@@ -165,7 +165,7 @@
     return null;
   }
 
-  /* 单词内词根词形高亮：前缀型加连字符（dict-ate），中缀型只标红（ex**pect**） */
+  /* 单词内词根词形高亮：词素前后加"·"分隔（react→re·act，interaction→inter·act·ion） */
   function heroWordHtml(word, variants) {
     var w = String(word == null ? "" : word);
     var lw = w.toLowerCase();
@@ -183,10 +183,11 @@
     var morph = esc(w.slice(i, i + best.length));
     var before = esc(w.slice(0, i));
     var after = esc(w.slice(i + best.length));
-    if (i === 0) {
-      return '<span class="morph">' + morph + '</span><span class="hyph">·</span>' + after;
-    }
-    return before + '<span class="morph">' + morph + "</span>" + after;
+    var dot = '<span class="hyph">·</span>';
+    var html = '<span class="morph">' + morph + '</span>';
+    if (before) html = before + dot + html;   // 前有词素才加前点
+    if (after) html = html + dot + after;     // 后有词素才加后点
+    return html;
   }
   /* 电影感转场：快速连播时跳过，避免闪烁 */
   var lastCine = 0;
