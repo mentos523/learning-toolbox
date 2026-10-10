@@ -2,28 +2,50 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>数学 — 学习工具箱</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23f59e0b'/%3E%3Ctext x='32' y='44' font-size='36' text-anchor='middle' fill='white' font-family='sans-serif'%3Eπ%3C/text%3E%3C/svg%3E">
+<title>数学 · 代数 — 学习工具箱</title>
+<meta name="description" content="从方程一路到微积分：数形结合，一页一屏，动手看到数学。">
 <link rel="stylesheet" href="../../assets/css/style.css">
-<style>:root { --card-color: #f59e0b; }</style>
+<link rel="stylesheet" href="css/math.css">
 </head>
-<body>
-  <div class="topbar">
-    <a class="back-link" href="../../index.html">← 返回首页</a>
-    <h1>数学</h1>
-  </div>
+<body data-theme="light">
 
-  <main class="container">
-    <div class="version-note">
-      筹备中：先把路线图定下来，内容下一步再设计。
+<div class="m-app" id="app">
+  <!-- 左：章节-单元-课程目录 -->
+  <aside class="m-drawer" id="drawer" aria-label="课程目录">
+    <h2>代数 · 课程目录</h2>
+    <div class="m-tree" id="tree"></div>
+  </aside>
+
+  <!-- 右：学习区（一屏） -->
+  <main class="m-main">
+    <header class="m-head">
+      <button class="m-menu-btn" id="menu-btn" aria-label="打开目录">☰ 目录</button>
+      <a class="m-back" href="../../index.html" aria-label="返回工具箱首页">← 返回</a>
+      <h1>数学 · 代数</h1>
+      <span class="m-page-ind" id="page-ind"></span>
+    </header>
+
+    <!-- 三块式页面：标题 / 公式 / 交互 / 点拨 -->
+    <div class="m-page" id="page">
+      <div class="m-title" id="p-title">载入中…</div>
+      <div class="m-formulas" id="p-formulas" aria-label="公式"></div>
+      <div class="m-interaction" id="p-interaction" aria-label="交互区"></div>
+      <div class="m-hints" id="p-hints" aria-label="点拨"></div>
     </div>
 
-    <h2>路线图</h2>
-    <ul class="plan-list">
-      <li><b>代数部分</b>：从方程出发，一步步渐进到微积分</li>
-      <li><b>几何部分</b>：从五六年级的图形认知，渐进到高中阶段</li>
-    </ul>
-    <p class="hint">起点：小学五、六年级</p>
+    <nav class="m-nav" aria-label="翻页">
+      <button id="btn-prev">← 上一页</button>
+      <button id="btn-next">下一页 →</button>
+    </nav>
   </main>
+</div>
+
+<!-- 数据：章注册表（章数据文件按需动态加载） -->
+<script src="data/chapters.js"></script>
+<!-- 框架：MathML 环境检测 → 主渲染逻辑 -->
+<script src="js/mathml-check.js"></script>
+<script src="js/math.js"></script>
 </body>
 </html>
