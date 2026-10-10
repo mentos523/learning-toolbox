@@ -3,71 +3,143 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>英语 · 词根应用 — 学习工具箱</title>
+<title>词根词缀学习工具 — 学习工具箱</title>
+<meta name="description" content="拨一拨词根，单词自己长出来。">
 <link rel="stylesheet" href="../../assets/css/style.css">
-<style>:root { --card-color: #3b82f6; }</style>
+<link rel="stylesheet" href="css/english.css">
 </head>
-<body>
-  <div class="topbar">
-    <a class="back-link" href="../../index.html">← 返回首页</a>
-    <h1>英语 · 词根应用</h1>
-  </div>
+<body data-theme="light" data-font="sys" data-size="normal">
 
-  <main class="container">
-    <div class="version-note">
-      v0.1 演示版：先验证页面结构与搜索交互，词根库的完整内容下一步再设计。
+<div class="app left-closed right-closed" id="app">
+  <!-- 顶栏：平板/手机显示 -->
+  <header class="topbar">
+    <button class="icon-btn" id="btn-left" aria-label="打开词根列表">☰</button>
+    <h1>词根词缀学习工具</h1>
+    <button class="icon-btn" id="btn-right" aria-label="打开设置">⚙</button>
+  </header>
+
+  <!-- 左：词根列表 -->
+  <aside class="sidebar" aria-label="词根列表">
+    <div class="sidebar-head">
+      <h2>词根</h2>
+      <button class="icon-btn" id="btn-left-close" aria-label="收起词根列表">✕</button>
     </div>
+    <div style="padding:0 14px;">
+      <input id="root-search" class="root-search" type="search" placeholder="搜索或输入词根，回车选中" autocomplete="off">
+    </div>
+    <ul class="root-list" id="root-list"></ul>
+    <div class="sidebar-foot" id="stats"></div>
+  </aside>
 
-    <input id="search" class="search-box" type="search"
-           placeholder="搜词根或中文意思，比如 spect / 看" autocomplete="off">
+  <!-- 中：学习区 -->
+  <main class="stage">
+    <div class="stage-inner">
+      <div class="version-note" style="margin-bottom:16px;">
+        v1.0 · <span id="stats2"></span>，数据持续扩充中（目标 3000–5000 词，优先覆盖初中词汇）
+      </div>
 
-    <div id="root-grid" class="root-grid"></div>
+      <!-- 词根区 -->
+      <section class="zone" aria-label="词根">
+        <h2 class="zone-title">词根 · 拨盘选择字母变形</h2>
+        <div class="wheel-wrap" id="variant-wheel-wrap">
+          <div class="wheel" role="listbox" aria-label="词根变形"></div>
+          <div class="wheel-center"></div>
+        </div>
+        <div class="mean-cols" id="mean-cols"></div>
+      </section>
+
+      <!-- 单词区 -->
+      <section class="zone" aria-label="单词">
+        <h2 class="zone-title">单词 · 拨盘浏览组合词</h2>
+        <div class="combo-zh" id="combo-zh"></div>
+        <div class="wheel-wrap" id="word-wheel-wrap">
+          <div class="wheel" role="listbox" aria-label="单词"></div>
+          <div class="wheel-center"></div>
+        </div>
+        <div class="word-meta" id="word-meta"></div>
+        <div class="mapping" id="mapping"></div>
+      </section>
+
+      <!-- 朗读区 -->
+      <section class="zone" aria-label="朗读">
+        <h2 class="zone-title">朗读 · 真人发音</h2>
+        <div class="tts-row">
+          <button class="tts-btn" id="tts-us">🔊 美音</button>
+          <button class="tts-btn" id="tts-gb">🔊 英音</button>
+          <span class="tts-rate">语速 <b id="tts-rate">0.9x</b></span>
+        </div>
+        <p class="tts-note" id="tts-note">默认美音 · 语速可在右侧设置中调整</p>
+      </section>
+    </div>
   </main>
 
-<script>
-(function () {
-  "use strict";
+  <!-- 右：设置 -->
+  <aside class="settings" aria-label="设置">
+    <div class="settings-head">
+      <h2>设置</h2>
+      <button class="icon-btn" id="btn-right-close" aria-label="收起设置">✕</button>
+    </div>
+    <div class="set-group">
+      <h3>背景亮度</h3>
+      <div class="seg">
+        <button data-set="theme" data-val="light">明亮</button>
+        <button data-set="theme" data-val="soft">护眼</button>
+        <button data-set="theme" data-val="dark">暗夜</button>
+      </div>
+    </div>
+    <div class="set-group">
+      <h3>字体</h3>
+      <div class="seg">
+        <button data-set="font" data-val="sys">默认</button>
+        <button data-set="font" data-val="serif">衬线</button>
+        <button data-set="font" data-val="round">圆润</button>
+      </div>
+    </div>
+    <div class="set-group">
+      <h3>字号</h3>
+      <div class="seg">
+        <button data-set="size" data-val="normal">标准</button>
+        <button data-set="size" data-val="large">大</button>
+      </div>
+    </div>
+    <div class="set-group">
+      <h3>语音模式</h3>
+      <div class="seg">
+        <button data-set="voice" data-val="us">美音</button>
+        <button data-set="voice" data-val="gb">英音</button>
+      </div>
+      <div class="set-row">
+        <span>语速</span>
+        <input type="range" id="set-rate" min="0.5" max="1.5" step="0.1" value="0.9">
+        <span class="set-val" id="set-rate-val">0.9x</span>
+      </div>
+      <div class="set-row">
+        <span>切换单词自动朗读</span>
+        <label class="switch" style="margin-left:auto;">
+          <input type="checkbox" id="set-auto">
+          <span class="sl"></span>
+        </label>
+      </div>
+    </div>
+    <div class="set-group">
+      <h3>关于</h3>
+      <p style="font-size:0.85rem;color:var(--ink-soft);margin:0;">
+        设置保存在本机浏览器中。<br>
+        <a href="../../index.html" style="color:var(--accent);">← 返回工具箱首页</a>
+      </p>
+    </div>
+  </aside>
 
-  // v0.1 演示数据：后续完整词根库设计时替换/扩充
-  var ROOTS = [
-    { root: "spect-", meaning: "看",
-      words: [["spectate", "观看"], ["inspect", "检查"], ["respect", "尊敬"]] },
-    { root: "dict-", meaning: "说",
-      words: [["dictate", "口授"], ["predict", "预言"], ["dictionary", "词典"]] },
-    { root: "port-", meaning: "拿；运",
-      words: [["import", "进口"], ["export", "出口"], ["transport", "运输"]] },
-    { root: "scrib- / script-", meaning: "写",
-      words: [["describe", "描述"], ["prescribe", "开处方"], ["manuscript", "手稿"]] },
-    { root: "bio-", meaning: "生命",
-      words: [["biology", "生物学"], ["biography", "传记"]] },
-    { root: "photo-", meaning: "光",
-      words: [["photograph", "照片"], ["photosynthesis", "光合作用"]] }
-  ];
+  <div class="scrim" id="scrim" style="display:none;"></div>
+</div>
 
-  var grid = document.getElementById("root-grid");
-  var search = document.getElementById("search");
+<div class="toast" id="toast" role="status"></div>
 
-  function cardHTML(r) {
-    var lis = r.words.map(function (w) {
-      return "<li><b>" + w[0] + "</b> — " + w[1] + "</li>";
-    }).join("");
-    return '<div class="root-card" data-key="' + (r.root + r.meaning).toLowerCase() + '">' +
-           '<div class="root">' + r.root + "</div>" +
-           '<div class="meaning">“' + r.meaning + '”的意思</div>' +
-           "<ul>" + lis + "</ul></div>";
-  }
+<!-- 桌面端浮动开关：侧栏收起时显示 -->
+<button class="fab fab-left" id="fab-left" aria-label="展开词根列表">☰ 词根</button>
+<button class="fab fab-right" id="fab-right" aria-label="展开设置">⚙ 设置</button>
 
-  function render(filter) {
-    var f = (filter || "").trim().toLowerCase();
-    var html = ROOTS.filter(function (r) {
-      return !f || (r.root + r.meaning).toLowerCase().indexOf(f) !== -1;
-    }).map(cardHTML).join("");
-    grid.innerHTML = html || '<p class="hint">没有找到，换个词试试。</p>';
-  }
-
-  search.addEventListener("input", function () { render(search.value); });
-  render("");
-})();
-</script>
+<script src="data/roots.js"></script>
+<script src="js/english.js"></script>
 </body>
 </html>
