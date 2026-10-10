@@ -223,3 +223,17 @@ a.card:hover {
   .hero h1 { font-size: 1.8rem; }
   .card-grid { grid-template-columns: 1fr; }
 }
+
+/* ---------- 关于栏 ---------- */
+.about {
+  margin-top: 40px;
+  padding: 24px;
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.about h2 { margin: 0 0 16px; font-size: 1.2rem; }
+.about h3 { margin: 16px 0 8px; font-size: 1rem; color: var(--ink-soft); }
+.about ul { margin: 0; padding-left: 20px; }
+.about li { margin: 6px 0; }
+.about a { color: var(--card-color, #3b82f6); }
