@@ -17,7 +17,7 @@ window.MATH_CHAPTERS = [
   { id: "ch06", title: "函数与一次函数",           file: "data/ch06.js", status: "ready" },
   { id: "ch07", title: "二次函数与反比例函数",     file: "data/ch07.js", status: "ready" },
   { id: "ch08", title: "指数与对数",               file: "data/ch08.js", status: "ready" },
-  { id: "ch09", title: "数列",                     file: "data/ch09.js", status: "planned" },
+  { id: "ch09", title: "数列",                     file: "data/ch09.js", status: "ready" },
   { id: "ch10", title: "极限与连续",               file: "data/ch10.js", status: "planned" },
   { id: "ch11", title: "导数",                     file: "data/ch11.js", status: "planned" },
   { id: "ch12", title: "定积分与微积分基本定理",   file: "data/ch12.js", status: "planned" }

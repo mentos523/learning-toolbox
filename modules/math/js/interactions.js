@@ -10,6 +10,7 @@
  *   linked-dashboard  联动仪表盘：一个滑块驱动数值读数 + SVG 坐标点/轨迹
  *   plot-points       描点成像：拖滑块逐个点亮坐标点，连成曲线（可自动播放）
  *   side-compare      并排对比：左右两栏简化 slider-lab，支持滑块同步联动
+ *   numeric-lab       数值实验台：点按钮/输数看趋势（accumulate 累加棋盘麦粒）
  * ============================================================ */
 (function () {
   "use strict";
@@ -921,6 +922,166 @@
     updateSyncLine();
   }
 
+  /* ============================================================
+   * 6. numeric-lab 数值实验台
+   * params: {mode, term, maxSteps, buttonLabel?, showTrend?}
+   * mode: accumulate（逐项累加，如棋盘麦粒）/ iterate（只看每一项）/
+   *       input（输入 n 看第 n 项）
+   * 点按钮（输数），看趋势。适用：等比求和、极限、无穷级数、试解。
+   * term 走 evalExpr 白名单（含 ^ 与变量 n），大数字千分位显示。
+   * ============================================================ */
+  function fmtInt(n) {
+    if (!isFinite(n)) return "—";
+    if (Math.abs(n - Math.round(n)) > 1e-9) return fmt(n);
+    return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
+  function renderNumericLab(container, params) {
+    var mode = params.mode || "accumulate";
+    var term = params.term || "";
+    var maxSteps = Math.min(Math.max(parseInt(params.maxSteps, 10) || 20, 1), 50);
+    var buttonLabel = params.buttonLabel || "加一步";
+    var showTrend = params.showTrend !== false;
+    var stepWord = mode === "accumulate" ? "格" : "项";
+
+    var n = 0, sum = 0, terms = [];
+
+    // 行构建器：字符串按原文追加，元素保持引用（innerHTML 解析出的节点
+    // 拿不到引用，且不利于无头测试，故显式 append）
+    function textRow() {
+      var d = el("div", "ix-expr-line");
+      for (var i = 0; i < arguments.length; i++) {
+        var a = arguments[i];
+        d.appendChild(typeof a === "string" ? document.createTextNode(a) : a);
+      }
+      return d;
+    }
+
+    var wrap = el("div", "ix-numeric");
+    var status = el("div", "ix-status", "");
+
+    var progSpan = el("span", "ix-val", "0");
+    var lineProg = textRow("通项 ", el("span", "ix-expr", esc(term || "—")),
+      " · 已放 ", progSpan, " / " + maxSteps + " " + stepWord);
+
+    var nCurSpan = el("span", "ix-val", "—");
+    var curSpan = el("span", "ix-val", "—");
+    var lineCur = textRow("第 ", nCurSpan, " " + stepWord + "：", curSpan, " 粒");
+
+    var sumSpan = el("span", "ix-val", "0");
+    var lineSum = textRow("累计：", sumSpan, " 粒");
+
+    var inputEl = null;
+    if (mode === "input") {
+      inputEl = document.createElement("input");
+      inputEl.type = "number";
+      inputEl.setAttribute("style", "width:5em;font-size:1rem;");
+    }
+
+    var goBtn = el("button", "ix-reset", esc(buttonLabel));
+    goBtn.type = "button";
+    goBtn.setAttribute("data-k", "go");
+    var resetBtn = el("button", "ix-reset", "↺ 重来");
+    resetBtn.type = "button";
+    var foot = el("div", "ix-foot");
+    if (inputEl) foot.appendChild(inputEl);
+    foot.appendChild(goBtn);
+    foot.appendChild(resetBtn);
+
+    wrap.appendChild(lineProg);
+    wrap.appendChild(lineCur);
+    if (mode === "accumulate") wrap.appendChild(lineSum);
+    wrap.appendChild(status);
+    wrap.appendChild(foot);
+    container.appendChild(wrap);
+
+    // 趋势判断：最近两次"相邻比"是否稳定，是则返回该比值
+    function stableRatio() {
+      if (terms.length < 3) return 0;
+      var r1 = terms[terms.length - 1] / terms[terms.length - 2];
+      var r0 = terms[terms.length - 2] / terms[terms.length - 3];
+      if (!isFinite(r1) || !isFinite(r0)) return 0;
+      return Math.abs(r1 - r0) <= 1e-9 * Math.max(1, Math.abs(r0)) ? r1 : 0;
+    }
+
+    function refresh() {
+      progSpan.textContent = String(n);
+      if (n >= maxSteps) {
+        goBtn.disabled = true;
+        var endWord = mode === "accumulate" ? "格放完了" :
+                      (mode === "iterate" ? "项算完了" : "次试完了");
+        status.innerHTML = '<span class="ix-success">🎉 ' + maxSteps + " " + endWord +
+          (mode === "accumulate" ? "，累计 " + fmtInt(sum) + " 粒" : "") + "</span>";
+        return;
+      }
+      if (showTrend && mode !== "input") {
+        if (n >= 2) {
+          var r = terms[n - 1] / terms[n - 2];
+          if (isFinite(r)) {
+            var sr = stableRatio();
+            status.innerHTML = sr
+              ? '<span class="ix-success">每一' + stepWord + "都是上一" + stepWord +
+                "的 " + fmt(sr) + " 倍</span>"
+              : '<span class="ix-hint">第 ' + n + stepWord + "是上一" + stepWord +
+                "的 " + fmt(r) + " 倍，继续点看规律</span>";
+          }
+        } else if (n === 1) {
+          status.innerHTML = '<span class="ix-hint">继续点，看' +
+            (mode === "accumulate" ? "累计数" : "每一项") + "怎么涨</span>";
+        }
+      } else if (n === 0) {
+        status.innerHTML = '<span class="ix-hint">点「' + esc(buttonLabel) + "」开始</span>";
+      }
+    }
+
+    function step() {
+      if (goBtn.disabled || n >= maxSteps) return;
+      if (mode === "input") {
+        var k = inputEl ? parseFloat(inputEl.value) : NaN;
+        if (!isFinite(k)) {
+          status.innerHTML = '<span class="ix-hint">先输入一个数</span>';
+          return;
+        }
+        n++;
+        var tk = term ? evalExpr(term, "n", k) : k;
+        terms.push(tk);
+        nCurSpan.textContent = String(k);
+        curSpan.textContent = fmtInt(tk);
+        tickSound(); hapticTick();
+        refresh();
+        return;
+      }
+      var t = evalExpr(term, "n", n + 1);
+      if (!isFinite(t)) {
+        status.innerHTML = '<span class="ix-hint">第 ' + (n + 1) + stepWord +
+          "算不出来，检查通项写法</span>";
+        return;
+      }
+      n++;
+      if (mode === "accumulate") sum += t;
+      terms.push(t);
+      nCurSpan.textContent = String(n);
+      curSpan.textContent = fmtInt(t);
+      if (mode === "accumulate") sumSpan.textContent = fmtInt(sum);
+      tickSound(); hapticTick();
+      refresh();
+    }
+
+    function reset() {
+      n = 0; sum = 0; terms = [];
+      goBtn.disabled = false;
+      if (inputEl) inputEl.value = "";
+      progSpan.textContent = "0";
+      nCurSpan.textContent = "—"; curSpan.textContent = "—";
+      if (mode === "accumulate") sumSpan.textContent = "0";
+      refresh();
+    }
+
+    goBtn.addEventListener("click", step);
+    resetBtn.addEventListener("click", reset);
+    refresh();
+  }
+
   /* ---------------- 注册 ---------------- */
   if (window.MATH_INTERACTIONS) {
     window.MATH_INTERACTIONS.register("slider-lab", renderSliderLab);
@@ -928,5 +1089,6 @@
     window.MATH_INTERACTIONS.register("linked-dashboard", renderLinkedDashboard);
     window.MATH_INTERACTIONS.register("plot-points", renderPlotPoints);
     window.MATH_INTERACTIONS.register("side-compare", renderSideCompare);
+    window.MATH_INTERACTIONS.register("numeric-lab", renderNumericLab);
   }
 })();
