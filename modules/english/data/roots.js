@@ -47,7 +47,7 @@ window.ROOTS_DATA = [
 ]},
 /* ---------- 说 / 写 ---------- */
 { r:"dict", v:["dict"], d:"dict-", m:["说"], w:[
-  ["dictate","v.","口授",0],
+  ["dictate","v.","口授；命令",0],
   ["dictionary","n.","词典",0],
   ["contradict","v.","反驳",0]
 ]},
@@ -115,13 +115,13 @@ window.ROOTS_DATA = [
   ["transport","v.","运输",0],
   ["portable","adj.","便携的",0],
   ["support","v.","支持",0],
-  ["report","n.","报告",0],
+  ["report","n./v.","报告",0],
   ["passport","n.","护照",0]
 ]},
 { r:"fer", v:["fer"], d:"fer-", m:["拿；带"], w:[
   ["refer","v.","提到",0],
   ["prefer","v.","更喜欢",0],
-  ["differ","v.","不同",0],
+  ["differ","v.","相异；有区别",0],
   ["transfer","v.","转移",0],
   ["offer","v.","提供",0],
   ["conference","n.","会议",0],
@@ -145,7 +145,7 @@ window.ROOTS_DATA = [
   ["permit","v.","允许",0],
   ["mission","n.","使命",0],
   ["dismiss","v.","解散",0],
-  ["promise","v.","承诺",0],
+  ["promise","v./n.","承诺；许诺",0],
   ["submit","v.","提交",0]
 ]},
 { r:"pos", v:["pos","pon"], d:"pos- / pon-", m:["放"], w:[
@@ -158,7 +158,7 @@ window.ROOTS_DATA = [
 ]},
 { r:"sist", v:["sist"], d:"sist-", m:["站"], w:[
   ["insist","v.","坚持",0],
-  ["consist","v.","组成",0],
+  ["consist","v.","由…组成",0],
   ["assist","v.","帮助",0],
   ["resist","v.","抵抗",0],
   ["persist","v.","坚持不懈",0],
@@ -177,7 +177,7 @@ window.ROOTS_DATA = [
   ["grade","n.","年级；成绩",0],
   ["gradual","adj.","逐渐的",0],
   ["graduate","v.","毕业",0],
-  ["progress","n.","进步",0]
+  ["progress","n./v.","进步；进展",0]
 ]},
 { r:"ced", v:["ced","ceed","cess"], d:"ced- / ceed- / cess-", m:["走"], w:[
   ["succeed","v.","成功",0],
@@ -185,7 +185,7 @@ window.ROOTS_DATA = [
   ["exceed","v.","超过",0],
   ["proceed","v.","继续",0],
   ["process","n.","过程",0],
-  ["access","n.","进入",0]
+  ["access","n.","通道；使用权",0]
 ]},
 { r:"rupt", v:["rupt"], d:"rupt-", m:["断"], w:[
   ["interrupt","v.","打断",0],
@@ -196,7 +196,7 @@ window.ROOTS_DATA = [
 /* ---------- 分 ---------- */
 { r:"part", v:["part"], d:"part-", m:["分"], w:[
   ["part","n.","部分",0],
-  ["apart","adv.","分离",0],
+  ["apart","adv.","相隔；分开",0],
   ["participate","v.","参加",0],
   ["partial","adj.","部分的",0]
 ]},
@@ -338,7 +338,7 @@ window.ROOTS_DATA = [
 ]},
 { r:"quer", v:["quer","quis","quest"], d:"quer- / quest-", m:["问"], w:[
   ["question","n.","问题",0],
-  ["request","n.","要求",0]
+  ["request","n./v.","要求",0]
 ]},
 { r:"spond", v:["spond","spons"], d:"spond-", m:["应答"], w:[
   ["respond","v.","回答",0],
@@ -477,7 +477,7 @@ window.ROOTS_DATA = [
 ]},
 { r:"inter", v:["inter"], d:"inter-", m:["在…之间"], w:[
   ["international","adj.","国际的",0],
-  ["interview","n.","采访",0],
+  ["interview","n./v.","采访",0],
   ["internet","n.","互联网",0]
 ]},
 { r:"auto", v:["auto"], d:"auto-", m:["自己","自动"], w:[
@@ -512,7 +512,7 @@ window.ROOTS_DATA = [
 /* ---------- 前缀（二）：表方向 ---------- */
 { r:"pre", v:["pre"], d:"pre-", m:["前"], w:[
   ["preview","v.","预习",0],
-  ["predict","v.","预言",0],
+  ["predict","v.","预测；预言",0],
   ["prepare","v.","准备",0]
 ]},
 { r:"de", v:["de"], d:"de-", m:["向下","除去"], w:[
