@@ -96,7 +96,7 @@ server {
 
 | 支付宝 | 微信支付 | 以太坊 |
 |--------|----------|--------|
-| ![支付宝](docs/donate-alipay.jpg) | ![微信](docs/donate-wechat.png) | ![以太坊](docs/donate-eth.png) |
+| ![支付宝](https://github.com/mentos523/learning-toolbox/blob/main/docs/donate-alipay.jpg?raw=true) | ![微信](https://github.com/mentos523/learning-toolbox/blob/main/docs/donate-wechat.png?raw=true) | ![以太坊](https://github.com/mentos523/learning-toolbox/blob/main/docs/donate-eth.png?raw=true) |
 
 以太坊地址：`0x79b046b212c3151e08994e833a51289ca82b13df`
 
