@@ -20,5 +20,5 @@ window.MATH_CHAPTERS = [
   { id: "ch09", title: "数列",                     file: "data/ch09.js", status: "ready" },
   { id: "ch10", title: "极限与连续",               file: "data/ch10.js", status: "ready" },
   { id: "ch11", title: "导数",                     file: "data/ch11.js", status: "ready" },
-  { id: "ch12", title: "定积分与微积分基本定理",   file: "data/ch12.js", status: "planned" }
+  { id: "ch12", title: "定积分与微积分基本定理",   file: "data/ch12.js", status: "ready" }
 ];

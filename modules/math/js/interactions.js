@@ -11,6 +11,7 @@
  *   plot-points       描点成像：拖滑块逐个点亮坐标点，连成曲线（可自动播放）
  *   side-compare      并排对比：左右两栏简化 slider-lab，支持滑块同步联动
  *   numeric-lab       数值实验台：点按钮/输数看趋势（accumulate 累加棋盘麦粒）
+ *   subdivision       细分动画：档位切换，矩形逼近求和（右端点矩形和）
  * ============================================================ */
 (function () {
   "use strict";
@@ -1104,6 +1105,183 @@
     refresh();
   }
 
+  /* ============================================================
+   * 7. subdivision 细分动画
+   * params: {fn, a, b, steps, showError?}
+   * 右端点矩形和 S_n = dx·Σ f(a+i·dx)；档位按钮切换重绘矩形，
+   * 显示当前和、真实值（细分估算）与误差。非法 params 给提示不崩溃。
+   * ============================================================ */
+  function renderSubdivision(container, params) {
+    var NS = "http://www.w3.org/2000/svg";
+    function svgEl(tag, attrs) {
+      var e = document.createElementNS(NS, tag);
+      for (var k in attrs) e.setAttribute(k, attrs[k]);
+      return e;
+    }
+
+    var fn = String(params.fn == null ? "" : params.fn).trim();
+    var a = Number(params.a), b = Number(params.b);
+    if (!fn || !(a < b)) {
+      container.appendChild(el("div", "ix-stub",
+        "参数错误：subdivision 需要 fn 且 a < b（积分下限小于上限）"));
+      return;
+    }
+    // 自变量名：fn 里出现独立的 x 用 x，否则独立的 t 用 t（兼容 "2*t"）
+    var varName = /\bx\b/.test(fn) ? "x" : (/\bt\b/.test(fn) ? "t" : "x");
+    function f(x) { return evalExpr(fn, varName, x); }
+    var bad = false;
+    [a, (a + b) / 2, b].forEach(function (v) { if (!isFinite(f(v))) bad = true; });
+    if (bad) {
+      container.appendChild(el("div", "ix-stub",
+        "参数错误：fn 求值失败，请检查函数写法（自变量用 x 或 t）"));
+      return;
+    }
+    // steps：去重、递增、只取前 4 档；非法时回退默认
+    var steps = params.steps;
+    var clean = [];
+    if (Array.isArray(steps)) steps.forEach(function (s) {
+      s = Math.round(Number(s));
+      if (isFinite(s) && s > 0 && clean.indexOf(s) < 0) clean.push(s);
+    });
+    clean.sort(function (p, q) { return p - q; });
+    clean = clean.slice(0, 4);
+    if (clean.length === 0) clean = [4, 16, 64, 256];
+    var showError = params.showError !== false;
+
+    // 数字格式化：最多 4 位小数，去尾零
+    function fmtS(n) {
+      if (!isFinite(n)) return "—";
+      return String(Math.round(n * 10000) / 10000);
+    }
+    // 右端点矩形和
+    function rsum(n) {
+      var dx = (b - a) / n, s = 0;
+      for (var i = 1; i <= n; i++) s += f(a + i * dx);
+      return s * dx;
+    }
+    // 真实值：用更细的档位做数值估算（显示保留 2 位小数）
+    var trueApprox = rsum(Math.min(8192, Math.max.apply(null, clean) * 32));
+    var trueShown = Math.round(trueApprox * 100) / 100;
+
+    // 量程：采样取 y 范围
+    var yMax = -Infinity, yMin = Infinity, sy;
+    for (var si = 0; si <= 120; si++) {
+      sy = f(a + (b - a) * si / 120);
+      if (isFinite(sy)) { if (sy > yMax) yMax = sy; if (sy < yMin) yMin = sy; }
+    }
+    if (!isFinite(yMax)) { yMax = 1; yMin = 0; }
+    if (yMax <= 0) yMax = 1;
+    if (yMin > 0) yMin = 0;
+    var yPad = (yMax - yMin) * 0.12 || 1;
+    yMax += yPad; yMin -= yPad * 0.2;
+
+    var W = 420, H = 300, mL = 38, mR = 12, mT = 14, mB = 30;
+    var x0 = a - (b - a) * 0.06, x1 = b + (b - a) * 0.06;
+    function X(v) { return mL + (v - x0) / (x1 - x0) * (W - mL - mR); }
+    function Y(v) { return mT + (1 - (v - yMin) / (yMax - yMin)) * (H - mT - mB); }
+
+    var wrap = el("div", "ix-plot");
+    var svg = svgEl("svg", { viewBox: "0 0 " + W + " " + H, "class": "ix-svg" });
+    svg.style.maxWidth = "100%";
+    // x 轴（y=0）
+    svg.appendChild(svgEl("line", { x1: mL, y1: Y(0), x2: W - mR, y2: Y(0),
+      stroke: "var(--m-line)", "stroke-width": 1.5 }));
+    // y 轴画在 x=a 处
+    svg.appendChild(svgEl("line", { x1: X(a), y1: mT, x2: X(a), y2: H - mB,
+      stroke: "var(--m-line)", "stroke-width": 1.5 }));
+    // 矩形组（档位切换时重建；先于曲线加入，压在曲线下方）
+    var gRects = svgEl("g", {});
+    svg.appendChild(gRects);
+    // 曲线
+    var pts = [];
+    for (var ci = 0; ci <= 120; ci++) {
+      var cx = a + (b - a) * ci / 120, cy = f(cx);
+      if (isFinite(cy)) pts.push(X(cx).toFixed(1) + "," + Y(cy).toFixed(1));
+    }
+    svg.appendChild(svgEl("polyline", { points: pts.join(" "), fill: "none",
+      stroke: "var(--m-accent-strong)", "stroke-width": 2.5 }));
+    // a/b 刻度
+    var labA = svgEl("text", { x: X(a), y: H - 10, "text-anchor": "middle",
+      fill: "var(--m-ink-soft)", "font-size": 13 });
+    labA.textContent = fmtS(a);
+    svg.appendChild(labA);
+    var labB = svgEl("text", { x: X(b), y: H - 10, "text-anchor": "middle",
+      fill: "var(--m-ink-soft)", "font-size": 13 });
+    labB.textContent = fmtS(b);
+    svg.appendChild(labB);
+    wrap.appendChild(svg);
+
+    // 读数行
+    var status = el("div", "ix-status", "");
+    wrap.appendChild(status);
+    // 误差条
+    var errFill = null;
+    if (showError) {
+      var errBar = el("div", "", "");
+      errBar.style.cssText = "height:10px;background:var(--m-line-soft,#e8e8e8);" +
+        "border-radius:5px;overflow:hidden;margin:2px 0 6px;";
+      errFill = el("div", "", "");
+      errFill.style.cssText = "height:100%;width:0;background:var(--m-accent);" +
+        "border-radius:5px;transition:width .25s;";
+      errBar.appendChild(errFill);
+      wrap.appendChild(errBar);
+    }
+
+    // 各档位和、误差预计算
+    var sums = {}, errOf = {}, maxErr = 0;
+    clean.forEach(function (n) {
+      sums[n] = rsum(n);
+      errOf[n] = Math.abs(sums[n] - trueShown);
+      if (errOf[n] > maxErr) maxErr = errOf[n];
+    });
+
+    // 档位按钮行
+    var foot = el("div", "ix-foot", "");
+    foot.style.cssText = "display:flex;gap:8px;flex-wrap:wrap;align-items:center;";
+    var btns = [];
+    clean.forEach(function (n) {
+      var bt = el("button", "ix-reset", "n = " + n);
+      bt.type = "button";
+      bt.addEventListener("click", function () { draw(n); tickSound(); hapticTick(); });
+      foot.appendChild(bt);
+      btns.push(bt);
+    });
+    wrap.appendChild(foot);
+    container.appendChild(wrap);
+
+    function draw(n) {
+      // 重建矩形
+      while (gRects.firstChild) gRects.removeChild(gRects.firstChild);
+      var dx = (b - a) / n;
+      for (var i = 1; i <= n; i++) {
+        var xl = a + (i - 1) * dx, xr = a + i * dx, v = f(xr);
+        if (!isFinite(v)) continue;
+        var yTop = Y(Math.max(v, 0)), yBot = Y(Math.min(v, 0));
+        gRects.appendChild(svgEl("rect", {
+          x: X(xl).toFixed(2), y: yTop.toFixed(2),
+          width: Math.max(0.2, X(xr) - X(xl)).toFixed(2),
+          height: Math.max(0.2, yBot - yTop).toFixed(2),
+          fill: "var(--m-accent)", opacity: 0.32
+        }));
+      }
+      // 按钮高亮
+      clean.forEach(function (m, idx) {
+        var on = (m === n);
+        btns[idx].style.fontWeight = on ? "bold" : "";
+        btns[idx].style.borderColor = on ? "var(--m-accent-strong)" : "";
+        btns[idx].style.boxShadow = on ? "0 0 0 2px var(--m-accent-soft,#ffd)" : "";
+      });
+      // 读数：n=256：和=16.0625；真实值≈16；误差≈0.0625
+      var html = "n=" + n + "：和=" + fmtS(sums[n]) +
+        "；真实值≈" + fmtS(trueShown);
+      if (showError) html += "；误差≈" + fmtS(errOf[n]);
+      status.innerHTML = html;
+      if (errFill) errFill.style.width =
+        (maxErr > 0 ? (errOf[n] / maxErr * 100).toFixed(1) : 0) + "%";
+    }
+    draw(clean[0]);
+  }
+
   /* ---------------- 渲染器内嵌查表 ----------------
    * 与 window.MATH_INTERACTIONS 同源：注册时同步记一份本地表。
    * side-compare 内嵌时按 kind 查表调用已注册渲染器（不复制渲染器代码）。*/
@@ -1120,4 +1298,5 @@
   ixRegister("plot-points", renderPlotPoints);
   ixRegister("side-compare", renderSideCompare);
   ixRegister("numeric-lab", renderNumericLab);
+  ixRegister("subdivision", renderSubdivision);
 })();
