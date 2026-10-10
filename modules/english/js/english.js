@@ -289,8 +289,15 @@
     this.index = i;
     var els = this.list.querySelectorAll(".wheel-item");
     for (var k = 0; k < els.length; k++) {
+      var d = Math.abs(k - i);
       els[k].classList.toggle("selected", k === i);
       els[k].setAttribute("aria-selected", k === i ? "true" : "false");
+      // 透视：离选中项越远越小、越透（最多显示约 7 个）
+      var op = d === 0 ? 1 : Math.max(0.08, 1 - d * 0.3);
+      var sc = d === 0 ? 1.22 : Math.max(0.68, 1 - d * 0.1);
+      els[k].style.opacity = op;
+      els[k].style.transform = d === 0 ? "" : "scale(" + sc.toFixed(2) + ")";
+      els[k].style.filter = d >= 3 ? "blur(1px)" : "";
     }
     this.onSelect(i, this.items[i]);
   };
@@ -433,7 +440,7 @@
       var sp = splitPair(wd[0], rt);
       return { label: sp.other, full: wd[0] };
     }));
-    renderMorphemes();
+    renderHero();
     updateRootsSub();
     // 深链接写回：刷新/分享后回到当前词根（replaceState 不污染历史栈）
     try { history.replaceState(null, "", "#r=" + rt.r); } catch (e) {}
@@ -445,53 +452,39 @@
     if (!state.root || !state.root.w.length) return null;
     return state.root.w[Math.max(0, Math.min(state.root.w.length - 1, state.word))];
   }
-  /* ---------------- 三词素槽渲染 ----------------
-   * Row 1: 前缀词根（词根在前时显示，否则隐藏）
-   * Row 2: 另一部分（恒显示）
-   * Row 3: 后缀词根（词根在后时显示，否则隐藏）
-   */
-  function setRow(n, formHtml, meanHtml, isRoot) {
-    var row = document.getElementById("mrow-" + n);
-    if (!formHtml) { row.classList.add("hidden"); return; }
-    row.classList.remove("hidden");
-    row.classList.toggle("is-root", !!isRoot);
-    document.getElementById("mform-" + n).innerHTML = formHtml;
-    document.getElementById("mmean-" + n).innerHTML = meanHtml;
-  }
-  function renderMorphemes() {
+  /* ---------------- Hero 渲染：整个单词 + 单词意思 ---------------- */
+  function renderHero() {
     var rt = state.root;
+    var heroWord = document.getElementById("hero-word");
+    var heroMean = document.getElementById("hero-mean");
+    var rootMean = document.getElementById("root-mean");
+    var wordMean = document.getElementById("word-mean");
     if (!rt || !rt.w.length) {
-      setRow(1, null); setRow(3, null);
-      setRow(2, "—", "该词根暂无收词", false);
+      heroWord.textContent = "—";
+      heroMean.textContent = "";
+      if (rootMean) rootMean.textContent = "";
+      if (wordMean) wordMean.textContent = "该词根暂无收词";
       return;
     }
     var wd = currentWord();
-    var sp = splitPair(wd[0], rt);
+    // 顶部：整个单词（词根词素标红）
+    heroWord.innerHTML = heroWordHtml(wd[0], rt.v);
+    cineRestart(heroWord);
+    // 单词意思：词性 + 中文
+    heroMean.innerHTML = '<span class="pos">' + esc(wd[1]) + "</span><b>" + esc(wd[2]) + "</b>";
+    cineRestart(heroMean);
+    // 左拨盘下方：词根意思
     var mi = Math.min(Math.max(0, wd[3] || 0), rt.m.length - 1);
-    var rootMeanHtml = '<span class="num">' + num(mi) + "</span>" + esc(rt.m[mi]);
-    // 另一部分的意思
-    var mRoot = findMorpheme(sp.other);
-    var otherMeanHtml;
-    if (mRoot && sp.pos !== "none" && sp.pos !== "mid") {
-      otherMeanHtml = '<span class="pos">词素</span><b>' + esc(mRoot.m[0]) + "</b>";
-    } else {
-      otherMeanHtml = '<span class="pos">' + esc(wd[1]) + "</span><b>" + esc(wd[2]) + "</b>";
-    }
-    var otherFormHtml = esc(sp.other) || esc(sp.full);
-    if (sp.pos === "suffix") {
-      // 词根在前：Row 1 = 词根，Row 2 = 另一部分
-      setRow(1, esc(rt.d), rootMeanHtml, true);
-      setRow(2, otherFormHtml, otherMeanHtml, false);
-      setRow(3, null);
-    } else if (sp.pos === "prefix") {
-      // 词根在后：Row 2 = 另一部分，Row 3 = 词根
-      setRow(1, null);
-      setRow(2, otherFormHtml, otherMeanHtml, false);
-      setRow(3, esc(rt.d), rootMeanHtml, true);
-    } else {
-      // 中缀/无匹配：Row 2 显示整词（词根标红）
-      setRow(1, null); setRow(3, null);
-      setRow(2, heroWordHtml(wd[0], rt.v), otherMeanHtml, false);
+    if (rootMean) rootMean.innerHTML = '<span class="num">' + num(mi) + "</span>" + esc(rt.m[mi]);
+    // 右拨盘下方：选中词素的意思（查词素；查不到回退单词意思）
+    if (wordMean) {
+      var sp = splitPair(wd[0], rt);
+      var mRoot = findMorpheme(sp.other);
+      if (mRoot && sp.pos !== "none" && sp.pos !== "mid") {
+        wordMean.innerHTML = '<span class="pos">词素</span><b>' + esc(mRoot.m[0]) + "</b>";
+      } else {
+        wordMean.innerHTML = '<span class="pos">' + esc(wd[1]) + "</span><b>" + esc(wd[2]) + "</b>";
+      }
     }
     // 自动朗读：仅在用户已交互过页面后触发（避免刷新即播）
     if (settings.auto && userInteracted) speak(wd[0]);
@@ -524,7 +517,7 @@
     // 右拨盘：当前词根的单词
     wordWheel = new Wheel("word-wheel-wrap", {
       itemH: wheelItemH(),
-      onSelect: function (i) { state.word = i; renderMorphemes(); }
+      onSelect: function (i) { state.word = i; renderHero(); }
     });
     rootWheel.setItems(DATA.map(function (rt) { return { label: rt.d }; }));
     // 列表
