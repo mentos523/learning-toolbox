@@ -337,6 +337,15 @@ body {
   transform: scale(1.22);
   text-shadow: 0 0 24px var(--accent-glow);
 }
+/* 卡入效果：选中时轻微回弹 */
+@keyframes snap-in {
+  0% { transform: scale(1.1); }
+  60% { transform: scale(1.26); }
+  100% { transform: scale(1.22); }
+}
+.wheel-item.snapped {
+  animation: snap-in 0.18s ease-out;
+}
 .wheel-center {
   position: absolute;
   left: 4px;

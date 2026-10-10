@@ -211,6 +211,28 @@
   }
 
   /* ---------------- 拨盘组件 ---------------- */
+  /* 卡塔音效：Web Audio 合成短促滴答，无需外部文件 */
+  var tickCtx = null;
+  function tickSound() {
+    try {
+      if (!tickCtx) tickCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (tickCtx.state === "suspended") tickCtx.resume();
+      var t = tickCtx.currentTime;
+      var o = tickCtx.createOscillator();
+      var g = tickCtx.createGain();
+      o.type = "triangle";
+      o.frequency.setValueAtTime(2400, t);
+      o.frequency.exponentialRampToValueAtTime(1200, t + 0.03);
+      g.gain.setValueAtTime(0.04, t);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + 0.04);
+      o.connect(g); g.connect(tickCtx.destination);
+      o.start(t); o.stop(t + 0.05);
+    } catch (e) {}
+  }
+  /* 微弱震动：仅移动端支持 */
+  function hapticTick() {
+    try { if (navigator.vibrate) navigator.vibrate(8); } catch (e) {}
+  }
   function Wheel(wrapId, opts) {
     this.wrap = document.getElementById(wrapId);
     this.list = this.wrap.querySelector(".wheel");
@@ -267,7 +289,7 @@
     this.index = -1;
     var selfFit = this;
     requestAnimationFrame(function () { selfFit.fit(); });
-    if (items.length) this.go(0, true);
+    if (items.length) this.go(0, true, true);  // 初始选中静默，不播音效
   };
   Wheel.prototype._onScroll = function () {
     var self = this;
@@ -284,7 +306,7 @@
     }
     this._select(i);
   };
-  Wheel.prototype._select = function (i) {
+  Wheel.prototype._select = function (i, quiet) {
     if (i === this.index) return;
     this.index = i;
     var els = this.list.querySelectorAll(".wheel-item");
@@ -298,15 +320,23 @@
       els[k].style.opacity = op;
       els[k].style.transform = d === 0 ? "" : "scale(" + sc.toFixed(2) + ")";
       els[k].style.filter = d >= 3 ? "blur(1px)" : "";
+      // 卡入效果：选中项播放回弹动画
+      if (k === i && !quiet) {
+        els[k].classList.remove("snapped");
+        void els[k].offsetWidth;  // 强制重排，重启动画
+        els[k].classList.add("snapped");
+      }
     }
+    // 卡塔音效 + 微弱震动（初始加载静默）
+    if (!quiet) { tickSound(); hapticTick(); }
     this.onSelect(i, this.items[i]);
   };
-  Wheel.prototype.go = function (i, instant) {
+  Wheel.prototype.go = function (i, instant, quiet) {
     if (!this.items.length) return;
     i = Math.max(0, Math.min(this.items.length - 1, i));
     this.list.scrollTo({ top: i * this.itemH, behavior: instant ? "auto" : "smooth" });
     // 立即高亮，不等滚动稳定（体验更跟手）
-    this._select(i);
+    this._select(i, quiet);
   };
 
   /* ---------------- 语音朗读 ---------------- */
