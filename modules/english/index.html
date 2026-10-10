@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231d4ed8'/%3E%3Ctext x='32' y='44' font-size='36' text-anchor='middle' fill='white' font-family='sans-serif'%3EAa%3C/text%3E%3C/svg%3E">
 <title>词根词缀学习工具 — 学习工具箱</title>
 <meta name="description" content="拨一拨词根，单词自己长出来。">
@@ -32,55 +32,47 @@
     </div>
   </aside>
 
-  <!-- 中：学习区 -->
-  <main class="stage">
+  <!-- 中：学习区（一屏，无滚动，无卡片） -->
+  <main class="stage-flat">
     <header class="stage-head">
       <a class="back-btn" href="../../index.html" aria-label="返回工具箱首页">← 返回</a>
       <h1>词根词缀学习工具</h1>
       <span class="spacer" aria-hidden="true"></span>
     </header>
 
-    <div class="version-note">
-      v1.1 · <span id="stats2"></span>，词根求精不求多（常见词根 + 初中常见成词）
+    <!-- 焦点：当前单词（词根部分标红） -->
+    <div class="word-hero">
+      <div class="word-hero-word" id="hero-word" aria-live="polite"></div>
+      <div class="word-hero-zh" id="hero-zh"></div>
     </div>
 
-    <!-- 词根拨盘 + 单词拨盘：一排并列 -->
-    <section class="zone dials-row" aria-label="拨盘">
-      <div class="dial-col">
-        <h2 class="zone-title">词根 · 拨字母变形</h2>
-        <div class="wheel-wrap" id="variant-wheel-wrap">
-          <div class="wheel" role="listbox" aria-label="词根变形"></div>
+    <!-- 双拨盘：一排并列 -->
+    <div class="dials">
+      <div class="dial">
+        <div class="wheel-wrap" id="root-wheel-wrap">
+          <div class="wheel" role="listbox" aria-label="词根"></div>
           <div class="wheel-center"></div>
         </div>
-        <div class="mean-cols" id="mean-cols"></div>
+        <div class="dial-label">词根 · 上下拨切换</div>
       </div>
-      <div class="dial-col">
-        <h2 class="zone-title">单词 · 拨组合词</h2>
-        <div class="combo-zh" id="combo-zh"></div>
+      <div class="dial">
         <div class="wheel-wrap" id="word-wheel-wrap">
           <div class="wheel" role="listbox" aria-label="单词"></div>
           <div class="wheel-center"></div>
         </div>
-        <div class="word-meta" id="word-meta"></div>
+        <div class="dial-label">单词 · 上下拨切换</div>
       </div>
-    </section>
+    </div>
 
-    <!-- 词义对齐 -->
-    <section class="zone" aria-label="词义对齐">
-      <h2 class="zone-title">词义对齐 · 词根意思 ↔ 单词意思</h2>
-      <div class="mapping" id="mapping"></div>
-    </section>
+    <!-- 词义（一行） -->
+    <div class="mean-line" id="mean-line"></div>
 
-    <!-- 朗读 -->
-    <section class="zone" aria-label="朗读">
-      <h2 class="zone-title">朗读 · 真人发音</h2>
-      <div class="tts-row">
-        <button class="tts-btn" id="tts-us">🔊 美音</button>
-        <button class="tts-btn" id="tts-gb">🔊 英音</button>
-        <span class="tts-rate">语速 <b id="tts-rate">0.9x</b></span>
-      </div>
-      <p class="tts-note" id="tts-note">默认美音 · 语速可在右侧设置中调整</p>
-    </section>
+    <!-- 朗读（一行） -->
+    <div class="tts-bar">
+      <button class="tts-btn" id="tts-us">🔊 美音</button>
+      <button class="tts-btn" id="tts-gb">🔊 英音</button>
+      <span class="tts-rate">语速 <b id="tts-rate">0.9x</b></span>
+    </div>
   </main>
 
   <!-- 右：设置（桌面贴边窄条悬停滑出 / 手机底部栏点开展开） -->

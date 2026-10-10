@@ -123,10 +123,8 @@
     if (cur) cur.textContent = voiceName;
   }
 
-  /* 单词内词根词形高亮（视频风格：词根部分标红，一排内呈现）
-   * 先找最长字面匹配；无命中时允许首字母脱落的音变（如 spect→pect/expect），
-   * 但脱落后的词形至少保留 4 个字母，避免误伤短词根。 */
-  function morphHtml(word, variants) {
+  /* 单词内词根词形高亮：前缀型加连字符（dict-ate），中缀型只标红（ex**pect**） */
+  function heroWordHtml(word, variants) {
     var w = String(word == null ? "" : word);
     var lw = w.toLowerCase();
     var best = "", bestLen = 0;
@@ -140,8 +138,13 @@
     });
     if (!best) return esc(w);
     var i = lw.indexOf(best);
-    return esc(w.slice(0, i)) + '<span class="morph">' + esc(w.slice(i, i + best.length)) +
-           "</span>" + esc(w.slice(i + best.length));
+    var morph = esc(w.slice(i, i + best.length));
+    var before = esc(w.slice(0, i));
+    var after = esc(w.slice(i + best.length));
+    if (i === 0) {
+      return '<span class="morph">' + morph + '</span><span class="hyph">-</span>' + after;
+    }
+    return before + '<span class="morph">' + morph + "</span>" + after;
   }
   /* 电影感转场：快速连播时跳过，避免闪烁 */
   var lastCine = 0;
@@ -311,8 +314,8 @@
   }
 
   /* ---------------- 状态 ---------------- */
-  var state = { root: null, variant: 0, word: 0 };
-  var variantWheel, wordWheel;
+  var state = { root: null, rootIdx: 0, word: 0 };
+  var rootWheel, wordWheel;
   // 用户是否已与页面交互（自动朗读需手势后才允许，避免刷新即播）
   var userInteracted = false;
   window.addEventListener("pointerdown", function () { userInteracted = true; }, { once: true });
@@ -345,8 +348,15 @@
   function selectRoot(r, opts) {
     var rt = typeof r === "string" ? findRoot(r) : r;
     if (!rt) return;
+    var idx = DATA.indexOf(rt);
+    // 左拨盘同步（抽屉/搜索触发时）
+    if (idx !== -1 && idx !== state.rootIdx) {
+      state.rootIdx = idx;
+      if (rootWheel && rootWheel.index !== idx) rootWheel.go(idx, true);
+    } else if (idx !== -1) {
+      state.rootIdx = idx;
+    }
     state.root = rt;
-    state.variant = 0;
     state.word = 0;
     document.querySelectorAll("#root-list li").forEach(function (li) {
       li.classList.toggle("active", li.dataset.r === rt.r);
@@ -360,64 +370,43 @@
         li.classList.toggle("active", li.dataset.r === rt.r);
       });
     }
-    // 词根拨盘：字母变形
-    variantWheel.setItems(rt.v.map(function (x) { return { label: x + "-" }; }));
-    // 词根意思分列
-    var mc = document.getElementById("mean-cols");
-    mc.innerHTML = rt.m.map(function (mm, i) {
-      return '<div class="mean-col" data-mi="' + i + '"><span class="num">' + num(i) + "</span>" + esc(mm) + "</div>";
-    }).join("");
-    // 单词拨盘
+    // 右拨盘：当前词根的单词
     wordWheel.setItems(rt.w.map(function (wd) { return { label: wd[0] }; }));
-    renderWord();
+    renderHero();
     updateRootsSub();
     // 深链接写回：刷新/分享后回到当前词根（replaceState 不污染历史栈）
     try { history.replaceState(null, "", "#r=" + rt.r); } catch (e) {}
-    // 选完词根后收起抽屉，学习区回到视野（除非调用方要求保持展开）
+    // 选完词根后收起抽屉（除非调用方要求保持展开）
     if (!(opts && opts.keepOpen)) setDrawer("left", false);
   }
 
-  /* ---------------- 单词区渲染 ---------------- */
+  /* ---------------- Hero 渲染 ---------------- */
   function currentWord() {
     if (!state.root || !state.root.w.length) return null;
     return state.root.w[Math.max(0, Math.min(state.root.w.length - 1, state.word))];
   }
-  function renderWord() {
+  function renderHero() {
     var rt = state.root;
-    var comboZh = document.getElementById("combo-zh");
-    var wordMeta = document.getElementById("word-meta");
-    var map = document.getElementById("mapping");
-    // 防御：词根无收词
+    var heroWord = document.getElementById("hero-word");
+    var heroZh = document.getElementById("hero-zh");
+    var meanLine = document.getElementById("mean-line");
     if (!rt || !rt.w.length) {
-      comboZh.innerHTML = "<small>组合词中文</small>—";
-      wordMeta.innerHTML = "该词根暂无收词";
-      map.innerHTML = "";
-      document.querySelectorAll("#mean-cols .mean-col").forEach(function (el) {
-        el.classList.remove("hl");
-      });
+      heroWord.textContent = "—";
+      heroZh.textContent = "";
+      meanLine.textContent = "该词根暂无收词";
       return;
     }
     var wd = currentWord();
-    // 单词上方：组合词中文大字（电影感转场）
-    comboZh.innerHTML = "<small>组合词中文</small>" + esc(wd[2]);
-    cineRestart(comboZh);
-    // 单词信息：英文一排内词根词形标红 + 词性中文
-    wordMeta.innerHTML = '<span class="w-en">' + morphHtml(wd[0], rt.v) + "</span> · " + esc(wd[1]);
-    cineRestart(wordMeta);
-    // 对齐映射：单词中文 ↔ 词根意思行（mi 钳制防越界）
+    // 焦点大字：词根词形标红（前缀型加连字符，如 dict-ate）
+    heroWord.innerHTML = heroWordHtml(wd[0], rt.v);
+    cineRestart(heroWord);
+    // 单词中文
+    heroZh.textContent = wd[2];
+    cineRestart(heroZh);
+    // 词义一行：词根意思① → 单词词性中文
     var mi = Math.min(Math.max(0, wd[3] || 0), rt.m.length - 1);
-    var html = '<div class="map-head">词根意思</div><div class="map-head">单词意思</div>';
-    rt.m.forEach(function (mm, i) {
-      html += '<div class="map-cell left' + (i === mi ? " hl" : "") + '" style="grid-row:' + (i + 2) + '">' +
-              '<span class="num">' + num(i) + "</span>" + esc(mm) + "</div>";
-    });
-    html += '<div class="map-cell right hl" style="grid-row:' + (mi + 2) + '">' +
-            '<span class="tag">← 词根意思' + num(mi) + "</span>" + esc(wd[2]) + "</div>";
-    map.innerHTML = html;
-    // 词根意思分列同步高亮
-    document.querySelectorAll("#mean-cols .mean-col").forEach(function (el) {
-      el.classList.toggle("hl", +el.dataset.mi === mi);
-    });
+    meanLine.innerHTML = '<span class="num">' + num(mi) + "</span>" + esc(rt.m[mi]) +
+      ' &nbsp;→&nbsp; <b>' + esc(wd[1]) + " " + esc(wd[2]) + "</b>";
     // 自动朗读：仅在用户已交互过页面后触发（避免刷新即播）
     if (settings.auto && userInteracted) speak(wd[0]);
   }
@@ -439,15 +428,19 @@
     bindDrawer("right");
     setDrawer("left", !!drawerState.left);
     setDrawer("right", !!drawerState.right);
-    // 拨盘
-    variantWheel = new Wheel("variant-wheel-wrap", {
+    // 左拨盘：全部词根（上下拨切换词根）
+    rootWheel = new Wheel("root-wheel-wrap", {
       itemH: wheelItemH(),
-      onSelect: function (i) { state.variant = i; }
+      onSelect: function (i) {
+        if (i !== state.rootIdx) selectRoot(DATA[i]);
+      }
     });
+    // 右拨盘：当前词根的单词
     wordWheel = new Wheel("word-wheel-wrap", {
       itemH: wheelItemH(),
-      onSelect: function (i) { state.word = i; renderWord(); }
+      onSelect: function (i) { state.word = i; renderHero(); }
     });
+    rootWheel.setItems(DATA.map(function (rt) { return { label: rt.d }; }));
     // 列表
     renderRootList("");
     renderStats();
@@ -474,14 +467,16 @@
       loadVoices();
       speechSynthesis.onvoiceschanged = loadVoices;
     } else {
-      document.getElementById("tts-note").textContent = "当前浏览器不支持语音朗读";
+      var ttsNote = document.getElementById("tts-note");
+      if (ttsNote) ttsNote.textContent = "当前浏览器不支持语音朗读";
+      toast("当前浏览器不支持语音朗读");
       document.getElementById("tts-us").disabled = true;
       document.getElementById("tts-gb").disabled = true;
     }
     window.addEventListener("resize", function () {
       // 跨断点（767px）重算拨盘行高，避免选中错位
       var h = wheelItemH();
-      [variantWheel, wordWheel].forEach(function (w) {
+      [rootWheel, wordWheel].forEach(function (w) {
         if (w && w.itemH !== h) { w.itemH = h; w._settle(); }
       });
     });
