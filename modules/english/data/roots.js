@@ -31,12 +31,9 @@ window.ROOTS_DATA = [
   ["foretell","v.","预言",0],
   ["foretaste","n.","预尝",0],
   ["forefather","n.","祖先",0],
-  ["foreleg","n.","前腿",0],
   ["forebear","n.","祖先",0],
-  ["forenoon","n.","上午",0],
   ["forewarn","v.","预警",0],
-  ["forebode","v.","预示",0],
-  ["foreordain","v.","预定",0]
+  ["forebode","v.","预示",0]
 ]},
 {r:"us",v:["us","ut"],d:"us- / ut-",m:["用"],w:[
   ["use","v.","使用",0],
@@ -152,7 +149,6 @@ window.ROOTS_DATA = [
   ["collateral","n.","抵押品",0],
   ["compartment","n.","隔间",0],
   ["comprise","v.","包括",0],
-  ["consul","n.","领事",0],
   ["commence","v.","开始",0],
   ["concession","n.","让步",0],
   ["covert","adj.","秘密的",0],
@@ -162,7 +158,6 @@ window.ROOTS_DATA = [
   ["consolidate","v.","巩固",0],
   ["concise","adj.","简明的",0],
   ["compute","v.","计算",0],
-  ["contemplate","v.","沉思",0],
   ["conglomerate","n.","集团",0],
   ["compile","v.","编纂",0],
   ["conserve","v.","保存",0],
@@ -183,7 +178,6 @@ window.ROOTS_DATA = [
   ["complacent","adj.","自满的",0],
   ["concur","v.","同意",0],
   ["condone","v.","宽恕",0],
-  ["conjure","v.","变魔术",0],
   ["copious","adj.","丰富的",0],
   ["consonant","n.","辅音",0],
   ["coexist","v.","共存",0],
@@ -472,7 +466,6 @@ window.ROOTS_DATA = [
   ["explosive","adj.","爆炸的",0],
   ["explicit","adj.","明确的",0],
   ["execute","v.","执行",0],
-  ["exotic","adj.","异国情调的",0],
   ["exile","n.","流放",0],
   ["exploit","v.","利用",0],
   ["exhaust","v.","耗尽",0],
@@ -731,9 +724,7 @@ window.ROOTS_DATA = [
   ["midwinter","n.","仲冬",0],
   ["midsection","n.","中段",0],
   ["midstream","n.","中游",0],
-  ["midriff","n.","中腰",0],
-  ["midyear","n.","年中",0],
-  ["midmost","adj.","最中间的",0]
+  ["midyear","n.","年中",0]
 ]},
 {r:"sign",v:["sign"],d:"sign-",m:["记号"],w:[
   ["design","v.","设计",0],
@@ -789,8 +780,7 @@ window.ROOTS_DATA = [
   ["manual","adj.","手工的",0],
   ["manufacture","v.","制造",0],
   ["manicure","n.","修指甲",0],
-  ["emancipate","v.","解放",0],
-  ["manacle","n.","手铐",0]
+  ["emancipate","v.","解放",0]
 ]},
 {r:"sci",v:["sci"],d:"sci-",m:["知道"],w:[
   ["science","n.","科学",0],
@@ -844,7 +834,7 @@ window.ROOTS_DATA = [
   ["debut","n.","首秀",1],
   ["defeat","n.","失败",1],
   ["defend","v.","保卫",1],
-  ["delay","v.","延迟",1],
+  ["delay","v.","延迟",0],
   ["desert","n.","沙漠",1],
   ["defensive","adj.","防御的",1],
   ["delicious","adj.","美味的",1],
@@ -863,7 +853,7 @@ window.ROOTS_DATA = [
   ["delicate","adj.","精致的",1],
   ["denial","n.","否认",1],
   ["defendant","n.","被告",1],
-  ["delight","n.","高兴",1],
+  ["delight","n.","高兴",0],
   ["detention","n.","拘留",1],
   ["descent","n.","下降",0],
   ["debris","n.","碎片",1],
@@ -884,7 +874,7 @@ window.ROOTS_DATA = [
   ["deficiency","n.","缺乏",1],
   ["debit","n.","借方",1],
   ["detrimental","adj.","有害的",1],
-  ["devote","v.","奉献",1],
+  ["devote","v.","奉献",0],
   ["derive","v.","源自",1],
   ["descend","v.","下降",0],
   ["despise","v.","鄙视",1],
@@ -892,9 +882,9 @@ window.ROOTS_DATA = [
   ["deter","v.","威慑",1],
   ["despicable","adj.","卑鄙的",1],
   ["deprivation","n.","剥夺",1],
-  ["defy","v.","违抗",1],
+  ["defy","v.","违抗",0],
   ["devoid","adj.","缺乏的",1],
-  ["depict","v.","描绘",1],
+  ["depict","v.","描绘",0],
   ["deceive","v.","欺骗",1],
   ["defamation","n.","诽谤",1],
   ["delusion","n.","错觉",1],
@@ -908,8 +898,7 @@ window.ROOTS_DATA = [
   ["demeanor","n.","举止",1],
   ["deplorable","adj.","可悲的",1],
   ["detergent","n.","洗涤剂",1],
-  ["detour","n.","绕行",1],
-  ["deprive","v.","剥夺",1],
+    ["deprive","v.","剥夺",1],
   ["devise","v.","设计",1],
   ["delicacy","n.","美食",1],
   ["demolish","v.","拆除",1],
@@ -954,7 +943,6 @@ window.ROOTS_DATA = [
   ["decompose","v.","分解",1],
   ["debunk","v.","揭穿",1],
   ["depose","v.","罢免",1],
-  ["defile","v.","玷污",1],
   ["deplete","v.","耗尽",1],
   ["devalue","v.","贬值",0],
   ["demonstrable","adj.","可证明的",1],
@@ -963,18 +951,15 @@ window.ROOTS_DATA = [
   ["decry","v.","谴责",1],
   ["denigrate","v.","诋毁",1],
   ["demean","v.","贬低",1],
-  ["derangement","n.","混乱",1],
   ["delineate","v.","描述",1],
   ["demure","adj.","端庄的",1],
   ["dereliction","n.","玩忽职守",1],
   ["deconstruct","v.","解构",1],
   ["defrost","v.","除霜",1],
-  ["dele","v.","删除",1],
   ["delude","v.","欺骗",1],
   ["depreciate","v.","贬值",1],
   ["debrief","v.","听取汇报",1],
   ["deplore","v.","悲叹",1],
-  ["deputation","n.","代表团",1],
   ["deride","v.","嘲笑",1],
   ["defray","v.","支付",1],
   ["dethrone","v.","废黜",1],
@@ -986,35 +971,24 @@ window.ROOTS_DATA = [
   ["declassify","v.","解密",1],
   ["deregulate","v.","放松管制",1],
   ["demoralize","v.","使士气低落",1],
-  ["depute","v.","派任",1],
   ["decouple","v.","分离",1],
   ["detoxify","v.","解毒",1],
   ["deforest","v.","砍伐森林",1],
   ["decease","n.","死亡",1],
   ["debase","v.","贬低",0],
   ["desultory","adj.","散漫的",1],
-  ["delimit","v.","定界",1],
   ["desegregate","v.","废除种族隔离",1],
   ["deprecate","v.","反对",1],
-  ["deniable","adj.","可否认的",1],
   ["desensitize","v.","脱敏",1],
   ["denature","v.","变性",1],
   ["demur","v.","反对",1],
   ["depopulate","v.","减少人口",1],
-  ["destine","v.","注定",1],
   ["deputize","v.","任命为代表",1],
-  ["deplane","v.","下飞机",1],
   ["demilitarize","v.","非军事化",1],
-  ["despoil","v.","掠夺",1],
-  ["desalinate","v.","脱盐",1],
   ["derange","v.","扰乱",1],
   ["denude","v.","剥光",1],
   ["deprave","v.","使堕落",1],
-  ["deodorize","v.","除臭",1],
-  ["deject","v.","使沮丧",0],
-  ["defog","v.","除雾",1],
-  ["deice","v.","除冰",1],
-  ["demount","v.","拆卸",1]
+  ["deject","v.","使沮丧",0]
 ]},
 {r:"uni",v:["uni"],d:"uni-",m:["一"],w:[
   ["union","n.","联盟",0],
@@ -1481,8 +1455,7 @@ window.ROOTS_DATA = [
   ["spirit","n.","精神",0],
   ["inspire","v.","激发",0],
   ["aspire","v.","渴望",0],
-  ["conspire","v.","共谋",0],
-  ["transpire","v.","发生",0]
+  ["conspire","v.","共谋",0]
 ]},
 {r:"neg",v:["neg"],d:"neg-",m:["否；拒"],w:[
   ["negative","adj.","否定的；消极的",0],
@@ -1552,7 +1525,6 @@ window.ROOTS_DATA = [
   ["backboard","n.","篮板",0],
   ["backache","n.","背痛",0],
   ["backspace","n.","退格",0],
-  ["backfill","v.","回填",0],
   ["backwash","n.","回流",0],
   ["backslash","n.","反斜杠",0],
   ["backslide","v.","倒退",0],
@@ -1591,8 +1563,7 @@ window.ROOTS_DATA = [
   ["transcribe","v.","转录",0],
   ["conscript","n.","征兵",0],
   ["inscribe","v.","刻写",0],
-  ["proscribe","v.","禁止",0],
-  ["circumscribe","v.","限制",0]
+  ["proscribe","v.","禁止",0]
 ]},
 {r:"sist",v:["sist"],d:"sist-",m:["站"],w:[
   ["exist","v.","存在",0],
@@ -2124,8 +2095,7 @@ window.ROOTS_DATA = [
 ]},
 {r:"bi",v:["bi"],d:"bi-",m:["二"],w:[
   ["bicycle","n.","自行车",0],
-  ["binary","adj.","二元的",0],
-  ["biped","n.","二足动物",0]
+  ["binary","adj.","二元的",0]
 ]},
 {r:"fug",v:["fug","fugit"],d:"fug-",m:["逃"],w:[
   ["refugee","n.","难民",0],
@@ -2236,8 +2206,7 @@ window.ROOTS_DATA = [
 {r:"mal",v:["mal"],d:"mal-",m:["坏；恶"],w:[
   ["malicious","adj.","恶意的",0],
   ["malaria","n.","疟疾",0],
-  ["malfunction","n./v.","故障",0],
-  ["maltreat","v.","虐待",0]
+  ["malfunction","n./v.","故障",0]
 ]},
 {r:"celer",v:["celer"],d:"celer-",m:["快"],w:[
   ["accelerate","v.","加速",0]
