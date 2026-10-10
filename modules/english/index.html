@@ -37,7 +37,11 @@
     <header class="stage-head">
       <a class="back-btn" href="../../index.html" aria-label="返回工具箱首页">← 返回</a>
       <h1>词根词缀学习工具</h1>
-      <span class="spacer" aria-hidden="true"></span>
+      <div class="head-tts">
+        <button class="tts-btn" id="tts-us">🔊 美音</button>
+        <button class="tts-btn" id="tts-gb">🔊 英音</button>
+        <span class="tts-rate"><b id="tts-rate">0.9x</b></span>
+      </div>
     </header>
 
     <!-- 焦点：整个单词 + 单词意思 -->
@@ -63,13 +67,6 @@
         </div>
         <div class="dial-mean" id="word-mean"></div>
       </div>
-    </div>
-
-    <!-- 朗读（一行） -->
-    <div class="tts-bar">
-      <button class="tts-btn" id="tts-us">🔊 美音</button>
-      <button class="tts-btn" id="tts-gb">🔊 英音</button>
-      <span class="tts-rate">语速 <b id="tts-rate">0.9x</b></span>
     </div>
   </main>
 

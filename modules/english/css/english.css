@@ -218,6 +218,23 @@ body {
 }
 .back-btn:hover { background: var(--accent-soft); }
 .stage-head .spacer { width: 70px; }
+/* 顶部朗读控制：紧凑版 */
+.head-tts {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: none;
+}
+.head-tts .tts-btn {
+  padding: 4px 12px;
+  font-size: 0.85rem;
+  border-width: 1.5px;
+}
+.head-tts .tts-rate {
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
 
 /* 焦点大字（保留兼容） */
 .word-hero { text-align: center; flex: none; padding: 6px 0 2px; }
@@ -364,15 +381,7 @@ body {
 }
 
 
-/* ---------- 朗读（一行） ---------- */
-.tts-bar {
-  flex: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  padding: 4px 0 2px;
-}
+/* ---------- 朗读按钮（通用） ---------- */
 .tts-btn {
   border: 2px solid var(--accent-text);
   background: var(--panel);
