@@ -1,0 +1,215 @@
+/* ============================================================
+ * 学习工具箱 · 共享设计系统
+ * 给孩子的界面：大字、大按钮、圆角、高对比，护眼配色。
+ * 各个学科页面可直接复用这些基础样式。
+ * ============================================================ */
+:root {
+  --bg: #fdf8ef;
+  --ink: #33302a;
+  --ink-soft: #6b655a;
+  --card-bg: #ffffff;
+  --radius: 18px;
+  --shadow: 0 4px 18px rgba(80, 60, 20, 0.08);
+  --shadow-hover: 0 10px 28px rgba(80, 60, 20, 0.14);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, "PingFang SC", "Hiragino Sans GB",
+               "Microsoft YaHei", "Noto Sans SC", sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px 20px 60px;
+}
+
+/* ---------- 首页 hero ---------- */
+.hero {
+  background: linear-gradient(135deg, #ffd66e 0%, #ffb347 60%, #ff9d5c 100%);
+  padding: 56px 20px 48px;
+  text-align: center;
+}
+.hero h1 {
+  margin: 0 0 8px;
+  font-size: 2.4rem;
+  letter-spacing: 2px;
+}
+.hero .subtitle {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #5c4a1e;
+}
+
+/* ---------- 学科卡片 ---------- */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 22px;
+  margin-top: 8px;
+}
+
+.card {
+  position: relative;
+  display: block;
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 26px 24px 22px;
+  text-decoration: none;
+  color: inherit;
+  border-top: 6px solid var(--card-color, #3b82f6);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+a.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+}
+.card-soon { opacity: 0.85; }
+
+.card-icon { margin-bottom: 10px; }
+.card h2 {
+  margin: 0 0 6px;
+  font-size: 1.45rem;
+}
+.card h2 small {
+  font-size: 0.95rem;
+  font-weight: normal;
+  color: var(--ink-soft);
+}
+.card p {
+  margin: 0 0 16px;
+  color: var(--ink-soft);
+  font-size: 0.98rem;
+}
+
+.badge {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  font-size: 0.78rem;
+  padding: 3px 12px;
+  border-radius: 999px;
+}
+.badge-ready { background: #dcfce7; color: #15803d; }
+.badge-soon  { background: #fef3c7; color: #b45309; }
+
+.card-btn {
+  display: inline-block;
+  background: var(--card-color, #3b82f6);
+  color: #fff;
+  padding: 10px 26px;
+  border-radius: 999px;
+  font-size: 1rem;
+  text-decoration: none;
+}
+.card-btn-disabled {
+  background: #d6d0c2;
+  cursor: default;
+}
+
+.hint {
+  text-align: center;
+  color: var(--ink-soft);
+  margin-top: 36px;
+}
+
+.footer {
+  text-align: center;
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+  padding: 18px;
+  border-top: 1px dashed #e5dcc8;
+}
+
+/* ---------- 学科内页通用 ---------- */
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 20px;
+  background: #fff;
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.back-link {
+  color: var(--ink-soft);
+  text-decoration: none;
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+.back-link:hover { color: var(--ink); }
+.topbar h1 { margin: 0; font-size: 1.25rem; }
+
+.search-box {
+  width: 100%;
+  max-width: 480px;
+  font-size: 1.05rem;
+  padding: 12px 18px;
+  border-radius: 999px;
+  border: 2px solid #e5dcc8;
+  background: #fff;
+  margin: 6px 0 20px;
+  outline: none;
+}
+.search-box:focus { border-color: var(--card-color, #3b82f6); }
+
+.root-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 18px;
+}
+.root-card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px;
+  border-left: 6px solid var(--card-color, #3b82f6);
+}
+.root-card .root {
+  font-size: 1.5rem;
+  font-weight: bold;
+  font-family: "Georgia", serif;
+  letter-spacing: 1px;
+}
+.root-card .meaning {
+  color: var(--card-color, #3b82f6);
+  font-weight: bold;
+  margin: 2px 0 10px;
+}
+.root-card ul {
+  margin: 0;
+  padding-left: 1.2em;
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+}
+.root-card li { margin-bottom: 4px; }
+.root-card li b { color: var(--ink); }
+
+.version-note {
+  background: #fffbeb;
+  border: 1px dashed #f59e0b;
+  border-radius: 12px;
+  padding: 12px 18px;
+  color: #92400e;
+  font-size: 0.92rem;
+  margin-bottom: 22px;
+}
+
+.plan-list { padding-left: 1.4em; }
+.plan-list li { margin-bottom: 10px; }
+
+/* ---------- 小屏幕 ---------- */
+@media (max-width: 560px) {
+  .hero h1 { font-size: 1.8rem; }
+  .card-grid { grid-template-columns: 1fr; }
+}

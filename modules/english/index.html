@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>英语 · 词根应用 — 学习工具箱</title>
+<link rel="stylesheet" href="../../assets/css/style.css">
+<style>:root { --card-color: #3b82f6; }</style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-link" href="../../index.html">← 返回首页</a>
+    <h1>英语 · 词根应用</h1>
+  </div>
+
+  <main class="container">
+    <div class="version-note">
+      v0.1 演示版：先验证页面结构与搜索交互，词根库的完整内容下一步再设计。
+    </div>
+
+    <input id="search" class="search-box" type="search"
+           placeholder="搜词根或中文意思，比如 spect / 看" autocomplete="off">
+
+    <div id="root-grid" class="root-grid"></div>
+  </main>
+
+<script>
+(function () {
+  "use strict";
+
+  // v0.1 演示数据：后续完整词根库设计时替换/扩充
+  var ROOTS = [
+    { root: "spect-", meaning: "看",
+      words: [["spectate", "观看"], ["inspect", "检查"], ["respect", "尊敬"]] },
+    { root: "dict-", meaning: "说",
+      words: [["dictate", "口授"], ["predict", "预言"], ["dictionary", "词典"]] },
+    { root: "port-", meaning: "拿；运",
+      words: [["import", "进口"], ["export", "出口"], ["transport", "运输"]] },
+    { root: "scrib- / script-", meaning: "写",
+      words: [["describe", "描述"], ["prescribe", "开处方"], ["manuscript", "手稿"]] },
+    { root: "bio-", meaning: "生命",
+      words: [["biology", "生物学"], ["biography", "传记"]] },
+    { root: "photo-", meaning: "光",
+      words: [["photograph", "照片"], ["photosynthesis", "光合作用"]] }
+  ];
+
+  var grid = document.getElementById("root-grid");
+  var search = document.getElementById("search");
+
+  function cardHTML(r) {
+    var lis = r.words.map(function (w) {
+      return "<li><b>" + w[0] + "</b> — " + w[1] + "</li>";
+    }).join("");
+    return '<div class="root-card" data-key="' + (r.root + r.meaning).toLowerCase() + '">' +
+           '<div class="root">' + r.root + "</div>" +
+           '<div class="meaning">“" + r.meaning + "”的意思</div>' +
+           "<ul>" + lis + "</ul></div>";
+  }
+
+  function render(filter) {
+    var f = (filter || "").trim().toLowerCase();
+    var html = ROOTS.filter(function (r) {
+      return !f || (r.root + r.meaning).toLowerCase().indexOf(f) !== -1;
+    }).map(cardHTML).join("");
+    grid.innerHTML = html || '<p class="hint">没有找到，换个词试试。</p>';
+  }
+
+  search.addEventListener("input", function () { render(search.value); });
+  render("");
+})();
+</script>
+</body>
+</html>
