@@ -270,12 +270,14 @@ body {
 }
 .dial { display: flex; flex-direction: column; min-height: 0; min-width: 0; }
 /* 拨盘下方：意思（替代原来的操作说明） */
+/* 固定高度：防止多义词根撑高挤压拨轮（最多 2 义） */
 .dial-mean {
   flex: none;
+  height: 3.4em;
+  overflow: hidden;
   text-align: center;
   font-size: 1.02rem;
   padding-top: 10px;
-  min-height: 2.2em;
   color: var(--ink);
 }
 .dial-mean .num {
