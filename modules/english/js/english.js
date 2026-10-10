@@ -452,6 +452,16 @@
     if (!state.root || !state.root.w.length) return null;
     return state.root.w[Math.max(0, Math.min(state.root.w.length - 1, state.word))];
   }
+  /* 词根多义显示：当前义高亮，其余义淡化放下面对齐 */
+  function meaningsHtml(meanings, curIdx) {
+    var html = "";
+    for (var i = 0; i < meanings.length; i++) {
+      var cls = i === curIdx ? "mean-cur" : "mean-other";
+      html += '<div class="mean-row ' + cls + '"><span class="num">' + num(i) + "</span><span>" + esc(meanings[i]) + "</span></div>";
+    }
+    return html;
+  }
+
   /* ---------------- Hero 渲染：整个单词 + 单词意思 ---------------- */
   function renderHero() {
     var rt = state.root;
@@ -478,15 +488,15 @@
     // 单词意思：词性 + 中文
     heroMean.innerHTML = '<span class="pos">' + esc(wd[1]) + "</span><b>" + esc(wd[2]) + "</b>";
     cineRestart(heroMean);
-    // 左拨盘下方：词根意思
+    // 左拨盘下方：词根意思（多义时当前义高亮，其余淡化对齐）
     var mi = Math.min(Math.max(0, wd[3] || 0), rt.m.length - 1);
-    if (rootMean) rootMean.innerHTML = '<span class="num">' + num(mi) + "</span>" + esc(rt.m[mi]);
-    // 右拨盘下方：选中词素的意思（查词素；查不到回退单词意思）
+    if (rootMean) rootMean.innerHTML = meaningsHtml(rt.m, mi);
+    // 右拨盘下方：选中词素的意思（多义同样处理，默认取第一义）
     if (wordMean) {
       var sp = splitPair(wd[0], rt);
       var mRoot = findMorpheme(sp.other);
       if (mRoot && sp.pos !== "none" && sp.pos !== "mid") {
-        wordMean.innerHTML = '<span class="pos">词素</span><b>' + esc(mRoot.m[0]) + "</b>";
+        wordMean.innerHTML = meaningsHtml(mRoot.m, 0);
       } else {
         wordMean.innerHTML = '<span class="pos">' + esc(wd[1]) + "</span><b>" + esc(wd[2]) + "</b>";
       }
