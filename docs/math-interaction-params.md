@@ -60,7 +60,7 @@
   },
   views: [           // 必填，联动视图数组（1–3 个）
     { kind: "readout", expr: "2*x + 1", label: "y" },   // 数值读数
-    { kind: "point", xExpr: "x", yExpr: "2*x + 1" }      // 坐标点
+    { kind: "point", xExpr: "x", yExpr: "2*x + 1" }      // 坐标点；可选 axisLabelX/axisLabelY 覆盖轴标签
   ]
 }
 ```

@@ -91,6 +91,7 @@
     // 主交互
     var ixBox = $("p-interaction");
     ixBox.innerHTML = "";
+    ixBox.classList.remove("has-aux");
     if (page.interaction && page.interaction.type) {
       var fn = ixRenderers[page.interaction.type];
       if (fn) {
@@ -102,6 +103,23 @@
       }
     } else {
       ixBox.innerHTML = '<div class="ix-stub">本页无交互</div>';
+    }
+
+    // 辅交互（可选，≤1 个，结构同 interaction）：主交互下方紧凑容器
+    // （白队 W：ch08 等页面的 auxInteraction 此前从未被渲染）
+    if (page.auxInteraction && page.auxInteraction.type) {
+      var auxFn = ixRenderers[page.auxInteraction.type];
+      var auxBox = document.createElement("div");
+      auxBox.className = "m-aux-interaction";
+      ixBox.appendChild(auxBox);
+      ixBox.classList.add("has-aux");  // 竖向堆叠：主交互在上，辅交互在下
+      if (auxFn) {
+        try { auxFn(auxBox, page.auxInteraction.params || {}, page); }
+        catch (e) { auxBox.innerHTML = '<div class="ix-stub">辅交互渲染出错：' + esc(e.message) + "</div>"; }
+      } else {
+        auxBox.innerHTML = '<div class="ix-stub">辅交互占位：' + esc(page.auxInteraction.type) +
+          "<br>（渲染器待实现，不影响浏览）</div>";
+      }
     }
 
     // 点拨

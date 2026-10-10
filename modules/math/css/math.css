@@ -76,6 +76,28 @@ body[data-theme="dark"] #mathml-warn { background: #4a3a1a; color: #fde68a; }
   display: flex; align-items: center; justify-content: center;
 }
 .ix-stub { color: var(--m-ink-soft); font-size: 0.9rem; padding: 20px; text-align: center; }
+/* 辅交互容器：主交互下方紧凑堆叠，复用 ix-* 样式 */
+.m-interaction.has-aux { flex-direction: column; justify-content: flex-start; }
+.m-aux-interaction {
+  flex: none; width: 100%; max-width: 440px; margin: 6px auto 0;
+  border-top: 1px dashed var(--m-line); padding-top: 4px;
+}
+/* ---------- has-aux 页面：一屏空间压缩 ---------- */
+/* 主交互 SVG 限高 200px（有 viewBox，宽高比自动保持），给辅交互腾空间 */
+.m-interaction.has-aux .ix-plot { width: 100%; }
+.m-interaction.has-aux .ix-plot svg {
+  height: 200px; width: auto; max-width: 100%;
+  display: block; margin: 0 auto;
+}
+/* 辅交互总高 ≤ 220px：读数区小字 + 单位圆 SVG 限高 120px */
+.m-aux-interaction .ix-dash-readouts { font-size: 0.85rem; }
+.m-aux-interaction .ix-expr-line { font-size: 1rem; margin-bottom: 2px; }
+.m-aux-interaction .ix-slider-label,
+.m-aux-interaction .ix-slider-val { font-size: 0.95rem; }
+.m-aux-interaction .ix-dashboard svg {
+  height: 120px; width: auto; max-width: 100%;
+  display: block; margin: 0 auto;
+}
 .m-hints { flex: none; max-height: 6.5em; overflow: hidden; font-size: 0.95rem; color: var(--m-ink-soft); }
 .m-hints p { margin: 4px 0; }
 .m-hints .point { color: var(--m-ink); font-weight: bold; }

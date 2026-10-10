@@ -15,14 +15,26 @@
   "use strict";
 
   /* ---------------- 共享：表达式求值（LaTeX 子集） ----------------
-   * 支持：+ - * / ^() 及变量名。^ 转 ** 做幂。 */
+   * 支持：+ - * / ^()、三角函数 sin/cos/tan、对数 log2/log/ln（ln=log=自然对数）、
+   * π 及变量名。^ 转 ** 做幂。 */
   function evalExpr(expr, varName, varValue) {
     var e = String(expr == null ? "" : expr);
     e = e.replace(/\^/g, "**");
+    // 白名单替换：三角函数、对数与圆周率 → Math.*（先做，再代入变量）
+    // 注意：log2( 必须先于 log( 处理，否则 log2( 会被误替换成 Math.log(2(
+    e = e.replace(/\bsin\s*\(/g, "Math.sin(")
+         .replace(/\bcos\s*\(/g, "Math.cos(")
+         .replace(/\btan\s*\(/g, "Math.tan(")
+         .replace(/\blog2\s*\(/g, "Math.log2(")
+         .replace(/\blog\s*\(/g, "Math.log(")
+         .replace(/\bln\s*\(/g, "Math.log(")
+         .replace(/\u03C0/g, "Math.PI");
     var escName = String(varName).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
     var re = new RegExp("\\b" + escName + "\\b", "g");
     e = e.replace(re, "(" + Number(varValue) + ")");
-    if (!/^[0-9+\-*/().\s]*$/.test(e)) return NaN;
+    // 安全检查：剥离白名单标识符后只允许数字、运算符、括号、空白
+    var check = e.replace(/\bMath\.(sin|cos|tan|log2|log|PI)\b/g, "");
+    if (!/^[0-9+\-*/().\s]*$/.test(check)) return NaN;
     try {
       var v = Function('"use strict"; return (' + e + ")")();
       return (typeof v === "number" && isFinite(v)) ? v : NaN;
@@ -136,7 +148,14 @@
 
   function renderSliderLab(container, params) {
     var core = sliderLabCore(container, params);
-    var wrap = core.wrap;
+    attachTargetFeedback(core.wrap, params, core);
+    return core;
+  }
+
+  /* 目标语义（🎯 旗帜 + r===target 命中反馈），slider-lab 与 side-compare 复用。
+   * 无 target 时：只挂载空状态行（slider-lab 历史行为，无视觉反馈）；
+   * side-compare 仅在栏内 params 含 target 时调用，不改变无 target 栏的布局。 */
+  function attachTargetFeedback(wrap, params, core) {
     var hasTarget = params.target !== undefined && params.target !== null;
     var target = Number(params.target);
     // 目标标记："结果目标"单独标注。target 是结果值 r 的目标，不能按输入滑块轴定位
@@ -582,13 +601,13 @@
         svg.appendChild(svgEl("line", { x1: X(0), y1: mT, x2: X(0), y2: H - mB,
           stroke: "var(--m-line)", "stroke-width": 1.5 }));
       }
-      // 轴标签（取首个 point 视图的表达式）
+      // 轴标签（可选 axisLabelX/axisLabelY；默认取首个 point 视图的表达式）
       var xLab = svgEl("text", { x: W - mR - 2, y: H - 8, "text-anchor": "end",
         fill: "var(--m-ink-soft)", "font-size": 13 });
-      xLab.textContent = pointViews[0].xExpr || "x";
+      xLab.textContent = pointViews[0].axisLabelX || pointViews[0].xExpr || "x";
       svg.appendChild(xLab);
       var yLab = svgEl("text", { x: 6, y: mT + 6, fill: "var(--m-ink-soft)", "font-size": 13 });
-      yLab.textContent = pointViews[0].yExpr || "y";
+      yLab.textContent = pointViews[0].axisLabelY || pointViews[0].yExpr || "y";
       svg.appendChild(yLab);
       // 轨迹（淡）+ 当前点（亮）+ 坐标标注
       trails.forEach(function (pts) {
@@ -829,7 +848,9 @@
    * 5. side-compare 并排对比
    * params: {left:{kind,params}, right:{kind,params}, sync?, labels?}
    *
-   * 左右两栏，每栏一个简化版 slider-lab（复用 sliderLabCore）。
+   * 左右两栏，每栏一个简化版 slider-lab。
+   * 栏内 params 含 target/targetLabel 时，复用与 slider-lab 完全相同的
+   * attachTargetFeedback（🎯 旗帜 + r===target 命中反馈）；无 target 的栏布局不变。
    * sync 列出的参数名：同名滑块联动（拖一边，另一边跟着动）。
    * 约束：不允许嵌套 side-compare。
    * ============================================================ */
@@ -850,7 +871,13 @@
       t.style.cssText = "font-weight:bold;margin-bottom:2px;";
       col.appendChild(t);
       if (cfg && cfg.kind === "slider-lab") {
-        cores.push(sliderLabCore(col, cfg.params || {}));
+        var scParams = cfg.params || {};
+        var scCore = sliderLabCore(col, scParams);
+        // 目标语义打通：栏内含 target 时复用与 renderSliderLab 相同的旗帜+命中反馈
+        if (scParams.target !== undefined && scParams.target !== null) {
+          attachTargetFeedback(scCore.wrap, scParams, scCore);
+        }
+        cores.push(scCore);
       } else {
         var stub = el("div", "ix-stub", "暂不支持内嵌类型：" + esc(cfg && cfg.kind));
         col.appendChild(stub);

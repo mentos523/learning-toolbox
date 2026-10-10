@@ -120,13 +120,15 @@ class Parser {
     if (!c || c.t !== "rbrace") this.fail("需要 } 配对");
     return `<mrow>${inner}</mrow>`;
   }
-  /* 上下标参数：{...} 或单个原子 */
+  /* 上下标参数：{...} 或单个字符（LaTeX 标准语义：无括号时只取一个字符） */
   parseScriptArg() {
     const t = this.peek();
     if (t && t.t === "lbrace") return this.parseGroup();
-    const a = this.parseAtom();
-    if (a == null) this.fail("^/_ 后缺少参数");
-    return typeof a === "string" ? a : "<mo>?</mo>";
+    const a = this.next();
+    if (!a) this.fail("^/_ 后缺少参数");
+    if (a.t === "char") return this.parseChar(a.v, true); // 单字符，不贪婪吞连续同类
+    if (a.t === "cmd") return this.parseCmd(a.v);
+    this.fail(`^/_ 后意外的记号 "${a.t}"`);
   }
   parseAtomWithScripts() {
     let base = this.parseAtom();
@@ -168,20 +170,24 @@ class Parser {
     if (t.t === "cmd") return this.parseCmd(t.v);
     this.fail(`意外的记号 "${t.t}"`);
   }
-  parseChar(c) {
+  parseChar(c, single = false) {
     if (/[0-9]/.test(c)) {
       let num = c;
-      while (this.peek() && this.peek().t === "char" && /[0-9]/.test(this.peek().v)) num += this.next().v;
-      if (this.peek() && this.peek().t === "char" && this.peek().v === "." &&
-          this.toks[this.i + 1] && this.toks[this.i + 1].t === "char" && /[0-9]/.test(this.toks[this.i + 1].v)) {
-        num += this.next().v;
+      if (!single) {
         while (this.peek() && this.peek().t === "char" && /[0-9]/.test(this.peek().v)) num += this.next().v;
+        if (this.peek() && this.peek().t === "char" && this.peek().v === "." &&
+            this.toks[this.i + 1] && this.toks[this.i + 1].t === "char" && /[0-9]/.test(this.toks[this.i + 1].v)) {
+          num += this.next().v;
+          while (this.peek() && this.peek().t === "char" && /[0-9]/.test(this.peek().v)) num += this.next().v;
+        }
       }
       return `<mn>${num}</mn>`;
     }
     if (/[a-zA-Z]/.test(c)) {
       let id = c;
-      while (this.peek() && this.peek().t === "char" && /[a-zA-Z]/.test(this.peek().v)) id += this.next().v;
+      if (!single) {
+        while (this.peek() && this.peek().t === "char" && /[a-zA-Z]/.test(this.peek().v)) id += this.next().v;
+      }
       return `<mi>${id}</mi>`;
     }
     const moMap = { "+": "+", "=": "=", "<": "&lt;", ">": "&gt;", "(": "(", ")": ")",
