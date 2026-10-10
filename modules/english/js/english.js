@@ -155,24 +155,54 @@
     VOICES.us = pickVoice(vs, "en-US");
     VOICES.gb = pickVoice(vs, "en-GB");
   }
-  /* 朗读序号：防止 cancel() 触发旧 utterance 的 onend 抹掉新按钮高亮 */
+  /* 朗读序号：防止竞态抹掉新按钮高亮 */
   var speakSeq = 0;
+  var audioEl = null;
+
+  /* 本地真人声音频优先，缺文件/播不了则降级到系统合成语音 */
   function speak(text, forceVoice) {
-    if (!("speechSynthesis" in window)) { toast("当前浏览器不支持朗读"); return; }
     if (!text) return;
+    var mode = forceVoice || settings.voice;   // 'us' 美音 / 'gb' 英音
+    var sub = (mode === "gb") ? "gb" : "us";
+    var rate = Math.min(1.5, Math.max(0.5, Number(settings.rate) || 0.9));
+    var myId = ++speakSeq;
+    var btn = document.getElementById(mode === "gb" ? "tts-gb" : "tts-us");
+    var hl = function (on) {
+      if (myId !== speakSeq) return;
+      document.querySelectorAll(".tts-btn").forEach(function (b) {
+        b.classList.toggle("speaking", on && b === btn);
+      });
+    };
+    try {
+      if (audioEl) { try { audioEl.pause(); } catch (e) {} }
+      audioEl = new Audio("audio/" + sub + "/" + text.toLowerCase() + ".mp3");
+      audioEl.playbackRate = rate;   // 语速设置同样生效
+      audioEl.onended = function () { hl(false); };
+      audioEl.onerror = function () { speakSynth(text, mode, rate, myId); };
+      hl(true);
+      var p = audioEl.play();
+      if (p && p.catch) p.catch(function () { speakSynth(text, mode, rate, myId); });
+    } catch (e) { speakSynth(text, mode, rate, myId); }
+  }
+
+  /* 降级：系统合成语音 */
+  function speakSynth(text, mode, rate, myId) {
+    if (!("speechSynthesis" in window)) {
+      if (myId === speakSeq) {
+        document.querySelectorAll(".tts-btn").forEach(function (b) { b.classList.remove("speaking"); });
+        toast("当前浏览器不支持朗读");
+      }
+      return;
+    }
     try {
       speechSynthesis.cancel();
-      var myId = ++speakSeq;
       var u = new SpeechSynthesisUtterance(text);
-      var mode = forceVoice || settings.voice;
       var v = mode === "gb" ? VOICES.gb : VOICES.us;
       if (v) { u.voice = v; u.lang = v.lang; }
       else { u.lang = mode === "gb" ? "en-GB" : "en-US"; }
-      u.rate = Math.min(1.5, Math.max(0.5, Number(settings.rate) || 0.9));
-      var btn = document.getElementById(mode === "gb" ? "tts-gb" : "tts-us");
-      if (btn) btn.classList.add("speaking");
+      u.rate = rate;
       u.onend = u.onerror = function () {
-        if (myId !== speakSeq) return;   // 只响应最后一次朗读
+        if (myId !== speakSeq) return;
         document.querySelectorAll(".tts-btn").forEach(function (b) { b.classList.remove("speaking"); });
       };
       speechSynthesis.speak(u);
