@@ -220,11 +220,6 @@ body {
 }
 .word-hero-word .morph { color: var(--morph); }
 .word-hero-word .hyph { color: var(--ink-soft); font-weight: normal; }
-.word-hero-zh {
-  font-size: clamp(1.15rem, 3.4vw, 1.5rem);
-  font-weight: bold;
-  min-height: 1.6em;
-}
 /* 切换时的电影感转场 */
 @keyframes cine-in {
   from { opacity: 0; transform: translateY(16px); filter: blur(5px); }
@@ -242,14 +237,25 @@ body {
   padding: 6px 0;
 }
 .dial { display: flex; flex-direction: column; min-height: 0; min-width: 0; }
-.dial-label {
+/* 拨盘下方：意思（替代原来的操作说明） */
+.dial-mean {
   flex: none;
   text-align: center;
-  font-size: 0.82rem;
-  color: var(--ink-soft);
-  letter-spacing: 2px;
-  padding-top: 8px;
+  font-size: 1.02rem;
+  padding-top: 10px;
+  min-height: 2.2em;
+  color: var(--ink);
 }
+.dial-mean .num {
+  display: inline-block;
+  background: var(--accent-strong);
+  color: #fff;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  padding: 1px 8px;
+  margin-right: 8px;
+}
+.dial-mean .pos { color: var(--ink-soft); font-size: 0.9em; margin-right: 6px; }
 
 /* ---------- 拨盘 ---------- */
 .wheel-wrap { position: relative; flex: 1; min-height: 0; display: flex; }
@@ -300,27 +306,6 @@ body {
   pointer-events: none;
 }
 
-/* ---------- 词义（一行） ---------- */
-.mean-line {
-  flex: none;
-  text-align: center;
-  font-size: 0.95rem;
-  color: var(--ink-soft);
-  padding: 6px 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.mean-line .num {
-  display: inline-block;
-  background: var(--accent-strong);
-  color: #fff;
-  border-radius: 6px;
-  font-size: 0.8rem;
-  padding: 1px 8px;
-  margin-right: 8px;
-}
-.mean-line b { color: var(--ink); }
 
 /* ---------- 朗读（一行） ---------- */
 .tts-bar {
@@ -443,7 +428,6 @@ body {
   .wheel-pad { height: 87px; }
   .wheel-item { height: 46px; font-size: 1.05rem; }
   .wheel-center { height: 46px; }
-  .mean-line { font-size: 0.85rem; }
   .tts-btn { padding: 8px 16px; font-size: 0.92rem; }
 }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }

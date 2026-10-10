@@ -43,7 +43,6 @@
     <!-- 焦点：当前单词（词根部分标红） -->
     <div class="word-hero">
       <div class="word-hero-word" id="hero-word" aria-live="polite"></div>
-      <div class="word-hero-zh" id="hero-zh"></div>
     </div>
 
     <!-- 双拨盘：一排并列 -->
@@ -53,19 +52,16 @@
           <div class="wheel" role="listbox" aria-label="词根"></div>
           <div class="wheel-center"></div>
         </div>
-        <div class="dial-label">词根 · 上下拨切换</div>
+        <div class="dial-mean" id="root-mean"></div>
       </div>
       <div class="dial">
         <div class="wheel-wrap" id="word-wheel-wrap">
           <div class="wheel" role="listbox" aria-label="单词"></div>
           <div class="wheel-center"></div>
         </div>
-        <div class="dial-label">单词 · 上下拨切换</div>
+        <div class="dial-mean" id="word-mean"></div>
       </div>
     </div>
-
-    <!-- 词义（一行） -->
-    <div class="mean-line" id="mean-line"></div>
 
     <!-- 朗读（一行） -->
     <div class="tts-bar">

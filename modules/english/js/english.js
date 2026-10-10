@@ -123,6 +123,22 @@
     if (cur) cur.textContent = voiceName;
   }
 
+  /* 单词切分：词根前缀型 → 词根 + 剩余部分（如 tele-phone）；
+   * 非前缀型 → 整词显示，hero 内标红词形 */
+  function splitWord(word, variants) {
+    var w = String(word == null ? "" : word);
+    var lw = w.toLowerCase();
+    var bestLen = 0;
+    (variants || []).forEach(function (v) {
+      var lv = String(v).toLowerCase();
+      if (lv && lw.indexOf(lv) === 0 && lv.length > bestLen) bestLen = lv.length;
+    });
+    if (bestLen > 0) {
+      return { clean: true, morph: w.slice(0, bestLen), rest: w.slice(bestLen), full: w };
+    }
+    return { clean: false, morph: "", rest: w, full: w };
+  }
+
   /* 单词内词根词形高亮：前缀型加连字符（dict-ate），中缀型只标红（ex**pect**） */
   function heroWordHtml(word, variants) {
     var w = String(word == null ? "" : word);
@@ -195,7 +211,21 @@
       if (e.key === "ArrowDown" || e.key === "ArrowRight") { self.go(self.index + 1); e.preventDefault(); }
       if (e.key === "ArrowUp" || e.key === "ArrowLeft") { self.go(self.index - 1); e.preventDefault(); }
     });
+    // 弹性高度：容器变化时重算上下垫片，保证选中项永远居中对齐高亮框
+    if ("ResizeObserver" in window) {
+      var ro = new ResizeObserver(function () { self.fit(); });
+      ro.observe(this.list);
+    }
   }
+  /* 垫片高度 = (容器高 - 行高) / 2，使 scrollTop = i*itemH 时第 i 项恰好居中 */
+  Wheel.prototype.fit = function () {
+    var H = this.list.clientHeight;
+    if (!H) return;
+    var pad = Math.max(0, (H - this.itemH) / 2);
+    var pads = this.list.querySelectorAll(".wheel-pad");
+    for (var i = 0; i < pads.length; i++) pads[i].style.height = pad + "px";
+    if (this.index >= 0) this.list.scrollTop = this.index * this.itemH;
+  };
   Wheel.prototype.setItems = function (items) {
     // items: [{label, sub}]
     this.items = items;
@@ -209,6 +239,8 @@
     this.list.innerHTML = html;
     this.list.scrollTop = 0;
     this.index = -1;
+    var selfFit = this;
+    requestAnimationFrame(function () { selfFit.fit(); });
     if (items.length) this.go(0, true);
   };
   Wheel.prototype._onScroll = function () {
@@ -370,8 +402,11 @@
         li.classList.toggle("active", li.dataset.r === rt.r);
       });
     }
-    // 右拨盘：当前词根的单词
-    wordWheel.setItems(rt.w.map(function (wd) { return { label: wd[0] }; }));
+    // 右拨盘：当前词根的单词（前缀型显示剩余部分，如 phone；非前缀型显示整词）
+    wordWheel.setItems(rt.w.map(function (wd) {
+      var sp = splitWord(wd[0], rt.v);
+      return { label: sp.rest, full: wd[0] };
+    }));
     renderHero();
     updateRootsSub();
     // 深链接写回：刷新/分享后回到当前词根（replaceState 不污染历史栈）
@@ -388,25 +423,29 @@
   function renderHero() {
     var rt = state.root;
     var heroWord = document.getElementById("hero-word");
-    var heroZh = document.getElementById("hero-zh");
-    var meanLine = document.getElementById("mean-line");
+    var rootMean = document.getElementById("root-mean");
+    var wordMean = document.getElementById("word-mean");
     if (!rt || !rt.w.length) {
       heroWord.textContent = "—";
-      heroZh.textContent = "";
-      meanLine.textContent = "该词根暂无收词";
+      rootMean.textContent = "";
+      wordMean.textContent = "该词根暂无收词";
       return;
     }
     var wd = currentWord();
-    // 焦点大字：词根词形标红（前缀型加连字符，如 dict-ate）
-    heroWord.innerHTML = heroWordHtml(wd[0], rt.v);
+    var sp = splitWord(wd[0], rt.v);
+    // 焦点大字：前缀型 tele-phone；非前缀型整词标红
+    if (sp.clean) {
+      heroWord.innerHTML = '<span class="morph">' + esc(sp.morph) + '</span><span class="hyph">-</span>' + esc(sp.rest);
+    } else {
+      heroWord.innerHTML = heroWordHtml(wd[0], rt.v);
+    }
     cineRestart(heroWord);
-    // 单词中文
-    heroZh.textContent = wd[2];
-    cineRestart(heroZh);
-    // 词义一行：词根意思① → 单词词性中文
+    // 词根意思（拨盘下方）
     var mi = Math.min(Math.max(0, wd[3] || 0), rt.m.length - 1);
-    meanLine.innerHTML = '<span class="num">' + num(mi) + "</span>" + esc(rt.m[mi]) +
-      ' &nbsp;→&nbsp; <b>' + esc(wd[1]) + " " + esc(wd[2]) + "</b>";
+    rootMean.innerHTML = '<span class="num">' + num(mi) + "</span>" + esc(rt.m[mi]);
+    // 单词意思（拨盘下方）：词性 + 中文
+    wordMean.innerHTML = '<span class="pos">' + esc(wd[1]) + "</span><b>" + esc(wd[2]) + "</b>";
+    cineRestart(wordMean);
     // 自动朗读：仅在用户已交互过页面后触发（避免刷新即播）
     if (settings.auto && userInteracted) speak(wd[0]);
   }
