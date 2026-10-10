@@ -156,7 +156,11 @@ body {
   outline: none;
 }
 .root-search:focus { border-color: var(--accent); }
-.root-list { list-style: none; margin: 0; padding: 8px; overflow-y: auto; flex: 1; }
+.root-list { list-style: none; margin: 0; padding: 8px; overflow-y: auto; flex: 1; scrollbar-width: thin; scrollbar-color: var(--accent-soft) transparent; }
+.root-list::-webkit-scrollbar { width: 8px; }
+.root-list::-webkit-scrollbar-track { background: transparent; }
+.root-list::-webkit-scrollbar-thumb { background: var(--accent-soft); border-radius: 4px; }
+.root-list::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 .root-list li {
   padding: 10px 12px;
   border-radius: 10px;

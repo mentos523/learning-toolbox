@@ -444,8 +444,8 @@
     updateRootsSub();
     // 深链接写回：刷新/分享后回到当前词根（replaceState 不污染历史栈）
     try { history.replaceState(null, "", "#r=" + rt.r); } catch (e) {}
-    // 选完词根后收起抽屉（除非调用方要求保持展开）
-    if (!(opts && opts.keepOpen)) setDrawer("left", false);
+    // 选完词根后收起抽屉：仅手机端自动收起，桌面端由用户手动控制（避免抽屉被锁死）
+    if (!(opts && opts.keepOpen) && window.innerWidth < 1024) setDrawer("left", false);
   }
 
   function currentWord() {
