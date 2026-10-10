@@ -175,11 +175,15 @@
   duration: 3000,    // 必填，毫秒（≤ 5000）
   draw: {            // 必填，每帧绘制指令
     kind: "projectile",   // 枚举：projectile（抛物线）/ pursuit（追及）
-    params: { v0: 20, angle: 60, g: 9.8 }
+    params: { v0: 20, angle: 60, g: 9.8 }  // projectile 参数
+    // pursuit 参数：{ vFront: 10, vBack: 15, gap: 50 }
+    //   vFront 前车速度 m/s（≥0），vBack 后车速度 m/s（必须 > vFront），gap 初始距离 m（≥0）
   },
   scrubber: true     // 可选，是否显示时间轴 scrubber（默认 true）
 }
 ```
+
+播放控制：▶ 播放/⏸ 暂停、⏮ 重播、◀/▶ 单步；关键事件（落地/追上）高亮 + 音效震动。
 
 ## 11. shape-area（图形面积）
 

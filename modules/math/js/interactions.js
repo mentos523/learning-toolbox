@@ -15,6 +15,7 @@
  *   shape-area        图形面积：拖正方形边长，看面积 x² 实时变化（数形结合）
  *   placeholder-morph 占位符渐变：□→△→x，算术→方程过渡（最小可用版本）
  *   zoomer            放大镜：级数按钮逐级放大看"变直"，配割线斜率读数（最小可用版本）
+ *   slow-replay       慢动作回放：抛物线/追及轨迹逐帧播放，播放/暂停/重播/单步+时间轴
  *
  * 数学排版（蓝队 2026-10-10 修复）：交互内的表达式（expr/term/label/
  * 轴标签）统一走 window.MathExpr.html() —— ASCII 子集 → MathML
@@ -1736,6 +1737,263 @@
     draw(1);
   }
 
+  /* ============================================================
+   * 11. slow-replay 慢动作回放
+   * params: {frames, duration, draw:{kind,params}, scrubber?}
+   * kind: "projectile"（抛物线：v0 初速 m/s、angle 角度、g 重力）/
+   *       "pursuit"（追及：vFront 前车速、vBack 后车速须>vFront、gap 初始距离 m）
+   *
+   * 轨迹逐帧播放：播放/暂停/重播/单步 + 时间轴 scrubber。
+   * 关键事件（落地/追上）高亮 + 音效震动反馈。
+   * ============================================================ */
+  function renderSlowReplay(container, params) {
+    var NS = "http://www.w3.org/2000/svg";
+    function svgEl(tag, attrs) {
+      var e = document.createElementNS(NS, tag);
+      for (var k in attrs) e.setAttribute(k, attrs[k]);
+      return e;
+    }
+
+    var frames = Math.max(2, Math.min(120, Math.round(Number(params.frames)) || 60));
+    var duration = Math.max(500, Math.min(5000, Number(params.duration) || 3000));
+    var draw = params.draw || {};
+    var kind = draw.kind;
+    var dp = draw.params || {};
+    var showScrubber = params.scrubber !== false;
+
+    if (kind !== "projectile" && kind !== "pursuit") {
+      container.appendChild(el("div", "ix-stub",
+        "参数错误：slow-replay 的 draw.kind 须为 projectile 或 pursuit"));
+      return;
+    }
+
+    /* ---- 物理模型 ---- */
+    var model;
+    if (kind === "projectile") {
+      var v0 = Number(dp.v0); if (!isFinite(v0) || v0 <= 0) v0 = 20;
+      var angleDeg = Number(dp.angle);
+      if (!isFinite(angleDeg) || angleDeg <= 0 || angleDeg >= 90) angleDeg = 60;
+      var g = Number(dp.g); if (!isFinite(g) || g <= 0) g = 9.8;
+      var angle = angleDeg * Math.PI / 180;
+      var vx = v0 * Math.cos(angle), vy = v0 * Math.sin(angle);
+      var tFlight = 2 * vy / g;
+      var range = vx * tFlight;
+      var hMax = vy * vy / (2 * g);
+      model = {
+        tEnd: tFlight,
+        pos: function (t) {
+          return { x: vx * t, y: Math.max(0, vy * t - 0.5 * g * t * t) };
+        },
+        xMax: range, yMax: hMax,
+        eventAt: function (t) { return t >= tFlight - 1e-9 ? "land" : null; },
+        eventText: "🎯 落地！",
+        caption: "初速 " + fmt(v0) + " m/s，角度 " + fmt(angleDeg) + "°，重力 " + fmt(g) + " m/s²"
+      };
+    } else {
+      var vFront = Number(dp.vFront); if (!isFinite(vFront) || vFront < 0) vFront = 10;
+      var vBack = Number(dp.vBack); if (!isFinite(vBack) || vBack <= 0) vBack = 15;
+      var gap = Number(dp.gap); if (!isFinite(gap) || gap < 0) gap = 50;
+      if (vBack <= vFront) {
+        container.appendChild(el("div", "ix-stub",
+          "参数错误：pursuit 需要 vBack > vFront（后车更快才能追上）"));
+        return;
+      }
+      var tMeet = gap / (vBack - vFront);
+      model = {
+        tEnd: tMeet,
+        pos: function (t) {
+          return { front: gap + vFront * t, back: vBack * t };
+        },
+        xMax: gap + vFront * tMeet + gap * 0.25, yMax: 1,
+        eventAt: function (t) { return t >= tMeet - 1e-9 ? "meet" : null; },
+        eventText: "🎯 追上了！相遇处就是方程的解",
+        caption: "前车 " + fmt(vFront) + " m/s，后车 " + fmt(vBack) + " m/s，相距 " + fmt(gap) + " m"
+      };
+    }
+
+    /* ---- SVG ---- */
+    var W = 440, H = 300, mL = 36, mR = 16, mT = 20, mB = 40;
+    function X(v) { return mL + (v / model.xMax) * (W - mL - mR); }
+    function Y(v) { return mT + (1 - v / (model.yMax * 1.18)) * (H - mT - mB); }
+
+    var wrap = el("div", "ix-replay");
+    wrap.appendChild(el("div", "ix-rule", esc(model.caption)));
+    var svg = svgEl("svg", { viewBox: "0 0 " + W + " " + H, "class": "ix-svg" });
+    wrap.appendChild(svg);
+
+    var groundY = kind === "projectile" ? Y(0) : H - mB;
+    svg.appendChild(svgEl("line", {
+      x1: mL, y1: groundY, x2: W - mR, y2: groundY,
+      stroke: "var(--m-line)", "stroke-width": 2
+    }));
+
+    var trail = null, ball = null, carF = null, carB = null, meetMark = null;
+    if (kind === "projectile") {
+      // 完整轨迹（淡色虚线，供预判）
+      var fullPts = [];
+      for (var fi = 0; fi <= 60; fi++) {
+        var ftt = model.tEnd * fi / 60;
+        var fp = model.pos(ftt);
+        fullPts.push(X(fp.x).toFixed(1) + "," + Y(fp.y).toFixed(1));
+      }
+      svg.appendChild(svgEl("polyline", {
+        points: fullPts.join(" "), fill: "none",
+        stroke: "var(--m-accent)", "stroke-width": 1.5,
+        opacity: 0.35, "stroke-dasharray": "5,4"
+      }));
+      trail = svgEl("polyline", {
+        points: "", fill: "none",
+        stroke: "var(--m-accent-strong)", "stroke-width": 2.5
+      });
+      svg.appendChild(trail);
+      ball = svgEl("circle", {
+        r: 8, fill: "var(--m-accent-strong)", stroke: "#fff", "stroke-width": 2
+      });
+      svg.appendChild(ball);
+      // 轴标签（数学排版经由 SVG text 纯文本即可，无公式）
+      var xl = svgEl("text", { x: W - mR - 2, y: H - 8, "text-anchor": "end",
+        fill: "var(--m-ink-soft)", "font-size": 13 });
+      xl.textContent = "x (m)";
+      svg.appendChild(xl);
+    } else {
+      var roadY = groundY;
+      // 距离刻度
+      var tick0 = svgEl("text", { x: mL, y: roadY + 22, "font-size": 11,
+        fill: "var(--m-ink-soft)" });
+      tick0.textContent = "0";
+      svg.appendChild(tick0);
+      function mkCar(color, label) {
+        var gr = svgEl("g", {});
+        gr.appendChild(svgEl("rect", { x: -22, y: -16, width: 44, height: 20,
+          rx: 4, fill: color, stroke: "#fff", "stroke-width": 1.5 }));
+        gr.appendChild(svgEl("rect", { x: -14, y: -24, width: 28, height: 10,
+          rx: 3, fill: color, opacity: 0.7 }));
+        gr.appendChild(svgEl("circle", { cx: -12, cy: 6, r: 5, fill: "#333" }));
+        gr.appendChild(svgEl("circle", { cx: 12, cy: 6, r: 5, fill: "#333" }));
+        var lb = svgEl("text", { "text-anchor": "middle", y: 24,
+          "font-size": 12, fill: "var(--m-ink-soft)" });
+        lb.textContent = label;
+        gr.appendChild(lb);
+        return gr;
+      }
+      carB = mkCar("var(--m-accent-strong)", "后车");
+      carF = mkCar("var(--m-accent)", "前车");
+      svg.appendChild(carB); svg.appendChild(carF);
+      meetMark = svgEl("text", { "text-anchor": "middle",
+        y: roadY - 36, "font-size": 24, visibility: "hidden" });
+      meetMark.textContent = "💥";
+      svg.appendChild(meetMark);
+    }
+
+    /* ---- 状态行 ---- */
+    var status = el("div", "ix-status", "");
+    wrap.appendChild(status);
+
+    /* ---- Scrubber ---- */
+    var scrub = null, scrubVal = null;
+    if (showScrubber) {
+      var sRow = el("div", "ix-slider-row");
+      sRow.appendChild(el("span", "ix-slider-label", "t = "));
+      scrub = document.createElement("input");
+      scrub.type = "range";
+      scrub.min = 0; scrub.max = frames; scrub.step = 1; scrub.value = 0;
+      scrub.className = "ix-range";
+      scrub.setAttribute("aria-label", "时间轴");
+      scrubVal = el("span", "ix-slider-val", "0 s");
+      sRow.appendChild(scrub); sRow.appendChild(scrubVal);
+      wrap.appendChild(sRow);
+    }
+
+    /* ---- 按钮行 ---- */
+    var foot = el("div", "ix-foot");
+    foot.style.cssText = "display:flex;gap:8px;justify-content:center;flex-wrap:wrap;";
+    var replayBtn = el("button", "ix-reset", "⏮ 重播"); replayBtn.type = "button";
+    var prevBtn = el("button", "ix-reset", "◀ 单步"); prevBtn.type = "button";
+    var playBtn = el("button", "ix-reset", "▶ 播放"); playBtn.type = "button";
+    var nextBtn = el("button", "ix-reset", "单步 ▶"); nextBtn.type = "button";
+    foot.appendChild(replayBtn); foot.appendChild(prevBtn);
+    foot.appendChild(playBtn); foot.appendChild(nextBtn);
+    wrap.appendChild(foot);
+    container.appendChild(wrap);
+
+    /* ---- 播放逻辑 ---- */
+    var frame = 0, rafId = null, lastTs = 0;
+    var msPerFrame = duration / frames;
+    var announced = false;
+
+    function drawFrame(f) {
+      frame = Math.max(0, Math.min(frames, Math.round(f)));
+      var t = model.tEnd * frame / frames;
+      if (kind === "projectile") {
+        var p = model.pos(t);
+        ball.setAttribute("cx", X(p.x).toFixed(1));
+        ball.setAttribute("cy", Y(p.y).toFixed(1));
+        var tp = [];
+        for (var i = 0; i <= frame; i++) {
+          var tt = model.tEnd * i / frames;
+          var pp = model.pos(tt);
+          tp.push(X(pp.x).toFixed(1) + "," + Y(pp.y).toFixed(1));
+        }
+        trail.setAttribute("points", tp.join(" "));
+      } else {
+        var q = model.pos(t);
+        carB.setAttribute("transform",
+          "translate(" + X(q.back).toFixed(1) + "," + groundY + ")");
+        carF.setAttribute("transform",
+          "translate(" + X(q.front).toFixed(1) + "," + groundY + ")");
+        var met = model.eventAt(t) === "meet";
+        meetMark.setAttribute("visibility", met ? "visible" : "hidden");
+        if (met) meetMark.setAttribute("x", X(q.back).toFixed(1));
+      }
+      if (scrub) scrub.value = frame;
+      if (scrubVal) scrubVal.textContent = fmt(t) + " s";
+      var ev = model.eventAt(t);
+      if (ev) {
+        status.innerHTML = '<span class="ix-success">' + esc(model.eventText) + "</span>";
+        if (frame === frames && !announced) {
+          announced = true;
+          tickSound(); hapticTick();
+        }
+      } else {
+        announced = false;
+        status.innerHTML = '<span class="ix-hint">t = ' + fmt(t) +
+          " s（" + frame + " / " + frames + " 帧）</span>";
+      }
+    }
+
+    function stop() {
+      if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+      playBtn.textContent = "▶ 播放";
+    }
+    function play() {
+      stop();
+      if (frame >= frames) drawFrame(0);
+      lastTs = 0;
+      playBtn.textContent = "⏸ 暂停";
+      function tick(ts) {
+        if (!document.body.contains(wrap)) { stop(); return; }
+        if (!lastTs) lastTs = ts;
+        var dt = ts - lastTs;
+        lastTs = ts;
+        var nf = frame + dt / msPerFrame;
+        if (nf >= frames) { drawFrame(frames); stop(); return; }
+        drawFrame(nf);
+        rafId = requestAnimationFrame(tick);
+      }
+      rafId = requestAnimationFrame(tick);
+    }
+
+    playBtn.addEventListener("click", function () { rafId ? stop() : play(); });
+    replayBtn.addEventListener("click", function () { stop(); drawFrame(0); play(); });
+    prevBtn.addEventListener("click", function () { stop(); drawFrame(frame - 1); });
+    nextBtn.addEventListener("click", function () { stop(); drawFrame(frame + 1); });
+    if (scrub) {
+      scrub.addEventListener("input", function () { stop(); drawFrame(Number(scrub.value)); });
+    }
+
+    drawFrame(0);
+  }
+
   /* ---------------- 渲染器内嵌查表 ----------------
    * 与 window.MATH_INTERACTIONS 同源：注册时同步记一份本地表。
    * side-compare 内嵌时按 kind 查表调用已注册渲染器（不复制渲染器代码）。*/
@@ -1756,4 +2014,5 @@
   ixRegister("shape-area", renderShapeArea);
   ixRegister("placeholder-morph", renderPlaceholderMorph);
   ixRegister("zoomer", renderZoomer);
+  ixRegister("slow-replay", renderSlowReplay);
 })();
