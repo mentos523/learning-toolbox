@@ -625,14 +625,13 @@ window.MATH_CH["ch07"] = {
               ],
               examples: [ { text: "定格在最高点：此时速度方向水平", figure: "顶点" } ],
               prev: "ch07-u1-l4-p2",
-              next: "ch07-u1-l4-p4"
-            },
-            {
-              id: "ch07-u1-l4-p4",
-              title: "喷泉：45° 射得最远？",
+              next: "ch07-u1-l4-p4a"
+            },            {
+              id: "ch07-u1-l4-p4a",
+              title: "试试 30°：低平远射",
               concept: "角度探究",
               formulas: [
-                { id: "f1", latex: "R = \frac{v_0^2 \sin 2\theta}{g}", translation: "射程 R 等于初速平方乘 sin2θ 除以 g" }
+                { id: "f1", latex: "30", translation: "发射角度：30 度——低平远射，看看能飞多远" }
               ],
               interaction: {
                 type: "slow-replay",
@@ -648,14 +647,97 @@ window.MATH_CH["ch07"] = {
               },
               auxInteraction: null,
               hints: [
-                "同样初速，30°、45°、60° 哪个射得远？",
-                "sin2θ 在 θ=45° 时最大，所以 45° 最远——这是有数学证明的。"
+                "同样初速 14 米/秒，30° 打出去，落在哪里？",
+                "记住落点位置，下面换角度对比。"
               ],
-              examples: [ { text: "对比：30° 低平远射 vs 60° 高吊", figure: "角度对比" } ],
+              examples: [ { text: "30°：贴着地面飞出去", figure: "低角度" } ],
               prev: "ch07-u1-l4-p3",
+              next: "ch07-u1-l4-p4b"
+            },
+            {
+              id: "ch07-u1-l4-p4b",
+              title: "试试 45°：不低不高",
+              concept: "角度探究",
+              formulas: [
+                { id: "f1", latex: "45", translation: "发射角度：45 度——不低不高，看看能飞多远" }
+              ],
+              interaction: {
+                type: "slow-replay",
+                params: {
+                  frames: 60,
+                  duration: 3000,
+                  draw: {
+                    kind: "projectile",
+                    params: { v0: 14, angle: 45, g: 9.8 }
+                  },
+                  scrubber: true
+                }
+              },
+              auxInteraction: null,
+              hints: [
+                "同样初速，45° 打出去，落点和 30° 比怎么样？",
+                "是更远了，还是更近了？"
+              ],
+              examples: [ { text: "45°：弧线最饱满", figure: "中角度" } ],
+              prev: "ch07-u1-l4-p4a",
+              next: "ch07-u1-l4-p4c"
+            },
+            {
+              id: "ch07-u1-l4-p4c",
+              title: "试试 60°：高吊",
+              concept: "角度探究",
+              formulas: [
+                { id: "f1", latex: "60", translation: "发射角度：60 度——高高吊起，看看能飞多远" }
+              ],
+              interaction: {
+                type: "slow-replay",
+                params: {
+                  frames: 60,
+                  duration: 3000,
+                  draw: {
+                    kind: "projectile",
+                    params: { v0: 14, angle: 60, g: 9.8 }
+                  },
+                  scrubber: true
+                }
+              },
+              auxInteraction: null,
+              hints: [
+                "同样初速，60° 打出去，飞得高，但落得远吗？",
+                "三个角度都试完了，哪个最远？"
+              ],
+              examples: [ { text: "60°：飞得最高，落得却不远", figure: "高角度" } ],
+              prev: "ch07-u1-l4-p4b",
+              next: "ch07-u1-l4-p4d"
+            },
+            {
+              id: "ch07-u1-l4-p4d",
+              title: "结论：45° 最远",
+              concept: "角度探究小结",
+              formulas: [
+                { id: "f1", latex: "45", translation: "结论：45 度射得最远——三个角度都试过了" }
+              ],
+              interaction: {
+                type: "slow-replay",
+                params: {
+                  frames: 60,
+                  duration: 3000,
+                  draw: {
+                    kind: "projectile",
+                    params: { v0: 14, angle: 45, g: 9.8 }
+                  },
+                  scrubber: true
+                }
+              },
+              auxInteraction: null,
+              hints: [
+                "30°、45°、60° 都试过了：45° 射得最远。",
+                "数学家用你以后会学的数学（三角函数）证明了：确实是 45° 最远。"
+              ],
+              examples: [ { text: "喷泉设计、水枪打靶，都用 45°", figure: "生活应用" } ],
+              prev: "ch07-u1-l4-p4c",
               next: "ch07-u2-l1-p1"
-            }
-          ]
+            },]
         }
       ]
     },
