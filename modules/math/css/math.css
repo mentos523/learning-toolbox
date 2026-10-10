@@ -112,6 +112,7 @@ body[data-theme="dark"] #mathml-warn { background: #4a3a1a; color: #fde68a; }
 
 /* ---------- 手机 ---------- */
 @media (max-width: 1023px) {
+  .m-head h1 { font-size: 0.95rem; white-space: nowrap; }
   .m-drawer {
     position: fixed; left: 0; top: 0; bottom: 0; z-index: 60;
     transform: translateX(-105%); transition: transform 0.3s ease;

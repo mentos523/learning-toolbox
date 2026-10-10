@@ -334,7 +334,7 @@
       g.addEventListener("pointerdown", function (evt) {
         evt.preventDefault();
         o.dragging = true;
-        g.setPointerCapture(evt.pointerId);
+        try { g.setPointerCapture(evt.pointerId); } catch (e) {}
         var p = svgPoint(evt);
         o.dx = p.x - o.homeX; o.dy = p.y - o.homeY;
         g.style.cursor = "grabbing";
