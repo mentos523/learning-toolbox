@@ -174,16 +174,19 @@
   frames: 60,        // 必填，总帧数（≤ 120）
   duration: 3000,    // 必填，毫秒（≤ 5000）
   draw: {            // 必填，每帧绘制指令
-    kind: "projectile",   // 枚举：projectile（抛物线）/ pursuit（追及）
+    kind: "projectile",   // 枚举：projectile（抛物线）/ pursuit（追及）/ meet（相遇）
     params: { v0: 20, angle: 60, g: 9.8 }  // projectile 参数
     // pursuit 参数：{ vFront: 10, vBack: 15, gap: 50 }
     //   vFront 前车速度 m/s（≥0），vBack 后车速度 m/s（必须 > vFront），gap 初始距离 m（≥0）
+    // meet 参数：{ v1: 5, v2: 7, distance: 60 }
+    //   v1 甲速度 m/s（>0），v2 乙速度 m/s（>0），distance 初始距离 m（>0），两车相向而行
   },
-  scrubber: true     // 可选，是否显示时间轴 scrubber（默认 true）
+  scrubber: true,    // 可选，是否显示时间轴 scrubber（默认 true）
+  interactive: false  // 可选，仅 projectile：true 时显示 v0/angle 滑块，调参后重播
 }
 ```
 
-播放控制：▶ 播放/⏸ 暂停、⏮ 重播、◀/▶ 单步；关键事件（落地/追上）高亮 + 音效震动。
+播放控制：▶ 播放/⏸ 暂停、⏮ 重播、◀/▶ 单步；关键事件（落地/追上/相遇）高亮 + 音效震动。
 
 ## 11. shape-area（图形面积）
 

@@ -1739,12 +1739,14 @@
 
   /* ============================================================
    * 11. slow-replay 慢动作回放
-   * params: {frames, duration, draw:{kind,params}, scrubber?}
+   * params: {frames, duration, draw:{kind,params}, scrubber?, interactive?}
    * kind: "projectile"（抛物线：v0 初速 m/s、angle 角度、g 重力）/
-   *       "pursuit"（追及：vFront 前车速、vBack 后车速须>vFront、gap 初始距离 m）
+   *       "pursuit"（追及：vFront 前车速、vBack 后车速须>vFront、gap 初始距离 m）/
+   *       "meet"（相遇：v1 甲速度、v2 乙速度、distance 初始距离 m，两车相向）
+   * interactive: true（仅 projectile）→ 页内显示 v0/angle 滑块，调参后重播
    *
    * 轨迹逐帧播放：播放/暂停/重播/单步 + 时间轴 scrubber。
-   * 关键事件（落地/追上）高亮 + 音效震动反馈。
+   * 关键事件（落地/追上/相遇）高亮 + 音效震动反馈。
    * ============================================================ */
   function renderSlowReplay(container, params) {
     var NS = "http://www.w3.org/2000/svg";
@@ -1761,25 +1763,25 @@
     var dp = draw.params || {};
     var showScrubber = params.scrubber !== false;
 
-    if (kind !== "projectile" && kind !== "pursuit") {
+    if (kind !== "projectile" && kind !== "pursuit" && kind !== "meet") {
       container.appendChild(el("div", "ix-stub",
-        "参数错误：slow-replay 的 draw.kind 须为 projectile 或 pursuit"));
+        "参数错误：slow-replay 的 draw.kind 须为 projectile / pursuit / meet"));
       return;
     }
 
     /* ---- 物理模型 ---- */
     var model;
-    if (kind === "projectile") {
-      var v0 = Number(dp.v0); if (!isFinite(v0) || v0 <= 0) v0 = 20;
-      var angleDeg = Number(dp.angle);
+    function buildProjectile(v0in, angleDegin, gin) {
+      var v0 = Number(v0in); if (!isFinite(v0) || v0 <= 0) v0 = 20;
+      var angleDeg = Number(angleDegin);
       if (!isFinite(angleDeg) || angleDeg <= 0 || angleDeg >= 90) angleDeg = 60;
-      var g = Number(dp.g); if (!isFinite(g) || g <= 0) g = 9.8;
+      var g = Number(gin); if (!isFinite(g) || g <= 0) g = 9.8;
       var angle = angleDeg * Math.PI / 180;
       var vx = v0 * Math.cos(angle), vy = v0 * Math.sin(angle);
       var tFlight = 2 * vy / g;
       var range = vx * tFlight;
       var hMax = vy * vy / (2 * g);
-      model = {
+      return {
         tEnd: tFlight,
         pos: function (t) {
           return { x: vx * t, y: Math.max(0, vy * t - 0.5 * g * t * t) };
@@ -1787,9 +1789,13 @@
         xMax: range, yMax: hMax,
         eventAt: function (t) { return t >= tFlight - 1e-9 ? "land" : null; },
         eventText: "🎯 落地！",
-        caption: "初速 " + fmt(v0) + " m/s，角度 " + fmt(angleDeg) + "°，重力 " + fmt(g) + " m/s²"
+        caption: "初速 " + fmt(v0) + " m/s，角度 " + fmt(angleDeg) + "°，重力 " + fmt(g) + " m/s²",
+        v0: v0, angleDeg: angleDeg, g: g
       };
-    } else {
+    }
+    if (kind === "projectile") {
+      model = buildProjectile(dp.v0, dp.angle, dp.g);
+    } else if (kind === "pursuit") {
       var vFront = Number(dp.vFront); if (!isFinite(vFront) || vFront < 0) vFront = 10;
       var vBack = Number(dp.vBack); if (!isFinite(vBack) || vBack <= 0) vBack = 15;
       var gap = Number(dp.gap); if (!isFinite(gap) || gap < 0) gap = 50;
@@ -1809,6 +1815,22 @@
         eventText: "🎯 追上了！相遇处就是方程的解",
         caption: "前车 " + fmt(vFront) + " m/s，后车 " + fmt(vBack) + " m/s，相距 " + fmt(gap) + " m"
       };
+    } else {
+      // meet：甲乙相向而行
+      var v1 = Number(dp.v1); if (!isFinite(v1) || v1 <= 0) v1 = 5;
+      var v2 = Number(dp.v2); if (!isFinite(v2) || v2 <= 0) v2 = 7;
+      var dist = Number(dp.distance); if (!isFinite(dist) || dist <= 0) dist = 60;
+      var tMeet2 = dist / (v1 + v2);
+      model = {
+        tEnd: tMeet2,
+        pos: function (t) {
+          return { a: v1 * t, b: dist - v2 * t };
+        },
+        xMax: dist * 1.25, yMax: 1,
+        eventAt: function (t) { return t >= tMeet2 - 1e-9 ? "meet" : null; },
+        eventText: "🎯 相遇了！相遇处就是方程的解",
+        caption: "甲 " + fmt(v1) + " m/s，乙 " + fmt(v2) + " m/s，相距 " + fmt(dist) + " m"
+      };
     }
 
     /* ---- SVG ---- */
@@ -1817,9 +1839,55 @@
     function Y(v) { return mT + (1 - v / (model.yMax * 1.18)) * (H - mT - mB); }
 
     var wrap = el("div", "ix-replay");
-    wrap.appendChild(el("div", "ix-rule", esc(model.caption)));
+    var captionEl = el("div", "ix-rule", esc(model.caption));
+    wrap.appendChild(captionEl);
     var svg = svgEl("svg", { viewBox: "0 0 " + W + " " + H, "class": "ix-svg" });
     wrap.appendChild(svg);
+
+    /* ---- 交互调参（仅 projectile + interactive） ---- */
+    var interactive = params.interactive === true && kind === "projectile";
+    var fullTrajEl = null;
+    if (interactive) {
+      var pRow = el("div", "ix-slider-row");
+      pRow.style.cssText = "display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:6px 0;";
+      function mkParam(label, min, max, step, val, onChg) {
+        var lab = el("span", "ix-slider-label", label + " ");
+        var inp = document.createElement("input");
+        inp.type = "range"; inp.min = min; inp.max = max;
+        inp.step = step; inp.value = val; inp.className = "ix-range";
+        inp.style.maxWidth = "120px";
+        var vv = el("span", "ix-slider-val", String(val));
+        inp.addEventListener("input", function () {
+          vv.textContent = inp.value;
+          onChg(Number(inp.value));
+        });
+        var box = el("span", "");
+        box.appendChild(lab); box.appendChild(inp); box.appendChild(vv);
+        return box;
+      }
+      var curV0 = model.v0, curAngle = model.angleDeg, curG = model.g;
+      function rebuild() {
+        stop();
+        model = buildProjectile(curV0, curAngle, curG);
+        captionEl.textContent = model.caption;
+        // 重绘完整轨迹预判
+        if (fullTrajEl) {
+          var pts = [];
+          for (var fi = 0; fi <= 60; fi++) {
+            var ftt = model.tEnd * fi / 60;
+            var fp = model.pos(ftt);
+            pts.push(X(fp.x).toFixed(1) + "," + Y(fp.y).toFixed(1));
+          }
+          fullTrajEl.setAttribute("points", pts.join(" "));
+        }
+        drawFrame(0);
+      }
+      pRow.appendChild(mkParam("初速 v₀", 5, 40, 1, curV0,
+        function (v) { curV0 = v; rebuild(); }));
+      pRow.appendChild(mkParam("角度", 10, 80, 1, curAngle,
+        function (v) { curAngle = v; rebuild(); }));
+      wrap.appendChild(pRow);
+    }
 
     var groundY = kind === "projectile" ? Y(0) : H - mB;
     svg.appendChild(svgEl("line", {
@@ -1827,7 +1895,7 @@
       stroke: "var(--m-line)", "stroke-width": 2
     }));
 
-    var trail = null, ball = null, carF = null, carB = null, meetMark = null;
+    var trail = null, ball = null, carF = null, carB = null, carA = null, meetMark = null;
     if (kind === "projectile") {
       // 完整轨迹（淡色虚线，供预判）
       var fullPts = [];
@@ -1841,6 +1909,8 @@
         stroke: "var(--m-accent)", "stroke-width": 1.5,
         opacity: 0.35, "stroke-dasharray": "5,4"
       }));
+      // 交互调参时需要重绘预判轨迹，记下引用
+      fullTrajEl = svg.lastChild;
       trail = svgEl("polyline", {
         points: "", fill: "none",
         stroke: "var(--m-accent-strong)", "stroke-width": 2.5
@@ -1855,7 +1925,7 @@
         fill: "var(--m-ink-soft)", "font-size": 13 });
       xl.textContent = "x (m)";
       svg.appendChild(xl);
-    } else {
+    } else if (kind === "pursuit") {
       var roadY = groundY;
       // 距离刻度
       var tick0 = svgEl("text", { x: mL, y: roadY + 22, "font-size": 11,
@@ -1881,6 +1951,38 @@
       svg.appendChild(carB); svg.appendChild(carF);
       meetMark = svgEl("text", { "text-anchor": "middle",
         y: roadY - 36, "font-size": 24, visibility: "hidden" });
+      meetMark.textContent = "💥";
+      svg.appendChild(meetMark);
+    } else {
+      // meet：甲乙相向而行
+      var roadYm = groundY;
+      var tick0m = svgEl("text", { x: mL, y: roadYm + 22, "font-size": 11,
+        fill: "var(--m-ink-soft)" });
+      tick0m.textContent = "0";
+      svg.appendChild(tick0m);
+      var tickDm = svgEl("text", { x: X(model.xMax / 1.25), y: roadYm + 22,
+        "font-size": 11, fill: "var(--m-ink-soft)" });
+      tickDm.textContent = fmt(dp.distance || 60) + " m";
+      svg.appendChild(tickDm);
+      function mkCarM(color, label) {
+        var gr = svgEl("g", {});
+        gr.appendChild(svgEl("rect", { x: -22, y: -16, width: 44, height: 20,
+          rx: 4, fill: color, stroke: "#fff", "stroke-width": 1.5 }));
+        gr.appendChild(svgEl("rect", { x: -14, y: -24, width: 28, height: 10,
+          rx: 3, fill: color, opacity: 0.7 }));
+        gr.appendChild(svgEl("circle", { cx: -12, cy: 6, r: 5, fill: "#333" }));
+        gr.appendChild(svgEl("circle", { cx: 12, cy: 6, r: 5, fill: "#333" }));
+        var lb = svgEl("text", { "text-anchor": "middle", y: 24,
+          "font-size": 12, fill: "var(--m-ink-soft)" });
+        lb.textContent = label;
+        gr.appendChild(lb);
+        return gr;
+      }
+      carA = mkCarM("var(--m-accent-strong)", "甲");
+      carB = mkCarM("var(--m-accent)", "乙");
+      svg.appendChild(carA); svg.appendChild(carB);
+      meetMark = svgEl("text", { "text-anchor": "middle",
+        y: roadYm - 36, "font-size": 24, visibility: "hidden" });
       meetMark.textContent = "💥";
       svg.appendChild(meetMark);
     }
@@ -1935,7 +2037,7 @@
           tp.push(X(pp.x).toFixed(1) + "," + Y(pp.y).toFixed(1));
         }
         trail.setAttribute("points", tp.join(" "));
-      } else {
+      } else if (kind === "pursuit") {
         var q = model.pos(t);
         carB.setAttribute("transform",
           "translate(" + X(q.back).toFixed(1) + "," + groundY + ")");
@@ -1944,6 +2046,16 @@
         var met = model.eventAt(t) === "meet";
         meetMark.setAttribute("visibility", met ? "visible" : "hidden");
         if (met) meetMark.setAttribute("x", X(q.back).toFixed(1));
+      } else {
+        // meet：甲从左向右，乙从右向左
+        var r = model.pos(t);
+        carA.setAttribute("transform",
+          "translate(" + X(r.a).toFixed(1) + "," + groundY + ")");
+        carB.setAttribute("transform",
+          "translate(" + X(r.b).toFixed(1) + "," + groundY + ")");
+        var metM = model.eventAt(t) === "meet";
+        meetMark.setAttribute("visibility", metM ? "visible" : "hidden");
+        if (metM) meetMark.setAttribute("x", X(r.a).toFixed(1));
       }
       if (scrub) scrub.value = frame;
       if (scrubVal) scrubVal.textContent = fmt(t) + " s";

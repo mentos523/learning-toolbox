@@ -574,8 +574,8 @@ window.MATH_CH["ch07"] = {
               title: "扔铅球：能飞多远？",
               concept: "抛物线应用",
               formulas: [
-                { id: "f1", latex: "y = 10t - 4.9t^2", translation: "铅球高度 y 等于 10t 减 4.9 倍 t 平方（初速 10，角度 90 度简化）" },
-                { id: "f2", latex: "10t - 4.9t^2 = 0", translation: "落地时高度为 0，解得 t 约 2.04 秒" }
+                { id: "f1", latex: "y = 9.9t - 4.9t^2", translation: "铅球高度 y 等于 9.9t 减 4.9 倍 t 平方（初速 14 米/秒、45° 斜抛，竖直方向分量约 9.9）" },
+                { id: "f2", latex: "9.9t - 4.9t^2 = 0", translation: "落地时高度为 0，解得 t 约 2.02 秒" }
               ],
               interaction: {
                 type: "slow-replay",
@@ -603,8 +603,8 @@ window.MATH_CH["ch07"] = {
               title: "最高点：顶点就是最值",
               concept: "顶点与最值",
               formulas: [
-                { id: "f1", latex: "y = -4.9t^2 + 10t", translation: "高度关于时间的二次函数，开口向下" },
-                { id: "f2", latex: "t = 1.02", translation: "顶点横坐标约 1.02 秒时达到最高" }
+                { id: "f1", latex: "y = -4.9t^2 + 9.9t", translation: "高度关于时间的二次函数，开口向下（45° 斜抛）" },
+                { id: "f2", latex: "t = 1.01", translation: "顶点横坐标约 1.01 秒时达到最高" }
               ],
               interaction: {
                 type: "slow-replay",
@@ -621,7 +621,7 @@ window.MATH_CH["ch07"] = {
               auxInteraction: null,
               hints: [
                 "抛物线升到最高再下落，最高点就是顶点。",
-                "顶点横坐标对应最值：这是二次函数最重要的应用。"
+                "顶点处竖直速度为 0，只剩水平速度，所以速度方向水平。"
               ],
               examples: [ { text: "定格在最高点：此时速度方向水平", figure: "顶点" } ],
               prev: "ch07-u1-l4-p2",
