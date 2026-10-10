@@ -1,4 +1,5 @@
 // 词根数据（按词频排序：词根按旗下最高频词，单词按词频降序）
+// R2-P0: 150 词根
 window.ROOTS_DATA = [
 { r:"us", v:["us","ut"], d:"us- / ut-", m:["用"], w:[
   ["use","v.","使用",0],
@@ -46,6 +47,12 @@ window.ROOTS_DATA = [
 { r:"serv", v:["serv"], d:"serv-", m:["服务"], w:[
   ["service","n.","服务",0],
   ["serve","v.","服务；招待",0]
+]},
+{ r:"ord", v:["ord"], d:"ord-", m:["序；令"], w:[
+  ["order","n./v.","顺序；命令",0],
+  ["ordinary","adj.","普通的",0],
+  ["coordinate","v.","协调",0],
+  ["subordinate","adj.","下级的；次要的",0]
 ]},
 { r:"gen", v:["gen"], d:"gen-", m:["生","种"], w:[
   ["general","adj.","一般的",1],
@@ -112,6 +119,16 @@ window.ROOTS_DATA = [
   ["exact","adj.","确切的",0],
   ["react","v.","反应",0]
 ]},
+{ r:"fin", v:["fin"], d:"fin-", m:["终","界"], w:[
+  ["final","adj.","最终的",0],
+  ["finish","v.","完成；结束",0],
+  ["define","v.","定义；界定",1],
+  ["infinite","adj.","无限的",0],
+  ["definite","adj.","确定的",1],
+  ["finite","adj.","有限的",0],
+  ["refine","v.","提炼；改进",1],
+  ["confine","v.","限制；禁闭",1]
+]},
 { r:"typ", v:["typ"], d:"typ-", m:["型"], w:[
   ["type","n.","类型",0],
   ["typical","adj.","典型的",0]
@@ -123,6 +140,13 @@ window.ROOTS_DATA = [
   ["succeed","v.","成功",0],
   ["proceed","v.","继续",0],
   ["exceed","v.","超过",0]
+]},
+{ r:"term", v:["term","termin"], d:"term-", m:["终","界"], w:[
+  ["term","n.","学期；术语",1],
+  ["determine","v.","决定",1],
+  ["terminal","n./adj.","终点站；末端的",0],
+  ["terminology","n.","术语",1],
+  ["terminate","v.","终止",0]
 ]},
 { r:"pro", v:["pro"], d:"pro-", m:["向前；先"], w:[
   ["project","n.","项目；工程",0],
@@ -196,6 +220,13 @@ window.ROOTS_DATA = [
   ["medical","adj.","医疗的",0],
   ["medicine","n.","药",0]
 ]},
+{ r:"ori", v:["ori","origin"], d:"ori-", m:["升；始"], w:[
+  ["original","adj.","最初的；原创的",0],
+  ["origin","n.","起源；由来",0],
+  ["orientation","n.","方向；适应",0],
+  ["aboriginal","adj.","土著的",0],
+  ["orient","v.","使适应；定方向",0]
+]},
 { r:"val", v:["val"], d:"val-", m:["价值"], w:[
   ["value","n.","价值",0],
   ["valuable","adj.","贵重的",0],
@@ -222,11 +253,32 @@ window.ROOTS_DATA = [
   ["tent","n.","帐篷",0],
   ["tense","adj.","紧张的",0]
 ]},
+{ r:"lingu", v:["lingu"], d:"lingu-", m:["舌；语言"], w:[
+  ["language","n.","语言",0],
+  ["bilingual","adj.","双语的",0],
+  ["linguist","n.","语言学家",0]
+]},
+{ r:"techn", v:["techn"], d:"techn-", m:["技；艺"], w:[
+  ["technology","n.","技术；科技",0],
+  ["technical","adj.","技术的",0],
+  ["technique","n.","技巧；技术",0],
+  ["technological","adj.","科技的",0],
+  ["technician","n.","技术员",0]
+]},
 { r:"uni", v:["uni"], d:"uni-", m:["一"], w:[
   ["union","n.","联盟",0],
   ["unit","n.","单位",0],
   ["unique","adj.","独特的",0],
   ["uniform","n.","制服",0]
+]},
+{ r:"lect", v:["lect","lig"], d:"lect-", m:["选","读"], w:[
+  ["election","n.","选举",0],
+  ["select","v.","选择",0],
+  ["collect","v.","收集",0],
+  ["lecture","n.","讲座；讲课",1],
+  ["elect","v.","选举",0],
+  ["collector","n.","收藏家",0],
+  ["selective","adj.","有选择的；挑剔的",0]
 ]},
 { r:"vers", v:["vers","vert"], d:"vers- / vert-", m:["转"], w:[
   ["version","n.","版本",0],
@@ -306,6 +358,13 @@ window.ROOTS_DATA = [
   ["normal","adj.","正常的",0],
   ["abnormal","adj.","反常的",0]
 ]},
+{ r:"text", v:["text"], d:"text-", m:["织；文"], w:[
+  ["text","n.","文本；课文",0],
+  ["context","n.","上下文；背景",0],
+  ["texture","n.","质地；纹理",0],
+  ["textbook","n.","课本",0],
+  ["textile","n.","纺织品",0]
+]},
 { r:"cred", v:["cred"], d:"cred-", m:["相信"], w:[
   ["credit","n.","信用",0],
   ["incredible","adj.","难以置信的",0]
@@ -316,10 +375,19 @@ window.ROOTS_DATA = [
   ["contain","v.","包含",0],
   ["obtain","v.","获得",0]
 ]},
+{ r:"tact", v:["tact","tang"], d:"tact-", m:["触"], w:[
+  ["contact","n./v.","接触；联系",0],
+  ["intact","adj.","完好无损的",0],
+  ["tactile","adj.","触觉的",0]
+]},
 { r:"min", v:["min"], d:"min-", m:["小"], w:[
   ["minute","adj.","微小的（≠分钟）",0],
   ["minimum","n.","最小值",0],
   ["minor","adj.","较小的",0]
+]},
+{ r:"phot", v:["phot","photo"], d:"phot-", m:["光"], w:[
+  ["photo","n.","照片",0],
+  ["photosynthesis","n.","光合作用",0]
 ]},
 { r:"duc", v:["duc","dukt"], d:"duc- / dukt-", m:["引导"], w:[
   ["product","n.","产品",0],
@@ -327,6 +395,22 @@ window.ROOTS_DATA = [
   ["reduce","v.","减少",0],
   ["introduce","v.","介绍",0],
   ["educate","v.","教育",0]
+]},
+{ r:"liter", v:["liter","litter"], d:"liter-", m:["字；文学"], w:[
+  ["letter","n.","信；字母",0],
+  ["literature","n.","文学",0],
+  ["literary","adj.","文学的",0],
+  ["literacy","n.","读写能力",0],
+  ["literal","adj.","字面的",0],
+  ["illiterate","adj.","文盲的",0]
+]},
+{ r:"reg", v:["reg","rect"], d:"reg-", m:["王；管"], w:[
+  ["regular","adj.","定期的；规则的",0],
+  ["regulation","n.","规则；管理",0],
+  ["regime","n.","政权；制度",0],
+  ["reign","n./v.","统治",0],
+  ["regulate","v.","管理；调节",0],
+  ["regal","adj.","帝王的；庄严的",0]
 ]},
 { r:"tract", v:["tract"], d:"tract-", m:["拉"], w:[
   ["contract","n.","合同",0],
@@ -356,6 +440,13 @@ window.ROOTS_DATA = [
   ["effort","n.","努力",0],
   ["comfortable","adj.","舒适的",0],
   ["comfort","n.","安慰",0]
+]},
+{ r:"rect", v:["rect"], d:"rect-", m:["正；直"], w:[
+  ["direct","v./adj.","指导；直接的",0],
+  ["correct","v./adj.","改正；正确的",0],
+  ["rectangular","adj.","矩形的",0],
+  ["rectangle","n.","矩形",0],
+  ["rectify","v.","纠正",0]
 ]},
 { r:"prim", v:["prim"], d:"prim-", m:["第一"], w:[
   ["primary","adj.","主要的",0],
@@ -392,6 +483,13 @@ window.ROOTS_DATA = [
   ["solve","v.","解决",1],
   ["resolve","v.","解决",1]
 ]},
+{ r:"mand", v:["mand"], d:"mand-", m:["令；委"], w:[
+  ["demand","n./v.","要求；需求",0],
+  ["command","n./v.","命令；指挥",0],
+  ["commander","n.","指挥官",0],
+  ["mandatory","adj.","强制的；义务的",0],
+  ["mandate","n.","授权；命令",0]
+]},
 { r:"sur", v:["sur","super"], d:"sur-", m:["上；在…之上"], w:[
   ["surface","n.","表面",0]
 ]},
@@ -408,6 +506,13 @@ window.ROOTS_DATA = [
   ["graduate","v.","毕业",0],
   ["gradual","adj.","逐渐的",0]
 ]},
+{ r:"opt", v:["opt"], d:"opt-", m:["眼","选"], w:[
+  ["option","n.","选择；选项",1],
+  ["adopt","v.","收养；采纳",1],
+  ["optical","adj.","光学的；视觉的",0],
+  ["optimal","adj.","最佳的",1],
+  ["optics","n.","光学",0]
+]},
 { r:"tele", v:["tele"], d:"tele-", m:["远"], w:[
   ["television","n.","电视",0],
   ["telephone","n.","电话",0]
@@ -415,6 +520,12 @@ window.ROOTS_DATA = [
 { r:"spir", v:["spir"], d:"spir-", m:["呼吸"], w:[
   ["spirit","n.","精神",0],
   ["inspire","v.","激发",0]
+]},
+{ r:"neg", v:["neg"], d:"neg-", m:["否；拒"], w:[
+  ["negative","adj.","否定的；消极的",0],
+  ["neglect","v.","忽视；疏忽",0],
+  ["negligible","adj.","微不足道的",0],
+  ["negate","v.","否定；取消",0]
 ]},
 { r:"flu", v:["flu"], d:"flu-", m:["流"], w:[
   ["influence","n.","影响",0],
@@ -435,6 +546,12 @@ window.ROOTS_DATA = [
 ]},
 { r:"veh", v:["veh"], d:"veh-", m:["运"], w:[
   ["vehicle","n.","车辆",0]
+]},
+{ r:"nect", v:["nect","nex"], d:"nect-", m:["连；结"], w:[
+  ["connection","n.","连接",0],
+  ["connect","v.","连接",0],
+  ["annex","v./n.","吞并；附件",0],
+  ["disconnect","v.","断开",0]
 ]},
 { r:"scrib", v:["scrib","script"], d:"scrib- / script-", m:["写"], w:[
   ["description","n.","描述",0],
@@ -461,10 +578,28 @@ window.ROOTS_DATA = [
   ["victory","n.","胜利",0],
   ["convince","v.","说服",0]
 ]},
+{ r:"merg", v:["merg","mers"], d:"merg-", m:["沉；没"], w:[
+  ["emergency","n.","紧急情况",0],
+  ["emerge","v.","浮现；出现",0],
+  ["merge","v.","合并；融合",0],
+  ["emergence","n.","出现；浮现",0]
+]},
+{ r:"sed", v:["sed","sess","sid"], d:"sed-", m:["坐；定"], w:[
+  ["session","n.","会议；学期",0],
+  ["sediment","n.","沉淀物",0],
+  ["sedentary","adj.","久坐的",0],
+  ["sedate","adj.","镇静的",0],
+  ["supersede","v.","取代",0]
+]},
 { r:"terr", v:["terr"], d:"terr-", m:["怕"], w:[
   ["terrible","adj.","可怕的",0],
   ["terror","n.","恐怖",0],
   ["terrify","v.","使害怕",0]
+]},
+{ r:"lim", v:["lim","limin"], d:"lim-", m:["界；限"], w:[
+  ["limit","n./v.","限制；限度",0],
+  ["preliminary","adj.","初步的；预备的",0],
+  ["eliminate","v.","消除；淘汰",0]
 ]},
 { r:"mis", v:["mis"], d:"mis-", m:["错"], w:[
   ["mistake","n.","错误",0],
@@ -483,6 +618,12 @@ window.ROOTS_DATA = [
   ["medium","adj.","中等的",0],
   ["immediate","adj.","立即的",0]
 ]},
+{ r:"sol", v:["sol"], d:"sol-", m:["日","独"], w:[
+  ["solo","n./adj.","独奏；单独的",1],
+  ["solar","adj.","太阳的",0],
+  ["solitary","adj.","独居的；孤独的",1],
+  ["solitude","n.","孤独",1]
+]},
 { r:"cycl", v:["cycl"], d:"cycl-", m:["圆"], w:[
   ["cycle","n.","循环",0],
   ["recycle","v.","回收",0]
@@ -497,6 +638,12 @@ window.ROOTS_DATA = [
 { r:"par", v:["par"], d:"par-", m:["生；产"], w:[
   ["parent","n.","父母",0]
 ]},
+{ r:"nav", v:["nav"], d:"nav-", m:["船；航"], w:[
+  ["navy","n.","海军",0],
+  ["navigation","n.","航行；导航",0],
+  ["navigate","v.","航行；导航",0],
+  ["navigator","n.","领航员",0]
+]},
 { r:"pre", v:["pre"], d:"pre-", m:["前"], w:[
   ["prepare","v.","准备",0],
   ["predict","v.","预测；预言",0],
@@ -510,12 +657,25 @@ window.ROOTS_DATA = [
   ["manual","adj.","手工的",0],
   ["manufacture","v.","制造",0]
 ]},
+{ r:"test", v:["test"], d:"test-", m:["证；试"], w:[
+  ["contest","n./v.","竞赛；质疑",0],
+  ["protest","n./v.","抗议",0],
+  ["testament","n.","遗嘱；证明",0],
+  ["testify","v.","作证",0],
+  ["attest","v.","证明",0]
+]},
 { r:"vit", v:["vit","viv"], d:"vit- / viv-", m:["生命"], w:[
   ["survive","v.","幸存",0],
   ["vital","adj.","至关重要的",0],
   ["vitamin","n.","维生素",0],
   ["vivid","adj.","生动的",0],
   ["revive","v.","苏醒",0]
+]},
+{ r:"tempor", v:["tempor"], d:"tempor-", m:["时"], w:[
+  ["contemporary","adj.","当代的",0],
+  ["temporary","adj.","暂时的",0],
+  ["temporarily","adv.","暂时地",0],
+  ["temporal","adj.","时间的",0]
 ]},
 { r:"vac", v:["vac"], d:"vac-", m:["空"], w:[
   ["vacation","n.","假期",0],
@@ -531,6 +691,19 @@ window.ROOTS_DATA = [
   ["refuse","v.","拒绝",0],
   ["confuse","v.","使混乱",0]
 ]},
+{ r:"sequ", v:["sequ","secut"], d:"sequ-", m:["随；续"], w:[
+  ["subsequent","adj.","随后的；后来的",0],
+  ["sequence","n.","顺序；序列",0],
+  ["execution","n.","执行",0],
+  ["consecutive","adj.","连续的",0],
+  ["consequence","n.","后果；结果",0],
+  ["sequel","n.","续集",0]
+]},
+{ r:"mort", v:["mort"], d:"mort-", m:["死"], w:[
+  ["mortgage","n.","抵押贷款",0],
+  ["mortal","adj.","终有一死的",0],
+  ["immortal","adj.","不朽的",0]
+]},
 { r:"log", v:["log"], d:"log-", m:["说；话"], w:[
   ["logic","n.","逻辑",0],
   ["dialogue","n.","对话",0],
@@ -544,6 +717,14 @@ window.ROOTS_DATA = [
 { r:"ex", v:["ex","e","ef"], d:"ex-", m:["出；向外"], w:[
   ["exit","n.","出口",0],
   ["expand","v.","扩大",0]
+]},
+{ r:"trib", v:["trib","tribut"], d:"trib-", m:["给；分"], w:[
+  ["contribute","v.","贡献",0],
+  ["tribute","n.","致敬；贡品",0],
+  ["tribunal","n.","法庭",0],
+  ["distribute","v.","分配；分发",0],
+  ["attribute","v./n.","归因；属性",0],
+  ["tributary","n.","支流",0]
 ]},
 { r:"sym", v:["sym","syn"], d:"sym- / syn-", m:["共同"], w:[
   ["symbol","n.","象征",0],
@@ -584,11 +765,29 @@ window.ROOTS_DATA = [
   ["decrease","v.","减少",0],
   ["depart","v.","离开",1]
 ]},
+{ r:"tort", v:["tort","tors"], d:"tort-", m:["扭；曲"], w:[
+  ["torture","n./v.","折磨",0],
+  ["distort","v.","扭曲；歪曲",0],
+  ["retort","v./n.","反驳",0],
+  ["tortuous","adj.","弯曲的",0]
+]},
 { r:"rupt", v:["rupt"], d:"rupt-", m:["断"], w:[
   ["corrupt","adj.","腐败的",0],
   ["interrupt","v.","打断",0],
   ["abrupt","adj.","突然的",0],
   ["erupt","v.","爆发",0]
+]},
+{ r:"migr", v:["migr"], d:"migr-", m:["迁"], w:[
+  ["migration","n.","迁移",0],
+  ["immigrant","n.","移民",0],
+  ["migrate","v.","迁移；移居",0],
+  ["emigrant","n.","移居国外者",0]
+]},
+{ r:"puls", v:["puls","pel"], d:"puls-", m:["推；冲"], w:[
+  ["pulse","n.","脉搏；脉冲",0],
+  ["impulse","n.","冲动；脉冲",0],
+  ["propulsion","n.","推进",0],
+  ["compulsion","n.","强迫",0]
 ]},
 { r:"magn", v:["magn"], d:"magn-", m:["大"], w:[
   ["magnificent","adj.","壮丽的",0],
