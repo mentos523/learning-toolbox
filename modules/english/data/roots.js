@@ -694,7 +694,7 @@ window.ROOTS_DATA = [
   ["terror","n.","恐怖",0],
   ["terrify","v.","使害怕",0]
 ]},
-{r:"cad", v:["cad","cas","cid"], d:"cad-", m:["落；降"], w:[
+{r:"cad", v:["cad","cas","cid","cay"], d:"cad-", m:["落；降"], w:[
   ["accident","n.","事故；意外",0],
   ["occasion","n.","场合；时机",0],
   ["casual","adj.","随意的；偶然的",0],
