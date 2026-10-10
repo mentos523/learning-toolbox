@@ -40,26 +40,35 @@
       <span class="spacer" aria-hidden="true"></span>
     </header>
 
-    <!-- 焦点：当前单词（词根部分标红） -->
-    <div class="word-hero">
-      <div class="word-hero-word" id="hero-word" aria-live="polite"></div>
+    <!-- 三词素槽：前缀词根 / 另一部分 / 后缀词根，空槽隐藏 -->
+    <div class="morph-rows" id="morph-rows">
+      <div class="morph-row" id="mrow-1">
+        <div class="morph-form" id="mform-1"></div>
+        <div class="morph-mean" id="mmean-1"></div>
+      </div>
+      <div class="morph-row" id="mrow-2">
+        <div class="morph-form" id="mform-2"></div>
+        <div class="morph-mean" id="mmean-2"></div>
+      </div>
+      <div class="morph-row" id="mrow-3">
+        <div class="morph-form" id="mform-3"></div>
+        <div class="morph-mean" id="mmean-3"></div>
+      </div>
     </div>
 
-    <!-- 双拨盘：一排并列 -->
+    <!-- 双拨盘：一排并列（选择器） -->
     <div class="dials">
       <div class="dial">
         <div class="wheel-wrap" id="root-wheel-wrap">
           <div class="wheel" role="listbox" aria-label="词根"></div>
           <div class="wheel-center"></div>
         </div>
-        <div class="dial-mean" id="root-mean"></div>
       </div>
       <div class="dial">
         <div class="wheel-wrap" id="word-wheel-wrap">
           <div class="wheel" role="listbox" aria-label="单词"></div>
           <div class="wheel-center"></div>
         </div>
-        <div class="dial-mean" id="word-mean"></div>
       </div>
     </div>
 
