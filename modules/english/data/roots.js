@@ -1,5 +1,4 @@
-// 词根数据（按词频排序：词根按旗下最高频词，单词按词频降序）
-// R2-P0: 150 词根
+// 词根数据（按词频排序）
 window.ROOTS_DATA = [
 { r:"us", v:["us","ut"], d:"us- / ut-", m:["用"], w:[
   ["use","v.","使用",0],
@@ -126,7 +125,7 @@ window.ROOTS_DATA = [
   ["infinite","adj.","无限的",0],
   ["definite","adj.","确定的",1],
   ["finite","adj.","有限的",0],
-  ["refine","v.","提炼；改进",1],
+  ["refine","v.","提炼；改进",0],
   ["confine","v.","限制；禁闭",1]
 ]},
 { r:"typ", v:["typ"], d:"typ-", m:["型"], w:[
@@ -201,6 +200,14 @@ window.ROOTS_DATA = [
   ["rebuild","v.","重建",0],
   ["rewrite","v.","重写",0]
 ]},
+{ r:"test", v:["test"], d:"test-", m:["证；试"], w:[
+  ["test","n./v.","试验；测试",0],
+  ["contest","n./v.","竞赛；质疑",0],
+  ["protest","n./v.","抗议",0],
+  ["testament","n.","遗嘱；证明",0],
+  ["testify","v.","作证",0],
+  ["attest","v.","证明",0]
+]},
 { r:"ven", v:["ven","vent"], d:"ven- / vent-", m:["来"], w:[
   ["event","n.","事件",0],
   ["prevent","v.","预防；阻止",0],
@@ -253,11 +260,6 @@ window.ROOTS_DATA = [
   ["tent","n.","帐篷",0],
   ["tense","adj.","紧张的",0]
 ]},
-{ r:"lingu", v:["lingu"], d:"lingu-", m:["舌；语言"], w:[
-  ["language","n.","语言",0],
-  ["bilingual","adj.","双语的",0],
-  ["linguist","n.","语言学家",0]
-]},
 { r:"techn", v:["techn"], d:"techn-", m:["技；艺"], w:[
   ["technology","n.","技术；科技",0],
   ["technical","adj.","技术的",0],
@@ -271,7 +273,7 @@ window.ROOTS_DATA = [
   ["unique","adj.","独特的",0],
   ["uniform","n.","制服",0]
 ]},
-{ r:"lect", v:["lect","lig"], d:"lect-", m:["选","读"], w:[
+{ r:"lect", v:["lect"], d:"lect-", m:["选","读"], w:[
   ["election","n.","选举",0],
   ["select","v.","选择",0],
   ["collect","v.","收集",0],
@@ -378,7 +380,8 @@ window.ROOTS_DATA = [
 { r:"tact", v:["tact","tang"], d:"tact-", m:["触"], w:[
   ["contact","n./v.","接触；联系",0],
   ["intact","adj.","完好无损的",0],
-  ["tactile","adj.","触觉的",0]
+  ["tactile","adj.","触觉的",0],
+  ["tactful","adj.","机智的；得体的",0]
 ]},
 { r:"min", v:["min"], d:"min-", m:["小"], w:[
   ["minute","adj.","微小的（≠分钟）",0],
@@ -387,6 +390,7 @@ window.ROOTS_DATA = [
 ]},
 { r:"phot", v:["phot","photo"], d:"phot-", m:["光"], w:[
   ["photo","n.","照片",0],
+  ["photograph","n.","照片",0],
   ["photosynthesis","n.","光合作用",0]
 ]},
 { r:"duc", v:["duc","dukt"], d:"duc- / dukt-", m:["引导"], w:[
@@ -404,7 +408,7 @@ window.ROOTS_DATA = [
   ["literal","adj.","字面的",0],
   ["illiterate","adj.","文盲的",0]
 ]},
-{ r:"reg", v:["reg","rect"], d:"reg-", m:["王；管"], w:[
+{ r:"reg", v:["reg"], d:"reg-", m:["王；管"], w:[
   ["regular","adj.","定期的；规则的",0],
   ["regulation","n.","规则；管理",0],
   ["regime","n.","政权；制度",0],
@@ -506,12 +510,10 @@ window.ROOTS_DATA = [
   ["graduate","v.","毕业",0],
   ["gradual","adj.","逐渐的",0]
 ]},
-{ r:"opt", v:["opt"], d:"opt-", m:["眼","选"], w:[
-  ["option","n.","选择；选项",1],
-  ["adopt","v.","收养；采纳",1],
-  ["optical","adj.","光学的；视觉的",0],
-  ["optimal","adj.","最佳的",1],
-  ["optics","n.","光学",0]
+{ r:"optc", v:["opt"], d:"opt-", m:["选"], w:[
+  ["option","n.","选择；选项",0],
+  ["adopt","v.","收养；采纳",0],
+  ["optimal","adj.","最佳的",0]
 ]},
 { r:"tele", v:["tele"], d:"tele-", m:["远"], w:[
   ["television","n.","电视",0],
@@ -618,11 +620,10 @@ window.ROOTS_DATA = [
   ["medium","adj.","中等的",0],
   ["immediate","adj.","立即的",0]
 ]},
-{ r:"sol", v:["sol"], d:"sol-", m:["日","独"], w:[
-  ["solo","n./adj.","独奏；单独的",1],
-  ["solar","adj.","太阳的",0],
-  ["solitary","adj.","独居的；孤独的",1],
-  ["solitude","n.","孤独",1]
+{ r:"solc", v:["sol"], d:"sol-", m:["独"], w:[
+  ["solo","n./adj.","独奏；单独的",0],
+  ["solitary","adj.","独居的；孤独的",0],
+  ["solitude","n.","孤独",0]
 ]},
 { r:"cycl", v:["cycl"], d:"cycl-", m:["圆"], w:[
   ["cycle","n.","循环",0],
@@ -657,12 +658,8 @@ window.ROOTS_DATA = [
   ["manual","adj.","手工的",0],
   ["manufacture","v.","制造",0]
 ]},
-{ r:"test", v:["test"], d:"test-", m:["证；试"], w:[
-  ["contest","n./v.","竞赛；质疑",0],
-  ["protest","n./v.","抗议",0],
-  ["testament","n.","遗嘱；证明",0],
-  ["testify","v.","作证",0],
-  ["attest","v.","证明",0]
+{ r:"sol", v:["sol"], d:"sol-", m:["日"], w:[
+  ["solar","adj.","太阳的",0]
 ]},
 { r:"vit", v:["vit","viv"], d:"vit- / viv-", m:["生命"], w:[
   ["survive","v.","幸存",0],
@@ -783,6 +780,10 @@ window.ROOTS_DATA = [
   ["migrate","v.","迁移；移居",0],
   ["emigrant","n.","移居国外者",0]
 ]},
+{ r:"opt", v:["opt"], d:"opt-", m:["眼"], w:[
+  ["optical","adj.","光学的；视觉的",0],
+  ["optics","n.","光学",0]
+]},
 { r:"puls", v:["puls","pel"], d:"puls-", m:["推；冲"], w:[
   ["pulse","n.","脉搏；脉冲",0],
   ["impulse","n.","冲动；脉冲",0],
@@ -807,6 +808,10 @@ window.ROOTS_DATA = [
 { r:"co", v:["co","col","com","con"], d:"co- / col- / com- / con-", m:["共同"], w:[
   ["cooperate","v.","合作",0],
   ["coworker","n.","同事",0]
+]},
+{ r:"lingu", v:["lingu"], d:"lingu-", m:["舌；语言"], w:[
+  ["bilingual","adj.","双语的",0],
+  ["linguist","n.","语言学家",0]
 ]},
 { r:"lumin", v:["lumin"], d:"lumin-", m:["光"], w:[
   ["illuminate","v.","照亮",0],

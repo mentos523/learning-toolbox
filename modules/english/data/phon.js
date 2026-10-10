@@ -1,4 +1,4 @@
-// 单词音标（R2-P0 更新）
+// 单词音标
 window.WORD_PHON = {
   "abnormal": "/æbnˈɔrməl/",
   "aboriginal": "/ˌæbɚˈɪdʒənəl/",
@@ -221,7 +221,6 @@ window.WORD_PHON = {
   "kilometer": "/kəlˈɑmətɚ/",
   "labor": "/lˈeɪbɚ/",
   "laboratory": "/lˈæbrətˌɔri/",
-  "language": "/ˈlæŋɡwədʒ/",
   "lecture": "/ˈlɛktʃɚ/",
   "letter": "/ˈlɛtɚ/",
   "library": "/lˈaɪbrɛrˌi/",
@@ -448,6 +447,7 @@ window.WORD_PHON = {
   "symbol": "/sˈɪmbəl/",
   "sympathy": "/sˈɪmpəθi/",
   "symphony": "/sˈɪmfəni/",
+  "tactful": "/ˈtæktfəl/",
   "tactile": "/ˈtæktɪl/",
   "technical": "/ˈtɛknɪkəl/",
   "technician": "/tɛkˈnɪʃən/",
@@ -469,6 +469,7 @@ window.WORD_PHON = {
   "terrible": "/ˈtɛ.ɹə.bl̩/",
   "terrify": "/tˈɛrəfˌaɪ/",
   "terror": "/tˈɛrɚ/",
+  "test": "/ˈtɛst/",
   "testament": "/ˈtɛstəmənt/",
   "testify": "/ˈtɛstəˌfaɪ/",
   "text": "/ˈtɛkst/",
