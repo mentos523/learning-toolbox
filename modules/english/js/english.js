@@ -1,6 +1,6 @@
 /* ============================================================
  * 词根词缀学习工具 · 应用逻辑
- * 单页应用：左侧词根列表 / 中央拨盘学习区 / 右侧设置
+ * 单列纵向流：词根选择（折叠）/ 拨盘学习区 / 设置（折叠）
  * ============================================================ */
 (function () {
   "use strict";
@@ -52,6 +52,46 @@
     if (auto) { auto.checked = !!settings.auto; }
     var ttsRate = document.getElementById("tts-rate");
     if (ttsRate) { ttsRate.textContent = Number(settings.rate).toFixed(1) + "x"; }
+    updateSettingsSub();
+  }
+
+  /* ---------------- 折叠面板 ----------------
+   * 词根选择 / 设置默认收起，点击头部丝滑展开；
+   * 开合状态持久化到本地。
+   */
+  var COLL_KEY = "ltb-en-coll";
+  function loadColl() {
+    try { return Object.assign({ roots: false, settings: false },
+      JSON.parse(localStorage.getItem(COLL_KEY) || "{}")); }
+    catch (e) { return { roots: false, settings: false }; }
+  }
+  function saveColl(c) {
+    try { localStorage.setItem(COLL_KEY, JSON.stringify(c)); } catch (e) {}
+  }
+  var collState = loadColl();
+  function setColl(name, open) {
+    collState[name] = open;
+    saveColl(collState);
+    var sec = document.getElementById(name === "roots" ? "coll-roots" : "coll-settings");
+    var head = document.getElementById(name === "roots" ? "coll-roots-head" : "coll-settings-head");
+    if (sec) sec.classList.toggle("open", open);
+    if (head) head.setAttribute("aria-expanded", open ? "true" : "false");
+  }
+  function updateRootsSub() {
+    var sub = document.getElementById("coll-roots-sub");
+    if (!sub) return;
+    if (state.root) {
+      // 副标题只显示主形态（如 ven-），变形太多时不挤占空间
+      var mainForm = state.root.v && state.root.v[0] ? state.root.v[0] + "-" : state.root.d;
+      sub.innerHTML = "<b>" + esc(mainForm) + "</b> · " + esc(state.root.m[0]);
+    } else { sub.textContent = ""; }
+  }
+  function updateSettingsSub() {
+    var sub = document.getElementById("coll-settings-sub");
+    if (!sub) return;
+    var themeName = { light: "明亮", soft: "护眼", dark: "暗夜" }[settings.theme] || "";
+    var voiceName = settings.voice === "gb" ? "英音" : "美音";
+    sub.textContent = themeName + " · " + voiceName + " · " + Number(settings.rate).toFixed(1) + "x";
   }
 
   /* ---------------- Toast ---------------- */
@@ -269,9 +309,11 @@
     // 单词拨盘
     wordWheel.setItems(rt.w.map(function (wd) { return { label: wd[0] }; }));
     renderWord();
+    updateRootsSub();
     // 深链接写回：刷新/分享后回到当前词根（replaceState 不污染历史栈）
     try { history.replaceState(null, "", "#r=" + rt.r); } catch (e) {}
-    if (window.innerWidth <= 1100 && !(opts && opts.keepOpen)) closeLeft();
+    // 选完词根后收起选择面板，学习区回到视野（除非调用方要求保持展开）
+    if (!(opts && opts.keepOpen)) setColl("roots", false);
   }
 
   /* ---------------- 单词区渲染 ---------------- */
@@ -317,24 +359,6 @@
     if (settings.auto && userInteracted) speak(wd[0]);
   }
 
-  /* ---------------- 抽屉 ---------------- */
-  function closeLeft() { document.getElementById("app").classList.add("left-closed"); syncScrim(); }
-  function closeRight() { document.getElementById("app").classList.add("right-closed"); syncScrim(); }
-  function toggleLeft() { document.getElementById("app").classList.toggle("left-closed"); syncScrim(); }
-  function toggleRight() { document.getElementById("app").classList.toggle("right-closed"); syncScrim(); }
-  function syncScrim() {
-    var app = document.getElementById("app");
-    var scrim = document.getElementById("scrim");
-    var need = window.innerWidth <= 1100 &&
-      (!app.classList.contains("left-closed") || !app.classList.contains("right-closed"));
-    scrim.style.display = need ? "block" : "none";
-    // 收起的抽屉移出 Tab 序列与无障碍树（动画不受影响）
-    var sb = document.querySelector(".sidebar");
-    var st = document.querySelector(".settings");
-    if (sb) sb.inert = app.classList.contains("left-closed");
-    if (st) st.inert = app.classList.contains("right-closed");
-  }
-
   /* ---------------- 统计 ---------------- */
   function renderStats() {
     var n = 0;
@@ -347,6 +371,15 @@
 
   /* ---------------- 初始化 ---------------- */
   function init() {
+    // 折叠面板：绑定 + 恢复上次开合状态（默认都收起）
+    document.getElementById("coll-roots-head").addEventListener("click", function () {
+      setColl("roots", !collState.roots);
+    });
+    document.getElementById("coll-settings-head").addEventListener("click", function () {
+      setColl("settings", !collState.settings);
+    });
+    setColl("roots", !!collState.roots);
+    setColl("settings", !!collState.settings);
     // 拨盘
     variantWheel = new Wheel("variant-wheel-wrap", {
       itemH: wheelItemH(),
@@ -386,16 +419,7 @@
       document.getElementById("tts-us").disabled = true;
       document.getElementById("tts-gb").disabled = true;
     }
-    // 抽屉开关
-    document.getElementById("btn-left").addEventListener("click", toggleLeft);
-    document.getElementById("btn-right").addEventListener("click", toggleRight);
-    document.getElementById("btn-left-close").addEventListener("click", closeLeft);
-    document.getElementById("btn-right-close").addEventListener("click", closeRight);
-    document.getElementById("fab-left").addEventListener("click", toggleLeft);
-    document.getElementById("fab-right").addEventListener("click", toggleRight);
-    document.getElementById("scrim").addEventListener("click", function () { closeLeft(); closeRight(); });
     window.addEventListener("resize", function () {
-      syncScrim();
       // 跨断点（767px）重算拨盘行高，避免选中错位
       var h = wheelItemH();
       [variantWheel, wordWheel].forEach(function (w) {
@@ -406,7 +430,7 @@
     window.addEventListener("hashchange", function () {
       var m = (location.hash || "").match(/#r=([a-z]+)/);
       if (m && findRoot(m[1]) && (!state.root || state.root.r !== m[1])) {
-        selectRoot(m[1], { keepOpen: window.innerWidth > 1100 });
+        selectRoot(m[1]);
       }
     });
     // 设置
@@ -426,18 +450,10 @@
       saveSettings();
     });
     applySettings();
-    // 桌面端默认展开两侧，窄屏默认收起为抽屉
-    var app = document.getElementById("app");
-    if (window.innerWidth > 1100) {
-      app.classList.remove("left-closed", "right-closed");
-    } else {
-      closeLeft(); closeRight();
-    }
-    syncScrim();
     // 默认选中：优先 URL hash（#r=re），否则第一个词根
     var hm = (location.hash || "").match(/#r=([a-z]+)/);
     var first = (hm && findRoot(hm[1])) ? hm[1] : (DATA.length ? DATA[0].r : null);
-    if (first) selectRoot(first, { keepOpen: window.innerWidth > 1100 });
+    if (first) selectRoot(first, { keepOpen: true });  // 初始化不碰面板开合（尊重持久化状态）
   }
 
   function wheelItemH() {
