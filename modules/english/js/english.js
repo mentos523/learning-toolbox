@@ -123,20 +123,46 @@
     if (cur) cur.textContent = voiceName;
   }
 
-  /* 单词切分：词根前缀型 → 词根 + 剩余部分（如 tele-phone）；
-   * 非前缀型 → 整词显示，hero 内标红词形 */
-  function splitWord(word, variants) {
+  /* 对称词素切分：单词 = 词根词素 + 另一部分（前缀或后缀）
+   * 返回 {morph, idx, len, other, pos}，pos: "prefix"|"suffix"|"mid"|"none" */
+  function splitPair(word, root) {
     var w = String(word == null ? "" : word);
     var lw = w.toLowerCase();
-    var bestLen = 0;
-    (variants || []).forEach(function (v) {
-      var lv = String(v).toLowerCase();
-      if (lv && lw.indexOf(lv) === 0 && lv.length > bestLen) bestLen = lv.length;
-    });
-    if (bestLen > 0) {
-      return { clean: true, morph: w.slice(0, bestLen), rest: w.slice(bestLen), full: w };
+    var bestLen = 0, bestIdx = -1;
+    function consider(lv) {
+      var idx = lw.indexOf(lv);
+      if (lv && idx !== -1 && lv.length > bestLen) { bestLen = lv.length; bestIdx = idx; }
     }
-    return { clean: false, morph: "", rest: w, full: w };
+    (root.v || []).forEach(function (v) {
+      var lv = String(v).toLowerCase();
+      consider(lv);
+      if (lv.length >= 5) consider(lv.slice(1));   // 音变兜底：spect→pect
+    });
+    if (bestLen === 0) return { morph: "", idx: -1, len: 0, other: w, pos: "none", full: w };
+    var morph = w.slice(bestIdx, bestIdx + bestLen);
+    var before = w.slice(0, bestIdx);
+    var after = w.slice(bestIdx + bestLen);
+    var pos, other;
+    if (bestIdx === 0) { pos = "suffix"; other = after; }          // tele-phone
+    else if (bestIdx + bestLen === w.length) { pos = "prefix"; other = before; }  // pro-ject（从ject看）
+    else { pos = "mid"; other = w; }                               // 中缀：右拨盘显示整词
+    return { morph: morph, idx: bestIdx, len: bestLen, other: other, pos: pos, full: w };
+  }
+
+  /* 词素意思查找：在词根库中找对应词素（如 pro→pro-，ject→ject-，phone→phon-） */
+  function findMorpheme(part) {
+    var p = String(part || "").toLowerCase().replace(/-/g, "");
+    if (!p) return null;
+    var rt = findRoot(p);
+    if (rt) return rt;
+    if (p.slice(-1) === "e") { rt = findRoot(p.slice(0, -1)); if (rt) return rt; }  // phone→phon
+    for (var i = 0; i < DATA.length; i++) {
+      var r = DATA[i];
+      for (var j = 0; j < r.v.length; j++) {
+        if (p === r.v[j].toLowerCase()) return r;
+      }
+    }
+    return null;
   }
 
   /* 单词内词根词形高亮：前缀型加连字符（dict-ate），中缀型只标红（ex**pect**） */
@@ -402,10 +428,10 @@
         li.classList.toggle("active", li.dataset.r === rt.r);
       });
     }
-    // 右拨盘：当前词根的单词（前缀型显示剩余部分，如 phone；非前缀型显示整词）
+    // 右拨盘：单词去掉词根词素后的另一部分（如 phone/pro/ject；中缀型显示整词）
     wordWheel.setItems(rt.w.map(function (wd) {
-      var sp = splitWord(wd[0], rt.v);
-      return { label: sp.rest, full: wd[0] };
+      var sp = splitPair(wd[0], rt);
+      return { label: sp.other, full: wd[0] };
     }));
     renderHero();
     updateRootsSub();
@@ -432,10 +458,12 @@
       return;
     }
     var wd = currentWord();
-    var sp = splitWord(wd[0], rt.v);
-    // 焦点大字：前缀型 tele-phone；非前缀型整词标红
-    if (sp.clean) {
-      heroWord.innerHTML = '<span class="morph">' + esc(sp.morph) + '</span><span class="hyph">-</span>' + esc(sp.rest);
+    var sp = splitPair(wd[0], rt);
+    // 焦点大字：按拼写顺序展示两部分，词根词素标红（如 pro-ject / tele-phone）
+    if (sp.pos === "suffix") {
+      heroWord.innerHTML = '<span class="morph">' + esc(sp.morph) + '</span><span class="hyph">-</span>' + esc(sp.other);
+    } else if (sp.pos === "prefix") {
+      heroWord.innerHTML = esc(sp.other) + '<span class="hyph">-</span><span class="morph">' + esc(sp.morph) + "</span>";
     } else {
       heroWord.innerHTML = heroWordHtml(wd[0], rt.v);
     }
@@ -443,8 +471,13 @@
     // 词根意思（拨盘下方）
     var mi = Math.min(Math.max(0, wd[3] || 0), rt.m.length - 1);
     rootMean.innerHTML = '<span class="num">' + num(mi) + "</span>" + esc(rt.m[mi]);
-    // 单词意思（拨盘下方）：词性 + 中文
-    wordMean.innerHTML = '<span class="pos">' + esc(wd[1]) + "</span><b>" + esc(wd[2]) + "</b>";
+    // 另一部分的意思：查词素（如 pro→向前，ject→投掷，phone→声）；查不到回退到单词意思
+    var mRoot = findMorpheme(sp.other);
+    if (mRoot && sp.pos !== "none" && sp.pos !== "mid") {
+      wordMean.innerHTML = '<span class="pos">词素</span><b>' + esc(mRoot.m[0]) + "</b>";
+    } else {
+      wordMean.innerHTML = '<span class="pos">' + esc(wd[1]) + "</span><b>" + esc(wd[2]) + "</b>";
+    }
     cineRestart(wordMean);
     // 自动朗读：仅在用户已交互过页面后触发（避免刷新即播）
     if (settings.auto && userInteracted) speak(wd[0]);

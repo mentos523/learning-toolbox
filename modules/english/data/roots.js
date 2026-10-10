@@ -71,6 +71,12 @@ window.ROOTS_DATA = [
   ["paragraph","n.","段落",0],
   ["autograph","n.","亲笔签名",0]
 ]},
+{ r:"pro", v:["pro"], d:"pro-", m:["向前；先"], w:[
+  ["project","n.","项目；工程",0],
+  ["protect","v.","保护",0],
+  ["progress","n./v.","进步；进展",0],
+  ["promise","v./n.","承诺；许诺",0]
+]},
 { r:"tele", v:["tele"], d:"tele-", m:["远"], w:[
   ["telephone","n.","电话",0],
   ["television","n.","电视",0]
