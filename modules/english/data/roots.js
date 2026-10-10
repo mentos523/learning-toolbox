@@ -5,6 +5,11 @@ window.ROOTS_DATA = [
   ["justice","n.","正义；司法",0],
   ["justify","v.","证明正当",0]
 ]},
+{r:"fore", v:["fore"], d:"fore-", m:["前"], w:[
+  ["before","prep./conj.","在…之前",0],
+  ["forecast","n./v.","预报；预测",0],
+  ["forehead","n.","前额",0]
+]},
 {r:"us", v:["us","ut"], d:"us- / ut-", m:["用"], w:[
   ["use","v.","使用",0],
   ["useful","adj.","有用的",0],
@@ -38,6 +43,10 @@ window.ROOTS_DATA = [
   ["popular","adj.","流行的",0],
   ["population","n.","人口",0],
   ["publish","v.","出版",0]
+]},
+{r:"gubern", v:["gubern"], d:"gubern-", m:["管"], w:[
+  ["government","n.","政府",0],
+  ["govern","v.","统治；管理",0]
 ]},
 {r:"port", v:["port"], d:"port-", m:["拿；运送"], w:[
   ["support","v.","支持",0],
@@ -108,6 +117,10 @@ window.ROOTS_DATA = [
   ["humanity","n.","人性",1],
   ["humble","adj.","谦逊的",0]
 ]},
+{r:"mill", v:["mill"], d:"mill-", m:["千"], w:[
+  ["million","num.","百万",0],
+  ["millennium","n.","一千年",0]
+]},
 {r:"form", v:["form"], d:"form-", m:["形"], w:[
   ["form","n.","形式",0],
   ["format","n.","格式",0],
@@ -156,6 +169,12 @@ window.ROOTS_DATA = [
   ["declare","v.","宣布",0],
   ["clarity","n.","清楚；明晰",0],
   ["clarify","v.","澄清",0]
+]},
+{r:"out", v:["out"], d:"out-", m:["出；外"], w:[
+  ["outside","prep./adv.","在外面",0],
+  ["outcome","n.","结果",0],
+  ["outbreak","n.","爆发",0],
+  ["outline","n./v.","轮廓；大纲",0]
 ]},
 {r:"term", v:["term","termin"], d:"term-", m:["终","界"], w:[
   ["term","n.","学期；术语",1],
@@ -322,6 +341,10 @@ window.ROOTS_DATA = [
 {r:"voc", v:["voc"], d:"voc-", m:["声音；叫"], w:[
   ["voice","n.","声音",0],
   ["vocabulary","n.","词汇",0]
+]},
+{r:"hosp", v:["hosp"], d:"hosp-", m:["客人"], w:[
+  ["hospital","n.","医院",0],
+  ["hospitality","n.","好客",0]
 ]},
 {r:"fer", v:["fer"], d:"fer-", m:["拿；带"], w:[
   ["offer","v.","提供",0],
@@ -508,6 +531,12 @@ window.ROOTS_DATA = [
   ["rectangle","n.","矩形",0],
   ["rectify","v.","纠正",0]
 ]},
+{r:"over", v:["over"], d:"over-", m:["过度；在上"], w:[
+  ["overall","adj./adv.","总体的；全部",0],
+  ["overcome","v.","克服",0],
+  ["overlook","v.","忽视；俯瞰",0],
+  ["overcoat","n.","大衣",0]
+]},
 {r:"prim", v:["prim"], d:"prim-", m:["第一"], w:[
   ["primary","adj.","主要的",0],
   ["prime","adj.","首要的",0]
@@ -579,6 +608,10 @@ window.ROOTS_DATA = [
   ["benefit","n.","利益",0],
   ["beneficial","adj.","有益的",0]
 ]},
+{r:"fil", v:["fil"], d:"fil-", m:["线"], w:[
+  ["profile","n.","侧面；简介",0],
+  ["filament","n.","细丝；灯丝",0]
+]},
 {r:"anim", v:["anim"], d:"anim-", m:["生命","精神"], w:[
   ["animal","n.","动物",0]
 ]},
@@ -634,6 +667,15 @@ window.ROOTS_DATA = [
 {r:"labor", v:["labor"], d:"labor-", m:["劳"], w:[
   ["labor","n.","劳动",0],
   ["laboratory","n.","实验室",0]
+]},
+{r:"back", v:["back"], d:"back-", m:["回；背"], w:[
+  ["background","n.","背景",0],
+  ["backup","n./v.","备份；支持",0],
+  ["backbone","n.","脊梁；支柱",0]
+]},
+{r:"host", v:["host"], d:"host-", m:["主人"], w:[
+  ["host","n./v.","主人；主持",0],
+  ["hostess","n.","女主人",0]
 ]},
 {r:"veh", v:["veh"], d:"veh-", m:["运"], w:[
   ["vehicle","n.","车辆",0]
@@ -706,6 +748,10 @@ window.ROOTS_DATA = [
   ["preliminary","adj.","初步的；预备的",0],
   ["eliminate","v.","消除；淘汰",0]
 ]},
+{r:"honor", v:["honor"], d:"honor-", m:["荣誉"], w:[
+  ["honor","n./v.","荣誉；尊敬",0],
+  ["honorable","adj.","光荣的",0]
+]},
 {r:"mis", v:["mis"], d:"mis-", m:["错"], w:[
   ["mistake","n.","错误",0],
   ["misunderstand","v.","误解",0]
@@ -745,6 +791,10 @@ window.ROOTS_DATA = [
   ["cycle","n.","循环",0],
   ["recycle","v.","回收",0]
 ]},
+{r:"max", v:["max"], d:"max-", m:["大"], w:[
+  ["maximum","n./adj.","最大量",0],
+  ["maximal","adj.","最大的",0]
+]},
 {r:"par", v:["par"], d:"par-", m:["生；产"], w:[
   ["parent","n.","父母",0]
 ]},
@@ -753,6 +803,12 @@ window.ROOTS_DATA = [
   ["navigation","n.","航行；导航",0],
   ["navigate","v.","航行；导航",0],
   ["navigator","n.","领航员",0]
+]},
+{r:"counter", v:["counter"], d:"counter-", m:["反；对"], w:[
+  ["counter","v./n.","反击；反驳",0],
+  ["encounter","v./n.","遭遇；遇到",0],
+  ["counterpart","n.","对应的人或物",0],
+  ["counterattack","n./v.","反击",0]
 ]},
 {r:"pre", v:["pre"], d:"pre-", m:["前"], w:[
   ["prepare","v.","准备",0],
@@ -807,9 +863,19 @@ window.ROOTS_DATA = [
   ["relate","v.","讲述；关联",0],
   ["translate","v.","翻译",0]
 ]},
+{r:"nerv", v:["nerv"], d:"nerv-", m:["经"], w:[
+  ["nervous","adj.","紧张的；神经的",0],
+  ["nerve","n.","神经；勇气",0],
+  ["neural","adj.","神经的",0]
+]},
 {r:"vac", v:["vac"], d:"vac-", m:["空"], w:[
   ["vacation","n.","假期",0],
   ["vacant","adj.","空的",0]
+]},
+{r:"clin", v:["clin"], d:"clin-", m:["倾；斜"], w:[
+  ["decline","v./n.","下降；拒绝",0],
+  ["incline","v./n.","倾斜；倾向",0],
+  ["recline","v.","斜靠",0]
 ]},
 {r:"dis", v:["dis","dif"], d:"dis-", m:["不；无","分开；离"], w:[
   ["discover","v.","发现",1],
@@ -890,6 +956,12 @@ window.ROOTS_DATA = [
   ["mechanism","n.","机制；机械装置",0],
   ["mechanic","n.","技工",0]
 ]},
+{r:"under", v:["under"], d:"under-", m:["在下"], w:[
+  ["underground","adj./adv.","地下的",0],
+  ["undergo","v.","经历；遭受",0],
+  ["underestimate","v.","低估",0],
+  ["underline","v./n.","在…下划线",0]
+]},
 {r:"sym", v:["sym","syn"], d:"sym- / syn-", m:["共同"], w:[
   ["symbol","n.","象征",0],
   ["sympathy","n.","同情",0],
@@ -905,6 +977,21 @@ window.ROOTS_DATA = [
   ["pronounce","v.","发音",0],
   ["pronunciation","n.","发音",0]
 ]},
+{r:"mid", v:["mid"], d:"mid-", m:["中"], w:[
+  ["midnight","n.","午夜",0],
+  ["midday","n.","正午",0],
+  ["midterm","n.","期中",0]
+]},
+{r:"domin", v:["domin"], d:"domin-", m:["统治"], w:[
+  ["domain","n.","领域；领地",0],
+  ["dominant","adj.","占优势的",0],
+  ["dominate","v.","支配；统治",0]
+]},
+{r:"dyn", v:["dyn"], d:"dyn-", m:["力"], w:[
+  ["dynamic","adj.","动态的；有活力的",0],
+  ["dynasty","n.","王朝",0],
+  ["dynamite","n.","炸药",0]
+]},
 {r:"volv", v:["volv"], d:"volv-", m:["卷"], w:[
   ["involve","v.","涉及",0],
   ["revolve","v.","旋转",0]
@@ -913,6 +1000,12 @@ window.ROOTS_DATA = [
   ["crucial","adj.","关键的",0],
   ["crucifix","n.","十字架",0],
   ["crucify","v.","钉十字架；严厉批评",0]
+]},
+{r:"sub", v:["sub"], d:"sub-", m:["下；次"], w:[
+  ["submit","v.","提交",0],
+  ["subway","n.","地铁",0],
+  ["subscribe","v.","订阅",0],
+  ["submarine","n.","潜水艇",0]
 ]},
 {r:"scop", v:["scop"], d:"scop-", m:["看"], w:[
   ["scope","n.","范围",0],
@@ -941,9 +1034,27 @@ window.ROOTS_DATA = [
   ["integral","adj.","不可或缺的",0],
   ["integrate","v.","融合",0]
 ]},
+{r:"chron", v:["chron"], d:"chron-", m:["时间"], w:[
+  ["chronic","adj.","慢性的；长期的",0],
+  ["chronicle","n./v.","编年史；记录",0],
+  ["synchronize","v.","使同步",0]
+]},
+{r:"laps", v:["laps"], d:"laps-", m:["滑"], w:[
+  ["collapse","v./n.","倒塌；崩溃",0],
+  ["lapse","n./v.","失误；流逝",0],
+  ["elapse","v.","（时间）流逝",0]
+]},
 {r:"de", v:["de"], d:"de-", m:["向下","除去"], w:[
   ["decrease","v.","减少",0],
   ["depart","v.","离开",1]
+]},
+{r:"magnet", v:["magnet"], d:"magnet-", m:["磁"], w:[
+  ["magnetic","adj.","有磁性的",0],
+  ["magnet","n.","磁铁",0]
+]},
+{r:"icon", v:["icon"], d:"icon-", m:["像"], w:[
+  ["icon","n.","图标；偶像",0],
+  ["iconic","adj.","标志性的",0]
 ]},
 {r:"tort", v:["tort","tors"], d:"tort-", m:["扭；曲"], w:[
   ["torture","n./v.","折磨",0],
@@ -963,12 +1074,20 @@ window.ROOTS_DATA = [
   ["migrate","v.","迁移；移居",0],
   ["emigrant","n.","移居国外者",0]
 ]},
+{r:"immun", v:["immun"], d:"immun-", m:["免"], w:[
+  ["immune","adj.","免疫的",0],
+  ["immunity","n.","免疫力",0]
+]},
 {r:"path", v:["path"], d:"path-", m:["感；病"], w:[
   ["pathetic","adj.","可怜的",0],
   ["sympathy","n.","同情",0],
   ["empathy","n.","共情",0],
   ["pathology","n.","病理学",0],
   ["apathy","n.","冷漠",0]
+]},
+{r:"dent", v:["dent"], d:"dent-", m:["牙"], w:[
+  ["dental","adj.","牙齿的",0],
+  ["dentist","n.","牙医",0]
 ]},
 {r:"meter", v:["meter","metr"], d:"meter-", m:["量；表"], w:[
   ["meter","n.","米；仪表",0],
@@ -985,6 +1104,14 @@ window.ROOTS_DATA = [
   ["nominee","n.","被提名人",0],
   ["nominal","adj.","名义上的",0],
   ["nominate","v.","提名",0]
+]},
+{r:"hostc", v:["host"], d:"host-", m:["敌"], w:[
+  ["hostile","adj.","敌对的",0],
+  ["hostility","n.","敌意",0]
+]},
+{r:"miser", v:["miser"], d:"miser-", m:["悲"], w:[
+  ["miserable","adj.","痛苦的；可怜的",0],
+  ["misery","n.","痛苦",0]
 ]},
 {r:"puls", v:["puls","pel"], d:"puls-", m:["推；冲"], w:[
   ["pulse","n.","脉搏；脉冲",0],
@@ -1005,6 +1132,13 @@ window.ROOTS_DATA = [
   ["dictionary","n.","词典",0],
   ["dictate","v.","口授；命令",0],
   ["contradict","v.","反驳",0]
+]},
+{r:"ego", v:["ego"], d:"ego-", m:["我"], w:[
+  ["ego","n.","自我",0],
+  ["egotistical","adj.","自我中心的",0]
+]},
+{r:"filc", v:["fil"], d:"fil-", m:["子"], w:[
+  ["affiliate","v./n.","附属；加盟",0]
 ]},
 {r:"bi", v:["bi"], d:"bi-", m:["二"], w:[
   ["bicycle","n.","自行车",0]
@@ -1046,6 +1180,28 @@ window.ROOTS_DATA = [
 {r:"tri", v:["tri"], d:"tri-", m:["三"], w:[
   ["triangle","n.","三角形",0]
 ]},
+{r:"chrom", v:["chrom"], d:"chrom-", m:["颜色"], w:[
+  ["chrome","n.","铬；镀铬",0],
+  ["chromosome","n.","染色体",0]
+]},
+{r:"juven", v:["juven"], d:"juven-", m:["年轻"], w:[
+  ["juvenile","adj./n.","青少年的",0],
+  ["rejuvenate","v.","使年轻",0]
+]},
+{r:"carn", v:["carn"], d:"carn-", m:["肉"], w:[
+  ["carnival","n.","狂欢节",0],
+  ["carnivore","n.","食肉动物",0]
+]},
+{r:"mono", v:["mono"], d:"mono-", m:["单；一"], w:[
+  ["monopoly","n.","垄断；独占",0],
+  ["monochrome","adj.","单色的",0],
+  ["monotone","n./adj.","单调",0]
+]},
+{r:"micro", v:["micro"], d:"micro-", m:["微；小"], w:[
+  ["microwave","n.","微波；微波炉",0],
+  ["microscope","n.","显微镜",0],
+  ["microchip","n.","微芯片",0]
+]},
 {r:"co", v:["co","col","com","con"], d:"co- / col- / com- / con-", m:["共同"], w:[
   ["cooperate","v.","合作",0],
   ["coworker","n.","同事",0]
@@ -1056,10 +1212,27 @@ window.ROOTS_DATA = [
   ["patron","n.","赞助人",0],
   ["paternal","adj.","父亲的",0]
 ]},
+{r:"cosm", v:["cosm"], d:"cosm-", m:["宇宙"], w:[
+  ["cosmic","adj.","宇宙的",0],
+  ["cosmopolitan","adj.","世界主义的",0]
+]},
 {r:"mater", v:["mater","matr"], d:"mater-", m:["母"], w:[
   ["maternal","adj.","母亲的",0],
   ["maternity","n.","母性；产科",0],
   ["matron","n.","女舍监；主妇",0]
+]},
+{r:"flor", v:["flor"], d:"flor-", m:["花"], w:[
+  ["floral","adj.","花的",0],
+  ["flourish","v.","繁荣；茂盛",0],
+  ["florist","n.","花商",0]
+]},
+{r:"herb", v:["herb"], d:"herb-", m:["草"], w:[
+  ["herb","n.","草药；香草",0],
+  ["herbal","adj.","草药的",0]
+]},
+{r:"lun", v:["lun"], d:"lun-", m:["月"], w:[
+  ["lunar","adj.","月亮的",0],
+  ["lunatic","n./adj.","疯子；疯狂的",0]
 ]},
 {r:"lat", v:["lat","later"], d:"lat-", m:["宽；边"], w:[
   ["lateral","adj.","侧面的",0],
@@ -1070,6 +1243,10 @@ window.ROOTS_DATA = [
   ["pedal","n./v.","踏板；踩踏板",0],
   ["expedite","v.","加快",0]
 ]},
+{r:"macro", v:["macro"], d:"macro-", m:["大"], w:[
+  ["macro","n./adj.","宏；宏观的",0],
+  ["macroeconomic","adj.","宏观经济的",0]
+]},
 {r:"ign", v:["ign"], d:"ign-", m:["火"], w:[
   ["ignition","n.","点火",0],
   ["ignite","v.","点燃",0]
@@ -1078,6 +1255,9 @@ window.ROOTS_DATA = [
   ["malicious","adj.","恶意的",0],
   ["malaria","n.","疟疾",0],
   ["malfunction","n./v.","故障",0]
+]},
+{r:"celer", v:["celer"], d:"celer-", m:["快"], w:[
+  ["accelerate","v.","加速",0]
 ]},
 {r:"mut", v:["mut"], d:"mut-", m:["变"], w:[
   ["mutation","n.","变异",0],
@@ -1090,25 +1270,77 @@ window.ROOTS_DATA = [
   ["aquarium","n.","水族馆",0],
   ["aqueduct","n.","渡槽；引水渠",0]
 ]},
+{r:"frig", v:["frig"], d:"frig-", m:["冷"], w:[
+  ["refrigerator","n.","冰箱",0],
+  ["frigid","adj.","严寒的；冷淡的",0]
+]},
+{r:"calor", v:["calor"], d:"calor-", m:["热"], w:[
+  ["calorie","n.","卡路里（热量单位）",0],
+  ["calorific","adj.","生热的",0]
+]},
+{r:"glaci", v:["glaci"], d:"glaci-", m:["冰"], w:[
+  ["glacier","n.","冰川",0],
+  ["glacial","adj.","冰的；冰冷的",0]
+]},
+{r:"frater", v:["frater"], d:"frater-", m:["兄弟"], w:[
+  ["fraternity","n.","兄弟会；友爱",0],
+  ["fraternal","adj.","兄弟般的",0]
+]},
 {r:"long", v:["long"], d:"long-", m:["长"], w:[
   ["longevity","n.","长寿",0],
   ["longitude","n.","经度",0],
   ["prolong","v.","延长",0]
 ]},
+{r:"mend", v:["mend"], d:"mend-", m:["修"], w:[
+  ["amend","v.","修正；改善",0],
+  ["mend","v.","修理",0]
+]},
 {r:"lingu", v:["lingu"], d:"lingu-", m:["舌；语言"], w:[
   ["bilingual","adj.","双语的",0],
   ["linguist","n.","语言学家",0]
+]},
+{r:"anti", v:["anti"], d:"anti-", m:["反；抗"], w:[
+  ["antibiotic","n./adj.","抗生素",0],
+  ["antibody","n.","抗体",0],
+  ["antisocial","adj.","反社会的",0],
+  ["antifreeze","n.","防冻液",0]
 ]},
 {r:"dorm", v:["dorm"], d:"dorm-", m:["睡"], w:[
   ["dormant","adj.","休眠的",0],
   ["dormitory","n.","宿舍",0]
 ]},
+{r:"hyper", v:["hyper"], d:"hyper-", m:["超；过度"], w:[
+  ["hypertension","n.","高血压",0],
+  ["hyperactive","adj.","过度活跃的",0],
+  ["hyperlink","n.","超链接",0]
+]},
+{r:"culp", v:["culp"], d:"culp-", m:["罪"], w:[
+  ["culprit","n.","罪犯；肇事者",0],
+  ["culpable","adj.","有罪的",0]
+]},
 {r:"lumin", v:["lumin"], d:"lumin-", m:["光"], w:[
   ["illuminate","v.","照亮",0],
   ["luminous","adj.","发光的",0]
 ]},
+{r:"lud", v:["lud"], d:"lud-", m:["玩"], w:[
+  ["prelude","n.","序幕；前奏",0],
+  ["interlude","n.","间奏；插曲",0]
+]},
+{r:"semi", v:["semi"], d:"semi-", m:["半"], w:[
+  ["semifinal","n.","半决赛",0],
+  ["semicircle","n.","半圆",0]
+]},
+{r:"homo", v:["homo"], d:"homo-", m:["同"], w:[
+  ["homogeneous","adj.","同类的；均匀的",0],
+  ["homonym","n.","同音异义词",0]
+]},
 {r:"kilo", v:["kilo"], d:"kilo-", m:["千"], w:[
   ["kilometer","n.","千米",0],
   ["kilogram","n.","千克",0]
+]},
+{r:"crypt", v:["crypt"], d:"crypt-", m:["藏"], w:[
+  ["crypt","n.","地下室；墓穴",0],
+  ["encrypt","v.","加密",0],
+  ["decrypt","v.","解密",0]
 ]},
 ];
