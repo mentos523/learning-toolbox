@@ -30,6 +30,6 @@ window.TOOLBOX_MODULES = [
     icon: "pi",
     color: "#f59e0b",
     path: "modules/math/index.html",
-    status: "soon"
+    status: "ready"                  // 试点 4 页已上线
   }
 ];
