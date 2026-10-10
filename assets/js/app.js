@@ -26,7 +26,7 @@
       ? '<span class="badge badge-ready">可用</span>'
       : '<span class="badge badge-soon">筹备中</span>';
     var action = ready
-      ? '<a class="card-btn" href="' + m.path + '">进入学习 →</a>'
+      ? '<span class="card-btn">进入学习 →</span>'
       : '<span class="card-btn card-btn-disabled">敬请期待</span>';
 
     var inner =
