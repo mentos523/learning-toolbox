@@ -11,59 +11,67 @@
 </head>
 <body data-theme="light" data-font="sys" data-size="normal">
 
-<div class="page" id="app">
-  <!-- 顶栏：返回 + 标题 -->
-  <header class="page-head">
-    <a class="back-btn" href="../../index.html" aria-label="返回工具箱首页">← 返回</a>
-    <h1>词根词缀学习工具</h1>
-  </header>
-
-  <!-- 词根选择（默认收起） -->
-  <section class="coll" id="coll-roots">
-    <button class="coll-head" id="coll-roots-head" aria-expanded="false" aria-controls="coll-roots-body">
-      <span class="coll-title">词根选择</span>
-      <span class="coll-sub" id="coll-roots-sub"></span>
-      <span class="chev" aria-hidden="true">▾</span>
+<div class="app" id="app">
+  <!-- 左：词根选择（桌面贴边窄条悬停滑出 / 手机顶部栏点开展开） -->
+  <aside class="drawer drawer-left" id="drawer-left" aria-label="词根选择">
+    <button class="edge-tab" id="tab-left" aria-expanded="false" aria-controls="panel-left">
+      <span class="edge-tab-text">词根选择</span>
+      <span class="edge-tab-cur" id="tab-left-cur"></span>
     </button>
-    <div class="coll-body" id="coll-roots-body">
-      <div class="coll-inner">
-        <input id="root-search" class="root-search" type="search"
-               placeholder="搜索或输入词根，回车选中" autocomplete="off" aria-label="搜索词根">
-        <ul class="root-list" id="root-list"></ul>
-        <div class="list-foot" id="stats"></div>
+    <div class="drawer-panel" id="panel-left">
+      <div class="drawer-scroll">
+      <div class="drawer-head">
+        <h2>词根选择</h2>
+        <span class="drawer-sub" id="drawer-roots-sub"></span>
+      </div>
+      <input id="root-search" class="root-search" type="search"
+             placeholder="搜索或输入词根，回车选中" autocomplete="off" aria-label="搜索词根">
+      <ul class="root-list" id="root-list"></ul>
+      <div class="drawer-foot" id="stats"></div>
       </div>
     </div>
-  </section>
+  </aside>
 
-  <!-- 学习区（常开） -->
+  <!-- 中：学习区 -->
   <main class="stage">
+    <header class="stage-head">
+      <a class="back-btn" href="../../index.html" aria-label="返回工具箱首页">← 返回</a>
+      <h1>词根词缀学习工具</h1>
+      <span class="spacer" aria-hidden="true"></span>
+    </header>
+
     <div class="version-note">
       v1.1 · <span id="stats2"></span>，词根求精不求多（常见词根 + 初中常见成词）
     </div>
 
-    <!-- 词根区 -->
-    <section class="zone" aria-label="词根">
-      <h2 class="zone-title">词根 · 拨盘选择字母变形</h2>
-      <div class="wheel-wrap" id="variant-wheel-wrap">
-        <div class="wheel" role="listbox" aria-label="词根变形"></div>
-        <div class="wheel-center"></div>
+    <!-- 词根拨盘 + 单词拨盘：一排并列 -->
+    <section class="zone dials-row" aria-label="拨盘">
+      <div class="dial-col">
+        <h2 class="zone-title">词根 · 拨字母变形</h2>
+        <div class="wheel-wrap" id="variant-wheel-wrap">
+          <div class="wheel" role="listbox" aria-label="词根变形"></div>
+          <div class="wheel-center"></div>
+        </div>
+        <div class="mean-cols" id="mean-cols"></div>
       </div>
-      <div class="mean-cols" id="mean-cols"></div>
+      <div class="dial-col">
+        <h2 class="zone-title">单词 · 拨组合词</h2>
+        <div class="combo-zh" id="combo-zh"></div>
+        <div class="wheel-wrap" id="word-wheel-wrap">
+          <div class="wheel" role="listbox" aria-label="单词"></div>
+          <div class="wheel-center"></div>
+        </div>
+        <div class="word-meta" id="word-meta"></div>
+      </div>
     </section>
 
-    <!-- 单词区 -->
-    <section class="zone" aria-label="单词">
-      <h2 class="zone-title">单词 · 拨盘浏览组合词</h2>
-      <div class="combo-zh" id="combo-zh"></div>
-      <div class="wheel-wrap" id="word-wheel-wrap">
-        <div class="wheel" role="listbox" aria-label="单词"></div>
-        <div class="wheel-center"></div>
-      </div>
-      <div class="word-meta" id="word-meta"></div>
+    <!-- 词义对齐 -->
+    <section class="zone" aria-label="词义对齐">
+      <h2 class="zone-title">词义对齐 · 词根意思 ↔ 单词意思</h2>
       <div class="mapping" id="mapping"></div>
     </section>
 
-    <!-- 朗读区 -->
+    <!-- 朗读 -->
     <section class="zone" aria-label="朗读">
       <h2 class="zone-title">朗读 · 真人发音</h2>
       <div class="tts-row">
@@ -71,71 +79,74 @@
         <button class="tts-btn" id="tts-gb">🔊 英音</button>
         <span class="tts-rate">语速 <b id="tts-rate">0.9x</b></span>
       </div>
-      <p class="tts-note" id="tts-note">默认美音 · 语速可在下方设置中调整</p>
+      <p class="tts-note" id="tts-note">默认美音 · 语速可在右侧设置中调整</p>
     </section>
   </main>
 
-  <!-- 设置（默认收起） -->
-  <section class="coll" id="coll-settings">
-    <button class="coll-head" id="coll-settings-head" aria-expanded="false" aria-controls="coll-settings-body">
-      <span class="coll-title">设置</span>
-      <span class="coll-sub" id="coll-settings-sub"></span>
-      <span class="chev" aria-hidden="true">▾</span>
+  <!-- 右：设置（桌面贴边窄条悬停滑出 / 手机底部栏点开展开） -->
+  <aside class="drawer drawer-right" id="drawer-right" aria-label="设置">
+    <button class="edge-tab" id="tab-right" aria-expanded="false" aria-controls="panel-right">
+      <span class="edge-tab-text">设置</span>
+      <span class="edge-tab-cur" id="tab-right-cur"></span>
     </button>
-    <div class="coll-body" id="coll-settings-body">
-      <div class="coll-inner">
-        <div class="set-group">
-          <h3>背景亮度</h3>
-          <div class="seg">
-            <button data-set="theme" data-val="light">明亮</button>
-            <button data-set="theme" data-val="soft">护眼</button>
-            <button data-set="theme" data-val="dark">暗夜</button>
-          </div>
-        </div>
-        <div class="set-group">
-          <h3>字体</h3>
-          <div class="seg">
-            <button data-set="font" data-val="sys">默认</button>
-            <button data-set="font" data-val="serif">衬线</button>
-            <button data-set="font" data-val="round">圆润</button>
-          </div>
-        </div>
-        <div class="set-group">
-          <h3>字号</h3>
-          <div class="seg">
-            <button data-set="size" data-val="normal">标准</button>
-            <button data-set="size" data-val="large">大</button>
-          </div>
-        </div>
-        <div class="set-group">
-          <h3>语音模式</h3>
-          <div class="seg">
-            <button data-set="voice" data-val="us">美音</button>
-            <button data-set="voice" data-val="gb">英音</button>
-          </div>
-          <div class="set-row">
-            <span>语速</span>
-            <input type="range" id="set-rate" min="0.5" max="1.5" step="0.1" value="0.9">
-            <span class="set-val" id="set-rate-val">0.9x</span>
-          </div>
-          <div class="set-row">
-            <span>切换单词自动朗读</span>
-            <label class="switch" style="margin-left:auto;">
-              <input type="checkbox" id="set-auto">
-              <span class="sl"></span>
-            </label>
-          </div>
-        </div>
-        <div class="set-group">
-          <h3>关于</h3>
-          <p style="font-size:0.85rem;color:var(--ink-soft);margin:0;">
-            设置保存在本机浏览器中。<br>
-            发音为本地真人声音频（美音/英音），离线可用。
-          </p>
+    <div class="drawer-panel" id="panel-right">
+      <div class="drawer-scroll">
+      <div class="drawer-head">
+        <h2>设置</h2>
+        <span class="drawer-sub" id="drawer-settings-sub"></span>
+      </div>
+      <div class="set-group">
+        <h3>背景亮度</h3>
+        <div class="seg">
+          <button data-set="theme" data-val="light">明亮</button>
+          <button data-set="theme" data-val="soft">护眼</button>
+          <button data-set="theme" data-val="dark">暗夜</button>
         </div>
       </div>
+      <div class="set-group">
+        <h3>字体</h3>
+        <div class="seg">
+          <button data-set="font" data-val="sys">默认</button>
+          <button data-set="font" data-val="serif">衬线</button>
+          <button data-set="font" data-val="round">圆润</button>
+        </div>
+      </div>
+      <div class="set-group">
+        <h3>字号</h3>
+        <div class="seg">
+          <button data-set="size" data-val="normal">标准</button>
+          <button data-set="size" data-val="large">大</button>
+        </div>
+      </div>
+      <div class="set-group">
+        <h3>语音模式</h3>
+        <div class="seg">
+          <button data-set="voice" data-val="us">美音</button>
+          <button data-set="voice" data-val="gb">英音</button>
+        </div>
+        <div class="set-row">
+          <span>语速</span>
+          <input type="range" id="set-rate" min="0.5" max="1.5" step="0.1" value="0.9">
+          <span class="set-val" id="set-rate-val">0.9x</span>
+        </div>
+        <div class="set-row">
+          <span>切换单词自动朗读</span>
+          <label class="switch" style="margin-left:auto;">
+            <input type="checkbox" id="set-auto">
+            <span class="sl"></span>
+          </label>
+        </div>
+      </div>
+      <div class="set-group">
+        <h3>关于</h3>
+        <p style="font-size:0.85rem;color:var(--ink-soft);margin:0;">
+          设置保存在本机浏览器中。<br>
+          发音为本地真人声音频（美音/英音），离线可用。
+        </p>
+      </div>
+      </div>
     </div>
-  </section>
+  </aside>
 </div>
 
 <div class="toast" id="toast" role="status"></div>

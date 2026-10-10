@@ -55,43 +55,104 @@
     updateSettingsSub();
   }
 
-  /* ---------------- 折叠面板 ----------------
-   * 词根选择 / 设置默认收起，点击头部丝滑展开；
+  /* ---------------- 抽屉 ----------------
+   * 桌面：贴边窄条，鼠标靠近（悬停）滑出，离开收起；
+   * 手机：收成上下栏，点击展开/收起。
    * 开合状态持久化到本地。
    */
-  var COLL_KEY = "ltb-en-coll";
-  function loadColl() {
-    try { return Object.assign({ roots: false, settings: false },
-      JSON.parse(localStorage.getItem(COLL_KEY) || "{}")); }
-    catch (e) { return { roots: false, settings: false }; }
+  var DRAWER_KEY = "ltb-en-drawer";
+  function loadDrawer() {
+    try { return Object.assign({ left: false, right: false },
+      JSON.parse(localStorage.getItem(DRAWER_KEY) || "{}")); }
+    catch (e) { return { left: false, right: false }; }
   }
-  function saveColl(c) {
-    try { localStorage.setItem(COLL_KEY, JSON.stringify(c)); } catch (e) {}
+  function saveDrawer(d) {
+    try { localStorage.setItem(DRAWER_KEY, JSON.stringify(d)); } catch (e) {}
   }
-  var collState = loadColl();
-  function setColl(name, open) {
-    collState[name] = open;
-    saveColl(collState);
-    var sec = document.getElementById(name === "roots" ? "coll-roots" : "coll-settings");
-    var head = document.getElementById(name === "roots" ? "coll-roots-head" : "coll-settings-head");
+  var drawerState = loadDrawer();
+  var hoverTimer = null;
+  function setDrawer(name, open) {
+    drawerState[name] = open;
+    saveDrawer(drawerState);
+    var sec = document.getElementById(name === "left" ? "drawer-left" : "drawer-right");
+    var tab = document.getElementById(name === "left" ? "tab-left" : "tab-right");
     if (sec) sec.classList.toggle("open", open);
-    if (head) head.setAttribute("aria-expanded", open ? "true" : "false");
+    if (tab) tab.setAttribute("aria-expanded", open ? "true" : "false");
   }
+  function bindDrawer(name) {
+    var sec = document.getElementById(name === "left" ? "drawer-left" : "drawer-right");
+    var tab = document.getElementById(name === "left" ? "tab-left" : "tab-right");
+    if (!sec || !tab) return;
+    // 靠近滑出：悬停意图延迟，避免鼠标路过时误触
+    sec.addEventListener("mouseenter", function () {
+      if (window.innerWidth < 1024) return;   // 手机走点击
+      clearTimeout(hoverTimer);
+      hoverTimer = setTimeout(function () { setDrawer(name, true); }, 120);
+    });
+    sec.addEventListener("mouseleave", function () {
+      if (window.innerWidth < 1024) return;
+      clearTimeout(hoverTimer);
+      hoverTimer = setTimeout(function () { setDrawer(name, false); }, 280);
+    });
+    // 点击切换：触屏 / 键盘可达
+    tab.addEventListener("click", function () { setDrawer(name, !drawerState[name]); });
+  }
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") { setDrawer("left", false); setDrawer("right", false); }
+  });
   function updateRootsSub() {
-    var sub = document.getElementById("coll-roots-sub");
-    if (!sub) return;
+    var mainForm = "";
     if (state.root) {
-      // 副标题只显示主形态（如 ven-），变形太多时不挤占空间
-      var mainForm = state.root.v && state.root.v[0] ? state.root.v[0] + "-" : state.root.d;
-      sub.innerHTML = "<b>" + esc(mainForm) + "</b> · " + esc(state.root.m[0]);
-    } else { sub.textContent = ""; }
+      mainForm = (state.root.v && state.root.v[0]) ? state.root.v[0] + "-" : state.root.d;
+    }
+    var sub = document.getElementById("drawer-roots-sub");
+    if (sub) {
+      sub.innerHTML = state.root
+        ? "<b>" + esc(mainForm) + "</b> · " + esc(state.root.m[0]) : "";
+    }
+    var cur = document.getElementById("tab-left-cur");
+    if (cur) cur.textContent = mainForm;
   }
   function updateSettingsSub() {
-    var sub = document.getElementById("coll-settings-sub");
-    if (!sub) return;
     var themeName = { light: "明亮", soft: "护眼", dark: "暗夜" }[settings.theme] || "";
     var voiceName = settings.voice === "gb" ? "英音" : "美音";
-    sub.textContent = themeName + " · " + voiceName + " · " + Number(settings.rate).toFixed(1) + "x";
+    var txt = themeName + " · " + voiceName + " · " + Number(settings.rate).toFixed(1) + "x";
+    var sub = document.getElementById("drawer-settings-sub");
+    if (sub) sub.textContent = txt;
+    var cur = document.getElementById("tab-right-cur");
+    if (cur) cur.textContent = voiceName;
+  }
+
+  /* 单词内词根词形高亮（视频风格：词根部分标红，一排内呈现）
+   * 先找最长字面匹配；无命中时允许首字母脱落的音变（如 spect→pect/expect），
+   * 但脱落后的词形至少保留 4 个字母，避免误伤短词根。 */
+  function morphHtml(word, variants) {
+    var w = String(word == null ? "" : word);
+    var lw = w.toLowerCase();
+    var best = "", bestLen = 0;
+    function consider(lv) {
+      if (lv && lw.indexOf(lv) !== -1 && lv.length > bestLen) { best = lv; bestLen = lv.length; }
+    }
+    (variants || []).forEach(function (v) {
+      var lv = String(v).toLowerCase();
+      consider(lv);
+      if (lv.length >= 5) consider(lv.slice(1));   // 音变兜底：spect→pect
+    });
+    if (!best) return esc(w);
+    var i = lw.indexOf(best);
+    return esc(w.slice(0, i)) + '<span class="morph">' + esc(w.slice(i, i + best.length)) +
+           "</span>" + esc(w.slice(i + best.length));
+  }
+  /* 电影感转场：快速连播时跳过，避免闪烁 */
+  var lastCine = 0;
+  function cineRestart(el) {
+    if (!el) return;
+    var now = Date.now();
+    if (now - lastCine < 250) return;
+    lastCine = now;
+    el.classList.remove("cine");
+    void el.offsetWidth;
+    el.classList.add("cine");
   }
 
   /* ---------------- Toast ---------------- */
@@ -312,8 +373,8 @@
     updateRootsSub();
     // 深链接写回：刷新/分享后回到当前词根（replaceState 不污染历史栈）
     try { history.replaceState(null, "", "#r=" + rt.r); } catch (e) {}
-    // 选完词根后收起选择面板，学习区回到视野（除非调用方要求保持展开）
-    if (!(opts && opts.keepOpen)) setColl("roots", false);
+    // 选完词根后收起抽屉，学习区回到视野（除非调用方要求保持展开）
+    if (!(opts && opts.keepOpen)) setDrawer("left", false);
   }
 
   /* ---------------- 单词区渲染 ---------------- */
@@ -337,10 +398,12 @@
       return;
     }
     var wd = currentWord();
-    // 单词上方：组合词中文大字
+    // 单词上方：组合词中文大字（电影感转场）
     comboZh.innerHTML = "<small>组合词中文</small>" + esc(wd[2]);
-    // 单词信息
-    wordMeta.innerHTML = "<b>" + esc(wd[0]) + "</b> · " + esc(wd[1]);
+    cineRestart(comboZh);
+    // 单词信息：英文一排内词根词形标红 + 词性中文
+    wordMeta.innerHTML = '<span class="w-en">' + morphHtml(wd[0], rt.v) + "</span> · " + esc(wd[1]);
+    cineRestart(wordMeta);
     // 对齐映射：单词中文 ↔ 词根意思行（mi 钳制防越界）
     var mi = Math.min(Math.max(0, wd[3] || 0), rt.m.length - 1);
     var html = '<div class="map-head">词根意思</div><div class="map-head">单词意思</div>';
@@ -371,15 +434,11 @@
 
   /* ---------------- 初始化 ---------------- */
   function init() {
-    // 折叠面板：绑定 + 恢复上次开合状态（默认都收起）
-    document.getElementById("coll-roots-head").addEventListener("click", function () {
-      setColl("roots", !collState.roots);
-    });
-    document.getElementById("coll-settings-head").addEventListener("click", function () {
-      setColl("settings", !collState.settings);
-    });
-    setColl("roots", !!collState.roots);
-    setColl("settings", !!collState.settings);
+    // 抽屉：绑定悬停/点击 + 恢复上次开合状态（默认都收起）
+    bindDrawer("left");
+    bindDrawer("right");
+    setDrawer("left", !!drawerState.left);
+    setDrawer("right", !!drawerState.right);
     // 拨盘
     variantWheel = new Wheel("variant-wheel-wrap", {
       itemH: wheelItemH(),
