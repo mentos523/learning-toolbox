@@ -8,8 +8,8 @@
  * status: ready=可学 / planned=筹备中。侧边栏据此渲染。
  * ============================================================ */
 window.MATH_CHAPTERS = [
-  { id: "ch00", title: "导论——从算术到代数",     file: "data/ch00.js", status: "planned" },
-  { id: "ch01", title: "一元一次方程",             file: "data/ch01.js", status: "planned" },
+  { id: "ch00", title: "导论——从算术到代数",     file: "data/ch00.js", status: "ready" },
+  { id: "ch01", title: "一元一次方程",             file: "data/ch01.js", status: "ready" },
   { id: "ch02", title: "整式与因式分解",           file: "data/ch02.js", status: "planned" },
   { id: "ch03", title: "分式",                     file: "data/ch03.js", status: "planned" },
   { id: "ch04", title: "一元二次方程",             file: "data/ch04.js", status: "planned" },

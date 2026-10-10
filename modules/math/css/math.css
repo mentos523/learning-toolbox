@@ -126,3 +126,65 @@ body[data-theme="dark"] #mathml-warn { background: #4a3a1a; color: #fde68a; }
 @media (min-width: 1024px) {
   .m-menu-btn { display: none; }
 }
+
+/* ============================================================
+ * 交互渲染器样式（蓝队：试点 4 页）
+ * ============================================================ */
+
+/* ---------- slider-lab ---------- */
+.ix-slider { padding: 8px 4px; }
+.ix-expr-line {
+  text-align: center; font-size: 1.5rem; margin-bottom: 14px;
+  font-family: Georgia, serif;
+}
+.ix-expr { color: var(--m-ink); }
+.ix-eq { color: var(--m-ink-soft); margin: 0 6px; }
+.ix-val { color: var(--m-accent-strong); font-weight: bold; min-width: 2em; display: inline-block; }
+.ix-unit { font-size: 0.85rem; color: var(--m-ink-soft); }
+.ix-slider-row {
+  position: relative; display: flex; align-items: center; gap: 12px;
+  padding: 0 8px;
+}
+.ix-slider-label { font-size: 1.1rem; font-weight: bold; white-space: nowrap; }
+.ix-slider-val { font-size: 1.1rem; color: var(--m-accent-strong); min-width: 2.5em; font-weight: bold; }
+.ix-range { flex: 1; accent-color: var(--m-accent); height: 32px; cursor: pointer; }
+.ix-target-tick {
+  position: absolute; top: -6px; width: 3px; height: 12px;
+  background: var(--m-accent-strong); border-radius: 2px;
+  transform: translateX(-50%); pointer-events: none;
+}
+.ix-status { text-align: center; min-height: 1.8em; margin-top: 8px; font-size: 1rem; }
+.ix-success { color: #15803d; font-weight: bold; animation: ix-pop 0.3s ease-out; }
+.ix-hint { color: var(--m-ink-soft); }
+.ix-slider.ix-hit .ix-val { animation: ix-pop 0.3s ease-out; }
+@keyframes ix-pop {
+  0% { transform: scale(0.9); } 60% { transform: scale(1.08); } 100% { transform: scale(1); }
+}
+
+/* ---------- balance-drag ---------- */
+.ix-balance { padding: 4px; }
+.ix-goal { text-align: center; font-weight: bold; font-size: 1.05rem; margin-bottom: 4px; }
+.ix-rule { text-align: center; font-size: 0.88rem; color: var(--m-ink-soft); margin-bottom: 6px; }
+.ix-svg { width: 100%; max-width: 440px; display: block; margin: 0 auto; user-select: none; -webkit-user-select: none; }
+.bl-base { fill: var(--m-ink-soft); opacity: 0.5; }
+.bl-post { fill: var(--m-ink-soft); opacity: 0.7; }
+.bl-beam-bar { fill: var(--m-accent); }
+.bl-pin { fill: var(--m-accent-strong); }
+.bl-string { stroke: var(--m-ink-soft); stroke-width: 2; }
+.bl-pan-plate { fill: none; stroke: var(--m-accent-strong); stroke-width: 3; }
+.bl-weight { fill: #f59e0b; stroke: #b45309; stroke-width: 1.5; }
+.bl-box { fill: #3b82f6; stroke: #1d4ed8; stroke-width: 1.5; }
+.bl-label { font-size: 15px; font-weight: bold; fill: #fff; pointer-events: none; font-family: Georgia, serif; }
+.bl-item { cursor: grab; }
+.ix-foot { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 4px; }
+.ix-reset {
+  border: 1px solid var(--m-line); background: var(--m-panel); color: var(--m-ink);
+  border-radius: 999px; padding: 5px 16px; font-size: 0.9rem; cursor: pointer;
+}
+.ix-reset:hover { background: var(--m-accent-soft); }
+
+/* ---------- 通用占位 ---------- */
+.ix-stub {
+  text-align: center; color: var(--m-ink-soft); padding: 30px 10px;
+  border: 2px dashed var(--m-line); border-radius: 12px; font-size: 0.95rem;
+}
