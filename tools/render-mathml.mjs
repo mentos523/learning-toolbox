@@ -44,6 +44,7 @@ const INTERACTION_TYPES = {
   "placeholder-morph": ["stages", "expr"],
   "side-compare": ["left", "right"],
   "slow-replay": ["frames", "duration", "draw"],
+  "shape-area": ["min", "max", "step"],
 };
 
 /* ============================================================

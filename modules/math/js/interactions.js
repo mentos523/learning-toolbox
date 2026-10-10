@@ -12,9 +12,23 @@
  *   side-compare      并排对比：左右两栏简化 slider-lab，支持滑块同步联动
  *   numeric-lab       数值实验台：点按钮/输数看趋势（accumulate 累加棋盘麦粒）
  *   subdivision       细分动画：档位切换，矩形逼近求和（右端点矩形和）
+ *   shape-area        图形面积：拖正方形边长，看面积 x² 实时变化（数形结合）
+ *
+ * 数学排版（蓝队 2026-10-10 修复）：交互内的表达式（expr/term/label/
+ * 轴标签）统一走 window.MathExpr.html() —— ASCII 子集 → MathML
+ * （MathML 可用时）/ HTML <sup>/<sub>（降级），解析失败回退转义
+ * 纯文本。禁止出现 x^2 裸文本。见 js/expr-mathml.js。
  * ============================================================ */
 (function () {
   "use strict";
+
+  /* 表达式 → 数学排版 HTML（MathML / 降级 sup-sub / 回退纯文本） */
+  function MX(s) {
+    try {
+      if (window.MathExpr) return window.MathExpr.html(s);
+    } catch (e) {}
+    return esc(s);
+  }
 
   /* ---------------- 共享：表达式求值（LaTeX 子集） ----------------
    * 支持：+ - * / ^()、三角函数 sin/cos/tan、对数 log2/log/ln（ln=log=自然对数）、
@@ -98,16 +112,16 @@
     var expr = params.expr || label;
 
     var wrap = el("div", "ix-slider");
-    // 表达式显示
+    // 表达式显示（数学排版：x^2 → x²，禁止裸文本）
     var exprLine = el("div", "ix-expr-line",
-      '<span class="ix-expr">' + esc(expr) + "</span>" +
+      '<span class="ix-expr">' + MX(expr) + "</span>" +
       '<span class="ix-eq"> = </span>' +
       '<span class="ix-val">0</span>' +
       (params.unit ? ' <span class="ix-unit">' + esc(params.unit) + "</span>" : ""));
     var valSpan = exprLine.querySelector(".ix-val");
     // 滑块行
     var row = el("div", "ix-slider-row");
-    var labSpan = el("span", "ix-slider-label", esc(label) + " = ");
+    var labSpan = el("span", "ix-slider-label", MX(label) + " = ");
     var valLab = el("span", "ix-slider-val", "");
     var input = document.createElement("input");
     input.type = "range";
@@ -364,7 +378,7 @@
         var total = sideWeight(right);
         var perX = lX.length === 1 ? total : null;
         status.innerHTML = '<span class="ix-success">🎉 天平平衡！' +
-          (perX !== null ? esc(lX[0].label || "x") + " = " + fmt(perX) : "左边共 " + lX.length + " 个 x = " + fmt(total)) +
+          (perX !== null ? MX(lX[0].label || "x") + " = " + fmt(perX) : "左边共 " + lX.length + " 个 x = " + fmt(total)) +
           "</span>";
         tickSound(); hapticTick();
         return true;
@@ -544,7 +558,7 @@
       rb.style.cssText = "display:flex;flex-wrap:wrap;gap:4px 24px;padding:4px 0;";
       readouts.forEach(function (v) {
         var line = el("div", "ix-expr-line",
-          '<span class="ix-expr">' + esc(v.label || v.expr || "") + "</span>" +
+          '<span class="ix-expr">' + MX(v.label || v.expr || "") + "</span>" +
           '<span class="ix-eq"> = </span><span class="ix-val">0</span>');
         rb.appendChild(line);
         readoutSpans.push(line.querySelector(".ix-val"));
@@ -604,13 +618,21 @@
           stroke: "var(--m-line)", "stroke-width": 1.5 }));
       }
       // 轴标签（可选 axisLabelX/axisLabelY；默认取首个 point 视图的表达式）
-      var xLab = svgEl("text", { x: W - mR - 2, y: H - 8, "text-anchor": "end",
-        fill: "var(--m-ink-soft)", "font-size": 13 });
-      xLab.textContent = pointViews[0].axisLabelX || pointViews[0].xExpr || "x";
-      svg.appendChild(xLab);
-      var yLab = svgEl("text", { x: 6, y: mT + 6, fill: "var(--m-ink-soft)", "font-size": 13 });
-      yLab.textContent = pointViews[0].axisLabelY || pointViews[0].yExpr || "y";
-      svg.appendChild(yLab);
+      // SVG <text> 只能放纯文本，表达式用 <foreignObject> 包裹 HTML 数学排版
+      // （与 HTML 上下文同一渲染器，保证 x^2 → x² 在 SVG 内同样生效）
+      function axisLabel(x, y, w, h, align, expr) {
+        var fo = svgEl("foreignObject", { x: x, y: y, width: w, height: h });
+        var div = document.createElementNS("http://www.w3.org/1999/xhtml", "div");
+        div.setAttribute("style", "font-size:13px;color:var(--m-ink-soft);" +
+          "text-align:" + align + ";line-height:1.5;white-space:nowrap;");
+        div.innerHTML = MX(expr);
+        fo.appendChild(div);
+        return fo;
+      }
+      svg.appendChild(axisLabel(W - mR - 176, H - 34, 172, 28, "right",
+        pointViews[0].axisLabelX || pointViews[0].xExpr || "x"));
+      svg.appendChild(axisLabel(2, 0, 176, 28, "left",
+        pointViews[0].axisLabelY || pointViews[0].yExpr || "y"));
       // 轨迹（淡）+ 当前点（亮）+ 坐标标注
       trails.forEach(function (pts) {
         svg.appendChild(svgEl("polyline", {
@@ -984,7 +1006,7 @@
     var status = el("div", "ix-status", "");
 
     var progSpan = el("span", "ix-val", "0");
-    var lineProg = textRow("通项 ", el("span", "ix-expr", esc(term || "—")),
+    var lineProg = textRow("通项 ", el("span", "ix-expr", MX(term || "—")),
       " · 已放 ", progSpan, " / " + maxSteps + " " + stepWord);
 
     var nCurSpan = el("span", "ix-val", "—");
@@ -1282,6 +1304,209 @@
     draw(clean[0]);
   }
 
+  /* ============================================================
+   * 8. shape-area 图形面积
+   * params: {min, max, step, label?, initial?, unit?, showGrid?}
+   *
+   * 可拖动的正方形：边长 x 变化时面积 x² 实时显示，
+   * 演示"平方就是正方形面积"的数形结合。整数边长（1–10）
+   * 时叠加单位网格，可数格子验证面积。
+   * 右下角手柄拖拽 + 下方滑块双向同步；零依赖 SVG，一屏内。
+   * ============================================================ */
+  function renderShapeArea(container, params) {
+    var NS = "http://www.w3.org/2000/svg";
+    function svgEl(tag, attrs) {
+      var e = document.createElementNS(NS, tag);
+      for (var k in attrs) e.setAttribute(k, attrs[k]);
+      return e;
+    }
+
+    var min = Number(params.min), max = Number(params.max);
+    var step = Number(params.step) || 1;
+    if (!(min < max) || !(step > 0) || !(min >= 0)) {
+      container.appendChild(el("div", "ix-stub",
+        "参数错误：shape-area 需要 0 ≤ min < max 且 step > 0"));
+      return;
+    }
+    var vName = params.label || "x";
+    var showGrid = params.showGrid !== false;
+    var unit = params.unit || "";
+    function snap(v) {
+      v = Math.min(max, Math.max(min, v));
+      var s = Math.round((v - min) / step) * step + min;
+      return Math.round(s * 1e9) / 1e9;  // 去浮点噪声
+    }
+    var init = params.initial !== undefined && params.initial !== null &&
+      isFinite(Number(params.initial)) ? snap(Number(params.initial)) : min;
+
+    var wrap = el("div", "ix-shape");
+
+    // —— 读数行（DOM 拼接，避免 "面积 = x^2" 混排被整体回退） ——
+    function htmlSpan(h) {
+      var s = el("span", "", "");
+      s.innerHTML = h;
+      return s;
+    }
+    var line1 = el("div", "ix-expr-line");
+    line1.appendChild(document.createTextNode("边长 "));
+    line1.appendChild(htmlSpan(MX(vName)));
+    line1.appendChild(document.createTextNode(" = "));
+    var sideVal = el("span", "ix-val", "");
+    line1.appendChild(sideVal);
+    if (unit) line1.appendChild(document.createTextNode(" " + unit));
+    var line2 = el("div", "ix-expr-line");
+    line2.appendChild(document.createTextNode("面积 = "));
+    line2.appendChild(htmlSpan(MX(vName + "^2")));
+    line2.appendChild(document.createTextNode(" = "));
+    var areaVal = el("span", "ix-val", "");
+    line2.appendChild(areaVal);
+    if (unit) line2.appendChild(document.createTextNode(" " + unit + "²"));
+    wrap.appendChild(line1);
+    wrap.appendChild(line2);
+
+    // —— SVG ——
+    var W = 420, H = 300;
+    var SX = 70, SY = 20;          // 正方形左上锚点
+    var L_MIN = 36, L_MAX = 216;   // 边长 px 范围
+    function Lof(x) { return L_MIN + (x - min) / (max - min) * (L_MAX - L_MIN); }
+    function XofL(L) { return snap(min + (L - L_MIN) / (L_MAX - L_MIN) * (max - min)); }
+
+    var svg = svgEl("svg", { viewBox: "0 0 " + W + " " + H, "class": "ix-svg" });
+    svg.style.maxWidth = "100%";
+    var rect = svgEl("rect", { x: SX, y: SY, "class": "sa-square" });
+    svg.appendChild(rect);
+    var gridG = svgEl("g", { "class": "sa-grid" });
+    svg.appendChild(gridG);
+    // 底边尺寸标注线
+    var dimY = 0;
+    var dimLine = svgEl("line", { "class": "sa-dim" });
+    var dimT1 = svgEl("line", { "class": "sa-dim" });
+    var dimT2 = svgEl("line", { "class": "sa-dim" });
+    svg.appendChild(dimLine); svg.appendChild(dimT1); svg.appendChild(dimT2);
+    var dimFo = svgEl("foreignObject", { width: 200, height: 30 });
+    var dimDiv = document.createElementNS("http://www.w3.org/1999/xhtml", "div");
+    dimDiv.setAttribute("style", "font-size:14px;text-align:center;color:var(--m-ink);" +
+      "line-height:1.4;white-space:nowrap;");
+    dimFo.appendChild(dimDiv);
+    svg.appendChild(dimFo);
+    // 拖拽手柄（右下角）
+    var handle = svgEl("circle", { r: 11, "class": "sa-handle" });
+    handle.style.cursor = "nwse-resize";
+    handle.style.touchAction = "none";
+    svg.appendChild(handle);
+    var handleHint = svgEl("text", {
+      x: 0, y: 0, "text-anchor": "middle", "class": "sa-handle-hint"
+    });
+    handleHint.textContent = "⇲";
+    svg.appendChild(handleHint);
+    wrap.appendChild(svg);
+
+    // —— 滑块（与拖拽双向同步） ——
+    var row = el("div", "ix-slider-row");
+    var labSpan = el("span", "ix-slider-label", "");
+    labSpan.innerHTML = MX(vName) + " = ";
+    var valLab = el("span", "ix-slider-val", "");
+    var input = document.createElement("input");
+    input.type = "range";
+    input.min = min; input.max = max; input.step = step;
+    input.className = "ix-range";
+    input.setAttribute("aria-label", "边长 " + vName);
+    row.appendChild(labSpan); row.appendChild(input); row.appendChild(valLab);
+    wrap.appendChild(row);
+
+    var status = el("div", "ix-status", "");
+    wrap.appendChild(status);
+    container.appendChild(wrap);
+
+    function svgPoint(evt) {
+      var pt = svg.createSVGPoint();
+      pt.x = evt.clientX; pt.y = evt.clientY;
+      return pt.matrixTransform(svg.getScreenCTM().inverse());
+    }
+
+    var cur = init;
+    function draw() {
+      var L = Lof(cur);
+      rect.setAttribute("width", L.toFixed(1));
+      rect.setAttribute("height", L.toFixed(1));
+      // 网格：整数边长 1–10 时画单位格
+      while (gridG.firstChild) gridG.removeChild(gridG.firstChild);
+      var xi = Math.round(cur);
+      if (showGrid && Math.abs(cur - xi) < 1e-9 && xi >= 1 && xi <= 10) {
+        var u = L / xi;
+        for (var i = 1; i < xi; i++) {
+          gridG.appendChild(svgEl("line", {
+            x1: (SX + i * u).toFixed(1), y1: SY,
+            x2: (SX + i * u).toFixed(1), y2: (SY + L).toFixed(1),
+            "class": "sa-grid-line"
+          }));
+          gridG.appendChild(svgEl("line", {
+            x1: SX, y1: (SY + i * u).toFixed(1),
+            x2: (SX + L).toFixed(1), y2: (SY + i * u).toFixed(1),
+            "class": "sa-grid-line"
+          }));
+        }
+      }
+      // 尺寸标注
+      dimY = SY + L + 16;
+      dimLine.setAttribute("x1", SX); dimLine.setAttribute("y1", dimY);
+      dimLine.setAttribute("x2", SX + L); dimLine.setAttribute("y2", dimY);
+      dimT1.setAttribute("x1", SX); dimT1.setAttribute("y1", dimY - 5);
+      dimT1.setAttribute("x2", SX); dimT1.setAttribute("y2", dimY + 5);
+      dimT2.setAttribute("x1", SX + L); dimT2.setAttribute("y1", dimY - 5);
+      dimT2.setAttribute("x2", SX + L); dimT2.setAttribute("y2", dimY + 5);
+      dimFo.setAttribute("x", SX + L / 2 - 100);
+      dimFo.setAttribute("y", dimY + 4);
+      dimDiv.innerHTML = MX(vName) + " = " + fmt(cur);
+      // 手柄
+      handle.setAttribute("cx", SX + L);
+      handle.setAttribute("cy", SY + L);
+      handleHint.setAttribute("x", SX + L);
+      handleHint.setAttribute("y", SY + L + 5);
+      // 读数
+      sideVal.textContent = fmt(cur);
+      valLab.textContent = fmt(cur);
+      areaVal.textContent = fmt(Math.round(cur * cur * 1e9) / 1e9);
+      // 状态文案
+      if (showGrid && Math.abs(cur - Math.round(cur)) < 1e-9 &&
+          Math.round(cur) >= 1 && Math.round(cur) <= 10) {
+        status.innerHTML = '<span class="ix-hint">数一数：正方形里有 ' +
+          fmt(cur * cur) + " 个 1×1 小格——面积就是 " + fmt(cur) + "²</span>";
+      } else {
+        status.innerHTML = '<span class="ix-hint">拖右下角 ⇲ 或拉滑块，' +
+          "看边长与面积一起变</span>";
+      }
+    }
+
+    function setX(v, fromSlider) {
+      cur = snap(v);
+      if (!fromSlider) input.value = cur;
+      draw();
+    }
+    input.addEventListener("input", function () { setX(Number(input.value), true); });
+
+    // 手柄拖拽（对角线方向取 max，自然）
+    var dragging = false;
+    handle.addEventListener("pointerdown", function (evt) {
+      evt.preventDefault();
+      dragging = true;
+      try { handle.setPointerCapture(evt.pointerId); } catch (e) {}
+    });
+    handle.addEventListener("pointermove", function (evt) {
+      if (!dragging) return;
+      var p = svgPoint(evt);
+      var L = Math.max(p.x - SX, p.y - SY);
+      L = Math.min(L_MAX, Math.max(L_MIN, L));
+      setX(XofL(L), false);
+    });
+    function endDrag() { dragging = false; }
+    handle.addEventListener("pointerup", endDrag);
+    handle.addEventListener("pointercancel", endDrag);
+
+    input.value = init;
+    draw();
+  }
+
   /* ---------------- 渲染器内嵌查表 ----------------
    * 与 window.MATH_INTERACTIONS 同源：注册时同步记一份本地表。
    * side-compare 内嵌时按 kind 查表调用已注册渲染器（不复制渲染器代码）。*/
@@ -1299,4 +1524,5 @@
   ixRegister("side-compare", renderSideCompare);
   ixRegister("numeric-lab", renderNumericLab);
   ixRegister("subdivision", renderSubdivision);
+  ixRegister("shape-area", renderShapeArea);
 })();

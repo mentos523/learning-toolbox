@@ -210,3 +210,35 @@ body[data-theme="dark"] #mathml-warn { background: #4a3a1a; color: #fde68a; }
   text-align: center; color: var(--m-ink-soft); padding: 30px 10px;
   border: 2px dashed var(--m-line); border-radius: 12px; font-size: 0.95rem;
 }
+
+/* ============================================================
+ * 交互内数学排版（蓝队 2026-10-10 修复）
+ * MathML 可用时由 js/expr-mathml.js 输出原生 <math>；
+ * 以下为 MathML 不可用时的 HTML 降级排版（<sup>/<sub>/分式）。
+ * ============================================================ */
+.ix-expr math, .ix-slider-label math { font-size: 1em; }
+.mx { white-space: nowrap; }
+.mx-mi { font-style: italic; }
+.mx-mo { margin: 0 0.12em; }
+.mx-frac {
+  display: inline-flex; flex-direction: column; vertical-align: middle;
+  text-align: center; margin: 0 0.15em; font-size: 0.92em;
+}
+.mx-frac > .mx-n { border-bottom: 1.5px solid currentColor; padding: 0 0.35em; }
+.mx-frac > .mx-d { padding: 0 0.35em; }
+
+/* ---------- shape-area ---------- */
+.ix-shape { padding: 4px; }
+.ix-shape .ix-expr-line { margin-bottom: 6px; }
+.sa-square {
+  fill: var(--m-accent); fill-opacity: 0.28;
+  stroke: var(--m-accent-strong); stroke-width: 2.5;
+}
+.sa-grid-line { stroke: var(--m-accent-strong); stroke-width: 1; opacity: 0.55; }
+.sa-dim { stroke: var(--m-ink-soft); stroke-width: 1.5; }
+.sa-handle {
+  fill: var(--m-accent-strong); stroke: #fff; stroke-width: 2.5;
+}
+.sa-handle-hint {
+  font-size: 13px; fill: #fff; pointer-events: none; font-weight: bold;
+}
