@@ -15,7 +15,7 @@ window.MATH_CHAPTERS = [
   { id: "ch04", title: "一元二次方程",             file: "data/ch04.js", status: "ready" },
   { id: "ch05", title: "不等式",                   file: "data/ch05.js", status: "ready" },
   { id: "ch06", title: "函数与一次函数",           file: "data/ch06.js", status: "ready" },
-  { id: "ch07", title: "二次函数与反比例函数",     file: "data/ch07.js", status: "planned" },
+  { id: "ch07", title: "二次函数与反比例函数",     file: "data/ch07.js", status: "ready" },
   { id: "ch08", title: "指数与对数",               file: "data/ch08.js", status: "planned" },
   { id: "ch09", title: "数列",                     file: "data/ch09.js", status: "planned" },
   { id: "ch10", title: "极限与连续",               file: "data/ch10.js", status: "planned" },

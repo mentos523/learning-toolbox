@@ -149,10 +149,9 @@ body[data-theme="dark"] #mathml-warn { background: #4a3a1a; color: #fde68a; }
 .ix-slider-label { font-size: 1.1rem; font-weight: bold; white-space: nowrap; }
 .ix-slider-val { font-size: 1.1rem; color: var(--m-accent-strong); min-width: 2.5em; font-weight: bold; }
 .ix-range { flex: 1; accent-color: var(--m-accent); height: 32px; cursor: pointer; }
-.ix-target-tick {
-  position: absolute; top: -6px; width: 3px; height: 12px;
-  background: var(--m-accent-strong); border-radius: 2px;
-  transform: translateX(-50%); pointer-events: none;
+.ix-target-flag {
+  text-align: center; font-size: 0.95rem; font-weight: bold;
+  color: var(--m-accent-strong); margin-top: 6px;
 }
 .ix-status { text-align: center; min-height: 1.8em; margin-top: 8px; font-size: 1rem; }
 .ix-success { color: #15803d; font-weight: bold; animation: ix-pop 0.3s ease-out; }

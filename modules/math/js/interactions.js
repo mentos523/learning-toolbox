@@ -139,14 +139,13 @@
     var wrap = core.wrap;
     var hasTarget = params.target !== undefined && params.target !== null;
     var target = Number(params.target);
-    // 目标标记
+    // 目标标记："结果目标"单独标注。target 是结果值 r 的目标，不能按输入滑块轴定位
+    // （此前用 (target-min)/(max-min) 定位到轨道上，r 与 v 量程不同时 tick 会飞出轨道被裁剪）。
     if (hasTarget) {
-      var min = Number(params.min), max = Number(params.max);
-      var pct = ((target - min) / (max - min)) * 100;
-      var tick = el("div", "ix-target-tick");
-      tick.style.left = pct + "%";
-      tick.title = params.targetLabel || ("目标 " + target);
-      core.row.appendChild(tick);
+      var flag = el("div", "ix-target-flag",
+        "🎯 " + esc(params.targetLabel || ("目标 " + target)));
+      flag.title = "把结果拖到这个值";
+      wrap.appendChild(flag);
     }
     // 状态行
     var status = el("div", "ix-status", "");
@@ -772,14 +771,28 @@
     function setLit(k) {
       input.value = k;
       valLab.textContent = k + " / " + n;
-      var pts = [];
+      // 按间断点分段：非有限点处断开 polyline，避免跨间断连笔（如双曲线过原点）
+      var segs = [[]];
       for (var j = 0; j < n; j++) {
         var lit = j < k;
         litDots[j].setAttribute("visibility", lit ? "visible" : "hidden");
         ghostDots[j].setAttribute("visibility", lit ? "hidden" : "visible");
-        if (lit && isFinite(ys[j])) pts.push(X(xs[j]).toFixed(1) + "," + Y(ys[j]).toFixed(1));
+        if (lit && isFinite(ys[j])) {
+          segs[segs.length - 1].push(X(xs[j]).toFixed(1) + "," + Y(ys[j]).toFixed(1));
+        } else if (segs[segs.length - 1].length > 0) {
+          segs.push([]);
+        }
       }
-      line.setAttribute("points", pts.join(" "));
+      // 清除旧线段，重绘
+      var oldLines = svg.querySelectorAll(".pp-seg");
+      for (var q = 0; q < oldLines.length; q++) oldLines[q].remove();
+      segs.forEach(function (sg) {
+        if (sg.length < 2) return;
+        var sl = svgEl("polyline", { points: sg.join(" "), fill: "none",
+          stroke: "var(--m-accent-strong)", "stroke-width": 2.5, "class": "pp-seg" });
+        svg.insertBefore(sl, coordLab);
+      });
+      line.setAttribute("points", "");
       // 最新点坐标标注
       if (k > 0 && isFinite(ys[k - 1])) {
         coordLab.setAttribute("visibility", "visible");
