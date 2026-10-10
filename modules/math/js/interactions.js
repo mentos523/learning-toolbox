@@ -943,6 +943,20 @@
     var buttonLabel = params.buttonLabel || "加一步";
     var showTrend = params.showTrend !== false;
     var stepWord = mode === "accumulate" ? "格" : "项";
+    // 精度参数：小数位数，缺省 3（与全局 fmt 一致）；如极限实验需要
+    // 更多小数位（"永远差一点"教学点），课程数据可传 precision: 6
+    var precision = parseInt(params.precision, 10);
+    if (!isFinite(precision) || precision < 0) precision = 3;
+    function fmtP(n) {
+      if (!isFinite(n)) return "—";
+      var m = Math.pow(10, precision);
+      return String(Math.round(n * m) / m);
+    }
+    function fmtIntP(n) {
+      if (!isFinite(n)) return "—";
+      if (Math.abs(n - Math.round(n)) > 1e-9) return fmtP(n);
+      return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
 
     var n = 0, sum = 0, terms = [];
 
@@ -1011,7 +1025,7 @@
         var endWord = mode === "accumulate" ? "格放完了" :
                       (mode === "iterate" ? "项算完了" : "次试完了");
         status.innerHTML = '<span class="ix-success">🎉 ' + maxSteps + " " + endWord +
-          (mode === "accumulate" ? "，累计 " + fmtInt(sum) + " 粒" : "") + "</span>";
+          (mode === "accumulate" ? "，累计 " + fmtIntP(sum) + " 粒" : "") + "</span>";
         return;
       }
       if (showTrend && mode !== "input") {
@@ -1021,9 +1035,9 @@
             var sr = stableRatio();
             status.innerHTML = sr
               ? '<span class="ix-success">每一' + stepWord + "都是上一" + stepWord +
-                "的 " + fmt(sr) + " 倍</span>"
+                "的 " + fmtP(sr) + " 倍</span>"
               : '<span class="ix-hint">第 ' + n + stepWord + "是上一" + stepWord +
-                "的 " + fmt(r) + " 倍，继续点看规律</span>";
+                "的 " + fmtP(r) + " 倍，继续点看规律</span>";
           }
         } else if (n === 1) {
           status.innerHTML = '<span class="ix-hint">继续点，看' +
@@ -1046,7 +1060,7 @@
         var tk = term ? evalExpr(term, "n", k) : k;
         terms.push(tk);
         nCurSpan.textContent = String(k);
-        curSpan.textContent = fmtInt(tk);
+        curSpan.textContent = fmtIntP(tk);
         tickSound(); hapticTick();
         refresh();
         return;
@@ -1061,8 +1075,8 @@
       if (mode === "accumulate") sum += t;
       terms.push(t);
       nCurSpan.textContent = String(n);
-      curSpan.textContent = fmtInt(t);
-      if (mode === "accumulate") sumSpan.textContent = fmtInt(sum);
+      curSpan.textContent = fmtIntP(t);
+      if (mode === "accumulate") sumSpan.textContent = fmtIntP(sum);
       tickSound(); hapticTick();
       refresh();
     }
