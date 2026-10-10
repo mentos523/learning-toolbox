@@ -567,6 +567,92 @@ window.MATH_CH["ch07"] = {
               },
               title: "最值应用：建模三步",
               prev: "ch07-u1-l4-p1",
+              next: "ch07-u1-l4-p2"
+            }            ,
+            {
+              id: "ch07-u1-l4-p2",
+              title: "扔铅球：能飞多远？",
+              concept: "抛物线应用",
+              formulas: [
+                { id: "f1", latex: "y = 10t - 4.9t^2", translation: "铅球高度 y 等于 10t 减 4.9 倍 t 平方（初速 10，角度 90 度简化）" },
+                { id: "f2", latex: "10t - 4.9t^2 = 0", translation: "落地时高度为 0，解得 t 约 2.04 秒" }
+              ],
+              interaction: {
+                type: "slow-replay",
+                params: {
+                  frames: 60,
+                  duration: 3000,
+                  draw: {
+                    kind: "projectile",
+                    params: { v0: 14, angle: 45, g: 9.8 }
+                  },
+                  scrubber: true
+                }
+              },
+              auxInteraction: null,
+              hints: [
+                "铅球出手后划出一道弧线，落地时高度 y = 0。",
+                "落地点就是方程的解：抛物线与 x 轴的交点。"
+              ],
+              examples: [ { text: "看动画：铅球飞出去，落在哪里？", figure: "抛物线" } ],
+              prev: "ch07-u1-l4-p1b",
+              next: "ch07-u1-l4-p3"
+            },
+            {
+              id: "ch07-u1-l4-p3",
+              title: "最高点：顶点就是最值",
+              concept: "顶点与最值",
+              formulas: [
+                { id: "f1", latex: "y = -4.9t^2 + 10t", translation: "高度关于时间的二次函数，开口向下" },
+                { id: "f2", latex: "t = 1.02", translation: "顶点横坐标约 1.02 秒时达到最高" }
+              ],
+              interaction: {
+                type: "slow-replay",
+                params: {
+                  frames: 60,
+                  duration: 3000,
+                  draw: {
+                    kind: "projectile",
+                    params: { v0: 14, angle: 45, g: 9.8 }
+                  },
+                  scrubber: true
+                }
+              },
+              auxInteraction: null,
+              hints: [
+                "抛物线升到最高再下落，最高点就是顶点。",
+                "顶点横坐标对应最值：这是二次函数最重要的应用。"
+              ],
+              examples: [ { text: "定格在最高点：此时速度方向水平", figure: "顶点" } ],
+              prev: "ch07-u1-l4-p2",
+              next: "ch07-u1-l4-p4"
+            },
+            {
+              id: "ch07-u1-l4-p4",
+              title: "喷泉：45° 射得最远？",
+              concept: "角度探究",
+              formulas: [
+                { id: "f1", latex: "R = \frac{v_0^2 \sin 2\theta}{g}", translation: "射程 R 等于初速平方乘 sin2θ 除以 g" }
+              ],
+              interaction: {
+                type: "slow-replay",
+                params: {
+                  frames: 60,
+                  duration: 3000,
+                  draw: {
+                    kind: "projectile",
+                    params: { v0: 14, angle: 30, g: 9.8 }
+                  },
+                  scrubber: true
+                }
+              },
+              auxInteraction: null,
+              hints: [
+                "同样初速，30°、45°、60° 哪个射得远？",
+                "sin2θ 在 θ=45° 时最大，所以 45° 最远——这是有数学证明的。"
+              ],
+              examples: [ { text: "对比：30° 低平远射 vs 60° 高吊", figure: "角度对比" } ],
+              prev: "ch07-u1-l4-p3",
               next: "ch07-u2-l1-p1"
             }
           ]
