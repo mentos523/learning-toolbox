@@ -330,6 +330,8 @@ body {
   overflow-y: auto;
   scroll-snap-type: y mandatory;
   scrollbar-width: none;
+  /* 触控：只允许纵向滚动，防止整页跟着跑 */
+  touch-action: pan-y;
   -webkit-mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
   mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
   border-radius: 12px;
@@ -484,7 +486,7 @@ body {
     box-shadow: var(--shadow);
     z-index: 60;
   }
-  .drawer-panel > .drawer-scroll { overflow: hidden; min-height: 0; display: flex; flex-direction: column; }
+  .drawer-panel > .drawer-scroll { overflow-y: auto; min-height: 0; display: flex; flex-direction: column; }
   .drawer-left .drawer-panel { top: 52px; bottom: auto; border-bottom: 1px solid var(--line); transform: none; }
   .drawer-right .drawer-panel { bottom: 52px; top: auto; border-top: 1px solid var(--line); transform: none; }
   .drawer.open .drawer-panel { grid-template-rows: 1fr; opacity: 1; transform: none; }

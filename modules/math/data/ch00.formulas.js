@@ -2,5 +2,12 @@
 // 源：modules/math/data/ch00.js
 window.MATH_MML = window.MATH_MML || {};
 window.MATH_MML["ch00-u1-l1-p1#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mi>x</mi><mo>+</mo><mn>5</mn><mo>=</mo><mn>12</mn></mrow></math>";
+window.MATH_MML["ch00-u1-l1-p1b#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mi>x</mi><mo>+</mo><mn>5</mn><mo>=</mo><mn>12</mn></mrow></math>";
+window.MATH_MML["ch00-u1-l1-p1b#f2"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mi>x</mi><mo>=</mo><mn>12</mn><mo>−</mo><mn>5</mn></mrow></math>";
+window.MATH_MML["ch00-u1-l1-p1b#f3"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mi>x</mi><mo>=</mo><mn>7</mn></mrow></math>";
 window.MATH_MML["ch00-u1-l1-p2#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mi>x</mi><mo>+</mo><mn>3</mn><mo>=</mo><mn>8</mn></mrow></math>";
 window.MATH_MML["ch00-u1-l1-p2#f2"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mi>x</mi><mo>=</mo><mn>5</mn></mrow></math>";
+window.MATH_MML["ch00-u1-l1-p2b#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mi>x</mi><mo>+</mo><mn>3</mn><mo>=</mo><mn>8</mn></mrow></math>";
+window.MATH_MML["ch00-u1-l1-p2b#f2"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mi>x</mi><mo>+</mo><mn>3</mn><mo>−</mo><mn>3</mn><mo>=</mo><mn>8</mn><mo>−</mo><mn>3</mn></mrow></math>";
+window.MATH_MML["ch00-u1-l1-p2b#f3"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mi>x</mi><mo>=</mo><mn>5</mn></mrow></math>";
+window.MATH_MML["ch00-ux-l1-p1#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mi>x</mi><mo>+</mo><mn>5</mn><mo>=</mo><mn>12</mn></mrow></math>";

@@ -73,6 +73,15 @@
   var hoverTimer = null;
   function setDrawer(name, open) {
     drawerState[name] = open;
+    // 手机端：开一个抽屉时收起另一个，避免互相遮挡
+    if (open && window.innerWidth < 1024) {
+      var other = name === "left" ? "right" : "left";
+      drawerState[other] = false;
+      var otherSec = document.getElementById(other === "left" ? "drawer-left" : "drawer-right");
+      var otherTab = document.getElementById(other === "left" ? "tab-left" : "tab-right");
+      if (otherSec) otherSec.classList.remove("open");
+      if (otherTab) otherTab.setAttribute("aria-expanded", "false");
+    }
     saveDrawer(drawerState);
     var sec = document.getElementById(name === "left" ? "drawer-left" : "drawer-right");
     var tab = document.getElementById(name === "left" ? "tab-left" : "tab-right");
@@ -214,10 +223,19 @@
   /* ---------------- 拨盘组件 ---------------- */
   /* 卡塔音效：Web Audio 合成短促滴答，无需外部文件 */
   var tickCtx = null;
-  function tickSound() {
+  function ensureTickCtx() {
     try {
       if (!tickCtx) tickCtx = new (window.AudioContext || window.webkitAudioContext)();
       if (tickCtx.state === "suspended") tickCtx.resume();
+    } catch (e) {}
+  }
+  // iOS：首次触摸时预热 AudioContext（iOS 要求手势内创建/恢复）
+  document.addEventListener("touchstart", ensureTickCtx, { passive: true, once: true });
+  document.addEventListener("touchend", ensureTickCtx, { passive: true });
+  function tickSound() {
+    try {
+      ensureTickCtx();
+      if (!tickCtx || tickCtx.state !== "running") return;
       var t = tickCtx.currentTime;
       var o = tickCtx.createOscillator();
       var g = tickCtx.createGain();
