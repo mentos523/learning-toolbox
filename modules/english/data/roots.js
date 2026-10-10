@@ -77,7 +77,7 @@ window.ROOTS_DATA = [
   ["endurance","n.","耐力",0],
   ["durable","adj.","耐用的",0]
 ]},
-{r:"numer",v:["numer"],d:"numer-",m:["数"],w:[
+{r:"numer",v:["numer","number"],d:"numer-",m:["数"],w:[
   ["number","n.","数字",0],
   ["numerous","adj.","众多的",0],
   ["numeral","n.","数字",0],
@@ -275,7 +275,7 @@ window.ROOTS_DATA = [
   ["indigenous","adj.","土著的",0],
   ["photogenic","adj.","上镜的",0]
 ]},
-{r:"cur",v:["cur","curs"],d:"cur- / curs-",m:["跑"],w:[
+{r:"cur",v:["cur","curs","cour"],d:"cur- / curs-",m:["跑"],w:[
   ["course","n.","课程",0],
   ["current","adj.","当前的",0],
   ["occur","v.","发生",0],
@@ -666,7 +666,7 @@ window.ROOTS_DATA = [
   ["sentimental","adj.","多愁善感的",0],
   ["assent","n./v.","赞同",0]
 ]},
-{r:"centr",v:["centr"],d:"centr-",m:["中"],w:[
+{r:"centr",v:["centr","center"],d:"centr-",m:["中"],w:[
   ["center","n.","中心",0],
   ["central","adj.","中央的",0],
   ["eccentric","adj.","古怪的",0],
@@ -1024,7 +1024,7 @@ window.ROOTS_DATA = [
   ["avert","v.","避免",0],
   ["invert","v.","倒置",0]
 ]},
-{r:"voc",v:["voc"],d:"voc-",m:["声音；叫"],w:[
+{r:"voc",v:["voc","voic"],d:"voc-",m:["声音；叫"],w:[
   ["voice","n.","声音",0],
   ["advocate","v./n.","提倡",0],
   ["vocal","adj.","声音的",0],
@@ -1110,7 +1110,7 @@ window.ROOTS_DATA = [
   ["century","n.","世纪",0],
   ["centimeter","n.","厘米",0]
 ]},
-{r:"pac",v:["pac"],d:"pac-",m:["和平"],w:[
+{r:"pac",v:["pac","peac"],d:"pac-",m:["和平"],w:[
   ["peace","n.","和平",0],
   ["pacific","adj.","太平洋的；和平的",0],
   ["peaceful","adj.","和平的",0],
@@ -1152,7 +1152,7 @@ window.ROOTS_DATA = [
   ["credence","n.","信任",0],
   ["credential","n.","证书",0]
 ]},
-{r:"tain",v:["tain"],d:"tain-",m:["持；握"],w:[
+{r:"tain",v:["tain","tent"],d:"tain-",m:["持；握"],w:[
   ["content","n.","内容",0],
   ["maintain","v.","维持",0],
   ["contain","v.","包含",0],
@@ -1197,7 +1197,7 @@ window.ROOTS_DATA = [
   ["deduce","v.","推断",0],
   ["abduct","v.","绑架",0]
 ]},
-{r:"liter",v:["liter","litter"],d:"liter-",m:["字；文学"],w:[
+{r:"liter",v:["liter","litter","lett"],d:"liter-",m:["字；文学"],w:[
   ["letter","n.","信；字母",0],
   ["literature","n.","文学",0],
   ["literary","adj.","文学的",0],
@@ -1205,7 +1205,7 @@ window.ROOTS_DATA = [
   ["literal","adj.","字面的",0],
   ["illiterate","adj.","文盲的",0]
 ]},
-{r:"reg",v:["reg"],d:"reg-",m:["王；管"],w:[
+{r:"reg",v:["reg","reig"],d:"reg-",m:["王；管"],w:[
   ["regular","adj.","定期的；规则的",0],
   ["regulation","n.","规则；管理",0],
   ["regime","n.","政权；制度",0],
@@ -1292,7 +1292,7 @@ window.ROOTS_DATA = [
   ["rectangle","n.","矩形",0],
   ["rectify","v.","纠正",0]
 ]},
-{r:"mit",v:["mit","miss"],d:"mit- / miss-",m:["送"],w:[
+{r:"mit",v:["mit","miss","mis"],d:"mit- / miss-",m:["送"],w:[
   ["commission","n.","委员会",0],
   ["mission","n.","使命",0],
   ["promise","v./n.","承诺；许诺",0],
@@ -1371,7 +1371,7 @@ window.ROOTS_DATA = [
   ["ligament","n.","韧带",0],
   ["oblige","v.","迫使；施恩",0]
 ]},
-{r:"struct",v:["struct"],d:"struct-",m:["建造"],w:[
+{r:"struct",v:["struct","stroy"],d:"struct-",m:["建造"],w:[
   ["structure","n.","结构",0],
   ["destroy","v.","破坏",0],
   ["infrastructure","n.","基础设施",0],
@@ -1565,7 +1565,7 @@ window.ROOTS_DATA = [
   ["inscribe","v.","刻写",0],
   ["proscribe","v.","禁止",0]
 ]},
-{r:"sist",v:["sist"],d:"sist-",m:["站"],w:[
+{r:"sist",v:["sist","ist"],d:"sist-",m:["站"],w:[
   ["exist","v.","存在",0],
   ["assistant","n.","助手",0],
   ["assist","v.","帮助",0],
