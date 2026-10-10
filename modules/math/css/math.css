@@ -101,6 +101,22 @@ body[data-theme="dark"] #mathml-warn { background: #4a3a1a; color: #fde68a; }
 .m-hints { flex: none; max-height: 6.5em; overflow: hidden; font-size: 0.95rem; color: var(--m-ink-soft); }
 .m-hints p { margin: 4px 0; }
 .m-hints .point { color: var(--m-ink); font-weight: bold; }
+/* ---------- 习题页：题目区可内滚动 + 核对答案折叠（蓝队 2026-10-10 缺陷A修复）
+ * 习题页有 6–7 道题，旧的 max-height:6.5em/overflow:hidden 会截断；
+ * exercise 类改为区内滚动（页面本身仍一屏无滚动），答案放 <details> 折叠。 */
+.m-hints.exercise {
+  max-height: 36vh; overflow-y: auto; -webkit-overflow-scrolling: touch;
+  padding-right: 4px;
+}
+.m-answers { margin: 8px 0 2px; }
+.m-answers > summary {
+  display: inline-block; cursor: pointer; font-weight: bold;
+  color: var(--m-accent-strong); border: 1px solid var(--m-line);
+  background: var(--m-accent-soft); border-radius: 999px; padding: 4px 16px;
+  font-size: 0.92rem; list-style: none;
+}
+.m-answers > summary::-webkit-details-marker { display: none; }
+.m-answers > p { margin: 6px 0 0; color: var(--m-ink); }
 
 /* ---------- 翻页 ---------- */
 .m-nav { flex: none; display: flex; justify-content: space-between; align-items: center; padding: 8px 0 2px; }
@@ -242,3 +258,31 @@ body[data-theme="dark"] #mathml-warn { background: #4a3a1a; color: #fde68a; }
 .sa-handle-hint {
   font-size: 13px; fill: #fff; pointer-events: none; font-weight: bold;
 }
+
+/* ---------- placeholder-morph ---------- */
+.ix-morph { padding: 6px 4px; width: 100%; }
+.ix-morph-stages {
+  display: flex; gap: 10px; justify-content: center; align-items: center;
+  margin-bottom: 10px;
+}
+.ix-morph-chip {
+  min-width: 2.2em; text-align: center; font-size: 1.3rem; font-weight: bold;
+  border: 2px solid var(--m-line); border-radius: 10px; padding: 4px 12px;
+  color: var(--m-ink-soft); background: var(--m-panel);
+  transition: all 0.25s ease;
+}
+.ix-morph-chip.on {
+  border-color: var(--m-accent-strong); color: var(--m-accent-strong);
+  background: var(--m-accent-soft); transform: scale(1.15);
+}
+.ix-morph-expr {
+  text-align: center; font-size: 2rem; margin: 8px 0 10px;
+  font-family: Georgia, serif; min-height: 2.6em;
+  display: flex; align-items: center; justify-content: center;
+}
+.ix-morph-expr math { font-size: 1em; }
+
+/* ---------- zoomer ---------- */
+.ix-zoomer { padding: 4px; width: 100%; }
+.ix-zoomer .ix-expr-line { margin-bottom: 2px; }
+.ix-zoomer .ix-svg { max-width: 460px; }

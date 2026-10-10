@@ -13,6 +13,8 @@
  *   numeric-lab       数值实验台：点按钮/输数看趋势（accumulate 累加棋盘麦粒）
  *   subdivision       细分动画：档位切换，矩形逼近求和（右端点矩形和）
  *   shape-area        图形面积：拖正方形边长，看面积 x² 实时变化（数形结合）
+ *   placeholder-morph 占位符渐变：□→△→x，算术→方程过渡（最小可用版本）
+ *   zoomer            放大镜：级数按钮逐级放大看"变直"，配割线斜率读数（最小可用版本）
  *
  * 数学排版（蓝队 2026-10-10 修复）：交互内的表达式（expr/term/label/
  * 轴标签）统一走 window.MathExpr.html() —— ASCII 子集 → MathML
@@ -875,7 +877,7 @@
    * 左右两栏：kind==="slider-lab" 时用简化版 slider-lab（sliderLabCore），
    * 栏内 params 含 target/targetLabel 时复用与 slider-lab 完全相同的
    * attachTargetFeedback（🎯 旗帜 + r===target 命中反馈）；无 target 的栏布局不变。
-   * kind 为其它已注册类型（如 plot-points）时查表调用其渲染器，
+   * kind 为其它已注册类型（如 plot-points / shape-area）时查表调用其渲染器，
    * params 原样透传（plot-points 的 autoPlay 定时器用 wrap 闭包 + 切页保护，
    * 两栏实例互不干扰；SVG 有 max-width:100%，窄栏自适应）。
    * 未知 kind 走占位分支，不抛错。
@@ -910,6 +912,11 @@
         // 内嵌 plot-points：查表调用已注册渲染器，params 原样透传
         ixByType["plot-points"](col, cfg.params || {});
         cores.push(null);  // plot-points 无 getResult/onInput，同步行跳过该栏
+      } else if (cfg && cfg.kind === "shape-area") {
+        // 内嵌 shape-area（蓝队 2026-10-10 缺陷C修复）：同 plot-points 模式，
+        // 查表调用已注册渲染器，params 原样透传
+        ixByType["shape-area"](col, cfg.params || {});
+        cores.push(null);  // shape-area 无 getResult/onInput，同步行跳过该栏
       } else {
         var stub = el("div", "ix-stub", "暂不支持内嵌类型：" + esc(cfg && cfg.kind));
         col.appendChild(stub);
@@ -1507,6 +1514,228 @@
     draw();
   }
 
+  /* ============================================================
+   * 9. placeholder-morph 占位符渐变（蓝队 2026-10-10 缺陷B修复：最小可用版本）
+   * params: {stages: ["□","△","x"], expr: "□ + 5 = 12", autoPlay?, interval?}
+   *
+   * 表达式中的首阶段符号逐阶段替换为当前阶段符号，演示
+   * "占位符 → 未知数 x"的算术→方程过渡。
+   * 自动播放（默认开）+ 手动"下一步" + 点表达式切换；到终点自动停。
+   * ============================================================ */
+  function renderPlaceholderMorph(container, params) {
+    var stages = params.stages || [];
+    var expr = String(params.expr == null ? "" : params.expr);
+    if (stages.length < 2 || !expr || expr.indexOf(stages[0]) < 0) {
+      container.appendChild(el("div", "ix-stub",
+        "参数错误：placeholder-morph 需要 stages（≥2 阶段）且 expr 含首阶段符号"));
+      return;
+    }
+    var interval = Math.max(400, Number(params.interval) || 1200);
+    var wrap = el("div", "ix-morph");
+
+    // 阶段符号条
+    var chipsRow = el("div", "ix-morph-stages");
+    var chips = stages.map(function (s, i) {
+      var c = el("span", "ix-morph-chip", esc(s));
+      chipsRow.appendChild(c);
+      return c;
+    });
+    wrap.appendChild(chipsRow);
+
+    // 大字表达式（首阶段符号替换为当前阶段符号；□/△ 等非 ASCII 走 MX 回退转义，安全）
+    var exprLine = el("div", "ix-morph-expr", "");
+    exprLine.style.cursor = "pointer";
+    exprLine.setAttribute("role", "button");
+    exprLine.setAttribute("aria-label", "点我切换到下一阶段");
+    wrap.appendChild(exprLine);
+
+    var status = el("div", "ix-status", "");
+    wrap.appendChild(status);
+
+    var foot = el("div", "ix-foot");
+    var playBtn = el("button", "ix-reset", "⏸ 暂停");
+    playBtn.type = "button";
+    var nextBtn = el("button", "ix-reset", "下一步 →");
+    nextBtn.type = "button";
+    foot.appendChild(playBtn); foot.appendChild(nextBtn);
+    wrap.appendChild(foot);
+    container.appendChild(wrap);
+
+    var idx = 0, timer = null;
+    function escRe(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); }
+    function show(i) {
+      idx = i;
+      var cur = stages[idx];
+      exprLine.innerHTML = MX(expr.replace(new RegExp(escRe(stages[0]), "g"), cur));
+      chips.forEach(function (c, j) { c.classList.toggle("on", j === idx); });
+      if (idx === 0) {
+        status.innerHTML = '<span class="ix-hint">第 1 步：先用方框 □ 占住这个不知道的数</span>';
+      } else if (idx === stages.length - 1) {
+        status.innerHTML = '<span class="ix-success">🎉 最后一步：把占位符换成字母 ' +
+          esc(cur) + "，这就是代数里的未知数！</span>";
+      } else {
+        status.innerHTML = '<span class="ix-hint">第 ' + (idx + 1) +
+          " 步：占位符变成 " + esc(cur) + "</span>";
+      }
+      playBtn.textContent = timer ? "⏸ 暂停" : "▶ 自动播放";
+    }
+    function stop() {
+      if (timer) { clearInterval(timer); timer = null; }
+      show(idx);
+    }
+    function play() {
+      stop();
+      if (idx >= stages.length - 1) idx = 0;  // 到终点再点播放：从头重来
+      show(idx);
+      timer = setInterval(function () {
+        if (!document.body.contains(wrap)) { stop(); return; }  // 已切页，停
+        if (idx >= stages.length - 1) { stop(); tickSound(); return; }
+        show(idx + 1);
+      }, interval);
+    }
+    function step() { stop(); show(idx >= stages.length - 1 ? 0 : idx + 1); }
+    playBtn.addEventListener("click", function () { timer ? stop() : play(); });
+    nextBtn.addEventListener("click", step);
+    exprLine.addEventListener("click", step);
+
+    show(0);
+    if (params.autoPlay !== false) play();  // schema 默认 true
+  }
+
+  /* ============================================================
+   * 10. zoomer 放大镜（蓝队 2026-10-10 缺陷B修复：最小可用版本）
+   * params: {fn: "x^2", center: 1, levels: 4, window: 2, caption?}
+   *
+   * 级别按钮切换放大级数：每级窗口半宽减半（window/2^(k-1)），
+   * 重采样绘制曲线，配窗口两端割线斜率读数——直观看到
+   * "放大到足够大，曲线看起来像直线"（割线逼近切线）。
+   * 求值复用 evalExpr（fn 为 x 的表达式，LaTeX 子集）。
+   * ============================================================ */
+  function renderZoomer(container, params) {
+    var fn = String(params.fn == null ? "" : params.fn);
+    var center = Number(params.center);
+    var levels = Math.max(2, Math.min(6, Math.round(Number(params.levels)) || 4));
+    var halfW = Number(params.window);
+    var caption = params.caption || "";
+    if (!fn || !isFinite(center) || !(halfW > 0)) {
+      container.appendChild(el("div", "ix-stub",
+        "参数错误：zoomer 需要 fn、center 与正数 window"));
+      return;
+    }
+    if (!isFinite(evalExpr(fn, "x", center))) {
+      container.appendChild(el("div", "ix-stub",
+        "zoomer：表达式在放大中心处无法求值：" + esc(fn)));
+      return;
+    }
+    var NS = "http://www.w3.org/2000/svg";
+    function svgEl(tag, attrs) {
+      var e = document.createElementNS(NS, tag);
+      for (var k in attrs) e.setAttribute(k, attrs[k]);
+      return e;
+    }
+
+    var wrap = el("div", "ix-zoomer");
+    var fnLine = el("div", "ix-expr-line", "");
+    fnLine.innerHTML = "y = " + MX(fn);
+    fnLine.style.marginBottom = "2px";
+    wrap.appendChild(fnLine);
+
+    var W = 440, H = 236, PAD = 32;
+    var svg = svgEl("svg", { viewBox: "0 0 " + W + " " + H, "class": "ix-svg" });
+    svg.style.maxWidth = "100%";
+    var axesG = svgEl("g", {}); svg.appendChild(axesG);
+    var curve = svgEl("path", { fill: "none", stroke: "var(--m-accent-strong)",
+      "stroke-width": 2.5 });
+    svg.appendChild(curve);
+    var secant = svgEl("line", { stroke: "#15803d", "stroke-width": 2,
+      "stroke-dasharray": "6 4" });
+    svg.appendChild(secant);
+    var winLab = svgEl("text", { x: W / 2, y: H - 6, "text-anchor": "middle",
+      "font-size": 12, fill: "var(--m-ink-soft)" });
+    svg.appendChild(winLab);
+    wrap.appendChild(svg);
+
+    var status = el("div", "ix-status", "");
+    wrap.appendChild(status);
+
+    var foot = el("div", "ix-foot");
+    var btns = [];
+    for (var L = 1; L <= levels; L++) {
+      (function (lv) {
+        var b = el("button", "ix-reset", "第 " + lv + " 级");
+        b.type = "button";
+        b.addEventListener("click", function () { draw(lv); });
+        foot.appendChild(b); btns.push(b);
+      })(L);
+    }
+    wrap.appendChild(foot);
+    if (caption) {
+      var cap = el("div", "ix-hint", esc(caption));
+      cap.style.textAlign = "center"; cap.style.marginTop = "4px";
+      wrap.appendChild(cap);
+    }
+    container.appendChild(wrap);
+
+    function draw(level) {
+      var hw = halfW / Math.pow(2, level - 1);
+      var N = 90, xs = [], ys = [];
+      for (var i = 0; i < N; i++) {
+        var x = center - hw + 2 * hw * i / (N - 1);
+        xs.push(x); ys.push(evalExpr(fn, "x", x));
+      }
+      var valid = ys.filter(isFinite);
+      if (!valid.length) {
+        status.innerHTML = '<span class="ix-hint">该窗口内函数无有效值</span>';
+        return;
+      }
+      var yMin = Math.min.apply(null, valid), yMax = Math.max.apply(null, valid);
+      if (yMax - yMin < 1e-9) { yMin -= 1; yMax += 1; }
+      var pad = (yMax - yMin) * 0.12;
+      yMin -= pad; yMax += pad;
+      function X(v) { return PAD + (v - (center - hw)) / (2 * hw) * (W - 2 * PAD); }
+      function Y(v) { return H - PAD - (v - yMin) / (yMax - yMin) * (H - 2 * PAD); }
+      // 坐标轴（x=center 竖线；y=0 横线，仅在范围内画）
+      while (axesG.firstChild) axesG.removeChild(axesG.firstChild);
+      var axC = svgEl("line", { x1: X(center), y1: PAD, x2: X(center), y2: H - PAD,
+        stroke: "var(--m-line)", "stroke-width": 1.5 });
+      axesG.appendChild(axC);
+      if (yMin <= 0 && 0 <= yMax) {
+        var ax0 = svgEl("line", { x1: PAD, y1: Y(0), x2: W - PAD, y2: Y(0),
+          stroke: "var(--m-line)", "stroke-width": 1.5 });
+        axesG.appendChild(ax0);
+      }
+      // 曲线：按有限点分段，避免跨间断点连笔
+      var segs = [[]];
+      for (var j = 0; j < N; j++) {
+        if (isFinite(ys[j])) {
+          segs[segs.length - 1].push(X(xs[j]).toFixed(1) + "," + Y(ys[j]).toFixed(1));
+        } else if (segs[segs.length - 1].length) { segs.push([]); }
+      }
+      var d = "";
+      segs.forEach(function (sg) { if (sg.length > 1) d += "M" + sg.join(" L"); });
+      curve.setAttribute("d", d);
+      // 窗口两端割线 + 斜率读数
+      var x0 = center - hw, x1 = center + hw;
+      var y0 = evalExpr(fn, "x", x0), y1 = evalExpr(fn, "x", x1);
+      var slope = (isFinite(y0) && isFinite(y1)) ? (y1 - y0) / (2 * hw) : NaN;
+      if (isFinite(slope)) {
+        secant.setAttribute("x1", X(x0)); secant.setAttribute("y1", Y(y0));
+        secant.setAttribute("x2", X(x1)); secant.setAttribute("y2", Y(y1));
+        secant.style.visibility = "visible";
+      } else { secant.style.visibility = "hidden"; }
+      winLab.textContent = "x ∈ [" + fmt(x0) + ", " + fmt(x1) + "]";
+      status.innerHTML = '<span class="' + (level >= 3 ? "ix-success" : "ix-hint") +
+        '">第 ' + level + " 级：窗口半宽 " + fmt(hw) +
+        "，割线斜率 ≈ " + (isFinite(slope) ? fmt(slope) : "—") +
+        (level >= 3 ? " —— 曲线看起来越来越像直线了！" : "") + "</span>";
+      btns.forEach(function (b, i) {
+        b.style.fontWeight = (i === level - 1) ? "bold" : "";
+        b.style.borderColor = (i === level - 1) ? "var(--m-accent-strong)" : "";
+      });
+    }
+    draw(1);
+  }
+
   /* ---------------- 渲染器内嵌查表 ----------------
    * 与 window.MATH_INTERACTIONS 同源：注册时同步记一份本地表。
    * side-compare 内嵌时按 kind 查表调用已注册渲染器（不复制渲染器代码）。*/
@@ -1525,4 +1754,6 @@
   ixRegister("numeric-lab", renderNumericLab);
   ixRegister("subdivision", renderSubdivision);
   ixRegister("shape-area", renderShapeArea);
+  ixRegister("placeholder-morph", renderPlaceholderMorph);
+  ixRegister("zoomer", renderZoomer);
 })();

@@ -123,11 +123,31 @@
     }
 
     // 点拨
+    // （蓝队 2026-10-10 缺陷A修复）习题页（concept === "本章习题"）：
+    // 题目区加 exercise 类变为可滚动（CSS .m-hints.exercise），
+    // examples 作为"核对答案"折叠渲染——此前 examples 从未被渲染，答案用户永远看不到。
+    var isExercise = page.concept === "本章习题";
     var hh = "";
     (page.hints || []).forEach(function (h, i) {
       hh += "<p>" + (i === 0 ? '<span class="point">💡</span> ' : "") + esc(h) + "</p>";
     });
-    $("p-hints").innerHTML = hh;
+    var hintsBox = $("p-hints");
+    hintsBox.className = "m-hints" + (isExercise ? " exercise" : "");
+    hintsBox.innerHTML = hh;
+    if (isExercise) {
+      (page.examples || []).forEach(function (ex) {
+        if (!ex || !ex.text) return;
+        var det = document.createElement("details");
+        det.className = "m-answers";
+        var sum = document.createElement("summary");
+        sum.textContent = "📝 核对答案（点开展开）";
+        det.appendChild(sum);
+        var ap = document.createElement("p");
+        ap.textContent = ex.text;
+        det.appendChild(ap);
+        hintsBox.appendChild(det);
+      });
+    }
 
     // 翻页按钮
     $("btn-prev").disabled = state.index <= 0;
