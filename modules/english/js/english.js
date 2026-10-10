@@ -331,6 +331,11 @@
   /* 本地真人声音频优先，缺文件/播不了则降级到系统合成语音 */
   function speak(text, forceVoice) {
     if (!text) return;
+    var now = Date.now();
+    // 去重：300ms 内相同文本只读一次（selectRoot 会经 setItems+显式调用双触发 renderHero）
+    if (text === speak._lastText && now - speak._lastTime < 300) return;
+    speak._lastText = text;
+    speak._lastTime = now;
     var mode = forceVoice || settings.voice;   // 'us' 美音 / 'gb' 英音
     var sub = (mode === "gb") ? "gb" : "us";
     var rate = Math.min(1.5, Math.max(0.5, Number(settings.rate) || 0.9));
