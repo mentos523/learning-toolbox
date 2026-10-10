@@ -5,8 +5,11 @@
  * 注册到 window.MATH_INTERACTIONS（见 js/math.js）。
  *
  * 已实现：
- *   slider-lab    滑块实验：拖参数看表达式实时变化，命中目标咔哒反馈
- *   balance-drag  拖拽天平：拖砝码保持平衡，解方程的动作化
+ *   slider-lab        滑块实验：拖参数看表达式实时变化，命中目标咔哒反馈
+ *   balance-drag      拖拽天平：拖砝码保持平衡，解方程的动作化
+ *   linked-dashboard  联动仪表盘：一个滑块驱动数值读数 + SVG 坐标点/轨迹
+ *   plot-points       描点成像：拖滑块逐个点亮坐标点，连成曲线（可自动播放）
+ *   side-compare      并排对比：左右两栏简化 slider-lab，支持滑块同步联动
  * ============================================================ */
 (function () {
   "use strict";
@@ -69,22 +72,23 @@
   /* ============================================================
    * 1. slider-lab 滑块实验
    * params: {min,max,step,label,expr,target?,targetLabel?,unit?}
+   *
+   * sliderLabCore 是无目标反馈的精简构建器，供 side-compare 复用。
+   * 返回 {wrap,row,input,getValue,getResult,setValue,onInput}。
    * ============================================================ */
-  function renderSliderLab(container, params) {
+  function sliderLabCore(container, params) {
     var min = Number(params.min);
     var max = Number(params.max);
     var step = Number(params.step) || 1;
     var label = params.label || "x";
     var expr = params.expr || label;
-    var hasTarget = params.target !== undefined && params.target !== null;
-    var target = Number(params.target);
 
     var wrap = el("div", "ix-slider");
     // 表达式显示
     var exprLine = el("div", "ix-expr-line",
       '<span class="ix-expr">' + esc(expr) + "</span>" +
       '<span class="ix-eq"> = </span>' +
-      '<span class="ix-val" id="">0</span>' +
+      '<span class="ix-val">0</span>' +
       (params.unit ? ' <span class="ix-unit">' + esc(params.unit) + "</span>" : ""));
     var valSpan = exprLine.querySelector(".ix-val");
     // 滑块行
@@ -97,51 +101,78 @@
     input.value = min;
     input.className = "ix-range";
     input.setAttribute("aria-label", label);
-    // 目标标记
-    if (hasTarget) {
-      var pct = ((target - min) / (max - min)) * 100;
-      var tick = el("div", "ix-target-tick");
-      tick.style.left = pct + "%";
-      tick.title = params.targetLabel || ("目标 " + target);
-      row.appendChild(tick);
-    }
     row.appendChild(labSpan);
     row.appendChild(input);
     row.appendChild(valLab);
-    // 状态行
-    var status = el("div", "ix-status", "");
-
     wrap.appendChild(exprLine);
     wrap.appendChild(row);
-    wrap.appendChild(status);
     container.appendChild(wrap);
 
-    var hitTarget = false;
-    function update() {
+    var cbs = [];
+    function refresh() {
       var v = Number(input.value);
       valLab.textContent = fmt(v);
       var r = evalExpr(expr, label, v);
       valSpan.textContent = fmt(r);
-      if (hasTarget) {
-        if (r === target && !hitTarget) {
-          hitTarget = true;
-          tickSound(); hapticTick();
-          status.innerHTML = '<span class="ix-success">🎯 ' +
-            esc(params.targetLabel || ("达到目标 " + target)) + "！</span>";
-          wrap.classList.add("ix-hit");
-        } else if (r !== target && hitTarget) {
-          hitTarget = false;
-          status.innerHTML = "";
-          wrap.classList.remove("ix-hit");
-        } else if (!hitTarget) {
-          var diff = target - r;
-          status.innerHTML = '<span class="ix-hint">' +
-            (diff > 0 ? "还差 " + fmt(diff) : "超过了 " + fmt(-diff)) + "</span>";
-        }
+      return { v: v, r: r };
+    }
+    input.addEventListener("input", function () {
+      var s = refresh();
+      cbs.forEach(function (cb) { cb(s.v, s.r); });
+    });
+    refresh();
+    return {
+      wrap: wrap, row: row, input: input,
+      getValue: function () { return Number(input.value); },
+      getResult: function () { return evalExpr(expr, label, Number(input.value)); },
+      setValue: function (v) {  // 程序设值（同步联动用），同样触发回调
+        input.value = Math.min(max, Math.max(min, Number(v)));
+        var s = refresh();
+        cbs.forEach(function (cb) { cb(s.v, s.r); });
+      },
+      onInput: function (cb) { cbs.push(cb); }
+    };
+  }
+
+  function renderSliderLab(container, params) {
+    var core = sliderLabCore(container, params);
+    var wrap = core.wrap;
+    var hasTarget = params.target !== undefined && params.target !== null;
+    var target = Number(params.target);
+    // 目标标记
+    if (hasTarget) {
+      var min = Number(params.min), max = Number(params.max);
+      var pct = ((target - min) / (max - min)) * 100;
+      var tick = el("div", "ix-target-tick");
+      tick.style.left = pct + "%";
+      tick.title = params.targetLabel || ("目标 " + target);
+      core.row.appendChild(tick);
+    }
+    // 状态行
+    var status = el("div", "ix-status", "");
+    wrap.appendChild(status);
+
+    var hitTarget = false;
+    function update(v, r) {
+      if (!hasTarget) return;
+      if (r === target && !hitTarget) {
+        hitTarget = true;
+        tickSound(); hapticTick();
+        status.innerHTML = '<span class="ix-success">🎯 ' +
+          esc(params.targetLabel || ("达到目标 " + target)) + "！</span>";
+        wrap.classList.add("ix-hit");
+      } else if (r !== target && hitTarget) {
+        hitTarget = false;
+        status.innerHTML = "";
+        wrap.classList.remove("ix-hit");
+      } else if (!hitTarget) {
+        var diff = target - r;
+        status.innerHTML = '<span class="ix-hint">' +
+          (diff > 0 ? "还差 " + fmt(diff) : "超过了 " + fmt(-diff)) + "</span>";
       }
     }
-    input.addEventListener("input", update);
-    update();
+    core.onInput(update);
+    update(core.getValue(), core.getResult());
   }
 
   /* ============================================================
@@ -442,9 +473,420 @@
     drawItems();
   }
 
+  /* ============================================================
+   * 3. linked-dashboard 联动仪表盘
+   * params: {source:{label,min,max,step,initial}, views:[...]}
+   * views[].kind: "readout"（数值读数）/ "point"（坐标点+轨迹）
+   *
+   * 一个滑块驱动多视图：拖动 source，读数实时变，SVG 里点沿轨迹动。
+   * ============================================================ */
+  function renderLinkedDashboard(container, params) {
+    var NS = "http://www.w3.org/2000/svg";
+    function svgEl(tag, attrs) {
+      var e = document.createElementNS(NS, tag);
+      for (var k in attrs) e.setAttribute(k, attrs[k]);
+      return e;
+    }
+
+    var src = params.source || {};
+    var vName = src.label || "x";
+    var min = Number(src.min), max = Number(src.max);
+    var step = Number(src.step) || 1;
+    if (!(min < max)) {
+      container.appendChild(el("div", "ix-stub", "参数错误：source.min 必须 < source.max"));
+      return;
+    }
+    var init = (src.initial !== undefined && src.initial !== null && isFinite(Number(src.initial)))
+      ? Number(src.initial) : min;
+
+    var views = params.views || [];
+    var wrap = el("div", "ix-dashboard");
+
+    // —— 滑块（复用 slider-lab 样式） ——
+    var row = el("div", "ix-slider-row");
+    var labSpan = el("span", "ix-slider-label", esc(vName) + " = ");
+    var valLab = el("span", "ix-slider-val", "");
+    var input = document.createElement("input");
+    input.type = "range";
+    input.min = min; input.max = max; input.step = step;
+    input.value = init;
+    input.className = "ix-range";
+    input.setAttribute("aria-label", vName);
+    row.appendChild(labSpan); row.appendChild(input); row.appendChild(valLab);
+    wrap.appendChild(row);
+
+    // —— readout 视图：数值读数 ——
+    var readouts = [];
+    views.forEach(function (v) { if (v && v.kind === "readout") readouts.push(v); });
+    var readoutSpans = [];
+    if (readouts.length) {
+      var rb = el("div", "ix-dash-readouts");
+      rb.style.cssText = "display:flex;flex-wrap:wrap;gap:4px 24px;padding:4px 0;";
+      readouts.forEach(function (v) {
+        var line = el("div", "ix-expr-line",
+          '<span class="ix-expr">' + esc(v.label || v.expr || "") + "</span>" +
+          '<span class="ix-eq"> = </span><span class="ix-val">0</span>');
+        rb.appendChild(line);
+        readoutSpans.push(line.querySelector(".ix-val"));
+      });
+      wrap.appendChild(rb);
+    }
+
+    // —— point 视图：共享一个 SVG，自动量程 ——
+    var pointViews = [];
+    views.forEach(function (v) { if (v && v.kind === "point") pointViews.push(v); });
+    views.forEach(function (v) {
+      if (v && v.kind !== "readout" && v.kind !== "point") {
+        var stub = el("div", "ix-stub", "视图 " + esc(v.kind) + " 暂不支持");
+        stub.style.cssText = "font-size:.85rem;padding:2px 0;";
+        wrap.appendChild(stub);
+      }
+    });
+
+    var xMin, xMax, yMin, yMax;
+    var dots = [], coordLabels = [];
+    var W = 420, H = 300, mL = 40, mR = 14, mT = 16, mB = 30;
+    function X(x) { return mL + (x - xMin) / (xMax - xMin) * (W - mL - mR); }
+    function Y(y) { return mT + (1 - (y - yMin) / (yMax - yMin)) * (H - mT - mB); }
+
+    if (pointViews.length) {
+      // 全 range 采样求量程
+      xMin = Infinity; xMax = -Infinity; yMin = Infinity; yMax = -Infinity;
+      var SAMPLES = 60;
+      var trails = pointViews.map(function (v) {
+        var pts = [];
+        for (var i = 0; i <= SAMPLES; i++) {
+          var t = min + (max - min) * i / SAMPLES;
+          var px = evalExpr(v.xExpr, vName, t);
+          var py = evalExpr(v.yExpr, vName, t);
+          if (isFinite(px) && isFinite(py)) {
+            pts.push({ x: px, y: py });
+            if (px < xMin) xMin = px; if (px > xMax) xMax = px;
+            if (py < yMin) yMin = py; if (py > yMax) yMax = py;
+          }
+        }
+        return pts;
+      });
+      if (!isFinite(xMin)) { xMin = min; xMax = max; yMin = 0; yMax = 1; }
+      var xPad = (xMax - xMin) * 0.08 || 1;
+      var yPad = (yMax - yMin) * 0.12 || 1;
+      xMin -= xPad; xMax += xPad; yMin -= yPad; yMax += yPad;
+
+      var svg = svgEl("svg", { viewBox: "0 0 " + W + " " + H, "class": "ix-svg" });
+      svg.style.maxWidth = "100%";
+      // 过零坐标轴
+      if (yMin <= 0 && yMax >= 0) {
+        svg.appendChild(svgEl("line", { x1: mL, y1: Y(0), x2: W - mR, y2: Y(0),
+          stroke: "var(--m-line)", "stroke-width": 1.5 }));
+      }
+      if (xMin <= 0 && xMax >= 0) {
+        svg.appendChild(svgEl("line", { x1: X(0), y1: mT, x2: X(0), y2: H - mB,
+          stroke: "var(--m-line)", "stroke-width": 1.5 }));
+      }
+      // 轴标签（取首个 point 视图的表达式）
+      var xLab = svgEl("text", { x: W - mR - 2, y: H - 8, "text-anchor": "end",
+        fill: "var(--m-ink-soft)", "font-size": 13 });
+      xLab.textContent = pointViews[0].xExpr || "x";
+      svg.appendChild(xLab);
+      var yLab = svgEl("text", { x: 6, y: mT + 6, fill: "var(--m-ink-soft)", "font-size": 13 });
+      yLab.textContent = pointViews[0].yExpr || "y";
+      svg.appendChild(yLab);
+      // 轨迹（淡）+ 当前点（亮）+ 坐标标注
+      trails.forEach(function (pts) {
+        svg.appendChild(svgEl("polyline", {
+          points: pts.map(function (p) { return X(p.x).toFixed(1) + "," + Y(p.y).toFixed(1); }).join(" "),
+          fill: "none", stroke: "var(--m-accent)", "stroke-width": 2, opacity: 0.25
+        }));
+        var dot = svgEl("circle", { r: 7, fill: "var(--m-accent-strong)",
+          stroke: "#fff", "stroke-width": 2 });
+        svg.appendChild(dot);
+        var cl = svgEl("text", { "font-size": 13, fill: "var(--m-ink)", "font-weight": "bold" });
+        svg.appendChild(cl);
+        dots.push(dot); coordLabels.push(cl);
+      });
+      wrap.appendChild(svg);
+    }
+
+    container.appendChild(wrap);
+
+    function update() {
+      var t = Number(input.value);
+      valLab.textContent = fmt(t);
+      readouts.forEach(function (v, i) {
+        readoutSpans[i].textContent = fmt(evalExpr(v.expr, vName, t));
+      });
+      pointViews.forEach(function (v, i) {
+        var px = evalExpr(v.xExpr, vName, t);
+        var py = evalExpr(v.yExpr, vName, t);
+        if (!isFinite(px) || !isFinite(py)) {
+          dots[i].setAttribute("visibility", "hidden");
+          coordLabels[i].setAttribute("visibility", "hidden");
+          return;
+        }
+        dots[i].setAttribute("visibility", "visible");
+        coordLabels[i].setAttribute("visibility", "visible");
+        dots[i].setAttribute("cx", X(px).toFixed(1));
+        dots[i].setAttribute("cy", Y(py).toFixed(1));
+        var cl = coordLabels[i];
+        cl.textContent = "(" + fmt(px) + ", " + fmt(py) + ")";
+        var lx = X(px) + 12;
+        if (lx > W - 100) { lx = X(px) - 12; cl.setAttribute("text-anchor", "end"); }
+        else cl.setAttribute("text-anchor", "start");
+        cl.setAttribute("x", lx.toFixed(1));
+        cl.setAttribute("y", (Y(py) - 10).toFixed(1));
+      });
+    }
+    input.addEventListener("input", update);
+    update();
+  }
+
+  /* ============================================================
+   * 4. plot-points 描点成像
+   * params: {fn, xMin, xMax, step, autoPlay?, speed?}
+   *
+   * 给定 x 列表，拖滑块逐个"点亮"坐标点，点亮的点连成曲线。
+   * 自动播放逐点点亮（用户一拖滑块即接管，暂停自动播放）。
+   * ============================================================ */
+  function renderPlotPoints(container, params) {
+    var NS = "http://www.w3.org/2000/svg";
+    function svgEl(tag, attrs) {
+      var e = document.createElementNS(NS, tag);
+      for (var k in attrs) e.setAttribute(k, attrs[k]);
+      return e;
+    }
+
+    var fn = params.fn || "x";
+    var xMin = Number(params.xMin), xMax = Number(params.xMax);
+    var step = Number(params.step) || 1;
+    if (!(xMin < xMax) || !(step > 0)) {
+      container.appendChild(el("div", "ix-stub", "参数错误：需 xMin < xMax 且 step > 0"));
+      return;
+    }
+    var count = Math.round((xMax - xMin) / step);
+    var xs = [], ys = [];
+    for (var i = 0; i <= count; i++) {
+      var x = Math.round((xMin + i * step) * 1000) / 1000;
+      xs.push(x);
+      ys.push(evalExpr(fn, "x", x));
+    }
+    var n = xs.length;
+
+    // 量程
+    var yMin = Infinity, yMax = -Infinity;
+    ys.forEach(function (y) {
+      if (isFinite(y)) { if (y < yMin) yMin = y; if (y > yMax) yMax = y; }
+    });
+    if (!isFinite(yMin)) { yMin = 0; yMax = 1; }
+    var yPad = (yMax - yMin) * 0.15 || 1;
+    yMin -= yPad; yMax += yPad;
+    var x0 = xMin - step * 0.6, x1 = xMax + step * 0.6;
+
+    var W = 420, H = 320, mL = 42, mR = 14, mT = 16, mB = 32;
+    function X(v) { return mL + (v - x0) / (x1 - x0) * (W - mL - mR); }
+    function Y(v) { return mT + (1 - (v - yMin) / (yMax - yMin)) * (H - mT - mB); }
+
+    var wrap = el("div", "ix-plot");
+    var svg = svgEl("svg", { viewBox: "0 0 " + W + " " + H, "class": "ix-svg" });
+    svg.style.maxWidth = "100%";
+    // 坐标轴
+    if (yMin <= 0 && yMax >= 0) {
+      svg.appendChild(svgEl("line", { x1: mL, y1: Y(0), x2: W - mR, y2: Y(0),
+        stroke: "var(--m-line)", "stroke-width": 1.5 }));
+    }
+    if (x0 <= 0 && x1 >= 0) {
+      svg.appendChild(svgEl("line", { x1: X(0), y1: mT, x2: X(0), y2: H - mB,
+        stroke: "var(--m-line)", "stroke-width": 1.5 }));
+    }
+    var xLab = svgEl("text", { x: W - mR - 2, y: H - 8, "text-anchor": "end",
+      fill: "var(--m-ink-soft)", "font-size": 13 });
+    xLab.textContent = "x";
+    svg.appendChild(xLab);
+    var yLab = svgEl("text", { x: 6, y: mT + 6, fill: "var(--m-ink-soft)", "font-size": 13 });
+    yLab.textContent = "y";
+    svg.appendChild(yLab);
+
+    // 点：未点亮=空心，点亮=实心；连线穿过已点亮的点
+    var ghostDots = [], litDots = [];
+    for (var d = 0; d < n; d++) {
+      var ok = isFinite(ys[d]);
+      var g = svgEl("circle", { cx: X(xs[d]).toFixed(1), cy: ok ? Y(ys[d]).toFixed(1) : -50,
+        r: 5, fill: "none", stroke: "var(--m-accent)", "stroke-width": 1.5, opacity: 0.45,
+        visibility: ok ? "visible" : "hidden" });
+      var l = svgEl("circle", { cx: X(xs[d]).toFixed(1), cy: ok ? Y(ys[d]).toFixed(1) : -50,
+        r: 6, fill: "var(--m-accent-strong)", stroke: "#fff", "stroke-width": 2,
+        visibility: "hidden" });
+      svg.appendChild(g); svg.appendChild(l);
+      ghostDots.push(g); litDots.push(l);
+    }
+    var line = svgEl("polyline", { points: "", fill: "none",
+      stroke: "var(--m-accent-strong)", "stroke-width": 2.5 });
+    svg.appendChild(line);
+    var coordLab = svgEl("text", { "font-size": 13, fill: "var(--m-ink)",
+      "font-weight": "bold", visibility: "hidden" });
+    svg.appendChild(coordLab);
+    wrap.appendChild(svg);
+
+    // 状态行
+    var status = el("div", "ix-status", "");
+    wrap.appendChild(status);
+
+    // 滑块：点亮个数
+    var row = el("div", "ix-slider-row");
+    var labSpan = el("span", "ix-slider-label", "点亮 ");
+    var valLab = el("span", "ix-slider-val", "");
+    var input = document.createElement("input");
+    input.type = "range";
+    input.min = 0; input.max = n; input.step = 1; input.value = 0;
+    input.className = "ix-range";
+    input.setAttribute("aria-label", "点亮的点数");
+    row.appendChild(labSpan); row.appendChild(input); row.appendChild(valLab);
+    wrap.appendChild(row);
+
+    // 按钮行
+    var foot = el("div", "ix-foot");
+    foot.style.cssText = "display:flex;gap:8px;justify-content:flex-start;";
+    var playBtn = el("button", "ix-reset", "▶ 自动播放");
+    playBtn.type = "button";
+    var resetBtn = el("button", "ix-reset", "↺ 重置");
+    resetBtn.type = "button";
+    foot.appendChild(playBtn); foot.appendChild(resetBtn);
+    wrap.appendChild(foot);
+    container.appendChild(wrap);
+
+    var timer = null;
+    var speed = Math.max(100, Number(params.speed) || 800);
+    function stop() {
+      if (timer) { clearInterval(timer); timer = null; }
+      playBtn.textContent = "▶ 自动播放";
+    }
+    function play() {
+      stop();
+      timer = setInterval(function () {
+        if (!document.body.contains(wrap)) { stop(); return; }  // 已切页，停
+        var k = Number(input.value);
+        if (k >= n) { stop(); return; }
+        setLit(k + 1);
+      }, speed);
+      playBtn.textContent = "⏸ 暂停";
+    }
+    function setLit(k) {
+      input.value = k;
+      valLab.textContent = k + " / " + n;
+      var pts = [];
+      for (var j = 0; j < n; j++) {
+        var lit = j < k;
+        litDots[j].setAttribute("visibility", lit ? "visible" : "hidden");
+        ghostDots[j].setAttribute("visibility", lit ? "hidden" : "visible");
+        if (lit && isFinite(ys[j])) pts.push(X(xs[j]).toFixed(1) + "," + Y(ys[j]).toFixed(1));
+      }
+      line.setAttribute("points", pts.join(" "));
+      // 最新点坐标标注
+      if (k > 0 && isFinite(ys[k - 1])) {
+        coordLab.setAttribute("visibility", "visible");
+        coordLab.textContent = "(" + fmt(xs[k - 1]) + ", " + fmt(ys[k - 1]) + ")";
+        var lx = X(xs[k - 1]) + 10;
+        if (lx > W - 100) { lx = X(xs[k - 1]) - 10; coordLab.setAttribute("text-anchor", "end"); }
+        else coordLab.setAttribute("text-anchor", "start");
+        coordLab.setAttribute("x", lx.toFixed(1));
+        coordLab.setAttribute("y", (Y(ys[k - 1]) - 10).toFixed(1));
+      } else {
+        coordLab.setAttribute("visibility", "hidden");
+      }
+      // 状态文案
+      if (k >= n) {
+        status.innerHTML = '<span class="ix-success">🎉 ' + n +
+          " 个点连成了一条曲线——这就是描点法画图像！</span>";
+        tickSound(); hapticTick();
+      } else if (k > 0) {
+        status.innerHTML = '<span class="ix-hint">已点亮 ' + k + " / " + n +
+          " 个点，继续拖滑块或点自动播放</span>";
+      } else {
+        status.innerHTML = '<span class="ix-hint">拖滑块逐个点亮坐标点，看它们连成曲线</span>';
+      }
+    }
+    playBtn.addEventListener("click", function () { timer ? stop() : play(); });
+    resetBtn.addEventListener("click", function () { stop(); setLit(0); });
+    input.addEventListener("input", function () { stop(); setLit(Number(input.value)); });  // 用户接管
+
+    setLit(0);
+    if (params.autoPlay !== false) play();  // schema 默认 true
+  }
+
+  /* ============================================================
+   * 5. side-compare 并排对比
+   * params: {left:{kind,params}, right:{kind,params}, sync?, labels?}
+   *
+   * 左右两栏，每栏一个简化版 slider-lab（复用 sliderLabCore）。
+   * sync 列出的参数名：同名滑块联动（拖一边，另一边跟着动）。
+   * 约束：不允许嵌套 side-compare。
+   * ============================================================ */
+  function renderSideCompare(container, params) {
+    if (!params.left || !params.right) {
+      container.appendChild(el("div", "ix-stub", "参数错误：需要 left 与 right"));
+      return;
+    }
+    var wrap = el("div", "ix-compare");
+    wrap.style.cssText = "display:flex;gap:12px;flex-wrap:wrap;";
+    var cfgs = [params.left, params.right];
+    var titles = params.labels || ["左", "右"];
+    var cores = [];
+    cfgs.forEach(function (cfg, i) {
+      var col = el("div", "ix-compare-col");
+      col.style.cssText = "flex:1 1 220px;min-width:0;";
+      var t = el("div", "ix-compare-title", esc(titles[i] || ("图" + (i + 1))));
+      t.style.cssText = "font-weight:bold;margin-bottom:2px;";
+      col.appendChild(t);
+      if (cfg && cfg.kind === "slider-lab") {
+        cores.push(sliderLabCore(col, cfg.params || {}));
+      } else {
+        var stub = el("div", "ix-stub", "暂不支持内嵌类型：" + esc(cfg && cfg.kind));
+        col.appendChild(stub);
+        cores.push(null);
+      }
+      wrap.appendChild(col);
+    });
+    // 底部同步状态行
+    var syncLine = el("div", "ix-status", "");
+    syncLine.style.flexBasis = "100%";
+    wrap.appendChild(syncLine);
+    container.appendChild(wrap);
+
+    var syncLabels = params.sync || [];
+    var syncing = false;  // 防回环
+    function updateSyncLine() {
+      var parts = [], vals = [];
+      cores.forEach(function (c, i) {
+        if (!c) return;
+        vals.push(c.getResult());
+        parts.push("图" + (i + 1) + " = " + fmt(c.getResult()));
+      });
+      var same = vals.length === 2 && vals[0] === vals[1];
+      syncLine.innerHTML = '<span class="' + (same ? "ix-success" : "ix-hint") + '">' +
+        esc(parts.join("，")) + (same ? " ✅ 两边相等" : "") + "</span>";
+    }
+    cores.forEach(function (c, i) {
+      if (!c) return;
+      var myLabel = (cfgs[i].params || {}).label;
+      c.onInput(function (v) {
+        if (!syncing && syncLabels.indexOf(myLabel) !== -1) {
+          syncing = true;
+          cores.forEach(function (o, j) {
+            if (o && j !== i && (cfgs[j].params || {}).label === myLabel) o.setValue(v);
+          });
+          syncing = false;
+        }
+        updateSyncLine();
+      });
+    });
+    updateSyncLine();
+  }
+
   /* ---------------- 注册 ---------------- */
   if (window.MATH_INTERACTIONS) {
     window.MATH_INTERACTIONS.register("slider-lab", renderSliderLab);
     window.MATH_INTERACTIONS.register("balance-drag", renderBalanceDrag);
+    window.MATH_INTERACTIONS.register("linked-dashboard", renderLinkedDashboard);
+    window.MATH_INTERACTIONS.register("plot-points", renderPlotPoints);
+    window.MATH_INTERACTIONS.register("side-compare", renderSideCompare);
   }
 })();

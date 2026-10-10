@@ -12,7 +12,7 @@ window.MATH_CHAPTERS = [
   { id: "ch01", title: "一元一次方程",             file: "data/ch01.js", status: "ready" },
   { id: "ch02", title: "整式与因式分解",           file: "data/ch02.js", status: "ready" },
   { id: "ch03", title: "分式",                     file: "data/ch03.js", status: "ready" },
-  { id: "ch04", title: "一元二次方程",             file: "data/ch04.js", status: "planned" },
+  { id: "ch04", title: "一元二次方程",             file: "data/ch04.js", status: "ready" },
   { id: "ch05", title: "不等式",                   file: "data/ch05.js", status: "planned" },
   { id: "ch06", title: "函数与一次函数",           file: "data/ch06.js", status: "planned" },
   { id: "ch07", title: "二次函数与反比例函数",     file: "data/ch07.js", status: "planned" },
