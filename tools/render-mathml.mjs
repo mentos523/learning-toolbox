@@ -154,6 +154,23 @@ class Parser {
       if (sup) return `<mover>${op}${sup}</mover>`;
       return op;
     }
+    // 上下标底数绑定修正（LaTeX 语义：^/_ 只绑最后一个字符）
+    // 多字符 <mi> 由连续字母合并而成（如 ax、nx）：遇 ^/_ 时拆成
+    // "<mi>前部</mi> + 末字符带上下标"，使上下标只作用于末字符。
+    // 只拆 <mi>：<mn>（如 10^2）整体为底绝不拆；函数名（log/sin/lim…）
+    // 是整体单位绝不拆；无上下标时（如 bx）保持合并 <mi>bx</mi> 不变。
+    // 大运算符（bigop 对象）走上面的分支，不受影响。
+    if (typeof base === "string" && (sub || sup)) {
+      const m = /^<mi>([a-zA-Z]{2,})<\/mi>$/.exec(base);
+      if (m && !FUNCNAMES.has(m[1])) {
+        const name = m[1];
+        const head = `<mi>${name.slice(0, -1)}</mi>`;
+        const last = `<mi>${name.slice(-1)}</mi>`;
+        if (sub && sup) return `${head}<msubsup>${last}${sub}${sup}</msubsup>`;
+        if (sub) return `${head}<msub>${last}${sub}</msub>`;
+        return `${head}<msup>${last}${sup}</msup>`;
+      }
+    }
     if (sub && sup) return `<msubsup>${base}${sub}${sup}</msubsup>`;
     if (sub) return `<msub>${base}${sub}</msub>`;
     if (sup) return `<msup>${base}${sup}</msup>`;
@@ -377,6 +394,13 @@ function runTests() {
     ["\\alpha + \\beta = \\pi", ["α", "β", "π"]],
     ["\\left( x + 1 \\right)^2", ["<msup>", "<mo>(</mo>"]],
     ["a \\leq b, c \\neq d", ["≤", "≠"]],
+    // 上下标底数绑定：多字符 <mi> 只绑末字符；<mn>/函数名整体为底
+    ["y = ax^2 + bx", ["<mi>a</mi><msup><mi>x</mi><mn>2</mn></msup>", "<mi>bx</mi>"]],
+    ["(x^n)' = n x^{n-1}", ["<mi>n</mi><msup><mi>x</mi>", "<msup><mi>x</mi><mi>n</mi></msup>"]],
+    ["2^3", ["<msup><mn>2</mn><mn>3</mn></msup>"]],
+    ["10^2", ["<msup><mn>10</mn><mn>2</mn></msup>"]],
+    ["a_1 + b_{23}", ["<msub><mi>a</mi><mn>1</mn></msub>"]],
+    ["\\sin^2 x + \\cos^2 x = 1", ["<msup><mi>sin</mi>", "<msup><mi>cos</mi>"]],
   ];
   let pass = 0;
   for (const [latex, wants] of cases) {

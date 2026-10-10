@@ -24,4 +24,4 @@ window.MATH_MML["ch05-u2-l2-p1#f3"] = "<math xmlns=\"http://www.w3.org/1998/Math
 window.MATH_MML["ch05-u2-l3-p1#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mi>x</mi><mo>(</mo><mn>10</mn><mo>−</mo><mi>x</mi><mo>)</mo><mo>≤</mo><mn>25</mn></mrow></math>";
 window.MATH_MML["ch05-u2-l3-p1#f2"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mi>x</mi><mo>=</mo><mn>5</mn></mrow></math>";
 window.MATH_MML["ch05-u2-l4-p1#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mi>ax</mi><mo>+</mo><mi>b</mi><mo>&gt;</mo><mn>0</mn></mrow></math>";
-window.MATH_MML["ch05-u2-l4-p1#f2"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><msup><mi>ax</mi><mn>2</mn></msup><mo>+</mo><mi>bx</mi><mo>+</mo><mi>c</mi><mo>&gt;</mo><mn>0</mn></mrow></math>";
+window.MATH_MML["ch05-u2-l4-p1#f2"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mi>a</mi><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mi>bx</mi><mo>+</mo><mi>c</mi><mo>&gt;</mo><mn>0</mn></mrow></math>";

@@ -849,9 +849,13 @@
    * 5. side-compare 并排对比
    * params: {left:{kind,params}, right:{kind,params}, sync?, labels?}
    *
-   * 左右两栏，每栏一个简化版 slider-lab。
-   * 栏内 params 含 target/targetLabel 时，复用与 slider-lab 完全相同的
+   * 左右两栏：kind==="slider-lab" 时用简化版 slider-lab（sliderLabCore），
+   * 栏内 params 含 target/targetLabel 时复用与 slider-lab 完全相同的
    * attachTargetFeedback（🎯 旗帜 + r===target 命中反馈）；无 target 的栏布局不变。
+   * kind 为其它已注册类型（如 plot-points）时查表调用其渲染器，
+   * params 原样透传（plot-points 的 autoPlay 定时器用 wrap 闭包 + 切页保护，
+   * 两栏实例互不干扰；SVG 有 max-width:100%，窄栏自适应）。
+   * 未知 kind 走占位分支，不抛错。
    * sync 列出的参数名：同名滑块联动（拖一边，另一边跟着动）。
    * 约束：不允许嵌套 side-compare。
    * ============================================================ */
@@ -879,6 +883,10 @@
           attachTargetFeedback(scCore.wrap, scParams, scCore);
         }
         cores.push(scCore);
+      } else if (cfg && cfg.kind === "plot-points") {
+        // 内嵌 plot-points：查表调用已注册渲染器，params 原样透传
+        ixByType["plot-points"](col, cfg.params || {});
+        cores.push(null);  // plot-points 无 getResult/onInput，同步行跳过该栏
       } else {
         var stub = el("div", "ix-stub", "暂不支持内嵌类型：" + esc(cfg && cfg.kind));
         col.appendChild(stub);
@@ -1096,13 +1104,20 @@
     refresh();
   }
 
-  /* ---------------- 注册 ---------------- */
-  if (window.MATH_INTERACTIONS) {
-    window.MATH_INTERACTIONS.register("slider-lab", renderSliderLab);
-    window.MATH_INTERACTIONS.register("balance-drag", renderBalanceDrag);
-    window.MATH_INTERACTIONS.register("linked-dashboard", renderLinkedDashboard);
-    window.MATH_INTERACTIONS.register("plot-points", renderPlotPoints);
-    window.MATH_INTERACTIONS.register("side-compare", renderSideCompare);
-    window.MATH_INTERACTIONS.register("numeric-lab", renderNumericLab);
+  /* ---------------- 渲染器内嵌查表 ----------------
+   * 与 window.MATH_INTERACTIONS 同源：注册时同步记一份本地表。
+   * side-compare 内嵌时按 kind 查表调用已注册渲染器（不复制渲染器代码）。*/
+  var ixByType = {};
+  function ixRegister(type, fn) {
+    ixByType[type] = fn;
+    if (window.MATH_INTERACTIONS) window.MATH_INTERACTIONS.register(type, fn);
   }
+
+  /* ---------------- 注册 ---------------- */
+  ixRegister("slider-lab", renderSliderLab);
+  ixRegister("balance-drag", renderBalanceDrag);
+  ixRegister("linked-dashboard", renderLinkedDashboard);
+  ixRegister("plot-points", renderPlotPoints);
+  ixRegister("side-compare", renderSideCompare);
+  ixRegister("numeric-lab", renderNumericLab);
 })();
