@@ -281,7 +281,8 @@ window.ROOTS_DATA = [
 { r:"tain", v:["tain"], d:"tain-", m:["持；握"], w:[
   ["contain","v.","包含",0],
   ["obtain","v.","获得",0],
-  ["maintain","v.","维持",0]
+  ["maintain","v.","维持",0],
+  ["content","n.","内容",0]
 ]},
 { r:"us", v:["us","ut"], d:"us- / ut-", m:["用"], w:[
   ["use","v.","使用",0],
@@ -550,9 +551,110 @@ window.ROOTS_DATA = [
 ]},
 { r:"pict", v:["pict"], d:"pict-", m:["画"], w:[
   ["picture","n.","图画",0]
-]}
+]},
+{ r:"ven", v:["ven","vent"], d:"ven- / vent-", m:["来"], w:[
+  ["invent","v.","发明",0],
+  ["invention","n.","发明",0],
+  ["prevent","v.","预防；阻止",0],
+  ["event","n.","事件",0],
+  ["adventure","n.","冒险",0],
+  ["convenient","adj.","方便的",0],
+  ["inventor","n.","发明家",0]
+]},
+{ r:"tend", v:["tend","tens","tent"], d:"tend- / tens-", m:["伸"], w:[
+  ["attend","v.","出席",0],
+  ["attention","n.","注意力",0],
+  ["intend","v.","打算",0],
+  ["intention","n.","意图",0],
+  ["pretend","v.","假装",0],
+  ["tense","adj.","紧张的",0],
+  ["tent","n.","帐篷",0]
+]},
+{ r:"pass", v:["pass"], d:"pass-", m:["通过"], w:[
+  ["pass","v.","通过；及格",0],
+  ["passage","n.","段落；通道",0],
+  ["passenger","n.","乘客",0]
+]},
+{ r:"medi", v:["medi"], d:"medi-", m:["中间"], w:[
+  ["immediate","adj.","立即的",0],
+  ["medium","adj.","中等的",0]
+]},
+{ r:"oper", v:["oper"], d:"oper-", m:["工作"], w:[
+  ["operate","v.","操作；动手术",0],
+  ["operation","n.","操作；手术",0],
+  ["operator","n.","操作员",0]
+]},
+{ r:"solv", v:["solv","solu"], d:"solv- / solu-", m:["松","解决"], w:[
+  ["solve","v.","解决",1],
+  ["solution","n.","解决办法",1],
+  ["resolve","v.","解决",1],
+  ["resolution","n.","决议",1],
+  ["absolute","adj.","绝对的",0]
+]},
+{ r:"nunci", v:["nunci","nounc"], d:"nunci-", m:["宣布"], w:[
+  ["announce","v.","宣布",0],
+  ["pronounce","v.","发音",0],
+  ["pronunciation","n.","发音",0],
+  ["announcement","n.","公告",0]
+]},
+{ r:"mod", v:["mod"], d:"mod-", m:["模式","适度"], w:[
+  ["model","n.","模型",0],
+  ["modern","adj.","现代的",0],
+  ["modest","adj.","谦虚的",1]
+]},
+{ r:"fort", v:["fort"], d:"fort-", m:["强"], w:[
+  ["comfort","n.","安慰",0],
+  ["comfortable","adj.","舒适的",0],
+  ["effort","n.","努力",0]
+]},
+{ r:"terr", v:["terr"], d:"terr-", m:["怕"], w:[
+  ["terrible","adj.","可怕的",0],
+  ["terror","n.","恐怖",0],
+  ["terrify","v.","使害怕",0]
+]},
+{ r:"loc", v:["loc"], d:"loc-", m:["地方"], w:[
+  ["local","adj.","本地的",0],
+  ["allocate","v.","分配",0]
+]},
+{ r:"vac", v:["vac"], d:"vac-", m:["空"], w:[
+  ["vacation","n.","假期",0],
+  ["vacant","adj.","空的",0]
+]},
+{ r:"spir", v:["spir"], d:"spir-", m:["呼吸"], w:[
+  ["spirit","n.","精神",0],
+  ["inspire","v.","激发",0]
+]},
+{ r:"pac", v:["pac"], d:"pac-", m:["和平"], w:[
+  ["peace","n.","和平",0],
+  ["peaceful","adj.","和平的",0]
+]},
+{ r:"gen", v:["gen"], d:"gen-", m:["生","种"], w:[
+  ["general","adj.","一般的",1],
+  ["generous","adj.","慷慨的",1]
+]},
+{ r:"vinc", v:["vinc","vict"], d:"vinc- / vict-", m:["胜"], w:[
+  ["victory","n.","胜利",0],
+  ["convince","v.","说服",0]
+]},
+{ r:"typ", v:["typ"], d:"typ-", m:["型"], w:[
+  ["type","n.","类型",0],
+  ["typical","adj.","典型的",0]
+]},
+{ r:"labor", v:["labor"], d:"labor-", m:["劳"], w:[
+  ["labor","n.","劳动",0],
+  ["laboratory","n.","实验室",0]
+]},
+{ r:"norm", v:["norm"], d:"norm-", m:["规范"], w:[
+  ["normal","adj.","正常的",0],
+  ["abnormal","adj.","反常的",0]
+]},
+{ r:"fus", v:["fus"], d:"fus-", m:["倾注"], w:[
+  ["confuse","v.","使混乱",0],
+  ["refuse","v.","拒绝",0]
+]},
 
 ];
+
 /* 数据校验：开发期自检（控制台无输出即通过） */
 (function () {
   "use strict";
