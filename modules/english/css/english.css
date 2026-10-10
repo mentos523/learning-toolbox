@@ -219,7 +219,13 @@ body {
   min-height: 1.3em;
 }
 .word-hero-word .morph { color: var(--morph); }
-.word-hero-word .hyph { color: var(--ink-soft); font-weight: normal; }
+.word-hero-word .hyph {
+  color: var(--ink-soft);
+  opacity: 0.4;
+  font-size: 0.55em;
+  vertical-align: 0.35em;
+  margin: 0 3px;
+}
 .word-hero-mean {
   font-size: 1.05rem;
   color: var(--ink-soft);
@@ -227,6 +233,14 @@ body {
 }
 .word-hero-mean .pos { font-size: 0.9em; margin-right: 8px; }
 .word-hero-mean b { color: var(--ink); }
+.word-hero-phon {
+  font-size: 1rem;
+  color: var(--ink-soft);
+  opacity: 0.75;
+  letter-spacing: 1px;
+  margin-bottom: 2px;
+  font-family: "Charis SIL", "Doulos SIL", Georgia, serif;
+}
 /* 切换时的电影感转场 */
 @keyframes cine-in {
   from { opacity: 0; transform: translateY(16px); filter: blur(5px); }

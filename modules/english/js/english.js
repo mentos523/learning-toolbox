@@ -184,7 +184,7 @@
     var before = esc(w.slice(0, i));
     var after = esc(w.slice(i + best.length));
     if (i === 0) {
-      return '<span class="morph">' + morph + '</span><span class="hyph">-</span>' + after;
+      return '<span class="morph">' + morph + '</span><span class="hyph">·</span>' + after;
     }
     return before + '<span class="morph">' + morph + "</span>" + after;
   }
@@ -467,6 +467,11 @@
       return;
     }
     var wd = currentWord();
+    // 音标（顶部）
+    var heroPhon = document.getElementById("hero-phon");
+    var phon = (window.WORD_PHON && window.WORD_PHON[wd[0]]) || "";
+    heroPhon.textContent = phon;
+    heroPhon.style.display = phon ? "" : "none";
     // 顶部：整个单词（词根词素标红）
     heroWord.innerHTML = heroWordHtml(wd[0], rt.v);
     cineRestart(heroWord);
