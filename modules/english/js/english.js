@@ -46,6 +46,7 @@
     var safeRate = Math.min(1.5, Math.max(0.5, Number(settings.rate)));
     if (!isFinite(safeRate)) safeRate = 0.9;
     settings.rate = Math.round(safeRate * 10) / 10;
+    saveSettings();   // 钳制后回写，避免脏值残留
     if (rateVal) { rateVal.textContent = settings.rate.toFixed(1) + "x"; }
     var auto = document.getElementById("set-auto");
     if (auto) { auto.checked = !!settings.auto; }
@@ -154,11 +155,14 @@
     VOICES.us = pickVoice(vs, "en-US");
     VOICES.gb = pickVoice(vs, "en-GB");
   }
+  /* 朗读序号：防止 cancel() 触发旧 utterance 的 onend 抹掉新按钮高亮 */
+  var speakSeq = 0;
   function speak(text, forceVoice) {
     if (!("speechSynthesis" in window)) { toast("当前浏览器不支持朗读"); return; }
     if (!text) return;
     try {
       speechSynthesis.cancel();
+      var myId = ++speakSeq;
       var u = new SpeechSynthesisUtterance(text);
       var mode = forceVoice || settings.voice;
       var v = mode === "gb" ? VOICES.gb : VOICES.us;
@@ -168,6 +172,7 @@
       var btn = document.getElementById(mode === "gb" ? "tts-gb" : "tts-us");
       if (btn) btn.classList.add("speaking");
       u.onend = u.onerror = function () {
+        if (myId !== speakSeq) return;   // 只响应最后一次朗读
         document.querySelectorAll(".tts-btn").forEach(function (b) { b.classList.remove("speaking"); });
       };
       speechSynthesis.speak(u);
@@ -215,6 +220,15 @@
     document.querySelectorAll("#root-list li").forEach(function (li) {
       li.classList.toggle("active", li.dataset.r === rt.r);
     });
+    // 若目标词根被搜索过滤掉了，清空搜索重渲染，保证高亮可见
+    if (!document.querySelector('#root-list li[data-r="' + rt.r + '"]')) {
+      var search = document.getElementById("root-search");
+      search.value = "";
+      renderRootList("");
+      document.querySelectorAll("#root-list li").forEach(function (li) {
+        li.classList.toggle("active", li.dataset.r === rt.r);
+      });
+    }
     // 词根拨盘：字母变形
     variantWheel.setItems(rt.v.map(function (x) { return { label: x + "-" }; }));
     // 词根意思分列
@@ -225,6 +239,8 @@
     // 单词拨盘
     wordWheel.setItems(rt.w.map(function (wd) { return { label: wd[0] }; }));
     renderWord();
+    // 深链接写回：刷新/分享后回到当前词根（replaceState 不污染历史栈）
+    try { history.replaceState(null, "", "#r=" + rt.r); } catch (e) {}
     if (window.innerWidth <= 1100 && !(opts && opts.keepOpen)) closeLeft();
   }
 
@@ -282,6 +298,11 @@
     var need = window.innerWidth <= 1100 &&
       (!app.classList.contains("left-closed") || !app.classList.contains("right-closed"));
     scrim.style.display = need ? "block" : "none";
+    // 收起的抽屉移出 Tab 序列与无障碍树（动画不受影响）
+    var sb = document.querySelector(".sidebar");
+    var st = document.querySelector(".settings");
+    if (sb) sb.inert = app.classList.contains("left-closed");
+    if (st) st.inert = app.classList.contains("right-closed");
   }
 
   /* ---------------- 统计 ---------------- */

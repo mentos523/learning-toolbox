@@ -14,6 +14,7 @@
   --accent: #3b82f6;
   --accent-soft: #dbeafe;
   --accent-strong: #1d4ed8;   /* 深色强调：保证白字对比度 ≥4.5:1 */
+  --accent-text: #1d4ed8;     /* 浅底文字用色：对比度 ≈6.7:1 */
   --hl: #fef08a;
   --radius: 14px;
   --shadow: 0 4px 16px rgba(80, 60, 20, 0.08);
@@ -28,6 +29,8 @@ body[data-theme="soft"] {
   --line: #d8e2c8;
   --accent: #4d7c0f;
   --accent-soft: #ecfccb;
+  --accent-strong: #3f6212;
+  --accent-text: #3f6212;
   --hl: #fef9c3;
 }
 body[data-theme="dark"] {
@@ -38,7 +41,8 @@ body[data-theme="dark"] {
   --line: #3a4054;
   --accent: #7cb3ff;
   --accent-soft: #2c3a55;
-  --accent-strong: #4a7ddb;   /* 暗夜下白字对比度 ≥4.5:1 */
+  --accent-strong: #3b6fd4;   /* 暗夜下白字对比度 ≈4.76:1 */
+  --accent-text: #9cc2ff;     /* 暗夜下浅底文字色 */
   --hl: #66550f;
   --shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
 }
@@ -209,7 +213,7 @@ body {
 }
 .wheel-item .w-zh { font-size: 0.85em; }
 .wheel-item.selected {
-  color: var(--accent);
+  color: var(--accent-text);
   font-weight: bold;
   transform: scale(1.18);
 }
@@ -306,11 +310,16 @@ body {
 .map-cell .tag {
   display: inline-block;
   font-size: 0.78rem;
-  color: var(--accent);
-  border: 1px solid var(--accent);
+  color: var(--accent-text);
+  border: 1px solid var(--accent-text);
   border-radius: 999px;
   padding: 0 10px;
   margin-right: 8px;
+}
+/* 高亮底上的 tag：保证对比度 */
+.map-cell.hl .tag {
+  color: var(--ink);
+  border-color: var(--ink);
 }
 .word-meta {
   margin-top: 12px;
@@ -328,9 +337,9 @@ body {
   flex-wrap: wrap;
 }
 .tts-btn {
-  border: 2px solid var(--accent);
+  border: 2px solid var(--accent-text);
   background: var(--panel);
-  color: var(--accent);
+  color: var(--accent-text);
   border-radius: 999px;
   padding: 10px 24px;
   font-size: 1.05rem;
@@ -338,7 +347,7 @@ body {
   font-weight: bold;
 }
 .tts-btn:hover { background: var(--accent-soft); }
-.tts-btn.speaking { background: var(--accent); color: #fff; }
+.tts-btn.speaking { background: var(--accent-strong); border-color: var(--accent-strong); color: #fff; }
 .tts-btn:disabled { opacity: 0.45; cursor: not-allowed; }
 .tts-rate { margin-left: auto; font-size: 0.9rem; color: var(--ink-soft); }
 .tts-note { font-size: 0.82rem; color: var(--ink-soft); margin-top: 8px; }
@@ -374,9 +383,9 @@ body {
   white-space: nowrap;
 }
 .seg button.on {
-  border-color: var(--accent);
+  border-color: var(--accent-text);
   background: var(--accent-soft);
-  color: var(--accent);
+  color: var(--accent-text);
   font-weight: bold;
 }
 .set-row { display: flex; align-items: center; gap: 10px; margin-top: 10px; font-size: 0.9rem; }
@@ -431,8 +440,9 @@ body {
 .fab-left { left: 14px; }
 .fab-right { right: 14px; }
 @media (min-width: 1101px) {
-  .app.left-closed .fab-left { display: block; }
-  .app.right-closed .fab-right { display: block; }
+  /* 注意：fab 按钮是 #app 的兄弟节点（不在其内部），必须用兄弟选择器 */
+  .app.left-closed ~ .fab-left { display: block; }
+  .app.right-closed ~ .fab-right { display: block; }
 }
 
 /* ---------- 平板：抽屉 ---------- */

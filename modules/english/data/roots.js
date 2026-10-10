@@ -78,7 +78,7 @@ window.ROOTS_DATA = [
 { r:"phon", v:["phon"], d:"phon-", m:["声"], w:[
   ["phone","n.","电话",0],
   ["microphone","n.","麦克风",0],
-  ["headphone","n.","耳机",0]
+  ["headphones","n.","耳机",0]
 ]},
 { r:"sym", v:["sym","syn"], d:"sym- / syn-", m:["共同"], w:[
   ["sympathy","n.","同情",0],
@@ -234,7 +234,8 @@ window.ROOTS_DATA = [
   ["motion","n.","运动",0],
   ["motor","n.","马达",0],
   ["promote","v.","促进",0],
-  ["emotion","n.","情绪",0]
+  ["emotion","n.","情绪",0],
+  ["remote","adj.","遥远的",0]
 ]},
 { r:"cur", v:["cur","curs"], d:"cur- / curs-", m:["跑"], w:[
   ["course","n.","课程",0],
@@ -309,7 +310,8 @@ window.ROOTS_DATA = [
 ]},
 { r:"sens", v:["sens","sent"], d:"sens- / sent-", m:["感觉"], w:[
   ["sense","n.","感觉",0],
-  ["sensitive","adj.","敏感的",0]
+  ["sensitive","adj.","敏感的",0],
+  ["nonsense","n.","胡说",0]
 ]},
 { r:"aud", v:["aud"], d:"aud-", m:["听"], w:[
   ["audience","n.","听众；观众",0],
@@ -339,7 +341,8 @@ window.ROOTS_DATA = [
 { r:"struct", v:["struct"], d:"struct-", m:["建造"], w:[
   ["structure","n.","结构",0],
   ["construct","v.","建造",0],
-  ["instruct","v.","指导",0]
+  ["instruct","v.","指导",0],
+  ["destroy","v.","破坏",0]
 ]},
 { r:"creat", v:["creat"], d:"creat-", m:["创造"], w:[
   ["create","v.","创造",0],
@@ -360,7 +363,8 @@ window.ROOTS_DATA = [
 { r:"popul", v:["popul","publ"], d:"popul-", m:["人民"], w:[
   ["population","n.","人口",0],
   ["popular","adj.","流行的",0],
-  ["public","adj.","公共的",0]
+  ["public","adj.","公共的",0],
+  ["publish","v.","出版",0]
 ]},
 { r:"hum", v:["hum"], d:"hum-", m:["地（低）","人"], w:[
   ["humble","adj.","谦逊的",0],
