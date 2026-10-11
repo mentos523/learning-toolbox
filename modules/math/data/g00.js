@@ -239,9 +239,9 @@ window.MATH_CH["g00"] = {
               auxInteraction: null,
               hints: [
                 "拖动蓝色顶点 A、B、C：边长和角度一直在变。",
-                "但无论怎么拖，它永远是一张平平的“面”——这就是二维。",
-                "把它拖成一条线？拖不成！三角形再怎么变，也变不成点或线。",
-                "记住：变化的是形状大小，不变的是“它是二维的面”。"
+                "只要三个点不共线，它永远是一张平平的“面”——这就是二维。",
+                "故意把三个点拖到同一条线上试试：三角形会被“压扁”成一条线段，面积变成 0——这叫退化情形。",
+                "记住：变化的是形状大小；不退化时，不变的是“它是二维的面”。"
               ],
               examples: [
                 { text: "吹气球：气球变大，表面永远是“面”", figure: "实物" }
@@ -274,10 +274,10 @@ window.MATH_CH["g00"] = {
                       label: "三个角分开",
                       caption: "三角形的三个角：∠1、∠2、∠3，各待各的位置。",
                       shapes: [
-                        { t: "poly", pts: [[20,70],[80,70],[50,25]], color: "line", width: 3 },
-                        { t: "arc", v: [20,70], a1: 0, a2: 55, r: 10, group: 1, color: "corrAngle" },
-                        { t: "arc", v: [80,70], a1: 125, a2: 180, r: 10, group: 2, color: "corrAngle" },
-                        { t: "arc", v: [50,25], a1: 208, a2: 332, r: 10, group: 3, color: "corrAngle" },
+                        { t: "poly", pts: [[20,70],[80,70],[50,27.14]], color: "line", width: 3 },
+                        { t: "arc", v: [20,70], a1: -55, a2: 0, r: 10, group: 1, color: "corrAngle" },
+                        { t: "arc", v: [80,70], a1: 180, a2: 235, r: 10, group: 2, color: "corrAngle" },
+                        { t: "arc", v: [50,27.14], a1: 55, a2: 125, r: 10, group: 3, color: "corrAngle" },
                         { t: "txt", p: [31,61], text: "∠1", size: 13 },
                         { t: "txt", p: [69,61], text: "∠2", size: 13 },
                         { t: "txt", p: [50,40], text: "∠3", size: 13 }
@@ -330,16 +330,16 @@ window.MATH_CH["g00"] = {
                     {
                       caption: "第 1 步：完整的三角形，三个角都在。",
                       shapes: [
-                        { t: "poly", pts: [[20,70],[80,70],[50,25]], color: "line", width: 3 },
-                        { t: "arc", v: [20,70], a1: 0, a2: 55, r: 10, group: 1, color: "corrAngle" },
-                        { t: "arc", v: [80,70], a1: 125, a2: 180, r: 10, group: 2, color: "corrAngle" },
-                        { t: "arc", v: [50,25], a1: 208, a2: 332, r: 10, group: 3, color: "corrAngle" }
+                        { t: "poly", pts: [[20,70],[80,70],[50,27.14]], color: "line", width: 3 },
+                        { t: "arc", v: [20,70], a1: -55, a2: 0, r: 10, group: 1, color: "corrAngle" },
+                        { t: "arc", v: [80,70], a1: 180, a2: 235, r: 10, group: 2, color: "corrAngle" },
+                        { t: "arc", v: [50,27.14], a1: 55, a2: 125, r: 10, group: 3, color: "corrAngle" }
                       ]
                     },
                     {
                       caption: "第 2 步：把三个角撕下来，顶点拼到一起。",
                       shapes: [
-                        { t: "poly", pts: [[20,70],[80,70],[50,25]], color: "line", width: 1.5, dash: "5,4" },
+                        { t: "poly", pts: [[20,70],[80,70],[50,27.14]], color: "line", width: 1.5, dash: "5,4" },
                         { t: "arc", v: [50,45], a1: 0, a2: 55, r: 10, group: 1, color: "corrAngle" },
                         { t: "arc", v: [50,45], a1: 55, a2: 125, r: 12, group: 2, color: "corrAngle" },
                         { t: "arc", v: [50,45], a1: 125, a2: 180, r: 14, group: 3, color: "corrAngle" },
@@ -410,7 +410,8 @@ window.MATH_CH["g00"] = {
                 "反例：三个角胡乱叠起来，拼不成直线——那是你拼错了，不是定理错了。",
                 "⚠️ 别搞混：量 100 个三角形都是 180°，那叫“验证”，不是“证明”。",
                 "拼图只拼一次就够了，因为拼的动作不看三角形的长相——这才叫证明。",
-                "记住一句话：拼出来，就说清楚了。"
+                "记住一句话：拼出来，就说清楚了。",
+                "更严格的证明，我们在第 3 章用平行线再来一次。"
               ],
               examples: [],
               prev: "g00-u1-l3-p2",
@@ -540,7 +541,7 @@ window.MATH_CH["g00"] = {
             },
             {
               id: "g00-u1-l4-p3",
-              title: "导论小测：4 道题",
+              title: "导论小测：5 道题",
               concept: "本章习题",
               formulas: [
                 {
