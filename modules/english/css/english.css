@@ -290,8 +290,8 @@ body {
 /* 固定高度：防止多义词根撑高挤压拨轮（容纳 2 行词义） */
 .dial-mean {
   flex: none;
-  height: 5em;
-  overflow: hidden;
+  height: 7.5em;
+  overflow-y: auto;
   text-align: center;
   font-size: 1.02rem;
   padding-top: 10px;
