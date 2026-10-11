@@ -4,17 +4,29 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23f59e0b'/%3E%3Ctext x='32' y='44' font-size='36' text-anchor='middle' fill='white' font-family='sans-serif'%3Eπ%3C/text%3E%3C/svg%3E">
-<title>数学 · 代数 — 学习工具箱</title>
+<title>数学 · 代数与几何 — 学习工具箱</title>
 <meta name="description" content="从方程一路到微积分：数形结合，一页一屏，动手看到数学。">
 <link rel="stylesheet" href="../../assets/css/style.css">
 <link rel="stylesheet" href="css/math.css">
 </head>
 <body data-theme="light">
+<!-- （蓝队 2026-10-11 白队 g00 终查问题 3）深色模式入口：跟随系统
+     prefers-color-scheme，系统切换时实时响应；几何 SVG 用 CSS 变量
+     取色，切换主题不重绘画布。无按钮（header 在 390px 下已拥挤）。 -->
+<script>
+(function () {
+  var mq = window.matchMedia("(prefers-color-scheme: dark)");
+  function apply() { document.body.setAttribute("data-theme", mq.matches ? "dark" : "light"); }
+  apply();
+  if (mq.addEventListener) mq.addEventListener("change", apply);
+  else if (mq.addListener) mq.addListener(apply);  // 旧版 Safari
+})();
+</script>
 
 <div class="m-app" id="app">
   <!-- 左：章节-单元-课程目录 -->
   <aside class="m-drawer" id="drawer" aria-label="课程目录">
-    <h2>代数 · 课程目录</h2>
+    <h2>数学 · 课程目录</h2>
     <div class="m-tree" id="tree"></div>
   </aside>
 
@@ -23,7 +35,7 @@
     <header class="m-head">
       <button class="m-menu-btn" id="menu-btn" aria-label="打开目录">☰ 目录</button>
       <a class="m-back" href="../../index.html" aria-label="返回工具箱首页">← 返回</a>
-      <h1>数学 · 代数</h1>
+      <h1>数学 · 代数与几何</h1>
       <span class="m-page-ind" id="page-ind"></span>
     </header>
 

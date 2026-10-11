@@ -207,7 +207,12 @@ body[data-theme="dark"] #mathml-warn { background: #4a3a1a; color: #fde68a; }
 
 /* ---------- 手机 ---------- */
 @media (max-width: 1023px) {
-  .m-head h1 { font-size: 0.95rem; white-space: nowrap; }
+  .m-head h1 {
+    font-size: 0.95rem; white-space: nowrap;
+    /* （蓝队 2026-10-11 白队 g00 终查问题 2）390px 下 header 挤高：
+       标题允许收缩并省略，不把左右按钮挤换行 */
+    min-width: 0; overflow: hidden; text-overflow: ellipsis;
+  }
   .m-drawer {
     position: fixed; left: 0; top: 0; bottom: 0; z-index: 60;
     transform: translateX(-105%); transition: transform 0.3s ease;
@@ -217,7 +222,12 @@ body[data-theme="dark"] #mathml-warn { background: #4a3a1a; color: #fde68a; }
   .m-menu-btn {
     display: inline-block; border: 1px solid var(--m-line); background: var(--m-panel);
     border-radius: 10px; padding: 6px 12px; font-size: 0.9rem; cursor: pointer; color: var(--m-ink);
+    /* （蓝队 2026-10-11 白队 g00 终查问题 2）"☰ 目录"不许换行竖排、不许被压缩 */
+    white-space: nowrap; flex: none;
   }
+  /* （蓝队 2026-10-11 白队 g00 终查问题 1）step-play 帧 SVG 移动端限高：
+     SVG 带 viewBox，按比例缩小；讲解页（单步、无控制条）一屏放下 */
+  .ix-frame svg { max-height: 26vh; }
 }
 @media (min-width: 1024px) {
   .m-menu-btn { display: none; }

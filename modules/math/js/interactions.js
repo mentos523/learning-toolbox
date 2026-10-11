@@ -2696,8 +2696,14 @@
     var loop = params.loop === true;
     var idx = 0, playing = false, timer = null;
 
+    // （蓝队 2026-10-11 白队 g00 终查问题 1）单步 = 静态定格图：
+    // 不渲染控制条（◀/▶/⏯/↺ 对单步无意义），也不显示"第 1 / 1 步"
+    // 读数行，省出纵向空间，避免 390px 下控制条被裁掉看不见。
+    var single = steps.length === 1;
+
     var wrap = el("div", "ix-geo-wrap");
     var readout = el("div", "ix-geo-readout", "");
+    if (single) readout.style.display = "none";
     wrap.appendChild(readout);
     var fr = geoFrame();
     var frameBox = el("div", "ix-frame");
@@ -2706,18 +2712,21 @@
     var cap = el("div", "ix-step-cap", "");
     wrap.appendChild(cap);
 
-    var ctrl = el("div", "ix-step-ctrl");
-    function mkBtn(label) {
-      var b = el("button", "ix-btn", label);
-      b.type = "button";
-      ctrl.appendChild(b);
-      return b;
+    var btnPrev = null, btnPlay = null, btnNext = null, btnRestart = null;
+    if (!single) {
+      var ctrl = el("div", "ix-step-ctrl");
+      function mkBtn(label) {
+        var b = el("button", "ix-btn", label);
+        b.type = "button";
+        ctrl.appendChild(b);
+        return b;
+      }
+      btnPrev = mkBtn("◀ 上一步");
+      btnPlay = mkBtn("▶ 播放");
+      btnNext = mkBtn("下一步 ▶");
+      btnRestart = mkBtn("↺ 重头");
+      wrap.appendChild(ctrl);
     }
-    var btnPrev = mkBtn("◀ 上一步");
-    var btnPlay = mkBtn("▶ 播放");
-    var btnNext = mkBtn("下一步 ▶");
-    var btnRestart = mkBtn("↺ 重头");
-    wrap.appendChild(ctrl);
     container.appendChild(wrap);
 
     function show(i) {
@@ -2727,8 +2736,10 @@
       (st.shapes || []).forEach(function (sh) { drawGeoShape(fr.svg, sh, fr); });
       cap.textContent = st.caption || "";
       readout.innerHTML = '<span class="ix-val">第 ' + (idx + 1) + " / " + steps.length + " 步</span>";
-      btnPrev.disabled = idx === 0;
-      btnNext.disabled = idx === steps.length - 1;
+      if (!single) {
+        btnPrev.disabled = idx === 0;
+        btnNext.disabled = idx === steps.length - 1;
+      }
       // 帧切换淡入
       frameBox.classList.remove("ix-frame");
       void frameBox.offsetWidth;
@@ -2737,25 +2748,27 @@
     function stop() {
       playing = false;
       if (timer) { clearInterval(timer); timer = null; }
-      btnPlay.innerHTML = "▶ 播放";
+      if (btnPlay) btnPlay.innerHTML = "▶ 播放";
     }
-    btnPrev.addEventListener("click", function () { stop(); show(idx - 1); });
-    btnNext.addEventListener("click", function () { stop(); show(idx + 1); });
-    btnRestart.addEventListener("click", function () { stop(); show(0); });
-    btnPlay.addEventListener("click", function () {
-      if (playing) { stop(); return; }
-      playing = true;
-      btnPlay.innerHTML = "⏸ 暂停";
-      timer = setInterval(function () {
-        if (idx >= steps.length - 1) {
-          if (loop) show(0);
-          else stop();
-        } else show(idx + 1);
-      }, interval);
-    });
+    if (!single) {
+      btnPrev.addEventListener("click", function () { stop(); show(idx - 1); });
+      btnNext.addEventListener("click", function () { stop(); show(idx + 1); });
+      btnRestart.addEventListener("click", function () { stop(); show(0); });
+      btnPlay.addEventListener("click", function () {
+        if (playing) { stop(); return; }
+        playing = true;
+        btnPlay.innerHTML = "⏸ 暂停";
+        timer = setInterval(function () {
+          if (idx >= steps.length - 1) {
+            if (loop) show(0);
+            else stop();
+          } else show(idx + 1);
+        }, interval);
+      });
+    }
 
     show(0);
-    if (params.autoplay === true) btnPlay.click();  // 落页即播
+    if (!single && params.autoplay === true) btnPlay.click();  // 落页即播
   }
 
   /* ============================================================
