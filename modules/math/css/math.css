@@ -175,7 +175,10 @@ body[data-theme="dark"] #mathml-warn { background: #4a3a1a; color: #fde68a; }
  * 习题页有 6–7 道题，旧的 max-height:6.5em/overflow:hidden 会截断；
  * exercise 类改为区内滚动（页面本身仍一屏无滚动），答案放 <details> 折叠。 */
 .m-hints.exercise {
-  max-height: 36vh; overflow-y: auto; -webkit-overflow-scrolling: touch;
+  /* 白队 2026-10-11 g10 终查：hints 区占 282–304px 挤压 flex:1 交互区，
+   * .m-interaction overflow:hidden + 内容居中，超出的控件被静默裁掉；
+   * 36vh → min(30vh, 250px)，区内仍可滚动不丢内容，给交互区腾出约 50–60px */
+  max-height: min(30vh, 250px); overflow-y: auto; -webkit-overflow-scrolling: touch;
   padding-right: 4px;
 }
 .m-answers { margin: 8px 0 2px; }
@@ -367,7 +370,8 @@ body[data-theme="dark"] #mathml-warn { background: #4a3a1a; color: #fde68a; }
  * math.js 加 explain 类）改为区内滚动，复用习题页 .exercise 模式；
  * 页面本身仍一屏无滚动。 */
 .m-hints.explain, .explain-scroll {
-  max-height: 36vh; overflow-y: auto; -webkit-overflow-scrolling: touch;
+  /* 白队 2026-10-11 g10 终查：同上，36vh → min(30vh, 250px) */
+  max-height: min(30vh, 250px); overflow-y: auto; -webkit-overflow-scrolling: touch;
   padding-right: 4px;
 }
 
