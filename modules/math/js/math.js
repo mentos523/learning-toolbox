@@ -136,10 +136,12 @@
       }
     }
 
-    // 交互区溢出检测（见 fitInteraction 定义处注释）
-    fitInteraction();
-
     // 点拨
+    // （白队 2026-10-11 g10 复验：fitInteraction 排序修复）注意：溢出检测
+    // 必须放在本函数末尾（hints/答案渲染之后）。hints 区是 flex:none，
+    // 习题页可达 250px，会把 flex:1 的交互区往下压；若在 hints 渲染前检测，
+    // 量到的是"旧 hints 高度下"的交互区尺寸，之后 hints 变高导致的新溢出
+    // 将被漏检 → 静默裁剪。见函数末尾调用。
     // （蓝队 2026-10-10 缺陷A修复）习题页（concept === "本章习题"）：
     // 题目区加 exercise 类变为可滚动（CSS .m-hints.exercise），
     // examples 作为"核对答案"折叠渲染——此前 examples 从未被渲染，答案用户永远看不到。
@@ -179,6 +181,12 @@
     saveProgress();
     try { history.replaceState(null, "", "#p=" + page.id); } catch (e) {}
     markActiveLesson(page.id);
+
+    // 交互区溢出检测（见 fitInteraction 定义处注释）。
+    // （白队 2026-10-11 g10 复验）必须在 hints/答案全部渲染后执行：
+    // 此时 flex 布局已最终确定，量到的才是交互区的真实可用高度。
+    // scrollHeight 的读取会强制同步布局，无需额外 rAF。
+    fitInteraction();
   }
 
   function go(d) {
@@ -312,6 +320,16 @@
       if (rsT) clearTimeout(rsT);
       rsT = setTimeout(fitInteraction, 150);
     });
+
+    // （白队 2026-10-11 g10 复验）习题页"核对答案"折叠展开/收起会改变
+    // hints 区高度（flex:none，上限 250px），从而改变 flex:1 交互区的可用
+    // 高度；toggle 事件不冒泡，用捕获阶段委托监听，展开后重算溢出。
+    document.addEventListener("toggle", function (e) {
+      if (e.target && e.target.classList &&
+          e.target.classList.contains("m-answers")) {
+        fitInteraction();
+      }
+    }, true);
 
     // 深链接：#p=<pageId>
     var m = (location.hash || "").match(/#p=([\w-]+)/);
