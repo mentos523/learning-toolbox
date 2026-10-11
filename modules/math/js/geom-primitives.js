@@ -172,6 +172,23 @@
     return segment(svgRoot, best[0][0], best[0][1], best[1][0], best[1][1], opts);
   }
 
+  /* ---------------- 原语：圆 ----------------
+   * fill：语义色名 → 填充该色（默认不透明度 0.22）；缺省不填充。 */
+  function circle(svgRoot, x, y, r, opts) {
+    opts = opts || {};
+    var c = el("circle", {
+      cx: x, cy: y, r: r,
+      fill: opts.fill ? colorOf(opts.fill) : "none",
+      stroke: colorOf(opts.color || "line"),
+      "stroke-width": opts.width || 2.5
+    });
+    if (opts.fill) c.setAttribute("fill-opacity",
+      opts.opacity == null ? 0.22 : opts.opacity);
+    if (opts.dash) c.setAttribute("stroke-dasharray", opts.dash);
+    svgRoot.appendChild(c);
+    return c;
+  }
+
   /* ---------------- 原语：角弧线（双编码：颜色 + 弧数） ----------------
    * a1→a2 按数学逆时针方向画；group 1/2/3 → 单弧/双弧/三弧。 */
   function angleArc(svgRoot, vx, vy, a1, a2, r, opts) {
@@ -411,7 +428,7 @@
     C: C, colorOf: colorOf,
     rad: rad, deg: deg, norm360: norm360, norm180: norm180,
     dist: dist, polar: polar, angleOf: angleOf,
-    point: point, segment: segment, ray: ray, line: line,
+    point: point, segment: segment, ray: ray, line: line, circle: circle,
     angleArc: angleArc, ticks: ticks, parArrows: parArrows,
     rightAngle: rightAngle, label: label, arrowMarker: arrowMarker,
     vibrate: vibrate, beep: beep, flash: flash, ripple: ripple, settle: settle

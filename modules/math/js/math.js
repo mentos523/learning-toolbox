@@ -126,13 +126,17 @@
     // （蓝队 2026-10-10 缺陷A修复）习题页（concept === "本章习题"）：
     // 题目区加 exercise 类变为可滚动（CSS .m-hints.exercise），
     // examples 作为"核对答案"折叠渲染——此前 examples 从未被渲染，答案用户永远看不到。
+    // （蓝队 2026-10-11）讲解页（page.pageKind === "explain"）：
+    // 讲透需要 300 字（pedagogy §5.2），点拨区加 explain 类变为
+    // 可滚动（CSS .m-hints.explain / .explain-scroll，复用习题页模式）。
     var isExercise = page.concept === "本章习题";
+    var isExplain = page.pageKind === "explain";
     var hh = "";
     (page.hints || []).forEach(function (h, i) {
       hh += "<p>" + (i === 0 ? '<span class="point">💡</span> ' : "") + esc(h) + "</p>";
     });
     var hintsBox = $("p-hints");
-    hintsBox.className = "m-hints" + (isExercise ? " exercise" : "");
+    hintsBox.className = "m-hints" + (isExercise ? " exercise" : "") + (isExplain ? " explain" : "");
     hintsBox.innerHTML = hh;
     if (isExercise) {
       (page.examples || []).forEach(function (ex) {

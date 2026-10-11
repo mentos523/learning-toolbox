@@ -18,6 +18,10 @@
  *   slow-replay       慢动作回放：抛物线/追及轨迹逐帧播放，播放/暂停/重播/单步+时间轴
  *   vertex-drag       顶点拖拽（几何 G1）：拖三角形顶点，边长/角度读数实时更新
  *   angle-protractor  量角器（几何 G6）：旋转量角器测角，落定 flash+ripple 反馈
+ *   step-play         分步播放（几何）：折叠/撕角/平移/作图步骤逐帧播放，◀/▶/⏯/↺
+ *   tap-highlight     点击点亮分类（几何）：点元素按组高亮（组色+编号徽章双编码），
+ *                     支持"一次只显示一组"
+ *   compare-toggle    对比切换（几何）：双视图按钮切换或上下堆叠（如 SSS 稳定性对比）
  *
  * 数学排版（蓝队 2026-10-10 修复）：交互内的表达式（expr/term/label/
  * 轴标签）统一走 window.MathExpr.html() —— ASCII 子集 → MathML
@@ -2559,6 +2563,424 @@
     paint();
   }
 
+  /* ============================================================
+   * 共享：几何帧 DSL → GEOM 原语（step-play / tap-highlight /
+   * compare-toggle 共用）。
+   *
+   * 逻辑坐标 0–100（y 向上），零具体色值（只用语义色名）。
+   * shape 描述：
+   *  t:"seg"    {a:[x,y], b:[x,y], color?, width?, dash?, arrows?(0-3平行箭头),
+   *              ticks?(1-3等长刻度), label?(中点标注)}
+   *  t:"poly"   {pts:[[x,y]..], color?, width?, dash?, close?(默认true),
+   *              fill?(语义色名), opacity?}
+   *  t:"circle" {c:[x,y], r(逻辑), color?, width?, dash?, fill?, opacity?}
+   *  t:"pt"     {p:[x,y], label?, color?, r?}
+   *  t:"txt"    {p:[x,y], text, size?, color?, anchor?, math?, bold?}
+   *  t:"arc"    {v:[x,y], a1, a2(数学惯例度), r(逻辑), group?(1-3), color?}
+   *  t:"ticks"  {a:[x,y], b:[x,y], count?(1-3), color?}
+   *  t:"right"  {v:[x,y], p:[x,y], q:[x,y], size?(逻辑), color?}
+   *  t:"ray"    {p:[x,y], ang(数学惯例度), len(逻辑), color?, width?}
+   * ============================================================ */
+  function geoFrame(H) {
+    var G = window.GEOM;
+    var W = 420, mL = 44, mR = 44, mT = 28, mB = 44;
+    H = H || 360;
+    function X(x) { return mL + x / 100 * (W - mL - mR); }
+    function Y(y) { return mT + (1 - y / 100) * (H - mT - mB); }
+    function S(v) { return v / 100 * (W - mL - mR); }
+    return { svg: G.svg(W, H, "ix-svg geo-svg"), W: W, H: H, X: X, Y: Y, S: S };
+  }
+  function clearSvg(svg) {
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+  }
+  // shape → 在 g（<g> 或 <svg>，GEOM 原语直接 append）内绘制，返回 g
+  function drawGeoShape(g, sh, fr) {
+    var G = window.GEOM;
+    var t = sh.t, col = sh.color || "line", w = sh.width || 2.5;
+    function P(p) { return [fr.X(p[0]), fr.Y(p[1])]; }
+    if (t === "seg") {
+      var a = P(sh.a), b = P(sh.b);
+      G.segment(g, a[0], a[1], b[0], b[1],
+        { color: col, width: w, dash: sh.dash });
+      if (sh.arrows) G.parArrows(g, a[0], a[1], b[0], b[1],
+        { count: Math.min(3, Math.max(1, sh.arrows)), color: col });
+      if (sh.ticks) G.ticks(g, a[0], a[1], b[0], b[1],
+        { count: Math.min(3, Math.max(1, sh.ticks)), color: col });
+      if (sh.label) G.label(g, (a[0] + b[0]) / 2, (a[1] + b[1]) / 2 - 10,
+        sh.label, { size: 14, bold: true });
+    } else if (t === "poly") {
+      var pts = (sh.pts || []).map(function (p) {
+        var q = P(p); return q[0].toFixed(1) + "," + q[1].toFixed(1);
+      }).join(" ");
+      var close = sh.close !== false;
+      var pg = G.el(close ? "polygon" : "polyline", {
+        points: pts,
+        fill: sh.fill ? G.colorOf(sh.fill) : "none",
+        stroke: G.colorOf(col), "stroke-width": w,
+        "stroke-linejoin": "round", "stroke-linecap": "round"
+      });
+      if (sh.fill) pg.setAttribute("fill-opacity",
+        sh.opacity == null ? 0.22 : sh.opacity);
+      if (sh.dash) pg.setAttribute("stroke-dasharray", sh.dash);
+      g.appendChild(pg);
+    } else if (t === "circle") {
+      var c = P(sh.c);
+      G.circle(g, c[0], c[1], fr.S(sh.r || 10),
+        { color: col, width: w, dash: sh.dash, fill: sh.fill, opacity: sh.opacity });
+    } else if (t === "pt") {
+      var pp = P(sh.p);
+      G.point(g, pp[0], pp[1],
+        { label: sh.label, color: col, r: sh.r || 4.5 });
+    } else if (t === "txt") {
+      var tp = P(sh.p);
+      G.label(g, tp[0], tp[1], sh.text,
+        { size: sh.size || 15, color: col, anchor: sh.anchor || "middle",
+          math: sh.math === true, bold: sh.bold === true });
+    } else if (t === "arc") {
+      var v = P(sh.v);
+      G.angleArc(g, v[0], v[1], sh.a1 || 0, sh.a2 || 90, fr.S(sh.r || 12),
+        { group: sh.group, color: col, width: w });
+    } else if (t === "ticks") {
+      var ta = P(sh.a), tb = P(sh.b);
+      G.ticks(g, ta[0], ta[1], tb[0], tb[1],
+        { count: Math.min(3, Math.max(1, sh.count || 1)), color: col });
+    } else if (t === "right") {
+      var rv = P(sh.v), rp = P(sh.p), rq = P(sh.q);
+      G.rightAngle(g, rv[0], rv[1], rp[0], rp[1], rq[0], rq[1],
+        fr.S(sh.size || 8), { color: col, width: w });
+    } else if (t === "ray") {
+      var rp2 = P(sh.p);
+      G.ray(g, rp2[0], rp2[1], sh.ang || 0, fr.S(sh.len || 30),
+        { color: col, width: w });
+    }
+    return g;
+  }
+  // DSL 图形的逻辑锚点（点击热区 / 徽章定位用）
+  function shapeAnchor(sh) {
+    if (sh.anchor) return sh.anchor;
+    if (sh.a && sh.b) return [(sh.a[0] + sh.b[0]) / 2, (sh.a[1] + sh.b[1]) / 2];
+    if (sh.v) return sh.v;
+    if (sh.p) return sh.p;
+    if (sh.c) return sh.c;
+    if (sh.pts && sh.pts.length) {
+      var sx = 0, sy = 0, n = sh.pts.length;
+      sh.pts.forEach(function (p) { sx += p[0]; sy += p[1]; });
+      return [sx / n, sy / n];
+    }
+    return [50, 50];
+  }
+  function geoErr(container, msg) {
+    container.appendChild(el("div", "ix-stub", "参数错误：" + esc(msg)));
+  }
+
+  /* ============================================================
+   * 14. step-play 分步播放（几何）
+   * params: {steps:[{caption?, shapes:[DSL]}], interval?, autoplay?, loop?}
+   *
+   * 每步一帧 SVG + 说明文字；◀/▶ 步进，⏯ 自动播放/暂停，↺ 重头。
+   * 帧切换做淡入过渡；播放到末尾自动停（loop:true 则循环）。
+   * ============================================================ */
+  function renderStepPlay(container, params) {
+    var G = window.GEOM;
+    if (!G) {
+      container.appendChild(el("div", "ix-stub", "几何原语库未加载（js/geom-primitives.js）"));
+      return;
+    }
+    var steps = params.steps;
+    if (!Array.isArray(steps) || !steps.length) {
+      geoErr(container, "step-play 需要 steps（非空数组，每步 {caption, shapes}）");
+      return;
+    }
+    var iv = Number(params.interval);
+    var interval = isFinite(iv) ? Math.max(800, Math.min(4000, iv)) : 1500;
+    var loop = params.loop === true;
+    var idx = 0, playing = false, timer = null;
+
+    var wrap = el("div", "ix-geo-wrap");
+    var readout = el("div", "ix-geo-readout", "");
+    wrap.appendChild(readout);
+    var fr = geoFrame();
+    var frameBox = el("div", "ix-frame");
+    frameBox.appendChild(fr.svg);
+    wrap.appendChild(frameBox);
+    var cap = el("div", "ix-step-cap", "");
+    wrap.appendChild(cap);
+
+    var ctrl = el("div", "ix-step-ctrl");
+    function mkBtn(label) {
+      var b = el("button", "ix-btn", label);
+      b.type = "button";
+      ctrl.appendChild(b);
+      return b;
+    }
+    var btnPrev = mkBtn("◀ 上一步");
+    var btnPlay = mkBtn("▶ 播放");
+    var btnNext = mkBtn("下一步 ▶");
+    var btnRestart = mkBtn("↺ 重头");
+    wrap.appendChild(ctrl);
+    container.appendChild(wrap);
+
+    function show(i) {
+      idx = Math.max(0, Math.min(steps.length - 1, i));
+      var st = steps[idx] || {};
+      clearSvg(fr.svg);
+      (st.shapes || []).forEach(function (sh) { drawGeoShape(fr.svg, sh, fr); });
+      cap.textContent = st.caption || "";
+      readout.innerHTML = '<span class="ix-val">第 ' + (idx + 1) + " / " + steps.length + " 步</span>";
+      btnPrev.disabled = idx === 0;
+      btnNext.disabled = idx === steps.length - 1;
+      // 帧切换淡入
+      frameBox.classList.remove("ix-frame");
+      void frameBox.offsetWidth;
+      frameBox.classList.add("ix-frame");
+    }
+    function stop() {
+      playing = false;
+      if (timer) { clearInterval(timer); timer = null; }
+      btnPlay.innerHTML = "▶ 播放";
+    }
+    btnPrev.addEventListener("click", function () { stop(); show(idx - 1); });
+    btnNext.addEventListener("click", function () { stop(); show(idx + 1); });
+    btnRestart.addEventListener("click", function () { stop(); show(0); });
+    btnPlay.addEventListener("click", function () {
+      if (playing) { stop(); return; }
+      playing = true;
+      btnPlay.innerHTML = "⏸ 暂停";
+      timer = setInterval(function () {
+        if (idx >= steps.length - 1) {
+          if (loop) show(0);
+          else stop();
+        } else show(idx + 1);
+      }, interval);
+    });
+
+    show(0);
+    if (params.autoplay === true) btnPlay.click();  // 落页即播
+  }
+
+  /* ============================================================
+   * 15. tap-highlight 点击点亮分类（几何）
+   * params: {base?:[DSL], items:[{id?, label?, group, shape, anchor?}],
+   *          groups:[{name, color(语义色名)}]}
+   *
+   * 玩法：点图形元素 → 高亮为组色 + 编号徽章（双编码：颜色+编号，
+   * 色盲可辨）+ 状态栏显示归类；顶部组标签可"一次只显示一组"
+   * （其余组淡化 0.22）。
+   * ============================================================ */
+  function renderTapHighlight(container, params) {
+    var G = window.GEOM;
+    if (!G) {
+      container.appendChild(el("div", "ix-stub", "几何原语库未加载（js/geom-primitives.js）"));
+      return;
+    }
+    var items = params.items;
+    if (!Array.isArray(items) || !items.length) {
+      geoErr(container, "tap-highlight 需要 items（非空数组，每项 {label, group, shape}）");
+      return;
+    }
+    var groups = (Array.isArray(params.groups) && params.groups.length) ? params.groups : [
+      { name: "A 组", color: "corrA" },
+      { name: "B 组", color: "corrB" },
+      { name: "C 组", color: "corrC" }
+    ];
+    function gIdxOf(gr) {
+      if (typeof gr === "number") return (gr >= 0 && gr < groups.length) ? gr : 0;
+      for (var i = 0; i < groups.length; i++) {
+        if (groups[i].name === gr) return i;
+      }
+      return 0;
+    }
+    var its = items.map(function (it, k) {
+      return {
+        id: it.id || ("i" + (k + 1)),
+        label: it.label || ("元素" + (k + 1)),
+        group: gIdxOf(it.group),
+        shape: it.shape || { t: "pt", p: [50, 50] },
+        classified: false,
+        g: null
+      };
+    });
+
+    var wrap = el("div", "ix-geo-wrap");
+    var tabs = el("div", "ix-groups");
+    wrap.appendChild(tabs);
+    var readout = el("div", "ix-geo-readout", "");
+    wrap.appendChild(readout);
+    var fr = geoFrame();
+    wrap.appendChild(fr.svg);
+    var status = el("div", "ix-status",
+      '<span class="ix-hint">点一点图形里的元素，看它属于哪一组</span>');
+    wrap.appendChild(status);
+    container.appendChild(wrap);
+
+    // 背景静态图形
+    (params.base || []).forEach(function (sh) { drawGeoShape(fr.svg, sh, fr); });
+
+    var sel = -1;  // -1 = 全部；>=0 = 只显示该组
+    function classifiedCount() {
+      return its.filter(function (it) { return it.classified; }).length;
+    }
+    function paintCount() {
+      readout.innerHTML = '<span class="ix-val">已点亮 ' + classifiedCount() +
+        " / " + its.length + "</span>";
+    }
+    function applyFilter() {
+      its.forEach(function (it) {
+        if (it.g) it.g.style.opacity = (sel >= 0 && it.group !== sel) ? "0.22" : "1";
+      });
+    }
+    function paintItem(it) {
+      if (it.g && it.g.parentNode) it.g.parentNode.removeChild(it.g);
+      var g = G.el("g", { "class": "geo-tap" });
+      // 点亮：主色覆写为组色（shape 深拷贝，避免污染原始 params）
+      var shape = it.shape;
+      if (it.classified) {
+        shape = JSON.parse(JSON.stringify(it.shape));
+        shape.color = groups[it.group].color;
+      }
+      drawGeoShape(g, shape, fr);
+      var an = shapeAnchor(it.shape);
+      var ax = fr.X(an[0]), ay = fr.Y(an[1]);
+      if (it.classified) {
+        // 双编码：组色描边 + 编号徽章（不依赖颜色）+ 组名文字
+        var bd = G.el("g", { "pointer-events": "none" });
+        bd.appendChild(G.el("circle", {
+          cx: (ax + 20).toFixed(1), cy: (ay - 20).toFixed(1), r: 11,
+          fill: G.colorOf(groups[it.group].color), stroke: "#fff", "stroke-width": 2
+        }));
+        var tx = G.el("text", {
+          x: (ax + 20).toFixed(1), y: (ay - 20 + 5).toFixed(1),
+          "text-anchor": "middle", "font-size": 13, "font-weight": "bold", fill: "#fff"
+        });
+        tx.textContent = String(it.group + 1);
+        bd.appendChild(tx);
+        g.appendChild(bd);
+        G.label(g, ax, ay + 28, it.label + " → " + groups[it.group].name,
+          { size: 13, bold: true, color: groups[it.group].color });
+      }
+      // 透明点击热区（细线条也好点）
+      var hit = G.el("circle", {
+        cx: ax.toFixed(1), cy: ay.toFixed(1), r: 22,
+        fill: "transparent", "pointer-events": "all", style: "cursor:pointer"
+      });
+      g.appendChild(hit);
+      hit.addEventListener("click", function () { tap(it); });
+      fr.svg.appendChild(g);
+      it.g = g;
+      applyFilter();
+    }
+    function tap(it) {
+      if (!it.classified) {
+        it.classified = true;
+        paintItem(it);
+        G.flash(it.g, 300);   // M6：点亮闪烁（视觉必选）
+        paintCount();
+        var done = classifiedCount() === its.length;
+        status.innerHTML = '<span class="ix-success">✓ ' + esc(it.label) + " → " +
+          esc(groups[it.group].name) + "</span>" +
+          (done ? ' <span class="ix-hint">全部点亮！</span>' : "");
+      } else {
+        G.flash(it.g, 300);
+        status.innerHTML = '<span class="ix-hint">' + esc(it.label) + " 已在 " +
+          esc(groups[it.group].name) + "</span>";
+      }
+    }
+
+    // 组标签：全部 + 各组（一次只显示一组）
+    function mkTab(label, dotColor, active, onClick) {
+      var b = el("button", "ix-group-btn" + (active ? " on" : ""),
+        (dotColor ? '<span class="ix-dot" style="background:' +
+          G.colorOf(dotColor) + '"></span>' : "") + esc(label));
+      b.type = "button";
+      b.addEventListener("click", onClick);
+      tabs.appendChild(b);
+      return b;
+    }
+    var tabBtns = [mkTab("全部", null, true, function () { selectGroup(-1); })];
+    groups.forEach(function (gr, i) {
+      tabBtns.push(mkTab(gr.name, gr.color, false, function () { selectGroup(i); }));
+    });
+    function selectGroup(i) {
+      sel = i;
+      tabBtns.forEach(function (b, k) {
+        b.classList.toggle("on", (k - 1) === i);
+      });
+      applyFilter();
+      status.innerHTML = i < 0
+        ? '<span class="ix-hint">点一点图形里的元素，看它属于哪一组</span>'
+        : '<span class="ix-hint">只显示「' + esc(groups[i].name) +
+          "」——点元素继续点亮分类</span>";
+    }
+
+    its.forEach(paintItem);
+    paintCount();
+  }
+
+  /* ============================================================
+   * 16. compare-toggle 对比切换（几何）
+   * params: {views:[{label, caption?, shapes:[DSL]}]（恰好 2 个）,
+   *          layout?:"toggle"(默认，按钮切换) | "stack"(上下堆叠)}
+   * ============================================================ */
+  function renderCompareToggle(container, params) {
+    var G = window.GEOM;
+    if (!G) {
+      container.appendChild(el("div", "ix-stub", "几何原语库未加载（js/geom-primitives.js）"));
+      return;
+    }
+    var views = params.views;
+    if (!Array.isArray(views) || views.length !== 2) {
+      geoErr(container, "compare-toggle 需要 views（恰好 2 个视图 {label, shapes}）");
+      return;
+    }
+    var layout = params.layout === "stack" ? "stack" : "toggle";
+
+    var wrap = el("div", "ix-geo-wrap");
+    container.appendChild(wrap);
+
+    function paintView(svg, fr, v) {
+      clearSvg(svg);
+      ((v || {}).shapes || []).forEach(function (sh) { drawGeoShape(svg, sh, fr); });
+      // 切换淡入
+      svg.classList.remove("ix-frame");
+      void svg.getBoundingClientRect();
+      svg.classList.add("ix-frame");
+    }
+
+    if (layout === "toggle") {
+      var seg = el("div", "ix-seg-row");
+      var segCtl = el("div", "ix-seg");
+      var btns = views.map(function (v, i) {
+        var b = el("button", i === 0 ? "on" : "", esc(v.label || ("视图" + (i + 1))));
+        b.type = "button";
+        b.addEventListener("click", function () { show(i); });
+        segCtl.appendChild(b);
+        return b;
+      });
+      seg.appendChild(segCtl);
+      wrap.appendChild(seg);
+      var fr = geoFrame();
+      wrap.appendChild(fr.svg);
+      var cap = el("div", "ix-step-cap", "");
+      wrap.appendChild(cap);
+      function show(i) {
+        paintView(fr.svg, fr, views[i]);
+        cap.textContent = views[i].caption || "";
+        btns.forEach(function (b, k) { b.classList.toggle("on", k === i); });
+      }
+      show(0);
+    } else {
+      // stack：上下堆叠，各带标题与说明
+      views.forEach(function (v) {
+        var vh = el("div", "ix-view-label", esc(v.label || ""));
+        wrap.appendChild(vh);
+        var fr2 = geoFrame(300);
+        paintView(fr2.svg, fr2, v);
+        wrap.appendChild(fr2.svg);
+        if (v.caption) wrap.appendChild(el("div", "ix-step-cap", esc(v.caption)));
+      });
+    }
+  }
+
   /* ---------------- 渲染器内嵌查表 ----------------
    * 与 window.MATH_INTERACTIONS 同源：注册时同步记一份本地表。
    * side-compare 内嵌时按 kind 查表调用已注册渲染器（不复制渲染器代码）。*/
@@ -2582,4 +3004,7 @@
   ixRegister("slow-replay", renderSlowReplay);
   ixRegister("vertex-drag", renderVertexDrag);
   ixRegister("angle-protractor", renderAngleProtractor);
+  ixRegister("step-play", renderStepPlay);
+  ixRegister("tap-highlight", renderTapHighlight);
+  ixRegister("compare-toggle", renderCompareToggle);
 })();

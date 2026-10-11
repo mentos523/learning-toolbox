@@ -1,6 +1,10 @@
-# 数学 · 几何 交互参数编写手册（蓝队 v1.0）
+# 数学 · 几何 交互参数编写手册（蓝队 v1.1）
 
 > 给黄队：按本手册写几何页的 `interaction.params`，不用关心 SVG/CSS 实现。
+> v1.1（2026-10-11，白队一屏预算评审阻塞项修复）：
+> 新增 `step-play` / `tap-highlight` / `compare-toggle` 三种通用交互；
+> 新增**讲解页口径**（§"讲解页口径"）：`pageKind: "explain"` + 文字上限 300 字 +
+> 点拨区 36vh 内滚动（复用习题页模式）。
 > 全局铁律（沿用代数 `docs/math-interaction-params.md` + `docs/math-geometry-style.md`）：
 > 1. `params` 里**不出现具体色值**，只用语义（known/target/对应组）；颜色由 CSS 变量 `--geo-*` 决定，深色模式自动切换。
 > 2. **逻辑单位 0–100**（y 向上），不写死 px；渲染器按画布自适应缩放。
@@ -105,6 +109,225 @@ interaction: {
 
 ---
 
+## step-play · 分步播放
+
+折叠/撕角/平移/作图步骤：每步一帧 SVG + 一句说明，◀/▶ 步进、
+▶/⏸ 自动播放（可落页即播）、↺ 重头。
+
+### Schema
+
+| 参数 | 类型 | 必填 | 默认 | 说明 |
+|---|---|---|---|---|
+| `steps` | array | ✅ | — | 非空；每步 `{caption?, shapes}`。`caption` ≤ 60 字；`shapes` 为帧 DSL 数组（见下） |
+| `interval` | number | — | `1500` | 自动播放间隔（毫秒），钳制 800–4000 |
+| `autoplay` | boolean | — | `false` | `true` 则落页即自动播放 |
+| `loop` | boolean | — | `false` | `true` 则播到末尾循环；默认播完自动停 |
+
+### 帧 DSL（`shapes` 元素，逻辑坐标 0–100 / y 向上）
+
+| `t` | 字段 | 说明 |
+|---|---|---|
+| `seg` | `a`,`b`(端点),`color?`,`width?`,`dash?`,`arrows?`(1-3 平行箭头),`ticks?`(1-3 等长刻度),`label?`(中点标注) | 线段 |
+| `poly` | `pts`,`color?`,`width?`,`dash?`,`close?`(默认 true),`fill?`(语义色名),`opacity?` | 多边形/折线 |
+| `circle` | `c`(圆心),`r`(逻辑半径),`color?`,`width?`,`dash?`,`fill?`,`opacity?` | 圆 |
+| `pt` | `p`,`label?`,`color?`,`r?` | 点 |
+| `txt` | `p`,`text`,`size?`,`color?`,`anchor?`,`math?`,`bold?` | 文本（`math:true` 走 MathExpr 排版） |
+| `arc` | `v`,`a1`,`a2`(数学惯例度),`r`(逻辑),`group?`(1-3 弧数),`color?` | 角弧线 |
+| `ticks` | `a`,`b`,`count?`(1-3),`color?` | 等长刻度线 |
+| `right` | `v`,`p`,`q`,`size?`(逻辑),`color?` | 直角方块 |
+| `ray` | `p`,`ang`(数学惯例度),`len`(逻辑),`color?`,`width?` | 射线 |
+
+- `color`/`fill` 只填语义名（`known`/`target`/`corrA`/`corrB`/`corrC`/`corrAngle`/`line`/`aux`），不出现具体色值。
+- `anchor`：该步图形的点击无关定位点，缺省为图形几何中心。
+
+### 示例（撕角拼内角和：第 2 步）
+
+```js
+interaction: {
+  type: "step-play",
+  params: {
+    interval: 1600,
+    steps: [
+      { caption: "第 1 步：完整的三角形，三个角都在。",
+        shapes: [
+          { t: "poly", pts: [[20,70],[80,70],[50,25]], color: "line", width: 3 },
+          { t: "arc", v: [20,70], a1: 0, a2: 55, r: 10, group: 1, color: "corrAngle" },
+          { t: "arc", v: [80,70], a1: 125, a2: 180, r: 10, group: 2, color: "corrAngle" },
+          { t: "arc", v: [50,25], a1: 208, a2: 332, r: 10, group: 3, color: "corrAngle" }
+        ] },
+      { caption: "第 2 步：把三个角撕下来，顶点拼到一起。",
+        shapes: [
+          { t: "poly", pts: [[20,70],[80,70],[50,25]], color: "line", width: 1.5, dash: "5,4" },
+          { t: "arc", v: [50,45], a1: 0, a2: 55, r: 10, group: 1, color: "corrAngle" },
+          { t: "arc", v: [50,45], a1: 55, a2: 125, r: 12, group: 2, color: "corrAngle" },
+          { t: "arc", v: [50,45], a1: 125, a2: 180, r: 14, group: 3, color: "corrAngle" },
+          { t: "seg", a: [28,45], b: [72,45], color: "aux", dash: "5,4" }
+        ] },
+      { caption: "第 3 步：三个角拼成一条直线——内角和是 180°。",
+        shapes: [
+          { t: "seg", a: [20,45], b: [80,45], color: "line", width: 3 },
+          { t: "arc", v: [50,45], a1: 0, a2: 55, r: 10, group: 1, color: "corrAngle" },
+          { t: "arc", v: [50,45], a1: 55, a2: 125, r: 12, group: 2, color: "corrAngle" },
+          { t: "arc", v: [50,45], a1: 125, a2: 180, r: 14, group: 3, color: "corrAngle" },
+          { t: "txt", p: [50,28], text: "三个角拼成平角", size: 15, bold: true }
+        ] }
+    ]
+  }
+}
+```
+
+### 常见坑
+
+1. **`steps` 非空**：空数组直接报错不渲染；单步也合法（退化为静态帧 + 说明，控制条只剩 ↺）。
+2. **每步独立成帧**：帧之间不继承——第 2 步想保留第 1 步的三角形，要把它的 DSL 再写一遍（可用虚线表示"原来的位置"，如上例）。
+3. **`caption` 别写过程承诺**：只描述"这一步画面是什么"，不写"下一步会…"（自动播放时用户可能跳着看）。
+4. **`interval` 别太短**：< 800ms 会被钳制；折叠类步骤建议 1500–2000ms，给学生看清的时间。
+5. **组数 ≤ 3**：`arc.group` / `seg.arrows` / `seg.ticks` 都是 1-3，超过 3 组用"同色 + 编号"另行设计（见 style.md 双编码）。
+
+---
+
+## tap-highlight · 点击点亮分类
+
+三线八角、三角形三线（高/中线/角平分线）区分：点图形元素 →
+高亮为组色 + 编号徽章（双编码：颜色 + 数字，色盲可辨）+ 状态栏显示归类；
+顶部组标签支持"一次只显示一组"（其余组淡化到 0.22）。
+
+### Schema
+
+| 参数 | 类型 | 必填 | 默认 | 说明 |
+|---|---|---|---|---|
+| `items` | array | ✅ | — | 非空；每项 `{id?, label?, group, shape, anchor?}`。`label` 如"∠3"；`group` 为组序号（0 起）或组名；`shape` 为帧 DSL（同 step-play） |
+| `groups` | array | ✅ | — | 每组 `{name, color}`；`color` 为语义色名（建议 `corrA`/`corrB`/`corrC` 三色，最多 3 组） |
+| `base` | array | — | `[]` | 背景静态图形（帧 DSL 数组，如三线八角的三条直线本身） |
+
+- 点亮后元素描边变为组色，并加**编号徽章**（圆圈 + 组序号，如 ①②③ 效果，数字不依赖颜色）与"标签 → 组名"文字。
+- 点击已点亮元素：闪烁一下 + 状态栏提示"已在某组"，不重复计数。
+- 顶部读数：`已点亮 X / N`；全部点亮显示"全部点亮！"。
+
+### 示例（三线八角分类）
+
+```js
+interaction: {
+  type: "tap-highlight",
+  params: {
+    base: [
+      { t: "seg", a: [15,75], b: [85,75], color: "line", width: 3 },   // 直线 a
+      { t: "seg", a: [15,35], b: [85,35], color: "line", width: 3 },   // 直线 b
+      { t: "seg", a: [30,85], b: [70,25], color: "aux", width: 2 },    // 截线 c
+      { t: "txt", p: [88,75], text: "a" }, { t: "txt", p: [88,35], text: "b" },
+      { t: "txt", p: [72,28], text: "c" }
+    ],
+    groups: [
+      { name: "同位角", color: "corrA" },
+      { name: "内错角", color: "corrB" },
+      { name: "同旁内角", color: "corrC" }
+    ],
+    items: [
+      { id: "a1", label: "∠1", group: 0,
+        shape: { t: "arc", v: [36,75], a1: 300, a2: 360, r: 9, color: "corrAngle" } },
+      { id: "a3", label: "∠3", group: 1,
+        shape: { t: "arc", v: [64,35], a1: 120, a2: 180, r: 9, color: "corrAngle" } }
+      // ……其余 6 个角同理
+    ]
+  }
+}
+```
+
+### 常见坑
+
+1. **`group` 引用方式**：写序号（0 起）或组名都行；序号越界/组名对不上时自动归第 0 组——写完对照 groups 数一遍。
+2. **最多 3 组**：徽章编号 = 组序号 + 1；超过 3 组色板不够用，要拆成两页。
+3. **细线条也要能点**：每个元素自带透明点击热区（半径约 22px），`arc`/`seg` 再细也点得中；但两个元素的 `anchor` 别重叠，否则热区打架。
+4. **"一次只显示一组"是淡化不是删除**：切组标签时其余组透明度 0.22，底图 `base` 不受影响；文案里说"只看同位角"即可。
+5. **点亮不可撤销**：点错组没有"取消点亮"——黄队写 items 时 `group` 必须先跟绿队对准答案。
+
+---
+
+## compare-toggle · 对比切换
+
+SSS 稳定性双图对比：两个视图按钮切换（同一画布），或 `layout: "stack"` 上下堆叠。
+
+### Schema
+
+| 参数 | 类型 | 必填 | 默认 | 说明 |
+|---|---|---|---|---|
+| `views` | array | ✅ | — | **恰好 2 个**：`{label, caption?, shapes}`。`label` 为切换按钮文字（如"拉四边形"/"拉三角形"）；`caption` 为该视图下说明；`shapes` 为帧 DSL 数组 |
+| `layout` | string | — | `"toggle"` | `"toggle"`（按钮切换）或 `"stack"`（上下堆叠，各带标题与说明） |
+
+### 示例（三角形稳定性的对比）
+
+```js
+interaction: {
+  type: "compare-toggle",
+  params: {
+    views: [
+      { label: "拉四边形",
+        caption: "四根木条钉成的四边形，一拉就变形——边长定了，形状没定。",
+        shapes: [
+          { t: "poly", pts: [[25,65],[65,70],[60,35],[20,30]], color: "target", width: 3.5 },
+          { t: "seg", a: [25,65], b: [65,70], ticks: 1, color: "target" },
+          { t: "txt", p: [45,80], text: "会晃", size: 15, bold: true, color: "target" }
+        ] },
+      { label: "拉三角形",
+        caption: "三根木条钉成的三角形，怎么拉都不变形——三边定了，形状就定了。",
+        shapes: [
+          { t: "poly", pts: [[25,35],[65,35],[45,65]], color: "known", width: 3.5 },
+          { t: "seg", a: [25,35], b: [65,35], ticks: 1, color: "known" },
+          { t: "seg", a: [65,35], b: [45,65], ticks: 2, color: "known" },
+          { t: "seg", a: [45,65], b: [25,35], ticks: 3, color: "known" },
+          { t: "txt", p: [45,80], text: "纹丝不动", size: 15, bold: true, color: "known" }
+        ] }
+    ]
+  }
+}
+```
+
+### 常见坑
+
+1. **`views` 必须恰好 2 个**：1 个或 3 个直接报错不渲染。三个对比拆成两页。
+2. **两视图画布同尺寸**：切换时是同一画布重绘，图形位置尽量对齐（如上例两个图形都在 y 30–70 区间），学生一眼看出差别。
+3. **`caption` 跟视图走**：toggle 模式下 caption 随按钮切换；文案不要写"左图/右图"，要写视图 label（"拉四边形时…"）。
+4. **`stack` 模式无切换按钮**：两视图上下堆叠（每视图画布高 300），适合打印式对照；一屏预算紧张时优先用 `toggle`。
+
+---
+
+## 讲解页口径（v1.1 新增）
+
+用户铁律：讲解页要"讲透"（反复举例：生活例 → 图形例 → 反例，pedagogy §5.2 五段式）。
+旧 schema"全页 ≤ 150 字"+ `.m-hints` 6.5em 截断装不下，新口径如下：
+
+| 项目 | 口径 |
+|---|---|
+| 页标识 | `pageKind: "explain"`（页对象可选字段；讲解页必须写，交互页/习题页不写） |
+| 文字上限 | **全页 ≤ 300 字**（不含按钮标签；对齐 `docs/math-geometry-pedagogy.md` §5.2） |
+| 点拨区样式 | `math.js` 检测到 `pageKind === "explain"` 自动给点拨区加 `explain` 类 → `.m-hints.explain`（`math.css`）：**36vh 内滚动区**，复用习题页 `.exercise` 模式；页面本身仍一屏无滚动 |
+| hints 约束 | 每条仍建议 ≤ 60 字；条数不限（滚动区装得下），但五段式结构优先 |
+| interaction | 仍必填；推荐 `step-play`（关键帧定格 + 反复讲解）或 `compare-toggle`（正例/反例对照）；纯文字讲解页可用单步 `step-play` 做静态配图 |
+
+示例：
+
+```js
+{
+  id: "g05-u1-l2-p3",
+  title: "全等：能完全重合的两个图形",
+  pageKind: "explain",          // ← 讲解页标识
+  concept: "全等",
+  formulas: [ { id: "f1", latex: "\\text{全等} \\iff \\text{完全重合}",
+                translation: "全等就是能完全重合" } ],
+  interaction: { type: "step-play", params: { steps: [ /* 关键帧 */ ] } },
+  hints: [ "还记得吗？你把两个三角形叠到一起时，它们严丝合缝——这就是全等。",
+           "全等，就是“能完全重合”——像复印机印出来的两张纸。",
+           "生活例：两扇一模一样的门；图形例：三边三标记同色的两个三角形。",
+           "反例：大小不一样的两扇门，形状一样但不能重合——那叫相似，不是全等。",
+           "⚠️ 别搞混：全等不是相似，因为全等要求大小也一样。",
+           "记住一句话：全等要重合，相似只同形。" ],
+  examples: [ { text: "复印机印出的两张纸", figure: "实物" } ],
+  prev: "g05-u1-l2-p2", next: "g05-u1-l2-p4"
+}
+```
+
+---
+
 ## 样本页
 
 - `modules/math/data/g00.js`：G1、G6 各 1 个完整样本页（公式 + 中文讲解 + params），可直接对照抄写结构。
@@ -113,7 +336,7 @@ interaction: {
 ## 校验清单（提交页数据前）
 
 1. `node --check` 数据文件语法通过。
-2. `interaction.type` 为 `vertex-drag` / `angle-protractor` 之一（大小写敏感）。
+2. `interaction.type` 为 5 种之一（大小写敏感）：`vertex-drag` / `angle-protractor` / `step-play` / `tap-highlight` / `compare-toggle`。
 3. `formulas[].translation` 非空；LaTeX 只用构建器支持的子集（`\\text{}` 可写中文）。
-4. `hints` 每条 ≤ 60 字，`examples` ≤ 2 个，全页文字 ≤ 150 字（沿用代数 schema 约束）。
+4. `hints` 每条 ≤ 60 字，`examples` ≤ 2 个；**全页文字：交互页 ≤ 150 字，讲解页（`pageKind: "explain"`）≤ 300 字**（沿用代数 schema 约束 + pedagogy §5.2）。
 5. 本手册"常见坑"逐条过一遍。
