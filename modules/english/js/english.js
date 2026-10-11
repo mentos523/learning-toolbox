@@ -537,7 +537,7 @@
     var mi = Math.min(Math.max(0, wd[3] || 0), rt.m.length - 1);
     if (rootMean) rootMean.innerHTML = meaningsHtml(rt.m, mi);
     // 右拨盘下方：选中词素的意思（多义同样处理，默认取第一义）
-    // 若另一部分不是已知词根（如 school），不显示词义，避免用整词词义误导（如 preschool 的"幼儿园"）
+    // 若另一部分不是已知词根：查独立单词词典（如 school→学校）；查不到则不显示
     if (wordMean) {
       var sp = splitPair(wd[0], rt);
       var mRoot = findMorpheme(sp.other);
@@ -547,7 +547,8 @@
         // 整词即词素：显示词根本义
         wordMean.innerHTML = meaningsHtml(rt.m, mi);
       } else {
-        wordMean.innerHTML = "";
+        var stMean = window.STANDALONE_DICT && window.STANDALONE_DICT[sp.other.toLowerCase()];
+        wordMean.innerHTML = stMean ? "<b>" + esc(stMean) + "</b>" : "";
       }
     }
     // 自动朗读：仅在用户已交互过页面后触发（避免刷新即播）
