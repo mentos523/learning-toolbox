@@ -228,6 +228,10 @@ body[data-theme="dark"] #mathml-warn { background: #4a3a1a; color: #fde68a; }
   /* （蓝队 2026-10-11 白队 g00 终查问题 1）step-play 帧 SVG 移动端限高：
      SVG 带 viewBox，按比例缩小；讲解页（单步、无控制条）一屏放下 */
   .ix-frame svg { max-height: 26vh; }
+  /* （蓝队 2026-10-11 白队一屏终查 B1/B2）proof-replay 画布 26vh→22vh
+     （约省 4vh≈34px@844px）；只作用于 .ix-frame-proof，step-play /
+     construction-step 等其它交互保持 26vh 不变 */
+  .ix-frame-proof svg { max-height: 22vh; }
 }
 @media (min-width: 1024px) {
   .m-menu-btn { display: none; }
@@ -420,10 +424,16 @@ body[data-theme="dark"] #mathml-warn { background: #4a3a1a; color: #fde68a; }
  * 颜色全部走语义变量（--geo-*/--m-*），深色模式自动切换（M5）。
  * ============================================================ */
 /* 证明页首三问：已知（蓝）/ 求证（红）+ 公式（MX 排版） */
+/* （蓝队 2026-10-11 白队一屏终查 B1/B2）meta 紧凑单行：每个"已知/求证"为
+   不可断行的 inline-flex 单元，容器单行优先、超宽时换为紧凑双行 */
 .ix-proof-meta {
   display: flex; align-items: center; justify-content: center;
-  gap: 8px; flex-wrap: wrap; padding: 2px 0 4px; font-size: 0.95rem;
+  gap: 4px 10px; flex-wrap: wrap; padding: 2px 0; font-size: 0.88rem;
 }
+.ix-proof-meta-item {
+  display: inline-flex; align-items: center; gap: 5px; white-space: nowrap;
+}
+.ix-proof-meta .ix-chip { padding: 1px 8px; font-size: 0.8rem; }
 .ix-chip {
   border-radius: 999px; padding: 2px 10px; font-size: 0.85rem;
   font-weight: bold; color: #fff; flex: none;
@@ -449,6 +459,21 @@ body[data-theme="dark"] #mathml-warn { background: #4a3a1a; color: #fde68a; }
 }
 .ix-why > summary { cursor: pointer; font-weight: bold; color: var(--m-accent-strong); }
 .ix-why > div { padding: 4px 0 2px; }
+/* ============================================================
+ * proof-replay 一屏预算收紧（蓝队 2026-10-11 白队一屏终查 B1/B2）
+ * 全部挂在 .ix-proof-replay 作用域下：construction-step 等其它交互
+ * 共用的 .ix-step-cap/.ix-step-ctrl/.ix-btn/.ix-geo-readout/.ix-why
+ * 不受影响。目标：在"满配"页（meta+人话卡片+为什么折叠+证明书折叠）
+ * 省出 ≥80px，页首"已知/求证"不再被 .m-interaction 裁掉、底部证明书可点。
+ * ============================================================ */
+.ix-proof-replay .ix-geo-readout { padding: 2px 0 4px; font-size: 1rem; }
+.ix-proof-replay .ix-proof-card { margin: 4px auto; padding: 5px 10px; }
+.ix-proof-replay .ix-why { margin: 3px auto; padding: 3px 10px; }
+/* 控制条：按钮收紧到单行（390px 下原 4 按钮约 369px 会折成两行） */
+.ix-proof-replay .ix-step-ctrl { margin-top: 2px; gap: 8px; }
+.ix-proof-replay .ix-btn { padding: 4px 12px; font-size: 0.85rem; white-space: nowrap; }
+/* 证明书折叠条收紧 */
+.ix-proof-replay .ix-proof-cert { margin: 5px auto 0; padding: 3px 10px; }
 /* 证明书：两栏式收尾（左栏陈述 / 右栏理由）+ 序号双编码（M4） */
 .ix-proof-cert {
   margin: 8px auto 0; max-width: 560px; border: 1px solid var(--m-line);
@@ -470,6 +495,9 @@ body[data-theme="dark"] #mathml-warn { background: #4a3a1a; color: #fde68a; }
 .ix-construct-pending {
   position: absolute; inset: 0; display: flex; flex-direction: column;
   align-items: center; justify-content: center; gap: 10px;
+  /* （蓝队 2026-10-11 白队建议 S1）color-mix 需 Chrome 111+，项目基线
+     Chrome 109+：先给纯色 fallback，旧浏览器忽略第二行 */
+  background: var(--m-panel);
   background: color-mix(in srgb, var(--m-panel) 84%, transparent);
   border-radius: 8px; text-align: center; padding: 12px;
 }

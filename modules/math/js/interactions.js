@@ -3025,18 +3025,24 @@
     var interval = isFinite(iv) ? Math.max(1000, Math.min(5000, iv)) : 2200;
     var hasSummary = Array.isArray(params.summary) && params.summary.length > 0;
 
-    var wrap = el("div", "ix-geo-wrap");
+    var wrap = el("div", "ix-geo-wrap ix-proof-replay");
 
     // 三问之已知 / 求证（已知标蓝，求证标红）
+    // （蓝队 2026-10-11 白队一屏终查 B1/B2）每个"已知/求证"包成不可断行
+    // 的 .ix-proof-meta-item，CSS 里单行优先、放不下时优雅换行（紧凑双行）
     if (params.given || params.goal) {
       var meta = el("div", "ix-proof-meta");
       if (params.given) {
-        meta.appendChild(el("span", "ix-chip ix-chip-known", "已知"));
-        meta.appendChild(el("span", "ix-proof-meta-expr", MX(params.given)));
+        var givenItem = el("span", "ix-proof-meta-item");
+        givenItem.appendChild(el("span", "ix-chip ix-chip-known", "已知"));
+        givenItem.appendChild(el("span", "ix-proof-meta-expr", MX(params.given)));
+        meta.appendChild(givenItem);
       }
       if (params.goal) {
-        meta.appendChild(el("span", "ix-chip ix-chip-target", "求证"));
-        meta.appendChild(el("span", "ix-proof-meta-expr", MX(params.goal)));
+        var goalItem = el("span", "ix-proof-meta-item");
+        goalItem.appendChild(el("span", "ix-chip ix-chip-target", "求证"));
+        goalItem.appendChild(el("span", "ix-proof-meta-expr", MX(params.goal)));
+        meta.appendChild(goalItem);
       }
       wrap.appendChild(meta);
     }
@@ -3044,7 +3050,9 @@
     var readout = el("div", "ix-geo-readout", "");
     wrap.appendChild(readout);
     var fr = geoFrame();
-    var frameBox = el("div", "ix-frame");
+    // （蓝队 2026-10-11 白队一屏终查 B1/B2）ix-frame-proof：移动端画布
+    // 限高 22vh（原通用 26vh），只收紧 proof-replay，不碰其它交互
+    var frameBox = el("div", "ix-frame ix-frame-proof");
     frameBox.appendChild(fr.svg);
     wrap.appendChild(frameBox);
     var cap = el("div", "ix-step-cap", "");
