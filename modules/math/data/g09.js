@@ -855,7 +855,6 @@ window.MATH_CH["g09"] = {
               interaction: {
                 type: "compare-toggle",
                 params: {
-                  layout: "stack",
                   views: [
                     {
                       label: "全等四判定（g04）",
