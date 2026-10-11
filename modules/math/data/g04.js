@@ -1262,8 +1262,8 @@ window.MATH_CH["g04"] = {
                         { t: "seg", a: [18,60], b: [40,72], color: "known", width: 3 },
                         { t: "seg", a: [18,60], b: [42,52], color: "known", width: 3 },
                         { t: "circle", c: [18,60], r: 16, color: "aux", dash: "5,4" },
-                        { t: "pt", p: [30,70], label: "M", color: "known" },
-                        { t: "pt", p: [32,53], label: "N", color: "known" },
+                        { t: "pt", p: [32.05,67.66], label: "M", color: "known" },
+                        { t: "pt", p: [33.18,54.94], label: "N", color: "known" },
                         { t: "ray", p: [58,60], ang: 0, len: 30, color: "line", width: 2.5 }
                       ]
                     },
@@ -1356,7 +1356,7 @@ window.MATH_CH["g04"] = {
                         { t: "seg", a: [30,60], b: [60,48], color: "line", width: 2 },
                         { t: "circle", c: [48,70], r: 20, color: "aux", dash: "5,4" },
                         { t: "circle", c: [50,53], r: 20, color: "aux", dash: "5,4" },
-                        { t: "pt", p: [66,62], label: "P", color: "target" }
+                        { t: "pt", p: [66.95,63.61], label: "P", color: "target" }
                       ]
                     },
                     {
