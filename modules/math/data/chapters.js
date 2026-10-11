@@ -37,7 +37,7 @@ window.MATH_CHAPTERS = [
   { id: "g08", title: "圆（二）——切线与圆的方程",  file: "data/g08.js", status: "ready" },
   { id: "g09", title: "图形的相似",                 file: "data/g09.js", status: "ready" },
   { id: "g10", title: "图形的变换——对称与旋转",   file: "data/g10.js", status: "ready" },
-  { id: "g11", title: "面积与体积",                 file: "data/g11.js", status: "planned" },
+  { id: "g11", title: "面积与体积",                 file: "data/g11.js", status: "ready" },
   { id: "g12", title: "立体几何初步",               file: "data/g12.js", status: "planned" },
   { id: "g13", title: "解析几何入门",               file: "data/g13.js", status: "ready" }
 ];
