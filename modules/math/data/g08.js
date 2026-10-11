@@ -288,7 +288,7 @@ window.MATH_CH["g08"] = {
               formulas: [
                 {
                   id: "f1",
-                  latex: "\\text{直线}l\text{:}d = 3 < 5 = r \\Rightarrow \\text{相交}",
+                  latex: "\\text{直线}l\\text{:}d = 3 < 5 = r \\Rightarrow \\text{相交}",
                   translation: "圆心到直线的距离 3 小于半径 5：直线 l 与圆相交"
                 },
                 {
