@@ -155,6 +155,8 @@
     if (bestIdx === 0) { pos = "suffix"; other = after; }          // tele-phone
     else if (bestIdx + bestLen === w.length) { pos = "prefix"; other = before; }  // pro-ject（从ject看）
     else { pos = "mid"; other = w; }                               // 中缀：右拨盘显示整词
+    // 整词即词素时（如 test@test），other 为空，右拨盘显示整词避免落空
+    if (!other) { other = w; pos = "none"; }
     return { morph: morph, idx: bestIdx, len: bestLen, other: other, pos: pos, full: w };
   }
 
@@ -535,13 +537,17 @@
     var mi = Math.min(Math.max(0, wd[3] || 0), rt.m.length - 1);
     if (rootMean) rootMean.innerHTML = meaningsHtml(rt.m, mi);
     // 右拨盘下方：选中词素的意思（多义同样处理，默认取第一义）
+    // 若另一部分不是已知词根（如 school），不显示词义，避免用整词词义误导（如 preschool 的"幼儿园"）
     if (wordMean) {
       var sp = splitPair(wd[0], rt);
       var mRoot = findMorpheme(sp.other);
       if (mRoot && sp.pos !== "none" && sp.pos !== "mid") {
         wordMean.innerHTML = meaningsHtml(mRoot.m, 0);
+      } else if (sp.pos === "none" && sp.other === wd[0]) {
+        // 整词即词素：显示词根本义
+        wordMean.innerHTML = meaningsHtml(rt.m, mi);
       } else {
-        wordMean.innerHTML = '<span class="pos">' + esc(wd[1]) + "</span><b>" + esc(wd[2]) + "</b>";
+        wordMean.innerHTML = "";
       }
     }
     // 自动朗读：仅在用户已交互过页面后触发（避免刷新即播）
