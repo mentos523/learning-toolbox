@@ -22,6 +22,10 @@
  *   tap-highlight     点击点亮分类（几何）：点元素按组高亮（组色+编号徽章双编码），
  *                     支持"一次只显示一组"
  *   compare-toggle    对比切换（几何）：双视图按钮切换或上下堆叠（如 SSS 稳定性对比）
+ *   proof-replay      证明慢放机（几何）：证明三件套（画布+人话卡片+"为什么可以"
+ *                     折叠）+ 两栏式"证明书"收尾；三问：已知（蓝）/求证（红）
+ *   construction-step 作图步骤机（几何）：倒带/单步/播放 + 跟做模式（"待画"遮罩
+ *                     先比划再揭晓），每步"为什么这样画"折叠
  *
  * 数学排版（蓝队 2026-10-10 修复）：交互内的表达式（expr/term/label/
  * 轴标签）统一走 window.MathExpr.html() —— ASCII 子集 → MathML
@@ -2994,6 +2998,329 @@
     }
   }
 
+  /* ============================================================
+   * 17. proof-replay 证明慢放机（几何）
+   * params: {given?, goal?, steps:[{caption?, card?, shapes:[DSL],
+   *           why?, reason?}], summary?:[{statement, reason}]}
+   *
+   * 教学设计 §4.2：每步三件套 = 画布高亮 + 人话卡片（≤40 字，说
+   * "这一步在干什么"）+ "为什么可以？"折叠（每个"因为"都有出
+   * 处）；播完出两栏式"证明书"（左陈述 / 右理由）；页首三问：
+   * 已知（蓝）/ 求证（红）/ 第一步依据。
+   * 黄队字段兼容：主文案 = caption || card；依据 = why || reason。
+   * 公式走 MX()（MathML / 降级），不许裸文本。
+   * ============================================================ */
+  function renderProofReplay(container, params) {
+    var G = window.GEOM;
+    if (!G) {
+      container.appendChild(el("div", "ix-stub", "几何原语库未加载（js/geom-primitives.js）"));
+      return;
+    }
+    var steps = params.steps;
+    if (!Array.isArray(steps) || !steps.length) {
+      geoErr(container, "proof-replay 需要 steps（非空数组，每步 {caption/card, shapes, why/reason}）");
+      return;
+    }
+    var iv = Number(params.interval);
+    var interval = isFinite(iv) ? Math.max(1000, Math.min(5000, iv)) : 2200;
+    var hasSummary = Array.isArray(params.summary) && params.summary.length > 0;
+
+    var wrap = el("div", "ix-geo-wrap");
+
+    // 三问之已知 / 求证（已知标蓝，求证标红）
+    if (params.given || params.goal) {
+      var meta = el("div", "ix-proof-meta");
+      if (params.given) {
+        meta.appendChild(el("span", "ix-chip ix-chip-known", "已知"));
+        meta.appendChild(el("span", "ix-proof-meta-expr", MX(params.given)));
+      }
+      if (params.goal) {
+        meta.appendChild(el("span", "ix-chip ix-chip-target", "求证"));
+        meta.appendChild(el("span", "ix-proof-meta-expr", MX(params.goal)));
+      }
+      wrap.appendChild(meta);
+    }
+
+    var readout = el("div", "ix-geo-readout", "");
+    wrap.appendChild(readout);
+    var fr = geoFrame();
+    var frameBox = el("div", "ix-frame");
+    frameBox.appendChild(fr.svg);
+    wrap.appendChild(frameBox);
+    var cap = el("div", "ix-step-cap", "");
+    wrap.appendChild(cap);
+    var cardBox = el("div", "ix-proof-card", "");
+    wrap.appendChild(cardBox);
+    var whyBox = el("details", "ix-why");
+    wrap.appendChild(whyBox);
+
+    var ctrl = el("div", "ix-step-ctrl");
+    function mkBtn(label) {
+      var b = el("button", "ix-btn", label);
+      b.type = "button";
+      ctrl.appendChild(b);
+      return b;
+    }
+    var btnPrev = mkBtn("◀ 上一步");
+    var btnPlay = mkBtn("▶ 播放");
+    var btnNext = mkBtn("下一步 ▶");
+    var btnRestart = mkBtn("↺ 重头");
+    wrap.appendChild(ctrl);
+
+    // 证明书：两栏式收尾（左栏陈述 / 右栏理由），默认折叠
+    var cert = null;
+    if (hasSummary) {
+      cert = el("details", "ix-proof-cert");
+      cert.appendChild(el("summary", "", "证明书：陈述 ↔ 理由（两栏对照）"));
+      var table = el("table", "ix-proof-table");
+      table.appendChild(el("thead", "",
+        "<tr><th>陈述（做了什么）</th><th>理由（凭什么）</th></tr>"));
+      var tbody = el("tbody", "");
+      params.summary.forEach(function (row, i) {
+        var tr = el("tr", "");
+        tr.appendChild(el("td", "",
+          '<span class="ix-proof-num">' + (i + 1) + "</span>" +
+          MX(row.statement || "")));
+        tr.appendChild(el("td", "", MX(row.reason || "")));
+        tbody.appendChild(tr);
+      });
+      table.appendChild(tbody);
+      cert.appendChild(table);
+      wrap.appendChild(cert);
+    }
+    container.appendChild(wrap);
+
+    var idx = 0, playing = false, timer = null;
+    function show(i, flashIt) {
+      idx = Math.max(0, Math.min(steps.length - 1, i));
+      var st = steps[idx] || {};
+      clearSvg(fr.svg);
+      (st.shapes || []).forEach(function (sh) { drawGeoShape(fr.svg, sh, fr); });
+      // 主文案：caption || card；caption 与 card 都存在且不同 → card 另出人话卡片
+      var main = st.caption || st.card || "";
+      cap.textContent = main;
+      if (st.caption && st.card && st.caption !== st.card) {
+        cardBox.style.display = "";
+        cardBox.innerHTML = '<span class="ix-proof-card-tag">人话</span>' + esc(st.card);
+      } else {
+        cardBox.style.display = "none";
+      }
+      // "为什么可以？"折叠：每个"因为"都有出处
+      var why = st.why || st.reason || "";
+      if (why) {
+        whyBox.style.display = "";
+        whyBox.innerHTML = "";
+        whyBox.appendChild(el("summary", "", "为什么可以？"));
+        whyBox.appendChild(el("div", "", esc(why)));
+        whyBox.open = false;
+      } else {
+        whyBox.style.display = "none";
+      }
+      readout.innerHTML = '<span class="ix-val">第 ' + (idx + 1) + " / " + steps.length + " 步</span>";
+      btnPrev.disabled = idx === 0;
+      btnNext.disabled = idx === steps.length - 1;
+      // 帧切换淡入 + M6 视觉反馈
+      frameBox.classList.remove("ix-frame");
+      void frameBox.offsetWidth;
+      frameBox.classList.add("ix-frame");
+      if (flashIt) G.flash(fr.svg, 250);
+    }
+    function stop(atEnd) {
+      playing = false;
+      if (timer) { clearInterval(timer); timer = null; }
+      btnPlay.innerHTML = "▶ 播放";
+      // 播完出证明书：自动展开两栏对照
+      if (atEnd && cert) cert.open = true;
+    }
+    btnPrev.addEventListener("click", function () { stop(false); show(idx - 1, true); });
+    btnNext.addEventListener("click", function () { stop(false); show(idx + 1, true); });
+    btnRestart.addEventListener("click", function () { stop(false); show(0, true); });
+    btnPlay.addEventListener("click", function () {
+      if (playing) { stop(false); return; }
+      if (idx >= steps.length - 1) show(0);
+      playing = true;
+      btnPlay.innerHTML = "⏸ 暂停";
+      timer = setInterval(function () {
+        if (idx >= steps.length - 1) stop(true);
+        else show(idx + 1, false);
+      }, interval);
+    });
+
+    show(0, false);
+  }
+
+  /* ============================================================
+   * 18. construction-step 作图步骤机（几何）
+   * params: {steps:[{text, why, shapes:[DSL]}]}
+   *
+   * 教学设计 §4.1/§9.2：每步一句话指令（动词开头）+ 本步作图帧 +
+   * "为什么这样画"折叠；控制条：◀/▶ 单步、▶ 播放、↺ 倒带、
+   * 观看/跟做模式切换。跟做模式下点"下一步"先进入"待画"状态
+   * （遮罩 + 本步指令）：学生先在心里/纸上比划，再点"我画好了，
+   * 看这一步"揭晓验证——验证失败不惩罚（无扣分无红叉）。
+   * ============================================================ */
+  function renderConstructionStep(container, params) {
+    var G = window.GEOM;
+    if (!G) {
+      container.appendChild(el("div", "ix-stub", "几何原语库未加载（js/geom-primitives.js）"));
+      return;
+    }
+    var steps = params.steps;
+    if (!Array.isArray(steps) || !steps.length) {
+      geoErr(container, "construction-step 需要 steps（非空数组，每步 {text, why, shapes}）");
+      return;
+    }
+    var iv = Number(params.interval);
+    var interval = isFinite(iv) ? Math.max(1000, Math.min(4000, iv)) : 1800;
+
+    var wrap = el("div", "ix-geo-wrap");
+
+    // 观看 / 跟做 模式切换
+    var modeRow = el("div", "ix-seg-row");
+    var modeCtl = el("div", "ix-seg");
+    var btnWatch = el("button", "on", "观看");
+    btnWatch.type = "button";
+    var btnFollow = el("button", "", "跟做");
+    btnFollow.type = "button";
+    modeCtl.appendChild(btnWatch);
+    modeCtl.appendChild(btnFollow);
+    modeRow.appendChild(modeCtl);
+    wrap.appendChild(modeRow);
+
+    var readout = el("div", "ix-geo-readout", "");
+    wrap.appendChild(readout);
+    var fr = geoFrame();
+    var frameBox = el("div", "ix-frame");
+    frameBox.style.position = "relative";
+    frameBox.appendChild(fr.svg);
+    // "待画"遮罩（跟做模式用）
+    var pending = el("div", "ix-construct-pending");
+    pending.style.display = "none";
+    frameBox.appendChild(pending);
+    wrap.appendChild(frameBox);
+
+    var cap = el("div", "ix-step-cap", "");
+    wrap.appendChild(cap);
+    var whyBox = el("details", "ix-why");
+    wrap.appendChild(whyBox);
+
+    var ctrl = el("div", "ix-step-ctrl");
+    function mkBtn(label) {
+      var b = el("button", "ix-btn", label);
+      b.type = "button";
+      ctrl.appendChild(b);
+      return b;
+    }
+    var btnPrev = mkBtn("◀ 上一步");
+    var btnPlay = mkBtn("▶ 播放");
+    var btnNext = mkBtn("下一步 ▶");
+    var btnRestart = mkBtn("↺ 倒带");
+    wrap.appendChild(ctrl);
+    container.appendChild(wrap);
+
+    var idx = 0, playing = false, timer = null, follow = false, revealed = true;
+
+    function paint(i) {
+      var st = steps[i] || {};
+      clearSvg(fr.svg);
+      (st.shapes || []).forEach(function (sh) { drawGeoShape(fr.svg, sh, fr); });
+      frameBox.classList.remove("ix-frame");
+      void frameBox.offsetWidth;
+      frameBox.classList.add("ix-frame");
+      G.flash(fr.svg, 250);
+    }
+    // 跟做"待画"：画布停在上一步，只出本步指令遮罩
+    function showPending(i) {
+      var st = steps[i] || {};
+      clearSvg(fr.svg);
+      if (i > 0) {
+        var prev = steps[i - 1] || {};
+        (prev.shapes || []).forEach(function (sh) { drawGeoShape(fr.svg, sh, fr); });
+      }
+      pending.style.display = "";
+      pending.innerHTML = "";
+      pending.appendChild(el("div", "ix-construct-pending-step",
+        "第 " + (i + 1) + " 步（待画）"));
+      pending.appendChild(el("div", "ix-construct-pending-text", esc(st.text || "")));
+      pending.appendChild(el("div", "ix-hint", "先在纸上 / 心里比划，再看答案验证"));
+      var rv = el("button", "ix-btn", "我画好了，看这一步");
+      rv.type = "button";
+      rv.addEventListener("click", function () {
+        revealed = true;
+        pending.style.display = "none";
+        paint(i);
+      });
+      pending.appendChild(rv);
+    }
+    function show(i, opts) {
+      opts = opts || {};
+      stop();
+      idx = Math.max(0, Math.min(steps.length - 1, i));
+      var st = steps[idx] || {};
+      cap.innerHTML = '<span class="ix-val">第 ' + (idx + 1) + " 步：</span>" + esc(st.text || "");
+      var why = st.why || "";
+      if (why) {
+        whyBox.style.display = "";
+        whyBox.innerHTML = "";
+        whyBox.appendChild(el("summary", "", "为什么这样画？"));
+        whyBox.appendChild(el("div", "", esc(why)));
+        whyBox.open = false;
+      } else {
+        whyBox.style.display = "none";
+      }
+      readout.innerHTML = '<span class="ix-val">第 ' + (idx + 1) + " / " + steps.length + " 步</span>";
+      btnPrev.disabled = idx === 0;
+      btnNext.disabled = idx === steps.length - 1;
+      // 跟做模式：前进时进入"待画"（后退/倒带直接看）
+      if (follow && !opts.reveal && i > opts.from) {
+        revealed = false;
+        showPending(idx);
+      } else {
+        revealed = true;
+        pending.style.display = "none";
+        paint(idx);
+      }
+    }
+    function stop() {
+      playing = false;
+      if (timer) { clearInterval(timer); timer = null; }
+      btnPlay.innerHTML = "▶ 播放";
+    }
+    var fromIdx = 0;
+    btnPrev.addEventListener("click", function () {
+      fromIdx = idx;
+      show(idx - 1, { from: fromIdx, reveal: true });
+    });
+    btnNext.addEventListener("click", function () {
+      fromIdx = idx;
+      show(idx + 1, { from: fromIdx });
+    });
+    btnRestart.addEventListener("click", function () {
+      fromIdx = 0;
+      show(0, { from: 0, reveal: true });
+    });
+    btnPlay.addEventListener("click", function () {
+      if (playing) { stop(); return; }
+      if (idx >= steps.length - 1) { fromIdx = -1; show(0, { from: -1, reveal: true }); }
+      playing = true;
+      btnPlay.innerHTML = "⏸ 暂停";
+      timer = setInterval(function () {
+        if (idx >= steps.length - 1) stop();
+        else { fromIdx = idx; show(idx + 1, { from: fromIdx, reveal: true }); }
+      }, interval);
+    });
+    function setFollow(f) {
+      follow = f;
+      btnWatch.classList.toggle("on", !f);
+      btnFollow.classList.toggle("on", f);
+      if (!f) { pending.style.display = "none"; revealed = true; paint(idx); }
+    }
+    btnWatch.addEventListener("click", function () { setFollow(false); });
+    btnFollow.addEventListener("click", function () { setFollow(true); });
+
+    show(0, { from: -1, reveal: true });
+  }
+
   /* ---------------- 渲染器内嵌查表 ----------------
    * 与 window.MATH_INTERACTIONS 同源：注册时同步记一份本地表。
    * side-compare 内嵌时按 kind 查表调用已注册渲染器（不复制渲染器代码）。*/
@@ -3020,4 +3347,6 @@
   ixRegister("step-play", renderStepPlay);
   ixRegister("tap-highlight", renderTapHighlight);
   ixRegister("compare-toggle", renderCompareToggle);
+  ixRegister("proof-replay", renderProofReplay);
+  ixRegister("construction-step", renderConstructionStep);
 })();

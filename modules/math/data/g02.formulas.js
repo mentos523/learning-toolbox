@@ -1,0 +1,29 @@
+// 由 tools/render-mathml.mjs 自动生成，请勿手工编辑
+// 源：modules/math/data/g02.js
+window.MATH_MML = window.MATH_MML || {};
+window.MATH_MML["g02-u1-l1-p1#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>两条直线相交</mtext><mo>→</mo><mtext>四个角</mtext></mrow></math>";
+window.MATH_MML["g02-u1-l1-p2#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mo>∠</mo><mn>1</mn><mo>=</mo><mo>∠</mo><mn>3</mn></mrow></math>";
+window.MATH_MML["g02-u1-l1-p3#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>对顶角相等</mtext><mo>，</mo><mtext>邻补角互补</mtext></mrow></math>";
+window.MATH_MML["g02-u1-l2-p1#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mi>a</mi><mo>⊥</mo><mi>b</mi></mrow></math>";
+window.MATH_MML["g02-u1-l2-p2#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>过一点有且只有一条直线与已知直线垂直</mtext></mrow></math>";
+window.MATH_MML["g02-u1-l3-p1#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>垂线段最短</mtext></mrow></math>";
+window.MATH_MML["g02-u1-l3-p2#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>点到直线的距离</mtext><mo>=</mo><mtext>垂线段的长度</mtext></mrow></math>";
+window.MATH_MML["g02-u1-l4-p1#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>三条直线相交</mtext><mo>→</mo><mtext>八个角</mtext></mrow></math>";
+window.MATH_MML["g02-u1-l4-p2#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>同位角</mtext><mo>=</mo><mtext>位置相同的两个角</mtext></mrow></math>";
+window.MATH_MML["g02-u1-l4-p3#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>内错角</mtext><mo>=</mo><mtext>内部错开的两个角</mtext></mrow></math>";
+window.MATH_MML["g02-u1-l4-p4#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>同旁内角</mtext><mo>=</mo><mtext>内部同侧的两个角</mtext></mrow></math>";
+window.MATH_MML["g02-u2-l1-p1#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mi>a</mi><mo>∥</mo><mi>b</mi></mrow></math>";
+window.MATH_MML["g02-u2-l1-p2#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>过直线外一点有且只有一条直线与已知直线平行</mtext></mrow></math>";
+window.MATH_MML["g02-u2-l2-p1#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>同位角相等</mtext><mo>→</mo><mtext>两直线平行</mtext></mrow></math>";
+window.MATH_MML["g02-u2-l2-p2#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>同位角相等</mtext><mo>⇒</mo><mi>a</mi><mo>∥</mo><mi>b</mi></mrow></math>";
+window.MATH_MML["g02-u2-l2-p3#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>内错角相等</mtext><mo>⇒</mo><mi>a</mi><mo>∥</mo><mi>b</mi></mrow></math>";
+window.MATH_MML["g02-u2-l2-p4#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>同旁内角互补</mtext><mo>⇒</mo><mi>a</mi><mo>∥</mo><mi>b</mi></mrow></math>";
+window.MATH_MML["g02-u2-l3-p1#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mi>a</mi><mo>∥</mo><mi>b</mi><mo>→</mo><mtext>角有关系</mtext></mrow></math>";
+window.MATH_MML["g02-u2-l3-p2#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mi>a</mi><mo>∥</mo><mi>b</mi><mo>⇒</mo><mtext>同位角相等</mtext></mrow></math>";
+window.MATH_MML["g02-u2-l3-p3#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mi>a</mi><mo>∥</mo><mi>b</mi><mo>⇒</mo><mtext>内错角相等</mtext></mrow></math>";
+window.MATH_MML["g02-u2-l3-p4#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mi>a</mi><mo>∥</mo><mi>b</mi><mo>⇒</mo><mtext>同旁内角互补</mtext></mrow></math>";
+window.MATH_MML["g02-u2-l4-p1#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>平移</mtext><mo>=</mo><mtext>沿直线滑动</mtext></mrow></math>";
+window.MATH_MML["g02-u2-l4-p2#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mi>AA</mi><mo>′</mo><mo>∥</mo><mi>BB</mi><mo>′</mo><mo>∥</mo><mi>CC</mi><mo>′</mo><mo>,</mo><mspace width=\"0.25em\"/><mi>AA</mi><mo>′</mo><mo>=</mo><mi>BB</mi><mo>′</mo><mo>=</mo><mi>CC</mi><mo>′</mo></mrow></math>";
+window.MATH_MML["g02-u2-l4-p3#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mi>y</mi><mo>=</mo><mi>x</mi><mo>→</mo><mi>y</mi><mo>=</mo><mi>x</mi><mo>+</mo><mn>2</mn></mrow></math>";
+window.MATH_MML["g02-u2-l5-p1#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>判定：角</mtext><mo>→</mo><mtext>线</mtext><mo>；</mo><mtext>性质：线</mtext><mo>→</mo><mtext>角</mtext></mrow></math>";
+window.MATH_MML["g02-u2-l5-p2#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>判定找相等，性质得相等</mtext></mrow></math>";

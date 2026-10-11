@@ -29,6 +29,14 @@ window.MATH_MML["ch07-u1-l4-p1#f2"] = "<math xmlns=\"http://www.w3.org/1998/Math
 window.MATH_MML["ch07-u1-l4-p1b#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mi>S</mi><mo>=</mo><mi>x</mi><mo>(</mo><mn>60</mn><mo>−</mo><mn>2</mn><mi>x</mi><mo>)</mo></mrow></math>";
 window.MATH_MML["ch07-u1-l4-p1b#f2"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mi>S</mi><mo>=</mo><mo>−</mo><mn>2</mn><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>60</mn><mi>x</mi></mrow></math>";
 window.MATH_MML["ch07-u1-l4-p1b#f3"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mi>x</mi><mo>=</mo><mn>15</mn></mrow></math>";
+window.MATH_MML["ch07-u1-l4-p2#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mi>y</mi><mo>=</mo><mn>9.9</mn><mi>t</mi><mo>−</mo><mn>4.9</mn><msup><mi>t</mi><mn>2</mn></msup></mrow></math>";
+window.MATH_MML["ch07-u1-l4-p2#f2"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mn>9.9</mn><mi>t</mi><mo>−</mo><mn>4.9</mn><msup><mi>t</mi><mn>2</mn></msup><mo>=</mo><mn>0</mn></mrow></math>";
+window.MATH_MML["ch07-u1-l4-p3#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mi>y</mi><mo>=</mo><mo>−</mo><mn>4.9</mn><msup><mi>t</mi><mn>2</mn></msup><mo>+</mo><mn>9.9</mn><mi>t</mi></mrow></math>";
+window.MATH_MML["ch07-u1-l4-p3#f2"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mi>t</mi><mo>=</mo><mn>1.01</mn></mrow></math>";
+window.MATH_MML["ch07-u1-l4-p4a#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mn>30</mn></mrow></math>";
+window.MATH_MML["ch07-u1-l4-p4b#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mn>45</mn></mrow></math>";
+window.MATH_MML["ch07-u1-l4-p4c#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mn>60</mn></mrow></math>";
+window.MATH_MML["ch07-u1-l4-p4d#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mn>45</mn></mrow></math>";
 window.MATH_MML["ch07-u2-l1-p1#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mi>y</mi><mo>=</mo><mfrac><mrow><mi>k</mi></mrow><mrow><mi>x</mi></mrow></mfrac><mo>(</mo><mi>k</mi><mo>≠</mo><mn>0</mn><mo>)</mo></mrow></math>";
 window.MATH_MML["ch07-u2-l1-p1#f2"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mi>x</mi><mo>≠</mo><mn>0</mn></mrow></math>";
 window.MATH_MML["ch07-u2-l1-p1b#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mi>y</mi><mo>=</mo><mfrac><mrow><mn>12</mn></mrow><mrow><mi>x</mi></mrow></mfrac></mrow></math>";

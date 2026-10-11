@@ -413,3 +413,65 @@ body[data-theme="dark"] #mathml-warn { background: #4a3a1a; color: #fde68a; }
 .ix-zoomer { padding: 4px; width: 100%; }
 .ix-zoomer .ix-expr-line { margin-bottom: 2px; }
 .ix-zoomer .ix-svg { max-width: 460px; }
+
+/* ============================================================
+ * 证明慢放机 proof-replay / 作图步骤机 construction-step
+ * （蓝队 2026-10-11，几何 g01–g04 接入）
+ * 颜色全部走语义变量（--geo-*/--m-*），深色模式自动切换（M5）。
+ * ============================================================ */
+/* 证明页首三问：已知（蓝）/ 求证（红）+ 公式（MX 排版） */
+.ix-proof-meta {
+  display: flex; align-items: center; justify-content: center;
+  gap: 8px; flex-wrap: wrap; padding: 2px 0 4px; font-size: 0.95rem;
+}
+.ix-chip {
+  border-radius: 999px; padding: 2px 10px; font-size: 0.85rem;
+  font-weight: bold; color: #fff; flex: none;
+}
+.ix-chip-known { background: var(--geo-known); }
+.ix-chip-target { background: var(--geo-target); }
+.ix-proof-meta-expr { color: var(--m-ink); }
+/* 人话卡片：≤40 字，说"这一步在干什么"（§4.2 三件套之二） */
+.ix-proof-card {
+  margin: 6px auto; max-width: 560px; border-left: 4px solid var(--m-accent-strong);
+  background: var(--m-accent-soft); border-radius: 0 8px 8px 0;
+  padding: 6px 10px; font-size: 0.92rem; color: var(--m-ink); text-align: left;
+}
+.ix-proof-card-tag {
+  display: inline-block; background: var(--m-accent-strong); color: #fff;
+  font-size: 0.75rem; border-radius: 4px; padding: 1px 6px; margin-right: 6px;
+}
+/* "为什么可以？"/"为什么这样画？"折叠（§4.2/§4.1：每个"因为"都有出处） */
+.ix-why {
+  margin: 4px auto; max-width: 560px; border: 1px dashed var(--m-line);
+  border-radius: 8px; padding: 4px 10px; font-size: 0.9rem;
+  color: var(--m-ink-soft); text-align: left;
+}
+.ix-why > summary { cursor: pointer; font-weight: bold; color: var(--m-accent-strong); }
+.ix-why > div { padding: 4px 0 2px; }
+/* 证明书：两栏式收尾（左栏陈述 / 右栏理由）+ 序号双编码（M4） */
+.ix-proof-cert {
+  margin: 8px auto 0; max-width: 560px; border: 1px solid var(--m-line);
+  border-radius: 8px; padding: 4px 10px; text-align: left;
+}
+.ix-proof-cert > summary { cursor: pointer; font-weight: bold; color: var(--m-ink); }
+.ix-proof-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; margin-top: 6px; }
+.ix-proof-table th, .ix-proof-table td {
+  border: 1px solid var(--m-line); padding: 5px 8px;
+  text-align: left; vertical-align: top; color: var(--m-ink);
+}
+.ix-proof-table th { background: var(--m-accent-soft); }
+.ix-proof-num {
+  display: inline-block; min-width: 1.3em; height: 1.3em; line-height: 1.3em;
+  text-align: center; border-radius: 50%; background: var(--m-accent-strong);
+  color: #fff; font-size: 0.8rem; margin-right: 6px;
+}
+/* 跟做模式"待画"遮罩（§4.1：先比划，再揭晓验证） */
+.ix-construct-pending {
+  position: absolute; inset: 0; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 10px;
+  background: color-mix(in srgb, var(--m-panel) 84%, transparent);
+  border-radius: 8px; text-align: center; padding: 12px;
+}
+.ix-construct-pending-step { font-weight: bold; color: var(--m-accent-strong); }
+.ix-construct-pending-text { font-size: 1rem; color: var(--m-ink); max-width: 26em; }

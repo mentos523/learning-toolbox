@@ -776,7 +776,7 @@ window.MATH_CH["ch01"] = {
               concept: "追及问题",
               formulas: [
                 { id: "f1", latex: "5t = 2t + 50", translation: "哥哥 5 米每秒走 t 秒的路程 = 弟弟 2 米每秒走 t 秒的路程 + 先走的 50 米" },
-                { id: "f2", latex: "t = \frac{50}{3}", translation: "t 等于 50 除以 3，约 16.7 秒追上" }
+                { id: "f2", latex: "t = \\frac{50}{3}", translation: "t 等于 50 除以 3，约 16.7 秒追上" }
               ],
               interaction: {
                 type: "slow-replay",

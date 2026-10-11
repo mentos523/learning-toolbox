@@ -20,8 +20,12 @@
  *             \mu \pi \sigma \phi \omega \Delta \Sigma \Omega
  *   运算符：\times \div \pm \cdot \leq \geq \neq \approx \in
  *           \to \rightarrow \infty
+ *   几何符号（2026-10-11 几何章接入）：\angle ∠ ｜ \triangle △ ｜
+ *           \cong ≅ ｜ \Rightarrow ⇒ ｜ \parallel ∥ ｜ \perp ⊥ ｜
+ *           \subset ⊂ ｜ \circ ∘ ｜ \␣（空格） ｜ \quad（1em 空格）
  *   大运算符：\sum \prod \int ｜ 函数名：\log \ln \lg \sin \cos \tan \lim \exp
  *   数字/字母/+-=<>()[]|,;:!? 与 '（求导撇）
+ *   中文标点 、，。；与 /（\text{块之间的分隔符，原样输出）
  * ============================================================ */
 import { readFileSync, writeFileSync, readdirSync, existsSync } from "node:fs";
 import { dirname, join } from "node:path";
@@ -53,6 +57,9 @@ const INTERACTION_TYPES = {
   "step-play": ["steps"],
   "tap-highlight": ["items", "groups"],
   "compare-toggle": ["views"],
+  // 几何 g01–g04 接入（蓝队 2026-10-11：params 手册 v1.2）
+  "proof-replay": ["steps"],
+  "construction-step": ["steps"],
 };
 
 /* ============================================================
@@ -66,6 +73,12 @@ const GREEK = {
 const BINOP = {
   times: "×", div: "÷", pm: "±", cdot: "⋅", leq: "≤", geq: "≥",
   neq: "≠", approx: "≈", in: "∈", to: "→", rightarrow: "→",
+};
+/* 几何符号（蓝队 2026-10-11，几何章接入）：LaTeX 里是普通符号，
+ * MathML 统一按 <mo> 输出（∠A / △ABC / AB ∥ CD 均可读）。 */
+const GEOMSYM = {
+  angle: "∠", triangle: "△", cong: "≅", Rightarrow: "⇒",
+  parallel: "∥", perp: "⊥", subset: "⊂", circ: "∘",
 };
 const FUNCNAMES = new Set(["log", "ln", "lg", "sin", "cos", "tan", "lim", "exp", "max", "min"]);
 
@@ -218,6 +231,8 @@ class Parser {
     }
     const moMap = { "+": "+", "=": "=", "<": "&lt;", ">": "&gt;", "(": "(", ")": ")",
       "[": "[", "]": "]", "|": "|", ",": ",", ";": ";", ":": ":", "!": "!", "?": "?",
+      // 中文标点与斜杠（蓝队 2026-10-11：几何公式里 \text{块之间 的分隔符，原样输出）
+      "、": "、", "，": "，", "。": "。", "；": "；", "/": "/",
       "*": "×", "'": "′" };
     if (c === "-") return "<mo>−</mo>"; // U+2212 减号
     if (c === ".") return "<mo>.</mo>";
@@ -227,6 +242,10 @@ class Parser {
   parseCmd(name) {
     if (GREEK[name]) return `<mi>${GREEK[name]}</mi>`;
     if (BINOP[name]) return `<mo>${BINOP[name]}</mo>`;
+    if (GEOMSYM[name]) return `<mo>${GEOMSYM[name]}</mo>`;
+    // 空格类命令：\␣（普通空格）/ \quad（1em 空格）
+    if (name === " ") return `<mspace width="0.25em"/>`;
+    if (name === "quad") return `<mspace width="1em"/>`;
     if (name === "infty") return "<mi>∞</mi>";
     if (name === "sum") return { bigop: "∑" };
     if (name === "prod") return { bigop: "∏" };

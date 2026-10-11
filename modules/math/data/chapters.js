@@ -24,13 +24,13 @@ window.MATH_CHAPTERS = [
   { id: "ch12", title: "定积分与微积分基本定理",   file: "data/ch12.js", status: "ready" },
   /* ---------------- 几何 g00–g13（蓝队 2026-10-11 接入） ----------------
    * 14 章结构来自绿队课程体系 docs/math-geometry-curriculum.md v1.1。
-   * 章标题以课程体系为准，g01 及以后待生产时把 status 改为 ready
+   * 章标题以课程体系为准；g05 及以后待生产时把 status 改为 ready
    * 并补齐 data/gNN.js 数据文件。 */
   { id: "g00", title: "导论——几何是什么",         file: "data/g00.js", status: "ready" },
-  { id: "g01", title: "点、线、面、角",             file: "data/g01.js", status: "planned" },
-  { id: "g02", title: "相交线与平行线",             file: "data/g02.js", status: "planned" },
-  { id: "g03", title: "三角形（一）——认识三角形",  file: "data/g03.js", status: "planned" },
-  { id: "g04", title: "全等三角形",                 file: "data/g04.js", status: "planned" },
+  { id: "g01", title: "点、线、面、角",             file: "data/g01.js", status: "ready" },
+  { id: "g02", title: "相交线与平行线",             file: "data/g02.js", status: "ready" },
+  { id: "g03", title: "三角形（一）——认识三角形",  file: "data/g03.js", status: "ready" },
+  { id: "g04", title: "全等三角形",                 file: "data/g04.js", status: "ready" },
   { id: "g05", title: "勾股定理",                   file: "data/g05.js", status: "planned" },
   { id: "g06", title: "四边形",                     file: "data/g06.js", status: "planned" },
   { id: "g07", title: "圆（一）——圆的基本性质",    file: "data/g07.js", status: "planned" },

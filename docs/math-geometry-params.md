@@ -1,6 +1,10 @@
-# 数学 · 几何 交互参数编写手册（蓝队 v1.1）
+# 数学 · 几何 交互参数编写手册（蓝队 v1.2）
 
 > 给黄队：按本手册写几何页的 `interaction.params`，不用关心 SVG/CSS 实现。
+> v1.2（2026-10-11，几何 g01–g04 接入）：
+> 新增 `proof-replay`（证明慢放机） / `construction-step`（作图步骤机）两种交互；
+> LaTeX 子集新增几何符号（`\angle \triangle \cong \Rightarrow \parallel \perp \subset \circ`、
+> `\␣` 空格、`\quad`、中文标点 `、，。；` 与 `/`）。
 > v1.1（2026-10-11，白队一屏预算评审阻塞项修复）：
 > 新增 `step-play` / `tap-highlight` / `compare-toggle` 三种通用交互；
 > 新增**讲解页口径**（§"讲解页口径"）：`pageKind: "explain"` + 文字上限 300 字 +
@@ -291,6 +295,132 @@ interaction: {
 
 ---
 
+## proof-replay · 证明慢放机（v1.2 新增）
+
+教学设计 §4.2：证明不是"读文字"，是"看动作"。每个证明步骤 =
+**画布上的一个动作** + **一张人话卡片** + **"为什么可以？"折叠**
+（每个"因为"都有出处，不许"显然"）。
+
+### Schema
+
+| 参数 | 类型 | 必填 | 默认 | 说明 |
+|---|---|---|---|---|
+| `given` | string | — | — | 已知（页首蓝色"已知"徽章 + 公式，公式走 MX 排版） |
+| `goal` | string | — | — | 求证（页首红色"求证"徽章 + 公式） |
+| `steps` | array | ✅ | — | 非空，**≤ 5 步**（超 5 步拆页，拆页点选在"阶段性结论"处）；每步 `{caption?, card?, shapes, why?/reason?}` |
+| `steps[].caption` | string | — | — | 步骤说明（"第 N 步：……"）；与 `card` 二选一必填 |
+| `steps[].card` | string | — | — | 人话卡片：**≤ 40 字**，说"这一步在干什么"。`caption` 与 `card` 都写且不同时，`card` 另出高亮卡片 |
+| `steps[].shapes` | array | ✅ | — | 本步画布：帧 DSL 数组（当前步涉及的边/角/线用高亮色/加粗） |
+| `steps[].why` / `steps[].reason` | string | — | — | "为什么可以？"折叠内容：依据出处——"已知条件" / "定理：××（第 X 页）" / 作图痕迹。**二选一**，强烈建议写 |
+| `interval` | number | — | `2200` | 自动播放间隔（毫秒），钳制 1000–5000（证明步比 step-play 慢，给学生看依据的时间） |
+| `summary` | array | — | — | 两栏式"证明书"收尾：`{statement（陈述：做了什么）, reason（理由：凭什么）}`；播完自动展开 |
+
+- 主文案规则：`caption || card` 为步骤主说明；黄队 g02/g03 用 `{caption, why}`，
+  g04 用 `{card, reason}`——两种写法渲染器都认。
+- 控制条：◀ 上一步 / ▶ 播放（播完自动停并展开"证明书"，不循环）/ 下一步 ▶ / ↺ 重头；
+  切步带淡入 + 闪烁反馈（M6）。
+- 公式走 MX（MathML / 降级）：`given`/`goal`/`summary` 里的表达式自动排版，不许裸文本。
+
+### 示例（三角形内角和证明：第 1 步 + 证明书）
+
+```js
+interaction: {
+  type: "proof-replay",
+  params: {
+    given: "△ABC",
+    goal: "∠A + ∠B + ∠C = 180°",
+    steps: [
+      { caption: "第 1 步：过点 C 作直线 DE，使 DE ∥ AB。",
+        card: "画一条辅助线：过 C 作 AB 的平行线——给三个角搭个“舞台”。",
+        why: "依据：平行公理——过直线外一点，有且只有一条直线与已知直线平行。",
+        shapes: [
+          { t: "poly", pts: [[18,28],[82,28],[58,72]], color: "line", width: 3 },
+          { t: "seg", a: [20,72], b: [88,72], color: "aux", width: 2.5, dash: "6,4", arrows: 2 },
+          { t: "txt", p: [13,68], text: "D", size: 13 },
+          { t: "txt", p: [95,68], text: "E", size: 13 }
+        ] },
+      /* ……第 2–5 步同理 …… */
+    ],
+    summary: [
+      { statement: "过点 C 作直线 DE ∥ AB", reason: "平行公理" },
+      { statement: "∠A = ∠ACD", reason: "平行线性质：内错角相等" },
+      { statement: "∴ ∠A + ∠B + ∠C = 180°", reason: "等量代换" }
+    ]
+  }
+}
+```
+
+### 常见坑
+
+1. **步骤数 ≤ 5**：超 5 步必须拆页；拆页点选在"阶段性结论"处（如证完"△ABE ≌ △CDF"先停一页）。
+2. **"为什么可以？"不许空**：每一步的动作都要能点开看到依据；写"显然""易得"等于没写。
+3. **基本事实不证明**：如 SAS 判定是基本事实——叠合动画只做直观验证（用 step-play），
+   不配 proof-replay；真证明位置留给 AAS 等可证内容。
+4. **`given`/`goal` 的公式写法**：纯 ASCII/符号（如 `△ABC`、`∠A + ∠B = 180°`），
+   走 MX 自动排版；中文混排会降级为纯文本，不报错但不好看。
+5. **`summary` 与 `steps` 对齐**：证明书行数一般 = 步骤数，每行陈述对应一步的动作。
+
+---
+
+## construction-step · 作图步骤机（v1.2 新增）
+
+教学设计 §4.1/§9.2：作图教学 = "看一遍 → 跟一遍 → 自己来一遍"，
+三遍可在同一页完成（观看/跟做两种模式一键切换）。
+
+### Schema
+
+| 参数 | 类型 | 必填 | 默认 | 说明 |
+|---|---|---|---|---|
+| `steps` | array | ✅ | — | 非空，**≤ 6 步**（超 6 步拆成两页，第一页终点是第二页起点，"未完待续"式衔接）；每步 `{text, why?, shapes}` |
+| `steps[].text` | string | ✅ | — | 本步一句话指令：**≤ 15 字，动词开头**（"以 B 为圆心、b 为半径画弧"）；不许"显然""作""得"式黑话省略 |
+| `steps[].why` | string | — | — | "为什么这样画？"折叠：人话解释（"圆规保证：弧上每一点到 B 的距离都是 b"）。强烈建议写 |
+| `steps[].shapes` | array | ✅ | — | 本步作图帧：帧 DSL 数组（**累积写法**：把之前步骤的图形也写上，作图痕迹保留） |
+| `interval` | number | — | `1800` | 自动播放间隔（毫秒），钳制 1000–4000 |
+
+- 控制条：◀ 上一步 / ▶ 播放 / 下一步 ▶ / ↺ 倒带；顶部"观看/跟做"模式切换。
+- **跟做模式**：点"下一步"时画布进入"待画"状态（遮罩 + 本步指令），
+  学生先在纸上/心里比划，再点"我画好了，看这一步"揭晓验证；
+  验证失败不惩罚（无扣分、无红叉，另有 ◀ 可"再看一遍上一步"）。
+- 描红/虚线轨迹等"一笔画"特殊处理（§4.1）暂不在本机实现，需要时用 step-play 另写页。
+
+### 示例（已知三边作三角形：第 2 步）
+
+```js
+interaction: {
+  type: "construction-step",
+  params: {
+    steps: [
+      { text: "画线段 BC，等于最长的边 a",
+        why: "先定一条边当“地基”；作线段等于已知线段",
+        shapes: [
+          { t: "seg", a: [25,45], b: [65,45], color: "known", width: 3.5 },
+          { t: "pt", p: [25,45], label: "B", color: "known" },
+          { t: "pt", p: [65,45], label: "C", color: "known" }
+        ] },
+      { text: "以 B 为圆心、b 为半径画弧",
+        why: "圆规保证：弧上每一点到 B 的距离都是 b",
+        shapes: [
+          { t: "seg", a: [25,45], b: [65,45], color: "line", width: 2 },
+          { t: "circle", c: [25,45], r: 28, color: "aux", dash: "5,4" },
+          { t: "txt", p: [25,80], text: "半径 = b", size: 13 }
+        ] },
+      /* ……后续步骤同理（累积写法）…… */
+    ]
+  }
+}
+```
+
+### 常见坑
+
+1. **步骤数 ≤ 6**：超 6 步拆两页；页尾写"下一步：……"做衔接。
+2. **`text` 动词开头、≤ 15 字**：写"画/以…为圆心/标出/连接……"，不写"然后我们得到…"。
+3. **帧用累积写法**：每步的 `shapes` 把前面步骤的图形也带上（作图痕迹保留），
+   当前步新画的线用 `known`/`target` 高亮色，旧痕迹用 `line`/`aux` 退后。
+4. **跟做模式是默认体验的一部分**：写页时假设学生会点"跟做"——`text` 必须自足
+   （不依赖上一页的图也能看懂这一步要干什么）。
+
+---
+
 ## 讲解页口径（v1.1 新增）
 
 用户铁律：讲解页要"讲透"（反复举例：生活例 → 图形例 → 反例，pedagogy §5.2 五段式）。
@@ -331,12 +461,12 @@ interaction: {
 ## 样本页
 
 - `modules/math/data/g00.js`：G1、G6 各 1 个完整样本页（公式 + 中文讲解 + params），可直接对照抄写结构。
-- 样本章**未接入** `data/chapters.js`（验证用）；正式几何章节按 `gNN.js` 命名、黄队写页、蓝队实现后由维护者接入注册表。
+- 样本章**已接入** `data/chapters.js`（g00–g04 `status: "ready"`）；正式几何章节按 `gNN.js` 命名、黄队写页、蓝队实现后由维护者接入注册表。
 
 ## 校验清单（提交页数据前）
 
 1. `node --check` 数据文件语法通过。
-2. `interaction.type` 为 5 种之一（大小写敏感）：`vertex-drag` / `angle-protractor` / `step-play` / `tap-highlight` / `compare-toggle`。
+2. `interaction.type` 为 7 种之一（大小写敏感）：`vertex-drag` / `angle-protractor` / `step-play` / `tap-highlight` / `compare-toggle` / `proof-replay` / `construction-step`（与 `tools/render-mathml.mjs` 的 `INTERACTION_TYPES` 同步）。
 3. `formulas[].translation` 非空；LaTeX 只用构建器支持的子集（`\\text{}` 可写中文）。
 4. `hints` 每条 ≤ 60 字，`examples` ≤ 2 个；**全页文字：交互页 ≤ 150 字，讲解页（`pageKind: "explain"`）≤ 300 字**（沿用代数 schema 约束 + pedagogy §5.2）。
 5. 本手册"常见坑"逐条过一遍。
