@@ -538,6 +538,7 @@
     if (rootMean) rootMean.innerHTML = meaningsHtml(rt.m, mi);
     // 右拨盘下方：选中词素的意思（多义同样处理，默认取第一义）
     // 若另一部分不是已知词根：查独立单词词典（如 school→学校）；查不到则不显示
+    // 中间型（如 submarine）：分别解释前后两部分（sub + ne）
     if (wordMean) {
       var sp = splitPair(wd[0], rt);
       var mRoot = findMorpheme(sp.other);
@@ -546,6 +547,27 @@
       } else if (sp.pos === "none" && sp.other === wd[0]) {
         // 整词即词素：显示词根本义
         wordMean.innerHTML = meaningsHtml(rt.m, mi);
+      } else if (sp.pos === "mid") {
+        // 中间型：分别查前后两部分
+        var w = wd[0], lw = w.toLowerCase();
+        var before = "", after = "";
+        (rt.v || []).forEach(function (v) {
+          var lv = String(v).toLowerCase();
+          var idx = lw.indexOf(lv);
+          if (lv && idx > 0 && idx + lv.length < w.length) {
+            before = w.slice(0, idx); after = w.slice(idx + lv.length);
+          }
+        });
+        var html = "";
+        if (before) {
+          var bm = window.STANDALONE_DICT && window.STANDALONE_DICT[before.toLowerCase()];
+          html += '<div><b>' + esc(before) + "</b>：" + esc(bm || "—") + "</div>";
+        }
+        if (after) {
+          var am = window.STANDALONE_DICT && window.STANDALONE_DICT[after.toLowerCase()];
+          html += '<div><b>' + esc(after) + "</b>：" + esc(am || "—") + "</div>";
+        }
+        wordMean.innerHTML = html;
       } else {
         var stMean = window.STANDALONE_DICT && window.STANDALONE_DICT[sp.other.toLowerCase()];
         wordMean.innerHTML = stMean ? "<b>" + esc(stMean) + "</b>" : "";
