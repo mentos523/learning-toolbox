@@ -1,0 +1,33 @@
+// 由 tools/render-mathml.mjs 自动生成，请勿手工编辑
+// 源：modules/math/data/g06.js
+window.MATH_MML = window.MATH_MML || {};
+window.MATH_MML["g06-u1-l1-p1#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>旋转</mtext><mn>180</mn><mtext>度，完全重合</mtext></mrow></math>";
+window.MATH_MML["g06-u1-l1-p2#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>对边平行：</mtext><mi>AB</mi><mo>∥</mo><mi>CD</mi><mo>,</mo><mi>AD</mi><mo>∥</mo><mi>BC</mi></mrow></math>";
+window.MATH_MML["g06-u1-l1-p2#f2"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>对边相等：</mtext><mi>AB</mi><mo>=</mo><mi>CD</mi><mo>,</mo><mi>AD</mi><mo>=</mo><mi>BC</mi></mrow></math>";
+window.MATH_MML["g06-u1-l1-p3#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mo>∠</mo><mi>A</mi><mo>=</mo><mo>∠</mo><mi>C</mi><mo>,</mo><mo>∠</mo><mi>B</mi><mo>=</mo><mo>∠</mo><mi>D</mi></mrow></math>";
+window.MATH_MML["g06-u1-l1-p4#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mi>OA</mi><mo>=</mo><mi>OC</mi><mo>,</mo><mi>OB</mi><mo>=</mo><mi>OD</mi></mrow></math>";
+window.MATH_MML["g06-u1-l1-p5#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mi>OA</mi><mo>=</mo><mi>OC</mi><mo>,</mo><mi>OB</mi><mo>=</mo><mi>OD</mi></mrow></math>";
+window.MATH_MML["g06-u1-l2-p1#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>满足任一条，就能断定是平行四边形</mtext></mrow></math>";
+window.MATH_MML["g06-u1-l2-p2#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>两组对边分别平行</mtext><mo>⇒</mo><mtext>平行四边形</mtext></mrow></math>";
+window.MATH_MML["g06-u1-l2-p3#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mi>AB</mi><mo>=</mo><mi>CD</mi><mo>,</mo><mi>AD</mi><mo>=</mo><mi>BC</mi><mo>⇒</mo><mtext>平行四边形</mtext></mrow></math>";
+window.MATH_MML["g06-u1-l2-p4#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mi>AB</mi><mo>∥</mo><mi>CD</mi><mo>,</mo><mi>AB</mi><mo>=</mo><mi>CD</mi><mo>⇒</mo><mtext>平行四边形</mtext></mrow></math>";
+window.MATH_MML["g06-u1-l2-p5#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mi>OA</mi><mo>=</mo><mi>OC</mi><mo>,</mo><mi>OB</mi><mo>=</mo><mi>OD</mi><mo>⇒</mo><mtext>平行四边形</mtext></mrow></math>";
+window.MATH_MML["g06-u1-l3-p1#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>矩形</mtext><mo>=</mo><mtext>平行四边形</mtext><mo>+</mo><mtext>一个直角</mtext></mrow></math>";
+window.MATH_MML["g06-u1-l3-p2#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>有一个角是直角的平行四边形叫做矩形</mtext></mrow></math>";
+window.MATH_MML["g06-u1-l3-p2#f2"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>矩形的四个角都是直角</mtext></mrow></math>";
+window.MATH_MML["g06-u1-l3-p3#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mi>AC</mi><mo>=</mo><mi>BD</mi></mrow></math>";
+window.MATH_MML["g06-u1-l3-p4#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mi>AC</mi><mo>=</mo><mi>BD</mi></mrow></math>";
+window.MATH_MML["g06-u1-l4-p1#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>菱形</mtext><mo>=</mo><mtext>平行四边形</mtext><mo>+</mo><mtext>邻边相等</mtext></mrow></math>";
+window.MATH_MML["g06-u1-l4-p2#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>有一组邻边相等的平行四边形叫做菱形</mtext></mrow></math>";
+window.MATH_MML["g06-u1-l4-p2#f2"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mi>AB</mi><mo>=</mo><mi>BC</mi><mo>=</mo><mi>CD</mi><mo>=</mo><mi>DA</mi></mrow></math>";
+window.MATH_MML["g06-u1-l4-p3#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mi>AC</mi><mo>⊥</mo><mi>BD</mi></mrow></math>";
+window.MATH_MML["g06-u1-l4-p3#f2"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>菱形的对角线互相垂直平分</mtext></mrow></math>";
+window.MATH_MML["g06-u1-l4-p4#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mi>AC</mi><mo>⊥</mo><mi>BD</mi></mrow></math>";
+window.MATH_MML["g06-u1-l5-p1#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>正方形</mtext><mo>=</mo><mtext>矩形</mtext><mo>+</mo><mtext>菱形</mtext></mrow></math>";
+window.MATH_MML["g06-u1-l5-p2#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mi>AC</mi><mo>=</mo><mi>BD</mi><mo>,</mo><mi>AC</mi><mo>⊥</mo><mi>BD</mi></mrow></math>";
+window.MATH_MML["g06-u1-l6-p1#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mi>DE</mi><mo>∥</mo><mi>BC</mi><mo>,</mo><mi>DE</mi><mo>=</mo><mfrac><mrow><mn>1</mn></mrow><mrow><mn>2</mn></mrow></mfrac><mi>BC</mi></mrow></math>";
+window.MATH_MML["g06-u1-l6-p2#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mi>DE</mi><mo>∥</mo><mi>BC</mi><mo>,</mo><mi>DE</mi><mo>=</mo><mfrac><mrow><mn>1</mn></mrow><mrow><mn>2</mn></mrow></mfrac><mi>BC</mi></mrow></math>";
+window.MATH_MML["g06-u1-l6-p3#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>只有一组对边平行的四边形叫做梯形</mtext></mrow></math>";
+window.MATH_MML["g06-u1-l6-p3#f2"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>两腰相等的梯形叫做等腰梯形</mtext></mrow></math>";
+window.MATH_MML["g06-u1-l7-p1#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>判定：条件</mtext><mo>→</mo><mtext>是平行四边形</mtext><mo>；</mo><mtext>性质：是平行四边形</mtext><mo>→</mo><mtext>结论</mtext></mrow></math>";
+window.MATH_MML["g06-u1-l7-p2#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>先看已知：给条件用判定，已知平行四边形用性质</mtext></mrow></math>";
