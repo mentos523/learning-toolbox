@@ -31,7 +31,7 @@ window.MATH_CHAPTERS = [
   { id: "g02", title: "相交线与平行线",             file: "data/g02.js", status: "ready" },
   { id: "g03", title: "三角形（一）——认识三角形",  file: "data/g03.js", status: "ready" },
   { id: "g04", title: "全等三角形",                 file: "data/g04.js", status: "ready" },
-  { id: "g05", title: "勾股定理",                   file: "data/g05.js", status: "planned" },
+  { id: "g05", title: "勾股定理",                   file: "data/g05.js", status: "ready" },
   { id: "g06", title: "四边形",                     file: "data/g06.js", status: "ready" },
   { id: "g07", title: "圆（一）——圆的基本性质",    file: "data/g07.js", status: "ready" },
   { id: "g08", title: "圆（二）——切线与圆的方程",  file: "data/g08.js", status: "planned" },
