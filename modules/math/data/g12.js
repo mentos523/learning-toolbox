@@ -27,10 +27,12 @@
  *
  * 蓝队需求（net-fold，G8 新增交互类型）：
  *   l3-p1 为技术验证页，params 按教学设计 §9.2（展开图多边形、折叠轴序列、视角档位）
- *   提案书写，schema 待蓝队冻结。白队验收点：折叠动画 ≤3 秒；固定 4–6 个视角档位
- *   （不做自由 3D 旋转）；390px 下展开图多边形可点区域 ≥44px。验证通过后再量产
+ *   提案书写，schema 已由蓝队冻结（params 手册 v1.5：net/foldSequence/views 必填，
+ *   angle 取绝对值、符号>0 按自动方向向 -z 折起；views 3–6 个固定档位）。白队验收点：
+ *   折叠动画 ≤3 秒；固定 4–6 个视角档位（不做自由 3D 旋转）；
+ *   390px 下展开图多边形可点区域 ≥44px（视角拟合缩放保证）。
  *   11 种分类页（本文件 p3/p4 已用 step-play 写好，不依赖 net-fold 量产）。
- *   在蓝队实现并注册 net-fold 之前，本章 chapters.js 保持 status: "planned"。
+ *   蓝队已实现并注册 net-fold，本章 chapters.js 已翻 status: "ready"。
  *
  * 全局约定：params 只用语义色名（known=已知蓝 / target=求证红 / corrA·corrB·corrC=对应组 /
  *   corrAngle=对应角 / line=普通线 / aux=辅助线灰虚线），不出现具体色值；逻辑坐标 0–100，y 向上。
@@ -804,8 +806,8 @@ window.MATH_CH["g12"] = {
                 type: "net-fold",
                 params: {
                   /* G8 技术验证页：正方体“一四一”展开图 ↔ 折叠。
-                   * 提案 schema（待蓝队冻结）：net=展开图多边形 / foldSequence=折叠轴序列 /
-                   * views=固定视角档位。蓝队实现并注册 net-fold 后，本页方可渲染。 */
+                   * schema 已冻结（蓝队 v1.5）：net=展开图多边形 / foldSequence=折叠轴序列 /
+                   * views=固定视角档位（iso/front/top）。net-fold 已实现并注册，本页可渲染。 */
                   net: [
                     { id: "F1", pts: [[30,50],[40,50],[40,60],[30,60]] },
                     { id: "F2", pts: [[40,50],[50,50],[50,60],[40,60]] },
