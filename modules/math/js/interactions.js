@@ -2152,10 +2152,14 @@
     var showAngles = params.showAngles !== false;
     var DEFAULT_LABELS = ["A", "B", "C"];
 
-    var W = 420, H = 360, mL = 44, mR = 44, mT = 30, mB = 56;
-    function X(x) { return mL + x / 100 * (W - mL - mR); }
-    function Y(y) { return mT + (1 - y / 100) * (H - mT - mB); }
-    function S(v) { return v / 100 * (W - mL - mR); }
+    // —— 蓝队 2026-10-11：白队 g07 终查阻塞修复。顶点拖拽曾用独立帧
+    // （X=3.32, Y=2.74），与其它交互视角不一致；现统一走 geoFrame()
+    //（方案 A：X=Y=3.32，plot 332×332），拖拽逆映射用 fr0.iX/fr0.iY。
+    var fr0 = geoFrame();
+    var W = fr0.W, H = fr0.H;
+    function X(x) { return fr0.X(x); }
+    function Y(y) { return fr0.Y(y); }
+    function S(v) { return fr0.S(v); }
 
     var init = vs.map(function (v, i) {
       return {
@@ -2170,7 +2174,7 @@
     var readout = el("div", "ix-geo-readout", "");
     wrap.appendChild(readout);
 
-    var svg = G.svg(W, H, "ix-svg geo-svg");
+    var svg = fr0.svg;
     wrap.appendChild(svg);
 
     // 可选底图（蓝队 2026-10-11：g07.1.5 半圆+直径）：DSL 形状，画在最下层，
@@ -2323,8 +2327,8 @@
       g.addEventListener("pointermove", function (evt) {
         if (!dragging) return;
         var p = G.svgPoint(svg, evt);
-        var lx = (p.x - dx - mL) / (W - mL - mR) * 100;
-        var ly = (1 - (p.y - dy - mT) / (H - mT - mB)) * 100;
+        var lx = fr0.iX(p.x - dx);
+        var ly = fr0.iY(p.y - dy);
         pts[idx].x = Math.min(98, Math.max(2, lx));
         pts[idx].y = Math.min(98, Math.max(2, ly));
         redraw();
@@ -2609,12 +2613,28 @@
    * ============================================================ */
   function geoFrame(H) {
     var G = window.GEOM;
-    var W = 420, mL = 44, mR = 44, mT = 28, mB = 44;
+    var W = 420, mL = 44, mR = 44;
     H = H || 360;
-    function X(x) { return mL + x / 100 * (W - mL - mR); }
-    function Y(y) { return mT + (1 - y / 100) * (H - mT - mB); }
-    function S(v) { return v / 100 * (W - mL - mR); }
-    return { svg: G.svg(W, H, "ix-svg geo-svg"), W: W, H: H, X: X, Y: Y, S: S };
+    // —— 蓝队 2026-10-11：白队 g07 终查阻塞修复。几何帧 X/Y 必须统一缩放，
+    // 否则 t:"circle"/arcpath 按 X 缩放画真像素圆，而黄队按逻辑坐标布的
+    // "圆上点"（X/Y 分别映射）会落在椭圆上（g07 终查 150 处脱离，最大 13.2px）。
+    // 采用白队方案 A：标准帧（H=360）plot 取 332×332 正方形，
+    // X=Y=3.32px/逻辑单位（mT=mB=14）；圆的像素半径 S 本就按 X 缩放，
+    // 故修复后所有已画圆的像素大小不变。非标准高度（如 H=300）
+    // 取 min(横向缩放, 纵向可用高度缩放) 并居中，保证任何高度下都是正方形。
+    // 不用椭圆补偿：把"圆"画成 13% 压扁的椭圆同样是错的。
+    var sx = (W - mL - mR) / 100;          // 3.32
+    var s = Math.min(sx, (H - 28) / 100);   // 上下各至少保留 14px 边距
+    var plot = 100 * s;
+    var ox = mL + ((W - mL - mR) - plot) / 2;
+    var oy = 14 + ((H - 28) - plot) / 2;
+    function X(x) { return ox + x / 100 * plot; }
+    function Y(y) { return oy + (1 - y / 100) * plot; }
+    function S(v) { return v / 100 * plot; }
+    function iX(px) { return (px - ox) / plot * 100; }   // 拖拽：像素→逻辑
+    function iY(py) { return (1 - (py - oy) / plot) * 100; }
+    return { svg: G.svg(W, H, "ix-svg geo-svg"), W: W, H: H,
+             X: X, Y: Y, S: S, iX: iX, iY: iY, scale: s };
   }
   function clearSvg(svg) {
     while (svg.firstChild) svg.removeChild(svg.firstChild);
