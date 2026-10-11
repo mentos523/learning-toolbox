@@ -1189,7 +1189,7 @@ window.MATH_CH["g13"] = {
                 type: "proof-replay",
                 params: {
                   given: "l₁: y = k₁x，l₂: y = k₂x，l₁ ⊥ l₂",
-                  goal: "k_1 k_2 = -1",
+                  goal: "k₁k₂ = −1",
                   steps: [
                     {
                       card: "先把两条直线平移到过原点——平移不改变垂不垂直。",
