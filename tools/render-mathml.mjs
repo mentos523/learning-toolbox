@@ -32,8 +32,10 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const DATA_DIR = join(ROOT, "modules", "math", "data");
 const MATHML_NS = "http://www.w3.org/1998/Math/MathML";
 
-/* ---------------- 交互类型（与 docs/math-interaction-params.md 同步） ---------------- */
+/* ---------------- 交互类型（与 docs/math-interaction-params.md、
+ * docs/math-geometry-params.md 同步） ---------------- */
 const INTERACTION_TYPES = {
+  // 代数（原有）
   "slider-lab": ["min", "max", "step", "label", "expr"],
   "balance-drag": ["left", "right", "goal"],
   "linked-dashboard": ["source", "views"],
@@ -45,6 +47,12 @@ const INTERACTION_TYPES = {
   "side-compare": ["left", "right"],
   "slow-replay": ["frames", "duration", "draw"],
   "shape-area": ["min", "max", "step"],
+  // 几何（蓝队 2026-10-11：必填参数按 docs/math-geometry-params.md Schema）
+  "vertex-drag": ["vertices"],
+  "angle-protractor": ["angle"],
+  "step-play": ["steps"],
+  "tap-highlight": ["items", "groups"],
+  "compare-toggle": ["views"],
 };
 
 /* ============================================================
@@ -349,10 +357,10 @@ function validate(pages) {
     // 交互
     validateInteraction(tag, p.interaction, "主");
     if (p.auxInteraction) validateInteraction(tag, p.auxInteraction, "辅");
-    // 文字量
+    // 文字量（蓝队 2026-10-11：讲解页按教学设计可写到约 300 字，不适用 150 字上限）
     const text = [p.title, ...(p.hints || [])].join("");
     const cjkCount = (text.match(/[\u4e00-\u9fff]/g) || []).length;
-    if (cjkCount > 150) warn(`${tag}: 文字约 ${cjkCount} 字，超过 150 上限`);
+    if (p.pageKind !== "explain" && cjkCount > 150) warn(`${tag}: 文字约 ${cjkCount} 字，超过 150 上限`);
   }
 }
 
