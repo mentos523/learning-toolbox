@@ -1,0 +1,30 @@
+// 由 tools/render-mathml.mjs 自动生成，请勿手工编辑
+// 源：modules/math/data/g10.js
+window.MATH_MML = window.MATH_MML || {};
+window.MATH_MML["g10-u1-l1-p1#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>对折</mtext><mo>⇒</mo><mtext>折痕两边镜像重合</mtext></mrow></math>";
+window.MATH_MML["g10-u1-l1-p2#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>沿直线</mtext><mi>l</mi><mtext>翻折</mtext><mo>⇒</mo><mtext>两部分完全重合</mtext></mrow></math>";
+window.MATH_MML["g10-u1-l1-p3#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>轴对称图形</mtext></mrow></math>";
+window.MATH_MML["g10-u1-l1-p4#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>对折重合</mtext><mo>⇒</mo><mtext>轴对称</mtext></mrow></math>";
+window.MATH_MML["g10-u1-l2-p1#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mi>l</mi><mo>⊥</mo><mi>AA</mi><mo>′</mo></mrow></math>";
+window.MATH_MML["g10-u1-l2-p1#f2"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mi>AO</mi><mo>=</mo><mi>OA</mi><mo>′</mo></mrow></math>";
+window.MATH_MML["g10-u1-l2-p2#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>对称轴</mtext><mo>⊥</mo><mtext>对应点连线</mtext><mo>，</mo><mtext>且平分它</mtext></mrow></math>";
+window.MATH_MML["g10-u1-l2-p2#f2"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mi>AB</mi><mo>=</mo><mi>A</mi><mo>′</mo><mi>B</mi><mo>′</mo><mo>,</mo><mo>∠</mo><mi>A</mi><mo>=</mo><mo>∠</mo><mi>A</mi><mo>′</mo></mrow></math>";
+window.MATH_MML["g10-u1-l2-p3#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mi>x</mi><mo>=</mo><mo>−</mo><mfrac><mrow><mi>b</mi></mrow><mrow><mn>2</mn><mi>a</mi></mrow></mfrac></mrow></math>";
+window.MATH_MML["g10-u1-l2-p4#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>矩形的对称轴</mtext><mo>=</mo><mn>2</mn><mtext>条</mtext></mrow></math>";
+window.MATH_MML["g10-u1-l3-p1#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>作垂线</mtext><mo>⇒</mo><mtext>截等长</mtext><mo>⇒</mo><mi>A</mi><mo>′</mo></mrow></math>";
+window.MATH_MML["g10-u1-l3-p2#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mo>△</mo><mi>ABC</mi><mo>⇒</mo><mo>△</mo><mi>A</mi><mo>′</mo><mi>B</mi><mo>′</mo><mi>C</mi><mo>′</mo></mrow></math>";
+window.MATH_MML["g10-u1-l3-p3#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>作垂线</mtext><mo>⇒</mo><mtext>截等长</mtext><mo>⇒</mo><mtext>连线</mtext></mrow></math>";
+window.MATH_MML["g10-u1-l4-p1#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>三线合一</mtext><mo>⇒</mo><mtext>对称轴</mtext></mrow></math>";
+window.MATH_MML["g10-u1-l4-p2#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>对称轴上的点到</mtext><mi>B</mi><mo>、</mo><mi>C</mi><mtext>距离相等</mtext></mrow></math>";
+window.MATH_MML["g10-u1-l4-p3#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mo>∠</mo><mi>BAD</mi><mo>=</mo><msup><mn>40</mn><mrow><mo>∘</mo></mrow></msup></mrow></math>";
+window.MATH_MML["g10-u1-l5-p1#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>旋转中心</mtext><mo>+</mo><mtext>旋转方向</mtext><mo>+</mo><mtext>旋转角度</mtext></mrow></math>";
+window.MATH_MML["g10-u1-l5-p2#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>旋转</mtext><mo>⇒</mo><mtext>形状大小不变</mtext></mrow></math>";
+window.MATH_MML["g10-u1-l5-p3#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>中心对称</mtext><mo>=</mo><mtext>旋转</mtext><msup><mn>180</mn><mrow><mo>∘</mo></mrow></msup></mrow></math>";
+window.MATH_MML["g10-u1-l5-p4#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mi>OA</mi><mo>=</mo><mi>OA</mi><mo>′</mo></mrow></math>";
+window.MATH_MML["g10-u1-l5-p5#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>平行四边形</mtext><mo>⇒</mo><mtext>中心对称图形</mtext></mrow></math>";
+window.MATH_MML["g10-u1-l5-p6#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>转</mtext><msup><mn>180</mn><mrow><mo>∘</mo></mrow></msup><mtext>重合</mtext><mo>⇒</mo><mtext>中心对称图形</mtext></mrow></math>";
+window.MATH_MML["g10-u1-l6-p1#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>平移</mtext><mo>/</mo><mtext>轴对称</mtext><mo>/</mo><mtext>旋转</mtext><mo>⇒</mo><mtext>形状大小不变</mtext></mrow></math>";
+window.MATH_MML["g10-u1-l6-p2#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>全等</mtext><mo>⇒</mo><mtext>经运动可重合</mtext></mrow></math>";
+window.MATH_MML["g10-u1-l6-p3#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mo>△</mo><mi>ABC</mi><mo>≅</mo><mo>△</mo><mi>A</mi><mo>′</mo><mi>B</mi><mo>′</mo><mi>C</mi><mo>′</mo></mrow></math>";
+window.MATH_MML["g10-u1-l7-p1#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>全等</mtext><mo>⇒</mo><mtext>经运动可重合</mtext></mrow></math>";
+window.MATH_MML["g10-u1-l7-p2#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>对称</mtext><mo>/</mo><mtext>旋转</mtext><mo>/</mo><mtext>运动重合</mtext></mrow></math>";
