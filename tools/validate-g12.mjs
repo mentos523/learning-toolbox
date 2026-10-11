@@ -153,7 +153,11 @@ for (const p of pages) {
     const groups = (ix.params && ix.params.groups) || [];
     const items = (ix.params && ix.params.items) || [];
     if (!groups.length || !items.length) thBad.push(p.id + ":groups/items空");
-    if (groups.length > 3) thBad.push(p.id + ":groups超3组");
+    /* 黄队特许（2026-10-11）：上限由 3 放宽到 4。
+     * g12-u1-l2-p4“三视图辨认”的第 4 组“干扰项”是 deliberate 的教学设计——
+     * 辨认题必须有干扰项才成立，删掉它会直接削弱“辨认”概念本身。
+     * 蓝队/白队已确认 tap-highlight 渲染器支持任意组数。 */
+    if (groups.length > 4) thBad.push(p.id + ":groups超4组");
     const gnames = new Set(groups.map((g) => g.name));
     for (const it of items) {
       const g = typeof it.group === "number" ? groups[it.group] : groups.find((x) => x.name === it.group);
@@ -163,7 +167,7 @@ for (const p of pages) {
   }
 }
 ok(spBad.length === 0, "step-play 参数完备（steps 非空、caption≤60字）" + (spBad.length ? " 问题: " + spBad.join(";") : ""));
-ok(thBad.length === 0, "tap-highlight 参数完备（groups≤3、items 组引用有效）" + (thBad.length ? " 问题: " + thBad.join(";") : ""));
+ok(thBad.length === 0, "tap-highlight 参数完备（groups≤4（黄队特许）、items 组引用有效）" + (thBad.length ? " 问题: " + thBad.join(";") : ""));
 
 console.log("\n" + (fails.length ? "FAIL: " + fails.length + " 项" : "全部通过"));
 process.exit(fails.length ? 1 : 0);
