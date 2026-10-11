@@ -89,6 +89,11 @@ body[data-theme="dark"] {
   border: 1px solid var(--m-line); border-radius: 999px;
   padding: 4px 18px; margin: 0 auto 6px; width: fit-content; max-width: 100%;
 }
+/* 小字注记（ratio-slider 的 note：如"这就是 y=x² 在干的事"） */
+.ix-note {
+  text-align: center; font-size: 0.85rem; color: var(--m-ink-soft);
+  padding: 2px 0 0;
+}
 
 * { box-sizing: border-box; }
 html, body { height: 100%; overflow: hidden; }

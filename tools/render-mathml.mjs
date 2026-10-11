@@ -64,6 +64,8 @@ const INTERACTION_TYPES = {
   "cut-reassemble": ["pieces", "targets"],
   "pythag-grow": ["aMin", "aMax", "bMin", "bMax"],
   "ladder-slide": ["length", "xMin", "xMax", "expr"],
+  // 几何 g09 接入（蓝队 2026-10-11：params 手册 v1.4）
+  "ratio-slider": ["kMin", "kMax"],
 };
 
 /* ============================================================

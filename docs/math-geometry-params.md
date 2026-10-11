@@ -1,6 +1,10 @@
-# 数学 · 几何 交互参数编写手册（蓝队 v1.3）
+# 数学 · 几何 交互参数编写手册（蓝队 v1.4）
 
 > 给黄队：按本手册写几何页的 `interaction.params`，不用关心 SVG/CSS 实现。
+> v1.4（2026-10-11，几何 g09 接入）：
+> 新增 `ratio-slider`（相似缩放滑块）一种交互：单滑块调相似比 k，
+> 两三角形始终相似锁定，面积读数 S₂/S₁=k² 走 MathML 实时验算，
+> 配不变量徽章与小字注记。
 > v1.3（2026-10-11，几何 g05 接入）：
 > 新增 `cut-reassemble`（切割拼补） / `pythag-grow`（正方形生长滑块） /
 > `ladder-slide`（梯子滑块）三种交互；expr-mathml.js 新增 `sqrt` 函数
@@ -573,6 +577,53 @@ interaction: {
 
 ---
 
+## ratio-slider · 相似缩放滑块（v1.4 新增）
+
+单滑块调相似比 k，两三角形始终相似锁定（缩放构造），面积读数按 k² 联动。
+适用：相似三角形性质——面积比 = 相似比²（g09 灵魂页）。
+
+### Schema
+
+| 参数 | 类型 | 必填 | 默认 | 说明 |
+|---|---|---|---|---|
+| `kMin` | number | ✅ | — | 相似比下限（>0） |
+| `kMax` | number | ✅ | — | 相似比上限（必须 > kMin） |
+| `kStep` | number | — | `0.25` | 滑块步长（>0） |
+| `kInit` | number | — | `1` | 初始值（钳制到上下限内；不在范围内时取 1 再钳制） |
+| `lockRatio` | boolean | — | `true` | **硬约束**：必须为 `true`；相似由缩放构造保证（角度恒相等、对应边比恒=k）；传 `false` 直接报错不渲染 |
+| `showAreas` | boolean | — | `true` | 是否在三角形内显示面积数（S₁=…/S₂=…） |
+| `badge` | string | — | — | 不变量徽章文案，如 `"没变的是：形状；面积按 k² 跳"`。纯中文按纯文本显示；纯 ASCII 公式走 MathML；中英混排降级为纯文本 |
+| `note` | string | — | — | 滑块下方小字注记，如 `"这就是 y=x² 在干的事"` |
+
+- 滑块上方有表达式行（`k² = …`，MathML），滑块行显示 `k = …`。
+- 读数行：`S₂/S₁=k²`（MathML）+ 实时数值验算（如 `S₂/S₁=4 ✓`）。注意交互内表达式不支持 `:`（冒号），故读数用等价的分式写法；页级公式 `S₁:S₂=1:k²` 走构建管线渲染不受影响。
+- 两三角形：左侧基准（corrA，k=1），右侧缩放（corrB，边长=k×基准）；对应角画同样式弧线标记（恒相等可视化），顶点标 A/B/C ↔ A′/B′/C′。
+- 画布按两三角形包围盒自适应缩放，k 取值再大也不会出画布。
+
+### 示例
+
+```js
+interaction: {
+  type: "ratio-slider",
+  params: {
+    kMin: 0.5, kMax: 3, kStep: 0.25, kInit: 1,
+    lockRatio: true,
+    showAreas: true,
+    badge: "没变的是：形状；面积按 k² 跳",
+    note: "这就是 y=x² 在干的事"
+  }
+}
+```
+
+### 常见坑
+
+1. **`lockRatio` 别写 `false`**：这个交互的身份就是"相似锁定"，传 `false` 会报错；想做非相似变形用 vertex-drag。
+2. **k 别取太大**：k 到 5 时右侧三角形巨大，画布自适应后左侧基准缩得很小；建议 kMax ≤ 3。
+3. **读数别写冒号**：交互读数固定为 `S₂/S₁=k²` 分式写法；想写 `S₁:S₂=1:k²` 请放在页级 `formulas` 里。
+4. **note 是小字**：只放一句话点睛（如 y=x² 呼应），别写成长段讲解。
+
+---
+
 ## 讲解页口径（v1.1 新增）
 
 用户铁律：讲解页要"讲透"（反复举例：生活例 → 图形例 → 反例，pedagogy §5.2 五段式）。
@@ -622,7 +673,7 @@ interaction: {
 ## 校验清单（提交页数据前）
 
 1. `node --check` 数据文件语法通过。
-2. `interaction.type` 为 10 种之一（大小写敏感）：`vertex-drag` / `angle-protractor` / `step-play` / `tap-highlight` / `compare-toggle` / `proof-replay` / `construction-step` / `cut-reassemble` / `pythag-grow` / `ladder-slide`（与 `tools/render-mathml.mjs` 的 `INTERACTION_TYPES` 同步）。
+2. `interaction.type` 为 11 种之一（大小写敏感）：`vertex-drag` / `angle-protractor` / `step-play` / `tap-highlight` / `compare-toggle` / `proof-replay` / `construction-step` / `cut-reassemble` / `pythag-grow` / `ladder-slide` / `ratio-slider`（与 `tools/render-mathml.mjs` 的 `INTERACTION_TYPES` 同步）。
 3. `formulas[].translation` 非空；LaTeX 只用构建器支持的子集（`\\text{}` 可写中文）。
 4. `hints` 每条 ≤ 60 字，`examples` ≤ 2 个；**全页文字：交互页 ≤ 150 字，讲解页（`pageKind: "explain"`）≤ 300 字**（沿用代数 schema 约束 + pedagogy §5.2）。
 5. 本手册"常见坑"逐条过一遍。

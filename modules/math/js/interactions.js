@@ -36,6 +36,9 @@
  *   ladder-slide      梯子滑块（几何）：拖梯子底端 / 滑块，梯子实时转动，
  *                     h=√(L²−x²) 走 MathML 实时显示，
  *                     showCheck 时 x²+h²=L² 实时验算，showTriangle 画直角三角形
+ *   ratio-slider      相似缩放滑块（几何）：单滑块调相似比 k，两三角形
+ *                     始终相似锁定（缩放构造），面积读数 S₂/S₁=k² 走 MathML
+ *                     实时验算；badge 不变量徽章；note 小字注记
  *
  * 数学排版（蓝队 2026-10-10 修复）：交互内的表达式（expr/term/label/
  * 轴标签）统一走 window.MathExpr.html() —— ASCII 子集 → MathML
@@ -3943,6 +3946,168 @@
     core.setValue(xInit);  // 触发首次 redraw
   }
 
+  /* ============================================================
+   * 22. ratio-slider 相似缩放滑块（几何）
+   * params: {kMin, kMax, kStep?, kInit?, lockRatio?, showAreas?,
+   *          badge?, note?}
+   *
+   * 玩法：单滑块调相似比 k；两三角形始终相似锁定（构造保证：
+   * 缩放变换，角度恒相等、对应边比恒=k）；面积读数 S₂/S₁=k²
+   * 走 MathML + 实时数值验算；badge 为不变量徽章；note 为小字注记
+   * （如"这就是 y=x² 在干的事"，中文混排时降级为转义纯文本）。
+   * 硬约束：相似锁定由构造保证；lockRatio 必须为 true（传 false 直接报错）。
+   * 逻辑坐标 0–100（y 向上），画布按图形包围盒自适应缩放。
+   * ============================================================ */
+  function renderRatioSlider(container, params) {
+    var G = window.GEOM;
+    if (!G) {
+      container.appendChild(el("div", "ix-stub", "几何原语库未加载（js/geom-primitives.js）"));
+      return;
+    }
+    var kMin = Number(params.kMin), kMax = Number(params.kMax);
+    if (!isFinite(kMin) || !isFinite(kMax) || kMax <= kMin || kMin <= 0) {
+      geoErr(container, "ratio-slider 需要 0<kMin<kMax（数值）");
+      return;
+    }
+    var kStep = Number(params.kStep);
+    if (!isFinite(kStep) || kStep <= 0) kStep = 0.25;
+    if (params.lockRatio === false) {
+      geoErr(container, "ratio-slider 的 lockRatio 是硬约束，必须为 true（相似由缩放构造保证）");
+      return;
+    }
+    var showAreas = params.showAreas !== false;
+
+    function clamp(v, lo, hi) { return Math.min(hi, Math.max(lo, v)); }
+    var k0 = isFinite(Number(params.kInit))
+      ? clamp(Number(params.kInit), kMin, kMax)
+      : clamp(1, kMin, kMax);
+
+    var wrap = el("div", "ix-geo-wrap");
+    if (params.badge) {
+      // 徽章：纯文本（中文条件）或纯 ASCII 公式（走 MathML）；混排降级为纯文本
+      wrap.appendChild(el("div", "ix-badge", MX(params.badge)));
+    }
+    var readout = el("div", "ix-geo-readout", "");
+    wrap.appendChild(readout);
+    var W = 420, H = 300;
+    var svg = G.svg(W, H, "ix-svg geo-svg");
+    wrap.appendChild(svg);
+
+    // 滑块：k；表达式行显示面积比 k²（MathML：k² = …）
+    var core = sliderLabCore(wrap, { min: kMin, max: kMax, step: kStep, label: "k", expr: "k^2" });
+    if (params.note) {
+      wrap.appendChild(el("div", "ix-note", MX(params.note)));
+    }
+    container.appendChild(wrap);
+
+    // 基准三角形（k=1）：A=(0,0)，B=(30,0)，C=(10,20)；S1 = 300
+    var A = [0, 0], B = [30, 0], C = [10, 20];
+    var S1 = 300;
+    var GAP = 12;  // 两三角形间距（逻辑单位）
+
+    function fmtN(n) { return String(Math.round(n * 100) / 100); }
+
+    function redraw() {
+      var k = core.getValue();
+      var k2 = k * k;
+      var S2 = S1 * k2;
+      // 缩放三角形 T2 = k·T1，平移至 T1 右侧（相似锁定：构造即缩放变换）
+      var A2 = [30 + GAP, 0], B2 = [30 + GAP + 30 * k, 0], C2 = [30 + GAP + 10 * k, 20 * k];
+      var all = [A, B, C, A2, B2, C2];
+      var xs = all.map(function (p) { return p[0]; });
+      var ys = all.map(function (p) { return p[1]; });
+      var x0 = Math.min.apply(null, xs), x1 = Math.max.apply(null, xs);
+      var y0 = Math.min.apply(null, ys), y1 = Math.max.apply(null, ys);
+      var mL = 40, mR = 16, mT = 12, mB = 22;
+      var s = Math.min((W - mL - mR) / ((x1 - x0) || 1),
+                       (H - mT - mB) / ((y1 - y0) || 1));
+      var ox = mL + ((W - mL - mR) - (x1 - x0) * s) / 2;
+      var oy = mT + ((H - mT - mB) - (y1 - y0) * s) / 2;
+      function X(x) { return ox + (x - x0) * s; }
+      function Y(y) { return oy + (y1 - y) * s; }
+      function ptsStr(arr) {
+        return arr.map(function (p) {
+          return X(p[0]).toFixed(1) + "," + Y(p[1]).toFixed(1);
+        }).join(" ");
+      }
+      clearSvg(svg);
+
+      function poly(arr, color) {
+        var pg = G.el("polygon", {
+          points: ptsStr(arr), fill: G.colorOf(color), "fill-opacity": 0.22,
+          stroke: G.colorOf(color), "stroke-width": 2.5,
+          "stroke-linejoin": "round"
+        });
+        svg.appendChild(pg);
+        return pg;
+      }
+      poly([A, B, C], "corrA");
+      poly([A2, B2, C2], "corrB");
+
+      // 对应角弧线：同样式绘制 → 恒相等可视化
+      function markAngles(V, E1, E2, rPx) {
+        var a = G.angleOf(V[0], V[1], E1[0], E1[1]);
+        var b = G.angleOf(V[0], V[1], E2[0], E2[1]);
+        var d = G.norm180(b - a);  // 内角 < 180°，取小弧
+        var a1 = d >= 0 ? a : b;
+        G.angleArc(svg, V[0], V[1], a1, a1 + Math.abs(d), rPx,
+          { color: "corrAngle", width: 2 });
+      }
+      var VA = [X(A[0]), Y(A[1])], VB = [X(B[0]), Y(B[1])], VC = [X(C[0]), Y(C[1])];
+      var VA2 = [X(A2[0]), Y(A2[1])], VB2 = [X(B2[0]), Y(B2[1])], VC2 = [X(C2[0]), Y(C2[1])];
+      var arcR = Math.max(10, s * 2.2);
+      markAngles(VA, VB, VC, arcR);
+      markAngles(VB, VA, VC, arcR);
+      markAngles(VC, VA, VB, arcR);
+      markAngles(VA2, VB2, VC2, arcR);
+      markAngles(VB2, VA2, VC2, arcR);
+      markAngles(VC2, VA2, VB2, arcR);
+
+      // 顶点标签（对应关系：A↔A′ 等），相对各自形心向外
+      function vlab(pixPt, cx, cy, t, color) {
+        var dx = pixPt[0] - cx, dy = pixPt[1] - cy;
+        var dl = Math.sqrt(dx * dx + dy * dy) || 1;
+        G.label(svg, pixPt[0] + dx / dl * 14, pixPt[1] + dy / dl * 14,
+          t, { size: 12, bold: true, color: color });
+      }
+      var c1x = (VA[0] + VB[0] + VC[0]) / 3, c1y = (VA[1] + VB[1] + VC[1]) / 3;
+      var c2x = (VA2[0] + VB2[0] + VC2[0]) / 3, c2y = (VA2[1] + VB2[1] + VC2[1]) / 3;
+      vlab(VA, c1x, c1y, "A", "corrA");
+      vlab(VB, c1x, c1y, "B", "corrA");
+      vlab(VC, c1x, c1y, "C", "corrA");
+      vlab(VA2, c2x, c2y, "A′", "corrB");
+      vlab(VB2, c2x, c2y, "B′", "corrB");
+      vlab(VC2, c2x, c2y, "C′", "corrB");
+
+      // 面积数（showAreas）
+      if (showAreas) {
+        function areaNum(cx, cy, name, v, color) {
+          var t = G.el("text", {
+            x: cx.toFixed(1), y: (cy + 6).toFixed(1),
+            "text-anchor": "middle", "font-size": 15, "font-weight": "bold",
+            fill: G.colorOf(color || "text"),
+            "paint-order": "stroke", stroke: "var(--geo-bg)", "stroke-width": 3
+          });
+          t.textContent = name + "=" + fmtN(v);
+          svg.appendChild(t);
+        }
+        areaNum(c1x, c1y, "S₁", S1, "corrA");
+        areaNum(c2x, c2y, "S₂", S2, "corrB");
+      }
+
+      // 读数行：S₂/S₁=k²（MathML）+ 实时数值验算（":" 不在 MX 子集内，
+      // 故交互读数用等价的分式写法；页级公式 S₁:S₂=1:k² 走构建管线渲染）
+      readout.innerHTML =
+        '<span class="ix-val">' + MX("S_2/S_1=k^2") + "</span>" +
+        '<span class="ix-sep">　</span>' +
+        "<span>" + MX("S_2/S_1=" + fmtN(k2)) + "</span>" +
+        ' <span class="ix-success">✓</span>';
+    }
+
+    core.onInput(redraw);
+    core.setValue(k0);  // 触发首次 redraw
+  }
+
   /* ---------------- 渲染器内嵌查表 ----------------
    * 与 window.MATH_INTERACTIONS 同源：注册时同步记一份本地表。
    * side-compare 内嵌时按 kind 查表调用已注册渲染器（不复制渲染器代码）。*/
@@ -3974,4 +4139,5 @@
   ixRegister("cut-reassemble", renderCutReassemble);
   ixRegister("pythag-grow", renderPythagGrow);
   ixRegister("ladder-slide", renderLadderSlide);
+  ixRegister("ratio-slider", renderRatioSlider);
 })();
