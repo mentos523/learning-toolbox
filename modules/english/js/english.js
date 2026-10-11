@@ -533,6 +533,51 @@
     // 单词意思：词性 + 中文
     heroMean.innerHTML = '<span class="pos">' + esc(wd[1]) + "</span><b>" + esc(wd[2]) + "</b>";
     cineRestart(heroMean);
+    // 词义分解：各部分意思用 · 分隔（如 [再；重新]·[带；运送]·[形容词后缀]）
+    var heroParts = document.getElementById("hero-parts");
+    if (heroParts) {
+      var sp = splitPair(wd[0], rt);
+      var parts = [];
+      // 简化词义：取核心部分，去掉举例
+      function shortMean(s) {
+        if (!s) return "";
+        // 去掉"如…"举例部分（中英文括号）
+        var idx = s.indexOf("，如");
+        if (idx === -1) idx = s.indexOf(", 如");
+        if (idx === -1) idx = s.indexOf("（如");
+        if (idx === -1) idx = s.indexOf("(如");
+        if (idx !== -1) s = s.slice(0, idx);
+        // 去掉"表示"前缀，保留核心
+        s = s.replace(/^(前缀|后缀|名词后缀|形容词后缀|动词后缀|副词后缀)，表示/, "$1");
+        return s.trim();
+      }
+      var seenParts = {};
+      // 用 splitPair 已算出的最长变体位置（sp.idx/sp.len）直接切片，保证与顶部标红一致
+      if (sp.idx !== -1 && sp.len > 0) {
+        var w = wd[0];
+        if (sp.idx > 0) {
+          // 前缀部分
+          var before = w.slice(0, sp.idx);
+          var bm = window.STANDALONE_DICT && window.STANDALONE_DICT[before.toLowerCase()];
+          if (bm) parts.push("[" + shortMean(bm) + "]");
+        }
+        // 词根部分
+        var mi2 = Math.min(Math.max(0, wd[3] || 0), rt.m.length - 1);
+        parts.push("[" + rt.m[mi2] + "]");
+        if (sp.idx + sp.len < w.length) {
+          // 后缀部分
+          var after = w.slice(sp.idx + sp.len);
+          var am = window.STANDALONE_DICT && window.STANDALONE_DICT[after.toLowerCase()];
+          if (am) parts.push("[" + shortMean(am) + "]");
+        }
+      } else {
+        // 整词即词素或无法切分：只显示词根意思
+        var mi3 = Math.min(Math.max(0, wd[3] || 0), rt.m.length - 1);
+        parts.push("[" + rt.m[mi3] + "]");
+      }
+      heroParts.textContent = parts.join("·");
+      heroParts.style.display = parts.length > 1 ? "" : "none";
+    }
     // 左拨盘下方：词根意思（多义时当前义高亮，其余淡化对齐）
     var mi = Math.min(Math.max(0, wd[3] || 0), rt.m.length - 1);
     if (rootMean) rootMean.innerHTML = meaningsHtml(rt.m, mi);

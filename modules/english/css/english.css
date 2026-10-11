@@ -261,6 +261,18 @@ body {
 }
 .word-hero-mean .pos { font-size: 0.9em; margin-right: 8px; }
 .word-hero-mean b { color: var(--ink); }
+/* 词义分解：各部分意思，字略小、色略浅 */
+.word-hero-parts {
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  opacity: 0.85;
+  margin-top: 6px;
+  padding: 0 16px;
+  line-height: 1.6;
+  overflow-wrap: break-word;
+  max-height: 6em;
+  overflow-y: auto;
+}
 .word-hero-phon {
   font-size: 1rem;
   color: var(--ink-soft);
