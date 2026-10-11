@@ -1,6 +1,10 @@
-# 数学 · 几何 交互参数编写手册（蓝队 v1.4）
+# 数学 · 几何 交互参数编写手册（蓝队 v1.5）
 
 > 给黄队：按本手册写几何页的 `interaction.params`，不用关心 SVG/CSS 实现。
+> v1.5（2026-10-11，几何 g12 接入）：
+> 新增 `net-fold`（展开图↔折叠，G8）——**schema 冻结**：`net` 展开图多边形 /
+> `foldSequence` 折叠轴序列 / `views` 固定视角档位；零依赖 SVG/CSS 实现
+> （2D 模拟 3D：刚体面片绕轴旋转 + 正交投影），不做自由 3D 旋转。
 > v1.4（2026-10-11，几何 g09 接入）：
 > 新增 `ratio-slider`（相似缩放滑块）一种交互：单滑块调相似比 k，
 > 两三角形始终相似锁定，面积读数 S₂/S₁=k² 走 MathML 实时验算，
@@ -577,6 +581,39 @@ interaction: {
 
 ---
 
+## G8 · net-fold（展开图↔折叠，v1.5 新增，schema 已冻结）
+
+正方体（及以后：长方体/棱柱/棱锥）展开图 ↔ 立体折叠可逆动画 + 固定视角档位
+（三视图教学：正视/俯视即主视图/俯视图）。**零依赖 SVG/CSS 实现**：每面是刚体，
+按 `foldSequence` 绕折叠轴依次转起（Rodrigues 旋转公式），正交投影到固定视角，
+**不做自由 3D 旋转**（性能+操作双保险，pedagogy §9.2）。
+
+### Schema（冻结）
+
+| 参数 | 类型 | 必填 | 默认 | 说明 |
+|---|---|---|---|---|
+| `net` | array | ✅ | — | 展开图多边形：`{id, pts}`；`pts` 为逻辑坐标 0–100（y 向上）多边形顶点（≥3 点）；正方体 6 个面 |
+| `foldSequence` | array | ✅ | — | 折叠轴序列：`{face, edge, angle}`；`face` 为面 id（每面最多折一次）；`edge=[[x1,y1],[x2,y2]]` 为折叠轴，**必须是该面与父面的公共边**（端点按 net 坐标）；`angle` 为折叠总角度（度，非零；取绝对值，符号>0 按自动方向折起、<0 反向——渲染器自动判定使面片向 -z 折起，立体向 -z 延伸，保证正视/俯视呈标准三视图方位：正视见 F2 且左 F1 右 F3、俯视见顶面） |
+| `views` | array | ✅ | — | 固定视角档位 3–6 个（去重后仍≥3）：`"iso"` 等轴 / `"front"` 正视 / `"top"` 俯视 / `"side"` 侧视 / `"back"` 后视 / `"bottom"` 仰视 |
+| `autoplay` | boolean | — | `false` | 落页自动播放折叠 |
+| `reversible` | boolean | — | `true` | 显示"⇄ 展开/折叠"可逆按钮；`false` 时只能正向折叠+重播 |
+| `duration` | number | — | `2800` | 全序列毫秒数，钳制 500–3000（白队验收：折叠动画 ≤3 秒） |
+
+- **书写顺序**：`foldSequence` 按"从根向外"书写（父面先折、子面后折）；验证页顺序 F5→F6→F1→F4→F3（F2 为根面不动，F4 先于其父面 F3 折）。
+- **面可点**：每面都是 ≥44px 点选热区（视角拟合缩放保证 390px 下达标），点选面显示"面 Fx（已折起/展开状态）"。
+- 控件：▶ 折叠 / ⏸ 暂停 / ↺ 重播 / ⇄ 展开-折叠 / 视角按钮 / scrubber 进度条（几何全局约定：重播+scrubber 必备）。
+- 折叠中铰链轴红色高亮；角度读数走 MathML（如 <math><mn>90</mn><mo>°</mo></math>），不许裸文本。
+- 面编号 1–6 徽章常显（双编码：颜色+编号，色盲可辨）。
+
+### 常见坑
+
+1. **`edge` 必须是公共边**：端点坐标要与 net 里两面的顶点**完全一致**（容差 1e-6），写错一位小数即报错不渲染。
+2. **别让一面折两次**：`foldSequence` 里同一 `face` 出现两次直接报错。
+3. **`views` 去重后不足 3 个报错**；未知视角名报错（大小写敏感）。
+4. **`duration` 别超 3000**：渲染器钳制，但 params 里就该写对（验收红线）。
+
+---
+
 ## ratio-slider · 相似缩放滑块（v1.4 新增）
 
 单滑块调相似比 k，两三角形始终相似锁定（缩放构造），面积读数按 k² 联动。
@@ -673,7 +710,7 @@ interaction: {
 ## 校验清单（提交页数据前）
 
 1. `node --check` 数据文件语法通过。
-2. `interaction.type` 为 11 种之一（大小写敏感）：`vertex-drag` / `angle-protractor` / `step-play` / `tap-highlight` / `compare-toggle` / `proof-replay` / `construction-step` / `cut-reassemble` / `pythag-grow` / `ladder-slide` / `ratio-slider`（与 `tools/render-mathml.mjs` 的 `INTERACTION_TYPES` 同步）。
+2. `interaction.type` 为 12 种之一（大小写敏感）：`vertex-drag` / `angle-protractor` / `step-play` / `tap-highlight` / `compare-toggle` / `proof-replay` / `construction-step` / `cut-reassemble` / `pythag-grow` / `ladder-slide` / `ratio-slider` / `net-fold`（与 `tools/render-mathml.mjs` 的 `INTERACTION_TYPES` 同步）。
 3. `formulas[].translation` 非空；LaTeX 只用构建器支持的子集（`\\text{}` 可写中文）。
 4. `hints` 每条 ≤ 60 字，`examples` ≤ 2 个；**全页文字：交互页 ≤ 150 字，讲解页（`pageKind: "explain"`）≤ 300 字**（沿用代数 schema 约束 + pedagogy §5.2）。
 5. 本手册"常见坑"逐条过一遍。

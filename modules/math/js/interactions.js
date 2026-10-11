@@ -36,6 +36,9 @@
  *   ladder-slide      梯子滑块（几何）：拖梯子底端 / 滑块，梯子实时转动，
  *                     h=√(L²−x²) 走 MathML 实时显示，
  *                     showCheck 时 x²+h²=L² 实时验算，showTriangle 画直角三角形
+ *   net-fold          展开图↔折叠（几何 G8）：刚体面片绕折叠轴依次转起
+ *                     （Rodrigues 公式），正交投影到固定视角档位；播放/暂停/
+ *                     重播/可逆/视角切换/scrubber；面可点（≥44px）；角度读数走 MathML
  *   ratio-slider      相似缩放滑块（几何）：单滑块调相似比 k，两三角形
  *                     始终相似锁定（缩放构造），面积读数 S₂/S₁=k² 走 MathML
  *                     实时验算；badge 不变量徽章；note 小字注记
@@ -4108,6 +4111,437 @@
     core.setValue(k0);  // 触发首次 redraw
   }
 
+  /* ============================================================
+   * 22. net-fold 展开图↔折叠（几何 G8）
+   * params: {net:[{id, pts:[[x,y]...]}], foldSequence:[{face, edge:[[x1,y1],[x2,y2]], angle}],
+   *          views:["iso","front","top",...](3–6 个), autoplay?, reversible?=true, duration?≤3000}
+   *
+   * 2D 模拟 3D 折叠：每面是刚体，按 foldSequence 绕折叠轴依次转起
+   * （Rodrigues 旋转公式）；正交投影到固定视角档位，不做自由 3D 旋转。
+   * 播放/暂停/重播/可逆（展开↔折叠）/scrubber/视角切换；面可点（≥44px，
+   * 点选面显示状态）。折叠总时长 ≤3 秒。角度读数走 MathML。
+   * ============================================================ */
+  function renderNetFold(container, params) {
+    var G = window.GEOM;
+    if (!G) { container.appendChild(el("div", "ix-stub", "几何原语库未加载（js/geom-primitives.js）")); return; }
+    var net = params.net, seq = params.foldSequence, views = params.views;
+    if (!Array.isArray(net) || !net.length) { geoErr(container, "net-fold 需要 net（非空数组，每面 {id, pts}）"); return; }
+    if (!Array.isArray(seq) || !seq.length) { geoErr(container, "net-fold 需要 foldSequence（非空数组，每步 {face, edge, angle}）"); return; }
+    if (!Array.isArray(views) || views.length < 3 || views.length > 6) { geoErr(container, "net-fold 需要 views（3–6 个固定视角档位）"); return; }
+
+    /* ---------- 3D 小向量库 ---------- */
+    function vsub(a, b) { return [a[0] - b[0], a[1] - b[1], a[2] - b[2]]; }
+    function vadd(a, b) { return [a[0] + b[0], a[1] + b[1], a[2] + b[2]]; }
+    function vmul(a, s) { return [a[0] * s, a[1] * s, a[2] * s]; }
+    function vdot(a, b) { return a[0] * b[0] + a[1] * b[1] + a[2] * b[2]; }
+    function vcross(a, b) {
+      return [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+    }
+    function vlen(a) { return Math.sqrt(vdot(a, a)); }
+    function vnorm(a) { var l = vlen(a) || 1; return vmul(a, 1 / l); }
+    // Rodrigues：点 p 绕过 A、方向 u（单位向量）的轴旋转 th 弧度
+    function rotAxis(p, A, u, th) {
+      var v = vsub(p, A), c = Math.cos(th), s = Math.sin(th);
+      return vadd(A, vadd(vadd(vmul(v, c), vmul(vcross(u, v), s)), vmul(u, vdot(u, v) * (1 - c))));
+    }
+    function easeIO(t) {
+      t = Math.max(0, Math.min(1, t));
+      return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    }
+
+    /* ---------- 面与折叠树 ---------- */
+    function flat3(p) { return [p[0], p[1], 0]; }
+    var faces = [], byId = {};
+    for (var fi = 0; fi < net.length; fi++) {
+      var nf = net[fi] || {};
+      if (!Array.isArray(nf.pts) || nf.pts.length < 3) { geoErr(container, "net-fold：net 第 " + (fi + 1) + " 面缺少 pts（≥3 个点）"); return; }
+      var f = { id: String(nf.id || ("F" + (fi + 1))), num: fi + 1, flat: nf.pts.map(flat3) };
+      var cx = 0, cy = 0, k;
+      for (k = 0; k < f.flat.length; k++) { cx += f.flat[k][0]; cy += f.flat[k][1]; }
+      f.centroid = [cx / f.flat.length, cy / f.flat.length, 0];
+      faces.push(f); byId[f.id] = f;
+    }
+    function edgeMatch(pts, e) {
+      // e 的两端是否恰为该多边形的一条边（任一方向）
+      for (var i = 0; i < pts.length; i++) {
+        var a = pts[i], b = pts[(i + 1) % pts.length];
+        var fwd = Math.abs(a[0] - e[0][0]) < 1e-6 && Math.abs(a[1] - e[0][1]) < 1e-6 &&
+                  Math.abs(b[0] - e[1][0]) < 1e-6 && Math.abs(b[1] - e[1][1]) < 1e-6;
+        var rev = Math.abs(a[0] - e[1][0]) < 1e-6 && Math.abs(a[1] - e[1][1]) < 1e-6 &&
+                  Math.abs(b[0] - e[0][0]) < 1e-6 && Math.abs(b[1] - e[0][1]) < 1e-6;
+        if (fwd || rev) return true;
+      }
+      return false;
+    }
+    var n = seq.length;
+    var stepOf = {}, parentOf = {}, hingeE = [], hingeA = [], hingeU = [],
+        stepDir = [], stepMag = [], stepFace = [];
+    for (var si = 0; si < n; si++) {
+      var st = seq[si] || {};
+      var face = byId[String(st.face)];
+      if (!face) { geoErr(container, "net-fold：第 " + (si + 1) + " 步 face \"" + st.face + "\" 不在 net 中"); return; }
+      if (stepOf[face.id] !== undefined) { geoErr(container, "net-fold：面 " + face.id + " 折叠了两次（每面最多折一次）"); return; }
+      var e = st.edge;
+      if (!Array.isArray(e) || e.length !== 2) { geoErr(container, "net-fold：第 " + (si + 1) + " 步 edge 须为两个端点"); return; }
+      if (!edgeMatch(face.flat, e)) { geoErr(container, "net-fold：第 " + (si + 1) + " 步 edge 不是面 " + face.id + " 的边"); return; }
+      var mag = Math.abs(Number(st.angle));
+      if (!isFinite(mag) || mag <= 0) { geoErr(container, "net-fold：第 " + (si + 1) + " 步 angle 须为非零角度（度）"); return; }
+      // 铰链伙伴：net 中另一条拥有该边的面（无则为根面）
+      var partner = null;
+      for (var pj = 0; pj < faces.length; pj++) {
+        if (faces[pj] === face) continue;
+        if (edgeMatch(faces[pj].flat, e)) { partner = faces[pj]; break; }
+      }
+      var A = flat3(e[0]), B = flat3(e[1]);
+      var u = vnorm(vsub(B, A));
+      // 自动判定折叠方向：质心绕轴转 +2°，z 下降（向 -z）则取正向，否则取反向。
+      // 约定：面片一律向 -z 折起，正方体向 -z 延伸 → 正视（+z 相机）看到 F2 且
+      // 左 F1 / 右 F3，俯视看到顶面，等轴为 front-right-top 经典视角（三视图方位正确）。
+      var probe = rotAxis(face.centroid, A, u, 2 * Math.PI / 180);
+      var autoSign = probe[2] <= 0 ? 1 : -1;
+      stepOf[face.id] = si;
+      parentOf[face.id] = partner ? partner.id : null;
+      hingeE.push([A, B]); hingeA.push(A); hingeU.push(u);
+      stepDir.push(autoSign * (Number(st.angle) < 0 ? -1 : 1));
+      stepMag.push(mag * Math.PI / 180);
+      stepFace.push(face.id);
+    }
+    for (var ci = 0; ci < faces.length; ci++) {  // 折叠树环检测
+      var seen = {}, cur = faces[ci].id;
+      while (cur) {
+        if (seen[cur]) { geoErr(container, "net-fold：折叠树出现环（面 " + cur + "）"); return; }
+        seen[cur] = true; cur = parentOf[cur];
+      }
+    }
+
+    /* ---------- 视角（固定档位，不做自由旋转） ---------- */
+    var VIEW_DEFS = {
+      iso:    { label: "等轴", d: [-1, -1, -1], up: [0, 1, 0] },
+      front:  { label: "正视", d: [0, 0, -1],  up: [0, 1, 0] },
+      top:    { label: "俯视", d: [0, -1, 0],  up: [0, 0, -1] },
+      side:   { label: "侧视", d: [-1, 0, 0],  up: [0, 1, 0] },
+      back:   { label: "后视", d: [0, 0, 1],   up: [0, 1, 0] },
+      bottom: { label: "仰视", d: [0, 1, 0],   up: [0, 0, 1] }
+    };
+    var viewIds = [];
+    for (var vi = 0; vi < views.length; vi++) {
+      if (!VIEW_DEFS[views[vi]]) { geoErr(container, "net-fold：未知视角 \"" + views[vi] + "\"（可选 iso/front/top/side/back/bottom）"); return; }
+      if (viewIds.indexOf(views[vi]) < 0) viewIds.push(views[vi]);
+    }
+    if (viewIds.length < 3) { geoErr(container, "net-fold：views 去重后不足 3 个"); return; }
+    function viewBasis(vid) {
+      var def = VIEW_DEFS[vid], dn = vnorm(def.d);
+      var r = vnorm(vcross(dn, def.up));
+      return { r: r, u: vcross(r, dn), dn: dn };
+    }
+
+    /* ---------- 包围盒（按折叠扫掠半径扩展，动画全程不裁剪） ---------- */
+    var bbMin = [1e9, 1e9, 1e9], bbMax = [-1e9, -1e9, -1e9], bk;
+    faces.forEach(function (fc) {
+      fc.flat.forEach(function (p) {
+        for (bk = 0; bk < 3; bk++) {
+          if (p[bk] < bbMin[bk]) bbMin[bk] = p[bk];
+          if (p[bk] > bbMax[bk]) bbMax[bk] = p[bk];
+        }
+      });
+    });
+    var sweepR = 0;
+    for (var ri = 0; ri < n; ri++) {
+      (function (rii) {
+        byId[stepFace[rii]].flat.forEach(function (p) {
+          var d = vlen(vcross(hingeU[rii], vsub(p, hingeA[rii])));
+          if (d > sweepR) sweepR = d;
+        });
+      })(ri);
+    }
+    for (bk = 0; bk < 3; bk++) { bbMin[bk] -= sweepR; bbMax[bk] += sweepR; }
+    var corners = [];
+    for (var cxi = 0; cxi < 2; cxi++) for (var cyi = 0; cyi < 2; cyi++) for (var czi = 0; czi < 2; czi++)
+      corners.push([cxi ? bbMax[0] : bbMin[0], cyi ? bbMax[1] : bbMin[1], czi ? bbMax[2] : bbMin[2]]);
+
+    /* ---------- 画布与视角映射 ---------- */
+    var W = 420, H = 360, mL = 44, mR = 44, mT = 14, mB = 14;
+    var plotW = W - mL - mR, plotH = H - mT - mB;
+    var svg = G.svg(W, H, "ix-svg geo-svg");
+    var curView = viewIds[0], basis = viewBasis(curView), mapS = 1, mapOX = 0, mapOY = 0;
+    function fitView() {
+      var mnx = 1e9, mxx = -1e9, mny = 1e9, mxy = -1e9;
+      corners.forEach(function (p) {
+        var sx = vdot(p, basis.r), sy = vdot(p, basis.u);
+        if (sx < mnx) mnx = sx; if (sx > mxx) mxx = sx;
+        if (sy < mny) mny = sy; if (sy > mxy) mxy = sy;
+      });
+      var s = Math.min(plotW / Math.max(1e-6, mxx - mnx), plotH / Math.max(1e-6, mxy - mny));
+      mapS = s;
+      mapOX = mL + (plotW - (mxx - mnx) * s) / 2 - mnx * s;
+      mapOY = mT + (plotH - (mxy - mny) * s) / 2 + mxy * s;
+    }
+    function PX(p) { return mapOX + vdot(p, basis.r) * mapS; }
+    function PY(p) { return mapOY - vdot(p, basis.u) * mapS; }
+
+    /* ---------- 折叠变换（递归刚体：T(面) = T(父面) ∘ 绕轴旋转） ---------- */
+    var transCache = null;
+    function stepLocal(i, P) {
+      var t = P * n - i;
+      return t <= 0 ? 0 : t >= 1 ? 1 : t;
+    }
+    function transformOf(faceId, P) {
+      if (transCache[faceId]) return transCache[faceId];
+      var si = stepOf[faceId], par = parentOf[faceId];
+      var base = par ? transformOf(par, P) : function (p) { return p; };
+      var fn;
+      if (si === undefined) { fn = base; }
+      else {
+        (function (sii, baseFn) {
+          fn = function (p) {
+            var th = stepDir[sii] * stepMag[sii] * easeIO(stepLocal(sii, P));
+            return th === 0 ? baseFn(p) : baseFn(rotAxis(p, hingeA[sii], hingeU[sii], th));
+          };
+        })(si, base);
+      }
+      transCache[faceId] = fn;
+      return fn;
+    }
+
+    /* ---------- 绘制 ---------- */
+    var FACE_FILL = ["corrA", "corrB", "corrC", "known", "target", "line"];
+    var LIGHT = vnorm([0.45, 0.75, 0.55]);
+    function faceNormal(pts3) {  // Newell 法
+      var nx = 0, ny = 0, nz = 0;
+      for (var i = 0; i < pts3.length; i++) {
+        var a = pts3[i], b = pts3[(i + 1) % pts3.length];
+        nx += (a[1] - b[1]) * (a[2] + b[2]);
+        ny += (a[2] - b[2]) * (a[0] + b[0]);
+        nz += (a[0] - b[0]) * (a[1] + b[1]);
+      }
+      return vnorm([nx, ny, nz]);
+    }
+    function pointInPoly(x, y, poly) {
+      var inside = false;
+      for (var i = 0, j = poly.length - 1; i < poly.length; j = i++) {
+        var xi = poly[i][0], yi = poly[i][1], xj = poly[j][0], yj = poly[j][1];
+        if (((yi > y) !== (yj > y)) && (x < (xj - xi) * (y - yi) / (yj - yi) + xi)) inside = !inside;
+      }
+      return inside;
+    }
+    var lastItems = [], selId = null;
+    function activeStep(P) {
+      for (var i = 0; i < n; i++) { var l = stepLocal(i, P); if (l > 0 && l < 1) return i; }
+      return -1;
+    }
+    function draw(P) {
+      transCache = {};
+      clearSvg(svg);
+      var items = faces.map(function (fc) {
+        var T = transformOf(fc.id, P);
+        var c3 = fc.flat.map(T);
+        var c2 = c3.map(function (p) { return [PX(p), PY(p)]; });
+        var dep = 0, di;
+        for (di = 0; di < c3.length; di++) dep += vdot(c3[di], basis.dn);
+        return { f: fc, c3: c3, c2: c2, dep: -dep / c3.length };  // dep 越大越近
+      });
+      items.sort(function (a, b) { return a.dep - b.dep; });  // 画家算法：远→近
+      items.forEach(function (it) {
+        var pts = it.c2.map(function (q) { return q[0].toFixed(1) + "," + q[1].toFixed(1); }).join(" ");
+        // 明暗：|法线·光向|（Newell 法线内外朝向不确定，取绝对值；正对光最亮，侧对最暗）
+        var bright = 0.66 + 0.34 * Math.abs(vdot(faceNormal(it.c3), LIGHT));
+        var g = G.el("g", {});
+        g.appendChild(G.el("polygon", {
+          points: pts, fill: G.colorOf(FACE_FILL[(it.f.num - 1) % FACE_FILL.length]),
+          "fill-opacity": 0.32, stroke: G.colorOf("line"), "stroke-width": 2.5,
+          "stroke-linejoin": "round"
+        }));
+        g.appendChild(G.el("polygon", {  // 明暗
+          points: pts, fill: "#000000", "fill-opacity": ((1 - bright) * 0.38).toFixed(2), stroke: "none"
+        }));
+        var cx = 0, cy = 0, qi;
+        for (qi = 0; qi < it.c2.length; qi++) { cx += it.c2[qi][0]; cy += it.c2[qi][1]; }
+        cx /= it.c2.length; cy /= it.c2.length;
+        it.badgeC = [cx, cy];
+        g.appendChild(G.el("circle", {
+          cx: cx.toFixed(1), cy: cy.toFixed(1), r: 13, fill: "#ffffff",
+          stroke: G.colorOf("line"), "stroke-width": 2
+        }));
+        var tx = G.el("text", {
+          x: cx.toFixed(1), y: (cy + 5.5).toFixed(1), "text-anchor": "middle",
+          "font-size": 15, "font-weight": "bold", fill: G.colorOf("line")
+        });
+        tx.textContent = String(it.f.num);
+        g.appendChild(tx);
+        svg.appendChild(g);
+      });
+      var act = activeStep(P);  // 正在折的铰链轴红色高亮
+      if (act >= 0) {
+        var T = transformOf(stepFace[act], P);
+        var a2 = [PX(T(hingeE[act][0])), PY(T(hingeE[act][0]))];
+        var b2 = [PX(T(hingeE[act][1])), PY(T(hingeE[act][1]))];
+        svg.appendChild(G.el("line", {
+          x1: a2[0].toFixed(1), y1: a2[1].toFixed(1), x2: b2[0].toFixed(1), y2: b2[1].toFixed(1),
+          stroke: G.colorOf("target"), "stroke-width": 5, "stroke-linecap": "round"
+        }));
+      }
+      if (selId && byId[selId]) {  // 点选环
+        for (var si2 = 0; si2 < items.length; si2++) {
+          if (items[si2].f.id === selId) {
+            var sp = items[si2].c2.map(function (q) { return q[0].toFixed(1) + "," + q[1].toFixed(1); }).join(" ");
+            svg.appendChild(G.el("polygon", {
+              points: sp, fill: "none", stroke: G.colorOf("target"), "stroke-width": 3.5,
+              "stroke-dasharray": "8,5", "stroke-linejoin": "round"
+            }));
+            break;
+          }
+        }
+      }
+      svg.appendChild(hitRect);  // 点选热区（最上层，pointer-events=all）
+      lastItems = items;
+    }
+
+    /* ---------- 点选（面可点，≥44px 由视角拟合缩放保证） ---------- */
+    var hitRect = G.el("rect", {
+      x: mL, y: mT, width: plotW, height: plotH,
+      fill: "#ffffff", "fill-opacity": 0, "pointer-events": "all"
+    });
+    hitRect.style.cursor = "pointer";
+    hitRect.addEventListener("pointerdown", function (evt) {
+      evt.preventDefault();
+      var sp = G.svgPoint(svg, evt), x = sp.x, y = sp.y, pick = null;
+      for (var i = lastItems.length - 1; i >= 0; i--) {  // 近→远
+        if (pointInPoly(x, y, lastItems[i].c2)) { pick = lastItems[i].f.id; break; }
+      }
+      if (!pick) {  // 兜底：最近质心 30px 内
+        var best = 1e9;
+        for (var j = 0; j < lastItems.length; j++) {
+          var c = lastItems[j].badgeC;
+          var d = Math.hypot(x - c[0], y - c[1]);
+          if (d < best) { best = d; pick = lastItems[j].f.id; }
+        }
+        if (best > 30) pick = null;
+      }
+      if (pick !== selId) {
+        selId = pick;
+        tickSound(); hapticTick();
+        draw(P); updateReadout();
+      }
+    });
+
+    /* ---------- 读数（角度走 MathML） ---------- */
+    function angleMML(deg) {
+      return '<math xmlns="http://www.w3.org/1998/Math/MathML"><mn>' + deg + '</mn><mo>°</mo></math>';
+    }
+    function faceState(fid) {
+      var si = stepOf[fid];
+      if (si === undefined) return "固定不动";
+      var deg = Math.round(easeIO(stepLocal(si, P)) * stepMag[si] * 180 / Math.PI);
+      return deg <= 0 ? "展开状态" : deg >= Math.round(stepMag[si] * 180 / Math.PI) ? "已折起" : "折起中";
+    }
+    function updateReadout() {
+      var html;
+      if (P <= 0.001) html = "展开图：" + faces.length + " 个面摊平，点击面可查看";
+      else if (P >= 0.999) html = "折好了";
+      else {
+        var i = activeStep(P);
+        if (i < 0) {
+          i = Math.min(n - 1, Math.floor(P * n));
+          html = "第 " + (i + 1) + " 步完成：面 " + esc(stepFace[i]) + " 已折起 " +
+            angleMML(Math.round(stepMag[i] * 180 / Math.PI));
+        } else {
+          html = "第 " + (i + 1) + " 步：面 " + esc(stepFace[i]) + " 沿红棱折起 " +
+            angleMML(Math.round(easeIO(stepLocal(i, P)) * stepMag[i] * 180 / Math.PI));
+        }
+      }
+      if (selId && byId[selId]) html += "<br>点选：面 " + esc(selId) + "（" + faceState(selId) + "）";
+      readout.innerHTML = html;
+    }
+
+    /* ---------- 控件 ---------- */
+    var wrap = el("div", "ix-geo-wrap");
+    var readout = el("div", "ix-geo-readout", "");
+    wrap.appendChild(readout);
+    var frameBox = el("div", "ix-frame");
+    frameBox.appendChild(svg);
+    wrap.appendChild(frameBox);
+
+    function mkBtn(label, parent) {
+      var b = el("button", "ix-btn", label);
+      b.type = "button";
+      parent.appendChild(b);
+      return b;
+    }
+    var viewRow = el("div", "ix-step-ctrl");
+    var viewBtns = {};
+    viewIds.forEach(function (vid) {
+      var b = mkBtn(VIEW_DEFS[vid].label, viewRow);
+      b.addEventListener("click", function () { setView(vid); tickSound(); });
+      viewBtns[vid] = b;
+    });
+    wrap.appendChild(viewRow);
+
+    var ctrl = el("div", "ix-step-ctrl");
+    var btnPlay = mkBtn("▶ 折叠", ctrl);
+    var btnPause = mkBtn("⏸ 暂停", ctrl);
+    var btnReplay = mkBtn("↺ 重播", ctrl);
+    var btnRev = null;
+    var reversible = params.reversible !== false;
+    if (reversible) btnRev = mkBtn("⇄ 折叠", ctrl);
+    wrap.appendChild(ctrl);
+    var scrub = document.createElement("input");
+    scrub.type = "range"; scrub.min = "0"; scrub.max = "1000"; scrub.value = "0";
+    scrub.className = "ix-range";
+    scrub.setAttribute("aria-label", "折叠进度");
+    scrub.addEventListener("input", function () { stop(); setP(Number(scrub.value) / 1000); });
+    wrap.appendChild(scrub);
+    container.appendChild(wrap);
+
+    /* ---------- 播放状态机 ---------- */
+    var dur = params.duration;
+    dur = isFinite(Number(dur)) ? Math.max(500, Math.min(3000, Number(dur))) : 2800;
+    var P = 0, playing = false, target = 1, lastT = 0, rafId = 0;
+    function setP(v) {
+      P = Math.max(0, Math.min(1, v));
+      draw(P); updateReadout();
+      scrub.value = String(Math.round(P * 1000));
+      updateBtns();
+    }
+    function updateBtns() {
+      btnPlay.disabled = playing || P >= 1;
+      btnPause.disabled = !playing;
+      if (btnRev) btnRev.textContent = P > 0.5 ? "⇄ 展开" : "⇄ 折叠";
+      for (var vid in viewBtns) viewBtns[vid].disabled = (vid === curView);
+    }
+    function tickFn(t) {
+      if (!playing) return;
+      if (!lastT) lastT = t;
+      var dt = t - lastT; lastT = t;  // 毫秒（与 dur 同单位）
+      P += (target === 1 ? dt / dur : -dt / dur);
+      if ((target === 1 && P >= 1) || (target === 0 && P <= 0)) { P = target; stop(); }
+      setP(P);
+      if (playing) rafId = requestAnimationFrame(tickFn);
+    }
+    function play(to) {
+      target = to;
+      if ((to === 1 && P >= 1) || (to === 0 && P <= 0)) { updateBtns(); return; }
+      playing = true; lastT = 0; updateBtns();
+      rafId = requestAnimationFrame(tickFn);
+    }
+    function stop() {
+      playing = false;
+      if (rafId) { cancelAnimationFrame(rafId); rafId = 0; }
+      updateBtns();
+    }
+    function setView(vid) {
+      curView = vid; basis = viewBasis(vid); fitView();
+      draw(P); updateBtns();
+    }
+    btnPlay.addEventListener("click", function () { play(1); });
+    btnPause.addEventListener("click", function () { stop(); });
+    btnReplay.addEventListener("click", function () { stop(); setP(0); play(1); });
+    if (btnRev) btnRev.addEventListener("click", function () { play(P > 0.5 ? 0 : 1); });
+
+    fitView();
+    setP(0);
+    if (params.autoplay === true) setTimeout(function () { play(1); }, 500);  // 落页即播
+  }
+
   /* ---------------- 渲染器内嵌查表 ----------------
    * 与 window.MATH_INTERACTIONS 同源：注册时同步记一份本地表。
    * side-compare 内嵌时按 kind 查表调用已注册渲染器（不复制渲染器代码）。*/
@@ -4139,5 +4573,6 @@
   ixRegister("cut-reassemble", renderCutReassemble);
   ixRegister("pythag-grow", renderPythagGrow);
   ixRegister("ladder-slide", renderLadderSlide);
+  ixRegister("net-fold", renderNetFold);
   ixRegister("ratio-slider", renderRatioSlider);
 })();

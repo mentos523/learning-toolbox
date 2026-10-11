@@ -16,15 +16,15 @@ const fails = [];
 const ok = (cond, msg) => { console.log((cond ? "  [OK] " : "  [FAIL] ") + msg); if (!cond) fails.push(msg); };
 const cjk = (s) => (s.match(/[\u4e00-\u9fff]/g) || []).length;
 
-/* 1. chapters.js: g12 条目存在；net-fold 未实现前保持 planned */
+/* 1. chapters.js: g12 条目存在；net-fold 已实现并注册 → ready */
 load("modules/math/data/chapters.js");
 const g12meta = sandbox.window.MATH_CHAPTERS.find((c) => c.id === "g12");
 ok(!!g12meta, "chapters.js 中有 g12 条目");
 ok(g12meta && g12meta.file === "data/g12.js", "g12 file 指向 data/g12.js");
-ok(g12meta && g12meta.status === "planned",
-  "g12 status=planned（net-fold 待蓝队实现，暂不翻 ready）");
+ok(g12meta && g12meta.status === "ready",
+  "g12 status=ready（net-fold 蓝队已实现并注册）");
 
-/* 2. 交互注册表：除 net-fold 外全部已注册；net-fold 明确未注册（蓝队待办） */
+/* 2. 交互注册表：net-fold 已注册（蓝队实现） */
 sandbox.window.MATH_INTERACTIONS = {
   _m: {},
   register(t, f) { this._m[t] = f; },
@@ -33,6 +33,7 @@ sandbox.window.MATH_INTERACTIONS = {
 load("modules/math/js/interactions.js");
 const reg = sandbox.window.MATH_INTERACTIONS;
 ok(!!reg, "window.MATH_INTERACTIONS 存在");
+ok(reg.has && reg.has("net-fold"), "net-fold 已在 interactions.js 注册（蓝队实现）");
 
 /* 3. 加载 g12 数据 */
 load("modules/math/data/g12.js");
@@ -89,25 +90,55 @@ for (const p of pages) for (const f of (p.formulas || [])) {
 ok(noTr.length === 0, "公式 translation 全必填");
 ok(badLx.length === 0, "LaTeX 仅用支持子集" + (badLx.length ? " 未知命令: " + badLx.join(";") : ""));
 
-/* 8. 交互类型：21 页用已实现类型；仅 l3-p1 用 net-fold（待蓝队） */
+/* 8. 交互类型：22 页全部已实现类型；l3-p1 用 net-fold（已注册） */
 const IMPLEMENTED = new Set(["vertex-drag", "angle-protractor", "step-play", "tap-highlight",
-  "compare-toggle", "proof-replay", "construction-step", "cut-reassemble", "pythag-grow", "ladder-slide"]);
+  "compare-toggle", "proof-replay", "construction-step", "cut-reassemble", "pythag-grow", "ladder-slide",
+  "net-fold"]);
 const netFoldPages = pages.filter((p) => p.interaction && p.interaction.type === "net-fold");
 ok(netFoldPages.length === 1 && netFoldPages[0].id === "g12-u1-l3-p1",
   "仅 g12-u1-l3-p1 使用 net-fold（技术验证页）");
 let regBad = pages.filter((p) => p.interaction && IMPLEMENTED.has(p.interaction.type)
   && !(reg.has && reg.has(p.interaction.type))).map((p) => p.id);
-ok(regBad.length === 0, "其余 21 页交互类型已在 interactions.js 注册");
-ok(!(reg.has && reg.has("net-fold")), "net-fold 尚未注册（蓝队待实现，此为预期）");
+ok(regBad.length === 0, "全部 22 页交互类型已在 interactions.js 注册" + (regBad.length ? " 缺: " + regBad.join(",") : ""));
 
-/* 9. net-fold 提案参数完备性（待蓝队冻结 schema） */
+/* 9. net-fold schema 冻结校验（蓝队 v1.5：net/foldSequence/views 必填；angle 非零；edge 为公共边） */
 const nf = netFoldPages[0] && netFoldPages[0].interaction.params;
 const nfNeed = ["net", "foldSequence", "views"];
 const nfMiss = nfNeed.filter((k) => !(nf && nf[k] !== undefined));
-ok(nfMiss.length === 0, "net-fold 提案参数齐全（net/foldSequence/views）" + (nfMiss.length ? " 缺: " + nfMiss.join(",") : ""));
+ok(nfMiss.length === 0, "net-fold 参数齐全（net/foldSequence/views）" + (nfMiss.length ? " 缺: " + nfMiss.join(",") : ""));
 ok(nf && nf.net.length === 6, "net 含 6 个面（正方体）");
-ok(nf && nf.foldSequence.length > 0, "foldSequence 非空（折叠轴序列）");
-ok(nf && nf.views.length >= 3 && nf.views.length <= 6, "views 为 3–6 个固定视角档位");
+let nfFaceBad = [];
+for (const f of (nf && nf.net) || []) {
+  if (!f.id || !Array.isArray(f.pts) || f.pts.length < 3) nfFaceBad.push(JSON.stringify(f.id));
+}
+ok(nfFaceBad.length === 0, "net 每面有 id 且 pts≥3 点");
+const netIds = new Set(((nf && nf.net) || []).map((f) => f.id));
+const VIEWS_OK = new Set(["iso", "front", "top", "side", "back", "bottom"]);
+let nfStepBad = [];
+const seenFaces = new Set();
+const edgeEq = (e1, e2) =>
+  Math.abs(e1[0] - e2[0]) < 1e-6 && Math.abs(e1[1] - e2[1]) < 1e-6;
+const isFaceEdge = (facePts, e) => {
+  for (let i = 0; i < facePts.length; i++) {
+    const a = facePts[i], b = facePts[(i + 1) % facePts.length];
+    if ((edgeEq(a, e[0]) && edgeEq(b, e[1])) || (edgeEq(a, e[1]) && edgeEq(b, e[0]))) return true;
+  }
+  return false;
+};
+for (const s of (nf && nf.foldSequence) || []) {
+  const face = (nf.net || []).find((f) => f.id === String(s.face));
+  if (!face) { nfStepBad.push(`face ${s.face} 不在 net 中`); continue; }
+  if (seenFaces.has(face.id)) nfStepBad.push(`面 ${face.id} 折叠两次`);
+  seenFaces.add(face.id);
+  if (!Array.isArray(s.edge) || s.edge.length !== 2 || !isFaceEdge(face.pts, s.edge))
+    nfStepBad.push(`面 ${face.id} 的 edge 不是其边`);
+  if (!(Math.abs(Number(s.angle)) > 0)) nfStepBad.push(`面 ${face.id} 的 angle 非法`);
+}
+ok(nfStepBad.length === 0, "foldSequence 合法（face 存在唯一、edge 为该面的边、angle 非零）" + (nfStepBad.length ? " 问题: " + nfStepBad.join(";") : ""));
+const nfViews = (nf && nf.views) || [];
+const nfViewsU = [...new Set(nfViews)];
+ok(nfViewsU.length >= 3 && nfViewsU.length <= 6 && nfViewsU.every((v) => VIEWS_OK.has(v)),
+  "views 为 3–6 个有效固定视角档位（去重后 " + nfViewsU.length + " 个：" + nfViewsU.join("/") + ")");
 
 /* 10. step-play / tap-highlight 参数完备性 */
 let spBad = [], thBad = [];
