@@ -33,7 +33,7 @@ window.MATH_CHAPTERS = [
   { id: "g04", title: "全等三角形",                 file: "data/g04.js", status: "ready" },
   { id: "g05", title: "勾股定理",                   file: "data/g05.js", status: "planned" },
   { id: "g06", title: "四边形",                     file: "data/g06.js", status: "ready" },
-  { id: "g07", title: "圆（一）——圆的基本性质",    file: "data/g07.js", status: "planned" },
+  { id: "g07", title: "圆（一）——圆的基本性质",    file: "data/g07.js", status: "ready" },
   { id: "g08", title: "圆（二）——切线与圆的方程",  file: "data/g08.js", status: "planned" },
   { id: "g09", title: "图形的相似",                 file: "data/g09.js", status: "planned" },
   { id: "g10", title: "图形的变换——对称与旋转",   file: "data/g10.js", status: "planned" },
