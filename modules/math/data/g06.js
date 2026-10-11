@@ -276,7 +276,7 @@ window.MATH_CH["g06"] = {
               interaction: {
                 type: "proof-replay",
                 params: {
-                  given: "\\text{平行四边形} ABCD, AC \\text{与} BD \\text{交于} O",
+                  given: "平行四边形 ABCD，AC 与 BD 交于 O",
                   goal: "OA = OC, OB = OD",
                   steps: [
                     {
@@ -789,7 +789,7 @@ window.MATH_CH["g06"] = {
               interaction: {
                 type: "proof-replay",
                 params: {
-                  given: "ABCD \\text{为矩形}",
+                  given: "ABCD 为矩形",
                   goal: "AC = BD",
                   steps: [
                     {
@@ -1037,8 +1037,8 @@ window.MATH_CH["g06"] = {
               interaction: {
                 type: "proof-replay",
                 params: {
-                  given: "ABCD \\text{为菱形，} AC \\text{与} BD \\text{交于} O",
-                  goal: "AC \\perp BD",
+                  given: "ABCD 为菱形，AC 与 BD 交于 O",
+                  goal: "AC ⊥ BD",
                   steps: [
                     {
                       card: "先拿现成的：AB=AD（菱形四边相等）；BO=DO（对角线互相平分，性质3）。",
@@ -1296,8 +1296,8 @@ window.MATH_CH["g06"] = {
               interaction: {
                 type: "proof-replay",
                 params: {
-                  given: "D, E \\text{为} AB, AC \\text{中点}",
-                  goal: "DE \\parallel BC, DE = \\frac{1}{2} BC",
+                  given: "D、E 为 AB、AC 中点",
+                  goal: "DE ∥ BC，DE = ½BC",
                   steps: [
                     {
                       card: "把 DE 延长一倍，端点记作 F，连 CF——造一个全等三角形。",
