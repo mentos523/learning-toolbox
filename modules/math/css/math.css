@@ -25,6 +25,63 @@ body[data-theme="dark"] {
   --m-accent-strong: #f59e0b;
 }
 
+/* ============================================================
+ * 几何（蓝队 M4/M5）：Okabe-Ito 语义变量
+ * 浅色 / 深色两套色值（docs/math-geometry-style.md §2.1）。
+ * params 里只用变量名，不出现具体色值；切换主题不重绘画布。
+ * ============================================================ */
+:root {
+  --geo-bg: #FFFFFF;
+  --geo-text: #1A1A1A;
+  --geo-known: #0072B2;        /* 已知：蓝 */
+  --geo-target: #D55E00;       /* 待求/求证：朱红 */
+  --geo-corr-a: #E69F00;       /* 对应 A：橙 */
+  --geo-corr-b: #56B4E9;       /* 对应 B：天蓝 */
+  --geo-corr-c: #009E73;       /* 对应 C：蓝绿 */
+  --geo-corr-angle: #CC79A7;   /* 对应角：紫红 */
+  --geo-line: #000000;         /* 常规描边 */
+  --geo-aux: #7A7A7A;          /* 辅助线（灰虚线） */
+  --geo-grid: #E5E5E5;         /* 网格线 */
+  --geo-highlight: #F0E442;    /* 高亮：黄（配深色字） */
+}
+body[data-theme="dark"] {
+  --geo-bg: #121212;
+  --geo-text: #F5F5F5;
+  --geo-known: #56B4E9;        /* 已知：提亮为天蓝 */
+  --geo-target: #FF7043;       /* 求证：提亮朱红 */
+  --geo-corr-a: #FFB020;       /* 对应 A：提亮橙 */
+  --geo-corr-b: #7FD4FF;       /* 对应 B：更亮天蓝 */
+  --geo-corr-c: #3DDC97;       /* 对应 C：提亮蓝绿 */
+  --geo-corr-angle: #E69BBE;   /* 对应角：提亮紫红 */
+  --geo-line: #F5F5F5;         /* 常规描边：近白 */
+  --geo-aux: #9E9E9E;          /* 辅助线：浅灰虚线 */
+  --geo-grid: #333333;         /* 网格线：深灰弱对比 */
+  --geo-highlight: #F0E442;    /* 高亮：黄（深底高对比） */
+}
+
+/* M6 · 几何反馈：高亮闪烁（必选）+ 缩放脉冲 */
+.geo-flash { stroke: var(--geo-highlight) !important; }
+.geo-pulse {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: geoPulse 0.3s ease;
+}
+@keyframes geoPulse {
+  50% { transform: scale(1.08); }
+}
+
+/* 几何交互容器与读数行 */
+.ix-geo-wrap { width: 100%; }
+.geo-svg { touch-action: manipulation; }
+.geo-drag { cursor: grab; touch-action: none; }
+.ix-geo-readout {
+  display: flex; flex-wrap: wrap; gap: 4px 20px;
+  justify-content: center; align-items: baseline;
+  padding: 2px 0 6px; font-size: 1.02rem;
+}
+.ix-geo-readout .ix-sep { color: var(--m-ink-soft); }
+.ix-geo-readout .ix-val { font-weight: bold; color: var(--m-ink); }
+
 * { box-sizing: border-box; }
 html, body { height: 100%; overflow: hidden; }
 body {
