@@ -313,11 +313,12 @@ function loadWindowJs(path) {
   return sandbox.window;
 }
 
-function collectPages(dataDir) {
+function collectPages(dataDir, onlyCh) {
   const chapters = loadWindowJs(join(dataDir, "chapters.js")).MATH_CHAPTERS || [];
   const pages = []; // {chId, page, lessonTitle}
   const seen = new Set();
   for (const ch of chapters) {
+    if (onlyCh && ch.id !== onlyCh) continue; // 蓝队 2026-10-11：--ch 限定单章校验/渲染
     const fp = join(dataDir, ch.id + ".js");
     if (!existsSync(fp)) continue; // 筹备中章节无数据文件时跳过
     const CH = loadWindowJs(fp).MATH_CH || {};
@@ -454,7 +455,9 @@ const args = process.argv.slice(2);
 if (args.includes("--test")) {
   runTests();
 } else {
-  const pages = collectPages(DATA_DIR);
+  const chArg = args[args.indexOf("--ch") + 1];
+  const onlyCh = args.includes("--ch") ? chArg : null;
+  const pages = collectPages(DATA_DIR, onlyCh);
   validate(pages);
   if (warnings.length) {
     console.log("--- 告警 ---");
@@ -468,8 +471,7 @@ if (args.includes("--test")) {
   if (args.includes("--validate")) {
     console.log(`校验通过：${pages.length} 页`);
   } else {
-    const chArg = args[args.indexOf("--ch") + 1];
-    render(pages, args.includes("--ch") ? chArg : null);
+    render(pages, onlyCh);
     console.log(`完成：${pages.length} 页`);
   }
 }
