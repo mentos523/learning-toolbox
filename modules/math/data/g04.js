@@ -1365,7 +1365,7 @@ window.MATH_CH["g04"] = {
                       shapes: [
                         { t: "seg", a: [30,60], b: [58,74], color: "known", width: 3 },
                         { t: "seg", a: [30,60], b: [60,48], color: "known", width: 3 },
-                        { t: "seg", a: [30,60], b: [66,62], color: "target", width: 4 },
+                        { t: "seg", a: [30,60], b: [66.95,63.61], color: "target", width: 4 },
                         { t: "arc", v: [30,60], a1: 8, a2: 20, r: 12, group: 1, color: "corrAngle" },
                         { t: "arc", v: [30,60], a1: 20, a2: 32, r: 12, group: 1, color: "corrAngle" },
                         { t: "txt", p: [50,84], text: "∠AOP = ∠BOP", size: 13, bold: true }
