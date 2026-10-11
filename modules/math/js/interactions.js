@@ -26,6 +26,16 @@
  *                     折叠）+ 两栏式"证明书"收尾；三问：已知（蓝）/求证（红）
  *   construction-step 作图步骤机（几何）：倒带/单步/播放 + 跟做模式（"待画"遮罩
  *                     先比划再揭晓），每步"为什么这样画"折叠
+ *   cut-reassemble    切割拼补（几何 G5）：拖多边形散块到虚线目标轮廓，
+ *                     顶点数一致且质心距离 < snapDist 即吸附对齐；
+ *                     落定 flash+ripple（M6），拼完横幅反馈；
+ *                     autoAssemble 一键拼好，↺ 复原
+ *   pythag-grow       正方形生长（几何）：双滑块调直角边 a、b，三边上的
+ *                     正方形实时生长；面积读数 a²+b²=c² 走 MathML；
+ *                     badge 条件徽章；lockRight=true 直角硬约束（构造保证）
+ *   ladder-slide      梯子滑块（几何）：拖梯子底端 / 滑块，梯子实时转动，
+ *                     h=√(L²−x²) 走 MathML 实时显示，
+ *                     showCheck 时 x²+h²=L² 实时验算，showTriangle 画直角三角形
  *
  * 数学排版（蓝队 2026-10-10 修复）：交互内的表达式（expr/term/label/
  * 轴标签）统一走 window.MathExpr.html() —— ASCII 子集 → MathML
@@ -45,11 +55,11 @@
 
   /* ---------------- 共享：表达式求值（LaTeX 子集） ----------------
    * 支持：+ - * / ^()、三角函数 sin/cos/tan、对数 log2/log/ln（ln=log=自然对数）、
-   * π 及变量名。^ 转 ** 做幂。 */
+   * 开方 sqrt()、π 及变量名。^ 转 ** 做幂。 */
   function evalExpr(expr, varName, varValue) {
     var e = String(expr == null ? "" : expr);
     e = e.replace(/\^/g, "**");
-    // 白名单替换：三角函数、对数与圆周率 → Math.*（先做，再代入变量）
+    // 白名单替换：三角函数、对数、开方与圆周率 → Math.*（先做，再代入变量）
     // 注意：log2( 必须先于 log( 处理，否则 log2( 会被误替换成 Math.log(2(
     e = e.replace(/\bsin\s*\(/g, "Math.sin(")
          .replace(/\bcos\s*\(/g, "Math.cos(")
@@ -57,12 +67,13 @@
          .replace(/\blog2\s*\(/g, "Math.log2(")
          .replace(/\blog\s*\(/g, "Math.log(")
          .replace(/\bln\s*\(/g, "Math.log(")
+         .replace(/\bsqrt\s*\(/g, "Math.sqrt(")
          .replace(/\u03C0/g, "Math.PI");
     var escName = String(varName).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
     var re = new RegExp("\\b" + escName + "\\b", "g");
     e = e.replace(re, "(" + Number(varValue) + ")");
     // 安全检查：剥离白名单标识符后只允许数字、运算符、括号、空白
-    var check = e.replace(/\bMath\.(sin|cos|tan|log2|log|PI)\b/g, "");
+    var check = e.replace(/\bMath\.(sin|cos|tan|log2|log|sqrt|PI)\b/g, "");
     if (!/^[0-9+\-*/().\s]*$/.test(check)) return NaN;
     try {
       var v = Function('"use strict"; return (' + e + ")")();
@@ -2118,7 +2129,8 @@
 
   /* ============================================================
    * 12. vertex-drag 顶点拖拽（几何 G1）
-   * params: {vertices:[{x,y,label} ×3], showLengths?, showAngles?}
+   * params: {vertices:[{x,y,label} ×3], showLengths?, showAngles?,
+   *          base?:[DSL 形状]（可选底图，画在三角形之下，如半圆+直径）}
    *
    * 逻辑坐标 0–100（y 向上），不写死 px。拖动三角形顶点，
    * 边长/角度读数实时更新；某角 ≈90°（±0.8°）时自动画出直角方块。
@@ -2143,6 +2155,7 @@
     var W = 420, H = 360, mL = 44, mR = 44, mT = 30, mB = 56;
     function X(x) { return mL + x / 100 * (W - mL - mR); }
     function Y(y) { return mT + (1 - y / 100) * (H - mT - mB); }
+    function S(v) { return v / 100 * (W - mL - mR); }
 
     var init = vs.map(function (v, i) {
       return {
@@ -2159,6 +2172,13 @@
 
     var svg = G.svg(W, H, "ix-svg geo-svg");
     wrap.appendChild(svg);
+
+    // 可选底图（蓝队 2026-10-11：g07.1.5 半圆+直径）：DSL 形状，画在最下层，
+    // 与顶点同用 0–100 逻辑坐标（y 向上），静态不随拖拽重绘。
+    if (Array.isArray(params.base) && params.base.length) {
+      var vfr = { X: X, Y: Y, S: S };
+      params.base.forEach(function (sh) { drawGeoShape(svg, sh, vfr); });
+    }
 
     // 边：sideNames[i] 是 pts[i] 的对边（a 对 A，以此类推）
     var sideNames = ["a", "b", "c"];
@@ -2578,6 +2598,8 @@
    *  t:"poly"   {pts:[[x,y]..], color?, width?, dash?, close?(默认true),
    *              fill?(语义色名), opacity?}
    *  t:"circle" {c:[x,y], r(逻辑), color?, width?, dash?, fill?, opacity?}
+   *  t:"arcpath" {c:[x,y], r(逻辑), a1, a2(数学惯例度，逆时针), color?,
+   *              width?, dash?} —— 以圆心为锚的圆周弧（如半圆背景）
    *  t:"pt"     {p:[x,y], label?, color?, r?}
    *  t:"txt"    {p:[x,y], text, size?, color?, anchor?, math?, bold?}
    *  t:"arc"    {v:[x,y], a1, a2(数学惯例度), r(逻辑), group?(1-3), color?}
@@ -2631,6 +2653,10 @@
       var c = P(sh.c);
       G.circle(g, c[0], c[1], fr.S(sh.r || 10),
         { color: col, width: w, dash: sh.dash, fill: sh.fill, opacity: sh.opacity });
+    } else if (t === "arcpath") {
+      var ac = P(sh.c);
+      G.circleArc(g, ac[0], ac[1], fr.S(sh.r || 10), sh.a1 || 0, sh.a2 == null ? 360 : sh.a2,
+        { color: col, width: w, dash: sh.dash });
     } else if (t === "pt") {
       var pp = P(sh.p);
       G.point(g, pp[0], pp[1],

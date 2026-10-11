@@ -1015,7 +1015,11 @@ window.MATH_CH["g07"] = {
                     { x: 65, y: 78, label: "P" }
                   ],
                   showLengths: false,
-                  showAngles: true
+                  showAngles: true,
+                  base: [
+                    { t: "arcpath", c: [50, 52], r: 30, a1: 0, a2: 180, color: "line", width: 2.5 },
+                    { t: "seg", a: [20, 52], b: [80, 52], color: "line", width: 3 }
+                  ]
                 }
               },
               auxInteraction: null,

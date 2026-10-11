@@ -215,6 +215,31 @@
     return g;
   }
 
+  /* ---------------- 原语：圆弧（以圆心为锚的圆周弧线） ----------------
+   * a1→a2 按数学逆时针方向画（y-up 逻辑）；用于半圆/扇形边等背景图形。
+   * sweep<=0 或 >=360 时画整圆。 */
+  function circleArc(svgRoot, cx, cy, r, a1, a2, opts) {
+    opts = opts || {};
+    var sweep = norm360(a2 - a1);
+    var col = colorOf(opts.color || "line");
+    var wdt = opts.width || 2.5;
+    var full = sweep === 0;
+    if (full) sweep = 360;
+    var s = polar(cx, cy, r, a1), e = polar(cx, cy, r, a1 + sweep);
+    var large = sweep > 180 ? 1 : 0;
+    // 数学逆时针在 SVG y-down 坐标中视觉为逆时针 → sweep-flag 0
+    var p = el("path", {
+      d: "M" + s[0].toFixed(1) + "," + s[1].toFixed(1) +
+         " A" + r.toFixed(1) + "," + r.toFixed(1) + " 0 " + large + " 0 " +
+         e[0].toFixed(1) + "," + e[1].toFixed(1),
+      fill: "none", stroke: col, "stroke-width": wdt,
+      "stroke-linecap": "round"
+    });
+    if (opts.dash) p.setAttribute("stroke-dasharray", opts.dash);
+    svgRoot.appendChild(p);
+    return p;
+  }
+
   /* ---------------- 原语：等长刻度线（双编码：颜色 + 刻度道数） ----------------
    * 在边中点画与边垂直的短横刻度；count 1/2/3 道沿边方向排开。 */
   function ticks(svgRoot, ax, ay, bx, by, opts) {
@@ -429,7 +454,7 @@
     rad: rad, deg: deg, norm360: norm360, norm180: norm180,
     dist: dist, polar: polar, angleOf: angleOf,
     point: point, segment: segment, ray: ray, line: line, circle: circle,
-    angleArc: angleArc, ticks: ticks, parArrows: parArrows,
+    angleArc: angleArc, circleArc: circleArc, ticks: ticks, parArrows: parArrows,
     rightAngle: rightAngle, label: label, arrowMarker: arrowMarker,
     vibrate: vibrate, beep: beep, flash: flash, ripple: ripple, settle: settle
   };
