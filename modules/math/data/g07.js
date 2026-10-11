@@ -104,7 +104,7 @@ window.MATH_CH["g07"] = {
                 "记住：圆不是“圆盘”，是那条“线”（下一页讲圆 vs 圆面）。"
               ],
               examples: [
-                { text: "圆规画圆：针脚是圆心，两脚张开的角度是半径", figure: "实物" }
+                { text: "圆规画圆：针脚是圆心，两脚张开的距离是半径", figure: "实物" }
               ],
               prev: null,
               next: "g07-u1-l1-p2"
@@ -132,6 +132,10 @@ window.MATH_CH["g07"] = {
                         { t: "seg", a: [50,52], b: [65,78], color: "corrA", width: 3, ticks: 1 },
                         { t: "seg", a: [22.5,64], b: [77.5,64], color: "corrB", width: 3 },
                         { t: "seg", a: [50,82], b: [50,22], color: "corrC", width: 3, ticks: 2 },
+                        { t: "txt", p: [13,64], text: "A", size: 13 },
+                        { t: "txt", p: [82,64], text: "B", size: 13 },
+                        { t: "txt", p: [44,14], text: "C", size: 13 },
+                        { t: "txt", p: [56,90], text: "D", size: 13 },
                         { t: "pt", p: [50,52], label: "O", color: "known", r: 5 },
                         { t: "txt", p: [62,72], text: "半径", size: 13, color: "corrA" },
                         { t: "txt", p: [50,72], text: "弦", size: 13, color: "corrB" },
@@ -311,7 +315,7 @@ window.MATH_CH["g07"] = {
                 type: "proof-replay",
                 params: {
                   given: "直径 CD ⊥ 弦 AB，交于 E",
-                  goal: "AE = EB；弧 AC = 弧 BC",
+                  goal: "AE = EB；弧 AC = 弧 BC，弧 AD = 弧 BD",
                   steps: [
                     {
                       card: "连 OA、OB——两条半径登场。",
@@ -352,7 +356,7 @@ window.MATH_CH["g07"] = {
                       ]
                     },
                     {
-                      card: "沿 CD 对折：弧 AC 与弧 BC 完全重合。",
+                      card: "沿 CD 对折：弧 AC 与弧 BC 重合，弧 AD 与弧 BD 也重合。",
                       reason: "圆的轴对称性：直径 CD 是对称轴（本课 P1）",
                       shapes: [
                         { t: "circle", c: [50,52], r: 30, color: "line", width: 3 },
@@ -367,7 +371,7 @@ window.MATH_CH["g07"] = {
                     { statement: "连半径 OA、OB", reason: "作图；同圆半径相等" },
                     { statement: "△OAB 是等腰三角形", reason: "等腰三角形定义" },
                     { statement: "OE ⊥ AB → AE = EB", reason: "等腰三角形三线合一" },
-                    { statement: "弧 AC = 弧 BC", reason: "圆的轴对称性（直径是折痕）" }
+                    { statement: "弧 AC = 弧 BC，弧 AD = 弧 BD", reason: "圆的轴对称性（直径是折痕）" }
                   ]
                 }
               },
@@ -672,7 +676,7 @@ window.MATH_CH["g07"] = {
                   goal: "∠APB = ½∠AOB",
                   steps: [
                     {
-                      card: "连 OB——造出三角形 OAB。",
+                      card: "连 OB——造出 △OPB。",
                       reason: "作图：连半径 OB",
                       shapes: [
                         { t: "circle", c: [50,52], r: 30, color: "line", width: 3 },
@@ -687,32 +691,34 @@ window.MATH_CH["g07"] = {
                       ]
                     },
                     {
-                      card: "OA = OB，△OAB 是等腰三角形。",
+                      card: "OP = OB——△OPB 是等腰三角形，得 ∠OPB = ∠OBP。",
                       reason: "同圆半径相等；等边对等角（g04.1.5）",
                       shapes: [
                         { t: "circle", c: [50,52], r: 30, color: "line", width: 2 },
-                        { t: "poly", pts: [[50,52],[80,52],[50,82]], color: "target", width: 3 },
-                        { t: "seg", a: [50,52], b: [80,52], color: "target", width: 3, ticks: 1 },
+                        { t: "poly", pts: [[50,52],[20,52],[50,82]], color: "target", width: 3 },
+                        { t: "seg", a: [50,52], b: [20,52], color: "target", width: 3, ticks: 1 },
                         { t: "seg", a: [50,52], b: [50,82], color: "target", width: 3, ticks: 1 },
-                        { t: "arc", v: [80,52], a1: 135, a2: 180, r: 9, group: 1, color: "corrAngle" },
-                        { t: "arc", v: [50,82], a1: 270, a2: 315, r: 9, group: 1, color: "corrAngle" },
-                        { t: "txt", p: [66,62], text: "OA = OB", size: 13, color: "target" }
+                        { t: "arc", v: [20,52], a1: 0, a2: 45, r: 9, group: 1, color: "corrAngle" },
+                        { t: "arc", v: [50,82], a1: 225, a2: 270, r: 9, group: 1, color: "corrAngle" },
+                        { t: "txt", p: [35,62], text: "OP = OB", size: 13, color: "target" }
                       ]
                     },
                     {
-                      card: "∠AOB 是外角：∠AOB = ∠A + ∠ABO。",
+                      card: "∠AOB 是 △OPB 在 O 处的外角——∠AOB = ∠OPB + ∠OBP。",
                       reason: "三角形外角定理（g03.1.3）：外角等于不相邻两内角和",
                       shapes: [
                         { t: "circle", c: [50,52], r: 30, color: "line", width: 2 },
-                        { t: "poly", pts: [[50,52],[80,52],[50,82]], color: "line", width: 2.5 },
-                        { t: "seg", a: [50,52], b: [20,52], color: "aux", width: 2, dash: "5,4" },
-                        { t: "arc", v: [50,52], a1: 90, a2: 180, r: 14, color: "target", width: 3 },
-                        { t: "txt", p: [33,68], text: "外角", size: 13, bold: true, color: "target" }
+                        { t: "poly", pts: [[50,52],[20,52],[50,82]], color: "line", width: 2.5 },
+                        { t: "seg", a: [50,52], b: [80,52], color: "aux", width: 2, dash: "5,4" },
+                        { t: "arc", v: [50,52], a1: 0, a2: 90, r: 14, color: "target", width: 3 },
+                        { t: "txt", p: [67,68], text: "外角", size: 13, bold: true, color: "target" },
+                        { t: "txt", p: [13,52], text: "P", size: 13 },
+                        { t: "txt", p: [87,52], text: "A", size: 13 }
                       ]
                     },
                     {
-                      card: "∠APB = ∠A，所以 ∠APB = ½∠AOB。",
-                      reason: "等量代换：∠AOB = 2∠A = 2∠APB",
+                      card: "∠OPB 就是 ∠APB——O 在 PA 上，所以 ∠APB = ½∠AOB。",
+                      reason: "等量代换：∠AOB = 2∠OPB = 2∠APB",
                       shapes: [
                         { t: "circle", c: [50,52], r: 30, color: "line", width: 3 },
                         { t: "seg", a: [20,52], b: [80,52], color: "line", width: 3 },
@@ -726,9 +732,9 @@ window.MATH_CH["g07"] = {
                   ],
                   summary: [
                     { statement: "连半径 OB", reason: "作图" },
-                    { statement: "OA = OB → ∠A = ∠ABO", reason: "同圆半径相等；等边对等角" },
-                    { statement: "∠AOB = ∠A + ∠ABO", reason: "三角形外角定理" },
-                    { statement: "∠APB = ∠A = ½∠AOB", reason: "等量代换" }
+                    { statement: "OP = OB → ∠OPB = ∠OBP", reason: "同圆半径相等；等边对等角" },
+                    { statement: "∠AOB = ∠OPB + ∠OBP", reason: "三角形外角定理（△OPB 在 O 处的外角）" },
+                    { statement: "∠APB = ∠OPB = ½∠AOB", reason: "等量代换（O 在 PA 上，∠OPB 就是 ∠APB）" }
                   ]
                 }
               },
