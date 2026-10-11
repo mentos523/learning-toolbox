@@ -2875,7 +2875,10 @@
     wrap.appendChild(tabs);
     var readout = el("div", "ix-geo-readout", "");
     wrap.appendChild(readout);
-    var fr = geoFrame();
+    // （蓝队 2026-10-11 g10 白队复验）紧凑帧 H=300：标准帧 360 在 390px 屏上
+    // 渲染高 291px 且上下留白多；300 帧仍保持 X/Y 统一缩放（正方形 plot，
+    // 圆不变形，坐标映射一致），只等比缩小几何，文字/热区像素尺寸不变。
+    var fr = geoFrame(300);
     wrap.appendChild(fr.svg);
     var status = el("div", "ix-status",
       '<span class="ix-hint">点一点图形里的元素，看它属于哪一组</span>');

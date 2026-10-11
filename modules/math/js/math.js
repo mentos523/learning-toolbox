@@ -73,6 +73,20 @@
     return '<span class="formula-fallback">' + esc(f.translation || f.latex || "") + "</span>";
   }
 
+  /* ---------------- 交互区溢出兜底（蓝队 2026-10-11 g10 白队复验） ----------
+   * .m-interaction 默认 flex 居中 + overflow:hidden：内容超高时上下对称
+   * 静默裁剪，关键控件不可见且无滚动可达。检测到 scrollHeight >
+   * clientHeight 则加 .overflows（CSS 改 block 顶部对齐 + 区内滚动），
+   * 保证所有控件可达；未溢出页面不受影响。 */
+  function fitInteraction() {
+    var ixBox = $("p-interaction");
+    if (!ixBox) return;
+    ixBox.classList.remove("overflows");
+    if (ixBox.scrollHeight > ixBox.clientHeight + 1) {
+      ixBox.classList.add("overflows");
+    }
+  }
+
   /* ---------------- 页面渲染 ---------------- */
   function renderPage() {
     var cur = state.flat[state.index];
@@ -121,6 +135,9 @@
           "<br>（渲染器待实现，不影响浏览）</div>";
       }
     }
+
+    // 交互区溢出检测（见 fitInteraction 定义处注释）
+    fitInteraction();
 
     // 点拨
     // （蓝队 2026-10-10 缺陷A修复）习题页（concept === "本章习题"）：
@@ -287,6 +304,13 @@
     });
     $("menu-btn").addEventListener("click", function () {
       $("drawer").classList.toggle("open");
+    });
+
+    // 横竖屏/窗口尺寸变化时重算交互区是否溢出（防抖 150ms）
+    var rsT = null;
+    window.addEventListener("resize", function () {
+      if (rsT) clearTimeout(rsT);
+      rsT = setTimeout(fitInteraction, 150);
     });
 
     // 深链接：#p=<pageId>

@@ -148,6 +148,15 @@ body[data-theme="dark"] #mathml-warn { background: #4a3a1a; color: #fde68a; }
 .ix-stub { color: var(--m-ink-soft); font-size: 0.9rem; padding: 20px; text-align: center; }
 /* 辅交互容器：主交互下方紧凑堆叠，复用 ix-* 样式 */
 .m-interaction.has-aux { flex-direction: column; justify-content: flex-start; }
+/* ---------- 交互区溢出兜底（蓝队 2026-10-11 g10 白队复验） ----------
+ * .m-interaction 默认 flex 居中 + overflow:hidden：内容超高时上下对称
+ * 静默裁剪，关键控件不可见且无滚动可达。JS 在 renderPage 检测到
+ * scrollHeight > clientHeight 时加 .overflows：改 block 顶部对齐 +
+ * 区内滚动，保证所有控件可达；未溢出的页面完全不受影响（类不加）。 */
+.m-interaction.overflows {
+  display: block; overflow-y: auto; overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
 .m-aux-interaction {
   flex: none; width: 100%; max-width: 440px; margin: 6px auto 0;
   border-top: 1px dashed var(--m-line); padding-top: 4px;
@@ -248,6 +257,14 @@ body[data-theme="dark"] #mathml-warn { background: #4a3a1a; color: #fde68a; }
      （约省 4vh≈34px@844px）；只作用于 .ix-frame-proof，step-play /
      construction-step 等其它交互保持 26vh 不变 */
   .ix-frame-proof svg { max-height: 22vh; }
+  /* ---------- tap-highlight 移动端收紧（蓝队 2026-10-11 g10 白队复验）
+   * 白队实测 390px 下 .ix-groups 折成两行占 78px。收紧按钮字号/内边距/
+   * 间距后，"全部 + 两组"三按钮可排进单行（约 27px），省出约 50px；
+   * readout/status 同步收紧。只作用于移动端，桌面端原样。 */
+  .ix-groups { gap: 6px; padding: 2px 0 4px; }
+  .ix-group-btn { padding: 3px 8px; font-size: 0.85rem; white-space: nowrap; }
+  .ix-geo-readout { padding: 2px 0 4px; font-size: 0.95rem; }
+  .ix-status { margin-top: 4px; }
 }
 @media (min-width: 1024px) {
   .m-menu-btn { display: none; }
