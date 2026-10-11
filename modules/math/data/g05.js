@@ -8,12 +8,12 @@
  * 白队一屏预算评审：/tmp/white_geom_budget_g05_g07.md（g05 20→23 页，按逐课页清单执行）
  *
  * 页构成：
- *   g05.1.1 发现：方格纸上的秘密   3 页  P1 step-play（数格子） P2 step-play（正方形生长，直角锁定）
+ *   g05.1.1 发现：方格纸上的秘密   3 页  P1 step-play（数格子） P2 pythag-grow（正方形生长滑块，直角锁定）
  *                                        P3 讲解（猜想 a²+b²=c²）
- *   g05.1.2 证明：弦图拼图          5 页  P1 step-play（弦图拼图） P2 proof-replay（主证法慢放）
+ *   g05.1.2 证明：弦图拼图          5 页  P1 cut-reassemble（弦图拼图） P2 proof-replay（主证法慢放）
  *                                        P3 proof-replay（总统证法·拼法） P4 proof-replay（总统证法·化简）
  *                                        P5 讲解（定理陈述 + H1 互链代数 2.2.2）
- *   g05.1.3 应用：已知两边求第三边   3 页  P1 slider-lab（梯子滑块）+ aux step-play
+ *   g05.1.3 应用：已知两边求第三边   3 页  P1 ladder-slide（梯子图形联动滑块）
  *                                        P2 讲解（旗杆拉绳例） P3 讲解（逆运算例 + 易错点）
  *   g05.1.4 逆定理                  3 页  P1 step-play（绳圈拉直角） P2 proof-replay（SSS 构造证明）
  *                                        P3 讲解（互逆讲清）
@@ -28,14 +28,10 @@
  *   H2  g05.1.6 P1/P2：距离公式 ↔ 代数 ch06（"横平竖直"亲手造公式 + 数轴回链）
  *   H13 g05.1.7 P2：√2 ↔ 代数 0.1.3（"画出来→算出来"）
  *
- * 蓝队待实现交互（本文件暂用已注册类型代替，升级时替换 interaction 即可）：
- *   cut-reassemble（G5 切割拼补）：g05.1.2 P1 暂用 step-play 拼图分帧代替；
- *     建议 params：{ pieces: [{id, label, pts}], targets: [{id, pts}], autoAssemble: true }
- *   pythag-grow（正方形生长滑块）：g05.1.1 P2 暂用 step-play 分帧代替；
- *     建议 params：{ aMin, aMax, bMin, bMax, lockRight: true, showAreas: true,
- *       badge: "直角三角形中，两小块面积和=大块面积" }（直角锁定硬约束）
- *   ladder-slide（梯子滑块）：g05.1.3 P1 暂用 slider-lab（数值滑块）+ aux step-play（静态梯形图）代替；
- *     建议 params：{ ladderLen, xMin, xMax, showCheck: "a²+b²=c² 实时验算" }
+ * 蓝队已实现（2026-10-11，params 手册 v1.3）：以下三交互已接入本章对应页——
+ *   cut-reassemble（G5 切割拼补）：g05.1.2 P1（4 三角形 + 1 小正方形 → 弦图）
+ *   pythag-grow（正方形生长滑块）：g05.1.1 P2（直角锁定硬约束 + 面积徽章）
+ *   ladder-slide（梯子滑块）：g05.1.3 P1（拖梯底/滑块双向联动 + x²+h²=L² 验算）
  *
  * 全局约定：params 只用语义色名（known=已知蓝 / target=求证红 / corrA·corrB·corrC=对应组 /
  *   corrAngle=对应角 / line=普通线 / aux=辅助线灰虚线），不出现具体色值；逻辑坐标 0–100，y 向上。
@@ -138,59 +134,12 @@ window.MATH_CH["g05"] = {
                 }
               ],
               interaction: {
-                type: "step-play",
+                type: "pythag-grow",
                 params: {
-                  interval: 2000,
-                  steps: [
-                    {
-                      caption: "第 1 步：3-4-5：9+16=25，成立。",
-                      shapes: [
-                        { t: "poly", pts: [[30,28],[58,28],[30,49]], color: "line", width: 3 },
-                        { t: "right", v: [30,28], p: [58,28], q: [30,49], size: 6, color: "corrAngle" },
-                        { t: "poly", pts: [[30,28],[58,28],[58,6],[30,6]], color: "known", width: 2 },
-                        { t: "txt", p: [44,17], text: "16", size: 13, bold: true },
-                        { t: "poly", pts: [[30,28],[30,49],[9,49],[9,28]], color: "known", width: 2 },
-                        { t: "txt", p: [19,38], text: "9", size: 13, bold: true },
-                        { t: "poly", pts: [[58,28],[30,49],[51,77],[79,56]], color: "target", width: 2 },
-                        { t: "txt", p: [55,52], text: "25", size: 13, bold: true, color: "target" },
-                        { t: "txt", p: [50,88], text: "9 + 16 = 25", size: 14, bold: true }
-                      ]
-                    },
-                    {
-                      caption: "第 2 步：5-12-13：25+144=169，也成立。",
-                      shapes: [
-                        { t: "poly", pts: [[35,30],[65,30],[35,66]], color: "line", width: 3 },
-                        { t: "right", v: [35,30], p: [65,30], q: [35,66], size: 6, color: "corrAngle" },
-                        { t: "txt", p: [50,26], text: "5", size: 12 },
-                        { t: "txt", p: [31,48], text: "12", size: 12 },
-                        { t: "txt", p: [56,52], text: "13", size: 12 },
-                        { t: "poly", pts: [[35,30],[65,30],[65,10],[35,10]], color: "known", width: 2 },
-                        { t: "txt", p: [50,20], text: "25", size: 13, bold: true },
-                        { t: "poly", pts: [[35,30],[35,66],[11,66],[11,30]], color: "known", width: 2 },
-                        { t: "txt", p: [23,48], text: "144", size: 13, bold: true },
-                        { t: "poly", pts: [[65,30],[35,66],[59,86],[83,62]], color: "target", width: 2 },
-                        { t: "txt", p: [63,60], text: "169", size: 13, bold: true, color: "target" },
-                        { t: "txt", p: [50,90], text: "25 + 144 = 169", size: 14, bold: true }
-                      ]
-                    },
-                    {
-                      caption: "第 3 步：换成字母——任意直角三角形，直角边 a、b，斜边 c，都有 a²+b²=c²。注意：直角被锁死了，变的只是两条直角边的长度。",
-                      shapes: [
-                        { t: "poly", pts: [[32,32],[62,32],[32,58]], color: "line", width: 3 },
-                        { t: "right", v: [32,32], p: [62,32], q: [32,58], size: 7, color: "corrAngle" },
-                        { t: "txt", p: [47,28], text: "a", size: 13, bold: true },
-                        { t: "txt", p: [28,45], text: "b", size: 13, bold: true },
-                        { t: "txt", p: [52,48], text: "c", size: 13, bold: true },
-                        { t: "poly", pts: [[32,32],[62,32],[62,8],[32,8]], color: "known", width: 2 },
-                        { t: "txt", p: [47,20], text: "a²", size: 14, bold: true, math: true },
-                        { t: "poly", pts: [[32,32],[32,58],[6,58],[6,32]], color: "known", width: 2 },
-                        { t: "txt", p: [19,45], text: "b²", size: 14, bold: true, math: true },
-                        { t: "poly", pts: [[62,32],[32,58],[52,82],[76,60]], color: "target", width: 2 },
-                        { t: "txt", p: [58,58], text: "c²", size: 14, bold: true, math: true, color: "target" },
-                        { t: "txt", p: [50,90], text: "a² + b² = c²", size: 15, bold: true, math: true }
-                      ]
-                    }
-                  ]
+                  aMin: 1, aMax: 6, bMin: 1, bMax: 6,
+                  aInit: 3, bInit: 4,
+                  lockRight: true, showAreas: true,
+                  badge: "直角三角形中，两小块面积和=大块面积"
                 }
               },
               auxInteraction: null,
@@ -282,57 +231,24 @@ window.MATH_CH["g05"] = {
                 }
               ],
               interaction: {
-                type: "step-play",
+                type: "cut-reassemble",
                 params: {
-                  interval: 2000,
-                  steps: [
-                    {
-                      caption: "第 1 步：四个一模一样的直角三角形——直角边 a、b，斜边 c。",
-                      shapes: [
-                        { t: "poly", pts: [[10,75],[34,75],[34,43]], color: "line", width: 2.5 },
-                        { t: "txt", p: [24,62], text: "①", size: 14, bold: true },
-                        { t: "txt", p: [22,79], text: "a", size: 12 },
-                        { t: "txt", p: [38,59], text: "b", size: 12 },
-                        { t: "txt", p: [15,57], text: "c", size: 12 },
-                        { t: "poly", pts: [[42,75],[66,75],[66,43]], color: "line", width: 2.5 },
-                        { t: "txt", p: [56,62], text: "②", size: 14, bold: true },
-                        { t: "poly", pts: [[10,36],[34,36],[10,68]], color: "line", width: 2.5 },
-                        { t: "txt", p: [17,47], text: "③", size: 14, bold: true },
-                        { t: "poly", pts: [[42,36],[66,36],[42,68]], color: "line", width: 2.5 },
-                        { t: "txt", p: [49,47], text: "④", size: 14, bold: true }
-                      ]
-                    },
-                    {
-                      caption: "第 2 步：把四个三角形拼起来——斜边朝里，围出中间的小正方形。",
-                      shapes: [
-                        { t: "poly", pts: [[44.4,10.8],[89.2,44.4],[55.6,89.2],[10.8,55.6]], color: "line", width: 3 },
-                        { t: "poly", pts: [[44.4,10.8],[30,30],[70,30]], color: "corrA", width: 2, fill: "corrA", opacity: 0.3 },
-                        { t: "txt", p: [48,24], text: "①", size: 13, bold: true },
-                        { t: "poly", pts: [[89.2,44.4],[70,30],[70,70]], color: "corrB", width: 2, fill: "corrB", opacity: 0.3 },
-                        { t: "txt", p: [76,48], text: "②", size: 13, bold: true },
-                        { t: "poly", pts: [[55.6,89.2],[70,70],[30,70]], color: "corrC", width: 2, fill: "corrC", opacity: 0.3 },
-                        { t: "txt", p: [52,76], text: "③", size: 13, bold: true },
-                        { t: "poly", pts: [[10.8,55.6],[30,70],[30,30]], color: "known", width: 2, fill: "known", opacity: 0.3 },
-                        { t: "txt", p: [24,65], text: "④", size: 13, bold: true },
-                        { t: "poly", pts: [[30,30],[70,30],[70,70],[30,70]], color: "line", width: 2 }
-                      ]
-                    },
-                    {
-                      caption: "第 3 步：看边长——大正方形边长是 a+b（一段 a 接一段 b），中间小正方形边长是 c。这就是赵爽弦图。",
-                      shapes: [
-                        { t: "poly", pts: [[44.4,10.8],[89.2,44.4],[55.6,89.2],[10.8,55.6]], color: "line", width: 3 },
-                        { t: "poly", pts: [[44.4,10.8],[30,30],[70,30]], color: "corrA", width: 2, fill: "corrA", opacity: 0.25 },
-                        { t: "poly", pts: [[89.2,44.4],[70,30],[70,70]], color: "corrB", width: 2, fill: "corrB", opacity: 0.25 },
-                        { t: "poly", pts: [[55.6,89.2],[70,70],[30,70]], color: "corrC", width: 2, fill: "corrC", opacity: 0.25 },
-                        { t: "poly", pts: [[10.8,55.6],[30,70],[30,30]], color: "known", width: 2, fill: "known", opacity: 0.25 },
-                        { t: "poly", pts: [[30,30],[70,30],[70,70],[30,70]], color: "target", width: 2.5 },
-                        { t: "txt", p: [57,20], text: "b", size: 13, bold: true },
-                        { t: "txt", p: [80,37], text: "a", size: 13, bold: true },
-                        { t: "txt", p: [50,50], text: "c", size: 13, bold: true, color: "target" },
-                        { t: "txt", p: [50,94], text: "大正方形边长 = a + b", size: 13, bold: true }
-                      ]
-                    }
-                  ]
+                  pieces: [
+                    { id: "t1", label: "①", pts: [[16.4,48.8],[2,68],[42,68]] },
+                    { id: "t2", label: "②", pts: [[37.2,20.4],[18,6],[18,46]] },
+                    { id: "t3", label: "③", pts: [[71.6,45.2],[86,26],[46,26]] },
+                    { id: "t4", label: "④", pts: [[48.8,79.6],[68,94],[68,54]] },
+                    { id: "sq", label: "c", pts: [[10,18],[50,18],[50,58],[10,58]] }
+                  ],
+                  targets: [
+                    { id: "t1", pts: [[44.4,10.8],[30,30],[70,30]] },
+                    { id: "t2", pts: [[89.2,44.4],[70,30],[70,70]] },
+                    { id: "t3", pts: [[55.6,89.2],[70,70],[30,70]] },
+                    { id: "t4", pts: [[10.8,55.6],[30,70],[30,30]] },
+                    { id: "sq", pts: [[30,30],[70,30],[70,70],[30,70]] }
+                  ],
+                  autoAssemble: true,
+                  doneText: "弦图拼好了！大正方形边长 = a + b 🎉"
                 }
               },
               auxInteraction: null,
@@ -646,54 +562,17 @@ window.MATH_CH["g05"] = {
                 }
               ],
               interaction: {
-                type: "slider-lab",
+                type: "ladder-slide",
                 params: {
-                  min: 2,
-                  max: 8,
-                  step: 1,
-                  label: "x",
-                  expr: "\\sqrt{100-x^2}",
-                  target: 6,
-                  targetLabel: "试试 x=6（6-8-10）",
-                  unit: "米"
+                  length: 10, xMin: 2, xMax: 8, xStep: 0.5, xInit: 6,
+                  expr: "sqrt(100-x^2)",
+                  unit: "米",
+                  showTriangle: true, showCheck: true
                 }
               },
-              auxInteraction: {
-                type: "step-play",
-                params: {
-                  steps: [
-                    {
-                      caption: "x=6 米时，h=8 米：6²+8²=10²。",
-                      shapes: [
-                        { t: "seg", a: [30,15], b: [30,85], color: "line", width: 3 },
-                        { t: "seg", a: [30,15], b: [90,15], color: "line", width: 3 },
-                        { t: "seg", a: [54,15], b: [30,47], color: "known", width: 4 },
-                        { t: "txt", p: [60,30], text: "6²+8²=10²", size: 13, bold: true }
-                      ]
-                    },
-                    {
-                      caption: "x=8 米时，h=6 米：梯子底端越远，顶端越低。",
-                      shapes: [
-                        { t: "seg", a: [30,15], b: [30,85], color: "line", width: 3 },
-                        { t: "seg", a: [30,15], b: [90,15], color: "line", width: 3 },
-                        { t: "seg", a: [62,15], b: [30,39], color: "known", width: 4 },
-                        { t: "txt", p: [60,30], text: "8²+6²=10²", size: 13, bold: true }
-                      ]
-                    },
-                    {
-                      caption: "x=2 米时，h≈9.8 米：每次都满足 x²+h²=100。",
-                      shapes: [
-                        { t: "seg", a: [30,15], b: [30,85], color: "line", width: 3 },
-                        { t: "seg", a: [30,15], b: [90,15], color: "line", width: 3 },
-                        { t: "seg", a: [38,15], b: [30,54], color: "known", width: 4 },
-                        { t: "txt", p: [60,30], text: "2²+9.8²≈10²", size: 13, bold: true }
-                      ]
-                    }
-                  ]
-                }
-              },
+              auxInteraction: null,
               hints: [
-                "拖滑块：梯子底端离墙 x 米，梯子长 10 米不变——看高度 h 跟着变。",
+                "拖滑块，或直接拖梯子底端：梯子长 10 米不变——看高度 h 跟着变。",
                 "每次都验算：x²+h² 是不是等于 100？——勾股定理在实时工作。",
                 "试试 x=6：h=8——6-8-10，又是勾股数家族的成员。"
               ],

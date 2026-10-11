@@ -3355,6 +3355,574 @@
     show(0, { from: -1, reveal: true });
   }
 
+  /* ============================================================
+   * 19. cut-reassemble 切割拼补（几何 G5）
+   * params: {pieces:[{id,label,pts}], targets:[{id,pts}],
+   *          autoAssemble?, snapDist?, doneText?}
+   *
+   * 玩法：把散块（多边形）拖到虚线目标轮廓上；顶点数一致、且散块
+   * 质心与目标质心距离 ≤ snapDist（逻辑单位）时，松手即吸附对齐
+   * （精确落位）；落定走 M6 反馈（flash + ripple + 震动）；
+   * 全部拼好显示 doneText 横幅。散块拖拽只做平移（不旋转），
+   * 已拼好的块锁定。autoAssemble=true 显示"✨ 一键拼好"按钮。
+   * 逻辑坐标 0–100（y 向上），不写死 px；pointer 事件，手机可用。
+   * ============================================================ */
+  function renderCutReassemble(container, params) {
+    var G = window.GEOM;
+    if (!G) {
+      container.appendChild(el("div", "ix-stub", "几何原语库未加载（js/geom-primitives.js）"));
+      return;
+    }
+    var pieces = params.pieces, targets = params.targets;
+    if (!Array.isArray(pieces) || !pieces.length) {
+      geoErr(container, "cut-reassemble 需要 pieces（非空数组，每项 {id, label, pts}）");
+      return;
+    }
+    if (!Array.isArray(targets) || !targets.length) {
+      geoErr(container, "cut-reassemble 需要 targets（非空数组，每项 {id, pts}）");
+      return;
+    }
+    var autoAssemble = params.autoAssemble !== false;
+    var snapD = Number(params.snapDist);
+    if (!isFinite(snapD) || snapD <= 0) snapD = 12;
+    var doneText = params.doneText || "拼好了！🎉";
+    var PIECE_COLORS = ["corrA", "corrB", "corrC", "known", "target"];
+
+    var W = 420, H = 360, mL = 30, mR = 30, mT = 22, mB = 26;
+    function X(x) { return mL + x / 100 * (W - mL - mR); }
+    function Y(y) { return mT + (1 - y / 100) * (H - mT - mB); }
+    function LX(px) { return (px - mL) / (W - mL - mR) * 100; }
+    function LY(py) { return (1 - (py - mT) / (H - mT - mB)) * 100; }
+    function centroid(pts) {
+      var sx = 0, sy = 0, k;
+      for (k = 0; k < pts.length; k++) { sx += pts[k][0]; sy += pts[k][1]; }
+      return [sx / pts.length, sy / pts.length];
+    }
+    function copyPts(p) {
+      return (p.pts || []).map(function (q) { return [Number(q[0]), Number(q[1])]; });
+    }
+
+    var wrap = el("div", "ix-geo-wrap");
+    var readout = el("div", "ix-geo-readout",
+      '<span class="ix-hint">把散块拖进虚线轮廓里，拼出完整图形</span>');
+    wrap.appendChild(readout);
+    var svg = G.svg(W, H, "ix-svg geo-svg");
+    wrap.appendChild(svg);
+
+    var home = pieces.map(copyPts);
+    var cur = pieces.map(copyPts);
+    var tgtPts = targets.map(copyPts);
+    var placed = [], occupied = [], i;
+    for (i = 0; i < pieces.length; i++) placed.push(-1);
+    for (i = 0; i < targets.length; i++) occupied.push(-1);
+
+    // 目标轮廓（虚线）：拼好后隐藏
+    var targetNodes = tgtPts.map(function (tp) {
+      var s = tp.map(function (q) {
+        return X(q[0]).toFixed(1) + "," + Y(q[1]).toFixed(1);
+      }).join(" ");
+      var pg = G.el("polygon", {
+        points: s, fill: "none",
+        stroke: G.colorOf("aux"), "stroke-width": 2,
+        "stroke-dasharray": "7,5", "stroke-linejoin": "round"
+      });
+      svg.appendChild(pg);
+      return pg;
+    });
+
+    // 散块：<g>（多边形 + 透明加粗描边热区 + 编号标签）
+    var pieceGroups = [], piecePolys = [], pieceHits = [], pieceLabels = [];
+    for (i = 0; i < pieces.length; i++) {
+      (function (pi) {
+        var color = PIECE_COLORS[pi % PIECE_COLORS.length];
+        var g = G.el("g", { "class": "geo-drag" });
+        g.style.touchAction = "none";
+        g.style.cursor = "grab";
+        var pg = G.el("polygon", {
+          points: "", fill: G.colorOf(color), "fill-opacity": 0.88,
+          stroke: G.colorOf(color), "stroke-width": 2.5,
+          "stroke-linejoin": "round"
+        });
+        var hit = G.el("polygon", {
+          points: "", fill: "transparent",
+          stroke: "transparent", "stroke-width": 18,
+          "stroke-linejoin": "round", "pointer-events": "stroke"
+        });
+        g.appendChild(pg);
+        g.appendChild(hit);
+        var lb = G.label(g, 0, 0, pieces[pi].label || String(pi + 1),
+          { size: 15, bold: true, anchor: "middle" });
+        svg.appendChild(g);
+        pieceGroups.push(g); piecePolys.push(pg);
+        pieceHits.push(hit); pieceLabels.push(lb);
+        bindDrag(g, pi);
+      })(i);
+    }
+
+    function paintPiece(pi) {
+      var s = cur[pi].map(function (q) {
+        return X(q[0]).toFixed(1) + "," + Y(q[1]).toFixed(1);
+      }).join(" ");
+      piecePolys[pi].setAttribute("points", s);
+      pieceHits[pi].setAttribute("points", s);
+      var c = centroid(cur[pi]);
+      pieceLabels[pi].setAttribute("x", X(c[0]).toFixed(1));
+      pieceLabels[pi].setAttribute("y", (Y(c[1]) + 5).toFixed(1));
+    }
+
+    function updateStatus() {
+      var n = 0, k;
+      for (k = 0; k < placed.length; k++) if (placed[k] >= 0) n++;
+      if (n === pieces.length) {
+        readout.innerHTML = '<span class="ix-success">' + G.esc(doneText) + "</span>";
+        hapticTick();
+      } else {
+        readout.innerHTML = '<span class="ix-val">已拼好 ' + n + " / " + pieces.length + "</span>";
+      }
+    }
+
+    function snapTo(pi, ti) {
+      placed[pi] = ti; occupied[ti] = pi;
+      cur[pi] = tgtPts[ti].map(function (q) { return [q[0], q[1]]; });
+      paintPiece(pi);
+      targetNodes[ti].setAttribute("visibility", "hidden");
+      var c = centroid(cur[pi]);
+      G.settle(svg, X(c[0]), Y(c[1]), pieceGroups[pi], {});
+    }
+
+    function trySnap(pi) {
+      var c = centroid(cur[pi]), best = -1, bd = 1e9, ti;
+      for (ti = 0; ti < tgtPts.length; ti++) {
+        if (occupied[ti] >= 0) continue;
+        // 顶点数一致：三角形只进三角形轮廓，正方形只进正方形轮廓
+        if (tgtPts[ti].length !== cur[pi].length) continue;
+        var tc = centroid(tgtPts[ti]);
+        var d = Math.sqrt((c[0] - tc[0]) * (c[0] - tc[0]) +
+                          (c[1] - tc[1]) * (c[1] - tc[1]));
+        if (d < bd) { bd = d; best = ti; }
+      }
+      if (best >= 0 && bd <= snapD) snapTo(pi, best);
+      updateStatus();
+    }
+
+    function bindDrag(g, pi) {
+      var dragging = false, dx = 0, dy = 0;
+      g.addEventListener("pointerdown", function (evt) {
+        if (placed[pi] >= 0) return;  // 已拼好：锁定
+        evt.preventDefault();
+        dragging = true;
+        try { g.setPointerCapture(evt.pointerId); } catch (e) {}
+        var p = G.svgPoint(svg, evt);
+        var c = centroid(cur[pi]);
+        dx = LX(p.x) - c[0]; dy = LY(p.y) - c[1];
+        g.style.cursor = "grabbing";
+        svg.appendChild(g);  // 提到最上层
+      });
+      g.addEventListener("pointermove", function (evt) {
+        if (!dragging) return;
+        var p = G.svgPoint(svg, evt);
+        var ncx = LX(p.x) - dx, ncy = LY(p.y) - dy;
+        var oc = centroid(cur[pi]);
+        var mx = ncx - oc[0], my = ncy - oc[1], q, np = [];
+        for (q = 0; q < cur[pi].length; q++)
+          np.push([cur[pi][q][0] + mx, cur[pi][q][1] + my]);
+        cur[pi] = np;
+        paintPiece(pi);
+      });
+      function end() {
+        if (!dragging) return;
+        dragging = false;
+        g.style.cursor = "grab";
+        trySnap(pi);
+      }
+      g.addEventListener("pointerup", end);
+      g.addEventListener("pointercancel", end);
+    }
+
+    var foot = el("div", "ix-foot");
+    var status = el("div", "ix-status",
+      '<span class="ix-hint">拖动彩色散块</span>');
+    foot.appendChild(status);
+    if (autoAssemble) {
+      var asmBtn = el("button", "ix-btn", "✨ 一键拼好");
+      asmBtn.type = "button";
+      asmBtn.addEventListener("click", function () {
+        var delay = 0, pi, k, ti;
+        for (pi = 0; pi < pieces.length; pi++) {
+          if (placed[pi] >= 0) continue;
+          ti = -1;
+          // 优先按序号找空闲且顶点数一致的目标
+          if (pi < tgtPts.length && occupied[pi] < 0 &&
+              tgtPts[pi].length === cur[pi].length) ti = pi;
+          else {
+            for (k = 0; k < tgtPts.length; k++) {
+              if (occupied[k] < 0 && tgtPts[k].length === cur[pi].length) { ti = k; break; }
+            }
+          }
+          if (ti >= 0) {
+            (function (ppi, tti, d) {
+              setTimeout(function () { snapTo(ppi, tti); updateStatus(); }, d);
+            })(pi, ti, delay);
+            delay += 180;
+          }
+        }
+        setTimeout(updateStatus, delay + 60);
+      });
+      foot.appendChild(asmBtn);
+    }
+    var resetBtn = el("button", "ix-reset", "↺ 复原");
+    resetBtn.type = "button";
+    resetBtn.addEventListener("click", function () {
+      var k;
+      for (k = 0; k < pieces.length; k++) {
+        placed[k] = -1;
+        cur[k] = home[k].map(function (q) { return [q[0], q[1]]; });
+        paintPiece(k);
+      }
+      for (k = 0; k < tgtPts.length; k++) {
+        occupied[k] = -1;
+        targetNodes[k].setAttribute("visibility", "visible");
+      }
+      updateStatus();
+    });
+    foot.appendChild(resetBtn);
+    wrap.appendChild(foot);
+    container.appendChild(wrap);
+
+    for (i = 0; i < pieces.length; i++) paintPiece(i);
+    updateStatus();
+  }
+
+  /* ============================================================
+   * 20. pythag-grow 正方形生长滑块（几何）
+   * params: {aMin,aMax,bMin,bMax, aStep?,bStep?, aInit?,bInit?,
+   *          lockRight?, showAreas?, badge?}
+   *
+   * 玩法：双滑块调直角边 a、b，三边上的正方形实时生长；
+   * 读数行 a²+b²=c²（MathML）+ 实时数值验算"9+16=25 ✓"；
+   * badge 为条件徽章（直角三角形中，两小块面积和=大块面积）。
+   * 硬约束：直角由构造保证（两直角边分别沿水平/竖直方向），
+   * 直角标记恒显示；lockRight 必须为 true（传 false 直接报错）。
+   * 逻辑坐标 0–100（y 向上），画布按图形包围盒自适应缩放。
+   * ============================================================ */
+  function renderPythagGrow(container, params) {
+    var G = window.GEOM;
+    if (!G) {
+      container.appendChild(el("div", "ix-stub", "几何原语库未加载（js/geom-primitives.js）"));
+      return;
+    }
+    var aMin = Number(params.aMin), aMax = Number(params.aMax);
+    var bMin = Number(params.bMin), bMax = Number(params.bMax);
+    if (!isFinite(aMin) || !isFinite(aMax) || aMax <= aMin ||
+        !isFinite(bMin) || !isFinite(bMax) || bMax <= bMin) {
+      geoErr(container, "pythag-grow 需要 aMin<aMax、bMin<bMax（数值）");
+      return;
+    }
+    var aStep = Number(params.aStep);
+    if (!isFinite(aStep) || aStep <= 0) aStep = 1;
+    var bStep = Number(params.bStep);
+    if (!isFinite(bStep) || bStep <= 0) bStep = 1;
+    if (params.lockRight === false) {
+      geoErr(container, "pythag-grow 的 lockRight 是硬约束，必须为 true（直角由构造保证）");
+      return;
+    }
+    var showAreas = params.showAreas !== false;
+
+    function clamp(v, lo, hi) { return Math.min(hi, Math.max(lo, v)); }
+    var a0 = isFinite(Number(params.aInit)) ? clamp(Number(params.aInit), aMin, aMax) : aMin;
+    var b0 = isFinite(Number(params.bInit)) ? clamp(Number(params.bInit), bMin, bMax) : bMin;
+
+    var wrap = el("div", "ix-geo-wrap");
+    if (params.badge) {
+      // 徽章：纯文本（中文条件）或纯 ASCII 公式（走 MathML）；混排降级为纯文本
+      wrap.appendChild(el("div", "ix-badge", MX(params.badge)));
+    }
+    var readout = el("div", "ix-geo-readout", "");
+    wrap.appendChild(readout);
+    var W = 420, H = 320;
+    var svg = G.svg(W, H, "ix-svg geo-svg");
+    wrap.appendChild(svg);
+
+    // 双滑块：滑块行显示边长，表达式行显示该边正方形的面积（a² = …）
+    var sA = sliderLabCore(wrap, { min: aMin, max: aMax, step: aStep, label: "a", expr: "a^2" });
+    var sB = sliderLabCore(wrap, { min: bMin, max: bMax, step: bStep, label: "b", expr: "b^2" });
+    container.appendChild(wrap);
+
+    function fmtN(n) { return String(Math.round(n * 100) / 100); }
+
+    function redraw() {
+      var a = sA.getValue(), b = sB.getValue();
+      var c = Math.sqrt(a * a + b * b);
+      var a2 = a * a, b2 = b * b;
+      // 作图坐标（y 向上）：直角顶点 O=(0,0)，A=(a,0)，B=(0,b)
+      // 斜边正方形外法向 = 从 O 指向斜边中点的方向
+      var mx = a / 2, my = b / 2, ml = Math.sqrt(mx * mx + my * my) || 1;
+      var nx = mx / ml, ny = my / ml;
+      var sqC = [[a, 0], [0, b],
+                 [nx * c, b + ny * c], [a + nx * c, ny * c]];
+      var all = [[0, 0], [a, 0], [0, b],
+                 [a, -a], [0, -a], [-b, 0], [-b, b],
+                 sqC[2], sqC[3]];
+      var xs = all.map(function (p) { return p[0]; });
+      var ys = all.map(function (p) { return p[1]; });
+      var x0 = Math.min.apply(null, xs), x1 = Math.max.apply(null, xs);
+      var y0 = Math.min.apply(null, ys), y1 = Math.max.apply(null, ys);
+      var mL = 48, mR = 18, mT = 14, mB = 14;
+      var s = Math.min((W - mL - mR) / ((x1 - x0) || 1),
+                       (H - mT - mB) / ((y1 - y0) || 1));
+      var ox = mL + ((W - mL - mR) - (x1 - x0) * s) / 2;
+      var oy = mT + ((H - mT - mB) - (y1 - y0) * s) / 2;
+      function X(x) { return ox + (x - x0) * s; }
+      function Y(y) { return oy + (y1 - y) * s; }
+      function ptsStr(arr) {
+        return arr.map(function (p) {
+          return X(p[0]).toFixed(1) + "," + Y(p[1]).toFixed(1);
+        }).join(" ");
+      }
+      clearSvg(svg);
+      function poly(arr, color) {
+        var pg = G.el("polygon", {
+          points: ptsStr(arr), fill: G.colorOf(color), "fill-opacity": 0.22,
+          stroke: G.colorOf(color), "stroke-width": 2.5,
+          "stroke-linejoin": "round"
+        });
+        svg.appendChild(pg);
+        return pg;
+      }
+      // 三个正方形：两直角边上（known 蓝），斜边上（target 红）
+      poly([[0, 0], [a, 0], [a, -a], [0, -a]], "known");
+      poly([[0, 0], [0, b], [-b, b], [-b, 0]], "known");
+      poly(sqC, "target");
+      // 三角形（衬底色填充，压住正方形接缝）
+      var tri = G.el("polygon", {
+        points: ptsStr([[0, 0], [a, 0], [0, b]]),
+        fill: "var(--geo-bg)", "fill-opacity": 0.9,
+        stroke: G.colorOf("line"), "stroke-width": 3,
+        "stroke-linejoin": "round"
+      });
+      svg.appendChild(tri);
+      // 直角标记（硬约束：恒显示）
+      G.rightAngle(svg, X(0), Y(0), X(a), Y(0), X(0), Y(b),
+        Math.max(9, s * 1.6), { color: "corrAngle", width: 2 });
+      // 边标签（单字母，沿用 vertex-drag/step-play 的纯文本惯例；
+      // 表达式与读数走 MathML）
+      G.label(svg, X(a / 2), Y(0) + 17, "a", { bold: true, size: 16, anchor: "middle" });
+      G.label(svg, X(0) - 16, Y(b / 2), "b", { bold: true, size: 16, anchor: "middle" });
+      G.label(svg, X(mx) - nx * 15, Y(my) + ny * 15, "c",
+        { bold: true, size: 16, color: "target", anchor: "middle" });
+      // 面积数（showAreas）
+      if (showAreas) {
+        function areaNum(x, y, v, color) {
+          var t = G.el("text", {
+            x: X(x).toFixed(1), y: (Y(y) + 6).toFixed(1),
+            "text-anchor": "middle", "font-size": 15, "font-weight": "bold",
+            fill: G.colorOf(color || "text"),
+            "paint-order": "stroke", stroke: "var(--geo-bg)", "stroke-width": 3
+          });
+          t.textContent = fmtN(v);
+          svg.appendChild(t);
+        }
+        areaNum(a / 2, -a / 2, a2);
+        areaNum(-b / 2, b / 2, b2);
+        areaNum(mx + nx * c / 2, my + ny * c / 2, a2 + b2, "target");
+      }
+      // 读数行：a²+b²=c²（MathML）+ 数值验算
+      readout.innerHTML =
+        '<span class="ix-val">' + MX("a^2+b^2=c^2") + "</span>" +
+        '<span class="ix-sep">　</span>' +
+        "<span>" + MX(fmtN(a2) + "+" + fmtN(b2) + "=" + fmtN(a2 + b2)) + "</span>" +
+        ' <span class="ix-success">✓</span>';
+    }
+
+    sA.onInput(redraw);
+    sB.onInput(redraw);
+    sA.setValue(a0);
+    sB.setValue(b0);
+    redraw();
+  }
+
+  /* ============================================================
+   * 21. ladder-slide 梯子滑块（几何）
+   * params: {length, xMin, xMax, xStep?, xInit?, expr?, unit?,
+   *          showTriangle?, showCheck?}
+   * （length 可用 ladderLen 别名；expr 自变量必须为 x，
+   *   如 "sqrt(100-x^2)"，显示与求值共用）
+   *
+   * 玩法：拖梯子底端（画布手柄）或拖滑块，梯子（线段）实时转动；
+   * 顶端高度 h 走 MathML 实时显示（expr = …）；showCheck 时附
+   * x²+h²=L² 实时验算；showTriangle 时画出直角三角形（墙/地面/
+   * 梯子 + 直角标记）。
+   * 约束：x∈[xMin, min(xMax, L))，保证 h=√(L²−x²)>0。
+   * ============================================================ */
+  function renderLadderSlide(container, params) {
+    var G = window.GEOM;
+    if (!G) {
+      container.appendChild(el("div", "ix-stub", "几何原语库未加载（js/geom-primitives.js）"));
+      return;
+    }
+    var L = Number(params.length != null ? params.length : params.ladderLen);
+    var xMin = Number(params.xMin), xMax = Number(params.xMax);
+    if (!isFinite(L) || L <= 0) {
+      geoErr(container, "ladder-slide 需要 length（梯长，>0）");
+      return;
+    }
+    if (!isFinite(xMin) || !isFinite(xMax) || xMax <= xMin) {
+      geoErr(container, "ladder-slide 需要 xMin<xMax（数值）");
+      return;
+    }
+    xMin = Math.max(0, xMin);
+    xMax = Math.min(xMax, L * 0.999);  // h=√(L²−x²) 要求 x<L
+    if (xMax <= xMin) {
+      geoErr(container, "ladder-slide 的 xMax 必须 < 梯长（否则高度为 0）");
+      return;
+    }
+    var xStep = Number(params.xStep);
+    if (!isFinite(xStep) || xStep <= 0) xStep = 0.5;
+    var expr = params.expr || ("sqrt(" + (L * L) + "-x^2)");
+    var unit = params.unit || "";
+    var showTriangle = params.showTriangle !== false;
+    var showCheck = params.showCheck !== false;
+    var xInit = isFinite(Number(params.xInit))
+      ? Math.min(xMax, Math.max(xMin, Number(params.xInit))) : xMin;
+
+    var hMax = Math.sqrt(L * L - xMin * xMin);
+    var W = 420, H = 330, mL = 58, mR = 26, mT = 22, mB = 48;
+    var wx0 = -1.4, wx1 = xMax + 0.9, wy0 = -0.9, wy1 = hMax + 0.9;
+    var sc = Math.min((W - mL - mR) / (wx1 - wx0), (H - mT - mB) / (wy1 - wy0));
+    var ox = mL + ((W - mL - mR) - (wx1 - wx0) * sc) / 2;
+    var oy = mT + ((H - mT - mB) - (wy1 - wy0) * sc) / 2;
+    function X(x) { return ox + (x - wx0) * sc; }
+    function Y(y) { return oy + (wy1 - y) * sc; }
+    function LX(px) { return (px - ox) / sc + wx0; }
+
+    var wrap = el("div", "ix-geo-wrap");
+    var svg = G.svg(W, H, "ix-svg geo-svg");
+    wrap.appendChild(svg);
+
+    // 静态：地面 + 墙
+    G.segment(svg, X(wx0), Y(0), X(wx1), Y(0), { color: "line", width: 3 });
+    G.segment(svg, X(0), Y(0), X(0), Y(wy1), { color: "line", width: 3 });
+    G.label(svg, X(wx1) - 4, Y(0) + 22, "地面", { size: 13, anchor: "end" });
+    G.label(svg, X(0) - 12, Y(wy1) + 2, "墙", { size: 13, anchor: "end" });
+
+    // 动态节点（常驻，只改属性）
+    var dyn = G.el("g", {});
+    svg.appendChild(dyn);
+    var triFill = G.el("polygon", {
+      points: "", fill: G.colorOf("known"), "fill-opacity": 0.12, stroke: "none"
+    });
+    var legX = G.el("line", { stroke: G.colorOf("line"), "stroke-width": 2.5 });
+    var legH = G.el("line", { stroke: G.colorOf("line"), "stroke-width": 2.5 });
+    var ladder = G.el("line", {
+      stroke: G.colorOf("known"), "stroke-width": 6, "stroke-linecap": "round"
+    });
+    dyn.appendChild(triFill); dyn.appendChild(legX); dyn.appendChild(legH);
+    dyn.appendChild(ladder);
+    var footG = G.el("g", { "class": "geo-drag" });
+    footG.style.touchAction = "none";
+    footG.style.cursor = "grab";
+    footG.appendChild(G.el("circle", { r: 22, fill: "transparent" }));
+    footG.appendChild(G.el("circle", {
+      r: 9, fill: "var(--geo-known)", stroke: "#fff", "stroke-width": 2
+    }));
+    dyn.appendChild(footG);
+    var topDot = G.el("circle", {
+      r: 7, fill: "var(--geo-known)", stroke: "#fff", "stroke-width": 2
+    });
+    dyn.appendChild(topDot);
+    var lbX = G.label(dyn, 0, 0, "x", { bold: true, size: 15, anchor: "middle" });
+    var lbH = G.label(dyn, 0, 0, "h", { bold: true, size: 15, anchor: "middle" });
+    var lbL = G.label(dyn, 0, 0, "L", { bold: true, size: 15, color: "known", anchor: "middle" });
+    var rmark = null;
+
+    var checkLine = el("div", "ix-geo-readout", "");
+    var core = sliderLabCore(wrap, {
+      min: xMin, max: xMax, step: xStep, label: "x", expr: expr, unit: unit
+    });
+    if (showCheck) wrap.appendChild(checkLine);
+    container.appendChild(wrap);
+
+    function setLn(node, x1, y1, x2, y2) {
+      node.setAttribute("x1", x1.toFixed(1)); node.setAttribute("y1", y1.toFixed(1));
+      node.setAttribute("x2", x2.toFixed(1)); node.setAttribute("y2", y2.toFixed(1));
+    }
+
+    function redraw(xv) {
+      var x = Math.min(xMax, Math.max(xMin, xv));
+      var h = Math.sqrt(Math.max(0, L * L - x * x));
+      var fx = X(x), fy = Y(0), tx = X(0), ty = Y(h), ox0 = X(0), oy0 = Y(0);
+      setLn(ladder, fx, fy, tx, ty);
+      footG.setAttribute("transform",
+        "translate(" + fx.toFixed(1) + "," + fy.toFixed(1) + ")");
+      topDot.setAttribute("cx", tx.toFixed(1));
+      topDot.setAttribute("cy", ty.toFixed(1));
+      if (showTriangle) {
+        triFill.setAttribute("points",
+          ox0.toFixed(1) + "," + oy0.toFixed(1) + " " +
+          fx.toFixed(1) + "," + fy.toFixed(1) + " " +
+          tx.toFixed(1) + "," + ty.toFixed(1));
+        triFill.setAttribute("visibility", "visible");
+        setLn(legX, ox0, oy0, fx, fy);
+        setLn(legH, ox0, oy0, tx, ty);
+        legX.setAttribute("visibility", "visible");
+        legH.setAttribute("visibility", "visible");
+        var fresh = G.rightAngle(dyn, ox0, oy0, fx, fy, tx, ty, 10,
+          { color: "corrAngle", width: 2 });
+        if (rmark && rmark.parentNode === dyn) dyn.replaceChild(fresh, rmark);
+        else dyn.appendChild(fresh);
+        rmark = fresh;
+      } else {
+        triFill.setAttribute("visibility", "hidden");
+        legX.setAttribute("visibility", "hidden");
+        legH.setAttribute("visibility", "hidden");
+        if (rmark && rmark.parentNode === dyn) dyn.removeChild(rmark);
+        rmark = null;
+      }
+      // 标签：x 在地面段下方，h 在墙段左侧，L 在梯子中点外侧
+      lbX.setAttribute("x", ((ox0 + fx) / 2).toFixed(1));
+      lbX.setAttribute("y", (fy + 16).toFixed(1));
+      lbH.setAttribute("x", (ox0 - 20).toFixed(1));
+      lbH.setAttribute("y", ((oy0 + ty) / 2 + 2).toFixed(1));
+      var mxp = (fx + tx) / 2, myp = (fy + ty) / 2;
+      var px = -(fy - ty), py = fx - tx;  // 梯子方向的法向（svg 坐标）
+      var pl = Math.sqrt(px * px + py * py) || 1;
+      // 选远离墙角 (ox0,oy0) 的一侧
+      if ((mxp + px / pl * 18 - ox0) * (mxp - ox0) +
+          (myp + py / pl * 18 - oy0) * (myp - oy0) < 0) { px = -px; py = -py; }
+      lbL.setAttribute("x", (mxp + px / pl * 18).toFixed(1));
+      lbL.setAttribute("y", (myp + py / pl * 18).toFixed(1));
+      if (showCheck) {
+        checkLine.innerHTML = MX(fmt(x) + "^2+" + fmt(h) + "^2=" + (L * L)) +
+          ' <span class="ix-success">✓</span>';
+      }
+    }
+
+    // 拖梯子底端：横向拖 → x 变化 → 滑块同步
+    var dragging = false;
+    footG.addEventListener("pointerdown", function (evt) {
+      evt.preventDefault();
+      dragging = true;
+      try { footG.setPointerCapture(evt.pointerId); } catch (e) {}
+      footG.style.cursor = "grabbing";
+    });
+    footG.addEventListener("pointermove", function (evt) {
+      if (!dragging) return;
+      var p = G.svgPoint(svg, evt);
+      var q = Math.round((LX(p.x) - xMin) / xStep) * xStep + xMin;
+      core.setValue(q);  // 钳制 + 触发 onInput → redraw
+    });
+    function endDrag() {
+      if (!dragging) return;
+      dragging = false;
+      footG.style.cursor = "grab";
+    }
+    footG.addEventListener("pointerup", endDrag);
+    footG.addEventListener("pointercancel", endDrag);
+
+    core.onInput(function (v) { redraw(v); });
+    core.setValue(xInit);  // 触发首次 redraw
+  }
+
   /* ---------------- 渲染器内嵌查表 ----------------
    * 与 window.MATH_INTERACTIONS 同源：注册时同步记一份本地表。
    * side-compare 内嵌时按 kind 查表调用已注册渲染器（不复制渲染器代码）。*/
@@ -3383,4 +3951,7 @@
   ixRegister("compare-toggle", renderCompareToggle);
   ixRegister("proof-replay", renderProofReplay);
   ixRegister("construction-step", renderConstructionStep);
+  ixRegister("cut-reassemble", renderCutReassemble);
+  ixRegister("pythag-grow", renderPythagGrow);
+  ixRegister("ladder-slide", renderLadderSlide);
 })();

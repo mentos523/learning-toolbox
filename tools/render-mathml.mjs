@@ -60,6 +60,10 @@ const INTERACTION_TYPES = {
   // 几何 g01–g04 接入（蓝队 2026-10-11：params 手册 v1.2）
   "proof-replay": ["steps"],
   "construction-step": ["steps"],
+  // 几何 g05 接入（蓝队 2026-10-11：params 手册 v1.3）
+  "cut-reassemble": ["pieces", "targets"],
+  "pythag-grow": ["aMin", "aMax", "bMin", "bMax"],
+  "ladder-slide": ["length", "xMin", "xMax", "expr"],
 };
 
 /* ============================================================

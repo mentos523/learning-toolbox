@@ -1,6 +1,10 @@
-# 数学 · 几何 交互参数编写手册（蓝队 v1.2）
+# 数学 · 几何 交互参数编写手册（蓝队 v1.3）
 
 > 给黄队：按本手册写几何页的 `interaction.params`，不用关心 SVG/CSS 实现。
+> v1.3（2026-10-11，几何 g05 接入）：
+> 新增 `cut-reassemble`（切割拼补） / `pythag-grow`（正方形生长滑块） /
+> `ladder-slide`（梯子滑块）三种交互；expr-mathml.js 新增 `sqrt` 函数
+> （ASCII `sqrt(…)` → MathML 真根号，ladder-slide 高度公式用）。
 > v1.2（2026-10-11，几何 g01–g04 接入）：
 > 新增 `proof-replay`（证明慢放机） / `construction-step`（作图步骤机）两种交互；
 > LaTeX 子集新增几何符号（`\angle \triangle \cong \Rightarrow \parallel \perp \subset \circ`、
@@ -421,6 +425,154 @@ interaction: {
 
 ---
 
+## cut-reassemble · 切割拼补（v1.3 新增）
+
+拖动多边形散块，拼进虚线目标轮廓。适用：弦图拼图、撕角拼角、面积割补
+（pedagogy G5：块编号、切割线预览、一键拼好兜底）。
+
+### Schema
+
+| 参数 | 类型 | 必填 | 默认 | 说明 |
+|---|---|---|---|---|
+| `pieces` | array | ✅ | — | 非空；散块数组，每项 `{id, label, pts}`。`pts` 为散放位置的顶点数组（逻辑坐标 0–100，y 向上）；**顶点顺序必须与对应 target 一致**（如都按顺时针） |
+| `targets` | array | ✅ | — | 非空；目标轮廓数组，每项 `{id, pts}`。`pts` 为目标位置顶点数组 |
+| `autoAssemble` | boolean | — | `true` | 是否显示"✨ 一键拼好"按钮 |
+| `snapDist` | number | — | `12` | 吸附半径（逻辑单位）：散块质心与目标质心距离 ≤ 此值时，松手即吸附对齐 |
+| `doneText` | string | — | `"拼好了！🎉"` | 全部拼好后的横幅文案 |
+
+- 散块与目标按**顶点数**匹配：三角形（3 顶点）只进三角形轮廓，正方形（4 顶点）只进正方形轮廓；顶点数相同的目标之间可互换（如弦图的 4 个全等三角形，任意一块可进任意三角轮廓）。
+- 散块拖拽只做平移（不旋转）；吸附时按目标形状**精确落位**（顶点一一对应）。
+- 散块配色自动按 corrA/corrB/corrC/known/target 循环 + 编号标签（双编码：颜色 + 编号），不要在 params 里指定颜色。
+- 已拼好的块锁定（不可再拖）；落定走 M6 反馈（flash + ripple + 震动，能力检测静默跳过）；右下角"↺ 复原"回到散放状态。
+
+### 示例（赵爽弦图：4 个直角三角形 + 1 个小正方形）
+
+```js
+interaction: {
+  type: "cut-reassemble",
+  params: {
+    pieces: [
+      { id: "t1", label: "①", pts: [[16.4,48.8],[2,68],[42,68]] },
+      { id: "t2", label: "②", pts: [[37.2,20.4],[18,6],[18,46]] },
+      { id: "t3", label: "③", pts: [[71.6,45.2],[86,26],[46,26]] },
+      { id: "t4", label: "④", pts: [[48.8,79.6],[68,94],[68,54]] },
+      { id: "sq", label: "c", pts: [[10,18],[50,18],[50,58],[10,58]] }
+    ],
+    targets: [
+      { id: "t1", pts: [[44.4,10.8],[30,30],[70,30]] },
+      { id: "t2", pts: [[89.2,44.4],[70,30],[70,70]] },
+      { id: "t3", pts: [[55.6,89.2],[70,70],[30,70]] },
+      { id: "t4", pts: [[10.8,55.6],[30,70],[30,30]] },
+      { id: "sq", pts: [[30,30],[70,30],[70,70],[30,70]] }
+    ],
+    autoAssemble: true
+  }
+}
+```
+
+### 常见坑
+
+1. **散块顶点顺序必须与目标一致**：吸附是"顶点一一对应精确落位"，顺序写反/写乱会导致块"拧"进轮廓。写法：目标画好后，把散块的 `pts` 按同样顺序（如顺时针）抄一遍，再整体平移散开。
+2. **散块别出画布**：`pts` 坐标钳制在 2–98；散块之间允许轻微重叠（像真的散放在一起），但别五个全叠成一坨。
+3. **顶点数是匹配依据**：学生把三角形往正方形轮廓里放时不吸附——这是设计（形状不对），不是 bug。
+4. **块的最小边 ≥ 13 逻辑单位**：约 44px 可点（pedagogy G5 要求），手机手指点得中。
+5. **至少 2 个散块**：1 个块的"拼图"没有拼的意义，换 step-play。
+
+---
+
+## pythag-grow · 正方形生长滑块（v1.3 新增）
+
+双滑块调直角边 a、b，三边上的正方形实时生长，面积徽章实时验算。
+适用：勾股定理的发现（a²+b²=c² 猜想）。
+
+### Schema
+
+| 参数 | 类型 | 必填 | 默认 | 说明 |
+|---|---|---|---|---|
+| `aMin` | number | ✅ | — | 直角边 a 下限（>0） |
+| `aMax` | number | ✅ | — | 直角边 a 上限（必须 > aMin） |
+| `bMin` | number | ✅ | — | 直角边 b 下限（>0） |
+| `bMax` | number | ✅ | — | 直角边 b 上限（必须 > bMin） |
+| `aStep` / `bStep` | number | — | `1` | 滑块步长（>0） |
+| `aInit` / `bInit` | number | — | 下限 | 初始值（钳制到上下限内） |
+| `lockRight` | boolean | — | `true` | **硬约束**：必须为 `true`；直角由构造保证（两直角边分别沿水平/竖直方向），直角标记恒显示；传 `false` 直接报错不渲染 |
+| `showAreas` | boolean | — | `true` | 是否在正方形内显示面积数 |
+| `badge` | string | — | — | 条件徽章文案，如 `"直角三角形中，两小块面积和=大块面积"`。纯中文按纯文本显示；纯 ASCII 公式（如 `"a^2+b^2=c^2"`）走 MathML；中英混排降级为纯文本 |
+
+- 每个滑块上方有表达式行（如 `a² = 9`，该边正方形的面积，MathML），滑块行显示边长。
+- 读数行：`a²+b²=c²`（MathML）+ 实时数值验算（如 `9+16=25 ✓`）。
+- 正方形颜色：两直角边上为 known（蓝），斜边上为 target（红）；边标签 a/b/c 与面积数自动标注。
+- 画布按三个正方形的包围盒自适应缩放，a、b 取值再大也不会出画布。
+
+### 示例
+
+```js
+interaction: {
+  type: "pythag-grow",
+  params: {
+    aMin: 1, aMax: 6, bMin: 1, bMax: 6,
+    aInit: 3, bInit: 4,
+    lockRight: true, showAreas: true,
+    badge: "直角三角形中，两小块面积和=大块面积"
+  }
+}
+```
+
+### 常见坑
+
+1. **`lockRight` 别写 `false`**：这个交互的身份就是"直角三角形"，传 `false` 会报错；想做一般三角形用 vertex-drag。
+2. **上下限别太大**：a、b 到 20 时斜边正方形巨大，画布自适应后三角形缩得很小；建议 ≤ 8。
+3. **步长与"勾股数"**：步长 1 时 a=3、b=4 得 c=5（整数，好讲）；步长 0.5 更平滑但面积出现小数——按教学目标选。
+4. **badge 是条件陈述，不是证明**：徽章写"直角三角形中，……"这类条件句；证明放 proof-replay。
+
+---
+
+## ladder-slide · 梯子滑块（v1.3 新增）
+
+拖梯子底端（画布手柄）或拖滑块，梯子（线段）实时转动，顶端高度
+h=√(L²−x²) 走 MathML 实时显示。适用：勾股定理的应用（梯子靠墙）。
+
+### Schema
+
+| 参数 | 类型 | 必填 | 默认 | 说明 |
+|---|---|---|---|---|
+| `length` | number | ✅ | — | 梯长 L（>0）；可用别名 `ladderLen` |
+| `xMin` | number | ✅ | — | 底端离墙距离下限（≥0） |
+| `xMax` | number | ✅ | — | 底端离墙距离上限（必须 > xMin 且 < length，否则 h=0 无意义） |
+| `xStep` | number | — | `0.5` | 滑块步长（>0）；画布拖动手柄按此步长取整 |
+| `xInit` | number | — | `xMin` | 初始 x（钳制到上下限内） |
+| `expr` | string | ✅ | — | 高度公式（ASCII 子集，**自变量必须为 `x`**），如 `"sqrt(100-x^2)"`；显示（MathML 真根号）与求值共用。缺省为 `"sqrt(L²-x^2)"`（L 取 length 的平方数） |
+| `unit` | string | — | `""` | 单位说明（如 `"米"`） |
+| `showTriangle` | boolean | — | `true` | 是否画出直角三角形（墙/地面/梯子 + 直角标记 + 浅色填充） |
+| `showCheck` | boolean | — | `true` | 是否显示 `x²+h²=L²` 实时验算行 |
+
+- 滑块表达式行显示 `√(L²−x²) = …`（MathML 真根号，expr-mathml.js 的 `sqrt` 支持），滑块行显示 `x = …`。
+- 画布手柄：梯子底端的蓝色圆点可横向拖拽，与滑块双向同步。
+- 约束：x 超出范围会被钳制；`xMax ≥ length` 时渲染器自动钳制到 0.999L（保证 h>0），但 params 里就该写对。
+
+### 示例（10 米梯子靠墙）
+
+```js
+interaction: {
+  type: "ladder-slide",
+  params: {
+    length: 10, xMin: 2, xMax: 8, xStep: 0.5, xInit: 6,
+    expr: "sqrt(100-x^2)",
+    unit: "米",
+    showTriangle: true, showCheck: true
+  }
+}
+```
+
+### 常见坑
+
+1. **`expr` 必须用 ASCII**：写 `"sqrt(100-x^2)"`，不要写 LaTeX `"\\sqrt{100-x^2}"`（交互内公式走 expr-mathml.js 的 ASCII 子集，LaTeX 会降级为纯文本）。
+2. **`expr` 自变量必须叫 `x`**：求值按变量名 `x` 代入；写成别的字母读数是 NaN。
+3. **`xMax` 别 ≥ 梯长**：x=L 时 h=0（梯子躺平），x>L 时无实数解；渲染器会钳制，但 params 里就该写对。
+4. **别把 `unit` 写进 `expr`**：单位走 `unit` 参数，公式保持干净。
+
+---
+
 ## 讲解页口径（v1.1 新增）
 
 用户铁律：讲解页要"讲透"（反复举例：生活例 → 图形例 → 反例，pedagogy §5.2 五段式）。
@@ -461,12 +613,16 @@ interaction: {
 ## 样本页
 
 - `modules/math/data/g00.js`：G1、G6 各 1 个完整样本页（公式 + 中文讲解 + params），可直接对照抄写结构。
-- 样本章**已接入** `data/chapters.js`（g00–g04 `status: "ready"`）；正式几何章节按 `gNN.js` 命名、黄队写页、蓝队实现后由维护者接入注册表。
+- `modules/math/data/g05.js`（v1.3 新增交互样本页）：
+  `g05-u1-l1-p2`（pythag-grow）/ `g05-u1-l2-p1`（cut-reassemble）/
+  `g05-u1-l3-p1`（ladder-slide）——三页均为"公式 + 中文讲解 + params"完整页，
+  可直接对照抄写结构。
+- 样本章**已接入** `data/chapters.js`（g00–g07 `status: "ready"`）；正式几何章节按 `gNN.js` 命名、黄队写页、蓝队实现后由维护者接入注册表。
 
 ## 校验清单（提交页数据前）
 
 1. `node --check` 数据文件语法通过。
-2. `interaction.type` 为 7 种之一（大小写敏感）：`vertex-drag` / `angle-protractor` / `step-play` / `tap-highlight` / `compare-toggle` / `proof-replay` / `construction-step`（与 `tools/render-mathml.mjs` 的 `INTERACTION_TYPES` 同步）。
+2. `interaction.type` 为 10 种之一（大小写敏感）：`vertex-drag` / `angle-protractor` / `step-play` / `tap-highlight` / `compare-toggle` / `proof-replay` / `construction-step` / `cut-reassemble` / `pythag-grow` / `ladder-slide`（与 `tools/render-mathml.mjs` 的 `INTERACTION_TYPES` 同步）。
 3. `formulas[].translation` 非空；LaTeX 只用构建器支持的子集（`\\text{}` 可写中文）。
 4. `hints` 每条 ≤ 60 字，`examples` ≤ 2 个；**全页文字：交互页 ≤ 150 字，讲解页（`pageKind: "explain"`）≤ 300 字**（沿用代数 schema 约束 + pedagogy §5.2）。
 5. 本手册"常见坑"逐条过一遍。

@@ -81,6 +81,14 @@ body[data-theme="dark"] {
 }
 .ix-geo-readout .ix-sep { color: var(--m-ink-soft); }
 .ix-geo-readout .ix-val { font-weight: bold; color: var(--m-ink); }
+/* 条件徽章（pythag-grow 的 badge：如"直角三角形中，两小块面积和=大块面积"） */
+.ix-badge {
+  text-align: center; font-weight: bold; font-size: 1rem;
+  color: var(--m-accent-strong);
+  background: var(--m-accent-soft);
+  border: 1px solid var(--m-line); border-radius: 999px;
+  padding: 4px 18px; margin: 0 auto 6px; width: fit-content; max-width: 100%;
+}
 
 * { box-sizing: border-box; }
 html, body { height: 100%; overflow: hidden; }

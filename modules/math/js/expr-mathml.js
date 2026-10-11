@@ -18,7 +18,7 @@
  *   四则 + - * /（* 渲染为 ⋅，/ 渲染为分式）
  *   上下标 ^ _（含 Unicode 上下标 ²₃ᵐ 等直接写法）
  *   括号 ()、一元负号、求导撇 '
- *   函数：sin cos tan log ln lg log2 exp（调用形式）
+ *   函数：sin cos tan log ln lg log2 exp sqrt（调用形式；sqrt 渲染为根号）
  *   标识符：拉丁字母、希腊字母（π ε Δ…）、隐式乘法（2x、2(x+1)、(a)(b)）
  *   关系符：= < > ≤ ≥ ≠ ≈ ± →
  * 对外：window.MathExpr = { html(expr), toMathML(expr), supported() }
@@ -54,7 +54,8 @@
     "₊": "+", "₋": "-", "₌": "=", "₍": "(", "₎": ")"
   };
   var GREEK_RE = /[α-ωΑ-Ω]/;  // 希腊字母（含 π ε Δ 等字面量）
-  var FUNC_NAMES = { sin: 1, cos: 1, tan: 1, log: 1, ln: 1, lg: 1, log2: 1, exp: 1 };
+  var FUNC_NAMES = { sin: 1, cos: 1, tan: 1, log: 1, ln: 1, lg: 1, log2: 1, exp: 1,
+    sqrt: 1 };  // 蓝队 2026-10-11：ladder-slide 的 h=√(L²−x²) 需要 sqrt（渲染为根号）
 
   /* ---------------- 词法 ---------------- */
   // token: {k:'num'|'id'|'sup'|'sub'|'usup'|'usub'|'add'|'mul'|'div'|'rel'|'lp'|'rp'|'prime'|'comma', v}
@@ -291,6 +292,8 @@
       case "paren":
         return "<mrow><mo>(</mo>" + emitMML(node.inner) + "<mo>)</mo></mrow>";
       case "func":
+        // sqrt → 真根号（ladder-slide 高度公式用）；其余函数名 + 括号
+        if (node.v === "sqrt") return "<msqrt>" + emitMML(node.arg) + "</msqrt>";
         return "<mrow><mi>" + esc(node.v) + "</mi><mo>(</mo>" +
           emitMML(node.arg) + "<mo>)</mo></mrow>";
       case "sfunc": {  // 带上下标的函数调用：log₂(x)、sin^2(x)
@@ -336,6 +339,9 @@
       case "paren":
         return "<span>(</span>" + emitHTML(node.inner) + "<span>)</span>";
       case "func":
+        if (node.v === "sqrt")
+          return '<span class="mx-mo">√</span><span>(</span>' +
+            emitHTML(node.arg) + "<span>)</span>";
         return '<i class="mx-mi">' + esc(node.v) + "</i><span>(</span>" +
           emitHTML(node.arg) + "<span>)</span>";
       case "sfunc": {
