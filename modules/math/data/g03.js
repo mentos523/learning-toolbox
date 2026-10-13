@@ -901,16 +901,15 @@ window.MATH_CH["g03"] = {
                       caption: "定格：BC 延长到 D，外角 ∠ABD 登场——它等于 ∠A + ∠C。",
                       shapes: [
                         { t: "poly", pts: [[20,30],[80,30],[55,66]], color: "line", width: 2.5 },
-                        { t: "seg", a: [80,30], b: [95,13], color: "aux", width: 2.5, dash: "6,4" },
-                        { t: "arc", v: [80,30], a1: 301, a2: 360, r: 13, group: 1, color: "corrA" },
-                        { t: "arc", v: [80,30], a1: 0, a2: 90, r: 13, group: 1, color: "corrA" },
+                        { t: "seg", a: [80,30], b: [93,11], color: "aux", width: 2.5, dash: "6,4" },
+                        { t: "arc", v: [80,30], a1: 180, a2: 305, r: 13, group: 1, color: "corrA" },
                         { t: "arc", v: [20,30], a1: 0, a2: 61, r: 10, group: 2, color: "corrB" },
                         { t: "arc", v: [55,66], a1: 241, a2: 299, r: 10, group: 3, color: "corrC" },
                         { t: "txt", p: [15,22], text: "A", size: 13, bold: true },
                         { t: "txt", p: [85,22], text: "B", size: 13, bold: true },
                         { t: "txt", p: [55,74], text: "C", size: 13, bold: true },
-                        { t: "txt", p: [97,9], text: "D", size: 13 },
-                        { t: "txt", p: [90,48], text: "∠ABD", size: 13, bold: true, color: "corrA" },
+                        { t: "txt", p: [95,7], text: "D", size: 13 },
+                        { t: "txt", p: [70,11], text: "∠ABD", size: 13, bold: true, color: "corrA" },
                         { t: "txt", p: [50,84], text: "∠ABD = ∠A + ∠C", size: 14, bold: true, math: true }
                       ]
                     }
