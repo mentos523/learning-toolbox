@@ -12,6 +12,10 @@ window.MATH_MML["g02-u1-l4-p1#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/
 window.MATH_MML["g02-u1-l4-p2#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>同位角</mtext><mo>=</mo><mtext>位置相同的两个角</mtext></mrow></math>";
 window.MATH_MML["g02-u1-l4-p3#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>内错角</mtext><mo>=</mo><mtext>内部错开的两个角</mtext></mrow></math>";
 window.MATH_MML["g02-u1-l4-p4#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>同旁内角</mtext><mo>=</mo><mtext>内部同侧的两个角</mtext></mrow></math>";
+window.MATH_MML["g02-u1-l4-p5#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>一条截线</mtext><mo>+</mo><mtext>两条直线</mtext><mo>=</mo><mtext>八个角</mtext></mrow></math>";
+window.MATH_MML["g02-u1-l4-p6#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>同位角</mtext><mo>=</mo><mtext>两交点上位置相同的角</mtext></mrow></math>";
+window.MATH_MML["g02-u1-l4-p7#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>内错角</mtext><mo>=</mo><mtext>两直线之间、截线两侧的角</mtext></mrow></math>";
+window.MATH_MML["g02-u1-l4-p8#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>同旁内角</mtext><mo>=</mo><mtext>两直线之间、截线同侧的角</mtext></mrow></math>";
 window.MATH_MML["g02-u2-l1-p1#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mi>a</mi><mo>∥</mo><mi>b</mi></mrow></math>";
 window.MATH_MML["g02-u2-l1-p2#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>过直线外一点有且只有一条直线与已知直线平行</mtext></mrow></math>";
 window.MATH_MML["g02-u2-l2-p1#f1"] = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><mrow><mtext>同位角相等</mtext><mo>→</mo><mtext>两直线平行</mtext></mrow></math>";

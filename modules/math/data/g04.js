@@ -1279,8 +1279,8 @@ window.MATH_CH["g04"] = {
                       ]
                     },
                     {
-                      text: "以M′为圆心画弧截得N′",
-                      why: "保证 M′N′=MN——三边对上了",
+                      text: "以 M′ 为圆心、MN 为半径画弧截得 N′",
+                      why: "半径取 MN，保证 M′N′=MN——三条对应边全对上了",
                       shapes: [
                         { t: "ray", p: [58,60], ang: 0, len: 30, color: "line", width: 2.5 },
                         { t: "circle", c: [58,60], r: 16, color: "aux", dash: "5,4" },
@@ -1295,7 +1295,7 @@ window.MATH_CH["g04"] = {
                         { t: "seg", a: [58,60], b: [88,60], color: "known", width: 3 },
                         { t: "seg", a: [58,60], b: [68,71], color: "target", width: 3.5 },
                         { t: "arc", v: [58,60], a1: 0, a2: 45, r: 10, group: 1, color: "corrAngle" },
-                        { t: "txt", p: [70,82], text: "∠A′O′B′ = ∠AOB", size: 13, bold: true }
+                        { t: "txt", p: [70,82], text: "∠M′O′N′ = ∠MON", size: 13, bold: true }
                       ]
                     }
                   ]

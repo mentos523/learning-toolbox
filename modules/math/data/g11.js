@@ -1036,6 +1036,16 @@ next: "g11-u1-l5-p1"
                   id: "f1",
                   latex: "\\frac{n}{360}",
                   translation: "圆心角是 n 度，扇形就占整个圆的 n 比 360"
+                },
+                {
+                  id: "f2",
+                  latex: "\\frac{60}{360}=\\frac{1}{6}",
+                  translation: "n=60°：扇形占圆的 60 比 360，约成 6 分之 1"
+                },
+                {
+                  id: "f3",
+                  latex: "\\frac{120}{360}=\\frac{1}{3}",
+                  translation: "n=120°：扇形占圆的 120 比 360，约成 3 分之 1"
                 }
               ],
               interaction: {
@@ -1043,19 +1053,19 @@ next: "g11-u1-l5-p1"
                 params: {
                   steps: [
                     {
-                      caption: "n=60°：扇形占圆的 60/360=1/6。",
+                      caption: "n=60°：扇形占圆的六分之一。",
                       shapes: [
                         { t: "circle", c: [50,50], r: 28, color: "line", width: 2 },
                         { t: "poly", pts: [[50,50],[50,78],[74.2,64]], color: "target", width: 2, fill: "target", opacity: 0.25 },
-                        { t: "txt", p: [50,88], text: "n=60°，占 1/6", size: 13 }
+                        { t: "txt", p: [50,88], text: "60/360=1/6", size: 13, math: true }
                       ]
                     },
                     {
-                      caption: "n=120°：扇形占圆的 120/360=1/3。",
+                      caption: "n=120°：扇形占圆的三分之一。",
                       shapes: [
                         { t: "circle", c: [50,50], r: 28, color: "line", width: 2 },
                         { t: "poly", pts: [[50,50],[50,78],[74.2,36]], color: "target", width: 2, fill: "target", opacity: 0.25 },
-                        { t: "txt", p: [50,88], text: "n=120°，占 1/3", size: 13 }
+                        { t: "txt", p: [50,88], text: "120/360=1/3", size: 13, math: true }
                       ]
                     },
                     {
@@ -1540,6 +1550,11 @@ next: "g11-u1-l5-p1"
                   id: "f1",
                   latex: "V_{\\text{锥}} = \\frac{1}{3} V_{\\text{柱}}",
                   translation: "等底等高的锥体体积是柱体体积的三分之一"
+                },
+                {
+                  id: "f2",
+                  latex: "\\frac{2}{3}",
+                  translation: "两杯沙占柱体体积的三分之二"
                 }
               ],
               interaction: {
@@ -1557,19 +1572,19 @@ next: "g11-u1-l5-p1"
                       ]
                     },
                     {
-                      caption: "第 2 步：第一杯沙倒进圆柱——只占 1/3。",
+                      caption: "第 2 步：第一杯沙倒进圆柱——只占三分之一。",
                       shapes: [
                         { t: "poly", pts: [[30,30],[70,30],[70,70],[30,70]], color: "line", width: 2.5 },
                         { t: "poly", pts: [[30,56.7],[70,56.7],[70,70],[30,70]], color: "corrA", width: 1.5, fill: "corrA", opacity: 0.5 },
-                        { t: "txt", p: [50,82], text: "第 1 杯：占 1/3", size: 13 }
+                        { t: "txt", p: [50,82], text: "1/3", size: 14, math: true }
                       ]
                     },
                     {
-                      caption: "第 3 步：第二杯沙——占到 2/3。",
+                      caption: "第 3 步：第二杯沙——占到三分之二。",
                       shapes: [
                         { t: "poly", pts: [[30,30],[70,30],[70,70],[30,70]], color: "line", width: 2.5 },
                         { t: "poly", pts: [[30,43.3],[70,43.3],[70,70],[30,70]], color: "corrA", width: 1.5, fill: "corrA", opacity: 0.5 },
-                        { t: "txt", p: [50,82], text: "第 2 杯：占 2/3", size: 13 }
+                        { t: "txt", p: [50,82], text: "2/3", size: 14, math: true }
                       ]
                     },
                     {
@@ -1933,7 +1948,7 @@ next: "g11-u1-l5-p1"
             },
             {
               id: "g11-u1-l10-p2",
-              title: "本章习题：6 道题",
+              title: "本章习题：8 道题",
               concept: "本章习题",
               formulas: [
                 {
@@ -1977,10 +1992,12 @@ next: "g11-u1-l5-p1"
                 "3．梯形上底 4cm、下底 8cm、高 5cm，面积？",
                 "4．圆半径 5cm，面积？（保留 π）",
                 "5．圆柱 r=2cm、h=6cm，体积？",
-                "6．等底等高的圆锥，体积是圆柱的几分之几？"
+                "6．等底等高的圆锥，体积是圆柱的几分之几？",
+                "7．已知圆柱体积是 24πcm³、高 6cm，底面半径 r 是多少？（逆向：从体积反求半径）",
+                "8．一个圆柱和一个圆锥等底等高，体积加起来是 48cm³，圆锥的体积是多少？（想想 1 份和 3 份）"
               ],
               examples: [
-                { figure: "核对答案", text: "认图：长方体/圆柱/正方体是柱体，圆锥/四棱锥是锥体，球是球；1．40cm²；2．30cm²；3．30cm²；4．25π cm²；5．24π cm³；6．三分之一" }
+                { figure: "核对答案", text: "认图：长方体/圆柱/正方体是柱体，圆锥/四棱锥是锥体，球是球；1．40cm²；2．30cm²；3．30cm²；4．25π cm²；5．24π cm³；6．三分之一；7．r=2cm（πr²×6=24π）；8．12cm³（圆锥 1 份、圆柱 3 份，共 4 份）" }
               ],
               prev: "g11-u1-l10-p1",
               next: null

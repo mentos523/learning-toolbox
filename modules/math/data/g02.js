@@ -1,7 +1,7 @@
 /* ============================================================
  * 学习工具箱 · 数学 · 几何 g02：相交线与平行线
  *
- * 黄队（教育教学专家）生产：9 课 / 26 页。
+ * 黄队（教育教学专家）生产：9 课 / 30 页。
  * 课程体系：docs/math-geometry-curriculum.md v1.1（g02 章）
  * 教学设计：docs/math-geometry-pedagogy.md（黄队）
  * 参数手册：docs/math-geometry-params.md v1.1
@@ -11,7 +11,8 @@
  *   g02.1.1 对顶角与邻补角   3 页：P1 转剪刀 step-play / P2 proof-replay（2 步首秀）/ P3 讲解
  *   g02.1.2 垂线             2 页：P1 三角板推画 step-play / P2 讲解（尺规版留 g04.1.7）
  *   g02.1.3 点到直线的距离   2 页：P1 跳跃对比 step-play / P2 讲解
- *   g02.1.4 三线八角         4 页：P1 总览编号 / P2 同位角 / P3 内错角 / P4 同旁内角（各 tap-highlight）
+ *   g02.1.4 三线八角         8 页：P1–P4 交互（总览编号 / 同位角 / 内错角 / 同旁内角，各 tap-highlight）/
+ *                        P5–P8 讲解页（三线八角 / 同位角 F / 内错角 Z / 同旁内角 U + F/Z/U 对比）
  *   g02.2.1 平行的定义与公理 2 页：P1 铁轨 step-play / P2 讲解（含异面伏笔）
  *   g02.2.2 平行线的判定     4 页：P1 量角器验证 / P2-P4 三种判定各一讲解页
  *   g02.2.3 平行线的性质     4 页：P1 度数联动 / P2-P4 三种性质各一讲解页
@@ -727,6 +728,319 @@ window.MATH_CH["g02"] = {
                 { text: "U 形：U 抱住的两个角就是一对同旁内角", figure: "方法" }
               ],
               prev: "g02-u1-l4-p3",
+              next: "g02-u1-l4-p5"
+            },
+            {
+              id: "g02-u1-l4-p5",
+              title: "三线八角：一次讲透",
+              pageKind: "explain",
+              concept: "三线八角",
+              formulas: [
+                {
+                  id: "f1",
+                  latex: "\\text{一条截线} + \\text{两条直线} = \\text{八个角}",
+                  translation: "一条截线切过两条直线，一共形成八个角"
+                }
+              ],
+              interaction: {
+                type: "step-play",
+                params: {
+                  steps: [
+                    {
+                      caption: "定格：截线 c 切过 a、b——上面交点 4 个角，下面交点 4 个角，到齐。",
+                      shapes: [
+                        { t: "seg", a: [15,72], b: [85,72], color: "line", width: 3 },
+                        { t: "seg", a: [15,40], b: [85,40], color: "line", width: 3 },
+                        { t: "seg", a: [38,20], b: [62,85], color: "aux", width: 2.5 },
+                        { t: "arc", v: [57.2,72], a1: 0, a2: 70, r: 9, group: 1, color: "corrAngle" },
+                        { t: "arc", v: [57.2,72], a1: 70, a2: 180, r: 9, group: 1, color: "corrAngle" },
+                        { t: "arc", v: [57.2,72], a1: 180, a2: 250, r: 9, group: 1, color: "corrAngle" },
+                        { t: "arc", v: [57.2,72], a1: 250, a2: 360, r: 9, group: 1, color: "corrAngle" },
+                        { t: "arc", v: [45.4,40], a1: 0, a2: 70, r: 9, group: 1, color: "corrAngle" },
+                        { t: "arc", v: [45.4,40], a1: 70, a2: 180, r: 9, group: 1, color: "corrAngle" },
+                        { t: "arc", v: [45.4,40], a1: 180, a2: 250, r: 9, group: 1, color: "corrAngle" },
+                        { t: "arc", v: [45.4,40], a1: 250, a2: 360, r: 9, group: 1, color: "corrAngle" },
+                        { t: "txt", p: [68,80], text: "∠1", size: 13, bold: true },
+                        { t: "txt", p: [50,83], text: "∠2", size: 13, bold: true },
+                        { t: "txt", p: [47,65], text: "∠3", size: 13, bold: true },
+                        { t: "txt", p: [65,61], text: "∠4", size: 13, bold: true },
+                        { t: "txt", p: [56,48], text: "∠5", size: 13, bold: true },
+                        { t: "txt", p: [38,51], text: "∠6", size: 13, bold: true },
+                        { t: "txt", p: [35,33], text: "∠7", size: 13, bold: true },
+                        { t: "txt", p: [53,29], text: "∠8", size: 13, bold: true }
+                      ]
+                    }
+                  ]
+                }
+              },
+              auxInteraction: null,
+              hints: [
+                "还记得吗？你点了 ▶，截线 c 切过 a、b，8 个角一个个亮起来——上面 ∠1 到 ∠4，下面 ∠5 到 ∠8。",
+                "三线八角：一条截线切过两条直线，形成的八个角——“三线”是 a、b、c，“八角”是 ∠1 到 ∠8。",
+                "生活例：楼梯的斜扶手切过每级台阶——每一级都被“切”出 4 个角。",
+                "图形例：看定格图——认准两个交点，一个交点管 4 个角。",
+                "反例：三条直线交于同一点——只有 6 个角。三线八角要求两个不同的交点，“共点”的不算。",
+                "⚠️ 别搞混：编号 ∠1–∠8 是临时的，换个图可能重编——位置关系（上下、左右）才是永久的。",
+                "记住一句话：一线切两线，八角排排坐。"
+              ],
+              examples: [
+                { text: "斜扶手切台阶：每级 4 个角", figure: "实物" }
+              ],
+              prev: "g02-u1-l4-p4",
+              next: "g02-u1-l4-p6"
+            },
+            {
+              id: "g02-u1-l4-p6",
+              title: "同位角：F 形找同位",
+              pageKind: "explain",
+              concept: "同位角",
+              formulas: [
+                {
+                  id: "f1",
+                  latex: "\\text{同位角} = \\text{两交点上位置相同的角}",
+                  translation: "同位角是在两个交点的相同位置上的一对角"
+                }
+              ],
+              interaction: {
+                type: "step-play",
+                params: {
+                  steps: [
+                    {
+                      caption: "定格：F 的三笔框住 ∠1 和 ∠5——上交点右上、下交点右上，位置一模一样。",
+                      shapes: [
+                        { t: "seg", a: [15,72], b: [85,72], color: "line", width: 3 },
+                        { t: "seg", a: [15,40], b: [85,40], color: "line", width: 3 },
+                        { t: "seg", a: [38,20], b: [62,85], color: "aux", width: 2 },
+                        { t: "poly", pts: [[68,72],[57.2,72],[45.4,40],[56,40]], color: "aux", width: 3, dash: "6,4", close: false },
+                        { t: "txt", p: [88,72], text: "a", size: 13 },
+                        { t: "txt", p: [88,40], text: "b", size: 13 },
+                        { t: "txt", p: [64,87], text: "c", size: 13 },
+                        { t: "txt", p: [74,56], text: "F", size: 15, bold: true, color: "aux" },
+                        { t: "arc", v: [57.2,72], a1: 0, a2: 70, r: 11, group: 1, color: "corrA" },
+                        { t: "arc", v: [45.4,40], a1: 0, a2: 70, r: 11, group: 1, color: "corrA" },
+                        { t: "arc", v: [57.2,72], a1: 70, a2: 180, r: 9, group: 2, color: "corrAngle" },
+                        { t: "arc", v: [57.2,72], a1: 180, a2: 250, r: 9, group: 2, color: "corrAngle" },
+                        { t: "arc", v: [57.2,72], a1: 250, a2: 360, r: 9, group: 2, color: "corrAngle" },
+                        { t: "arc", v: [45.4,40], a1: 70, a2: 180, r: 9, group: 2, color: "corrAngle" },
+                        { t: "arc", v: [45.4,40], a1: 180, a2: 250, r: 9, group: 2, color: "corrAngle" },
+                        { t: "arc", v: [45.4,40], a1: 250, a2: 360, r: 9, group: 2, color: "corrAngle" },
+                        { t: "txt", p: [68,80], text: "∠1", size: 12, bold: true, color: "corrA" },
+                        { t: "txt", p: [56,48], text: "∠5", size: 12, bold: true, color: "corrA" },
+                        { t: "txt", p: [50,83], text: "∠2", size: 12 },
+                        { t: "txt", p: [47,65], text: "∠3", size: 12 },
+                        { t: "txt", p: [65,61], text: "∠4", size: 12 },
+                        { t: "txt", p: [38,51], text: "∠6", size: 12 },
+                        { t: "txt", p: [35,33], text: "∠7", size: 12 },
+                        { t: "txt", p: [53,29], text: "∠8", size: 12 }
+                      ]
+                    }
+                  ]
+                }
+              },
+              auxInteraction: null,
+              hints: [
+                "还记得吗？你点的 F 形里，∠1 在上交点右上，∠5 在下交点右上——位置相同，这就是同位角。",
+                "同位角：两个交点上，位置完全相同的一对角——都在右上，或都在左下。",
+                "生活例：电影院前后两排、同一列的两个座位——位置一模一样。",
+                "图形例：顺着 F 的三笔找——F 框住的两个角就是一对：∠1–∠5、∠2–∠6、∠3–∠7、∠4–∠8。",
+                "反例：∠1 和 ∠3 都在上交点——同位角必须是两个交点各出一个，同一个交点的再像也不是。",
+                "⚠️ 别搞混：同位角说的是“位置相同”，不是“大小相等”——大小相等要等两直线平行才成立，下节课见。",
+                "记住一句话：同位看 F，位置要相同。"
+              ],
+              examples: [
+                { text: "F 形三笔：框住的就是一对", figure: "方法" }
+              ],
+              prev: "g02-u1-l4-p5",
+              next: "g02-u1-l4-p7"
+            },
+            {
+              id: "g02-u1-l4-p7",
+              title: "内错角：Z 字两头找",
+              pageKind: "explain",
+              concept: "内错角",
+              formulas: [
+                {
+                  id: "f1",
+                  latex: "\\text{内错角} = \\text{两直线之间、截线两侧的角}",
+                  translation: "内错角是在两条直线之间、分居截线两侧的一对角"
+                }
+              ],
+              interaction: {
+                type: "step-play",
+                params: {
+                  steps: [
+                    {
+                      caption: "定格：Z 的两头——∠3（上交点左下）和 ∠5（下交点右上），里面、错开。",
+                      shapes: [
+                        { t: "seg", a: [15,72], b: [85,72], color: "line", width: 3 },
+                        { t: "seg", a: [15,40], b: [85,40], color: "line", width: 3 },
+                        { t: "seg", a: [38,20], b: [62,85], color: "aux", width: 2 },
+                        { t: "poly", pts: [[47,72],[57.2,72],[45.4,40],[56,40]], color: "aux", width: 3, dash: "6,4", close: false },
+                        { t: "txt", p: [88,72], text: "a", size: 13 },
+                        { t: "txt", p: [88,40], text: "b", size: 13 },
+                        { t: "txt", p: [64,87], text: "c", size: 13 },
+                        { t: "txt", p: [30,56], text: "Z", size: 15, bold: true, color: "aux" },
+                        { t: "arc", v: [57.2,72], a1: 180, a2: 250, r: 11, group: 1, color: "corrA" },
+                        { t: "arc", v: [45.4,40], a1: 0, a2: 70, r: 11, group: 1, color: "corrA" },
+                        { t: "arc", v: [57.2,72], a1: 0, a2: 70, r: 9, group: 2, color: "corrAngle" },
+                        { t: "arc", v: [57.2,72], a1: 70, a2: 180, r: 9, group: 2, color: "corrAngle" },
+                        { t: "arc", v: [57.2,72], a1: 250, a2: 360, r: 9, group: 2, color: "corrAngle" },
+                        { t: "arc", v: [45.4,40], a1: 70, a2: 180, r: 9, group: 2, color: "corrAngle" },
+                        { t: "arc", v: [45.4,40], a1: 180, a2: 250, r: 9, group: 2, color: "corrAngle" },
+                        { t: "arc", v: [45.4,40], a1: 250, a2: 360, r: 9, group: 2, color: "corrAngle" },
+                        { t: "txt", p: [47,65], text: "∠3", size: 12, bold: true, color: "corrA" },
+                        { t: "txt", p: [56,48], text: "∠5", size: 12, bold: true, color: "corrA" },
+                        { t: "txt", p: [68,80], text: "∠1", size: 12 },
+                        { t: "txt", p: [50,83], text: "∠2", size: 12 },
+                        { t: "txt", p: [65,61], text: "∠4", size: 12 },
+                        { t: "txt", p: [38,51], text: "∠6", size: 12 },
+                        { t: "txt", p: [35,33], text: "∠7", size: 12 },
+                        { t: "txt", p: [53,29], text: "∠8", size: 12 }
+                      ]
+                    }
+                  ]
+                }
+              },
+              auxInteraction: null,
+              hints: [
+                "还记得吗？你点的 Z 形里，∠3 在上交点左下，∠5 在下交点右上——一个左一个右，错开了。",
+                "内错角：夹在两条直线 a、b 之间，又分居截线 c 两侧的一对角——“内”是里面，“错”是错开。",
+                "生活例：两条平行的马路，中间绿化带两侧各站一人，一个在东头一个在西头——里面、错开。",
+                "图形例：Z 的两头就是一对内错角：∠3–∠5、∠4–∠6。",
+                "反例：∠3 和 ∠6——看着也“错开”，但都在截线左侧（同侧）——那是同旁内角，不是内错角。",
+                "⚠️ 别搞混：内错角也要“两条直线之间”——跑到 a 上面或 b 下面的角，再错开也不是内错角。",
+                "记住一句话：内错看 Z，里面错开。"
+              ],
+              examples: [
+                { text: "Z 字两头：一头一个", figure: "方法" }
+              ],
+              prev: "g02-u1-l4-p6",
+              next: "g02-u1-l4-p8"
+            },
+            {
+              id: "g02-u1-l4-p8",
+              title: "同旁内角：U 形抱一抱",
+              pageKind: "explain",
+              concept: "同旁内角",
+              formulas: [
+                {
+                  id: "f1",
+                  latex: "\\text{同旁内角} = \\text{两直线之间、截线同侧的角}",
+                  translation: "同旁内角是在两条直线之间、截线同一侧的一对角"
+                }
+              ],
+              interaction: {
+                type: "compare-toggle",
+                params: {
+                  views: [
+                    {
+                      label: "同位角·F",
+                      caption: "F 形：∠1 和 ∠5——两个交点、位置相同（都在右上）——同位角。",
+                      shapes: [
+                        { t: "seg", a: [15,72], b: [85,72], color: "line", width: 3 },
+                        { t: "seg", a: [15,40], b: [85,40], color: "line", width: 3 },
+                        { t: "seg", a: [38,20], b: [62,85], color: "aux", width: 2 },
+                        { t: "poly", pts: [[68,72],[57.2,72],[45.4,40],[56,40]], color: "aux", width: 3, dash: "6,4", close: false },
+                        { t: "txt", p: [88,72], text: "a", size: 13 },
+                        { t: "txt", p: [88,40], text: "b", size: 13 },
+                        { t: "txt", p: [64,87], text: "c", size: 13 },
+                        { t: "txt", p: [74,56], text: "F", size: 15, bold: true, color: "aux" },
+                        { t: "arc", v: [57.2,72], a1: 0, a2: 70, r: 11, group: 1, color: "corrA" },
+                        { t: "arc", v: [45.4,40], a1: 0, a2: 70, r: 11, group: 1, color: "corrA" },
+                        { t: "arc", v: [57.2,72], a1: 70, a2: 180, r: 9, group: 2, color: "corrAngle" },
+                        { t: "arc", v: [57.2,72], a1: 180, a2: 250, r: 9, group: 2, color: "corrAngle" },
+                        { t: "arc", v: [57.2,72], a1: 250, a2: 360, r: 9, group: 2, color: "corrAngle" },
+                        { t: "arc", v: [45.4,40], a1: 70, a2: 180, r: 9, group: 2, color: "corrAngle" },
+                        { t: "arc", v: [45.4,40], a1: 180, a2: 250, r: 9, group: 2, color: "corrAngle" },
+                        { t: "arc", v: [45.4,40], a1: 250, a2: 360, r: 9, group: 2, color: "corrAngle" },
+                        { t: "txt", p: [68,80], text: "∠1", size: 12, bold: true, color: "corrA" },
+                        { t: "txt", p: [56,48], text: "∠5", size: 12, bold: true, color: "corrA" },
+                        { t: "txt", p: [50,83], text: "∠2", size: 12 },
+                        { t: "txt", p: [47,65], text: "∠3", size: 12 },
+                        { t: "txt", p: [65,61], text: "∠4", size: 12 },
+                        { t: "txt", p: [38,51], text: "∠6", size: 12 },
+                        { t: "txt", p: [35,33], text: "∠7", size: 12 },
+                        { t: "txt", p: [53,29], text: "∠8", size: 12 }
+                      ]
+                    },
+                    {
+                      label: "内错角·Z",
+                      caption: "Z 形：∠3 和 ∠5——两直线之间、截线两侧（一左一右）——内错角。",
+                      shapes: [
+                        { t: "seg", a: [15,72], b: [85,72], color: "line", width: 3 },
+                        { t: "seg", a: [15,40], b: [85,40], color: "line", width: 3 },
+                        { t: "seg", a: [38,20], b: [62,85], color: "aux", width: 2 },
+                        { t: "poly", pts: [[47,72],[57.2,72],[45.4,40],[56,40]], color: "aux", width: 3, dash: "6,4", close: false },
+                        { t: "txt", p: [88,72], text: "a", size: 13 },
+                        { t: "txt", p: [88,40], text: "b", size: 13 },
+                        { t: "txt", p: [64,87], text: "c", size: 13 },
+                        { t: "txt", p: [30,56], text: "Z", size: 15, bold: true, color: "aux" },
+                        { t: "arc", v: [57.2,72], a1: 180, a2: 250, r: 11, group: 1, color: "corrA" },
+                        { t: "arc", v: [45.4,40], a1: 0, a2: 70, r: 11, group: 1, color: "corrA" },
+                        { t: "arc", v: [57.2,72], a1: 0, a2: 70, r: 9, group: 2, color: "corrAngle" },
+                        { t: "arc", v: [57.2,72], a1: 70, a2: 180, r: 9, group: 2, color: "corrAngle" },
+                        { t: "arc", v: [57.2,72], a1: 250, a2: 360, r: 9, group: 2, color: "corrAngle" },
+                        { t: "arc", v: [45.4,40], a1: 70, a2: 180, r: 9, group: 2, color: "corrAngle" },
+                        { t: "arc", v: [45.4,40], a1: 180, a2: 250, r: 9, group: 2, color: "corrAngle" },
+                        { t: "arc", v: [45.4,40], a1: 250, a2: 360, r: 9, group: 2, color: "corrAngle" },
+                        { t: "txt", p: [47,65], text: "∠3", size: 12, bold: true, color: "corrA" },
+                        { t: "txt", p: [56,48], text: "∠5", size: 12, bold: true, color: "corrA" },
+                        { t: "txt", p: [68,80], text: "∠1", size: 12 },
+                        { t: "txt", p: [50,83], text: "∠2", size: 12 },
+                        { t: "txt", p: [65,61], text: "∠4", size: 12 },
+                        { t: "txt", p: [38,51], text: "∠6", size: 12 },
+                        { t: "txt", p: [35,33], text: "∠7", size: 12 },
+                        { t: "txt", p: [53,29], text: "∠8", size: 12 }
+                      ]
+                    },
+                    {
+                      label: "同旁内角·U",
+                      caption: "U 形：∠4 和 ∠5——两直线之间、截线同侧（都在右边）——同旁内角。",
+                      shapes: [
+                        { t: "seg", a: [15,72], b: [85,72], color: "line", width: 3 },
+                        { t: "seg", a: [15,40], b: [85,40], color: "line", width: 3 },
+                        { t: "seg", a: [38,20], b: [62,85], color: "aux", width: 2 },
+                        { t: "poly", pts: [[66,72],[57.2,72],[45.4,40],[56,40]], color: "aux", width: 3, dash: "6,4", close: false },
+                        { t: "txt", p: [88,72], text: "a", size: 13 },
+                        { t: "txt", p: [88,40], text: "b", size: 13 },
+                        { t: "txt", p: [64,87], text: "c", size: 13 },
+                        { t: "txt", p: [74,56], text: "U", size: 15, bold: true, color: "aux" },
+                        { t: "arc", v: [57.2,72], a1: 250, a2: 360, r: 11, group: 1, color: "corrA" },
+                        { t: "arc", v: [45.4,40], a1: 0, a2: 70, r: 11, group: 1, color: "corrA" },
+                        { t: "arc", v: [57.2,72], a1: 0, a2: 70, r: 9, group: 2, color: "corrAngle" },
+                        { t: "arc", v: [57.2,72], a1: 70, a2: 180, r: 9, group: 2, color: "corrAngle" },
+                        { t: "arc", v: [57.2,72], a1: 180, a2: 250, r: 9, group: 2, color: "corrAngle" },
+                        { t: "arc", v: [45.4,40], a1: 70, a2: 180, r: 9, group: 2, color: "corrAngle" },
+                        { t: "arc", v: [45.4,40], a1: 180, a2: 250, r: 9, group: 2, color: "corrAngle" },
+                        { t: "arc", v: [45.4,40], a1: 250, a2: 360, r: 9, group: 2, color: "corrAngle" },
+                        { t: "txt", p: [65,61], text: "∠4", size: 12, bold: true, color: "corrA" },
+                        { t: "txt", p: [56,48], text: "∠5", size: 12, bold: true, color: "corrA" },
+                        { t: "txt", p: [68,80], text: "∠1", size: 12 },
+                        { t: "txt", p: [50,83], text: "∠2", size: 12 },
+                        { t: "txt", p: [47,65], text: "∠3", size: 12 },
+                        { t: "txt", p: [38,51], text: "∠6", size: 12 },
+                        { t: "txt", p: [35,33], text: "∠7", size: 12 },
+                        { t: "txt", p: [53,29], text: "∠8", size: 12 }
+                      ]
+                    }
+                  ]
+                }
+              },
+              auxInteraction: null,
+              hints: [
+                "还记得吗？你点的 U 形里，∠4 和 ∠5 都在截线右边、都被 a、b 夹在中间——像被 U 抱在怀里。",
+                "同旁内角：夹在两条直线之间，又在截线同一侧的一对角——“同旁”是同侧，“内”是里面。",
+                "生活例：两条平行的跑道，同一侧看台上前后排的两个观众——里面、同侧。",
+                "图形例：U 抱住的两个角：∠4–∠5、∠3–∠6。",
+                "反例：∠4 和 ∠8——也都在截线右侧，但 ∠8 在直线 b 的外边——不在“两条直线之间”，那是同位角。",
+                "⚠️ 别搞混：同旁内角互补（和 180°）也要等两直线平行——现在只认位置，不认大小。",
+                "F/Z/U 对比：F 同位（位置相同）、Z 内错（里面两侧）、U 同旁（里面同侧）——看字母，认位置。",
+                "记住一句话：F 同位，Z 内错，U 同旁。"
+              ],
+              examples: [
+                { text: "U 形怀抱：抱住的两个角", figure: "方法" }
+              ],
+              prev: "g02-u1-l4-p7",
               next: "g02-u2-l1-p1"
             }
           ]
@@ -1478,7 +1792,7 @@ window.MATH_CH["g02"] = {
             },
             {
               id: "g02-u2-l5-p2",
-              title: "本章小测：4 道题",
+              title: "本章小测：6 道题",
               concept: "本章习题",
               formulas: [
                 {
@@ -1508,14 +1822,16 @@ window.MATH_CH["g02"] = {
               },
               auxInteraction: null,
               hints: [
-                "点一点：把 4 道题送进“用判定”或“用性质”的篮子。",
+                "点一点：把 ①–④ 送进“用判定”或“用性质”的篮子；⑤⑥ 直接算一算。",
                 "1．∠1 = ∠5 = 60°，能推出 a ∥ b 吗？",
                 "2．已知 a ∥ b，∠1 = 60°，求 ∠5 是多少？",
                 "3．∠3 + ∠6 = 180°，能推出 a ∥ b 吗？",
-                "4．已知 a ∥ b，∠4 = 100°，求 ∠6 是多少？"
+                "4．已知 a ∥ b，∠4 = 100°，求 ∠6 是多少？",
+                "5．已知 a ∥ b，∠1 = 110°，求 ∠6 是多少？（两步：先找同位角，再用邻补角）",
+                "6．小区楼梯的两条扶手是平行的，一根横杆斜穿两条扶手，量得横杆和上面扶手的夹角是 75°，横杆和下面扶手在同一侧的夹角是多少？"
               ],
               examples: [
-                { figure: "核对答案", text: "答案：①用判定（同位角相等→平行）；②用性质（∠5=60°，同位角相等）；③用判定（同旁内角互补→平行）；④用性质（∠6=100°，内错角相等）" }
+                { figure: "核对答案", text: "答案：①用判定（同位角相等→平行）；②用性质（∠5=60°，同位角相等）；③用判定（同旁内角互补→平行）；④用性质（∠6=100°，内错角相等）；⑤∠6=70°（∠5=∠1=110°，∠5+∠6=180°）；⑥105°（同旁内角互补）" }
               ],
               prev: "g02-u2-l5-p1",
               next: null

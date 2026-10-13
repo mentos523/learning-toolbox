@@ -1,7 +1,7 @@
 /* ============================================================
  * 学习工具箱 · 数学 · 几何 g03：三角形（一）——认识三角形
  *
- * 黄队（教育教学专家）生产：6 课 / 19 页（白队一屏预算评审执行版）。
+ * 黄队（教育教学专家）生产：6 课 / 20 页（白队一屏预算评审执行版）。
  * 课程体系：docs/math-geometry-curriculum.md v1.1（g03 章）
  * 教学设计：docs/math-geometry-pedagogy.md（跃升 3、跃升 4 落地课）
  * 参数手册：docs/math-geometry-params.md v1.1
@@ -11,7 +11,7 @@
  *   g03.1.1 三角形的定义与三边关系  3页  P1 小棒拼 P2 定义表示 P3 三边关系+反例
  *   g03.1.2 三角形的分类与三线      4页  P1 分类对照 P2 三线点亮 P3 分类讲解 P4 三线讲解(钝角高在形外)
  *   g03.1.3 三角形内角和            5页  P1 拖量 P2 批量100 P3 撕拼 P4 proof-replay P5 讲解（严格执行不压缩）
- *   g03.1.4 三角形的外角            2页  P1 张开动画 P2 证明+讲解（外角和不加，留到后面）
+ *   g03.1.4 三角形的外角            3页  P1 张开动画 P2 证明 P3 讲解（含“记住一句话”）
  *   g03.1.5 多边形的内角和          3页  P1 对角线剖分 P2 H19加边交互 P3 公式讲解（外角和不加）
  *   g03.1.6 本章小结与习题          2页  小结串讲 + 习题
  *
@@ -879,6 +879,58 @@ window.MATH_CH["g03"] = {
                 { text: "求外角不用量：两个不相邻内角一加就行", figure: "技巧" }
               ],
               prev: "g03-u1-l4-p1",
+              next: "g03-u1-l4-p3"
+            },
+            {
+              id: "g03-u1-l4-p3",
+              title: "外角定理：一次讲透",
+              pageKind: "explain",
+              concept: "三角形外角定理",
+              formulas: [
+                {
+                  id: "f1",
+                  latex: "\\text{外角} = \\text{不相邻两内角之和}",
+                  translation: "三角形的一个外角等于和它不相邻的两个内角的和"
+                }
+              ],
+              interaction: {
+                type: "step-play",
+                params: {
+                  steps: [
+                    {
+                      caption: "定格：BC 延长到 D，外角 ∠ABD 登场——它等于 ∠A + ∠C。",
+                      shapes: [
+                        { t: "poly", pts: [[20,30],[80,30],[55,66]], color: "line", width: 2.5 },
+                        { t: "seg", a: [80,30], b: [95,13], color: "aux", width: 2.5, dash: "6,4" },
+                        { t: "arc", v: [80,30], a1: 301, a2: 360, r: 13, group: 1, color: "corrA" },
+                        { t: "arc", v: [80,30], a1: 0, a2: 90, r: 13, group: 1, color: "corrA" },
+                        { t: "arc", v: [20,30], a1: 0, a2: 61, r: 10, group: 2, color: "corrB" },
+                        { t: "arc", v: [55,66], a1: 241, a2: 299, r: 10, group: 3, color: "corrC" },
+                        { t: "txt", p: [15,22], text: "A", size: 13, bold: true },
+                        { t: "txt", p: [85,22], text: "B", size: 13, bold: true },
+                        { t: "txt", p: [55,74], text: "C", size: 13, bold: true },
+                        { t: "txt", p: [97,9], text: "D", size: 13 },
+                        { t: "txt", p: [90,48], text: "∠ABD", size: 13, bold: true, color: "corrA" },
+                        { t: "txt", p: [50,84], text: "∠ABD = ∠A + ∠C", size: 14, bold: true, math: true }
+                      ]
+                    }
+                  ]
+                }
+              },
+              auxInteraction: null,
+              hints: [
+                "还记得吗？你把 BC 延长到 D，∠ABD“长”了出来——外角就是这么来的。",
+                "外角定理：三角形的一个外角，等于和它不相邻的两个内角的和——“不相邻”是关键词。",
+                "生活例：三角形屋顶——屋檐外侧的角，等于屋内两个角的和。",
+                "图形例：∠A=50°、∠C=60°，外角 ∠ABD=110°——不用量角器，一加就行。",
+                "反例：∠ABC 是和外角相邻的那个内角——它不算在内，把它加进去就错了。",
+                "⚠️ 别搞混：外角等于“不相邻”两内角之和——相邻的那个是邻居（互补），不是加数。",
+                "记住一句话：外角等于另两角之和。"
+              ],
+              examples: [
+                { text: "反着用：已知外角 110°、∠A=50°，求∠C=60°", figure: "方法" }
+              ],
+              prev: "g03-u1-l4-p2",
               next: "g03-u1-l5-p1"
             }
           ]

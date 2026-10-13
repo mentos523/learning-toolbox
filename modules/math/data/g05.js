@@ -1,7 +1,7 @@
 /* ============================================================
  * 学习工具箱 · 数学 · 几何 g05：勾股定理
  *
- * 黄队（教育教学专家）生产：1 单元 / 8 课 / 23 页。
+ * 黄队（教育教学专家）生产：1 单元 / 8 课 / 24 页。
  * 课程体系：docs/math-geometry-curriculum.md v1.1（g05 章，枢纽章）
  * 教学设计：docs/math-geometry-pedagogy.md v1.1（跃升 8：形→数）
  * 参数手册：docs/math-geometry-params.md v1.2
@@ -20,7 +20,7 @@
  *   g05.1.5 HL：直角三角形全等      3 页  P1 compare-toggle（补 g04 拼图） P2 proof-replay（勾股+SSS）
  *                                        P3 讲解
  *   g05.1.6 两点间距离公式          2 页  P1 step-play（横平竖直造公式，H2） P2 讲解（+数轴回链）
- *   g05.1.7 勾股数 + √2             2 页  P1 tap-highlight（家族图谱） P2 step-play（√2 对角线，H13）
+ *   g05.1.7 勾股数 + √2             3 页  P1 tap-highlight（家族图谱） P2 step-play（√2 对角线，H13） P3 讲解（正例/反例对照：√2 不是勾股数）
  *   g05.1.8 本章小结与习题          2 页  P1 小结（讲解页） P2 习题（tap-highlight 认图 + 6 道题）
  *
  * 呼应点落实：
@@ -301,8 +301,21 @@ window.MATH_CH["g05"] = {
                       ]
                     },
                     {
-                      card: "算法二：4 个小三角形（每个 ab/2）加中间小正方形（c²）。",
-                      reason: "三角形面积 = ab ÷ 2；小正方形边长是 c，面积 c²。",
+                      card: "中间四边形的角也是直角：顶点处是平角 180°，减去两个锐角（互余，和 90°），剩下 90°。",
+                      reason: "直角三角形两锐角互余；180° − 90° = 90°——四边是 c、四角是直角，它才是真正的正方形。",
+                      shapes: [
+                        { t: "poly", pts: [[30,30],[70,30],[70,70],[30,70]], color: "target", width: 3 },
+                        { t: "right", v: [30,30], p: [70,30], q: [30,70], size: 6, color: "corrAngle" },
+                        { t: "right", v: [70,30], p: [30,30], q: [70,70], size: 6, color: "corrAngle" },
+                        { t: "right", v: [70,70], p: [70,30], q: [30,70], size: 6, color: "corrAngle" },
+                        { t: "right", v: [30,70], p: [30,30], q: [70,70], size: 6, color: "corrAngle" },
+                        { t: "txt", p: [50,50], text: "c", size: 13, bold: true, color: "target" },
+                        { t: "txt", p: [50,90], text: "180°−90°=90°：四角皆直角", size: 13, bold: true }
+                      ]
+                    },
+                    {
+                      card: "算法二：4 个小三角形（每个 ab/2）加中间的正方形——上一步刚证了它是正方形，面积 c²。",
+                      reason: "三角形面积 = ab ÷ 2；正方形边长是 c，面积 c²。",
                       shapes: [
                         { t: "poly", pts: [[44.4,10.8],[30,30],[70,30]], color: "corrA", width: 2, fill: "corrA", opacity: 0.4 },
                         { t: "poly", pts: [[89.2,44.4],[70,30],[70,70]], color: "corrB", width: 2, fill: "corrB", opacity: 0.4 },
@@ -324,7 +337,8 @@ window.MATH_CH["g05"] = {
                   summary: [
                     { statement: "大正方形边长为 a+b", reason: "拼图：每条边都是一段 a 接一段 b" },
                     { statement: "面积算法一：(a+b)²", reason: "正方形面积 = 边长²" },
-                    { statement: "面积算法二：4×ab/2 + c² = 2ab + c²", reason: "三角形面积 + 小正方形面积" },
+                    { statement: "中间四边形：四边都是 c，四角都是 90°——是正方形", reason: "顶点处：180° − 两锐角之和（90°）= 90°" },
+                    { statement: "面积算法二：4×ab/2 + c² = 2ab + c²", reason: "三角形面积 + 正方形面积" },
                     { statement: "(a+b)² = 2ab + c²，展开得 a²+b²=c²", reason: "等量代换；代数 2.2.2" }
                   ]
                 }
@@ -694,7 +708,7 @@ window.MATH_CH["g05"] = {
                 "记住一句话：已知两边求第三边——先找斜边，再列式，最后开方别漏。"
               ],
               examples: [
-                { text: "篮球场对角线：28 米×15 米≈31.8 米", figure: "实物" }
+                { text: "小区滑梯：滑道长 5 米、底端离立柱 4 米，立柱高 3 米", figure: "实物" }
               ],
               prev: "g05-u1-l3-p2",
               next: "g05-u1-l4-p1"
@@ -1359,6 +1373,66 @@ window.MATH_CH["g05"] = {
                 { text: "回看代数 0.1.3：无理数 √2", figure: "回链" }
               ],
               prev: "g05-u1-l7-p1",
+              next: "g05-u1-l7-p3"
+            },
+            {
+              id: "g05-u1-l7-p3",
+              title: "勾股数：边边皆整数",
+              pageKind: "explain",
+              concept: "勾股数",
+              formulas: [
+                {
+                  id: "f1",
+                  latex: "\\text{勾股数} = \\text{三边都是整数的直角三角形}",
+                  translation: "勾股数就是三条边都是整数的直角三角形"
+                }
+              ],
+              interaction: {
+                type: "compare-toggle",
+                params: {
+                  views: [
+                    {
+                      label: "是勾股数：3-4-5",
+                      caption: "3-4-5：三边都是整数，又是直角三角形——勾股数。",
+                      shapes: [
+                        { t: "poly", pts: [[30,30],[66,30],[30,66]], color: "corrA", width: 3 },
+                        { t: "right", v: [30,30], p: [66,30], q: [30,66], size: 6, color: "corrAngle" },
+                        { t: "txt", p: [48,24], text: "4", size: 13, bold: true },
+                        { t: "txt", p: [24,48], text: "3", size: 13, bold: true },
+                        { t: "txt", p: [52,52], text: "5", size: 13, bold: true },
+                        { t: "txt", p: [50,80], text: "3²+4²=5²，三边整数 ✓", size: 13, bold: true, color: "corrA" }
+                      ]
+                    },
+                    {
+                      label: "不是勾股数：1-1-√2",
+                      caption: "1-1-√2：也满足 a²+b²=c²，但 √2 不是整数——不是勾股数。",
+                      shapes: [
+                        { t: "poly", pts: [[30,30],[66,30],[30,66]], color: "line", width: 3 },
+                        { t: "right", v: [30,30], p: [66,30], q: [30,66], size: 6, color: "corrAngle" },
+                        { t: "txt", p: [48,24], text: "1", size: 13, bold: true },
+                        { t: "txt", p: [24,48], text: "1", size: 13, bold: true },
+                        { t: "txt", p: [52,52], text: "√2", size: 13, bold: true, color: "target" },
+                        { t: "txt", p: [50,80], text: "√2 不是整数 ✗", size: 13, bold: true, color: "target" }
+                      ]
+                    }
+                  ]
+                }
+              },
+              auxInteraction: null,
+              hints: [
+                "还记得吗？你点的 3-4-5、5-12-13、8-15-17——三条边都是整数，这就是勾股数。",
+                "勾股数：三条边都是整数的直角三角形——“整数”和“直角”两个条件，缺一不可。",
+                "生活例：木工的 3-4-5 墨斗——3 米、4 米、5 米一拉，直角就出来了。",
+                "图形例：6-8-10 是 3-4-5 的 2 倍——同一家族，放大缩小还是勾股数。",
+                "反例：边长 1、1、√2 的等腰直角三角形——也满足 a²+b²=c²，但 √2 不是整数，所以它不是勾股数。",
+                "⚠️ 别搞混：a²+b²=c² 成立 ≠ 勾股数——勾股数还要求三条边都是整数。",
+                "⚠️ 别搞混 2：2-3-4 看着像，2²+3²=13≠16——得验算，不能看长得像。",
+                "记住一句话：勾股数，边边皆整数。"
+              ],
+              examples: [
+                { text: "记住三组：3-4-5、5-12-13、8-15-17", figure: "方法" }
+              ],
+              prev: "g05-u1-l7-p2",
               next: "g05-u1-l8-p1"
             }
           ]
