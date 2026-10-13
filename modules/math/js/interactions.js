@@ -2176,7 +2176,7 @@
     });
     var pts = JSON.parse(JSON.stringify(init));
 
-    var wrap = el("div", "ix-geo-wrap");
+    var wrap = el("div", "ix-geo-wrap ix-vertex-drag");
     var readout = el("div", "ix-geo-readout", "");
     wrap.appendChild(readout);
 
@@ -2400,7 +2400,7 @@
     var R = 30 * S;                    // 量角器半径
     var rayLen = 44 * S;
 
-    var wrap = el("div", "ix-geo-wrap");
+    var wrap = el("div", "ix-geo-wrap ix-angle-protractor");
     var readout = el("div", "ix-geo-readout", "");
     wrap.appendChild(readout);
     var svg = G.svg(W, H, "ix-svg geo-svg");
@@ -4457,7 +4457,8 @@
     }
 
     /* ---------- 控件 ---------- */
-    var wrap = el("div", "ix-geo-wrap");
+    // （蓝队 2026-10-13 几何审计）挂 ix-net-fold 作用域类，供移动端收紧样式用
+    var wrap = el("div", "ix-geo-wrap ix-net-fold");
     var readout = el("div", "ix-geo-readout", "");
     wrap.appendChild(readout);
     var frameBox = el("div", "ix-frame");

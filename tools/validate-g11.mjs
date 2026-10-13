@@ -36,7 +36,7 @@ for (const t of ["step-play", "cut-reassemble", "compare-toggle", "shape-area", 
   ok(reg.has && reg.has(t), "交互类型已注册: " + t);
 }
 
-/* 3. 加载 g11 数据：1 单元 / 10 课 / 35 页 / 44 公式 */
+/* 3. 加载 g11 数据：1 单元 / 10 课 / 35 页 / 47 公式 */
 load("modules/math/data/g11.js");
 const ch = sandbox.window.MATH_CH.g11;
 ok(!!ch && ch.id === "g11", "window.MATH_CH.g11 加载成功");
@@ -47,7 +47,7 @@ ok(ch.units.length === 1, "单元数 = 1");
 ok(pages.length === 35, "页总数 = 35（实际 " + pages.length + "）");
 ok(ch.units[0].lessons.length === 10, "课数 = 10（实际 " + ch.units[0].lessons.length + "）");
 let nForm = 0; for (const p of pages) nForm += (p.formulas || []).length;
-ok(nForm === 44, "公式总数 = 44（实际 " + nForm + "）");
+ok(nForm === 47, "公式总数 = 47（实际 " + nForm + "）");
 
 /* 4. id 唯一 + prev/next 链 */
 const idSet = new Set(pages.map((p) => p.id));
@@ -134,11 +134,11 @@ ok(saBad.length === 0, "shape-area 参数完备（min/max/step 合法）" + (saB
 ok(thBad.length === 0, "tap-highlight 参数完备（items/groups 非空）" + (thBad.length ? " 问题: " + thBad.join(";") : ""));
 console.log("  (交互类型分布: " + Object.entries(typeCount).map(([t, n]) => `${t}×${n}`).join("、") + ")");
 
-/* 9. 派生公式 MathML：44 键全覆盖；XML 良好；无裸文本 */
+/* 9. 派生公式 MathML：47 键全覆盖；XML 良好；无裸文本 */
 load("modules/math/data/g11.formulas.js");
 const MML = sandbox.window.MATH_MML || {};
 const keys = Object.keys(MML);
-ok(keys.length === 44, "MATH_MML 键数 = 44（实际 " + keys.length + "）");
+ok(keys.length === 47, "MATH_MML 键数 = 47（实际 " + keys.length + "）");
 let miss = [];
 for (const p of pages) for (const f of (p.formulas || [])) {
   const k = p.id + "#" + f.id;

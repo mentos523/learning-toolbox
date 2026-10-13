@@ -324,9 +324,15 @@
     // （白队 2026-10-11 g10 复验）习题页"核对答案"折叠展开/收起会改变
     // hints 区高度（flex:none，上限 250px），从而改变 flex:1 交互区的可用
     // 高度；toggle 事件不冒泡，用捕获阶段委托监听，展开后重算溢出。
+    // （蓝队 2026-10-13 几何审计严重项）proof-replay 播完自动展开证明书
+    // （stop(true) 里 cert.open=true，同样触发 toggle）与"为什么可以"
+    // （.ix-why）折叠展开都会改变交互区内容高度；此前从不重算溢出，
+    // 390px 下展开内容被静默裁剪且无法滚动到达。此处统一委托重算。
     document.addEventListener("toggle", function (e) {
       if (e.target && e.target.classList &&
-          e.target.classList.contains("m-answers")) {
+          (e.target.classList.contains("m-answers") ||
+           e.target.classList.contains("ix-proof-cert") ||
+           e.target.classList.contains("ix-why"))) {
         fitInteraction();
       }
     }, true);

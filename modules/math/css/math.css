@@ -177,7 +177,10 @@ body[data-theme="dark"] #mathml-warn { background: #4a3a1a; color: #fde68a; }
   height: 120px; width: auto; max-width: 100%;
   display: block; margin: 0 auto;
 }
-.m-hints { flex: none; max-height: 6.5em; overflow: hidden; font-size: 0.95rem; color: var(--m-ink-soft); }
+/* （蓝队 2026-10-13 几何审计）白队中等项：6 页 hints 在 390px 下丢 1–3 行——
+ * 旧的 overflow:hidden 在窄屏多换行时静默裁剪。改为区内滚动（同
+ * exercise/explain 模式），内容可达、不裁剪；未溢出页面无滚动条、无影响。 */
+.m-hints { flex: none; max-height: 6.5em; overflow-y: auto; -webkit-overflow-scrolling: touch; font-size: 0.95rem; color: var(--m-ink-soft); }
 .m-hints p { margin: 4px 0; }
 .m-hints .point { color: var(--m-ink); font-weight: bold; }
 /* ---------- 习题页：题目区可内滚动 + 核对答案折叠（蓝队 2026-10-10 缺陷A修复）
@@ -265,6 +268,26 @@ body[data-theme="dark"] #mathml-warn { background: #4a3a1a; color: #fde68a; }
   .ix-group-btn { padding: 3px 8px; font-size: 0.85rem; white-space: nowrap; }
   .ix-geo-readout { padding: 2px 0 4px; font-size: 0.95rem; }
   .ix-status { margin-top: 4px; }
+  /* ---------- 控制条按钮 390px 折行（蓝队 2026-10-13 几何审计）
+   * step-play / proof-replay / net-fold / construction-step 共用
+   * .ix-step-ctrl（约 120 页）。移动端紧凑布局：小字号/小内边距/
+   * 不换行，4 按钮单行放下；保持 flex-wrap:wrap 作极窄屏兜底。 */
+  .ix-step-ctrl { gap: 6px; }
+  .ix-btn { padding: 4px 10px; font-size: 0.85rem; white-space: nowrap; }
+  /* proof-replay 340px 折行临界：按钮再收一档（约 287px < 340px 内宽） */
+  .ix-proof-replay .ix-step-ctrl { gap: 6px; }
+  .ix-proof-replay .ix-btn { padding: 4px 8px; font-size: 0.82rem; }
+  /* ---------- vertex-drag / angle-protractor 移动端画布限高
+   * （蓝队 2026-10-13 几何审计）两者 SVG 直接挂在 ix-geo-wrap 下，
+   * 不走 .ix-frame 包裹，之前不受 26vh 上限约束；补上，同 step-play 口径 */
+  .ix-vertex-drag > svg, .ix-angle-protractor > svg { max-height: 26vh; }
+  /* ---------- net-fold 移动端收紧（蓝队 2026-10-13 几何审计）
+   * 读数 + 画布 + 视角行 + 控制行 + scrubber 纵向占位大；画布
+   * 26vh→20vh，按钮行/读数收紧，scrubber 压薄，390px 下一屏放下 */
+  .ix-net-fold .ix-frame svg { max-height: 20vh; }
+  .ix-net-fold .ix-step-ctrl { gap: 6px; margin-top: 2px; }
+  .ix-net-fold .ix-geo-readout { font-size: 0.9rem; }
+  .ix-net-fold .ix-range { height: 28px; }
 }
 @media (min-width: 1024px) {
   .m-menu-btn { display: none; }
@@ -508,10 +531,13 @@ body[data-theme="dark"] #mathml-warn { background: #4a3a1a; color: #fde68a; }
 .ix-proof-replay .ix-btn { padding: 4px 12px; font-size: 0.85rem; white-space: nowrap; }
 /* 证明书折叠条收紧 */
 .ix-proof-replay .ix-proof-cert { margin: 5px auto 0; padding: 3px 10px; }
-/* 证明书：两栏式收尾（左栏陈述 / 右栏理由）+ 序号双编码（M4） */
+/* 证明书：两栏式收尾（左栏陈述 / 右栏理由）+ 序号双编码（M4）
+ * （蓝队 2026-10-13 几何审计轻微项）窄屏下表格列宽不足时允许横向滚动，
+ * 不挤压/裁剪单元格内容 */
 .ix-proof-cert {
   margin: 8px auto 0; max-width: 560px; border: 1px solid var(--m-line);
   border-radius: 8px; padding: 4px 10px; text-align: left;
+  overflow-x: auto;
 }
 .ix-proof-cert > summary { cursor: pointer; font-weight: bold; color: var(--m-ink); }
 .ix-proof-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; margin-top: 6px; }
