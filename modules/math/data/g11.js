@@ -1040,12 +1040,12 @@ next: "g11-u1-l5-p1"
                 {
                   id: "f2",
                   latex: "\\frac{60}{360}=\\frac{1}{6}",
-                  translation: "n=60°：扇形占圆的 60 比 360，约成 6 分之 1"
+                  translation: "n=60°：扇形占圆的 60 比 360，约成六分之一"
                 },
                 {
                   id: "f3",
                   latex: "\\frac{120}{360}=\\frac{1}{3}",
-                  translation: "n=120°：扇形占圆的 120 比 360，约成 3 分之 1"
+                  translation: "n=120°：扇形占圆的 120 比 360，约成三分之一"
                 }
               ],
               interaction: {
@@ -1924,7 +1924,7 @@ next: "g11-u1-l5-p1"
                         { t: "poly", pts: [[14,42],[30,42],[30,60],[14,60]], color: "corrA", width: 2 },
                         { t: "txt", p: [22,70], text: "Sh", size: 12, color: "corrA" },
                         { t: "poly", pts: [[40,60],[60,60],[50,42]], color: "corrB", width: 2 },
-                        { t: "txt", p: [50,70], text: "Sh/3", size: 12, color: "corrB" },
+                        { t: "txt", p: [50,70], text: "Sh/3", size: 12, color: "corrB", math: true },
                         { t: "circle", c: [76,51], r: 11, color: "corrC", width: 2 },
                         { t: "txt", p: [76,70], text: "球", size: 12, color: "corrC" },
                         { t: "txt", p: [50,84], text: "体积靠“摞”", size: 13 }
@@ -1936,7 +1936,7 @@ next: "g11-u1-l5-p1"
               auxInteraction: null,
               hints: [
                 "一句话串全章：面积靠“割补”（平行四边形→三角形→梯形），圆靠“极限”（化圆为方）。",
-                "体积靠“摞”：柱体 V=Sh，锥体是它的 1/3，球单记两个公式。",
+                "体积靠“摞”：柱体 V=Sh，锥体是它的三分之一，球单记两个公式。",
                 "三种思想：割补（面积守恒）、极限（越来越像）、摞（体积=底面积×高）。",
                 "记住一句话：割补算面积，极限化圆方，摞出体积来。"
               ],
