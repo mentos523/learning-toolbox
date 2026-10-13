@@ -223,3 +223,26 @@ a.card:hover {
   .hero h1 { font-size: 1.8rem; }
   .card-grid { grid-template-columns: 1fr; }
 }
+
+/* ---------- 在线更新（蓝队 2026-10-13） ---------- */
+.update-row { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 6px 0; }
+.update-btn {
+  border: 1px solid var(--line, #e5e0d5); background: #fff; border-radius: 999px;
+  padding: 5px 14px; font-size: 0.85rem; cursor: pointer; color: inherit;
+}
+.update-btn:hover { background: #f7f4ec; }
+.update-btn-primary { background: #3b82f6; border-color: #3b82f6; color: #fff; }
+.update-btn-primary:hover { background: #2563eb; }
+.version-label { font-size: 0.8rem; color: #8a8478; }
+.update-dot {
+  width: 8px; height: 8px; border-radius: 50%; background: #ef4444;
+  display: inline-block; flex: none;
+}
+.update-dot[hidden] { display: none; }
+.update-banner {
+  max-width: 560px; margin: 8px auto 0; padding: 10px 16px;
+  background: #fffbeb; border: 1px solid #fcd34d; border-radius: 12px;
+  font-size: 0.9rem; line-height: 1.7;
+}
+.update-banner[hidden] { display: none; }
+.update-banner a { color: #1d4ed8; }

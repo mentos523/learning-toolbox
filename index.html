@@ -22,10 +22,19 @@
 
   <footer class="footer">
     <p>学习工具箱 · 纯静态页面，无需安装，放在任何网站下都能跑</p>
+    <p class="update-row">
+      <button id="check-update-btn" class="update-btn" aria-label="检查更新">⟳ 检查更新</button>
+      <span id="update-dot" class="update-dot" hidden aria-hidden="true"></span>
+      <span id="version-label" class="version-label"></span>
+    </p>
+    <div id="update-banner" class="update-banner" hidden></div>
     <p><a href="https://github.com/mentos523/learning-toolbox#打赏">☕ 请我喝杯咖啡</a></p>
   </footer>
 
+  <!-- 内嵌版本号：发布时与根目录 version.json 同步更新 -->
+  <script>window.TOOLBOX_VERSION = "2026.10.13.1";</script>
   <script src="assets/js/registry.js"></script>
   <script src="assets/js/app.js"></script>
+  <script src="assets/js/update.js"></script>
 </body>
 </html>

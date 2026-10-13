@@ -44,6 +44,75 @@
     try { localStorage.setItem(PROG_KEY, JSON.stringify(progress)); } catch (e) {}
   }
 
+  /* ---------------- 板块（蓝队 2026-10-13）：代数 / 几何 ----------------
+   * 进入数学板块先选板块卡片；深链接 #p=xxx 直接进对应板块。
+   * 上次板块记 localStorage，下次在卡片上标"上次进入"。 */
+  var TRACK_KEY = "ltb-math-track";
+  function trackOfChapter(chId) {
+    return /^g/i.test(chId || "") ? "geometry" : "algebra";
+  }
+  function trackMeta(id) {
+    return (window.MATH_TRACKS || []).filter(function (t) { return t.id === id; })[0];
+  }
+  function trackIcon(t) {
+    var c = t.color || "#f59e0b";
+    var glyph = t.icon === "tri" ? "△" : "ƒx";
+    return '<svg viewBox="0 0 48 48" width="44" height="44" aria-hidden="true">' +
+      '<rect x="4" y="8" width="40" height="32" rx="6" fill="' + c + '" opacity="0.15"/>' +
+      '<text x="24" y="33" text-anchor="middle" font-size="19" font-weight="bold" fill="' + c +
+      '" font-family="sans-serif">' + glyph + "</text></svg>";
+  }
+  function renderTracks() {
+    var grid = $("track-grid");
+    if (!grid) return;
+    var last = null;
+    try { last = localStorage.getItem(TRACK_KEY); } catch (e) {}
+    grid.innerHTML = (window.MATH_TRACKS || []).map(function (t) {
+      var badge = (t.id === last) ? '<span class="m-track-last">上次进入</span>' : "";
+      return '<a class="m-track-card" style="--track-color:' + esc(t.color || "#f59e0b") + '"' +
+        ' href="#track=' + esc(t.id) + '" data-track="' + esc(t.id) + '"' +
+        ' aria-label="进入' + esc(t.name) + '板块">' +
+        '<div class="m-track-icon">' + trackIcon(t) + "</div>" +
+        "<h2>" + esc(t.name) + " <small>· " + esc(t.tagline || "") + "</small>" + badge + "</h2>" +
+        "<p>" + esc(t.description || "") + "</p>" +
+        '<div class="m-track-meta">' + (t.pages ? "约 " + t.pages + " 页" : "") + "</div>" +
+        '<span class="m-track-btn">进入学习 →</span></a>';
+    }).join("");
+    Array.prototype.forEach.call(grid.querySelectorAll(".m-track-card"), function (a) {
+      a.addEventListener("click", function (e) {
+        e.preventDefault();
+        enterTrack(a.dataset.track);
+      });
+    });
+  }
+  function showTracks() {
+    state.track = null;
+    state.chapterId = null; state.pageId = null; state.flat = []; state.index = -1;
+    renderTracks();
+    $("tracks").hidden = false;
+    $("main").hidden = true;
+    try { history.replaceState(null, "", location.pathname); } catch (e) {}
+  }
+  function enterTrack(trackId, opts) {
+    var meta = trackMeta(trackId);
+    if (!meta) return;
+    state.track = trackId;
+    try { localStorage.setItem(TRACK_KEY, trackId); } catch (e) {}
+    $("tracks").hidden = true;
+    $("main").hidden = false;
+    $("m-title").textContent = "数学 · " + meta.name;
+    renderSidebar();
+    if (!(opts && opts.keepPage)) {
+      $("p-title").textContent = "从左侧目录选择一课开始";
+      var hint = trackId === "geometry"
+        ? "<p>💡 建议从「导论——几何是什么」开始，先建立图形直觉。</p>"
+        : "<p>💡 建议从第零章「导论」开始，10 分钟建立代数直觉。</p>";
+      $("p-hints").innerHTML = hint;
+      $("btn-prev").disabled = true;
+      $("btn-next").disabled = true;
+    }
+  }
+
   /* ---------------- 状态 ---------------- */
   var state = {
     chapterId: null,     // 当前章
@@ -257,6 +326,8 @@
     var tree = $("tree");
     var html = "";
     (window.MATH_CHAPTERS || []).forEach(function (c) {
+      // 板块过滤：只显示当前板块的章节（未选板块时全显，兜底）
+      if (state.track && trackOfChapter(c.id) !== state.track) return;
       var planned = c.status !== "ready";
       html += '<div class="m-ch' + (planned ? " planned" : "") + '" data-ch="' + esc(c.id) + '">' +
         '<div class="m-ch-title"><span>' + esc(c.title) + "</span><span>" +
@@ -337,18 +408,18 @@
       }
     }, true);
 
-    // 深链接：#p=<pageId>
+    // 深链接：#p=<pageId>（兼容旧链接）→ 按章节前缀判定板块直接进入
     var m = (location.hash || "").match(/#p=([\w-]+)/);
     if (m) {
       // 从 pageId 反查章节：ch00-u1-l1-p1 → ch00
       var chId = m[1].split("-")[0];
+      enterTrack(trackOfChapter(chId), { keepPage: true });
       openLesson(chId, null, m[1]);
     } else {
-      $("p-title").textContent = "从左侧目录选择一课开始";
-      $("p-hints").innerHTML = "<p>💡 建议从第零章「导论」开始，10 分钟建立代数直觉。</p>";
-      $("btn-prev").disabled = true;
-      $("btn-next").disabled = true;
+      // 无深链接：先选板块卡片
+      showTracks();
     }
+    $("tracks-back").addEventListener("click", showTracks);
   }
 
   if (document.readyState === "loading") {

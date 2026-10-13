@@ -563,3 +563,51 @@ body[data-theme="dark"] #mathml-warn { background: #4a3a1a; color: #fde68a; }
 }
 .ix-construct-pending-step { font-weight: bold; color: var(--m-accent-strong); }
 .ix-construct-pending-text { font-size: 1rem; color: var(--m-ink); max-width: 26em; }
+
+/* ---------- 板块选择（蓝队 2026-10-13）：代数 / 几何双卡片 ----------
+ * 设计语言复用首页学科卡片：顶部主题色条 + 图标 + 标题小字 + 说明 +
+ * 底部按钮。纯文档流，fixed 全屏覆盖，无定位冲突。 */
+.m-tracks {
+  position: fixed; inset: 0; z-index: 70;
+  background: var(--m-bg); overflow-y: auto;
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px 16px;
+}
+.m-tracks[hidden] { display: none; }
+.m-tracks-inner { width: 100%; max-width: 720px; }
+.m-tracks-title { text-align: center; font-size: 1.4rem; margin: 0 0 4px; color: var(--m-ink); }
+.m-tracks-sub { text-align: center; color: var(--m-ink-soft); margin: 0 0 20px; font-size: 0.95rem; }
+.m-track-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+.m-track-card {
+  display: block; text-decoration: none; color: inherit; cursor: pointer;
+  background: var(--m-panel); border: 1px solid var(--m-line);
+  border-top: 6px solid var(--track-color, #f59e0b);
+  border-radius: var(--m-radius); padding: 20px 18px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.m-track-card:hover { transform: translateY(-3px); box-shadow: 0 6px 18px rgba(0,0,0,0.10); }
+.m-track-card:active { transform: translateY(0); }
+.m-track-icon { margin-bottom: 8px; }
+.m-track-card h2 { margin: 0 0 6px; font-size: 1.25rem; color: var(--m-ink); }
+.m-track-card h2 small { font-size: 0.8rem; color: var(--m-ink-soft); font-weight: normal; }
+.m-track-card p { margin: 0 0 10px; font-size: 0.92rem; color: var(--m-ink-soft); line-height: 1.6; }
+.m-track-meta { font-size: 0.85rem; color: var(--m-ink-soft); margin-bottom: 12px; }
+.m-track-last { display: inline-block; font-size: 0.75rem; color: var(--m-accent-strong);
+  border: 1px solid var(--m-accent); border-radius: 999px; padding: 1px 8px; margin-left: 6px; }
+.m-track-btn {
+  display: inline-block; background: var(--track-color, #f59e0b); color: #fff;
+  border-radius: 10px; padding: 8px 18px; font-size: 0.95rem; font-weight: bold;
+}
+/* 学习界面内的"板块"返回按钮：复用 .m-back 样式，只收紧内边距 */
+.m-tracks-back { cursor: pointer; }
+@media (max-width: 1023px) {
+  .m-tracks { align-items: flex-start; padding-top: 15vh; }
+}
+
+/* （蓝队 2026-10-13）hidden 属性必须压过 .m-main 的 display:flex（类选择器
+   优先级高于 UA 的 [hidden]），否则板块选择时学习区仍占位 */
+.m-main[hidden] { display: none; }

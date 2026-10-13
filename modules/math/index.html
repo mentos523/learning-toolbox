@@ -24,6 +24,15 @@
 </script>
 
 <div class="m-app" id="app">
+  <!-- 板块选择（蓝队 2026-10-13）：代数 / 几何双卡片，无深链接时先到这里 -->
+  <section class="m-tracks" id="tracks" aria-label="选择板块">
+    <div class="m-tracks-inner">
+      <h2 class="m-tracks-title">数学 · 选择板块</h2>
+      <p class="m-tracks-sub">一个板块一套课程，慢慢学完。</p>
+      <div class="m-track-grid" id="track-grid"></div>
+    </div>
+  </section>
+
   <!-- 左：章节-单元-课程目录 -->
   <aside class="m-drawer" id="drawer" aria-label="课程目录">
     <h2>数学 · 课程目录</h2>
@@ -31,11 +40,12 @@
   </aside>
 
   <!-- 右：学习区（一屏） -->
-  <main class="m-main">
+  <main class="m-main" id="main" hidden>
     <header class="m-head">
       <button class="m-menu-btn" id="menu-btn" aria-label="打开目录">☰ 目录</button>
       <a class="m-back" href="../../index.html" aria-label="返回工具箱首页">← 返回</a>
-      <h1>数学 · 代数与几何</h1>
+      <button class="m-back m-tracks-back" id="tracks-back" aria-label="返回板块选择">板块</button>
+      <h1 id="m-title">数学</h1>
       <span class="m-page-ind" id="page-ind"></span>
     </header>
 
