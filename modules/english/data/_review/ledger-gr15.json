@@ -567,10 +567,15 @@
       },
       "id": "gr15.1.4-e2",
       "lesson": "gr15.1.4",
-      "register": "neutral",
-      "revision": 1,
+      "register": "written",
+      "revision": 2,
+      "rewrite": {
+        "by": "语法生产C队",
+        "at": "2026-10-14",
+        "note": "红队终审打回重写：in order that 为正式书面连词，register 由 neutral 改为 written；英文/中文/分块不变。"
+      },
       "rule": "in order that + 情态（正例 example）",
-      "status": "rejected",
+      "status": "drafted",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -752,7 +757,7 @@
       "zh": "那只狗太大了，把我们吓到了。"
     },
     {
-      "en": "She is so kind a girl that all love her.",
+      "en": "She is so kind a girl that everyone loves her.",
       "final": {
         "by": "红队",
         "at": "2026-10-14",
@@ -768,9 +773,14 @@
       "id": "gr15.1.5-e3",
       "lesson": "gr15.1.5",
       "register": "neutral",
-      "revision": 1,
+      "revision": 2,
+      "rewrite": {
+        "by": "语法生产C队",
+        "at": "2026-10-14",
+        "note": "红队终审打回重写：all love her 生硬古旧，改为 everyone loves her（中文'大家都爱她'对应 everyone）；rule/condition 不变。"
+      },
       "rule": "so + 形 + a/an + n（正例 example）",
-      "status": "rejected",
+      "status": "drafted",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",

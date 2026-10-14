@@ -73,7 +73,7 @@ window.ENG_CH["gr15"] = {
     /* ---------- gr15.1.4 目的状语从句 ---------- */
     "gr15.1.4-e1": { en: "He got up early so that he could catch the bus.", zh: "他早起以便赶上公交车。（目的 + 情态）", reg: "通用",
       tagged: [ { w: "He", role: "subject", label: "主语" }, { w: "got up", role: "verb", label: "谓语" }, { w: "early", role: "adverb", label: "状语" }, { w: "so that he could catch the bus", role: "adverb", label: "目的状语从句" } ] },
-    "gr15.1.4-e2": { en: "She studied hard in order that she could pass.", zh: "她努力学习以便通过。（in order that + 情态）", reg: "通用",
+    "gr15.1.4-e2": { en: "She studied hard in order that she could pass.", zh: "她努力学习以便通过。（in order that + 情态）", reg: "书面",
       tagged: [ { w: "She", role: "subject", label: "主语" }, { w: "studied", role: "verb", label: "谓语" }, { w: "hard", role: "adverb", label: "状语" }, { w: "in order that she could pass", role: "adverb", label: "目的状语从句" } ] },
     "gr15.1.4-e3": { en: "I came early in order to get a seat.", zh: "我早到以便占个座。（in order to + 不定式）", reg: "通用",
       tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "came", role: "verb", label: "谓语" }, { w: "early", role: "adverb", label: "状语" }, { w: "in order to get a seat", role: "adverb", label: "状语（不定式表目的）" } ] },
@@ -90,8 +90,8 @@ window.ENG_CH["gr15"] = {
       tagged: [ { w: "He", role: "subject", label: "主语" }, { w: "was", role: "verb", label: "谓语" }, { w: "so tired", role: "complem", label: "表语" }, { w: "that he fell asleep", role: "adverb", label: "结果状语从句" } ] },
     "gr15.1.5-e2": { en: "It was such a big dog that we were scared.", zh: "那只狗太大了，把我们吓到了。", reg: "通用",
       tagged: [ { w: "It", role: "subject", label: "主语" }, { w: "was", role: "verb", label: "谓语" }, { w: "such a big dog", role: "complem", label: "表语" }, { w: "that we were scared", role: "adverb", label: "结果状语从句" } ] },
-    "gr15.1.5-e3": { en: "She is so kind a girl that all love her.", zh: "她是个如此善良的女孩，大家都爱她。", reg: "通用",
-      tagged: [ { w: "She", role: "subject", label: "主语" }, { w: "is", role: "verb", label: "谓语" }, { w: "so kind a girl", role: "complem", label: "表语" }, { w: "that all love her", role: "adverb", label: "结果状语从句" } ] },
+    "gr15.1.5-e3": { en: "She is so kind a girl that everyone loves her.", zh: "她是个如此善良的女孩，大家都爱她。", reg: "通用",
+      tagged: [ { w: "She", role: "subject", label: "主语" }, { w: "is", role: "verb", label: "谓语" }, { w: "so kind a girl", role: "complem", label: "表语" }, { w: "that everyone loves her", role: "adverb", label: "结果状语从句" } ] },
     "gr15.1.5-e4": { en: "The box is so heavy that I can't lift it.", zh: "箱子太重了，我搬不动。", reg: "通用",
       tagged: [ { w: "The box", role: "subject", label: "主语" }, { w: "is", role: "verb", label: "谓语" }, { w: "so heavy", role: "complem", label: "表语" }, { w: "that I can't lift it", role: "adverb", label: "结果状语从句" } ] },
     "gr15.1.5-e5": { en: "It was such bad weather that we stayed home.", zh: "天气太糟了，我们待在家里。", reg: "通用",
@@ -732,8 +732,8 @@ window.ENG_CH["gr15"] = {
                   tagged: [ { w: "He", role: "subject", label: "主语" }, { w: "was", role: "verb", label: "谓语" }, { w: "so tired", role: "complem", label: "表语" }, { w: "that he fell asleep", role: "adverb", label: "结果状语从句" } ] },
                 { id: "gr15.1.5-e2", en: "It was such a big dog that we were scared.", zh: "那只狗太大了，把我们吓到了。", reg: "通用",
                   tagged: [ { w: "It", role: "subject", label: "主语" }, { w: "was", role: "verb", label: "谓语" }, { w: "such a big dog", role: "complem", label: "表语" }, { w: "that we were scared", role: "adverb", label: "结果状语从句" } ] },
-                { id: "gr15.1.5-e3", en: "She is so kind a girl that all love her.", zh: "她是个如此善良的女孩，大家都爱她。", reg: "通用",
-                  tagged: [ { w: "She", role: "subject", label: "主语" }, { w: "is", role: "verb", label: "谓语" }, { w: "so kind a girl", role: "complem", label: "表语" }, { w: "that all love her", role: "adverb", label: "结果状语从句" } ] }
+                { id: "gr15.1.5-e3", en: "She is so kind a girl that everyone loves her.", zh: "她是个如此善良的女孩，大家都爱她。", reg: "通用",
+                  tagged: [ { w: "She", role: "subject", label: "主语" }, { w: "is", role: "verb", label: "谓语" }, { w: "so kind a girl", role: "complem", label: "表语" }, { w: "that everyone loves her", role: "adverb", label: "结果状语从句" } ] }
               ],
               guess: {
                 q: "so tired that / such a big dog that / so kind a girl that——so 和 such 后面跟的东西一样吗？",
