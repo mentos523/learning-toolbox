@@ -1186,7 +1186,7 @@
     var head = el("header", "g-head");
     var back = el("button", "g-back", "← 返回");
     back.type = "button";
-    back.setAttribute("aria-label", "返回语法筹备页");
+    back.setAttribute("aria-label", "返回语法首页");
     back.addEventListener("click", function () {
       try {
         window.dispatchEvent(new CustomEvent("eng-grammar-exit"));

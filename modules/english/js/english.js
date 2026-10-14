@@ -659,11 +659,11 @@
     {
       id: "grammar",
       name: "语法",
-      tagline: "125 课",            /* 占位（蓝队 2026-10-15）：待红队定稿替换 */
-      description: "占位，待红队定稿", /* 占位（蓝队 2026-10-15）：待红队定稿替换 */
-      glyph: "？",
+      tagline: "125 课 · 讲透语法",
+      description: "从最基础的句子开始，一个一个讲透：879 条例句全带中文解释，句子按成分分块标注，对齐中考、高考要求。",
+      glyph: "Sv",
       color: "#b45309",
-      cta: "进入学习 →"             /* 占位（蓝队 2026-10-15）：待红队定稿替换 */
+      cta: "进入学习 →"
     }
   ];
   var TRACK_KEY = "ltb-en-track";
@@ -785,8 +785,8 @@
       /* 第一级：章列表（回退兜底：数据异常时回到章列表） */
       gramNav.level = "chapters"; gramNav.chId = null;
       html += '<button class="back-btn" data-gram-tracks>← 返回子卡选择</button>';
-      html += "<h2>选择章节</h2>";
-      html += '<p class="e-gram-sub">按课程体系顺序排列，从导论一路学到语篇与总复习。</p>';
+      html += "<h2>从最基础起步，一步一步讲透</h2>";
+      html += '<p class="e-gram-sub">20 章 · 125 课 · 458 页，879 条例句全带中文解释与分块标注，对齐中考、高考要求。</p>';
       html += '<ul class="e-gram-chapters">';
       gramChapters().forEach(function (c) {
         html += '<li><button class="e-gram-chapter" data-chapter="' + esc(c.id) + '">' +
