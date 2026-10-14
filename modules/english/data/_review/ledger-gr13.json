@@ -1,1 +1,1112 @@
-{"chapter": "gr13", "entries": [{"en": "I know that he is ill.", "final": null, "first": {"by": "英语专家队", "at": "2026-10-14", "verdict": "pass", "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"}, "id": "gr13.1.1-e1", "lesson": "gr13.1.1", "register": "neutral", "revision": 1, "rule": "宾语从句连接词 that（正例 example）", "status": "first_passed", "vocab": "in-scope", "written_at": "2026-10-14", "written_by": "语法生产C队", "zh": "我知道他病了。"}, {"en": "I wonder if it will rain.", "final": null, "first": {"by": "英语专家队", "at": "2026-10-14", "verdict": "pass", "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"}, "id": "gr13.1.1-e2", "lesson": "gr13.1.1", "register": "neutral", "revision": 1, "rule": "宾语从句连接词 if（正例 example）", "status": "first_passed", "vocab": "in-scope", "written_at": "2026-10-14", "written_by": "语法生产C队", "zh": "我想知道是否会下雨。"}, {"en": "He asked me where I lived.", "final": null, "first": {"by": "英语专家队", "at": "2026-10-14", "verdict": "pass", "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"}, "id": "gr13.1.1-e3", "lesson": "gr13.1.1", "register": "neutral", "revision": 1, "rule": "宾语从句连接词 wh-（正例 example）", "status": "first_passed", "vocab": "in-scope", "written_at": "2026-10-14", "written_by": "语法生产C队", "zh": "他问我住在哪儿。"}, {"en": "She told me that she was busy.", "final": null, "first": {"by": "英语专家队", "at": "2026-10-14", "verdict": "pass", "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"}, "id": "gr13.1.1-e4", "lesson": "gr13.1.1", "register": "neutral", "revision": 1, "rule": "宾语从句连接词 that（正例 example）", "status": "first_passed", "vocab": "in-scope", "written_at": "2026-10-14", "written_by": "语法生产C队", "zh": "她告诉我她很忙。"}, {"en": "Do you know what he said?", "final": null, "first": {"by": "英语专家队", "at": "2026-10-14", "verdict": "pass", "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"}, "id": "gr13.1.1-e5", "lesson": "gr13.1.1", "register": "neutral", "revision": 1, "rule": "宾语从句连接词 wh-（正例 example）", "status": "first_passed", "vocab": "in-scope", "written_at": "2026-10-14", "written_by": "语法生产C队", "zh": "你知道他说了什么吗？"}, {"en": "I don't know whether he will come.", "final": null, "first": {"by": "英语专家队", "at": "2026-10-14", "verdict": "pass", "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"}, "id": "gr13.1.1-e6", "lesson": "gr13.1.1", "register": "neutral", "revision": 1, "rule": "宾语从句连接词 whether（正例 example）", "status": "first_passed", "vocab": "in-scope", "written_at": "2026-10-14", "written_by": "语法生产C队", "zh": "我不知道他是否会来。"}, {"en": "I wonder it will rain.", "final": null, "first": {"by": "英语专家队", "at": "2026-10-14", "verdict": "pass", "note": "错句标注明确、纠偏方向与本课规则一致"}, "id": "gr13.1.1-e7", "lesson": "gr13.1.1", "register": "neutral", "revision": 1, "rule": "连接词漏用（反例 counter）", "status": "first_passed", "vocab": "in-scope", "written_at": "2026-10-14", "written_by": "语法生产C队", "zh": "（✗ 错句）本想说“ 我想知道是否会下雨 ”。"}, {"en": "They asked him when he arrived.", "final": null, "first": {"by": "英语专家队", "at": "2026-10-14", "verdict": "pass", "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"}, "id": "gr13.1.2-e1", "lesson": "gr13.1.2", "register": "neutral", "revision": 1, "rule": "宾语从句陈述语序（正例 example）", "status": "first_passed", "vocab": "in-scope", "written_at": "2026-10-14", "written_by": "语法生产C队", "zh": "他们问他什么时候到的。"}, {"en": "She said that she was busy.", "final": null, "first": {"by": "英语专家队", "at": "2026-10-14", "verdict": "pass", "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"}, "id": "gr13.1.2-e2", "lesson": "gr13.1.2", "register": "neutral", "revision": 1, "rule": "主过从过（正例 example）", "status": "first_passed", "vocab": "in-scope", "written_at": "2026-10-14", "written_by": "语法生产C队", "zh": "她说她很忙。"}, {"en": "I think he will come tomorrow.", "final": null, "first": {"by": "英语专家队", "at": "2026-10-14", "verdict": "pass", "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"}, "id": "gr13.1.2-e3", "lesson": "gr13.1.2", "register": "neutral", "revision": 1, "rule": "主句现在时从句时态不变（正例 example）", "status": "first_passed", "vocab": "in-scope", "written_at": "2026-10-14", "written_by": "语法生产C队", "zh": "我想他明天会来。"}, {"en": "He asked me where did I live.", "final": null, "first": {"by": "英语专家队", "at": "2026-10-14", "verdict": "pass", "note": "错句标注明确、纠偏方向与本课规则一致"}, "id": "gr13.1.2-e4", "lesson": "gr13.1.2", "register": "neutral", "revision": 1, "rule": "从句倒装（反例 counter）", "status": "first_passed", "vocab": "in-scope", "written_at": "2026-10-14", "written_by": "语法生产C队", "zh": "（✗ 错句）本想说“ 他问我住在哪儿 ”。"}, {"en": "They told us that they had finished the work.", "final": null, "first": {"by": "英语专家队", "at": "2026-10-14", "verdict": "pass", "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"}, "id": "gr13.1.2-e5", "lesson": "gr13.1.2", "register": "neutral", "revision": 1, "rule": "主过从过（正例 example）", "status": "first_passed", "vocab": "in-scope", "written_at": "2026-10-14", "written_by": "语法生产C队", "zh": "他们告诉我们他们已经完成了工作。"}, {"en": "Do you know when he will arrive?", "final": null, "first": {"by": "英语专家队", "at": "2026-10-14", "verdict": "pass", "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"}, "id": "gr13.1.2-e6", "lesson": "gr13.1.2", "register": "neutral", "revision": 1, "rule": "主句现在时从句时态不变（正例 example）", "status": "first_passed", "vocab": "in-scope", "written_at": "2026-10-14", "written_by": "语法生产C队", "zh": "你知道他什么时候到吗？"}, {"en": "She said she is busy.", "final": null, "first": {"by": "英语专家队", "at": "2026-10-14", "verdict": "pass", "note": "错句标注明确、纠偏方向与本课规则一致"}, "id": "gr13.1.2-e7", "lesson": "gr13.1.2", "register": "neutral", "revision": 1, "rule": "时态不呼应（反例 counter）", "status": "first_passed", "vocab": "in-scope", "written_at": "2026-10-14", "written_by": "语法生产C队", "zh": "（✗ 错句）本想说“ 她说她很忙 ”。"}, {"en": "I don't know whether to go.", "final": null, "first": {"by": "英语专家队", "at": "2026-10-14", "verdict": "pass", "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"}, "id": "gr13.1.3-e1", "lesson": "gr13.1.3", "register": "neutral", "revision": 1, "rule": "whether 接 to do（正例 example）", "status": "first_passed", "vocab": "in-scope", "written_at": "2026-10-14", "written_by": "语法生产C队", "zh": "我不知道是否该去。"}, {"en": "I don't care whether he comes or not.", "final": null, "first": {"by": "英语专家队", "at": "2026-10-14", "verdict": "reject", "note": "打回（审计清单第11条：规则必注适用条件）——例句从句类型超出本课规则适用范围：'Whether it rains or not, we will go.' 中的 whether 从句是让步状语从句（= No matter whether…），不是宾语从句；本课规则为 whether 在名词性从句中的三条身份证（to do / or not / 作主语），正例句须为名词性从句。重写建议：换成宾语从句正例，如 \"I don't care whether he comes or not.\"（whether…or not 宾语从句）"}, "id": "gr13.1.3-e2", "lesson": "gr13.1.3", "register": "neutral", "revision": 2, "rule": "whether 与 or not 连用（正例 example）", "status": "drafted", "vocab": "in-scope", "written_at": "2026-10-14", "written_by": "语法生产C队", "zh": "我不在乎他来不来。（whether…or not 在这里是宾语从句，充当 care 的宾语）", "rewrite": {"by": "语法生产C队", "at": "2026-10-14", "note": "初审打回重写：原句 \"Whether it rains or not, we will go.\" 的 whether 从句是让步状语从句，非名词性从句；已换成宾语从句正例 \"I don't care whether he comes or not.\"（whether…or not 作宾语从句），英文/中文/分块同步重写"}}, {"en": "I wonder if he is at home.", "final": null, "first": {"by": "英语专家队", "at": "2026-10-14", "verdict": "pass", "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"}, "id": "gr13.1.3-e3", "lesson": "gr13.1.3", "register": "neutral", "revision": 1, "rule": "if 表是否（正例 example）", "status": "first_passed", "vocab": "in-scope", "written_at": "2026-10-14", "written_by": "语法生产C队", "zh": "我想知道他在不在家。"}, {"en": "We discussed whether we should wait.", "final": null, "first": {"by": "英语专家队", "at": "2026-10-14", "verdict": "pass", "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"}, "id": "gr13.1.3-e4", "lesson": "gr13.1.3", "register": "neutral", "revision": 1, "rule": "discuss 后接 whether（正例 example）", "status": "first_passed", "vocab": "in-scope", "written_at": "2026-10-14", "written_by": "语法生产C队", "zh": "我们讨论了是否该等。"}, {"en": "I don't know if to go.", "final": null, "first": {"by": "英语专家队", "at": "2026-10-14", "verdict": "pass", "note": "错句标注明确、纠偏方向与本课规则一致"}, "id": "gr13.1.3-e5", "lesson": "gr13.1.3", "register": "neutral", "revision": 1, "rule": "if 接 to do（反例 counter）", "status": "first_passed", "vocab": "in-scope", "written_at": "2026-10-14", "written_by": "语法生产C队", "zh": "（✗ 错句）本想说“ 我不知道是否该去 ”。"}, {"en": "They discussed if they should leave.", "final": null, "first": {"by": "英语专家队", "at": "2026-10-14", "verdict": "pass", "note": "错句标注明确、纠偏方向与本课规则一致"}, "id": "gr13.1.3-e6", "lesson": "gr13.1.3", "register": "neutral", "revision": 1, "rule": "discuss 后接 if（反例 counter）", "status": "first_passed", "vocab": "in-scope", "written_at": "2026-10-14", "written_by": "语法生产C队", "zh": "（✗ 错句）本想说“ 他们讨论是否该离开 ”。"}, {"en": "Whether he comes or not doesn't matter.", "final": null, "first": {"by": "英语专家队", "at": "2026-10-14", "verdict": "pass", "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"}, "id": "gr13.1.3-e7", "lesson": "gr13.1.3", "register": "neutral", "revision": 1, "rule": "whether 作主语（正例 example）", "status": "first_passed", "vocab": "in-scope", "written_at": "2026-10-14", "written_by": "语法生产C队", "zh": "他来不来没关系。"}, {"en": "I doubt whether he will come.", "final": null, "first": {"by": "英语专家队", "at": "2026-10-14", "verdict": "pass", "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"}, "id": "gr13.1.4-e1", "lesson": "gr13.1.4", "register": "neutral", "revision": 1, "rule": "肯定 doubt 接 whether（正例 example）", "status": "first_passed", "vocab": "in-scope", "written_at": "2026-10-14", "written_by": "语法生产C队", "zh": "我怀疑他是否会来。"}, {"en": "I don't doubt that he will come.", "final": null, "first": {"by": "英语专家队", "at": "2026-10-14", "verdict": "pass", "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"}, "id": "gr13.1.4-e2", "lesson": "gr13.1.4", "register": "neutral", "revision": 1, "rule": "否定 doubt 接 that（正例 example）", "status": "first_passed", "vocab": "in-scope", "written_at": "2026-10-14", "written_by": "语法生产C队", "zh": "我不怀疑他会来。"}, {"en": "I wonder if it will rain tomorrow.", "final": null, "first": {"by": "英语专家队", "at": "2026-10-14", "verdict": "pass", "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"}, "id": "gr13.1.4-e3", "lesson": "gr13.1.4", "register": "neutral", "revision": 1, "rule": "wonder 接 if（正例 example）", "status": "first_passed", "vocab": "in-scope", "written_at": "2026-10-14", "written_by": "语法生产C队", "zh": "我想知道明天是否下雨。"}, {"en": "He suggested that we leave early.", "final": null, "first": {"by": "英语专家队", "at": "2026-10-14", "verdict": "pass", "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"}, "id": "gr13.1.4-e4", "lesson": "gr13.1.4", "register": "neutral", "revision": 1, "rule": "suggest 接 that（正例 example）", "status": "first_passed", "vocab": "in-scope", "written_at": "2026-10-14", "written_by": "语法生产C队", "zh": "他建议我们早点离开。"}, {"en": "I suggest if we leave early.", "final": null, "first": {"by": "英语专家队", "at": "2026-10-14", "verdict": "pass", "note": "错句标注明确、纠偏方向与本课规则一致"}, "id": "gr13.1.4-e5", "lesson": "gr13.1.4", "register": "neutral", "revision": 1, "rule": "suggest 接 if（反例 counter）", "status": "first_passed", "vocab": "in-scope", "written_at": "2026-10-14", "written_by": "语法生产C队", "zh": "（✗ 错句）本想说“ 我建议我们早点离开 ”。"}, {"en": "I doubt that he won't come.", "final": null, "first": {"by": "英语专家队", "at": "2026-10-14", "verdict": "pass", "note": "错句标注明确、纠偏方向与本课规则一致"}, "id": "gr13.1.4-e6", "lesson": "gr13.1.4", "register": "neutral", "revision": 1, "rule": "doubt 双重否定（反例 counter）", "status": "first_passed", "vocab": "in-scope", "written_at": "2026-10-14", "written_by": "语法生产C队", "zh": "（✗ 错句）本想说“ 我怀疑他是否会来 ”。"}, {"en": "I wonder whether he knows the answer.", "final": null, "first": {"by": "英语专家队", "at": "2026-10-14", "verdict": "pass", "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"}, "id": "gr13.1.4-e7", "lesson": "gr13.1.4", "register": "neutral", "revision": 1, "rule": "wonder 接 whether（正例 example）", "status": "first_passed", "vocab": "in-scope", "written_at": "2026-10-14", "written_by": "语法生产C队", "zh": "我想知道他是否知道答案。"}, {"en": "It is important that we learn English well.", "final": null, "first": {"by": "英语专家队", "at": "2026-10-14", "verdict": "pass", "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"}, "id": "gr13.2.1-e1", "lesson": "gr13.2.1", "register": "neutral", "revision": 1, "rule": "形式主语 it（正例 example）", "status": "first_passed", "vocab": "in-scope", "written_at": "2026-10-14", "written_by": "语法生产C队", "zh": "学好英语很重要。"}, {"en": "It is true that he helped us.", "final": null, "first": {"by": "英语专家队", "at": "2026-10-14", "verdict": "pass", "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"}, "id": "gr13.2.1-e2", "lesson": "gr13.2.1", "register": "neutral", "revision": 1, "rule": "形式主语 it（正例 example）", "status": "first_passed", "vocab": "in-scope", "written_at": "2026-10-14", "written_by": "语法生产C队", "zh": "他帮过我们，这是真的。"}, {"en": "That we finish on time is important.", "final": null, "first": {"by": "英语专家队", "at": "2026-10-14", "verdict": "pass", "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"}, "id": "gr13.2.1-e3", "lesson": "gr13.2.1", "register": "written", "revision": 1, "rule": "主语从句放句首（正例 example）", "status": "first_passed", "vocab": "in-scope", "written_at": "2026-10-14", "written_by": "语法生产C队", "zh": "我们按时完成很重要。"}, {"en": "It doesn't matter whether you come or not.", "final": null, "first": {"by": "英语专家队", "at": "2026-10-14", "verdict": "pass", "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"}, "id": "gr13.2.1-e4", "lesson": "gr13.2.1", "register": "neutral", "revision": 1, "rule": "whether 引导主语从句（正例 example）", "status": "first_passed", "vocab": "in-scope", "written_at": "2026-10-14", "written_by": "语法生产C队", "zh": "你来不来没关系。"}, {"en": "That is important that we learn English.", "final": null, "first": {"by": "英语专家队", "at": "2026-10-14", "verdict": "pass", "note": "错句标注明确、纠偏方向与本课规则一致"}, "id": "gr13.2.1-e5", "lesson": "gr13.2.1", "register": "neutral", "revision": 1, "rule": "that 杂糅（反例 counter）", "status": "first_passed", "vocab": "in-scope", "written_at": "2026-10-14", "written_by": "语法生产C队", "zh": "（✗ 错句）本想说“ 学好英语很重要 ”。"}, {"en": "It is clear that he was wrong.", "final": null, "first": {"by": "英语专家队", "at": "2026-10-14", "verdict": "pass", "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"}, "id": "gr13.2.1-e6", "lesson": "gr13.2.1", "register": "neutral", "revision": 1, "rule": "形式主语 it（正例 example）", "status": "first_passed", "vocab": "in-scope", "written_at": "2026-10-14", "written_by": "语法生产C队", "zh": "很明显他错了。"}, {"en": "It is said that he will leave.", "final": null, "first": {"by": "英语专家队", "at": "2026-10-14", "verdict": "pass", "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"}, "id": "gr13.2.1-e7", "lesson": "gr13.2.1", "register": "neutral", "revision": 1, "rule": "形式主语 it（正例 example）", "status": "first_passed", "vocab": "in-scope", "written_at": "2026-10-14", "written_by": "语法生产C队", "zh": "据说他要离开。"}, {"en": "The problem is that we have no money.", "final": null, "first": {"by": "英语专家队", "at": "2026-10-14", "verdict": "pass", "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"}, "id": "gr13.2.2-e1", "lesson": "gr13.2.2", "register": "neutral", "revision": 1, "rule": "表语从句（正例 example）", "status": "first_passed", "vocab": "in-scope", "written_at": "2026-10-14", "written_by": "语法生产C队", "zh": "问题是我们没钱。"}, {"en": "The news that he won surprised us.", "final": null, "first": {"by": "英语专家队", "at": "2026-10-14", "verdict": "pass", "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"}, "id": "gr13.2.2-e2", "lesson": "gr13.2.2", "register": "neutral", "revision": 1, "rule": "同位语从句（正例 example）", "status": "first_passed", "vocab": "in-scope", "written_at": "2026-10-14", "written_by": "语法生产C队", "zh": "他赢了的消息让我们吃惊。"}, {"en": "The fact that he was late made us angry.", "final": null, "first": {"by": "英语专家队", "at": "2026-10-14", "verdict": "pass", "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"}, "id": "gr13.2.2-e3", "lesson": "gr13.2.2", "register": "neutral", "revision": 1, "rule": "同位语从句（正例 example）", "status": "first_passed", "vocab": "in-scope", "written_at": "2026-10-14", "written_by": "语法生产C队", "zh": "他迟到的事实让我们生气。"}, {"en": "My idea is that we start early.", "final": null, "first": {"by": "英语专家队", "at": "2026-10-14", "verdict": "pass", "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"}, "id": "gr13.2.2-e4", "lesson": "gr13.2.2", "register": "neutral", "revision": 1, "rule": "表语从句（正例 example）", "status": "first_passed", "vocab": "in-scope", "written_at": "2026-10-14", "written_by": "语法生产C队", "zh": "我的想法是我们早点出发。"}, {"en": "I have no idea when he will come.", "final": null, "first": {"by": "英语专家队", "at": "2026-10-14", "verdict": "pass", "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"}, "id": "gr13.2.2-e5", "lesson": "gr13.2.2", "register": "neutral", "revision": 1, "rule": "同位语从句 wh-（正例 example）", "status": "first_passed", "vocab": "in-scope", "written_at": "2026-10-14", "written_by": "语法生产C队", "zh": "我不知道他什么时候来。"}, {"en": "The idea that the earth is flat is wrong.", "final": null, "first": {"by": "英语专家队", "at": "2026-10-14", "verdict": "pass", "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"}, "id": "gr13.2.2-e6", "lesson": "gr13.2.2", "register": "neutral", "revision": 1, "rule": "同位语从句（正例 example）", "status": "first_passed", "vocab": "in-scope", "written_at": "2026-10-14", "written_by": "语法生产C队", "zh": "地球是平的这种看法是错的。"}, {"en": "The news that he told us surprised me.", "final": null, "first": {"by": "英语专家队", "at": "2026-10-14", "verdict": "pass", "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"}, "id": "gr13.2.2-e7", "lesson": "gr13.2.2", "register": "neutral", "revision": 1, "rule": "同位语 vs 定语辨析（正例 example）", "status": "first_passed", "vocab": "in-scope", "written_at": "2026-10-14", "written_by": "语法生产C队", "zh": "他告诉我们的那个消息让我吃惊。"}, {"en": "He said that he was busy.", "final": null, "first": {"by": "英语专家队", "at": "2026-10-14", "verdict": "pass", "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"}, "id": "gr13.2.3-e1", "lesson": "gr13.2.3", "register": "neutral", "revision": 1, "rule": "间接引语陈述句（正例 example）", "status": "first_passed", "vocab": "in-scope", "written_at": "2026-10-14", "written_by": "语法生产C队", "zh": "他说他很忙。"}, {"en": "She asked me if I was ready.", "final": null, "first": {"by": "英语专家队", "at": "2026-10-14", "verdict": "pass", "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"}, "id": "gr13.2.3-e2", "lesson": "gr13.2.3", "register": "neutral", "revision": 1, "rule": "间接引语疑问句（正例 example）", "status": "first_passed", "vocab": "in-scope", "written_at": "2026-10-14", "written_by": "语法生产C队", "zh": "她问我是否准备好了。"}, {"en": "The teacher told us to be quiet.", "final": null, "first": {"by": "英语专家队", "at": "2026-10-14", "verdict": "pass", "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"}, "id": "gr13.2.3-e3", "lesson": "gr13.2.3", "register": "neutral", "revision": 1, "rule": "间接引语祈使句（正例 example）", "status": "first_passed", "vocab": "in-scope", "written_at": "2026-10-14", "written_by": "语法生产C队", "zh": "老师让我们安静。"}, {"en": "He said he would come soon.", "final": null, "first": {"by": "英语专家队", "at": "2026-10-14", "verdict": "pass", "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"}, "id": "gr13.2.3-e4", "lesson": "gr13.2.3", "register": "neutral", "revision": 1, "rule": "间接引语时态后退（正例 example）", "status": "first_passed", "vocab": "in-scope", "written_at": "2026-10-14", "written_by": "语法生产C队", "zh": "他说他很快就来。"}, {"en": "She asked where I lived.", "final": null, "first": {"by": "英语专家队", "at": "2026-10-14", "verdict": "pass", "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"}, "id": "gr13.2.3-e5", "lesson": "gr13.2.3", "register": "neutral", "revision": 1, "rule": "间接引语疑问句（正例 example）", "status": "first_passed", "vocab": "in-scope", "written_at": "2026-10-14", "written_by": "语法生产C队", "zh": "她问我住在哪儿。"}, {"en": "He said that he is busy.", "final": null, "first": {"by": "英语专家队", "at": "2026-10-14", "verdict": "pass", "note": "错句标注明确、纠偏方向与本课规则一致"}, "id": "gr13.2.3-e6", "lesson": "gr13.2.3", "register": "neutral", "revision": 1, "rule": "间接引语时态未后退（反例 counter）", "status": "first_passed", "vocab": "in-scope", "written_at": "2026-10-14", "written_by": "语法生产C队", "zh": "（✗ 错句）本想说“ 他说他很忙 ”。"}, {"en": "My mother told me to lock the door.", "final": null, "first": {"by": "英语专家队", "at": "2026-10-14", "verdict": "pass", "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"}, "id": "gr13.2.3-e7", "lesson": "gr13.2.3", "register": "neutral", "revision": 1, "rule": "间接引语祈使句（正例 example）", "status": "first_passed", "vocab": "in-scope", "written_at": "2026-10-14", "written_by": "语法生产C队", "zh": "妈妈让我锁门。"}, {"en": "I believe that he is right.", "final": null, "first": {"by": "英语专家队", "at": "2026-10-14", "verdict": "pass", "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"}, "id": "gr13.2.4-e1", "lesson": "gr13.2.4", "register": "neutral", "revision": 1, "rule": "名词性从句综合（正例 example）", "status": "first_passed", "vocab": "in-scope", "written_at": "2026-10-14", "written_by": "语法生产C队", "zh": "我相信他是对的。"}, {"en": "What he said is true.", "final": null, "first": {"by": "英语专家队", "at": "2026-10-14", "verdict": "pass", "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"}, "id": "gr13.2.4-e2", "lesson": "gr13.2.4", "register": "neutral", "revision": 1, "rule": "名词性从句综合（正例 example）", "status": "first_passed", "vocab": "in-scope", "written_at": "2026-10-14", "written_by": "语法生产C队", "zh": "他说的是真的。"}, {"en": "The question is when we leave.", "final": null, "first": {"by": "英语专家队", "at": "2026-10-14", "verdict": "pass", "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"}, "id": "gr13.2.4-e3", "lesson": "gr13.2.4", "register": "neutral", "revision": 1, "rule": "名词性从句综合（正例 example）", "status": "first_passed", "vocab": "in-scope", "written_at": "2026-10-14", "written_by": "语法生产C队", "zh": "问题是我们何时出发。"}, {"en": "She asked me whether I was tired.", "final": null, "first": {"by": "英语专家队", "at": "2026-10-14", "verdict": "pass", "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"}, "id": "gr13.2.4-e4", "lesson": "gr13.2.4", "register": "neutral", "revision": 1, "rule": "名词性从句综合（正例 example）", "status": "first_passed", "vocab": "in-scope", "written_at": "2026-10-14", "written_by": "语法生产C队", "zh": "她问我是否累了。"}, {"en": "It is clear that we need help.", "final": null, "first": {"by": "英语专家队", "at": "2026-10-14", "verdict": "pass", "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"}, "id": "gr13.2.4-e5", "lesson": "gr13.2.4", "register": "neutral", "revision": 1, "rule": "名词性从句综合（正例 example）", "status": "first_passed", "vocab": "in-scope", "written_at": "2026-10-14", "written_by": "语法生产C队", "zh": "很明显我们需要帮助。"}, {"en": "He told me that he had seen the film.", "final": null, "first": {"by": "英语专家队", "at": "2026-10-14", "verdict": "pass", "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"}, "id": "gr13.2.4-e6", "lesson": "gr13.2.4", "register": "neutral", "revision": 1, "rule": "名词性从句综合（正例 example）", "status": "first_passed", "vocab": "in-scope", "written_at": "2026-10-14", "written_by": "语法生产C队", "zh": "他告诉我他看过那部电影。"}], "note": "英语语法例句三审台账（D3）。字段与状态定义见 docs/english-grammar-review-ledger.md。语法生产C队 2026-10-14 撰写，共 55 条（正例 48 / 反例 7），状态 drafted，待英语专家队初审与红队终审。", "schema": "grammar-review-ledger/1.0"}
+{
+  "chapter": "gr13",
+  "entries": [
+    {
+      "en": "I know that he is ill.",
+      "final": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr13.1.1-e1",
+      "lesson": "gr13.1.1",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "宾语从句连接词 that（正例 example）",
+      "status": "first_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "我知道他病了。"
+    },
+    {
+      "en": "I wonder if it will rain.",
+      "final": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr13.1.1-e2",
+      "lesson": "gr13.1.1",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "宾语从句连接词 if（正例 example）",
+      "status": "first_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "我想知道是否会下雨。"
+    },
+    {
+      "en": "He asked me where I lived.",
+      "final": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr13.1.1-e3",
+      "lesson": "gr13.1.1",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "宾语从句连接词 wh-（正例 example）",
+      "status": "first_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "他问我住在哪儿。"
+    },
+    {
+      "en": "She told me that she was busy.",
+      "final": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr13.1.1-e4",
+      "lesson": "gr13.1.1",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "宾语从句连接词 that（正例 example）",
+      "status": "first_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "她告诉我她很忙。"
+    },
+    {
+      "en": "Do you know what he said?",
+      "final": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr13.1.1-e5",
+      "lesson": "gr13.1.1",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "宾语从句连接词 wh-（正例 example）",
+      "status": "first_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "你知道他说了什么吗？"
+    },
+    {
+      "en": "I don't know whether he will come.",
+      "final": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr13.1.1-e6",
+      "lesson": "gr13.1.1",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "宾语从句连接词 whether（正例 example）",
+      "status": "first_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "我不知道他是否会来。"
+    },
+    {
+      "en": "I wonder it will rain.",
+      "final": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "错句标注明确、纠偏方向与本课规则一致"
+      },
+      "id": "gr13.1.1-e7",
+      "lesson": "gr13.1.1",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "连接词漏用（反例 counter）",
+      "status": "first_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "（✗ 错句）本想说“ 我想知道是否会下雨 ”。"
+    },
+    {
+      "en": "They asked him when he arrived.",
+      "final": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr13.1.2-e1",
+      "lesson": "gr13.1.2",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "宾语从句陈述语序（正例 example）",
+      "status": "first_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "他们问他什么时候到的。"
+    },
+    {
+      "en": "She said that she was busy.",
+      "final": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr13.1.2-e2",
+      "lesson": "gr13.1.2",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "主过从过（正例 example）",
+      "status": "first_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "她说她很忙。"
+    },
+    {
+      "en": "I think he will come tomorrow.",
+      "final": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr13.1.2-e3",
+      "lesson": "gr13.1.2",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "主句现在时从句时态不变（正例 example）",
+      "status": "first_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "我想他明天会来。"
+    },
+    {
+      "en": "He asked me where did I live.",
+      "final": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "错句标注明确、纠偏方向与本课规则一致"
+      },
+      "id": "gr13.1.2-e4",
+      "lesson": "gr13.1.2",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "从句倒装（反例 counter）",
+      "status": "first_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "（✗ 错句）本想说“ 他问我住在哪儿 ”。"
+    },
+    {
+      "en": "They told us that they had finished the work.",
+      "final": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr13.1.2-e5",
+      "lesson": "gr13.1.2",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "主过从过（正例 example）",
+      "status": "first_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "他们告诉我们他们已经完成了工作。"
+    },
+    {
+      "en": "Do you know when he will arrive?",
+      "final": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr13.1.2-e6",
+      "lesson": "gr13.1.2",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "主句现在时从句时态不变（正例 example）",
+      "status": "first_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "你知道他什么时候到吗？"
+    },
+    {
+      "en": "She said she is busy.",
+      "final": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "错句标注明确、纠偏方向与本课规则一致"
+      },
+      "id": "gr13.1.2-e7",
+      "lesson": "gr13.1.2",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "时态不呼应（反例 counter）",
+      "status": "first_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "（✗ 错句）本想说“ 她说她很忙 ”。"
+    },
+    {
+      "en": "I don't know whether to go.",
+      "final": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr13.1.3-e1",
+      "lesson": "gr13.1.3",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "whether 接 to do（正例 example）",
+      "status": "first_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "我不知道是否该去。"
+    },
+    {
+      "en": "I don't care whether he comes or not.",
+      "final": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "whether 从句作 care 的宾语，确为宾语从句（非让步）；rule（身份证②）/术语/中文释义/分块标注均合清单要求；gr13.js 登记处与 gr13.1.3-p1 引用（英文/中文/分块/猜测题）逐字一致"
+      },
+      "id": "gr13.1.3-e2",
+      "lesson": "gr13.1.3",
+      "register": "neutral",
+      "revision": 2,
+      "rule": "whether 与 or not 连用（正例 example）",
+      "status": "first_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "我不在乎他来不来。（whether…or not 在这里是宾语从句，充当 care 的宾语）",
+      "rewrite": {
+        "by": "语法生产C队",
+        "at": "2026-10-14",
+        "note": "初审打回重写：原句 \"Whether it rains or not, we will go.\" 的 whether 从句是让步状语从句，非名词性从句；已换成宾语从句正例 \"I don't care whether he comes or not.\"（whether…or not 作宾语从句），英文/中文/分块同步重写"
+      }
+    },
+    {
+      "en": "I wonder if he is at home.",
+      "final": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr13.1.3-e3",
+      "lesson": "gr13.1.3",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "if 表是否（正例 example）",
+      "status": "first_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "我想知道他在不在家。"
+    },
+    {
+      "en": "We discussed whether we should wait.",
+      "final": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr13.1.3-e4",
+      "lesson": "gr13.1.3",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "discuss 后接 whether（正例 example）",
+      "status": "first_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "我们讨论了是否该等。"
+    },
+    {
+      "en": "I don't know if to go.",
+      "final": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "错句标注明确、纠偏方向与本课规则一致"
+      },
+      "id": "gr13.1.3-e5",
+      "lesson": "gr13.1.3",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "if 接 to do（反例 counter）",
+      "status": "first_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "（✗ 错句）本想说“ 我不知道是否该去 ”。"
+    },
+    {
+      "en": "They discussed if they should leave.",
+      "final": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "错句标注明确、纠偏方向与本课规则一致"
+      },
+      "id": "gr13.1.3-e6",
+      "lesson": "gr13.1.3",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "discuss 后接 if（反例 counter）",
+      "status": "first_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "（✗ 错句）本想说“ 他们讨论是否该离开 ”。"
+    },
+    {
+      "en": "Whether he comes or not doesn't matter.",
+      "final": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr13.1.3-e7",
+      "lesson": "gr13.1.3",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "whether 作主语（正例 example）",
+      "status": "first_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "他来不来没关系。"
+    },
+    {
+      "en": "I doubt whether he will come.",
+      "final": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr13.1.4-e1",
+      "lesson": "gr13.1.4",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "肯定 doubt 接 whether（正例 example）",
+      "status": "first_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "我怀疑他是否会来。"
+    },
+    {
+      "en": "I don't doubt that he will come.",
+      "final": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr13.1.4-e2",
+      "lesson": "gr13.1.4",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "否定 doubt 接 that（正例 example）",
+      "status": "first_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "我不怀疑他会来。"
+    },
+    {
+      "en": "I wonder if it will rain tomorrow.",
+      "final": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr13.1.4-e3",
+      "lesson": "gr13.1.4",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "wonder 接 if（正例 example）",
+      "status": "first_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "我想知道明天是否下雨。"
+    },
+    {
+      "en": "He suggested that we leave early.",
+      "final": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr13.1.4-e4",
+      "lesson": "gr13.1.4",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "suggest 接 that（正例 example）",
+      "status": "first_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "他建议我们早点离开。"
+    },
+    {
+      "en": "I suggest if we leave early.",
+      "final": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "错句标注明确、纠偏方向与本课规则一致"
+      },
+      "id": "gr13.1.4-e5",
+      "lesson": "gr13.1.4",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "suggest 接 if（反例 counter）",
+      "status": "first_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "（✗ 错句）本想说“ 我建议我们早点离开 ”。"
+    },
+    {
+      "en": "I doubt that he won't come.",
+      "final": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "错句标注明确、纠偏方向与本课规则一致"
+      },
+      "id": "gr13.1.4-e6",
+      "lesson": "gr13.1.4",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "doubt 双重否定（反例 counter）",
+      "status": "first_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "（✗ 错句）本想说“ 我怀疑他是否会来 ”。"
+    },
+    {
+      "en": "I wonder whether he knows the answer.",
+      "final": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr13.1.4-e7",
+      "lesson": "gr13.1.4",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "wonder 接 whether（正例 example）",
+      "status": "first_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "我想知道他是否知道答案。"
+    },
+    {
+      "en": "It is important that we learn English well.",
+      "final": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr13.2.1-e1",
+      "lesson": "gr13.2.1",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "形式主语 it（正例 example）",
+      "status": "first_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "学好英语很重要。"
+    },
+    {
+      "en": "It is true that he helped us.",
+      "final": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr13.2.1-e2",
+      "lesson": "gr13.2.1",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "形式主语 it（正例 example）",
+      "status": "first_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "他帮过我们，这是真的。"
+    },
+    {
+      "en": "That we finish on time is important.",
+      "final": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr13.2.1-e3",
+      "lesson": "gr13.2.1",
+      "register": "written",
+      "revision": 1,
+      "rule": "主语从句放句首（正例 example）",
+      "status": "first_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "我们按时完成很重要。"
+    },
+    {
+      "en": "It doesn't matter whether you come or not.",
+      "final": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr13.2.1-e4",
+      "lesson": "gr13.2.1",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "whether 引导主语从句（正例 example）",
+      "status": "first_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "你来不来没关系。"
+    },
+    {
+      "en": "That is important that we learn English.",
+      "final": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "错句标注明确、纠偏方向与本课规则一致"
+      },
+      "id": "gr13.2.1-e5",
+      "lesson": "gr13.2.1",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "that 杂糅（反例 counter）",
+      "status": "first_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "（✗ 错句）本想说“ 学好英语很重要 ”。"
+    },
+    {
+      "en": "It is clear that he was wrong.",
+      "final": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr13.2.1-e6",
+      "lesson": "gr13.2.1",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "形式主语 it（正例 example）",
+      "status": "first_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "很明显他错了。"
+    },
+    {
+      "en": "It is said that he will leave.",
+      "final": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr13.2.1-e7",
+      "lesson": "gr13.2.1",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "形式主语 it（正例 example）",
+      "status": "first_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "据说他要离开。"
+    },
+    {
+      "en": "The problem is that we have no money.",
+      "final": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr13.2.2-e1",
+      "lesson": "gr13.2.2",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "表语从句（正例 example）",
+      "status": "first_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "问题是我们没钱。"
+    },
+    {
+      "en": "The news that he won surprised us.",
+      "final": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr13.2.2-e2",
+      "lesson": "gr13.2.2",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "同位语从句（正例 example）",
+      "status": "first_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "他赢了的消息让我们吃惊。"
+    },
+    {
+      "en": "The fact that he was late made us angry.",
+      "final": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr13.2.2-e3",
+      "lesson": "gr13.2.2",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "同位语从句（正例 example）",
+      "status": "first_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "他迟到的事实让我们生气。"
+    },
+    {
+      "en": "My idea is that we start early.",
+      "final": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr13.2.2-e4",
+      "lesson": "gr13.2.2",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "表语从句（正例 example）",
+      "status": "first_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "我的想法是我们早点出发。"
+    },
+    {
+      "en": "I have no idea when he will come.",
+      "final": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr13.2.2-e5",
+      "lesson": "gr13.2.2",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "同位语从句 wh-（正例 example）",
+      "status": "first_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "我不知道他什么时候来。"
+    },
+    {
+      "en": "The idea that the earth is flat is wrong.",
+      "final": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr13.2.2-e6",
+      "lesson": "gr13.2.2",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "同位语从句（正例 example）",
+      "status": "first_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "地球是平的这种看法是错的。"
+    },
+    {
+      "en": "The news that he told us surprised me.",
+      "final": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr13.2.2-e7",
+      "lesson": "gr13.2.2",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "同位语 vs 定语辨析（正例 example）",
+      "status": "first_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "他告诉我们的那个消息让我吃惊。"
+    },
+    {
+      "en": "He said that he was busy.",
+      "final": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr13.2.3-e1",
+      "lesson": "gr13.2.3",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "间接引语陈述句（正例 example）",
+      "status": "first_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "他说他很忙。"
+    },
+    {
+      "en": "She asked me if I was ready.",
+      "final": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr13.2.3-e2",
+      "lesson": "gr13.2.3",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "间接引语疑问句（正例 example）",
+      "status": "first_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "她问我是否准备好了。"
+    },
+    {
+      "en": "The teacher told us to be quiet.",
+      "final": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr13.2.3-e3",
+      "lesson": "gr13.2.3",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "间接引语祈使句（正例 example）",
+      "status": "first_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "老师让我们安静。"
+    },
+    {
+      "en": "He said he would come soon.",
+      "final": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr13.2.3-e4",
+      "lesson": "gr13.2.3",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "间接引语时态后退（正例 example）",
+      "status": "first_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "他说他很快就来。"
+    },
+    {
+      "en": "She asked where I lived.",
+      "final": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr13.2.3-e5",
+      "lesson": "gr13.2.3",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "间接引语疑问句（正例 example）",
+      "status": "first_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "她问我住在哪儿。"
+    },
+    {
+      "en": "He said that he is busy.",
+      "final": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "错句标注明确、纠偏方向与本课规则一致"
+      },
+      "id": "gr13.2.3-e6",
+      "lesson": "gr13.2.3",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "间接引语时态未后退（反例 counter）",
+      "status": "first_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "（✗ 错句）本想说“ 他说他很忙 ”。"
+    },
+    {
+      "en": "My mother told me to lock the door.",
+      "final": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr13.2.3-e7",
+      "lesson": "gr13.2.3",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "间接引语祈使句（正例 example）",
+      "status": "first_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "妈妈让我锁门。"
+    },
+    {
+      "en": "I believe that he is right.",
+      "final": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr13.2.4-e1",
+      "lesson": "gr13.2.4",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "名词性从句综合（正例 example）",
+      "status": "first_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "我相信他是对的。"
+    },
+    {
+      "en": "What he said is true.",
+      "final": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr13.2.4-e2",
+      "lesson": "gr13.2.4",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "名词性从句综合（正例 example）",
+      "status": "first_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "他说的是真的。"
+    },
+    {
+      "en": "The question is when we leave.",
+      "final": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr13.2.4-e3",
+      "lesson": "gr13.2.4",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "名词性从句综合（正例 example）",
+      "status": "first_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "问题是我们何时出发。"
+    },
+    {
+      "en": "She asked me whether I was tired.",
+      "final": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr13.2.4-e4",
+      "lesson": "gr13.2.4",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "名词性从句综合（正例 example）",
+      "status": "first_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "她问我是否累了。"
+    },
+    {
+      "en": "It is clear that we need help.",
+      "final": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr13.2.4-e5",
+      "lesson": "gr13.2.4",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "名词性从句综合（正例 example）",
+      "status": "first_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "很明显我们需要帮助。"
+    },
+    {
+      "en": "He told me that he had seen the film.",
+      "final": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr13.2.4-e6",
+      "lesson": "gr13.2.4",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "名词性从句综合（正例 example）",
+      "status": "first_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "他告诉我他看过那部电影。"
+    }
+  ],
+  "note": "英语语法例句三审台账（D3）。字段与状态定义见 docs/english-grammar-review-ledger.md。语法生产C队 2026-10-14 撰写，共 55 条（正例 48 / 反例 7），状态 drafted，待英语专家队初审与红队终审。",
+  "schema": "grammar-review-ledger/1.0"
+}
