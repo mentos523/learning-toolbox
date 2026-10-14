@@ -368,18 +368,23 @@
         "by": "英语专家队",
         "at": "2026-10-14",
         "verdict": "pass",
-        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+        "note": "targeted复核：中文删括号标注，准确无误导"
       },
       "id": "gr14.1.3-e1",
       "lesson": "gr14.1.3",
       "register": "neutral",
-      "revision": 1,
+      "revision": 2,
       "rule": "限制性定语从句（正例 example）",
-      "status": "final_passed",
+      "status": "first_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
-      "zh": "我那个住在北京的哥哥是医生。（暗示还有别的兄弟）"
+      "zh": "我那个住在北京的哥哥是医生。",
+      "rewrite": {
+        "by": "协调者（台账同步）",
+        "at": "2026-10-14",
+        "note": "S2去泄题：C队修复时数据文件中文删括号标注，台账同步对齐；英文未动。"
+      }
     },
     {
       "en": "My brother, who lives in Beijing, is a doctor.",
@@ -393,18 +398,23 @@
         "by": "英语专家队",
         "at": "2026-10-14",
         "verdict": "pass",
-        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+        "note": "targeted复核：中文删括号标注，准确无误导"
       },
       "id": "gr14.1.3-e2",
       "lesson": "gr14.1.3",
       "register": "neutral",
-      "revision": 1,
+      "revision": 2,
       "rule": "非限制性定语从句（正例 example）",
-      "status": "final_passed",
+      "status": "first_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
-      "zh": "我哥哥住在北京，他是医生。（只有一个哥哥）"
+      "zh": "我哥哥住在北京，他是医生。",
+      "rewrite": {
+        "by": "协调者（台账同步）",
+        "at": "2026-10-14",
+        "note": "S2去泄题：C队修复时数据文件中文删括号标注，台账同步对齐；英文未动。"
+      }
     },
     {
       "en": "He failed the test, which surprised us.",
@@ -543,18 +553,23 @@
         "by": "英语专家队",
         "at": "2026-10-14",
         "verdict": "pass",
-        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+        "note": "targeted复核：中文删括号标注，准确无误导"
       },
       "id": "gr14.1.4-e1",
       "lesson": "gr14.1.4",
       "register": "neutral",
-      "revision": 1,
+      "revision": 2,
       "rule": "关系代词作宾语可省（正例 example）",
-      "status": "final_passed",
+      "status": "first_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
-      "zh": "我买的那本书很好。（省 that）"
+      "zh": "我买的那本书很好。",
+      "rewrite": {
+        "by": "协调者（台账同步）",
+        "at": "2026-10-14",
+        "note": "S2去泄题：C队修复时数据文件中文删括号标注，台账同步对齐；英文未动。"
+      }
     },
     {
       "en": "The car that stopped at the door is mine.",
@@ -568,22 +583,22 @@
         "by": "英语专家队",
         "at": "2026-10-14",
         "verdict": "pass",
-        "note": "that 作定语从句主语不可省，规则准确；英文自然无中式英语；中文适合初中生；与 gr14.1.1-e1 不再重复；gr14.js 登记处与 gr14.1.4-p1/p3 引用逐字一致"
+        "note": "targeted复核：中文删括号标注，准确无误导"
       },
       "id": "gr14.1.4-e2",
       "lesson": "gr14.1.4",
       "register": "neutral",
-      "revision": 2,
+      "revision": 3,
       "rule": "关系代词作主语不可省（正例 example）",
-      "status": "final_passed",
+      "status": "first_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
-      "zh": "停在门口的那辆车是我的。（that 不可省）",
+      "zh": "停在门口的那辆车是我的。",
       "rewrite": {
-        "by": "语法生产C队",
+        "by": "协调者（台账同步）",
         "at": "2026-10-14",
-        "note": "同章内重复例句修订（初审员观察项）：原句与 gr14.1.1-e1 完全相同；已换成新的 that/which 关系代词正例 \"The car that stopped at the door is mine.\"（that 作主语不可省），英文/中文同步更新"
+        "note": "S2去泄题：C队修复时数据文件中文删括号标注，台账同步对齐；英文未动。"
       }
     },
     {
@@ -673,18 +688,23 @@
         "by": "英语专家队",
         "at": "2026-10-14",
         "verdict": "pass",
-        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+        "note": "targeted复核：中文删括号标注，准确无误导"
       },
       "id": "gr14.1.4-e6",
       "lesson": "gr14.1.4",
       "register": "neutral",
-      "revision": 1,
+      "revision": 2,
       "rule": "关系代词作宾语可省（正例 example）",
-      "status": "final_passed",
+      "status": "first_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
-      "zh": "我们昨天唱的那首歌很老。（省 which）"
+      "zh": "我们昨天唱的那首歌很老。",
+      "rewrite": {
+        "by": "协调者（台账同步）",
+        "at": "2026-10-14",
+        "note": "S2去泄题：C队修复时数据文件中文删括号标注，台账同步对齐；英文未动。"
+      }
     },
     {
       "en": "Is this the book you are looking for?",
@@ -723,18 +743,23 @@
         "by": "英语专家队",
         "at": "2026-10-14",
         "verdict": "pass",
-        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+        "note": "targeted复核：中文删括号标注，准确无误导"
       },
       "id": "gr14.2.1-e1",
       "lesson": "gr14.2.1",
       "register": "neutral",
-      "revision": 1,
+      "revision": 2,
       "rule": "最高级后 that 必用（正例 example）",
-      "status": "final_passed",
+      "status": "first_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
-      "zh": "这是我看过的最好的电影。（最高级后 that）"
+      "zh": "这是我看过的最好的电影。",
+      "rewrite": {
+        "by": "协调者（台账同步）",
+        "at": "2026-10-14",
+        "note": "S2去泄题：C队修复时数据文件中文删括号标注，台账同步对齐；英文未动。"
+      }
     },
     {
       "en": "He is the first person that came.",
@@ -748,18 +773,23 @@
         "by": "英语专家队",
         "at": "2026-10-14",
         "verdict": "pass",
-        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+        "note": "targeted复核：中文删括号标注，准确无误导"
       },
       "id": "gr14.2.1-e2",
       "lesson": "gr14.2.1",
       "register": "neutral",
-      "revision": 1,
+      "revision": 2,
       "rule": "序数词后 that 必用（正例 example）",
-      "status": "final_passed",
+      "status": "first_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
-      "zh": "他是第一个来的人。（序数词后 that）"
+      "zh": "他是第一个来的人。",
+      "rewrite": {
+        "by": "协调者（台账同步）",
+        "at": "2026-10-14",
+        "note": "S2去泄题：C队修复时数据文件中文删括号标注，台账同步对齐；英文未动。"
+      }
     },
     {
       "en": "This is the only book that I like.",
@@ -773,18 +803,23 @@
         "by": "英语专家队",
         "at": "2026-10-14",
         "verdict": "pass",
-        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+        "note": "targeted复核：中文删括号标注，准确无误导"
       },
       "id": "gr14.2.1-e3",
       "lesson": "gr14.2.1",
       "register": "neutral",
-      "revision": 1,
+      "revision": 2,
       "rule": "only 后 that 必用（正例 example）",
-      "status": "final_passed",
+      "status": "first_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
-      "zh": "这是我唯一喜欢的书。（only 后 that）"
+      "zh": "这是我唯一喜欢的书。",
+      "rewrite": {
+        "by": "协调者（台账同步）",
+        "at": "2026-10-14",
+        "note": "S2去泄题：C队修复时数据文件中文删括号标注，台账同步对齐；英文未动。"
+      }
     },
     {
       "en": "My car, which I bought in 2020, is red.",
@@ -898,18 +933,23 @@
         "by": "英语专家队",
         "at": "2026-10-14",
         "verdict": "pass",
-        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+        "note": "targeted复核：中文删括号标注，准确无误导"
       },
       "id": "gr14.2.2-e1",
       "lesson": "gr14.2.2",
       "register": "written",
-      "revision": 1,
+      "revision": 2,
       "rule": "介词前置（正例 example）",
-      "status": "final_passed",
+      "status": "first_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
-      "zh": "这就是他住过的房子。（介词前置，正式）"
+      "zh": "这就是他住过的房子。",
+      "rewrite": {
+        "by": "协调者（台账同步）",
+        "at": "2026-10-14",
+        "note": "S2去泄题：C队修复时数据文件中文删括号标注，台账同步对齐；英文未动。"
+      }
     },
     {
       "en": "This is the house he lived in.",
@@ -923,18 +963,23 @@
         "by": "英语专家队",
         "at": "2026-10-14",
         "verdict": "pass",
-        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+        "note": "targeted复核：中文删括号标注，准确无误导"
       },
       "id": "gr14.2.2-e2",
       "lesson": "gr14.2.2",
       "register": "spoken",
-      "revision": 1,
+      "revision": 2,
       "rule": "介词后置（正例 example）",
-      "status": "final_passed",
+      "status": "first_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
-      "zh": "这就是他住过的房子。（介词后置，口语）"
+      "zh": "这就是他住过的房子。",
+      "rewrite": {
+        "by": "协调者（台账同步）",
+        "at": "2026-10-14",
+        "note": "S2去泄题：C队修复时数据文件中文删括号标注，台账同步对齐；英文未动。"
+      }
     },
     {
       "en": "The person to whom I spoke was kind.",
@@ -948,18 +993,23 @@
         "by": "英语专家队",
         "at": "2026-10-14",
         "verdict": "pass",
-        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+        "note": "targeted复核：中文删括号标注，准确无误导"
       },
       "id": "gr14.2.2-e3",
       "lesson": "gr14.2.2",
       "register": "written",
-      "revision": 1,
+      "revision": 2,
       "rule": "介词 + whom（正例 example）",
-      "status": "final_passed",
+      "status": "first_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
-      "zh": "跟我说话的那个人很和善。（正式）"
+      "zh": "跟我说话的那个人很和善。",
+      "rewrite": {
+        "by": "协调者（台账同步）",
+        "at": "2026-10-14",
+        "note": "S2去泄题：C队修复时数据文件中文删括号标注，台账同步对齐；英文未动。"
+      }
     },
     {
       "en": "The tree under which we sat is tall.",
@@ -1073,18 +1123,23 @@
         "by": "英语专家队",
         "at": "2026-10-14",
         "verdict": "pass",
-        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+        "note": "targeted复核：中文删括号标注，准确无误导"
       },
       "id": "gr14.2.3-e1",
       "lesson": "gr14.2.3",
       "register": "neutral",
-      "revision": 1,
+      "revision": 2,
       "rule": "定语从句简化 doing（正例 example）",
-      "status": "final_passed",
+      "status": "first_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
-      "zh": "正在踢足球的男孩是汤姆。（= the boy who is playing）"
+      "zh": "正在踢足球的男孩是汤姆。",
+      "rewrite": {
+        "by": "协调者（台账同步）",
+        "at": "2026-10-14",
+        "note": "S2去泄题：C队修复时数据文件中文删括号标注，台账同步对齐；英文未动。"
+      }
     },
     {
       "en": "The girl standing there is my sister.",
@@ -1123,18 +1178,23 @@
         "by": "英语专家队",
         "at": "2026-10-14",
         "verdict": "pass",
-        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+        "note": "targeted复核：中文删括号标注，准确无误导"
       },
       "id": "gr14.2.3-e3",
       "lesson": "gr14.2.3",
       "register": "neutral",
-      "revision": 1,
+      "revision": 2,
       "rule": "定语从句简化 done（正例 example）",
-      "status": "final_passed",
+      "status": "first_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
-      "zh": "他写的书很受欢迎。（= which were written）"
+      "zh": "他写的书很受欢迎。",
+      "rewrite": {
+        "by": "协调者（台账同步）",
+        "at": "2026-10-14",
+        "note": "S2去泄题：C队修复时数据文件中文删括号标注，台账同步对齐；英文未动。"
+      }
     },
     {
       "en": "The man wearing glasses is our teacher.",

@@ -388,22 +388,22 @@
         "by": "英语专家队",
         "at": "2026-10-14",
         "verdict": "pass",
-        "note": "whether 从句作 care 的宾语，确为宾语从句（非让步）；rule（身份证②）/术语/中文释义/分块标注均合清单要求；gr13.js 登记处与 gr13.1.3-p1 引用（英文/中文/分块/猜测题）逐字一致"
+        "note": "targeted复核：中文删括号标注，准确无误导"
       },
       "id": "gr13.1.3-e2",
       "lesson": "gr13.1.3",
       "register": "neutral",
-      "revision": 2,
+      "revision": 3,
       "rule": "whether 与 or not 连用（正例 example）",
-      "status": "final_passed",
+      "status": "first_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
-      "zh": "我不在乎他来不来。（whether…or not 在这里是宾语从句，充当 care 的宾语）",
+      "zh": "我不在乎他来不来。",
       "rewrite": {
-        "by": "语法生产C队",
+        "by": "协调者（台账同步）",
         "at": "2026-10-14",
-        "note": "初审打回重写：原句 \"Whether it rains or not, we will go.\" 的 whether 从句是让步状语从句，非名词性从句；已换成宾语从句正例 \"I don't care whether he comes or not.\"（whether…or not 作宾语从句），英文/中文/分块同步重写"
+        "note": "S2去泄题：C队修复时数据文件中文删括号标注，台账同步对齐；英文未动。"
       }
     },
     {
