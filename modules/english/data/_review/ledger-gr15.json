@@ -563,7 +563,7 @@
         "by": "英语专家队",
         "at": "2026-10-14",
         "verdict": "pass",
-        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+        "note": "revision 2 复核（红队终审打回后重写）：register=written 与'in order that 正式书面连词'一致（清单第7条·语域口径）；英文/中文/分块均未改动，与 gr15.js 第76行（reg='书面'）逐字一致。rule 表述准确（清单第6条）、术语'目的状语从句/情态'与冻结清单一致（清单第10条）、中文释义适合初中生（清单第2条）、无中式英语且词性可判定（清单第3、9条）。初审通过，待红队终审。"
       },
       "id": "gr15.1.4-e2",
       "lesson": "gr15.1.4",
@@ -575,7 +575,7 @@
         "note": "红队终审打回重写：in order that 为正式书面连词，register 由 neutral 改为 written；英文/中文/分块不变。"
       },
       "rule": "in order that + 情态（正例 example）",
-      "status": "drafted",
+      "status": "first_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -768,7 +768,7 @@
         "by": "英语专家队",
         "at": "2026-10-14",
         "verdict": "pass",
-        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+        "note": "revision 2 复核（红队终审打回后重写）：'everyone loves her' 替换后自然、无中式英语且每词词性可判定（清单第3、9条）；rule 'so + 形 + a/an + n' 与例句对应、适用条件完整（清单第6条）；中文释义适合初中生（清单第2条）；分块术语'结果状语从句'与冻结清单一致（清单第10条）；与 gr15.js 登记（第93行）及课程页 gr15.1.5-p?（第735行）英文/中文/分块 'that everyone loves her' 逐字一致。初审通过，待红队终审。"
       },
       "id": "gr15.1.5-e3",
       "lesson": "gr15.1.5",
@@ -780,7 +780,7 @@
         "note": "红队终审打回重写：all love her 生硬古旧，改为 everyone loves her（中文'大家都爱她'对应 everyone）；rule/condition 不变。"
       },
       "rule": "so + 形 + a/an + n（正例 example）",
-      "status": "drafted",
+      "status": "first_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
