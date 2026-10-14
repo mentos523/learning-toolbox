@@ -266,7 +266,7 @@ window.ENG_CH["gr05"] = {
                 {
                   type: "examples",
                   ids: ["gr05.1.1-e1", "gr05.1.1-e2", "gr05.1.1-e4"],
-                  note: "身份证已经亮出来了——看下面三句话，找找 -s 都藏在哪。"
+                  note: "身份证亮出来了——看三句话，找 -s 藏在哪。"
                 },
                 {
                   type: "idcard",
