@@ -248,6 +248,7 @@ body[data-theme="dark"] #grammar-app {
   padding: 5px 10px 4px;
   background: var(--eng-panel);
   min-height: 44px;
+  min-width: 44px; /* P2（白队 QA）：短词块触控宽度 ≥44px，与 min-height 并存 */
   justify-content: center;
   cursor: default;
   user-select: none;
@@ -406,6 +407,13 @@ body[data-theme="dark"] #grammar-app {
 }
 .g-bridge .unbridge { color: var(--eng-verb); font-weight: 700; }
 
+/* ---------- 拼写条（兜底提示：畸形 spell 块防御，不改变正常渲染） ---------- */
+.g-spell-missing {
+  font-size: 0.9rem;
+  color: var(--eng-error);
+  padding: 6px 0;
+}
+
 /* ---------- 先猜后验（Y1：不判对错，只记录） ---------- */
 .g-guess {
   border: 1px solid var(--eng-line);
@@ -416,6 +424,7 @@ body[data-theme="dark"] #grammar-app {
 .g-guess-opts { display: flex; flex-wrap: wrap; gap: 8px; }
 .g-guess-opts button {
   min-height: 44px;
+  min-width: 44px; /* P2（白队 QA）：短选项触控宽度 ≥44px，与 min-height 并存 */
   padding: 6px 12px;
   border-radius: 10px;
   border: 2px solid var(--eng-line);

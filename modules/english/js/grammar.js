@@ -384,6 +384,13 @@
   function widgetSpell(b) {
     var box = el("div");
     if (b.title) box.appendChild(el("div", "", "<b>" + esc(b.title) + "</b>"));
+    /* P0 防御（2026-10-14 白队 QA）：畸形 spell 块（items 缺失/非数组，
+     * 如 gr16 的 {type:"spell", rule}）渲染提示行而非抛错，保证页面不崩；
+     * 正常渲染路径（items 为数组）一字未动。 */
+    if (!Array.isArray(b.items)) {
+      box.appendChild(el("div", "g-spell-missing", "⚠ 内容配置缺失，请联系老师。"));
+      return box;
+    }
     var ul = el("ul");
     ul.style.margin = "6px 0 0";
     ul.style.paddingLeft = "20px";
