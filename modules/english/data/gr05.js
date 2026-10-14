@@ -1079,7 +1079,7 @@ window.ENG_CH["gr05"] = {
                   type: "bridge",
                   zh: "汉语都说“要”：“我去接”和“下个月去北京”都是“要”，不分临时还是计划。",
                   en: "英语把“要”拆成两个：will 是“一拍脑袋”的要，be going to 是“心里有数”的要。",
-                  unbridge: "别觉得两个随便换——“电话响了”说 I'm going to get it，听着像早就等着电话响，味儿不对。"
+                  unbridge: "别觉得两个随便换——“电话响了”说 I'm going to get it，听着像早就打算去接（be going to 自带“早有打算”的味儿）；临时起意，还是 will 最地道。"
                 },
                 {
                   type: "contrast",
