@@ -1297,7 +1297,7 @@
         "by": "英语专家队",
         "at": "2026-10-14",
         "verdict": "pass",
-        "note": "反例错因成立、错句即所要纠偏的典型错误且已标注（错句），中文释义准确。"
+        "note": "revision 2 初审通过：①错因成立——I'm will get it! 为 will 与 be going to 杂糅的真错句（情态动词 will 后须接动词原形，与 be going to 不可同现），母语者不会说，红队清单第 7/11 条打回意见已落实；②中文“我是 will 去接！——will 和 be going to 杂糅了，will 后面只能跟动词原形”适合初中生，讲清错因；③rule“will 与 be going to 杂糅（反例 counter）”准确；④gr05.js L127 登记处 en/zh/tagged（助动词（杂糅））与台账逐字一致；⑤术语口径与 M3 一致（情态动词 modal auxiliary）；⑥清单 6 项全过。"
       },
       "final": {
         "by": "红队",
@@ -1305,7 +1305,7 @@
         "verdict": "reject",
         "note": "终审 reject（红队，2026-10-14）：打回。原因：①清单第 7 条——反例须为母语者不会说的真错句，\"I'm going to get it!\" 在电话响起场景下是英语母语者日常会说的自然表达（与 \"I'll get it!\" 并用），将该句判为错句未能通过'母语者替换测试'的反向检验；②清单第 11 条（初审漏网的规则泛化）——curriculum gr05.2.2 典型例句方向只说 \"I'll get it!（临时决定，经典例）\"，并未断言 be going to 在该场景为错，将教学简化口径 'will=临时决定，be going to=计划/迹象' 无条件判 ✗ 属规则泛化（同 S5 已裁决先例），学生据此会产生矫枉过正的错误直觉。重写建议：保留正例 'I will get it!'，反例换成真错句，如 \"I'm will get it!\"（will 与 be going to 杂糅，情态动词后须接动词原形）或 \"I'll getting it\"。"
       },
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 2,
       "rewrite": {
         "by": "语法生产B队",
@@ -1352,7 +1352,7 @@
         "by": "英语专家队",
         "at": "2026-10-14",
         "verdict": "pass",
-        "note": "反例错因成立、错句即所要纠偏的典型错误且已标注（错句），中文释义准确。"
+        "note": "revision 2 初审通过：①错因成立——I'll getting it 为真错句（will 后须接动词原形，不能接 doing），母语者不会说，红队清单第 7/11 条打回意见已落实；②中文“电话响了，‘我 will 正在去接’——will 后面要跟动词原形，不能跟 getting”适合初中生，讲清错因；③rule“will 后误接 doing（反例 counter）”准确；④gr05.js p3 对比块 wrong/wrongZh 与台账逐字一致，正例 — The phone is ringing! — I'll get it! 未改动；⑤术语口径与 M3 一致；⑥清单 6 项全过。"
       },
       "final": {
         "by": "红队",
@@ -1360,7 +1360,7 @@
         "verdict": "reject",
         "note": "终审 reject（红队，2026-10-14）：打回。原因同 gr05.2.2-e7：①清单第 7 条——\"— The phone is ringing! — I'm going to get it!\" 是母语者在电话场景下的自然说法，不可判为错句；②清单第 11 条（初审漏网的规则泛化）——curriculum 未断言 be going to 在该场景为错，无条件判 ✗ 属规则泛化。重写建议：将对话体反例换成真错句，如 \"— The phone is ringing! — I'm will get it!\"（will/be going to 杂糅），或保留对话体、错误点改为形式错误。"
       },
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 2,
       "rewrite": {
         "by": "语法生产B队",
