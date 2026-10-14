@@ -1,0 +1,452 @@
+/* ============================================================
+ * 英语 · 语法 SPA 样式（蓝队 2026-10-14，试点 gr05.1.1）
+ *
+ * 命名空间隔离铁律：所有类名前缀 g-（grammar），只作用于
+ * #grammar-app 容器内；不触碰数学引擎与讲词根子卡的任何样式。
+ * 色板：--eng-* 语义变量（别名 Okabe-Ito 值，与几何 --geo-*
+ * 同源；浅色/深色两套，随 body[data-theme] 自动切换）。
+ * 全局约束：每页一屏（100dvh）、触控目标 ≥44px、
+ * 色盲双编码（颜色 + 文字标签）、file:// 可用、零依赖。
+ * ============================================================ */
+
+/* ---------- --eng-* 语义色板（B-M4 冻结口径） ---------- */
+#grammar-app {
+  --eng-subject:  #0072B2;  /* 主语：蓝 */
+  --eng-verb:     #D55E00;  /* 谓语动词：朱红（全书视觉锚点） */
+  --eng-object:   #E69F00;  /* 宾语：橙 */
+  --eng-complem:  #56B4E9;  /* 表语/补语：天蓝 */
+  --eng-adverb:   #009E73;  /* 状语：蓝绿 */
+  --eng-attrib:   #7A7A7A;  /* 定语：灰（中性） */
+  --eng-clause:   #F0E442;  /* 从句块：黄底（配深色字） */
+  --eng-error:    #D55E00;  /* 错误：朱红 + ✗ 文字（双编码） */
+  --eng-correct:  #009E73;  /* 正确：蓝绿 + ✓ 文字（双编码） */
+  --eng-card:     #000000;  /* 条件卡/规则卡描边 */
+  --eng-on-clause:#1A1A1A;  /* 黄底上的深色字 */
+  --eng-bg:       #FFFFFF;
+  --eng-ink:      #1A1A1A;
+  --eng-ink-soft: #555555;
+  --eng-panel:    #F7F7F7;
+  --eng-line:     #DDDDDD;
+}
+body[data-theme="dark"] #grammar-app {
+  --eng-subject:  #56B4E9;
+  --eng-verb:     #FF7043;
+  --eng-object:   #FFB020;
+  --eng-complem:  #7FD4FF;
+  --eng-adverb:   #3DDC97;
+  --eng-attrib:   #9E9E9E;
+  --eng-clause:   #F0E442;
+  --eng-error:    #FF7043;
+  --eng-correct:  #3DDC97;
+  --eng-card:     #F5F5F5;
+  --eng-on-clause:#1A1A1A;
+  --eng-bg:       #121212;
+  --eng-ink:      #F5F5F5;
+  --eng-ink-soft: #BBBBBB;
+  --eng-panel:    #1E1E1E;
+  --eng-line:     #3A3A3A;
+}
+/* 护眼主题沿用浅色值（body[data-theme="soft"] 不覆盖） */
+
+/* 语法试点容器：公开展示仍为"筹备中"外壳时保持 hidden */
+.e-grammar-app[hidden] { display: none !important; }
+
+/* ---------- App 骨架：一屏三块 ---------- */
+#grammar-app {
+  height: 100dvh;
+  background: var(--eng-bg);
+  color: var(--eng-ink);
+  font-family: inherit;
+  overflow: hidden;
+}
+.g-app {
+  height: 100dvh;
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  padding: 0 14px calc(10px + env(safe-area-inset-bottom));
+}
+.g-head {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0 6px;
+  border-bottom: 1px solid var(--eng-line);
+}
+.g-head h1 {
+  margin: 0;
+  font-size: 1rem;
+  flex: 1;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.g-page-tag {
+  flex: none;
+  font-size: 0.72rem;
+  color: var(--eng-ink-soft);
+  border: 1px solid var(--eng-line);
+  border-radius: 999px;
+  padding: 3px 9px;
+  white-space: nowrap;
+}
+.g-back {
+  flex: none;
+  min-width: 44px;
+  min-height: 44px;
+  border: 1px solid var(--eng-line);
+  border-radius: 10px;
+  background: var(--eng-panel);
+  color: var(--eng-ink);
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+.g-main {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 8px 0;
+  overflow: hidden;
+}
+/* 标题区（一句话规则 ≤20 字） */
+.g-title {
+  flex: none;
+  margin: 0 0 8px;
+  font-size: 1.08rem;
+  line-height: 1.45;
+}
+/* 交互区（主角，占 60%+；390px 下 ≥300px 可用高度，见 B-M5） */
+.g-zone {
+  flex: 1;
+  min-height: 300px;
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+/* 点拨区（≤60 字 + 下一步；讲解页 36vh 内滚动） */
+.g-point {
+  flex: none;
+  margin: 8px 0 0;
+  padding: 8px 10px;
+  background: var(--eng-panel);
+  border-left: 4px solid var(--eng-verb);
+  border-radius: 0 8px 8px 0;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--eng-ink);
+}
+.g-point.scroll { max-height: 36vh; overflow-y: auto; }
+.g-pager {
+  flex: none;
+  display: flex;
+  gap: 10px;
+  padding-top: 8px;
+}
+.g-pager button {
+  flex: 1;
+  min-height: 44px;
+  border-radius: 10px;
+  border: 1px solid var(--eng-line);
+  background: var(--eng-panel);
+  color: var(--eng-ink);
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+.g-pager button:disabled { opacity: 0.35; cursor: default; }
+.g-pager .g-next { background: var(--eng-verb); border-color: var(--eng-verb); color: #fff; }
+.g-pager .g-next:disabled { background: var(--eng-panel); color: var(--eng-ink); border-color: var(--eng-line); }
+
+/* ---------- 例句区（§2.1 规范） ---------- */
+.g-sent {
+  background: var(--eng-panel);
+  border: 1px solid var(--eng-line);
+  border-radius: 10px;
+  padding: 8px 10px;
+}
+.g-sent-en { font-size: 1.02rem; line-height: 1.6; color: var(--eng-ink); }
+.g-sent-zh { font-size: 0.8rem; line-height: 1.5; color: var(--eng-ink-soft); margin-top: 2px; }
+.g-reg {
+  display: inline-block;
+  font-size: 0.68rem;
+  color: var(--eng-ink-soft);
+  border: 1px solid var(--eng-line);
+  border-radius: 999px;
+  padding: 1px 7px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
+/* ---------- 句子分块标注（G1 呈现态：成分色块 + 文字标签，双编码） ---------- */
+.g-chunks { display: flex; flex-wrap: wrap; gap: 6px; align-items: stretch; }
+.g-chunk {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid var(--role-c, var(--eng-line));
+  border-radius: 10px;
+  padding: 5px 10px 4px;
+  background: var(--eng-panel);
+  min-height: 44px;
+  justify-content: center;
+  cursor: default;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+.g-chunk .w { font-size: 1rem; line-height: 1.4; color: var(--eng-ink); }
+.g-chunk .r {
+  font-size: 0.68rem;
+  line-height: 1.3;
+  color: var(--role-c, var(--eng-ink-soft));
+  font-weight: 700;
+}
+.g-chunk.role-subject { --role-c: var(--eng-subject); }
+.g-chunk.role-verb    { --role-c: var(--eng-verb); }
+.g-chunk.role-object  { --role-c: var(--eng-object); }
+.g-chunk.role-complem { --role-c: var(--eng-complem); }
+.g-chunk.role-adverb  { --role-c: var(--eng-adverb); }
+.g-chunk.role-attrib  { --role-c: var(--eng-attrib); }
+/* 拖拽态 */
+.g-chunk.draggable { cursor: grab; }
+.g-chunk.picked { outline: 3px solid var(--role-c, var(--eng-verb)); outline-offset: 2px; }
+.g-chunk.placed-ok  { border-style: solid; }
+.g-chunk.placed-bad { animation: gShake 0.25s ease; }
+@keyframes gShake {
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+/* 标签池 */
+.g-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.g-tag {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 2px solid var(--role-c, var(--eng-line));
+  background: var(--eng-bg);
+  color: var(--role-c, var(--eng-ink));
+  font-size: 0.92rem;
+  font-weight: 700;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.g-tag[aria-pressed="true"] { background: var(--role-c, var(--eng-verb)); color: #fff; border-color: var(--role-c, var(--eng-verb)); }
+.g-tag.used { opacity: 0.35; }
+.g-tag.role-subject { --role-c: var(--eng-subject); }
+.g-tag.role-verb    { --role-c: var(--eng-verb); }
+.g-tag.role-object  { --role-c: var(--eng-object); }
+.g-tag.role-complem { --role-c: var(--eng-complem); }
+.g-tag.role-adverb  { --role-c: var(--eng-adverb); }
+.g-tag.role-attrib  { --role-c: var(--eng-attrib); }
+.g-tag-hint { font-size: 0.8rem; color: var(--eng-ink-soft); min-height: 1.4em; }
+.g-tag-hint .ok  { color: var(--eng-correct); font-weight: 700; }
+.g-tag-hint .bad { color: var(--eng-error); font-weight: 700; }
+
+/* ---------- 信号灯（跃升 2：主语拨动 → -s 灯联动） ---------- */
+.g-signal { display: flex; flex-direction: column; gap: 8px; }
+.g-subj-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.g-subj {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 6px 14px;
+  border-radius: 10px;
+  border: 2px solid var(--eng-line);
+  background: var(--eng-bg);
+  color: var(--eng-ink);
+  font-size: 0.95rem;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.g-subj[aria-pressed="true"] { border-color: var(--eng-subject); background: var(--eng-subject); color: #fff; }
+.g-lamp-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.g-lamp {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 6px 12px;
+  border: 2px solid var(--eng-line);
+  color: var(--eng-ink-soft);
+}
+.g-lamp .dot {
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--eng-line);
+}
+.g-lamp.on { border-color: var(--eng-verb); color: var(--eng-verb); }
+.g-lamp.on .dot { background: var(--eng-verb); box-shadow: 0 0 8px var(--eng-verb); }
+.g-verb-form { font-size: 1.15rem; font-weight: 700; color: var(--eng-verb); }
+
+/* ---------- 规则身份证（G7：规则面 ↔ 条件面翻转） ---------- */
+.g-idcard { perspective: 800px; }
+.g-idcard-inner {
+  position: relative;
+  min-height: 120px;
+  transition: transform 0.18s ease;
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+.g-idcard.flipped .g-idcard-inner { transform: rotateY(180deg); }
+.g-idcard-face {
+  border: 2px solid var(--eng-card);
+  border-radius: 12px;
+  padding: 10px 12px;
+  background: var(--eng-panel);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.g-idcard-face.back { position: absolute; inset: 0; transform: rotateY(180deg); overflow-y: auto; }
+.g-idcard-kicker { font-size: 0.7rem; color: var(--eng-ink-soft); letter-spacing: 0.05em; }
+.g-idcard-rule { font-size: 1rem; font-weight: 700; margin-top: 4px; line-height: 1.5; }
+.g-idcard-cond { font-size: 0.88rem; line-height: 1.6; margin-top: 4px; }
+.g-idcard-flip {
+  margin-top: 8px;
+  min-height: 44px;
+  border-radius: 10px;
+  border: 1px solid var(--eng-line);
+  background: var(--eng-bg);
+  color: var(--eng-ink);
+  font-size: 0.88rem;
+  width: 100%;
+  cursor: pointer;
+}
+
+/* ---------- 中式对拍（G8：左✗右✓；390px 下改上下堆叠） ---------- */
+.g-contrast { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.g-contrast .side {
+  border-radius: 10px;
+  padding: 8px 10px;
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+.g-contrast .side .mark { font-weight: 700; }
+.g-contrast .wrong { background: var(--eng-panel); border: 2px solid var(--eng-error); }
+.g-contrast .wrong .mark { color: var(--eng-error); }
+.g-contrast .right { background: var(--eng-panel); border: 2px solid var(--eng-correct); }
+.g-contrast .right .mark { color: var(--eng-correct); }
+.g-contrast .why {
+  grid-column: 1 / -1;
+  font-size: 0.82rem;
+  color: var(--eng-ink-soft);
+  line-height: 1.6;
+}
+@media (max-width: 480px) {
+  .g-contrast { grid-template-columns: 1fr; }
+}
+
+/* ---------- 汉语桥（D6/第8条铁律：先桥后拆桥） ---------- */
+.g-bridge {
+  border: 1px dashed var(--eng-line);
+  border-radius: 10px;
+  padding: 8px 10px;
+  font-size: 0.88rem;
+  line-height: 1.65;
+}
+.g-bridge .unbridge { color: var(--eng-verb); font-weight: 700; }
+
+/* ---------- 先猜后验（Y1：不判对错，只记录） ---------- */
+.g-guess {
+  border: 1px solid var(--eng-line);
+  border-radius: 10px;
+  padding: 8px 10px;
+}
+.g-guess-q { font-size: 0.9rem; font-weight: 700; margin-bottom: 6px; }
+.g-guess-opts { display: flex; flex-wrap: wrap; gap: 8px; }
+.g-guess-opts button {
+  min-height: 44px;
+  padding: 6px 12px;
+  border-radius: 10px;
+  border: 2px solid var(--eng-line);
+  background: var(--eng-bg);
+  color: var(--eng-ink);
+  font-size: 0.88rem;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.g-guess-opts button[aria-pressed="true"] { border-color: var(--eng-subject); }
+.g-guess-note { font-size: 0.75rem; color: var(--eng-ink-soft); margin-top: 6px; }
+
+/* ---------- 朗读（Y2） ---------- */
+.g-speak {
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: 10px;
+  border: 1px solid var(--eng-line);
+  background: var(--eng-panel);
+  color: var(--eng-ink);
+  font-size: 1rem;
+  cursor: pointer;
+  flex: none;
+}
+.g-sent-head { display: flex; align-items: flex-start; gap: 8px; }
+.g-sent-head .g-sent-en { flex: 1; }
+
+/* ---------- 练习（Y3：选择/填空，即时判分） ---------- */
+.g-q { display: flex; flex-direction: column; gap: 8px; }
+.g-q-stem { font-size: 0.95rem; line-height: 1.6; }
+.g-q-opts { display: flex; flex-direction: column; gap: 8px; }
+.g-q-opts button {
+  min-height: 44px;
+  text-align: left;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 2px solid var(--eng-line);
+  background: var(--eng-bg);
+  color: var(--eng-ink);
+  font-size: 0.92rem;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.g-q-opts button.judged-ok  { border-color: var(--eng-correct); }
+.g-q-opts button.judged-bad { border-color: var(--eng-error); }
+.g-q input[type="text"] {
+  min-height: 44px;
+  font-size: 1rem;
+  border-radius: 10px;
+  border: 2px solid var(--eng-line);
+  background: var(--eng-bg);
+  color: var(--eng-ink);
+  padding: 6px 12px;
+  width: 100%;
+  box-sizing: border-box;
+}
+.g-q-check {
+  min-height: 44px;
+  border-radius: 10px;
+  border: none;
+  background: var(--eng-subject);
+  color: #fff;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+.g-q-fb { font-size: 0.88rem; min-height: 1.5em; line-height: 1.5; }
+.g-q-fb .ok  { color: var(--eng-correct); font-weight: 700; }
+.g-q-fb .bad { color: var(--eng-error); font-weight: 700; }
+.g-q-fb .tip { color: var(--eng-ink-soft); }
+
+/* ---------- 反馈闪烁（M6 口径：视觉必选） ---------- */
+.g-flash-ok  { animation: gFlashOk 0.35s ease; }
+.g-flash-bad { animation: gFlashBad 0.35s ease; }
+@keyframes gFlashOk  { 50% { box-shadow: 0 0 0 4px var(--eng-correct); } }
+@keyframes gFlashBad { 50% { box-shadow: 0 0 0 4px var(--eng-error); } }
+
+/* ---------- 动手提示（exploreTip，≤40 字） ---------- */
+.g-tip {
+  flex: none;
+  font-size: 0.82rem;
+  color: var(--eng-ink-soft);
+  border: 1px dashed var(--eng-line);
+  border-radius: 8px;
+  padding: 6px 10px;
+  line-height: 1.5;
+}
+
+/* ---------- 章节内页眉：面包屑 ---------- */
+.g-crumb { font-size: 0.75rem; color: var(--eng-ink-soft); }

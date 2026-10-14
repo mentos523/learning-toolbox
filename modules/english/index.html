@@ -8,6 +8,7 @@
 <meta name="description" content="拨一拨词根，单词自己长出来。">
 <link rel="stylesheet" href="../../assets/css/style.css">
 <link rel="stylesheet" href="css/english.css">
+<link rel="stylesheet" href="css/grammar.css">
 </head>
 <body data-theme="light" data-font="sys" data-size="normal">
 
@@ -39,6 +40,13 @@
       <p><button class="e-track-btn" data-goto-roots>去讲词根看看 →</button></p>
     </div>
   </div>
+</section>
+
+<!-- 语法 SPA 试点容器（蓝队 2026-10-14）：仅 #card=grammar&test=<课号> 测试路由进入；
+     公开展示仍为上方"筹备中"外壳，本容器保持 hidden。引擎见 js/grammar.js，
+     数据见 data/grNN.js，样式见 css/grammar.css（g- 前缀，与数学/讲词根隔离）。 -->
+<section class="e-grammar-app" id="grammar-app" hidden aria-label="语法学习（试点）">
+  <div class="g-app" id="g-app"></div>
 </section>
 
 <div class="app" id="app" hidden>
@@ -173,6 +181,8 @@
 <script src="data/roots.js"></script>
   <script src="data/standalone.js"></script>
   <script src="data/phon.js"></script>
+<script src="data/gr05.js"></script>
+<script src="js/grammar.js"></script>
 <script src="js/english.js"></script>
 </body>
 </html>

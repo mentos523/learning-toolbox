@@ -702,6 +702,9 @@
     document.getElementById("tracks").hidden = false;
     document.getElementById("app").hidden = true;
     document.getElementById("grammar").hidden = true;
+    var gapp = document.getElementById("grammar-app");
+    if (gapp) gapp.hidden = true;
+    if (window.ENG_GRAMMAR) window.ENG_GRAMMAR.close();
     try { history.replaceState(null, "", location.pathname); } catch (e) {}
   }
   function enterRoots() {
@@ -727,8 +730,21 @@
     try { localStorage.setItem(TRACK_KEY, "grammar"); } catch (e) {}
     document.getElementById("tracks").hidden = true;
     document.getElementById("app").hidden = true;
-    document.getElementById("grammar").hidden = false;
-    try { history.replaceState(null, "", "#card=grammar"); } catch (e) {}
+    // 语法试点测试路由（蓝队 2026-10-14）：#card=grammar&test=gr05.1.1
+    // 仅显式给出 test 参数且课号存在时进入语法 SPA；公开展示仍为筹备中外壳。
+    var tm = (location.hash || "").match(/[?&#]test=([a-z0-9.]+)/i);
+    var testId = tm && tm[1];
+    var hasPilot = !!(testId && window.ENG_GRAMMAR && window.ENG_GRAMMAR.hasLesson(testId));
+    var shell = document.getElementById("grammar");
+    var gapp = document.getElementById("grammar-app");
+    shell.hidden = hasPilot;
+    if (gapp) gapp.hidden = !hasPilot;
+    if (hasPilot) {
+      window.ENG_GRAMMAR.open(testId);
+    } else if (window.ENG_GRAMMAR) {
+      window.ENG_GRAMMAR.close();
+    }
+    try { history.replaceState(null, "", "#card=grammar" + (hasPilot ? "&test=" + testId : "")); } catch (e) {}
   }
   function enterCard(id) {
     if (id === "grammar") enterGrammar();
@@ -795,11 +811,16 @@
       });
     });
     // 分享链接：#r=xxx 变化时切换词根；#card=xxx 变化时切换子卡
+    // 语法卡每次重进 enterGrammar（处理 &test= 试点参数的开关切换）；讲词根保持原条件。
     window.addEventListener("hashchange", function () {
       var h = location.hash || "";
       var cm = h.match(/#card=([a-z]+)/);
-      if (cm && (cm[1] === "roots" || cm[1] === "grammar")) {
-        if (state.card !== cm[1]) enterCard(cm[1]);
+      if (cm && cm[1] === "grammar") {
+        enterGrammar();
+        return;
+      }
+      if (cm && cm[1] === "roots") {
+        if (state.card !== "roots") enterCard("roots");
         return;
       }
       var m = h.match(/#r=([a-z]+)/);
@@ -823,6 +844,12 @@
     document.getElementById("set-auto").addEventListener("change", function (e) {
       settings.auto = e.target.checked;
       saveSettings();
+    });
+    // 语法 SPA 试点内的"← 返回"：回到筹备中外壳（清掉 test 参数）
+    window.addEventListener("eng-grammar-exit", function () {
+      try { history.replaceState(null, "", "#card=grammar"); } catch (e) {}
+      if (state.card === "grammar") enterCard("grammar");
+      else showTracks();
     });
     // 子卡返回按钮（拨盘页 header / 语法外壳）：回子卡选择页
     document.querySelectorAll("[data-card-back]").forEach(function (el) {
