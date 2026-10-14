@@ -94,5 +94,32 @@ const engCode = eng.replace(/\/\*[\s\S]*?\*\//g, "").replace(/\/\/.*$/gm, "");
 (/if \(!speakOK\) return null/.test(eng))
   ? ok("Y2 降级：speechSynthesis 不可用时隐藏按钮") : fail("Y2 降级缺失");
 
+// 蓝队 2026-10-14 F1–F3 根因修复：区内滚动不变量（黄队裁决方案 a）
+const zoneRule = css.match(/\.g-zone\s*\{[^}]*\}/s);
+(zoneRule && /overflow-y:\s*auto/.test(zoneRule[0]))
+  ? ok(".g-zone 区内纵向滚动（overflow-y:auto）") : fail(".g-zone 未改区内滚动");
+(zoneRule && !/overflow:\s*hidden/.test(zoneRule[0]))
+  ? ok(".g-zone 无 overflow:hidden 裁剪") : fail(".g-zone 仍有 overflow:hidden");
+(zoneRule && /overscroll-behavior-y:\s*contain/.test(zoneRule[0]))
+  ? ok(".g-zone 防链式滚动（overscroll-behavior-y:contain）") : fail(".g-zone 缺防链式滚动");
+(/\.g-zone-wrap\.show-more\s+\.g-more/.test(css) && /\.g-more-pill/.test(css))
+  ? ok("「下滑查看更多」提示样式存在（渐隐罩+箭头文字）") : fail("滚动提示样式缺失");
+(/\.g-qnav\s*\{[^}]*position:\s*sticky/s.test(css))
+  ? ok("练习题导航 sticky 置顶存在") : fail("练习题导航缺失");
+(/\.g-zone\s*>\s*\.g-guess:last-child\s*\{[^}]*position:\s*sticky/s.test(css))
+  ? ok("Y1 猜测条 sticky 贴底（初始完整可见）") : fail("Y1 猜测条贴底缺失");
+(/\.g-qnav button\s*\{[^}]*min-height:\s*44px/s.test(css))
+  ? ok("题导航触控目标 ≥44px") : fail("题导航触控目标不足 44px");
+(/scrollIntoView/.test(engCode))
+  ? fail("grammar.js 出现 scrollIntoView（会连带滚动 body）") : ok("无 scrollIntoView（滚动只动 zone）");
+(/explainBlockOrder/.test(engCode))
+  ? ok("讲解页身份证卡渲染前置逻辑存在") : fail("身份证卡前置逻辑缺失");
+(/bindZoneScroll/.test(engCode))
+  ? ok("区内滚动提示绑定（bindZoneScroll）存在") : fail("bindZoneScroll 缺失");
+(/\.g-idcard-face\.back\s*\{[^}]*overflow-y:\s*auto/s.test(css))
+  ? ok("G7 条件面独立滚动保留（未改坏）") : fail("G7 条件面滚动被改坏");
+(/#grammar-app\s*\{[^}]*overflow:\s*hidden/s.test(css))
+  ? ok("#grammar-app 页面级 overflow:hidden 保留（一屏不变量）") : fail("#grammar-app 一屏约束被改");
+
 console.log(fails === 0 ? "\n[PASS] 语法试点静态 QA 全部通过" : `\n[FAIL] ${fails} 项未通过`);
 process.exit(fails === 0 ? 0 : 1);

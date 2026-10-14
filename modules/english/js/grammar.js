@@ -8,6 +8,11 @@
  *
  * 数据驱动：页面全部来自 window.ENG_CH[grNN].units[].lessons[]
  * .pages[]，pageKind = observe / interact / explain / quiz。
+ * 蓝队 2026-10-14 F1–F3 根因修复（黄队裁决方案 a：区内滚动）：
+ * .g-zone 由 overflow:hidden 改为区内纵向滚动（同几何 hints 口径），
+ * 配套「下滑查看更多」提示、练习题导航、讲解页身份证卡渲染前置、
+ * Y1 猜测条 sticky 贴底、G7 翻面后 zone 内自动对齐；.g-zone 仍是
+ * 唯一滚动容器，body 永不滚动。
  * 交互实现（全部真实可用，无占位）：
  *   G1 成分拖拽标注（点选 + 拖拽双通道，即时判分）
  *   G7 规则身份证（翻面：规则面 ↔ 条件面）
@@ -46,6 +51,29 @@
   function load(k, fb) {
     try { var v = JSON.parse(localStorage.getItem(k)); return v == null ? fb : v; }
     catch (e) { return fb; }
+  }
+  /* ---------- 区内滚动工具（蓝队 2026-10-14 F1–F3 根因修复）
+   * 黄队硬性要求 5：.g-zone 是唯一滚动容器，body 永不出滚动条。
+   * 因此滚动一律只改 zone.scrollTop，绝不调用 scrollIntoView
+   *（它会连带滚动 body/页面，破坏一屏不变量）。以下函数均为
+   * smoke 测试的最小 DOM stub 安全：缺 API 时静默跳过。 ---------- */
+  function later(fn, ms) {
+    if (typeof setTimeout === "function") { setTimeout(fn, ms || 0); return; }
+    try { fn(); } catch (e) {}
+  }
+  function rectOf(node) {
+    if (!node || typeof node.getBoundingClientRect !== "function") return null;
+    try { return node.getBoundingClientRect(); } catch (e) { return null; }
+  }
+  function scrollZoneDelta(zone, delta) {
+    if (!zone) return;
+    zone.scrollTop = (zone.scrollTop || 0) + delta;
+  }
+  /* 把目标顶部对齐到 zone 可视区顶部（留 guard 间隙），只动 zone */
+  function scrollZoneTo(zone, target, guard) {
+    var zr = rectOf(zone), tr = rectOf(target);
+    if (!zr || !tr) return;
+    scrollZoneDelta(zone, tr.top - zr.top - (guard == null ? 8 : guard));
   }
 
   /* ---------------- 数据查找 ---------------- */
@@ -288,7 +316,7 @@
   }
 
   /* ---------------- G7 规则身份证 ---------------- */
-  function widgetIdCard(b) {
+  function widgetIdCard(b, zone) {
     var wrap = el("div", "g-idcard");
     var inner = el("div", "g-idcard-inner");
     inner.innerHTML =
@@ -308,6 +336,17 @@
       var f = wrap.classList.contains("flipped");
       btn.textContent = f ? "点我翻回：看规则 ⤾" : "点我翻面：看适用条件 ⤾";
       btn.setAttribute("aria-pressed", f ? "true" : "false");
+      /* 黄队硬性要求 3：翻到条件面后，若卡片超出 zone 可视区，
+       * 把卡片顶部对齐到 zone 顶部（只滚 .g-zone 自身，绝不碰 body）。
+       * 翻面动画 0.18s，200ms 后再量；动画本身不动。 */
+      if (f) later(function () {
+        if (!wrap.classList.contains("flipped")) return;
+        var zr = rectOf(zone), cr = rectOf(inner);
+        if (!zr || !cr) return;
+        if (cr.top < zr.top - 2 || cr.bottom > zr.bottom + 2) {
+          scrollZoneDelta(zone, cr.top - zr.top - 8);
+        }
+      }, 200);
     }
     btn.addEventListener("click", flip);
     inner.addEventListener("click", flip);
@@ -386,6 +425,27 @@
     return { observe: "观察", interact: "交互", explain: "讲解", quiz: "练习" }[kind] || kind;
   }
 
+  /* 黄队硬性要求 2（蓝队 2026-10-14 F1 根因修复）：G7 身份证卡是讲解页的
+   * 关键教学组件，初始必须可识别（≥1/3 高度或完整标题行）。数据顺序
+   * examples → idcard（先现象后规则）在窄屏下会把卡片挤出首屏（实测
+   * 390px 下完全不可见）。渲染层把首张 idcard 提前到首个 examples
+   * 之前；数据顺序不动，其余块相对顺序不变。
+   * 内容侧跟进（不属本次改动）：examples.note「先看现象，再看规则的
+   * 身份证」措辞与呈现顺序不一致，待黄队修订。 */
+  function explainBlockOrder(blocks) {
+    var ex = -1, id = -1;
+    for (var i = 0; i < blocks.length; i++) {
+      if (blocks[i].type === "examples" && ex < 0) ex = i;
+      if (blocks[i].type === "idcard" && id < 0) id = i;
+    }
+    if (ex >= 0 && id > ex) {
+      var out = blocks.slice();
+      out.splice(ex, 0, out.splice(id, 1)[0]);
+      return out;
+    }
+    return blocks;
+  }
+
   function renderZone(page, chapter) {
     var zone = el("div", "g-zone");
     if (page.kind === "observe") {
@@ -399,7 +459,7 @@
       });
     } else if (page.kind === "explain") {
       if (page.lead) zone.appendChild(el("div", "g-tip", "👋 " + esc(page.lead)));
-      (page.blocks || []).forEach(function (b) {
+      explainBlockOrder(page.blocks || []).forEach(function (b) {
         if (b.type === "examples") {
           var ids = b.ids || [];
           if (b.note) zone.appendChild(el("div", "g-tag-hint", esc(b.note)));
@@ -408,13 +468,34 @@
             if (s) zone.appendChild(sentenceBlock(s));
           });
         }
-        else if (b.type === "idcard") zone.appendChild(widgetIdCard(b));
+        else if (b.type === "idcard") zone.appendChild(widgetIdCard(b, zone));
         else if (b.type === "bridge") zone.appendChild(widgetBridge(b));
         else if (b.type === "spell") zone.appendChild(widgetSpell(b));
         else if (b.type === "contrast") zone.appendChild(widgetContrast(b));
       });
     } else if (page.kind === "quiz") {
-      (page.questions || []).forEach(function (q, qi) {
+      var qs = page.questions || [];
+      /* 黄队硬性要求 2：练习题导航——sticky 置顶，初始完整可见；
+       * 点选后只滚动 .g-zone（scrollZoneTo），不触发页面滚动。 */
+      if (qs.length > 1) {
+        var nav = el("nav", "g-qnav");
+        nav.setAttribute("aria-label", "题目导航");
+        qs.forEach(function (q, qi) {
+          var chip = el("button", "", "第 " + (qi + 1) + " 题");
+          chip.type = "button";
+          chip.setAttribute("aria-label", "跳到第 " + (qi + 1) + " 题");
+          chip.addEventListener("click", function () {
+            var list = zone.querySelectorAll(".g-q");
+            var guard = 8;
+            var nr = rectOf(nav);
+            if (nr) guard = nr.height + 8;
+            scrollZoneTo(zone, list[qi], guard);
+          });
+          nav.appendChild(chip);
+        });
+        zone.appendChild(nav);
+      }
+      qs.forEach(function (q, qi) {
         zone.appendChild(renderQuestion(q, page.id + "-q" + qi));
       });
     }
@@ -481,6 +562,62 @@
     return box;
   }
 
+  /* 黄队硬性要求 1 & 5（蓝队 2026-10-14 F1–F3 根因修复）：
+   * .g-zone 是唯一滚动容器。区内可滚动且未滚到底时，在内容区底部
+   * 显示「下滑查看更多」渐隐提示（.g-zone-wrap.show-more），滚到底后
+   * 消失。滚动/尺寸变化/内容变化（判分反馈、翻面等）都会重算。
+   * smoke 最小 DOM stub 安全：缺 API 时只做一次静态计算。 */
+  var zoneCleanup = null;
+  function bindZoneScroll(zone, wrap) {
+    if (zoneCleanup) { try { zoneCleanup(); } catch (e) {} zoneCleanup = null; }
+    function update() {
+      var sh = zone.scrollHeight || 0;
+      var ch = zone.clientHeight || 0;
+      var st = zone.scrollTop || 0;
+      var can = sh > ch + 4;
+      var atBottom = st + ch >= sh - 4;
+      wrap.classList.toggle("show-more", can && !atBottom);
+    }
+    var rafFn = (typeof window.requestAnimationFrame === "function")
+      ? window.requestAnimationFrame.bind(window) : null;
+    var cafFn = (typeof window.cancelAnimationFrame === "function")
+      ? window.cancelAnimationFrame.bind(window) : null;
+    var raf = 0;
+    function schedule() {
+      if (raf) return;
+      if (rafFn) { raf = rafFn(function () { raf = 0; update(); }); }
+      else update();
+    }
+    function onScroll() { schedule(); }
+    function onResize() { schedule(); }
+    if (zone.addEventListener) {
+      try { zone.addEventListener("scroll", onScroll, { passive: true }); }
+      catch (e) { zone.addEventListener("scroll", onScroll); }
+    }
+    var hasWinListen = (typeof window.addEventListener === "function");
+    if (hasWinListen) window.addEventListener("resize", onResize);
+    var mo = null;
+    if (typeof window.MutationObserver === "function") {
+      mo = new window.MutationObserver(schedule);
+      mo.observe(zone, { childList: true, subtree: true, characterData: true });
+    }
+    update();
+    var cancelled = false;
+    zoneCleanup = function () {
+      if (cancelled) return;
+      cancelled = true;
+      if (zone.removeEventListener) {
+        try { zone.removeEventListener("scroll", onScroll); } catch (e) {}
+      }
+      if (hasWinListen && typeof window.removeEventListener === "function") {
+        try { window.removeEventListener("resize", onResize); } catch (e) {}
+      }
+      if (mo) { try { mo.disconnect(); } catch (e) {} }
+      if (raf && cafFn) { try { cafFn(raf); } catch (e) {} }
+      raf = 0;
+    };
+  }
+
   function render() {
     if (!cur || !appRoot) return;
     var found = cur.found;
@@ -508,7 +645,17 @@
 
     var main = el("main", "g-main");
     main.appendChild(el("h2", "g-title", esc(page.title)));
-    main.appendChild(renderZone(page, found.chapter));
+    /* 黄队硬性要求 1：zone 外包 .g-zone-wrap（相对定位），底部叠放
+     * .g-more「下滑查看更多」提示条（aria-hidden，纯视觉提示）。 */
+    var zone = renderZone(page, found.chapter);
+    var zoneWrap = el("div", "g-zone-wrap");
+    zoneWrap.appendChild(zone);
+    var more = el("div", "g-more",
+      '<span class="g-more-pill"><span class="t">下滑查看更多</span>' +
+      '<span class="arr">↓</span></span>');
+    more.setAttribute("aria-hidden", "true");
+    zoneWrap.appendChild(more);
+    main.appendChild(zoneWrap);
     var point = el("p", "g-point" + (page.pointScroll ? " scroll" : ""), "💡 " + esc(page.point || ""));
     main.appendChild(point);
     appRoot.appendChild(main);
@@ -532,6 +679,8 @@
     pager.appendChild(prev);
     pager.appendChild(next);
     appRoot.appendChild(pager);
+    /* 渲染完成、布局就绪后再绑定区内滚动提示（读 clientHeight 需在文档流中） */
+    bindZoneScroll(zone, zoneWrap);
   }
 
   function open(lessonId) {

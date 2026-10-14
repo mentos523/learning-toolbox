@@ -119,15 +119,70 @@ body[data-theme="dark"] #grammar-app {
   font-size: 1.08rem;
   line-height: 1.45;
 }
-/* 交互区（主角，占 60%+；390px 下 ≥300px 可用高度，见 B-M5） */
+/* 交互区（主角，占 60%+；390px 下 ≥300px 可用高度，见 B-M5）
+ * 蓝队 2026-10-14 F1–F3 根因修复（黄队裁决方案 a：区内滚动）：
+ * 旧 overflow:hidden 在内容超高时静默裁掉关键组件（p3 G7 身份证卡、
+ * p4 第 4 题、p1 Y1 猜测条）。改为区内纵向滚动，同几何 hints 口径
+ * （原生滚动条 + -webkit-overflow-scrolling:touch，不自定义样式）；
+ * 页面仍一屏、body 永不出现滚动条（overscroll-behavior 防链式滚动）。 */
+.g-zone-wrap {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
 .g-zone {
   flex: 1;
-  min-height: 300px;
   min-height: 0;
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior-y: contain;
+  -webkit-overflow-scrolling: touch;
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+/* 滚动容器直系子项不参与 flex 压缩：内容再多也只滚动、不压扁，保证可达 */
+.g-zone > * { flex: none; }
+/* 「下滑查看更多」提示（黄队硬性要求 1）：区内可滚动且未滚到底时，
+ * 内容区底部显示渐隐罩 + 箭头文字条；滚到底后消失（JS 切 .show-more）。
+ * 图形 + 文字双提示，不只靠滚动条；深色模式随 --eng-* 自动切换。 */
+.g-more {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 6; /* 高于 sticky 的猜测条（z-index 4），提示始终可见 */
+  display: flex;
+  justify-content: center;
+  padding: 20px 0 8px;
+  background: linear-gradient(to bottom, transparent, var(--eng-bg) 75%);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s;
+  pointer-events: none;
+}
+.g-zone-wrap.show-more .g-more { opacity: 1; visibility: visible; }
+.g-more-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  color: var(--eng-ink-soft);
+  background: var(--eng-panel);
+  border: 1px solid var(--eng-line);
+  border-radius: 999px;
+  padding: 6px 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+.g-more-pill .arr {
+  display: inline-block;
+  animation: gMoreBounce 1.4s ease-in-out infinite;
+}
+@keyframes gMoreBounce { 50% { transform: translateY(3px); } }
+@media (prefers-reduced-motion: reduce) {
+  .g-more-pill .arr { animation: none; }
 }
 /* 点拨区（≤60 字 + 下一步；讲解页 36vh 内滚动） */
 .g-point {
@@ -372,6 +427,17 @@ body[data-theme="dark"] #grammar-app {
 }
 .g-guess-opts button[aria-pressed="true"] { border-color: var(--eng-subject); }
 .g-guess-note { font-size: 0.75rem; color: var(--eng-ink-soft); margin-top: 6px; }
+/* 黄队硬性要求 2（蓝队 2026-10-14 F3 根因修复）：Y1 猜测条是观察页的
+ * 关键教学组件。窄屏下三条例句会把它挤出首屏，改为 sticky 贴底——
+ * 初始即完整可见，句子在它上方滚动；内容不足一屏时保持自然位置。
+ * 数据顺序不动（例句先行铁律），只调整呈现；仅作用于 zone 末尾的猜测条。 */
+.g-zone > .g-guess:last-child {
+  position: sticky;
+  bottom: 0;
+  z-index: 4;
+  background: var(--eng-bg);
+  box-shadow: 0 -6px 14px rgba(0, 0, 0, 0.08);
+}
 
 /* ---------- 朗读（Y2） ---------- */
 .g-speak {
@@ -389,6 +455,33 @@ body[data-theme="dark"] #grammar-app {
 .g-sent-head .g-sent-en { flex: 1; }
 
 /* ---------- 练习（Y3：选择/填空，即时判分） ---------- */
+/* 练习题导航（黄队硬性要求 2：关键组件初始完整可见）：sticky 置顶，
+ * 点选后 JS 只滚动 .g-zone 自身（scrollZoneTo），绝不触发 body 滚动。 */
+.g-qnav {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 2px 2px 8px;
+  background: var(--eng-bg);
+  border-bottom: 1px solid var(--eng-line);
+}
+.g-qnav button {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 2px solid var(--eng-line);
+  background: var(--eng-panel);
+  color: var(--eng-ink);
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.g-qnav button:active { border-color: var(--eng-subject); color: var(--eng-subject); }
 .g-q { display: flex; flex-direction: column; gap: 8px; }
 .g-q-stem { font-size: 0.95rem; line-height: 1.6; }
 .g-q-opts { display: flex; flex-direction: column; gap: 8px; }
