@@ -376,8 +376,8 @@
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
-        "verdict": "reject",
-        "note": "清单第2条：中文释义'半夜她应该在睡觉'中'应该'易被初中生对应到 should，偷换了 will 表预测的概念；建议改为'半夜她会在睡觉'。打回重写。"
+        "verdict": "pass",
+        "note": "复核：revision 2 中文释义已改为'半夜她会在睡觉。'，去除'应该/肯定会'等情态词歧义，回归 will 表预测口径；数据文件 gr06.js 例句登记处与 gr06.1.3-p1 句子处两处英文/中文一致、均与台账一致。初审 6 项：规则表述准确（将来进行时 will be doing）、术语一致（will/be→助动词）、中文释义准确适合初中生、无中式英语。"
       },
       "rewrite": {
         "by": "语法生产B队",
@@ -385,7 +385,7 @@
         "note": "revision 2：中文释义“应该”改为“会在”，去除情态词歧义，回归 will 表预测口径；id 保留，revision+1，状态回 drafted 重走三审。"
       },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 2
     },
     {

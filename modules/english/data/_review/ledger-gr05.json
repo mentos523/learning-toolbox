@@ -416,8 +416,8 @@
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
-        "verdict": "reject",
-        "note": "清单第9条：'watches news' 漏定冠词，属中式英语（地道说法为 'watches the news'）；打回重写。"
+        "verdict": "pass",
+        "note": "复核：revision 2 英文已补定冠词（watches the news），中文保留冠词点拨'（news 前面要加 the）'，表述适合初中生、无误导；数据文件 gr05.js 例句登记处英文/中文/tagged 宾语块（the news→宾语）与台账一致。初审 6 项：规则表述准确（现在时时间状语）、术语一致、中文释义准确、无中式英语、每个词词性可判定。"
       },
       "rewrite": {
         "by": "语法生产B队",
@@ -425,7 +425,7 @@
         "note": "revision 2：英文补定冠词 the（watches the news），中文加注冠词点拨；id 保留，revision+1，状态回 drafted 重走三审。"
       },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 2
     },
     {
