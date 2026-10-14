@@ -58,8 +58,8 @@ window.ENG_CH["gr13"] = {
     /* ---------- gr13.1.3 that vs if/whether ---------- */
     "gr13.1.3-e1": { en: "I don't know whether to go.", zh: "我不知道是否该去。", reg: "通用",
       tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "don't", role: "verb", label: "助动词" }, { w: "know", role: "verb", label: "谓语" }, { w: "whether to go", role: "object", label: "宾语从句" } ] },
-    "gr13.1.3-e2": { en: "Whether it rains or not, we will go.", zh: "不管下不下雨，我们都去。", reg: "通用",
-      tagged: [ { w: "Whether it rains or not", role: "subject", label: "主语从句" }, { w: "we", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "助动词" }, { w: "go", role: "verb", label: "动词原形" } ] },
+    "gr13.1.3-e2": { en: "I don't care whether he comes or not.", zh: "我不在乎他来不来。（whether…or not 在这里是宾语从句，充当 care 的宾语）", reg: "通用",
+      tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "don't", role: "verb", label: "助动词" }, { w: "care", role: "verb", label: "谓语" }, { w: "whether he comes or not", role: "object", label: "宾语从句" } ] },
     "gr13.1.3-e3": { en: "I wonder if he is at home.", zh: "我想知道他在不在家。", reg: "通用",
       tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "wonder", role: "verb", label: "谓语" }, { w: "if he is at home", role: "object", label: "宾语从句" } ] },
     "gr13.1.3-e4": { en: "We discussed whether we should wait.", zh: "我们讨论了是否该等。", reg: "通用",
@@ -428,13 +428,13 @@ window.ENG_CH["gr13"] = {
               sentences: [
                 { id: "gr13.1.3-e1", en: "I don't know whether to go.", zh: "我不知道是否该去。", reg: "通用",
                   tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "don't", role: "verb", label: "助动词" }, { w: "know", role: "verb", label: "谓语" }, { w: "whether to go", role: "object", label: "宾语从句" } ] },
-                { id: "gr13.1.3-e2", en: "Whether it rains or not, we will go.", zh: "不管下不下雨，我们都去。", reg: "通用",
-                  tagged: [ { w: "Whether it rains or not", role: "subject", label: "主语从句" }, { w: "we", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "助动词" }, { w: "go", role: "verb", label: "动词原形" } ] },
+                { id: "gr13.1.3-e2", en: "I don't care whether he comes or not.", zh: "我不在乎他来不来。（whether…or not 在这里是宾语从句，充当 care 的宾语）", reg: "通用",
+                  tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "don't", role: "verb", label: "助动词" }, { w: "care", role: "verb", label: "谓语" }, { w: "whether he comes or not", role: "object", label: "宾语从句" } ] },
                 { id: "gr13.1.3-e3", en: "I wonder if he is at home.", zh: "我想知道他在不在家。", reg: "通用",
                   tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "wonder", role: "verb", label: "谓语" }, { w: "if he is at home", role: "object", label: "宾语从句" } ] }
               ],
               guess: {
-                q: "whether 后面能直接跟 to go，还能带 or not 当主语——if 行吗？",
+                q: "whether 后面能直接跟 to go，还能带 or not 作宾语——if 行吗？",
                 options: ["if 也行", "if 不行，这是 whether 的三张身份证", "that 也行"],
                 answer: 1,
                 note: "先猜，再看上面的色块验证——猜错也没关系，只记录不判分。"

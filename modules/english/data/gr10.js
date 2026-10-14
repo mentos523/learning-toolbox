@@ -62,8 +62,8 @@ window.ENG_CH["gr10"] = {
       tagged: [ { w: "Walking in the park", role: "adverb", label: "状语（分词短语）" }, { w: "I", role: "subject", label: "主语（分词的逻辑主语）" }, { w: "saw", role: "verb", label: "谓语" }, { w: "a bird", role: "object", label: "宾语" } ] },
     "gr10.1.3-e3": { en: "Written in easy English, the book is good for us.", zh: "这本书用浅显的英语写成，很适合我们。", reg: "通用",
       tagged: [ { w: "Written in easy English", role: "adverb", label: "状语（分词短语）" }, { w: "the book", role: "subject", label: "主语（分词的逻辑主语）" }, { w: "is", role: "verb", label: "谓语" }, { w: "good for us", role: "complem", label: "表语" } ] },
-    "gr10.1.3-e4": { en: "Walking along the street, a car hit me.", zh: "（✗ 错句）沿街走着，一辆车撞了我。", reg: "通用",
-      tagged: [ { w: "Walking along the street", role: "adverb", label: "状语（分词短语）" }, { w: "a car", role: "subject", label: "主语" }, { w: "hit", role: "verb", label: "谓语" }, { w: "me", role: "object", label: "宾语" } ] },
+    "gr10.1.3-e4": { en: "Walking into the classroom, the bell rang.", zh: "（✗ 错句）本想说“ 走进教室时 ”。", reg: "通用",
+      tagged: [ { w: "Walking into the classroom", role: "adverb", label: "状语（分词短语）" }, { w: "the bell", role: "subject", label: "主语" }, { w: "rang", role: "verb", label: "谓语" } ] },
     "gr10.1.3-e5": { en: "Being a rainy day, we stayed at home.", zh: "（✗ 错句）本想说“ 因为是雨天 ”。", reg: "通用",
       tagged: [ { w: "Being a rainy day", role: "adverb", label: "状语（分词短语）" }, { w: "we", role: "subject", label: "主语" }, { w: "stayed", role: "verb", label: "谓语" }, { w: "at home", role: "adverb", label: "状语" } ] },
     "gr10.1.3-e6": { en: "Seen from space, the earth looks blue.", zh: "从太空看去，地球是蓝色的。", reg: "通用",
@@ -434,12 +434,12 @@ window.ENG_CH["gr10"] = {
                   tagged: [ { w: "Walking in the park", role: "adverb", label: "状语（分词短语）" }, { w: "I", role: "subject", label: "主语（分词的逻辑主语）" }, { w: "saw", role: "verb", label: "谓语" }, { w: "a bird", role: "object", label: "宾语" } ] },
                 { id: "gr10.1.3-e1", en: "Seen from the hill, the town looks beautiful.", zh: "从山上看去，小镇很美。", reg: "通用",
                   tagged: [ { w: "Seen from the hill", role: "adverb", label: "状语（分词短语）" }, { w: "the town", role: "subject", label: "主语（分词的逻辑主语）" }, { w: "looks", role: "verb", label: "谓语" }, { w: "beautiful", role: "complem", label: "表语" } ] },
-                { id: "gr10.1.3-e4", en: "Walking along the street, a car hit me.", zh: "（✗ 错句）沿街走着，一辆车撞了我。", reg: "通用",
-                  tagged: [ { w: "Walking along the street", role: "adverb", label: "状语（分词短语）" }, { w: "a car", role: "subject", label: "主语" }, { w: "hit", role: "verb", label: "谓语" }, { w: "me", role: "object", label: "宾语" } ] }
+                { id: "gr10.1.3-e4", en: "Walking into the classroom, the bell rang.", zh: "（✗ 错句）本想说“ 走进教室时 ”。", reg: "通用",
+                  tagged: [ { w: "Walking into the classroom", role: "adverb", label: "状语（分词短语）" }, { w: "the bell", role: "subject", label: "主语" }, { w: "rang", role: "verb", label: "谓语" } ] }
               ],
               guess: {
-                q: "第三句错在哪？“ 走路 ”的人是谁，主句的主语又是谁？",
-                options: ["走路的是 a car，和主语一致", "走路的应该是人，但主语是 a car——对不上", "没有错误"],
+                q: "第三句错在哪？“ 走进教室 ”的人是谁，主句的主语又是谁？",
+                options: ["走进教室的是 the bell，和主语一致", "走进教室的应该是人，但主语是 the bell——对不上", "没有错误"],
                 answer: 1,
                 note: "先猜，再看上面的色块验证——猜错也没关系，只记录不判分。"
               },

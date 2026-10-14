@@ -73,8 +73,8 @@ window.ENG_CH["gr14"] = {
     /* ---------- gr14.1.4 关系代词省略规则 ---------- */
     "gr14.1.4-e1": { en: "The book I bought is good.", zh: "我买的那本书很好。（省 that）", reg: "通用",
       tagged: [ { w: "The book", role: "subject", label: "主语" }, { w: "(that) I bought", role: "attribute", label: "定语从句（that 省略）" }, { w: "is", role: "verb", label: "谓语" }, { w: "good", role: "complem", label: "表语" } ] },
-    "gr14.1.4-e2": { en: "The girl who is singing is my sister.", zh: "正在唱歌的女孩是我姐姐。（who 不可省）", reg: "通用",
-      tagged: [ { w: "The girl", role: "subject", label: "主语" }, { w: "who is singing", role: "attribute", label: "定语从句" }, { w: "is", role: "verb", label: "谓语" }, { w: "my sister", role: "complem", label: "表语" } ] },
+    "gr14.1.4-e2": { en: "The car that stopped at the door is mine.", zh: "停在门口的那辆车是我的。（that 不可省）", reg: "通用",
+      tagged: [ { w: "The car", role: "subject", label: "主语" }, { w: "that stopped at the door", role: "attribute", label: "定语从句" }, { w: "is", role: "verb", label: "谓语" }, { w: "mine", role: "complem", label: "表语" } ] },
     "gr14.1.4-e3": { en: "The person to whom I spoke is my teacher.", zh: "跟我说话的那个人是我的老师。（介词后不可省）", reg: "书面",
       tagged: [ { w: "The person", role: "subject", label: "主语" }, { w: "to whom I spoke", role: "attribute", label: "定语从句" }, { w: "is", role: "verb", label: "谓语" }, { w: "my teacher", role: "complem", label: "表语" } ] },
     "gr14.1.4-e4": { en: "The man whose bike was lost is sad.", zh: "丢了自行车的那个男人很难过。（whose 不可省）", reg: "通用",
@@ -590,8 +590,8 @@ window.ENG_CH["gr14"] = {
               sentences: [
                 { id: "gr14.1.4-e1", en: "The book I bought is good.", zh: "我买的那本书很好。（省 that）", reg: "通用",
                   tagged: [ { w: "The book", role: "subject", label: "主语" }, { w: "(that) I bought", role: "attribute", label: "定语从句（that 省略）" }, { w: "is", role: "verb", label: "谓语" }, { w: "good", role: "complem", label: "表语" } ] },
-                { id: "gr14.1.4-e2", en: "The girl who is singing is my sister.", zh: "正在唱歌的女孩是我姐姐。（who 不可省）", reg: "通用",
-                  tagged: [ { w: "The girl", role: "subject", label: "主语" }, { w: "who is singing", role: "attribute", label: "定语从句" }, { w: "is", role: "verb", label: "谓语" }, { w: "my sister", role: "complem", label: "表语" } ] },
+                { id: "gr14.1.4-e2", en: "The car that stopped at the door is mine.", zh: "停在门口的那辆车是我的。（that 不可省）", reg: "通用",
+                  tagged: [ { w: "The car", role: "subject", label: "主语" }, { w: "that stopped at the door", role: "attribute", label: "定语从句" }, { w: "is", role: "verb", label: "谓语" }, { w: "mine", role: "complem", label: "表语" } ] },
                 { id: "gr14.1.4-e6", en: "The song we sang yesterday is old.", zh: "我们昨天唱的那首歌很老。（省 which）", reg: "通用",
                   tagged: [ { w: "The song", role: "subject", label: "主语" }, { w: "(which) we sang yesterday", role: "attribute", label: "定语从句（which 省略）" }, { w: "is", role: "verb", label: "谓语" }, { w: "old", role: "complem", label: "表语" } ] }
               ],
