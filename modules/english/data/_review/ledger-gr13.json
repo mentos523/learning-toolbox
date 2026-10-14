@@ -395,7 +395,7 @@
       "register": "neutral",
       "revision": 3,
       "rule": "whether 与 or not 连用（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
