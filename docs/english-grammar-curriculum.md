@@ -244,7 +244,7 @@
 | 课名 | 知识点 | 典型例句方向 | 常见中式英语误区（英语专家队纠偏） | 词根呼应 | 前置 | 页数 |
 |------|--------|--------------|--------------------------------------|----------|------|------|
 | gr07.1.1 被动语态构成 | be + 过去分词；be 随时刻变（is/was/will be/have been）；by + 动作执行者 | The window was broken by Tom.（讲故事场景） | be 漏掉：The window broken.；done 用原形 | —— | gr06（过去分词形态） | 3 |
-| gr07.1.2 主动改被动 | 双宾语（give sb sth → 两句被动）；带宾补（make sb do → be made to do，to 回来！） | He was made to work.（to 回归，重点） | make sb to do（主动无 to）；被动后 to 不回来 | 呼应讲词根：`fact-`（做）家族：factory/manufacture | gr07.1.1 | 3 |
+| gr07.1.2 主动改被动 | 双宾语（give sb sth → 两句被动）；带宾补（make sb do → be made to do，to 回来！） | He was made to work.（to 回归，重点） | make sb to do（主动无 to）；被动后 to 不回来 | 呼应讲词根：`fac-`（做）家族：factory/manufacture | gr07.1.1 | 3 |
 | gr07.1.3 含情态与完成时的被动 | can be done；have been done；be going to be done | The bridge will be finished soon. | 情态后 be 漏掉：can done；完成被动 have been 漏 been | —— | gr07.1.2 | 3 |
 | gr07.1.4 不用被动的场合 | 不及物动词无被动（happen/take place/appear）；系动词无被动；"be + 形容词"不是被动（be interested） | The accident happened.（✗ was happened，重点纠） | was happened / was died（不及物动词被动化，中式英语重灾区） | —— | gr07.1.3 | 2 |
 | gr07.1.5 本章小结与习题（**中考**） | —— | —— | —— | —— | 全章 | 2 |
@@ -332,7 +332,7 @@
 
 | 课名 | 知识点 | 典型例句方向 | 常见中式英语误区（英语专家队纠偏） | 词根呼应 | 前置 | 页数 |
 |------|--------|--------------|--------------------------------------|----------|------|------|
-| gr11.2.1 词性转换一条链 | 名词→动词→形容词→副词（success→succeed→successful→successfully）；零转换（book n./v.） | 一词四形填空（**中考**高频题型） | 词性混用（He successed ✗）；零转换重音移位（record n./v.，注明） | 呼应讲词根：`ceed-/cess-`（走）家族：succeed/success | gr11.1 | 3 |
+| gr11.2.1 词性转换一条链 | 名词→动词→形容词→副词（success→succeed→successful→successfully）；零转换（book n./v.） | 一词四形填空（**中考**高频题型） | 词性混用（He successed ✗）；零转换重音移位（record n./v.，注明） | 呼应讲词根：`ced-`（走）家族：succeed/success（变体 ceed-/cess-）| gr11.1 | 3 |
 | gr11.2.2 从词根猜词性 | 看到 -tion 知道是名词、看到 -ize 知道是动词；生词词性预判（阅读技能） | 阅读场景：生词先判词性再猜义 | 只猜义不判性；后缀认错（-al 形容词 vs -al 名词 arrival，注明） | 呼应讲词根：猜词义 → 本章猜词性，技能升级 | gr11.2.1 | 3 |
 | gr11.2.3 本章小结与习题 | 前缀表 + 后缀词性总表 + 一词四形表（三表合一） | —— | —— | —— | 全章 | 2 |
 
@@ -404,7 +404,7 @@
 
 ## 第十五章：状语从句
 
-**难度**：★★★进阶 | **预计**：9 课时 | **目标**：九种状语从句识别无误；主将从现；although…but 禁令；**高考**重点
+**难度**：★★★进阶 | **预计**：9 课时 | **目标**：八种状语从句识别无误；主将从现；although…but 禁令；**高考**重点
 
 ### 单元 gr15.1 时间、条件、原因、目的、结果
 
@@ -422,7 +422,7 @@
 |------|--------|--------------|--------------------------------------|----------|------|------|
 | gr15.2.1 让步状语从句 | although/though（不能与 but 连用！）；even though；as 倒装让步（Child as he is…，高中） | Although it rained, we went.（✗ …but we went，重点纠） | although…but（全书级中式英语王）；though 口语位置（It's hard, though. 句末 though） | —— | gr15.1 | 3 |
 | gr15.2.2 比较与方式 | as…as（gr03 回填）；than；as if/as though（虚拟预告）；the way（口语） | He talks as if he knew everything.（gr16 虚拟兑现） | as if 后时态（虚拟！）；like vs as（口语 like = as if，注明语域） | —— | gr15.2.1 | 2 |
-| gr15.2.3 状语从句总表与简化 | 九种总表（连接词 × 意义 × 主将从现？）；状语从句→分词/介词短语简化 | When he was young → When young（主语一致可省，gr10 呼应） | 简化后主语偷换；although 简化（Although tired,… 主语一致） | —— | gr15.2.2 | 2 |
+| gr15.2.3 状语从句总表与简化 | 八种总表（连接词 × 意义 × 主将从现？）；状语从句→分词/介词短语简化 | When he was young → When young（主语一致可省，gr10 呼应） | 简化后主语偷换；although 简化（Although tired,… 主语一致） | —— | gr15.2.2 | 2 |
 | gr15.2.4 本章小结与习题（**高考**） | —— | —— | —— | —— | 全章 | 2 |
 
 ---
@@ -528,7 +528,7 @@
 9. mustn't 表"不必"；"play the basketball"
 10. 主将从现违反（If it will rain）
 11. used to 三兄弟混用；enjoy to do
-12. "我很" very much 位置（I very much like it. ✗ → I like it very much.）
+12. "我很" very much 位置（I very much like it. ✗ → I like it very much.；正式文体 very much 前置可接受，口语与考试用句尾式）
 
 ## 附录 B：与讲词根板块的呼应总表
 
@@ -536,9 +536,9 @@
 |----------|----------|----------|
 | gr03.1.1 | 前缀初识 | `inter-` 等既有词条 |
 | gr04.1.3 | 动词 + 介词搭配 | `spect-`（看）家族：inspect/expect |
-| gr07.1.2 | 被动语态例词 | `fact-`（做）家族：factory/manufacture |
+| gr07.1.2 | 被动语态例词 | `fac-`（做）家族：factory/manufacture |
 | gr11 全章 | 前缀改义 ↔ 词根词缀猜词义；后缀改性（本章新建）→ 两板互链 | 前缀词条（`un-`/`re-`/`dis-`/`pre-`/`in-`/`ex-`/`de-`/`co-`）R3 审计通过 |
-| gr11.2.1 | 一词四形 | `ceed-/cess-`（走）家族：succeed/success |
+| gr11.2.1 | 一词四形 | `ced-`（走）家族：succeed/success（变体 ceed-/cess-）|
 | gr11.2.2 / gr19.1.1 | 生词"先判词性再猜义" | 讲词根"猜词义"技能升级 |
 | gr19.2.3 | 词汇 ↔ 语法联合学习路径 | 两子卡跳转 |
 

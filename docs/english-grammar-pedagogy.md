@@ -312,7 +312,7 @@
 - **核心难点**：主将从现；because…so（D5）；unless 双重否定。
 - **讲解策略**："主将从现"是条件卡不是口诀——时间/条件从句里 will 被"没收"；because 与 so "仇人"可视化。
 - **对比纠偏话术**："If it will rain… 里 will 被没收了——条件从句里不许用将来时，用现在时代替。"
-- **自学路径**：九种状语从句总表（分两次）→ 主将从现专项。
+- **自学路径**：八种状语从句总表（分两次）→ 主将从现专项。
 
 ### gr15.2 让步、比较、方式与总表
 
@@ -411,10 +411,10 @@
 | 6 | He asked me where did I live. | He asked me where I lived. | 从句是披着句子外衣的宾语，里面用陈述语序，不倒装。 |
 | 7 | The book that I bought it. | The book that I bought. | that 已经占了宾语的位置，it 没地方站。 |
 | 8 | Walking along the street, a car hit me. | Walking along the street, I was hit by a car. | 分词要找自己的主语——走路的是"我"，不是"车"。 |
-| 9 | You mustn't come if you are busy.（表"不必"） | You don't have to come if you are busy. | mustn't 是"不许"（红灯），don't have to 才是"不必"（绿灯）。 |
+| 9 | You mustn't come if you are busy.（表"不必"）/ play the basketball | You don't have to come if you are busy. / play basketball | mustn't 是"不许"（红灯），don't have to 才是"不必"（绿灯）；球类运动前不加 the。 |
 | 10 | If it will rain, we will stay. | If it rains, we will stay. | 条件从句里 will 被"没收"了，用现在时代替将来。 |
 | 11 | I used to getting up late. | I used to get up late. | used to do（过去常常）/ be used to doing（习惯于）是两兄弟，别认错。 |
-| 12 | I very much like it. | I like it very much. | very much 是"程度副词"，站句尾，不站动词前面。 |
+| 12 | I very much like it. | I like it very much. | very much 是"程度副词"，站句尾，不站动词前面。（正式文体可前置，考试用句尾式） |
 
 > 话术库为黄队起草、英语专家队确认、红队审计时复核。人话版仅限直觉页/点拨区使用，严格页用术语版（"先直觉后严格"）。
 
