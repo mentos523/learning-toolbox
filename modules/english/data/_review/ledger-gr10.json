@@ -3,7 +3,12 @@
   "entries": [
     {
       "en": "The sleeping baby is my little brother.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -15,7 +20,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "现在分词作定语（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -23,7 +28,12 @@
     },
     {
       "en": "The girl talking to Tom is my classmate.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -35,7 +45,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "现在分词作定语（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -43,7 +53,12 @@
     },
     {
       "en": "Walking along the street, he met an old friend.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -55,7 +70,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "现在分词作状语（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -63,7 +78,12 @@
     },
     {
       "en": "Hearing the news, she jumped up.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -75,7 +95,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "现在分词作状语（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -83,7 +103,12 @@
     },
     {
       "en": "The man standing at the door is our teacher.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -95,7 +120,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "现在分词作定语（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -103,7 +128,12 @@
     },
     {
       "en": "Walking along the street, a car hit me.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -115,7 +145,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "悬垂分词（反例 counter）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -123,7 +153,12 @@
     },
     {
       "en": "The students playing soccer are from Class 3.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -135,7 +170,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "现在分词作定语（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -143,7 +178,12 @@
     },
     {
       "en": "The broken bike is mine.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -155,7 +195,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "过去分词作定语（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -163,7 +203,12 @@
     },
     {
       "en": "I'm interested in English.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -175,7 +220,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "过去分词作表语（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -183,7 +228,12 @@
     },
     {
       "en": "She was worried about the test.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -195,7 +245,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "过去分词作表语（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -203,7 +253,12 @@
     },
     {
       "en": "Fallen leaves covered the ground.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -215,7 +270,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "过去分词作定语（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -223,7 +278,12 @@
     },
     {
       "en": "He felt tired after the game.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -235,7 +295,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "过去分词作表语（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -243,7 +303,12 @@
     },
     {
       "en": "I'm bored.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -255,7 +320,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "-ing/-ed 辨析（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -263,7 +328,12 @@
     },
     {
       "en": "I'm boring.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -275,7 +345,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "-ing/-ed 混淆（反例 counter）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -283,7 +353,12 @@
     },
     {
       "en": "Seen from the hill, the town looks beautiful.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -295,7 +370,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "逻辑主语一致（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -303,7 +378,12 @@
     },
     {
       "en": "Walking in the park, I saw a bird.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -315,7 +395,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "逻辑主语一致（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -323,7 +403,12 @@
     },
     {
       "en": "Written in easy English, the book is good for us.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -335,7 +420,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "逻辑主语一致（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -343,7 +428,12 @@
     },
     {
       "en": "Walking into the classroom, the bell rang.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -355,7 +445,7 @@
       "register": "neutral",
       "revision": 2,
       "rule": "悬垂分词（反例 counter）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -368,7 +458,12 @@
     },
     {
       "en": "Being a rainy day, we stayed at home.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -380,7 +475,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "悬垂分词（反例 counter）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -388,7 +483,12 @@
     },
     {
       "en": "Seen from space, the earth looks blue.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -400,7 +500,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "逻辑主语一致（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -408,7 +508,12 @@
     },
     {
       "en": "Opening the box, he found a letter.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -420,7 +525,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "逻辑主语一致（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -428,7 +533,12 @@
     },
     {
       "en": "The work done, we went home.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -440,7 +550,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "独立主格（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -448,7 +558,12 @@
     },
     {
       "en": "With the work done, we felt happy.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -460,7 +575,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "with 复合结构（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -468,7 +583,12 @@
     },
     {
       "en": "With Tom helping us, it was easy.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -480,7 +600,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "with 复合结构（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -488,7 +608,12 @@
     },
     {
       "en": "Her homework finished, she watched TV.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -500,7 +625,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "独立主格（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -508,7 +633,12 @@
     },
     {
       "en": "With winter coming, the days get short.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -520,7 +650,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "with 复合结构（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -528,7 +658,12 @@
     },
     {
       "en": "Time permitting, I'll visit you.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -540,7 +675,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "独立主格（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "glossed:permit=允许",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -548,7 +683,12 @@
     },
     {
       "en": "With the work, we felt happy.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -560,7 +700,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "with 后成分残缺（反例 counter）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -568,7 +708,12 @@
     },
     {
       "en": "I want to buy a book.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -580,7 +725,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "非谓语三分法（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -588,7 +733,12 @@
     },
     {
       "en": "I enjoy reading books.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -600,7 +750,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "非谓语三分法（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -608,7 +758,12 @@
     },
     {
       "en": "The broken cup is on the floor.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -620,7 +775,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "非谓语三分法（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -628,7 +783,12 @@
     },
     {
       "en": "Swimming is good for health.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -640,7 +800,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "非谓语三分法（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -648,7 +808,12 @@
     },
     {
       "en": "The girl dancing is my sister.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -660,7 +825,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "非谓语三分法（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -668,7 +833,12 @@
     },
     {
       "en": "Seen from here, the lake is small.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -680,7 +850,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "非谓语三分法（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -688,7 +858,12 @@
     },
     {
       "en": "Falling leaves danced in the wind.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -700,7 +875,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "分词辨析（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -708,7 +883,12 @@
     },
     {
       "en": "The excited boy opened the gift.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -720,7 +900,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "分词辨析（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -728,7 +908,12 @@
     },
     {
       "en": "Crossing the road, she saw a cat.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -740,7 +925,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "分词辨析（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -748,7 +933,12 @@
     },
     {
       "en": "I'm interested in history.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -760,7 +950,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "分词辨析（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -768,7 +958,12 @@
     },
     {
       "en": "With dinner ready, we sat down.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -780,7 +975,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "分词辨析（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -788,7 +983,12 @@
     },
     {
       "en": "Running down the street, his hat flew off.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -800,7 +1000,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "悬垂分词（反例 counter）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",

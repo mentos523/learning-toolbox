@@ -1,1 +1,1557 @@
-{"chapter":"gr15","entries":[{"en":"I'll call you as soon as I arrive.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr15.1.1-e1","lesson":"gr15.1.1","register":"neutral","revision":1,"rule":"主将从现（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"我一到就给你打电话。"},{"en":"While I was cooking, he watched TV.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr15.1.1-e2","lesson":"gr15.1.1","register":"neutral","revision":1,"rule":"while + 延续动词（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"我做饭时，他在看电视。"},{"en":"When I got home, my mother was cooking.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr15.1.1-e3","lesson":"gr15.1.1","register":"neutral","revision":1,"rule":"时间状语从句（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"我到家时，妈妈正在做饭。"},{"en":"By the time we arrived, the film had started.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr15.1.1-e4","lesson":"gr15.1.1","register":"neutral","revision":1,"rule":"by the time（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"我们到时，电影已经开演了。"},{"en":"I'll call you as soon as I will arrive.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"错句标注明确、纠偏方向与本课规则一致"},"id":"gr15.1.1-e5","lesson":"gr15.1.1","register":"neutral","revision":1,"rule":"时间从句误用 will（反例 counter）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"（✗ 错句）本想说“ 我一到就给你打电话 ”。"},{"en":"When he comes, tell me.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr15.1.1-e6","lesson":"gr15.1.1","register":"neutral","revision":1,"rule":"主将从现（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"他来时告诉我。"},{"en":"As soon as she heard the news, she left.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr15.1.1-e7","lesson":"gr15.1.1","register":"neutral","revision":1,"rule":"as soon as（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"她一听到消息就离开了。"},{"en":"If it rains, we will stay at home.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr15.1.2-e1","lesson":"gr15.1.2","register":"neutral","revision":1,"rule":"条件从句主将从现（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"如果下雨，我们就待在家里。"},{"en":"Unless you hurry, you will be late.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr15.1.2-e2","lesson":"gr15.1.2","register":"neutral","revision":1,"rule":"unless = if not（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"除非你抓紧，否则会迟到。（= If you don't hurry）"},{"en":"If you study hard, you will pass.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr15.1.2-e3","lesson":"gr15.1.2","register":"neutral","revision":1,"rule":"条件从句主将从现（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"如果你努力学习，就会通过。"},{"en":"Unless you don't hurry, you will be late.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"错句标注明确、纠偏方向与本课规则一致"},"id":"gr15.1.2-e4","lesson":"gr15.1.2","register":"neutral","revision":1,"rule":"unless 双重否定（反例 counter）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"（✗ 错句）本想说“ 除非你抓紧，否则会迟到 ”。"},{"en":"If it will rain, we will stay at home.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"错句标注明确、纠偏方向与本课规则一致"},"id":"gr15.1.2-e5","lesson":"gr15.1.2","register":"neutral","revision":1,"rule":"条件从句误用 will（反例 counter）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"（✗ 错句）本想说“ 如果下雨，我们就待在家里 ”。"},{"en":"You can't go out unless you finish homework.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr15.1.2-e6","lesson":"gr15.1.2","register":"neutral","revision":1,"rule":"unless = if not（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"除非做完作业，否则不能出去。"},{"en":"If I have time, I will help you.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr15.1.2-e7","lesson":"gr15.1.2","register":"neutral","revision":1,"rule":"条件从句主将从现（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"如果我有时间，我会帮你。"},{"en":"Because he was ill, he stayed at home.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr15.1.3-e1","lesson":"gr15.1.3","register":"neutral","revision":1,"rule":"because 语气最强（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"因为他病了，他待在家里。（语气最强）"},{"en":"As he was ill, we visited him.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr15.1.3-e2","lesson":"gr15.1.3","register":"neutral","revision":1,"rule":"as 表已知原因（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"因为他病了（已知），我们去看他。"},{"en":"Since you are tired, have a rest.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr15.1.3-e3","lesson":"gr15.1.3","register":"neutral","revision":1,"rule":"since 表已知原因（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"既然你累了，休息一下吧。"},{"en":"He was late, for it rained hard.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr15.1.3-e4","lesson":"gr15.1.3","register":"written","revision":1,"rule":"for 补充说明（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"他迟到了，因为雨下得很大。（for 补充说明）"},{"en":"Because he was ill, so he stayed at home.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"错句标注明确、纠偏方向与本课规则一致"},"id":"gr15.1.3-e5","lesson":"gr15.1.3","register":"neutral","revision":1,"rule":"because…so 连用（反例 counter）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"（✗ 错句）本想说“ 因为他病了，他待在家里 ”。"},{"en":"I stayed up because the film was exciting.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr15.1.3-e6","lesson":"gr15.1.3","register":"neutral","revision":1,"rule":"because 语气最强（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"我熬夜了，因为电影很精彩。"},{"en":"As it was getting dark, we went home.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr15.1.3-e7","lesson":"gr15.1.3","register":"neutral","revision":1,"rule":"as 表已知原因（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"天渐渐黑了，我们回家了。"},{"en":"He got up early so that he could catch the bus.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr15.1.4-e1","lesson":"gr15.1.4","register":"neutral","revision":1,"rule":"so that + 情态表目的（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"他早起以便赶上公交车。（目的 + 情态）"},{"en":"She studied hard in order that she could pass.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr15.1.4-e2","lesson":"gr15.1.4","register":"neutral","revision":1,"rule":"in order that + 情态（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"她努力学习以便通过。（in order that + 情态）"},{"en":"I came early in order to get a seat.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr15.1.4-e3","lesson":"gr15.1.4","register":"neutral","revision":1,"rule":"in order to 表目的（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"我早到以便占个座。（in order to + 不定式）"},{"en":"He spoke loudly so that all could hear.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr15.1.4-e4","lesson":"gr15.1.4","register":"neutral","revision":1,"rule":"so that + 情态表目的（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"他大声说以便大家都能听见。"},{"en":"It was so dark that we couldn't see.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr15.1.4-e5","lesson":"gr15.1.4","register":"neutral","revision":1,"rule":"目的 vs 结果辨析（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"天太黑了，我们看不见。（结果，对比）"},{"en":"He got up early so that he catches the bus.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"错句标注明确、纠偏方向与本课规则一致"},"id":"gr15.1.4-e6","lesson":"gr15.1.4","register":"neutral","revision":1,"rule":"目的从句漏情态（反例 counter）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"（✗ 错句）本想说“ 他早起以便赶上公交车 ”。"},{"en":"Save money so that you can buy a bike.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr15.1.4-e7","lesson":"gr15.1.4","register":"neutral","revision":1,"rule":"so that + 情态表目的（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"存钱以便买自行车。"},{"en":"He was so tired that he fell asleep.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr15.1.5-e1","lesson":"gr15.1.5","register":"neutral","revision":1,"rule":"so…that 结果（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"他太累了，睡着了。"},{"en":"It was such a big dog that we were scared.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr15.1.5-e2","lesson":"gr15.1.5","register":"neutral","revision":1,"rule":"such…that 结果（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"那只狗太大了，把我们吓到了。"},{"en":"She is so kind a girl that all love her.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr15.1.5-e3","lesson":"gr15.1.5","register":"neutral","revision":1,"rule":"so + 形 + a/an + n（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"她是个如此善良的女孩，大家都爱她。"},{"en":"The box is so heavy that I can't lift it.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr15.1.5-e4","lesson":"gr15.1.5","register":"neutral","revision":1,"rule":"so…that 结果（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"箱子太重了，我搬不动。"},{"en":"It was such bad weather that we stayed home.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr15.1.5-e5","lesson":"gr15.1.5","register":"neutral","revision":1,"rule":"such…that 结果（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"天气太糟了，我们待在家里。"},{"en":"He was such tired that he fell asleep.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"错句标注明确、纠偏方向与本课规则一致"},"id":"gr15.1.5-e6","lesson":"gr15.1.5","register":"neutral","revision":1,"rule":"such 后误跟形容词（反例 counter）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"（✗ 错句）本想说“ 他太累了，睡着了 ”。"},{"en":"The story is so interesting that I read it twice.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr15.1.5-e7","lesson":"gr15.1.5","register":"neutral","revision":1,"rule":"so…that 结果（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"故事太有趣了，我读了两遍。"},{"en":"Although it rained, we went hiking.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr15.2.1-e1","lesson":"gr15.2.1","register":"neutral","revision":1,"rule":"although 让步（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"虽然下雨了，我们还是去远足了。"},{"en":"Though he is young, he knows a lot.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr15.2.1-e2","lesson":"gr15.2.1","register":"neutral","revision":1,"rule":"though 让步（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"虽然他年轻，但懂得很多。"},{"en":"Even though it was late, they kept working.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr15.2.1-e3","lesson":"gr15.2.1","register":"neutral","revision":1,"rule":"even though 让步（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"尽管很晚了，他们继续工作。"},{"en":"Child as he is, he can swim well.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr15.2.1-e4","lesson":"gr15.2.1","register":"written","revision":1,"rule":"as 倒装让步（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"虽然他是个孩子，但游泳很好。（as 倒装让步）"},{"en":"Although it rained, but we went hiking.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"错句标注明确、纠偏方向与本课规则一致"},"id":"gr15.2.1-e5","lesson":"gr15.2.1","register":"neutral","revision":1,"rule":"although…but 连用（反例 counter）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"（✗ 错句）本想说“ 虽然下雨了，我们还是去远足了 ”。"},{"en":"Though tired, he kept on reading.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr15.2.1-e6","lesson":"gr15.2.1","register":"neutral","revision":1,"rule":"though + 分词省略（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"虽然累了，他继续读书。（though + 分词省略）"},{"en":"The task was hard. We finished it, though.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr15.2.1-e7","lesson":"gr15.2.1","register":"spoken","revision":1,"rule":"句末 though 口语（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"任务很难。不过我们完成了。（句末 though，口语）"},{"en":"He talks as if he knew everything.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr15.2.2-e1","lesson":"gr15.2.2","register":"neutral","revision":1,"rule":"as if + 虚拟（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"他说话的样子好像无所不知。（as if + 虚拟）"},{"en":"She sings as well as her sister.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr15.2.2-e2","lesson":"gr15.2.2","register":"neutral","revision":1,"rule":"as…as 比较（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"她唱歌和她姐姐一样好。"},{"en":"Do as I do.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr15.2.2-e3","lesson":"gr15.2.2","register":"neutral","revision":1,"rule":"as 表方式（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"照我做的做。（方式 as）"},{"en":"He looks as though he is ill.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr15.2.2-e4","lesson":"gr15.2.2","register":"neutral","revision":1,"rule":"as though + 陈述（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"他看起来好像病了。（可能为真，陈述）"},{"en":"Tom runs faster than Jim.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr15.2.2-e5","lesson":"gr15.2.2","register":"neutral","revision":1,"rule":"than 比较（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"汤姆比吉姆跑得快。"},{"en":"He talks as if he knows everything.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"错句标注明确、纠偏方向与本课规则一致"},"id":"gr15.2.2-e6","lesson":"gr15.2.2","register":"neutral","revision":1,"rule":"as if 假装误用陈述（反例 counter）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"（✗ 错句）本想说“ 他说话好像无所不知 ”。"},{"en":"Do it the way I told you.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr15.2.2-e7","lesson":"gr15.2.2","register":"spoken","revision":1,"rule":"the way 口语（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"按我告诉你的方法做。（the way 口语）"},{"en":"When young, he lived here.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr15.2.3-e1","lesson":"gr15.2.3","register":"neutral","revision":1,"rule":"状语从句省略（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"他小时候住这儿。（= When he was young）"},{"en":"Although tired, he kept working.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr15.2.3-e2","lesson":"gr15.2.3","register":"neutral","revision":1,"rule":"状语从句省略（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"虽然累了，他继续工作。（= Although he was tired）"},{"en":"If possible, call me.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr15.2.3-e3","lesson":"gr15.2.3","register":"neutral","revision":1,"rule":"状语从句省略（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"如果可能，给我打电话。（= If it is possible）"},{"en":"While walking in the park, I met him.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr15.2.3-e4","lesson":"gr15.2.3","register":"neutral","revision":1,"rule":"状语从句省略（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"在公园散步时，我遇到了他。（= While I was walking）"},{"en":"He stayed home because of the rain.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr15.2.3-e5","lesson":"gr15.2.3","register":"neutral","revision":1,"rule":"because of 简化（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"因为下雨，他待在家里。（介词短语简化）"},{"en":"When young, they lived here.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"错句标注明确、纠偏方向与本课规则一致"},"id":"gr15.2.3-e6","lesson":"gr15.2.3","register":"neutral","revision":1,"rule":"简化后主语偷换（反例 counter）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"（✗ 错句）本想说“ 他小时候住这儿 ”。"},{"en":"If necessary, I will help.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr15.2.3-e7","lesson":"gr15.2.3","register":"neutral","revision":1,"rule":"状语从句省略（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"如果需要，我会帮忙。（= If it is necessary）"},{"en":"I'll call you as soon as I arrive.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr15.2.4-e1","lesson":"gr15.2.4","register":"neutral","revision":1,"rule":"状语从句综合（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"我一到就给你打电话。（时间，复习）"},{"en":"Because he was ill, he stayed at home.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr15.2.4-e2","lesson":"gr15.2.4","register":"neutral","revision":1,"rule":"状语从句综合（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"因为他病了，他待在家里。（原因，复习）"},{"en":"Although it rained, we went hiking.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr15.2.4-e3","lesson":"gr15.2.4","register":"neutral","revision":1,"rule":"状语从句综合（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"虽然下雨了，我们还是去远足了。（让步，复习）"},{"en":"Unless you hurry, you will be late.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr15.2.4-e4","lesson":"gr15.2.4","register":"neutral","revision":1,"rule":"状语从句综合（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"除非你抓紧，否则会迟到。（条件，复习）"},{"en":"He was so tired that he fell asleep.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr15.2.4-e5","lesson":"gr15.2.4","register":"neutral","revision":1,"rule":"状语从句综合（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"他太累了，睡着了。（结果，复习）"},{"en":"Because he was ill, so he stayed at home.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"错句标注明确、纠偏方向与本课规则一致"},"id":"gr15.2.4-e6","lesson":"gr15.2.4","register":"neutral","revision":1,"rule":"because…so 连用（反例 counter）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"（✗ 错句）本想说“ 因为他病了，他待在家里 ”。"}],"note":"英语语法例句三审台账（D3）。字段与状态定义见 docs/english-grammar-review-ledger.md。语法生产C队 2026-10-14 撰写，共 62 条（正例 53 / 反例 9），状态 drafted，待英语专家队初审与红队终审。","schema":"grammar-review-ledger/1.0"}
+{
+  "chapter": "gr15",
+  "entries": [
+    {
+      "en": "I'll call you as soon as I arrive.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr15.1.1-e1",
+      "lesson": "gr15.1.1",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "主将从现（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "我一到就给你打电话。"
+    },
+    {
+      "en": "While I was cooking, he watched TV.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr15.1.1-e2",
+      "lesson": "gr15.1.1",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "while + 延续动词（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "我做饭时，他在看电视。"
+    },
+    {
+      "en": "When I got home, my mother was cooking.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr15.1.1-e3",
+      "lesson": "gr15.1.1",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "时间状语从句（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "我到家时，妈妈正在做饭。"
+    },
+    {
+      "en": "By the time we arrived, the film had started.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr15.1.1-e4",
+      "lesson": "gr15.1.1",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "by the time（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "我们到时，电影已经开演了。"
+    },
+    {
+      "en": "I'll call you as soon as I will arrive.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "错句标注明确、纠偏方向与本课规则一致"
+      },
+      "id": "gr15.1.1-e5",
+      "lesson": "gr15.1.1",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "时间从句误用 will（反例 counter）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "（✗ 错句）本想说“ 我一到就给你打电话 ”。"
+    },
+    {
+      "en": "When he comes, tell me.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr15.1.1-e6",
+      "lesson": "gr15.1.1",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "主将从现（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "他来时告诉我。"
+    },
+    {
+      "en": "As soon as she heard the news, she left.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr15.1.1-e7",
+      "lesson": "gr15.1.1",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "as soon as（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "她一听到消息就离开了。"
+    },
+    {
+      "en": "If it rains, we will stay at home.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr15.1.2-e1",
+      "lesson": "gr15.1.2",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "条件从句主将从现（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "如果下雨，我们就待在家里。"
+    },
+    {
+      "en": "Unless you hurry, you will be late.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr15.1.2-e2",
+      "lesson": "gr15.1.2",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "unless = if not（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "除非你抓紧，否则会迟到。（= If you don't hurry）"
+    },
+    {
+      "en": "If you study hard, you will pass.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr15.1.2-e3",
+      "lesson": "gr15.1.2",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "条件从句主将从现（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "如果你努力学习，就会通过。"
+    },
+    {
+      "en": "Unless you don't hurry, you will be late.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "错句标注明确、纠偏方向与本课规则一致"
+      },
+      "id": "gr15.1.2-e4",
+      "lesson": "gr15.1.2",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "unless 双重否定（反例 counter）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "（✗ 错句）本想说“ 除非你抓紧，否则会迟到 ”。"
+    },
+    {
+      "en": "If it will rain, we will stay at home.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "错句标注明确、纠偏方向与本课规则一致"
+      },
+      "id": "gr15.1.2-e5",
+      "lesson": "gr15.1.2",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "条件从句误用 will（反例 counter）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "（✗ 错句）本想说“ 如果下雨，我们就待在家里 ”。"
+    },
+    {
+      "en": "You can't go out unless you finish homework.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr15.1.2-e6",
+      "lesson": "gr15.1.2",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "unless = if not（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "除非做完作业，否则不能出去。"
+    },
+    {
+      "en": "If I have time, I will help you.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr15.1.2-e7",
+      "lesson": "gr15.1.2",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "条件从句主将从现（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "如果我有时间，我会帮你。"
+    },
+    {
+      "en": "Because he was ill, he stayed at home.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr15.1.3-e1",
+      "lesson": "gr15.1.3",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "because 语气最强（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "因为他病了，他待在家里。（语气最强）"
+    },
+    {
+      "en": "As he was ill, we visited him.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr15.1.3-e2",
+      "lesson": "gr15.1.3",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "as 表已知原因（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "因为他病了（已知），我们去看他。"
+    },
+    {
+      "en": "Since you are tired, have a rest.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr15.1.3-e3",
+      "lesson": "gr15.1.3",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "since 表已知原因（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "既然你累了，休息一下吧。"
+    },
+    {
+      "en": "He was late, for it rained hard.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr15.1.3-e4",
+      "lesson": "gr15.1.3",
+      "register": "written",
+      "revision": 1,
+      "rule": "for 补充说明（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "他迟到了，因为雨下得很大。（for 补充说明）"
+    },
+    {
+      "en": "Because he was ill, so he stayed at home.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "错句标注明确、纠偏方向与本课规则一致"
+      },
+      "id": "gr15.1.3-e5",
+      "lesson": "gr15.1.3",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "because…so 连用（反例 counter）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "（✗ 错句）本想说“ 因为他病了，他待在家里 ”。"
+    },
+    {
+      "en": "I stayed up because the film was exciting.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr15.1.3-e6",
+      "lesson": "gr15.1.3",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "because 语气最强（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "我熬夜了，因为电影很精彩。"
+    },
+    {
+      "en": "As it was getting dark, we went home.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr15.1.3-e7",
+      "lesson": "gr15.1.3",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "as 表已知原因（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "天渐渐黑了，我们回家了。"
+    },
+    {
+      "en": "He got up early so that he could catch the bus.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr15.1.4-e1",
+      "lesson": "gr15.1.4",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "so that + 情态表目的（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "他早起以便赶上公交车。（目的 + 情态）"
+    },
+    {
+      "en": "She studied hard in order that she could pass.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "reject",
+        "note": "红队终审打回（清单第7条·检查项2）：语域标注错误——'in order that' 为正式书面连词（词典标 formal），register 应为 written 而非 neutral。重写建议：register 改为 written，句子本身保留；或改用 so that 并保留 neutral（但会与本课 e1 重复，故建议前者）。"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr15.1.4-e2",
+      "lesson": "gr15.1.4",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "in order that + 情态（正例 example）",
+      "status": "rejected",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "她努力学习以便通过。（in order that + 情态）"
+    },
+    {
+      "en": "I came early in order to get a seat.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr15.1.4-e3",
+      "lesson": "gr15.1.4",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "in order to 表目的（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "我早到以便占个座。（in order to + 不定式）"
+    },
+    {
+      "en": "He spoke loudly so that all could hear.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr15.1.4-e4",
+      "lesson": "gr15.1.4",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "so that + 情态表目的（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "他大声说以便大家都能听见。"
+    },
+    {
+      "en": "It was so dark that we couldn't see.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr15.1.4-e5",
+      "lesson": "gr15.1.4",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "目的 vs 结果辨析（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "天太黑了，我们看不见。（结果，对比）"
+    },
+    {
+      "en": "He got up early so that he catches the bus.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "错句标注明确、纠偏方向与本课规则一致"
+      },
+      "id": "gr15.1.4-e6",
+      "lesson": "gr15.1.4",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "目的从句漏情态（反例 counter）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "（✗ 错句）本想说“ 他早起以便赶上公交车 ”。"
+    },
+    {
+      "en": "Save money so that you can buy a bike.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr15.1.4-e7",
+      "lesson": "gr15.1.4",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "so that + 情态表目的（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "存钱以便买自行车。"
+    },
+    {
+      "en": "He was so tired that he fell asleep.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr15.1.5-e1",
+      "lesson": "gr15.1.5",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "so…that 结果（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "他太累了，睡着了。"
+    },
+    {
+      "en": "It was such a big dog that we were scared.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr15.1.5-e2",
+      "lesson": "gr15.1.5",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "such…that 结果（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "那只狗太大了，把我们吓到了。"
+    },
+    {
+      "en": "She is so kind a girl that all love her.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "reject",
+        "note": "红队终审打回（清单第7条·检查项1/2）：母语者替换测试不通过——'all love her'生硬古旧，真实场景母语者会说 'everyone loves her'，有为凑 so…that 模式编造怪句之嫌。重写建议：改为 'She is so kind a girl that everyone loves her.'（中文'大家都爱她'正好对应 everyone）。"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr15.1.5-e3",
+      "lesson": "gr15.1.5",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "so + 形 + a/an + n（正例 example）",
+      "status": "rejected",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "她是个如此善良的女孩，大家都爱她。"
+    },
+    {
+      "en": "The box is so heavy that I can't lift it.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr15.1.5-e4",
+      "lesson": "gr15.1.5",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "so…that 结果（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "箱子太重了，我搬不动。"
+    },
+    {
+      "en": "It was such bad weather that we stayed home.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr15.1.5-e5",
+      "lesson": "gr15.1.5",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "such…that 结果（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "天气太糟了，我们待在家里。"
+    },
+    {
+      "en": "He was such tired that he fell asleep.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "错句标注明确、纠偏方向与本课规则一致"
+      },
+      "id": "gr15.1.5-e6",
+      "lesson": "gr15.1.5",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "such 后误跟形容词（反例 counter）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "（✗ 错句）本想说“ 他太累了，睡着了 ”。"
+    },
+    {
+      "en": "The story is so interesting that I read it twice.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr15.1.5-e7",
+      "lesson": "gr15.1.5",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "so…that 结果（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "故事太有趣了，我读了两遍。"
+    },
+    {
+      "en": "Although it rained, we went hiking.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr15.2.1-e1",
+      "lesson": "gr15.2.1",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "although 让步（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "虽然下雨了，我们还是去远足了。"
+    },
+    {
+      "en": "Though he is young, he knows a lot.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr15.2.1-e2",
+      "lesson": "gr15.2.1",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "though 让步（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "虽然他年轻，但懂得很多。"
+    },
+    {
+      "en": "Even though it was late, they kept working.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr15.2.1-e3",
+      "lesson": "gr15.2.1",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "even though 让步（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "尽管很晚了，他们继续工作。"
+    },
+    {
+      "en": "Child as he is, he can swim well.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr15.2.1-e4",
+      "lesson": "gr15.2.1",
+      "register": "written",
+      "revision": 1,
+      "rule": "as 倒装让步（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "虽然他是个孩子，但游泳很好。（as 倒装让步）"
+    },
+    {
+      "en": "Although it rained, but we went hiking.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "错句标注明确、纠偏方向与本课规则一致"
+      },
+      "id": "gr15.2.1-e5",
+      "lesson": "gr15.2.1",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "although…but 连用（反例 counter）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "（✗ 错句）本想说“ 虽然下雨了，我们还是去远足了 ”。"
+    },
+    {
+      "en": "Though tired, he kept on reading.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr15.2.1-e6",
+      "lesson": "gr15.2.1",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "though + 分词省略（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "虽然累了，他继续读书。（though + 分词省略）"
+    },
+    {
+      "en": "The task was hard. We finished it, though.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr15.2.1-e7",
+      "lesson": "gr15.2.1",
+      "register": "spoken",
+      "revision": 1,
+      "rule": "句末 though 口语（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "任务很难。不过我们完成了。（句末 though，口语）"
+    },
+    {
+      "en": "He talks as if he knew everything.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr15.2.2-e1",
+      "lesson": "gr15.2.2",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "as if + 虚拟（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "他说话的样子好像无所不知。（as if + 虚拟）"
+    },
+    {
+      "en": "She sings as well as her sister.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr15.2.2-e2",
+      "lesson": "gr15.2.2",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "as…as 比较（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "她唱歌和她姐姐一样好。"
+    },
+    {
+      "en": "Do as I do.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr15.2.2-e3",
+      "lesson": "gr15.2.2",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "as 表方式（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "照我做的做。（方式 as）"
+    },
+    {
+      "en": "He looks as though he is ill.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr15.2.2-e4",
+      "lesson": "gr15.2.2",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "as though + 陈述（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "他看起来好像病了。（可能为真，陈述）"
+    },
+    {
+      "en": "Tom runs faster than Jim.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr15.2.2-e5",
+      "lesson": "gr15.2.2",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "than 比较（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "汤姆比吉姆跑得快。"
+    },
+    {
+      "en": "He talks as if he knows everything.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "错句标注明确、纠偏方向与本课规则一致"
+      },
+      "id": "gr15.2.2-e6",
+      "lesson": "gr15.2.2",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "as if 假装误用陈述（反例 counter）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "（✗ 错句）本想说“ 他说话好像无所不知 ”。"
+    },
+    {
+      "en": "Do it the way I told you.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr15.2.2-e7",
+      "lesson": "gr15.2.2",
+      "register": "spoken",
+      "revision": 1,
+      "rule": "the way 口语（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "按我告诉你的方法做。（the way 口语）"
+    },
+    {
+      "en": "When young, he lived here.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr15.2.3-e1",
+      "lesson": "gr15.2.3",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "状语从句省略（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "他小时候住这儿。（= When he was young）"
+    },
+    {
+      "en": "Although tired, he kept working.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr15.2.3-e2",
+      "lesson": "gr15.2.3",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "状语从句省略（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "虽然累了，他继续工作。（= Although he was tired）"
+    },
+    {
+      "en": "If possible, call me.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr15.2.3-e3",
+      "lesson": "gr15.2.3",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "状语从句省略（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "如果可能，给我打电话。（= If it is possible）"
+    },
+    {
+      "en": "While walking in the park, I met him.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr15.2.3-e4",
+      "lesson": "gr15.2.3",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "状语从句省略（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "在公园散步时，我遇到了他。（= While I was walking）"
+    },
+    {
+      "en": "He stayed home because of the rain.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr15.2.3-e5",
+      "lesson": "gr15.2.3",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "because of 简化（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "因为下雨，他待在家里。（介词短语简化）"
+    },
+    {
+      "en": "When young, they lived here.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "错句标注明确、纠偏方向与本课规则一致"
+      },
+      "id": "gr15.2.3-e6",
+      "lesson": "gr15.2.3",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "简化后主语偷换（反例 counter）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "（✗ 错句）本想说“ 他小时候住这儿 ”。"
+    },
+    {
+      "en": "If necessary, I will help.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr15.2.3-e7",
+      "lesson": "gr15.2.3",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "状语从句省略（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "如果需要，我会帮忙。（= If it is necessary）"
+    },
+    {
+      "en": "I'll call you as soon as I arrive.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr15.2.4-e1",
+      "lesson": "gr15.2.4",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "状语从句综合（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "我一到就给你打电话。（时间，复习）"
+    },
+    {
+      "en": "Because he was ill, he stayed at home.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr15.2.4-e2",
+      "lesson": "gr15.2.4",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "状语从句综合（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "因为他病了，他待在家里。（原因，复习）"
+    },
+    {
+      "en": "Although it rained, we went hiking.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr15.2.4-e3",
+      "lesson": "gr15.2.4",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "状语从句综合（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "虽然下雨了，我们还是去远足了。（让步，复习）"
+    },
+    {
+      "en": "Unless you hurry, you will be late.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr15.2.4-e4",
+      "lesson": "gr15.2.4",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "状语从句综合（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "除非你抓紧，否则会迟到。（条件，复习）"
+    },
+    {
+      "en": "He was so tired that he fell asleep.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr15.2.4-e5",
+      "lesson": "gr15.2.4",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "状语从句综合（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "他太累了，睡着了。（结果，复习）"
+    },
+    {
+      "en": "Because he was ill, so he stayed at home.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "错句标注明确、纠偏方向与本课规则一致"
+      },
+      "id": "gr15.2.4-e6",
+      "lesson": "gr15.2.4",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "because…so 连用（反例 counter）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "（✗ 错句）本想说“ 因为他病了，他待在家里 ”。"
+    }
+  ],
+  "note": "英语语法例句三审台账（D3）。字段与状态定义见 docs/english-grammar-review-ledger.md。语法生产C队 2026-10-14 撰写，共 62 条（正例 53 / 反例 9），状态 drafted，待英语专家队初审与红队终审。",
+  "schema": "grammar-review-ledger/1.0"
+}

@@ -3,7 +3,12 @@
   "entries": [
     {
       "en": "I know that he is ill.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -15,7 +20,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "宾语从句连接词 that（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -23,7 +28,12 @@
     },
     {
       "en": "I wonder if it will rain.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -35,7 +45,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "宾语从句连接词 if（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -43,7 +53,12 @@
     },
     {
       "en": "He asked me where I lived.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -55,7 +70,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "宾语从句连接词 wh-（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -63,7 +78,12 @@
     },
     {
       "en": "She told me that she was busy.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -75,7 +95,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "宾语从句连接词 that（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -83,7 +103,12 @@
     },
     {
       "en": "Do you know what he said?",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -95,7 +120,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "宾语从句连接词 wh-（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -103,7 +128,12 @@
     },
     {
       "en": "I don't know whether he will come.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -115,7 +145,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "宾语从句连接词 whether（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -123,7 +153,12 @@
     },
     {
       "en": "I wonder it will rain.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -135,7 +170,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "连接词漏用（反例 counter）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -143,7 +178,12 @@
     },
     {
       "en": "They asked him when he arrived.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -155,7 +195,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "宾语从句陈述语序（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -163,7 +203,12 @@
     },
     {
       "en": "She said that she was busy.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -175,7 +220,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "主过从过（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -183,7 +228,12 @@
     },
     {
       "en": "I think he will come tomorrow.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -195,7 +245,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "主句现在时从句时态不变（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -203,7 +253,12 @@
     },
     {
       "en": "He asked me where did I live.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -215,7 +270,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "从句倒装（反例 counter）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -223,7 +278,12 @@
     },
     {
       "en": "They told us that they had finished the work.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -235,7 +295,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "主过从过（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -243,7 +303,12 @@
     },
     {
       "en": "Do you know when he will arrive?",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -255,7 +320,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "主句现在时从句时态不变（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -263,7 +328,12 @@
     },
     {
       "en": "She said she is busy.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -275,7 +345,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "时态不呼应（反例 counter）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -283,7 +353,12 @@
     },
     {
       "en": "I don't know whether to go.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -295,7 +370,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "whether 接 to do（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -303,7 +378,12 @@
     },
     {
       "en": "I don't care whether he comes or not.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -315,7 +395,7 @@
       "register": "neutral",
       "revision": 2,
       "rule": "whether 与 or not 连用（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -328,7 +408,12 @@
     },
     {
       "en": "I wonder if he is at home.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -340,7 +425,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "if 表是否（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -348,7 +433,12 @@
     },
     {
       "en": "We discussed whether we should wait.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -360,7 +450,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "discuss 后接 whether（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -368,7 +458,12 @@
     },
     {
       "en": "I don't know if to go.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -380,7 +475,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "if 接 to do（反例 counter）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -388,7 +483,12 @@
     },
     {
       "en": "They discussed if they should leave.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -400,7 +500,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "discuss 后接 if（反例 counter）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -408,7 +508,12 @@
     },
     {
       "en": "Whether he comes or not doesn't matter.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -420,7 +525,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "whether 作主语（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -428,7 +533,12 @@
     },
     {
       "en": "I doubt whether he will come.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -440,7 +550,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "肯定 doubt 接 whether（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -448,7 +558,12 @@
     },
     {
       "en": "I don't doubt that he will come.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -460,7 +575,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "否定 doubt 接 that（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -468,7 +583,12 @@
     },
     {
       "en": "I wonder if it will rain tomorrow.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -480,7 +600,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "wonder 接 if（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -488,7 +608,12 @@
     },
     {
       "en": "He suggested that we leave early.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -500,7 +625,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "suggest 接 that（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -508,7 +633,12 @@
     },
     {
       "en": "I suggest if we leave early.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -520,7 +650,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "suggest 接 if（反例 counter）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -528,7 +658,12 @@
     },
     {
       "en": "I doubt that he won't come.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -540,7 +675,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "doubt 双重否定（反例 counter）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -548,7 +683,12 @@
     },
     {
       "en": "I wonder whether he knows the answer.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -560,7 +700,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "wonder 接 whether（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -568,7 +708,12 @@
     },
     {
       "en": "It is important that we learn English well.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -580,7 +725,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "形式主语 it（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -588,7 +733,12 @@
     },
     {
       "en": "It is true that he helped us.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -600,7 +750,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "形式主语 it（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -608,7 +758,12 @@
     },
     {
       "en": "That we finish on time is important.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -620,7 +775,7 @@
       "register": "written",
       "revision": 1,
       "rule": "主语从句放句首（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -628,7 +783,12 @@
     },
     {
       "en": "It doesn't matter whether you come or not.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -640,7 +800,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "whether 引导主语从句（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -648,7 +808,12 @@
     },
     {
       "en": "That is important that we learn English.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -660,7 +825,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "that 杂糅（反例 counter）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -668,7 +833,12 @@
     },
     {
       "en": "It is clear that he was wrong.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -680,7 +850,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "形式主语 it（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -688,7 +858,12 @@
     },
     {
       "en": "It is said that he will leave.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -700,7 +875,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "形式主语 it（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -708,7 +883,12 @@
     },
     {
       "en": "The problem is that we have no money.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -720,7 +900,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "表语从句（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -728,7 +908,12 @@
     },
     {
       "en": "The news that he won surprised us.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -740,7 +925,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "同位语从句（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -748,7 +933,12 @@
     },
     {
       "en": "The fact that he was late made us angry.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -760,7 +950,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "同位语从句（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -768,7 +958,12 @@
     },
     {
       "en": "My idea is that we start early.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -780,7 +975,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "表语从句（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -788,7 +983,12 @@
     },
     {
       "en": "I have no idea when he will come.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -800,7 +1000,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "同位语从句 wh-（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -808,7 +1008,12 @@
     },
     {
       "en": "The idea that the earth is flat is wrong.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -820,7 +1025,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "同位语从句（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -828,7 +1033,12 @@
     },
     {
       "en": "The news that he told us surprised me.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -840,7 +1050,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "同位语 vs 定语辨析（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -848,7 +1058,12 @@
     },
     {
       "en": "He said that he was busy.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -860,7 +1075,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "间接引语陈述句（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -868,7 +1083,12 @@
     },
     {
       "en": "She asked me if I was ready.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -880,7 +1100,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "间接引语疑问句（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -888,7 +1108,12 @@
     },
     {
       "en": "The teacher told us to be quiet.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -900,7 +1125,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "间接引语祈使句（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -908,7 +1133,12 @@
     },
     {
       "en": "He said he would come soon.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -920,7 +1150,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "间接引语时态后退（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -928,7 +1158,12 @@
     },
     {
       "en": "She asked where I lived.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -940,7 +1175,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "间接引语疑问句（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -948,7 +1183,12 @@
     },
     {
       "en": "He said that he is busy.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -960,7 +1200,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "间接引语时态未后退（反例 counter）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -968,7 +1208,12 @@
     },
     {
       "en": "My mother told me to lock the door.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -980,7 +1225,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "间接引语祈使句（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -988,7 +1233,12 @@
     },
     {
       "en": "I believe that he is right.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -1000,7 +1250,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "名词性从句综合（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -1008,7 +1258,12 @@
     },
     {
       "en": "What he said is true.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -1020,7 +1275,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "名词性从句综合（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -1028,7 +1283,12 @@
     },
     {
       "en": "The question is when we leave.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -1040,7 +1300,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "名词性从句综合（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -1048,7 +1308,12 @@
     },
     {
       "en": "She asked me whether I was tired.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -1060,7 +1325,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "名词性从句综合（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -1068,7 +1333,12 @@
     },
     {
       "en": "It is clear that we need help.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -1080,7 +1350,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "名词性从句综合（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -1088,7 +1358,12 @@
     },
     {
       "en": "He told me that he had seen the film.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -1100,7 +1375,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "名词性从句综合（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",

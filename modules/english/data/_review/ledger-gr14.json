@@ -3,7 +3,12 @@
   "entries": [
     {
       "en": "The girl who is singing is my sister.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -15,7 +20,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "关系代词 who（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -23,7 +28,12 @@
     },
     {
       "en": "The book that I bought is interesting.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -35,7 +45,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "关系代词 that（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -43,7 +53,12 @@
     },
     {
       "en": "The man whose car is red is my uncle.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -55,7 +70,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "关系代词 whose（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -63,7 +78,12 @@
     },
     {
       "en": "This is the house which Jack built.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -75,7 +95,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "关系代词 which（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -83,7 +103,12 @@
     },
     {
       "en": "The teacher whom we love is ill.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -95,7 +120,7 @@
       "register": "written",
       "revision": 1,
       "rule": "关系代词 whom（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -103,7 +128,12 @@
     },
     {
       "en": "The book that I bought it is interesting.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -115,7 +145,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "关系代词残留 it（反例 counter）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -123,7 +153,12 @@
     },
     {
       "en": "The dog that is running is ours.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -135,7 +170,7 @@
       "register": "neutral",
       "revision": 2,
       "rule": "关系代词 that 指物（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -148,7 +183,12 @@
     },
     {
       "en": "I remember the day when we met.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -160,7 +200,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "关系副词 when（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -168,7 +208,12 @@
     },
     {
       "en": "This is the house where I was born.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -180,7 +225,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "关系副词 where（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -188,7 +233,12 @@
     },
     {
       "en": "Tell me the reason why you are late.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -200,7 +250,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "关系副词 why（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -208,7 +258,12 @@
     },
     {
       "en": "The night when he left was rainy.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -220,7 +275,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "关系副词 when（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -228,7 +283,12 @@
     },
     {
       "en": "Do you know the place where we parked the car?",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -240,7 +300,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "关系副词 where（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -248,7 +308,12 @@
     },
     {
       "en": "I remember the day where we met.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -260,7 +325,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "关系副词误用（反例 counter）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -268,7 +333,12 @@
     },
     {
       "en": "Sunday is the day when we rest.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -280,7 +350,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "关系副词 when（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -288,7 +358,12 @@
     },
     {
       "en": "My brother who lives in Beijing is a doctor.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -300,7 +375,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "限制性定语从句（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -308,7 +383,12 @@
     },
     {
       "en": "My brother, who lives in Beijing, is a doctor.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -320,7 +400,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "非限制性定语从句（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -328,7 +408,12 @@
     },
     {
       "en": "He failed the test, which surprised us.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -340,7 +425,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "which 指全句（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -348,7 +433,12 @@
     },
     {
       "en": "Beijing, which is the capital of China, is beautiful.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -360,7 +450,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "非限制性定语从句（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -368,7 +458,12 @@
     },
     {
       "en": "My mother, that is cooking, is kind.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -380,7 +475,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "非限制性误用 that（反例 counter）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -388,7 +483,12 @@
     },
     {
       "en": "The students who work hard will succeed.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -400,7 +500,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "限制性定语从句（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -408,7 +508,12 @@
     },
     {
       "en": "Tom, whose father is a teacher, likes math.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -420,7 +525,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "非限制性定语从句（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -428,7 +533,12 @@
     },
     {
       "en": "The book I bought is good.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -440,7 +550,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "关系代词作宾语可省（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -448,7 +558,12 @@
     },
     {
       "en": "The car that stopped at the door is mine.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -460,7 +575,7 @@
       "register": "neutral",
       "revision": 2,
       "rule": "关系代词作主语不可省（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -473,7 +588,12 @@
     },
     {
       "en": "The person to whom I spoke is my teacher.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -485,7 +605,7 @@
       "register": "written",
       "revision": 1,
       "rule": "介词后关系代词不可省（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -493,7 +613,12 @@
     },
     {
       "en": "The man whose bike was lost is sad.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -505,7 +630,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "whose 不可省（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -513,7 +638,12 @@
     },
     {
       "en": "The girl is singing is my sister.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -525,7 +655,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "主语关系代词误省（反例 counter）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -533,7 +663,12 @@
     },
     {
       "en": "The song we sang yesterday is old.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -545,7 +680,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "关系代词作宾语可省（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -553,7 +688,12 @@
     },
     {
       "en": "Is this the book you are looking for?",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -565,7 +705,7 @@
       "register": "spoken",
       "revision": 1,
       "rule": "介词后置口语（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -573,7 +713,12 @@
     },
     {
       "en": "This is the best film that I have seen.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -585,7 +730,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "最高级后 that 必用（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -593,7 +738,12 @@
     },
     {
       "en": "He is the first person that came.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -605,7 +755,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "序数词后 that 必用（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -613,7 +763,12 @@
     },
     {
       "en": "This is the only book that I like.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -625,7 +780,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "only 后 that 必用（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -633,7 +788,12 @@
     },
     {
       "en": "My car, which I bought in 2020, is red.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -645,7 +805,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "非限制性不用 that（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -653,7 +813,12 @@
     },
     {
       "en": "This is the best film which I have seen.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -665,7 +830,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "最高级后误用 which（反例 counter）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -673,7 +838,12 @@
     },
     {
       "en": "My car, that I bought in 2020, is red.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -685,7 +855,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "非限制性误用 that（反例 counter）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -693,7 +863,12 @@
     },
     {
       "en": "All that he said is true.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -705,7 +880,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "all 后 that 必用（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -713,7 +888,12 @@
     },
     {
       "en": "This is the house in which he lived.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -725,7 +905,7 @@
       "register": "written",
       "revision": 1,
       "rule": "介词前置（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -733,7 +913,12 @@
     },
     {
       "en": "This is the house he lived in.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -745,7 +930,7 @@
       "register": "spoken",
       "revision": 1,
       "rule": "介词后置（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -753,7 +938,12 @@
     },
     {
       "en": "The person to whom I spoke was kind.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -765,7 +955,7 @@
       "register": "written",
       "revision": 1,
       "rule": "介词 + whom（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -773,7 +963,12 @@
     },
     {
       "en": "The tree under which we sat is tall.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -785,7 +980,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "介词 + which（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -793,7 +988,12 @@
     },
     {
       "en": "The house whose roof is red is mine.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -805,7 +1005,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "whose = of which（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -813,7 +1013,12 @@
     },
     {
       "en": "This is the house in that he lived.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -825,7 +1030,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "介词后误用 that（反例 counter）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -833,7 +1038,12 @@
     },
     {
       "en": "Is this the pen with which you wrote?",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -845,7 +1055,7 @@
       "register": "written",
       "revision": 1,
       "rule": "介词前置（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -853,7 +1063,12 @@
     },
     {
       "en": "The boy playing soccer is Tom.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -865,7 +1080,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "定语从句简化 doing（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -873,7 +1088,12 @@
     },
     {
       "en": "The girl standing there is my sister.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -885,7 +1105,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "定语从句简化 doing（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -893,7 +1113,12 @@
     },
     {
       "en": "The books written by him are popular.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -905,7 +1130,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "定语从句简化 done（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -913,7 +1138,12 @@
     },
     {
       "en": "The man wearing glasses is our teacher.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -925,7 +1155,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "定语从句简化 doing（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -933,7 +1163,12 @@
     },
     {
       "en": "Do you know the woman talking to Tom?",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -945,7 +1180,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "定语从句简化 doing（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -953,7 +1188,12 @@
     },
     {
       "en": "The boy is playing soccer is Tom.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -965,7 +1205,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "简化残留 is（反例 counter）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -973,7 +1213,12 @@
     },
     {
       "en": "The bridge built in 2000 is long.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -985,7 +1230,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "定语从句简化 done（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -993,7 +1238,12 @@
     },
     {
       "en": "The girl who is singing is my sister.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -1005,7 +1255,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "定语从句综合（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -1013,7 +1263,12 @@
     },
     {
       "en": "This is the house where I was born.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -1025,7 +1280,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "定语从句综合（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -1033,7 +1288,12 @@
     },
     {
       "en": "He failed the test, which surprised us.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -1045,7 +1305,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "定语从句综合（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -1053,7 +1313,12 @@
     },
     {
       "en": "This is the best film that I have seen.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -1065,7 +1330,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "定语从句综合（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -1073,7 +1338,12 @@
     },
     {
       "en": "The house in which he lived is old.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -1085,7 +1355,7 @@
       "register": "written",
       "revision": 1,
       "rule": "定语从句综合（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -1093,7 +1363,12 @@
     },
     {
       "en": "The book that I bought it is interesting.",
-      "final": null,
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
       "first": {
         "by": "英语专家队",
         "at": "2026-10-14",
@@ -1105,7 +1380,7 @@
       "register": "neutral",
       "revision": 1,
       "rule": "关系代词残留 it（反例 counter）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",

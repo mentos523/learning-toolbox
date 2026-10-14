@@ -1,1 +1,1232 @@
-{"chapter":"gr16","entries":[{"en":"If I were a bird, I would fly to you.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr16.1.1-e1","lesson":"gr16.1.1","register":"neutral","revision":1,"rule":"与现在相反虚拟（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"如果我是只鸟，我就飞到你身边。"},{"en":"If I had studied harder, I would have passed.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr16.1.1-e2","lesson":"gr16.1.1","register":"neutral","revision":1,"rule":"与过去相反虚拟（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"如果我当时更努力，我就通过了。"},{"en":"If I were you, I would take the chance.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr16.1.1-e3","lesson":"gr16.1.1","register":"neutral","revision":1,"rule":"If I were you 固定搭配（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"如果我是你，我会抓住机会。"},{"en":"If he knew the answer, he would tell us.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr16.1.1-e4","lesson":"gr16.1.1","register":"neutral","revision":1,"rule":"与现在相反虚拟（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"如果他知道答案，他会告诉我们。"},{"en":"If I was a bird, I would fly to you.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"错句标注明确、纠偏方向与本课规则一致"},"id":"gr16.1.1-e5","lesson":"gr16.1.1","register":"written","revision":1,"rule":"书面 was 误用（反例 counter）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"（✗ 错句，书面）本想说“ 如果我是只鸟 ”。"},{"en":"If they had left earlier, they would have caught the bus.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr16.1.1-e6","lesson":"gr16.1.1","register":"neutral","revision":1,"rule":"与过去相反虚拟（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"如果他们早点出发，就赶上公交车了。"},{"en":"I would buy a car if I had money.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr16.1.1-e7","lesson":"gr16.1.1","register":"neutral","revision":1,"rule":"与现在相反虚拟（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"如果我有钱，我就买辆车。"},{"en":"If it rains, we will stay at home.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr16.1.1-e8","lesson":"gr16.1.1","register":"neutral","revision":1,"rule":"真实条件主将从现对比（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"如果下雨，我们就待在家里。（真事：主将从现）"},{"en":"If it should rain tomorrow, we would stay home.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr16.1.2-e1","lesson":"gr16.1.2","register":"neutral","revision":1,"rule":"与将来相反 should（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"如果明天下雨（小可能），我们就待家里。"},{"en":"If it were to rain tomorrow, the game would stop.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr16.1.2-e2","lesson":"gr16.1.2","register":"neutral","revision":1,"rule":"与将来相反 were to（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"如果明天下雨（几乎不可能），比赛就停了。"},{"en":"If I had worked harder, I would be a teacher now.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr16.1.2-e3","lesson":"gr16.1.2","register":"neutral","revision":1,"rule":"混合虚拟（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"如果当年更努力，我现在就是老师了。"},{"en":"If he should come, tell me.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr16.1.2-e4","lesson":"gr16.1.2","register":"neutral","revision":1,"rule":"与将来相反 should（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"如果他来（小可能），告诉我。"},{"en":"If you were to try again, you might win.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr16.1.2-e5","lesson":"gr16.1.2","register":"neutral","revision":1,"rule":"与将来相反 were to（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"如果你再试一次（几乎不可能），可能会赢。"},{"en":"If I had worked harder, I would have been a teacher now.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"错句标注明确、纠偏方向与本课规则一致"},"id":"gr16.1.2-e6","lesson":"gr16.1.2","register":"neutral","revision":1,"rule":"混合虚拟主句误降级（反例 counter）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"（✗ 错句）本想说“ 如果当年更努力，我现在就是老师了 ”。"},{"en":"If she had listened, she would know the truth now.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr16.1.2-e7","lesson":"gr16.1.2","register":"neutral","revision":1,"rule":"混合虚拟（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"如果她当时听了，现在就知道真相了。"},{"en":"Without your help, I would have failed.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr16.1.3-e1","lesson":"gr16.1.3","register":"neutral","revision":1,"rule":"without 含蓄条件（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"若没有你的帮助，我就失败了。"},{"en":"But for the rain, we would have had a good trip.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr16.1.3-e2","lesson":"gr16.1.3","register":"neutral","revision":1,"rule":"but for 含蓄条件（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"若没有这场雨，我们的旅行就很愉快了。"},{"en":"Had I known the truth, I would not have come.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr16.1.3-e3","lesson":"gr16.1.3","register":"written","revision":1,"rule":"虚拟倒装 Had（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"我要是早知道真相，就不来了。"},{"en":"Were I you, I would go.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr16.1.3-e4","lesson":"gr16.1.3","register":"written","revision":1,"rule":"虚拟倒装 Were（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"如果我是你，我就去。"},{"en":"Otherwise, we would be late.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr16.1.3-e5","lesson":"gr16.1.3","register":"neutral","revision":1,"rule":"otherwise 含蓄条件（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"否则我们就迟到了。"},{"en":"Without water, we will die.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"错句标注明确、纠偏方向与本课规则一致"},"id":"gr16.1.3-e6","lesson":"gr16.1.3","register":"neutral","revision":1,"rule":"含蓄条件主句误用 will（反例 counter）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"（✗ 错句）本想说“ 没有水，我们会死（假想） ”。"},{"en":"Should he come, please call me.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr16.1.3-e7","lesson":"gr16.1.3","register":"written","revision":1,"rule":"虚拟倒装 Should（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"他要是来，请给我打电话。"},{"en":"He suggested that we leave early.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr16.2.1-e1","lesson":"gr16.2.1","register":"neutral","revision":1,"rule":"suggest 从句虚拟（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"他建议我们早点离开。（美式：should 省）"},{"en":"He suggested that we should leave early.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr16.2.1-e2","lesson":"gr16.2.1","register":"written","revision":1,"rule":"suggest 从句虚拟英式（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"他建议我们早点离开。（英式：should 留）"},{"en":"The doctor ordered that he stay in bed.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr16.2.1-e3","lesson":"gr16.2.1","register":"neutral","revision":1,"rule":"order 从句虚拟（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"医生命令他卧床休息。"},{"en":"It is important that we be on time.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr16.2.1-e4","lesson":"gr16.2.1","register":"written","revision":1,"rule":"It is important 从句虚拟（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"我们准时很重要。（美式：be 原形）"},{"en":"She insisted that he go with her.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr16.2.1-e5","lesson":"gr16.2.1","register":"neutral","revision":1,"rule":"insist 坚持要求虚拟（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"她坚持要他跟她一起去。"},{"en":"She insisted that he was right.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr16.2.1-e6","lesson":"gr16.2.1","register":"neutral","revision":1,"rule":"insist 坚持认为陈述（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"她坚持认为他是对的。"},{"en":"He suggested that we will leave early.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"错句标注明确、纠偏方向与本课规则一致"},"id":"gr16.2.1-e7","lesson":"gr16.2.1","register":"neutral","revision":1,"rule":"suggest 从句误用 will（反例 counter）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"（✗ 错句）本想说“ 他建议我们早点离开 ”。"},{"en":"It's time we left.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr16.2.2-e1","lesson":"gr16.2.2","register":"neutral","revision":1,"rule":"It's time 虚拟（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"我们该走了。（早该走了）"},{"en":"It's high time you went to bed.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr16.2.2-e2","lesson":"gr16.2.2","register":"neutral","revision":1,"rule":"It's high time 虚拟（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"你早该睡觉了。"},{"en":"I would rather you came tomorrow.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr16.2.2-e3","lesson":"gr16.2.2","register":"neutral","revision":1,"rule":"would rather 异主虚拟（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"我宁愿你明天来。"},{"en":"I would rather stay at home.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr16.2.2-e4","lesson":"gr16.2.2","register":"neutral","revision":1,"rule":"would rather 同主原形（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"我宁愿待在家里。"},{"en":"It's time for us to leave.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr16.2.2-e5","lesson":"gr16.2.2","register":"neutral","revision":1,"rule":"It's time to do 陈述（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"我们该走了。（就事论事）"},{"en":"It's time we leave.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"错句标注明确、纠偏方向与本课规则一致"},"id":"gr16.2.2-e6","lesson":"gr16.2.2","register":"neutral","revision":1,"rule":"It's time 误用原形（反例 counter）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"（✗ 错句）本想说“ 我们该走了（早该走了） ”。"},{"en":"I would rather he had come yesterday.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr16.2.2-e7","lesson":"gr16.2.2","register":"neutral","revision":1,"rule":"would rather 异主过去完成（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"我宁愿他昨天来了。"},{"en":"I wish I were taller.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr16.2.3-e1","lesson":"gr16.2.3","register":"neutral","revision":1,"rule":"wish 现在愿望（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"我要是再高一点就好了。"},{"en":"I wish I had studied harder.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr16.2.3-e2","lesson":"gr16.2.3","register":"neutral","revision":1,"rule":"wish 过去遗憾（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"我要是当时更努力就好了。"},{"en":"He talks as if he knew everything.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr16.2.3-e3","lesson":"gr16.2.3","register":"neutral","revision":1,"rule":"as if 假装虚拟（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"他说话好像无所不知。"},{"en":"She wishes she could fly.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr16.2.3-e4","lesson":"gr16.2.3","register":"neutral","revision":1,"rule":"wish 将来愿望（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"她要是会飞就好了。"},{"en":"I wish it will rain tomorrow.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"错句标注明确、纠偏方向与本课规则一致"},"id":"gr16.2.3-e5","lesson":"gr16.2.3","register":"neutral","revision":1,"rule":"wish 误用 will（反例 counter）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"（✗ 错句）本想说“ 我希望明天下雨 ”。"},{"en":"I wish you were here now.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr16.2.3-e6","lesson":"gr16.2.3","register":"neutral","revision":1,"rule":"wish 现在愿望（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"我真希望你现在在这儿。"},{"en":"It looks as if it is going to rain.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr16.2.3-e7","lesson":"gr16.2.3","register":"neutral","revision":1,"rule":"as if 可能为真陈述（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"看起来要下雨了。"},{"en":"If I were you, I would take the chance.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr16.2.4-e1","lesson":"gr16.2.4","register":"neutral","revision":1,"rule":"虚拟综合复习（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"如果我是你，我会抓住机会。（与现在相反，复习）"},{"en":"If I had worked harder, I would be a teacher now.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr16.2.4-e2","lesson":"gr16.2.4","register":"neutral","revision":1,"rule":"虚拟综合复习（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"如果当年更努力，我现在就是老师了。（混合，复习）"},{"en":"He suggested that we leave early.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr16.2.4-e3","lesson":"gr16.2.4","register":"neutral","revision":1,"rule":"虚拟综合复习（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"他建议我们早点离开。（从句虚拟，复习）"},{"en":"It's time we left.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr16.2.4-e4","lesson":"gr16.2.4","register":"neutral","revision":1,"rule":"虚拟综合复习（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"我们该走了。（It's time 虚拟，复习）"},{"en":"I wish I were taller.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"规则/条件/术语/释义/词性/考点口径均符合清单要求"},"id":"gr16.2.4-e5","lesson":"gr16.2.4","register":"neutral","revision":1,"rule":"虚拟综合复习（正例 example）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"我要是再高一点就好了。（wish 虚拟，复习）"},{"en":"If I was a bird, I would fly to you.","final":null,"first":{"by":"英语专家队","at":"2026-10-14","verdict":"pass","note":"错句标注明确、纠偏方向与本课规则一致"},"id":"gr16.2.4-e6","lesson":"gr16.2.4","register":"written","revision":1,"rule":"书面 was 误用（反例 counter）","status":"first_passed","vocab":"in-scope","written_at":"2026-10-14","written_by":"语法生产C队","zh":"（✗ 错句，书面）本想说“ 如果我是只鸟 ”。"}],"note":"英语语法例句三审台账（D3）。字段与状态定义见 docs/english-grammar-review-ledger.md。语法生产C队 2026-10-14 撰写，共 49 条（正例 42 / 反例 7），状态 drafted，待英语专家队初审与红队终审。","schema":"grammar-review-ledger/1.0"}
+{
+  "chapter": "gr16",
+  "entries": [
+    {
+      "en": "If I were a bird, I would fly to you.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr16.1.1-e1",
+      "lesson": "gr16.1.1",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "与现在相反虚拟（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "如果我是只鸟，我就飞到你身边。"
+    },
+    {
+      "en": "If I had studied harder, I would have passed.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr16.1.1-e2",
+      "lesson": "gr16.1.1",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "与过去相反虚拟（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "如果我当时更努力，我就通过了。"
+    },
+    {
+      "en": "If I were you, I would take the chance.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr16.1.1-e3",
+      "lesson": "gr16.1.1",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "If I were you 固定搭配（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "如果我是你，我会抓住机会。"
+    },
+    {
+      "en": "If he knew the answer, he would tell us.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr16.1.1-e4",
+      "lesson": "gr16.1.1",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "与现在相反虚拟（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "如果他知道答案，他会告诉我们。"
+    },
+    {
+      "en": "If I was a bird, I would fly to you.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "错句标注明确、纠偏方向与本课规则一致"
+      },
+      "id": "gr16.1.1-e5",
+      "lesson": "gr16.1.1",
+      "register": "written",
+      "revision": 1,
+      "rule": "书面 was 误用（反例 counter）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "（✗ 错句，书面）本想说“ 如果我是只鸟 ”。"
+    },
+    {
+      "en": "If they had left earlier, they would have caught the bus.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr16.1.1-e6",
+      "lesson": "gr16.1.1",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "与过去相反虚拟（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "如果他们早点出发，就赶上公交车了。"
+    },
+    {
+      "en": "I would buy a car if I had money.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr16.1.1-e7",
+      "lesson": "gr16.1.1",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "与现在相反虚拟（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "如果我有钱，我就买辆车。"
+    },
+    {
+      "en": "If it rains, we will stay at home.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr16.1.1-e8",
+      "lesson": "gr16.1.1",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "真实条件主将从现对比（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "如果下雨，我们就待在家里。（真事：主将从现）"
+    },
+    {
+      "en": "If it should rain tomorrow, we would stay home.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr16.1.2-e1",
+      "lesson": "gr16.1.2",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "与将来相反 should（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "如果明天下雨（小可能），我们就待家里。"
+    },
+    {
+      "en": "If it were to rain tomorrow, the game would stop.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr16.1.2-e2",
+      "lesson": "gr16.1.2",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "与将来相反 were to（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "如果明天下雨（几乎不可能），比赛就停了。"
+    },
+    {
+      "en": "If I had worked harder, I would be a teacher now.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr16.1.2-e3",
+      "lesson": "gr16.1.2",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "混合虚拟（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "如果当年更努力，我现在就是老师了。"
+    },
+    {
+      "en": "If he should come, tell me.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr16.1.2-e4",
+      "lesson": "gr16.1.2",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "与将来相反 should（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "如果他来（小可能），告诉我。"
+    },
+    {
+      "en": "If you were to try again, you might win.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr16.1.2-e5",
+      "lesson": "gr16.1.2",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "与将来相反 were to（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "如果你再试一次（几乎不可能），可能会赢。"
+    },
+    {
+      "en": "If I had worked harder, I would have been a teacher now.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "错句标注明确、纠偏方向与本课规则一致"
+      },
+      "id": "gr16.1.2-e6",
+      "lesson": "gr16.1.2",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "混合虚拟主句误降级（反例 counter）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "（✗ 错句）本想说“ 如果当年更努力，我现在就是老师了 ”。"
+    },
+    {
+      "en": "If she had listened, she would know the truth now.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr16.1.2-e7",
+      "lesson": "gr16.1.2",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "混合虚拟（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "如果她当时听了，现在就知道真相了。"
+    },
+    {
+      "en": "Without your help, I would have failed.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr16.1.3-e1",
+      "lesson": "gr16.1.3",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "without 含蓄条件（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "若没有你的帮助，我就失败了。"
+    },
+    {
+      "en": "But for the rain, we would have had a good trip.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr16.1.3-e2",
+      "lesson": "gr16.1.3",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "but for 含蓄条件（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "若没有这场雨，我们的旅行就很愉快了。"
+    },
+    {
+      "en": "Had I known the truth, I would not have come.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr16.1.3-e3",
+      "lesson": "gr16.1.3",
+      "register": "written",
+      "revision": 1,
+      "rule": "虚拟倒装 Had（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "我要是早知道真相，就不来了。"
+    },
+    {
+      "en": "Were I you, I would go.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr16.1.3-e4",
+      "lesson": "gr16.1.3",
+      "register": "written",
+      "revision": 1,
+      "rule": "虚拟倒装 Were（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "如果我是你，我就去。"
+    },
+    {
+      "en": "Otherwise, we would be late.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr16.1.3-e5",
+      "lesson": "gr16.1.3",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "otherwise 含蓄条件（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "否则我们就迟到了。"
+    },
+    {
+      "en": "Without water, we will die.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "错句标注明确、纠偏方向与本课规则一致"
+      },
+      "id": "gr16.1.3-e6",
+      "lesson": "gr16.1.3",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "含蓄条件主句误用 will（反例 counter）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "（✗ 错句）本想说“ 没有水，我们会死（假想） ”。"
+    },
+    {
+      "en": "Should he come, please call me.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr16.1.3-e7",
+      "lesson": "gr16.1.3",
+      "register": "written",
+      "revision": 1,
+      "rule": "虚拟倒装 Should（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "他要是来，请给我打电话。"
+    },
+    {
+      "en": "He suggested that we leave early.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr16.2.1-e1",
+      "lesson": "gr16.2.1",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "suggest 从句虚拟（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "他建议我们早点离开。（美式：should 省）"
+    },
+    {
+      "en": "He suggested that we should leave early.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr16.2.1-e2",
+      "lesson": "gr16.2.1",
+      "register": "written",
+      "revision": 1,
+      "rule": "suggest 从句虚拟英式（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "他建议我们早点离开。（英式：should 留）"
+    },
+    {
+      "en": "The doctor ordered that he stay in bed.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr16.2.1-e3",
+      "lesson": "gr16.2.1",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "order 从句虚拟（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "医生命令他卧床休息。"
+    },
+    {
+      "en": "It is important that we be on time.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr16.2.1-e4",
+      "lesson": "gr16.2.1",
+      "register": "written",
+      "revision": 1,
+      "rule": "It is important 从句虚拟（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "我们准时很重要。（美式：be 原形）"
+    },
+    {
+      "en": "She insisted that he go with her.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr16.2.1-e5",
+      "lesson": "gr16.2.1",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "insist 坚持要求虚拟（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "她坚持要他跟她一起去。"
+    },
+    {
+      "en": "She insisted that he was right.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr16.2.1-e6",
+      "lesson": "gr16.2.1",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "insist 坚持认为陈述（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "她坚持认为他是对的。"
+    },
+    {
+      "en": "He suggested that we will leave early.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "错句标注明确、纠偏方向与本课规则一致"
+      },
+      "id": "gr16.2.1-e7",
+      "lesson": "gr16.2.1",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "suggest 从句误用 will（反例 counter）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "（✗ 错句）本想说“ 他建议我们早点离开 ”。"
+    },
+    {
+      "en": "It's time we left.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr16.2.2-e1",
+      "lesson": "gr16.2.2",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "It's time 虚拟（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "我们该走了。（早该走了）"
+    },
+    {
+      "en": "It's high time you went to bed.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr16.2.2-e2",
+      "lesson": "gr16.2.2",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "It's high time 虚拟（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "你早该睡觉了。"
+    },
+    {
+      "en": "I would rather you came tomorrow.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr16.2.2-e3",
+      "lesson": "gr16.2.2",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "would rather 异主虚拟（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "我宁愿你明天来。"
+    },
+    {
+      "en": "I would rather stay at home.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr16.2.2-e4",
+      "lesson": "gr16.2.2",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "would rather 同主原形（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "我宁愿待在家里。"
+    },
+    {
+      "en": "It's time for us to leave.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr16.2.2-e5",
+      "lesson": "gr16.2.2",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "It's time to do 陈述（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "我们该走了。（就事论事）"
+    },
+    {
+      "en": "It's time we leave.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "错句标注明确、纠偏方向与本课规则一致"
+      },
+      "id": "gr16.2.2-e6",
+      "lesson": "gr16.2.2",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "It's time 误用原形（反例 counter）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "（✗ 错句）本想说“ 我们该走了（早该走了） ”。"
+    },
+    {
+      "en": "I would rather he had come yesterday.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr16.2.2-e7",
+      "lesson": "gr16.2.2",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "would rather 异主过去完成（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "我宁愿他昨天来了。"
+    },
+    {
+      "en": "I wish I were taller.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr16.2.3-e1",
+      "lesson": "gr16.2.3",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "wish 现在愿望（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "我要是再高一点就好了。"
+    },
+    {
+      "en": "I wish I had studied harder.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr16.2.3-e2",
+      "lesson": "gr16.2.3",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "wish 过去遗憾（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "我要是当时更努力就好了。"
+    },
+    {
+      "en": "He talks as if he knew everything.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr16.2.3-e3",
+      "lesson": "gr16.2.3",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "as if 假装虚拟（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "他说话好像无所不知。"
+    },
+    {
+      "en": "She wishes she could fly.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr16.2.3-e4",
+      "lesson": "gr16.2.3",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "wish 将来愿望（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "她要是会飞就好了。"
+    },
+    {
+      "en": "I wish it will rain tomorrow.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "错句标注明确、纠偏方向与本课规则一致"
+      },
+      "id": "gr16.2.3-e5",
+      "lesson": "gr16.2.3",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "wish 误用 will（反例 counter）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "（✗ 错句）本想说“ 我希望明天下雨 ”。"
+    },
+    {
+      "en": "I wish you were here now.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr16.2.3-e6",
+      "lesson": "gr16.2.3",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "wish 现在愿望（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "我真希望你现在在这儿。"
+    },
+    {
+      "en": "It looks as if it is going to rain.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr16.2.3-e7",
+      "lesson": "gr16.2.3",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "as if 可能为真陈述（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "看起来要下雨了。"
+    },
+    {
+      "en": "If I were you, I would take the chance.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr16.2.4-e1",
+      "lesson": "gr16.2.4",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "虚拟综合复习（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "如果我是你，我会抓住机会。（与现在相反，复习）"
+    },
+    {
+      "en": "If I had worked harder, I would be a teacher now.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr16.2.4-e2",
+      "lesson": "gr16.2.4",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "虚拟综合复习（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "如果当年更努力，我现在就是老师了。（混合，复习）"
+    },
+    {
+      "en": "He suggested that we leave early.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr16.2.4-e3",
+      "lesson": "gr16.2.4",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "虚拟综合复习（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "他建议我们早点离开。（从句虚拟，复习）"
+    },
+    {
+      "en": "It's time we left.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr16.2.4-e4",
+      "lesson": "gr16.2.4",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "虚拟综合复习（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "我们该走了。（It's time 虚拟，复习）"
+    },
+    {
+      "en": "I wish I were taller.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则/条件/术语/释义/词性/考点口径均符合清单要求"
+      },
+      "id": "gr16.2.4-e5",
+      "lesson": "gr16.2.4",
+      "register": "neutral",
+      "revision": 1,
+      "rule": "虚拟综合复习（正例 example）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "我要是再高一点就好了。（wish 虚拟，复习）"
+    },
+    {
+      "en": "If I was a bird, I would fly to you.",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "错句标注明确、纠偏方向与本课规则一致"
+      },
+      "id": "gr16.2.4-e6",
+      "lesson": "gr16.2.4",
+      "register": "written",
+      "revision": 1,
+      "rule": "书面 was 误用（反例 counter）",
+      "status": "final_passed",
+      "vocab": "in-scope",
+      "written_at": "2026-10-14",
+      "written_by": "语法生产C队",
+      "zh": "（✗ 错句，书面）本想说“ 如果我是只鸟 ”。"
+    }
+  ],
+  "note": "英语语法例句三审台账（D3）。字段与状态定义见 docs/english-grammar-review-ledger.md。语法生产C队 2026-10-14 撰写，共 49 条（正例 42 / 反例 7），状态 drafted，待英语专家队初审与红队终审。",
+  "schema": "grammar-review-ledger/1.0"
+}
