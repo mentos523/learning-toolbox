@@ -88,11 +88,11 @@ window.ENG_CH["gr09"] = {
     "gr09.2.1-e7": { en: "Swimming are fun.", zh: "（错句）游泳很有趣。", reg: "通用",
       tagged: [ { w: "Swimming", role: "subject", label: "主语" }, { w: "are", role: "verb", label: "系动词" }, { w: "fun", role: "complem", label: "表语" } ] },
     /* ---------- gr09.2.2 动名词 vs 不定式辨析 ---------- */
-    "gr09.2.2-e1": { en: "I forgot to lock the door.", zh: "我忘了锁门。（没锁）", reg: "通用",
+    "gr09.2.2-e1": { en: "I forgot to lock the door.", zh: "我忘了锁门。", reg: "通用",
       tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "forgot", role: "verb", label: "谓语" }, { w: "to lock", role: "verb", label: "不定式" }, { w: "the door", role: "object", label: "宾语" } ] },
-    "gr09.2.2-e2": { en: "I forgot locking the door.", zh: "我忘了锁过门。（锁了，但忘了这事）", reg: "通用",
+    "gr09.2.2-e2": { en: "I forgot locking the door.", zh: "我忘了锁过门。", reg: "通用",
       tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "forgot", role: "verb", label: "谓语" }, { w: "locking", role: "verb", label: "动名词" }, { w: "the door", role: "object", label: "宾语" } ] },
-    "gr09.2.2-e3": { en: "He stopped smoking last year.", zh: "他去年戒烟了。（不抽了）", reg: "通用",
+    "gr09.2.2-e3": { en: "He stopped smoking last year.", zh: "他去年戒烟了。", reg: "通用",
       tagged: [ { w: "He", role: "subject", label: "主语" }, { w: "stopped", role: "verb", label: "谓语" }, { w: "smoking", role: "verb", label: "动名词" }, { w: "last year", role: "adverb", label: "状语" } ] },
     "gr09.2.2-e4": { en: "Remember to close the window.", zh: "记得去关窗。（还没关）", reg: "通用",
       tagged: [ { w: "Remember", role: "verb", label: "谓语" }, { w: "to close", role: "verb", label: "不定式" }, { w: "the window", role: "object", label: "宾语" } ] },
@@ -173,17 +173,17 @@ window.ENG_CH["gr09"] = {
               id: "gr09.1.1-p3",
               kind: "explain",
               title: "不定式作宾语：want to do",
-              lead: "还记得吗？上一页 go 想挤进宾语槽，被“双谓语警报”拦下了。",
+              lead: "还记得吗？go 想挤进宾语槽，被“双谓语警报”拦下了。",
               blocks: [
                 {
                   type: "examples",
                   ids: ["gr09.1.1-e1", "gr09.1.1-e2", "gr09.1.1-e3"],
-                  note: "身份证已经亮出来了——看这三句话，want / decide / know 后面跟的都是什么？"
+                  note: "看三句话：want / decide / know 后面跟的都是什么？"
                 },
                 {
                   type: "idcard",
                   rule: "want / hope / decide / plan / learn + to do；疑问词 + to do（what to do）。",
-                  condition: "只在“第二个动词”位置成立（谓语唯一：一个句子只能有一个谓语）；to 后跟动词原形；hope 后也可跟 that 从句（I hope (that)…），want 不行。"
+                  condition: "只在“第二个动词”位置成立；to 后跟动词原形；hope 还可跟 that 从句，want 不行。"
                 },
                 {
                   type: "bridge",
@@ -798,11 +798,11 @@ window.ENG_CH["gr09"] = {
               kind: "observe",
               title: "先看三句话：“没锁”和“锁了却忘了”",
               sentences: [
-                { id: "gr09.2.2-e1", en: "I forgot to lock the door.", zh: "我忘了锁门。（没锁）", reg: "通用",
+                { id: "gr09.2.2-e1", en: "I forgot to lock the door.", zh: "我忘了锁门。", reg: "通用",
                   tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "forgot", role: "verb", label: "谓语" }, { w: "to lock", role: "verb", label: "不定式" }, { w: "the door", role: "object", label: "宾语" } ] },
-                { id: "gr09.2.2-e2", en: "I forgot locking the door.", zh: "我忘了锁过门。（锁了，但忘了这事）", reg: "通用",
+                { id: "gr09.2.2-e2", en: "I forgot locking the door.", zh: "我忘了锁过门。", reg: "通用",
                   tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "forgot", role: "verb", label: "谓语" }, { w: "locking", role: "verb", label: "动名词" }, { w: "the door", role: "object", label: "宾语" } ] },
-                { id: "gr09.2.2-e3", en: "He stopped smoking last year.", zh: "他去年戒烟了。（不抽了）", reg: "通用",
+                { id: "gr09.2.2-e3", en: "He stopped smoking last year.", zh: "他去年戒烟了。", reg: "通用",
                   tagged: [ { w: "He", role: "subject", label: "主语" }, { w: "stopped", role: "verb", label: "谓语" }, { w: "smoking", role: "verb", label: "动名词" }, { w: "last year", role: "adverb", label: "状语" } ] }
               ],
               guess: {
@@ -949,7 +949,7 @@ window.ENG_CH["gr09"] = {
         /* ================= gr09.2.3 used to/be used to/get used to 与本章小结 ================= */
         {
           id: "gr09.2.3",
-          title: "used to 三兄弟与本章小结",
+          title: "used to/be used to/get used to 与本章小结",
           pages: [
             {
               id: "gr09.2.3-p1",

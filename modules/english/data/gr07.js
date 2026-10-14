@@ -317,7 +317,7 @@ window.ENG_CH["gr07"] = {
                 {
                   type: "bridge",
                   zh: "汉语“他被迫每天工作十小时”，“被”字管全文。",
-                  en: "英语被动要“调座位”：主动句的宾语坐到主语位上，动词穿 be + done 制服，原主语退到 by 后面——座位一调，意思不变。",
+                  en: "英语被动要“调座位”：主动句的宾语坐到主语位上，动词穿 be + done 制服，原主语退到 by 后面——座位一调，意思不变。factory（工厂）、manufacture（制造）同属 fac-（做）家族（讲词根 #r=fac，R3 审计通过）。",
                   unbridge: "别只加 be 不调座位——“Tom was broken the window”主语还是 Tom，不算被动。"
                 },
                 {

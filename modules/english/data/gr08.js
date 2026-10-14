@@ -18,7 +18,7 @@ window.ENG_CH["gr08"] = {
       tagged: [ { w: "She", role: "subject", label: "主语" }, { w: "can", role: "verb", label: "情态动词" }, { w: "swim", role: "verb", label: "动词原形" }, { w: "well", role: "adverb", label: "状语" } ] },
     "gr08.1.1-e2": { en: "May I come in?", zh: "我可以进来吗？", reg: "口语",
       tagged: [ { w: "May", role: "verb", label: "情态动词" }, { w: "I", role: "subject", label: "主语" }, { w: "come", role: "verb", label: "动词原形" }, { w: "in", role: "adverb", label: "状语" } ] },
-    "gr08.1.1-e3": { en: "You must be tired.", zh: "你一定累了。（肯定推测）", reg: "通用",
+    "gr08.1.1-e3": { en: "You must be tired.", zh: "你一定累了。", reg: "通用",
       tagged: [ { w: "You", role: "subject", label: "主语" }, { w: "must", role: "verb", label: "情态动词" }, { w: "be", role: "verb", label: "动词原形" }, { w: "tired", role: "complem", label: "表语" } ] },
     "gr08.1.1-e4": { en: "He can ride a bike.", zh: "他会骑自行车。", reg: "通用",
       tagged: [ { w: "He", role: "subject", label: "主语" }, { w: "can", role: "verb", label: "情态动词" }, { w: "ride", role: "verb", label: "动词原形" }, { w: "a bike", role: "object", label: "宾语" } ] },
@@ -29,26 +29,26 @@ window.ENG_CH["gr08"] = {
     "gr08.1.1-e7": { en: "He cans swim.", zh: "（错句）他会游泳。", reg: "通用",
       tagged: [ { w: "He", role: "subject", label: "主语" }, { w: "cans", role: "verb", label: "情态动词" }, { w: "swim", role: "verb", label: "动词原形" } ] },
     /* ---------- gr08.1.2 mustn't vs don't have to ---------- */
-    "gr08.1.2-e1": { en: "You mustn't smoke here.", zh: "你在这里不许吸烟。（禁止）", reg: "通用",
+    "gr08.1.2-e1": { en: "You mustn't smoke here.", zh: "你在这里不能吸烟。", reg: "通用",
       tagged: [ { w: "You", role: "subject", label: "主语" }, { w: "mustn't", role: "verb", label: "情态动词" }, { w: "smoke", role: "verb", label: "动词原形" }, { w: "here", role: "adverb", label: "状语" } ] },
-    "gr08.1.2-e2": { en: "You don't have to come if you are busy.", zh: "你忙的话不必来。（不必）", reg: "通用",
-      tagged: [ { w: "You", role: "subject", label: "主语" }, { w: "don't have to", role: "verb", label: "助动词" }, { w: "come", role: "verb", label: "动词原形" }, { w: "if you are busy", role: "adverb", label: "状语" } ] },
+    "gr08.1.2-e2": { en: "You don't have to come if you are busy.", zh: "你忙的话可以不来。", reg: "通用",
+      tagged: [ { w: "You", role: "subject", label: "主语" }, { w: "don't", role: "verb", label: "助动词" }, { w: "have to", role: "verb", label: "半情态动词" }, { w: "come", role: "verb", label: "动词原形" }, { w: "if you are busy", role: "adverb", label: "状语" } ] },
     "gr08.1.2-e3": { en: "We needn't hurry.", zh: "我们不必匆忙。", reg: "通用",
       tagged: [ { w: "We", role: "subject", label: "主语" }, { w: "needn't", role: "verb", label: "半情态动词" }, { w: "hurry", role: "verb", label: "动词原形" } ] },
     "gr08.1.2-e4": { en: "You mustn't run in the hall.", zh: "你不许在走廊里跑。（禁止）", reg: "通用",
       tagged: [ { w: "You", role: "subject", label: "主语" }, { w: "mustn't", role: "verb", label: "情态动词" }, { w: "run", role: "verb", label: "动词原形" }, { w: "in the hall", role: "adverb", label: "状语" } ] },
     "gr08.1.2-e5": { en: "She doesn't have to work today.", zh: "她今天不必工作。", reg: "通用",
-      tagged: [ { w: "She", role: "subject", label: "主语" }, { w: "doesn't have to", role: "verb", label: "助动词" }, { w: "work", role: "verb", label: "动词原形" }, { w: "today", role: "adverb", label: "状语" } ] },
+      tagged: [ { w: "She", role: "subject", label: "主语" }, { w: "doesn't", role: "verb", label: "助动词" }, { w: "have to", role: "verb", label: "半情态动词" }, { w: "work", role: "verb", label: "动词原形" }, { w: "today", role: "adverb", label: "状语" } ] },
     "gr08.1.2-e6": { en: "You mustn't come if you are busy.", zh: "（错句，想表“不必”）你忙的话不许来。", reg: "通用",
       tagged: [ { w: "You", role: "subject", label: "主语" }, { w: "mustn't", role: "verb", label: "情态动词" }, { w: "come", role: "verb", label: "动词原形" }, { w: "if you are busy", role: "adverb", label: "状语" } ] },
     "gr08.1.2-e7": { en: "You don't have to smoke here.", zh: "（错句，想表“禁止”）你在这里不必吸烟。", reg: "通用",
-      tagged: [ { w: "You", role: "subject", label: "主语" }, { w: "don't have to", role: "verb", label: "助动词" }, { w: "smoke", role: "verb", label: "动词原形" }, { w: "here", role: "adverb", label: "状语" } ] },
+      tagged: [ { w: "You", role: "subject", label: "主语" }, { w: "don't", role: "verb", label: "助动词" }, { w: "have to", role: "verb", label: "半情态动词" }, { w: "smoke", role: "verb", label: "动词原形" }, { w: "here", role: "adverb", label: "状语" } ] },
     /* ---------- gr08.1.3 情态 + 完成时（高中） ---------- */
     "gr08.1.3-e1": { en: "He must have missed the bus.", zh: "他肯定误了公交车。", reg: "通用",
       tagged: [ { w: "He", role: "subject", label: "主语" }, { w: "must", role: "verb", label: "情态动词" }, { w: "have", role: "verb", label: "助动词" }, { w: "missed", role: "verb", label: "过去分词" }, { w: "the bus", role: "object", label: "宾语" } ] },
     "gr08.1.3-e2": { en: "She can't have finished so fast.", zh: "她不可能这么快就做完了。", reg: "通用",
       tagged: [ { w: "She", role: "subject", label: "主语" }, { w: "can't", role: "verb", label: "情态动词" }, { w: "have", role: "verb", label: "助动词" }, { w: "finished", role: "verb", label: "过去分词" }, { w: "so fast", role: "adverb", label: "状语" } ] },
-    "gr08.1.3-e3": { en: "You should have called me.", zh: "你本该给我打电话的。（而没打）", reg: "通用",
+    "gr08.1.3-e3": { en: "You should have called me.", zh: "你本该给我打电话的。", reg: "通用",
       tagged: [ { w: "You", role: "subject", label: "主语" }, { w: "should", role: "verb", label: "情态动词" }, { w: "have", role: "verb", label: "助动词" }, { w: "called", role: "verb", label: "过去分词" }, { w: "me", role: "object", label: "宾语" } ] },
     "gr08.1.3-e4": { en: "They must have arrived.", zh: "他们肯定已经到了。", reg: "通用",
       tagged: [ { w: "They", role: "subject", label: "主语" }, { w: "must", role: "verb", label: "情态动词" }, { w: "have", role: "verb", label: "助动词" }, { w: "arrived", role: "verb", label: "过去分词" } ] },
@@ -93,7 +93,7 @@ window.ENG_CH["gr08"] = {
         /* ================= gr08.1.1 can/may/must 基本义 ================= */
         {
           id: "gr08.1.1",
-          title: "can / may / must 基本义",
+          title: "can/may/must 基本义",
           pages: [
             {
               id: "gr08.1.1-p1",
@@ -104,7 +104,7 @@ window.ENG_CH["gr08"] = {
                   tagged: [ { w: "She", role: "subject", label: "主语" }, { w: "can", role: "verb", label: "情态动词" }, { w: "swim", role: "verb", label: "动词原形" }, { w: "well", role: "adverb", label: "状语" } ] },
                 { id: "gr08.1.1-e2", en: "May I come in?", zh: "我可以进来吗？", reg: "口语",
                   tagged: [ { w: "May", role: "verb", label: "情态动词" }, { w: "I", role: "subject", label: "主语" }, { w: "come", role: "verb", label: "动词原形" }, { w: "in", role: "adverb", label: "状语" } ] },
-                { id: "gr08.1.1-e3", en: "You must be tired.", zh: "你一定累了。（肯定推测）", reg: "通用",
+                { id: "gr08.1.1-e3", en: "You must be tired.", zh: "你一定累了。", reg: "通用",
                   tagged: [ { w: "You", role: "subject", label: "主语" }, { w: "must", role: "verb", label: "情态动词" }, { w: "be", role: "verb", label: "动词原形" }, { w: "tired", role: "complem", label: "表语" } ] }
               ],
               guess: {
@@ -258,10 +258,10 @@ window.ENG_CH["gr08"] = {
               kind: "observe",
               title: "先看三句话：哪个是“不许”，哪个是“不必”？",
               sentences: [
-                { id: "gr08.1.2-e1", en: "You mustn't smoke here.", zh: "你在这里不许吸烟。（禁止）", reg: "通用",
+                { id: "gr08.1.2-e1", en: "You mustn't smoke here.", zh: "你在这里不能吸烟。", reg: "通用",
                   tagged: [ { w: "You", role: "subject", label: "主语" }, { w: "mustn't", role: "verb", label: "情态动词" }, { w: "smoke", role: "verb", label: "动词原形" }, { w: "here", role: "adverb", label: "状语" } ] },
-                { id: "gr08.1.2-e2", en: "You don't have to come if you are busy.", zh: "你忙的话不必来。（不必）", reg: "通用",
-                  tagged: [ { w: "You", role: "subject", label: "主语" }, { w: "don't have to", role: "verb", label: "助动词" }, { w: "come", role: "verb", label: "动词原形" }, { w: "if you are busy", role: "adverb", label: "状语" } ] },
+                { id: "gr08.1.2-e2", en: "You don't have to come if you are busy.", zh: "你忙的话可以不来。", reg: "通用",
+                  tagged: [ { w: "You", role: "subject", label: "主语" }, { w: "don't", role: "verb", label: "助动词" }, { w: "have to", role: "verb", label: "半情态动词" }, { w: "come", role: "verb", label: "动词原形" }, { w: "if you are busy", role: "adverb", label: "状语" } ] },
                 { id: "gr08.1.2-e3", en: "We needn't hurry.", zh: "我们不必匆忙。", reg: "通用",
                   tagged: [ { w: "We", role: "subject", label: "主语" }, { w: "needn't", role: "verb", label: "半情态动词" }, { w: "hurry", role: "verb", label: "动词原形" } ] }
               ],
@@ -277,40 +277,23 @@ window.ENG_CH["gr08"] = {
               id: "gr08.1.2-p2",
               kind: "interact",
               title: "对拍：红灯 vs 绿灯",
-              exploreTip: "标出 mustn't 和 don't have to：红灯（禁止）还是绿灯（不必）？",
+              exploreTip: "把四个词块拖进红灯槽或绿灯槽。",
               widgets: [
                 {
                   type: "tagging",
                   params: {
                     sentence: [
-                      { w: "You", role: "subject", label: "主语" },
-                      { w: "mustn't", role: "verb", label: "情态动词" },
-                      { w: "smoke", role: "verb", label: "动词原形" },
-                      { w: "here", role: "adverb", label: "状语" }
+                      { w: "mustn't", role: "red", label: "？" },
+                      { w: "don't have to", role: "green", label: "？" },
+                      { w: "needn't", role: "green", label: "？" },
+                      { w: "must", role: "other", label: "？" }
                     ],
                     slots: [
-                      { role: "subject", label: "主语" },
-                      { role: "verb", label: "情态动词" },
-                      { role: "verb", label: "动词原形" },
-                      { role: "adverb", label: "状语" }
+                      { role: "red", label: "红灯（禁止）" },
+                      { role: "green", label: "绿灯（不必）" },
+                      { role: "other", label: "以上都不是（干扰）" }
                     ],
-                    hint: "这是红灯还是绿灯？（禁止 → mustn't）"
-                  }
-                },
-                {
-                  type: "tagging",
-                  params: {
-                    sentence: [
-                      { w: "You", role: "subject", label: "主语" },
-                      { w: "don't have to", role: "verb", label: "助动词" },
-                      { w: "come", role: "verb", label: "动词原形" }
-                    ],
-                    slots: [
-                      { role: "subject", label: "主语" },
-                      { role: "verb", label: "助动词" },
-                      { role: "verb", label: "动词原形" }
-                    ],
-                    hint: "这是红灯还是绿灯？（不必 → don't have to）"
+                    hint: "想想：哪个是“不许”，哪个是“不必”？"
                   }
                 }
               ],
@@ -330,7 +313,7 @@ window.ENG_CH["gr08"] = {
                 {
                   type: "idcard",
                   rule: "mustn't = 禁止（不许）；don't have to / needn't = 不必。",
-                  condition: "只在否定意义时成立；must 的否定有两种：mustn't（不许）vs don't have to（不必）——“不必”绝不用 mustn't。"
+                  condition: "“不必”的两种说法 don't have to / needn't 可互换；mustn't 永远表禁止，不可替换。"
                 },
                 {
                   type: "bridge",
@@ -418,7 +401,7 @@ window.ENG_CH["gr08"] = {
                   tagged: [ { w: "He", role: "subject", label: "主语" }, { w: "must", role: "verb", label: "情态动词" }, { w: "have", role: "verb", label: "助动词" }, { w: "missed", role: "verb", label: "过去分词" }, { w: "the bus", role: "object", label: "宾语" } ] },
                 { id: "gr08.1.3-e2", en: "She can't have finished so fast.", zh: "她不可能这么快就做完了。", reg: "通用",
                   tagged: [ { w: "She", role: "subject", label: "主语" }, { w: "can't", role: "verb", label: "情态动词" }, { w: "have", role: "verb", label: "助动词" }, { w: "finished", role: "verb", label: "过去分词" }, { w: "so fast", role: "adverb", label: "状语" } ] },
-                { id: "gr08.1.3-e3", en: "You should have called me.", zh: "你本该给我打电话的。（而没打）", reg: "通用",
+                { id: "gr08.1.3-e3", en: "You should have called me.", zh: "你本该给我打电话的。", reg: "通用",
                   tagged: [ { w: "You", role: "subject", label: "主语" }, { w: "should", role: "verb", label: "情态动词" }, { w: "have", role: "verb", label: "助动词" }, { w: "called", role: "verb", label: "过去分词" }, { w: "me", role: "object", label: "宾语" } ] }
               ],
               guess: {
@@ -569,7 +552,7 @@ window.ENG_CH["gr08"] = {
         /* ================= gr08.1.4 should/had better/need ================= */
         {
           id: "gr08.1.4",
-          title: "should / had better / need",
+          title: "should/had better/need",
           pages: [
             {
               id: "gr08.1.4-p1",

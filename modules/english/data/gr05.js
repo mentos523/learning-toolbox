@@ -19,7 +19,7 @@
 window.ENG_CH = window.ENG_CH || {};
 window.ENG_CH["gr05"] = {
   id: "gr05",
-  title: "动词的时与体（一）：一般现在 / 过去 / 将来",
+  title: "动词的时与体（一）：一般现在/过去/将来",
   /* 例句索引：键 = D3 台账例句 id；讲解页 blocks.type="examples" 按 id 引用。
    * 文本与台账 ledger-gr05.json 逐字一致（终审通过版）。 */
   sentences: {
@@ -112,11 +112,11 @@ window.ENG_CH["gr05"] = {
     "gr05.2.1-e8": { en: "I go tomorrow.", zh: "（错句）我明天去。", reg: "通用",
       tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "go", role: "verb", label: "谓语" }, { w: "tomorrow", role: "adverb", label: "状语" } ] },
     /* ---------- gr05.2.2 will vs be going to ---------- */
-    "gr05.2.2-e1": { en: "I will get it!", zh: "我去接！（电话响了，临时决定）", reg: "口语",
+    "gr05.2.2-e1": { en: "I will get it!", zh: "我去接！", reg: "口语",
       tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "助动词" }, { w: "get", role: "verb", label: "动词原形" }, { w: "it", role: "object", label: "宾语" } ] },
-    "gr05.2.2-e2": { en: "Look! It is going to rain.", zh: "看！天要下雨了。（看着乌云，有迹象）", reg: "口语",
+    "gr05.2.2-e2": { en: "Look! It is going to rain.", zh: "看！天要下雨了。", reg: "口语",
       tagged: [ { w: "It", role: "subject", label: "主语" }, { w: "is going to", role: "verb", label: "助动词" }, { w: "rain", role: "verb", label: "动词原形" } ] },
-    "gr05.2.2-e3": { en: "We are going to visit Beijing next month.", zh: "我们下个月要去北京玩。（提前计划）", reg: "通用",
+    "gr05.2.2-e3": { en: "We are going to visit Beijing next month.", zh: "我们下个月要去北京玩。", reg: "通用",
       tagged: [ { w: "We", role: "subject", label: "主语" }, { w: "are going to", role: "verb", label: "助动词" }, { w: "visit", role: "verb", label: "动词原形" }, { w: "Beijing", role: "object", label: "宾语" }, { w: "next month", role: "adverb", label: "状语" } ] },
     "gr05.2.2-e4": { en: "I will carry it for you.", zh: "我来帮你拿。（主动提出）", reg: "口语",
       tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "助动词" }, { w: "carry", role: "verb", label: "动词原形" }, { w: "it", role: "object", label: "宾语" }, { w: "for you", role: "adverb", label: "状语" } ] },
@@ -422,23 +422,23 @@ window.ENG_CH["gr05"] = {
               id: "gr05.1.2-p3",
               kind: "explain",
               title: "频率副词的位置：实义动词前，be 动词后",
-              lead: "还记得吗？上一页 often 站在 plays 前面，always 却站在 is 后面。",
+              lead: "还记得吗？上一页 often 站 plays 前，always 却站 is 后。",
               blocks: [
                 {
                   type: "examples",
                   ids: ["gr05.1.2-e1", "gr05.1.2-e2", "gr05.1.2-e3"],
-                  note: "身份证已经亮出来了——看这三句话，找找频率副词都站在哪。"
+                  note: "看三句话：频率副词都站在哪？"
                 },
                 {
                   type: "idcard",
                   rule: "频率副词站在实义动词前、be 动词后。",
-                  condition: "只在一般现在时描述习惯时成立；always / usually / often / sometimes / never 都一样；never 表否定，句子不再加 not。"
+                  condition: "只在一般现在时讲习惯时成立；never 表否定，不再加 not。"
                 },
                 {
                   type: "bridge",
-                  zh: "汉语说“他经常打篮球”，“经常”站在动词前面；说“他总是迟到”，“总是”也在动词前面——汉语副词基本都在动词前。",
+                  zh: "汉语说“他经常打篮球”，“经常”站在动词前——汉语副词基本都在动词前。",
                   en: "英语也差不多，但多了一条：be 动词是“有礼貌的动词”，频率副词要站在它后面（is always），不能插到它前面。",
-                  unbridge: "位置不同是英语的规矩，汉语“都在动词前”不能硬套。"
+                  unbridge: "位置不同是英语的规矩，汉语习惯不能硬套。"
                 },
                 {
                   type: "spell",
@@ -446,7 +446,7 @@ window.ENG_CH["gr05"] = {
                   items: [
                     "频率一条链：always（总是）> usually（通常）> often（经常）> sometimes（有时）> never（从不）",
                     "never = 一次也不，句子不再加 not：He never smokes.",
-                    "every day（每天，两词）vs everyday（日常的，形容词）：everyday English（日常英语）"
+                    "every day（每天，两词）vs everyday（日常的，形容词）"
                   ]
                 },
                 {
@@ -461,7 +461,7 @@ window.ENG_CH["gr05"] = {
                   wrong: "I do sports everyday.",
                   wrongZh: "（✗ 错句）",
                   right: "I do sports every day.",
-                  why: "“每天”是两个词 every day；一个词的 everyday 是形容词（日常的）。"
+                  why: "“每天”是两词 every day；一词的 everyday 是形容词。"
                 }
               ],
               point: "这就是频率副词的位置：实义动词前，be 动词后；every day 永远两词。",
@@ -580,17 +580,17 @@ window.ENG_CH["gr05"] = {
               id: "gr05.1.3-p3",
               kind: "explain",
               title: "一般过去时：动词穿“过去装”",
-              lead: "还记得吗？上一页 went 是 go 的过去样子，Did 后面 watch 变回了原形。",
+              lead: "还记得吗？went 是 go 的过去样子，Did 后 watch 变回了原形。",
               blocks: [
                 {
                   type: "examples",
                   ids: ["gr05.1.3-e1", "gr05.1.3-e2", "gr05.1.3-e3"],
-                  note: "身份证已经亮出来了——看这三句话，动词的“过去装”有几种穿法？"
+                  note: "看三句话：动词的“过去装”有几种穿法？"
                 },
                 {
                   type: "idcard",
                   rule: "说过去的事，动词用过去式：规则加 -ed，不规则的换词（go → went）。",
-                  condition: "只在一般过去时成立；句中有 did（didn't / Did…?）时，动词用原形，不再变过去式（一句话只标记一次）。"
+                  condition: "只在一般过去时成立；有 did（didn't / Did…?）时动词用原形，不再变过去式（一句话只标记一次）。"
                 },
                 {
                   type: "bridge",
@@ -602,7 +602,7 @@ window.ENG_CH["gr05"] = {
                   type: "spell",
                   title: "过去式三条 + 不规则单记：",
                   items: [
-                    "规则三条：直接加 -ed（watch → watched）；e 结尾加 -d（live → lived）；辅音 + y 去 y 变 ied（study → studied）",
+                    "规则三条：加 -ed（watched）；e 结尾加 -d（lived）；辅音 + y 变 ied（studied）",
                     "重读闭音节双写：stop → stopped，plan → planned",
                     "不规则单记（中考 30 个）：go-went-gone，eat-ate-eaten，do-did-done"
                   ]
@@ -738,17 +738,17 @@ window.ENG_CH["gr05"] = {
               id: "gr05.1.4-p3",
               kind: "explain",
               title: "ago（…以前）与 used to do（过去常常）",
-              lead: "还记得吗？上一页 two years ago 是往前数，used to 后面跟的是动词原形。",
+              lead: "还记得吗？two years ago 往前数，used to 后跟动词原形。",
               blocks: [
                 {
                   type: "examples",
                   ids: ["gr05.1.4-e1", "gr05.1.4-e2", "gr05.1.4-e3"],
-                  note: "身份证已经亮出来了——看这三句话，哪个讲“多久以前”，哪个讲“过去常常”？"
+                  note: "看三句话：哪个讲“多久以前”，哪个讲“过去常常”？"
                 },
                 {
                   type: "idcard",
                   rule: "ago 与数字连用表“…以前”（two years ago）；used to do 表“过去常常做（现在不做了）”。",
-                  condition: "ago 只与过去时连用（不与现在时 / 将来时）；used to 只讲过去的习惯，to 后跟动词原形；used to 本身不随主语变化。"
+                  condition: "ago 只配过去时；used to 只讲过去习惯，to 后跟动词原形；used to 不随主语变。"
                 },
                 {
                   type: "bridge",
@@ -997,11 +997,11 @@ window.ENG_CH["gr05"] = {
               kind: "observe",
               title: "先看三句话：哪个是临时决定？",
               sentences: [
-                { id: "gr05.2.2-e1", en: "I will get it!", zh: "我去接！（电话响了，临时决定）", reg: "口语",
+                { id: "gr05.2.2-e1", en: "I will get it!", zh: "我去接！", reg: "口语",
                   tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "助动词" }, { w: "get", role: "verb", label: "动词原形" }, { w: "it", role: "object", label: "宾语" } ] },
-                { id: "gr05.2.2-e2", en: "Look! It is going to rain.", zh: "看！天要下雨了。（看着乌云，有迹象）", reg: "口语",
+                { id: "gr05.2.2-e2", en: "Look! It is going to rain.", zh: "看！天要下雨了。", reg: "口语",
                   tagged: [ { w: "It", role: "subject", label: "主语" }, { w: "is going to", role: "verb", label: "助动词" }, { w: "rain", role: "verb", label: "动词原形" } ] },
-                { id: "gr05.2.2-e3", en: "We are going to visit Beijing next month.", zh: "我们下个月要去北京玩。（提前计划）", reg: "通用",
+                { id: "gr05.2.2-e3", en: "We are going to visit Beijing next month.", zh: "我们下个月要去北京玩。", reg: "通用",
                   tagged: [ { w: "We", role: "subject", label: "主语" }, { w: "are going to", role: "verb", label: "助动词" }, { w: "visit", role: "verb", label: "动词原形" }, { w: "Beijing", role: "object", label: "宾语" }, { w: "next month", role: "adverb", label: "状语" } ] }
               ],
               guess: {
@@ -1063,37 +1063,37 @@ window.ENG_CH["gr05"] = {
               id: "gr05.2.2-p3",
               kind: "explain",
               title: "will vs be going to：临时决定 vs 计划迹象",
-              lead: "还记得吗？上一页电话一响，I will get it! 脱口而出；下个月去北京，却是提前计划好的。",
+              lead: "还记得吗？电话一响，I will get it! 脱口而出；去北京却是提前计划好的。",
               blocks: [
                 {
                   type: "examples",
                   ids: ["gr05.2.2-e1", "gr05.2.2-e2", "gr05.2.2-e3"],
-                  note: "身份证已经亮出来了——看这三句话，will 和 be going to 分工有什么不同？"
+                  note: "看三句话：will 和 be going to 分工有什么不同？"
                 },
                 {
                   type: "idcard",
                   rule: "will 表临时决定、意愿；be going to 表事先计划，或有迹象表明将发生。",
-                  condition: "只在表将来时成立；“话赶话”（电话响、求助）用 will；“提前商量好”用 be going to；“乌云”等迹象用 be going to。临场决定用 will 最地道，不过电话响了说 be going to 母语者也常说、不算错——本课重点练 will 的临场决定用法。"
+                  condition: "只在表将来时成立；“话赶话”用 will，“提前商量好”/“乌云”迹象用 be going to。电话响了说 be going to 也不算错，本课主练 will 的临场决定。"
                 },
                 {
                   type: "bridge",
-                  zh: "汉语都说“要”：“我去接”和“下个月去北京”都是“要”，不分临时还是计划。",
+                  zh: "汉语都说“要”，不分临时还是计划。",
                   en: "英语把“要”拆成两个：will 是“一拍脑袋”的要，be going to 是“心里有数”的要。",
-                  unbridge: "别觉得两个随便换——“电话响了”说 I'm going to get it，听着像早就打算去接（be going to 自带“早有打算”的味儿）；临时起意，还是 will 最地道。"
+                  unbridge: "别随便换——“电话响了”说 I'm going to get it，像早就打算去接；临时起意还是 will 最地道。"
                 },
                 {
                   type: "contrast",
                   wrong: "— The phone is ringing! — I'll getting it.",
-                  wrongZh: "（✗ 错句）电话响了，“我 will 正在去接”——will 后面要跟动词原形，不能跟 getting。",
+                  wrongZh: "（✗ 错句）will 后面要跟动词原形，不能跟 getting。",
                   right: "— The phone is ringing! — I'll get it!",
-                  why: "will 后面只能跟动词原形；getting 带着 -ing，是“进行时”的尾巴，will 管不了它。"
+                  why: "will 后面只能跟动词原形；getting 的 -ing 尾巴，will 管不了。"
                 },
                 {
                   type: "contrast",
                   wrong: "Look! It will rain.",
                   wrongZh: "（✗ 错句）",
                   right: "Look! It's going to rain.",
-                  why: "乌云是“迹象”，用 be going to；will 听着像“我决定让天下雨”。"
+                  why: "乌云是迹象，用 be going to；will 听着像“我决定让天下雨”。"
                 }
               ],
               point: "这就是 will vs be going to：临时决定用 will，计划和迹象用 be going to。",

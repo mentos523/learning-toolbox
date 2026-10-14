@@ -282,7 +282,7 @@ window.ENG_CH["gr12"] = {
                 },
                 {
                   type: "idcard",
-                  rule: "祈使句：Don't + 原形（禁止）；Let's + 原形（建议）；感叹句：What + (a / an) + adj + n! / How + adj / adv!",
+                  rule: "祈使句：Don't + 原形（禁止）；Let's + 原形（建议）；感叹句：What + (a/an) + adj + n! / How + adj!",
                   condition: "What 后名词单数可数加 a / an（What a nice day）；How 后直接跟形容词（How nice!），不加 a。"
                 },
                 {

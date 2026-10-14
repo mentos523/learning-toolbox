@@ -12,14 +12,14 @@
 window.ENG_CH = window.ENG_CH || {};
 window.ENG_CH["gr06"] = {
   id: "gr06",
-  title: "动词的时与体（二）：进行 / 完成",
+  title: "动词的时与体（二）：进行/完成",
   sentences: {
     /* ---------- gr06.1.1 现在进行时 ---------- */
     "gr06.1.1-e1": { en: "Look! She is running.", zh: "看！她在跑步。", reg: "口语",
       tagged: [ { w: "She", role: "subject", label: "主语" }, { w: "is", role: "verb", label: "助动词" }, { w: "running", role: "verb", label: "谓语" } ] },
     "gr06.1.1-e2": { en: "They are having lunch now.", zh: "他们正在吃午饭。", reg: "通用",
       tagged: [ { w: "They", role: "subject", label: "主语" }, { w: "are", role: "verb", label: "助动词" }, { w: "having", role: "verb", label: "谓语" }, { w: "lunch", role: "object", label: "宾语" }, { w: "now", role: "adverb", label: "状语" } ] },
-    "gr06.1.1-e3": { en: "I am leaving tomorrow.", zh: "我明天要走了。（表将来安排）", reg: "通用",
+    "gr06.1.1-e3": { en: "I am leaving tomorrow.", zh: "我明天要走了。", reg: "通用",
       tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "am", role: "verb", label: "助动词" }, { w: "leaving", role: "verb", label: "谓语" }, { w: "tomorrow", role: "adverb", label: "状语" } ] },
     "gr06.1.1-e4": { en: "We are watching TV.", zh: "我们正在看电视。", reg: "通用",
       tagged: [ { w: "We", role: "subject", label: "主语" }, { w: "are", role: "verb", label: "助动词" }, { w: "watching", role: "verb", label: "谓语" }, { w: "TV", role: "object", label: "宾语" } ] },
@@ -51,7 +51,7 @@ window.ENG_CH["gr06"] = {
     /* ---------- gr06.1.3 将来进行时（高中） ---------- */
     "gr06.1.3-e1": { en: "I will be waiting for you at eight.", zh: "八点钟我会一直在等你。", reg: "通用",
       tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "助动词" }, { w: "be", role: "verb", label: "助动词" }, { w: "waiting", role: "verb", label: "谓语" }, { w: "for you", role: "adverb", label: "状语" }, { w: "at eight", role: "adverb", label: "状语" } ] },
-    "gr06.1.3-e2": { en: "Will you be using the computer tonight?", zh: "你今晚会用电脑吗？（礼貌询问）", reg: "口语",
+    "gr06.1.3-e2": { en: "Will you be using the computer tonight?", zh: "你今晚会用电脑吗？", reg: "口语",
       tagged: [ { w: "Will", role: "verb", label: "助动词" }, { w: "you", role: "subject", label: "主语" }, { w: "be", role: "verb", label: "助动词" }, { w: "using", role: "verb", label: "谓语" }, { w: "the computer", role: "object", label: "宾语" }, { w: "tonight", role: "adverb", label: "状语" } ] },
     "gr06.1.3-e3": { en: "She will be sleeping at midnight.", zh: "半夜她会在睡觉。", reg: "通用",
       tagged: [ { w: "She", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "助动词" }, { w: "be", role: "verb", label: "助动词" }, { w: "sleeping", role: "verb", label: "谓语" }, { w: "at midnight", role: "adverb", label: "状语" } ] },
@@ -75,11 +75,11 @@ window.ENG_CH["gr06"] = {
     "gr06.1.4-e6": { en: "I am knowing the answer.", zh: "（错句）我知道答案。", reg: "通用",
       tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "am", role: "verb", label: "助动词" }, { w: "knowing", role: "verb", label: "谓语" }, { w: "the answer", role: "object", label: "宾语" } ] },
     /* ---------- gr06.2.1 现在完成时 ---------- */
-    "gr06.2.1-e1": { en: "I have lost my key.", zh: "我把钥匙弄丢了。（现在没钥匙）", reg: "通用",
+    "gr06.2.1-e1": { en: "I have lost my key.", zh: "我把钥匙弄丢了。", reg: "通用",
       tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "have", role: "verb", label: "助动词" }, { w: "lost", role: "verb", label: "过去分词" }, { w: "my key", role: "object", label: "宾语" } ] },
-    "gr06.2.1-e2": { en: "She has been to Beijing.", zh: "她去过北京。（有经验）", reg: "通用",
+    "gr06.2.1-e2": { en: "She has been to Beijing.", zh: "她去过北京。", reg: "通用",
       tagged: [ { w: "She", role: "subject", label: "主语" }, { w: "has", role: "verb", label: "助动词" }, { w: "been", role: "verb", label: "过去分词" }, { w: "to Beijing", role: "adverb", label: "状语" } ] },
-    "gr06.2.1-e3": { en: "He has finished his homework.", zh: "他做完作业了。（现在不用做了）", reg: "通用",
+    "gr06.2.1-e3": { en: "He has finished his homework.", zh: "他做完作业了。", reg: "通用",
       tagged: [ { w: "He", role: "subject", label: "主语" }, { w: "has", role: "verb", label: "助动词" }, { w: "finished", role: "verb", label: "过去分词" }, { w: "his homework", role: "object", label: "宾语" } ] },
     "gr06.2.1-e4": { en: "We have seen the film.", zh: "我们看过这部电影了。", reg: "通用",
       tagged: [ { w: "We", role: "subject", label: "主语" }, { w: "have", role: "verb", label: "助动词" }, { w: "seen", role: "verb", label: "过去分词" }, { w: "the film", role: "object", label: "宾语" } ] },
@@ -154,7 +154,7 @@ window.ENG_CH["gr06"] = {
                   tagged: [ { w: "She", role: "subject", label: "主语" }, { w: "is", role: "verb", label: "助动词" }, { w: "running", role: "verb", label: "谓语" } ] },
                 { id: "gr06.1.1-e2", en: "They are having lunch now.", zh: "他们正在吃午饭。", reg: "通用",
                   tagged: [ { w: "They", role: "subject", label: "主语" }, { w: "are", role: "verb", label: "助动词" }, { w: "having", role: "verb", label: "谓语" }, { w: "lunch", role: "object", label: "宾语" }, { w: "now", role: "adverb", label: "状语" } ] },
-                { id: "gr06.1.1-e3", en: "I am leaving tomorrow.", zh: "我明天要走了。（表将来安排）", reg: "通用",
+                { id: "gr06.1.1-e3", en: "I am leaving tomorrow.", zh: "我明天要走了。", reg: "通用",
                   tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "am", role: "verb", label: "助动词" }, { w: "leaving", role: "verb", label: "谓语" }, { w: "tomorrow", role: "adverb", label: "状语" } ] }
               ],
               guess: {
@@ -468,7 +468,7 @@ window.ENG_CH["gr06"] = {
               sentences: [
                 { id: "gr06.1.3-e1", en: "I will be waiting for you at eight.", zh: "八点钟我会一直在等你。", reg: "通用",
                   tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "助动词" }, { w: "be", role: "verb", label: "助动词" }, { w: "waiting", role: "verb", label: "谓语" }, { w: "for you", role: "adverb", label: "状语" }, { w: "at eight", role: "adverb", label: "状语" } ] },
-                { id: "gr06.1.3-e2", en: "Will you be using the computer tonight?", zh: "你今晚会用电脑吗？（礼貌询问）", reg: "口语",
+                { id: "gr06.1.3-e2", en: "Will you be using the computer tonight?", zh: "你今晚会用电脑吗？", reg: "口语",
                   tagged: [ { w: "Will", role: "verb", label: "助动词" }, { w: "you", role: "subject", label: "主语" }, { w: "be", role: "verb", label: "助动词" }, { w: "using", role: "verb", label: "谓语" }, { w: "the computer", role: "object", label: "宾语" }, { w: "tonight", role: "adverb", label: "状语" } ] },
                 { id: "gr06.1.3-e3", en: "She will be sleeping at midnight.", zh: "半夜她会在睡觉。", reg: "通用",
                   tagged: [ { w: "She", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "助动词" }, { w: "be", role: "verb", label: "助动词" }, { w: "sleeping", role: "verb", label: "谓语" }, { w: "at midnight", role: "adverb", label: "状语" } ] }
@@ -593,11 +593,11 @@ window.ENG_CH["gr06"] = {
               kind: "observe",
               title: "先看三句话：过去的动作给“现在”留下了什么？",
               sentences: [
-                { id: "gr06.2.1-e1", en: "I have lost my key.", zh: "我把钥匙弄丢了。（现在没钥匙）", reg: "通用",
+                { id: "gr06.2.1-e1", en: "I have lost my key.", zh: "我把钥匙弄丢了。", reg: "通用",
                   tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "have", role: "verb", label: "助动词" }, { w: "lost", role: "verb", label: "过去分词" }, { w: "my key", role: "object", label: "宾语" } ] },
-                { id: "gr06.2.1-e2", en: "She has been to Beijing.", zh: "她去过北京。（有经验）", reg: "通用",
+                { id: "gr06.2.1-e2", en: "She has been to Beijing.", zh: "她去过北京。", reg: "通用",
                   tagged: [ { w: "She", role: "subject", label: "主语" }, { w: "has", role: "verb", label: "助动词" }, { w: "been", role: "verb", label: "过去分词" }, { w: "to Beijing", role: "adverb", label: "状语" } ] },
-                { id: "gr06.2.1-e3", en: "He has finished his homework.", zh: "他做完作业了。（现在不用做了）", reg: "通用",
+                { id: "gr06.2.1-e3", en: "He has finished his homework.", zh: "他做完作业了。", reg: "通用",
                   tagged: [ { w: "He", role: "subject", label: "主语" }, { w: "has", role: "verb", label: "助动词" }, { w: "finished", role: "verb", label: "过去分词" }, { w: "his homework", role: "object", label: "宾语" } ] }
               ],
               guess: {
@@ -657,30 +657,30 @@ window.ENG_CH["gr06"] = {
               id: "gr06.2.1-p3",
               kind: "explain",
               title: "现在完成时：have / has + 过去分词",
-              lead: "还记得吗？上一页 have 和 lost 两个零件，讲的是“丢了”和“现在没钥匙”两件事。",
+              lead: "还记得吗？have 和 lost 两个零件，讲“丢了”和“现在没钥匙”两件事。",
               blocks: [
                 {
                   type: "examples",
                   ids: ["gr06.2.1-e1", "gr06.2.1-e2", "gr06.2.1-e3"],
-                  note: "身份证已经亮出来了——看这三句话，过去的动作给“现在”留下了什么？"
+                  note: "看三句话：过去的动作给“现在”留下了什么？"
                 },
                 {
                   type: "idcard",
-                  rule: "现在完成时 = have / has + 过去分词，表“过去的动作对现在有影响 / 结果”，或“到现在为止的经验”。",
-                  condition: "have 随主语变（I have / she has）；过去分词不规则的单记（lose-lost-lost，go-went-gone）；不与 yesterday / last night 等“过去时间词”连用（那是一般过去时的地盘）。"
+                  rule: "现在完成时 = have / has + 过去分词，表“过去动作对现在的影响”，或“到现在的经验”。",
+                  condition: "have 随主语变（I have / she has）；不规则过去分词单记（lose-lost-lost）；不与 yesterday 等“过去时间词”连用。"
                 },
                 {
                   type: "bridge",
                   zh: "汉语说“我把钥匙弄丢了”，“了”字一加，过去现在一肩挑。",
                   en: "英语把“了”拆开：lost 管“丢”（过去），have 管“到现在”（现在没钥匙）——完成时是“过去连着现在”。",
-                  unbridge: "别拿一般过去时凑合——“I lost my key”只讲过去丢了，没说现在有没有钥匙，意思不一样。"
+                  unbridge: "别拿一般过去时凑合——“I lost my key”没说现在有没有钥匙，意思不一样。"
                 },
                 {
                   type: "spell",
                   title: "have 分工 + 过去分词单记：",
                   items: [
                     "have 随主语变：I / you / we / they have；he / she / it has",
-                    "过去分词不规则单记：lose-lost-lost，eat-ate-eaten，go-went-gone",
+                    "不规则单记：lose-lost-lost，eat-ate-eaten，go-went-gone",
                     "规则加 -ed：finish-finished，watch-watched"
                   ]
                 },
