@@ -641,7 +641,8 @@
    * hash 约定：
    *   #card=roots   → 讲词根（入口用；进入后 selectRoot 会按原逻辑写回 #r=xxx，
    *                     与旧分享链格式一致，故不再重复写 #card=roots）
-   *   #card=grammar → 语法筹备中外壳
+   *   #card=grammar → 语法章节浏览器
+   *   #card=grammar&test=<课id> → 直接开课（试点测试路由兼容）
    *   #r=xxx        → 讲词根对应词根（旧链，优先级高于 #card=）
    *   无 hash       → 子卡选择页
    * 与既有 #r= 无冲突："#card=roots" 中不含 "#r=" 子串。 */
@@ -658,11 +659,11 @@
     {
       id: "grammar",
       name: "语法",
-      tagline: "筹备中",
-      description: "语法板块正在按课程体系筹备，内容尚未上线，先看筹备说明。",
+      tagline: "125 课",            /* 占位（蓝队 2026-10-15）：待红队定稿替换 */
+      description: "占位，待红队定稿", /* 占位（蓝队 2026-10-15）：待红队定稿替换 */
       glyph: "？",
       color: "#b45309",
-      cta: "查看说明 →"
+      cta: "进入学习 →"             /* 占位（蓝队 2026-10-15）：待红队定稿替换 */
     }
   ];
   var TRACK_KEY = "ltb-en-track";
@@ -725,26 +726,130 @@
     if (rootWheel) rootWheel.fit();
     if (wordWheel) wordWheel.fit();
   }
+    /* ---------------- 语法章节浏览器（蓝队 2026-10-15）：gr00-gr19 已上线，
+   * 替换原"筹备中"外壳。从 window.ENG_CH 动态生成三级导航：
+   *   章列表 →（点击）课列表 →（点击）openGrammarLesson(课id) 进入学习页。
+   * gramNav 记录浏览器位置；课内"← 返回"（eng-grammar-exit）回到该课
+   * 所在章的课列表。window.ENG_GRAMMAR API 本体不动。 */
+  var gramNav = { level: "chapters", chId: null };
+  function gramChapters() {
+    var CH = window.ENG_CH || {};
+    var list = [];
+    for (var i = 0; i < 20; i++) {
+      var id = "gr" + (i < 10 ? "0" + i : String(i));
+      if (CH[id]) list.push(CH[id]);
+    }
+    return list;
+  }
+  function gramLessonCount(ch) {
+    var n = 0;
+    (ch.units || []).forEach(function (u) { n += (u.lessons || []).length; });
+    return n;
+  }
+  /* 课 id → 所属章 id（找不到返回 null；数据驱动，不硬编码映射） */
+  function gramFindChapter(lessonId) {
+    var CH = window.ENG_CH || {};
+    for (var i = 0; i < 20; i++) {
+      var id = "gr" + (i < 10 ? "0" + i : String(i));
+      var ch = CH[id];
+      if (!ch) continue;
+      var found = false;
+      (ch.units || []).forEach(function (u) {
+        (u.lessons || []).forEach(function (l) { if (l.id === lessonId) found = true; });
+      });
+      if (found) return id;
+    }
+    return null;
+  }
+  function renderGrammarBrowser() {
+    var box = document.getElementById("grammar-browser");
+    if (!box) return;
+    var html = "";
+    var ch = (gramNav.level === "lessons" && window.ENG_CH) ? window.ENG_CH[gramNav.chId] : null;
+    if (ch) {
+      /* 第二级：课列表（按单元分组） */
+      html += '<button class="back-btn" data-gram-back>← 返回章节列表</button>';
+      html += "<h2>" + esc(ch.id) + " · " + esc(ch.title) + "</h2>";
+      (ch.units || []).forEach(function (u) {
+        html += '<h3 class="e-gram-unit">' + esc(u.title || "") + "</h3>";
+        html += '<ul class="e-gram-lessons">';
+        (u.lessons || []).forEach(function (l) {
+          html += '<li><button class="e-gram-lesson" data-lesson="' + esc(l.id) + '">' +
+            '<span class="e-gram-lesson-id">' + esc(l.id) + "</span>" +
+            '<span class="e-gram-lesson-title">' + esc(l.title) + "</span>" +
+            '<span class="e-gram-lesson-go">进入 →</span></button></li>';
+        });
+        html += "</ul>";
+      });
+    } else {
+      /* 第一级：章列表（回退兜底：数据异常时回到章列表） */
+      gramNav.level = "chapters"; gramNav.chId = null;
+      html += '<button class="back-btn" data-gram-tracks>← 返回子卡选择</button>';
+      html += "<h2>选择章节</h2>";
+      html += '<p class="e-gram-sub">按课程体系顺序排列，从导论一路学到语篇与总复习。</p>';
+      html += '<ul class="e-gram-chapters">';
+      gramChapters().forEach(function (c) {
+        html += '<li><button class="e-gram-chapter" data-chapter="' + esc(c.id) + '">' +
+          '<span class="e-gram-ch-id">' + esc(c.id) + "</span>" +
+          '<span class="e-gram-ch-title">' + esc(c.title) + "</span>" +
+          '<span class="e-gram-ch-count">' + gramLessonCount(c) + " 课</span></button></li>";
+      });
+      html += "</ul>";
+    }
+    box.innerHTML = html;
+    Array.prototype.forEach.call(box.querySelectorAll("[data-chapter]"), function (b) {
+      b.addEventListener("click", function () {
+        gramNav.level = "lessons"; gramNav.chId = b.dataset.chapter;
+        renderGrammarBrowser();
+      });
+    });
+    Array.prototype.forEach.call(box.querySelectorAll("[data-lesson]"), function (b) {
+      b.addEventListener("click", function () { openGrammarLesson(b.dataset.lesson); });
+    });
+    var back = box.querySelector("[data-gram-back]");
+    if (back) back.addEventListener("click", function () {
+      gramNav.level = "chapters"; gramNav.chId = null;
+      renderGrammarBrowser();
+    });
+    var toTracks = box.querySelector("[data-gram-tracks]");
+    if (toTracks) toTracks.addEventListener("click", showTracks);
+  }
+  /* 开课：浏览器点课 / #card=grammar&test=<课id> 直达 共用此入口 */
+  function openGrammarLesson(lessonId) {
+    if (!window.ENG_GRAMMAR || !window.ENG_GRAMMAR.hasLesson(lessonId)) return;
+    var chId = gramFindChapter(lessonId);
+    if (chId) { gramNav.level = "lessons"; gramNav.chId = chId; }
+    state.card = "grammar";
+    try { localStorage.setItem(TRACK_KEY, "grammar"); } catch (e) {}
+    document.getElementById("tracks").hidden = true;
+    document.getElementById("app").hidden = true;
+    var shell = document.getElementById("grammar");
+    var gapp = document.getElementById("grammar-app");
+    shell.hidden = true;
+    if (gapp) gapp.hidden = false;
+    window.ENG_GRAMMAR.open(lessonId);
+    try { history.replaceState(null, "", "#card=grammar&test=" + lessonId); } catch (e) {}
+  }
   function enterGrammar() {
     state.card = "grammar";
     try { localStorage.setItem(TRACK_KEY, "grammar"); } catch (e) {}
     document.getElementById("tracks").hidden = true;
     document.getElementById("app").hidden = true;
-    // 语法试点测试路由（蓝队 2026-10-14）：#card=grammar&test=gr05.1.1
-    // 仅显式给出 test 参数且课号存在时进入语法 SPA；公开展示仍为筹备中外壳。
-    var tm = (location.hash || "").match(/[?&#]test=([a-z0-9.]+)/i);
-    var testId = tm && tm[1];
-    var hasPilot = !!(testId && window.ENG_GRAMMAR && window.ENG_GRAMMAR.hasLesson(testId));
     var shell = document.getElementById("grammar");
     var gapp = document.getElementById("grammar-app");
-    shell.hidden = hasPilot;
-    if (gapp) gapp.hidden = !hasPilot;
-    if (hasPilot) {
-      window.ENG_GRAMMAR.open(testId);
-    } else if (window.ENG_GRAMMAR) {
-      window.ENG_GRAMMAR.close();
+    // 语法直达路由（试点测试兼容）：#card=grammar&test=<课id> 直接开课；
+    // 无 test 参数 → 章节浏览器（蓝队 2026-10-15 起替代原筹备中外壳）
+    var tm = (location.hash || "").match(/[?&#]test=([a-z0-9.]+)/i);
+    var testId = tm && tm[1];
+    if (testId && window.ENG_GRAMMAR && window.ENG_GRAMMAR.hasLesson(testId)) {
+      openGrammarLesson(testId);
+      return;
     }
-    try { history.replaceState(null, "", "#card=grammar" + (hasPilot ? "&test=" + testId : "")); } catch (e) {}
+    renderGrammarBrowser();
+    shell.hidden = false;
+    if (gapp) gapp.hidden = true;
+    if (window.ENG_GRAMMAR) window.ENG_GRAMMAR.close();
+    try { history.replaceState(null, "", "#card=grammar"); } catch (e) {}
   }
   function enterCard(id) {
     if (id === "grammar") enterGrammar();
@@ -845,22 +950,20 @@
       settings.auto = e.target.checked;
       saveSettings();
     });
-    // 语法 SPA 试点内的"← 返回"：回到筹备中外壳（清掉 test 参数）
+    // 语法学习页内的"← 返回"（grammar.js dispatch eng-grammar-exit）：
+    // 回到章节浏览器（该课所在章的课列表，由 openGrammarLesson 记录的 gramNav 定位），清掉 test 参数
     window.addEventListener("eng-grammar-exit", function () {
       try { history.replaceState(null, "", "#card=grammar"); } catch (e) {}
       if (state.card === "grammar") enterCard("grammar");
       else showTracks();
     });
-    // 子卡返回按钮（拨盘页 header / 语法外壳）：回子卡选择页
+    // 子卡返回按钮（拨盘页 header / 语法浏览器 header）：回子卡选择页
     document.querySelectorAll("[data-card-back]").forEach(function (el) {
       el.addEventListener("click", showTracks);
     });
-    // 语法外壳里的真实入口：去讲词根
-    var goRoots = document.querySelector("[data-goto-roots]");
-    if (goRoots) goRoots.addEventListener("click", function () { enterCard("roots"); });
     applySettings();
-    // 深链路由：#r=xxx（旧分享链）→ 讲词根对应词根；#card=grammar → 语法外壳；
-    // #card=roots → 讲词根；无 → 子卡选择页
+    // 深链路由：#r=xxx（旧分享链）→ 讲词根对应词根；#card=grammar → 语法章节浏览器；
+    // #card=grammar&test=<课id> → 直接开课；#card=roots → 讲词根；无 → 子卡选择页
     var _h = location.hash || "";
     var _rm = _h.match(/#r=([a-z]+)/);
     var _cm = _h.match(/#card=([a-z]+)/);

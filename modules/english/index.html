@@ -23,9 +23,10 @@
   </div>
 </section>
 
-<!-- 语法筹备中外壳（蓝队 2026-10-14）：诚实占位，无假内容、无假交互；
-     文案已定稿（红队 2026-10-14 审定） -->
-<section class="e-grammar" id="grammar" hidden aria-label="语法（筹备中）">
+<!-- 语法章节浏览器（蓝队 2026-10-15）：20 章/125 课已上线，
+     #grammar-browser 由 js/english.js 从 window.ENG_CH 动态生成
+     （章列表 → 课列表 → window.ENG_GRAMMAR.open），替换原筹备中外壳 -->
+<section class="e-grammar" id="grammar" hidden aria-label="语法">
   <div class="e-grammar-inner">
     <header class="e-grammar-head">
       <a class="back-btn" href="../../index.html" aria-label="返回工具箱首页">← 返回</a>
@@ -33,19 +34,16 @@
       <h1>英语 · 语法</h1>
     </header>
     <div class="e-grammar-body">
-      <h2>语法板块正在按课程体系筹备</h2>
-      <p>语法子卡将来会按课程体系建设：从初中起步、一路到高中，对齐中考与高考要求，并与「讲词根」设构词法呼应。</p>
-      <p>课程体系、教学设计和交互形式都还在准备中，这里暂时没有可以学习的内容，也没有可以点的课程或练习。</p>
-      <p>内容准备好后会在这里上线。现在可以先去「讲词根」拨盘学习。</p>
-      <p><button class="e-track-btn" data-goto-roots>去讲词根看看 →</button></p>
+      <div id="grammar-browser"></div>
     </div>
   </div>
 </section>
 
-<!-- 语法 SPA 试点容器（蓝队 2026-10-14）：仅 #card=grammar&test=<课号> 测试路由进入；
-     公开展示仍为上方"筹备中"外壳，本容器保持 hidden。引擎见 js/grammar.js，
-     数据见 data/grNN.js，样式见 css/grammar.css（g- 前缀，与数学/讲词根隔离）。 -->
-<section class="e-grammar-app" id="grammar-app" hidden aria-label="语法学习（试点）">
+<!-- 语法 SPA 学习页（蓝队 2026-10-15）：从章节浏览器点课进入，或
+     #card=grammar&test=<课号> 直达；课内"← 返回" dispatch eng-grammar-exit，
+     由 js/english.js 回到章节浏览器。引擎见 js/grammar.js，
+     数据见 data/grNN.js（gr00–gr19），样式见 css/grammar.css（g- 前缀，与数学/讲词根隔离）。 -->
+<section class="e-grammar-app" id="grammar-app" hidden aria-label="语法学习">
   <div class="g-app" id="g-app"></div>
 </section>
 
@@ -181,7 +179,26 @@
 <script src="data/roots.js"></script>
   <script src="data/standalone.js"></script>
   <script src="data/phon.js"></script>
+<script src="data/gr00.js"></script>
+<script src="data/gr01.js"></script>
+<script src="data/gr02.js"></script>
+<script src="data/gr03.js"></script>
+<script src="data/gr04.js"></script>
 <script src="data/gr05.js"></script>
+<script src="data/gr06.js"></script>
+<script src="data/gr07.js"></script>
+<script src="data/gr08.js"></script>
+<script src="data/gr09.js"></script>
+<script src="data/gr10.js"></script>
+<script src="data/gr11.js"></script>
+<script src="data/gr12.js"></script>
+<script src="data/gr13.js"></script>
+<script src="data/gr14.js"></script>
+<script src="data/gr15.js"></script>
+<script src="data/gr16.js"></script>
+<script src="data/gr17.js"></script>
+<script src="data/gr18.js"></script>
+<script src="data/gr19.js"></script>
 <script src="js/grammar.js"></script>
 <script src="js/english.js"></script>
 </body>

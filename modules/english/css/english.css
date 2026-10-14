@@ -590,6 +590,30 @@ button.back-btn { font: inherit; cursor: pointer; color: var(--accent-text); }
 .e-grammar-flag { display: inline-block; font-size: 0.8rem; color: var(--accent-text);
   background: var(--accent-soft); border-radius: 999px; padding: 3px 12px; }
 
+/* 语法章节浏览器（蓝队 2026-10-15）：列表项样式，与讲词根子卡视觉一致 */
+#grammar-browser h2 { margin: 14px 0 8px; font-size: 1.15rem; color: var(--ink); }
+#grammar-browser h2:first-of-type { margin-top: 14px; }
+.e-gram-sub { color: var(--ink-soft); font-size: 0.9rem; margin: 0 0 14px; }
+.e-gram-chapters, .e-gram-lessons { list-style: none; margin: 0; padding: 0;
+  display: grid; gap: 10px; }
+.e-gram-chapter, .e-gram-lesson {
+  display: flex; align-items: center; gap: 12px; width: 100%;
+  text-align: left; background: var(--panel); border: 1px solid var(--line);
+  border-radius: var(--radius); padding: 13px 16px; min-height: 44px;
+  cursor: pointer; color: var(--ink); font: inherit; font-size: 1rem;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+.e-gram-chapter:hover, .e-gram-lesson:hover { transform: translateY(-2px); border-color: var(--accent); }
+.e-gram-ch-id { flex: none; font-size: 0.8rem; color: var(--accent-text);
+  background: var(--accent-soft); border-radius: 999px; padding: 2px 10px; white-space: nowrap; }
+.e-gram-ch-title { flex: 1; font-weight: 600; }
+.e-gram-ch-count { flex: none; color: var(--ink-soft); font-size: 0.85rem; white-space: nowrap; }
+.e-gram-unit { margin: 20px 0 8px; font-size: 1rem; color: var(--ink-soft); font-weight: 600; }
+.e-gram-unit:first-of-type { margin-top: 12px; }
+.e-gram-lesson-id { flex: none; min-width: 64px; font-size: 0.8rem; color: var(--ink-soft); }
+.e-gram-lesson-title { flex: 1; }
+.e-gram-lesson-go { flex: none; color: var(--accent-text); font-size: 0.9rem; white-space: nowrap; }
+
 @media (max-width: 1023px) {
   .e-tracks { align-items: flex-start; padding-top: 12vh; }
   /* 移动端保持原设计（顶部起始），只水平居中；桌面端 margin:auto 负责安全垂直居中 */
