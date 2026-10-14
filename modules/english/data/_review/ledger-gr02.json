@@ -13,9 +13,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产A队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则表述准确、适用条件完整，术语/释义/词性/考点口径均符合清单要求"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -28,9 +33,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产A队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则表述准确、适用条件完整，术语/释义/词性/考点口径均符合清单要求"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -43,9 +53,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产A队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则表述准确、适用条件完整，术语/释义/词性/考点口径均符合清单要求"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -58,9 +73,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产A队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则表述准确、适用条件完整，术语/释义/词性/考点口径均符合清单要求"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -73,9 +93,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产A队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则表述准确、适用条件完整，术语/释义/词性/考点口径均符合清单要求"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -88,9 +113,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产A队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则表述准确、适用条件完整，术语/释义/词性/考点口径均符合清单要求"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -103,9 +133,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产A队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "反例：错句标注明确，纠偏方向与本课规则/适用条件一致，未放行中式英语"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -118,9 +153,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产A队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "反例：错句标注明确，纠偏方向与本课规则/适用条件一致，未放行中式英语"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -133,9 +173,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产A队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则表述准确、适用条件完整，术语/释义/词性/考点口径均符合清单要求"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -148,9 +193,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产A队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则表述准确、适用条件完整，术语/释义/词性/考点口径均符合清单要求"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -163,9 +213,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产A队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则表述准确、适用条件完整，术语/释义/词性/考点口径均符合清单要求"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -178,9 +233,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产A队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则表述准确、适用条件完整，术语/释义/词性/考点口径均符合清单要求"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -193,9 +253,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产A队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则表述准确、适用条件完整，术语/释义/词性/考点口径均符合清单要求"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -208,9 +273,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产A队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则表述准确、适用条件完整，术语/释义/词性/考点口径均符合清单要求"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -223,9 +293,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产A队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "反例：错句标注明确，纠偏方向与本课规则/适用条件一致，未放行中式英语"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -238,9 +313,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产A队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "反例：错句标注明确，纠偏方向与本课规则/适用条件一致，未放行中式英语"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -253,9 +333,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产A队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则表述准确、适用条件完整，术语/释义/词性/考点口径均符合清单要求"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -268,9 +353,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产A队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则表述准确、适用条件完整，术语/释义/词性/考点口径均符合清单要求"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -283,9 +373,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产A队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则表述准确、适用条件完整，术语/释义/词性/考点口径均符合清单要求"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -298,9 +393,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产A队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则表述准确、适用条件完整，术语/释义/词性/考点口径均符合清单要求"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -313,9 +413,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产A队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则表述准确、适用条件完整，术语/释义/词性/考点口径均符合清单要求"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -328,9 +433,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产A队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则表述准确、适用条件完整，术语/释义/词性/考点口径均符合清单要求"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -343,9 +453,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产A队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "反例：错句标注明确，纠偏方向与本课规则/适用条件一致，未放行中式英语"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -358,9 +473,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产A队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "反例：错句标注明确，纠偏方向与本课规则/适用条件一致，未放行中式英语"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -373,9 +493,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产A队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则表述准确、适用条件完整，术语/释义/词性/考点口径均符合清单要求"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -388,9 +513,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产A队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则表述准确、适用条件完整，术语/释义/词性/考点口径均符合清单要求"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -403,9 +533,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产A队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则表述准确、适用条件完整，术语/释义/词性/考点口径均符合清单要求"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -418,9 +553,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产A队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则表述准确、适用条件完整，术语/释义/词性/考点口径均符合清单要求"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -433,9 +573,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产A队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则表述准确、适用条件完整，术语/释义/词性/考点口径均符合清单要求"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -448,9 +593,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产A队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则表述准确、适用条件完整，术语/释义/词性/考点口径均符合清单要求"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -463,9 +613,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产A队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "反例：错句标注明确，纠偏方向与本课规则/适用条件一致，未放行中式英语"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -478,9 +633,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产A队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "反例：错句标注明确，纠偏方向与本课规则/适用条件一致，未放行中式英语"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -493,9 +653,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产A队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则表述准确、适用条件完整，术语/释义/词性/考点口径均符合清单要求"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -508,9 +673,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产A队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则表述准确、适用条件完整，术语/释义/词性/考点口径均符合清单要求"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -523,9 +693,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产A队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则表述准确、适用条件完整，术语/释义/词性/考点口径均符合清单要求"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -538,9 +713,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产A队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则表述准确、适用条件完整，术语/释义/词性/考点口径均符合清单要求"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -553,9 +733,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产A队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则表述准确、适用条件完整，术语/释义/词性/考点口径均符合清单要求"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -568,9 +753,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产A队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则表述准确、适用条件完整，术语/释义/词性/考点口径均符合清单要求"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -583,9 +773,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产A队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则表述准确、适用条件完整，术语/释义/词性/考点口径均符合清单要求"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -598,9 +793,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产A队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "反例：错句标注明确，纠偏方向与本课规则/适用条件一致，未放行中式英语"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -613,9 +813,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产A队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则表述准确、适用条件完整，术语/释义/词性/考点口径均符合清单要求"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -628,9 +833,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产A队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则表述准确、适用条件完整，术语/释义/词性/考点口径均符合清单要求"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -643,9 +853,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产A队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则表述准确、适用条件完整，术语/释义/词性/考点口径均符合清单要求"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -658,9 +873,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产A队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则表述准确、适用条件完整，术语/释义/词性/考点口径均符合清单要求"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -673,9 +893,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产A队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "规则表述准确、适用条件完整，术语/释义/词性/考点口径均符合清单要求"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -688,9 +913,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产A队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "反例：错句标注明确，纠偏方向与本课规则/适用条件一致，未放行中式英语"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -703,9 +933,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产A队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "反例：错句标注明确，纠偏方向与本课规则/适用条件一致，未放行中式英语"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     }
   ]
