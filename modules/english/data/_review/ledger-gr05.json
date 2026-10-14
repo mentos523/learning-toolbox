@@ -406,8 +406,8 @@
     {
       "id": "gr05.1.2-e6",
       "lesson": "gr05.1.2",
-      "en": "My father sometimes watches news on TV.",
-      "zh": "我爸爸有时在电视上看新闻。",
+      "en": "My father sometimes watches the news on TV.",
+      "zh": "我爸爸有时在电视上看新闻。（news 前面要加 the）",
       "register": "neutral",
       "rule": "现在时的时间状语（正例 example）",
       "vocab": "in-scope",
@@ -419,9 +419,14 @@
         "verdict": "reject",
         "note": "清单第9条：'watches news' 漏定冠词，属中式英语（地道说法为 'watches the news'）；打回重写。"
       },
+      "rewrite": {
+        "by": "语法生产B队",
+        "at": "2026-10-14",
+        "note": "revision 2：英文补定冠词 the（watches the news），中文加注冠词点拨；id 保留，revision+1，状态回 drafted 重走三审。"
+      },
       "final": null,
-      "status": "rejected",
-      "revision": 1
+      "status": "drafted",
+      "revision": 2
     },
     {
       "id": "gr05.1.2-e7",

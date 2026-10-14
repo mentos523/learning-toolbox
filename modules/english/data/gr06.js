@@ -53,7 +53,7 @@ window.ENG_CH["gr06"] = {
       tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "助动词" }, { w: "be", role: "verb", label: "助动词" }, { w: "waiting", role: "verb", label: "谓语" }, { w: "for you", role: "adverb", label: "状语" }, { w: "at eight", role: "adverb", label: "状语" } ] },
     "gr06.1.3-e2": { en: "Will you be using the computer tonight?", zh: "你今晚会用电脑吗？（礼貌询问）", reg: "口语",
       tagged: [ { w: "Will", role: "verb", label: "助动词" }, { w: "you", role: "subject", label: "主语" }, { w: "be", role: "verb", label: "助动词" }, { w: "using", role: "verb", label: "谓语" }, { w: "the computer", role: "object", label: "宾语" }, { w: "tonight", role: "adverb", label: "状语" } ] },
-    "gr06.1.3-e3": { en: "She will be sleeping at midnight.", zh: "半夜她应该在睡觉。", reg: "通用",
+    "gr06.1.3-e3": { en: "She will be sleeping at midnight.", zh: "半夜她会在睡觉。", reg: "通用",
       tagged: [ { w: "She", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "助动词" }, { w: "be", role: "verb", label: "助动词" }, { w: "sleeping", role: "verb", label: "谓语" }, { w: "at midnight", role: "adverb", label: "状语" } ] },
     "gr06.1.3-e4": { en: "They will be traveling next week.", zh: "他们下周会在旅行。", reg: "通用",
       tagged: [ { w: "They", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "助动词" }, { w: "be", role: "verb", label: "助动词" }, { w: "traveling", role: "verb", label: "谓语" }, { w: "next week", role: "adverb", label: "状语" } ] },
@@ -470,7 +470,7 @@ window.ENG_CH["gr06"] = {
                   tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "助动词" }, { w: "be", role: "verb", label: "助动词" }, { w: "waiting", role: "verb", label: "谓语" }, { w: "for you", role: "adverb", label: "状语" }, { w: "at eight", role: "adverb", label: "状语" } ] },
                 { id: "gr06.1.3-e2", en: "Will you be using the computer tonight?", zh: "你今晚会用电脑吗？（礼貌询问）", reg: "口语",
                   tagged: [ { w: "Will", role: "verb", label: "助动词" }, { w: "you", role: "subject", label: "主语" }, { w: "be", role: "verb", label: "助动词" }, { w: "using", role: "verb", label: "谓语" }, { w: "the computer", role: "object", label: "宾语" }, { w: "tonight", role: "adverb", label: "状语" } ] },
-                { id: "gr06.1.3-e3", en: "She will be sleeping at midnight.", zh: "半夜她应该在睡觉。", reg: "通用",
+                { id: "gr06.1.3-e3", en: "She will be sleeping at midnight.", zh: "半夜她会在睡觉。", reg: "通用",
                   tagged: [ { w: "She", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "助动词" }, { w: "be", role: "verb", label: "助动词" }, { w: "sleeping", role: "verb", label: "谓语" }, { w: "at midnight", role: "adverb", label: "状语" } ] }
               ],
               guess: {

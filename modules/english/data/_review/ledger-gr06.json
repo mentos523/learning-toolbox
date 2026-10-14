@@ -367,7 +367,7 @@
       "id": "gr06.1.3-e3",
       "lesson": "gr06.1.3",
       "en": "She will be sleeping at midnight.",
-      "zh": "半夜她应该在睡觉。",
+      "zh": "半夜她会在睡觉。",
       "register": "neutral",
       "rule": "将来进行时（正例 example）",
       "vocab": "in-scope",
@@ -379,9 +379,14 @@
         "verdict": "reject",
         "note": "清单第2条：中文释义'半夜她应该在睡觉'中'应该'易被初中生对应到 should，偷换了 will 表预测的概念；建议改为'半夜她会在睡觉'。打回重写。"
       },
+      "rewrite": {
+        "by": "语法生产B队",
+        "at": "2026-10-14",
+        "note": "revision 2：中文释义“应该”改为“会在”，去除情态词歧义，回归 will 表预测口径；id 保留，revision+1，状态回 drafted 重走三审。"
+      },
       "final": null,
-      "status": "rejected",
-      "revision": 1
+      "status": "drafted",
+      "revision": 2
     },
     {
       "id": "gr06.1.3-e4",
