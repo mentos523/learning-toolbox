@@ -349,7 +349,7 @@ window.ENG_CH["gr01"] = {
               id: "gr01.1.2-p3",
               kind: "explain",
               title: "复数与所有格：-s 管'几个'，-'s 管'谁的'",
-              lead: "还记得吗？上一页 boys'（谁的）和 bikes（几个）长得像，身份完全不同——一撇定身份。",
+              lead: "还记得吗？上一页 boys'（谁的）和 bikes（几个）长得像，身份不同——一撇定身份。",
               point: "这就是复数与所有格：-s 管'几个'，-'s 管'谁的'，不规则的单记。",
               blocks: [
                 {
@@ -360,7 +360,7 @@ window.ENG_CH["gr01"] = {
                 {
                   type: "idcard",
                   rule: "名词复数：一般 -s；s/x/ch/sh 结尾 -es；辅音+y 变 ies；不规则（child→children, foot→feet）单记。所有格：单数 -'s；复数 s 结尾加 -s'；无生命用 of。",
-                  condition: "复数答'几个'，所有格答'谁的'。two-hour 作定语用单数、加连字符。"
+                  condition: "复数答'几个'，所有格答'谁的'。two-hour 作定语用单数加连字符。"
                 },
                 {
                   type: "spell",
@@ -368,7 +368,7 @@ window.ENG_CH["gr01"] = {
                   items: [
                     "规则三形：-s（books）、-es（boxes）、y→ies（babies）",
                     "不规则单记：child→children，foot→feet，tooth→teeth",
-                    "所有格：单数 -'s（boy's），复数 s 结尾只加一撇（boys'）",
+                    "所有格：单数 -'s（boy's），复数 s 结尾加一撇（boys'）",
                     "无生命多用 of：the legs of the table"
                   ]
                 },
@@ -376,7 +376,7 @@ window.ENG_CH["gr01"] = {
                   type: "bridge",
                   zh: "汉语'孩子们''孩子的'靠'们''的'区分，复数和所有格界限清楚。",
                   en: "英语里 -s 又管复数又管所有格：boys（几个）vs boy's（他的）vs boys'（他们的）——一撇之差，意思全变。",
-                  unbridge: "这是英语的 -s 规矩：先看有没有一撇，再看一撇在哪。"
+                  unbridge: "这是英语的 -s 规矩：先看有没有一撇，再看位置。"
                 },
                 {
                   type: "contrast",
@@ -390,7 +390,7 @@ window.ENG_CH["gr01"] = {
                   wrong: "It is a two hours' film.",
                   wrongZh: "（✗ 错句：复合形容词）",
                   right: "It is a two-hour film.",
-                  why: "two-hour 作定语是形容词，用单数、加连字符。"
+                  why: "two-hour 作定语是形容词，用单数加连字符。"
                 }
               ],
               pointScroll: true
@@ -496,7 +496,7 @@ window.ENG_CH["gr01"] = {
               id: "gr01.1.3-p3",
               kind: "explain",
               title: "易混名词：不可数永远单数，集合名词看强调",
-              lead: "还记得吗？上一页 news 以 s 结尾，你却给它贴了'不可数'、给 is 贴了'单数'——长得像复数不是复数。",
+              lead: "还记得吗？上一页 news 以 s 结尾，你却给它贴了'不可数'、给 is 贴了'单数'——像复数不是复数。",
               point: "这就是易混名词：不可数永远单数；集合名词看强调整体还是成员。",
               blocks: [
                 {
@@ -507,27 +507,27 @@ window.ENG_CH["gr01"] = {
                 {
                   type: "idcard",
                   rule: "advice/information/news 是不可数名词，无复数，谓语用单数。集合名词（family/team/class）：看作整体用单数（is），强调成员用复数（are）。",
-                  condition: "不可数：永远单数谓语。集合名词：看说话人想强调'一个整体'还是'好几个成员'——意思定单复数。"
+                  condition: "不可数：永远单数谓语。集合名词：看说话人强调'整体'还是'成员'——意思定单复数。"
                 },
                 {
                   type: "bridge",
                   zh: "汉语'消息''建议'可数不可数都行，'家人'单复数不用变谓语。",
                   en: "英语不一样：news 永远单数（The news is…）；family 作整体是单数（My family is big 我家这个整体大），说成员时是复数（My family are all teachers 家人们都是老师）。",
-                  unbridge: "这是英语的'数'规矩：先看词，再看说话人想强调什么。"
+                  unbridge: "这是英语的'数'规矩：先看词，再看说话人强调什么。"
                 },
                 {
                   type: "contrast",
                   wrong: "The news are bad.",
                   wrongZh: "（✗ 错句：news 无复数）",
                   right: "The news is bad.",
-                  why: "news 不可数，没有复数——以 s 结尾不代表复数，谓语用单数。"
+                  why: "news 不可数，没有复数——s 结尾不代表复数，谓语用单数。"
                 },
                 {
                   type: "contrast",
                   wrong: "My family is all teachers.",
                   wrongZh: "（✗ 错句：强调成员用复数）",
                   right: "My family are all teachers.",
-                  why: "想说'家人们（成员）'，family 就按复数走，谓语用 are。"
+                  why: "想说'家人们'，family 就按复数走，谓语用 are。"
                 }
               ],
               pointScroll: true

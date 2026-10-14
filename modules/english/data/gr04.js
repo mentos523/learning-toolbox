@@ -466,12 +466,12 @@ window.ENG_CH["gr04"] = {
               kind: "explain",
               title: "介词搭配：动词+介词是固定搭档",
               lead: "还记得吗？上一页 to 是卧底介词，后面跟了 seeing——介词后面不跟动词原形。",
-              point: "这就是介词搭配：动词+介词是固定搭档；to 是介词还是不定式，看前面。（呼应讲词根：spect-（看）家族 inspect/expect，讲词根板块已收录。）",
+              point: "这就是介词搭配：动词+介词是固定搭档；to 是介词还是不定式，看前面。（呼应讲词根 #r=spect，R3 审计通过）",
               blocks: [
                 {
                   type: "examples",
                   ids: [ "gr04.1.3-e1", "gr04.1.3-e3", "gr04.1.3-e4" ],
-                  note: "先看现象：动词+介词是固定搭档。"
+                  note: "先看现象：动词+介词固定搭档。"
                 },
                 {
                   type: "idcard",
@@ -496,7 +496,7 @@ window.ENG_CH["gr04"] = {
                   wrong: "She is good English.",
                   wrongZh: "（✗ 错句：漏 at）",
                   right: "She is good at English.",
-                  why: "be good at 是固定搭配，at 不可省——省了 at，good 就没着落了。"
+                  why: "be good at 是固定搭配，at 不可省——省了 at，good 没着落。"
                 }
               ],
               pointScroll: true

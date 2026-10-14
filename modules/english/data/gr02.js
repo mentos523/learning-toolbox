@@ -245,6 +245,38 @@ window.ENG_CH["gr02"] = {
               id: "gr02.1.1-p4",
               kind: "quiz",
               title: "练一练：换岗换衣服",
+              questions: [
+                {
+                  type: "choice",
+                  stem: "选出正确的句子：",
+                  options: ["Me and Tom are friends.", "Tom and I are friends.", "Tom and me are friends."],
+                  answer: 1,
+                  tip: "主语并列用主格 I——Me 站不了主语岗。"
+                },
+                {
+                  type: "fill",
+                  stemBefore: "Give it to",
+                  stemAfter: ".（I / me）",
+                  answer: "me",
+                  accept: ["me"],
+                  tip: "to 是介词，介词后面跟宾格 me。"
+                },
+                {
+                  type: "choice",
+                  stem: "选出正确的句子：",
+                  options: ["Her likes apples.", "She likes apples.", "Her like apples."],
+                  answer: 1,
+                  tip: "主语岗穿主格 She——Her 是宾格，只能站宾语岗。"
+                },
+                {
+                  type: "fill",
+                  stemBefore: "Let",
+                  stemAfter: "go first.（he / him）",
+                  answer: "him",
+                  accept: ["him"],
+                  tip: "Let 后面是宾语岗，用宾格 him。"
+                }
+              ],
               point: "自查：先看代词在句中当主语还是宾语，再选格。"
             }
         ]
@@ -405,6 +437,38 @@ window.ENG_CH["gr02"] = {
               id: "gr02.1.2-p4",
               kind: "quiz",
               title: "练一练：my 还是 mine？",
+              questions: [
+                {
+                  type: "choice",
+                  stem: "选出正确的句子：",
+                  options: ["This is my.", "This is mine.", "This is me."],
+                  answer: 1,
+                  tip: "my 后面不能空着——后面没名词，用独立的 mine。"
+                },
+                {
+                  type: "fill",
+                  stemBefore: "This is",
+                  stemAfter: "book.（my / mine）",
+                  answer: "my",
+                  accept: ["my"],
+                  tip: "book 是名词，my 后面必须跟名词。"
+                },
+                {
+                  type: "choice",
+                  stem: "选出正确的句子：",
+                  options: ["A friend of my is a doctor.", "A friend of mine is a doctor.", "A friend of me is a doctor."],
+                  answer: 1,
+                  tip: "of 后面跟名词性 mine——my 是半成品，不能自己站。"
+                },
+                {
+                  type: "fill",
+                  stemBefore: "Your bag is red, but",
+                  stemAfter: "is blue.（my / mine）",
+                  answer: "mine",
+                  accept: ["mine"],
+                  tip: "but 后面是主语岗、后面又没名词——用独立的 mine。"
+                }
+              ],
               point: "自查：后面有名词用 my/your，没名词用 mine/yours。"
             }
         ]
@@ -551,6 +615,38 @@ window.ENG_CH["gr02"] = {
               id: "gr02.1.3-p4",
               kind: "quiz",
               title: "练一练：-self 跟谁走？",
+              questions: [
+                {
+                  type: "choice",
+                  stem: "选出正确的句子：",
+                  options: ["She did it herself.", "She did it himself.", "She did it myself."],
+                  answer: 0,
+                  tip: "-self 跟主语走：主语是 She，用 herself。"
+                },
+                {
+                  type: "fill",
+                  stemBefore: "He taught",
+                  stemAfter: "English.（him / himself）",
+                  answer: "himself",
+                  accept: ["himself"],
+                  tip: "想说'他自己'，必须用 himself——him 指的是别人。"
+                },
+                {
+                  type: "choice",
+                  stem: "选出正确的句子：",
+                  options: ["This apples are red.", "These apples are red.", "That apples are red."],
+                  answer: 1,
+                  tip: "apples 是复数，指示代词用复数 these。"
+                },
+                {
+                  type: "fill",
+                  stemBefore: "",
+                  stemAfter: "is my book, and that is yours.（This / These）",
+                  answer: "This",
+                  accept: ["This"],
+                  tip: "book 是单数，近处用 this。"
+                }
+              ],
               point: "自查：-self 看主语；this/that 看远近、看单复数。"
             }
         ]
@@ -694,6 +790,38 @@ window.ENG_CH["gr02"] = {
               id: "gr02.2.1-p4",
               kind: "quiz",
               title: "练一练：who 后面加不加 did？",
+              questions: [
+                {
+                  type: "choice",
+                  stem: "选出正确的句子：",
+                  options: ["Who did break the window?", "Who broke the window?", "Who break the window?"],
+                  answer: 1,
+                  tip: "who 作主语，后面不加 did——主语已经在了。"
+                },
+                {
+                  type: "fill",
+                  stemBefore: "",
+                  stemAfter: "did you meet?（Who / Whose）",
+                  answer: "Who",
+                  accept: ["Who"],
+                  tip: "who 作宾语才倒装：Who did you meet?"
+                },
+                {
+                  type: "choice",
+                  stem: "“你叫什么名字？”的正确问法是：",
+                  options: ["Which is your name?", "What is your name?", "Whose is your name?"],
+                  answer: 1,
+                  tip: "问名字（无范围）用 what；which 用于有范围的选择。"
+                },
+                {
+                  type: "fill",
+                  stemBefore: "",
+                  stemAfter: "color do you like?（Which / What）",
+                  answer: "Which",
+                  accept: ["Which"],
+                  tip: "在几种颜色里选（有范围），用 which。"
+                }
+              ],
               point: "自查：先看疑问词在句中当什么成分——当主语，不倒装。"
             }
         ]
@@ -815,6 +943,38 @@ window.ENG_CH["gr02"] = {
               id: "gr02.2.2-p4",
               kind: "quiz",
               title: "练一练：选系列",
+              questions: [
+                {
+                  type: "choice",
+                  stem: "选出正确的句子：",
+                  options: ["I don't want something.", "I don't want anything.", "I want anything."],
+                  answer: 1,
+                  tip: "否定句用 anything；肯定句才用 something。"
+                },
+                {
+                  type: "fill",
+                  stemBefore: "Is there",
+                  stemAfter: "wrong?（something / anything）",
+                  answer: "anything",
+                  accept: ["anything"],
+                  tip: "疑问句住 anything——any- 系列住在否定/疑问句里。"
+                },
+                {
+                  type: "choice",
+                  stem: "选出正确的句子：",
+                  options: ["Everyone are here.", "Everyone is here.", "Everyone am here."],
+                  answer: 1,
+                  tip: "every- 系列是单数，谓语用 is。"
+                },
+                {
+                  type: "fill",
+                  stemBefore: "There is",
+                  stemAfter: "in the box.（something / nothing）",
+                  answer: "nothing",
+                  accept: ["nothing"],
+                  tip: "no- 系列表全否定：盒子里什么都没有。"
+                }
+              ],
               point: "自查：先看句式（肯定/否定/疑问），再选系列；every- 永远单数。"
             }
         ]
@@ -867,6 +1027,38 @@ window.ENG_CH["gr02"] = {
               id: "gr02.2.3-p2",
               kind: "quiz",
               title: "本章综合练：代词大盘点",
+              questions: [
+                {
+                  type: "choice",
+                  stem: "选出正确的句子：",
+                  options: ["My friend and I went to the park.", "Me and my friend went to the park.", "My friend and me went to the park."],
+                  answer: 0,
+                  tip: "主语并列用主格 I——Me 站不了主语岗。"
+                },
+                {
+                  type: "fill",
+                  stemBefore: "Tom lost",
+                  stemAfter: "key.（his / their）",
+                  answer: "his",
+                  accept: ["his"],
+                  tip: "Tom 是单数，代词的人称数要和它一致——用 his。"
+                },
+                {
+                  type: "choice",
+                  stem: "选出正确的句子：",
+                  options: ["This is my.", "This is mine.", "This is me book."],
+                  answer: 1,
+                  tip: "my 后面不能空着——后面没名词，用独立的 mine。"
+                },
+                {
+                  type: "fill",
+                  stemBefore: "The students are reading",
+                  stemAfter: "books.（his / their）",
+                  answer: "their",
+                  accept: ["their"],
+                  tip: "students 是复数，代词用复数 their。"
+                }
+              ],
               point: "本章自查三问：格站对岗了吗？my/mine 分清了吗？代词和先行词一致吗？"
             }
         ]

@@ -333,7 +333,7 @@ window.ENG_CH["gr00"] = {
                   wrong: "My mother very beautiful.",
                   wrongZh: "（✗ 错句：漏了谓语）",
                   right: "My mother is beautiful.",
-                  why: "漏了谓语动词 is——英语句子不能没有动词，is 就是那个'有礼貌的动词'，专门站在形容词前面。"
+                  why: "漏了谓语动词 is——英语句子不能没有动词，is 专门站在形容词前面。"
                 },
                 {
                   type: "contrast",
@@ -680,8 +680,8 @@ window.ENG_CH["gr00"] = {
                         role: "verb"
                       }
                     ],
-                    hint: "interesting 是宾语补足语（说明宾语 English 怎么样），放进补语槽。",
-                    doneNote: "拼好了！这是第五种句型 S+V+O+C：interesting 是宾语补足语。全家福：S+V / S+V+P / S+V+O / S+V+IO+DO / S+V+O+C。"
+                    hint: "interesting 是补语（宾补）（说明宾语 English 怎么样），放进补语槽。",
+                    doneNote: "拼好了！这是第五种句型 S+V+O+C：interesting 是补语（宾补）。全家福：S+V / S+V+P / S+V+O / S+V+IO+DO / S+V+O+C。"
                   }
                 }
               ]

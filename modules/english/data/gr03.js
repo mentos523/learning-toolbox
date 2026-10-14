@@ -162,12 +162,12 @@ window.ENG_CH["gr03"] = {
               kind: "explain",
               title: "形容词的位置：定语前置，表语跟系动词",
               lead: "还记得吗？上一页 interesting 站在 is 后面当表语——形容词的第二个岗位。",
-              point: "这就是形容词的位置：定语前置、表语跟系动词；形容词不修饰动词。（呼应讲词根：inter- 在…之间）",
+              point: "这就是形容词的位置：定语前置、表语跟系动词；形容词不修饰动词。（呼应讲词根 #r=inter，R3 审计通过）",
               blocks: [
                 {
                   type: "examples",
                   ids: [ "gr03.1.1-e1", "gr03.1.1-e2", "gr03.1.1-e3" ],
-                  note: "先看现象：形容词的三个站位。"
+                  note: "先看现象：三个站位。"
                 },
                 {
                   type: "idcard",
@@ -176,7 +176,7 @@ window.ENG_CH["gr03"] = {
                 },
                 {
                   type: "bridge",
-                  zh: "汉语'有趣的书''书很有趣'，'有趣'位置灵活，汉语母语者不觉得位置是问题。",
+                  zh: "汉语'有趣的书''书很有趣'，'有趣'位置灵活，位置不是问题。",
                   en: "英语形容词有'岗位制'：装修名词站前面（an interesting book），说明主语站 is 后面（is interesting）——站错岗（He runs quick）就错了。",
                   unbridge: "这是英语的岗位规矩：形容词装修名词，不装修动词。"
                 },
