@@ -313,9 +313,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产B队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -328,9 +333,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产B队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -343,9 +353,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产B队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -358,9 +373,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产B队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -373,9 +393,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产B队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -388,9 +413,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产B队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "reject",
+        "note": "清单第9条：'watches news' 漏定冠词，属中式英语（地道说法为 'watches the news'）；打回重写。"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "rejected",
       "revision": 1
     },
     {
@@ -403,9 +433,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产B队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "反例错因成立、错句即所要纠偏的典型错误且已标注（错句），中文释义准确。"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -418,9 +453,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产B队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "反例错因成立、错句即所要纠偏的典型错误且已标注（错句），中文释义准确。"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -433,9 +473,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产B队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -448,9 +493,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产B队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -463,9 +513,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产B队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -478,9 +533,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产B队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -493,9 +553,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产B队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -508,9 +573,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产B队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -523,9 +593,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产B队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -538,9 +613,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产B队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "反例错因成立、错句即所要纠偏的典型错误且已标注（错句），中文释义准确。"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -553,9 +633,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产B队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "反例错因成立、错句即所要纠偏的典型错误且已标注（错句），中文释义准确。"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -568,9 +653,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产B队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -583,9 +673,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产B队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -598,9 +693,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产B队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -613,9 +713,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产B队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -628,9 +733,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产B队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -643,9 +753,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产B队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -658,9 +773,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产B队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "反例错因成立、错句即所要纠偏的典型错误且已标注（错句），中文释义准确。"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -673,9 +793,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产B队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "反例错因成立、错句即所要纠偏的典型错误且已标注（错句），中文释义准确。"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -688,9 +813,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产B队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -703,9 +833,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产B队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -718,9 +853,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产B队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -733,9 +873,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产B队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -748,9 +893,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产B队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -763,9 +913,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产B队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -778,9 +933,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产B队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "反例错因成立、错句即所要纠偏的典型错误且已标注（错句），中文释义准确。"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -793,9 +953,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产B队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "反例错因成立、错句即所要纠偏的典型错误且已标注（错句），中文释义准确。"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -808,9 +973,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产B队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -823,9 +993,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产B队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -838,9 +1013,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产B队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -853,9 +1033,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产B队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -868,9 +1053,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产B队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -883,9 +1073,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产B队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -898,9 +1093,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产B队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "反例错因成立、错句即所要纠偏的典型错误且已标注（错句），中文释义准确。"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -913,9 +1113,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产B队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "反例错因成立、错句即所要纠偏的典型错误且已标注（错句），中文释义准确。"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -928,9 +1133,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产B队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "反例错因成立、错句即所要纠偏的典型错误且已标注（错句），中文释义准确。"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -943,9 +1153,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产B队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -958,9 +1173,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产B队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -973,9 +1193,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产B队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -988,9 +1213,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产B队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -1003,9 +1233,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产B队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -1018,9 +1253,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产B队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "反例错因成立、错句即所要纠偏的典型错误且已标注（错句），中文释义准确。"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -1033,9 +1273,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产B队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -1048,9 +1293,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产B队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -1063,9 +1313,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产B队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -1078,9 +1333,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产B队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -1093,9 +1353,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产B队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "反例错因成立、错句即所要纠偏的典型错误且已标注（错句），中文释义准确。"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     },
     {
@@ -1108,9 +1373,14 @@
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产B队",
-      "first": null,
+      "first": {
+        "by": "英语专家队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "反例错因成立、错句即所要纠偏的典型错误且已标注（错句），中文释义准确。"
+      },
       "final": null,
-      "status": "drafted",
+      "status": "first_passed",
       "revision": 1
     }
   ]
