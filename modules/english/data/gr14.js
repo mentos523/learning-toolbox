@@ -672,7 +672,7 @@ window.ENG_CH["gr14"] = {
                 },
                 {
                   type: "contrast",
-                  wrong: "The girl is singing is my sister.",
+                  wrong: "The car stopped at the door is mine.",
                   wrongZh: "（✗ 错句）",
                   right: "The car that stopped at the door is mine.",
                   why: "that 作主语，省了它“ 停在门口 ”就没主语了——主语关系代词不可省。"
