@@ -57,7 +57,7 @@
       "id": "gr06.1.1-e3",
       "lesson": "gr06.1.1",
       "en": "I am leaving tomorrow.",
-      "zh": "我明天要走了。（表将来安排）",
+      "zh": "我明天要走了。",
       "register": "neutral",
       "rule": "现在进行时（正例 example）",
       "vocab": "in-scope",
@@ -67,7 +67,7 @@
         "by": "英语专家队",
         "at": "2026-10-14",
         "verdict": "pass",
-        "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
+        "note": "targeted复核：中文变更（去泄题标注/重译）准确、无误导，适合初中生"
       },
       "final": {
         "by": "红队",
@@ -75,8 +75,13 @@
         "verdict": "pass",
         "note": "自然度/语域/拼写口径符合要求"
       },
-      "status": "final_passed",
-      "revision": 1
+      "status": "first_passed",
+      "revision": 2,
+      "rewrite": {
+        "by": "协调者（台账同步）",
+        "at": "2026-10-14",
+        "note": "S2去泄题：B队修复时数据文件中文已改（去括号标注/重译），台账同步对齐；英文未动。"
+      }
     },
     {
       "id": "gr06.1.1-e4",
@@ -432,7 +437,7 @@
       "id": "gr06.1.3-e2",
       "lesson": "gr06.1.3",
       "en": "Will you be using the computer tonight?",
-      "zh": "你今晚会用电脑吗？（礼貌询问）",
+      "zh": "你今晚会用电脑吗？",
       "register": "spoken",
       "rule": "将来进行时（正例 example）",
       "vocab": "in-scope",
@@ -442,7 +447,7 @@
         "by": "英语专家队",
         "at": "2026-10-14",
         "verdict": "pass",
-        "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
+        "note": "targeted复核：中文变更（去泄题标注/重译）准确、无误导，适合初中生"
       },
       "final": {
         "by": "红队",
@@ -450,8 +455,13 @@
         "verdict": "pass",
         "note": "自然度/语域/拼写口径符合要求"
       },
-      "status": "final_passed",
-      "revision": 1
+      "status": "first_passed",
+      "revision": 2,
+      "rewrite": {
+        "by": "协调者（台账同步）",
+        "at": "2026-10-14",
+        "note": "S2去泄题：B队修复时数据文件中文已改（去括号标注/重译），台账同步对齐；英文未动。"
+      }
     },
     {
       "id": "gr06.1.3-e3",
@@ -712,7 +722,7 @@
       "id": "gr06.2.1-e1",
       "lesson": "gr06.2.1",
       "en": "I have lost my key.",
-      "zh": "我把钥匙弄丢了。（现在没钥匙）",
+      "zh": "我把钥匙弄丢了。",
       "register": "neutral",
       "rule": "现在完成时（正例 example）",
       "vocab": "in-scope",
@@ -722,7 +732,7 @@
         "by": "英语专家队",
         "at": "2026-10-14",
         "verdict": "pass",
-        "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
+        "note": "targeted复核：中文变更（去泄题标注/重译）准确、无误导，适合初中生"
       },
       "final": {
         "by": "红队",
@@ -730,14 +740,19 @@
         "verdict": "pass",
         "note": "自然度/语域/拼写口径符合要求"
       },
-      "status": "final_passed",
-      "revision": 1
+      "status": "first_passed",
+      "revision": 2,
+      "rewrite": {
+        "by": "协调者（台账同步）",
+        "at": "2026-10-14",
+        "note": "S2去泄题：B队修复时数据文件中文已改（去括号标注/重译），台账同步对齐；英文未动。"
+      }
     },
     {
       "id": "gr06.2.1-e2",
       "lesson": "gr06.2.1",
       "en": "She has been to Beijing.",
-      "zh": "她去过北京。（有经验）",
+      "zh": "她去过北京。",
       "register": "neutral",
       "rule": "现在完成时（正例 example）",
       "vocab": "in-scope",
@@ -747,7 +762,7 @@
         "by": "英语专家队",
         "at": "2026-10-14",
         "verdict": "pass",
-        "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
+        "note": "targeted复核：中文变更（去泄题标注/重译）准确、无误导，适合初中生"
       },
       "final": {
         "by": "红队",
@@ -755,14 +770,19 @@
         "verdict": "pass",
         "note": "自然度/语域/拼写口径符合要求"
       },
-      "status": "final_passed",
-      "revision": 1
+      "status": "first_passed",
+      "revision": 2,
+      "rewrite": {
+        "by": "协调者（台账同步）",
+        "at": "2026-10-14",
+        "note": "S2去泄题：B队修复时数据文件中文已改（去括号标注/重译），台账同步对齐；英文未动。"
+      }
     },
     {
       "id": "gr06.2.1-e3",
       "lesson": "gr06.2.1",
       "en": "He has finished his homework.",
-      "zh": "他做完作业了。（现在不用做了）",
+      "zh": "他做完作业了。",
       "register": "neutral",
       "rule": "现在完成时（正例 example）",
       "vocab": "in-scope",
@@ -772,7 +792,7 @@
         "by": "英语专家队",
         "at": "2026-10-14",
         "verdict": "pass",
-        "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
+        "note": "targeted复核：中文变更（去泄题标注/重译）准确、无误导，适合初中生"
       },
       "final": {
         "by": "红队",
@@ -780,8 +800,13 @@
         "verdict": "pass",
         "note": "自然度/语域/拼写口径符合要求"
       },
-      "status": "final_passed",
-      "revision": 1
+      "status": "first_passed",
+      "revision": 2,
+      "rewrite": {
+        "by": "协调者（台账同步）",
+        "at": "2026-10-14",
+        "note": "S2去泄题：B队修复时数据文件中文已改（去括号标注/重译），台账同步对齐；英文未动。"
+      }
     },
     {
       "id": "gr06.2.1-e4",

@@ -57,7 +57,7 @@
       "id": "gr08.1.1-e3",
       "lesson": "gr08.1.1",
       "en": "You must be tired.",
-      "zh": "你一定累了。（肯定推测）",
+      "zh": "你一定累了。",
       "register": "neutral",
       "rule": "can/may/must 基本义（正例 example）",
       "vocab": "in-scope",
@@ -67,7 +67,7 @@
         "by": "英语专家队",
         "at": "2026-10-14",
         "verdict": "pass",
-        "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
+        "note": "targeted复核：中文变更（去泄题标注/重译）准确、无误导，适合初中生"
       },
       "final": {
         "by": "红队",
@@ -75,8 +75,13 @@
         "verdict": "pass",
         "note": "自然度/语域/拼写口径符合要求"
       },
-      "status": "final_passed",
-      "revision": 1
+      "status": "first_passed",
+      "revision": 2,
+      "rewrite": {
+        "by": "协调者（台账同步）",
+        "at": "2026-10-14",
+        "note": "S2去泄题：B队修复时数据文件中文已改（去括号标注/重译），台账同步对齐；英文未动。"
+      }
     },
     {
       "id": "gr08.1.1-e4",
@@ -182,7 +187,7 @@
       "id": "gr08.1.2-e1",
       "lesson": "gr08.1.2",
       "en": "You mustn't smoke here.",
-      "zh": "你在这里不许吸烟。（禁止）",
+      "zh": "你在这里不能吸烟。",
       "register": "neutral",
       "rule": "mustn't vs don't have to（正例 example）",
       "vocab": "in-scope",
@@ -192,7 +197,7 @@
         "by": "英语专家队",
         "at": "2026-10-14",
         "verdict": "pass",
-        "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
+        "note": "targeted复核：中文变更（去泄题标注/重译）准确、无误导，适合初中生"
       },
       "final": {
         "by": "红队",
@@ -200,14 +205,19 @@
         "verdict": "pass",
         "note": "自然度/语域/拼写口径符合要求"
       },
-      "status": "final_passed",
-      "revision": 1
+      "status": "first_passed",
+      "revision": 2,
+      "rewrite": {
+        "by": "协调者（台账同步）",
+        "at": "2026-10-14",
+        "note": "S2去泄题：B队修复时数据文件中文已改（去括号标注/重译），台账同步对齐；英文未动。"
+      }
     },
     {
       "id": "gr08.1.2-e2",
       "lesson": "gr08.1.2",
       "en": "You don't have to come if you are busy.",
-      "zh": "你忙的话不必来。（不必）",
+      "zh": "你忙的话可以不来。",
       "register": "neutral",
       "rule": "mustn't vs don't have to（正例 example）",
       "vocab": "in-scope",
@@ -217,7 +227,7 @@
         "by": "英语专家队",
         "at": "2026-10-14",
         "verdict": "pass",
-        "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
+        "note": "targeted复核：中文变更（去泄题标注/重译）准确、无误导，适合初中生"
       },
       "final": {
         "by": "红队",
@@ -225,8 +235,13 @@
         "verdict": "pass",
         "note": "自然度/语域/拼写口径符合要求"
       },
-      "status": "final_passed",
-      "revision": 1
+      "status": "first_passed",
+      "revision": 2,
+      "rewrite": {
+        "by": "协调者（台账同步）",
+        "at": "2026-10-14",
+        "note": "S2去泄题：B队修复时数据文件中文已改（去括号标注/重译），台账同步对齐；英文未动。"
+      }
     },
     {
       "id": "gr08.1.2-e3",
@@ -407,7 +422,7 @@
       "id": "gr08.1.3-e3",
       "lesson": "gr08.1.3",
       "en": "You should have called me.",
-      "zh": "你本该给我打电话的。（而没打）",
+      "zh": "你本该给我打电话的。",
       "register": "neutral",
       "rule": "情态 + 完成时（正例 example）",
       "vocab": "in-scope",
@@ -417,7 +432,7 @@
         "by": "英语专家队",
         "at": "2026-10-14",
         "verdict": "pass",
-        "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
+        "note": "targeted复核：中文变更（去泄题标注/重译）准确、无误导，适合初中生"
       },
       "final": {
         "by": "红队",
@@ -425,8 +440,13 @@
         "verdict": "pass",
         "note": "自然度/语域/拼写口径符合要求"
       },
-      "status": "final_passed",
-      "revision": 1
+      "status": "first_passed",
+      "revision": 2,
+      "rewrite": {
+        "by": "协调者（台账同步）",
+        "at": "2026-10-14",
+        "note": "S2去泄题：B队修复时数据文件中文已改（去括号标注/重译），台账同步对齐；英文未动。"
+      }
     },
     {
       "id": "gr08.1.3-e4",
