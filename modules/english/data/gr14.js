@@ -56,9 +56,9 @@ window.ENG_CH["gr14"] = {
     "gr14.1.2-e7": { en: "Sunday is the day when we rest.", zh: "星期天是我们休息的日子。", reg: "通用",
       tagged: [ { w: "Sunday", role: "subject", label: "主语" }, { w: "is", role: "verb", label: "谓语" }, { w: "the day", role: "complem", label: "表语" }, { w: "when we rest", role: "attribute", label: "定语从句" } ] },
     /* ---------- gr14.1.3 限制性 vs 非限制性 ---------- */
-    "gr14.1.3-e1": { en: "My brother who lives in Beijing is a doctor.", zh: "我那个住在北京的哥哥是医生。（暗示还有别的兄弟）", reg: "通用",
+    "gr14.1.3-e1": { en: "My brother who lives in Beijing is a doctor.", zh: "我那个住在北京的哥哥是医生。", reg: "通用",
       tagged: [ { w: "My brother", role: "subject", label: "主语" }, { w: "who lives in Beijing", role: "attribute", label: "定语从句（限制性）" }, { w: "is", role: "verb", label: "谓语" }, { w: "a doctor", role: "complem", label: "表语" } ] },
-    "gr14.1.3-e2": { en: "My brother, who lives in Beijing, is a doctor.", zh: "我哥哥住在北京，他是医生。（只有一个哥哥）", reg: "通用",
+    "gr14.1.3-e2": { en: "My brother, who lives in Beijing, is a doctor.", zh: "我哥哥住在北京，他是医生。", reg: "通用",
       tagged: [ { w: "My brother", role: "subject", label: "主语" }, { w: "who lives in Beijing", role: "attribute", label: "定语从句（非限制性）" }, { w: "is", role: "verb", label: "谓语" }, { w: "a doctor", role: "complem", label: "表语" } ] },
     "gr14.1.3-e3": { en: "He failed the test, which surprised us.", zh: "他考试没及格，这让我们吃惊。", reg: "通用",
       tagged: [ { w: "He failed the test", role: "subject", label: "主句" }, { w: "which surprised us", role: "attribute", label: "定语从句（which 指全句）" } ] },
@@ -71,9 +71,9 @@ window.ENG_CH["gr14"] = {
     "gr14.1.3-e7": { en: "Tom, whose father is a teacher, likes math.", zh: "汤姆的爸爸是老师，他喜欢数学。", reg: "通用",
       tagged: [ { w: "Tom", role: "subject", label: "主语" }, { w: "whose father is a teacher", role: "attribute", label: "定语从句（非限制性）" }, { w: "likes", role: "verb", label: "谓语" }, { w: "math", role: "object", label: "宾语" } ] },
     /* ---------- gr14.1.4 关系代词省略规则 ---------- */
-    "gr14.1.4-e1": { en: "The book I bought is good.", zh: "我买的那本书很好。（省 that）", reg: "通用",
+    "gr14.1.4-e1": { en: "The book I bought is good.", zh: "我买的那本书很好。", reg: "通用",
       tagged: [ { w: "The book", role: "subject", label: "主语" }, { w: "(that) I bought", role: "attribute", label: "定语从句（that 省略）" }, { w: "is", role: "verb", label: "谓语" }, { w: "good", role: "complem", label: "表语" } ] },
-    "gr14.1.4-e2": { en: "The car that stopped at the door is mine.", zh: "停在门口的那辆车是我的。（that 不可省）", reg: "通用",
+    "gr14.1.4-e2": { en: "The car that stopped at the door is mine.", zh: "停在门口的那辆车是我的。", reg: "通用",
       tagged: [ { w: "The car", role: "subject", label: "主语" }, { w: "that stopped at the door", role: "attribute", label: "定语从句" }, { w: "is", role: "verb", label: "谓语" }, { w: "mine", role: "complem", label: "表语" } ] },
     "gr14.1.4-e3": { en: "The person to whom I spoke is my teacher.", zh: "跟我说话的那个人是我的老师。（介词后不可省）", reg: "书面",
       tagged: [ { w: "The person", role: "subject", label: "主语" }, { w: "to whom I spoke", role: "attribute", label: "定语从句" }, { w: "is", role: "verb", label: "谓语" }, { w: "my teacher", role: "complem", label: "表语" } ] },
@@ -81,16 +81,16 @@ window.ENG_CH["gr14"] = {
       tagged: [ { w: "The man", role: "subject", label: "主语" }, { w: "whose bike was lost", role: "attribute", label: "定语从句" }, { w: "is", role: "verb", label: "谓语" }, { w: "sad", role: "complem", label: "表语" } ] },
     "gr14.1.4-e5": { en: "The girl is singing is my sister.", zh: "（✗ 错句）本想说“ 正在唱歌的女孩是我姐姐 ”。", reg: "通用",
       tagged: [ { w: "The girl", role: "subject", label: "主语" }, { w: "is singing", role: "attribute", label: "定语从句（who 误省）" }, { w: "is", role: "verb", label: "谓语" }, { w: "my sister", role: "complem", label: "表语" } ] },
-    "gr14.1.4-e6": { en: "The song we sang yesterday is old.", zh: "我们昨天唱的那首歌很老。（省 which）", reg: "通用",
+    "gr14.1.4-e6": { en: "The song we sang yesterday is old.", zh: "我们昨天唱的那首歌很老。", reg: "通用",
       tagged: [ { w: "The song", role: "subject", label: "主语" }, { w: "(which) we sang yesterday", role: "attribute", label: "定语从句（which 省略）" }, { w: "is", role: "verb", label: "谓语" }, { w: "old", role: "complem", label: "表语" } ] },
     "gr14.1.4-e7": { en: "Is this the book you are looking for?", zh: "这就是你在找的那本书吗？（介词后置口语）", reg: "口语",
       tagged: [ { w: "Is", role: "verb", label: "谓语" }, { w: "this", role: "subject", label: "主语" }, { w: "the book", role: "object", label: "宾语" }, { w: "(that) you are looking for", role: "attribute", label: "定语从句（that 省略）" } ] },
     /* ---------- gr14.2.1 that vs which ---------- */
-    "gr14.2.1-e1": { en: "This is the best film that I have seen.", zh: "这是我看过的最好的电影。（最高级后 that）", reg: "通用",
+    "gr14.2.1-e1": { en: "This is the best film that I have seen.", zh: "这是我看过的最好的电影。", reg: "通用",
       tagged: [ { w: "This", role: "subject", label: "主语" }, { w: "is", role: "verb", label: "谓语" }, { w: "the best film", role: "complem", label: "表语" }, { w: "that I have seen", role: "attribute", label: "定语从句" } ] },
-    "gr14.2.1-e2": { en: "He is the first person that came.", zh: "他是第一个来的人。（序数词后 that）", reg: "通用",
+    "gr14.2.1-e2": { en: "He is the first person that came.", zh: "他是第一个来的人。", reg: "通用",
       tagged: [ { w: "He", role: "subject", label: "主语" }, { w: "is", role: "verb", label: "谓语" }, { w: "the first person", role: "complem", label: "表语" }, { w: "that came", role: "attribute", label: "定语从句" } ] },
-    "gr14.2.1-e3": { en: "This is the only book that I like.", zh: "这是我唯一喜欢的书。（only 后 that）", reg: "通用",
+    "gr14.2.1-e3": { en: "This is the only book that I like.", zh: "这是我唯一喜欢的书。", reg: "通用",
       tagged: [ { w: "This", role: "subject", label: "主语" }, { w: "is", role: "verb", label: "谓语" }, { w: "the only book", role: "complem", label: "表语" }, { w: "that I like", role: "attribute", label: "定语从句" } ] },
     "gr14.2.1-e4": { en: "My car, which I bought in 2020, is red.", zh: "我的车是 2020 年买的，是红色的。（非限制不用 that）", reg: "通用",
       tagged: [ { w: "My car", role: "subject", label: "主语" }, { w: "which I bought in 2020", role: "attribute", label: "定语从句（非限制性）" }, { w: "is", role: "verb", label: "谓语" }, { w: "red", role: "complem", label: "表语" } ] },
@@ -101,11 +101,11 @@ window.ENG_CH["gr14"] = {
     "gr14.2.1-e7": { en: "All that he said is true.", zh: "他说的全是真的。（all 后 that）", reg: "通用",
       tagged: [ { w: "All", role: "subject", label: "主语" }, { w: "that he said", role: "attribute", label: "定语从句" }, { w: "is", role: "verb", label: "谓语" }, { w: "true", role: "complem", label: "表语" } ] },
     /* ---------- gr14.2.2 介词 + 关系代词 ---------- */
-    "gr14.2.2-e1": { en: "This is the house in which he lived.", zh: "这就是他住过的房子。（介词前置，正式）", reg: "书面",
+    "gr14.2.2-e1": { en: "This is the house in which he lived.", zh: "这就是他住过的房子。", reg: "书面",
       tagged: [ { w: "This", role: "subject", label: "主语" }, { w: "is", role: "verb", label: "谓语" }, { w: "the house", role: "complem", label: "表语" }, { w: "in which he lived", role: "attribute", label: "定语从句" } ] },
-    "gr14.2.2-e2": { en: "This is the house he lived in.", zh: "这就是他住过的房子。（介词后置，口语）", reg: "口语",
+    "gr14.2.2-e2": { en: "This is the house he lived in.", zh: "这就是他住过的房子。", reg: "口语",
       tagged: [ { w: "This", role: "subject", label: "主语" }, { w: "is", role: "verb", label: "谓语" }, { w: "the house", role: "complem", label: "表语" }, { w: "(that) he lived in", role: "attribute", label: "定语从句" } ] },
-    "gr14.2.2-e3": { en: "The person to whom I spoke was kind.", zh: "跟我说话的那个人很和善。（正式）", reg: "书面",
+    "gr14.2.2-e3": { en: "The person to whom I spoke was kind.", zh: "跟我说话的那个人很和善。", reg: "书面",
       tagged: [ { w: "The person", role: "subject", label: "主语" }, { w: "to whom I spoke", role: "attribute", label: "定语从句" }, { w: "was", role: "verb", label: "谓语" }, { w: "kind", role: "complem", label: "表语" } ] },
     "gr14.2.2-e4": { en: "The tree under which we sat is tall.", zh: "我们坐过的那棵树很高。", reg: "通用",
       tagged: [ { w: "The tree", role: "subject", label: "主语" }, { w: "under which we sat", role: "attribute", label: "定语从句" }, { w: "is", role: "verb", label: "谓语" }, { w: "tall", role: "complem", label: "表语" } ] },
@@ -116,11 +116,11 @@ window.ENG_CH["gr14"] = {
     "gr14.2.2-e7": { en: "Is this the pen with which you wrote?", zh: "这就是你写字的那支笔吗？", reg: "书面",
       tagged: [ { w: "Is", role: "verb", label: "谓语" }, { w: "this", role: "subject", label: "主语" }, { w: "the pen", role: "complem", label: "表语" }, { w: "with which you wrote", role: "attribute", label: "定语从句" } ] },
     /* ---------- gr14.2.3 定语从句的简化 ---------- */
-    "gr14.2.3-e1": { en: "The boy playing soccer is Tom.", zh: "正在踢足球的男孩是汤姆。（= the boy who is playing）", reg: "通用",
+    "gr14.2.3-e1": { en: "The boy playing soccer is Tom.", zh: "正在踢足球的男孩是汤姆。", reg: "通用",
       tagged: [ { w: "The boy", role: "subject", label: "主语" }, { w: "playing soccer", role: "attribute", label: "定语（现在分词短语）" }, { w: "is", role: "verb", label: "谓语" }, { w: "Tom", role: "complem", label: "表语" } ] },
     "gr14.2.3-e2": { en: "The girl standing there is my sister.", zh: "站在那儿的女孩是我姐姐。", reg: "通用",
       tagged: [ { w: "The girl", role: "subject", label: "主语" }, { w: "standing there", role: "attribute", label: "定语（现在分词短语）" }, { w: "is", role: "verb", label: "谓语" }, { w: "my sister", role: "complem", label: "表语" } ] },
-    "gr14.2.3-e3": { en: "The books written by him are popular.", zh: "他写的书很受欢迎。（= which were written）", reg: "通用",
+    "gr14.2.3-e3": { en: "The books written by him are popular.", zh: "他写的书很受欢迎。", reg: "通用",
       tagged: [ { w: "The books", role: "subject", label: "主语" }, { w: "written by him", role: "attribute", label: "定语（过去分词短语）" }, { w: "are", role: "verb", label: "谓语" }, { w: "popular", role: "complem", label: "表语" } ] },
     "gr14.2.3-e4": { en: "The man wearing glasses is our teacher.", zh: "戴眼镜的那位男士是我们的老师。", reg: "通用",
       tagged: [ { w: "The man", role: "subject", label: "主语" }, { w: "wearing glasses", role: "attribute", label: "定语（现在分词短语）" }, { w: "is", role: "verb", label: "谓语" }, { w: "our teacher", role: "complem", label: "表语" } ] },
@@ -445,9 +445,9 @@ window.ENG_CH["gr14"] = {
               kind: "observe",
               title: "先看三句话：逗号改变了什么？",
               sentences: [
-                { id: "gr14.1.3-e1", en: "My brother who lives in Beijing is a doctor.", zh: "我那个住在北京的哥哥是医生。（暗示还有别的兄弟）", reg: "通用",
+                { id: "gr14.1.3-e1", en: "My brother who lives in Beijing is a doctor.", zh: "我那个住在北京的哥哥是医生。", reg: "通用",
                   tagged: [ { w: "My brother", role: "subject", label: "主语" }, { w: "who lives in Beijing", role: "attribute", label: "定语从句（限制性）" }, { w: "is", role: "verb", label: "谓语" }, { w: "a doctor", role: "complem", label: "表语" } ] },
-                { id: "gr14.1.3-e2", en: "My brother, who lives in Beijing, is a doctor.", zh: "我哥哥住在北京，他是医生。（只有一个哥哥）", reg: "通用",
+                { id: "gr14.1.3-e2", en: "My brother, who lives in Beijing, is a doctor.", zh: "我哥哥住在北京，他是医生。", reg: "通用",
                   tagged: [ { w: "My brother", role: "subject", label: "主语" }, { w: "who lives in Beijing", role: "attribute", label: "定语从句（非限制性）" }, { w: "is", role: "verb", label: "谓语" }, { w: "a doctor", role: "complem", label: "表语" } ] },
                 { id: "gr14.1.3-e3", en: "He failed the test, which surprised us.", zh: "他考试没及格，这让我们吃惊。", reg: "通用",
                   tagged: [ { w: "He failed the test", role: "subject", label: "主句" }, { w: "which surprised us", role: "attribute", label: "定语从句（which 指全句）" } ] }
@@ -588,11 +588,11 @@ window.ENG_CH["gr14"] = {
               kind: "observe",
               title: "先看三句话：谁被省了？谁不能省？",
               sentences: [
-                { id: "gr14.1.4-e1", en: "The book I bought is good.", zh: "我买的那本书很好。（省 that）", reg: "通用",
+                { id: "gr14.1.4-e1", en: "The book I bought is good.", zh: "我买的那本书很好。", reg: "通用",
                   tagged: [ { w: "The book", role: "subject", label: "主语" }, { w: "(that) I bought", role: "attribute", label: "定语从句（that 省略）" }, { w: "is", role: "verb", label: "谓语" }, { w: "good", role: "complem", label: "表语" } ] },
-                { id: "gr14.1.4-e2", en: "The car that stopped at the door is mine.", zh: "停在门口的那辆车是我的。（that 不可省）", reg: "通用",
+                { id: "gr14.1.4-e2", en: "The car that stopped at the door is mine.", zh: "停在门口的那辆车是我的。", reg: "通用",
                   tagged: [ { w: "The car", role: "subject", label: "主语" }, { w: "that stopped at the door", role: "attribute", label: "定语从句" }, { w: "is", role: "verb", label: "谓语" }, { w: "mine", role: "complem", label: "表语" } ] },
-                { id: "gr14.1.4-e6", en: "The song we sang yesterday is old.", zh: "我们昨天唱的那首歌很老。（省 which）", reg: "通用",
+                { id: "gr14.1.4-e6", en: "The song we sang yesterday is old.", zh: "我们昨天唱的那首歌很老。", reg: "通用",
                   tagged: [ { w: "The song", role: "subject", label: "主语" }, { w: "(which) we sang yesterday", role: "attribute", label: "定语从句（which 省略）" }, { w: "is", role: "verb", label: "谓语" }, { w: "old", role: "complem", label: "表语" } ] }
               ],
               guess: {
@@ -737,11 +737,11 @@ window.ENG_CH["gr14"] = {
               kind: "observe",
               title: "先看三句话：that 的“ 必用 ”场",
               sentences: [
-                { id: "gr14.2.1-e1", en: "This is the best film that I have seen.", zh: "这是我看过的最好的电影。（最高级后 that）", reg: "通用",
+                { id: "gr14.2.1-e1", en: "This is the best film that I have seen.", zh: "这是我看过的最好的电影。", reg: "通用",
                   tagged: [ { w: "This", role: "subject", label: "主语" }, { w: "is", role: "verb", label: "谓语" }, { w: "the best film", role: "complem", label: "表语" }, { w: "that I have seen", role: "attribute", label: "定语从句" } ] },
-                { id: "gr14.2.1-e2", en: "He is the first person that came.", zh: "他是第一个来的人。（序数词后 that）", reg: "通用",
+                { id: "gr14.2.1-e2", en: "He is the first person that came.", zh: "他是第一个来的人。", reg: "通用",
                   tagged: [ { w: "He", role: "subject", label: "主语" }, { w: "is", role: "verb", label: "谓语" }, { w: "the first person", role: "complem", label: "表语" }, { w: "that came", role: "attribute", label: "定语从句" } ] },
-                { id: "gr14.2.1-e3", en: "This is the only book that I like.", zh: "这是我唯一喜欢的书。（only 后 that）", reg: "通用",
+                { id: "gr14.2.1-e3", en: "This is the only book that I like.", zh: "这是我唯一喜欢的书。", reg: "通用",
                   tagged: [ { w: "This", role: "subject", label: "主语" }, { w: "is", role: "verb", label: "谓语" }, { w: "the only book", role: "complem", label: "表语" }, { w: "that I like", role: "attribute", label: "定语从句" } ] }
               ],
               guess: {
@@ -880,11 +880,11 @@ window.ENG_CH["gr14"] = {
               kind: "observe",
               title: "先看三句话：介词站哪？",
               sentences: [
-                { id: "gr14.2.2-e1", en: "This is the house in which he lived.", zh: "这就是他住过的房子。（介词前置，正式）", reg: "书面",
+                { id: "gr14.2.2-e1", en: "This is the house in which he lived.", zh: "这就是他住过的房子。", reg: "书面",
                   tagged: [ { w: "This", role: "subject", label: "主语" }, { w: "is", role: "verb", label: "谓语" }, { w: "the house", role: "complem", label: "表语" }, { w: "in which he lived", role: "attribute", label: "定语从句" } ] },
-                { id: "gr14.2.2-e2", en: "This is the house he lived in.", zh: "这就是他住过的房子。（介词后置，口语）", reg: "口语",
+                { id: "gr14.2.2-e2", en: "This is the house he lived in.", zh: "这就是他住过的房子。", reg: "口语",
                   tagged: [ { w: "This", role: "subject", label: "主语" }, { w: "is", role: "verb", label: "谓语" }, { w: "the house", role: "complem", label: "表语" }, { w: "(that) he lived in", role: "attribute", label: "定语从句" } ] },
-                { id: "gr14.2.2-e3", en: "The person to whom I spoke was kind.", zh: "跟我说话的那个人很和善。（正式）", reg: "书面",
+                { id: "gr14.2.2-e3", en: "The person to whom I spoke was kind.", zh: "跟我说话的那个人很和善。", reg: "书面",
                   tagged: [ { w: "The person", role: "subject", label: "主语" }, { w: "to whom I spoke", role: "attribute", label: "定语从句" }, { w: "was", role: "verb", label: "谓语" }, { w: "kind", role: "complem", label: "表语" } ] }
               ],
               guess: {
@@ -1019,9 +1019,9 @@ window.ENG_CH["gr14"] = {
               kind: "observe",
               title: "先看三句话：从哪个长句压缩来？",
               sentences: [
-                { id: "gr14.2.3-e1", en: "The boy playing soccer is Tom.", zh: "正在踢足球的男孩是汤姆。（= the boy who is playing）", reg: "通用",
+                { id: "gr14.2.3-e1", en: "The boy playing soccer is Tom.", zh: "正在踢足球的男孩是汤姆。", reg: "通用",
                   tagged: [ { w: "The boy", role: "subject", label: "主语" }, { w: "playing soccer", role: "attribute", label: "定语（现在分词短语）" }, { w: "is", role: "verb", label: "谓语" }, { w: "Tom", role: "complem", label: "表语" } ] },
-                { id: "gr14.2.3-e3", en: "The books written by him are popular.", zh: "他写的书很受欢迎。（= which were written）", reg: "通用",
+                { id: "gr14.2.3-e3", en: "The books written by him are popular.", zh: "他写的书很受欢迎。", reg: "通用",
                   tagged: [ { w: "The books", role: "subject", label: "主语" }, { w: "written by him", role: "attribute", label: "定语（过去分词短语）" }, { w: "are", role: "verb", label: "谓语" }, { w: "popular", role: "complem", label: "表语" } ] },
                 { id: "gr14.2.3-e4", en: "The man wearing glasses is our teacher.", zh: "戴眼镜的那位男士是我们的老师。", reg: "通用",
                   tagged: [ { w: "The man", role: "subject", label: "主语" }, { w: "wearing glasses", role: "attribute", label: "定语（现在分词短语）" }, { w: "is", role: "verb", label: "谓语" }, { w: "our teacher", role: "complem", label: "表语" } ] }

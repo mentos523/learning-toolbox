@@ -43,7 +43,7 @@ window.ENG_CH["gr15"] = {
     /* ---------- gr15.1.2 条件状语从句 ---------- */
     "gr15.1.2-e1": { en: "If it rains, we will stay at home.", zh: "如果下雨，我们就待在家里。", reg: "通用",
       tagged: [ { w: "If it rains", role: "adverb", label: "条件状语从句" }, { w: "we", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "助动词" }, { w: "stay", role: "verb", label: "动词原形" }, { w: "at home", role: "adverb", label: "状语" } ] },
-    "gr15.1.2-e2": { en: "Unless you hurry, you will be late.", zh: "除非你抓紧，否则会迟到。（= If you don't hurry）", reg: "通用",
+    "gr15.1.2-e2": { en: "Unless you hurry, you will be late.", zh: "除非你抓紧，否则会迟到。", reg: "通用",
       tagged: [ { w: "Unless you hurry", role: "adverb", label: "条件状语从句" }, { w: "you", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "助动词" }, { w: "be", role: "verb", label: "动词原形" }, { w: "late", role: "complem", label: "表语" } ] },
     "gr15.1.2-e3": { en: "If you study hard, you will pass.", zh: "如果你努力学习，就会通过。", reg: "通用",
       tagged: [ { w: "If you study hard", role: "adverb", label: "条件状语从句" }, { w: "you", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "助动词" }, { w: "pass", role: "verb", label: "动词原形" } ] },
@@ -56,13 +56,13 @@ window.ENG_CH["gr15"] = {
     "gr15.1.2-e7": { en: "If I have time, I will help you.", zh: "如果我有时间，我会帮你。", reg: "通用",
       tagged: [ { w: "If I have time", role: "adverb", label: "条件状语从句" }, { w: "I", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "助动词" }, { w: "help", role: "verb", label: "动词原形" }, { w: "you", role: "object", label: "宾语" } ] },
     /* ---------- gr15.1.3 原因状语从句 ---------- */
-    "gr15.1.3-e1": { en: "Because he was ill, he stayed at home.", zh: "因为他病了，他待在家里。（语气最强）", reg: "通用",
+    "gr15.1.3-e1": { en: "Because he was ill, he stayed at home.", zh: "因为他病了，他待在家里。", reg: "通用",
       tagged: [ { w: "Because he was ill", role: "adverb", label: "原因状语从句" }, { w: "he", role: "subject", label: "主语" }, { w: "stayed", role: "verb", label: "谓语" }, { w: "at home", role: "adverb", label: "状语" } ] },
-    "gr15.1.3-e2": { en: "As he was ill, we visited him.", zh: "因为他病了（已知），我们去看他。", reg: "通用",
+    "gr15.1.3-e2": { en: "As he was ill, we visited him.", zh: "因为他病了，我们去看他。", reg: "通用",
       tagged: [ { w: "As he was ill", role: "adverb", label: "原因状语从句" }, { w: "we", role: "subject", label: "主语" }, { w: "visited", role: "verb", label: "谓语" }, { w: "him", role: "object", label: "宾语" } ] },
     "gr15.1.3-e3": { en: "Since you are tired, have a rest.", zh: "既然你累了，休息一下吧。", reg: "通用",
       tagged: [ { w: "Since you are tired", role: "adverb", label: "原因状语从句" }, { w: "have", role: "verb", label: "谓语" }, { w: "a rest", role: "object", label: "宾语" } ] },
-    "gr15.1.3-e4": { en: "He was late, for it rained hard.", zh: "他迟到了，因为雨下得很大。（for 补充说明）", reg: "书面",
+    "gr15.1.3-e4": { en: "He was late, for it rained hard.", zh: "他迟到了，因为雨下得很大。", reg: "书面",
       tagged: [ { w: "He", role: "subject", label: "主语" }, { w: "was", role: "verb", label: "谓语" }, { w: "late", role: "complem", label: "表语" }, { w: "for it rained hard", role: "adverb", label: "原因状语从句" } ] },
     "gr15.1.3-e5": { en: "Because he was ill, so he stayed at home.", zh: "（✗ 错句）本想说“ 因为他病了，他待在家里 ”。", reg: "通用",
       tagged: [ { w: "Because he was ill", role: "adverb", label: "原因状语从句" }, { w: "so he stayed at home", role: "adverb", label: "多余的 so" } ] },
@@ -71,7 +71,7 @@ window.ENG_CH["gr15"] = {
     "gr15.1.3-e7": { en: "As it was getting dark, we went home.", zh: "天渐渐黑了，我们回家了。", reg: "通用",
       tagged: [ { w: "As it was getting dark", role: "adverb", label: "原因状语从句" }, { w: "we", role: "subject", label: "主语" }, { w: "went", role: "verb", label: "谓语" }, { w: "home", role: "adverb", label: "状语" } ] },
     /* ---------- gr15.1.4 目的状语从句 ---------- */
-    "gr15.1.4-e1": { en: "He got up early so that he could catch the bus.", zh: "他早起以便赶上公交车。（目的 + 情态）", reg: "通用",
+    "gr15.1.4-e1": { en: "He got up early so that he could catch the bus.", zh: "他早起以便赶上公交车。", reg: "通用",
       tagged: [ { w: "He", role: "subject", label: "主语" }, { w: "got up", role: "verb", label: "谓语" }, { w: "early", role: "adverb", label: "状语" }, { w: "so that he could catch the bus", role: "adverb", label: "目的状语从句" } ] },
     "gr15.1.4-e2": { en: "She studied hard in order that she could pass.", zh: "她努力学习以便通过。（in order that + 情态）", reg: "书面",
       tagged: [ { w: "She", role: "subject", label: "主语" }, { w: "studied", role: "verb", label: "谓语" }, { w: "hard", role: "adverb", label: "状语" }, { w: "in order that she could pass", role: "adverb", label: "目的状语从句" } ] },
@@ -79,7 +79,7 @@ window.ENG_CH["gr15"] = {
       tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "came", role: "verb", label: "谓语" }, { w: "early", role: "adverb", label: "状语" }, { w: "in order to get a seat", role: "adverb", label: "状语（不定式表目的）" } ] },
     "gr15.1.4-e4": { en: "He spoke loudly so that all could hear.", zh: "他大声说以便大家都能听见。", reg: "通用",
       tagged: [ { w: "He", role: "subject", label: "主语" }, { w: "spoke", role: "verb", label: "谓语" }, { w: "loudly", role: "adverb", label: "状语" }, { w: "so that all could hear", role: "adverb", label: "目的状语从句" } ] },
-    "gr15.1.4-e5": { en: "It was so dark that we couldn't see.", zh: "天太黑了，我们看不见。（结果，对比）", reg: "通用",
+    "gr15.1.4-e5": { en: "It was so dark that we couldn't see.", zh: "天太黑了，我们看不见。", reg: "通用",
       tagged: [ { w: "It", role: "subject", label: "主语" }, { w: "was", role: "verb", label: "谓语" }, { w: "so dark", role: "complem", label: "表语" }, { w: "that we couldn't see", role: "adverb", label: "结果状语从句" } ] },
     "gr15.1.4-e6": { en: "He got up early so that he catches the bus.", zh: "（✗ 错句）本想说“ 他早起以便赶上公交车 ”。", reg: "通用",
       tagged: [ { w: "He", role: "subject", label: "主语" }, { w: "got up", role: "verb", label: "谓语" }, { w: "early", role: "adverb", label: "状语" }, { w: "so that he catches the bus", role: "adverb", label: "目的状语从句（漏情态）" } ] },
@@ -107,7 +107,7 @@ window.ENG_CH["gr15"] = {
       tagged: [ { w: "Though he is young", role: "adverb", label: "让步状语从句" }, { w: "he", role: "subject", label: "主语" }, { w: "knows", role: "verb", label: "谓语" }, { w: "a lot", role: "object", label: "宾语" } ] },
     "gr15.2.1-e3": { en: "Even though it was late, they kept working.", zh: "尽管很晚了，他们继续工作。", reg: "通用",
       tagged: [ { w: "Even though it was late", role: "adverb", label: "让步状语从句" }, { w: "they", role: "subject", label: "主语" }, { w: "kept", role: "verb", label: "谓语" }, { w: "working", role: "object", label: "宾语" } ] },
-    "gr15.2.1-e4": { en: "Child as he is, he can swim well.", zh: "虽然他是个孩子，但游泳很好。（as 倒装让步）", reg: "书面",
+    "gr15.2.1-e4": { en: "Child as he is, he can swim well.", zh: "虽然他是个孩子，但游泳很好。", reg: "书面",
       tagged: [ { w: "Child as he is", role: "adverb", label: "让步状语从句（as 倒装）" }, { w: "he", role: "subject", label: "主语" }, { w: "can", role: "verb", label: "助动词" }, { w: "swim", role: "verb", label: "动词原形" }, { w: "well", role: "adverb", label: "状语" } ] },
     "gr15.2.1-e5": { en: "Although it rained, but we went hiking.", zh: "（✗ 错句）本想说“ 虽然下雨了，我们还是去远足了 ”。", reg: "通用",
       tagged: [ { w: "Although it rained", role: "adverb", label: "让步状语从句" }, { w: "but we went hiking", role: "adverb", label: "多余的 but" } ] },
@@ -116,7 +116,7 @@ window.ENG_CH["gr15"] = {
     "gr15.2.1-e7": { en: "The task was hard. We finished it, though.", zh: "任务很难。不过我们完成了。（句末 though，口语）", reg: "口语",
       tagged: [ { w: "We", role: "subject", label: "主语" }, { w: "finished", role: "verb", label: "谓语" }, { w: "it", role: "object", label: "宾语" }, { w: "though", role: "adverb", label: "让步（句末口语）" } ] },
     /* ---------- gr15.2.2 比较与方式 ---------- */
-    "gr15.2.2-e1": { en: "He talks as if he knew everything.", zh: "他说话的样子好像无所不知。（as if + 虚拟）", reg: "通用",
+    "gr15.2.2-e1": { en: "He talks as if he knew everything.", zh: "他说话的样子好像无所不知。", reg: "通用",
       tagged: [ { w: "He", role: "subject", label: "主语" }, { w: "talks", role: "verb", label: "谓语" }, { w: "as if he knew everything", role: "adverb", label: "方式状语从句" } ] },
     "gr15.2.2-e2": { en: "She sings as well as her sister.", zh: "她唱歌和她姐姐一样好。", reg: "通用",
       tagged: [ { w: "She", role: "subject", label: "主语" }, { w: "sings", role: "verb", label: "谓语" }, { w: "as well as her sister", role: "adverb", label: "比较状语从句" } ] },
@@ -131,11 +131,11 @@ window.ENG_CH["gr15"] = {
     "gr15.2.2-e7": { en: "Do it the way I told you.", zh: "按我告诉你的方法做。（the way 口语）", reg: "口语",
       tagged: [ { w: "Do", role: "verb", label: "谓语" }, { w: "it", role: "object", label: "宾语" }, { w: "the way I told you", role: "adverb", label: "方式状语从句" } ] },
     /* ---------- gr15.2.3 状语从句总表与简化 ---------- */
-    "gr15.2.3-e1": { en: "When young, he lived here.", zh: "他小时候住这儿。（= When he was young）", reg: "通用",
+    "gr15.2.3-e1": { en: "When young, he lived here.", zh: "他小时候住这儿。", reg: "通用",
       tagged: [ { w: "When young", role: "adverb", label: "时间状语从句（省略）" }, { w: "he", role: "subject", label: "主语" }, { w: "lived", role: "verb", label: "谓语" }, { w: "here", role: "adverb", label: "状语" } ] },
-    "gr15.2.3-e2": { en: "Although tired, he kept working.", zh: "虽然累了，他继续工作。（= Although he was tired）", reg: "通用",
+    "gr15.2.3-e2": { en: "Although tired, he kept working.", zh: "虽然累了，他继续工作。", reg: "通用",
       tagged: [ { w: "Although tired", role: "adverb", label: "让步状语从句（省略）" }, { w: "he", role: "subject", label: "主语" }, { w: "kept", role: "verb", label: "谓语" }, { w: "working", role: "object", label: "宾语" } ] },
-    "gr15.2.3-e3": { en: "If possible, call me.", zh: "如果可能，给我打电话。（= If it is possible）", reg: "通用",
+    "gr15.2.3-e3": { en: "If possible, call me.", zh: "如果可能，给我打电话。", reg: "通用",
       tagged: [ { w: "If possible", role: "adverb", label: "条件状语从句（省略）" }, { w: "call", role: "verb", label: "谓语" }, { w: "me", role: "object", label: "宾语" } ] },
     "gr15.2.3-e4": { en: "While walking in the park, I met him.", zh: "在公园散步时，我遇到了他。（= While I was walking）", reg: "通用",
       tagged: [ { w: "While walking in the park", role: "adverb", label: "时间状语从句（省略）" }, { w: "I", role: "subject", label: "主语" }, { w: "met", role: "verb", label: "谓语" }, { w: "him", role: "object", label: "宾语" } ] },
@@ -295,7 +295,7 @@ window.ENG_CH["gr15"] = {
               sentences: [
                 { id: "gr15.1.2-e1", en: "If it rains, we will stay at home.", zh: "如果下雨，我们就待在家里。", reg: "通用",
                   tagged: [ { w: "If it rains", role: "adverb", label: "条件状语从句" }, { w: "we", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "助动词" }, { w: "stay", role: "verb", label: "动词原形" }, { w: "at home", role: "adverb", label: "状语" } ] },
-                { id: "gr15.1.2-e2", en: "Unless you hurry, you will be late.", zh: "除非你抓紧，否则会迟到。（= If you don't hurry）", reg: "通用",
+                { id: "gr15.1.2-e2", en: "Unless you hurry, you will be late.", zh: "除非你抓紧，否则会迟到。", reg: "通用",
                   tagged: [ { w: "Unless you hurry", role: "adverb", label: "条件状语从句" }, { w: "you", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "助动词" }, { w: "be", role: "verb", label: "动词原形" }, { w: "late", role: "complem", label: "表语" } ] },
                 { id: "gr15.1.2-e3", en: "If you study hard, you will pass.", zh: "如果你努力学习，就会通过。", reg: "通用",
                   tagged: [ { w: "If you study hard", role: "adverb", label: "条件状语从句" }, { w: "you", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "助动词" }, { w: "pass", role: "verb", label: "动词原形" } ] }
@@ -444,11 +444,11 @@ window.ENG_CH["gr15"] = {
               kind: "observe",
               title: "先看三句话：because / as / for",
               sentences: [
-                { id: "gr15.1.3-e1", en: "Because he was ill, he stayed at home.", zh: "因为他病了，他待在家里。（语气最强）", reg: "通用",
+                { id: "gr15.1.3-e1", en: "Because he was ill, he stayed at home.", zh: "因为他病了，他待在家里。", reg: "通用",
                   tagged: [ { w: "Because he was ill", role: "adverb", label: "原因状语从句" }, { w: "he", role: "subject", label: "主语" }, { w: "stayed", role: "verb", label: "谓语" }, { w: "at home", role: "adverb", label: "状语" } ] },
-                { id: "gr15.1.3-e2", en: "As he was ill, we visited him.", zh: "因为他病了（已知），我们去看他。", reg: "通用",
+                { id: "gr15.1.3-e2", en: "As he was ill, we visited him.", zh: "因为他病了，我们去看他。", reg: "通用",
                   tagged: [ { w: "As he was ill", role: "adverb", label: "原因状语从句" }, { w: "we", role: "subject", label: "主语" }, { w: "visited", role: "verb", label: "谓语" }, { w: "him", role: "object", label: "宾语" } ] },
-                { id: "gr15.1.3-e4", en: "He was late, for it rained hard.", zh: "他迟到了，因为雨下得很大。（for 补充说明）", reg: "书面",
+                { id: "gr15.1.3-e4", en: "He was late, for it rained hard.", zh: "他迟到了，因为雨下得很大。", reg: "书面",
                   tagged: [ { w: "He", role: "subject", label: "主语" }, { w: "was", role: "verb", label: "谓语" }, { w: "late", role: "complem", label: "表语" }, { w: "for it rained hard", role: "adverb", label: "原因状语从句" } ] }
               ],
               guess: {
@@ -586,11 +586,11 @@ window.ENG_CH["gr15"] = {
               kind: "observe",
               title: "先看三句话：目的 vs 结果",
               sentences: [
-                { id: "gr15.1.4-e1", en: "He got up early so that he could catch the bus.", zh: "他早起以便赶上公交车。（目的 + 情态）", reg: "通用",
+                { id: "gr15.1.4-e1", en: "He got up early so that he could catch the bus.", zh: "他早起以便赶上公交车。", reg: "通用",
                   tagged: [ { w: "He", role: "subject", label: "主语" }, { w: "got up", role: "verb", label: "谓语" }, { w: "early", role: "adverb", label: "状语" }, { w: "so that he could catch the bus", role: "adverb", label: "目的状语从句" } ] },
                 { id: "gr15.1.4-e3", en: "I came early in order to get a seat.", zh: "我早到以便占个座。（in order to + 不定式）", reg: "通用",
                   tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "came", role: "verb", label: "谓语" }, { w: "early", role: "adverb", label: "状语" }, { w: "in order to get a seat", role: "adverb", label: "状语（不定式表目的）" } ] },
-                { id: "gr15.1.4-e5", en: "It was so dark that we couldn't see.", zh: "天太黑了，我们看不见。（结果，对比）", reg: "通用",
+                { id: "gr15.1.4-e5", en: "It was so dark that we couldn't see.", zh: "天太黑了，我们看不见。", reg: "通用",
                   tagged: [ { w: "It", role: "subject", label: "主语" }, { w: "was", role: "verb", label: "谓语" }, { w: "so dark", role: "complem", label: "表语" }, { w: "that we couldn't see", role: "adverb", label: "结果状语从句" } ] }
               ],
               guess: {
@@ -877,7 +877,7 @@ window.ENG_CH["gr15"] = {
                   tagged: [ { w: "Although it rained", role: "adverb", label: "让步状语从句" }, { w: "we", role: "subject", label: "主语" }, { w: "went", role: "verb", label: "谓语" }, { w: "hiking", role: "adverb", label: "状语" } ] },
                 { id: "gr15.2.1-e2", en: "Though he is young, he knows a lot.", zh: "虽然他年轻，但懂得很多。", reg: "通用",
                   tagged: [ { w: "Though he is young", role: "adverb", label: "让步状语从句" }, { w: "he", role: "subject", label: "主语" }, { w: "knows", role: "verb", label: "谓语" }, { w: "a lot", role: "object", label: "宾语" } ] },
-                { id: "gr15.2.1-e4", en: "Child as he is, he can swim well.", zh: "虽然他是个孩子，但游泳很好。（as 倒装让步）", reg: "书面",
+                { id: "gr15.2.1-e4", en: "Child as he is, he can swim well.", zh: "虽然他是个孩子，但游泳很好。", reg: "书面",
                   tagged: [ { w: "Child as he is", role: "adverb", label: "让步状语从句（as 倒装）" }, { w: "he", role: "subject", label: "主语" }, { w: "can", role: "verb", label: "助动词" }, { w: "swim", role: "verb", label: "动词原形" }, { w: "well", role: "adverb", label: "状语" } ] }
               ],
               guess: {
@@ -1015,7 +1015,7 @@ window.ENG_CH["gr15"] = {
               kind: "observe",
               title: "先看三句话：as if 的 knew 是过去吗？",
               sentences: [
-                { id: "gr15.2.2-e1", en: "He talks as if he knew everything.", zh: "他说话的样子好像无所不知。（as if + 虚拟）", reg: "通用",
+                { id: "gr15.2.2-e1", en: "He talks as if he knew everything.", zh: "他说话的样子好像无所不知。", reg: "通用",
                   tagged: [ { w: "He", role: "subject", label: "主语" }, { w: "talks", role: "verb", label: "谓语" }, { w: "as if he knew everything", role: "adverb", label: "方式状语从句" } ] },
                 { id: "gr15.2.2-e4", en: "He looks as though he is ill.", zh: "他看起来好像病了。（可能为真，陈述）", reg: "通用",
                   tagged: [ { w: "He", role: "subject", label: "主语" }, { w: "looks", role: "verb", label: "谓语" }, { w: "as though he is ill", role: "adverb", label: "方式状语从句" } ] },
@@ -1152,11 +1152,11 @@ window.ENG_CH["gr15"] = {
               kind: "observe",
               title: "先看三句话：省了谁？",
               sentences: [
-                { id: "gr15.2.3-e1", en: "When young, he lived here.", zh: "他小时候住这儿。（= When he was young）", reg: "通用",
+                { id: "gr15.2.3-e1", en: "When young, he lived here.", zh: "他小时候住这儿。", reg: "通用",
                   tagged: [ { w: "When young", role: "adverb", label: "时间状语从句（省略）" }, { w: "he", role: "subject", label: "主语" }, { w: "lived", role: "verb", label: "谓语" }, { w: "here", role: "adverb", label: "状语" } ] },
-                { id: "gr15.2.3-e2", en: "Although tired, he kept working.", zh: "虽然累了，他继续工作。（= Although he was tired）", reg: "通用",
+                { id: "gr15.2.3-e2", en: "Although tired, he kept working.", zh: "虽然累了，他继续工作。", reg: "通用",
                   tagged: [ { w: "Although tired", role: "adverb", label: "让步状语从句（省略）" }, { w: "he", role: "subject", label: "主语" }, { w: "kept", role: "verb", label: "谓语" }, { w: "working", role: "object", label: "宾语" } ] },
-                { id: "gr15.2.3-e3", en: "If possible, call me.", zh: "如果可能，给我打电话。（= If it is possible）", reg: "通用",
+                { id: "gr15.2.3-e3", en: "If possible, call me.", zh: "如果可能，给我打电话。", reg: "通用",
                   tagged: [ { w: "If possible", role: "adverb", label: "条件状语从句（省略）" }, { w: "call", role: "verb", label: "谓语" }, { w: "me", role: "object", label: "宾语" } ] }
               ],
               guess: {

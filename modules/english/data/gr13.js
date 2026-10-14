@@ -58,7 +58,7 @@ window.ENG_CH["gr13"] = {
     /* ---------- gr13.1.3 that vs if/whether ---------- */
     "gr13.1.3-e1": { en: "I don't know whether to go.", zh: "我不知道是否该去。", reg: "通用",
       tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "don't", role: "verb", label: "助动词" }, { w: "know", role: "verb", label: "谓语" }, { w: "whether to go", role: "object", label: "宾语从句" } ] },
-    "gr13.1.3-e2": { en: "I don't care whether he comes or not.", zh: "我不在乎他来不来。（whether…or not 在这里是宾语从句，充当 care 的宾语）", reg: "通用",
+    "gr13.1.3-e2": { en: "I don't care whether he comes or not.", zh: "我不在乎他来不来。", reg: "通用",
       tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "don't", role: "verb", label: "助动词" }, { w: "care", role: "verb", label: "谓语" }, { w: "whether he comes or not", role: "object", label: "宾语从句" } ] },
     "gr13.1.3-e3": { en: "I wonder if he is at home.", zh: "我想知道他在不在家。", reg: "通用",
       tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "wonder", role: "verb", label: "谓语" }, { w: "if he is at home", role: "object", label: "宾语从句" } ] },
@@ -439,7 +439,7 @@ window.ENG_CH["gr13"] = {
               sentences: [
                 { id: "gr13.1.3-e1", en: "I don't know whether to go.", zh: "我不知道是否该去。", reg: "通用",
                   tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "don't", role: "verb", label: "助动词" }, { w: "know", role: "verb", label: "谓语" }, { w: "whether to go", role: "object", label: "宾语从句" } ] },
-                { id: "gr13.1.3-e2", en: "I don't care whether he comes or not.", zh: "我不在乎他来不来。（whether…or not 在这里是宾语从句，充当 care 的宾语）", reg: "通用",
+                { id: "gr13.1.3-e2", en: "I don't care whether he comes or not.", zh: "我不在乎他来不来。", reg: "通用",
                   tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "don't", role: "verb", label: "助动词" }, { w: "care", role: "verb", label: "谓语" }, { w: "whether he comes or not", role: "object", label: "宾语从句" } ] },
                 { id: "gr13.1.3-e3", en: "I wonder if he is at home.", zh: "我想知道他在不在家。", reg: "通用",
                   tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "wonder", role: "verb", label: "谓语" }, { w: "if he is at home", role: "object", label: "宾语从句" } ] }
