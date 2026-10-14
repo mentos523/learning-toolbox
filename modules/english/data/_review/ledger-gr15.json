@@ -556,8 +556,8 @@
       "final": {
         "by": "红队",
         "at": "2026-10-14",
-        "verdict": "reject",
-        "note": "红队终审打回（清单第7条·检查项2）：语域标注错误——'in order that' 为正式书面连词（词典标 formal），register 应为 written 而非 neutral。重写建议：register 改为 written，句子本身保留；或改用 so that 并保留 neutral（但会与本课 e1 重复，故建议前者）。"
+        "verdict": "pass",
+        "note": "终审复核：重写符合打回要求，自然度/语域通过"
       },
       "first": {
         "by": "英语专家队",
@@ -575,7 +575,7 @@
         "note": "红队终审打回重写：in order that 为正式书面连词，register 由 neutral 改为 written；英文/中文/分块不变。"
       },
       "rule": "in order that + 情态（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
@@ -761,8 +761,8 @@
       "final": {
         "by": "红队",
         "at": "2026-10-14",
-        "verdict": "reject",
-        "note": "红队终审打回（清单第7条·检查项1/2）：母语者替换测试不通过——'all love her'生硬古旧，真实场景母语者会说 'everyone loves her'，有为凑 so…that 模式编造怪句之嫌。重写建议：改为 'She is so kind a girl that everyone loves her.'（中文'大家都爱她'正好对应 everyone）。"
+        "verdict": "pass",
+        "note": "终审复核：重写符合打回要求，自然度/语域通过"
       },
       "first": {
         "by": "英语专家队",
@@ -780,7 +780,7 @@
         "note": "红队终审打回重写：all love her 生硬古旧，改为 everyone loves her（中文'大家都爱她'对应 everyone）；rule/condition 不变。"
       },
       "rule": "so + 形 + a/an + n（正例 example）",
-      "status": "first_passed",
+      "status": "final_passed",
       "vocab": "in-scope",
       "written_at": "2026-10-14",
       "written_by": "语法生产C队",
