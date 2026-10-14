@@ -19,8 +19,13 @@
         "verdict": "pass",
         "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
       },
-      "final": null,
-      "status": "first_passed",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "status": "final_passed",
       "revision": 1
     },
     {
@@ -39,8 +44,13 @@
         "verdict": "pass",
         "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
       },
-      "final": null,
-      "status": "first_passed",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "status": "final_passed",
       "revision": 1
     },
     {
@@ -59,8 +69,13 @@
         "verdict": "pass",
         "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
       },
-      "final": null,
-      "status": "first_passed",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "status": "final_passed",
       "revision": 1
     },
     {
@@ -79,8 +94,13 @@
         "verdict": "pass",
         "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
       },
-      "final": null,
-      "status": "first_passed",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "status": "final_passed",
       "revision": 1
     },
     {
@@ -99,8 +119,13 @@
         "verdict": "pass",
         "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
       },
-      "final": null,
-      "status": "first_passed",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "status": "final_passed",
       "revision": 1
     },
     {
@@ -119,8 +144,13 @@
         "verdict": "pass",
         "note": "反例错因成立、错句即所要纠偏的典型错误且已标注（错句），中文释义准确。"
       },
-      "final": null,
-      "status": "first_passed",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "status": "final_passed",
       "revision": 1
     },
     {
@@ -139,8 +169,13 @@
         "verdict": "pass",
         "note": "反例错因成立、错句即所要纠偏的典型错误且已标注（错句），中文释义准确。"
       },
-      "final": null,
-      "status": "first_passed",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "status": "final_passed",
       "revision": 1
     },
     {
@@ -159,8 +194,13 @@
         "verdict": "pass",
         "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
       },
-      "final": null,
-      "status": "first_passed",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "status": "final_passed",
       "revision": 1
     },
     {
@@ -179,8 +219,13 @@
         "verdict": "pass",
         "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
       },
-      "final": null,
-      "status": "first_passed",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "status": "final_passed",
       "revision": 1
     },
     {
@@ -199,8 +244,13 @@
         "verdict": "pass",
         "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
       },
-      "final": null,
-      "status": "first_passed",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "status": "final_passed",
       "revision": 1
     },
     {
@@ -219,8 +269,13 @@
         "verdict": "pass",
         "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
       },
-      "final": null,
-      "status": "first_passed",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "status": "final_passed",
       "revision": 1
     },
     {
@@ -239,8 +294,13 @@
         "verdict": "pass",
         "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
       },
-      "final": null,
-      "status": "first_passed",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "status": "final_passed",
       "revision": 1
     },
     {
@@ -259,8 +319,13 @@
         "verdict": "pass",
         "note": "反例错因成立、错句即所要纠偏的典型错误且已标注（错句），中文释义准确。"
       },
-      "final": null,
-      "status": "first_passed",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "status": "final_passed",
       "revision": 1
     },
     {
@@ -279,8 +344,13 @@
         "verdict": "pass",
         "note": "反例错因成立、错句即所要纠偏的典型错误且已标注（错句），中文释义准确。"
       },
-      "final": null,
-      "status": "first_passed",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "status": "final_passed",
       "revision": 1
     },
     {
@@ -299,8 +369,13 @@
         "verdict": "pass",
         "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
       },
-      "final": null,
-      "status": "first_passed",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "status": "final_passed",
       "revision": 1
     },
     {
@@ -319,8 +394,13 @@
         "verdict": "pass",
         "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
       },
-      "final": null,
-      "status": "first_passed",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "status": "final_passed",
       "revision": 1
     },
     {
@@ -339,8 +419,13 @@
         "verdict": "pass",
         "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
       },
-      "final": null,
-      "status": "first_passed",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "status": "final_passed",
       "revision": 1
     },
     {
@@ -359,8 +444,13 @@
         "verdict": "pass",
         "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
       },
-      "final": null,
-      "status": "first_passed",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "status": "final_passed",
       "revision": 1
     },
     {
@@ -379,8 +469,13 @@
         "verdict": "pass",
         "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
       },
-      "final": null,
-      "status": "first_passed",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "status": "final_passed",
       "revision": 1
     },
     {
@@ -399,8 +494,13 @@
         "verdict": "pass",
         "note": "反例错因成立、错句即所要纠偏的典型错误且已标注（错句），中文释义准确。"
       },
-      "final": null,
-      "status": "first_passed",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "status": "final_passed",
       "revision": 1
     },
     {
@@ -419,8 +519,13 @@
         "verdict": "pass",
         "note": "反例错因成立、错句即所要纠偏的典型错误且已标注（错句），中文释义准确。"
       },
-      "final": null,
-      "status": "first_passed",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "status": "final_passed",
       "revision": 1
     },
     {
@@ -439,8 +544,13 @@
         "verdict": "pass",
         "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
       },
-      "final": null,
-      "status": "first_passed",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "status": "final_passed",
       "revision": 1
     },
     {
@@ -459,8 +569,13 @@
         "verdict": "pass",
         "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
       },
-      "final": null,
-      "status": "first_passed",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "status": "final_passed",
       "revision": 1
     },
     {
@@ -479,8 +594,13 @@
         "verdict": "pass",
         "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
       },
-      "final": null,
-      "status": "first_passed",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "status": "final_passed",
       "revision": 1
     },
     {
@@ -499,8 +619,13 @@
         "verdict": "pass",
         "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
       },
-      "final": null,
-      "status": "first_passed",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "status": "final_passed",
       "revision": 1
     },
     {
@@ -519,8 +644,13 @@
         "verdict": "pass",
         "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
       },
-      "final": null,
-      "status": "first_passed",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "status": "final_passed",
       "revision": 1
     },
     {
@@ -539,8 +669,13 @@
         "verdict": "pass",
         "note": "反例错因成立、错句即所要纠偏的典型错误且已标注（错句），中文释义准确。"
       },
-      "final": null,
-      "status": "first_passed",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "status": "final_passed",
       "revision": 1
     },
     {
@@ -559,8 +694,13 @@
         "verdict": "pass",
         "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
       },
-      "final": null,
-      "status": "first_passed",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "status": "final_passed",
       "revision": 1
     },
     {
@@ -579,8 +719,13 @@
         "verdict": "pass",
         "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
       },
-      "final": null,
-      "status": "first_passed",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "status": "final_passed",
       "revision": 1
     },
     {
@@ -599,8 +744,13 @@
         "verdict": "pass",
         "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
       },
-      "final": null,
-      "status": "first_passed",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "status": "final_passed",
       "revision": 1
     },
     {
@@ -619,8 +769,13 @@
         "verdict": "pass",
         "note": "英文正确、与标注规则对应、术语口径与 M3 一致，中文释义准确适合初中生。"
       },
-      "final": null,
-      "status": "first_passed",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "status": "final_passed",
       "revision": 1
     },
     {
@@ -639,8 +794,13 @@
         "verdict": "pass",
         "note": "反例错因成立、错句即所要纠偏的典型错误且已标注（错句），中文释义准确。"
       },
-      "final": null,
-      "status": "first_passed",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "status": "final_passed",
       "revision": 1
     },
     {
@@ -659,8 +819,13 @@
         "verdict": "pass",
         "note": "反例错因成立、错句即所要纠偏的典型错误且已标注（错句），中文释义准确。"
       },
-      "final": null,
-      "status": "first_passed",
+      "final": {
+        "by": "红队",
+        "at": "2026-10-14",
+        "verdict": "pass",
+        "note": "自然度/语域/拼写口径符合要求"
+      },
+      "status": "final_passed",
       "revision": 1
     }
   ]
