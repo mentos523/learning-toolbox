@@ -41,7 +41,7 @@ window.ENG_CH["gr16"] = {
     "gr16.1.1-e7": { en: "I would buy a car if I had money.", zh: "如果我有钱，我就买辆车。", reg: "通用",
       tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "would", role: "verb", label: "情态动词" }, { w: "buy", role: "verb", label: "动词原形" }, { w: "a car", role: "object", label: "宾语" }, { w: "if I had money", role: "adverb", label: "虚拟条件句（与现在相反）" } ] },
     "gr16.1.1-e8": { en: "If it rains, we will stay at home.", zh: "如果下雨，我们就待在家里。（真事：主将从现）", reg: "通用",
-      tagged: [ { w: "If it rains", role: "adverb", label: "条件状语从句（真实）" }, { w: "we", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "助动词" }, { w: "stay", role: "verb", label: "动词原形" }, { w: "at home", role: "adverb", label: "状语" } ] },
+      tagged: [ { w: "If it rains", role: "adverb", label: "条件状语从句（真实）" }, { w: "we", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "情态动词" }, { w: "stay", role: "verb", label: "动词原形" }, { w: "at home", role: "adverb", label: "状语" } ] },
     /* ---------- gr16.1.2 与将来相反与混合虚拟 ---------- */
     "gr16.1.2-e1": { en: "If it should rain tomorrow, we would stay home.", zh: "如果明天下雨（小可能），我们就待家里。", reg: "通用",
       tagged: [ { w: "If it should rain tomorrow", role: "adverb", label: "虚拟条件句（与将来相反）" }, { w: "we", role: "subject", label: "主语" }, { w: "would", role: "verb", label: "情态动词" }, { w: "stay", role: "verb", label: "动词原形" }, { w: "home", role: "adverb", label: "状语" } ] },
@@ -52,7 +52,7 @@ window.ENG_CH["gr16"] = {
     "gr16.1.2-e4": { en: "If he should come, tell me.", zh: "如果他来（小可能），告诉我。", reg: "通用",
       tagged: [ { w: "If he should come", role: "adverb", label: "虚拟条件句（与将来相反）" }, { w: "tell", role: "verb", label: "谓语" }, { w: "me", role: "object", label: "宾语" } ] },
     "gr16.1.2-e5": { en: "If you were to try again, you might win.", zh: "如果你再试一次（几乎不可能），可能会赢。", reg: "通用",
-      tagged: [ { w: "If you were to try again", role: "adverb", label: "虚拟条件句（与将来相反）" }, { w: "you", role: "subject", label: "主语" }, { w: "might", role: "verb", label: "助动词" }, { w: "win", role: "verb", label: "动词原形" } ] },
+      tagged: [ { w: "If you were to try again", role: "adverb", label: "虚拟条件句（与将来相反）" }, { w: "you", role: "subject", label: "主语" }, { w: "might", role: "verb", label: "情态动词" }, { w: "win", role: "verb", label: "动词原形" } ] },
     "gr16.1.2-e6": { en: "If I had worked harder, I would have been a teacher now.", zh: "（✗ 错句）本想说“ 如果当年更努力，我现在就是老师了 ”。", reg: "通用",
       tagged: [ { w: "If I had worked harder", role: "adverb", label: "虚拟条件句（过去）" }, { w: "I", role: "subject", label: "主语" }, { w: "would", role: "verb", label: "情态动词" }, { w: "have been", role: "verb", label: "完成时（谓语）（错）" }, { w: "a teacher now", role: "complem", label: "表语" } ] },
     "gr16.1.2-e7": { en: "If she had listened, she would know the truth now.", zh: "如果她当时听了，现在就知道真相了。", reg: "通用",
@@ -151,7 +151,7 @@ window.ENG_CH["gr16"] = {
                 { id: "gr16.1.1-e2", en: "If I had studied harder, I would have passed.", zh: "如果我当时更努力，我就通过了。", reg: "通用",
                   tagged: [ { w: "If I had studied harder", role: "adverb", label: "假想句（与过去相反）" }, { w: "I", role: "subject", label: "主语" }, { w: "would", role: "verb", label: "情态动词" }, { w: "have passed", role: "verb", label: "完成时（谓语）" } ] },
                 { id: "gr16.1.1-e8", en: "If it rains, we will stay at home.", zh: "如果下雨，我们就待在家里。（真事：主将从现）", reg: "通用",
-                  tagged: [ { w: "If it rains", role: "adverb", label: "真实条件句" }, { w: "we", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "助动词" }, { w: "stay", role: "verb", label: "动词原形" }, { w: "at home", role: "adverb", label: "状语" } ] },
+                  tagged: [ { w: "If it rains", role: "adverb", label: "真实条件句" }, { w: "we", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "情态动词" }, { w: "stay", role: "verb", label: "动词原形" }, { w: "at home", role: "adverb", label: "状语" } ] },
                 { id: "gr16.1.1-e3", en: "If I were you, I would take the chance.", zh: "如果我是你，我会抓住机会。", reg: "通用",
                   tagged: [ { w: "If I were you", role: "adverb", label: "假想句（与现在相反）" }, { w: "I", role: "subject", label: "主语" }, { w: "would", role: "verb", label: "情态动词" }, { w: "take", role: "verb", label: "动词原形" }, { w: "the chance", role: "object", label: "宾语" } ] }
               ],

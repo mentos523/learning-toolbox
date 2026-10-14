@@ -639,7 +639,7 @@ window.ENG_CH["gr15"] = {
                       { role: "complem", label: "表语" },
                       { role: "adverb", label: "状语" }
                     ],
-                    hint: "so dark that…：无情态 → 表结果（如此…以致）。"
+                    hint: "so dark that…：结果从句（如此…以致）——结果从句也可带情态（如 could）。"
                   }
                 }
               ],
@@ -649,7 +649,7 @@ window.ENG_CH["gr15"] = {
               id: "gr15.1.4-p3",
               kind: "explain",
               title: "目的：so that + 情态",
-              lead: "还记得吗？上一页 so that he could（有情态）是目的，so dark that（无情态）是结果。",
+              lead: "还记得吗？上一页 so that he could（有情态）是目的，so dark that（含 could）是结果——结果从句也可带情态。",
               blocks: [
                 {
                   type: "examples",
@@ -703,7 +703,7 @@ window.ENG_CH["gr15"] = {
                   stem: "“ It was so dark that we couldn't see.”是：",
                   options: ["目的状语从句", "结果状语从句", "时间状语从句"],
                   answer: 1,
-                  tip: "无情态 → 结果（如此…以致）。"
+                  tip: "结果从句（如此…以致）——could 在此表结果，非目的。"
                 },
                 {
                   type: "fill",
@@ -714,7 +714,7 @@ window.ENG_CH["gr15"] = {
                   tip: "in order that / so that + could（目的）。"
                 }
               ],
-              point: "自查：有情态 = 目的；无情态 = 结果；主语一致用 in order to。"
+              point: "自查：先看是目的还是结果（目的常配情态，结果多为陈述但也可带情态）；主语一致用 in order to。"
             }
           ]
         },
