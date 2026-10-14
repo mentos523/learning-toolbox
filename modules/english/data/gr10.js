@@ -428,7 +428,7 @@ window.ENG_CH["gr10"] = {
             {
               id: "gr10.1.3-p1",
               kind: "observe",
-              title: "先看三句话：分词的主人是谁？",
+              title: "先看四句话：分词的主人是谁？",
               sentences: [
                 { id: "gr10.1.3-e2", en: "Walking in the park, I saw a bird.", zh: "在公园散步时，我看到一只鸟。", reg: "通用",
                   tagged: [ { w: "Walking in the park", role: "adverb", label: "状语（分词短语）" }, { w: "I", role: "subject", label: "主语（分词的逻辑主语）" }, { w: "saw", role: "verb", label: "谓语" }, { w: "a bird", role: "object", label: "宾语" } ] },
