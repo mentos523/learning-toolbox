@@ -75,7 +75,7 @@
         "verdict": "pass",
         "note": "自然度/语域/拼写口径符合要求"
       },
-      "status": "first_passed",
+      "status": "final_passed",
       "revision": 2,
       "rewrite": {
         "by": "协调者（台账同步）",
@@ -205,7 +205,7 @@
         "verdict": "pass",
         "note": "自然度/语域/拼写口径符合要求"
       },
-      "status": "first_passed",
+      "status": "final_passed",
       "revision": 2,
       "rewrite": {
         "by": "协调者（台账同步）",
@@ -235,7 +235,7 @@
         "verdict": "pass",
         "note": "自然度/语域/拼写口径符合要求"
       },
-      "status": "first_passed",
+      "status": "final_passed",
       "revision": 2,
       "rewrite": {
         "by": "协调者（台账同步）",
@@ -440,7 +440,7 @@
         "verdict": "pass",
         "note": "自然度/语域/拼写口径符合要求"
       },
-      "status": "first_passed",
+      "status": "final_passed",
       "revision": 2,
       "rewrite": {
         "by": "协调者（台账同步）",
