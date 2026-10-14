@@ -424,7 +424,7 @@
   }
 
   /* ---------------- 状态 ---------------- */
-  var state = { root: null, rootIdx: 0, word: 0 };
+  var state = { card: null, root: null, rootIdx: 0, word: 0 };
   var rootWheel, wordWheel;
   // 用户是否已与页面交互（自动朗读需手势后才允许，避免刷新即播）
   var userInteracted = false;
@@ -632,6 +632,103 @@
     if (s2) s2.textContent = txt;
   }
 
+  /* ---------------- 子卡（蓝队 2026-10-14）：讲词根 / 语法 ----------------
+   * 进入英语先选子卡；深链 #card=roots|grammar 直达对应子卡；
+   * 旧深链 #r=xxx（已分享）直接进讲词根对应词根，行为与原来一致。
+   * 上次进入的子卡记 localStorage "ltb-en-track"，选择页打"上次进入"徽标。
+   * 讲词根拨盘应用本身内容与行为零改动。
+   *
+   * hash 约定：
+   *   #card=roots   → 讲词根（入口用；进入后 selectRoot 会按原逻辑写回 #r=xxx，
+   *                     与旧分享链格式一致，故不再重复写 #card=roots）
+   *   #card=grammar → 语法筹备中外壳
+   *   #r=xxx        → 讲词根对应词根（旧链，优先级高于 #card=）
+   *   无 hash       → 子卡选择页
+   * 与既有 #r= 无冲突："#card=roots" 中不含 "#r=" 子串。 */
+  var EN_TRACKS = [
+    {
+      id: "roots",
+      name: "讲词根",
+      tagline: "拨盘识词",
+      description: "拨一拨词根，单词自己长出来：变形拨盘、词根词义对齐、合成语音朗读。",
+      glyph: "Aa",
+      color: "#1d4ed8",
+      cta: "进入学习 →"
+    },
+    {
+      id: "grammar",
+      name: "语法",
+      tagline: "筹备中",
+      description: "语法板块正在按课程体系筹备，内容尚未上线，先看筹备说明。（文案待红队审定）",
+      glyph: "？",
+      color: "#b45309",
+      cta: "查看说明 →"
+    }
+  ];
+  var TRACK_KEY = "ltb-en-track";
+  function trackIcon(t) {
+    var c = t.color || "#1d4ed8";
+    return '<svg viewBox="0 0 48 48" width="44" height="44" aria-hidden="true">' +
+      '<rect x="4" y="8" width="40" height="32" rx="6" fill="' + c + '" opacity="0.15"/>' +
+      '<text x="24" y="33" text-anchor="middle" font-size="19" font-weight="bold" fill="' + c +
+      '" font-family="sans-serif">' + esc(t.glyph || "Aa") + "</text></svg>";
+  }
+  function renderTracks() {
+    var grid = document.getElementById("track-grid");
+    if (!grid) return;
+    var last = null;
+    try { last = localStorage.getItem(TRACK_KEY); } catch (e) {}
+    grid.innerHTML = EN_TRACKS.map(function (t) {
+      var badge = (t.id === last) ? '<span class="e-track-last">上次进入</span>' : "";
+      return '<a class="e-track-card" style="--track-color:' + esc(t.color || "#1d4ed8") + '"' +
+        ' href="#card=' + esc(t.id) + '" data-track="' + esc(t.id) + '"' +
+        ' aria-label="进入' + esc(t.name) + '子卡">' +
+        '<div class="e-track-icon">' + trackIcon(t) + "</div>" +
+        "<h2>" + esc(t.name) + " <small>· " + esc(t.tagline || "") + "</small>" + badge + "</h2>" +
+        "<p>" + esc(t.description || "") + "</p>" +
+        '<span class="e-track-btn">' + esc(t.cta || "进入学习 →") + "</span></a>";
+    }).join("");
+    Array.prototype.forEach.call(grid.querySelectorAll(".e-track-card"), function (a) {
+      a.addEventListener("click", function (e) {
+        e.preventDefault();
+        enterCard(a.dataset.track);
+      });
+    });
+  }
+  /* 回子卡选择页：清 hash（类比数学 showTracks），下次进入重新选 */
+  function showTracks() {
+    state.card = null;
+    renderTracks();
+    document.getElementById("tracks").hidden = false;
+    document.getElementById("app").hidden = true;
+    document.getElementById("grammar").hidden = true;
+    try { history.replaceState(null, "", location.pathname); } catch (e) {}
+  }
+  function enterRoots() {
+    state.card = "roots";
+    try { localStorage.setItem(TRACK_KEY, "roots"); } catch (e) {}
+    document.getElementById("tracks").hidden = true;
+    document.getElementById("grammar").hidden = true;
+    document.getElementById("app").hidden = false;
+    // 默认选中：优先 URL hash（#r=re），否则第一个词根（原初始化逻辑原样搬入）；
+    // selectRoot 会按原逻辑写回 #r=xxx，与旧分享链格式一致
+    var hm = (location.hash || "").match(/#r=([a-z]+)/);
+    var first = (hm && findRoot(hm[1])) ? hm[1] : (DATA.length ? DATA[0].r : null);
+    if (first) selectRoot(first, { keepOpen: true });  // 初始化不碰面板开合（尊重持久化状态）
+  }
+  function enterGrammar() {
+    state.card = "grammar";
+    try { localStorage.setItem(TRACK_KEY, "grammar"); } catch (e) {}
+    document.getElementById("tracks").hidden = true;
+    document.getElementById("app").hidden = true;
+    document.getElementById("grammar").hidden = false;
+    try { history.replaceState(null, "", "#card=grammar"); } catch (e) {}
+  }
+  function enterCard(id) {
+    if (id === "grammar") enterGrammar();
+    else if (id === "roots") enterRoots();
+  }
+
   /* ---------------- 初始化 ---------------- */
   function init() {
     // 抽屉：绑定悬停/点击 + 恢复上次开合状态（默认都收起）
@@ -691,11 +788,18 @@
         if (w && w.itemH !== h) { w.itemH = h; w._settle(); }
       });
     });
-    // 分享链接：#r=xxx 变化时切换词根
+    // 分享链接：#r=xxx 变化时切换词根；#card=xxx 变化时切换子卡
     window.addEventListener("hashchange", function () {
-      var m = (location.hash || "").match(/#r=([a-z]+)/);
-      if (m && findRoot(m[1]) && (!state.root || state.root.r !== m[1])) {
-        selectRoot(m[1]);
+      var h = location.hash || "";
+      var cm = h.match(/#card=([a-z]+)/);
+      if (cm && (cm[1] === "roots" || cm[1] === "grammar")) {
+        if (state.card !== cm[1]) enterCard(cm[1]);
+        return;
+      }
+      var m = h.match(/#r=([a-z]+)/);
+      if (m && findRoot(m[1])) {
+        if (state.card !== "roots") enterCard("roots");
+        else if (!state.root || state.root.r !== m[1]) selectRoot(m[1]);
       }
     });
     // 设置
@@ -714,11 +818,28 @@
       settings.auto = e.target.checked;
       saveSettings();
     });
+    // 子卡返回按钮（拨盘页 header / 语法外壳）：回子卡选择页
+    document.querySelectorAll("[data-card-back]").forEach(function (el) {
+      el.addEventListener("click", showTracks);
+    });
+    // 语法外壳里的真实入口：去讲词根
+    var goRoots = document.querySelector("[data-goto-roots]");
+    if (goRoots) goRoots.addEventListener("click", function () { enterCard("roots"); });
     applySettings();
-    // 默认选中：优先 URL hash（#r=re），否则第一个词根
-    var hm = (location.hash || "").match(/#r=([a-z]+)/);
-    var first = (hm && findRoot(hm[1])) ? hm[1] : (DATA.length ? DATA[0].r : null);
-    if (first) selectRoot(first, { keepOpen: true });  // 初始化不碰面板开合（尊重持久化状态）
+    // 深链路由：#r=xxx（旧分享链）→ 讲词根对应词根；#card=grammar → 语法外壳；
+    // #card=roots → 讲词根；无 → 子卡选择页
+    var _h = location.hash || "";
+    var _rm = _h.match(/#r=([a-z]+)/);
+    var _cm = _h.match(/#card=([a-z]+)/);
+    if (_rm && findRoot(_rm[1])) {
+      enterCard("roots");
+    } else if (_cm && _cm[1] === "grammar") {
+      enterCard("grammar");
+    } else if (_cm && _cm[1] === "roots") {
+      enterCard("roots");
+    } else {
+      showTracks();
+    }
   }
 
   function wheelItemH() {

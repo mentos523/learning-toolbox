@@ -4,14 +4,45 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231d4ed8'/%3E%3Ctext x='32' y='44' font-size='36' text-anchor='middle' fill='white' font-family='sans-serif'%3EAa%3C/text%3E%3C/svg%3E">
-<title>词根词缀学习工具 — 学习工具箱</title>
+<title>英语 · 讲词根 / 语法 — 学习工具箱</title>
 <meta name="description" content="拨一拨词根，单词自己长出来。">
 <link rel="stylesheet" href="../../assets/css/style.css">
 <link rel="stylesheet" href="css/english.css">
 </head>
 <body data-theme="light" data-font="sys" data-size="normal">
 
-<div class="app" id="app">
+<!-- 子卡选择（蓝队 2026-10-14）：讲词根 / 语法双卡片，无深链接时先到这里；
+     设计语言复用数学板块卡（m-track-*），取色走本模块 CSS 变量 -->
+<section class="e-tracks" id="tracks" aria-label="选择子卡">
+  <div class="e-tracks-inner">
+    <h2 class="e-tracks-title">英语 · 选择子卡</h2>
+    <p class="e-tracks-sub">先选一块，慢慢学。</p>
+    <div class="e-track-grid" id="track-grid"></div>
+    <p class="e-tracks-foot"><a class="back-btn" href="../../index.html">← 返回工具箱首页</a></p>
+  </div>
+</section>
+
+<!-- 语法筹备中外壳（蓝队 2026-10-14）：诚实占位，无假内容、无假交互；
+     文案为中性草稿，待红队审定 -->
+<section class="e-grammar" id="grammar" hidden aria-label="语法（筹备中）">
+  <div class="e-grammar-inner">
+    <header class="e-grammar-head">
+      <a class="back-btn" href="../../index.html" aria-label="返回工具箱首页">← 返回</a>
+      <button class="back-btn" data-card-back aria-label="返回子卡选择">子卡</button>
+      <h1>英语 · 语法</h1>
+    </header>
+    <div class="e-grammar-body">
+      <p><span class="e-grammar-flag">筹备中 · 以下文案为中性草稿，待红队审定</span></p>
+      <h2>语法板块正在按课程体系筹备</h2>
+      <p>语法子卡将来会按课程体系建设：从初中起步、一路到高中，对齐中考与高考要求，并与「讲词根」设构词法呼应。</p>
+      <p>课程体系、教学设计和交互形式都还在准备中，这里暂时没有可以学习的内容，也没有可以点的课程或练习。</p>
+      <p>内容准备好后会在这里上线。现在可以先去「讲词根」拨盘学习。</p>
+      <p><button class="e-track-btn" data-goto-roots>去讲词根看看 →</button></p>
+    </div>
+  </div>
+</section>
+
+<div class="app" id="app" hidden>
   <!-- 左：词根选择（桌面贴边窄条悬停滑出 / 手机顶部栏点开展开） -->
   <aside class="drawer drawer-left" id="drawer-left" aria-label="词根选择">
     <button class="edge-tab" id="tab-left" aria-expanded="false" aria-controls="panel-left">
@@ -36,6 +67,7 @@
   <main class="stage-flat">
     <header class="stage-head">
       <a class="back-btn" href="../../index.html" aria-label="返回工具箱首页">← 返回</a>
+      <button class="back-btn" data-card-back aria-label="返回子卡选择">子卡</button>
       <h1>词根词缀学习工具</h1>
       <div class="head-tts">
         <button class="tts-btn" id="tts-us">🔊 美音</button>
