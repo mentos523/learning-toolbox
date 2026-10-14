@@ -96,64 +96,64 @@ window.ENG_CH["gr05"] = {
       tagged: [ { w: "He", role: "subject", label: "主语" }, { w: "came", role: "verb", label: "谓语" }, { w: "here", role: "adverb", label: "状语" }, { w: "two years before", role: "adverb", label: "状语" } ] },
     /* ---------- gr05.2.1 一般将来时 ---------- */
     "gr05.2.1-e1": { en: "I will help you.", zh: "我来帮你。", reg: "口语",
-      tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "助动词" }, { w: "help", role: "verb", label: "动词原形" }, { w: "you", role: "object", label: "宾语" } ] },
+      tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "情态动词" }, { w: "help", role: "verb", label: "动词原形" }, { w: "you", role: "object", label: "宾语" } ] },
     "gr05.2.1-e2": { en: "It is going to rain.", zh: "天要下雨了。", reg: "通用",
       tagged: [ { w: "It", role: "subject", label: "主语" }, { w: "is going to", role: "verb", label: "助动词" }, { w: "rain", role: "verb", label: "动词原形" } ] },
     "gr05.2.1-e3": { en: "They will visit the museum tomorrow.", zh: "他们明天要参观博物馆。", reg: "通用",
-      tagged: [ { w: "They", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "助动词" }, { w: "visit", role: "verb", label: "动词原形" }, { w: "the museum", role: "object", label: "宾语" }, { w: "tomorrow", role: "adverb", label: "状语" } ] },
+      tagged: [ { w: "They", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "情态动词" }, { w: "visit", role: "verb", label: "动词原形" }, { w: "the museum", role: "object", label: "宾语" }, { w: "tomorrow", role: "adverb", label: "状语" } ] },
     "gr05.2.1-e4": { en: "She will call you tonight.", zh: "她今晚会给你打电话。", reg: "通用",
-      tagged: [ { w: "She", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "助动词" }, { w: "call", role: "verb", label: "动词原形" }, { w: "you", role: "object", label: "宾语" }, { w: "tonight", role: "adverb", label: "状语" } ] },
+      tagged: [ { w: "She", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "情态动词" }, { w: "call", role: "verb", label: "动词原形" }, { w: "you", role: "object", label: "宾语" }, { w: "tonight", role: "adverb", label: "状语" } ] },
     "gr05.2.1-e5": { en: "We are going to have a test.", zh: "我们要进行一次考试。", reg: "通用",
       tagged: [ { w: "We", role: "subject", label: "主语" }, { w: "are going to", role: "verb", label: "助动词" }, { w: "have", role: "verb", label: "动词原形" }, { w: "a test", role: "object", label: "宾语" } ] },
     "gr05.2.1-e6": { en: "Look! It is going to snow.", zh: "看！天要下雪了。", reg: "口语",
       tagged: [ { w: "It", role: "subject", label: "主语" }, { w: "is going to", role: "verb", label: "助动词" }, { w: "snow", role: "verb", label: "动词原形" } ] },
     "gr05.2.1-e7": { en: "I will to go there.", zh: "（错句）我要去那儿。", reg: "通用",
-      tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "助动词" }, { w: "to go", role: "verb", label: "动词不定式" }, { w: "there", role: "adverb", label: "状语" } ] },
+      tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "情态动词" }, { w: "to go", role: "verb", label: "动词不定式" }, { w: "there", role: "adverb", label: "状语" } ] },
     "gr05.2.1-e8": { en: "I go tomorrow.", zh: "（错句）我明天去。", reg: "通用",
       tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "go", role: "verb", label: "谓语" }, { w: "tomorrow", role: "adverb", label: "状语" } ] },
     /* ---------- gr05.2.2 will vs be going to ---------- */
     "gr05.2.2-e1": { en: "I will get it!", zh: "我去接！", reg: "口语",
-      tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "助动词" }, { w: "get", role: "verb", label: "动词原形" }, { w: "it", role: "object", label: "宾语" } ] },
+      tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "情态动词" }, { w: "get", role: "verb", label: "动词原形" }, { w: "it", role: "object", label: "宾语" } ] },
     "gr05.2.2-e2": { en: "Look! It is going to rain.", zh: "看！天要下雨了。", reg: "口语",
       tagged: [ { w: "It", role: "subject", label: "主语" }, { w: "is going to", role: "verb", label: "助动词" }, { w: "rain", role: "verb", label: "动词原形" } ] },
     "gr05.2.2-e3": { en: "We are going to visit Beijing next month.", zh: "我们下个月要去北京玩。", reg: "通用",
       tagged: [ { w: "We", role: "subject", label: "主语" }, { w: "are going to", role: "verb", label: "助动词" }, { w: "visit", role: "verb", label: "动词原形" }, { w: "Beijing", role: "object", label: "宾语" }, { w: "next month", role: "adverb", label: "状语" } ] },
     "gr05.2.2-e4": { en: "I will carry it for you.", zh: "我来帮你拿。（主动提出）", reg: "口语",
-      tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "助动词" }, { w: "carry", role: "verb", label: "动词原形" }, { w: "it", role: "object", label: "宾语" }, { w: "for you", role: "adverb", label: "状语" } ] },
+      tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "情态动词" }, { w: "carry", role: "verb", label: "动词原形" }, { w: "it", role: "object", label: "宾语" }, { w: "for you", role: "adverb", label: "状语" } ] },
     "gr05.2.2-e5": { en: "She is going to be a doctor.", zh: "她打算当医生。（人生计划）", reg: "通用",
       tagged: [ { w: "She", role: "subject", label: "主语" }, { w: "is going to", role: "verb", label: "助动词" }, { w: "be", role: "verb", label: "动词原形" }, { w: "a doctor", role: "complem", label: "表语" } ] },
     "gr05.2.2-e6": { en: "I will call him back.", zh: "我会给他回电话。（当场决定）", reg: "口语",
-      tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "助动词" }, { w: "call", role: "verb", label: "动词原形" }, { w: "him", role: "object", label: "宾语" }, { w: "back", role: "adverb", label: "状语" } ] },
+      tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "情态动词" }, { w: "call", role: "verb", label: "动词原形" }, { w: "him", role: "object", label: "宾语" }, { w: "back", role: "adverb", label: "状语" } ] },
     "gr05.2.2-e7": { en: "I'm will get it!", zh: "（✗ 错句）“我是 will 去接！”——will 和 be going to 杂糅了，will 后面只能跟动词原形。", reg: "口语",
       tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "I'm will", role: "verb", label: "助动词（杂糅）" }, { w: "get", role: "verb", label: "动词原形" }, { w: "it", role: "object", label: "宾语" } ] },
     "gr05.2.2-e8": { en: "Look! It will rain.", zh: "（错句，乌云场景）看！天要下雨了。", reg: "口语",
-      tagged: [ { w: "It", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "助动词" }, { w: "rain", role: "verb", label: "动词原形" } ] },
+      tagged: [ { w: "It", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "情态动词" }, { w: "rain", role: "verb", label: "动词原形" } ] },
     /* ---------- gr05.2.3 过去将来初识 ---------- */
     "gr05.2.3-e1": { en: "He said he would come.", zh: "他说他会来。", reg: "通用",
-      tagged: [ { w: "He", role: "subject", label: "主语" }, { w: "said", role: "verb", label: "谓语" }, { w: "he", role: "subject", label: "主语" }, { w: "would", role: "verb", label: "助动词" }, { w: "come", role: "verb", label: "动词原形" } ] },
+      tagged: [ { w: "He", role: "subject", label: "主语" }, { w: "said", role: "verb", label: "谓语" }, { w: "he", role: "subject", label: "主语" }, { w: "would", role: "verb", label: "情态动词" }, { w: "come", role: "verb", label: "动词原形" } ] },
     "gr05.2.3-e2": { en: "I knew it would rain.", zh: "我知道天会下雨。", reg: "通用",
-      tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "knew", role: "verb", label: "谓语" }, { w: "it", role: "subject", label: "主语" }, { w: "would", role: "verb", label: "助动词" }, { w: "rain", role: "verb", label: "动词原形" } ] },
+      tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "knew", role: "verb", label: "谓语" }, { w: "it", role: "subject", label: "主语" }, { w: "would", role: "verb", label: "情态动词" }, { w: "rain", role: "verb", label: "动词原形" } ] },
     "gr05.2.3-e3": { en: "She told me she would help.", zh: "她告诉我她会帮忙。", reg: "通用",
-      tagged: [ { w: "She", role: "subject", label: "主语" }, { w: "told", role: "verb", label: "谓语" }, { w: "me", role: "object", label: "宾语" }, { w: "she", role: "subject", label: "主语" }, { w: "would", role: "verb", label: "助动词" }, { w: "help", role: "verb", label: "动词原形" } ] },
+      tagged: [ { w: "She", role: "subject", label: "主语" }, { w: "told", role: "verb", label: "谓语" }, { w: "me", role: "object", label: "宾语" }, { w: "she", role: "subject", label: "主语" }, { w: "would", role: "verb", label: "情态动词" }, { w: "help", role: "verb", label: "动词原形" } ] },
     "gr05.2.3-e4": { en: "They thought it would be easy.", zh: "他们以为那会很容易。", reg: "通用",
-      tagged: [ { w: "They", role: "subject", label: "主语" }, { w: "thought", role: "verb", label: "谓语" }, { w: "it", role: "subject", label: "主语" }, { w: "would", role: "verb", label: "助动词" }, { w: "be", role: "verb", label: "动词原形" }, { w: "easy", role: "complem", label: "表语" } ] },
+      tagged: [ { w: "They", role: "subject", label: "主语" }, { w: "thought", role: "verb", label: "谓语" }, { w: "it", role: "subject", label: "主语" }, { w: "would", role: "verb", label: "情态动词" }, { w: "be", role: "verb", label: "动词原形" }, { w: "easy", role: "complem", label: "表语" } ] },
     "gr05.2.3-e5": { en: "I didn't know you would be here.", zh: "我不知道你会在这儿。", reg: "通用",
-      tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "didn't", role: "verb", label: "助动词" }, { w: "know", role: "verb", label: "谓语" }, { w: "you", role: "subject", label: "主语" }, { w: "would", role: "verb", label: "助动词" }, { w: "be", role: "verb", label: "动词原形" }, { w: "here", role: "adverb", label: "状语" } ] },
+      tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "didn't", role: "verb", label: "助动词" }, { w: "know", role: "verb", label: "谓语" }, { w: "you", role: "subject", label: "主语" }, { w: "would", role: "verb", label: "情态动词" }, { w: "be", role: "verb", label: "动词原形" }, { w: "here", role: "adverb", label: "状语" } ] },
     "gr05.2.3-e6": { en: "He said he will come.", zh: "（错句）他说他会来。", reg: "通用",
-      tagged: [ { w: "He", role: "subject", label: "主语" }, { w: "said", role: "verb", label: "谓语" }, { w: "he", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "助动词" }, { w: "come", role: "verb", label: "动词原形" } ] },
+      tagged: [ { w: "He", role: "subject", label: "主语" }, { w: "said", role: "verb", label: "谓语" }, { w: "he", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "情态动词" }, { w: "come", role: "verb", label: "动词原形" } ] },
     /* ---------- gr05.2.4 本章小结与习题 ---------- */
     "gr05.2.4-e1": { en: "He goes to school every day.", zh: "他每天去上学。（三单现复习）", reg: "通用",
       tagged: [ { w: "He", role: "subject", label: "主语" }, { w: "goes", role: "verb", label: "谓语" }, { w: "to school", role: "adverb", label: "状语" }, { w: "every day", role: "adverb", label: "状语" } ] },
     "gr05.2.4-e2": { en: "We played chess yesterday.", zh: "我们昨天下了棋。（过去时复习）", reg: "通用",
       tagged: [ { w: "We", role: "subject", label: "主语" }, { w: "played", role: "verb", label: "谓语" }, { w: "chess", role: "object", label: "宾语" }, { w: "yesterday", role: "adverb", label: "状语" } ] },
     "gr05.2.4-e3": { en: "They will come soon.", zh: "他们很快会来。（将来时复习）", reg: "通用",
-      tagged: [ { w: "They", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "助动词" }, { w: "come", role: "verb", label: "动词原形" }, { w: "soon", role: "adverb", label: "状语" } ] },
+      tagged: [ { w: "They", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "情态动词" }, { w: "come", role: "verb", label: "动词原形" }, { w: "soon", role: "adverb", label: "状语" } ] },
     "gr05.2.4-e4": { en: "Did you enjoy the film?", zh: "你喜欢那部电影吗？（did 复习）", reg: "通用",
       tagged: [ { w: "Did", role: "verb", label: "助动词" }, { w: "you", role: "subject", label: "主语" }, { w: "enjoy", role: "verb", label: "动词原形" }, { w: "the film", role: "object", label: "宾语" } ] },
     "gr05.2.4-e5": { en: "I go there yesterday.", zh: "（错句）我昨天去那儿了。", reg: "通用",
       tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "go", role: "verb", label: "谓语" }, { w: "there", role: "adverb", label: "状语" }, { w: "yesterday", role: "adverb", label: "状语" } ] },
     "gr05.2.4-e6": { en: "She will helps us.", zh: "（错句）她会帮我们。", reg: "通用",
-      tagged: [ { w: "She", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "助动词" }, { w: "helps", role: "verb", label: "谓语" } ] }
+      tagged: [ { w: "She", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "情态动词" }, { w: "helps", role: "verb", label: "谓语" } ] }
   },
   units: [
     {
@@ -841,11 +841,11 @@ window.ENG_CH["gr05"] = {
               title: "先看三句话：will 后面跟什么？",
               sentences: [
                 { id: "gr05.2.1-e1", en: "I will help you.", zh: "我来帮你。", reg: "口语",
-                  tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "助动词" }, { w: "help", role: "verb", label: "动词原形" }, { w: "you", role: "object", label: "宾语" } ] },
+                  tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "情态动词" }, { w: "help", role: "verb", label: "动词原形" }, { w: "you", role: "object", label: "宾语" } ] },
                 { id: "gr05.2.1-e2", en: "It is going to rain.", zh: "天要下雨了。", reg: "通用",
                   tagged: [ { w: "It", role: "subject", label: "主语" }, { w: "is going to", role: "verb", label: "助动词" }, { w: "rain", role: "verb", label: "动词原形" } ] },
                 { id: "gr05.2.1-e3", en: "They will visit the museum tomorrow.", zh: "他们明天要参观博物馆。", reg: "通用",
-                  tagged: [ { w: "They", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "助动词" }, { w: "visit", role: "verb", label: "动词原形" }, { w: "the museum", role: "object", label: "宾语" }, { w: "tomorrow", role: "adverb", label: "状语" } ] }
+                  tagged: [ { w: "They", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "情态动词" }, { w: "visit", role: "verb", label: "动词原形" }, { w: "the museum", role: "object", label: "宾语" }, { w: "tomorrow", role: "adverb", label: "状语" } ] }
               ],
               guess: {
                 q: "will 和 be going to 后面，动词长什么样？",
@@ -866,7 +866,7 @@ window.ENG_CH["gr05"] = {
                   params: {
                     sentence: [
                       { w: "I", role: "subject", label: "主语" },
-                      { w: "will", role: "verb", label: "助动词" },
+                      { w: "will", role: "verb", label: "情态动词" },
                       { w: "help", role: "verb", label: "动词原形" },
                       { w: "you", role: "object", label: "宾语" }
                     ],
@@ -998,7 +998,7 @@ window.ENG_CH["gr05"] = {
               title: "先看三句话：哪个是临时决定？",
               sentences: [
                 { id: "gr05.2.2-e1", en: "I will get it!", zh: "我去接！", reg: "口语",
-                  tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "助动词" }, { w: "get", role: "verb", label: "动词原形" }, { w: "it", role: "object", label: "宾语" } ] },
+                  tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "情态动词" }, { w: "get", role: "verb", label: "动词原形" }, { w: "it", role: "object", label: "宾语" } ] },
                 { id: "gr05.2.2-e2", en: "Look! It is going to rain.", zh: "看！天要下雨了。", reg: "口语",
                   tagged: [ { w: "It", role: "subject", label: "主语" }, { w: "is going to", role: "verb", label: "助动词" }, { w: "rain", role: "verb", label: "动词原形" } ] },
                 { id: "gr05.2.2-e3", en: "We are going to visit Beijing next month.", zh: "我们下个月要去北京玩。", reg: "通用",
@@ -1023,7 +1023,7 @@ window.ENG_CH["gr05"] = {
                   params: {
                     sentence: [
                       { w: "I", role: "subject", label: "主语" },
-                      { w: "will", role: "verb", label: "助动词" },
+                      { w: "will", role: "verb", label: "情态动词" },
                       { w: "get", role: "verb", label: "动词原形" },
                       { w: "it", role: "object", label: "宾语" }
                     ],
@@ -1149,11 +1149,11 @@ window.ENG_CH["gr05"] = {
               title: "先看三句话：would 是谁的“过去版”？",
               sentences: [
                 { id: "gr05.2.3-e1", en: "He said he would come.", zh: "他说他会来。", reg: "通用",
-                  tagged: [ { w: "He", role: "subject", label: "主语" }, { w: "said", role: "verb", label: "谓语" }, { w: "he", role: "subject", label: "主语" }, { w: "would", role: "verb", label: "助动词" }, { w: "come", role: "verb", label: "动词原形" } ] },
+                  tagged: [ { w: "He", role: "subject", label: "主语" }, { w: "said", role: "verb", label: "谓语" }, { w: "he", role: "subject", label: "主语" }, { w: "would", role: "verb", label: "情态动词" }, { w: "come", role: "verb", label: "动词原形" } ] },
                 { id: "gr05.2.3-e2", en: "I knew it would rain.", zh: "我知道天会下雨。", reg: "通用",
-                  tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "knew", role: "verb", label: "谓语" }, { w: "it", role: "subject", label: "主语" }, { w: "would", role: "verb", label: "助动词" }, { w: "rain", role: "verb", label: "动词原形" } ] },
+                  tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "knew", role: "verb", label: "谓语" }, { w: "it", role: "subject", label: "主语" }, { w: "would", role: "verb", label: "情态动词" }, { w: "rain", role: "verb", label: "动词原形" } ] },
                 { id: "gr05.2.3-e3", en: "She told me she would help.", zh: "她告诉我她会帮忙。", reg: "通用",
-                  tagged: [ { w: "She", role: "subject", label: "主语" }, { w: "told", role: "verb", label: "谓语" }, { w: "me", role: "object", label: "宾语" }, { w: "she", role: "subject", label: "主语" }, { w: "would", role: "verb", label: "助动词" }, { w: "help", role: "verb", label: "动词原形" } ] }
+                  tagged: [ { w: "She", role: "subject", label: "主语" }, { w: "told", role: "verb", label: "谓语" }, { w: "me", role: "object", label: "宾语" }, { w: "she", role: "subject", label: "主语" }, { w: "would", role: "verb", label: "情态动词" }, { w: "help", role: "verb", label: "动词原形" } ] }
               ],
               guess: {
                 q: "would 长得像谁的“过去版”？",

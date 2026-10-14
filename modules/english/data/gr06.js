@@ -50,24 +50,24 @@ window.ENG_CH["gr06"] = {
       tagged: [ { w: "They", role: "subject", label: "主语" }, { w: "was", role: "verb", label: "助动词" }, { w: "playing", role: "verb", label: "谓语" }, { w: "chess", role: "object", label: "宾语" } ] },
     /* ---------- gr06.1.3 将来进行时（高中） ---------- */
     "gr06.1.3-e1": { en: "I will be waiting for you at eight.", zh: "八点钟我会一直在等你。", reg: "通用",
-      tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "助动词" }, { w: "be", role: "verb", label: "助动词" }, { w: "waiting", role: "verb", label: "谓语" }, { w: "for you", role: "adverb", label: "状语" }, { w: "at eight", role: "adverb", label: "状语" } ] },
+      tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "情态动词" }, { w: "be", role: "verb", label: "助动词" }, { w: "waiting", role: "verb", label: "谓语" }, { w: "for you", role: "adverb", label: "状语" }, { w: "at eight", role: "adverb", label: "状语" } ] },
     "gr06.1.3-e2": { en: "Will you be using the computer tonight?", zh: "你今晚会用电脑吗？", reg: "口语",
-      tagged: [ { w: "Will", role: "verb", label: "助动词" }, { w: "you", role: "subject", label: "主语" }, { w: "be", role: "verb", label: "助动词" }, { w: "using", role: "verb", label: "谓语" }, { w: "the computer", role: "object", label: "宾语" }, { w: "tonight", role: "adverb", label: "状语" } ] },
+      tagged: [ { w: "Will", role: "verb", label: "情态动词" }, { w: "you", role: "subject", label: "主语" }, { w: "be", role: "verb", label: "助动词" }, { w: "using", role: "verb", label: "谓语" }, { w: "the computer", role: "object", label: "宾语" }, { w: "tonight", role: "adverb", label: "状语" } ] },
     "gr06.1.3-e3": { en: "She will be sleeping at midnight.", zh: "半夜她会在睡觉。", reg: "通用",
-      tagged: [ { w: "She", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "助动词" }, { w: "be", role: "verb", label: "助动词" }, { w: "sleeping", role: "verb", label: "谓语" }, { w: "at midnight", role: "adverb", label: "状语" } ] },
+      tagged: [ { w: "She", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "情态动词" }, { w: "be", role: "verb", label: "助动词" }, { w: "sleeping", role: "verb", label: "谓语" }, { w: "at midnight", role: "adverb", label: "状语" } ] },
     "gr06.1.3-e4": { en: "They will be traveling next week.", zh: "他们下周会在旅行。", reg: "通用",
-      tagged: [ { w: "They", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "助动词" }, { w: "be", role: "verb", label: "助动词" }, { w: "traveling", role: "verb", label: "谓语" }, { w: "next week", role: "adverb", label: "状语" } ] },
+      tagged: [ { w: "They", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "情态动词" }, { w: "be", role: "verb", label: "助动词" }, { w: "traveling", role: "verb", label: "谓语" }, { w: "next week", role: "adverb", label: "状语" } ] },
     "gr06.1.3-e5": { en: "Will you be coming with us?", zh: "你要和我们一起去吗？（礼貌询问）", reg: "口语",
-      tagged: [ { w: "Will", role: "verb", label: "助动词" }, { w: "you", role: "subject", label: "主语" }, { w: "be", role: "verb", label: "助动词" }, { w: "coming", role: "verb", label: "谓语" }, { w: "with us", role: "adverb", label: "状语" } ] },
+      tagged: [ { w: "Will", role: "verb", label: "情态动词" }, { w: "you", role: "subject", label: "主语" }, { w: "be", role: "verb", label: "助动词" }, { w: "coming", role: "verb", label: "谓语" }, { w: "with us", role: "adverb", label: "状语" } ] },
     "gr06.1.3-e6": { en: "I will waiting for you.", zh: "（错句）我会一直等你。", reg: "通用",
-      tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "助动词" }, { w: "waiting", role: "verb", label: "谓语" }, { w: "for you", role: "adverb", label: "状语" } ] },
+      tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "情态动词" }, { w: "waiting", role: "verb", label: "谓语" }, { w: "for you", role: "adverb", label: "状语" } ] },
     /* ---------- gr06.1.4 进行时的时间轴 ---------- */
     "gr06.1.4-e1": { en: "I am reading now.", zh: "我现在在看书。", reg: "通用",
       tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "am", role: "verb", label: "助动词" }, { w: "reading", role: "verb", label: "谓语" }, { w: "now", role: "adverb", label: "状语" } ] },
     "gr06.1.4-e2": { en: "I was reading at nine.", zh: "九点钟我在看书。", reg: "通用",
       tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "was", role: "verb", label: "助动词" }, { w: "reading", role: "verb", label: "谓语" }, { w: "at nine", role: "adverb", label: "状语" } ] },
     "gr06.1.4-e3": { en: "I will be reading at ten tonight.", zh: "今晚十点我会在看书。", reg: "通用",
-      tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "助动词" }, { w: "be", role: "verb", label: "助动词" }, { w: "reading", role: "verb", label: "谓语" }, { w: "at ten tonight", role: "adverb", label: "状语" } ] },
+      tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "情态动词" }, { w: "be", role: "verb", label: "助动词" }, { w: "reading", role: "verb", label: "谓语" }, { w: "at ten tonight", role: "adverb", label: "状语" } ] },
     "gr06.1.4-e4": { en: "She is cooking now.", zh: "她现在在做饭。", reg: "通用",
       tagged: [ { w: "She", role: "subject", label: "主语" }, { w: "is", role: "verb", label: "助动词" }, { w: "cooking", role: "verb", label: "谓语" }, { w: "now", role: "adverb", label: "状语" } ] },
     "gr06.1.4-e5": { en: "They were swimming then.", zh: "那时他们在游泳。", reg: "通用",
@@ -467,11 +467,11 @@ window.ENG_CH["gr06"] = {
               title: "先看三句话：will be doing 把“正在”搬到了哪？",
               sentences: [
                 { id: "gr06.1.3-e1", en: "I will be waiting for you at eight.", zh: "八点钟我会一直在等你。", reg: "通用",
-                  tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "助动词" }, { w: "be", role: "verb", label: "助动词" }, { w: "waiting", role: "verb", label: "谓语" }, { w: "for you", role: "adverb", label: "状语" }, { w: "at eight", role: "adverb", label: "状语" } ] },
+                  tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "情态动词" }, { w: "be", role: "verb", label: "助动词" }, { w: "waiting", role: "verb", label: "谓语" }, { w: "for you", role: "adverb", label: "状语" }, { w: "at eight", role: "adverb", label: "状语" } ] },
                 { id: "gr06.1.3-e2", en: "Will you be using the computer tonight?", zh: "你今晚会用电脑吗？", reg: "口语",
-                  tagged: [ { w: "Will", role: "verb", label: "助动词" }, { w: "you", role: "subject", label: "主语" }, { w: "be", role: "verb", label: "助动词" }, { w: "using", role: "verb", label: "谓语" }, { w: "the computer", role: "object", label: "宾语" }, { w: "tonight", role: "adverb", label: "状语" } ] },
+                  tagged: [ { w: "Will", role: "verb", label: "情态动词" }, { w: "you", role: "subject", label: "主语" }, { w: "be", role: "verb", label: "助动词" }, { w: "using", role: "verb", label: "谓语" }, { w: "the computer", role: "object", label: "宾语" }, { w: "tonight", role: "adverb", label: "状语" } ] },
                 { id: "gr06.1.3-e3", en: "She will be sleeping at midnight.", zh: "半夜她会在睡觉。", reg: "通用",
-                  tagged: [ { w: "She", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "助动词" }, { w: "be", role: "verb", label: "助动词" }, { w: "sleeping", role: "verb", label: "谓语" }, { w: "at midnight", role: "adverb", label: "状语" } ] }
+                  tagged: [ { w: "She", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "情态动词" }, { w: "be", role: "verb", label: "助动词" }, { w: "sleeping", role: "verb", label: "谓语" }, { w: "at midnight", role: "adverb", label: "状语" } ] }
               ],
               guess: {
                 q: "will be doing 把“正在”搬到了哪？",
@@ -531,7 +531,7 @@ window.ENG_CH["gr06"] = {
                 { id: "gr06.1.4-e2", en: "I was reading at nine.", zh: "九点钟我在看书。", reg: "通用",
                   tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "was", role: "verb", label: "助动词" }, { w: "reading", role: "verb", label: "谓语" }, { w: "at nine", role: "adverb", label: "状语" } ] },
                 { id: "gr06.1.4-e3", en: "I will be reading at ten tonight.", zh: "今晚十点我会在看书。", reg: "通用",
-                  tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "助动词" }, { w: "be", role: "verb", label: "助动词" }, { w: "reading", role: "verb", label: "谓语" }, { w: "at ten tonight", role: "adverb", label: "状语" } ] }
+                  tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "情态动词" }, { w: "be", role: "verb", label: "助动词" }, { w: "reading", role: "verb", label: "谓语" }, { w: "at ten tonight", role: "adverb", label: "状语" } ] }
               ],
               guess: {
                 q: "三句话的“正在看书”，分别发生在什么时候？",
