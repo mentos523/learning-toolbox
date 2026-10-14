@@ -15,11 +15,18 @@
  * 唯一滚动容器，body 永不滚动。
  * 交互实现（全部真实可用，无占位）：
  *   G1 成分拖拽标注（点选 + 拖拽双通道，即时判分）
+ *   G3 句型积木拼装（五种槽形；双谓语报警，跃升 1）
+ *   G5 从句槽（槽类型校验，放错弹回）
+ *   G6 词性换装（后缀外套状态机；卧底报警）
  *   G7 规则身份证（翻面：规则面 ↔ 条件面）
  *   G8 中式对拍（✗/✓ 双编码）
  *   Y1 先猜后验（只记录，不判对错）
  *   Y2 例句朗读（speechSynthesis；不支持时隐藏按钮）
  *   Y3 改错判分（选择即时判分；填空字符串归一化比对）
+ *   Y4 成分标注练习（G1 引擎 + 题库；限时；只记正确率）
+ * G2/G4 本阶段不实现（B-M1/B-M2 降级口径冻结，理由见
+ * docs/english-grammar-interactions.md：G2 不做"听发音辨时态"、
+ * G4 不做自由输入批改）。
  * 反馈走 M6 口径：视觉必选（flash/✓✗），震动与合成音为可选。
  * ============================================================ */
 (function () {
@@ -417,6 +424,546 @@
     return box;
   }
 
+  /* ============================================================
+   * 蓝队 2026-10-14（阶段三）：G 系列交互补齐。
+   * 新增 interact widgets：sentence-builder（G3）、clause-slots
+   * （G5）、morph-dressup（G6）、constituent-quiz（Y4）。
+   * 旧部件（signal-light/tagging/idcard/contrast/guess/speak/
+   * quiz 判分）一字未动；新增代码只读数据、不碰既有函数。
+   * 口径遵守：.g-zone 是唯一滚动容器（新增代码不创建滚动
+   * 容器、不调用 scrollIntoView）；触控目标 ≥44px；双编码。
+   * ============================================================ */
+
+  var ROLE_ZH = {
+    subject: "主语", verb: "谓语", object: "宾语",
+    complem: "补语", adverb: "状语", attrib: "定语", clause: "从句"
+  };
+  function roleZh(role) { return ROLE_ZH[role] || role; }
+
+  /* 双通道放置（点选 + 拖拽），G3/G5/Y4 共用；tagging 原实现不动。
+   * decide(tag, target) 返回：
+   *   {kind:"ok"}           放置成功
+   *   {kind:"bad", msg}      放错（msg 提示，不放置）
+   *   {kind:"alarm", msg}    报警（msg 警报，不放置）
+   *   null / {kind:"ignore"} 无视（如槽已满、块已用）
+   * apply(tag, target, d) 执行放置/反馈（各部件自定）。 */
+  function bindDual(tags, targets, decide, apply) {
+    var armed = null;
+    function disarm() {
+      if (armed) { try { armed.setAttribute("aria-pressed", "false"); } catch (e) {} }
+      armed = null;
+    }
+    function attempt(tag, tg) {
+      if (!tag) return;
+      var d = null;
+      try { d = decide(tag, tg); } catch (e) { return; }
+      if (!d || d.kind === "ignore") return;
+      try { apply(tag, tg, d); } catch (e) {}
+      disarm();
+    }
+    tags.forEach(function (t) {
+      t.addEventListener("click", function () {
+        if (armed === t) { disarm(); return; }
+        disarm();
+        armed = t;
+        try { t.setAttribute("aria-pressed", "true"); } catch (e) {}
+      });
+      try { t.draggable = true; } catch (e) {}
+      t.addEventListener("dragstart", function (e) {
+        try { e.dataTransfer.setData("text/plain", t.dataset.role || t.dataset.kind || ""); }
+        catch (err) {}
+      });
+    });
+    targets.forEach(function (tg) {
+      tg.addEventListener("click", function () { attempt(armed, tg); });
+      tg.addEventListener("keydown", function (e) {
+        if ((e.key === "Enter" || e.key === " ") && armed) {
+          e.preventDefault();
+          attempt(armed, tg);
+        }
+      });
+      tg.addEventListener("dragover", function (e) { e.preventDefault(); });
+      tg.addEventListener("drop", function (e) {
+        e.preventDefault();
+        var key = "";
+        try { key = e.dataTransfer.getData("text/plain"); } catch (err) {}
+        var tag = null;
+        tags.forEach(function (t) {
+          if ((t.dataset.role || t.dataset.kind) === key) tag = t;
+        });
+        attempt(tag, tg);
+      });
+    });
+    return { disarm: disarm };
+  }
+
+  /* ---------------- G3 句型积木拼装 sentence-builder ----------------
+   * params: { pattern, blocks:[{w, role}], hint, doneNote }
+   * pattern: SV / SVO / SVP / SVIO DO / SVOC（大小写、空格不敏感）；
+   * 槽由 pattern 派生（五种句型五种槽形：槽名即槽形）。
+   * 双谓语报警（跃升 1）：已有谓语块入槽时，再放谓语块即报警。 */
+  var PATTERN_SLOTS = {
+    SV:     [["subject", "主语"], ["verb", "谓语"]],
+    SVO:    [["subject", "主语"], ["verb", "谓语"], ["object", "宾语"]],
+    SVP:    [["subject", "主语"], ["verb", "谓语"], ["complem", "表语"]],
+    SVIODO: [["subject", "主语"], ["verb", "谓语"], ["object", "间接宾语"], ["object", "直接宾语"]],
+    SVOC:   [["subject", "主语"], ["verb", "谓语"], ["object", "宾语"], ["complem", "补语"]]
+  };
+  function widgetSentenceBuilder(params) {
+    var wrap = el("div", "g-builder");
+    var key = String(params.pattern || "SVO").toUpperCase().replace(/\s+/g, "");
+    var defs = PATTERN_SLOTS[key] || PATTERN_SLOTS.SVO;
+    var hint = el("div", "g-tag-hint",
+      esc(params.hint || "把积木放进对的槽，拼出一句完整的话。"));
+    var slotsBox = el("div", "g-builder-slots");
+    var pool = el("div", "g-tags");
+    var doneBox = el("div", "g-builder-done");
+    var slots = defs.map(function (d) {
+      var s = el("div", "g-builder-slot empty");
+      s.innerHTML = '<span class="g-builder-slot-label">' + esc(d[1]) + "槽</span>" +
+        '<span class="g-builder-slot-tip">（放' + esc(d[1]) + "）</span>";
+      s.dataset.accept = d[0];
+      s.dataset.slotLabel = d[1];
+      s.dataset.filled = "0";
+      s.setAttribute("tabindex", "0");
+      s.setAttribute("role", "button");
+      s.setAttribute("aria-label", d[1] + "槽：空");
+      slotsBox.appendChild(s);
+      return s;
+    });
+    var blocks = (params.blocks || []).map(function (b) {
+      var c = el("span", "g-chunk draggable role-" + b.role);
+      c.innerHTML = '<span class="w">' + esc(b.w) + '</span><span class="r">' +
+        esc(roleZh(b.role)) + "</span>";
+      c.dataset.role = b.role;
+      c.dataset.word = b.w;
+      c.dataset.used = "0";
+      c.setAttribute("tabindex", "0");
+      c.setAttribute("role", "button");
+      c.setAttribute("aria-label", "积木：" + b.w);
+      pool.appendChild(c);
+      return c;
+    });
+    wrap.appendChild(slotsBox);
+    wrap.appendChild(pool);
+    wrap.appendChild(hint);
+    wrap.appendChild(doneBox);
+
+    function verbPlaced() {
+      return slots.some(function (s) {
+        return s.dataset.filled === "1" && s.dataset.vrole === "verb";
+      });
+    }
+    function decide(tag, slot) {
+      if (slot.dataset.filled === "1" || tag.dataset.used === "1") return { kind: "ignore" };
+      var role = tag.dataset.role;
+      if (role === "verb" && verbPlaced()) {
+        return { kind: "alarm", msg: "⚠ 双谓语警报！一个句子只能有一个谓语动词——把多余的动词拿回去。" };
+      }
+      if (role !== slot.dataset.accept) {
+        return { kind: "bad", msg: "✗ 不对：“" + tag.dataset.word + "”是" + roleZh(role) +
+          "，不能放进" + slot.dataset.slotLabel + "槽。再想想。" };
+      }
+      return { kind: "ok" };
+    }
+    function apply(tag, slot, d) {
+      if (d.kind !== "ok") {
+        hint.innerHTML = '<span class="bad">' + esc(d.msg) + "</span>";
+        tag.classList.remove("placed-bad");
+        void tag.offsetWidth;
+        tag.classList.add("placed-bad");
+        flash(tag, false);
+        return;
+      }
+      tag.dataset.used = "1";
+      try { tag.draggable = false; } catch (e) {}
+      tag.classList.remove("draggable");
+      slot.appendChild(tag);
+      slot.dataset.filled = "1";
+      slot.dataset.vrole = tag.dataset.role;
+      slot.classList.remove("empty");
+      slot.setAttribute("aria-label", slot.dataset.slotLabel + "槽：已放 " + tag.dataset.word);
+      flash(slot, true);
+      if (slots.every(function (s) { return s.dataset.filled === "1"; })) {
+        var sent = slots.map(function (s) {
+          var b = s.querySelector(".g-chunk");
+          return b ? b.dataset.word : "";
+        }).join(" ");
+        hint.innerHTML = '<span class="ok">✓ 拼好了！</span>';
+        doneBox.innerHTML = '<span class="ok">✓</span> ' + esc(sent) +
+          (params.doneNote ? "<br>" + esc(params.doneNote) : "");
+        flash(doneBox, true);
+      } else {
+        hint.innerHTML = "放对了！继续拼。";
+      }
+    }
+    bindDual(blocks, slots, decide, apply);
+    return wrap;
+  }
+
+  /* ---------------- G5 从句槽 clause-slots ----------------
+   * params: { main, mainSlots:[{id, label, accept:[kind]}], clauseBlocks:[{text, kind}], hint }
+   * kind: subject/object/attrib/adverbial（主语/宾语/定语/状语从句）；
+   * 放错槽弹回 + 提示（W-G5：从句块黄底 + "从句"文字标签）。 */
+  var CLAUSE_ZH = { subject: "主语从句", object: "宾语从句", attrib: "定语从句", adverbial: "状语从句" };
+  function clauseZh(k) { return CLAUSE_ZH[k] || k; }
+  function widgetClauseSlots(params) {
+    var wrap = el("div", "g-clause");
+    var hint = el("div", "g-tag-hint",
+      esc(params.hint || "把从句块放进对的槽。放错槽会弹回来。"));
+    if (params.main) {
+      wrap.appendChild(el("div", "g-clause-main", "主句： " + esc(params.main)));
+    }
+    var slotsBox = el("div", "g-clause-slots");
+    var pool = el("div", "g-tags");
+    var doneBox = el("div", "g-clause-done");
+    var slots = (params.mainSlots || []).map(function (m) {
+      var s = el("div", "g-clause-slot empty");
+      s.innerHTML = '<span class="g-clause-slot-label">' + esc(m.label) + "</span>" +
+        '<span class="g-clause-slot-tip">（放' + esc(m.label) + "）</span>";
+      s.dataset.label = m.label;
+      s.dataset.accepts = (m.accept || []).join(",");
+      s.dataset.filled = "0";
+      s.setAttribute("tabindex", "0");
+      s.setAttribute("role", "button");
+      s.setAttribute("aria-label", m.label + "：空");
+      slotsBox.appendChild(s);
+      return s;
+    });
+    var clauses = (params.clauseBlocks || []).map(function (c) {
+      var b = el("button", "g-clause-block");
+      b.type = "button";
+      b.innerHTML = '<span class="t">' + esc(c.text) + "</span>" +
+        '<span class="k">从句 · ' + esc(clauseZh(c.kind)) + "</span>";
+      b.dataset.kind = c.kind;
+      b.dataset.text = c.text;
+      b.dataset.used = "0";
+      b.setAttribute("aria-label", "从句块：" + c.text + "，" + clauseZh(c.kind));
+      pool.appendChild(b);
+      return b;
+    });
+    wrap.appendChild(slotsBox);
+    wrap.appendChild(pool);
+    wrap.appendChild(hint);
+    wrap.appendChild(doneBox);
+
+    function decide(tag, slot) {
+      if (slot.dataset.filled === "1" || tag.dataset.used === "1") return { kind: "ignore" };
+      var accepts = (slot.dataset.accepts || "").split(",").filter(Boolean);
+      if (accepts.indexOf(tag.dataset.kind) < 0) {
+        return { kind: "bad", msg: "✗ " + clauseZh(tag.dataset.kind) +
+          "不能当" + slot.dataset.label + "——弹回来了，再想想。" };
+      }
+      return { kind: "ok" };
+    }
+    function apply(tag, slot, d) {
+      if (d.kind !== "ok") {
+        hint.innerHTML = '<span class="bad">' + esc(d.msg) + "</span>";
+        tag.classList.remove("placed-bad");
+        void tag.offsetWidth;
+        tag.classList.add("placed-bad");
+        flash(tag, false);
+        return;
+      }
+      tag.dataset.used = "1";
+      try { tag.draggable = false; } catch (e) {}
+      slot.appendChild(tag);
+      slot.dataset.filled = "1";
+      slot.classList.remove("empty");
+      slot.setAttribute("aria-label", slot.dataset.label + "：已放 " + tag.dataset.text);
+      flash(slot, true);
+      if (slots.every(function (s) { return s.dataset.filled === "1"; })) {
+        var parts = slots.map(function (s) {
+          var t = s.querySelector(".g-clause-block");
+          return t ? t.dataset.text : "";
+        });
+        hint.innerHTML = '<span class="ok">✓ 从句拼装完成！</span>';
+        var main = params.main ? String(params.main) : "";
+        var shown = main.indexOf("___") >= 0
+          ? main.split("___").join(parts.join(" / "))
+          : parts.join("；");
+        doneBox.innerHTML = '<span class="ok">✓</span> ' + esc(shown);
+        flash(doneBox, true);
+      } else {
+        hint.innerHTML = "放对了！继续。";
+      }
+    }
+    bindDual(clauses, slots, decide, apply);
+    return wrap;
+  }
+
+  /* ---------------- G6 词性换装 morph-dressup ----------------
+   * params: { root, rootPos, suffixes:[{suf, pos, word}], traps:[{root, suf, pos, word, note}], hint }
+   * 纯展示 + 状态机：点外套穿上（词性变化），再点脱下；
+   * traps 是"卧底"：点之 ✗ + 文字报警（W-G6：不只靠颜色）。 */
+  function widgetMorph(params) {
+    var wrap = el("div", "g-morph");
+    var hint = el("div", "g-tag-hint",
+      esc(params.hint || "给词根小人穿上后缀外套，看看词性怎么变。小心卧底外套！"));
+    var stage = el("div", "g-morph-stage");
+    var root = el("div", "g-morph-root");
+    root.innerHTML = '<span class="p">🤖</span>' +
+      '<span class="w">' + esc(params.root || "") + "</span>" +
+      '<span class="pos">' + esc(params.rootPos || "") + "</span>";
+    var arrow = el("div", "g-morph-arrow", "→");
+    arrow.setAttribute("aria-hidden", "true");
+    var result = el("div", "g-morph-result empty");
+    result.innerHTML = '<span class="tip">点一件外套穿上</span>';
+    stage.appendChild(root);
+    stage.appendChild(arrow);
+    stage.appendChild(result);
+    wrap.appendChild(stage);
+
+    var rack = el("div", "g-morph-rack");
+    rack.setAttribute("role", "group");
+    rack.setAttribute("aria-label", "后缀外套");
+    var worn = null;
+    function compose(sf, baseRoot) {
+      return sf.word || (String(baseRoot) + String(sf.suf || "").replace(/^-/, ""));
+    }
+    (params.suffixes || []).forEach(function (sf) {
+      var b = el("button", "g-suffix", "🧥 " + esc(sf.suf));
+      b.type = "button";
+      b.setAttribute("aria-pressed", "false");
+      b.setAttribute("aria-label", "后缀外套 " + sf.suf + "，穿上变" + (sf.pos || ""));
+      b.addEventListener("click", function () {
+        if (worn === sf) {
+          worn = null;
+          b.setAttribute("aria-pressed", "false");
+          result.className = "g-morph-result empty";
+          result.innerHTML = '<span class="tip">点一件外套穿上</span>';
+          hint.textContent = "脱下了。再试一件。";
+          return;
+        }
+        worn = sf;
+        Array.prototype.forEach.call(rack.children, function (x) {
+          try { x.setAttribute("aria-pressed", "false"); } catch (e) {}
+        });
+        b.setAttribute("aria-pressed", "true");
+        var word = compose(sf, params.root || "");
+        result.className = "g-morph-result";
+        result.innerHTML = '<span class="w">' + esc(word) + "</span>" +
+          '<span class="pos">' + esc(sf.pos || "") + "</span>" +
+          '<span class="ch">' + esc(params.root || "") + "（" + esc(params.rootPos || "") +
+          "） + " + esc(sf.suf) + " → " + esc(word) + "（" + esc(sf.pos || "") + "）</span>";
+        hint.innerHTML = "穿上了！" + esc(params.root || "") + "从" +
+          esc(params.rootPos || "") + "变成了" + esc(sf.pos || "") + "。";
+        flash(result, true);
+      });
+      rack.appendChild(b);
+    });
+    wrap.appendChild(rack);
+
+    var traps = params.traps || [];
+    if (traps.length) {
+      var trapsBox = el("div", "g-morph-traps");
+      trapsBox.appendChild(el("div", "g-morph-trap-title", "⚠ 卧底外套（点它试试）"));
+      var trapRow = el("div", "g-morph-rack");
+      traps.forEach(function (t) {
+        var b = el("button", "g-suffix trap", "🥷 " + esc(t.suf));
+        b.type = "button";
+        b.setAttribute("aria-label", "可疑外套 " + t.suf);
+        b.addEventListener("click", function () {
+          var word = compose(t, t.root || params.root || "");
+          var note = t.note || (word + " 穿上 " + t.suf + " 词性没变！");
+          result.className = "g-morph-result alarm";
+          result.innerHTML = '<span class="w">' + esc(word) + "</span>" +
+            '<span class="pos">还是' + esc(t.pos || "") + "！</span>" +
+            '<span class="ch">✗ 卧底警报：' + esc(note) + "</span>";
+          hint.innerHTML = '<span class="bad">✗ 卧底！</span>' + esc(note);
+          flash(result, false);
+        });
+        trapRow.appendChild(b);
+      });
+      trapsBox.appendChild(trapRow);
+      wrap.appendChild(trapsBox);
+    }
+    wrap.appendChild(hint);
+    return wrap;
+  }
+
+  /* ---------------- Y4 成分标注练习 constituent-quiz ----------------
+   * G1 引擎 + 题库配置：随机抽句、限时标注；不排名，只记录正确率。
+   * params: { items:[{id, sentence:[{w, role}]}], slots:[{role, label}],
+   *           rounds, timeLimitSec, hint }
+   * 正确率存 localStorage（store/load 已 try/catch 降级）；
+   * W-G12：明确的"退出练习"按钮；一屏内完成（紧凑布局）。
+   * 注意：.g-zone 是唯一滚动容器——本部件不创建滚动容器、
+   * 不调用 scrollIntoView；页面切换后部件脱离文档时定时器自清。 */
+  function widgetConstituentQuiz(params, pageId) {
+    var wrap = el("div", "g-quiz4");
+    var bar = el("div", "g-quiz4-bar");
+    var roundLab = el("span", "g-quiz4-stat", "");
+    var timerLab = el("span", "g-quiz4-stat g-quiz4-timer", "");
+    var scoreLab = el("span", "g-quiz4-stat", "");
+    var exit = el("button", "g-quiz4-exit", "退出练习");
+    exit.type = "button";
+    exit.setAttribute("aria-label", "退出成分标注练习");
+    bar.appendChild(roundLab);
+    bar.appendChild(timerLab);
+    bar.appendChild(scoreLab);
+    bar.appendChild(exit);
+    var body = el("div", "g-quiz4-body");
+    var hint = el("div", "g-tag-hint",
+      esc(params.hint || "限时标注句子成分，全部标对得 1 分。"));
+    wrap.appendChild(bar);
+    wrap.appendChild(body);
+    wrap.appendChild(hint);
+
+    var bank = (params.items || []).slice();
+    var rounds = Math.max(1, (params.rounds | 0) || 3);
+    var limit = Math.max(5, (params.timeLimitSec | 0) || 45);
+    var order = [];
+    var done = 0, correct = 0, timer = null, active = false, left = limit;
+    /* smoke 最小 DOM stub 安全：无 setInterval 时降级为不限时练习 */
+    var hasTimer = (typeof setInterval === "function") && (typeof clearInterval === "function");
+
+    function shuffle(a) {
+      for (var i = a.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var t = a[i]; a[i] = a[j]; a[j] = t;
+      }
+      return a;
+    }
+    function nextItem() {
+      if (!order.length) order = shuffle(bank.slice());
+      return order.pop();
+    }
+    function stopTimer() {
+      if (timer && hasTimer) { try { clearInterval(timer); } catch (e) {} }
+      timer = null;
+    }
+    function tick() {
+      if (wrap.isConnected === false) { stopTimer(); return; }
+      left--;
+      timerLab.textContent = "⏱ " + left + "s";
+      if (left <= 0) finishRound(false, "⏱ 时间到！这句记为未完成。");
+    }
+    function slotLabel(role) {
+      var ss = params.slots || [];
+      for (var i = 0; i < ss.length; i++) {
+        if (ss[i].role === role) return ss[i].label;
+      }
+      return roleZh(role);
+    }
+    function startRound() {
+      stopTimer();
+      var it = nextItem();
+      if (!it) { summary(); return; }
+      active = true;
+      left = limit;
+      roundLab.textContent = "第 " + (done + 1) + " / " + rounds + " 句";
+      timerLab.textContent = hasTimer ? "⏱ " + left + "s" : "⏱ 不限时";
+      scoreLab.textContent = "得分 " + correct + " / " + done;
+      body.innerHTML = "";
+      var fb = el("div", "g-tag-hint", "开始！");
+      var chunksBox = el("div", "g-chunks");
+      var tagsBox = el("div", "g-tags");
+      var chunks = it.sentence.map(function (c) {
+        var s = el("span", "g-chunk draggable role-" + c.role);
+        s.innerHTML = '<span class="w">' + esc(c.w) + "</span>" + '<span class="r">？</span>';
+        s.dataset.role = c.role;
+        s.dataset.done = "0";
+        s.setAttribute("tabindex", "0");
+        s.setAttribute("role", "button");
+        s.setAttribute("aria-label", "词块：" + c.w + "，待标注");
+        chunksBox.appendChild(s);
+        return s;
+      });
+      var tags = (params.slots || []).map(function (t) {
+        var b = el("button", "g-tag role-" + t.role, esc(t.label));
+        b.type = "button";
+        b.dataset.role = t.role;
+        b.setAttribute("aria-pressed", "false");
+        tagsBox.appendChild(b);
+        return b;
+      });
+      body.appendChild(chunksBox);
+      body.appendChild(tagsBox);
+      body.appendChild(fb);
+      function decide(tag, chunk) {
+        if (!active || chunk.dataset.done === "1") return { kind: "ignore" };
+        if (tag.dataset.role === chunk.dataset.role) return { kind: "ok" };
+        return { kind: "bad", msg: "✗ 不对，再想想：这个词块在句中做什么？" };
+      }
+      function apply(tag, chunk, d) {
+        if (d.kind !== "ok") {
+          fb.innerHTML = '<span class="bad">' + esc(d.msg) + "</span>";
+          chunk.classList.remove("placed-bad");
+          void chunk.offsetWidth;
+          chunk.classList.add("placed-bad");
+          flash(chunk, false);
+          return;
+        }
+        chunk.dataset.done = "1";
+        chunk.querySelector(".r").textContent = slotLabel(tag.dataset.role);
+        flash(chunk, true);
+        if (chunks.every(function (c) { return c.dataset.done === "1"; })) {
+          finishRound(true, "✓ 全对！这句 +1 分。");
+        } else {
+          fb.innerHTML = '<span class="ok">✓ 对了</span> 继续！';
+        }
+      }
+      bindDual(tags, chunks, decide, apply);
+      if (hasTimer) timer = setInterval(tick, 1000);
+    }
+    function finishRound(ok, msg) {
+      if (!active) return;
+      active = false;
+      stopTimer();
+      done++;
+      if (ok) correct++;
+      hint.innerHTML = msg;
+      scoreLab.textContent = "得分 " + correct + " / " + done;
+      /* 反馈停顿 0.9s 后再进下一轮（只读 wrap 连通性，绝不滚 body） */
+      later(function () {
+        if (wrap.isConnected === false) return;
+        if (done >= rounds) summary();
+        else startRound();
+      }, 900);
+    }
+    function summary() {
+      stopTimer();
+      active = false;
+      var rate = done ? Math.round(correct / done * 100) : 0;
+      store("ltb-eng-constituent-quiz", {
+        page: pageId || "", total: done, correct: correct, rate: rate, ts: Date.now()
+      });
+      roundLab.textContent = "已完成";
+      timerLab.textContent = "";
+      scoreLab.textContent = "正确率 " + correct + " / " + done;
+      body.innerHTML = "";
+      var box = el("div", "g-quiz4-summary");
+      box.innerHTML = '<div class="big">🏁 练习结束</div>' +
+        '<div class="rate">正确率：' + correct + " / " + done + "（" + rate + "%）</div>" +
+        '<div class="note">不排名，只记录——已存到本机学习记录。</div>';
+      var again = el("button", "g-quiz4-again", "再练一次");
+      again.type = "button";
+      again.addEventListener("click", function () {
+        done = 0; correct = 0; order = [];
+        hint.textContent = "开始新一轮练习！";
+        startRound();
+      });
+      box.appendChild(again);
+      body.appendChild(box);
+    }
+    exit.addEventListener("click", function () {
+      if (active) {
+        active = false;
+        stopTimer();
+        hint.innerHTML = "已退出练习。";
+      }
+      summary();
+    });
+    if (!bank.length) {
+      body.appendChild(el("div", "g-tag-hint", "题库为空，请生产队补充 items。"));
+      exit.style.display = "none";
+    } else {
+      startRound();
+    }
+    return wrap;
+  }
+
   /* ---------------- 页面渲染 ---------------- */
   var cur = null;   // {found, pageIdx}
   var appRoot = null;
@@ -456,6 +1003,10 @@
       (page.widgets || []).forEach(function (w) {
         if (w.type === "signal-light") zone.appendChild(widgetSignal(w.params));
         else if (w.type === "tagging") zone.appendChild(widgetTagging(w.params));
+        else if (w.type === "sentence-builder") zone.appendChild(widgetSentenceBuilder(w.params));
+        else if (w.type === "clause-slots") zone.appendChild(widgetClauseSlots(w.params));
+        else if (w.type === "morph-dressup") zone.appendChild(widgetMorph(w.params));
+        else if (w.type === "constituent-quiz") zone.appendChild(widgetConstituentQuiz(w.params, page.id));
       });
     } else if (page.kind === "explain") {
       if (page.lead) zone.appendChild(el("div", "g-tip", "👋 " + esc(page.lead)));

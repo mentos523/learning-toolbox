@@ -543,3 +543,173 @@ body[data-theme="dark"] #grammar-app {
 
 /* ---------- 章节内页眉：面包屑 ---------- */
 .g-crumb { font-size: 0.75rem; color: var(--eng-ink-soft); }
+
+/* ============================================================
+ * 蓝队 2026-10-14（阶段三）：G3 / G5 / G6 / Y4 新增部件样式
+ * 全部 g- 前缀，只作用于 #grammar-app 容器内；触控目标 ≥44px；
+ * 双编码（颜色 + 文字）；390px 下自然换行堆叠。
+ * ============================================================ */
+
+/* ---------- G3 句型积木拼装 ---------- */
+.g-builder { display: flex; flex-direction: column; gap: 10px; }
+.g-builder-slots { display: flex; flex-wrap: wrap; gap: 8px; }
+.g-builder-slot {
+  flex: 1 1 120px;
+  min-height: 64px;
+  border: 2px dashed var(--eng-line);   /* W-G3：空槽虚线框 */
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 6px 8px;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.g-builder-slot .g-builder-slot-label { font-size: 0.85rem; font-weight: 700; color: var(--eng-ink); }
+.g-builder-slot .g-builder-slot-tip { font-size: 0.72rem; color: var(--eng-ink-soft); }  /* W-G3：空态文字提示 */
+.g-builder-slot:not(.empty) { border-style: solid; border-color: var(--eng-subject); }
+.g-builder-slot .g-chunk { width: 100%; }
+.g-builder-done { font-size: 0.95rem; line-height: 1.6; min-height: 1.5em; }
+.g-builder-done .ok { color: var(--eng-correct); font-weight: 700; }
+
+/* ---------- G5 从句槽 ---------- */
+.g-clause { display: flex; flex-direction: column; gap: 10px; }
+.g-clause-main { font-size: 0.92rem; color: var(--eng-ink); line-height: 1.6; }
+.g-clause-slots { display: flex; flex-wrap: wrap; gap: 8px; }
+.g-clause-slot {
+  flex: 1 1 140px;
+  min-height: 64px;
+  border: 2px dashed var(--eng-line);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 6px 8px;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.g-clause-slot .g-clause-slot-label { font-size: 0.85rem; font-weight: 700; color: var(--eng-ink); }
+.g-clause-slot .g-clause-slot-tip { font-size: 0.72rem; color: var(--eng-ink-soft); }
+.g-clause-slot:not(.empty) { border-style: solid; border-color: var(--eng-clause); }
+.g-clause-slot .g-clause-block { width: 100%; }
+/* 从句块：黄底 + 深色字 + "从句"文字标签（W-G5 双编码） */
+.g-clause-block {
+  min-height: 44px;
+  border-radius: 10px;
+  border: 2px solid var(--eng-clause);
+  background: var(--eng-clause);
+  color: var(--eng-on-clause);
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 12px;
+  font-size: 0.92rem;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.g-clause-block .t { font-weight: 700; line-height: 1.4; }
+.g-clause-block .k { font-size: 0.68rem; font-weight: 700; }
+.g-clause-done { font-size: 0.95rem; line-height: 1.6; min-height: 1.5em; }
+.g-clause-done .ok { color: var(--eng-correct); font-weight: 700; }
+
+/* ---------- G6 词性换装 ---------- */
+.g-morph { display: flex; flex-direction: column; gap: 10px; }
+.g-morph-stage { display: flex; align-items: stretch; gap: 8px; }
+.g-morph-root, .g-morph-result {
+  flex: 1;
+  border: 2px solid var(--eng-card);
+  border-radius: 12px;
+  background: var(--eng-panel);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 8px;
+  gap: 2px;
+  min-height: 96px;
+}
+.g-morph-root .p { font-size: 1.4rem; }
+.g-morph-root .w, .g-morph-result .w { font-size: 1.15rem; font-weight: 700; color: var(--eng-ink); }
+.g-morph-root .pos, .g-morph-result .pos { font-size: 0.72rem; font-weight: 700; color: var(--eng-verb); }
+.g-morph-result .ch { font-size: 0.75rem; color: var(--eng-ink-soft); text-align: center; line-height: 1.5; }
+.g-morph-result.empty { border-style: dashed; }
+.g-morph-result.empty .tip { font-size: 0.78rem; color: var(--eng-ink-soft); }
+.g-morph-result.alarm { border-color: var(--eng-error); }
+.g-morph-result.alarm .pos { color: var(--eng-error); }
+.g-morph-arrow { align-self: center; font-size: 1.3rem; color: var(--eng-ink-soft); flex: none; }
+.g-morph-rack { display: flex; flex-wrap: wrap; gap: 8px; }
+.g-suffix {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 2px solid var(--eng-verb);
+  background: var(--eng-bg);
+  color: var(--eng-ink);
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.g-suffix[aria-pressed="true"] { background: var(--eng-verb); color: #fff; }
+.g-suffix.trap { border-color: var(--eng-error); }
+.g-morph-traps { border-top: 1px dashed var(--eng-line); padding-top: 8px; }
+.g-morph-trap-title { font-size: 0.8rem; color: var(--eng-ink-soft); margin-bottom: 6px; }
+
+/* ---------- Y4 成分标注练习 ---------- */
+.g-quiz4 { display: flex; flex-direction: column; gap: 10px; }
+.g-quiz4-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  background: var(--eng-panel);
+  border: 1px solid var(--eng-line);
+  border-radius: 10px;
+  padding: 6px 10px;
+}
+.g-quiz4-stat { font-size: 0.85rem; font-weight: 700; color: var(--eng-ink); }
+.g-quiz4-timer { color: var(--eng-verb); }
+.g-quiz4-exit {
+  margin-left: auto;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 6px 14px;
+  border-radius: 10px;
+  border: 2px solid var(--eng-line);
+  background: var(--eng-bg);
+  color: var(--eng-ink);
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.g-quiz4-body { display: flex; flex-direction: column; gap: 10px; }
+.g-quiz4-summary {
+  text-align: center;
+  padding: 14px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}
+.g-quiz4-summary .big { font-size: 1.1rem; font-weight: 700; }
+.g-quiz4-summary .rate { font-size: 1rem; }
+.g-quiz4-summary .note { font-size: 0.78rem; color: var(--eng-ink-soft); }
+.g-quiz4-again {
+  min-height: 44px;
+  padding: 8px 22px;
+  border-radius: 10px;
+  border: none;
+  background: var(--eng-subject);
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  touch-action: manipulation;
+}
