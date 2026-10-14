@@ -283,7 +283,7 @@ window.ENG_CH["gr19"] = {
             {
               id: "gr19.1.2-p1",
               kind: "observe",
-              title: "先看三句话：都是对的，错长什么样？",
+              title: "先看三句对的：每句都过了哪几“看”？",
               sentences: [
                 {
                   id: "gr19.1.2-e1",
@@ -321,12 +321,12 @@ window.ENG_CH["gr19"] = {
                 }
               ],
               guess: {
-                q: "改错十看：时态、主谓、冠词、介词、连词、代词、词性、非谓语、语序、逻辑——看到病句先看哪？",
-                options: ["先看谓语动词（时态/主谓）", "先看标点", "凭语感"],
+                q: "三句话里，哪一块是改错“十看”的第一检查对象？",
+                options: ["谓语动词", "状语", "主语"],
                 answer: 0,
                 note: "先猜，再看色块验证——猜错也没关系，只记录不判分。"
               },
-              point: "改错不凭语感：十看法一个一个过，先看谓语。"
+              point: "改错像体检：十个项目一个一个过，先看谓语。"
             },
             /* ---------- p2 交互页：G1 tagging（十看分类） ---------- */
             {
@@ -340,13 +340,13 @@ window.ENG_CH["gr19"] = {
                   params: {
                     sentence: [
                       { w: "He", role: "subject", label: "主语" },
-                      { w: "go", role: "verb", label: "谓语（十看：主谓）" },
+                      { w: "go", role: "verb", label: "谓语" },
                       { w: "to school", role: "adverb", label: "状语" },
                       { w: "every day", role: "adverb", label: "状语" }
                     ],
                     slots: [
                       { role: "subject", label: "主语" },
-                      { role: "verb", label: "谓语（十看：主谓）" },
+                      { role: "verb", label: "谓语" },
                       { role: "adverb", label: "状语" }
                     ],
                     hint: "He go to school every day：主语 He 是三单，谓语 go 对吗？"
@@ -370,12 +370,18 @@ window.ENG_CH["gr19"] = {
                 {
                   type: "idcard",
                   rule: "短文改错十看法：时态、主谓一致、冠词、介词、连词、代词、词性、非谓语、语序、行文逻辑。",
-                  condition: "高考改错规则：一处只改一词（多改扣分）；10 处左右设错，每看一般 1 处；先看谓语动词，再看名词（单复数/冠词），再看连词。"
+                  condition: "先看谓语动词，再看名词（单复数/冠词），再看连词。"
+                },
+                /* 考场规则独立成块：引擎暂无 note 块类型，暂用 idcard 承载（见 D 队报告） */
+                {
+                  type: "idcard",
+                  rule: "考场规则：一处只改一词，多改扣分。",
+                  condition: "10 处左右设错，每看一般 1 处。"
                 },
                 {
                   type: "bridge",
                   zh: "汉语改错看意思；英语改错看“形”：时态对不对、单复数对不对。",
-                  en: "英语是形合语言，错误都长在“形态”上：go 少个 s，a/an/the 乱放，although 后面跟了 but——十看法就是十个“形态检查站”。",
+                  en: "英语是形合语言（靠形态变化表意），错误都长在“形态”上：go 少个 s，a/an/the 乱放，although 后面跟了 but——十看法就是十个“形态检查站”。",
                   unbridge: "这是英语的规矩：改错不靠语感，靠检查站一个一个过。"
                 },
                 {
@@ -391,9 +397,23 @@ window.ENG_CH["gr19"] = {
                   wrongZh: "（✗ 错句）",
                   right: "Although it rained, we went out.",
                   why: "十看之连词：although 和 but 是仇人，留一个。"
+                },
+                {
+                  type: "contrast",
+                  wrong: "There have a book on the desk.",
+                  wrongZh: "（✗ 错句）",
+                  right: "There is a book on the desk.",
+                  why: "there be 是固定句式：表“存在”不用 have。"
+                },
+                {
+                  type: "contrast",
+                  wrong: "I very much like it.",
+                  wrongZh: "（✗ 错句）",
+                  right: "I like it very much.",
+                  why: "十看之语序：very much 放句尾。"
                 }
               ],
-              point: "这就是十看：先看谓语；一处只改一词；检查站一个一个过。",
+              point: "这就是十看：先看谓语，检查站一个一个过。",
               pointScroll: true
             },
             /* ---------- p4 练习页：改错 ---------- */
@@ -421,7 +441,7 @@ window.ENG_CH["gr19"] = {
                   stem: "There have a book on the desk. 错在？",
                   options: ["have → is", "book → books", "desk → desks"],
                   answer: 0,
-                  tip: "十看之句式：there be 不用 have。"
+                  tip: "there be 是固定句式：表“存在”不用 have。"
                 },
                 {
                   type: "choice",

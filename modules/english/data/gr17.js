@@ -468,7 +468,7 @@ window.ENG_CH["gr17"] = {
                 {
                   id: "gr17.1.3-e1",
                   en: "It was yesterday that we met.",
-                  zh: "我们是昨天见面的（强调昨天）。",
+                  zh: "我们是昨天见面的。",
                   reg: "通用",
                   tagged: [
                     { w: "It was", role: "subject", label: "形式主语" },
@@ -479,7 +479,7 @@ window.ENG_CH["gr17"] = {
                 {
                   id: "gr17.1.3-e2",
                   en: "It is my mother who cooks for us.",
-                  zh: "是我妈妈给我们做饭（强调妈妈）。",
+                  zh: "是我妈妈给我们做饭。",
                   reg: "通用",
                   tagged: [
                     { w: "It is", role: "subject", label: "形式主语" },
@@ -971,15 +971,15 @@ window.ENG_CH["gr17"] = {
             {
               id: "gr17.2.3-p1",
               kind: "observe",
-              title: "先看三句话：都有 that，身份一样吗？",
+              title: "先看四句话：that、倒装、there be 各长啥样？",
               sentences: [
                 {
                   id: "gr17.2.3-e1",
                   en: "It was in 2020 that we moved here.",
-                  zh: "我们是 2020 年搬到这儿的（强调）。",
+                  zh: "我们是在 2020 年搬到这儿的。",
                   reg: "通用",
                   tagged: [
-                    { w: "It was", role: "subject", label: "强调框前半" },
+                    { w: "It was", role: "subject", label: "主语（强调句前半）" },
                     { w: "in 2020", role: "adverb", label: "被强调部分" },
                     { w: "that we moved here", role: "clause", label: "强调框后半" }
                   ]
@@ -987,7 +987,7 @@ window.ENG_CH["gr17"] = {
                 {
                   id: "gr17.2.3-e2",
                   en: "The year that we moved here was 2020.",
-                  zh: "我们搬到这儿的那一年是 2020 年（定语从句）。",
+                  zh: "我们搬到这儿的那一年是 2020 年。",
                   reg: "通用",
                   tagged: [
                     { w: "The year", role: "subject", label: "先行词" },
@@ -1005,6 +1005,20 @@ window.ENG_CH["gr17"] = {
                     { w: "a book", role: "subject", label: "主语" },
                     { w: "on the desk", role: "adverb", label: "状语" }
                   ]
+                },
+                /* 演示句（非 D3 台账例句）：仅供本观察页作"倒装"例证，
+                 * 不入 sentences 索引、不登记台账、不标榜为例句。
+                 * 文本与已终审 gr17.1.1-e1 逐字一致，零新增评审内容。 */
+                {
+                  id: "gr17.2.3-demo1",
+                  en: "Here comes the bus.",
+                  zh: "公交车来了。",
+                  reg: "通用",
+                  tagged: [
+                    { w: "Here", role: "adverb", label: "地点状语" },
+                    { w: "comes", role: "verb", label: "谓语" },
+                    { w: "the bus", role: "subject", label: "主语（倒装：在后）" }
+                  ]
                 }
               ],
               guess: {
@@ -1013,7 +1027,7 @@ window.ENG_CH["gr17"] = {
                 answer: 0,
                 note: "先猜，再看色块验证——猜错也没关系，只记录不判分。"
               },
-              point: "都有 that，不一定是同一种句：看 that 前面有没有先行词。"
+              point: "that 看身份：前面有没有先行词；倒装看语序：主语在谓语后面。"
             },
             /* ---------- p2 交互页：G5 从句槽（强调 vs 定语） ---------- */
             {
@@ -1054,8 +1068,18 @@ window.ENG_CH["gr17"] = {
                 },
                 {
                   type: "idcard",
-                  rule: "综合辨析三问：一、It was…that… 有没有先行词？没有→强调句；有→定语从句。二、倒装还是强调？倒装变语序（Here comes…），强调加框（It is…that…）。三、there be 还是 have？表“存在”用 there be，不用 have。",
-                  condition: "强调句：It was in 2020 that…（that 前无先行词）；定语从句：The year that…（有先行词）；there be vs have：There is a book…（✓）/ There has a book…（✗）。"
+                  rule: "一问：It was…that… 有没有先行词？没有→强调句；有→定语从句。",
+                  condition: "强调句：It was in 2020 that…（that 前无先行词）；定语从句：The year that…（有先行词）。"
+                },
+                {
+                  type: "idcard",
+                  rule: "二问：倒装还是强调？倒装变语序（Here comes…），强调加框（It is…that…）。",
+                  condition: "倒装：Here comes the bus.（主语 the bus 在谓语 comes 之后）；强调：It was in 2020 that…（It…that… 加框）。"
+                },
+                {
+                  type: "idcard",
+                  rule: "三问：there be 还是 have？表“存在”用 there be，不用 have。",
+                  condition: "There is a book…（✓）/ There has a book…（✗）。"
                 },
                 {
                   type: "bridge",
@@ -1145,7 +1169,7 @@ window.ENG_CH["gr17"] = {
                 {
                   id: "gr17.2.4-e2",
                   en: "It is Tom who broke the window.",
-                  zh: "是汤姆打碎了窗户（强调汤姆）。",
+                  zh: "是汤姆打碎了窗户。",
                   reg: "通用",
                   tagged: [
                     { w: "It is", role: "subject", label: "强调框前半" },
