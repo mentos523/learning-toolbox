@@ -67,7 +67,7 @@ window.ENG_CH["gr14"] = {
     "gr14.1.3-e5": { en: "My mother, that is cooking, is kind.", zh: "（✗ 错句）本想说“ 正在做饭的妈妈很和善 ”。", reg: "通用",
       tagged: [ { w: "My mother", role: "subject", label: "主语" }, { w: "that is cooking", role: "attribute", label: "定语从句（非限制误用 that）" }, { w: "is", role: "verb", label: "谓语" }, { w: "kind", role: "complem", label: "表语" } ] },
     "gr14.1.3-e6": { en: "The students who work hard will succeed.", zh: "努力的学生会成功。", reg: "通用",
-      tagged: [ { w: "The students", role: "subject", label: "主语" }, { w: "who work hard", role: "attribute", label: "定语从句（限制性）" }, { w: "will", role: "verb", label: "助动词" }, { w: "succeed", role: "verb", label: "动词原形" } ] },
+      tagged: [ { w: "The students", role: "subject", label: "主语" }, { w: "who work hard", role: "attribute", label: "定语从句（限制性）" }, { w: "will", role: "verb", label: "情态动词" }, { w: "succeed", role: "verb", label: "动词原形" } ] },
     "gr14.1.3-e7": { en: "Tom, whose father is a teacher, likes math.", zh: "汤姆的爸爸是老师，他喜欢数学。", reg: "通用",
       tagged: [ { w: "Tom", role: "subject", label: "主语" }, { w: "whose father is a teacher", role: "attribute", label: "定语从句（非限制性）" }, { w: "likes", role: "verb", label: "谓语" }, { w: "math", role: "object", label: "宾语" } ] },
     /* ---------- gr14.1.4 关系代词省略规则 ---------- */

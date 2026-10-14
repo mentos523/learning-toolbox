@@ -27,7 +27,7 @@ window.ENG_CH["gr15"] = {
   sentences: {
     /* ---------- gr15.1.1 时间状语从句 ---------- */
     "gr15.1.1-e1": { en: "I'll call you as soon as I arrive.", zh: "我一到就给你打电话。", reg: "通用",
-      tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "'ll", role: "verb", label: "助动词" }, { w: "call", role: "verb", label: "动词原形" }, { w: "you", role: "object", label: "宾语" }, { w: "as soon as I arrive", role: "adverb", label: "时间状语从句" } ] },
+      tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "'ll", role: "verb", label: "情态动词" }, { w: "call", role: "verb", label: "动词原形" }, { w: "you", role: "object", label: "宾语" }, { w: "as soon as I arrive", role: "adverb", label: "时间状语从句" } ] },
     "gr15.1.1-e2": { en: "While I was cooking, he watched TV.", zh: "我做饭时，他在看电视。", reg: "通用",
       tagged: [ { w: "While I was cooking", role: "adverb", label: "时间状语从句" }, { w: "he", role: "subject", label: "主语" }, { w: "watched", role: "verb", label: "谓语" }, { w: "TV", role: "object", label: "宾语" } ] },
     "gr15.1.1-e3": { en: "When I got home, my mother was cooking.", zh: "我到家时，妈妈正在做饭。", reg: "通用",
@@ -35,26 +35,26 @@ window.ENG_CH["gr15"] = {
     "gr15.1.1-e4": { en: "By the time we arrived, the film had started.", zh: "我们到时，电影已经开演了。", reg: "通用",
       tagged: [ { w: "By the time we arrived", role: "adverb", label: "时间状语从句" }, { w: "the film", role: "subject", label: "主语" }, { w: "had started", role: "verb", label: "谓语" } ] },
     "gr15.1.1-e5": { en: "I'll call you as soon as I will arrive.", zh: "（✗ 错句）本想说“ 我一到就给你打电话 ”。", reg: "通用",
-      tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "'ll", role: "verb", label: "助动词" }, { w: "call", role: "verb", label: "动词原形" }, { w: "you", role: "object", label: "宾语" }, { w: "as soon as I will arrive", role: "adverb", label: "时间状语从句（时态错）" } ] },
+      tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "'ll", role: "verb", label: "情态动词" }, { w: "call", role: "verb", label: "动词原形" }, { w: "you", role: "object", label: "宾语" }, { w: "as soon as I will arrive", role: "adverb", label: "时间状语从句（时态错）" } ] },
     "gr15.1.1-e6": { en: "When he comes, tell me.", zh: "他来时告诉我。", reg: "通用",
       tagged: [ { w: "When he comes", role: "adverb", label: "时间状语从句" }, { w: "tell", role: "verb", label: "谓语" }, { w: "me", role: "object", label: "宾语" } ] },
     "gr15.1.1-e7": { en: "As soon as she heard the news, she left.", zh: "她一听到消息就离开了。", reg: "通用",
       tagged: [ { w: "As soon as she heard the news", role: "adverb", label: "时间状语从句" }, { w: "she", role: "subject", label: "主语" }, { w: "left", role: "verb", label: "谓语" } ] },
     /* ---------- gr15.1.2 条件状语从句 ---------- */
     "gr15.1.2-e1": { en: "If it rains, we will stay at home.", zh: "如果下雨，我们就待在家里。", reg: "通用",
-      tagged: [ { w: "If it rains", role: "adverb", label: "条件状语从句" }, { w: "we", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "助动词" }, { w: "stay", role: "verb", label: "动词原形" }, { w: "at home", role: "adverb", label: "状语" } ] },
+      tagged: [ { w: "If it rains", role: "adverb", label: "条件状语从句" }, { w: "we", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "情态动词" }, { w: "stay", role: "verb", label: "动词原形" }, { w: "at home", role: "adverb", label: "状语" } ] },
     "gr15.1.2-e2": { en: "Unless you hurry, you will be late.", zh: "除非你抓紧，否则会迟到。", reg: "通用",
-      tagged: [ { w: "Unless you hurry", role: "adverb", label: "条件状语从句" }, { w: "you", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "助动词" }, { w: "be", role: "verb", label: "动词原形" }, { w: "late", role: "complem", label: "表语" } ] },
+      tagged: [ { w: "Unless you hurry", role: "adverb", label: "条件状语从句" }, { w: "you", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "情态动词" }, { w: "be", role: "verb", label: "动词原形" }, { w: "late", role: "complem", label: "表语" } ] },
     "gr15.1.2-e3": { en: "If you study hard, you will pass.", zh: "如果你努力学习，就会通过。", reg: "通用",
-      tagged: [ { w: "If you study hard", role: "adverb", label: "条件状语从句" }, { w: "you", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "助动词" }, { w: "pass", role: "verb", label: "动词原形" } ] },
+      tagged: [ { w: "If you study hard", role: "adverb", label: "条件状语从句" }, { w: "you", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "情态动词" }, { w: "pass", role: "verb", label: "动词原形" } ] },
     "gr15.1.2-e4": { en: "Unless you don't hurry, you will be late.", zh: "（✗ 错句）本想说“ 除非你抓紧，否则会迟到 ”。", reg: "通用",
-      tagged: [ { w: "Unless you don't hurry", role: "adverb", label: "条件状语从句（双重否定）" }, { w: "you", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "助动词" }, { w: "be", role: "verb", label: "动词原形" }, { w: "late", role: "complem", label: "表语" } ] },
+      tagged: [ { w: "Unless you don't hurry", role: "adverb", label: "条件状语从句（双重否定）" }, { w: "you", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "情态动词" }, { w: "be", role: "verb", label: "动词原形" }, { w: "late", role: "complem", label: "表语" } ] },
     "gr15.1.2-e5": { en: "If it will rain, we will stay at home.", zh: "（✗ 错句）本想说“ 如果下雨，我们就待在家里 ”。", reg: "通用",
-      tagged: [ { w: "If it will rain", role: "adverb", label: "条件状语从句（时态错）" }, { w: "we", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "助动词" }, { w: "stay", role: "verb", label: "动词原形" }, { w: "at home", role: "adverb", label: "状语" } ] },
+      tagged: [ { w: "If it will rain", role: "adverb", label: "条件状语从句（时态错）" }, { w: "we", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "情态动词" }, { w: "stay", role: "verb", label: "动词原形" }, { w: "at home", role: "adverb", label: "状语" } ] },
     "gr15.1.2-e6": { en: "You can't go out unless you finish homework.", zh: "除非做完作业，否则不能出去。", reg: "通用",
-      tagged: [ { w: "You", role: "subject", label: "主语" }, { w: "can't", role: "verb", label: "助动词" }, { w: "go", role: "verb", label: "动词原形" }, { w: "out", role: "adverb", label: "状语" }, { w: "unless you finish homework", role: "adverb", label: "条件状语从句" } ] },
+      tagged: [ { w: "You", role: "subject", label: "主语" }, { w: "can't", role: "verb", label: "情态动词" }, { w: "go", role: "verb", label: "动词原形" }, { w: "out", role: "adverb", label: "状语" }, { w: "unless you finish homework", role: "adverb", label: "条件状语从句" } ] },
     "gr15.1.2-e7": { en: "If I have time, I will help you.", zh: "如果我有时间，我会帮你。", reg: "通用",
-      tagged: [ { w: "If I have time", role: "adverb", label: "条件状语从句" }, { w: "I", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "助动词" }, { w: "help", role: "verb", label: "动词原形" }, { w: "you", role: "object", label: "宾语" } ] },
+      tagged: [ { w: "If I have time", role: "adverb", label: "条件状语从句" }, { w: "I", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "情态动词" }, { w: "help", role: "verb", label: "动词原形" }, { w: "you", role: "object", label: "宾语" } ] },
     /* ---------- gr15.1.3 原因状语从句 ---------- */
     "gr15.1.3-e1": { en: "Because he was ill, he stayed at home.", zh: "因为他病了，他待在家里。", reg: "通用",
       tagged: [ { w: "Because he was ill", role: "adverb", label: "原因状语从句" }, { w: "he", role: "subject", label: "主语" }, { w: "stayed", role: "verb", label: "谓语" }, { w: "at home", role: "adverb", label: "状语" } ] },
@@ -108,7 +108,7 @@ window.ENG_CH["gr15"] = {
     "gr15.2.1-e3": { en: "Even though it was late, they kept working.", zh: "尽管很晚了，他们继续工作。", reg: "通用",
       tagged: [ { w: "Even though it was late", role: "adverb", label: "让步状语从句" }, { w: "they", role: "subject", label: "主语" }, { w: "kept", role: "verb", label: "谓语" }, { w: "working", role: "object", label: "宾语" } ] },
     "gr15.2.1-e4": { en: "Child as he is, he can swim well.", zh: "虽然他是个孩子，但游泳很好。", reg: "书面",
-      tagged: [ { w: "Child as he is", role: "adverb", label: "让步状语从句（as 倒装）" }, { w: "he", role: "subject", label: "主语" }, { w: "can", role: "verb", label: "助动词" }, { w: "swim", role: "verb", label: "动词原形" }, { w: "well", role: "adverb", label: "状语" } ] },
+      tagged: [ { w: "Child as he is", role: "adverb", label: "让步状语从句（as 倒装）" }, { w: "he", role: "subject", label: "主语" }, { w: "can", role: "verb", label: "情态动词" }, { w: "swim", role: "verb", label: "动词原形" }, { w: "well", role: "adverb", label: "状语" } ] },
     "gr15.2.1-e5": { en: "Although it rained, but we went hiking.", zh: "（✗ 错句）本想说“ 虽然下雨了，我们还是去远足了 ”。", reg: "通用",
       tagged: [ { w: "Although it rained", role: "adverb", label: "让步状语从句" }, { w: "but we went hiking", role: "adverb", label: "多余的 but" } ] },
     "gr15.2.1-e6": { en: "Though tired, he kept on reading.", zh: "虽然累了，他继续读书。（though + 分词省略）", reg: "通用",
@@ -144,16 +144,16 @@ window.ENG_CH["gr15"] = {
     "gr15.2.3-e6": { en: "When young, they lived here.", zh: "（✗ 错句）本想说“ 他小时候住这儿 ”。", reg: "通用",
       tagged: [ { w: "When young", role: "adverb", label: "时间状语从句（主语偷换）" }, { w: "they", role: "subject", label: "主语" }, { w: "lived", role: "verb", label: "谓语" }, { w: "here", role: "adverb", label: "状语" } ] },
     "gr15.2.3-e7": { en: "If necessary, I will help.", zh: "如果需要，我会帮忙。（= If it is necessary）", reg: "通用",
-      tagged: [ { w: "If necessary", role: "adverb", label: "条件状语从句（省略）" }, { w: "I", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "助动词" }, { w: "help", role: "verb", label: "动词原形" } ] },
+      tagged: [ { w: "If necessary", role: "adverb", label: "条件状语从句（省略）" }, { w: "I", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "情态动词" }, { w: "help", role: "verb", label: "动词原形" } ] },
     /* ---------- gr15.2.4 本章小结与习题（高考） ---------- */
     "gr15.2.4-e1": { en: "I'll call you as soon as I arrive.", zh: "我一到就给你打电话。（时间，复习）", reg: "通用",
-      tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "'ll", role: "verb", label: "助动词" }, { w: "call", role: "verb", label: "动词原形" }, { w: "you", role: "object", label: "宾语" }, { w: "as soon as I arrive", role: "adverb", label: "时间状语从句" } ] },
+      tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "'ll", role: "verb", label: "情态动词" }, { w: "call", role: "verb", label: "动词原形" }, { w: "you", role: "object", label: "宾语" }, { w: "as soon as I arrive", role: "adverb", label: "时间状语从句" } ] },
     "gr15.2.4-e2": { en: "Because he was ill, he stayed at home.", zh: "因为他病了，他待在家里。（原因，复习）", reg: "通用",
       tagged: [ { w: "Because he was ill", role: "adverb", label: "原因状语从句" }, { w: "he", role: "subject", label: "主语" }, { w: "stayed", role: "verb", label: "谓语" }, { w: "at home", role: "adverb", label: "状语" } ] },
     "gr15.2.4-e3": { en: "Although it rained, we went hiking.", zh: "虽然下雨了，我们还是去远足了。（让步，复习）", reg: "通用",
       tagged: [ { w: "Although it rained", role: "adverb", label: "让步状语从句" }, { w: "we", role: "subject", label: "主语" }, { w: "went", role: "verb", label: "谓语" }, { w: "hiking", role: "adverb", label: "状语" } ] },
     "gr15.2.4-e4": { en: "Unless you hurry, you will be late.", zh: "除非你抓紧，否则会迟到。（条件，复习）", reg: "通用",
-      tagged: [ { w: "Unless you hurry", role: "adverb", label: "条件状语从句" }, { w: "you", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "助动词" }, { w: "be", role: "verb", label: "动词原形" }, { w: "late", role: "complem", label: "表语" } ] },
+      tagged: [ { w: "Unless you hurry", role: "adverb", label: "条件状语从句" }, { w: "you", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "情态动词" }, { w: "be", role: "verb", label: "动词原形" }, { w: "late", role: "complem", label: "表语" } ] },
     "gr15.2.4-e5": { en: "He was so tired that he fell asleep.", zh: "他太累了，睡着了。（结果，复习）", reg: "通用",
       tagged: [ { w: "He", role: "subject", label: "主语" }, { w: "was", role: "verb", label: "谓语" }, { w: "so tired", role: "complem", label: "表语" }, { w: "that he fell asleep", role: "adverb", label: "结果状语从句" } ] },
     "gr15.2.4-e6": { en: "Because he was ill, so he stayed at home.", zh: "（✗ 错句）本想说“ 因为他病了，他待在家里 ”。", reg: "通用",
@@ -175,7 +175,7 @@ window.ENG_CH["gr15"] = {
               title: "先看三句话：从句里用 will 吗？",
               sentences: [
                 { id: "gr15.1.1-e1", en: "I'll call you as soon as I arrive.", zh: "我一到就给你打电话。", reg: "通用",
-                  tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "'ll", role: "verb", label: "助动词" }, { w: "call", role: "verb", label: "动词原形" }, { w: "you", role: "object", label: "宾语" }, { w: "as soon as I arrive", role: "adverb", label: "时间状语从句" } ] },
+                  tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "'ll", role: "verb", label: "情态动词" }, { w: "call", role: "verb", label: "动词原形" }, { w: "you", role: "object", label: "宾语" }, { w: "as soon as I arrive", role: "adverb", label: "时间状语从句" } ] },
                 { id: "gr15.1.1-e2", en: "While I was cooking, he watched TV.", zh: "我做饭时，他在看电视。", reg: "通用",
                   tagged: [ { w: "While I was cooking", role: "adverb", label: "时间状语从句" }, { w: "he", role: "subject", label: "主语" }, { w: "watched", role: "verb", label: "谓语" }, { w: "TV", role: "object", label: "宾语" } ] },
                 { id: "gr15.1.1-e3", en: "When I got home, my mother was cooking.", zh: "我到家时，妈妈正在做饭。", reg: "通用",
@@ -294,11 +294,11 @@ window.ENG_CH["gr15"] = {
               title: "先看三句话：unless = if 还是 if not？",
               sentences: [
                 { id: "gr15.1.2-e1", en: "If it rains, we will stay at home.", zh: "如果下雨，我们就待在家里。", reg: "通用",
-                  tagged: [ { w: "If it rains", role: "adverb", label: "条件状语从句" }, { w: "we", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "助动词" }, { w: "stay", role: "verb", label: "动词原形" }, { w: "at home", role: "adverb", label: "状语" } ] },
+                  tagged: [ { w: "If it rains", role: "adverb", label: "条件状语从句" }, { w: "we", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "情态动词" }, { w: "stay", role: "verb", label: "动词原形" }, { w: "at home", role: "adverb", label: "状语" } ] },
                 { id: "gr15.1.2-e2", en: "Unless you hurry, you will be late.", zh: "除非你抓紧，否则会迟到。", reg: "通用",
-                  tagged: [ { w: "Unless you hurry", role: "adverb", label: "条件状语从句" }, { w: "you", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "助动词" }, { w: "be", role: "verb", label: "动词原形" }, { w: "late", role: "complem", label: "表语" } ] },
+                  tagged: [ { w: "Unless you hurry", role: "adverb", label: "条件状语从句" }, { w: "you", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "情态动词" }, { w: "be", role: "verb", label: "动词原形" }, { w: "late", role: "complem", label: "表语" } ] },
                 { id: "gr15.1.2-e3", en: "If you study hard, you will pass.", zh: "如果你努力学习，就会通过。", reg: "通用",
-                  tagged: [ { w: "If you study hard", role: "adverb", label: "条件状语从句" }, { w: "you", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "助动词" }, { w: "pass", role: "verb", label: "动词原形" } ] }
+                  tagged: [ { w: "If you study hard", role: "adverb", label: "条件状语从句" }, { w: "you", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "情态动词" }, { w: "pass", role: "verb", label: "动词原形" } ] }
               ],
               guess: {
                 q: "Unless you hurry = If you hurry 还是 If you don't hurry？",
@@ -320,7 +320,7 @@ window.ENG_CH["gr15"] = {
                     sentence: [
                       { w: "If it rains", role: "adverb", label: "条件状语从句" },
                       { w: "we", role: "subject", label: "主语" },
-                      { w: "will", role: "verb", label: "助动词" },
+                      { w: "will", role: "verb", label: "情态动词" },
                       { w: "stay", role: "verb", label: "动词原形" },
                       { w: "at home", role: "adverb", label: "状语" }
                     ],
@@ -338,7 +338,7 @@ window.ENG_CH["gr15"] = {
                     sentence: [
                       { w: "Unless you hurry", role: "adverb", label: "条件状语从句" },
                       { w: "you", role: "subject", label: "主语" },
-                      { w: "will", role: "verb", label: "助动词" },
+                      { w: "will", role: "verb", label: "情态动词" },
                       { w: "be", role: "verb", label: "动词原形" },
                       { w: "late", role: "complem", label: "表语" }
                     ],
@@ -878,7 +878,7 @@ window.ENG_CH["gr15"] = {
                 { id: "gr15.2.1-e2", en: "Though he is young, he knows a lot.", zh: "虽然他年轻，但懂得很多。", reg: "通用",
                   tagged: [ { w: "Though he is young", role: "adverb", label: "让步状语从句" }, { w: "he", role: "subject", label: "主语" }, { w: "knows", role: "verb", label: "谓语" }, { w: "a lot", role: "object", label: "宾语" } ] },
                 { id: "gr15.2.1-e4", en: "Child as he is, he can swim well.", zh: "虽然他是个孩子，但游泳很好。", reg: "书面",
-                  tagged: [ { w: "Child as he is", role: "adverb", label: "让步状语从句（as 倒装）" }, { w: "he", role: "subject", label: "主语" }, { w: "can", role: "verb", label: "助动词" }, { w: "swim", role: "verb", label: "动词原形" }, { w: "well", role: "adverb", label: "状语" } ] }
+                  tagged: [ { w: "Child as he is", role: "adverb", label: "让步状语从句（as 倒装）" }, { w: "he", role: "subject", label: "主语" }, { w: "can", role: "verb", label: "情态动词" }, { w: "swim", role: "verb", label: "动词原形" }, { w: "well", role: "adverb", label: "状语" } ] }
               ],
               guess: {
                 q: "although / though / as 都是“ 虽然 ”，位置一样吗？as 倒装把什么提前了？",
@@ -917,7 +917,7 @@ window.ENG_CH["gr15"] = {
                     sentence: [
                       { w: "Child as he is", role: "adverb", label: "让步状语从句（as 倒装）" },
                       { w: "he", role: "subject", label: "主语" },
-                      { w: "can", role: "verb", label: "助动词" },
+                      { w: "can", role: "verb", label: "情态动词" },
                       { w: "swim", role: "verb", label: "动词原形" },
                       { w: "well", role: "adverb", label: "状语" }
                     ],
