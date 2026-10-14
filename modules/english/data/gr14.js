@@ -596,8 +596,8 @@ window.ENG_CH["gr14"] = {
                   tagged: [ { w: "The song", role: "subject", label: "主语" }, { w: "(which) we sang yesterday", role: "attribute", label: "定语从句（which 省略）" }, { w: "is", role: "verb", label: "谓语" }, { w: "old", role: "complem", label: "表语" } ] }
               ],
               guess: {
-                q: "第一、三句省了 that / which，第二句的 who 能省吗？",
-                options: ["能省", "不能省——who 作主语，省了“ 唱歌 ”就没主语了", "看心情"],
+                q: "第一、三句省了 that / which，第二句的 that 能省吗？",
+                options: ["能省", "不能省——that 作主语，省了“ 停在门口 ”就没主语了", "看心情"],
                 answer: 1,
                 note: "先猜，再看上面的色块验证——猜错也没关系，只记录不判分。"
               },
@@ -652,7 +652,7 @@ window.ENG_CH["gr14"] = {
               id: "gr14.1.4-p3",
               kind: "explain",
               title: "省略规则：宾语可省，主语不可省",
-              lead: "还记得吗？上一页 who 作主语省不得，whose 永远省不得。",
+              lead: "还记得吗？上一页 that 作主语省不得，whose 永远省不得。",
               blocks: [
                 {
                   type: "examples",
@@ -674,8 +674,8 @@ window.ENG_CH["gr14"] = {
                   type: "contrast",
                   wrong: "The girl is singing is my sister.",
                   wrongZh: "（✗ 错句）",
-                  right: "The girl who is singing is my sister.",
-                  why: "who 作主语，省了它“ 唱歌 ”就没主语了——主语关系代词不可省。"
+                  right: "The car that stopped at the door is mine.",
+                  why: "that 作主语，省了它“ 停在门口 ”就没主语了——主语关系代词不可省。"
                 }
               ],
               point: "这就是省略规则：宾语可省，主语 / 介词后 / whose 不可省。",
