@@ -715,6 +715,12 @@
     var hm = (location.hash || "").match(/#r=([a-z]+)/);
     var first = (hm && findRoot(hm[1])) ? hm[1] : (DATA.length ? DATA[0].r : null);
     if (first) selectRoot(first, { keepOpen: true });  // 初始化不碰面板开合（尊重持久化状态）
+    // 无 RO 兜底（蓝队 2026-10-14 修白队 M1）：隐藏初始化（选择页先显示）时 Wheel.fit
+    // 因 clientHeight=0 提前返回；无 ResizeObserver 的浏览器收不到 unhide 通知，
+    // 垫片永久错位。此处在 unhide 后显式补一次，不依赖 RO（拨盘逻辑本身零改动）。
+    // 深链路由（init 深链 / hashchange / 语法外壳入口）全部经 enterRoots，是唯一 unhide 点。
+    if (rootWheel) rootWheel.fit();
+    if (wordWheel) wordWheel.fit();
   }
   function enterGrammar() {
     state.card = "grammar";

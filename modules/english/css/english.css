@@ -205,7 +205,7 @@ body {
   padding: 4px 2px 6px;
   flex: none;
 }
-.stage-head h1 { margin: 0; font-size: 1.05rem; flex: 1; text-align: center; letter-spacing: 1px; }
+.stage-head h1 { margin: 0; font-size: 1.05rem; flex: 1; min-width: 0; text-align: center; letter-spacing: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .back-btn {
   color: var(--accent-text);
   text-decoration: none;
@@ -509,6 +509,13 @@ body {
   .wheel-item { height: 46px; font-size: 1.05rem; }
   .wheel-center { height: 46px; }
   .tts-btn { padding: 8px 16px; font-size: 0.92rem; }
+  /* 窄屏 header 精简（蓝队 2026-10-14 修白队 S1）：新增「子卡」按钮后 390px 下标题被挤成多行；
+     标题单行省略保一屏，朗读区收紧，语速读数窄屏隐藏（仍可在设置抽屉里调） */
+  .stage-head { gap: 8px; }
+  .stage-head .back-btn { padding: 6px 10px; font-size: 0.85rem; }
+  .head-tts { gap: 6px; }
+  .head-tts .tts-btn { padding: 6px 10px; font-size: 0.85rem; }
+  .head-tts .tts-rate { display: none; }
 }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 @media (prefers-reduced-motion: reduce) {
@@ -528,10 +535,13 @@ button.back-btn { font: inherit; cursor: pointer; color: var(--accent-text); }
 .e-tracks {
   position: fixed; inset: 0; z-index: 70;
   background: var(--bg); overflow-y: auto;
-  display: flex; align-items: center; justify-content: center;
+  display: flex; justify-content: center;
   padding: 24px 16px;
 }
-.e-tracks-inner { width: 100%; max-width: 720px; }
+/* 安全居中（蓝队 2026-10-14 修白队 L1）：align-items:center + overflow-y:auto
+   在内容超高时顶部被裁且滚不到；改用 inner margin:auto——空间够时居中，
+   超高时自动边距归零、从顶部正常滚动 */
+.e-tracks-inner { width: 100%; max-width: 720px; margin: auto; }
 .e-tracks-title { text-align: center; font-size: 1.4rem; margin: 0 0 4px; color: var(--ink); }
 .e-tracks-sub { text-align: center; color: var(--ink-soft); margin: 0 0 20px; font-size: 0.95rem; }
 .e-track-grid {
@@ -582,4 +592,6 @@ button.back-btn { font: inherit; cursor: pointer; color: var(--accent-text); }
 
 @media (max-width: 1023px) {
   .e-tracks { align-items: flex-start; padding-top: 12vh; }
+  /* 移动端保持原设计（顶部起始），只水平居中；桌面端 margin:auto 负责安全垂直居中 */
+  .e-tracks-inner { margin: 0 auto; }
 }
