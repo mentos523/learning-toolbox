@@ -124,8 +124,8 @@ window.ENG_CH["gr05"] = {
       tagged: [ { w: "She", role: "subject", label: "主语" }, { w: "is going to", role: "verb", label: "助动词" }, { w: "be", role: "verb", label: "动词原形" }, { w: "a doctor", role: "complem", label: "表语" } ] },
     "gr05.2.2-e6": { en: "I will call him back.", zh: "我会给他回电话。（当场决定）", reg: "口语",
       tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "助动词" }, { w: "call", role: "verb", label: "动词原形" }, { w: "him", role: "object", label: "宾语" }, { w: "back", role: "adverb", label: "状语" } ] },
-    "gr05.2.2-e7": { en: "I am going to get it!", zh: "（错句，电话场景）我去接！", reg: "口语",
-      tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "am going to", role: "verb", label: "助动词" }, { w: "get", role: "verb", label: "动词原形" }, { w: "it", role: "object", label: "宾语" } ] },
+    "gr05.2.2-e7": { en: "I'm will get it!", zh: "（✗ 错句）“我是 will 去接！”——will 和 be going to 杂糅了，will 后面只能跟动词原形。", reg: "口语",
+      tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "I'm will", role: "verb", label: "助动词（杂糅）" }, { w: "get", role: "verb", label: "动词原形" }, { w: "it", role: "object", label: "宾语" } ] },
     "gr05.2.2-e8": { en: "Look! It will rain.", zh: "（错句，乌云场景）看！天要下雨了。", reg: "口语",
       tagged: [ { w: "It", role: "subject", label: "主语" }, { w: "will", role: "verb", label: "助动词" }, { w: "rain", role: "verb", label: "动词原形" } ] },
     /* ---------- gr05.2.3 过去将来初识 ---------- */
@@ -1073,7 +1073,7 @@ window.ENG_CH["gr05"] = {
                 {
                   type: "idcard",
                   rule: "will 表临时决定、意愿；be going to 表事先计划，或有迹象表明将发生。",
-                  condition: "只在表将来时成立；“话赶话”（电话响、求助）用 will；“提前商量好”用 be going to；“乌云”等迹象用 be going to。"
+                  condition: "只在表将来时成立；“话赶话”（电话响、求助）用 will；“提前商量好”用 be going to；“乌云”等迹象用 be going to。临场决定用 will 最地道，不过电话响了说 be going to 母语者也常说、不算错——本课重点练 will 的临场决定用法。"
                 },
                 {
                   type: "bridge",
@@ -1083,10 +1083,10 @@ window.ENG_CH["gr05"] = {
                 },
                 {
                   type: "contrast",
-                  wrong: "— The phone is ringing! — I'm going to get it!",
-                  wrongZh: "（✗ 错句）",
+                  wrong: "— The phone is ringing! — I'll getting it.",
+                  wrongZh: "（✗ 错句）电话响了，“我 will 正在去接”——will 后面要跟动词原形，不能跟 getting。",
                   right: "— The phone is ringing! — I'll get it!",
-                  why: "电话突然响，用 will 表临时决定；be going to 听着像“早就计划好去接这个电话”。"
+                  why: "will 后面只能跟动词原形；getting 带着 -ing，是“进行时”的尾巴，will 管不了它。"
                 },
                 {
                   type: "contrast",
