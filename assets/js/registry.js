@@ -15,8 +15,8 @@ window.TOOLBOX_MODULES = [
   {
     slug: "english",
     name: "英语",
-    tagline: "词根词缀",
-    description: "拨一拨词根，单词自己长出来：变形拨盘、词根词义对齐、真人发音。",
+    tagline: "讲词根 · 语法",
+    description: "拨一拨词根，单词自己长出来：变形拨盘、词根词义对齐、合成语音朗读。",
     icon: "abc",                       // 图标见 app.js 中的 ICONS
     color: "#3b82f6",                  // 卡片主题色
     path: "modules/english/index.html",
