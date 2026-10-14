@@ -1,0 +1,6 @@
+{
+  "schema": "grammar-review-ledger/1.0",
+  "chapter": "gr14",
+  "note": "英语语法例句三审台账（D3）。字段与状态定义见 docs/english-grammar-review-ledger.md。开工时为空，随生产逐条登记。",
+  "entries": []
+}
