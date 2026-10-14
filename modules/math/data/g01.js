@@ -542,7 +542,7 @@ window.MATH_CH["g01"] = {
                       shapes: [
                         { t: "seg", a: [45,62], b: [20,80], color: "line", width: 3 },
                         { t: "seg", a: [45,62], b: [70,80], color: "line", width: 3 },
-                        { t: "arc", v: [45,62], a1: 235, a2: 305, r: 12, color: "corrAngle" },
+                        { t: "arc", v: [45,62], a1: 35.8, a2: 144.2, r: 12, color: "corrAngle" },
                         { t: "txt", p: [45,90], text: "∠AOB", size: 14, bold: true },
                         { t: "txt", p: [18,58], text: "∠O", size: 13 },
                         { t: "txt", p: [72,58], text: "∠1", size: 13 },
@@ -682,7 +682,7 @@ window.MATH_CH["g01"] = {
                         { t: "seg", a: [50,50], b: [21,74], color: "line", width: 3 },
                         { t: "arc", v: [50,50], a1: 0, a2: 140, r: 12, color: "corrAngle" },
                         { t: "seg", a: [50,50], b: [68,82], color: "target", width: 2, dash: "5,4" },
-                        { t: "arc", v: [50,50], a1: 0, a2: 100, r: 9, color: "corrAngle" },
+                        { t: "arc", v: [50,50], a1: 0, a2: 60.6, r: 9, color: "corrAngle" },
                         { t: "txt", p: [50,30], text: "一条边对齐", size: 13 }
                       ]
                     },
@@ -733,8 +733,8 @@ window.MATH_CH["g01"] = {
                         { t: "seg", a: [50,30], b: [15,68], color: "line", width: 3 },
                         { t: "seg", a: [50,30], b: [50,78], color: "aux", width: 2.5 },
                         { t: "seg", a: [50,30], b: [85,68], color: "line", width: 3 },
-                        { t: "arc", v: [50,30], a1: 240, a2: 270, r: 12, color: "corrAngle", group: 1 },
-                        { t: "arc", v: [50,30], a1: 270, a2: 300, r: 12, color: "corrAngle", group: 2 },
+                        { t: "arc", v: [50,30], a1: 90, a2: 132.6, r: 12, color: "corrAngle", group: 1 },
+                        { t: "arc", v: [50,30], a1: 47.4, a2: 90, r: 12, color: "corrAngle", group: 2 },
                         { t: "txt", p: [38,58], text: "∠1", size: 13 },
                         { t: "txt", p: [62,58], text: "∠2", size: 13 },
                         { t: "txt", p: [50,90], text: "∠AOC = ∠1 + ∠2", size: 14, bold: true }
@@ -775,9 +775,9 @@ window.MATH_CH["g01"] = {
                       shapes: [
                         { t: "seg", a: [50,32], b: [18,72], color: "line", width: 3 },
                         { t: "seg", a: [50,32], b: [82,72], color: "line", width: 3 },
-                        { t: "ray", p: [50,32], ang: 270, len: 40, color: "target", width: 3 },
-                        { t: "arc", v: [50,32], a1: 245, a2: 270, r: 12, color: "corrAngle", group: 1 },
-                        { t: "arc", v: [50,32], a1: 270, a2: 295, r: 12, color: "corrAngle", group: 2 },
+                        { t: "ray", p: [50,32], ang: 90, len: 40, color: "target", width: 3 },
+                        { t: "arc", v: [50,32], a1: 90, a2: 128.7, r: 12, color: "corrAngle", group: 1 },
+                        { t: "arc", v: [50,32], a1: 51.3, a2: 90, r: 12, color: "corrAngle", group: 2 },
                         { t: "txt", p: [38,60], text: "∠1", size: 13 },
                         { t: "txt", p: [62,60], text: "∠2", size: 13 },
                         { t: "txt", p: [50,88], text: "∠1 = ∠2", size: 14, bold: true }
@@ -826,8 +826,8 @@ window.MATH_CH["g01"] = {
                       caption: "第 1 步：三角板的两个锐角：∠1 和∠2。",
                       shapes: [
                         { t: "poly", pts: [[30,62],[70,62],[30,34]], color: "line", width: 3 },
-                        { t: "arc", v: [70,62], a1: 130, a2: 180, r: 10, color: "corrAngle", group: 1 },
-                        { t: "arc", v: [30,34], a1: 0, a2: 55, r: 10, color: "corrAngle", group: 2 },
+                        { t: "arc", v: [70,62], a1: 180, a2: 215, r: 10, color: "corrAngle", group: 1 },
+                        { t: "arc", v: [30,34], a1: 35, a2: 90, r: 10, color: "corrAngle", group: 2 },
                         { t: "txt", p: [60,54], text: "∠1", size: 13 },
                         { t: "txt", p: [40,44], text: "∠2", size: 13 }
                       ]
@@ -835,7 +835,7 @@ window.MATH_CH["g01"] = {
                     {
                       caption: "第 2 步：把∠1 和∠2 拼起来——正好拼成一个直角。",
                       shapes: [
-                        { t: "seg", a: [40,62], b: [40,38], color: "line", width: 3 },
+                        { t: "seg", a: [40,62], b: [40,86], color: "line", width: 3 },
                         { t: "seg", a: [40,62], b: [68,62], color: "line", width: 3 },
                         { t: "ray", p: [40,62], ang: 55, len: 24, color: "aux", width: 2.5 },
                         { t: "arc", v: [40,62], a1: 0, a2: 55, r: 10, color: "corrAngle", group: 1 },
@@ -885,7 +885,7 @@ window.MATH_CH["g01"] = {
                     {
                       caption: "第 1 步：∠1+∠2=90°。",
                       shapes: [
-                        { t: "seg", a: [30,62], b: [30,42], color: "line", width: 3 },
+                        { t: "seg", a: [30,62], b: [30,82], color: "line", width: 3 },
                         { t: "seg", a: [30,62], b: [62,62], color: "line", width: 3 },
                         { t: "ray", p: [30,62], ang: 40, len: 26, color: "aux", width: 2.5 },
                         { t: "arc", v: [30,62], a1: 0, a2: 40, r: 10, color: "corrAngle", group: 1 },
@@ -898,7 +898,7 @@ window.MATH_CH["g01"] = {
                     {
                       caption: "第 2 步：∠1+∠3=90°——∠2 和∠3 都是“90° 减去∠1”，所以相等。",
                       shapes: [
-                        { t: "seg", a: [30,62], b: [30,42], color: "line", width: 3 },
+                        { t: "seg", a: [30,62], b: [30,82], color: "line", width: 3 },
                         { t: "seg", a: [30,62], b: [62,62], color: "line", width: 3 },
                         { t: "ray", p: [30,62], ang: 65, len: 26, color: "aux", width: 2.5 },
                         { t: "arc", v: [30,62], a1: 0, a2: 65, r: 10, color: "corrAngle", group: 1 },
@@ -947,8 +947,8 @@ window.MATH_CH["g01"] = {
                       shapes: [
                         { t: "seg", a: [20,55], b: [80,55], color: "line", width: 3 },
                         { t: "seg", a: [50,55], b: [64,79], color: "line", width: 3 },
-                        { t: "arc", v: [50,55], a1: 0, a2: 70, r: 12, color: "corrAngle", group: 1 },
-                        { t: "arc", v: [50,55], a1: 70, a2: 180, r: 12, color: "corrAngle", group: 2 },
+                        { t: "arc", v: [50,55], a1: 0, a2: 59.7, r: 12, color: "corrAngle", group: 1 },
+                        { t: "arc", v: [50,55], a1: 59.7, a2: 180, r: 12, color: "corrAngle", group: 2 },
                         { t: "txt", p: [60,64], text: "∠1", size: 13 },
                         { t: "txt", p: [40,64], text: "∠2", size: 13 }
                       ]
@@ -995,8 +995,8 @@ window.MATH_CH["g01"] = {
                       shapes: [
                         { t: "seg", a: [20,55], b: [80,55], color: "line", width: 3 },
                         { t: "seg", a: [50,55], b: [64,79], color: "line", width: 3 },
-                        { t: "arc", v: [50,55], a1: 0, a2: 70, r: 12, color: "corrAngle", group: 1 },
-                        { t: "arc", v: [50,55], a1: 70, a2: 180, r: 12, color: "corrAngle", group: 2 },
+                        { t: "arc", v: [50,55], a1: 0, a2: 59.7, r: 12, color: "corrAngle", group: 1 },
+                        { t: "arc", v: [50,55], a1: 59.7, a2: 180, r: 12, color: "corrAngle", group: 2 },
                         { t: "txt", p: [60,64], text: "∠1", size: 13 },
                         { t: "txt", p: [40,64], text: "∠2", size: 13 },
                         { t: "txt", p: [50,32], text: "∠1+∠2=180°", size: 13, bold: true }
@@ -1006,9 +1006,9 @@ window.MATH_CH["g01"] = {
                       caption: "第 2 步：∠1+∠3=180°——∠2 和∠3 都是“180° 减去∠1”，所以相等。",
                       shapes: [
                         { t: "seg", a: [20,55], b: [80,55], color: "line", width: 3 },
-                        { t: "seg", a: [50,55], b: [36,79], color: "line", width: 3 },
-                        { t: "arc", v: [50,55], a1: 70, a2: 180, r: 12, color: "corrAngle", group: 1 },
-                        { t: "arc", v: [50,55], a1: 110, a2: 180, r: 12, color: "corrAngle", group: 3 },
+                        { t: "seg", a: [50,55], b: [64,79], color: "line", width: 3 },
+                        { t: "arc", v: [50,55], a1: 0, a2: 59.7, r: 12, color: "corrAngle", group: 1 },
+                        { t: "arc", v: [50,55], a1: 59.7, a2: 180, r: 12, color: "corrAngle", group: 3 },
                         { t: "txt", p: [60,64], text: "∠1", size: 13 },
                         { t: "txt", p: [40,64], text: "∠3", size: 13 },
                         { t: "txt", p: [50,32], text: "∠1+∠3=180°", size: 13, bold: true },

@@ -419,11 +419,11 @@ window.MATH_CH["g09"] = {
                       caption: "关键帧：对应角画同色弧线，对应边画同色描边——这就是相似多边形。",
                       shapes: [
                         { t: "poly", pts: [[12,35],[42,35],[27,62]], color: "corrA", width: 3 },
-                        { t: "arc", v: [12,35], a1: 0, a2: 55, r: 8, group: 1, color: "corrAngle" },
-                        { t: "arc", v: [42,35], a1: 125, a2: 180, r: 8, group: 2, color: "corrAngle" },
-                        { t: "poly", pts: [[58,33],[88,33],[73,63]], color: "corrB", width: 3 },
-                        { t: "arc", v: [58,33], a1: 0, a2: 55, r: 8, group: 1, color: "corrAngle" },
-                        { t: "arc", v: [88,33], a1: 125, a2: 180, r: 8, group: 2, color: "corrAngle" },
+                        { t: "arc", v: [12,35], a1: 0, a2: 60.9, r: 8, group: 1, color: "corrAngle" },
+                        { t: "arc", v: [42,35], a1: 119.1, a2: 180, r: 8, group: 2, color: "corrAngle" },
+                        { t: "poly", pts: [[60,35],[84,35],[72,56.6]], color: "corrB", width: 3 },
+                        { t: "arc", v: [60,35], a1: 0, a2: 60.9, r: 8, group: 1, color: "corrAngle" },
+                        { t: "arc", v: [84,35], a1: 119.1, a2: 180, r: 8, group: 2, color: "corrAngle" },
                         { t: "txt", p: [50,80], text: "对应角相等，对应边成比例", size: 13, bold: true }
                       ]
                     }
@@ -471,14 +471,14 @@ window.MATH_CH["g09"] = {
                     {
                       caption: "第 1 步：两个三角形，两对角分别相等（50 度、60 度）。",
                       shapes: [
-                        { t: "poly", pts: [[15,62],[45,62],[33,32]], color: "corrA", width: 3 },
-                        { t: "arc", v: [15,62], a1: 0, a2: 62, r: 9, group: 1, color: "corrAngle" },
-                        { t: "arc", v: [45,62], a1: 118, a2: 180, r: 9, group: 2, color: "corrAngle" },
+                        { t: "poly", pts: [[15,62],[45,62],[32.8,40.8]], color: "corrA", width: 3 },
+                        { t: "arc", v: [15,62], a1: 310, a2: 0, r: 9, group: 1, color: "corrAngle" },
+                        { t: "arc", v: [45,62], a1: 180, a2: 240, r: 9, group: 2, color: "corrAngle" },
                         { t: "txt", p: [15,74], text: "50°", size: 12 },
                         { t: "txt", p: [45,74], text: "60°", size: 12 },
-                        { t: "poly", pts: [[58,64],[92,64],[77,28]], color: "corrB", width: 3 },
-                        { t: "arc", v: [58,64], a1: 0, a2: 62, r: 9, group: 1, color: "corrAngle" },
-                        { t: "arc", v: [92,64], a1: 118, a2: 180, r: 9, group: 2, color: "corrAngle" },
+                        { t: "poly", pts: [[58,64],[92,64],[78.1,40]], color: "corrB", width: 3 },
+                        { t: "arc", v: [58,64], a1: 310, a2: 0, r: 9, group: 1, color: "corrAngle" },
+                        { t: "arc", v: [92,64], a1: 180, a2: 240, r: 9, group: 2, color: "corrAngle" },
                         { t: "txt", p: [58,76], text: "50°", size: 12 },
                         { t: "txt", p: [92,76], text: "60°", size: 12 }
                       ]
@@ -486,20 +486,20 @@ window.MATH_CH["g09"] = {
                     {
                       caption: "第 2 步：量一量边——2:4 = 3:6，边自动成比例！",
                       shapes: [
-                        { t: "poly", pts: [[15,62],[45,62],[33,32]], color: "corrA", width: 2.5 },
+                        { t: "poly", pts: [[15,62],[45,62],[32.8,40.8]], color: "corrA", width: 2.5 },
                         { t: "txt", p: [30,70], text: "2", size: 13, bold: true },
-                        { t: "txt", p: [24,46], text: "3", size: 13, bold: true },
-                        { t: "poly", pts: [[58,64],[92,64],[77,28]], color: "corrB", width: 2.5 },
+                        { t: "txt", p: [24,51], text: "3", size: 13, bold: true },
+                        { t: "poly", pts: [[58,64],[92,64],[78.1,40]], color: "corrB", width: 2.5 },
                         { t: "txt", p: [75,72], text: "4", size: 13, bold: true },
-                        { t: "txt", p: [68,46], text: "6", size: 13, bold: true },
+                        { t: "txt", p: [68,52], text: "6", size: 13, bold: true },
                         { t: "txt", p: [50,86], text: "2:4 = 3:6", size: 15, bold: true, color: "known" }
                       ]
                     },
                     {
                       caption: "第 3 步：把小的放大 2 倍盖到大的上面——严丝合缝，相似！",
                       shapes: [
-                        { t: "poly", pts: [[58,64],[92,64],[77,28]], color: "corrB", width: 3 },
-                        { t: "poly", pts: [[58,64],[92,64],[77,28]], color: "corrA", width: 2, dash: "5,4" },
+                        { t: "poly", pts: [[58,64],[92,64],[78.1,40]], color: "corrB", width: 3 },
+                        { t: "poly", pts: [[58,64],[92,64],[78.1,40]], color: "corrA", width: 2, dash: "5,4" },
                         { t: "txt", p: [50,84], text: "两角相等，形状锁死", size: 14, bold: true, color: "known" }
                       ]
                     }
@@ -543,11 +543,11 @@ window.MATH_CH["g09"] = {
                       caption: "关键帧：AA 判定——两对角相等，相似；k=1 时就是全等。",
                       shapes: [
                         { t: "poly", pts: [[15,55],[45,55],[30,28]], color: "corrA", width: 3 },
-                        { t: "arc", v: [15,55], a1: 0, a2: 55, r: 9, group: 1, color: "corrAngle" },
-                        { t: "arc", v: [45,55], a1: 125, a2: 180, r: 9, group: 2, color: "corrAngle" },
+                        { t: "arc", v: [15,55], a1: 299.1, a2: 0, r: 9, group: 1, color: "corrAngle" },
+                        { t: "arc", v: [45,55], a1: 180, a2: 240.9, r: 9, group: 2, color: "corrAngle" },
                         { t: "poly", pts: [[60,57],[90,57],[75,30]], color: "corrB", width: 3 },
-                        { t: "arc", v: [60,57], a1: 0, a2: 55, r: 9, group: 1, color: "corrAngle" },
-                        { t: "arc", v: [90,57], a1: 125, a2: 180, r: 9, group: 2, color: "corrAngle" },
+                        { t: "arc", v: [60,57], a1: 299.1, a2: 0, r: 9, group: 1, color: "corrAngle" },
+                        { t: "arc", v: [90,57], a1: 180, a2: 240.9, r: 9, group: 2, color: "corrAngle" },
                         { t: "txt", p: [50,80], text: "AA：两角对应相等 → 相似", size: 13, bold: true }
                       ]
                     }
@@ -644,33 +644,33 @@ window.MATH_CH["g09"] = {
                     {
                       caption: "第 1 步：两个三角形——小边 2、3，大边 4、6，夹角都是 60 度。",
                       shapes: [
-                        { t: "poly", pts: [[12,60],[42,60],[27,30]], color: "corrA", width: 3 },
-                        { t: "arc", v: [12,60], a1: 0, a2: 60, r: 10, group: 1, color: "corrAngle" },
+                        { t: "poly", pts: [[12,60],[42,60],[28.8,31]], color: "corrA", width: 3 },
+                        { t: "arc", v: [12,60], a1: 300, a2: 0, r: 10, group: 1, color: "corrAngle" },
                         { t: "txt", p: [27,68], text: "2", size: 12, bold: true },
-                        { t: "txt", p: [18,44], text: "3", size: 12, bold: true },
+                        { t: "txt", p: [20,45], text: "3", size: 12, bold: true },
                         { t: "txt", p: [12,74], text: "60°", size: 12 },
-                        { t: "poly", pts: [[55,62],[90,62],[72,28]], color: "corrB", width: 3 },
-                        { t: "arc", v: [55,62], a1: 0, a2: 60, r: 10, group: 1, color: "corrAngle" },
+                        { t: "poly", pts: [[55,62],[90,62],[74.6,28.1]], color: "corrB", width: 3 },
+                        { t: "arc", v: [55,62], a1: 300, a2: 0, r: 10, group: 1, color: "corrAngle" },
                         { t: "txt", p: [72,70], text: "4", size: 12, bold: true },
-                        { t: "txt", p: [62,44], text: "6", size: 12, bold: true },
+                        { t: "txt", p: [64,46], text: "6", size: 12, bold: true },
                         { t: "txt", p: [55,76], text: "60°", size: 12 }
                       ]
                     },
                     {
                       caption: "第 2 步：2:4 = 3:6，两组边成比例；60 度是这两条边的夹角，位置不能错。",
                       shapes: [
-                        { t: "poly", pts: [[12,60],[42,60],[27,30]], color: "corrA", width: 3 },
-                        { t: "arc", v: [12,60], a1: 0, a2: 60, r: 12, group: 1, color: "target" },
-                        { t: "poly", pts: [[55,62],[90,62],[72,28]], color: "corrB", width: 3 },
-                        { t: "arc", v: [55,62], a1: 0, a2: 60, r: 12, group: 1, color: "target" },
+                        { t: "poly", pts: [[12,60],[42,60],[28.8,31]], color: "corrA", width: 3 },
+                        { t: "arc", v: [12,60], a1: 300, a2: 0, r: 12, group: 1, color: "target" },
+                        { t: "poly", pts: [[55,62],[90,62],[74.6,28.1]], color: "corrB", width: 3 },
+                        { t: "arc", v: [55,62], a1: 300, a2: 0, r: 12, group: 1, color: "target" },
                         { t: "txt", p: [50,84], text: "2:4 = 3:6，夹角 60°", size: 14, bold: true, color: "known" }
                       ]
                     },
                     {
                       caption: "第 3 步：把小的放大 2 倍盖到大的上面——严丝合缝，相似！",
                       shapes: [
-                        { t: "poly", pts: [[55,62],[90,62],[72,28]], color: "corrB", width: 3 },
-                        { t: "poly", pts: [[55,62],[90,62],[72,28]], color: "corrA", width: 2, dash: "5,4" },
+                        { t: "poly", pts: [[55,62],[90,62],[74.6,28.1]], color: "corrB", width: 3 },
+                        { t: "poly", pts: [[55,62],[90,62],[74.6,28.1]], color: "corrA", width: 2, dash: "5,4" },
                         { t: "txt", p: [50,84], text: "SAS：两边成比例，夹角相等 → 相似", size: 13, bold: true, color: "known" }
                       ]
                     }
@@ -709,9 +709,9 @@ window.MATH_CH["g09"] = {
                       caption: "关键帧：SAS——两边成比例，夹住的角相等。",
                       shapes: [
                         { t: "poly", pts: [[15,60],[50,60],[32,30]], color: "corrA", width: 3 },
-                        { t: "arc", v: [15,60], a1: 0, a2: 60, r: 10, group: 1, color: "corrAngle" },
+                        { t: "arc", v: [15,60], a1: 299.5, a2: 0, r: 10, group: 1, color: "corrAngle" },
                         { t: "poly", pts: [[58,62],[93,62],[75,32]], color: "corrB", width: 3 },
-                        { t: "arc", v: [58,62], a1: 0, a2: 60, r: 10, group: 1, color: "corrAngle" },
+                        { t: "arc", v: [58,62], a1: 299.5, a2: 0, r: 10, group: 1, color: "corrAngle" },
                         { t: "txt", p: [50,82], text: "SAS：边成比例 + 夹角相等", size: 13, bold: true }
                       ]
                     }
@@ -1181,14 +1181,14 @@ window.MATH_CH["g09"] = {
                         { t: "seg", a: [8,25], b: [92,25], color: "line", width: 2.5 },
                         { t: "seg", a: [30,25], b: [30,45], color: "known", width: 3.5 },
                         { t: "txt", p: [26,36], text: "1.6米", size: 11 },
-                        { t: "seg", a: [30,25], b: [50,25], color: "aux", width: 2, dash: "5,4" },
-                        { t: "txt", p: [40,20], text: "影2米", size: 11 },
+                        { t: "seg", a: [30,25], b: [41.5,25], color: "aux", width: 2, dash: "5,4" },
+                        { t: "txt", p: [36,20], text: "影2米", size: 11 },
                         { t: "seg", a: [65,25], b: [65,70], color: "target", width: 3.5 },
                         { t: "txt", p: [72,50], text: "h=?", size: 12, bold: true, color: "target" },
-                        { t: "seg", a: [65,25], b: [90,25], color: "aux", width: 2, dash: "5,4" },
+                        { t: "seg", a: [65,25], b: [91,25], color: "aux", width: 2, dash: "5,4" },
                         { t: "txt", p: [78,20], text: "影10米", size: 11 },
-                        { t: "seg", a: [22,58], b: [34,42], color: "aux", width: 2, arrows: 1 },
-                        { t: "seg", a: [53,88], b: [69,68], color: "aux", width: 2, arrows: 1 }
+                        { t: "seg", a: [22,58], b: [34,37.2], color: "aux", width: 2, arrows: 1 },
+                        { t: "seg", a: [53,88], b: [65,67.2], color: "aux", width: 2, arrows: 1 }
                       ]
                     },
                     {
@@ -1196,13 +1196,15 @@ window.MATH_CH["g09"] = {
                       shapes: [
                         { t: "seg", a: [8,25], b: [92,25], color: "line", width: 2.5 },
                         { t: "seg", a: [30,25], b: [30,45], color: "known", width: 3.5 },
-                        { t: "seg", a: [30,25], b: [50,25], color: "aux", width: 2, dash: "5,4" },
-                        { t: "right", v: [30,25], p: [30,45], q: [50,25], size: 5, color: "corrAngle" },
+                        { t: "seg", a: [30,25], b: [41.5,25], color: "aux", width: 2, dash: "5,4" },
+                        { t: "right", v: [30,25], p: [30,45], q: [41.5,25], size: 5, color: "corrAngle" },
                         { t: "seg", a: [65,25], b: [65,70], color: "target", width: 3.5 },
-                        { t: "seg", a: [65,25], b: [90,25], color: "aux", width: 2, dash: "5,4" },
-                        { t: "right", v: [65,25], p: [65,70], q: [90,25], size: 5, color: "corrAngle" },
-                        { t: "arc", v: [50,25], a1: 0, a2: 60, r: 8, group: 1, color: "corrAngle" },
-                        { t: "arc", v: [90,25], a1: 0, a2: 60, r: 8, group: 1, color: "corrAngle" },
+                        { t: "seg", a: [65,25], b: [91,25], color: "aux", width: 2, dash: "5,4" },
+                        { t: "right", v: [65,25], p: [65,70], q: [91,25], size: 5, color: "corrAngle" },
+                        { t: "seg", a: [41.5,25], b: [30,45], color: "aux", width: 2 },
+                        { t: "seg", a: [91,25], b: [65,70], color: "aux", width: 2 },
+                        { t: "arc", v: [41.5,25], a1: 120, a2: 180, r: 6, group: 1, color: "corrAngle" },
+                        { t: "arc", v: [91,25], a1: 120, a2: 180, r: 6, group: 1, color: "corrAngle" },
                         { t: "txt", p: [50,12], text: "AA 相似", size: 13, bold: true, color: "known" }
                       ]
                     },

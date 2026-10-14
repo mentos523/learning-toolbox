@@ -2694,7 +2694,8 @@
           math: sh.math === true, bold: sh.bold === true });
     } else if (t === "arc") {
       var v = P(sh.v);
-      G.angleArc(g, v[0], v[1], sh.a1 || 0, sh.a2 || 90, fr.S(sh.r || 12),
+      // a2:0 是合法方向（指向 0°），不可用 || 90 篡改（arcpath 同款判空）
+      G.angleArc(g, v[0], v[1], sh.a1 || 0, sh.a2 == null ? 90 : sh.a2, fr.S(sh.r || 12),
         { group: sh.group, color: col, width: w });
     } else if (t === "ticks") {
       var ta = P(sh.a), tb = P(sh.b);
@@ -3684,9 +3685,12 @@
       var c = Math.sqrt(a * a + b * b);
       var a2 = a * a, b2 = b * b;
       // 作图坐标（y 向上）：直角顶点 O=(0,0)，A=(a,0)，B=(0,b)
-      // 斜边正方形外法向 = 从 O 指向斜边中点的方向
-      var mx = a / 2, my = b / 2, ml = Math.sqrt(mx * mx + my * my) || 1;
-      var nx = mx / ml, ny = my / ml;
+      // 斜边正方形外法向 = 垂直于斜边、背离 O 的单位向量：
+      // 斜边方向 (−a/c, b/c) 顺时针转 90° 得 (b/c, a/c)。
+      // 旧代码取"O→斜边中点"方向 (a/c, b/c)，仅 a=b 时才是法向，
+      // a≠b 时正方形被画成菱形。
+      var nx = b / c, ny = a / c;
+      var mx = a / 2, my = b / 2;
       var sqC = [[a, 0], [0, b],
                  [nx * c, b + ny * c], [a + nx * c, ny * c]];
       var all = [[0, 0], [a, 0], [0, b],
@@ -4054,9 +4058,13 @@
       function markAngles(V, E1, E2, rPx) {
         var a = G.angleOf(V[0], V[1], E1[0], E1[1]);
         var b = G.angleOf(V[0], V[1], E2[0], E2[1]);
-        var d = G.norm180(b - a);  // 内角 < 180°，取小弧
-        var a1 = d >= 0 ? a : b;
-        G.angleArc(svg, V[0], V[1], a1, a1 + Math.abs(d), rPx,
+        // 三角形内角 < 180°：取两方向间的劣弧。
+        // norm180(b-a) 在 b<a 时给出的是优弧补角（如 −45°→135°），须改用 norm360
+        // 取模后取 min(sweep, 360−sweep)，方向取劣弧所在侧。
+        var d = G.norm360(b - a);
+        var a1 = a, sweep = d;
+        if (d > 180) { a1 = b; sweep = 360 - d; }
+        G.angleArc(svg, V[0], V[1], a1, a1 + sweep, rPx,
           { color: "corrAngle", width: 2 });
       }
       var VA = [X(A[0]), Y(A[1])], VB = [X(B[0]), Y(B[1])], VC = [X(C[0]), Y(C[1])];

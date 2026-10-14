@@ -1,0 +1,1262 @@
+{
+ "meta": {
+  "date": "2026-10-14",
+  "tool": "tools/geom-audit-20261014.mjs",
+  "tolerances": {
+   "vertex": 0.75,
+   "arcDir": 3,
+   "ext": 2,
+   "right": 2,
+   "labelDeg": 2.5,
+   "extWarn": 8,
+   "ptCircle": 1.5,
+   "ptCircleNear": 4,
+   "squareSide": 0.5,
+   "foldEdge": 0.0001,
+   "cutCongruent": 0.75,
+   "segZero": 1e-9
+  },
+  "scope": "modules/math/data/g00.js…g13.js 全量页面（含习题页、auxInteraction）",
+  "coordinateNote": "断言在逻辑坐标（0–100，y 向上）下进行；渲染链为均匀缩放+平移，逻辑坐标结论等价于像素结论（angle-protractor 的 Y 缩放 2.94 vs X 3.32 为唯一非均匀处，但其角度几何全在像素空间按度构造，自洽——见报告）"
+ },
+ "primitiveTests": {
+  "checks": 56,
+  "failures": []
+ },
+ "counts": {
+  "pages": 340,
+  "frames": 779,
+  "noInteraction": 0,
+  "arcAtVertex": 231,
+  "arcMatched": 230,
+  "arcDecor": 73,
+  "arcReversed": 0,
+  "extPass": 26,
+  "rightChecks": 91,
+  "ptNearCircle": 64,
+  "ticksChecks": 0,
+  "extOther": 36,
+  "arcCircleHL": 13,
+  "arcExempt": 1
+ },
+ "interactionFrames": {
+  "step-play": 547,
+  "compare-toggle": 69,
+  "vertex-drag": 3,
+  "tap-highlight": 23,
+  "angle-protractor": 2,
+  "proof-replay": 93,
+  "construction-step": 33,
+  "pythag-grow": 1,
+  "cut-reassemble": 4,
+  "ladder-slide": 1,
+  "ratio-slider": 1,
+  "shape-area": 1,
+  "net-fold": 1
+ },
+ "failures": [
+  {
+   "page": "g02-u1-l3-p1",
+   "chapter": "g02",
+   "frame": "step3 [main/step-play]",
+   "caption": "第 3 步：量一量——垂直的那条最短，斜的路都更长。",
+   "type": "EXT_SUSPICIOUS",
+   "severity": "warn",
+   "element": "seg a=[50.0,78.0] b=[30.0,30.0] dash=5,4",
+   "measured": {
+    "colDev": "22.62°",
+    "cross": 960,
+    "dirDashed": "247.4°",
+    "dirSolid": "270°",
+    "sharedEndpoint": [
+     50,
+     78
+    ]
+   },
+   "expected": "人工确认意图",
+   "note": "虚线远端落在实画图形上，可能是有意辅助线（中线/高线/对角线/半径），需人眼复核"
+  },
+  {
+   "page": "g02-u1-l3-p1",
+   "chapter": "g02",
+   "frame": "step3 [main/step-play]",
+   "caption": "第 3 步：量一量——垂直的那条最短，斜的路都更长。",
+   "type": "EXT_SUSPICIOUS",
+   "severity": "warn",
+   "element": "seg a=[50.0,78.0] b=[70.0,30.0] dash=5,4",
+   "measured": {
+    "colDev": "22.62°",
+    "cross": -960,
+    "dirDashed": "292.6°",
+    "dirSolid": "270°",
+    "sharedEndpoint": [
+     50,
+     78
+    ]
+   },
+   "expected": "人工确认意图",
+   "note": "虚线远端落在实画图形上，可能是有意辅助线（中线/高线/对角线/半径），需人眼复核"
+  },
+  {
+   "page": "g03-u1-l2-p2",
+   "chapter": "g03",
+   "frame": "tap [main/tap-highlight]",
+   "caption": "",
+   "type": "EXT_SUSPICIOUS",
+   "severity": "warn",
+   "element": "seg a=[30.0,72.0] b=[49.0,30.0] dash=6,3",
+   "measured": {
+    "colDev": "8.65°",
+    "cross": -302.4,
+    "dirDashed": "294.3°",
+    "dirSolid": "285.7°",
+    "sharedEndpoint": [
+     30,
+     72
+    ]
+   },
+   "expected": "人工确认意图",
+   "note": "虚线远端落在实画图形上，可能是有意辅助线（中线/高线/对角线/半径），需人眼复核"
+  },
+  {
+   "page": "g03-u1-l3-p3",
+   "chapter": "g03",
+   "frame": "step2 [main/step-play]",
+   "caption": "第 2 步：把三个角撕下来，顶点拼到一起。",
+   "type": "TORN_ANGLES_MISMATCH",
+   "severity": "warn",
+   "element": "decorSweeps=[48,48,84]",
+   "measured": {
+    "ghostTriangleAngles": [
+     55.1,
+     55.1,
+     69.8
+    ],
+    "maxDev": "14.2°"
+   },
+   "expected": "撕下角的度数多重集 = 原三角形三角度数（±3°）",
+   "note": "拼角示意的装饰弧与原三角形角度对不上"
+  },
+  {
+   "page": "g03-u1-l5-p1",
+   "chapter": "g03",
+   "frame": "step2 [main/step-play]",
+   "caption": "第 2 步：从一个顶点引出所有对角线。",
+   "type": "EXT_SUSPICIOUS",
+   "severity": "warn",
+   "element": "seg a=[30.0,30.0] b=[82.0,58.0] dash=6,4",
+   "measured": {
+    "colDev": "28.3°",
+    "cross": -1120,
+    "dirDashed": "28.3°",
+    "dirSolid": "0°",
+    "sharedEndpoint": [
+     30,
+     30
+    ]
+   },
+   "expected": "人工确认意图",
+   "note": "虚线远端落在实画图形上，可能是有意辅助线（中线/高线/对角线/半径），需人眼复核"
+  },
+  {
+   "page": "g03-u1-l5-p1",
+   "chapter": "g03",
+   "frame": "step2 [main/step-play]",
+   "caption": "第 2 步：从一个顶点引出所有对角线。",
+   "type": "EXT_SUSPICIOUS",
+   "severity": "warn",
+   "element": "seg a=[30.0,30.0] b=[50.0,80.0] dash=6,4",
+   "measured": {
+    "colDev": "33.69°",
+    "cross": -1160,
+    "dirDashed": "248.2°",
+    "dirSolid": "214.5°",
+    "sharedEndpoint": [
+     50,
+     80
+    ]
+   },
+   "expected": "人工确认意图",
+   "note": "虚线远端落在实画图形上，可能是有意辅助线（中线/高线/对角线/半径），需人眼复核"
+  },
+  {
+   "page": "g03-u1-l5-p2",
+   "chapter": "g03",
+   "frame": "step2 [main/step-play]",
+   "caption": "n=4：切出 2 个三角形——2×180°=360°。",
+   "type": "EXT_SUSPICIOUS",
+   "severity": "warn",
+   "element": "seg a=[25.0,35.0] b=[80.0,65.0] dash=6,4",
+   "measured": {
+    "colDev": "28.61°",
+    "cross": -1500,
+    "dirDashed": "28.6°",
+    "dirSolid": "0°",
+    "sharedEndpoint": [
+     25,
+     35
+    ]
+   },
+   "expected": "人工确认意图",
+   "note": "虚线远端落在实画图形上，可能是有意辅助线（中线/高线/对角线/半径），需人眼复核"
+  },
+  {
+   "page": "g03-u1-l5-p2",
+   "chapter": "g03",
+   "frame": "step3 [main/step-play]",
+   "caption": "n=5：切出 3 个三角形——3×180°=540°。",
+   "type": "EXT_SUSPICIOUS",
+   "severity": "warn",
+   "element": "seg a=[30.0,30.0] b=[82.0,58.0] dash=6,4",
+   "measured": {
+    "colDev": "28.3°",
+    "cross": -1120,
+    "dirDashed": "28.3°",
+    "dirSolid": "0°",
+    "sharedEndpoint": [
+     30,
+     30
+    ]
+   },
+   "expected": "人工确认意图",
+   "note": "虚线远端落在实画图形上，可能是有意辅助线（中线/高线/对角线/半径），需人眼复核"
+  },
+  {
+   "page": "g03-u1-l5-p2",
+   "chapter": "g03",
+   "frame": "step3 [main/step-play]",
+   "caption": "n=5：切出 3 个三角形——3×180°=540°。",
+   "type": "EXT_SUSPICIOUS",
+   "severity": "warn",
+   "element": "seg a=[30.0,30.0] b=[50.0,80.0] dash=6,4",
+   "measured": {
+    "colDev": "33.69°",
+    "cross": -1160,
+    "dirDashed": "248.2°",
+    "dirSolid": "214.5°",
+    "sharedEndpoint": [
+     50,
+     80
+    ]
+   },
+   "expected": "人工确认意图",
+   "note": "虚线远端落在实画图形上，可能是有意辅助线（中线/高线/对角线/半径），需人眼复核"
+  },
+  {
+   "page": "g03-u1-l5-p2",
+   "chapter": "g03",
+   "frame": "step4 [main/step-play]",
+   "caption": "n=6：切出 4 个三角形——4×180°=720°。规律自己“长”出来了！",
+   "type": "EXT_SUSPICIOUS",
+   "severity": "warn",
+   "element": "seg a=[35.0,30.0] b=[82.0,55.0] dash=6,4",
+   "measured": {
+    "colDev": "27.78°",
+    "cross": 750,
+    "dirDashed": "208°",
+    "dirSolid": "235.8°",
+    "sharedEndpoint": [
+     82,
+     55
+    ]
+   },
+   "expected": "人工确认意图",
+   "note": "虚线远端落在实画图形上，可能是有意辅助线（中线/高线/对角线/半径），需人眼复核"
+  },
+  {
+   "page": "g03-u1-l5-p2",
+   "chapter": "g03",
+   "frame": "step4 [main/step-play]",
+   "caption": "n=6：切出 4 个三角形——4×180°=720°。规律自己“长”出来了！",
+   "type": "EXT_SUSPICIOUS",
+   "severity": "warn",
+   "element": "seg a=[35.0,30.0] b=[65.0,80.0] dash=6,4",
+   "measured": {
+    "colDev": "59.04°",
+    "cross": -1500,
+    "dirDashed": "59°",
+    "dirSolid": "0°",
+    "sharedEndpoint": [
+     35,
+     30
+    ]
+   },
+   "expected": "人工确认意图",
+   "note": "虚线远端落在实画图形上，可能是有意辅助线（中线/高线/对角线/半径），需人眼复核"
+  },
+  {
+   "page": "g03-u1-l5-p2",
+   "chapter": "g03",
+   "frame": "step4 [main/step-play]",
+   "caption": "n=6：切出 4 个三角形——4×180°=720°。规律自己“长”出来了！",
+   "type": "EXT_SUSPICIOUS",
+   "severity": "warn",
+   "element": "seg a=[35.0,30.0] b=[35.0,80.0] dash=6,4",
+   "measured": {
+    "colDev": "34.22°",
+    "cross": -850,
+    "dirDashed": "270°",
+    "dirSolid": "235.8°",
+    "sharedEndpoint": [
+     35,
+     80
+    ]
+   },
+   "expected": "人工确认意图",
+   "note": "虚线远端落在实画图形上，可能是有意辅助线（中线/高线/对角线/半径），需人眼复核"
+  },
+  {
+   "page": "g03-u1-l5-p3",
+   "chapter": "g03",
+   "frame": "step1 [main/step-play]",
+   "caption": "定格：从一个顶点引 (n−3) 条对角线，分成 (n−2) 个三角形。",
+   "type": "EXT_SUSPICIOUS",
+   "severity": "warn",
+   "element": "seg a=[30.0,30.0] b=[82.0,58.0] dash=6,4",
+   "measured": {
+    "colDev": "28.3°",
+    "cross": -1120,
+    "dirDashed": "28.3°",
+    "dirSolid": "0°",
+    "sharedEndpoint": [
+     30,
+     30
+    ]
+   },
+   "expected": "人工确认意图",
+   "note": "虚线远端落在实画图形上，可能是有意辅助线（中线/高线/对角线/半径），需人眼复核"
+  },
+  {
+   "page": "g03-u1-l5-p3",
+   "chapter": "g03",
+   "frame": "step1 [main/step-play]",
+   "caption": "定格：从一个顶点引 (n−3) 条对角线，分成 (n−2) 个三角形。",
+   "type": "EXT_SUSPICIOUS",
+   "severity": "warn",
+   "element": "seg a=[30.0,30.0] b=[50.0,80.0] dash=6,4",
+   "measured": {
+    "colDev": "33.69°",
+    "cross": -1160,
+    "dirDashed": "248.2°",
+    "dirSolid": "214.5°",
+    "sharedEndpoint": [
+     50,
+     80
+    ]
+   },
+   "expected": "人工确认意图",
+   "note": "虚线远端落在实画图形上，可能是有意辅助线（中线/高线/对角线/半径），需人眼复核"
+  },
+  {
+   "page": "g04-u1-l3-p1",
+   "chapter": "g04",
+   "frame": "step2 [main/step-play]",
+   "caption": "第 2 步：夹角张大一点，B、C 的位置全变了。",
+   "type": "EXT_SUSPICIOUS",
+   "severity": "warn",
+   "element": "seg a=[24.0,36.0] b=[70.0,30.0] dash=5,4",
+   "measured": {
+    "colDev": "37.57°",
+    "cross": -1200,
+    "dirDashed": "172.6°",
+    "dirSolid": "135°",
+    "sharedEndpoint": [
+     70,
+     30
+    ]
+   },
+   "expected": "人工确认意图",
+   "note": "虚线远端落在实画图形上，可能是有意辅助线（中线/高线/对角线/半径），需人眼复核"
+  },
+  {
+   "page": "g04-u1-l5-p1",
+   "chapter": "g04",
+   "frame": "step1 [main/step-play]",
+   "caption": "第 1 步：等腰三角形 ABC，AB=AC，AD 是中间的折痕。",
+   "type": "EXT_SUSPICIOUS",
+   "severity": "warn",
+   "element": "seg a=[50.0,74.0] b=[50.0,34.0] dash=5,4",
+   "measured": {
+    "colDev": "33.02°",
+    "cross": -1040,
+    "dirDashed": "270°",
+    "dirSolid": "237°",
+    "sharedEndpoint": [
+     50,
+     74
+    ]
+   },
+   "expected": "人工确认意图",
+   "note": "虚线远端落在实画图形上，可能是有意辅助线（中线/高线/对角线/半径），需人眼复核"
+  },
+  {
+   "page": "g04-u1-l5-p3",
+   "chapter": "g04",
+   "frame": "step1 [main/proof-replay]",
+   "caption": "已知 AB=AC。作顶角平分线 AD（辅助线）。",
+   "type": "EXT_SUSPICIOUS",
+   "severity": "warn",
+   "element": "seg a=[50.0,74.0] b=[50.0,34.0] dash=5,4",
+   "measured": {
+    "colDev": "33.02°",
+    "cross": -1040,
+    "dirDashed": "270°",
+    "dirSolid": "237°",
+    "sharedEndpoint": [
+     50,
+     74
+    ]
+   },
+   "expected": "人工确认意图",
+   "note": "虚线远端落在实画图形上，可能是有意辅助线（中线/高线/对角线/半径），需人眼复核"
+  },
+  {
+   "page": "g04-u1-l5-p3",
+   "chapter": "g04",
+   "frame": "step2 [main/proof-replay]",
+   "caption": "∠BAD=∠CAD——AD 是顶角的平分线。",
+   "type": "EXT_SUSPICIOUS",
+   "severity": "warn",
+   "element": "seg a=[50.0,74.0] b=[50.0,34.0] dash=5,4",
+   "measured": {
+    "colDev": "33.02°",
+    "cross": -1040,
+    "dirDashed": "270°",
+    "dirSolid": "237°",
+    "sharedEndpoint": [
+     50,
+     74
+    ]
+   },
+   "expected": "人工确认意图",
+   "note": "虚线远端落在实画图形上，可能是有意辅助线（中线/高线/对角线/半径），需人眼复核"
+  },
+  {
+   "page": "g04-u1-l6-p1",
+   "chapter": "g04",
+   "frame": "step1 [main/proof-replay]",
+   "caption": "已知 ∠B=∠C。作顶角平分线 AD（辅助线）。",
+   "type": "EXT_SUSPICIOUS",
+   "severity": "warn",
+   "element": "seg a=[50.0,74.0] b=[50.0,34.0] dash=5,4",
+   "measured": {
+    "colDev": "33.02°",
+    "cross": -1040,
+    "dirDashed": "270°",
+    "dirSolid": "237°",
+    "sharedEndpoint": [
+     50,
+     74
+    ]
+   },
+   "expected": "人工确认意图",
+   "note": "虚线远端落在实画图形上，可能是有意辅助线（中线/高线/对角线/半径），需人眼复核"
+  },
+  {
+   "page": "g04-u1-l7-p4",
+   "chapter": "g04",
+   "frame": "step2 [main/construction-step]",
+   "caption": "以A为圆心大于AB一半画弧",
+   "type": "PT_OFF_CIRCLE",
+   "severity": "warn",
+   "element": "pt [50,66] vs circle c=[31.4,40] r=30",
+   "measured": {
+    "deviation": 1.97
+   },
+   "expected": "点到圆心距离 = 半径 ±1.5",
+   "note": "点靠近圆周但不在圆上（g07 类布点），需人眼复核是否为有意"
+  },
+  {
+   "page": "g06-u1-l1-p1",
+   "chapter": "g06",
+   "frame": "step1 [main/step-play]",
+   "caption": "第 1 帧：平行四边形 ABCD，两条对角线交于点 O。",
+   "type": "EXT_SUSPICIOUS",
+   "severity": "warn",
+   "element": "seg a=[24.0,28.0] b=[72.0,68.0] dash=5,4",
+   "measured": {
+    "colDev": "39.81°",
+    "cross": -2400,
+    "dirDashed": "219.8°",
+    "dirSolid": "180°",
+    "sharedEndpoint": [
+     72,
+     68
+    ]
+   },
+   "expected": "人工确认意图",
+   "note": "虚线远端落在实画图形上，可能是有意辅助线（中线/高线/对角线/半径），需人眼复核"
+  },
+  {
+   "page": "g06-u1-l1-p1",
+   "chapter": "g06",
+   "frame": "step1 [main/step-play]",
+   "caption": "第 1 帧：平行四边形 ABCD，两条对角线交于点 O。",
+   "type": "EXT_SUSPICIOUS",
+   "severity": "warn",
+   "element": "seg a=[84.0,28.0] b=[12.0,68.0] dash=5,4",
+   "measured": {
+    "colDev": "29.05°",
+    "cross": 2400,
+    "dirDashed": "150.9°",
+    "dirSolid": "180°",
+    "sharedEndpoint": [
+     84,
+     28
+    ]
+   },
+   "expected": "人工确认意图",
+   "note": "虚线远端落在实画图形上，可能是有意辅助线（中线/高线/对角线/半径），需人眼复核"
+  },
+  {
+   "page": "g06-u1-l1-p1",
+   "chapter": "g06",
+   "frame": "step4 [main/step-play]",
+   "caption": "定格想一想：转半圈后，顶点 A 跑到了哪里？（答：C 的位置）",
+   "type": "EXT_SUSPICIOUS",
+   "severity": "warn",
+   "element": "seg a=[24.0,28.0] b=[72.0,68.0] dash=5,4",
+   "measured": {
+    "colDev": "39.81°",
+    "cross": -2400,
+    "dirDashed": "219.8°",
+    "dirSolid": "180°",
+    "sharedEndpoint": [
+     72,
+     68
+    ]
+   },
+   "expected": "人工确认意图",
+   "note": "虚线远端落在实画图形上，可能是有意辅助线（中线/高线/对角线/半径），需人眼复核"
+  },
+  {
+   "page": "g06-u1-l1-p1",
+   "chapter": "g06",
+   "frame": "step4 [main/step-play]",
+   "caption": "定格想一想：转半圈后，顶点 A 跑到了哪里？（答：C 的位置）",
+   "type": "EXT_SUSPICIOUS",
+   "severity": "warn",
+   "element": "seg a=[84.0,28.0] b=[12.0,68.0] dash=5,4",
+   "measured": {
+    "colDev": "29.05°",
+    "cross": 2400,
+    "dirDashed": "150.9°",
+    "dirSolid": "180°",
+    "sharedEndpoint": [
+     84,
+     28
+    ]
+   },
+   "expected": "人工确认意图",
+   "note": "虚线远端落在实画图形上，可能是有意辅助线（中线/高线/对角线/半径），需人眼复核"
+  },
+  {
+   "page": "g06-u1-l2-p3",
+   "chapter": "g06",
+   "frame": "step1 [main/step-play]",
+   "caption": "定格：两组等长刻度——虚线对角线是证明的“桥”。",
+   "type": "EXT_SUSPICIOUS",
+   "severity": "warn",
+   "element": "seg a=[24.0,28.0] b=[72.0,68.0] dash=5,4",
+   "measured": {
+    "colDev": "39.81°",
+    "cross": -2400,
+    "dirDashed": "219.8°",
+    "dirSolid": "180°",
+    "sharedEndpoint": [
+     72,
+     68
+    ]
+   },
+   "expected": "人工确认意图",
+   "note": "虚线远端落在实画图形上，可能是有意辅助线（中线/高线/对角线/半径），需人眼复核"
+  },
+  {
+   "page": "g06-u1-l2-p4",
+   "chapter": "g06",
+   "frame": "step1 [main/step-play]",
+   "caption": "定格：AB 与 CD 又有平行箭头、又有等长刻度——“平行”和“相等”必须在同一组对边上。",
+   "type": "EXT_SUSPICIOUS",
+   "severity": "warn",
+   "element": "seg a=[24.0,28.0] b=[72.0,68.0] dash=5,4",
+   "measured": {
+    "colDev": "39.81°",
+    "cross": -2400,
+    "dirDashed": "219.8°",
+    "dirSolid": "180°",
+    "sharedEndpoint": [
+     72,
+     68
+    ]
+   },
+   "expected": "人工确认意图",
+   "note": "虚线远端落在实画图形上，可能是有意辅助线（中线/高线/对角线/半径），需人眼复核"
+  },
+  {
+   "page": "g06-u1-l4-p4",
+   "chapter": "g06",
+   "frame": "step1 [main/proof-replay]",
+   "caption": "先拿现成的：AB=AD（菱形四边相等）；BO=DO（对角线互相平分，性质3）。",
+   "type": "EXT_SUSPICIOUS",
+   "severity": "warn",
+   "element": "seg a=[18.0,48.0] b=[82.0,48.0] dash=5,4",
+   "measured": {
+    "colDev": "29.36°",
+    "cross": -1152,
+    "dirDashed": "0°",
+    "dirSolid": "330.6°",
+    "sharedEndpoint": [
+     18,
+     48
+    ]
+   },
+   "expected": "人工确认意图",
+   "note": "虚线远端落在实画图形上，可能是有意辅助线（中线/高线/对角线/半径），需人眼复核"
+  },
+  {
+   "page": "g06-u1-l7-p1",
+   "chapter": "g06",
+   "frame": "view:性质 [main/compare-toggle]",
+   "caption": "",
+   "type": "EXT_SUSPICIOUS",
+   "severity": "warn",
+   "element": "seg a=[24.0,28.0] b=[72.0,68.0] dash=5,4",
+   "measured": {
+    "colDev": "39.81°",
+    "cross": -2400,
+    "dirDashed": "219.8°",
+    "dirSolid": "180°",
+    "sharedEndpoint": [
+     72,
+     68
+    ]
+   },
+   "expected": "人工确认意图",
+   "note": "虚线远端落在实画图形上，可能是有意辅助线（中线/高线/对角线/半径），需人眼复核"
+  },
+  {
+   "page": "g06-u1-l7-p1",
+   "chapter": "g06",
+   "frame": "view:性质 [main/compare-toggle]",
+   "caption": "",
+   "type": "EXT_SUSPICIOUS",
+   "severity": "warn",
+   "element": "seg a=[84.0,28.0] b=[12.0,68.0] dash=5,4",
+   "measured": {
+    "colDev": "29.05°",
+    "cross": 2400,
+    "dirDashed": "150.9°",
+    "dirSolid": "180°",
+    "sharedEndpoint": [
+     84,
+     28
+    ]
+   },
+   "expected": "人工确认意图",
+   "note": "虚线远端落在实画图形上，可能是有意辅助线（中线/高线/对角线/半径），需人眼复核"
+  },
+  {
+   "page": "g07-u1-l2-p2",
+   "chapter": "g07",
+   "frame": "step4 [main/proof-replay]",
+   "caption": "沿 CD 对折：弧 AC 与弧 BC 重合，弧 AD 与弧 BD 也重合。",
+   "type": "ARC_HL_UNVERIFIED",
+   "severity": "warn",
+   "element": "arc v=[50.0,52.0] a1=90 a2=156.4 r=35",
+   "measured": {
+    "arcDirs": [
+     90,
+     156.4
+    ],
+    "markedDirs": [
+     90,
+     270
+    ]
+   },
+   "expected": "人工确认",
+   "note": "圆弧高亮的起止在帧内无标注点对应（如跨步沿用的 A/B 点），需人眼复核"
+  },
+  {
+   "page": "g07-u1-l2-p2",
+   "chapter": "g07",
+   "frame": "step4 [main/proof-replay]",
+   "caption": "沿 CD 对折：弧 AC 与弧 BC 重合，弧 AD 与弧 BD 也重合。",
+   "type": "ARC_HL_UNVERIFIED",
+   "severity": "warn",
+   "element": "arc v=[50.0,52.0] a1=23.6 a2=90 r=35",
+   "measured": {
+    "arcDirs": [
+     23.6,
+     90
+    ],
+    "markedDirs": [
+     90,
+     270
+    ]
+   },
+   "expected": "人工确认",
+   "note": "圆弧高亮的起止在帧内无标注点对应（如跨步沿用的 A/B 点），需人眼复核"
+  },
+  {
+   "page": "g08-u1-l3-p2",
+   "chapter": "g08",
+   "frame": "step2 [main/proof-replay]",
+   "caption": "第 2 步：∠OAP = ∠OBP = 90°。",
+   "type": "RIGHT_FLOATING",
+   "severity": "warn",
+   "element": "right v=[72.0,64.5] p=[74.8,58.1] q=[65.6,61.7]",
+   "measured": {
+    "pDir": 293.6,
+    "qDir": 203.6,
+    "sideDirs": [
+     293.3
+    ]
+   },
+   "expected": "标记两边方向与顶点处实画边方向一致（±6°）",
+   "note": "方块方向与图中边对不上，看似“位置不对”"
+  },
+  {
+   "page": "g08-u1-l3-p2",
+   "chapter": "g08",
+   "frame": "step2 [main/proof-replay]",
+   "caption": "第 2 步：∠OAP = ∠OBP = 90°。",
+   "type": "RIGHT_FLOATING",
+   "severity": "warn",
+   "element": "right v=[50.7,31.0] p=[57.7,31.2] q=[50.5,38.0]",
+   "measured": {
+    "pDir": 1.6,
+    "qDir": 91.6,
+    "sideDirs": [
+     1.6
+    ]
+   },
+   "expected": "标记两边方向与顶点处实画边方向一致（±6°）",
+   "note": "方块方向与图中边对不上，看似“位置不对”"
+  },
+  {
+   "page": "g09-u1-l5-p4",
+   "chapter": "g09",
+   "frame": "step1 [main/step-play]",
+   "caption": "关键帧：底变成 k 倍，高也变成 k 倍——面积变成 k² 倍。",
+   "type": "EXT_SUSPICIOUS",
+   "severity": "warn",
+   "element": "seg a=[27.0,55.0] b=[27.0,30.0] dash=5,4",
+   "measured": {
+    "colDev": "30.96°",
+    "cross": -375,
+    "dirDashed": "90°",
+    "dirSolid": "59°",
+    "sharedEndpoint": [
+     27,
+     30
+    ]
+   },
+   "expected": "人工确认意图",
+   "note": "虚线远端落在实画图形上，可能是有意辅助线（中线/高线/对角线/半径），需人眼复核"
+  },
+  {
+   "page": "g09-u1-l5-p4",
+   "chapter": "g09",
+   "frame": "step1 [main/step-play]",
+   "caption": "关键帧：底变成 k 倍，高也变成 k 倍——面积变成 k² 倍。",
+   "type": "EXT_SUSPICIOUS",
+   "severity": "warn",
+   "element": "seg a=[72.0,58.0] b=[72.0,28.0] dash=5,4",
+   "measured": {
+    "colDev": "29.54°",
+    "cross": 510,
+    "dirDashed": "90°",
+    "dirSolid": "119.5°",
+    "sharedEndpoint": [
+     72,
+     28
+    ]
+   },
+   "expected": "人工确认意图",
+   "note": "虚线远端落在实画图形上，可能是有意辅助线（中线/高线/对角线/半径），需人眼复核"
+  },
+  {
+   "page": "g09-u1-l6-p1",
+   "chapter": "g09",
+   "frame": "step1 [main/step-play]",
+   "caption": "第 1 步：同一时刻，太阳光线平行——人影 2 米，旗杆影 10 米。",
+   "type": "EXT_SUSPICIOUS",
+   "severity": "warn",
+   "element": "seg a=[30.0,25.0] b=[41.5,25.0] dash=5,4",
+   "measured": {
+    "colDev": "90°",
+    "cross": 230,
+    "dirDashed": "0°",
+    "dirSolid": "90°",
+    "sharedEndpoint": [
+     30,
+     25
+    ]
+   },
+   "expected": "人工确认意图",
+   "note": "虚线远端落在实画图形上，可能是有意辅助线（中线/高线/对角线/半径），需人眼复核"
+  },
+  {
+   "page": "g09-u1-l6-p1",
+   "chapter": "g09",
+   "frame": "step1 [main/step-play]",
+   "caption": "第 1 步：同一时刻，太阳光线平行——人影 2 米，旗杆影 10 米。",
+   "type": "EXT_SUSPICIOUS",
+   "severity": "warn",
+   "element": "seg a=[65.0,25.0] b=[91.0,25.0] dash=5,4",
+   "measured": {
+    "colDev": "90°",
+    "cross": 1170,
+    "dirDashed": "0°",
+    "dirSolid": "90°",
+    "sharedEndpoint": [
+     65,
+     25
+    ]
+   },
+   "expected": "人工确认意图",
+   "note": "虚线远端落在实画图形上，可能是有意辅助线（中线/高线/对角线/半径），需人眼复核"
+  },
+  {
+   "page": "g09-u1-l6-p1",
+   "chapter": "g09",
+   "frame": "step2 [main/step-play]",
+   "caption": "第 2 步：人、旗杆都垂直地面，光线平行——两个三角形两对角相等（AA 相似）。",
+   "type": "EXT_SUSPICIOUS",
+   "severity": "warn",
+   "element": "seg a=[30.0,25.0] b=[41.5,25.0] dash=5,4",
+   "measured": {
+    "colDev": "60.1°",
+    "cross": -230,
+    "dirDashed": "180°",
+    "dirSolid": "119.9°",
+    "sharedEndpoint": [
+     41.5,
+     25
+    ]
+   },
+   "expected": "人工确认意图",
+   "note": "虚线远端落在实画图形上，可能是有意辅助线（中线/高线/对角线/半径），需人眼复核"
+  },
+  {
+   "page": "g09-u1-l6-p1",
+   "chapter": "g09",
+   "frame": "step2 [main/step-play]",
+   "caption": "第 2 步：人、旗杆都垂直地面，光线平行——两个三角形两对角相等（AA 相似）。",
+   "type": "EXT_SUSPICIOUS",
+   "severity": "warn",
+   "element": "seg a=[65.0,25.0] b=[91.0,25.0] dash=5,4",
+   "measured": {
+    "colDev": "59.98°",
+    "cross": -1170,
+    "dirDashed": "180°",
+    "dirSolid": "120°",
+    "sharedEndpoint": [
+     91,
+     25
+    ]
+   },
+   "expected": "人工确认意图",
+   "note": "虚线远端落在实画图形上，可能是有意辅助线（中线/高线/对角线/半径），需人眼复核"
+  },
+  {
+   "page": "g10-u1-l2-p4",
+   "chapter": "g10",
+   "frame": "tap [main/tap-highlight]",
+   "caption": "",
+   "type": "EXT_SUSPICIOUS",
+   "severity": "warn",
+   "element": "seg a=[25.0,35.0] b=[75.0,65.0] dash=5,4",
+   "measured": {
+    "colDev": "30.96°",
+    "cross": -1500,
+    "dirDashed": "31°",
+    "dirSolid": "0°",
+    "sharedEndpoint": [
+     25,
+     35
+    ]
+   },
+   "expected": "人工确认意图",
+   "note": "虚线远端落在实画图形上，可能是有意辅助线（中线/高线/对角线/半径），需人眼复核"
+  },
+  {
+   "page": "g10-u1-l2-p4",
+   "chapter": "g10",
+   "frame": "tap [main/tap-highlight]",
+   "caption": "",
+   "type": "EXT_SUSPICIOUS",
+   "severity": "warn",
+   "element": "seg a=[75.0,35.0] b=[25.0,65.0] dash=5,4",
+   "measured": {
+    "colDev": "30.96°",
+    "cross": 1500,
+    "dirDashed": "149°",
+    "dirSolid": "180°",
+    "sharedEndpoint": [
+     75,
+     35
+    ]
+   },
+   "expected": "人工确认意图",
+   "note": "虚线远端落在实画图形上，可能是有意辅助线（中线/高线/对角线/半径），需人眼复核"
+  },
+  {
+   "page": "g10-u1-l4-p1",
+   "chapter": "g10",
+   "frame": "step1 [main/step-play]",
+   "caption": "第 1 步：等腰三角形 ABC（AB=AC，两道刻度），AD 是顶角平分线。",
+   "type": "EXT_SUSPICIOUS",
+   "severity": "warn",
+   "element": "seg a=[50.0,30.0] b=[50.0,65.0] dash=6,4",
+   "measured": {
+    "colDev": "29.74°",
+    "cross": -700,
+    "dirDashed": "90°",
+    "dirSolid": "60.3°",
+    "sharedEndpoint": [
+     50,
+     30
+    ]
+   },
+   "expected": "人工确认意图",
+   "note": "虚线远端落在实画图形上，可能是有意辅助线（中线/高线/对角线/半径），需人眼复核"
+  },
+  {
+   "page": "g10-u1-l4-p2",
+   "chapter": "g10",
+   "frame": "step1 [main/step-play]",
+   "caption": "关键帧：对称轴 AD 上的点 P，到 B、C 距离相等（两段同色等长刻度）。",
+   "type": "EXT_SUSPICIOUS",
+   "severity": "warn",
+   "element": "seg a=[50.0,30.0] b=[50.0,65.0] dash=6,4",
+   "measured": {
+    "colDev": "29.74°",
+    "cross": -700,
+    "dirDashed": "90°",
+    "dirSolid": "60.3°",
+    "sharedEndpoint": [
+     50,
+     30
+    ]
+   },
+   "expected": "人工确认意图",
+   "note": "虚线远端落在实画图形上，可能是有意辅助线（中线/高线/对角线/半径），需人眼复核"
+  },
+  {
+   "page": "g10-u1-l4-p3",
+   "chapter": "g10",
+   "frame": "step1 [main/step-play]",
+   "caption": "第 1 步：已知等腰 △ABC，AB=AC，AD 是对称轴交 BC 于 D，∠B=50°。",
+   "type": "EXT_SUSPICIOUS",
+   "severity": "warn",
+   "element": "seg a=[50.0,41.2] b=[50.0,65.0] dash=6,4",
+   "measured": {
+    "colDev": "40.04°",
+    "cross": -476,
+    "dirDashed": "90°",
+    "dirSolid": "50°",
+    "sharedEndpoint": [
+     50,
+     41.2
+    ]
+   },
+   "expected": "人工确认意图",
+   "note": "虚线远端落在实画图形上，可能是有意辅助线（中线/高线/对角线/半径），需人眼复核"
+  },
+  {
+   "page": "g10-u1-l5-p5",
+   "chapter": "g10",
+   "frame": "step1 [main/step-play]",
+   "caption": "第 1 步：g06.1.1 的老朋友——平行四边形 ABCD，O 是对角线交点。",
+   "type": "EXT_SUSPICIOUS",
+   "severity": "warn",
+   "element": "seg a=[30.0,40.0] b=[60.0,68.0] dash=5,4",
+   "measured": {
+    "colDev": "43.03°",
+    "cross": -1120,
+    "dirDashed": "223°",
+    "dirSolid": "180°",
+    "sharedEndpoint": [
+     60,
+     68
+    ]
+   },
+   "expected": "人工确认意图",
+   "note": "虚线远端落在实画图形上，可能是有意辅助线（中线/高线/对角线/半径），需人眼复核"
+  },
+  {
+   "page": "g10-u1-l5-p5",
+   "chapter": "g10",
+   "frame": "step1 [main/step-play]",
+   "caption": "第 1 步：g06.1.1 的老朋友——平行四边形 ABCD，O 是对角线交点。",
+   "type": "EXT_SUSPICIOUS",
+   "severity": "warn",
+   "element": "seg a=[70.0,40.0] b=[20.0,68.0] dash=5,4",
+   "measured": {
+    "colDev": "29.25°",
+    "cross": 1120,
+    "dirDashed": "150.8°",
+    "dirSolid": "180°",
+    "sharedEndpoint": [
+     70,
+     40
+    ]
+   },
+   "expected": "人工确认意图",
+   "note": "虚线远端落在实画图形上，可能是有意辅助线（中线/高线/对角线/半径），需人眼复核"
+  },
+  {
+   "page": "g11-u1-l2-p2",
+   "chapter": "g11",
+   "frame": "view:斜得厉害 [main/compare-toggle]",
+   "caption": "",
+   "type": "EXT_SUSPICIOUS",
+   "severity": "warn",
+   "element": "seg a=[40.0,30.0] b=[40.0,70.0] dash=5,4",
+   "measured": {
+    "colDev": "26.57°",
+    "cross": -800,
+    "dirDashed": "270°",
+    "dirSolid": "243.4°",
+    "sharedEndpoint": [
+     40,
+     70
+    ]
+   },
+   "expected": "人工确认意图",
+   "note": "虚线远端落在实画图形上，可能是有意辅助线（中线/高线/对角线/半径），需人眼复核"
+  },
+  {
+   "page": "g11-u1-l3-p2",
+   "chapter": "g11",
+   "frame": "step1 [main/step-play]",
+   "caption": "正例：锐角三角形的高在形内——从顶点垂直画到底边。",
+   "type": "EXT_SUSPICIOUS",
+   "severity": "warn",
+   "element": "seg a=[50.0,30.0] b=[50.0,70.0] dash=5,4",
+   "measured": {
+    "colDev": "32.01°",
+    "cross": 1000,
+    "dirDashed": "270°",
+    "dirSolid": "302°",
+    "sharedEndpoint": [
+     50,
+     70
+    ]
+   },
+   "expected": "人工确认意图",
+   "note": "虚线远端落在实画图形上，可能是有意辅助线（中线/高线/对角线/半径），需人眼复核"
+  },
+  {
+   "page": "g11-u1-l3-p3",
+   "chapter": "g11",
+   "frame": "step1 [main/step-play]",
+   "caption": "第 1 个：底是 a，高是 h——面积 = ah/2。",
+   "type": "EXT_SUSPICIOUS",
+   "severity": "warn",
+   "element": "seg a=[40.0,30.0] b=[40.0,65.0] dash=5,4",
+   "measured": {
+    "colDev": "29.74°",
+    "cross": 700,
+    "dirDashed": "270°",
+    "dirSolid": "299.7°",
+    "sharedEndpoint": [
+     40,
+     65
+    ]
+   },
+   "expected": "人工确认意图",
+   "note": "虚线远端落在实画图形上，可能是有意辅助线（中线/高线/对角线/半径），需人眼复核"
+  },
+  {
+   "page": "g11-u1-l3-p3",
+   "chapter": "g11",
+   "frame": "step3 [main/step-play]",
+   "caption": "第 3 个：顶点再挪，底高不变——面积永远是 ah/2。没变的是：面积。",
+   "type": "EXT_SUSPICIOUS",
+   "severity": "warn",
+   "element": "seg a=[28.0,30.0] b=[28.0,65.0] dash=5,4",
+   "measured": {
+    "colDev": "12.88°",
+    "cross": -280,
+    "dirDashed": "270°",
+    "dirSolid": "257.1°",
+    "sharedEndpoint": [
+     28,
+     65
+    ]
+   },
+   "expected": "人工确认意图",
+   "note": "虚线远端落在实画图形上，可能是有意辅助线（中线/高线/对角线/半径），需人眼复核"
+  },
+  {
+   "page": "g11-u1-l3-p4",
+   "chapter": "g11",
+   "frame": "step1 [main/step-play]",
+   "caption": "例题：底 6cm、高 4cm——面积 = 6×4÷2 = 12cm²。",
+   "type": "EXT_SUSPICIOUS",
+   "severity": "warn",
+   "element": "seg a=[50.0,35.0] b=[50.0,70.0] dash=5,4",
+   "measured": {
+    "colDev": "35.54°",
+    "cross": 875,
+    "dirDashed": "270°",
+    "dirSolid": "305.5°",
+    "sharedEndpoint": [
+     50,
+     70
+    ]
+   },
+   "expected": "人工确认意图",
+   "note": "虚线远端落在实画图形上，可能是有意辅助线（中线/高线/对角线/半径），需人眼复核"
+  },
+  {
+   "page": "g11-u1-l8-p3",
+   "chapter": "g11",
+   "frame": "step1 [main/step-play]",
+   "caption": "例题：圆锥 r=3cm、h=4cm——底面积=9π，体积=9π×4÷3=12π cm³。",
+   "type": "EXT_SUSPICIOUS",
+   "severity": "warn",
+   "element": "seg a=[50.0,30.0] b=[50.0,65.0] dash=5,4",
+   "measured": {
+    "colDev": "29.74°",
+    "cross": -700,
+    "dirDashed": "90°",
+    "dirSolid": "60.3°",
+    "sharedEndpoint": [
+     50,
+     30
+    ]
+   },
+   "expected": "人工确认意图",
+   "note": "虚线远端落在实画图形上，可能是有意辅助线（中线/高线/对角线/半径），需人眼复核"
+  },
+  {
+   "page": "g12-u1-l1-p1",
+   "chapter": "g12",
+   "frame": "step2 [main/step-play]",
+   "caption": "第 2 种：棱锥——底面是个多边形，侧面全是三角形，顶上聚成一个尖。",
+   "type": "EXT_SUSPICIOUS",
+   "severity": "warn",
+   "element": "seg a=[45.0,34.0] b=[30.0,72.0] dash=5,4",
+   "measured": {
+    "colDev": "8.44°",
+    "cross": 180,
+    "dirDashed": "111.5°",
+    "dirSolid": "120°",
+    "sharedEndpoint": [
+     45,
+     34
+    ]
+   },
+   "expected": "人工确认意图",
+   "note": "虚线远端落在实画图形上，可能是有意辅助线（中线/高线/对角线/半径），需人眼复核"
+  },
+  {
+   "page": "g12-u1-l1-p1",
+   "chapter": "g12",
+   "frame": "step3 [main/step-play]",
+   "caption": "第 3 种：圆柱——上下两个圆一样大，侧面是曲面，像一节水管。",
+   "type": "EXT_SUSPICIOUS",
+   "severity": "warn",
+   "element": "seg a=[30.0,32.0] b=[60.0,32.0] dash=5,4",
+   "measured": {
+    "colDev": "90°",
+    "cross": 900,
+    "dirDashed": "0°",
+    "dirSolid": "90°",
+    "sharedEndpoint": [
+     30,
+     32
+    ]
+   },
+   "expected": "人工确认意图",
+   "note": "虚线远端落在实画图形上，可能是有意辅助线（中线/高线/对角线/半径），需人眼复核"
+  },
+  {
+   "page": "g12-u1-l1-p5",
+   "chapter": "g12",
+   "frame": "tap [main/tap-highlight]",
+   "caption": "",
+   "type": "EXT_SUSPICIOUS",
+   "severity": "warn",
+   "element": "seg a=[65.0,55.0] b=[79.0,69.0] dash=5,4",
+   "measured": {
+    "colDev": "45°",
+    "cross": -350,
+    "dirDashed": "45°",
+    "dirSolid": "270°",
+    "sharedEndpoint": [
+     65,
+     55
+    ]
+   },
+   "expected": "人工确认意图",
+   "note": "虚线远端落在实画图形上，可能是有意辅助线（中线/高线/对角线/半径），需人眼复核"
+  },
+  {
+   "page": "g12-u1-l1-p5",
+   "chapter": "g12",
+   "frame": "tap [main/tap-highlight]",
+   "caption": "",
+   "type": "EXT_SUSPICIOUS",
+   "severity": "warn",
+   "element": "seg a=[25.0,55.0] b=[39.0,69.0] dash=5,4",
+   "measured": {
+    "colDev": "45°",
+    "cross": -560,
+    "dirDashed": "45°",
+    "dirSolid": "0°",
+    "sharedEndpoint": [
+     25,
+     55
+    ]
+   },
+   "expected": "人工确认意图",
+   "note": "虚线远端落在实画图形上，可能是有意辅助线（中线/高线/对角线/半径），需人眼复核"
+  },
+  {
+   "page": "g12-u1-l4-p1",
+   "chapter": "g12",
+   "frame": "step4 [main/step-play]",
+   "caption": "第 4 刀：角度再刁一点，6 个面全切到——截面是六边形。",
+   "type": "EXT_SUSPICIOUS",
+   "severity": "warn",
+   "element": "seg a=[42.0,42.0] b=[72.0,42.0] dash=5,4",
+   "measured": {
+    "colDev": "45°",
+    "cross": 360,
+    "dirDashed": "180°",
+    "dirSolid": "225°",
+    "sharedEndpoint": [
+     72,
+     42
+    ]
+   },
+   "expected": "人工确认意图",
+   "note": "虚线远端落在实画图形上，可能是有意辅助线（中线/高线/对角线/半径），需人眼复核"
+  },
+  {
+   "page": "g12-u1-l4-p1",
+   "chapter": "g12",
+   "frame": "step4 [main/step-play]",
+   "caption": "第 4 刀：角度再刁一点，6 个面全切到——截面是六边形。",
+   "type": "EXT_SUSPICIOUS",
+   "severity": "warn",
+   "element": "seg a=[30.0,30.0] b=[42.0,42.0] dash=5,4",
+   "measured": {
+    "colDev": "45°",
+    "cross": -360,
+    "dirDashed": "45°",
+    "dirSolid": "0°",
+    "sharedEndpoint": [
+     30,
+     30
+    ]
+   },
+   "expected": "人工确认意图",
+   "note": "虚线远端落在实画图形上，可能是有意辅助线（中线/高线/对角线/半径），需人眼复核"
+  }
+ ]
+}

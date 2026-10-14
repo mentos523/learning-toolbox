@@ -710,8 +710,8 @@ window.MATH_CH["g08"] = {
                         { t: "circle", c: [50,55], r: 24, color: "line", width: 2.5 },
                         { t: "seg", a: [86,32], b: [72,64.5], color: "line", width: 2.5 },
                         { t: "seg", a: [86,32], b: [50.7,31], color: "line", width: 2.5 },
-                        { t: "right", v: [72,64.5], p: [79.3,67.7], q: [68.8,71.8], size: 7, color: "corrAngle" },
-                        { t: "right", v: [50.7,31], p: [50.9,23], q: [42.7,30.8], size: 7, color: "corrAngle" },
+                        { t: "right", v: [72,64.5], p: [74.8,58.1], q: [65.6,61.7], size: 7, color: "corrAngle" },
+                        { t: "right", v: [50.7,31], p: [57.7,31.2], q: [50.5,38], size: 7, color: "corrAngle" },
                         { t: "txt", p: [50,90], text: "∠OAP = ∠OBP = 90°", size: 13, bold: true, color: "corrAngle" }
                       ]
                     },
@@ -829,32 +829,32 @@ window.MATH_CH["g08"] = {
                     {
                       caption: "第 1 步：标已知——PA=6（蓝色）。",
                       shapes: [
-                        { t: "circle", c: [45,55], r: 22, color: "known", width: 3 },
+                        { t: "circle", c: [45,55], r: 24.87, color: "known", width: 3 },
                         { t: "pt", p: [88,30], label: "P", color: "known", r: 4 },
-                        { t: "seg", a: [88,30], b: [63.4,67.2], color: "known", width: 3.5 },
-                        { t: "seg", a: [88,30], b: [43.5,33], color: "line", width: 3 },
+                        { t: "seg", a: [88,30], b: [66.6,67.4], color: "known", width: 3.5 },
+                        { t: "seg", a: [88,30], b: [44.9,30.1], color: "line", width: 3 },
                         { t: "txt", p: [76,52], text: "PA=6", size: 13, bold: true, color: "known" }
                       ]
                     },
                     {
                       caption: "第 2 步：切线长定理——PB=PA=6。",
                       shapes: [
-                        { t: "circle", c: [45,55], r: 22, color: "known", width: 3 },
+                        { t: "circle", c: [45,55], r: 24.87, color: "known", width: 3 },
                         { t: "pt", p: [88,30], label: "P", color: "known", r: 4 },
-                        { t: "seg", a: [88,30], b: [63.4,67.2], color: "target", width: 3, ticks: 1 },
-                        { t: "seg", a: [88,30], b: [43.5,33], color: "target", width: 3, ticks: 1 },
+                        { t: "seg", a: [88,30], b: [66.6,67.4], color: "target", width: 3, ticks: 1 },
+                        { t: "seg", a: [88,30], b: [44.9,30.1], color: "target", width: 3, ticks: 1 },
                         { t: "txt", p: [70,56], text: "PB=PA=6", size: 14, bold: true, color: "target" }
                       ]
                     },
                     {
                       caption: "第 3 步：∠APB=60°，OP 平分它——∠APO=30°。",
                       shapes: [
-                        { t: "circle", c: [45,55], r: 22, color: "line", width: 2.5 },
-                        { t: "seg", a: [88,30], b: [63.4,67.2], color: "line", width: 2.5 },
-                        { t: "seg", a: [88,30], b: [43.5,33], color: "line", width: 2.5 },
+                        { t: "circle", c: [45,55], r: 24.87, color: "line", width: 2.5 },
+                        { t: "seg", a: [88,30], b: [66.6,67.4], color: "line", width: 2.5 },
+                        { t: "seg", a: [88,30], b: [44.9,30.1], color: "line", width: 2.5 },
                         { t: "seg", a: [45,55], b: [88,30], color: "known", width: 2.5 },
-                        { t: "arc", v: [88,30], a1: 148, a2: 180, r: 10, group: 1, color: "corrAngle" },
-                        { t: "arc", v: [88,30], a1: 180, a2: 212, r: 10, group: 1, color: "corrAngle" },
+                        { t: "arc", v: [88,30], a1: 119.8, a2: 149.8, r: 10, group: 1, color: "corrAngle" },
+                        { t: "arc", v: [88,30], a1: 149.8, a2: 179.8, r: 10, group: 1, color: "corrAngle" },
                         { t: "txt", p: [68,18], text: "∠APO=30°", size: 13, bold: true, color: "corrAngle" }
                       ]
                     }

@@ -912,20 +912,20 @@ window.MATH_CH["g10"] = {
                     {
                       caption: "第 1 步：已知等腰 △ABC，AB=AC，AD 是对称轴交 BC 于 D，∠B=50°。",
                       shapes: [
-                        { t: "poly", pts: [[30,65],[70,65],[50,30]], color: "known", width: 3 },
-                        { t: "seg", a: [30,65], b: [50,30], color: "known", width: 3, ticks: 1 },
-                        { t: "seg", a: [70,65], b: [50,30], color: "known", width: 3, ticks: 1 },
-                        { t: "seg", a: [50,30], b: [50,65], color: "aux", width: 2.5, dash: "6,4" },
-                        { t: "arc", v: [30,65], a1: 0, a2: 50, r: 10, group: 1, color: "target" },
+                        { t: "poly", pts: [[30,65],[70,65],[50,41.2]], color: "known", width: 3 },
+                        { t: "seg", a: [30,65], b: [50,41.2], color: "known", width: 3, ticks: 1 },
+                        { t: "seg", a: [70,65], b: [50,41.2], color: "known", width: 3, ticks: 1 },
+                        { t: "seg", a: [50,41.2], b: [50,65], color: "aux", width: 2.5, dash: "6,4" },
+                        { t: "arc", v: [30,65], a1: 310, a2: 0, r: 10, group: 1, color: "target" },
                         { t: "txt", p: [22,56], text: "50°", size: 13, color: "target" }
                       ]
                     },
                     {
                       caption: "第 2 步：对称 → ∠C = ∠B = 50°（对应角相等）。",
                       shapes: [
-                        { t: "poly", pts: [[30,65],[70,65],[50,30]], color: "known", width: 3 },
-                        { t: "arc", v: [30,65], a1: 0, a2: 50, r: 10, group: 1, color: "corrA" },
-                        { t: "arc", v: [70,65], a1: 130, a2: 180, r: 10, group: 1, color: "corrA" },
+                        { t: "poly", pts: [[30,65],[70,65],[50,41.2]], color: "known", width: 3 },
+                        { t: "arc", v: [30,65], a1: 310, a2: 0, r: 10, group: 1, color: "corrA" },
+                        { t: "arc", v: [70,65], a1: 180, a2: 230, r: 10, group: 1, color: "corrA" },
                         { t: "txt", p: [22,56], text: "50°", size: 13, color: "corrA" },
                         { t: "txt", p: [78,56], text: "50°", size: 13, color: "corrA" }
                       ]
@@ -933,10 +933,10 @@ window.MATH_CH["g10"] = {
                     {
                       caption: "第 3 步：AD⊥BC（三线合一），∠BAD = 180°−90°−50° = 40°。",
                       shapes: [
-                        { t: "poly", pts: [[30,65],[70,65],[50,30]], color: "known", width: 3 },
-                        { t: "seg", a: [50,30], b: [50,65], color: "target", width: 3 },
-                        { t: "right", v: [50,65], p: [50,30], q: [70,65], size: 6, color: "target" },
-                        { t: "arc", v: [50,30], a1: 232, a2: 270, r: 10, group: 1, color: "target" },
+                        { t: "poly", pts: [[30,65],[70,65],[50,41.2]], color: "known", width: 3 },
+                        { t: "seg", a: [50,41.2], b: [50,65], color: "target", width: 3 },
+                        { t: "right", v: [50,65], p: [50,41.2], q: [70,65], size: 6, color: "target" },
+                        { t: "arc", v: [50,41.2], a1: 90, a2: 130, r: 10, group: 1, color: "target" },
                         { t: "txt", p: [44,42], text: "40°", size: 14, bold: true, color: "target" }
                       ]
                     }
@@ -995,7 +995,7 @@ window.MATH_CH["g10"] = {
                         { t: "pt", p: [50,52], color: "target", r: 5 },
                         { t: "seg", a: [50,52], b: [50,74], color: "line", width: 2, dash: "5,4" },
                         { t: "seg", a: [50,52], b: [72,52], color: "known", width: 4 },
-                        { t: "arc", v: [50,52], a1: 90, a2: 0, r: 14, color: "corrA" },
+                        { t: "arc", v: [50,52], a1: 0, a2: 90, r: 14, color: "corrA" },
                         { t: "txt", p: [50,14], text: "转 90°", size: 14, bold: true, color: "corrA" }
                       ]
                     },

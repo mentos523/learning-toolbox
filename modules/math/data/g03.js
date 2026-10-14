@@ -532,9 +532,9 @@ window.MATH_CH["g03"] = {
                       caption: "第 1 步：完整的三角形，三个角都在。",
                       shapes: [
                         { t: "poly", pts: [[20,70],[80,70],[50,27]], color: "line", width: 3 },
-                        { t: "arc", v: [20,70], a1: 0, a2: 48, r: 10, group: 1, color: "corrAngle" },
-                        { t: "arc", v: [80,70], a1: 132, a2: 180, r: 10, group: 2, color: "corrAngle" },
-                        { t: "arc", v: [50,27], a1: 228, a2: 312, r: 10, group: 3, color: "corrAngle" }
+                        { t: "arc", v: [20,70], a1: 304.9, a2: 0, r: 10, group: 1, color: "corrAngle" },
+                        { t: "arc", v: [80,70], a1: 180, a2: 235.1, r: 10, group: 2, color: "corrAngle" },
+                        { t: "arc", v: [50,27], a1: 55.1, a2: 124.9, r: 10, group: 3, color: "corrAngle" }
                       ]
                     },
                     {
@@ -758,8 +758,8 @@ window.MATH_CH["g03"] = {
                       caption: "第 2 步：把 BC 延长到 D（虚线是延长部分）。",
                       shapes: [
                         { t: "poly", pts: [[20,32],[80,32],[55,68]], color: "line", width: 3 },
-                        { t: "seg", a: [80,32], b: [95,20], color: "aux", width: 2.5, dash: "6,4" },
-                        { t: "txt", p: [97,16], text: "D", size: 13 },
+                        { t: "seg", a: [80,32], b: [91,16], color: "aux", width: 2.5, dash: "6,4" },
+                        { t: "txt", p: [93,12], text: "D", size: 13 },
                         { t: "txt", p: [55,76], text: "C", size: 13, bold: true }
                       ]
                     },
@@ -767,10 +767,9 @@ window.MATH_CH["g03"] = {
                       caption: "第 3 步：∠ABD“张开”了——这就是外角。",
                       shapes: [
                         { t: "poly", pts: [[20,32],[80,32],[55,68]], color: "line", width: 2.5 },
-                        { t: "seg", a: [80,32], b: [95,20], color: "aux", width: 2.5, dash: "6,4" },
-                        { t: "arc", v: [80,32], a1: 322, a2: 360, r: 13, group: 1, color: "corrA" },
-                        { t: "arc", v: [80,32], a1: 0, a2: 90, r: 13, group: 1, color: "corrA" },
-                        { t: "txt", p: [90,42], text: "∠ABD", size: 13, bold: true, color: "corrA" },
+                        { t: "seg", a: [80,32], b: [91,16], color: "aux", width: 2.5, dash: "6,4" },
+                        { t: "arc", v: [80,32], a1: 180, a2: 304.8, r: 13, group: 1, color: "corrA" },
+                        { t: "txt", p: [71,14], text: "∠ABD", size: 13, bold: true, color: "corrA" },
                         { t: "txt", p: [50,80], text: "外角：∠ABD", size: 14, bold: true }
                       ]
                     }
@@ -811,13 +810,13 @@ window.MATH_CH["g03"] = {
                       caption: "第 1 步：延长 CB 到 D——外角 ∠ABD 登场。",
                       shapes: [
                         { t: "poly", pts: [[20,30],[80,30],[55,66]], color: "line", width: 3 },
-                        { t: "seg", a: [80,30], b: [95,13], color: "aux", width: 2.5, dash: "6,4" },
-                        { t: "arc", v: [80,30], a1: 301, a2: 360, r: 13, group: 1, color: "corrA" },
-                        { t: "txt", p: [90,44], text: "∠ABD", size: 13, bold: true, color: "corrA" },
+                        { t: "seg", a: [80,30], b: [93,11], color: "aux", width: 2.5, dash: "6,4" },
+                        { t: "arc", v: [80,30], a1: 180, a2: 304.8, r: 13, group: 1, color: "corrA" },
+                        { t: "txt", p: [71,12], text: "∠ABD", size: 13, bold: true, color: "corrA" },
                         { t: "txt", p: [15,22], text: "A", size: 13, bold: true },
                         { t: "txt", p: [85,22], text: "B", size: 13, bold: true },
                         { t: "txt", p: [55,74], text: "C", size: 13, bold: true },
-                        { t: "txt", p: [97,9], text: "D", size: 13 }
+                        { t: "txt", p: [95,7], text: "D", size: 13 }
                       ],
                       card: "延长 CB 到 D——外角 ∠ABD 登场。",
                       why: "依据：外角的定义——三角形一边与另一边延长线组成的角。"
@@ -826,11 +825,11 @@ window.MATH_CH["g03"] = {
                       caption: "第 2 步：∠ABC + ∠ABD = 180°（邻居拼成直线）。",
                       shapes: [
                         { t: "poly", pts: [[20,30],[80,30],[55,66]], color: "line", width: 2 },
-                        { t: "seg", a: [80,30], b: [95,13], color: "aux", width: 2, dash: "6,4" },
-                        { t: "arc", v: [80,30], a1: 119, a2: 180, r: 12, group: 2, color: "corrB" },
-                        { t: "arc", v: [80,30], a1: 301, a2: 360, r: 13, group: 1, color: "corrA" },
+                        { t: "seg", a: [80,30], b: [93,11], color: "aux", width: 2, dash: "6,4" },
+                        { t: "arc", v: [80,30], a1: 124.8, a2: 180, r: 12, group: 2, color: "corrB" },
+                        { t: "arc", v: [80,30], a1: 180, a2: 304.8, r: 13, group: 1, color: "corrA" },
                         { t: "txt", p: [68,22], text: "∠ABC", size: 12, color: "corrB" },
-                        { t: "txt", p: [90,44], text: "∠ABD", size: 12, color: "corrA" },
+                        { t: "txt", p: [71,12], text: "∠ABD", size: 12, color: "corrA" },
                         { t: "txt", p: [50,82], text: "∠ABC + ∠ABD = 180°", size: 13, math: true }
                       ],
                       card: "∠ABC 和 ∠ABD 是邻居，拼成一条直线——180°。",
@@ -840,9 +839,9 @@ window.MATH_CH["g03"] = {
                       caption: "第 3 步：∠A + ∠ABC + ∠C = 180°（内角和）。",
                       shapes: [
                         { t: "poly", pts: [[20,30],[80,30],[55,66]], color: "line", width: 2.5 },
-                        { t: "arc", v: [20,30], a1: 0, a2: 61, r: 10, group: 1, color: "corrA" },
-                        { t: "arc", v: [80,30], a1: 119, a2: 180, r: 10, group: 2, color: "corrB" },
-                        { t: "arc", v: [55,66], a1: 241, a2: 299, r: 10, group: 3, color: "corrC" },
+                        { t: "arc", v: [20,30], a1: 0, a2: 45.8, r: 10, group: 1, color: "corrA" },
+                        { t: "arc", v: [80,30], a1: 124.8, a2: 180, r: 10, group: 2, color: "corrB" },
+                        { t: "arc", v: [55,66], a1: 225.8, a2: 304.8, r: 10, group: 3, color: "corrC" },
                         { t: "txt", p: [50,82], text: "∠A + ∠ABC + ∠C = 180°", size: 13, math: true }
                       ],
                       card: "三角形内角和也是 180°——上一课刚证的，现拿现用。",
@@ -852,7 +851,7 @@ window.MATH_CH["g03"] = {
                       caption: "第 4 步：两式一减，∠ABC 消掉了——证毕。",
                       shapes: [
                         { t: "poly", pts: [[20,30],[80,30],[55,66]], color: "known", width: 3 },
-                        { t: "seg", a: [80,30], b: [95,13], color: "aux", width: 2, dash: "6,4" },
+                        { t: "seg", a: [80,30], b: [93,11], color: "aux", width: 2, dash: "6,4" },
                         { t: "txt", p: [50,50], text: "∠ABD = ∠A + ∠C", size: 15, bold: true, math: true }
                       ],
                       card: "两个 180° 一减，∠ABC 消掉了——外角等于不相邻两内角之和。",
@@ -903,8 +902,8 @@ window.MATH_CH["g03"] = {
                         { t: "poly", pts: [[20,30],[80,30],[55,66]], color: "line", width: 2.5 },
                         { t: "seg", a: [80,30], b: [93,11], color: "aux", width: 2.5, dash: "6,4" },
                         { t: "arc", v: [80,30], a1: 180, a2: 305, r: 13, group: 1, color: "corrA" },
-                        { t: "arc", v: [20,30], a1: 0, a2: 61, r: 10, group: 2, color: "corrB" },
-                        { t: "arc", v: [55,66], a1: 241, a2: 299, r: 10, group: 3, color: "corrC" },
+                        { t: "arc", v: [20,30], a1: 0, a2: 45.8, r: 10, group: 2, color: "corrB" },
+                        { t: "arc", v: [55,66], a1: 225.8, a2: 304.8, r: 10, group: 3, color: "corrC" },
                         { t: "txt", p: [15,22], text: "A", size: 13, bold: true },
                         { t: "txt", p: [85,22], text: "B", size: 13, bold: true },
                         { t: "txt", p: [55,74], text: "C", size: 13, bold: true },
@@ -1147,9 +1146,9 @@ window.MATH_CH["g03"] = {
                       caption: "第 3 步：角——内角和 180°；外角=不相邻两内角之和；n 边形=(n−2)×180°。",
                       shapes: [
                         { t: "poly", pts: [[20,62],[80,62],[50,28]], color: "line", width: 2.5 },
-                        { t: "arc", v: [20,62], a1: 0, a2: 48, r: 9, group: 1, color: "corrAngle" },
-                        { t: "arc", v: [80,62], a1: 132, a2: 180, r: 9, group: 2, color: "corrAngle" },
-                        { t: "arc", v: [50,28], a1: 228, a2: 312, r: 9, group: 3, color: "corrAngle" },
+                        { t: "arc", v: [20,62], a1: 311.4, a2: 0, r: 9, group: 1, color: "corrAngle" },
+                        { t: "arc", v: [80,62], a1: 180, a2: 228.6, r: 9, group: 2, color: "corrAngle" },
+                        { t: "arc", v: [50,28], a1: 48.6, a2: 131.4, r: 9, group: 3, color: "corrAngle" },
                         { t: "txt", p: [50,78], text: "180° / 外角定理 / (n−2)×180°", size: 13, bold: true }
                       ]
                     }

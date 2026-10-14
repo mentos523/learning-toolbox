@@ -349,7 +349,7 @@ window.MATH_CH["g07"] = {
                         { t: "circle", c: [50,52], r: 30, color: "line", width: 2 },
                         { t: "poly", pts: [[50,52],[22.5,64],[77.5,64]], color: "line", width: 2.5 },
                         { t: "seg", a: [50,52], b: [50,64], color: "target", width: 3.5 },
-                        { t: "right", v: [50,64], p: [50,82], q: [77.5,64], size: 6 },
+                        { t: "right", v: [50,64], p: [50,52], q: [77.5,64], size: 6 },
                         { t: "seg", a: [22.5,64], b: [50,64], color: "corrA", width: 3, ticks: 1 },
                         { t: "seg", a: [50,64], b: [77.5,64], color: "corrA", width: 3, ticks: 1 },
                         { t: "txt", p: [50,74], text: "AE = EB", size: 14, bold: true, color: "corrA" }
@@ -787,7 +787,7 @@ window.MATH_CH["g07"] = {
                         { t: "seg", a: [50,22], b: [35,78], color: "target", width: 3.5 },
                         { t: "seg", a: [50,22], b: [50,82], color: "target", width: 3.5 },
                         { t: "seg", a: [50,22], b: [65,78], color: "line", width: 2 },
-                        { t: "arc", v: [50,22], a1: 90, a2: 120, r: 10, color: "target", width: 3 },
+                        { t: "arc", v: [50,22], a1: 90, a2: 105, r: 10, color: "target", width: 3 },
                         { t: "arc", v: [50,52], a1: 90, a2: 120, r: 12, color: "target", width: 3 },
                         { t: "txt", p: [26,52], text: "O 在 PQ 上", size: 13, color: "target" }
                       ]
@@ -800,7 +800,7 @@ window.MATH_CH["g07"] = {
                         { t: "seg", a: [50,22], b: [65,78], color: "target", width: 3.5 },
                         { t: "seg", a: [50,22], b: [50,82], color: "target", width: 3.5 },
                         { t: "seg", a: [50,22], b: [35,78], color: "line", width: 2 },
-                        { t: "arc", v: [50,22], a1: 60, a2: 90, r: 10, color: "target", width: 3 },
+                        { t: "arc", v: [50,22], a1: 75, a2: 90, r: 10, color: "target", width: 3 },
                         { t: "arc", v: [50,52], a1: 60, a2: 90, r: 12, color: "target", width: 3 }
                       ]
                     },
@@ -812,7 +812,7 @@ window.MATH_CH["g07"] = {
                         { t: "seg", a: [50,22], b: [35,78], color: "known", width: 3 },
                         { t: "seg", a: [50,22], b: [65,78], color: "known", width: 3 },
                         { t: "seg", a: [50,22], b: [50,82], color: "aux", width: 2.5, dash: "6,4" },
-                        { t: "arc", v: [50,22], a1: 60, a2: 120, r: 10, group: 1, color: "target" },
+                        { t: "arc", v: [50,22], a1: 75, a2: 105, r: 10, group: 1, color: "target" },
                         { t: "txt", p: [50,94], text: "∠APB = ∠APQ + ∠BPQ", size: 12, color: "target" }
                       ]
                     }
@@ -1150,7 +1150,7 @@ window.MATH_CH["g07"] = {
                         { t: "circle", c: [50,52], r: 30, color: "line", width: 3 },
                         { t: "seg", a: [50,22], b: [35,78], color: "known", width: 3 },
                         { t: "seg", a: [50,22], b: [65,78], color: "known", width: 3 },
-                        { t: "arc", v: [50,22], a1: 60, a2: 120, r: 10, group: 1, color: "corrAngle" },
+                        { t: "arc", v: [50,22], a1: 75, a2: 105, r: 10, group: 1, color: "corrAngle" },
                         { t: "pt", p: [50,22], label: "P", color: "known", r: 4 },
                         { t: "pt", p: [50,52], label: "O", color: "known", r: 4 },
                         { t: "txt", p: [50,14], text: "圆周角定理", size: 15, bold: true, color: "corrAngle" }

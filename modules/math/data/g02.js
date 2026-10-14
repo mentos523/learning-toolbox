@@ -1265,12 +1265,12 @@ window.MATH_CH["g02"] = {
                       shapes: [
                         { t: "seg", a: [15,70], b: [85,70], color: "known", width: 3, arrows: 2 },
                         { t: "seg", a: [15,40], b: [85,40], color: "known", width: 3, arrows: 2 },
-                        { t: "seg", a: [42,28], b: [58,82], color: "aux", width: 2.5 },
-                        { t: "poly", pts: [[44,70],[54.2,70],[45.8,40],[56,40]], color: "aux", width: 2, dash: "6,4", close: false },
-                        { t: "arc", v: [54.2,70], a1: 180, a2: 252, r: 10, group: 1, color: "corrB" },
-                        { t: "arc", v: [45.8,40], a1: 0, a2: 72, r: 10, group: 1, color: "corrB" },
-                        { t: "txt", p: [44,63], text: "∠3=60°", size: 13, bold: true, color: "corrB" },
-                        { t: "txt", p: [56,48], text: "∠5=60°", size: 13, bold: true, color: "corrB" },
+                        { t: "seg", a: [34.4,28], b: [65.6,82], color: "aux", width: 2.5 },
+                        { t: "poly", pts: [[48,70],[58.7,70],[41.3,40],[52,40]], color: "aux", width: 2, dash: "6,4", close: false },
+                        { t: "arc", v: [58.7,70], a1: 180, a2: 240, r: 10, group: 1, color: "corrB" },
+                        { t: "arc", v: [41.3,40], a1: 0, a2: 60, r: 10, group: 1, color: "corrB" },
+                        { t: "txt", p: [47,63], text: "∠3=60°", size: 13, bold: true, color: "corrB" },
+                        { t: "txt", p: [53,47], text: "∠5=60°", size: 13, bold: true, color: "corrB" },
                         { t: "txt", p: [50,24], text: "a ∥ b", size: 15, bold: true, color: "known" }
                       ]
                     }
@@ -1311,12 +1311,12 @@ window.MATH_CH["g02"] = {
                       shapes: [
                         { t: "seg", a: [15,70], b: [85,70], color: "known", width: 3, arrows: 2 },
                         { t: "seg", a: [15,40], b: [85,40], color: "known", width: 3, arrows: 2 },
-                        { t: "seg", a: [42,28], b: [58,82], color: "aux", width: 2.5 },
-                        { t: "poly", pts: [[64,70],[54.2,70],[45.8,40],[56,40]], color: "aux", width: 2, dash: "6,4", close: false },
-                        { t: "arc", v: [54.2,70], a1: 252, a2: 360, r: 10, group: 1, color: "corrC" },
-                        { t: "arc", v: [45.8,40], a1: 0, a2: 72, r: 10, group: 1, color: "corrC" },
-                        { t: "txt", p: [64,61], text: "∠4=120°", size: 13, bold: true, color: "corrC" },
-                        { t: "txt", p: [56,48], text: "∠5=60°", size: 13, bold: true, color: "corrC" },
+                        { t: "seg", a: [34.4,28], b: [65.6,82], color: "aux", width: 2.5 },
+                        { t: "poly", pts: [[68,70],[58.7,70],[41.3,40],[52,40]], color: "aux", width: 2, dash: "6,4", close: false },
+                        { t: "arc", v: [58.7,70], a1: 240, a2: 360, r: 10, group: 1, color: "corrC" },
+                        { t: "arc", v: [41.3,40], a1: 0, a2: 60, r: 10, group: 1, color: "corrC" },
+                        { t: "txt", p: [66,58], text: "∠4=120°", size: 13, bold: true, color: "corrC" },
+                        { t: "txt", p: [53,47], text: "∠5=60°", size: 13, bold: true, color: "corrC" },
                         { t: "txt", p: [50,24], text: "a ∥ b", size: 15, bold: true, color: "known" }
                       ]
                     }
