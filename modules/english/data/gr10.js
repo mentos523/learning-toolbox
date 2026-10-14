@@ -57,7 +57,7 @@ window.ENG_CH["gr10"] = {
       tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "'m", role: "verb", label: "谓语" }, { w: "boring", role: "complem", label: "表语（现在分词）" } ] },
     /* ---------- gr10.1.3 分词的逻辑主语一致 ---------- */
     "gr10.1.3-e1": { en: "Seen from the hill, the town looks beautiful.", zh: "从山上看去，小镇很美。", reg: "通用",
-      tagged: [ { w: "Seen from the hill", role: "adverb", label: "状语（分词短语）" }, { w: "the town", role: "subject", label: "主语（分词的逻辑主语）" }, { w: "looks", role: "verb", label: "谓语" }, { w: "beautiful", role: "complem", label: "表语" } ] },
+      tagged: [ { w: "Seen from the hill", role: "adverb", label: "状语（分词短语）" }, { w: "the town", role: "subject", label: "主语（分词的逻辑主语·被看的是小镇）" }, { w: "looks", role: "verb", label: "谓语" }, { w: "beautiful", role: "complem", label: "表语" } ] },
     "gr10.1.3-e2": { en: "Walking in the park, I saw a bird.", zh: "在公园散步时，我看到一只鸟。", reg: "通用",
       tagged: [ { w: "Walking in the park", role: "adverb", label: "状语（分词短语）" }, { w: "I", role: "subject", label: "主语（分词的逻辑主语）" }, { w: "saw", role: "verb", label: "谓语" }, { w: "a bird", role: "object", label: "宾语" } ] },
     "gr10.1.3-e3": { en: "Written in easy English, the book is good for us.", zh: "这本书用浅显的英语写成，很适合我们。", reg: "通用",
@@ -191,7 +191,7 @@ window.ENG_CH["gr10"] = {
               id: "gr10.1.1-p3",
               kind: "explain",
               title: "现在分词：主动、正在",
-              lead: "还记得吗？上一页 standing at the door 站在名词后，Walking along the street 站在句首。",
+              lead: "上一页 standing at the door 在名词后，Walking along the street 在句首。",
               blocks: [
                 {
                   type: "examples",
@@ -428,14 +428,16 @@ window.ENG_CH["gr10"] = {
             {
               id: "gr10.1.3-p1",
               kind: "observe",
-              title: "先看三句话：谁在“ 走 ”？谁在“ 看 ”？",
+              title: "先看三句话：分词的主人是谁？",
               sentences: [
                 { id: "gr10.1.3-e2", en: "Walking in the park, I saw a bird.", zh: "在公园散步时，我看到一只鸟。", reg: "通用",
                   tagged: [ { w: "Walking in the park", role: "adverb", label: "状语（分词短语）" }, { w: "I", role: "subject", label: "主语（分词的逻辑主语）" }, { w: "saw", role: "verb", label: "谓语" }, { w: "a bird", role: "object", label: "宾语" } ] },
                 { id: "gr10.1.3-e1", en: "Seen from the hill, the town looks beautiful.", zh: "从山上看去，小镇很美。", reg: "通用",
-                  tagged: [ { w: "Seen from the hill", role: "adverb", label: "状语（分词短语）" }, { w: "the town", role: "subject", label: "主语（分词的逻辑主语）" }, { w: "looks", role: "verb", label: "谓语" }, { w: "beautiful", role: "complem", label: "表语" } ] },
+                  tagged: [ { w: "Seen from the hill", role: "adverb", label: "状语（分词短语）" }, { w: "the town", role: "subject", label: "主语（分词的逻辑主语·被看的是小镇）" }, { w: "looks", role: "verb", label: "谓语" }, { w: "beautiful", role: "complem", label: "表语" } ] },
                 { id: "gr10.1.3-e4", en: "Walking into the classroom, the bell rang.", zh: "（✗ 错句）本想说“ 走进教室时 ”。", reg: "通用",
-                  tagged: [ { w: "Walking into the classroom", role: "adverb", label: "状语（分词短语）" }, { w: "the bell", role: "subject", label: "主语" }, { w: "rang", role: "verb", label: "谓语" } ] }
+                  tagged: [ { w: "Walking into the classroom", role: "adverb", label: "状语（分词短语）" }, { w: "the bell", role: "subject", label: "主语" }, { w: "rang", role: "verb", label: "谓语" } ] },
+                { id: "gr10.1.3-e7", en: "Opening the box, he found a letter.", zh: "打开盒子，他发现一封信。", reg: "通用",
+                  tagged: [ { w: "Opening the box", role: "adverb", label: "状语（分词短语）" }, { w: "he", role: "subject", label: "主语（分词的逻辑主语）" }, { w: "found", role: "verb", label: "谓语" }, { w: "a letter", role: "object", label: "宾语" } ] }
               ],
               guess: {
                 q: "第三句错在哪？“ 走进教室 ”的人是谁，主句的主语又是谁？",
@@ -443,7 +445,7 @@ window.ENG_CH["gr10"] = {
                 answer: 1,
                 note: "先猜，再看上面的色块验证——猜错也没关系，只记录不判分。"
               },
-              point: "分词是“ 没主语的动作 ”，它的主人必须和主句主语是同一个人——这叫逻辑主语一致。"
+              point: "分词是“ 没主语的动作 ”，它的主人必须和主句主语是同一个人——这叫逻辑主语一致。-ed 分词的主人是“ 被… ”的那个（被看的是小镇），-ing 分词的主人才是“ 干… ”的那个。"
             },
             {
               id: "gr10.1.3-p2",
@@ -456,7 +458,7 @@ window.ENG_CH["gr10"] = {
                   params: {
                     sentence: [
                       { w: "Seen from the hill", role: "adverb", label: "状语（分词短语）" },
-                      { w: "the town", role: "subject", label: "主语（分词的逻辑主语）" },
+                      { w: "the town", role: "subject", label: "主语（分词的逻辑主语·被看的是小镇）" },
                       { w: "looks", role: "verb", label: "谓语" },
                       { w: "beautiful", role: "complem", label: "表语" }
                     ],
@@ -494,37 +496,37 @@ window.ENG_CH["gr10"] = {
               id: "gr10.1.3-p3",
               kind: "explain",
               title: "悬垂分词专治",
-              lead: "还记得吗？上一页 the town 既“ 被看 ”又当主语，he 既“ 打开 ”又当主语。",
+              lead: "the town 既“ 被看 ”又当主语，he 既“ 打开 ”又当主语。",
               blocks: [
                 {
                   type: "examples",
                   ids: ["gr10.1.3-e1", "gr10.1.3-e2", "gr10.1.3-e7"],
-                  note: "身份证已经亮出来了——三句话里，分词的主人和主句主语都是同一个人。"
+                  note: "三句话：分词的主人和主句主语是同一个人。"
                 },
                 {
                   type: "idcard",
                   rule: "分词短语作状语时，它的逻辑主语必须和主句主语一致；不一致就是悬垂分词（dangling），必须改。",
-                  condition: "Seen from the hill, the town…（看的主体泛指“ 人 ”，被看的是 the town，逻辑自洽）；改法二选一：换主句主语，或把分词改成从句（When I was walking…）。"
+                  condition: "Seen from the hill, the town…（看的主体泛指“ 人 ”，被看的是 the town，逻辑自洽）。"
                 },
                 {
                   type: "bridge",
-                  zh: "汉语说“ 走着走着，天黑了 ”，大家能听懂，没人较真“ 谁在走 ”。",
-                  en: "英语较真：分词是没主语的动作，读者会自动把主句主语当它的主人——主人对不上，句子就“ 悬空 ”了。",
-                  unbridge: "别拿汉语的“ 能听懂 ”套英语——英语里分词必须先找主语，这是硬规矩。"
+                  zh: "汉语“ 走着走着，天黑了 ”，没人较真“ 谁在走 ”。",
+                  en: "英语较真：分词没主语，读者自动把主句主语当主人——对不上就“ 悬空 ”。",
+                  unbridge: "别拿汉语“ 能听懂 ”套英语——分词必须先找主语。"
                 },
                 {
                   type: "contrast",
                   wrong: "Walking along the street, a car hit me.",
                   wrongZh: "（✗ 错句）",
                   right: "Walking along the street, I was hit by a car.",
-                  why: "走路的是“ 我 ”，不是“ 车 ”——分词找主语，主人对不上就悬空。"
+                  why: "走路的是“ 我 ”不是“ 车 ”——主人对不上就悬空；改法：换主语或改从句（When I was walking…）。"
                 },
                 {
                   type: "contrast",
                   wrong: "Being a rainy day, we stayed at home.",
                   wrongZh: "（✗ 错句）",
                   right: "It being a rainy day, we stayed at home.",
-                  why: "“ 是雨天 ”的主人是 it（天），不是 we——主人不同就请独立主格（下节）。"
+                  why: "“ 是雨天 ”的主人是 it 不是 we——请独立主格（下节）；或换主语、改从句。"
                 }
               ],
               point: "这就是逻辑主语一致：分词找主语，主人必须和主句主语是同一个人。",
@@ -538,9 +540,9 @@ window.ENG_CH["gr10"] = {
                 {
                   type: "choice",
                   stem: "哪一句是悬垂分词（有错）？",
-                  options: ["Walking in the park, I saw a bird.", "Walking along the street, a car hit me.", "Opening the box, he found a letter."],
+                  options: ["Having finished his work, he went home.", "Having finished his work, the dinner was ready.", "Opening the box, he found a letter."],
                   answer: 1,
-                  tip: "走路的应该是人，但主语是 a car——主人对不上。"
+                  tip: "B 句做完工作的是人，但主语是 the dinner——主人对不上，悬垂了。"
                 },
                 {
                   type: "fill",
@@ -747,7 +749,7 @@ window.ENG_CH["gr10"] = {
               id: "gr10.2.2-p2",
               kind: "explain",
               title: "非谓语三分法总表",
-              lead: "本章三员大将集结：现在分词、过去分词、独立主格——加上 gr09 的不定式和动名词，就是全家福。",
+              lead: "本章三员大将：现在分词、过去分词、独立主格——加上 gr09 的不定式和动名词，就是全家福。",
               blocks: [
                 {
                   type: "examples",
@@ -757,7 +759,7 @@ window.ENG_CH["gr10"] = {
                 {
                   type: "idcard",
                   rule: "非谓语三分法：to do（将来 / 目的）— doing（主动 / 进行）— done（被动 / 完成）；选哪种，看逻辑主语和语态。",
-                  condition: "做题两问：① 逻辑主语是谁？和主句主语一致吗？② 主动还是被动？正在还是已完成？（高考非谓语全家福）"
+                  condition: "做题两问：① 逻辑主语是谁？和主句主语一致吗？② 主动还是被动？正在还是已完成？"
                 },
                 {
                   type: "bridge",

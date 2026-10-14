@@ -595,17 +595,17 @@ window.ENG_CH["gr15"] = {
               ],
               guess: {
                 q: "so that he could…（目的）和 so dark that…（结果）的 so that 一样吗？",
-                options: ["一样", "不一样：目的 so that 从句有情态（could），结果 so…that 从句无情态", "都是结果"],
+                options: ["一样", "不一样：目的 so that 常配情态（could），结果 so…that 多为陈述语气", "都是结果"],
                 answer: 1,
                 note: "先猜，再看上面的色块验证——猜错也没关系，只记录不判分。"
               },
-              point: "目的 so that 从句有情态（could / would）；结果 so…that 从句无情态。"
+              point: "目的 so that 常配情态（could / would）；结果 so…that 多为陈述语气（也可带情态）。"
             },
             {
               id: "gr15.1.4-p2",
               kind: "interact",
               title: "标出目的和结果",
-              exploreTip: "标出两句话：目的从句（有情态）和结果从句（无情态）各长什么样？",
+              exploreTip: "标出两句话：目的从句（常配情态）和结果从句（多为陈述语气）各长什么样？",
               widgets: [
                 {
                   type: "tagging",
@@ -643,7 +643,7 @@ window.ENG_CH["gr15"] = {
                   }
                 }
               ],
-              point: "看情态：有情态 = 目的（以便），无情态 = 结果（以致）。"
+              point: "看情态：常配情态 could/would = 目的（以便）；多为陈述语气 = 结果（以致）。"
             },
             {
               id: "gr15.1.4-p3",
@@ -659,7 +659,7 @@ window.ENG_CH["gr15"] = {
                 {
                   type: "idcard",
                   rule: "so that / in order that + 情态（could / would）表目的；in order to + 动词原形（主语一致时）。",
-                  condition: "目的 so that 从句有情态；结果 so…that 从句无情态；in order to 后主语须一致（I came…to get）。"
+                  condition: "目的 so that 常配情态 could/would；结果 so…that 多为陈述语气（也可带情态）；in order to 后主语须一致（I came…to get）。"
                 },
                 {
                   type: "bridge",
@@ -1287,7 +1287,7 @@ window.ENG_CH["gr15"] = {
         /* ================= gr15.2.4 本章小结与习题（高考） ================= */
         {
           id: "gr15.2.4",
-          title: "本章小结与习题（高考）",
+          title: "本章小结与习题",
           pages: [
             {
               id: "gr15.2.4-p1",

@@ -163,34 +163,38 @@ window.ENG_CH["gr13"] = {
                   tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "know", role: "verb", label: "谓语" }, { w: "that he is ill", role: "object", label: "宾语从句" } ] },
                 { id: "gr13.1.1-e2", en: "I wonder if it will rain.", zh: "我想知道是否会下雨。", reg: "通用",
                   tagged: [ { w: "I", role: "subject", label: "主语" }, { w: "wonder", role: "verb", label: "谓语" }, { w: "if it will rain", role: "object", label: "宾语从句" } ] },
-                { id: "gr13.1.1-e5", en: "Do you know what he said?", zh: "你知道他说了什么吗？", reg: "通用",
-                  tagged: [ { w: "Do", role: "verb", label: "助动词" }, { w: "you", role: "subject", label: "主语" }, { w: "know", role: "verb", label: "谓语" }, { w: "what he said", role: "object", label: "宾语从句" } ] }
+                { id: "gr13.1.1-e3", en: "He asked me where I lived.", zh: "他问我住在哪儿。", reg: "通用",
+                  tagged: [ { w: "He", role: "subject", label: "主语" }, { w: "asked", role: "verb", label: "谓语" }, { w: "me", role: "object", label: "宾语" }, { w: "where I lived", role: "object", label: "宾语从句" } ] }
               ],
               guess: {
-                q: "that / if / what 三个“ 开门词 ”，各是从哪里来的？",
-                options: ["随便选的", "陈述→that；是否→if；缺什么成分补什么疑问词", "都是 that 的变体"],
-                answer: 1,
+                q: "三个“ 开门词 ”的选择，和什么有关？",
+                options: ["和从句里缺不缺成分有关", "随便选的", "和主句动词有关"],
+                answer: 0,
                 note: "先猜，再看上面的色块验证——猜错也没关系，只记录不判分。"
               },
-              point: "宾语从句（也叫名词性从句的一种）：陈述用 that，是非用 if / whether，疑问词缺什么补什么。"
+              point: "‘that he is ill’ 本来是个句子（“ 他病了 ”）；句子当宾语用，就叫从句：陈述用 that，是非用 if / whether，疑问词缺什么补什么。"
             },
             {
               id: "gr13.1.1-p2",
               kind: "interact",
-              title: "把从句块拖进宾语槽",
-              exploreTip: "把三个从句块（黄底）拖进宾语槽——看看“ 开门词 ”有什么不同。",
+              title: "把从句块拖进对应的槽",
+              exploreTip: "把三个从句块拖进对的槽",
               widgets: [
                 {
                   type: "clause-slots",
                   params: {
                     main: "I know __ .",
-                    mainSlots: [ { id: "obj", label: "宾语槽", accept: ["object"] } ],
-                    clauseBlocks: [
-                      { text: "that he is ill", kind: "object" },
-                      { text: "if it will rain", kind: "object" },
-                      { text: "what he said", kind: "object" }
+                    mainSlots: [
+                      { id: "state", label: "陈述槽（that）", accept: ["陈述"] },
+                      { id: "yesno", label: "是否槽（if）", accept: ["是否"] },
+                      { id: "wh", label: "疑问槽（wh-）", accept: ["疑问"] }
                     ],
-                    hint: "三个从句块都能进宾语槽——但“ 开门词 ”各管各的：陈述 / 是否 / 疑问。"
+                    clauseBlocks: [
+                      { text: "that he is ill", kind: "陈述" },
+                      { text: "if it will rain", kind: "是否" },
+                      { text: "what he said", kind: "疑问" }
+                    ],
+                    hint: "陈述、是否、疑问——哪个开门词进哪个槽？"
                   }
                 }
               ],
@@ -200,12 +204,12 @@ window.ENG_CH["gr13"] = {
               id: "gr13.1.1-p3",
               kind: "explain",
               title: "连接词三问：缺什么成分？",
-              lead: "还记得吗？上一页三个从句块都进了宾语槽，但“ 开门词 ”各不相同。",
+              lead: "上一页三个从句块进了三个槽，“ 开门词 ”各不相同。",
               blocks: [
                 {
                   type: "examples",
                   ids: ["gr13.1.1-e1", "gr13.1.1-e2", "gr13.1.1-e3"],
-                  note: "身份证已经亮出来了——看这三句话，从句里缺什么成分？"
+                  note: "看这三句话：从句里缺什么成分？"
                 },
                 {
                   type: "idcard",
@@ -224,6 +228,13 @@ window.ENG_CH["gr13"] = {
                   wrongZh: "（✗ 错句）",
                   right: "I wonder if it will rain.",
                   why: "“ 是否 ”的意思不能丢——if / whether 是“ 是否 ”的身份证，不可省。"
+                },
+                {
+                  type: "contrast",
+                  wrong: "Do you know he said?",
+                  wrongZh: "（✗ 错句）",
+                  right: "Do you know what he said?",
+                  why: "what 在从句里当宾语（said 缺宾语）——疑问词在从句里作成分，一个不能少。"
                 }
               ],
               point: "这就是宾语从句的连接词：that 管陈述（可省），if / whether / wh- 管是否与疑问（不可省）。",
@@ -252,9 +263,9 @@ window.ENG_CH["gr13"] = {
                 {
                   type: "choice",
                   stem: "“ 他问我住在哪儿。 ”英文是：",
-                  options: ["He asked me where did I live.", "He asked me where I lived.", "He asked me that I lived where."],
+                  options: ["He asked me that he lived where.", "He asked me where I lived.", "He asked me that I lived where."],
                   answer: 1,
-                  tip: "缺地点 → where；从句用陈述语序（下节讲透）。"
+                  tip: "缺地点 → where；that 只管陈述，不能带疑问词。"
                 },
                 {
                   type: "fill",
@@ -1108,7 +1119,7 @@ window.ENG_CH["gr13"] = {
         /* ================= gr13.2.4 本章小结与习题（高考） ================= */
         {
           id: "gr13.2.4",
-          title: "本章小结与习题（高考）",
+          title: "本章小结与习题",
           pages: [
             {
               id: "gr13.2.4-p1",
