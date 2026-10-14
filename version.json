@@ -1,5 +1,5 @@
 {
   "date": "2026-10-14",
   "note": "发布流程：每次推送前，先把 version 升一位（如 2026.10.13.2），并同步 index.html 里的 window.TOOLBOX_VERSION",
-  "version": "2026.10.14.5"
+  "version": "2026.10.14.6"
 }
