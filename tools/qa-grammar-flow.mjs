@@ -248,8 +248,8 @@ sandbox.location.hash === "#card=grammar"
   $("tracks").hidden === false ? ok("回到子卡选择页") : fail("tracks 应显示");
   $("grammar").hidden === true ? ok("#grammar 隐藏") : fail("#grammar 应隐藏");
   const cards = $("track-grid").innerHTML;
-  (cards.includes("讲词根") && cards.includes("125 课") && cards.includes("占位，待红队定稿"))
-    ? ok("子卡页语法卡文案为占位（tagline=125 课）") : fail("子卡页文案异常: " + cards.slice(0, 120));
+  (cards.includes("讲词根") && cards.includes("125 课 · 讲透语法") && cards.includes("879 条例句"))
+    ? ok("子卡页语法卡文案为定稿（tagline=125 课 · 讲透语法）") : fail("子卡页文案异常: " + cards.slice(0, 120));
 }
 
 /* 6b. 子卡页点语法卡 → 章节浏览器（卡片点击路径） */
