@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23D55E00'/%3E%3Ctext x='32' y='44' font-size='30' text-anchor='middle' fill='white' font-family='sans-serif'%3E%E7%89%A9%3C/text%3E%3C/svg%3E">
+<title>物理 — 学习工具箱</title>
+<meta name="description" content="从八年级出发：每个公式都有身份证，每条图像都会说话。">
+<link rel="stylesheet" href="css/physics.css">
+</head>
+<body data-theme="light">
+<!-- 深色模式入口：跟随系统 prefers-color-scheme，系统切换时实时响应；
+     物理 SVG/CSS 全走 --phy-* 变量，切换主题不重绘画布。 -->
+<script>
+(function () {
+  var mq = window.matchMedia("(prefers-color-scheme: dark)");
+  function apply() { document.body.setAttribute("data-theme", mq.matches ? "dark" : "light"); }
+  apply();
+  if (mq.addEventListener) mq.addEventListener("change", apply);
+  else if (mq.addListener) mq.addListener(apply);  // 旧版 Safari
+})();
+</script>
+
+<!-- 章节浏览器（蓝队 2026-10-15）：18 章 p00–p17 元信息见 data/chapters.js，
+     只展示 data/pNN.js 已就位的章；本阶段仅 p04（试点），其余随阶段三
+     数据文件就位自动出现。#phy=<课号> 深链冷启动直达。 -->
+<main class="phy-app" id="phy-browser" aria-label="物理章节浏览"></main>
+
+<!-- 物理 SPA 学习页：js/physics.js 引擎渲染；数据见 data/pNN.js；
+     样式见 css/physics.css（phy- 前缀，与其他学科隔离）。 -->
+<section id="physics-app" aria-label="物理学习">
+  <div class="phy-app" id="phy-app" hidden></div>
+</section>
+
+<!-- 框架：MathML 环境检测（复用数学模块已验证实现；缺失时 physics.js
+     本地兜底） → 章注册表 → 章数据 → 主引擎 -->
+<script src="../math/js/mathml-check.js"></script>
+<script src="data/chapters.js"></script>
+<script src="data/p04.js"></script>
+<script src="js/physics.js"></script>
+</body>
+</html>

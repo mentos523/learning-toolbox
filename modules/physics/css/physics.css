@@ -1,0 +1,585 @@
+/* ============================================================
+ * 物理 SPA 样式（蓝队 2026-10-15，骨架 + 试点 p04.1.2）
+ *
+ * 命名空间隔离铁律：所有类名前缀 phy-（physics），只作用于
+ * #physics-app 容器内；不触碰其他学科的任何样式。
+ * 色板：--phy-* 语义变量，别名 --geo-*（浅色/深色两套，随
+ * body[data-theme] 自动切换；见 docs/physics-interactions.md §0.2）。
+ * 全局约束：每页一屏（100dvh）、触控目标 ≥44px、
+ * 色盲双编码（颜色 + 文字标签）、file:// 可用、零依赖。
+ * 区内滚动口径（白队教训 F1–F3）：.phy-zone 是唯一滚动容器，
+ * overflow-y:auto + overscroll-behavior-y:contain；页面级
+ * #physics-app { overflow:hidden }（一屏不变量）；任何内容容器
+ * 不许「固定高度 + overflow:hidden」静默裁剪。
+ * ============================================================ */
+
+/* ---------- --phy-* 语义色板（别名 --geo-*，深色自动跟随） ---------- */
+#physics-app {
+  --geo-bg: #FFFFFF;
+  --geo-text: #1A1A1A;
+  --geo-known: #0072B2;        /* 已知：蓝 */
+  --geo-target: #D55E00;       /* 待求/求证：朱红 */
+  --geo-corr-a: #E69F00;       /* 对应 A：橙 */
+  --geo-corr-b: #56B4E9;       /* 对应 B：天蓝 */
+  --geo-corr-c: #009E73;       /* 对应 C：蓝绿 */
+  --geo-corr-angle: #CC79A7;   /* 对应角：紫红 */
+  --geo-line: #000000;         /* 常规描边 */
+  --geo-aux: #7A7A7A;          /* 辅助线（灰虚线） */
+  --geo-grid: #E5E5E5;         /* 网格线 */
+  --geo-highlight: #F0E442;    /* 高亮：黄（配深色字） */
+
+  --phy-known:   var(--geo-known);
+  --phy-target:  var(--geo-target);
+  --phy-force-a: var(--geo-corr-a);
+  --phy-force-b: var(--geo-corr-b);
+  --phy-force-c: var(--geo-corr-c);
+  --phy-body:    var(--geo-line);
+  --phy-track:   var(--geo-aux);
+  --phy-highlight: var(--geo-highlight);
+  --phy-momentum-a: var(--geo-aux);
+  --phy-momentum-b: var(--geo-line);
+
+  --phy-bg:       var(--geo-bg);
+  --phy-ink:      var(--geo-text);
+  --phy-ink-soft: var(--geo-aux);
+  --phy-panel:    #F7F7F7;
+  --phy-line:     #DDDDDD;
+  --phy-on-hl:    #1A1A1A;     /* 黄底上的深色字 */
+}
+body[data-theme="dark"] #physics-app {
+  --geo-bg: #121212;
+  --geo-text: #F5F5F5;
+  --geo-known: #56B4E9;
+  --geo-target: #FF7043;
+  --geo-corr-a: #FFB020;
+  --geo-corr-b: #7FD4FF;
+  --geo-corr-c: #3DDC97;
+  --geo-corr-angle: #E69BBE;
+  --geo-line: #F5F5F5;
+  --geo-aux: #9E9E9E;
+  --geo-grid: #333333;
+  --geo-highlight: #F0E442;
+
+  --phy-panel:    #1E1E1E;
+  --phy-line:     #3A3A3A;
+  --phy-on-hl:    #1A1A1A;
+}
+/* 护眼主题沿用浅色值（body[data-theme="soft"] 不覆盖） */
+
+/* ---------- App 骨架：一屏三块 ---------- */
+#physics-app {
+  height: 100dvh;
+  background: var(--phy-bg);
+  color: var(--phy-ink);
+  font-family: inherit;
+  overflow: hidden;              /* 页面级一屏不变量：唯一允许的 overflow:hidden */
+}
+.phy-app {
+  height: 100dvh;
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  padding: 0 14px calc(10px + env(safe-area-inset-bottom));
+}
+.phy-head {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0 6px;
+  border-bottom: 1px solid var(--phy-line);
+}
+.phy-head h1 {
+  margin: 0;
+  font-size: 1rem;
+  flex: 1;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.phy-page-tag {
+  flex: none;
+  font-size: 0.72rem;
+  color: var(--phy-ink-soft);
+  border: 1px solid var(--phy-line);
+  border-radius: 999px;
+  padding: 3px 9px;
+  white-space: nowrap;
+}
+.phy-back {
+  flex: none;
+  min-width: 44px;
+  min-height: 44px;
+  border: 1px solid var(--phy-line);
+  border-radius: 10px;
+  background: var(--phy-panel);
+  color: var(--phy-ink);
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+.phy-crumb {
+  flex: none;
+  margin: 6px 0 0;
+  font-size: 0.72rem;
+  color: var(--phy-ink-soft);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.phy-main {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 8px 0;
+  overflow: hidden;
+}
+.phy-title {
+  flex: none;
+  margin: 0 0 8px;
+  font-size: 1.08rem;
+  line-height: 1.45;
+}
+
+/* ---------- 区内滚动（白队 F1–F3 口径） ---------- */
+.phy-zone-wrap {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+.phy-zone {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;              /* 区内纵向滚动，绝不裁剪 */
+  overflow-x: hidden;
+  overscroll-behavior-y: contain;/* 防链式滚动：body 永不滚动 */
+  -webkit-overflow-scrolling: touch;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.phy-zone > * { flex: none; }    /* 直系子项不参与压缩：只滚动、不压扁 */
+.phy-more {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  z-index: 6;
+  display: flex;
+  justify-content: center;
+  padding: 20px 0 8px;
+  background: linear-gradient(to bottom, transparent, var(--phy-bg) 75%);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s;
+  pointer-events: none;
+}
+.phy-zone-wrap.show-more .phy-more { opacity: 1; visibility: visible; }
+.phy-more-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  color: var(--phy-ink-soft);
+  background: var(--phy-panel);
+  border: 1px solid var(--phy-line);
+  border-radius: 999px;
+  padding: 6px 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+.phy-more-pill .arr {
+  display: inline-block;
+  animation: phyMoreBounce 1.4s ease-in-out infinite;
+}
+@keyframes phyMoreBounce { 50% { transform: translateY(3px); } }
+@media (prefers-reduced-motion: reduce) {
+  .phy-more-pill .arr { animation: none; }
+}
+
+/* ---------- 点拨区 ---------- */
+.phy-point {
+  flex: none;
+  margin: 8px 0 0;
+  padding: 8px 10px;
+  background: var(--phy-panel);
+  border-left: 4px solid var(--phy-target);
+  border-radius: 0 8px 8px 0;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--phy-ink);
+}
+.phy-point.scroll { max-height: 36vh; overflow-y: auto; }
+
+/* ---------- 翻页器 ---------- */
+.phy-pager {
+  flex: none;
+  display: flex;
+  gap: 10px;
+  padding-top: 8px;
+}
+.phy-pager button {
+  flex: 1;
+  min-height: 44px;
+  border-radius: 10px;
+  border: 1px solid var(--phy-line);
+  background: var(--phy-panel);
+  color: var(--phy-ink);
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+.phy-pager button:disabled { opacity: 0.35; cursor: default; }
+.phy-pager .phy-next { background: var(--phy-target); border-color: var(--phy-target); color: #fff; }
+
+/* ---------- 章节浏览器 ---------- */
+/* 浏览器是导航列表页（非一屏课页）：内容超高时自身滚动，
+ * 与课页 .phy-zone 口径一致，body 永不滚动。 */
+#phy-browser.phy-app { display: block; overflow-y: auto; overscroll-behavior-y: contain; }
+.phy-browse { padding: 12px 0 24px; }
+.phy-browse h1 { font-size: 1.15rem; margin: 6px 0 4px; }
+.phy-browse-sub { color: var(--phy-ink-soft); font-size: 0.85rem; margin: 0 0 12px; }
+.phy-ch-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.phy-ch-btn {
+  width: 100%;
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-align: left;
+  border: 1px solid var(--phy-line);
+  border-radius: 12px;
+  background: var(--phy-panel);
+  color: var(--phy-ink);
+  padding: 10px 14px;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+.phy-ch-id {
+  flex: none;
+  font-size: 0.72rem;
+  color: var(--phy-ink-soft);
+  border: 1px solid var(--phy-line);
+  border-radius: 999px;
+  padding: 2px 8px;
+}
+.phy-ch-title { flex: 1; font-weight: 600; }
+.phy-ch-count { flex: none; font-size: 0.78rem; color: var(--phy-ink-soft); }
+.phy-unit { margin: 12px 0 4px; font-size: 0.9rem; color: var(--phy-ink-soft); }
+.phy-lesson-list { list-style: none; margin: 0 0 8px; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.phy-lesson-btn {
+  width: 100%;
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-align: left;
+  border: 1px solid var(--phy-line);
+  border-radius: 10px;
+  background: var(--phy-bg);
+  color: var(--phy-ink);
+  padding: 10px 14px;
+  font-size: 0.92rem;
+  cursor: pointer;
+}
+.phy-lesson-id { flex: none; font-size: 0.72rem; color: var(--phy-known); font-weight: 700; }
+.phy-lesson-title { flex: 1; }
+.phy-lesson-go { flex: none; color: var(--phy-ink-soft); }
+.phy-done { flex: none; color: var(--phy-force-c); font-size: 0.8rem; }
+
+/* ---------- 通用内容块 ---------- */
+.phy-tip {
+  background: var(--phy-panel);
+  border: 1px dashed var(--phy-line);
+  border-radius: 10px;
+  padding: 8px 10px;
+  font-size: 0.85rem;
+  color: var(--phy-ink-soft);
+  line-height: 1.6;
+}
+.phy-lead { font-size: 0.95rem; line-height: 1.7; margin: 0; }
+.phy-text { font-size: 0.92rem; line-height: 1.75; margin: 0; color: var(--phy-ink); }
+.phy-trap {
+  background: #FFF7E6;
+  border: 1px solid var(--phy-force-a);
+  border-left-width: 4px;
+  border-radius: 0 10px 10px 0;
+  padding: 8px 10px;
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+body[data-theme="dark"] #physics-app .phy-trap { background: #2b2113; }
+.phy-oldfriend {
+  background: var(--phy-panel);
+  border: 1px solid var(--phy-line);
+  border-radius: 10px;
+  padding: 8px 10px;
+  font-size: 0.88rem;
+  line-height: 1.7;
+}
+.phy-oldfriend::before { content: "🔗 "; }
+.phy-mathlink {
+  background: var(--phy-panel);
+  border: 1px solid var(--phy-line);
+  border-radius: 10px;
+  padding: 8px 10px;
+  font-size: 0.88rem;
+  line-height: 1.7;
+}
+.phy-mathlink::before { content: "📐 "; }
+.phy-slogan {
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--phy-target);
+  background: var(--phy-panel);
+  border-radius: 10px;
+  padding: 10px;
+  line-height: 1.6;
+}
+
+/* ---------- Y3 公式身份证卡片（全书统一版式） ---------- */
+.phy-idcard {
+  border: 2px solid var(--phy-body);
+  border-radius: 12px;
+  background: var(--phy-bg);
+  overflow: hidden;
+}
+.phy-idcard-head {
+  background: var(--phy-body);
+  color: var(--phy-bg);
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 6px 12px;
+}
+.phy-idcard-row {
+  display: flex;
+  gap: 8px;
+  padding: 7px 12px;
+  border-top: 1px dashed var(--phy-line);
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+.phy-idcard-row:first-of-type { border-top: none; }
+.phy-idcard-k {
+  flex: none;
+  width: 5.5em;
+  color: var(--phy-ink-soft);
+  font-size: 0.8rem;
+  padding-top: 2px;
+}
+.phy-idcard-v { flex: 1; min-width: 0; }
+.phy-idcard-v ul { margin: 0; padding-left: 1.2em; }
+.phy-idcard .phy-formula { font-size: 1.15rem; }
+.phy-idcard .phy-translation { color: var(--phy-ink-soft); font-size: 0.82rem; margin-top: 2px; }
+.phy-dim-ok { color: var(--phy-force-c); font-weight: 700; }
+
+/* ---------- 读数徽章（冻结 spec：固定预算、无布局抖动） ---------- */
+.phy-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--phy-panel);
+  border: 1px solid var(--phy-line);
+  border-radius: 10px;
+  padding: 8px 12px;
+  min-height: 56px;              /* 固定预算：读数变化不引起重排 */
+}
+.phy-badge .phy-readout {
+  flex: none;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--phy-target);
+  white-space: nowrap;
+}
+.phy-badge .phy-readout math { font-size: 1.25rem; }
+.phy-badge .phy-invariant {
+  flex: 1;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--phy-ink-soft);
+  border-left: 2px solid var(--phy-force-c);
+  padding-left: 8px;
+}
+
+/* ---------- m–V 虚拟实验 ---------- */
+.phy-tabs {
+  display: flex;
+  gap: 8px;
+}
+.phy-tabs button {
+  flex: 1;
+  min-height: 44px;
+  border-radius: 10px;
+  border: 2px solid var(--phy-line);
+  background: var(--phy-panel);
+  color: var(--phy-ink);
+  font-size: 0.92rem;
+  cursor: pointer;
+}
+.phy-tabs button[aria-pressed="true"] {
+  border-color: currentColor;
+  font-weight: 700;
+  background: var(--phy-bg);
+}
+.phy-plot {
+  width: 100%;
+  height: auto;
+  display: block;
+  background: var(--phy-bg);
+  border: 1px solid var(--phy-line);
+  border-radius: 10px;
+}
+.phy-plot text { fill: var(--phy-ink-soft); font-size: 4.2px; }
+.phy-plot .phy-axis { stroke: var(--phy-body); stroke-width: 0.6; }
+.phy-plot .phy-grid { stroke: var(--phy-line); stroke-width: 0.3; }
+.phy-plot .phy-trace { fill: none; stroke-width: 1.4; }
+.phy-plot .phy-dot { stroke: var(--phy-bg); stroke-width: 0.8; }
+.phy-plot .phy-slope-tag { font-weight: 700; }
+.phy-slider-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--phy-panel);
+  border: 1px solid var(--phy-line);
+  border-radius: 10px;
+  padding: 6px 12px;
+  min-height: 56px;
+}
+.phy-slider-row label { flex: none; font-size: 0.9rem; font-weight: 700; }
+.phy-slider-row input[type="range"] {
+  flex: 1;
+  min-width: 0;
+  height: 44px;                  /* 触控目标 ≥44px */
+  accent-color: var(--phy-target);
+}
+.phy-slider-val { flex: none; font-size: 0.9rem; min-width: 6em; text-align: right; }
+
+/* ---------- 斜率直观版 ---------- */
+.phy-slope-list { display: flex; flex-direction: column; gap: 8px; }
+.phy-slope-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 52px;
+  text-align: left;
+  border: 1px solid var(--phy-line);
+  border-radius: 10px;
+  background: var(--phy-panel);
+  color: var(--phy-ink);
+  padding: 8px 12px;
+  font-size: 0.92rem;
+  cursor: pointer;
+}
+.phy-slope-rank {
+  flex: none;
+  width: 30px; height: 30px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  background: var(--phy-highlight);
+  color: var(--phy-on-hl);
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+.phy-slope-name { flex: none; font-weight: 700; }
+.phy-slope-line { flex: 1; height: 10px; border-radius: 5px; }
+.phy-slope-rho { flex: none; font-size: 0.82rem; color: var(--phy-ink-soft); white-space: nowrap; }
+.phy-slope-note {
+  font-size: 0.82rem;
+  color: var(--phy-ink-soft);
+  line-height: 1.6;
+  background: var(--phy-panel);
+  border-radius: 10px;
+  padding: 8px 10px;
+}
+
+/* ---------- 练习题（Y3 判分口径） ---------- */
+.phy-q {
+  border: 1px solid var(--phy-line);
+  border-radius: 10px;
+  padding: 10px 12px;
+  background: var(--phy-bg);
+}
+.phy-q-stem { font-size: 0.95rem; line-height: 1.7; margin-bottom: 8px; }
+.phy-q-opts { display: flex; flex-direction: column; gap: 8px; }
+.phy-q-opts button {
+  min-height: 44px;
+  text-align: left;
+  border: 1px solid var(--phy-line);
+  border-radius: 8px;
+  background: var(--phy-panel);
+  color: var(--phy-ink);
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+.phy-q-opts button.judged-ok { border-color: var(--phy-force-c); border-width: 2px; }
+.phy-q-opts button.judged-bad { border-color: var(--phy-target); opacity: 0.55; }
+.phy-q-check {
+  min-height: 44px;
+  min-width: 88px;
+  margin-top: 8px;
+  border-radius: 8px;
+  border: 1px solid var(--phy-line);
+  background: var(--phy-panel);
+  color: var(--phy-ink);
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+.phy-q input[type="text"] {
+  min-height: 44px;
+  font-size: 1rem;
+  border: 1px solid var(--phy-line);
+  border-radius: 8px;
+  background: var(--phy-bg);
+  color: var(--phy-ink);
+  padding: 4px 10px;
+}
+.phy-q-fb { margin-top: 8px; font-size: 0.88rem; line-height: 1.6; min-height: 1.6em; }
+.phy-q-fb .ok { color: var(--phy-force-c); font-weight: 700; }
+.phy-q-fb .bad { color: var(--phy-target); font-weight: 700; }
+.phy-q-fb .tip { color: var(--phy-ink-soft); }
+
+/* ---------- 落定反馈（M6：视觉必选） ---------- */
+.phy-flash { animation: phyFlash 0.35s ease-out; }
+@keyframes phyFlash {
+  0% { box-shadow: 0 0 0 3px var(--phy-highlight); }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .phy-flash { animation: none; }
+}
+
+/* ---------- 公式降级文本 ---------- */
+.phy-formula-fallback {
+  font-style: italic;
+  color: var(--phy-ink-soft);
+}
+
+/* ---------- MathML 环境检测提示条 ---------- */
+#mathml-warn {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 50;
+  background: #FEF3C7;
+  color: #92400E;
+  padding: 10px 14px;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+#mathml-warn button {
+  margin-left: auto;
+  min-width: 44px; min-height: 44px;
+  border: none; background: transparent;
+  font-size: 1rem; cursor: pointer; color: inherit;
+}
+body[data-theme="dark"] #mathml-warn { background: #4a3a1a; color: #fde68a; }
+
+/* ---------- 390px 收紧 ---------- */
+@media (max-width: 620px) {
+  .phy-app { padding-left: 10px; padding-right: 10px; }
+  .phy-badge .phy-readout { font-size: 1.1rem; }
+}
