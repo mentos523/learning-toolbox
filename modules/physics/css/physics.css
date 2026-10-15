@@ -557,8 +557,17 @@ body[data-theme="dark"] .phy-drawer-mask { background: rgba(0, 0, 0, 0.6); }
  * 基线 .phy-drawer 的 background: var(--phy-bg) 无回退值 → 透明。
  * 此处用 var 回退值给浅色（及护眼 soft）一个不透明底；
  * 特异性 (0,1,1) 低于深色兜底 body[data-theme="dark"] .phy-drawer
- * (0,2,1)，深色已修好的规则不受影响。 */
-body .phy-drawer { background: var(--phy-bg, #FFFFFF); color: var(--phy-ink, #1A1A1A); }
+ * (0,2,1)，深色已修好的规则不受影响。
+ * R2 2026-10-15 修复队补修3：浅色抽屉变量作用域补齐。抽屉挂在 body 下，
+ * #physics-app 作用域外的 --phy-line/--phy-panel/--phy-target 等变量全部
+ * 失效 → 边框线不可见、当前课三编码中"背景"透明。此处在 body .phy-drawer
+ * 内补一套完整的浅色值（与 #physics-app 浅色定义一致，色值逐项复制，未自创），
+ * 特异性仍为 (0,1,1)，深色兜底规则在其后全量覆盖，深色不受影响。 */
+body .phy-drawer {
+  --phy-bg: #FFFFFF; --phy-ink: #1A1A1A; --phy-ink-soft: #7A7A7A;
+  --phy-panel: #F7F7F7; --phy-line: #DDDDDD; --phy-target: #D55E00;
+  background: var(--phy-bg, #FFFFFF); color: var(--phy-ink, #1A1A1A);
+}
 /* R2 2026-10-15 修复队补修：抽屉挂在 body 下（#physics-app 作用域外），
  * --phy-* 变量在深色下全部失效 → 透明底 + 黑字不可读。此处在深色下给
  * 抽屉作用域内补一套深色值（与 body[data-theme="dark"] #physics-app 一致），
