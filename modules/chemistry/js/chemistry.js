@@ -381,7 +381,8 @@
     function onTrap() {
       trapCount++;
       warnSlot.innerHTML = "";
-      var w = el("div", "chm-state chm-state-bad", "⚠ " + esc(p.trapText || "下标不可更改。"));
+      /* S3：B5 定稿 trapText 自带 "⚠"，渲染器不再加前缀（否则 ⚠ 重复） */
+      var w = el("div", "chm-state chm-state-bad", esc(p.trapText || "⚠ 下标不可更改。"));
       warnSlot.appendChild(w);
       flash(w); vib(30);
     }
@@ -396,8 +397,9 @@
       all.forEach(function (sp, i) {
         if (i > 0) {
           if (i === nR) {
-            /* 等号 + 反应条件（化学用语规范：方程式用等号，可逆 ⇌ 除外） */
-            var opWrap = el("span", "", "");
+            /* 等号 + 反应条件（CHEM-R04：条件必须位于等号上方或下方，
+               不许行内写在等号侧面混入反应物/生成物行） */
+            var opWrap = el("span", "chm-eq-stack", "");
             if (eq.conditions) opWrap.appendChild(el("span", "chm-eq-cond", esc(eq.conditions)));
             opWrap.appendChild(el("span", "chm-eq-op", eq.reversible ? " ⇌ " : " ＝ "));
             eqLine.appendChild(opWrap);
@@ -731,7 +733,15 @@
       eqLine.innerHTML = "";
       all.forEach(function (sp, i) {
         if (i > 0) {
-          eqLine.appendChild(el("span", "chm-eq-op", i === nR ? " ＝ " : " ＋ "));
+          if (i === nR) {
+            /* CHEM-R04：条件位于等号上方，不许写在方程式行末混入生成物行 */
+            var opWrap = el("span", "chm-eq-stack", "");
+            if (eq.conditions) opWrap.appendChild(el("span", "chm-eq-cond", esc(eq.conditions)));
+            opWrap.appendChild(el("span", "chm-eq-op", " ＝ "));
+            eqLine.appendChild(opWrap);
+          } else {
+            eqLine.appendChild(el("span", "chm-eq-op", " ＋ "));
+          }
         }
         var c = el("span", "", String(snap[i]));
         if ((st.highlight || []).indexOf(i) >= 0) c.className = "chm-replay-hl";
@@ -739,7 +749,6 @@
         eqLine.appendChild(c);
         eqLine.appendChild(renderFormulaToks(sp.formula, false, function () {}));
       });
-      if (eq.conditions) eqLine.appendChild(el("span", "chm-eq-cond", esc(eq.conditions)));
       countLine.textContent = snapCounts(snap);
       caption.textContent = st.caption || "";
       var last = idx === steps.length - 1;
