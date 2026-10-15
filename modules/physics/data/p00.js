@@ -55,7 +55,7 @@ kind: "explain",
 title: "五个筐，装下世界",
 blocks: [
 { type: "lead", text: "第 1 页你猜过了：磁悬浮归“力”，彩虹归“光”。物理学家就是这么给世界分家的。"},
-{ type: "text", html: "物理学研究<strong>物质</strong>、<strong>运动</strong>和<strong>相互作用</strong>。人话版：世界是由什么做的、它们怎么动、它们之间怎么“较劲”——这三件事，就是物理的全部地盘。"},
+{ type: "text", html: "物理学研究<strong>物质</strong>、<strong>运动</strong>和<strong>相互作用</strong>：世界是由什么做的、它们怎么动、它们之间怎么“较劲”——这三件事，就是物理的全部地盘。"},
 { type: "text", html: "地盘分成五个筐：<strong>力</strong>（磁悬浮、拔河）、<strong>热</strong>（烧水、空调）、<strong>声</strong>（说话、琴声）、<strong>光</strong>（彩虹、影子）、<strong>电</strong>（手机、闪电）。后面 17 章，就是一个一个筐地打开看。"},
 { type: "text", html: "反例：物理 ≠ 背公式做题。公式是筐底的标签，不是筐里的东西——先看到现象，再谈公式。"},
 { type: "trap", text: "⚠️ 别搞混：物理 = 背公式做题——错。公式是描述现象的语言，现象才是本体（本章专治这句）。"},

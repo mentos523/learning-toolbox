@@ -79,7 +79,7 @@ window.PHY_CH["p12"] = {
                 { type: "mathlink", text: "数学呼应：代数 6.2 一次函数（奠基）——F–x 图像斜率 = k，物理为数学打的第二个样板。" },
                 { type: "slogan", text: "k 是弹簧的脾气。" }
               ],
-              point: "F=kx 限弹性限度内；x 是形变量；绳只能拉，杆可推可拉。"
+              point: "F=kx 限弹性限度内；x 是形变量；绳只能拉。"
             }
           ]
         },
