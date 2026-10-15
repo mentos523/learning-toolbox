@@ -109,25 +109,25 @@ id: "p01.1.2-p2",
 kind: "explain",
 title: "声音要“搭车”",
 blocks: [
-{ type: "lead", text: "揭晓：第 1 页的实验里，空气越抽越少，铃声越来越弱——但永远抽不成绝对真空（现实中罩内仍有残余空气，注明理想化）。"},
-{ type: "text", html: "声音的传播需要<strong>介质</strong>：固体、液体、气体都能“搭车”，<strong>真空不能传声</strong>。人话版：振动要传到远处，得有个东西接着传。"},
+{ type: "lead", text: "揭晓：第 1 页实验里，空气越抽越少、铃声越来越弱——但抽不成绝对真空（注明理想化）。"},
+{ type: "text", html: "声音传播需要<strong>介质</strong>：固、液、气都能“搭车”，<strong>真空不能传声</strong>——振动要传远，得有东西接着传。"},
 {
 type: "formula-id",
 formula: {
 mathml: "<math><mi>v</mi><mo>=</mo><mn>340</mn><mspace width=\"0.2em\"/><mi mathvariant=\"normal\">m</mi><mo>/</mo><mi mathvariant=\"normal\">s</mi></math>",
 translation: "声速 = 340 米每秒（15℃ 空气中）"
 },
-conditions: ["15℃ 的空气中", "介质、温度一定（换介质、变温度，声速就变）"],
+conditions: ["15℃ 空气中", "介质、温度一定"],
 counterexample: "水中声速约 1500m/s——“声速永远 340m/s”这条一换介质就失效",
 dimension: "m/s = m ÷ s ✓",
 units: { si: "m/s", common: "km/h", note: "340 m/s ≈ 1224 km/h"}
 },
-{ type: "text", html: "声速（标量）：15℃ 空气中约 340m/s。水中约 1500m/s，钢铁中约 5200m/s——介质越“硬”，传得越快。"},
-{ type: "trap", text: "⚠️ 别搞混：声音在真空中也能传播——错（真空不能传声）；声速在任何介质中都是 340m/s——错（跟介质、温度有关）。"},
-{ type: "mathlink", text: "数学呼应：代数 6.2 一次函数（奠基）——s=vt 里 s 跟 t 成正比，物理第一次用函数关系算路程。"},
+{ type: "text", html: "声速（标量）：15℃ 空气中约 340m/s；水中约 1500m/s，钢铁中约 5200m/s——介质越“硬”传得越快。"},
+{ type: "trap", text: "⚠️ 别搞混：“真空能传声”——错；“声速恒为 340m/s”——错（跟介质、温度有关）。"},
+{ type: "mathlink", text: "数学呼应：代数 6.2 一次函数（奠基）——s=vt，s 跟 t 成正比。"},
 { type: "slogan", text: "无介质，不传声。"}
 ],
-point: "记住 340m/s 的两个条件：15℃、空气中——换了介质就得换数。"
+point: "记住 340m/s 的条件：15℃、空气中——换介质就换数。"
 },
 /* ---------- p3：讲解页 ---------- */
 {
