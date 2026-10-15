@@ -409,8 +409,8 @@ window.PHY_CH["p17"] = {
               kind: "explain",
               title: "双缝干涉：条纹是尺子",
               blocks: [
-                { type: "lead", text: "第 1 页的直线：λ 翻倍，Δx 跟着翻倍——条纹是'量'波长的尺子。" },
-                { type: "text", html: '双缝干涉：两束相干光叠出明暗条纹。<span class="phy-f" data-f="dx"></span>——λ、l 越大，d 越小，条纹越宽。' },
+                { type: "lead", text: "第 1 页直线：λ 翻倍，Δx 跟着翻倍——条纹是“量”波长的尺子。" },
+                { type: "text", html: '双缝干涉：两束相干光叠出明暗条纹<span class="phy-f" data-f="dx"></span>——λ、l 越大，d 越小，条纹越宽。' },
                 {
                   type: "formula-id",
                   formula: {
@@ -422,13 +422,13 @@ window.PHY_CH["p17"] = {
                   dimension: "m = m·m/m ✓",
                   units: { si: "m", common: "mm", note: "λ 常用 nm" }
                 },
-                { type: "text", html: "薄膜干涉：肥皂泡的彩色——前后表面反射光干涉。波粒二象性（定性）：干涉证波动性，光电效应证粒子性——不是非此即彼。" },
-                { type: "trap", text: "⚠️ 别搞混：条纹间距只与波长有关——错！还与 l、d 有关；干涉证光是波'所以不是粒子'——错！波粒二象性。" },
+                { type: "text", html: "薄膜干涉：肥皂泡的彩色——前后表面反射光干涉。波粒二象性（定性）：干涉证波动性、光电效应证粒子性——不是非此即彼。" },
+                { type: "trap", text: "⚠️ 别搞混：“条纹间距只与波长有关”——错！还与 l、d 有关；“干涉证光是波所以不是粒子”——错！波粒二象性。" },
                 { type: "oldfriend", text: "认旧友：p17.1.4——机械波的干涉条件，今天换成光。" },
-                { type: "mathlink", text: "数学呼应：代数 ch02（奠基）——Δx=lλ/d，三个量的代数关系。" },
+                { type: "mathlink", text: "数学呼应：代数 ch02（奠基）——Δx=lλ/d。" },
                 { type: "slogan", text: "条纹是量波长的尺子。" }
               ],
-              point: "Δx=lλ/d：相干是前提——条纹是'量'波长的尺子。"
+              point: "Δx=lλ/d：相干是前提。"
             },
             {
               id: "p17.2.2-p3",
