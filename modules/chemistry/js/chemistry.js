@@ -372,6 +372,45 @@
     var answer = p.answer || null;
     var relMass = p.relMass || {};
 
+    /* C3 redox 模式（蓝队 2026-10-15 追加）：mode:"redox" 时在原子计数表下
+     * 加第二检查行"得失电子守恒"（interactions.md C3 spec；CHEM-R57）。
+     * params.redox = { lose:{sp:"H₂",per:2}, gain:{sp:"CuO",per:2} }：
+     * sp 为方程式中某物种的 formula（按字符串匹配 all[]），per 为该物种
+     * 每式量得失电子数。失电子总数 = lose.per × 还原剂系数；
+     * 得电子总数 = gain.per × 氧化剂系数。两行（原子行 + 电子行）全 ✓
+     * 才算配平成功。normal 模式：redoxCfg 为 null，okAll 恒等于 ok，
+     * 本分支零介入，现有行为不变。 */
+    var redoxCfg = (p.mode === "redox" && p.redox) ? p.redox : null;
+    function redoxSpeciesIndex(formula) {
+      for (var ri = 0; ri < all.length; ri++) {
+        if (all[ri].formula === formula) return ri;
+      }
+      return -1;
+    }
+    function redoxTotals() {
+      var lose = (redoxCfg && redoxCfg.lose) || {};
+      var gain = (redoxCfg && redoxCfg.gain) || {};
+      var li = redoxSpeciesIndex(lose.sp), gi = redoxSpeciesIndex(gain.sp);
+      /* 数据问题时失败闭合：不谎报电子守恒（CHEM-R57：不等却判成功 = FAIL） */
+      if (li < 0 || gi < 0) return { ok: false, lost: 0, gained: 0, badData: true };
+      var lost = (parseInt(lose.per, 10) || 0) * coeffs[li];
+      var gained = (parseInt(gain.per, 10) || 0) * coeffs[gi];
+      return { ok: lost === gained, lost: lost, gained: gained, badData: false };
+    }
+    function renderRedoxRow(rt) {
+      var txt;
+      if (rt.badData) {
+        txt = "⚠ redox 参数中的物种名与方程式对不上，电子行无法校验（数据问题）。";
+      } else if (rt.ok) {
+        txt = "✓ 得失电子守恒：得电子总数 ＝ 失电子总数 ＝ " + rt.gained + " e⁻";
+      } else {
+        txt = "✗ 电子还不守恒：得电子总数 " + rt.gained + " e⁻ ≠ 失电子总数 " +
+          rt.lost + " e⁻ —— 继续调系数。";
+      }
+      /* 双编码：✓/✗ + 文字 + 数字，不只靠颜色；复用 chm-state 语义样式 */
+      return el("div", "chm-state" + (rt.ok ? " chm-state-ok" : ""), esc(txt));
+    }
+
     var box = el("div", "chm-widget chm-eq", "");
     var warnSlot = el("div", "", "");
     warnSlot.style.minHeight = "0px";
@@ -545,13 +584,24 @@
         tbl.appendChild(row);
       });
       tableWrap.appendChild(tbl);
-      statusBox.className = "chm-state" + (ok ? " chm-state-ok" : "");
-      if (ok) {
+      /* redox 第二检查行：原子表之后追加电子得失行（normal 模式不执行） */
+      var redoxOk = true;
+      if (redoxCfg) {
+        var rt = redoxTotals();
+        redoxOk = rt.ok;
+        tableWrap.appendChild(renderRedoxRow(rt));
+      }
+      var okAll = ok && redoxOk;   /* redox 模式：两行全 ✓ 才算成功；normal 模式 okAll === ok */
+      statusBox.className = "chm-state" + (okAll ? " chm-state-ok" : "");
+      if (okAll) {
         /* B1：任一正整数解都算配平成功；另给"最简整数比 ✓"徽章 */
         statusBox.textContent = isMinimal()
           ? "✓ 配平成功！最简整数比 ✓"
           : "✓ 配平成功！还能约成更小的整数比吗？试试看。";
         flash(statusBox);
+      } else if (ok && redoxCfg && !redoxOk) {
+        /* redox 模式中间态：原子行已 ✓，电子行还差——继续调系数 */
+        statusBox.textContent = "原子已配平 ✓，但得失电子还不相等——继续调系数，让电子也守恒。";
       } else {
         statusBox.textContent = "调一下系数，让两边每种原子的个数相等。";
       }
