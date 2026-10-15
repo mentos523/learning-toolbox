@@ -227,15 +227,26 @@ const fail = (m) => { console.log("  [FAIL] " + m); fails++; };
     (hh.includes("✗ 不对") && hh.includes("等号不代表因果"))
       ? ok("p4 错2次给提示（比值定义陷阱）") : fail("p4 错选提示缺失");
   } else fail("p4 陷阱选项缺失");
-  // 填空：kg/m³ 与接受变体 g/cm3
+  // 填空：逐题断言各自反馈（白队 2026-10-15：旧断言用全局正则数
+  // "✓ 答对了|单位正确" 命中数，单个正确反馈即含两处命中，Q3 canonical
+  // 被判错时仍误报通过。现逐题取其 .phy-q-fb，任一题判错即红；
+  // 若判分逻辑回退为 (q.accept || [q.answer])，kg/m³（canonical）必红。）
   const inputs = queryAll(appRoot, "input").filter(i => i.getAttribute("type") === "text");
   const checks = queryAll(appRoot, "button").filter(b => (b._text || "").includes("检查"));
+  const fbOf = (inputEl) => {
+    let p = inputEl.parent;
+    while (p && !(p._cls && p._cls.has("phy-q"))) p = p.parent;
+    return p ? (queryAll(p, ".phy-q-fb")[0] || null) : null;
+  };
   if (inputs.length >= 2 && checks.length >= 2) {
-    inputs[0].value = "kg/m³"; checks[0].click();
-    inputs[1].value = "g/cm3"; checks[1].click();
-    const hh = html();
-    (hh.match(/✓ 答对了|单位正确/g) || []).length >= 2
-      ? ok("p4 填空判分（kg/m³ + 变体 g/cm3）") : fail("p4 填空判分缺失");
+    inputs[0].value = "kg/m³"; checks[0].click();   // Q3：canonical 答案
+    inputs[1].value = "g/cm3"; checks[1].click();   // Q4：accept 变体
+    const fb1 = serialize(fbOf(inputs[0]) || makeEl("div"));
+    const fb2 = serialize(fbOf(inputs[1]) || makeEl("div"));
+    const ok1 = fb1.includes("✓ 答对了"), ok2 = fb2.includes("✓ 答对了");
+    (ok1 && ok2)
+      ? ok("p4 填空判分（Q3 canonical kg/m³ ✓，Q4 变体 g/cm3 ✓，逐题反馈）")
+      : fail(`p4 填空判分缺失（Q3反馈${ok1 ? "✓" : "✗"}，Q4反馈${ok2 ? "✓" : "✗"}）`);
   } else fail("p4 填空题元素缺失");
   // 完成 → 进度落盘 ltb-phy-*
   findBtn("完成") ? ok("末页“完成 ✓”按钮") : fail("末页完成按钮缺失");

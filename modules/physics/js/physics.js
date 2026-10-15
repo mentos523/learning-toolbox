@@ -56,8 +56,13 @@
       return v == null ? fb : v;
     } catch (e) { return fb; }
   }
+  /* 填空归一化：去首尾空白、小写、压缩空白；上标数字 ⁰¹²³⁴⁵⁶⁷⁸⁹ → 0-9
+   *（数据 schema §6：上标 ³ 必须接受纯文本 3 变体；R2 2026-10-15） */
+  var SUPER_DIGITS = "⁰¹²³⁴⁵⁶⁷⁸⁹";
   function norm(s) {
-    return String(s == null ? "" : s).trim().toLowerCase().replace(/\s+/g, " ");
+    return String(s == null ? "" : s).trim().toLowerCase()
+      .replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹]/g, function (d) { return String(SUPER_DIGITS.indexOf(d)); })
+      .replace(/\s+/g, " ");
   }
   function roleColor(role) {
     return "var(--phy-" + role + ")";
@@ -296,11 +301,17 @@
       });
       svg.appendChild(pl);
       traces[mt.id] = pl;
-      /* 斜率标签（Y4：直线段给精确值） */
+      /* 斜率标签（Y4：直线段给精确值）
+       * 附带观察（2026-10-15）：陡线（铁，线端贴近 y 轴）的标签若放线端
+       * 左上，会与 y 轴 "1000" 刻度在左上角相挤；此时改放线端右下方。 */
+      var tagEndX = X(vEnd), tagEndY = Y(mt.rho * vEnd);
+      var tagCrowded = tagEndX < 30;
       var tag = svgEl("text", {
         "class": "phy-slope-tag",
-        x: X(vEnd) - 1, y: Y(mt.rho * vEnd) - 2,
-        fill: roleColor(mt.colorRole), "text-anchor": "end"
+        x: tagCrowded ? tagEndX + 1.5 : tagEndX - 1,
+        y: tagCrowded ? tagEndY + 4.5 : tagEndY - 2,
+        fill: roleColor(mt.colorRole),
+        "text-anchor": tagCrowded ? "start" : "end"
       });
       tag.textContent = "ρ=" + mt.rho;
       svg.appendChild(tag);
@@ -483,7 +494,11 @@
       btn.type = "button";
       btn.addEventListener("click", function () {
         var v = norm(input.value);
-        var ok = (q.accept || [q.answer]).some(function (a) { return norm(a) === v; });
+        /* R2（2026-10-15）：候选集 = canonical + accept 全集；
+         * 旧式 (q.accept || [q.answer]) 在 accept 存在时丢弃 canonical，
+         * 致 Q3 填 kg/m³（canonical）被判错。 */
+        var candidates = [q.answer].concat(q.accept || []);
+        var ok = candidates.some(function (a) { return norm(a) === v; });
         if (ok) say(true, "单位正确。", true);
         else { wrong++; say(false, "再想想。", wrong >= 2); }
       });

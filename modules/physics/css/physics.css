@@ -45,6 +45,7 @@
   --phy-panel:    #F7F7F7;
   --phy-line:     #DDDDDD;
   --phy-on-hl:    #1A1A1A;     /* 黄底上的深色字 */
+  --phy-next-bg:  #B44A00;     /* 「下一页」按钮底：待求朱红加深，白字对比度 5.36 ≥ 4.5（R3 2026-10-15） */
 }
 body[data-theme="dark"] #physics-app {
   --geo-bg: #121212;
@@ -63,18 +64,22 @@ body[data-theme="dark"] #physics-app {
   --phy-panel:    #1E1E1E;
   --phy-line:     #3A3A3A;
   --phy-on-hl:    #1A1A1A;
+  --phy-next-bg:  #C1440E;     /* 深色主题按钮底：待求朱红加深，白字对比度 5.12 ≥ 4.5（R3 2026-10-15） */
 }
 /* 护眼主题沿用浅色值（body[data-theme="soft"] 不覆盖） */
 
 /* ---------- App 骨架：一屏三块 ---------- */
 #physics-app {
-  height: 100dvh;
+  /* 注意：此处不设 height（旧 100dvh 已删，R1 2026-10-15）——
+   * 高度由子 #phy-app.phy-app 的 100dvh 撑起；浏览器模式下子 div
+   * hidden=display:none 时 section 自动塌为 0 高，body 永不滚动。 */
   background: var(--phy-bg);
   color: var(--phy-ink);
   font-family: inherit;
   overflow: hidden;              /* 页面级一屏不变量：唯一允许的 overflow:hidden */
 }
 .phy-app {
+  box-sizing: border-box;      /* 100dvh 含 padding：无隐藏裁剪（附带观察 2026-10-15） */
   height: 100dvh;
   max-width: 720px;
   margin: 0 auto;
@@ -230,11 +235,18 @@ body[data-theme="dark"] #physics-app {
   cursor: pointer;
 }
 .phy-pager button:disabled { opacity: 0.35; cursor: default; }
-.phy-pager .phy-next { background: var(--phy-target); border-color: var(--phy-target); color: #fff; }
+.phy-pager .phy-next { background: var(--phy-next-bg); border-color: var(--phy-next-bg); color: #fff; }
 
 /* ---------- 章节浏览器 ---------- */
 /* 浏览器是导航列表页（非一屏课页）：内容超高时自身滚动，
  * 与课页 .phy-zone 口径一致，body 永不滚动。 */
+/* 白队闸门 R1（2026-10-15）：hidden 壳不得占空间。
+ * #phy-browser.phy-app 的 display:block 特异性（1-1-0）高于 UA
+ * [hidden]{display:none}（0-1-0），空壳曾撑开 100dvh+10px 致 body
+ * 可滚动；此处 !important 兜底。body margin 清零（本表仅被
+ * modules/physics/index.html 引用，即物理 SPA 页作用域）。 */
+#phy-browser[hidden], #phy-app[hidden] { display: none !important; }
+body { margin: 0; }
 #phy-browser.phy-app { display: block; overflow-y: auto; overscroll-behavior-y: contain; }
 .phy-browse { padding: 12px 0 24px; }
 .phy-browse h1 { font-size: 1.15rem; margin: 6px 0 4px; }
