@@ -35,7 +35,7 @@ window.CHEM_CH["cm10"] = {
               id: "cm10.1.1-p1",
               kind: "interact",
               title: "石蕊 vs 酚酞",
-              exploreTip: "左右对照点一点：酸、碱、中性，三种液体各变什么色？",
+              exploreTip: "左右对照：酸、碱、中性，三种液体各变什么色？",
               widgets: [
                 {
                   type: "side-compare",
@@ -486,7 +486,7 @@ window.CHEM_CH["cm10"] = {
               title: "pH：数量级的尺子",
               blocks: [
                 { type: "lead", text: "还记得吗？上一页你把滑块从 3 拨到 4，c(H⁺) 的条子缩成了 1/10——pH 不是“厘米尺”，是“数量级尺”。" },
-                { type: "text", html: "pH 标度常用 0–14：< 7 酸性、= 7 中性、> 7 碱性。适用条件：0–14 是常用范围，超浓酸 pH 可小于 0。" },
+                { type: "text", html: "pH 标度常用 0–14：pH < 7 酸性、pH = 7 中性、pH > 7 碱性。适用条件：0–14 是常用范围，超浓酸 pH 可小于 0。" },
                 { type: "text", html: "对数直观版：pH 每差 1，c(H⁺) 差 10 倍；差 2 差 100 倍。pH 是“压缩”过的尺子——不讲 log 定义，只记“10 倍一格”；学完代数 8.2 对数后回填 pH = −lg c(H⁺)。" },
                 { type: "trap", text: "⚠ 别搞混：试纸测大概，精确用 pH 计；试纸不能伸入待测液——玻璃棒蘸取，点在试纸上对比色卡。" },
                 { type: "mathlink", text: "数学呼应·预告：代数 8.2 对数——本页是“对数直观版”（10 倍一格，不讲 log 定义）；学完 8.2 后回填 pH = −lg c(H⁺)（cm19.1.2 兑现）。"
@@ -616,7 +616,7 @@ window.CHEM_CH["cm10"] = {
                 {
                   type: "choice",
                   stem: "下列反应属于复分解反应的是",
-                  options: ["C + 2CuO ＝高温＝ 2Cu + CO₂", "AgNO₃ + NaCl = AgCl↓ + NaNO₃", "Zn + H₂SO₄ = ZnSO₄ + H₂↑"],
+                  options: ["C + 2CuO ＝高温＝ 2Cu + CO₂↑", "AgNO₃ + NaCl = AgCl↓ + NaNO₃", "Zn + H₂SO₄ = ZnSO₄ + H₂↑"],
                   answer: 1,
                   tip: "两种化合物交换成分 + 有沉淀——才是复分解。"
                 },

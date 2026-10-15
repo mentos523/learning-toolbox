@@ -32,7 +32,7 @@ window.CHEM_CH["cm06"] = {
               id: "cm06.1.1-p1",
               kind: "interact",
               title: "钻戒和铅笔芯：都是碳",
-              exploreTip: "点一点对照表：结构不同，性质差多少。",
+              exploreTip: "看对照表：结构不同，性质差多少。",
               widgets: [
                 {
                   type: "side-compare",
@@ -123,7 +123,7 @@ window.CHEM_CH["cm06"] = {
                 {
                   type: "reaction-particle",
                   params: {
-                    reaction: { equationText: "C + 2CuO ＝高温＝ 2Cu + CO₂" },
+                    reaction: { equationText: "C + 2CuO ＝高温＝ 2Cu + CO₂↑" },
                     particles: [
                       { id: "c1", kind: "atom", label: "C", charge: null, role: "reactant", count: 1 },
                       { id: "cuo", kind: "molecule", label: "CuO", charge: null, role: "reactant", count: 2 },
@@ -151,7 +151,7 @@ window.CHEM_CH["cm06"] = {
               blocks: [
                 { type: "lead", text: "上一页你看到黑色粉末变成了红色——碳把氧化铜里的氧抢走了。今天看碳的“三副面孔”。" },
                 { type: "text", html: "可燃性：氧气充足时 C + O₂ ＝点燃＝ CO₂；不足时 2C + O₂ ＝点燃＝ 2CO。同样是烧，氧气够不够，产物完全不同。" },
-                { type: "text", html: "还原性：C + 2CuO ＝高温＝ 2Cu + CO₂。碳夺走氧化物里的氧，自己变成 CO₂——单质把化合物里的某种元素“换”出来，叫置换反应。木炭炼铜、焦炭炼铁用的都是这一招。" },
+                { type: "text", html: "还原性：C + 2CuO ＝高温＝ 2Cu + CO₂↑。碳夺走氧化物里的氧，自己变成 CO₂↑——单质把化合物里的某种元素“换”出来，叫置换反应。木炭炼铜、焦炭炼铁用的都是这一招。" },
                 { type: "text", html: "稳定性：常温下碳很稳定——古代字画用墨书写，千年不褪。适用条件是“常温”，加热它可不安分。" },
                 { type: "trap", text: "⚠ 别搞混：C + 2CuO 既是置换也是还原反应，但不是所有还原反应都是置换反应（如 CO + CuO，CO 是化合物）。" }
               ],
@@ -172,7 +172,7 @@ window.CHEM_CH["cm06"] = {
                 },
                 {
                   type: "fill",
-                  stemBefore: "C + 2CuO ＝高温＝ 2Cu + CO₂ 中，被还原的物质是",
+                  stemBefore: "C + 2CuO ＝高温＝ 2Cu + CO₂↑ 中，被还原的物质是",
                   stemAfter: "。",
                   answer: "CuO",
                   accept: ["氧化铜", "cuo"],

@@ -29,7 +29,7 @@ window.CHEM_CH["cm07"] = {
               id: "cm07.1.1-p1",
               kind: "interact",
               title: "三要素 vs 灭火：照镜子",
-              exploreTip: "左右对照点一点：灭火的每一招，都对应一个燃烧条件。",
+              exploreTip: "左右对照：灭火的每一招，都对应一个燃烧条件。",
               widgets: [
                 {
                   type: "side-compare",

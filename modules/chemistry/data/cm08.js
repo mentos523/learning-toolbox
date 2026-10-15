@@ -30,7 +30,7 @@ window.CHEM_CH["cm08"] = {
               id: "cm08.1.1-p1",
               kind: "interact",
               title: "纯铁 vs 钢：谁更硬",
-              exploreTip: "左右对照点一点：合金到底强在哪。",
+              exploreTip: "左右对照：合金到底强在哪。",
               widgets: [
                 {
                   type: "side-compare",

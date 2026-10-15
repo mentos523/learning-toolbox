@@ -103,7 +103,7 @@ window.CHEM_CH["cm05"] = {
               id: "cm05.1.1-p1",
               kind: "interact",
               title: "天平：敞口“轻了”之谜",
-              exploreTip: "点每一行：敞口“轻了”的那组，少的不是质量，是跑掉的气体。",
+              exploreTip: "对照三组实验：敞口“轻了”的那组，少的不是质量，是跑掉的气体。",
               widgets: [
                 {
                   type: "side-compare",

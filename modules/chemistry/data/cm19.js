@@ -115,7 +115,7 @@ window.CHEM_CH["cm19"] = {
                 { type: "mathlink", text: "回填：代数 8.2 对数——cm10.2.3 的预告今天兑现。" },
                 { type: "trap", text: "⚠ 别搞混：pH=7 不一定中性——看温度！100℃ 时中性 pH=6；Kw=10⁻¹⁴ 只在 25℃ 成立。" }
               ],
-              point: "pH=−lgc(H⁺)：小小一步，浓度大跳。下一页：亲手算 pH。"
+              point: "pH = −lg c(H⁺)：小小一步，浓度大跳。下一页：亲手算 pH。"
             },
             {
               id: "cm19.1.2-p2",

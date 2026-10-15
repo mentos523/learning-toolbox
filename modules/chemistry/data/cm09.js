@@ -113,7 +113,7 @@ window.CHEM_CH["cm09"] = {
               id: "cm09.1.2-p1",
               kind: "interact",
               title: "四要素：缺一不可",
-              exploreTip: "去一要素即错：点一点，看缺了哪一个。",
+              exploreTip: "去一要素即错：看四要素，缺了哪一个。",
               widgets: [
                 {
                   type: "side-compare",

@@ -43,7 +43,7 @@ window.CHEM_CH["cm11"] = {
                 {
                   type: "reaction-particle",
                   params: {
-                    reaction: { equationText: "2NH₄Cl + Ca(OH)₂ ＝加热＝ CaCl₂ + 2NH₃ + 2H₂O" },
+                    reaction: { equationText: "2NH₄Cl + Ca(OH)₂ ＝加热＝ CaCl₂ + 2NH₃↑ + 2H₂O" },
                     particles: [
                       { id: "nh4", kind: "ion", label: "NH₄", charge: "+1", role: "reactant", count: 2 },
                       { id: "oh", kind: "ion", label: "OH", charge: "−1", role: "reactant", count: 2 },
@@ -126,7 +126,7 @@ window.CHEM_CH["cm11"] = {
               id: "cm11.1.2-p1",
               kind: "interact",
               title: "营养素：缺啥补啥",
-              exploreTip: "点一点对照表：每种营养素管什么，缺了会怎样。",
+              exploreTip: "看对照表：每种营养素管什么，缺了会怎样。",
               widgets: [
                 {
                   type: "side-compare",
@@ -273,7 +273,7 @@ window.CHEM_CH["cm11"] = {
               id: "cm11.1.4-p1",
               kind: "interact",
               title: "四种基本反应类型",
-              exploreTip: "点一点对照表：四个类型，各举一个你学过的例子。",
+              exploreTip: "看对照表：四个类型，各举一个你学过的例子。",
               widgets: [
                 {
                   type: "side-compare",

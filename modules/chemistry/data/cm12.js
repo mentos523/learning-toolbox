@@ -203,7 +203,7 @@ window.CHEM_CH["cm12"] = {
                 { type: "lead", text: "上一页你亲手拆了一遍：Ba(OH)₂ 和 H₂SO₄ 拆成离子，BaSO₄ 和 H₂O 留化学式。规则就四步。" },
                 { type: "text", html: "① 写——写出配平的化学方程式：Ba(OH)₂ + H₂SO₄ ＝ BaSO₄↓ + 2H₂O。② 拆——'四留三拆'：弱电解质、沉淀、气体、氧化物留化学式；强酸、强碱、可溶性盐拆成离子。" },
                 { type: "text", html: "本例：Ba(OH)₂、H₂SO₄ 拆成离子；BaSO₄、H₂O 留化学式：Ba²⁺ + 2OH⁻ + 2H⁺ + SO₄²⁻ ＝ BaSO₄↓ + 2H₂O。" },
-                { type: "slogan", text: "四留三拆：弱沉气氧留式，强酸碱盐拆离子" },
+                { type: "slogan", text: "四留三拆：弱沉气氧留，强酸强碱可溶盐拆" },
                 { type: "trap", text: "⚠ 别搞混：把 CH₃COOH、CaCO₃、CO₂ 写成离子——弱电解质、沉淀、气体留化学式！" }
               ],
               point: "'四留三拆'先分类，再决定拆还是留——口诀背下来，拆写不用愁。"
