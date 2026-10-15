@@ -565,9 +565,52 @@ window.ENG_CH["gr07"] = {
             },
             {
               id: "gr07.1.4-p2",
+              kind: "interact",
+              title: "标出：谁没穿被动的衣服？",
+              exploreTip: "标一标：happen 是及物还是不及物？interested 是 done 还是形容词？",
+              widgets: [
+                {
+                  type: "tagging",
+                  params: {
+                    sentence: [
+                      { w: "The accident", role: "subject", label: "主语" },
+                      { w: "happened", role: "pred", label: "谓语（不及物）" },
+                      { w: "yesterday", role: "adverb", label: "时间状语" }
+                    ],
+                    slots: [
+                      { role: "subject", label: "主语" },
+                      { role: "pred", label: "谓语（不及物）" },
+                      { role: "adverb", label: "时间状语" }
+                    ],
+                    hint: "happen 不及物——没有“被…”这件衣服，was happened 是错的。"
+                  }
+                },
+                {
+                  type: "tagging",
+                  params: {
+                    sentence: [
+                      { w: "She", role: "subject", label: "主语" },
+                      { w: "is", role: "link", label: "系动词" },
+                      { w: "interested", role: "complem", label: "表语（形容词）" },
+                      { w: "in music", role: "adverb", label: "状语" }
+                    ],
+                    slots: [
+                      { role: "subject", label: "主语" },
+                      { role: "link", label: "系动词" },
+                      { role: "complem", label: "表语（形容词）" },
+                      { role: "adverb", label: "状语" }
+                    ],
+                    hint: "interested 长得像 done，其实是形容词——be + 形容词不是被动。"
+                  }
+                }
+              ],
+              point: "这就是“不用被动”：不及物无被动；be + 形容词不是被动。"
+            },
+            {
+              id: "gr07.1.4-p3",
               kind: "explain",
               title: "不及物无被动；be + 形容词不是被动",
-              lead: "还记得吗？上一页 happened / died 都是自己发生的，没人“被”。",
+              lead: "还记得吗？上一页 happened 没穿被动的衣服，interested 站在 be 后面当表语。",
               blocks: [
                 {
                   type: "examples",
@@ -602,6 +645,18 @@ window.ENG_CH["gr07"] = {
               ],
               point: "这就是“不用被动”：不及物无被动；be + 形容词不是被动。自查：动词及物吗？be 后面是 done 还是形容词？",
               pointScroll: true
+            },
+            {
+              id: "gr07.1.4-p4",
+              kind: "quiz",
+              title: "练一练：被动这件衣服该穿吗？",
+              questions: [
+                { type: "choice", stem: "下面哪句对？", options: ["The accident was happened yesterday.", "The accident happened yesterday.", "The accident is happened yesterday."], answer: 1, tip: "happen 是不及物动词，没被动这件衣服——was happened 是中式英语重灾区。" },
+                { type: "choice", stem: "“She is interested in music.”里的 interested 是？", options: ["过去分词，是被动", "形容词，作表语", "动词原形"], answer: 1, tip: "be + 形容词不是被动——interested 是形容词（感兴趣的）。" },
+                { type: "fill", stemBefore: "He", stemAfter: "three years ago.（“去世”；不及物，无被动）", answer: "died", accept: ["died"], tip: "die 不及物——“去世”是自己发生的，不用 was died。" },
+                { type: "choice", stem: "判断“能不能用被动”，先看什么？", options: ["动词及物吗？", "主语长吗？", "句子长吗？"], answer: 0, tip: "不及物（happen/die）无被动；再看 be 后面是 done 还是形容词。" }
+              ],
+              point: "自查：动词及物吗？be 后面是 done 还是形容词？"
             }
           ]
         },

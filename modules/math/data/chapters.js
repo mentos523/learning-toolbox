@@ -8,7 +8,7 @@ window.MATH_TRACKS = [
     description: "从五六年级出发：方程、不等式、函数，一路到极限、导数与微积分基本定理。",
     icon: "fx",
     color: "#3b82f6",
-    pages: 278,
+    pages: 279,
     prefix: "ch"
   },
   {
@@ -18,7 +18,7 @@ window.MATH_TRACKS = [
     description: "数形结合：点线面角、三角形、圆、相似变换，一直到立体几何与解析几何入门。",
     icon: "tri",
     color: "#10b981",
-    pages: 340,
+    pages: 341,
     prefix: "g"
   }
 ];

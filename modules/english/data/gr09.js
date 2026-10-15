@@ -612,9 +612,38 @@ window.ENG_CH["gr09"] = {
             },
             {
               id: "gr09.1.4-p2",
+              kind: "interact",
+              title: "标出：to do 站在谁后面？",
+              exploreTip: "标一标：to learn 修饰谁？站在名词前还是后？",
+              widgets: [
+                {
+                  type: "tagging",
+                  params: {
+                    sentence: [
+                      { w: "This", role: "subject", label: "主语" },
+                      { w: "is", role: "link", label: "系动词" },
+                      { w: "the best way", role: "complem", label: "表语" },
+                      { w: "to learn", role: "inf", label: "不定式定语" },
+                      { w: "English", role: "object", label: "宾语" }
+                    ],
+                    slots: [
+                      { role: "subject", label: "主语" },
+                      { role: "link", label: "系动词" },
+                      { role: "complem", label: "表语" },
+                      { role: "inf", label: "不定式定语" },
+                      { role: "object", label: "宾语" }
+                    ],
+                    hint: "to learn 站在名词 way 后面——不定式定语后置，这是英语的规矩。"
+                  }
+                }
+              ],
+              point: "这就是不定式定语：后置（the way to do）；be to do 表计划。"
+            },
+            {
+              id: "gr09.1.4-p3",
               kind: "explain",
               title: "不定式作定语与表语：后置 + be to do",
-              lead: "还记得吗？上一页 to learn 站在 way 后面，is to meet 表“定于”。",
+              lead: "还记得吗？上一页 to learn 站在 way 后面当定语——位置站对了。",
               blocks: [
                 {
                   type: "examples",
@@ -642,6 +671,18 @@ window.ENG_CH["gr09"] = {
               ],
               point: "这就是不定式作定语 / 表语：后置；be to do 表计划。自查：to do 站对位置了吗（名词后）？",
               pointScroll: true
+            },
+            {
+              id: "gr09.1.4-p4",
+              kind: "quiz",
+              title: "练一练：to do 站对位置了吗？",
+              questions: [
+                { type: "choice", stem: "下面哪句对？", options: ["This is the best to learn way.", "This is the best way to learn English.", "This is the best way learning English."], answer: 1, tip: "不定式定语后置：to learn 站 way 后面，不是前面。" },
+                { type: "choice", stem: "“He is to meet us at ten.”表什么？", options: ["过去", "按计划（定于十点见面）", "不可能"], answer: 1, tip: "be to do 表计划/安排：He is to meet us = 他定于和我们见面。" },
+                { type: "fill", stemBefore: "It is time", stemAfter: "have lunch.（“该…了”）", answer: "to", accept: ["to"], tip: "It's time to do：该…了——to do 站 time 后面。" },
+                { type: "choice", stem: "“the way to do”里 to do 修饰谁？", options: ["way（方法）", "the", "do 自己"], answer: 0, tip: "to do 作定语，修饰前面的名词 way：…的方法。" }
+              ],
+              point: "自查：to do 站对位置了吗（名词后）？"
             }
           ]
         }

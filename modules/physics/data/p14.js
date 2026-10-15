@@ -65,7 +65,7 @@ window.PHY_CH["p14"] = {
                     steps: ["area"],
                     areaSlices: 40,
                     xRange: [0, 4],
-                    badge: { invariant: "没变的是：面积 = 功" }
+                    badge: { invariant: "没变的是：面积 = 功（变的是力与位移→面积的读数）" }
                   }
                 }
               ],
@@ -271,7 +271,7 @@ window.PHY_CH["p14"] = {
                     k: { min: 10, max: 200, step: 10, init: 50 },
                     m: { min: 0.5, max: 5, step: 0.5, init: 1 },
                     dragAmp: true, showXTGraph: false, showEquation: false,
-                    badge: { invariant: "没变的是：系统的总机械能" }
+                    badge: { invariant: "没变的是：系统的总机械能（变的是动能↔势能的来回倒）" }
                   }
                 }
               ],
@@ -345,7 +345,7 @@ window.PHY_CH["p14"] = {
                     steps: ["area"],
                     areaSlices: 40,
                     xRange: [0, 5],
-                    badge: { invariant: "没变的是：面积 = 冲量" }
+                    badge: { invariant: "没变的是：面积 = 冲量（变的是作用时间→平均力的大小）" }
                   }
                 }
               ],
@@ -421,7 +421,7 @@ window.PHY_CH["p14"] = {
                     v1: { min: -5, max: 5, step: 0.5, init: 4 },
                     v2: { min: -5, max: 5, step: 0.5, init: 0 },
                     restitution: 1, showMomentumBars: true,
-                    badge: { invariant: "没变的是：系统总动量" }
+                    badge: { invariant: "没变的是：系统总动量（变的是碰撞前后→各自动量的分配）" }
                   }
                 }
               ],
@@ -488,7 +488,7 @@ window.PHY_CH["p14"] = {
                     v1: { min: -5, max: 5, step: 0.5, init: 4 },
                     v2: { min: -5, max: 5, step: 0.5, init: 0 },
                     restitution: 1, showMomentumBars: true,
-                    badge: { invariant: "没变的是：系统总动量" }
+                    badge: { invariant: "没变的是：系统总动量（变的是碰撞→两车速度的交换）" }
                   }
                 },
                 {

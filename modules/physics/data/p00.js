@@ -84,7 +84,7 @@ params: {
 length: { min: 0.2, max: 1.5, step: 0.1, init: 1 },
 mass: { min: 0.1, max: 1, step: 0.1, init: 0.5 },
 angle: { min: 5, max: 30, step: 1, init: 15 },
-badge: { invariant: "没变的是：重力加速度 g" }
+badge: { invariant: "没变的是：重力加速度 g（变的是摆绳长、摆球质量、摆角→周期）" }
 }
 }
 ],

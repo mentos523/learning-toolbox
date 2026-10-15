@@ -339,6 +339,9 @@ body[data-theme="dark"] #physics-app .phy-trap { background: #2b2113; }
   line-height: 1.7;
 }
 .phy-mathlink::before { content: "📐 "; }
+/* R-P2（2026-10-15）：跨科深链内联样式——下划线＋可辨色＋加粗，
+ * 与化学模块 .chm-lesson-link 口径一致（全站统一） */
+.phy-xlink { color: var(--phy-target); font-weight: 700; text-decoration: underline; }
 .phy-slogan {
   text-align: center;
   font-size: 1rem;

@@ -722,3 +722,24 @@ body[data-theme="dark"] #grammar-app {
   cursor: pointer;
   touch-action: manipulation;
 }
+
+/* ---------- R-B4（2026-10-15 自学审计整改）：内联跨科链接统一口径 ----------
+ * 下划线 + 可辨色（--eng-subject 蓝，深色/浅色主题均有覆写），
+ * 用于语法页内 #r= 词根引用等跨卡跳转。 */
+.eng-xlink {
+  color: var(--eng-subject);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+.eng-xlink:hover { filter: brightness(0.85); }
+.eng-xlink:active { filter: brightness(0.7); }
+
+/* ---------- R-E3（2026-10-15 自学审计整改）：“首现即定义”脚注 ----------
+ * 术语首次出现处的脚注式说明（如 there be 的前置说明）。 */
+.g-sent-fn {
+  margin-top: 4px;
+  font-size: 0.8rem;
+  color: var(--eng-ink-soft);
+  line-height: 1.5;
+}

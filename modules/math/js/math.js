@@ -232,7 +232,9 @@
         var det = document.createElement("details");
         det.className = "m-answers";
         var sum = document.createElement("summary");
-        sum.textContent = "📝 核对答案（点开展开）";
+        // （蓝队 2026-10-15 自学审计优化“章末习题补解析”）折叠标题取自
+        // examples 条目的 figure 字段；既有 27 条 figure 均为“核对答案”，输出不变。
+        sum.textContent = "📝 " + (ex.figure || "核对答案") + "（点开展开）";
         det.appendChild(sum);
         var ap = document.createElement("p");
         ap.textContent = ex.text;

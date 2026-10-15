@@ -220,7 +220,7 @@ window.PHY_CH["p07"] = {
                     v1: { min: 0, max: 8, step: 0.5, init: 4 },
                     v2: { min: 0, max: 0, step: 0.5, init: 0 },
                     restitution: 1, showMomentumBars: true,
-                    badge: { invariant: "没变的是：两车总质量" }
+                    badge: { invariant: "没变的是：两车总质量（变的是 m1、v1→m2 被撞飞的速度）" }
                   }
                 },
                 {
@@ -264,7 +264,7 @@ window.PHY_CH["p07"] = {
               kind: "explain",
               title: "重力势能与弹性势能",
               blocks: [
-                { type: "lead", text: "举高的石头、拉开的弓——没动，也有能量。" },
+                { type: "lead", text: "举高的石头、拉开的弓——没动，也有能量。（能量：物体做功本领的量度——动能、势能都是它的不同面孔。）" },
                 { type: "text", html: "重力势能：被举高的物体具有的能。影响因素：质量 m、高度 h——举得越高、越重，砸下来越狠（高空坠物警示）。" },
                 { type: "text", html: "弹性势能：弹性形变具有的能。影响因素：形变程度——拉开的弓、压缩的弹簧，形变越大，势能越大。" },
                 { type: "trap", text: "⚠️ 别搞混：“举得高重力势能一定大”——错，还看质量（零势能面初中点到为止）。" }
@@ -353,7 +353,7 @@ window.PHY_CH["p07"] = {
                     fulcrumX: { min: 30, max: 70, step: 1, init: 50 },
                     load: { weight: 10, armInit: 20 },
                     showEquation: true, unit: "N",
-                    badge: { invariant: "没变的是：阻力（钩码重量）" }
+                    badge: { invariant: "没变的是：阻力（钩码重量）（变的是支点位置→F₁ 读数）" }
                   }
                 }
               ],
@@ -421,7 +421,7 @@ window.PHY_CH["p07"] = {
                     mode: "pulley", pulleyKind: "fixed",
                     load: { weight: 10, armInit: 0 },
                     showEquation: false, unit: "N",
-                    badge: { invariant: "没变的是：重物重量（定滑轮）" }
+                    badge: { invariant: "没变的是：重物重量（定滑轮这轮，变的是拉力读数与绳子长度）" }
                   }
                 },
                 {
@@ -430,7 +430,7 @@ window.PHY_CH["p07"] = {
                     mode: "pulley", pulleyKind: "movable",
                     load: { weight: 10, armInit: 0 },
                     showEquation: false, unit: "N",
-                    badge: { invariant: "没变的是：重物重量（动滑轮）" }
+                    badge: { invariant: "没变的是：重物重量（动滑轮这轮，变的是拉力读数与绳子长度）" }
                   }
                 }
               ],

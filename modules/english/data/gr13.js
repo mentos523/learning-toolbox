@@ -214,7 +214,7 @@ window.ENG_CH["gr13"] = {
                 {
                   type: "idcard",
                   rule: "宾语从句连接词三问：陈述句→that；是否→if / whether；缺成分→wh-（缺主 / 宾用 what，缺地点用 where…）。",
-                  condition: "that 在口语中常省（I know he is ill）；if / whether / wh- 永不省；that 不在从句中作成分，wh- 在从句中作成分（what = said 的宾语）。"
+                  condition: "that 在口语中常省（I know he is ill）；if / whether / wh- 永不省——省了“是否/疑问”就没了标记，从句进不了槽；that 不在从句中作成分，wh- 在从句中作成分（what = said 的宾语）。"
                 },
                 {
                   type: "bridge",

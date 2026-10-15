@@ -323,6 +323,11 @@ window.ENG_CH["gr00"] = {
                   condition: "所有英语句子。谓语有三种：实义动词（run/like）、系动词（is/are）、助动词（do/does）。汉语'她很漂亮'没有动词也能成立，英语不行——必须加 is。"
                 },
                 {
+                  type: "idcard",
+                  rule: "谓语三兄弟，人话版：实义动词自己能扛事（run 跑、like 喜欢）；系动词 is/are/am 自己没意思，专门把主语和“怎么样”连起来（She is happy）；助动词 do/does/did 打杂的，帮实义动词变否定疑问（Does she like…？），从不抢谓语的位。",
+                  condition: "全书通用：后面看到“系动词”“助动词”标签，就回想这三行——先直觉，后严格。"
+                },
+                {
                   type: "bridge",
                   zh: "汉语说'她很漂亮'，'漂亮'前面不用'是'，句子照样成立。",
                   en: "英语不行：She very beautiful 里没有动词，英语耳朵听着像话没说完——必须加 is：She is beautiful。",
@@ -350,7 +355,14 @@ window.ENG_CH["gr00"] = {
               id: "gr00.1.1-p4",
               kind: "quiz",
               title: "练一练：谓语找对了吗？",
-              point: "自查：每句话先圈动词——圈出零个或两个，都要改。"
+              point: "自查：每句话先圈动词——圈出零个或两个，都要改。",
+              questions: [
+                { type: "choice", stem: "下面哪句是完整的英语句子？", options: ["She beautiful.", "She is beautiful.", "Beautiful she is."], answer: 1, tip: "英语句子不能没有谓语动词：She beautiful 里没有动词，必须加 is。" },
+                { type: "fill", stemBefore: "My mother", stemAfter: "beautiful.（是）", answer: "is", accept: ["is"], tip: "谓语不能缺——is 专门站在形容词前面（My mother is beautiful）。" },
+                { type: "choice", stem: "下面哪句犯了“双谓语”的错？", options: ["I like him.", "I like him is kind.", "I think he is kind."], answer: 1, tip: "like 已经是谓语，is 再进来就是两个“老大”——想加“他很善良”，另起一句。" },
+                { type: "choice", stem: "谓语有哪三种？", options: ["实义动词、系动词、助动词", "名词、动词、形容词", "主语、谓语、宾语"], answer: 0, tip: "谓语三兄弟：实义动词（run/like）、系动词（is/are）、助动词（do/does）。" },
+                { type: "fill", stemBefore: "They", stemAfter: "students.（是）", answer: "are", accept: ["are"], tip: "主语 They 是复数，系动词用 are——They are students。" }
+              ]
             }
         ]
       },
@@ -581,7 +593,14 @@ window.ENG_CH["gr00"] = {
               id: "gr00.1.2-p4",
               kind: "quiz",
               title: "练一练：成分对号入座",
-              point: "自查三问：谓语找到了吗？主语是谁？修饰语站对岗了吗？"
+              point: "自查三问：谓语找到了吗？主语是谁？修饰语站对岗了吗？",
+              questions: [
+                { type: "choice", stem: "找句子成分，第一步永远是？", options: ["先找主语", "先找谓语动词", "先找时间词"], answer: 1, tip: "全书通用：先圈动词（谓语），再定主语，其余成分对号入座。" },
+                { type: "choice", stem: "哪个成分组合是句子的“骨架”，每句必有？", options: ["定语", "主语 + 谓语", "补语"], answer: 1, tip: "主谓是骨架；宾语/表语/补语看动词需不需要——先立骨架。" },
+                { type: "choice", stem: "“yesterday（昨天）”在句中是什么成分？", options: ["补语", "时间状语", "定语"], answer: 1, tip: "时间地点词是状语——昨天是“什么时候”，绝不能当补语。" },
+                { type: "fill", stemBefore: "“She is happy.”中 happy 是", stemAfter: "。（系动词 is 后面说明主语怎么样）", answer: "表语", accept: ["表语"], tip: "系动词后面的成分叫表语：说明主语“怎么样/是什么”。" },
+                { type: "choice", stem: "哪个成分负责“装修名词”？", options: ["定语", "状语", "谓语"], answer: 0, tip: "定语装修名词（an interesting book）；状语装修动词/全句（He runs quickly）。" }
+              ]
             }
         ]
       },
@@ -725,7 +744,14 @@ window.ENG_CH["gr00"] = {
               id: "gr00.1.3-p4",
               kind: "quiz",
               title: "练一练：这是什么句型？",
-              point: "自查：先找动词，再看它带几个槽——槽数即句型。"
+              point: "自查：先找动词，再看它带几个槽——槽数即句型。",
+              questions: [
+                { type: "choice", stem: "“She runs.”是哪种句型？", options: ["S + V（主谓）", "S + V + O（主谓宾）", "S + V + P（主系表）"], answer: 0, tip: "run 是不及物动词，后面不跟东西——S + V 就够了。" },
+                { type: "choice", stem: "“He is a teacher.”是哪种句型？", options: ["S + V + O", "S + V + P（主系表）", "S + V + IO + DO"], answer: 1, tip: "is 是系动词，后面跟表语 a teacher——S + V + P。" },
+                { type: "choice", stem: "“I gave him a book.”是哪种句型？", options: ["S + V + O", "S + V + IO + DO（主谓间宾直宾）", "S + V + O + C"], answer: 1, tip: "give 后面有两个槽：给谁（him）+ 给什么（a book）——双宾动词。" },
+                { type: "choice", stem: "“I like him is kind.”错在哪？", options: ["like 拼错了", "like 后面槽已满（S+V+O），is 再进来是双谓语", "kind 拼错了"], answer: 1, tip: "句型由动词定槽：like 的槽（宾语 him）满了，is 没地方站。" },
+                { type: "choice", stem: "句型由谁决定？", options: ["主语", "动词", "时间词"], answer: 1, tip: "动词定槽，槽定句型——查动词，就知道句型。" }
+              ]
             }
         ]
       },
@@ -878,7 +904,14 @@ window.ENG_CH["gr00"] = {
               id: "gr00.1.4-p4",
               kind: "quiz",
               title: "练一练：词性看'做什么'",
-              point: "自查：背单词连词性一起背；查词先看缩写。"
+              point: "自查：背单词连词性一起背；查词先看缩写。",
+              questions: [
+                { type: "choice", stem: "“book”在“I read a book.”里是什么词类？", options: ["动词", "名词", "形容词"], answer: 1, tip: "book 在这里是“被读的东西”——名词。" },
+                { type: "choice", stem: "“book”在“I book a ticket.”里是什么意思？", options: ["名词“书”", "动词“订票”", "形容词“书的”"], answer: 1, tip: "book v. = 订票：I book a ticket = 我订一张票。" },
+                { type: "choice", stem: "词类看什么？", options: ["看拼写长什么样", "看它在句中做什么", "看首字母"], answer: 1, tip: "词类看“做什么”不看“长什么样”：book 可名可动，看岗位。" },
+                { type: "choice", stem: "查词典第一步是？", options: ["看第一个中文义", "先看词性缩写（n./v./adj.），再选中文义", "看发音"], answer: 1, tip: "一词多类：先看缩写定词性，再选中文义——只看第一个义会翻车。" },
+                { type: "choice", stem: "英语八大词类不包括下面哪个？", options: ["介词", "量词", "冠词"], answer: 1, tip: "八大词类：名词、动词、形容词、副词、代词、介词、连词、冠词——没有“量词”。" }
+              ]
             }
         ]
       }

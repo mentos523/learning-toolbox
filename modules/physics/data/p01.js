@@ -30,7 +30,7 @@ widgets: [
 {
 type: "tuning-fork",
 params: {
-badge: { invariant: "没变的是：音叉本身" }
+badge: { invariant: "没变的是：音叉本身（变的是水面的水花）" }
 }
 }
 ],
@@ -92,7 +92,7 @@ widgets: [
 type: "vacuum-chamber",
 params: {
 air: { min: 0, max: 100, step: 5, init: 100 },
-badge: { invariant: "没变的是：铃铛还在响" }
+badge: { invariant: "没变的是：铃铛还在响（变的是罩内空气：越少，声音越弱）" }
 }
 }
 ],
@@ -117,7 +117,7 @@ counterexample: "水中声速约 1500m/s——“声速永远 340m/s”这条一
 dimension: "m/s = m ÷ s ✓",
 units: { si: "m/s", common: "km/h", note: "340 m/s ≈ 1224 km/h"}
 },
-{ type: "text", html: "声速（标量）：15℃ 空气中约 340m/s；水中约 1500m/s，钢铁中约 5200m/s——介质越“硬”传得越快。"},
+{ type: "text", html: "声速（标量）：15℃ 空气中约 340m/s；水中约 1500m/s，钢铁中约 5200m/s——介质越“硬”传得越快。（标量：只有大小、没有方向的量，如温度、路程）"},
 { type: "trap", text: "⚠️ 别搞混：“真空能传声”——错；“声速恒为 340m/s”——错（跟介质、温度有关）。"},
 { type: "mathlink", text: "数学呼应：代数 6.2 一次函数（奠基）——s=vt，s 跟 t 成正比。"},
 { type: "slogan", text: "无介质，不传声。"}
@@ -130,7 +130,7 @@ id: "p01.1.2-p3",
 kind: "explain",
 title: "回声测距",
 blocks: [
-{ type: "lead", text: "对着山谷喊一嗓子，几秒后听到回声——这段“来回”的时间，能量出你离山多远。"},
+{ type: "lead", text: "对着山谷喊一嗓子，几秒后听到回声——这段“来回”的时间，量出你离山多远。"},
 { type: "text", html: "公式 <span class=\"phy-f\" data-f=\"svt\"></span>（条件：声速可看作匀速，t 内不变）只算“走过的总路程”。回声是去了一趟又回来，所以距离要除以 2：<span class=\"phy-f\" data-f=\"echo\"></span>。"},
 { type: "text", html: "生活例：3 秒后听到回声，s = 340×3÷2 = 510m。次例：倒车雷达、声呐都是这个原理；反例：教室里喊听不到回声——距离太短，回声跟原声混在一起了（人耳分辨要 0.1s 以上）。"},
 { type: "slogan", text: "回声测距，除以二。"}
@@ -166,7 +166,7 @@ freq: { min: 100, max: 1000, step: 10, init: 440},
 playSound: true,
 audibleMax: 2000,
 showLabels: true,
-badge: { invariant: "没变的是：介质（空气）"}
+badge: { invariant: "没变的是：介质（空气）（变的是频率→音调、振幅→响度）"}
 }
 }
 ],

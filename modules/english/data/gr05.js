@@ -1165,9 +1165,37 @@ window.ENG_CH["gr05"] = {
             },
             {
               id: "gr05.2.3-p2",
+              kind: "interact",
+              title: "标出 would 的位置",
+              exploreTip: "标出 would：它是 will 的“过去版”，站在哪？",
+              widgets: [
+                {
+                  type: "tagging",
+                  params: {
+                    sentence: [
+                      { w: "He", role: "subject", label: "主语" },
+                      { w: "said", role: "pred", label: "主句谓语（过去式）" },
+                      { w: "he", role: "subject", label: "主语" },
+                      { w: "would", role: "modal", label: "情态动词 would" },
+                      { w: "come", role: "base", label: "动词原形" }
+                    ],
+                    slots: [
+                      { role: "subject", label: "主语" },
+                      { role: "pred", label: "主句谓语（过去式）" },
+                      { role: "modal", label: "情态动词 would" },
+                      { role: "base", label: "动词原形" }
+                    ],
+                    hint: "said 是过去式，所以从句的 will 退成了 would——would 后面永远是动词原形。"
+                  }
+                }
+              ],
+              point: "这就是过去将来：主句过去式，从句 will 退 would；would + 动词原形。"
+            },
+            {
+              id: "gr05.2.3-p3",
               kind: "explain",
               title: "过去将来：would = 过去的 will",
-              lead: "还记得吗？上一页三句话都在转述“过去那会儿的将来”。",
+              lead: "还记得吗？上一页你给 would 贴上了“情态动词”——would 后面跟的永远是动词原形。",
               blocks: [
                 {
                   type: "examples",
@@ -1195,6 +1223,18 @@ window.ENG_CH["gr05"] = {
               ],
               point: "这就是过去将来：would = 过去的 will；主句过去式，从句 will 退 would。自查：主句是过去式吗？will 退成 would 了吗？",
               pointScroll: true
+            },
+            {
+              id: "gr05.2.3-p4",
+              kind: "quiz",
+              title: "练一练：will 退成 would 了吗？",
+              questions: [
+                { type: "choice", stem: "“He said he will come.”错在哪？", options: ["will 拼错了", "主句是过去式，从句 will 要退成 would", "said 拼错了"], answer: 1, tip: "主过从过：said 是过去式，will 退 would。" },
+                { type: "fill", stemBefore: "She told me she", stemAfter: "help.（过去将来：will 的过去版）", answer: "would", accept: ["would"], tip: "would = will 的过去版：站在过去讲“那时的将来”。" },
+                { type: "choice", stem: "过去将来用在什么语境？", options: ["直接讲将来的事", "过去语境里讲“那时的将来”", "讲现在的事"], answer: 1, tip: "站在过去看将来——主句得是过去式（said/knew/told）。" },
+                { type: "fill", stemBefore: "I knew it", stemAfter: "rain.（过去将来）", answer: "would", accept: ["would"], tip: "knew 是过去式，从句 will 退 would——I knew it would rain。" }
+              ],
+              point: "自查：主句是过去式吗？will 退成 would 了吗？"
             }
           ]
         },

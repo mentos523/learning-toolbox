@@ -38,7 +38,7 @@ window.PHY_CH["p05"] = {
                       { id: "fm", kind: "custom",  label: "F磁", angleDeg: 0,   mag: 6, min: 0, max: 15 }
                     ],
                     showResultant: true, surface: "horizontal", unit: "N",
-                    badge: { invariant: "没变的是：铁钉的质量（→重力不变）" }
+                    badge: { invariant: "没变的是：铁钉的质量→重力不变（变的是磁力的大小和方向）" }
                   }
                 }
               ],
@@ -69,7 +69,7 @@ window.PHY_CH["p05"] = {
                 { type: "oldfriend", text: "预告：p05.2.1 牛顿第一定律——“改变运动状态”这五个字，是全书最重要的观念转折。" },
                 { type: "slogan", text: "力有方向，别当“劲儿”。" }
               ],
-              point: "力是矢量：只说“用了 10N 的力”却不说方向，等于没说全。"
+              point: "力是矢量（矢量：既有大小、又有方向的量）：只说“用了 10N 的力”却不说方向，等于没说全。"
             }
           ]
         },
@@ -108,7 +108,7 @@ window.PHY_CH["p05"] = {
                       points: [[0,0],[1,10],[2,20],[3,30],[4,40],[4.5,44],[5,47],[5.5,49],[6,50]],
                       xLabel: "x/cm", yLabel: "F/N", steps: ["slope"]
                     },
-                    badge: { invariant: "没变的是：同一根弹簧（弹性限度内，k 不变）" }
+                    badge: { invariant: "没变的是：同一根弹簧（弹性限度内 k 不变）（变的是拉力→伸长量，F–x 点走直线）" }
                   }
                 }
               ],
@@ -180,7 +180,7 @@ window.PHY_CH["p05"] = {
                       { id: "n", kind: "normal",  label: "N", angleDeg: 120, mag: 9,  fixed: true }
                     ],
                     showResultant: false, surface: "incline", inclineDeg: 30, unit: "N",
-                    badge: { invariant: "没变的是：木块质量（→重力不变）" }
+                    badge: { invariant: "没变的是：木块质量→重力不变（变的是斜面倾角→重力箭头始终笔直朝下）" }
                   }
                 },
                 {
@@ -250,7 +250,7 @@ window.PHY_CH["p05"] = {
                       { id: "n", kind: "normal",   label: "N", angleDeg: 90,  mag: 10, fixed: true }
                     ],
                     showResultant: true, surface: "horizontal", unit: "N",
-                    badge: { invariant: "没变的是：小车质量" }
+                    badge: { invariant: "没变的是：小车质量（变的是摩擦力→小车滑得越久）" }
                   }
                 },
                 {
@@ -277,8 +277,8 @@ window.PHY_CH["p05"] = {
                   widget: {
                     type: "side-compare",
                     params: {
-                      left: { title: "亚里士多德", rows: ["不推就不动", "力是维持运动的原因", "推桌子桌子停=力没了"] },
-                      right: { title: "伽利略 / 牛顿", rows: ["阻力越小，保持运动越久", "力是改变运动状态的原因", "推桌子桌子停=摩擦力还在"] },
+                      left: { title: "亚里士多德", rows: ["不推就不动", "力是维持运动的原因", "推桌子，桌子停=力没了"] },
+                      right: { title: "伽利略 / 牛顿", rows: ["阻力越小，保持运动越久", "力是改变运动状态的原因", "推桌子，桌子停=摩擦力还在"] },
                       verdict: "桌子停下来，恰恰是因为有力（摩擦力）在改变它"
                     }
                   }
@@ -381,7 +381,7 @@ window.PHY_CH["p05"] = {
                       { id: "n",  kind: "normal",  label: "N",  angleDeg: 90,  mag: 10, fixed: true }
                     ],
                     showResultant: true, surface: "horizontal", unit: "N",
-                    badge: { invariant: "没变的是：小车质量" }
+                    badge: { invariant: "没变的是：小车质量（变的是两边拉力 T1、T2→合力徽章的读数）" }
                   }
                 }
               ],
@@ -467,7 +467,7 @@ window.PHY_CH["p05"] = {
                       { id: "n", kind: "normal",   label: "N", angleDeg: 90,  mag: 10, fixed: true }
                     ],
                     showResultant: true, surface: "horizontal", unit: "N",
-                    badge: { invariant: "没变的是：木块质量" }
+                    badge: { invariant: "没变的是：木块质量（变的是拉力 T→摩擦力 f 的跟随与转折）" }
                   }
                 },
                 {

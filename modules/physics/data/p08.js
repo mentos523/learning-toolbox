@@ -94,7 +94,7 @@ window.PHY_CH["p08"] = {
                     battery: { voltage: 3 },
                     goal: "任务1：拖灯泡和导线连亮电路。任务2：串进三个电流表，看读数一不一样。",
                     showCurrent: true,
-                    badge: { invariant: "没变的是：电源电压" },
+                    badge: { invariant: "没变的是：电源电压（变的是接法→三处电流表读数）" },
                     safety: "虚拟电路随便短路；真实电路短路会烧电源、烧表——只许在虚拟里试。"
                   }
                 }
@@ -163,7 +163,7 @@ window.PHY_CH["p08"] = {
                     battery: { voltage: 3 },
                     goal: "试试两条支路：搭一个双支路电路，断开一条支路的灯泡，看另一条还亮吗？再搭个串联对比。",
                     allowParallel: true, showCurrent: true,
-                    badge: { invariant: "没变的是：电源电压" },
+                    badge: { invariant: "没变的是：电源电压（变的是串/并联与断点→灯泡亮还是灭）" },
                     safety: "虚拟电路随便短路；真实电路短路会烧电源、烧表——只许在虚拟里试。"
                   }
                 }
@@ -221,7 +221,7 @@ window.PHY_CH["p08"] = {
                     battery: { voltage: 3 },
                     goal: "大量程试触选量程，电流表串进电路；再并在灯泡两端——看警告说什么。",
                     showCurrent: true,
-                    badge: { invariant: "没变的是：电源电压" },
+                    badge: { invariant: "没变的是：电源电压（变的是表的接法→烧表警告出不出现）" },
                     safety: "电流表内阻极小：并联=短路=烧表——安全红线！虚拟里看一次，现实中绝不试。"
                   }
                 },
@@ -348,7 +348,7 @@ window.PHY_CH["p08"] = {
                     battery: { voltage: 6 },
                     goal: "闭合开关前，滑片移到阻值最大处；闭合开关，拖动滑片——接入电阻变，电流表读数跟着变。",
                     showCurrent: true,
-                    badge: { invariant: "没变的是：电源电压" },
+                    badge: { invariant: "没变的是：电源电压（变的是滑片位置→接入电阻→电流大小）" },
                     safety: "虚拟电路随便短路；真实电路短路会烧电源、烧表——只许在虚拟里试。"
                   }
                 }
@@ -361,7 +361,7 @@ window.PHY_CH["p08"] = {
               title: "电阻的影响因素",
               blocks: [
                 { type: "lead", text: "同样 6V 电池，换根“脾气大”的导线，电流就小了——脾气是导体的。" },
-                { type: "text", html: "电阻：导体对电流的阻碍作用。影响因素（控制变量思想）：长度越长越大、横截面积越大越小、材料不同不同、温度也有影响。" },
+                { type: "text", html: "电阻：导体对电流的阻碍作用。影响因素（控制变量思想）：长度越长越大、横截面积越大越小、材料不同，电阻不同、温度也有影响。" },
                 { type: "text", html: "滑动变阻器：靠改变接入电路的电阻丝长度来改变电阻。接法：一上一下；开关闭合前，滑片移到阻值最大处。" },
                 { type: "mathlink", text: "数学呼应：代数 6.1（奠基）——控制变量 → 函数关系思想：固定其他量，看一个量怎么变。" },
                 { type: "slogan", text: "电阻是导体的脾气。" }
@@ -424,7 +424,7 @@ window.PHY_CH["p08"] = {
                     battery: { voltage: 6 },
                     goal: "保持电压不变：先串 1 个 20Ω 电阻读电流，再串第 2 个——R 越大，I 越小。",
                     showCurrent: true,
-                    badge: { invariant: "没变的是：电源电压" },
+                    badge: { invariant: "没变的是：电源电压（变的是电阻 R→电流 I 的趋势）" },
                     safety: "虚拟电路随便短路；真实电路短路会烧电源、烧表——只许在虚拟里试。"
                   }
                 },
@@ -452,7 +452,7 @@ window.PHY_CH["p08"] = {
                     type: "graph-reader",
                     params: {
                       source: { kind: "function", expr: "I = t/20", xLabel: "U/V", yLabel: "I/A", steps: ["slope"] },
-                      badge: { invariant: "没变的是：电阻（20Ω）" }
+                      badge: { invariant: "没变的是：电阻（20Ω）（变的是电压→电流跟着变）" }
                     }
                   }
                 },
@@ -521,7 +521,7 @@ window.PHY_CH["p08"] = {
                     battery: { voltage: 6 },
                     goal: "串联两电阻读电流，再换并联：哪种接法总电阻更小？亮度呢？",
                     allowParallel: true, showCurrent: true,
-                    badge: { invariant: "没变的是：电源电压" },
+                    badge: { invariant: "没变的是：电源电压（变的是滑片→电流与灯泡亮度）" },
                     safety: "虚拟电路随便短路；真实电路短路会烧电源、烧表——只许在虚拟里试。"
                   }
                 },

@@ -55,7 +55,7 @@ window.PHY_CH["p13"] = {
                     v0: { min: 5, max: 30, step: 1, init: 15 },
                     angle: { min: 0, max: 75, step: 5, init: 45 },
                     g: 9.8, dragHandle: true, timeScale: 0.5, showReadouts: true,
-                    badge: { invariant: "没变的是：小球受到的重力" }
+                    badge: { invariant: "没变的是：小球受到的重力（变的是初速度方向→轨迹的弯法）" }
                   }
                 },
                 {
@@ -103,7 +103,7 @@ window.PHY_CH["p13"] = {
                     v0: { min: 5, max: 30, step: 1, init: 15 },
                     angle: { min: 0, max: 75, step: 5, init: 45 },
                     g: 9.8, dragHandle: true, timeScale: 0.5, showReadouts: true,
-                    badge: { invariant: "没变的是：重力加速度" }
+                    badge: { invariant: "没变的是：重力加速度（变的是观察视角→水平与竖直两个分运动）" }
                   }
                 },
                 {
@@ -171,7 +171,7 @@ window.PHY_CH["p13"] = {
                     v0: { min: 5, max: 30, step: 1, init: 15 },
                     angle: { min: 0, max: 60, step: 5, init: 0 },
                     g: 9.8, dragHandle: true, timeScale: 0.5, showReadouts: true,
-                    badge: { invariant: "没变的是：重力加速度" }
+                    badge: { invariant: "没变的是：重力加速度（变的是初速度→射程）" }
                   }
                 },
                 {
@@ -243,7 +243,7 @@ window.PHY_CH["p13"] = {
               id: "p13.2.1-p1",
               kind: "interact",
               title: "向心力箭头永远指圆心",
-              exploreTip: "拖 ω：转速变了，周期 T=2π/ω 怎么变？盯住朱红箭头——它永远指圆心。",
+              exploreTip: "拖 ω（ω 读作“欧米伽”，表示转动的角速度）：转速变了，周期 T=2π/ω 怎么变？盯住朱红箭头——它永远指圆心。",
               widgets: [
                 {
                   type: "motion-sim",
@@ -251,7 +251,7 @@ window.PHY_CH["p13"] = {
                     mode: "circle",
                     omega: { min: 0.5, max: 3, step: 0.5, init: 1 },
                     g: 9.8, dragHandle: true, timeScale: 1, showReadouts: true,
-                    badge: { invariant: "没变的是：圆周半径" }
+                    badge: { invariant: "没变的是：圆周半径（变的是转速 ω→周期 T）" }
                   }
                 }
               ],
@@ -317,7 +317,7 @@ window.PHY_CH["p13"] = {
                     mode: "circle",
                     omega: { min: 0.5, max: 3, step: 0.5, init: 1 },
                     g: 9.8, dragHandle: true, timeScale: 1, showReadouts: true,
-                    badge: { invariant: "没变的是：圆周半径" }
+                    badge: { invariant: "没变的是：圆周半径（变的是转速 ω→向心力箭头的长短）" }
                   }
                 },
                 {

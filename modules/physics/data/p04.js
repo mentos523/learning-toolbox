@@ -175,7 +175,7 @@ window.PHY_CH["p04"] = {
                     unitM: "g", unitV: "cm³", unitRho: "g/cm³",
                     badge: {
                       quantityMathml: "<math><mi>&#961;</mi></math>",
-                      invariant: "没变的是：密度（物质的脾气）"
+                      invariant: "没变的是：密度（物质的脾气）（变的是质量、体积→图像上的点走直线）"
                     },
                     /* Y4 口径：点列数据源；三读法本页只开"读斜率" */
                     source: { kind: "points", xLabel: "V/cm³", yLabel: "m/g", steps: ["slope"] }
@@ -243,7 +243,7 @@ window.PHY_CH["p04"] = {
                 { type: "text", html: "比值定义 = 用两个量给第三个量「起名字」——起名字 ≠ 定因果。（红线「比值定义法四辨析」第一落点：电阻、电场强度、电容还要再考三次。）" },
                 { type: "trap", text: "⚠️ 别搞混：ρ 与 m 成正比、与 V 成反比——错！m 翻倍 V 跟着翻倍，比值不动；ρ 是物质的脾气。" },
                 { type: "text", html: "正反比判定三步：① 谁变、谁跟着变；② 「脾气」变没变；③ <span class=\"phy-f\" data-f=\"rui\"></span> 里 U 变 I 跟着变，R 不动——R 与 U、I 无关。" },
-                { type: "oldfriend", text: "认旧友：p08.2.2 电阻<span class=\"phy-f\" data-f=\"rui\"></span>陷阱再现——带上“等号不代表因果”去。" },
+                { type: "oldfriend", text: "预告：p08.2.2 电阻<span class=\"phy-f\" data-f=\"rui\"></span>陷阱再现——带上“等号不代表因果”去。" },
                 { type: "slogan", text: "等号不代表因果。" }
               ],
               point: "公式都是“有条件的真话”：先背条件，再背公式。"
@@ -294,7 +294,7 @@ window.PHY_CH["p04"] = {
                   tip: "线越陡，密度越大——第 2 页的直觉版。"
                 }
               ],
-              point: "下一站认旧友：p08.2.2 电阻——R=U/I 式陷阱再现，带上“等号不代表因果”去。"
+              point: "下一站预告：p08.2.2 电阻——R=U/I 式陷阱再现，带上“等号不代表因果”去。"
             }
           ]
         },
@@ -321,7 +321,7 @@ window.PHY_CH["p04"] = {
                     unitM: "g", unitV: "cm³", unitRho: "g/cm³",
                     badge: {
                       quantityMathml: "<math><mi>&#961;</mi></math>",
-                      invariant: "没变的是：石块的密度（物质的脾气）"
+                      invariant: "没变的是：石块的密度（变的是砝码质量→m–V 图像的点）"
                     },
                     source: { kind: "points", xLabel: "V/cm³", yLabel: "m/g", steps: ["slope"] }
                   }
@@ -389,7 +389,7 @@ window.PHY_CH["p04"] = {
                     unitM: "g", unitV: "cm³", unitRho: "g/cm³",
                     badge: {
                       quantityMathml: "<math><mi>&#961;</mi></math>",
-                      invariant: "没变的是：每种材料的密度（各自的脾气）"
+                      invariant: "没变的是：每种材料的密度（变的是测哪块金属→它的 m–V 斜率）"
                     },
                     source: { kind: "points", xLabel: "V/cm³", yLabel: "m/g", steps: ["slope"] }
                   }

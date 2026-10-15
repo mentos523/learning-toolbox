@@ -37,6 +37,28 @@
       .replace(/&/g, "&amp;").replace(/</g, "&lt;")
       .replace(/>/g, "&gt;").replace(/"/g, "&quot;");
   }
+  /* ---------------- R-B4（2026-10-15 自学审计整改）：#r=<id> 真跳转 ----------------
+   * 语法页内的“（呼应讲词根 #r=inter，R3 审计通过）”类纯文本引用，
+   * 在渲染时转为可点击的跨卡链接，目标为讲词根对应词条。
+   * 目标 hash 口径（实测 english.js 三处解析点 719/931/968 均只认字面量 "#r="）：
+   *   用旧深链 "#r=<id>"（如 #r=inter），hashchange 与初始化深链均能选中对应词条；
+   *   "#card=roots&r=<id>" 中的 "&r=" 不被旧正则识别，会回退到第一个词根，故不用。
+   * 样式 .eng-xlink：内联跨科链接统一口径（下划线 + 可辨色）。
+   * 只处理 window.ROOTS_DATA 中真实存在的词条 id，未知 id 原样输出，避免死链。
+   * 输入为已 esc 的 HTML（先转义再替换，避免把用户文本里的尖括号当标签）。 */
+  var ROOT_D = {};
+  try {
+    (window.ROOTS_DATA || []).forEach(function (r) { if (r && r.r) ROOT_D[r.r] = r.d; });
+  } catch (e) { /* 无词根数据时退化为纯文本 */ }
+  function linkifyRoots(escapedHtml) {
+    return String(escapedHtml).replace(/#r=([a-z]+)/g, function (m, id) {
+      if (!ROOT_D[id]) return m;
+      var label = String(ROOT_D[id]).split(" / ")[0];
+      return '<a class="eng-xlink" href="#r=' + id + '"' +
+        ' title="去“讲词根”看词条：' + esc(label) + '（' + esc(id) + ' 家族）">' +
+        esc(label) + "</a>";
+    });
+  }
   function $(sel, root) { return (root || document).querySelector(sel); }
   function el(tag, cls, html) {
     var d = document.createElement(tag);
@@ -140,6 +162,9 @@
     if (sb) head.appendChild(sb);
     box.appendChild(head);
     box.appendChild(el("div", "g-sent-zh", esc(sent.zh)));
+    /* R-E3（2026-10-15 自学审计整改）：“首现即定义”门禁——术语首次出现配脚注。
+     * 数据侧 sent.fn 为脚注文本（如 there be 的前置说明）。 */
+    if (sent.fn) box.appendChild(el("div", "g-sent-fn", "📌 " + esc(sent.fn)));
     if (sent.tagged && sent.tagged.length) {
       var chunks = el("div", "g-chunks");
       chunks.style.marginTop = "6px";
@@ -375,8 +400,8 @@
   /* ---------------- 汉语桥（第 8 条铁律） ---------------- */
   function widgetBridge(b) {
     var box = el("div", "g-bridge");
-    box.innerHTML = "🌉 汉语： " + esc(b.zh) + "<br>英语： " + esc(b.en) +
-      '<br><span class="unbridge">拆桥：' + esc(b.unbridge) + "</span>";
+    box.innerHTML = "🌉 汉语： " + linkifyRoots(esc(b.zh)) + "<br>英语： " + linkifyRoots(esc(b.en)) +
+      '<br><span class="unbridge">拆桥：' + linkifyRoots(esc(b.unbridge)) + "</span>";
     return box;
   }
 
@@ -1072,7 +1097,7 @@
       fb.innerHTML = (ok
         ? '<span class="ok">✓ 答对了</span> '
         : '<span class="bad">✗ 不对</span> ') + esc(msg) +
-        (showTip && q.tip ? '<br><span class="tip">💡 ' + esc(q.tip) + "</span>" : "");
+        (showTip && q.tip ? '<br><span class="tip">💡 ' + linkifyRoots(esc(q.tip)) + "</span>" : "");
       flash(box, ok);
     }
     if (q.type === "choice") {
@@ -1214,7 +1239,7 @@
     more.setAttribute("aria-hidden", "true");
     zoneWrap.appendChild(more);
     main.appendChild(zoneWrap);
-    var point = el("p", "g-point" + (page.pointScroll ? " scroll" : ""), "💡 " + esc(page.point || ""));
+    var point = el("p", "g-point" + (page.pointScroll ? " scroll" : ""), "💡 " + linkifyRoots(esc(page.point || "")));
     main.appendChild(point);
     appRoot.appendChild(main);
 

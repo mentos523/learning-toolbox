@@ -359,6 +359,8 @@ body[data-theme="dark"] #mathml-warn { background: #4a3a1a; color: #fde68a; }
 .ix-btn {
   border: 1px solid var(--m-line); background: var(--m-panel); color: var(--m-ink);
   border-radius: 999px; padding: 5px 16px; font-size: 0.9rem; cursor: pointer;
+  /* 蓝队 2026-10-15 自学审计 R-B6 闸门：触摸目标 ≥44px（全书 step-play 通用） */
+  min-height: 44px;
 }
 .ix-btn:hover:not(:disabled) { background: var(--m-accent-soft); }
 .ix-btn:disabled { opacity: 0.4; cursor: not-allowed; }

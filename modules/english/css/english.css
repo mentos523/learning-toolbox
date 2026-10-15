@@ -288,6 +288,15 @@ body {
 }
 .cine { animation: cine-in 0.45s cubic-bezier(0.22, 0.8, 0.3, 1); }
 
+/* 新手引导（R-E4 2026-10-15 自学审计整改）：拨盘操作可见提示 */
+.dial-guide {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--ink-soft, #555);
+  padding: 4px 8px 2px;
+  line-height: 1.4;
+}
+
 /* 双拨盘：一排并列，占据剩余高度 */
 .dials {
   flex: 1;

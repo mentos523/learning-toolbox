@@ -497,7 +497,78 @@
       hydrateFormulas(o, formulas);
       return o;
     }
-    if (b.type === "mathlink") return el("div", "phy-mathlink", esc(b.text));
+    /* R-P2（2026-10-15 自学审计整改）：mathlink 自动转跨科深链。
+     * 数学目标用数学模块既有 hash 格式 #p=<pageId>（modules/math/js/math.js
+     * L411 原生支持，不自创格式）；物理内部课号（如 p12.1.3）转本模块 #课号。
+     * token 按长度降序匹配，避免 "代数 8.3" 误吞 "代数 8.3.2"；
+     * 无匹配的文本保持纯文本（不造死链）。 */
+    var XLINK_MATH = {
+      "代数 8.3.2": "ch08-u3-l2-p1", "代数 8.3": "ch08-u3-l1-p1",
+      "代数 8.1": "ch08-u1-l1-p1", "代数 8.2": "ch08-u2-l1-p1",
+      "代数 6.1": "ch06-u1-l1-p1", "代数 6.2": "ch06-u2-l1-p1",
+      "代数 7.1": "ch07-u1-l1-p1", "代数 7.2": "ch07-u2-l1-p1",
+      "代数 11.1": "ch11-u1-l1-p1", "代数 12.1": "ch12-u1-l1-p1",
+      "代数 ch00": "ch00-u1-l1-p1", "代数 ch01": "ch01-u1-l1-p1",
+      "代数 ch02": "ch02-u1-l1-p1", "代数 ch03": "ch03-u1-l1-p1",
+      "代数 ch05": "ch05-u1-l1-p1", "代数 ch10": "ch10-u0-l1-p1",
+      "几何 g01–g04": "g01-u1-l1-p1",
+      "几何 g01": "g01-u1-l1-p1", "几何 g02": "g02-u1-l1-p1",
+      "几何 g06": "g06-u1-l1-p1", "几何 g07": "g07-u1-l1-p1",
+      "几何 g10": "g10-u1-l1-p1", "几何 g13": "g13-u1-l0-p1"
+    };
+    /* 组合 token（p17.3.1-p2 "代数 6.2/7.2"）：拆成两个锚点，"/" 留原文 */
+    var XLINK_COMBO = {
+      "代数 6.2/7.2": [
+        ["代数 6.2", "../math/index.html#p=ch06-u2-l1-p1"],
+        ["7.2", "../math/index.html#p=ch07-u2-l1-p1"]
+      ]
+    };
+    var XLINK_PHY = { "p12.1.3": 1, "p14.1.3": 1 }; /* 本模块课号 → #课号 */
+    function xlinkHref(token) {
+      if (XLINK_PHY[token]) return "#" + token;
+      var pid = XLINK_MATH[token];
+      return pid ? "../math/index.html#p=" + pid : null;
+    }
+    function renderMathlink(b) {
+      var div = el("div", "phy-mathlink", null);
+      var segs = [{ t: String(b.text || ""), link: null }];
+      var tokens = Object.keys(XLINK_COMBO).concat(Object.keys(XLINK_MATH), Object.keys(XLINK_PHY))
+        .sort(function (a, c) { return c.length - a.length; });
+      tokens.forEach(function (tok) {
+        var combo = XLINK_COMBO[tok];
+        var next = [];
+        segs.forEach(function (s) {
+          if (s.link || s.t.indexOf(tok) < 0) { next.push(s); return; }
+          var parts = s.t.split(tok);
+          for (var i = 0; i < parts.length; i++) {
+            if (i > 0) {
+              if (combo) {
+                next.push({ t: combo[0][0], link: combo[0][1] });
+                next.push({ t: "/", link: null });
+                next.push({ t: combo[1][0], link: combo[1][1] });
+              } else {
+                next.push({ t: tok, link: xlinkHref(tok) });
+              }
+            }
+            if (parts[i]) next.push({ t: parts[i], link: null });
+          }
+        });
+        segs = next;
+      });
+      segs.forEach(function (s) {
+        if (s.link) {
+          var a = document.createElement("a");
+          a.className = "phy-xlink";
+          a.href = s.link;
+          a.textContent = s.t;
+          div.appendChild(a);
+        } else {
+          div.appendChild(document.createTextNode(s.t));
+        }
+      });
+      return div;
+    }
+    if (b.type === "mathlink") return renderMathlink(b);
     if (b.type === "slogan") return el("div", "phy-slogan", esc(b.text));
     if (b.type === "widget") {
       return renderWidget((b.widget || {}).type, (b.widget || {}).params);
@@ -539,7 +610,9 @@
           } else {
             wrong++;
             b.classList.add("judged-bad");
-            say(false, "再想想。", wrong >= 2);
+            /* R-P5（2026-10-15 自学审计整改）：首次答错即给诊断 tip，
+             * 不许只"再想想"（零基础学生第一次错时就需要方向） */
+            say(false, "再想想。", true);
           }
         });
         opts.appendChild(b);
@@ -563,7 +636,8 @@
         var candidates = [q.answer].concat(q.accept || []);
         var ok = candidates.some(function (a) { return norm(a) === v; });
         if (ok) say(true, "单位正确。", true);
-        else { wrong++; say(false, "再想想。", wrong >= 2); }
+        /* R-P5（2026-10-15 自学审计整改）：首次答错即给诊断 tip，见上 */
+        else { wrong++; say(false, "再想想。", true); }
       });
       if (input.addEventListener) {
         input.addEventListener("keydown", function (e) {

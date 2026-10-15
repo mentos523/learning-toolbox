@@ -389,6 +389,13 @@ window.ENG_CH["gr15"] = {
                   wrongZh: "（✗ 错句）",
                   right: "If it rains, we will stay at home.",
                   why: "条件从句同样主将从现——从句里 will 被没收了。"
+                },
+                {
+                  type: "contrast",
+                  wrong: "Whether it rains, we will go.",
+                  wrongZh: "（✗ 错句）",
+                  right: "If it rains, we will go.",
+                  why: "“是否”→ if：条件状语从句不用 whether——whether 只管“是否”的宾语从句（如 I wonder whether…），条件句的“如果”只能是 if。"
                 }
               ],
               point: "这就是条件状语从句：unless = if not（后不加 not）；主将从现同样成立。",

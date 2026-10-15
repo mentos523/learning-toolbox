@@ -202,7 +202,14 @@ window.ENG_CH["gr03"] = {
               id: "gr03.1.1-p4",
               kind: "quiz",
               title: "练一练：谁装修谁？",
-              point: "自查：修饰名词用形容词，修饰动词用副词；very 不碰动词。"
+              point: "自查：修饰名词用形容词，修饰动词用副词；very 不碰动词。",
+              questions: [
+                { type: "choice", stem: "“an interesting book”中 interesting 是什么成分？", options: ["定语（站在名词前）", "表语", "状语"], answer: 0, tip: "形容词装修名词站前面：an interesting book——定语前置。" },
+                { type: "choice", stem: "“The book is interesting.”中 interesting 是什么成分？", options: ["定语", "表语（站在系动词后）", "宾语"], answer: 1, tip: "说明主语“怎么样”，站在 is 后面——表语跟系动词。" },
+                { type: "choice", stem: "下面哪句对？", options: ["He runs quick.", "He runs quickly.", "He quick runs."], answer: 1, tip: "“跑得快”装修的是“跑”（动词）——形容词不装修动词，要用副词 quickly。" },
+                { type: "choice", stem: "下面哪句对？", options: ["She very likes apples.", "She likes apples very much.", "Very she likes apples."], answer: 1, tip: "very 修饰形容词/副词，不修饰动词——“很喜欢”用 like…very much。" },
+                { type: "fill", stemBefore: "something", stemAfter: "（“错的”；不定代词后的形容词）", answer: "wrong", accept: ["wrong"], tip: "特例单记：something/anything 后的形容词后置——something wrong。" }
+              ]
             }
         ]
       },
@@ -352,7 +359,14 @@ window.ENG_CH["gr03"] = {
               id: "gr03.1.2-p4",
               kind: "quiz",
               title: "练一练：-ly 穿对了吗？",
-              point: "自查：修饰动词/形容词用副词；hardly=几乎不；friendly 是形容词。"
+              point: "自查：修饰动词/形容词用副词；hardly=几乎不；friendly 是形容词。",
+              questions: [
+                { type: "choice", stem: "“happy”的副词形式是？", options: ["happyly", "happily", "happys"], answer: 1, tip: "以 y 结尾：去 y 变 i 加 -ly——happily。" },
+                { type: "choice", stem: "下面哪句对？", options: ["He runs fastly.", "He runs fast.", "He fast runs."], answer: 1, tip: "fast 本身就是副词，拒绝穿 -ly 制服——He runs fast。" },
+                { type: "choice", stem: "“hardly”的意思是？", options: ["努力地", "几乎不", "非常"], answer: 1, tip: "hardly 是卧底：看起来像“努力地”，其实是“几乎不”。" },
+                { type: "choice", stem: "“good”的副词形式是？", options: ["goodly", "well", "gooder"], answer: 1, tip: "特例单记：good → well，没有 goodly。" },
+                { type: "choice", stem: "“friendly”是？", options: ["副词", "形容词", "动词"], answer: 1, tip: "卧底警报：friendly 长得像副词，其实是形容词（a friendly teacher）。" }
+              ]
             }
         ]
       },
@@ -510,7 +524,14 @@ window.ENG_CH["gr03"] = {
               id: "gr03.1.3-p4",
               kind: "quiz",
               title: "练一练：'更'和'最'",
-              point: "自查：than 配比较级；最高级配 the；more 和 -er 只留一个。"
+              point: "自查：than 配比较级；最高级配 the；more 和 -er 只留一个。",
+              questions: [
+                { type: "choice", stem: "“tall”的比较级是？", options: ["more tall", "taller", "tallest"], answer: 1, tip: "单音节加 -er：tall → taller（更）→ tallest（最）。" },
+                { type: "choice", stem: "“interesting”的比较级是？", options: ["interestinger", "more interesting", "most interesting"], answer: 1, tip: "多音节用 more：more interesting（更有趣）。" },
+                { type: "choice", stem: "“good”的最高级是？", options: ["goodest", "better", "best"], answer: 2, tip: "不规则单记：good → better → best。" },
+                { type: "choice", stem: "下面哪句对？", options: ["more taller", "much taller", "most taller"], answer: 1, tip: "双重比较禁止：more taller 是两个“更”——用 much 修饰（高得多）。" },
+                { type: "fill", stemBefore: "He is", stemAfter: "tallest in our class.（最高级前加）", answer: "the", accept: ["the"], tip: "最高级前面多用 the：the tallest（最高的）。" }
+              ]
             }
         ]
       }
@@ -662,7 +683,14 @@ window.ENG_CH["gr03"] = {
               id: "gr03.2.1-p4",
               kind: "quiz",
               title: "练一练：哪种比？",
-              point: "自查：一样→as…as；更→than；越…越…→the…the…；倍数→twice as…as。"
+              point: "自查：一样→as…as；更→than；越…越…→the…the…；倍数→twice as…as。",
+              questions: [
+                { type: "choice", stem: "下面哪句对？", options: ["He is taller his brother.", "He is taller than his brother.", "He is as taller as his brother."], answer: 1, tip: "“比…更”不能漏 than——than 是“比”字，不能省；as…as 中间用原级。" },
+                { type: "choice", stem: "“as…as（一样…）”中间用什么形式？", options: ["比较级", "原级", "最高级"], answer: 1, tip: "as tall as：中间是原级 tall——“一样”不用比较级。" },
+                { type: "choice", stem: "“The more you read, the more you know.”是什么句型？", options: ["越…越…", "一样…", "两倍…"], answer: 0, tip: "the + 比较级…，the + 比较级… = 越…越…。" },
+                { type: "fill", stemBefore: "This box is twice", stemAfter: "big as that one.（“两倍大”）", answer: "as", accept: ["as"], tip: "倍数 + as…as：twice as big as（两倍大）。" },
+                { type: "choice", stem: "下面哪句对？", options: ["She is as taller as her mother.", "She is as tall as her mother.", "She is so tall than her mother."], answer: 1, tip: "as…as 中间原级：as tall as（和…一样高）。" }
+              ]
             }
         ]
       },
@@ -703,7 +731,14 @@ window.ENG_CH["gr03"] = {
               id: "gr03.2.2-p2",
               kind: "quiz",
               title: "本章综合练",
-              point: "本章自查三问：谁装修谁？几个'更'？the 加了吗？"
+              point: "本章自查三问：谁装修谁？几个'更'？the 加了吗？",
+              questions: [
+                { type: "choice", stem: "下面哪句对？", options: ["She sings beautiful.", "She sings beautifully.", "She beautiful sings."], answer: 1, tip: "sings 是动词，修饰它用副词 beautifully——形容词装修错了地方。" },
+                { type: "choice", stem: "最高级前面通常加？", options: ["a", "the", "不加"], answer: 1, tip: "the tallest：最高级前面多用 the。" },
+                { type: "choice", stem: "“更”只能有几个？（防双重比较）", options: ["两个", "一个", "三个"], answer: 1, tip: "比较级一个“更”：more taller 是双重比较，错。" },
+                { type: "fill", stemBefore: "He is", stemAfter: "tall as his father.（“一样高”）", answer: "as", accept: ["as"], tip: "as…as 中间原级：as tall as（一样高）。" },
+                { type: "choice", stem: "修饰动词应该用？", options: ["形容词", "副词", "名词"], answer: 1, tip: "形容词装修名词，不装修动词——修饰动词用副词。" }
+              ]
             }
         ]
       }

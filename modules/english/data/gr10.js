@@ -601,7 +601,7 @@ window.ENG_CH["gr10"] = {
                 answer: 1,
                 note: "先猜，再看上面的色块验证——猜错也没关系，只记录不判分。"
               },
-              point: "The work done 自带主语（the work），不借主句的 we——这就是“ 独立 ”。"
+              point: "【拓展：初中可跳过】The work done 自带主语（the work），不借主句的 we——这就是“ 独立 ”。"
             },
             {
               id: "gr10.2.1-p2",

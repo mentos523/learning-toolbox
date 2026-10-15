@@ -576,9 +576,34 @@ window.ENG_CH["gr08"] = {
             },
             {
               id: "gr08.1.4-p2",
+              kind: "interact",
+              title: "标出：had better 后面跟 to 吗？",
+              exploreTip: "标一标：had better 后面站的是谁？to 在哪？",
+              widgets: [
+                {
+                  type: "tagging",
+                  params: {
+                    sentence: [
+                      { w: "You", role: "subject", label: "主语" },
+                      { w: "had better", role: "modal", label: "半情态动词 had better" },
+                      { w: "hurry up", role: "base", label: "动词原形" }
+                    ],
+                    slots: [
+                      { role: "subject", label: "主语" },
+                      { role: "modal", label: "半情态动词 had better" },
+                      { role: "base", label: "动词原形" }
+                    ],
+                    hint: "had better 后面直接跟原形——to 不许进，这是它的身份证。"
+                  }
+                }
+              ],
+              point: "这就是 should / had better / need：had better 后无 to；need 看 to 辨面孔。"
+            },
+            {
+              id: "gr08.1.4-p3",
               kind: "explain",
               title: "should / had better / need：应该、最好、需要",
-              lead: "还记得吗？上一页 had better 后面直接跟原形，to 不许进。",
+              lead: "还记得吗？上一页 had better 后面直接跟了原形，to 没让进。",
               blocks: [
                 {
                   type: "examples",
@@ -606,6 +631,18 @@ window.ENG_CH["gr08"] = {
               ],
               point: "这就是 should / had better / need：应该 / 最好 / 需要；had better 后无 to。自查：to 多穿了吗？need 是哪副面孔？",
               pointScroll: true
+            },
+            {
+              id: "gr08.1.4-p4",
+              kind: "quiz",
+              title: "练一练：to 该进吗？need 是哪副面孔？",
+              questions: [
+                { type: "choice", stem: "下面哪句对？", options: ["You had better to see a doctor.", "You had better see a doctor.", "You had better seeing a doctor."], answer: 1, tip: "had better 后面不加 to——“最好”是裸奔的。" },
+                { type: "choice", stem: "“needn't do”中 need 是？", options: ["实义动词", "半情态动词（后面跟原形）", "名词"], answer: 1, tip: "needn't do：need 是半情态，后面直接跟原形。" },
+                { type: "fill", stemBefore: "She", stemAfter: "to study hard.（实义动词 need，主语三单）", answer: "needs", accept: ["needs"], tip: "实义动词 need：三单加 -s，后面 to do——She needs to study。" },
+                { type: "choice", stem: "should 表什么语气？", options: ["必须", "应该（建议）", "禁止"], answer: 1, tip: "should = 应该（建议）；had better = 最好（语气更强）。" }
+              ],
+              point: "自查：to 多穿了吗？need 是哪副面孔？"
             }
           ]
         },

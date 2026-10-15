@@ -483,9 +483,39 @@ window.ENG_CH["gr06"] = {
             },
             {
               id: "gr06.1.3-p2",
+              kind: "interact",
+              title: "标出 will be doing 三个零件",
+              exploreTip: "标出三个零件：will、be、doing 各站哪？",
+              widgets: [
+                {
+                  type: "tagging",
+                  params: {
+                    sentence: [
+                      { w: "I", role: "subject", label: "主语" },
+                      { w: "will", role: "modal", label: "情态动词 will" },
+                      { w: "be", role: "aux", label: "助动词 be" },
+                      { w: "waiting", role: "pred", label: "谓语 doing" },
+                      { w: "for you", role: "adverb", label: "状语" },
+                      { w: "at eight", role: "adverb", label: "状语" }
+                    ],
+                    slots: [
+                      { role: "subject", label: "主语" },
+                      { role: "modal", label: "情态动词 will" },
+                      { role: "aux", label: "助动词 be" },
+                      { role: "pred", label: "谓语 doing" },
+                      { role: "adverb", label: "状语" }
+                    ],
+                    hint: "will be + doing：三个零件缺一不可——will（将来）+ be + doing（正在）。"
+                  }
+                }
+              ],
+              point: "这就是将来进行时：will be + doing；be 不随主语变，doing 不变。"
+            },
+            {
+              id: "gr06.1.3-p3",
               kind: "explain",
               title: "将来进行时：will be + doing（高中拓展）",
-              lead: "还记得吗？上一页 will be waiting 把“正在等”搬到了今晚八点。",
+              lead: "还记得吗？上一页 will、be、doing 三个零件各就各位——三个缺一不可。",
               blocks: [
                 {
                   type: "examples",
@@ -513,6 +543,18 @@ window.ENG_CH["gr06"] = {
               ],
               point: "这就是将来进行时：will be + doing；高考低频，认识即可。自查：be 在吗？doing 在吗？",
               pointScroll: true
+            },
+            {
+              id: "gr06.1.3-p4",
+              kind: "quiz",
+              title: "练一练：will be + doing 配对了吗？",
+              questions: [
+                { type: "choice", stem: "将来进行时的构成是？", options: ["will + doing", "will be + doing", "will + be"], answer: 1, tip: "will be + doing：三个零件 will / be / doing。" },
+                { type: "fill", stemBefore: "I", stemAfter: "waiting for you at eight.（将来进行）", answer: "will be", accept: ["will be"], tip: "将来进行 = will be + doing——“八点那会儿正在等”。" },
+                { type: "choice", stem: "“Will you be using the computer tonight?”的语气是？", options: ["命令", "礼貌询问对方安排", "否定"], answer: 1, tip: "Will you be doing…? 比 Will you do…? 更委婉。" },
+                { type: "choice", stem: "下面哪句对？", options: ["I will waiting for you.", "I will be waiting for you.", "I will be wait for you."], answer: 1, tip: "will 后面漏了 be 不行；doing 不能写成原形。" }
+              ],
+              point: "自查：be 在吗？doing 在吗？（高中拓展，认识即可）"
             }
           ]
         },
@@ -543,9 +585,36 @@ window.ENG_CH["gr06"] = {
             },
             {
               id: "gr06.1.4-p2",
+              kind: "interact",
+              title: "标出“报时”的 be",
+              exploreTip: "标一标：be 报告的是哪个时间？doing 变了吗？",
+              widgets: [
+                {
+                  type: "tagging",
+                  params: {
+                    sentence: [
+                      { w: "I", role: "subject", label: "主语" },
+                      { w: "was", role: "aux", label: "助动词 be（报时：过去）" },
+                      { w: "reading", role: "pred", label: "谓语 doing（不变）" },
+                      { w: "at nine", role: "adverb", label: "时间状语" }
+                    ],
+                    slots: [
+                      { role: "subject", label: "主语" },
+                      { role: "aux", label: "助动词 be（报时）" },
+                      { role: "pred", label: "谓语 doing（不变）" },
+                      { role: "adverb", label: "时间状语" }
+                    ],
+                    hint: "变的是 be（am → was），没变的是 doing——be 报时，doing 不变。"
+                  }
+                }
+              ],
+              point: "这就是进行时时间轴：be 报时（am / was / will be），doing 恒定。"
+            },
+            {
+              id: "gr06.1.4-p3",
               kind: "explain",
               title: "进行时时间轴：be 报时，doing 不变",
-              lead: "还记得吗？上一页 reading 没变，变的是前面的 be：am → was → will be。",
+              lead: "还记得吗？上一页 was 报告了“过去”，reading 没变——be 报时，doing 不变。",
               blocks: [
                 {
                   type: "examples",
@@ -573,6 +642,18 @@ window.ENG_CH["gr06"] = {
               ],
               point: "这就是进行时时间轴：be 报时，doing 不变；状态动词不进进行时。自查：be 的时间对吗？状态动词混进来了吗？",
               pointScroll: true
+            },
+            {
+              id: "gr06.1.4-p4",
+              kind: "quiz",
+              title: "练一练：be 报的时间对吗？",
+              questions: [
+                { type: "choice", stem: "三进行时里负责“报时”的是？", options: ["doing", "be（am / was / will be）", "时间词"], answer: 1, tip: "be 报时，doing 不变：am doing（现在）/ was doing（过去）。" },
+                { type: "choice", stem: "下面哪句对？", options: ["I am knowing the answer.", "I know the answer.", "I am know the answer."], answer: 1, tip: "know 是状态动词，没有“正在知道”——直接用一般现在时。" },
+                { type: "fill", stemBefore: "I", stemAfter: "reading at nine.（过去进行：“九点那会儿正在看”）", answer: "was", accept: ["was"], tip: "过去的“正在”：was / were + doing。" },
+                { type: "choice", stem: "“I will be reading at ten tonight.”讲的是？", options: ["现在正在", "过去正在", "将来某时正在"], answer: 2, tip: "will be + doing：把“正在”搬到将来。" }
+              ],
+              point: "自查：be 的时间对吗？状态动词混进来了吗？"
             }
           ]
         }
@@ -1081,7 +1162,7 @@ window.ENG_CH["gr06"] = {
                 },
                 {
                   type: "idcard",
-                  rule: "8 时态总表：一般现在 / 过去 / 将来 × 进行现在 / 过去 / 将来 × 完成现在 / 过去。",
+                  rule: "8 时态总表：一般现在 / 过去 / 将来 × 进行现在 / 过去 × 完成现在 / 过去 × 过去将来。",
                   condition: "做题三问：时间词？（now / yesterday / tomorrow）影响现在吗？（→ 完成时）正在做吗？（→ 进行时）"
                 },
                 {
@@ -1098,7 +1179,7 @@ window.ENG_CH["gr06"] = {
                   why: "yesterday 和完成时八字不合——时间词和时态要对上。"
                 }
               ],
-              point: "8 时态 = 3 一般 + 3 进行 + 2 完成；三问定位，百发百中。",
+              point: "8 时态 = 3 一般 + 2 进行 + 2 完成 + 过去将来；三问定位，百发百中。",
               pointScroll: true
             },
             {
@@ -1118,7 +1199,7 @@ window.ENG_CH["gr06"] = {
                       { id: "gr06.2.4-q5", sentence: [ { w: "I", role: "subject" }, { w: "was", role: "verb" }, { w: "sleeping", role: "verb" }, { w: "at ten", role: "adverb" } ] },
                       { id: "gr06.2.4-q6", sentence: [ { w: "I", role: "subject" }, { w: "have", role: "verb" }, { w: "lost", role: "verb" }, { w: "my key", role: "object" } ] },
                       { id: "gr06.2.4-q7", sentence: [ { w: "The train", role: "subject" }, { w: "had", role: "verb" }, { w: "left", role: "verb" } ] },
-                      { id: "gr06.2.4-q8", sentence: [ { w: "They", role: "subject" }, { w: "are", role: "verb" }, { w: "having", role: "verb" }, { w: "lunch", role: "object" } ] }
+                      { id: "gr06.2.4-q8", sentence: [ { w: "He", role: "subject" }, { w: "said", role: "verb" }, { w: "he", role: "subject" }, { w: "would", role: "verb" }, { w: "come", role: "verb" } ] }
                     ],
                     slots: [
                       { role: "subject", label: "主语" },

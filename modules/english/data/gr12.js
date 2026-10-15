@@ -271,9 +271,48 @@ window.ENG_CH["gr12"] = {
             },
             {
               id: "gr12.1.2-p2",
+              kind: "interact",
+              title: "标出：What 管名词，How 管形容词",
+              exploreTip: "标一标：What 后面的 a 能省吗？How 后面有 a 吗？",
+              widgets: [
+                {
+                  type: "tagging",
+                  params: {
+                    sentence: [
+                      { w: "What", role: "excl", label: "感叹词 What" },
+                      { w: "a nice day", role: "subject", label: "名词短语" }
+                    ],
+                    slots: [
+                      { role: "excl", label: "感叹词 What" },
+                      { role: "subject", label: "名词短语" }
+                    ],
+                    hint: "What + a + 形容词 + 名词——a 不能省，这是感叹句的身份证。"
+                  }
+                },
+                {
+                  type: "tagging",
+                  params: {
+                    sentence: [
+                      { w: "Don't", role: "aux", label: "助动词 Don't" },
+                      { w: "be", role: "base", label: "动词原形" },
+                      { w: "late", role: "complem", label: "表语" }
+                    ],
+                    slots: [
+                      { role: "aux", label: "助动词 Don't" },
+                      { role: "base", label: "动词原形" },
+                      { role: "complem", label: "表语" }
+                    ],
+                    hint: "祈使句动词打头：Don't + 原形表禁止。"
+                  }
+                }
+              ],
+              point: "这就是祈使与感叹：Don't / Let's 打头；What 管名词（加 a），How 管形容词。"
+            },
+            {
+              id: "gr12.1.2-p3",
               kind: "explain",
               title: "祈使句与感叹句：Don't / Let's / What / How",
-              lead: "还记得吗？上一页 Don't 开头表禁止，Let's 表建议，What a nice day 里 a 不能省。",
+              lead: "还记得吗？上一页 What 后面的 a 保住了，Don't 打头表禁止。",
               blocks: [
                 {
                   type: "examples",
@@ -301,6 +340,18 @@ window.ENG_CH["gr12"] = {
               ],
               point: "这就是祈使与感叹：Don't / Let's 打头；What 管名词（加 a），How 管形容词。自查：a 在吗？How 后面没加 a 吧？",
               pointScroll: true
+            },
+            {
+              id: "gr12.1.2-p4",
+              kind: "quiz",
+              title: "练一练：a 在吗？How 后面没加 a 吧？",
+              questions: [
+                { type: "choice", stem: "下面哪句对？", options: ["What nice day!", "What a nice day!", "How a nice day!"], answer: 1, tip: "What + a/an + 形容词 + 名词：a 不能省。" },
+                { type: "choice", stem: "“How nice!”中 How 后面跟什么？", options: ["形容词（不加 a）", "名词", "动词"], answer: 0, tip: "How + 形容词！How 后面没 a——How nice!" },
+                { type: "fill", stemBefore: "", stemAfter: "be late!（“别迟到”）", answer: "Don't", accept: ["Don't", "dont", "do not", "Do not"], tip: "祈使句表禁止：Don't + 动词原形——Don't be late!" },
+                { type: "choice", stem: "“Let's play soccer!”表什么？", options: ["命令", "建议", "疑问"], answer: 1, tip: "Let's + 原形：提建议——“咱们踢足球吧！”" }
+              ],
+              point: "自查：a 在吗？How 后面没加 a 吧？"
             }
           ]
         },

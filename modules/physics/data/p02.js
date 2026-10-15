@@ -33,7 +33,7 @@ window.PHY_CH["p02"] = {
                   params: {
                     aperture: { min: 1, max: 6, step: 0.5, init: 2 },
                     objDist: { min: 12, max: 38, step: 1, init: 24 },
-                    badge: { invariant: "没变的是：像距（光屏位置）" }
+                    badge: { invariant: "没变的是：光屏位置（变的是孔径→亮度、物距→像大小）" }
                   }
                 }
               ],
@@ -89,7 +89,7 @@ window.PHY_CH["p02"] = {
                     mirrorX: 50,
                     source: { x: 25, y: 30 },
                     showImage: false,
-                    badge: { invariant: "没变的是：镜面的位置" }
+                    badge: { invariant: "没变的是：镜面的位置（变的是入射角→反射角跟着变）" }
                   }
                 }
               ],
@@ -145,7 +145,7 @@ window.PHY_CH["p02"] = {
                     mirrorX: 50,
                     source: { x: 30, y: 55 },
                     showImage: true,
-                    badge: { invariant: "没变的是：像的大小" }
+                    badge: { invariant: "没变的是：像的大小（变的是物距→像距跟着变）" }
                   }
                 }
               ],
@@ -159,6 +159,7 @@ window.PHY_CH["p02"] = {
               blocks: [
                 { type: "lead", text: "拿一张纸，沿镜面位置对折——镜前的蜡烛和镜后的像，严丝合缝地重合了。" },
                 { type: "text", html: "这就是平面镜成像的直觉版：<strong>像和物关于镜面对称</strong>——沿镜面对折，两边完全重合。先记住这个“重合”的感觉，严格的说法以后再认。" },
+                { type: "mathlink", text: "数学呼应：几何 g10 对称（回填）——学完这一章再回来认旧友：平面镜成像，就是轴对称的物理版。" },
                 {
                   type: "widget",
                   widget: {
@@ -215,7 +216,7 @@ window.PHY_CH["p02"] = {
                     mode: "refraction",
                     angle: { min: 0, max: 80, step: 1, init: 30 },
                     n1: 1, n2: 1.33,
-                    badge: { invariant: "没变的是：两种介质" }
+                    badge: { invariant: "没变的是：两种介质（变的是入射角→折射光线偏折程度）" }
                   }
                 }
               ],
@@ -277,7 +278,7 @@ window.PHY_CH["p02"] = {
                     source: { x: 22, y: 62 },
                     rays: ["parallel", "center"],
                     showImage: true,
-                    badge: { invariant: "没变的是：焦距" }
+                    badge: { invariant: "没变的是：焦距（变的是光源位置→折射光线的走向）" }
                   }
                 }
               ],
@@ -335,7 +336,7 @@ window.PHY_CH["p02"] = {
                     source: { x: 15, y: 62 },
                     rays: ["parallel", "center", "focus"],
                     showImage: true,
-                    badge: { invariant: "没变的是：焦距" }
+                    badge: { invariant: "没变的是：焦距（变的是物距→像由小变大、由倒变正）" }
                   }
                 }
               ],
@@ -394,7 +395,7 @@ window.PHY_CH["p02"] = {
                     source: { x: 20, y: 62 },
                     rays: ["parallel", "center"],
                     showImage: true,
-                    badge: { invariant: "没变的是：物距（看的东西没动）" }
+                    badge: { invariant: "没变的是：物距（看的东西没动）（变的是焦距→像落在视网膜前还是后）" }
                   }
                 }
               ],

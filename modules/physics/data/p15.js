@@ -46,7 +46,7 @@ window.PHY_CH["p15"] = {
                     charges: [ { x: 30, y: 50, q: 1 } ],
                     lineCount: 24,
                     probeDrag: true,
-                    badge: { invariant: "没变的是：总电荷量（电荷守恒）" }
+                    badge: { invariant: "没变的是：总电荷量（电荷守恒）（变的是负电荷放哪→场线的弯法）" }
                   }
                 }
               ],
@@ -109,7 +109,7 @@ window.PHY_CH["p15"] = {
                     source: { kind: "function", expr: "F = 900/(t*t)", xLabel: "r", yLabel: "F" },
                     xRange: [1, 6],
                     steps: ["slope"],
-                    badge: { invariant: "没变的是：k、q₁、q₂" }
+                    badge: { invariant: "没变的是：k、q₁、q₂（变的是距离 r→库仑力 F）" }
                   }
                 }
               ],
@@ -182,7 +182,7 @@ window.PHY_CH["p15"] = {
                     charges: [ { x: 50, y: 50, q: 1 } ],
                     lineCount: 32,
                     probeDrag: true,
-                    badge: { invariant: "没变的是：场源电荷（场是它的'地盘'）" }
+                    badge: { invariant: "没变的是：场源电荷（场是它的'地盘'）（变的是探测位置→场强箭头与'强/中/弱'）" }
                   }
                 }
               ],
@@ -194,7 +194,7 @@ window.PHY_CH["p15"] = {
               title: "场强：场的'脾气'",
               blocks: [
                 { type: "lead", text: "地图画好，给每点“定级”：场多强、朝哪指？" },
-                { type: "text", html: '电场强度（矢量）：<span class="phy-f" data-f="E"></span>——某点受力 F 跟电荷量 q 的比值；方向：正电荷受力方向。' },
+                { type: "text", html: '电场强度（矢量）：试探电荷在某点受力 F 跟电荷量 q 的比值<span class="phy-f" data-f="E"></span>；方向：正电荷受力方向。' },
                 {
                   type: "formula-id",
                   formula: {
@@ -209,7 +209,7 @@ window.PHY_CH["p15"] = {
                 { type: "text", html: "红线「比值定义法四辨析」第三落点：E 与 F、q 无关——F 翻倍 q 跟着翻倍，E 不动；场是物质，试探电荷只是来“量”它的。" },
                 { type: "trap", text: "⚠️ 别搞混：“E 与 F 成正比”——错！同一个坑第三次；“电场线真实存在”——错！" },
                 { type: "oldfriend", text: "认旧友：p04.1.2 密度、p08.2.2 电阻——'等号不代表因果'第三次。" },
-                { type: "mathlink", text: "数学呼应：p12.1.3 矢量叠加——场强合成用平行四边形。" },
+                { type: "mathlink", text: "物理呼应：p12.1.3 矢量叠加——场强合成用平行四边形。" },
                 { type: "slogan", text: "场是物质，与试探电荷无关。" }
               ],
               point: "E 是场的脾气，与试探电荷无关。"
@@ -259,7 +259,7 @@ window.PHY_CH["p15"] = {
                     source: { kind: "function", expr: "V = 100 - 20*t", xLabel: "x（沿场强方向）", yLabel: "φ/V" },
                     xRange: [0, 5],
                     steps: ["slope"],
-                    badge: { invariant: "没变的是：匀强电场的 E" }
+                    badge: { invariant: "没变的是：匀强电场的 E（变的是位置→电势的均匀下降）" }
                   }
                 }
               ],
@@ -285,7 +285,7 @@ window.PHY_CH["p15"] = {
                 },
                 { type: "text", html: "零电势是人为规定的'海平面'：电势为零处，场强不一定为零——海平面处也可以有陡坡。" },
                 { type: "trap", text: "⚠️ 别搞混：电势为零处场强为零——错！零电势是人为规定；U=Ed 无条件用——错！限匀强电场。" },
-                { type: "mathlink", text: "数学呼应：p14.1.3 势能类比（回填）——Ep=qφ ↔ Ep=mgh，电势就是电场的'高度'。" },
+                { type: "mathlink", text: "物理呼应：p14.1.3 势能类比（回填）——Ep=qφ ↔ Ep=mgh，电势就是电场的'高度'。" },
                 { type: "slogan", text: "电势是高度，电势差是高度差。" }
               ],
               point: "U=Ed 限匀强电场。"
@@ -329,7 +329,7 @@ window.PHY_CH["p15"] = {
                   params: {
                     source: { kind: "points", points: [[0, 0], [1, 2], [2, 4], [3, 6]], xLabel: "U/V", yLabel: "Q/C" },
                     steps: ["slope"],
-                    badge: { invariant: "没变的是：电容 C（器件的脾气）" }
+                    badge: { invariant: "没变的是：电容 C（器件的脾气）（变的是电压 U→电荷量 Q）" }
                   }
                 }
               ],
@@ -404,7 +404,7 @@ window.PHY_CH["p15"] = {
                     source: { kind: "function", expr: "y = 2*t", xLabel: "U₂/V", yLabel: "y/mm" },
                     xRange: [0, 5],
                     steps: ["slope"],
-                    badge: { invariant: "没变的是：q、m、v₀、l、d（斜率的'配方'）" }
+                    badge: { invariant: "没变的是：q、m、v₀、l、d（斜率的'配方'）（变的是偏转电压 U₂→亮斑偏转 y）" }
                   }
                 }
               ],

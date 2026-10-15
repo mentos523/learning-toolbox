@@ -41,7 +41,7 @@ window.PHY_CH["p10"] = {
                     mode: "bfield",
                     magnet: { x: 50, y: 50, angle: 0 },
                     needleCount: 8, showFieldLines: true, ironFilings: true, probeDrag: true,
-                    badge: { invariant: "没变的是：磁铁的磁极" }
+                    badge: { invariant: "没变的是：磁铁的磁极（变的是磁铁朝向→小磁针 N 极的指向）" }
                   }
                 }
               ],
@@ -81,7 +81,7 @@ window.PHY_CH["p10"] = {
                     mode: "bfield",
                     magnet: { x: 50, y: 50, angle: 0 },
                     needleCount: 8, showFieldLines: true, ironFilings: false, probeDrag: true,
-                    badge: { invariant: "没变的是：磁感线的形状（螺线管版）" }
+                    badge: { invariant: "没变的是：磁感线的形状（螺线管版）（变的是电流方向→磁感线绕向反转）" }
                   }
                 },
                 {
@@ -138,7 +138,7 @@ window.PHY_CH["p10"] = {
                 {
                   type: "motor-commutator",
                   params: {
-                    badge: { invariant: "没变的是：磁铁、电源" }
+                    badge: { invariant: "没变的是：磁铁、电源（变的是换向器→电流方向每半圈切换）" }
                   }
                 }
               ],
@@ -191,13 +191,13 @@ window.PHY_CH["p10"] = {
               id: "p10.1.4-p1",
               kind: "interact",
               title: "磁铁不动，有电流吗？",
-              exploreTip: "先猜：磁铁插进线圈再拔出来——“动”的是什么？静止不动时，电流还在吗？再拖磁铁试试：看 Φ 条和电流方向。",
+              exploreTip: "先猜：磁铁插进线圈再拔出来——“动”的是什么？静止不动时，还会有电流吗？再拖磁铁试试：看 Φ 条（Φ 读作“斐”，表示穿过线圈的磁通量）和电流方向。",
               widgets: [
                 {
                   type: "em-induction",
                   params: {
                     pole: "N",
-                    badge: { invariant: "没变的是：线圈" }
+                    badge: { invariant: "没变的是：线圈匝数/面积（变的是磁通量）" }
                   }
                 }
               ],

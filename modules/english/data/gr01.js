@@ -25,6 +25,7 @@ window.ENG_CH["gr01"] = {
     "gr01.1.1-e2": { en: "She has two apples.", zh: "她有两个苹果。", reg: "通用",
       tagged: [ { w: "two apples", role: "object", label: "宾语·可数名词" } ] },
     "gr01.1.1-e3": { en: "There is some water in the glass.", zh: "杯子里有些水。", reg: "通用",
+      fn: "There be 表“有”，第 12 章细讲。",
       tagged: [ { w: "water", role: "subject", label: "主语·不可数名词" } ] },
     "gr01.1.1-e4": { en: "I have many books.", zh: "我有很多书。", reg: "通用",
       tagged: [ { w: "books", role: "object", label: "宾语·可数名词" } ] },
@@ -132,6 +133,7 @@ window.ENG_CH["gr01"] = {
                   en: "There is some water in the glass.",
                   zh: "杯子里有些水。",
                   reg: "通用",
+                  fn: "There be 表“有”，第 12 章细讲。",
                   tagged: [ { w: "water", role: "subject", label: "主语·不可数名词" } ]
                 }
               ],
@@ -244,7 +246,14 @@ window.ENG_CH["gr01"] = {
               id: "gr01.1.1-p4",
               kind: "quiz",
               title: "练一练：数数测试",
-              point: "自查：a/an + 单数可数；many + 可数复数；much/a little + 不可数。"
+              point: "自查：a/an + 单数可数；many + 可数复数；much/a little + 不可数。",
+              questions: [
+                { type: "choice", stem: "下面哪个是不可数名词？", options: ["apple", "water", "book"], answer: 1, tip: "水不能数“一个水”——water/milk/advice 都不可数。" },
+                { type: "choice", stem: "下面哪句对？", options: ["I want a water.", "I want some water.", "I want a waters."], answer: 1, tip: "water 不可数：不加 a，无复数——要么 some，要么用量词 a glass of。" },
+                { type: "choice", stem: "“advice（建议）”怎么用才对？", options: ["a advice", "some advices", "a piece of advice"], answer: 2, tip: "advice 像水一样不可数：a piece of advice（一“片”建议）。" },
+                { type: "fill", stemBefore: "I don't have", stemAfter: "money.（否定句，“一些”）", answer: "any", accept: ["any"], tip: "some 在否定句里是“黑户”：否定句 some → any。" },
+                { type: "choice", stem: "“a few”后面跟什么？", options: ["可数名词复数", "不可数名词", "单数名词"], answer: 0, tip: "a few / few + 可数复数（a few apples）；a little / little + 不可数。" }
+              ]
             }
         ]
       },
@@ -400,7 +409,14 @@ window.ENG_CH["gr01"] = {
               id: "gr01.1.2-p4",
               kind: "quiz",
               title: "练一练：-s 的身份",
-              point: "自查：复数先看结尾字母；所有格先看单复数，再看一撇位置。"
+              point: "自查：复数先看结尾字母；所有格先看单复数，再看一撇位置。",
+              questions: [
+                { type: "choice", stem: "“box”的复数是？", options: ["boxs", "boxes", "boxies"], answer: 1, tip: "s/x/ch/sh 结尾加 -es：boxes。" },
+                { type: "choice", stem: "“baby”的复数是？", options: ["babys", "babyes", "babies"], answer: 2, tip: "辅音 + y：去 y 变 ies——babies。" },
+                { type: "choice", stem: "“男孩们的（the boys 所有格）”怎么写？", options: ["boy's", "boys'", "boyes'"], answer: 1, tip: "复数 s 结尾的所有格：只加一撇——boys'（他们的）。" },
+                { type: "choice", stem: "“the legs of the table（桌腿）”为什么用 of？", options: ["因为 table 复数", "无生命的东西多用 of 表所有", "随便用的"], answer: 1, tip: "无生命多用 of：the legs of the table（桌子的腿）。" },
+                { type: "fill", stemBefore: "child 的复数是", stemAfter: "。（不规则，单记）", answer: "children", accept: ["children"], tip: "不规则单记：child → children，foot → feet。" }
+              ]
             }
         ]
       },
@@ -537,7 +553,14 @@ window.ENG_CH["gr01"] = {
               id: "gr01.1.3-p4",
               kind: "quiz",
               title: "练一练：单数还是复数？",
-              point: "自查：见 advice/information/news，直接单数谓语；见 family/team，先问自己强调整体还是成员。"
+              point: "自查：见 advice/information/news，直接单数谓语；见 family/team，先问自己强调整体还是成员。",
+              questions: [
+                { type: "choice", stem: "下面哪句对？", options: ["The news are bad.", "The news is bad.", "The news be bad."], answer: 1, tip: "news 不可数，没有复数——s 结尾不代表复数，谓语永远单数。" },
+                { type: "choice", stem: "“My family is big.”（说“我家这个整体大”）谓语用？", options: ["is", "are", "be"], answer: 0, tip: "集合名词看强调：说“整体”用单数 is。" },
+                { type: "choice", stem: "“My family ___ all teachers.”（强调“家人们”）", options: ["is", "are", "be"], answer: 1, tip: "强调“成员”用复数 are：My family are all teachers。" },
+                { type: "fill", stemBefore: "The advice", stemAfter: "useful.（advice 不可数，谓语用单数）", answer: "is", accept: ["is"], tip: "advice/information/news 不可数：永远单数谓语。" },
+                { type: "choice", stem: "“information”怎么用才对？", options: ["an information", "some informations", "some information"], answer: 2, tip: "information 不可数：无复数，不加 a——some information。" }
+              ]
             }
         ]
       }
@@ -685,7 +708,14 @@ window.ENG_CH["gr01"] = {
               id: "gr01.2.1-p4",
               kind: "quiz",
               title: "练一练：a 还是 the？",
-              point: "自查：单数可数名词前不能空着；先问泛指还是特指。"
+              point: "自查：单数可数名词前不能空着；先问泛指还是特指。",
+              questions: [
+                { type: "choice", stem: "第一次提到“一只狗”，该说？", options: ["I have dog.", "I have a dog.", "I have dogs."], answer: 1, tip: "单数可数名词不能“裸奔”：首次提到用 a/an 泛指一个。" },
+                { type: "choice", stem: "再次提到“那只狗”，该说？", options: ["a dog", "the dog", "dog"], answer: 1, tip: "the = 特指“那个”：双方都知道是哪个的时候用。" },
+                { type: "fill", stemBefore: "", stemAfter: "apple a day keeps the doctor away.（泛指“一个”）", answer: "An", accept: ["An", "an"], tip: "an 用于元音音素开头：an apple，an hour。" },
+                { type: "choice", stem: "下面哪句对？", options: ["The happiness is important.", "Happiness is important.", "A happiness is important."], answer: 1, tip: "泛指抽象概念不加 the：Happiness is important。" },
+                { type: "choice", stem: "“an”用于什么开头？", options: ["辅音字母", "元音音素（如 an hour）", "任何名词"], answer: 1, tip: "看“音”不看“字母”：hour 的 h 不发音，元音开头，用 an。" }
+              ]
             }
         ]
       },
@@ -827,7 +857,14 @@ window.ENG_CH["gr01"] = {
               id: "gr01.2.2-p4",
               kind: "quiz",
               title: "练一练：the 免票检查",
-              point: "自查：球类/棋类/三餐/at home/go to school——the 免票。"
+              point: "自查：球类/棋类/三餐/at home/go to school——the 免票。",
+              questions: [
+                { type: "choice", stem: "下面哪句对？", options: ["They play the basketball.", "They play basketball.", "They play a basketball."], answer: 1, tip: "球类是运动项目不是“那个球”：play basketball，the 一加就怪了。" },
+                { type: "choice", stem: "“I go to school every day.”的意思是？", options: ["每天去上学", "每天去学校那个地方", "每天在学校玩"], answer: 0, tip: "go to school = 去上学（做事）；go to the school = 去学校那个地方（特指）。" },
+                { type: "choice", stem: "下面哪句对？", options: ["I have the breakfast.", "I have breakfast.", "I have a breakfasts."], answer: 1, tip: "三餐是免票老熟人：have breakfast，不加 the。" },
+                { type: "fill", stemBefore: "She is", stemAfter: "home now.（“在家”，固定搭配）", answer: "at", accept: ["at"], tip: "at home 是固定搭配：home 前面用 at。" },
+                { type: "choice", stem: "the 一出现，意思就从“做事”变成？", options: ["还是做事", "特指某个地方", "没变化"], answer: 1, tip: "the 是“特指开关”：play basketball（打篮球）vs play the basketball（打那个球）。" }
+              ]
             }
         ]
       },
@@ -973,7 +1010,14 @@ window.ENG_CH["gr01"] = {
               id: "gr01.2.3-p4",
               kind: "quiz",
               title: "练一练：换词规矩",
-              point: "自查：先看肯定还是否定疑问，再看可数还是不可数。"
+              point: "自查：先看肯定还是否定疑问，再看可数还是不可数。",
+              questions: [
+                { type: "choice", stem: "下面哪句对？", options: ["I don't have some money.", "I don't have any money.", "I don't have a money."], answer: 1, tip: "否定句里 some 待不住，必须换成 any。" },
+                { type: "choice", stem: "下面哪句对？", options: ["There are much people.", "There are many people.", "There is many people."], answer: 1, tip: "people 可数：many + 可数复数；much 只管不可数（much water）。" },
+                { type: "fill", stemBefore: "Do you have", stemAfter: "questions?（疑问句，“一些”）", answer: "any", accept: ["any"], tip: "some 肯定，any 否定/疑问/条件——疑问句用 any。" },
+                { type: "choice", stem: "“Would you like ___ tea?”（委婉请求）", options: ["some", "any", "many"], answer: 0, tip: "例外：Would you like some…?（委婉请求/期待肯定回答）用 some。" },
+                { type: "choice", stem: "“much”后面跟什么？", options: ["可数名词复数", "不可数名词", "单数可数名词"], answer: 1, tip: "much + 不可数（much water）；many + 可数复数（many apples）。" }
+              ]
             }
         ]
       }

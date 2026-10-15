@@ -223,7 +223,14 @@ window.ENG_CH["gr04"] = {
               id: "gr04.1.1-p4",
               kind: "quiz",
               title: "练一练：时间的尺寸",
-              point: "自查：先看时间词——年/月/季→in，具体日→on，时刻→at。"
+              point: "自查：先看时间词——年/月/季→in，具体日→on，时刻→at。",
+              questions: [
+                { type: "choice", stem: "“___ Monday”选哪个介词？", options: ["in", "on", "at"], answer: 1, tip: "Monday 是具体的一天：大 in、中 on、小 at——日子用 on。" },
+                { type: "choice", stem: "“___ 8:00”选哪个介词？", options: ["in", "on", "at"], answer: 2, tip: "8:00 是时刻（小点）：用 at。" },
+                { type: "choice", stem: "“___ 2026”选哪个介词？", options: ["in", "on", "at"], answer: 0, tip: "年份是“大盒子”：in 2026。" },
+                { type: "choice", stem: "“夜里”用哪个？", options: ["in night", "at night", "on night"], answer: 1, tip: "特例单记：at night（夜里）——night 用 at。" },
+                { type: "fill", stemBefore: "We have classes", stemAfter: "the morning.（“上午”）", answer: "in", accept: ["in"], tip: "morning/afternoon/evening 用 in：in the morning。" }
+              ]
             }
         ]
       },
@@ -360,7 +367,14 @@ window.ENG_CH["gr04"] = {
               id: "gr04.1.2-p4",
               kind: "quiz",
               title: "练一练：上/里/点",
-              point: "自查：上/里/点→on/in/at；bus/train 用 on。"
+              point: "自查：上/里/点→on/in/at；bus/train 用 on。",
+              questions: [
+                { type: "choice", stem: "“The book is ___ the desk.”（在桌子上）", options: ["in", "on", "at"], answer: 1, tip: "在表面用 on：on the desk（在桌子上）。" },
+                { type: "choice", stem: "“The keys are ___ the drawer.”（在抽屉里面）", options: ["in", "on", "at"], answer: 0, tip: "在里面用 in：in the drawer（在抽屉里面）——in/on 混淆王。" },
+                { type: "choice", stem: "交通工具“___ the bus”选哪个？", options: ["in", "on", "at"], answer: 1, tip: "on the bus / on the train（交通工具用 on）；小汽车特例用 in：in the car。" },
+                { type: "choice", stem: "下面哪句对？", options: ["at home", "on home", "in home"], answer: 0, tip: "at home 是固定搭配——home 前面用 at。" },
+                { type: "choice", stem: "“在两者之间”用哪个？", options: ["among", "between", "behind"], answer: 1, tip: "between = 两者之间；among = 三者以上。" }
+              ]
             }
         ]
       },
@@ -466,7 +480,7 @@ window.ENG_CH["gr04"] = {
               kind: "explain",
               title: "介词搭配：动词+介词是固定搭档",
               lead: "还记得吗？上一页 to 是卧底介词，后面跟了 seeing——介词后面不跟动词原形。",
-              point: "这就是介词搭配：动词+介词是固定搭档；to 是介词还是不定式，看前面。（呼应讲词根 #r=spect，R3 审计通过）",
+              point: "这就是介词搭配：动词+介词是固定搭档；to 是介词还是不定式，看前面。",
               blocks: [
                 {
                   type: "examples",
@@ -506,7 +520,14 @@ window.ENG_CH["gr04"] = {
               id: "gr04.1.3-p4",
               kind: "quiz",
               title: "练一练：固定搭档",
-              point: "自查：to 前面是 look forward？那它是介词+doing；be good 后面跟 at。"
+              point: "自查：to 前面是 look forward？那它是介词+doing；be good 后面跟 at。",
+              questions: [
+                { type: "choice", stem: "下面哪句对？", options: ["I look forward to see you.", "I look forward to seeing you.", "I look forward see you."], answer: 1, tip: "to 在这里是介词（卧底），后面跟 doing——不是不定式。" },
+                { type: "choice", stem: "“She is ___ English.”（擅长英语）", options: ["good", "good at", "good for"], answer: 1, tip: "be good at 是固定搭配：at 不可省——She is good at English。" },
+                { type: "choice", stem: "“look after”的意思是？", options: ["看", "找", "照顾"], answer: 2, tip: "look 三兄弟：look at（看）、look for（找）、look after（照顾）——单记。" },
+                { type: "fill", stemBefore: "They look", stemAfter: "the lost key.（“寻找”）", answer: "for", accept: ["for"], tip: "look for = 寻找：动词 + 介词是固定搭档。" },
+                { type: "choice", stem: "介词后面不能直接跟？", options: ["名词", "动名词", "动词原形"], answer: 2, tip: "介词后面跟名词/代词/动名词，不跟动词原形。" }
+              ]
             }
         ]
       },
@@ -547,7 +568,14 @@ window.ENG_CH["gr04"] = {
               id: "gr04.1.4-p2",
               kind: "quiz",
               title: "本章综合练",
-              point: "本章自查三问：段/天/点？里/上/点？to 前面是谁？"
+              point: "本章自查三问：段/天/点？里/上/点？to 前面是谁？",
+              questions: [
+                { type: "choice", stem: "“We have a meeting ___ Monday.”", options: ["in", "on", "at"], answer: 1, tip: "星期用 on：on Monday（中 on）。" },
+                { type: "choice", stem: "“The class starts ___ 8:00.”", options: ["in", "on", "at"], answer: 2, tip: "时刻用 at：at 8:00（小 at）。" },
+                { type: "choice", stem: "下面哪句对？", options: ["She is on home.", "She is at home.", "She is in home."], answer: 1, tip: "at home 固定搭配——home 前用 at。" },
+                { type: "choice", stem: "下面哪句对？", options: ["I look forward to see you.", "I look forward to seeing you.", "She is good English."], answer: 1, tip: "to 是介词（卧底）→ 跟 doing；be good at 的 at 不可省。" },
+                { type: "fill", stemBefore: "The book is", stemAfter: "the desk.（“在桌子上”）", answer: "on", accept: ["on"], tip: "在表面用 on：on the desk。" }
+              ]
             }
         ]
       }

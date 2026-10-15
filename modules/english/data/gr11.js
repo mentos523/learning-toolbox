@@ -219,7 +219,7 @@ window.ENG_CH["gr11"] = {
                 {
                   type: "idcard",
                   rule: "前缀加在词的前面，只改变词的意思，不改变词性。",
-                  condition: "否定：un-/in-/dis-；错误：mis-；程度：over-/super-；方位：pre-/post-；再：re-。un- 一般不接具体名词（如 ✗ untable）；in- 见 b/m/p/l/r 变脸（im-/il-/ir-）。"
+                  condition: "否定：un-/in-/dis-；错误：mis-；程度：over-/super-；方位：pre-/post-；再：re-。un- 主要接形容词/分词（如 unable）；in- 见 b/m/p/l/r 变脸（im-/il-/ir-）。"
                 },
                 {
                   type: "bridge",
@@ -242,7 +242,7 @@ window.ENG_CH["gr11"] = {
                   wrong: "He is untable to come.",
                   wrongZh: "（✗ 错句）",
                   right: "He is unable to come.",
-                  why: "un- 一般不接具体名词——table 是具体名词，要用 unable。"
+                  why: "untable 的真错因是把形容词 able（能）听成了名词 table（桌子）——un- 主要接形容词/分词（如 unable）；un- 接名词也有 unrest（不安）等，别记反。"
                 },
                 {
                   type: "contrast",
@@ -252,7 +252,7 @@ window.ENG_CH["gr11"] = {
                   why: "in- 碰到 p 要变脸成 im-：in- + p → im-。"
                 }
               ],
-              point: "前缀：改义不改性；in- 见 b/m/p/l/r 变脸；un- 不接名词。",
+              point: "前缀：改义不改性；in- 见 b/m/p/l/r 变脸；un- 主要接形容词/分词。",
               pointScroll: true
             },
             /* ---------- p4 练习页 ---------- */
@@ -281,7 +281,7 @@ window.ENG_CH["gr11"] = {
                   stem: "下面哪个是错的？",
                   options: ["disagree（不同意）", "preview（预习）", "untable"],
                   answer: 2,
-                  tip: "un- 一般不接具体名词，table 是具体名词。"
+                  tip: "un- 主要接形容词/分词：unable = un- + able（形容词“能”），不是 table（桌子）。"
                 },
                 {
                   type: "fill",
@@ -575,7 +575,7 @@ window.ENG_CH["gr11"] = {
                 {
                   type: "bridge",
                   zh: "汉语也有复合词：“教室”= 教 + 室，“黑板”= 黑 + 板。",
-                  en: "英语一样：classroom = class + room。不一样的是：passer-by 的复数是 passers-by，s 加在“人”那个部分。passport = pass + port，port- 是“运送”（讲词根 #r=port，R3 审计通过）。",
+                  en: "英语一样：classroom = class + room。不一样的是：passer-by 的复数是 passers-by，s 加在“人”那个部分。passport = pass + port，这里的 port 是“港口”（portus），不是“运送”（portare）——它是“过港口/关口的通行证”。port 有两个家族，别搞混。",
                   unbridge: "这是英语的规矩：复合词先看它是几部分拼的，复数找“关键部分”加 s。"
                 },
                 {
@@ -1092,7 +1092,7 @@ window.ENG_CH["gr11"] = {
                 {
                   type: "idcard",
                   rule: "本章三表：一、前缀表（改义不改性）；二、后缀词性总表（改性）；三、一词四形表。",
-                  condition: "前缀：un-/in-/dis- 否定；mis- 错误；pre- 在前；re- 再；in- 见 b/m/p/l/r 变脸；un- 不接名词。后缀：-ness/-tion/-ment/-ity 名词；-ful/-less/-ous/-able 形容词；-ly 副词（friendly 卧底）；-ize/-en 动词。一词四形：success/succeed/successful/successfully；book 零转换。"
+                  condition: "前缀：un-/in-/dis- 否定；mis- 错误；pre- 在前；re- 再；in- 见 b/m/p/l/r 变脸；un- 主要接形容词/分词。后缀：-ness/-tion/-ment/-ity 名词；-ful/-less/-ous/-able 形容词；-ly 副词（friendly 卧底）；-ize/-en 动词。一词四形：success/succeed/successful/successfully；book 零转换。"
                 },
                 {
                   type: "bridge",

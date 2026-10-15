@@ -36,7 +36,7 @@ window.PHY_CH["p06"] = {
                   type: "sponge-dent",
                   params: {
                     pressure: { min: 0, max: 20, step: 1, init: 8 },
-                    badge: { invariant: "没变的是：海绵这块" }
+                    badge: { invariant: "没变的是：海绵这块（变的是压力→海绵凹陷的深浅）" }
                   }
                 }
               ],
@@ -101,7 +101,7 @@ window.PHY_CH["p06"] = {
                   type: "graph-reader",
                   params: {
                     source: { kind: "function", expr: "p = 9800*t", xLabel: "h/m", yLabel: "p/Pa", steps: ["slope"] },
-                    badge: { invariant: "没变的是：液体密度（水）" }
+                    badge: { invariant: "没变的是：液体密度（水）（变的是深度 h→压强；压强计转方向→读数不变）" }
                   }
                 },
                 {
@@ -237,7 +237,7 @@ window.PHY_CH["p06"] = {
                   params: {
                     mode: "paper",
                     blow: { min: 0, max: 10, step: 1, init: 4 },
-                    badge: { invariant: "没变的是：纸条" }
+                    badge: { invariant: "没变的是：纸条（变的是吹气强度→两张纸往中间靠）" }
                   }
                 }
               ],
@@ -292,7 +292,7 @@ window.PHY_CH["p06"] = {
                       { id: "fp", kind: "pull",    label: "F′",  angleDeg: 90,  mag: 7, min: 0, max: 10 }
                     ],
                     showResultant: true, surface: "horizontal", unit: "N",
-                    badge: { invariant: "没变的是：石块的重力" }
+                    badge: { invariant: "没变的是：石块的重力（变的是浸入深度→F浮→F′ 读数）" }
                   }
                 }
               ],
@@ -335,7 +335,7 @@ window.PHY_CH["p06"] = {
                   type: "overflow-cup",
                   params: {
                     objVolume: { max: 200, step: 10, init: 0 },
-                    badge: { invariant: "没变的是：杯里水面的高度（与溢水口齐平）" }
+                    badge: { invariant: "没变的是：杯里水面高度（与溢水口齐平）（变的是物体下压深度→溢出的水）" }
                   }
                 }
               ],
@@ -400,7 +400,7 @@ window.PHY_CH["p06"] = {
                       { id: "fb", kind: "custom",  label: "F浮", angleDeg: 90,  mag: 10, fixed: true }
                     ],
                     showResultant: true, surface: "horizontal", unit: "N",
-                    badge: { invariant: "没变的是：潜水艇体积（→浮力不变）" }
+                    badge: { invariant: "没变的是：潜水艇体积→浮力不变（变的是自重 G→下沉还是上浮）" }
                   }
                 }
               ],

@@ -86,7 +86,7 @@ window.PHY_CH["p11"] = {
                 {
                   type: "displacement-arrow",
                   params: {
-                    badge: { invariant: "没变的是：起点" }
+                    badge: { invariant: "没变的是：起点（变的是终点手柄→位移箭头与 Δx 读数）" }
                   }
                 }
               ],
@@ -149,15 +149,15 @@ window.PHY_CH["p11"] = {
             {
               id: "p11.1.3-p1",
               kind: "interact",
-              title: "纸带点迹 → 读斜率",
-              exploreTip: "点“读斜率”：v–t 图上直线的斜率，就是加速度——点越密，车越快。",
+              title: "纸带点迹（示意数据）→ 读斜率",
+              exploreTip: "点“读斜率”：v–t 图上直线的斜率，就是加速度——点越密，车越慢。",
               widgets: [
                 {
                   type: "graph-reader",
                   params: {
                     source: { kind: "points", points: [[0, 0], [1, 2], [2, 4], [3, 7], [4, 11], [5, 16]], xLabel: "t/s", yLabel: "v/(m/s)" },
                     steps: ["slope"],
-                    badge: { invariant: "没变的是：坐标轴的物理意义" }
+                    badge: { invariant: "没变的是：坐标轴的物理意义（变的是直线的斜率→加速度读数）" }
                   }
                 }
               ],
@@ -248,7 +248,7 @@ window.PHY_CH["p11"] = {
                   params: {
                     source: { kind: "function", expr: "v = 2*t + 1", xLabel: "t/s", yLabel: "v/(m/s)" },
                     steps: ["area"], areaSlices: 40, xRange: [0, 5],
-                    badge: { invariant: "没变的是：这条直线（匀加速）" }
+                    badge: { invariant: "没变的是：这条直线（匀加速）（变的是时间→面积→位移读数）" }
                   }
                 }
               ],
@@ -298,7 +298,7 @@ window.PHY_CH["p11"] = {
                   params: {
                     source: { kind: "function", expr: "v = 2*t + 1", xLabel: "t/s", yLabel: "v/(m/s)" },
                     steps: ["slope"], xRange: [0, 5],
-                    badge: { invariant: "没变的是：横纵轴的物理意义" }
+                    badge: { invariant: "没变的是：横纵轴的物理意义（变的是线的陡缓→加速度读数）" }
                   }
                 }
               ],
@@ -315,7 +315,7 @@ window.PHY_CH["p11"] = {
                   params: {
                     source: { kind: "function", expr: "v = 2*t + 1", xLabel: "t/s", yLabel: "v/(m/s)" },
                     steps: ["area"], areaSlices: 40, xRange: [0, 5],
-                    badge: { invariant: "没变的是：分割求和的过程" }
+                    badge: { invariant: "没变的是：分割求和的过程（变的是细条个数→面积和的逼近）" }
                   }
                 }
               ],
@@ -384,7 +384,7 @@ window.PHY_CH["p11"] = {
                 {
                   type: "vacuum-tube",
                   params: {
-                    badge: { invariant: "没变的是：管子、羽毛、硬币" }
+                    badge: { invariant: "没变的是：管子、羽毛、硬币（变的是抽不抽真空→谁先落地）" }
                   }
                 }
               ],

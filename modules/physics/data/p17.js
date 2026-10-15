@@ -50,7 +50,7 @@ window.PHY_CH["p17"] = {
                     dragAmp: true,
                     showXTGraph: true,
                     showEquation: true,
-                    badge: { invariant: "没变的是：振子质量（调 k 时）" }
+                    badge: { invariant: "没变的是：振子质量（调 k 时）（变的是劲度系数 k→周期 T）" }
                   }
                 }
               ],
@@ -67,7 +67,7 @@ window.PHY_CH["p17"] = {
                 { type: "text", html: "x–t 图像是正弦曲线：振幅 A（偏离平衡位置的最大距离）、周期 T（全振动一次的时间）、频率 f=1/T。" },
                 { type: "trap", text: "⚠️ 别搞混：振动图像是运动轨迹——错！是 x–t 图像（p11.2.2 再现）；F=−kx 负号可省略——错！负号表示方向。" },
                 { type: "oldfriend", text: "认旧友：p11.2.2——'图像≠轨迹'第二次；p01.1.3——正弦曲线第一次亮相。" },
-                { type: "mathlink", text: "数学呼应：代数 8.3.2 正弦图像（奠基）——x–t 即正弦曲线（呼应点 3）。" },
+                { type: "mathlink", text: "数学呼应：代数 8.3.2 正弦图像（奠基）——x–t 即正弦曲线。" },
                 { type: "slogan", text: "图像是时间的录像，不是跑的路线。" }
               ],
               point: "F=−kx：负号是方向——简谐运动的'身份证'。"
@@ -112,7 +112,7 @@ window.PHY_CH["p17"] = {
                     length: { min: 0.2, max: 1.5, step: 0.1, init: 1 },
                     mass: { min: 0.1, max: 1, step: 0.1, init: 0.5 },
                     angle: { min: 5, max: 30, step: 1, init: 15 },
-                    badge: { invariant: "没变的是：重力加速度 g" }
+                    badge: { invariant: "没变的是：重力加速度 g（变的是摆长/质量/摆角→周期 T）" }
                   }
                 },
                 {
@@ -120,7 +120,7 @@ window.PHY_CH["p17"] = {
                   params: {
                     source: { kind: "points", points: [[0.25, 1.0], [0.5, 2.0], [0.75, 3.0], [1.0, 4.0]], xLabel: "l/m", yLabel: "T²/s²" },
                     steps: ["slope"],
-                    badge: { invariant: "没变的是：g（同一地点）" }
+                    badge: { invariant: "没变的是：g（同一地点）（变的是摆长 l→T² 的点列→直线斜率）" }
                   }
                 }
               ],
@@ -145,7 +145,7 @@ window.PHY_CH["p17"] = {
                 },
                 { type: "text", html: "单摆等时性：周期与摆球质量、振幅（小角度内）无关——摆钟走得准，靠的就是它。" },
                 { type: "trap", text: "⚠️ 别搞混：周期与摆球质量有关——错！无关；大角度仍是简谐运动——错！小角度近似。" },
-                { type: "mathlink", text: "数学呼应：代数 7.1 二次函数（奠基）——T²–l 成正比，二次关系的实验验证（呼应点 27）。" },
+                { type: "mathlink", text: "数学呼应：代数 7.1 二次函数（奠基）——T²–l 成正比，二次关系的实验验证。" },
                 { type: "slogan", text: "周期看摆长，不看摆球。" }
               ],
               point: "T=2π√(l/g)：条件是灵魂——小角度、摆长≫球直径。"
@@ -191,7 +191,7 @@ window.PHY_CH["p17"] = {
                     freq: { min: 20, max: 200, step: 10, init: 60 },
                     playSound: false,
                     showLabels: true,
-                    badge: { invariant: "没变的是：介质（波速由介质定）" }
+                    badge: { invariant: "没变的是：介质（波速由介质定）（变的是相位→波形的'走位'）" }
                   }
                 }
               ],
@@ -262,7 +262,7 @@ window.PHY_CH["p17"] = {
                     },
                     showSum: true,
                     playSound: true,
-                    badge: { invariant: "没变的是：两列波的频率（同频才稳定）" }
+                    badge: { invariant: "没变的是：两列波的频率（同频才稳定）（变的是波 B 的频率→干涉花纹乱不乱）" }
                   }
                 }
               ],
@@ -327,7 +327,7 @@ window.PHY_CH["p17"] = {
                   params: {
                     source: { kind: "points", points: [[0, 0], [10, 13.3], [20, 27.9], [30, 44.4], [40, 79.1], [48.6, 90]], xLabel: "入射角 i/°", yLabel: "折射角 r/°" },
                     steps: ["slope"],
-                    badge: { invariant: "没变的是：水的折射率 n=1.33" }
+                    badge: { invariant: "没变的是：水的折射率 n=1.33（变的是入射角 i→折射角 r→全反射）" }
                   }
                 }
               ],
@@ -399,7 +399,7 @@ window.PHY_CH["p17"] = {
                     source: { kind: "function", expr: "x = 2*t", xLabel: "λ", yLabel: "Δx" },
                     xRange: [0, 5],
                     steps: ["slope"],
-                    badge: { invariant: "没变的是：l（缝屏距）、d（缝间距）" }
+                    badge: { invariant: "没变的是：l（缝屏距）、d（缝间距）（变的是波长 λ→条纹间距 Δx）" }
                   }
                 }
               ],
@@ -451,7 +451,7 @@ window.PHY_CH["p17"] = {
         {
           id: "p17.2.3",
           title: "交变电流",
-          prereq: "p16.3 电磁感应",
+          prereq: "p16.3.1 楞次定律",
           time: "40–60 分钟",
           formulas: {
             e: {
@@ -477,7 +477,7 @@ window.PHY_CH["p17"] = {
                     freq: { min: 10, max: 100, step: 10, init: 50 },
                     playSound: false,
                     showLabels: true,
-                    badge: { invariant: "没变的是：N、B、S（Em=NBSω 的'配方'）" }
+                    badge: { invariant: "没变的是：N、B、S（Em=NBSω 的'配方'）（变的是转速→曲线疏密、振幅→Em）" }
                   }
                 },
                 {
@@ -570,7 +570,7 @@ window.PHY_CH["p17"] = {
                     particleCount: 120,
                     showStates: true,
                     heatButtons: true,
-                    badge: { invariant: "没变的是：分子总数（质量一定）" }
+                    badge: { invariant: "没变的是：分子总数（质量一定）（变的是温度→分子跑速与物态徽章）" }
                   }
                 }
               ],
@@ -602,7 +602,7 @@ window.PHY_CH["p17"] = {
                       source: { kind: "function", expr: "p = 300/t", xLabel: "V", yLabel: "p" },
                       xRange: [1, 10],
                       steps: ["slope"],
-                      badge: { invariant: "没变的是：T（等温线）" }
+                      badge: { invariant: "没变的是：T（等温线）（变的是体积→压强→等温线上的点）" }
                     }
                   }
                 },
@@ -633,7 +633,7 @@ window.PHY_CH["p17"] = {
         {
           id: "p17.3.2",
           title: "原子结构与原子核",
-          prereq: "p03 分子动理论",
+          prereq: "p03.2.1 分子动理论",
           time: "40–60 分钟",
           formulas: {
             mc2: {
@@ -646,7 +646,7 @@ window.PHY_CH["p17"] = {
               id: "p17.3.2-p1",
               kind: "interact",
               title: "光电效应：看频率还是看强度？",
-              exploreTip: "先猜：红光再强打不出，弱紫光却打出——决定因素是？再看图：ν 太小，Ek 变负——电子'欠费'，出不来。",
+              exploreTip: "先猜：红光再强打不出，弱紫光却打出——决定因素是？再看图：ν 太小（ν 读作“纽”，表示光的频率），Ek 变负——电子'欠费'，出不来。",
               widgets: [
                 {
                   type: "guess-verify",
@@ -662,7 +662,7 @@ window.PHY_CH["p17"] = {
                   params: {
                     source: { kind: "points", points: [[3, -1], [4, 0], [5, 1], [6, 2], [7, 3]], xLabel: "ν（×10¹⁴Hz）", yLabel: "Ek（eV）" },
                     steps: ["intercept"],
-                    badge: { invariant: "没变的是：金属的截止频率（材料定）" }
+                    badge: { invariant: "没变的是：金属的截止频率（材料定）（变的是光频率 ν→光电子动能 Ek）" }
                   }
                 }
               ],

@@ -120,7 +120,7 @@ window.PHY_CH["p09"] = {
                     battery: { voltage: 6 },
                     goal: "从元件库拖灯泡、电流表和导线，连一个能让灯泡亮的电路",
                     allowParallel: false, showCurrent: true,
-                    badge: { invariant: "没变的是：灯泡的电阻" }
+                    badge: { invariant: "没变的是：灯泡的电阻（变的是电压→电流→灯泡亮度）" }
                   }
                 }
               ],
@@ -202,7 +202,7 @@ window.PHY_CH["p09"] = {
                     current: { min: 0.5, max: 3, step: 0.1, init: 1 },
                     resistance: { min: 5, max: 50, step: 1, init: 20 },
                     time: { min: 0, max: 60, step: 1, init: 10 },
-                    badge: { invariant: "没变的是：这根电阻丝" }
+                    badge: { invariant: "没变的是：这根电阻丝（变的是电流/电阻/时间→热量条）" }
                   }
                 }
               ],
@@ -271,7 +271,7 @@ window.PHY_CH["p09"] = {
                     battery: { voltage: 3 },
                     goal: "先断开开关（断电），再连一个“开关控制灯泡”的单回路",
                     allowParallel: false, showCurrent: true,
-                    badge: { invariant: "没变的是：先断电再接线" }
+                    badge: { invariant: "没变的是：先断电再接线（不管连什么电路，这一步永远第一）" }
                   }
                 }
               ],

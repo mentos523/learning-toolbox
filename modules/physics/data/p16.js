@@ -136,7 +136,7 @@ window.PHY_CH["p16"] = {
                   params: {
                     source: { kind: "points", points: [[0, 3.0], [0.1, 2.9], [0.2, 2.8], [0.3, 2.7], [0.4, 2.6], [0.5, 2.5]], xLabel: "I/A", yLabel: "U/V" },
                     steps: ["slope", "intercept"],
-                    badge: { invariant: "没变的是：E、r（电源的脾气）" }
+                    badge: { invariant: "没变的是：E、r（电源的脾气）（变的是电流 I→路端电压 U→斜率与截距读数）" }
                   }
                 }
               ],
@@ -162,7 +162,7 @@ window.PHY_CH["p16"] = {
                 { type: "text", html: '路端电压 <span class="phy-f" data-f="UE"></span>：外电路断开（I=0）时，U=E——电压表直接接电源，测的就是电动势！' },
                 { type: "trap", text: "⚠️ 别搞混：外电路断开时路端电压为零——错！=E；E、r 会随使用'变小'——理想化认为不变（模型边界）。" },
                 { type: "oldfriend", text: "认旧友：p08.2.3 欧姆定律——部分电路 I=U/R，今天升级成全电路 I=E/(R+r)。" },
-                { type: "mathlink", text: "数学呼应：代数 6.2 一次函数（奠基）——U–I 图像斜率=−r、截距=E（呼应点 15）。" },
+                { type: "mathlink", text: "数学呼应：代数 6.2 一次函数（奠基）——U–I 图像斜率=−r、截距=E。" },
                 { type: "slogan", text: "断路电压等于 E。" }
               ],
               point: "I=E/(R+r)：电源也有内阻 r——'理想电源'是模型。"
@@ -215,7 +215,7 @@ window.PHY_CH["p16"] = {
                     needleCount: 8,
                     showFieldLines: true,
                     ironFilings: true,
-                    badge: { invariant: "没变的是：磁铁的磁性" }
+                    badge: { invariant: "没变的是：磁铁的磁性（变的是磁铁朝向→8 个小磁针 N 极的跟随）" }
                   }
                 }
               ],
@@ -288,7 +288,7 @@ window.PHY_CH["p16"] = {
                     mode: "circle",
                     omega: { min: 1, max: 10, step: 1, init: 4 },
                     showReadouts: true,
-                    badge: { invariant: "没变的是：电子的 q、m" }
+                    badge: { invariant: "没变的是：电子的 q、m（变的是角速度 ω→转圈快慢与向心力箭头）" }
                   }
                 }
               ],
@@ -350,7 +350,7 @@ window.PHY_CH["p16"] = {
                     source: { kind: "function", expr: "r = 2*t", xLabel: "v", yLabel: "r" },
                     xRange: [0, 5],
                     steps: ["slope"],
-                    badge: { invariant: "没变的是：m、q、B（斜率的'配方'）" }
+                    badge: { invariant: "没变的是：m、q、B（斜率的'配方'）（变的是速度 v→半径 r）" }
                   }
                 }
               ],
@@ -426,14 +426,14 @@ window.PHY_CH["p16"] = {
                     magnet: { x: 50, y: 70, angle: 0 },
                     needleCount: 8,
                     showFieldLines: true,
-                    badge: { invariant: "没变的是：磁铁的磁性" }
+                    badge: { invariant: "没变的是：磁铁的磁性（变的是磁铁进出→Φ 增减→电流方向）" }
                   }
                 },
                 {
                   type: "em-induction",
                   params: {
                     pole: "N",
-                    badge: { invariant: "没变的是：线圈" }
+                    badge: { invariant: "没变的是：线圈匝数/面积（变的是磁通量 Φ→电流'增反减同'）" }
                   }
                 }
               ],
@@ -499,7 +499,7 @@ window.PHY_CH["p16"] = {
                     source: { kind: "function", expr: "E = 2*t", xLabel: "ΔΦ/Δt", yLabel: "E" },
                     xRange: [0, 5],
                     steps: ["slope"],
-                    badge: { invariant: "没变的是：线圈匝数 n" }
+                    badge: { invariant: "没变的是：线圈匝数 n（变的是 ΔΦ/Δt→感应电动势 E）" }
                   }
                 }
               ],
@@ -525,7 +525,7 @@ window.PHY_CH["p16"] = {
                 { type: "text", html: '切割公式 <span class="phy-f" data-f="Blv"></span>：限 B、l、v 两两垂直——导体棒切割磁感线专用版。' },
                 { type: "trap", text: "⚠️ 别搞混：ΔΦ 大则 E 大——错！看变化率；E=Blv 无条件——错！限 B、l、v 两两垂直。" },
                 { type: "oldfriend", text: "认旧友：p16.3.1 楞次定律——楞次定方向，法拉第定大小。" },
-                { type: "mathlink", text: "数学呼应：代数 11.1 变化率（奠基）——E ∝ ΔΦ/Δt，导数思想（呼应点 25）。" },
+                { type: "mathlink", text: "数学呼应：代数 11.1 变化率（奠基）——E ∝ ΔΦ/Δt，导数思想。" },
                 { type: "slogan", text: "感应电动势看变化率。" }
               ],
               point: "E=nΔΦ/Δt：楞次定方向，法拉第定大小——分工明确。"

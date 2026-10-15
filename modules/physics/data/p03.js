@@ -79,7 +79,7 @@ temp: { min: -20, max: 120, step: 5, init: 20, unit: "℃"},
 particleCount: 120,
 showStates: true,
 heatButtons: true,
-badge: { invariant: "没变的是：分子总数"}
+badge: { invariant: "没变的是：分子总数（变的是温度→粒子跑速、物态徽章）"}
 }
 }
 ],
@@ -104,7 +104,7 @@ xLabel: "t/min",
 yLabel: "T/℃"
 },
 steps: [],
-badge: { invariant: "没变的是：坐标轴的物理意义"}
+badge: { invariant: "没变的是：坐标轴的物理意义（变的是温度–时间曲线的形状）"}
 }
 }
 },
@@ -152,7 +152,7 @@ particleCount: 120,
 showStates: true,
 heatButtons: true,
 safety: "⚠ 虚拟实验里随便摸沸水，现实中 100℃ 会烫伤——做热学实验先想“烫不烫”，先判断，再伸手",
-badge: { invariant: "没变的是：分子总数"}
+badge: { invariant: "没变的是：分子总数（变的是温度→100℃ 刻度线点亮、水沸腾）"}
 }
 }
 ],
@@ -207,7 +207,7 @@ particleCount: 120,
 showStates: false,
 heatButtons: true,
 safety: "⚠ 干冰 −78℃，现实中徒手拿会冻伤——用镊子夹，不直接用手；虚拟实验里随便玩，现实中绝不许试",
-badge: { invariant: "没变的是：分子总数"}
+badge: { invariant: "没变的是：分子总数（变的是温度→粒子慢下来、干冰升华）"}
 }
 }
 ],
@@ -256,7 +256,7 @@ particleCount: 120,
 showStates: false,
 heatButtons: false,
 brownian: true,
-badge: { invariant: "没变的是：分子总数"}
+badge: { invariant: "没变的是：分子总数（变的是大颗粒被撞出的乱走轨迹）"}
 }
 }
 ],
@@ -315,7 +315,7 @@ widgets: [
 type: "heat-compare",
 params: {
 mass: { min: 0.5, max: 2, step: 0.5, init: 1 }, power: 500,
-badge: { invariant: "没变的是：火力、质量、初温" }
+badge: { invariant: "没变的是：火力、质量、初温（变的是物质→升温曲线的陡缓）" }
 }
 },
 {
@@ -362,7 +362,7 @@ title: "水的“热脾气”",
 blocks: [
 { type: "lead", text: "沿海城市昼夜温差小，沙漠里昼夜温差大——差的就是水的比热容。"},
 { type: "text", html: "水的比热容大：白天吸同样多的热，升温慢；晚上放同样多的热，降温慢——像个“温度缓冲垫”。生活例：暖气片里装水、汽车发动机用水冷却；次例：沿海昼夜温差小；反例：“比热容大的升温快”——错，正好反了。"},
-{ type: "mathlink", text: "数学呼应：代数 6.2 正比例（奠基）——Q–Δt 图像是过原点的直线，斜率 = cm（物理为数学奠基）。"},
+{ type: "mathlink", text: "数学呼应：代数 6.2 正比例（奠基）——Q–Δt 图像是过原点的直线（图像越陡，斜率越大——斜率就是“陡峭程度”的数），斜率 = cm（物理为数学奠基）。"},
 { type: "slogan", text: "水是热量海绵，温差缓冲垫。"}
 ],
 point: "Q–Δt 图像的斜率 = cm：m 一定时，斜率就是比热容的“画像”。"
