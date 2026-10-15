@@ -1845,6 +1845,7 @@
 
     /* 折射模式（p02.2.1）：激光从空气斜射入水，入射角滑块联动折射角 */
     if (p.mode === "refraction") {
+      imgBadge.style.display = "none"; /* 本模式不用像性质徽章，改用 refrSt */
       var n1 = p.n1 || 1, n2 = p.n2 || 1.33;
       var acfg = p.angle || {};
       var sA = uiSlider({ label: "入射角 i", min: acfg.min != null ? acfg.min : 0,
@@ -3900,14 +3901,17 @@
       var d = Math.max(4, 60 - (mx + 9));
       var phi = 100 / d, dPhi = prevPhi == null ? 0 : phi - prevPhi;
       prevPhi = phi;
-      var cur = Math.abs(dPhi) > 0.02 ? (dPhi > 0 ? "in" : "out") : "none";
+      /* 方向口径（楞次定律）：N 极插入 ≡ S 极拔出 → 上⊗下⊙（从左看逆时针）；
+       * S 极插入 ≡ N 极拔出 → 反向 */
+      var nPoleIn = (pole === "N") === (dPhi > 0);
+      var cur = Math.abs(dPhi) > 0.02 ? (nPoleIn ? "in" : "out") : "none";
       /* 感应电流方向标注（双编码：⊙/⊗ 符号 + 文字说明） */
       if (cur !== "none") {
         var topS = cur === "in" ? "⊗" : "⊙", botS = cur === "in" ? "⊙" : "⊗";
         var tTop = svgText(65, 36, topS, "phy-f-label");
-        tTop.setAttribute("fill", cssVar("--phy-current"));
+        tTop.style.fill = cssVar("--phy-current");
         var tBot = svgText(65, 66, botS, "phy-f-label");
-        tBot.setAttribute("fill", cssVar("--phy-current"));
+        tBot.style.fill = cssVar("--phy-current");
         svg.appendChild(tTop); svg.appendChild(tBot);
         svg.appendChild(svgText(65, 29, cur === "in" ? "上入下出" : "上出下入", "phy-note-text"));
       }
@@ -3919,13 +3923,17 @@
           fill: cssVar("--phy-force-a") }));
       svg.appendChild(svgText(42, 90.5, "Φ", "phy-note-text", "start"));
       if (cur === "in") {
-        st.textContent = "插入：Φ 增大 → 感应电流（从左看逆时针），磁场阻碍增大";
+        st.textContent = (dPhi > 0 ? "插入" : "拔出") + "：Φ " + (dPhi > 0 ? "增大" : "减小") +
+          " → 感应电流（从左看逆时针），磁场阻碍" + (dPhi > 0 ? "增大" : "减小");
         st.className = "phy-state phy-state-ok";
-        badge.setReadout("", "Φ 增大 → 感应电流：上 ⊗ 下 ⊙（从磁铁一侧看：逆时针）");
+        badge.setReadout("", "Φ " + (dPhi > 0 ? "增大" : "减小") +
+          " → 感应电流：上 ⊗ 下 ⊙（从磁铁一侧看：逆时针）");
       } else if (cur === "out") {
-        st.textContent = "拔出：Φ 减小 → 感应电流反向（从左看顺时针），磁场阻碍减小";
+        st.textContent = (dPhi > 0 ? "插入" : "拔出") + "：Φ " + (dPhi > 0 ? "增大" : "减小") +
+          " → 感应电流反向（从左看顺时针），磁场阻碍" + (dPhi > 0 ? "增大" : "减小");
         st.className = "phy-state phy-state-ok";
-        badge.setReadout("", "Φ 减小 → 感应电流：上 ⊙ 下 ⊗（从磁铁一侧看：顺时针）");
+        badge.setReadout("", "Φ " + (dPhi > 0 ? "增大" : "减小") +
+          " → 感应电流：上 ⊙ 下 ⊗（从磁铁一侧看：顺时针）");
       } else {
         st.textContent = "磁铁不动：Φ 不变 → 无感应电流";
         st.className = "phy-state";
