@@ -322,7 +322,7 @@ window.CHEM_CH["cm05"] = {
                 },
                 {
                   type: "choice",
-                  stem: "配平 H₂ + O₂ → H₂O 时，下面哪种做法犯了“改下标”的错？",
+                  stem: "配平 H₂ + O₂ → H₂O（待配平）时，下面哪种做法犯了“改下标”的错？",
                   options: [
                     "2H₂ + O₂ ＝ 2H₂O",
                     "H₂ + O₂ → H₂O₂",
