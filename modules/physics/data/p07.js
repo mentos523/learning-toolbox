@@ -231,6 +231,17 @@ window.PHY_CH["p07"] = {
                     recordKey: "phy_guess_p07.2.1",
                     showAfter: "manual"
                   }
+                },
+                /* Y3 公式身份证（交互页 widget 形态；形态/版式复用 p04.1.2-p1 已落地写法） */
+                {
+                  type: "formula-id",
+                  params: {
+                    formula: { mathml: "<math><msub><mi>E</mi><mi>k</mi></msub><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mi>m</mi><msup><mi>v</mi><mn>2</mn></msup></math>", translation: "动能 = ½ × 质量 × 速度平方" },
+                    conditions: ["宏观、低速、惯性系"],
+                    counterexample: "接近光速的粒子：v 快到跟光速比肩时，½mv² 算出的动能比真实值小——牛顿力学\"罢工\"了，得请相对论出场（p17 剧透）",
+                    dimension: "J = kg·(m/s)² ✓",
+                    units: { si: "J", common: "kJ", note: "1 kJ = 1000 J" }
+                  }
                 }
               ],
               point: "v 翻倍，效果不止翻倍——速度是“平方级”的影响。"
