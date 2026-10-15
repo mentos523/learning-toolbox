@@ -49,6 +49,18 @@
       "revision": 2,
       "note": "初审（化学专家队）：初审：答案数值已收录，独立重算见终审；终审（化学专家队）：终审：答案与课程页 checkTable/quiz 一致；有效数字口径（B2）合规",
       "page": "cm06.2.1-p3"
+    },
+    {
+      "id": "cm06.1.2-e5",
+      "lesson": "cm06.1.2",
+      "kind": "equation",
+      "content": "C + 2CuO ＝高温＝ 2Cu + CO₂↑（反应物 C、CuO 均为固体、无气体，气体产物标 ↑；CHEM-R05）",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（修复）",
+      "status": "final_passed",
+      "revision": 3,
+      "note": "复审（化学专家队）：终审打回（CHEM-R05：CO₂ 未标 ↑）→ 修复（p1 equationText 补 ↑）→ 复审通过。配平独立重算通过（C 1=1、Cu 2=2、O 2=2）；同步 3 处一致：cm06.1.2-p2 正文 2 处、cm06.1.2-p3 题干、cm10.3.1-p3 选项（该题为复分解选择题，正确答案仍为 AgNO₃+NaCl 选项，↑ 补入不影响答案）。",
+      "page": "cm06.1.2-p1"
     }
   ]
 }

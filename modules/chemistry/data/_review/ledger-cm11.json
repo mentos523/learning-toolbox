@@ -13,6 +13,18 @@
       "revision": 2,
       "note": "初审（化学专家队）：初审：答案数值已收录，独立重算见终审；终审（化学专家队）：终审：答案与课程页 checkTable/quiz 一致；有效数字口径（B2）合规",
       "page": "cm11.1.1-p3"
+    },
+    {
+      "id": "cm11.1.1-e2",
+      "lesson": "cm11.1.1",
+      "kind": "equation",
+      "content": "2NH₄Cl + Ca(OH)₂ ＝加热＝ CaCl₂ + 2NH₃↑ + 2H₂O（反应物均为固体、无气体，气体产物标 ↑；CHEM-R05）",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（修复）",
+      "status": "final_passed",
+      "revision": 3,
+      "note": "复审（化学专家队）：终审打回（CHEM-R05：NH₃ 未标 ↑）→ 修复（p1 equationText 补 ↑）→ 复审通过。配平独立重算通过（N 2=2、H 10=10、Cl 2=2、Ca 1=1、O 2=2）；H₂O 为液体、反应物有固体，不标 ↓，符合 CHEM-R05。",
+      "page": "cm11.1.1-p1"
     }
   ]
 }
