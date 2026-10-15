@@ -147,6 +147,7 @@ window.CHEM_CH["cm13"] = {
               title: "n—m—V—c",
               blocks: [
                 { type: "lead", text: "上一页你走了两步：质量 → 堆数 → 浓度。三公式一次讲清，外加一个'认旧友'。" },
+                { type: "text", html: "<b>摩尔质量</b>：1 mol 物质的质量，单位是 g/mol，数值上等于该物质的相对分子质量（不是 g！）。" },
                 { type: "text", html: "n = m / M：M 是摩尔质量，单位 g/mol（不是 g！）。n = V / V_m：V_m 是气体摩尔体积，标准状况（0℃、101kPa）下 22.4 L/mol——'标准状况'四个字不能丢！c = n / V：单位 mol/L。" },
                 { type: "physicslink", text: "物理呼应：物理 p06.1.3 大气压强——标准状况的 101kPa 就是 1 个标准大气压；“标准状况”四个字不能丢。" },
                 { type: "oldfriend", text: "（还记得 cm05.2.1 的有效数字直观版吗？规则一样：计算结果的有效数字与测量精度匹配，不编造精度。）" },
@@ -398,7 +399,7 @@ window.CHEM_CH["cm13"] = {
               title: "氯：黄绿色的'双面手'",
               blocks: [
                 { type: "lead", text: "Cl₂ 黄绿色，有毒，但用处极大：自来水消毒、制漂白粉，都靠它。" },
-                { type: "text", html: "<b>可逆符号 ⇌</b>：反应可向两方进行（正向、逆向同时发生）——详细 cm15.1.1 讲。" },
+                { type: "text", html: "<b>可逆符号 ⇌</b>：反应可向两方进行（正向、逆向同时发生）——详细 cm16.1.3 讲。" },
                 { type: "text", html: "Cl₂ 的化学性质：与金属（2Na + Cl₂ ＝点燃＝ 2NaCl）、与非金属（H₂ + Cl₂ ＝点燃＝ 2HCl）、与水（Cl₂ + H₂O ⇌ HCl + HClO，可逆）。HClO 不稳定：2HClO ＝光照＝ 2HCl + O₂↑——有漂白性。" },
                 { type: "text", html: "实验室制法：MnO₂ + 4HCl(浓) ＝△＝ MnCl₂ + Cl₂↑ + 2H₂O，尾气用 NaOH 溶液吸收。漂白粉的有效成分是 Ca(ClO)₂。" },
                 { type: "trap", text: "⚠ 别搞混：氯水 = 盐酸？氯水是混合物！新制氯水久置不变？HClO 见光分解，变成盐酸！" }
