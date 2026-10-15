@@ -562,7 +562,7 @@ window.PHY_CH["p12"] = {
                 },
                 {
                   type: "fill",
-                  stemBefore: "滑动摩擦力 f=μN 只适用于",
+                  stemBefore: "静摩擦力、滑动摩擦力中，能用 f=μN 直接计算大小的是",
                   stemAfter: "摩擦",
                   answer: "滑动",
                   accept: ["滑动摩擦"],

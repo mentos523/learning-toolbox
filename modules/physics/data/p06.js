@@ -484,10 +484,10 @@ window.PHY_CH["p06"] = {
                 {
                   type: "fill",
                   stemBefore: "液体压强公式 p=ρgh 中，h 指的是",
-                  stemAfter: "（填“深度”或“高度”）",
+                  stemAfter: "",
                   answer: "深度",
                   accept: [],
-                  hint: "（从液面往下量）",
+                  hint: "（从液面开始，往哪个方向量？）",
                   tip: "h 从液面往下量——深度不是高度，这是本课第一坑。"
                 },
                 {
