@@ -58,13 +58,13 @@ window.PHY_CH["p16"] = {
                 {
                   type: "side-compare",
                   params: {
-                    left: { title: "电子漂移（士兵）", rows: ["速度：mm/s", "电子的真实速度", "跑 1m 要十几天"] },
+                    left: { title: "电子漂移（士兵）", rows: ["速度：约 0.07 mm/s（每秒不到 1/10 毫米）", "电子的真实速度", "跑 1m 要几个小时"] },
                     right: { title: "电场传播（口令）", rows: ["速度：近光速", "'口令'传到全电路", "全电路同时起步"] },
                     verdict: "灯瞬间亮：口令快，不是士兵快。"
                   }
                 }
               ],
-              point: "电子漂移 mm/s，电场近光速——灯亮靠“口令”。"
+              point: "电子漂移约 0.07 mm/s（比 mm/s 还慢十几倍），电场近光速——灯亮靠“口令”。"
             },
             {
               id: "p16.1.1-p2",
@@ -72,7 +72,7 @@ window.PHY_CH["p16"] = {
               title: "电流的微观本质",
               blocks: [
                 { type: "lead", text: "第 1 页你猜了：灯亮是'口令'到了——现在给电流办'身份证'。" },
-                { type: "text", html: "微观本质：金属里跑的是自由电子，漂移仅 mm/s；电场近光速建立，全电路电子同时起步。" },
+                { type: "text", html: "微观本质：金属里跑的是自由电子，漂移仅约 0.07 mm/s（每秒连十分之一毫米都走不到）；电场近光速建立，全电路电子同时起步。" },
                 { type: "text", html: '电流 <span class="phy-f" data-f="I"></span>；电阻定律 <span class="phy-f" data-f="R"></span>：R 由材料 ρ、长度 l、横截面积 S 决定。' },
                 {
                   type: "formula-id",
@@ -86,7 +86,7 @@ window.PHY_CH["p16"] = {
                   units: { si: "Ω", note: "ρ 的单位是 Ω·m" }
                 },
                 { type: "trap", text: "⚠️ 别搞混：灯瞬间亮是电子跑得快——错！是电场近光速建立。" },
-                { type: "mathlink", text: "数学呼应：代数 ch00 数量级——10⁻³ vs 10⁸，差 11 个数量级。" },
+                { type: "mathlink", text: "数学呼应：代数 ch00 数量级——10⁻⁴ vs 10⁸，差 12 个数量级。" },
                 { type: "oldfriend", text: "认旧友：p08.2.3 欧姆定律——补上'适用条件'和'微观本质'。" },
                 { type: "slogan", text: "电流是队伍在走，不是士兵在跑。" }
               ],
@@ -628,7 +628,7 @@ window.PHY_CH["p16"] = {
               questions: [
                 {
                   type: "review",
-                  html: '本章四句话：① 电流：电子漂移 mm/s，电场近光速建立——<span class="phy-f" data-f="I"></span>（回填 p08.2.3：限金属导体、纯电阻）；② 磁场："能让小磁针转动"的空间，<span class="phy-f" data-f="B"></span>（限 B⊥I）——左手管受力，右手管磁场；洛伦兹力永不做功；③ 电磁感应：楞次"增反减同"定方向，<span class="phy-f" data-f="E"></span>定大小；④ 发电机：机械能→电能，能量守恒。'
+                  html: '本章四句话：① 电流：电子漂移约 0.07 mm/s（慢！），电场近光速建立——<span class="phy-f" data-f="I"></span>（回填 p08.2.3：限金属导体、纯电阻）；② 磁场："能让小磁针转动"的空间，<span class="phy-f" data-f="B"></span>（限 B⊥I）——左手管受力，右手管磁场；洛伦兹力永不做功；③ 电磁感应：楞次"增反减同"定方向，<span class="phy-f" data-f="E"></span>定大小；④ 发电机：机械能→电能，能量守恒。'
                 }
               ],
               point: "带上'左手右手分工'和'增反减同三步'，进习题。"
@@ -643,7 +643,7 @@ window.PHY_CH["p16"] = {
                   stem: "开关闭合后灯泡几乎瞬间亮，是因为——",
                   options: ["电子漂移速度极快", "电场以近光速建立，全电路电子同时起步", "电流不需要时间"],
                   answer: 1,
-                  tip: "电子漂移仅 mm/s——是'口令'快，不是'士兵'快。"
+                  tip: "电子漂移仅约 0.07 mm/s——是'口令'快，不是'士兵'快。"
                 },
                 {
                   type: "choice",
@@ -662,11 +662,11 @@ window.PHY_CH["p16"] = {
                 {
                   type: "fill",
                   stemBefore: "回 p16.1.1 第 1 页“士兵 vs 口令”对照表：电子的真实漂移速度约",
-                  stemAfter: "m/s（数量级）",
-                  answer: "10⁻³",
-                  accept: ["1e-3", "10^-3"],
-                  hint: "（毫米每秒）",
-                  tip: "p16.1.1 对照表：电子漂移 mm/s，电场近光速——灯亮靠“口令”，不是“士兵”。"
+                  stemAfter: "mm/s",
+                  answer: "0.07",
+                  accept: ["0.1", "约0.07", "7×10⁻²"],
+                  hint: "（每秒连十分之一毫米都走不到）",
+                  tip: "p16.1.1 对照表：电子漂移约 0.07 mm/s——比 mm/s 还慢十几倍；电场近光速——灯亮靠“口令”，不是“士兵”。"
                 },
                 {
                   type: "choice",
