@@ -214,6 +214,22 @@
     body.style.display = body.style.display === "none" ? "" : "none";
   }
 
+  /* G1（黄队全局）：oldfriend/mathlink 中的课号引用（如 cm05.2.1）自动转深链，
+   * 并在课号后补课名（课名取自数据 findLesson；找不到该课时保持纯文本）。
+   * 一处改，全书 16 块生效。 */
+  var LESSON_ID_RE = /cm\d{2}\.\d\.\d(?!\d)/g;
+  function linkifyLessons(text) {
+    var t = String(text == null ? "" : text);
+    if (t.indexOf("cm") < 0) return esc(t);
+    /* esc 不转义课号字符（字母/数字/点），转义后仍可匹配 */
+    return esc(t).replace(LESSON_ID_RE, function (id) {
+      var f = findLesson(id);
+      if (!f) return id;
+      return '<a class="chm-lesson-link" href="#' + id + '/1">' +
+        esc(id) + "《" + esc(f.lesson.title || "") + "》</a>";
+    });
+  }
+
   /* ---------------- 讲解页块渲染 ---------------- */
   function renderBlock(b, formulas) {
     if (b.type === "lead") return el("p", "chm-lead", esc(b.text));
@@ -224,11 +240,11 @@
     }
     if (b.type === "trap") return el("div", "chm-trap", esc(b.text));
     if (b.type === "oldfriend") {
-      var o = el("div", "chm-oldfriend", b.text || "");
+      var o = el("div", "chm-oldfriend", linkifyLessons(b.text));
       hydrateFormulas(o, formulas);
       return o;
     }
-    if (b.type === "mathlink") return el("div", "chm-mathlink", esc(b.text));
+    if (b.type === "mathlink") return el("div", "chm-mathlink", linkifyLessons(b.text));
     if (b.type === "slogan") return el("div", "chm-slogan", esc(b.text));
     if (b.type === "widget") {
       return renderWidget((b.widget || {}).type, (b.widget || {}).params);
@@ -949,6 +965,12 @@ function chemElement(z) {
     if (CHEM_ELEMENTS[i].z === z) return CHEM_ELEMENTS[i];
   return null;
 }
+/* C2（黄队）：元素符号 → 中文名（查 B11 冻结表；查不到回退符号本身） */
+function chemElemName(sym) {
+  for (var i = 0; i < CHEM_ELEMENTS.length; i++)
+    if (CHEM_ELEMENTS[i].s === sym) return CHEM_ELEMENTS[i].n;
+  return sym;
+}
 
 /* ---------------- 化学式全解析（含括号/结晶水点号） ----------------
  * "Ba(OH)₂" → {Ba:1,O:2,H:2}；"CuSO₄·5H₂O" → {Cu:1,S:1,O:9,H:10}。
@@ -1542,12 +1564,12 @@ function widgetMoleculeBuild(p) {
       var d = Math.hypot(A.x - B.x, A.y - B.y);
       if (d < 8) {
         if (bondCount(A) >= A.maxBonds) {
-          warn(A.element + "（" + A.element + "）只能形成 " + A.maxBonds +
+          warn(chemElemName(A.element) + "（" + A.element + "）只能形成 " + A.maxBonds +
             " 个共价键——成键数是元素的\"脾气\"。");
           flash(A.g); continue;
         }
         if (bondCount(B) >= B.maxBonds) {
-          warn(B.element + "（" + B.element + "）只能形成 " + B.maxBonds +
+          warn(chemElemName(B.element) + "（" + B.element + "）只能形成 " + B.maxBonds +
             " 个共价键——成键数是元素的\"脾气\"。");
           flash(B.g); continue;
         }
@@ -3303,7 +3325,9 @@ function widgetRedoxTrack(p) {
         b.setAttribute("data-vkey", key);
         b.setAttribute("aria-label", "给 " + sp.formula + " 中的 " + tk.v + " 标化合价");
         (elBtns[key] = elBtns[key] || []).push({ btn: b, side: i < nR ? "r" : "p" });
-        b.addEventListener("click", function () { openPicker(key, b); });
+        /* C10 模式分离（黄队）：标价模式点击只开选择器（不记 tap）；
+         * 画箭头模式点击只记 tap（不开选择器）。 */
+        b.addEventListener("click", function () { if (rxMode === "mark") openPicker(key, b); });
         fwrap.appendChild(b);
       } else {
         fwrap.appendChild(el("span", "chm-sub-plain", esc(tk.v)));
@@ -3336,6 +3360,7 @@ function widgetRedoxTrack(p) {
         else warn(key + " 的化合价不是 " + v + "——再想想（单质为 0 记住了吗？）。");
         closePicker();
         checkMotto();
+        updateArrowBtn();  /* C10：四价全标对后解锁"开始画箭头" */
       });
       picker.appendChild(b);
     });
@@ -3349,6 +3374,56 @@ function widgetRedoxTrack(p) {
     if (picker && picker.parentNode) picker.parentNode.removeChild(picker);
     picker = null;
   }
+
+  /* C10 模式分离（黄队 P0）：默认"标价模式"（点击只开选择器，不记 tap）；
+   * 四价全标对后点"开始画箭头"进入"画箭头模式"（点击只记 tap，不开选择器）。
+   * 现有文案全部保留。 */
+  var rxMode = "mark";  /* "mark" | "arrow" */
+  function allMarkedOk() {
+    var keys = Object.keys(elBtns);
+    if (!keys.length) return false;
+    return keys.every(function (k) {
+      var std = (valences.reactants && valences.reactants[k]) ||
+                (valences.products && valences.products[k]);
+      return marked[k] != null && norm(marked[k]) === norm(std || "");
+    });
+  }
+  var modeBar = el("div", "chm-rx-modebar", "");
+  var modeHint = el("span", "chm-note", "标价模式：点击元素只开选择器。");
+  var startArrowBtn = el("button", "chm-q-check", "开始画箭头 →");
+  startArrowBtn.type = "button";
+  startArrowBtn.disabled = true;
+  startArrowBtn.title = "把所有元素的化合价都标对后，才能开始画箭头";
+  var backMarkBtn = el("button", "chm-q-check", "← 返回标价");
+  backMarkBtn.type = "button";
+  backMarkBtn.style.display = "none";
+  modeBar.appendChild(modeHint);
+  modeBar.appendChild(startArrowBtn);
+  modeBar.appendChild(backMarkBtn);
+  box.appendChild(modeBar);
+  function updateArrowBtn() {
+    var ok = allMarkedOk();
+    startArrowBtn.disabled = !ok;
+    if (ok && rxMode === "mark")
+      modeHint.textContent = "四个化合价都标对了——可以开始画箭头。";
+  }
+  startArrowBtn.addEventListener("click", function () {
+    if (startArrowBtn.disabled) return;
+    closePicker();
+    tapStart = null;
+    rxMode = "arrow";
+    startArrowBtn.style.display = "none";
+    backMarkBtn.style.display = "";
+    modeHint.textContent = "画箭头模式：点击只记箭头端点，不开选择器。";
+  });
+  backMarkBtn.addEventListener("click", function () {
+    rxMode = "mark";
+    tapStart = null;
+    backMarkBtn.style.display = "none";
+    startArrowBtn.style.display = "";
+    modeHint.textContent = "标价模式：点击元素只开选择器。";
+    updateArrowBtn();
+  });
 
   /* 电子得失箭头（tap：点起点 → 点终点，不许手绘） */
   var arrowBox = el("div", "chm-rx-arrowzone", "");
@@ -3365,7 +3440,8 @@ function widgetRedoxTrack(p) {
   Object.keys(elBtns).forEach(function (key) {
     elBtns[key].forEach(function (rec) {
       rec.btn.addEventListener("click", function () {
-        /* 与标价选择器共存：点元素既开选择器也记 tap；tap 逻辑独立 */
+        /* C10 模式分离：只在画箭头模式记 tap；标价模式下点击只开选择器 */
+        if (rxMode !== "arrow") return;
         if (!tapStart) {
           tapStart = { key: key, btn: rec.btn };
           rec.btn.classList.add("tap-src");
@@ -3933,6 +4009,15 @@ function widgetReadGaugeChem(p) {
       });
       unit.textContent = "mL（分度值 " + division + "mL）";
       svg.appendChild(unit);
+      /* Y10（黄队首选 a）：视线相关读数显示——俯视 真值+0.2（偏大示意）/
+       * 仰视 真值−0.2（偏小示意）/ 水平显示真值；判分逻辑不变（仍只认水平读数） */
+      if (readout) {
+        var shown = reading, tag = "";
+        if (sight === "over") { shown = reading + 0.2; tag = "（俯视读数，偏大示意）"; }
+        else if (sight === "under") { shown = reading - 0.2; tag = "（仰视读数，偏小示意）"; }
+        readout.innerHTML = "读数：<b>" + fmtN(shown, 1) + " mL</b>" +
+          (tag ? '<span class="chm-readout-tag">' + esc(tag) + "</span>" : "");
+      }
     }
     var slider = uiSlider({
       label: "液面位置", min: 0, max: maxV, step: division, init: 0, unit: "mL",
@@ -3940,6 +4025,11 @@ function widgetReadGaugeChem(p) {
     });
     slider.on(function (v) { drawCyl(v); });
     stage.appendChild(slider.row);
+    var readout = null;
+    if (sightDemo) {
+      readout = el("div", "chm-gauge-readout", "");
+      stage.appendChild(readout);
+    }
     drawCyl(0);
     if (sightDemo) {
       var srow = el("div", "chm-btn-row", "");
@@ -4781,6 +4871,12 @@ var CHEM_NEW_WIDGETS = {
     setTimeout(function () { drawerAnim = false; }, 280);
     drawerOpen = true;
     renderDrawer();
+    /* F9（白队）：抽屉下移到顶栏下方——顶栏（z-index 95）在抽屉(91)/遮罩(90)之上，
+     * 抽屉打开状态下顶栏「目录」按钮仍可点（按钮再点关闭）。 */
+    try {
+      var hd = appRoot ? appRoot.querySelector(".chm-head") : null;
+      drawer.style.top = ((hd && hd.offsetHeight) || 64) + "px";
+    } catch (e) {}
     drawerMask.classList.add("open");
     drawer.classList.add("open");
     drawer.classList.add("chm-drawer-anim");

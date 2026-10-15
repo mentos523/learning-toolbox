@@ -114,6 +114,10 @@ body[data-theme="dark"] #chemistry-app {
   gap: 10px;
   padding: 8px 0 6px;
   border-bottom: 1px solid var(--chm-line);
+  /* F9（白队）：抽屉打开时顶栏仍可点——顶栏提到抽屉(91)/遮罩(90)之上；
+   * 抽屉本体在 openDrawer() 里按顶栏实测高度下移，保证"按钮再点关闭"可达。 */
+  position: relative;
+  z-index: 95;
 }
 .chm-head h1 {
   margin: 0;
@@ -555,6 +559,7 @@ body[data-theme="dark"] #chemistry-app .chm-state-bad { background: #3a1d18; col
   cursor: pointer;
   border-bottom: 2px dotted var(--chm-ink-soft);  /* 陷阱 affordance：虚线下划线 */
   line-height: 1;
+  vertical-align: sub;           /* F1–F8（白队）：化学式下标必须下沉（对齐 Y1 .chm-sub-seg） */
 }
 .chm-sub .chm-lock { font-size: 0.9em; margin-left: 1px; }  /* 锁形小标 */
 .chm-sub-plain { font-size: 0.72em; }  /* trapSubscript:false 时的静态下标 */
@@ -1062,6 +1067,20 @@ body[data-theme="dark"] #mathml-warn { background: #4a3a1a; color: #fde68a; }
 }
 #chemistry-app .chm-rx-arrowsvg { width: 100%; height: 60px; display: block; margin: 6px 0; }
 #chemistry-app .chm-rx-erow { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin: 10px 0; }
+/* C10 模式分离（黄队）：标价模式 / 画箭头模式切换条 */
+#chemistry-app .chm-rx-modebar {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  margin: 10px 0; padding: 8px 10px;
+  border: 1px dashed var(--chm-line); border-radius: 10px;
+}
+#chemistry-app .chm-rx-modebar .chm-note { flex: 1; min-width: 180px; }
+#chemistry-app .chm-rx-modebar button[disabled] { opacity: 0.45; cursor: not-allowed; }
+/* G1：课号引用深链（oldfriend/mathlink 自动转链） */
+.chm-lesson-link { color: var(--chm-target, #D55E00); font-weight: 700; text-decoration: underline; }
+/* Y10：视线相关读数显示 */
+#chemistry-app .chm-gauge-readout { font-size: 1.05rem; margin: 8px 0 2px; }
+#chemistry-app .chm-gauge-readout b { color: var(--chm-target); }
+#chemistry-app .chm-readout-tag { font-size: 0.8rem; color: var(--chm-ink-soft); margin-left: 6px; }
 
 /* ---------- Y2 safety-badge ---------- */
 #chemistry-app .chm-sbadge { margin: 4px 0 10px; }
