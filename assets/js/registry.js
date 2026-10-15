@@ -41,5 +41,15 @@ window.TOOLBOX_MODULES = [
     color: "#10b981",
     path: "modules/physics/index.html",
     status: "ready"
+  },
+  {
+    slug: "chemistry",
+    name: "化学",
+    tagline: "22 章 · 130 课",
+    description: "从九年级出发，一路到高中：宏观—微观—符号三重表征全程对齐，130 课虚拟实验探究。",
+    icon: "flask",
+    color: "#8b5cf6",
+    path: "modules/chemistry/index.html",
+    status: "ready"
   }
 ];

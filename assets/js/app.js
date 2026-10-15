@@ -19,7 +19,11 @@
          '<ellipse cx="24" cy="24" rx="14" ry="6"/>' +
          '<ellipse cx="24" cy="24" rx="14" ry="6" transform="rotate(60 24 24)"/>' +
          '<ellipse cx="24" cy="24" rx="14" ry="6" transform="rotate(120 24 24)"/>' +
-         '</g><circle cx="24" cy="24" r="3" fill="COLOR"/></svg>'
+         '</g><circle cx="24" cy="24" r="3" fill="COLOR"/></svg>',
+    flask: '<svg viewBox="0 0 48 48" width="44" height="44" aria-hidden="true">' +
+         '<rect x="4" y="8" width="40" height="32" rx="6" fill="COLOR" opacity="0.15"/>' +
+         '<path d="M20 10 h8 v7 l9 19 a3 3 0 0 1 -2.7 4 H13.7 a3 3 0 0 1 -2.7 -4 l9 -19 z" fill="none" stroke="COLOR" stroke-width="2"/>' +
+         '<path d="M15 29 h18 l2.2 4.6 a2.5 2.5 0 0 1 -2.2 3.4 H15 a2.5 2.5 0 0 1 -2.2 -3.4 z" fill="COLOR" opacity="0.45"/></svg>'
   };
 
   function icon(name, color) {
