@@ -59,7 +59,8 @@
 
   function bannerHasUpdate(remote) {
     showBanner(
-      '<span>🎉 发现新版本 <b>v' + esc(remote) + "</b>（当前 v" + esc(localVersion()) + "）</span> " +
+      '<span>🎉 发现新版本 <b>v' + esc(remote) + "</b>（当前 v" + esc(localVersion()) + "）" +
+      "，更新会强制重新加载全部文件（含各学科模块），学习进度不受影响。</span> " +
       '<button id="do-update-btn" class="update-btn update-btn-primary">更新到最新</button>'
     );
     setDot(true);
@@ -74,7 +75,9 @@
       return;
     }
     if (isPagesHost()) {
-      // Pages 域名下：清 Cache Storage → 带 cache-bust 参数硬重载
+      // Pages 域名下：清 Cache Storage → 带 cache-bust 参数硬重载。
+      // 各模块 css/js 引用自带 ?v=<版本号> 指纹（见模块 index.html），新版 HTML
+      // 必然拉取新版模块文件；localStorage（ltb-* 学习进度）全程不碰。
       showBanner("<span>⏳ 正在拉取最新版本…</span>");
       var clear = (window.caches && caches.keys)
         ? caches.keys().then(function (ks) {
