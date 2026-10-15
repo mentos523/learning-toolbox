@@ -340,7 +340,7 @@ window.PHY_CH["p15"] = {
               kind: "explain",
               title: "电容：器件的'脾气'",
               blocks: [
-                { type: "lead", text: "第 1 页你亲手验证了：U 翻倍，Q 跟着翻倍，斜率 C 纹丝不动——现在办身份证。" },
+                { type: "lead", text: "U 翻倍，Q 跟着翻倍，斜率 C 不动——办身份证。" },
                 {
                   type: "formula-id",
                   formula: {
@@ -352,9 +352,9 @@ window.PHY_CH["p15"] = {
                   dimension: "F = C ÷ V ✓",
                   units: { si: "F（法拉）", common: "μF、pF", note: "1F=10⁶μF=10¹²pF" }
                 },
-                { type: "text", html: "全书红线「比值定义法四辨析」第四落点（收官）：C 与 Q、U 无关！电容是电容器'装电荷的本事'，由结构决定：正对面积 S 越大、板间距 d 越小，C 越大（定性）。" },
-                { type: "trap", text: "⚠️ 别搞混：电容与 Q 成正比、与 U 成反比——错！全书第四次，同一个坑；电容器'储存电荷'——不准确！储存的是电场能量。" },
-                { type: "oldfriend", text: "认旧友：p04.1.2 密度、p08.2.2 电阻、p15.1.3 电场强度——'比值定义 ≠ 正反比'，四连击收官：等号不代表因果。" },
+                { type: "text", html: "红线「比值定义法四辨析」第四落点（收官）：C 与 Q、U 无关！电容是电容器“装电荷的本事”，由结构决定：S 越大、d 越小，C 越大（定性）。" },
+                { type: "trap", text: "⚠️ 别搞混：“电容与 Q 成正比”——错！全书第四次，同一个坑；“储存电荷”——不准确！存的是电场能量。" },
+                { type: "oldfriend", text: "认旧友：p04.1.2 密度、p08.2.2 电阻、p15.1.3 场强——“比值定义 ≠ 正反比”四连击收官。" },
                 { type: "mathlink", text: "数学呼应：代数 6.2 一次函数（奠基）——Q–U 图像斜率 = C。" },
                 { type: "slogan", text: "电容是器件的脾气。" }
               ],
@@ -415,8 +415,8 @@ window.PHY_CH["p15"] = {
               kind: "explain",
               title: "先加速，再偏转",
               blocks: [
-                { type: "lead", text: "第 1 页的直线：y 跟 U₂ 成正比——但斜率里还藏着 q、l、v₀、d。" },
-                { type: "text", html: '加速：电子被电压 U 加速，电场力做功 qU 全变成动能：<span class="phy-f" data-f="acc"></span>——算出射速度 v₀。' },
+                { type: "lead", text: "第 1 页直线：y 跟 U₂ 成正比——斜率里还藏着 q、l、v₀、d。" },
+                { type: "text", html: '加速：电子被电压 U 加速，qU 全变成动能<span class="phy-f" data-f="acc"></span>——算出射速度 v₀。' },
                 {
                   type: "formula-id",
                   formula: {
@@ -428,13 +428,13 @@ window.PHY_CH["p15"] = {
                   dimension: "J = C·V ✓",
                   units: { si: "J", note: "qU 是电场力做的功" }
                 },
-                { type: "text", html: '偏转：电子水平射入偏转电场——水平匀速、竖直匀加速，轨迹是抛物线：<span class="phy-f" data-f="defl"></span>。"类平抛"的条件：电场力恒定（匀强电场）。' },
-                { type: "trap", text: "⚠️ 别搞混：偏转距离只与电压有关——错！还与 v₀、l、d 有关；'类平抛'即平抛——不完全！受力恒定才成立。" },
-                { type: "oldfriend", text: "认旧友：p13.1.3 平抛运动——水平匀速+竖直匀加速，同一套动作，换了个'导演'（电场力）。" },
+                { type: "text", html: '偏转：电子水平射入偏转电场——水平匀速、竖直匀加速，轨迹抛物线<span class="phy-f" data-f="defl"></span>。"类平抛"的条件：电场力恒定（匀强电场）。' },
+                { type: "trap", text: "⚠️ 别搞混：“偏转距离只与电压有关”——错！还与 v₀、l、d 有关；“类平抛即平抛”——不完全！" },
+                { type: "oldfriend", text: "认旧友：p13.1.3 平抛运动——水平匀速+竖直匀加速，同一套动作，换了“导演”（电场力）。" },
                 { type: "mathlink", text: "数学呼应：代数 7.1 抛物线（奠基）——偏转轨迹是抛物线。" },
-                { type: "slogan", text: "先加速算速度，再偏转走抛物线。" }
+                { type: "slogan", text: "先加速，再偏转走抛物线。" }
               ],
-              point: "加速算 v₀，偏转走抛物线——示波管就是这么画图的。"
+              point: "加速算 v₀，偏转走抛物线——示波管就这么画图。"
             },
             {
               id: "p15.1.6-p3",
