@@ -471,12 +471,12 @@ window.PHY_CH["p04"] = {
                 },
                 {
                   type: "fill",
-                  stemBefore: "水的密度是",
-                  stemAfter: "kg/m³，合",
-                  answer: "1000，1",
-                  accept: ["1000,1", "1000，1"],
-                  hint: "（g/cm³）",
-                  tip: "1g/cm³ = 1000kg/m³——水的密度是 1g/cm³，记住这个锚点。"
+                  stemBefore: "回 p04.1.2 公式卡：1 g/cm³ =",
+                  stemAfter: "kg/m³",
+                  answer: "1000",
+                  accept: ["1000"],
+                  hint: "（一千）",
+                  tip: "p04.1.2 公式卡：1 g/cm³ = 1000 kg/m³——单位换算别丢 1000。"
                 },
                 {
                   type: "choice",
