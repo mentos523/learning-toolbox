@@ -237,7 +237,7 @@ window.PHY_CH["p05"] = {
               id: "p05.2.1-p1",
               kind: "interact",
               title: "路面越光滑，滑得越远",
-              exploreTip: "把摩擦力 f 从大往小拖：阻力越小，小车“自己滑”得越久（重力 G 大小方向不变）。再猜：路面完全光滑（想象），会怎样？",
+              exploreTip: "把摩擦力 f 从大往小拖：阻力越小，小车滑得越久（G 大小方向不变）。再猜：路面完全光滑（想象），会怎样？",
               widgets: [
                 {
                   type: "force-drag",
