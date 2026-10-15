@@ -218,7 +218,7 @@ window.PHY_CH["p04"] = {
               kind: "explain",
               title: "比值定义 ≠ 正反比",
               blocks: [
-                { type: "lead", text: "第 1 页你亲手验证了：m 翻倍，V 也翻倍，ρ 纹丝不动。现在给它办“身份证”。" },
+                { type: "lead", text: "m 翻倍、V 翻倍，ρ 不动——办“身份证”。" },
                 {
                   type: "formula-id",
                   formula: {
@@ -226,17 +226,17 @@ window.PHY_CH["p04"] = {
                     translation: "密度 = 质量 ÷ 体积"
                   },
                   conditions: ["同种物质", "状态、温度一定"],
-                  counterexample: "蜡烛熔成蜡油：状态变了，ρ 跟着变——“同种物质 ρ 一定”这条就失效了",
+                  counterexample: "蜡烛熔成蜡油：状态变了，“同种物质 ρ 一定”就失效",
                   dimension: "kg/m³ = kg ÷ m³ ✓",
                   units: { si: "kg/m³", common: "g/cm³", note: "1 g/cm³ = 1000 kg/m³" }
                 },
-                { type: "text", html: "比值定义 = 用两个量给第三个量「起名字」，不是说它俩决定它。密度是物质的脾气——脾气是它自己的，跟「量」它的人无关。（全书红线「比值定义法四辨析」第一落点：电阻、电场强度、电容还要再考三次。）" },
-                { type: "trap", text: "⚠️ 别搞混：ρ 与 m 成正比、与 V 成反比——错。m 翻倍时 V 跟着翻倍，比值 m/V 不动；ρ 是物质的脾气。" },
-                { type: "text", html: "正反比判定三步法：① 看公式里谁变了、谁跟着变；② 看「脾气」变没变；③ <span class=\"phy-f\" data-f=\"rui\"></span> 里，U 变 I 跟着变，R 动都不动——所以 R 与 U、I 无关。" },
-                { type: "oldfriend", text: "认旧友：p08.2.2 电阻——<span class=\"phy-f\" data-f=\"rui\"></span> 式陷阱再现。带上今天这句“等号不代表因果”去。" },
+                { type: "text", html: "比值定义 = 用两个量给第三个量「起名字」——起名字 ≠ 定因果。（红线「比值定义法四辨析」第一落点：电阻、电场强度、电容还要再考三次。）" },
+                { type: "trap", text: "⚠️ 别搞混：ρ 与 m 成正比、与 V 成反比——错！m 翻倍 V 跟着翻倍，比值不动；ρ 是物质的脾气。" },
+                { type: "text", html: "正反比判定三步：① 谁变、谁跟着变；② 「脾气」变没变；③ <span class=\"phy-f\" data-f=\"rui\"></span> 里 U 变 I 跟着变，R 不动——R 与 U、I 无关。" },
+                { type: "oldfriend", text: "认旧友：p08.2.2 电阻<span class=\"phy-f\" data-f=\"rui\"></span>陷阱再现——带上“等号不代表因果”去。" },
                 { type: "slogan", text: "等号不代表因果。" }
               ],
-              point: "物理公式都是“有条件的真话”：背公式先背条件——这是公式身份证的规矩。"
+              point: "公式都是“有条件的真话”：先背条件，再背公式。"
             },
             /* ---------- p4：练习页（Y3 判分） ---------- */
             {

@@ -337,24 +337,24 @@ id: "p03.2.2-p2",
 kind: "explain",
 title: "内能与热量",
 blocks: [
-{ type: "lead", text: "分子在动（动能）、分子间有力（势能）——加起来，就是内能。"},
-{ type: "text", html: "<strong>内能</strong>（标量，单位<strong>焦耳 J</strong>，SI）：物体内部所有分子动能和分子势能的总和。<strong>热量 Q</strong>（标量，单位 J）：热传递过程中转移的能量——<strong>热量是过程量</strong>，只能说“吸收/放出”，不能说“含有/具有”。"},
+{ type: "lead", text: "分子在动（动能）、分子间有力（势能）——加起来就是内能。"},
+{ type: "text", html: "<strong>内能</strong>（标量，J）：所有分子动能 + 势能的总和。<strong>热量 Q</strong>（标量，J）：热传递中转移的能量——<strong>热量是过程量</strong>，只说“吸收/放出”，不说“含有/具有”。"},
 {
 type: "formula-id",
 formula: {
 mathml: "<math><mi>Q</mi><mo>=</mo><mi>c</mi><mi>m</mi><mi>&#916;</mi><mi>T</mi></math>",
 translation: "吸（放）热量 = 比热容 × 质量 × 升（降）温度"
 },
-conditions: ["无物态变化", "无化学变化（只升温/降温）"],
-counterexample: "水烧到 100℃ 继续加热：温度不动，Q=cmΔt 失效——热量去汽化了",
+conditions: ["无物态变化", "无化学变化"],
+counterexample: "水烧开后继续加热：温度不动，Q=cmΔt 失效——热量去汽化了",
 dimension: "J = J/(kg·℃) × kg × ℃ ✓",
-units: { si: "J", common: "kJ", note: "c 的单位 J/(kg·℃)：1kg 物质升温 1℃ 吸的热"}
+units: { si: "J", common: "kJ", note: "1kg 物质升温 1℃ 吸的热"}
 },
-{ type: "text", html: "<strong>比热容 c</strong>（标量，单位 <strong>J/(kg·℃)</strong>）：1kg 物质温度升高 1℃ 吸收的热量。水 c = 4.2×10³ J/(kg·℃)——自然界数一数二的“热量海绵”。"},
-{ type: "trap", text: "⚠️ 别搞混：温度越高的物体内能越大——错（内能还跟质量、状态有关）；热量是一种物质——错（热量是过程量，审计清单第 6 条）。"},
+{ type: "text", html: "<strong>比热容 c</strong>：1kg 物质升高 1℃ 吸收的热量。水的 c=4.2×10³ J/(kg·℃)——“热量海绵”。"},
+{ type: "trap", text: "⚠️ 别搞混：“温度越高内能越大”——错（还跟质量、状态有关）；“热量是一种物质”——错（热量是过程量）。"},
 { type: "slogan", text: "内能是家底，热量是流水。"}
 ],
-point: "内能 vs 机械能：一个管微观（分子），一个管宏观（整体运动）——两本账，别混。"
+point: "内能管微观，机械能管宏观——两本账，别混。"
 },
 /* ---------- p3：讲解页 ---------- */
 {
