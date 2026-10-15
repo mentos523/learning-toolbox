@@ -131,6 +131,12 @@ function makeSandbox(hash) {
     navigator: {},
     console,
     __store: store,
+    /* 组件渲染器用的计时器（stub 透传 node 计时器） */
+    setTimeout: (...a) => setTimeout(...a),
+    clearTimeout: (...a) => clearTimeout(...a),
+    setInterval: (...a) => setInterval(...a),
+    clearInterval: (...a) => clearInterval(...a),
+    performance: { now: () => Date.now() },
   };
   sandbox.window = sandbox;
   sandbox.globalThis = sandbox;
@@ -280,6 +286,122 @@ const fail = (m) => { console.log("  [FAIL] " + m); fails++; };
   (html.includes("p04") && html.includes("质量与密度"))
     ? ok("浏览器显示 p04（仅已就位章节）") : fail("浏览器章节缺失");
   !html.includes("p05") ? ok("未就位章节不显示（p05）") : fail("未就位章节泄露");
+}
+
+console.log(fails === 0 ? "\n[PASS] 物理引擎烟雾测试全部通过" : `\n[FAIL] ${fails} 项未通过`);
+
+/* ---------- 第四轮：15 种组件最小渲染冒烟（P1–P10/Y1–Y5） ---------- */
+{
+  const { sandbox } = makeSandbox("");
+  const P = sandbox.window.PHY;
+  const body = sandbox.document.body;
+  const EXPECTED_TYPES = ["force-drag", "motion-sim", "circuit-build", "optics-ray",
+    "wave-tune", "pulley-lever", "collision-lab", "field-viz", "thermo-sim",
+    "spring-shm", "guess-verify", "read-gauge", "formula-id", "graph-reader",
+    "side-compare"];
+  const missing = EXPECTED_TYPES.filter(t => !(P.types || []).includes(t));
+  missing.length === 0 ? ok("PHY.types 含全部 15 种组件类型") : fail("PHY.types 缺失：" + missing.join(","));
+  (P.types || []).includes("mv-lab") && (P.types || []).includes("slope-compare")
+    ? ok("PHY.types 保留试点 mv-lab/slope-compare") : fail("试点类型丢失");
+
+  const cases = [
+    ["force-drag", { body: { x: 50, y: 40, size: 15, label: "木块" },
+      forces: [
+        { id: "g", kind: "gravity", label: "G", angleDeg: 270, mag: 10, fixed: true },
+        { id: "t", kind: "pull", label: "T", angleDeg: 0, mag: 6, min: 0, max: 20 },
+        { id: "f", kind: "friction", label: "f", angleDeg: 180, mag: 6 }],
+      showResultant: true, badge: { invariant: "没变的是：质量" } },
+      [".phy-stage", ".phy-badge", ".phy-state"]],
+    ["motion-sim", { mode: "projectile", v0: { min: 5, max: 30, step: 1, init: 15 },
+      angle: { min: 15, max: 75, step: 5, init: 45 }, timeScale: 0.5 },
+      [".phy-stage", ".phy-playbar", ".phy-slider-row"]],
+    ["motion-sim", { mode: "circle", omega: { min: 0.5, max: 3, step: 0.1, init: 1 } },
+      [".phy-stage", ".phy-playbar"]],
+    ["circuit-build", { grid: { cols: 6, rows: 4 },
+      components: [{ id: "bat1", kind: "battery", cell: [1, 2] }, { id: "sw1", kind: "switch", cell: [4, 2] }],
+      battery: { voltage: 3 }, goal: "连一个能让灯泡亮的电路" },
+      [".phy-stage", ".phy-tray", ".phy-state", ".phy-auto"]],
+    ["optics-ray", { mode: "lens", lens: { x: 50, f: 15 },
+      focal: { min: 8, max: 25, step: 1, init: 15 }, source: { x: 22, y: 62 } },
+      [".phy-stage", ".phy-formula-line", ".phy-state"]],
+    ["optics-ray", { mode: "mirror", mirrorX: 55, source: { x: 25, y: 68 } },
+      [".phy-stage", ".phy-state"]],
+    ["wave-tune", { amp: { min: 1, max: 5, step: 0.5, init: 3 },
+      freq: { min: 100, max: 1000, step: 10, init: 440 }, playSound: true },
+      ["canvas", ".phy-slider-row", ".phy-legend"]],
+    ["pulley-lever", { mode: "lever", fulcrumX: { min: 30, max: 70, step: 1, init: 50 },
+      load: { weight: 10, armInit: 20 } }, [".phy-stage", ".phy-formula-line", ".phy-state"]],
+    ["pulley-lever", { mode: "pulley", pulleyKind: "movable", load: { weight: 10 } },
+      [".phy-stage", ".phy-state"]],
+    ["collision-lab", { m1: { min: 1, max: 5, step: 0.5, init: 2 }, m2: { min: 1, max: 5, step: 0.5, init: 2 },
+      v1: { min: -5, max: 5, step: 0.5, init: 4 }, v2: { min: -5, max: 5, step: 0.5, init: 0 } },
+      [".phy-stage", ".phy-playbar", ".phy-mbars"]],
+    ["field-viz", { mode: "efield", charges: [{ x: 35, y: 50, q: 1 }, { x: 65, y: 50, q: -1 }], lineCount: 32 },
+      [".phy-stage"]],
+    ["field-viz", { mode: "bfield", magnet: { x: 50, y: 50, angle: 0 }, needleCount: 8, ironFilings: true },
+      [".phy-stage", ".phy-check-row"]],
+    ["thermo-sim", { temp: { min: -20, max: 120, step: 5, init: 20, unit: "℃" }, particleCount: 120, brownian: true },
+      ["canvas", ".phy-heat", ".phy-cool", ".phy-state"]],
+    ["spring-shm", { k: { min: 10, max: 200, step: 10, init: 50 }, m: { min: 0.5, max: 5, step: 0.5, init: 1 } },
+      [".phy-stage", "canvas", ".phy-formula-line"]],
+    ["guess-verify", { question: "拉力再大一点，木块会怎样？", options: ["还是不动", "动起来"],
+      recordKey: "phy_guess_p05.2.1" }, [".phy-guess", ".phy-guess-opts"]],
+    ["read-gauge", { gauge: "ruler", range: { min: 0, max: 20, unit: "cm" }, divisions: 0.1 }, [".phy-stage", ".phy-gauge-head"]],
+    ["read-gauge", { gauge: "thermometer", range: { min: -20, max: 120, unit: "℃" }, divisions: 1 }, [".phy-stage"]],
+    ["read-gauge", { gauge: "ammeter", range: { min: 0, max: 3, unit: "A" }, divisions: 0.1, trialTouch: true }, [".phy-stage", ".phy-mini"]],
+    ["read-gauge", { gauge: "voltmeter", range: { min: 0, max: 15, unit: "V" }, divisions: 0.5 }, [".phy-stage"]],
+    ["read-gauge", { gauge: "balance", range: { min: 0, max: 55, unit: "g" }, divisions: 0.2 }, [".phy-stage", ".phy-gauge-head"]],
+    ["formula-id", { formula: { translation: "电流 = 电压 ÷ 电阻" }, conditions: ["金属导体"],
+      counterexample: "小灯泡灯丝热了不成立", dimension: "A = V/Ω ✓" }, [".phy-idcard"]],
+    ["graph-reader", { source: { kind: "function", expr: "v = 2*t + 1", xLabel: "t/s", yLabel: "v/(m/s)" } },
+      [".phy-stage", ".phy-btn-row"]],
+    ["graph-reader", { source: { kind: "points", points: [{ x: 0, y: 1 }, { x: 2, y: 5 }, { x: 4, y: 9 }] } },
+      [".phy-stage"]],
+    ["side-compare", { left: { title: "电动机", rows: ["电 → 机械能"] },
+      right: { title: "发电机", rows: ["机械能 → 电"] }, verdict: "名字像双胞胎，原理是反的" },
+      [".phy-compare", ".phy-verdict", ".phy-col"]],
+  ];
+  for (const theme of ["light", "dark"]) {
+    if (theme === "dark") body.setAttribute("data-theme", "dark");
+    for (const [type, params, sels] of cases) {
+      let node = null, err = null;
+      try { node = P.widget(type, params); } catch (e) { err = e; }
+      if (err || !node) { fail(`[${theme}] ${type} 渲染抛错：${err && err.message}`); continue; }
+      /* stub queryAll 只查子节点：包一层 holder 再断言 */
+      const holder = makeEl("div");
+      holder.appendChild(node);
+      const bad = sels.filter(s => queryAll(holder, s).length === 0);
+      bad.length === 0
+        ? ok(`[${theme}] ${type} 渲染 OK（${sels.join(" ")}）`)
+        : fail(`[${theme}] ${type} 缺关键 DOM：${bad.join(",")}`);
+    }
+  }
+  body.setAttribute("data-theme", "light");
+  /* 未知类型：占位 + 不抛错 */
+  {
+    let n = null, err = null;
+    try { n = P.widget("nope-xyz", {}); } catch (e) { err = e; }
+    const holder = makeEl("div");
+    if (n) holder.appendChild(n);
+    (!err && n && queryAll(holder, ".phy-unknown").length > 0)
+      ? ok("未知 type → 占位提示，不抛错") : fail("未知 type 处理异常");
+  }
+  /* 冒烟交互路径：motion-sim 滑块联动不抛错；Y1 记录落盘 */
+  {
+    const n = P.widget("motion-sim", { mode: "projectile",
+      v0: { min: 5, max: 30, step: 1, init: 15 }, angle: { min: 15, max: 75, step: 5, init: 45 } });
+    const sl = queryAll(n, "input")[0];
+    let err = null;
+    try { sl.value = "20"; sl.fire("input"); } catch (e) { err = e; }
+    !err ? ok("motion-sim 滑块联动不抛错") : fail("motion-sim 滑块联动抛错：" + err.message);
+    const g = P.widget("guess-verify", { question: "会怎样？", options: ["A", "B"], recordKey: "phy_guess_smoke" });
+    const ob = queryAll(g, ".phy-guess-opts")[0].children[0];
+    ob.click();
+    const vb = queryAll(g, "button").find(b => (b._text || "").includes("动手验证"));
+    vb.click();
+    const rec = JSON.parse(sandbox.__store["ltb-phy-phy_guess_smoke"] || "null");
+    rec && rec.choice === 0 ? ok("Y1 猜测记录落盘 ltb-phy-phy_guess_smoke") : fail("Y1 记录未落盘");
+  }
 }
 
 console.log(fails === 0 ? "\n[PASS] 物理引擎烟雾测试全部通过" : `\n[FAIL] ${fails} 项未通过`);

@@ -595,3 +595,369 @@ body[data-theme="dark"] #mathml-warn { background: #4a3a1a; color: #fde68a; }
   .phy-app { padding-left: 10px; padding-right: 10px; }
   .phy-badge .phy-readout { font-size: 1.1rem; }
 }
+
+/* ============================================================
+ * P1–P10 / Y1–Y5 组件样式（蓝队 2026-10-15）
+ * 只新增，不改现有规则行为；无「固定高度+overflow:hidden」裁剪。
+ * 色板补全 docs/physics-interactions.md §0.2 缺失的 --phy-* 别名
+ * （深色自动跟随 --geo-*）。
+ * ============================================================ */
+#physics-app {
+  --phy-ray:         var(--geo-line);
+  --phy-field:       var(--geo-corr-b);
+  --phy-current:     var(--geo-corr-c);
+  --phy-charge-pos:  var(--geo-target);
+  --phy-charge-neg:  var(--geo-known);
+  --phy-wave-a:      var(--geo-corr-a);
+  --phy-wave-b:      var(--geo-corr-b);
+}
+
+/* ---------- 通用组件壳 ---------- */
+.phy-widget { display: flex; flex-direction: column; gap: 10px; }
+.phy-stage {
+  width: 100%;
+  height: auto;
+  display: block;
+  background: var(--phy-bg);
+  border: 1px solid var(--phy-line);
+  border-radius: 10px;
+  touch-action: none;
+}
+.phy-stage text { font-size: 4.2px; fill: var(--phy-ink-soft); }
+.phy-ground { stroke: var(--phy-body); stroke-width: 1.2; }
+.phy-track-line { stroke: var(--phy-track); stroke-width: 0.8; stroke-dasharray: 2.5,2; }
+.phy-track-circle { fill: none; stroke: var(--phy-track); stroke-width: 0.8; stroke-dasharray: 2.5,2; }
+.phy-body-box { fill: var(--phy-panel); stroke: var(--phy-body); stroke-width: 1.2; }
+.phy-body-label { fill: var(--phy-ink); font-size: 4.5px; font-weight: 700; }
+.phy-force-label { font-size: 4.5px; font-weight: 700; fill: var(--phy-ink); }
+.phy-res-label { fill: var(--phy-target); }
+.phy-sym-label { font-size: 3.8px; fill: var(--phy-ink-soft); }
+.phy-tick-label { font-size: 3.6px; fill: var(--phy-ink-soft); }
+.phy-note-text { font-size: 4px; fill: var(--phy-ink-soft); }
+.phy-slope-tag { font-size: 4.2px; font-weight: 700; }
+.phy-f-label { font-size: 4.2px; font-weight: 700; fill: var(--phy-ink); }
+.phy-f-mark { fill: var(--phy-target); }
+.phy-normal { stroke: var(--phy-track); stroke-width: 0.7; stroke-dasharray: 2,1.5; }
+.phy-handle { stroke: var(--phy-bg); stroke-width: 1; cursor: grab; }
+.phy-handle-blue { stroke: var(--phy-bg); stroke-width: 1; cursor: grab; }
+.phy-hot { cursor: grab; }
+.phy-shaft-hot { cursor: grab; }
+.phy-lens-hot { cursor: ew-resize; }
+.phy-ball { fill: var(--phy-target); stroke: var(--phy-bg); stroke-width: 0.8; }
+.phy-dot, .phy-dot-start, .phy-dot-end { fill: var(--phy-target); }
+.phy-trace { fill: none; stroke: var(--phy-track); stroke-width: 1.2; stroke-dasharray: 3,2; }
+.phy-trace-vert { stroke: var(--phy-track); stroke-width: 1.2; stroke-dasharray: 3,2; }
+.phy-charge { stroke: var(--phy-bg); stroke-width: 1; cursor: grab; }
+.phy-charge-label { font-size: 5px; font-weight: 700; fill: #fff; }
+.phy-probe-label { font-size: 3.8px; fill: var(--phy-ink); font-weight: 700; }
+.phy-mag-label { font-size: 4.5px; font-weight: 700; fill: #fff; }
+.phy-fulcrum { fill: var(--phy-panel); stroke: var(--phy-body); stroke-width: 1.2; }
+.phy-beam { transition: transform 0.3s ease; }
+@media (prefers-reduced-motion: reduce) { .phy-beam { transition: none; } }
+.phy-cell { fill: transparent; stroke: var(--phy-line); stroke-width: 0.4; }
+.phy-glow { pointer-events: none; }
+.phy-cart-label { font-size: 4.5px; font-weight: 700; fill: var(--phy-ink); }
+
+/* ---------- 状态徽章 / 备注 / 目标 ---------- */
+.phy-state {
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  background: var(--phy-panel);
+  border: 1px solid var(--phy-line);
+  color: var(--phy-ink);
+}
+.phy-state-ok { border-color: var(--phy-force-c); border-left-width: 4px; }
+.phy-state-warn { border-color: var(--phy-force-a); border-left-width: 4px; }
+.phy-state-bad {
+  border-color: var(--phy-target);
+  border-left-width: 4px;
+  background: #FDECEA;
+  color: #8f1d12;
+  font-weight: 700;
+}
+body[data-theme="dark"] #physics-app .phy-state-bad { background: #3a1d18; color: #ffb4a2; }
+.phy-note { font-size: 0.82rem; color: var(--phy-ink-soft); line-height: 1.6; }
+.phy-goal {
+  background: var(--phy-panel);
+  border: 1px dashed var(--phy-force-a);
+  border-radius: 10px;
+  padding: 8px 10px;
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+.phy-formula-line {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  background: var(--phy-panel);
+  border-radius: 10px;
+  padding: 8px 10px;
+  overflow-x: auto;
+}
+.phy-unknown {
+  border: 1px dashed var(--phy-target);
+  border-radius: 10px;
+  padding: 10px;
+  color: var(--phy-target);
+}
+
+/* ---------- 播放条 / 步进器 / 按钮行 ---------- */
+.phy-playbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--phy-panel);
+  border: 1px solid var(--phy-line);
+  border-radius: 10px;
+  padding: 6px 10px;
+}
+.phy-playbar button {
+  flex: none;
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: 8px;
+  border: 1px solid var(--phy-line);
+  background: var(--phy-bg);
+  color: var(--phy-ink);
+  font-size: 1rem;
+  cursor: pointer;
+}
+.phy-playbar button:disabled { opacity: 0.35; cursor: default; }
+.phy-playbar input[type="range"] { flex: 1; min-width: 0; height: 44px; accent-color: var(--phy-target); }
+.phy-stepper {
+  flex: none;
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: 8px;
+  border: 1px solid var(--phy-line);
+  background: var(--phy-bg);
+  color: var(--phy-ink);
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+.phy-btn-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.phy-btn-row button {
+  min-height: 44px;
+  border-radius: 10px;
+  border: 1px solid var(--phy-line);
+  background: var(--phy-panel);
+  color: var(--phy-ink);
+  padding: 8px 16px;
+  font-size: 0.92rem;
+  cursor: pointer;
+}
+.phy-mini {
+  min-height: 44px;
+  border-radius: 8px;
+  border: 1px solid var(--phy-line);
+  background: var(--phy-bg);
+  color: var(--phy-ink);
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+.phy-check-row { display: flex; align-items: center; gap: 8px; font-size: 0.88rem; }
+.phy-check-row input[type="checkbox"] { width: 24px; height: 24px; accent-color: var(--phy-target); }
+.phy-heat, .phy-cool {
+  flex: 1;
+  min-height: 56px;
+  border-radius: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  border: 1px solid var(--phy-line);
+  background: var(--phy-panel);
+  color: var(--phy-ink);
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* ---------- Canvas ---------- */
+.phy-wave-cv, .phy-thermo-cv, .phy-xt-cv {
+  width: 100%;
+  height: auto;
+  display: block;
+  background: var(--phy-bg);
+  border: 1px solid var(--phy-line);
+  border-radius: 10px;
+  touch-action: none;
+}
+.phy-legend { display: flex; gap: 12px; flex-wrap: wrap; font-size: 0.82rem; color: var(--phy-ink-soft); }
+.phy-lg { display: inline-flex; align-items: center; gap: 6px; }
+.phy-lg i { display: inline-block; width: 22px; height: 4px; border-radius: 2px; }
+.phy-lg i.dash { height: 0; border-top: 3px dashed; border-radius: 0; background: none !important; }
+
+/* ---------- P3 电路 ---------- */
+.phy-tray {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  background: var(--phy-panel);
+  border: 1px solid var(--phy-line);
+  border-radius: 10px;
+  padding: 8px;
+}
+.phy-tray-item {
+  min-width: 56px;
+  min-height: 48px;
+  border-radius: 8px;
+  border: 1px solid var(--phy-line);
+  background: var(--phy-bg);
+  color: var(--phy-ink);
+  font-size: 0.85rem;
+  cursor: grab;
+  touch-action: none;
+  padding: 6px 10px;
+}
+.phy-auto {
+  min-height: 44px;
+  border-radius: 10px;
+  border: 1px solid var(--phy-force-c);
+  background: var(--phy-bg);
+  color: var(--phy-ink);
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+.phy-ghost {
+  position: fixed;
+  z-index: 60;
+  pointer-events: none;
+  background: var(--phy-panel);
+  border: 2px dashed var(--phy-target);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 0.85rem;
+  opacity: 0.85;
+}
+
+/* ---------- Y1 先猜后验 ---------- */
+.phy-guess {
+  border: 2px dashed var(--phy-force-a);
+  border-radius: 12px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.phy-guess-q { font-size: 0.95rem; font-weight: 700; line-height: 1.6; }
+.phy-guess-opts { display: flex; gap: 8px; flex-wrap: wrap; }
+.phy-guess-opts button {
+  flex: 1 1 40%;
+  min-height: 48px;
+  border-radius: 10px;
+  border: 1px solid var(--phy-line);
+  background: var(--phy-bg);
+  color: var(--phy-ink);
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 8px 10px;
+}
+.phy-guess-opts button[aria-pressed="true"] {
+  border-color: var(--phy-known);
+  border-width: 2px;
+  font-weight: 700;
+}
+
+/* ---------- Y2 仪表 ---------- */
+.phy-gauge-head { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-size: 0.9rem; }
+.phy-gauge-input { display: flex; align-items: center; gap: 8px; }
+.phy-gauge-input input[type="text"] {
+  min-height: 44px;
+  width: 7em;
+  font-size: 1rem;
+  border: 1px solid var(--phy-line);
+  border-radius: 8px;
+  background: var(--phy-bg);
+  color: var(--phy-ink);
+  padding: 4px 10px;
+}
+
+/* ---------- Y4 图像三读法 ---------- */
+.phy-greader-out {
+  font-size: 0.88rem;
+  line-height: 1.7;
+  background: var(--phy-panel);
+  border-radius: 10px;
+  padding: 8px 10px;
+  min-height: 2.6em;
+}
+
+/* ---------- Y5 对照表 ---------- */
+.phy-compare { display: flex; flex-direction: column; gap: 10px; }
+.phy-verdict {
+  order: 2;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.6;
+  background: var(--phy-panel);
+  border: 1px solid var(--phy-force-c);
+  border-left-width: 4px;
+}
+.phy-cols {
+  order: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.phy-col {
+  border: 1px solid var(--phy-line);
+  border-radius: 10px;
+  padding: 10px 12px;
+  background: var(--phy-bg);
+}
+.phy-col-l { border-top: 3px solid var(--phy-force-a); }
+.phy-col-r { border-top: 3px solid var(--phy-force-b); }
+.phy-col-title { font-weight: 700; font-size: 0.95rem; margin-bottom: 6px; }
+.phy-col-rows { margin: 0; padding-left: 1.2em; font-size: 0.88rem; line-height: 1.7; }
+@media (max-width: 620px) {
+  .phy-cols { grid-template-columns: 1fr; }
+  .phy-verdict { order: 0; }  /* 390px 下 verdict 置顶 */
+}
+
+/* ---------- P7 动量条 ---------- */
+.phy-mbars { display: flex; flex-direction: column; gap: 6px; }
+.phy-mbar-row { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; }
+.phy-mbar-tag { flex: none; width: 3em; color: var(--phy-ink-soft); }
+.phy-mbar-cell { flex: 1; display: flex; align-items: center; min-height: 30px; }
+.phy-mbar {
+  display: inline-block;
+  height: 22px;
+  line-height: 22px;
+  border-radius: 4px;
+  color: var(--phy-ink);
+  font-size: 0.75rem;
+  padding: 0 6px;
+  white-space: nowrap;
+  border: 1px solid var(--phy-line);
+}
+.phy-mbar-zero { color: var(--phy-ink-soft); font-size: 0.8rem; }
+
+/* ---------- 章末小结（quiz/review） ---------- */
+.phy-review {
+  border: 1px solid var(--phy-line);
+  border-radius: 10px;
+  padding: 10px 12px;
+  background: var(--phy-panel);
+}
+.phy-review-head { font-weight: 700; font-size: 0.95rem; margin-bottom: 6px; }
+.phy-review-body { font-size: 0.9rem; line-height: 1.75; }
+
+/* ---------- W-P20 安全徽章（交互区顶部常驻） ---------- */
+.phy-safety {
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  line-height: 1.6;
+  background: #FFF7E6;
+  border: 1px solid var(--phy-force-a);
+  border-left-width: 4px;
+  color: var(--phy-ink);
+}
+body[data-theme="dark"] #physics-app .phy-safety { background: #2b2113; }
+
+/* ---------- Y2 仪表：表头内的滑块行独占一行且不撑破容器 ---------- */
+.phy-gauge-head > .phy-slider-row { flex: 1 1 100%; min-width: 0; max-width: 100%; }
