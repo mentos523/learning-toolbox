@@ -568,6 +568,14 @@ body .phy-drawer {
   --phy-panel: #F7F7F7; --phy-line: #DDDDDD; --phy-target: #D55E00;
   background: var(--phy-bg, #FFFFFF); color: var(--phy-ink, #1A1A1A);
 }
+/* R2 2026-10-15 修复队补修4：浅色抽屉"当前"徽章对比度。徽章基线 color: var(--phy-bg)
+ * 在浅色下是白字 #FFFFFF on 橙底 #D55E00，对比度 3.87:1 < 4.5 不达标。
+ * 注：任务示例 #1A1A1A on #D55E00 实测仅 4.5005:1（≈阈值，无余量），
+ * 此处取纯黑 #000000 on #D55E00 = 5.43:1，留足余量；徽章字号仅 0.7rem，
+ * 纯黑与 #1A1A1A 在橙底上视觉几乎无差。
+ * body[data-theme="light"] 限定只命中浅色抽屉，深色 #121212 on #FF7043 ≈ 6.83:1
+ * 达标不许动（深色作用域无此规则，深色回归对比度不变）。 */
+body[data-theme="light"] .phy-drawer .phy-drawer-cur { color: #000000; }
 /* R2 2026-10-15 修复队补修：抽屉挂在 body 下（#physics-app 作用域外），
  * --phy-* 变量在深色下全部失效 → 透明底 + 黑字不可读。此处在深色下给
  * 抽屉作用域内补一套深色值（与 body[data-theme="dark"] #physics-app 一致），
