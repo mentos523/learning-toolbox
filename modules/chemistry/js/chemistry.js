@@ -1802,6 +1802,13 @@ function widgetPeriodicExplore(p) {
   });
   box.appendChild(grid);
 
+  /* 第二轮裁决二：18 列 ×44px 在 390px 下物理放不下 → 横向滚动容器 + 44px 格；
+   * ←/→ 翻页补偿与最近格心命中保留作辅助，不算达标依据。 */
+  var ptabScroll = el("div", "chm-ptab-scroll", "");
+  ptabScroll.appendChild(grid);
+  box.appendChild(el("div", "chm-ptab-swipehint", "← 左右滑动查看完整周期表 →"));
+  box.appendChild(ptabScroll);
+
   /* 图例 */
   var legend = el("div", "chm-ptab-legend", "");
   if (mode === "metal") {
@@ -4309,6 +4316,10 @@ function widgetReadGaugeChem(p) {
  * ============================================================ */
 function widgetSideCompare(p) {
   p = p || {};
+  /* left/right 形态：条列式左右对照 + verdict 结论句（化学 C 章生产口径；
+   * 第二轮裁决一：组件加适配，不改数据——rows 为整行陈述句、无 dim/a/b 可拆，
+   * verdict 在 columns/rows 形态无处安放）。 */
+  if (p.left || p.right) return widgetSideCompareLR(p);
   var box = el("div", "chm-widget chm-compare", "");
   box.appendChild(el("div", "chm-compare-title", esc(p.title || "对照表")));
   var cols = p.columns || [];
@@ -4332,6 +4343,31 @@ function widgetSideCompare(p) {
   });
   box.appendChild(tbl);
   box.appendChild(el("div", "chm-note", "差异行已标\"不同\"（颜色 + 文字双编码）。"));
+  return box;
+}
+
+/* side-compare · left/right 分支：两块条列式对照（窄屏上下堆叠，390px 不横向溢出） */
+function widgetSideCompareLR(p) {
+  p = p || {};
+  var box = el("div", "chm-widget chm-compare", "");
+  function panel(side, cls) {
+    side = side || {};
+    var d = el("div", "chm-compare-side " + cls, "");
+    d.appendChild(el("div", "chm-compare-sidetitle", esc(side.title || "")));
+    var ul = el("ul", "chm-compare-siderows", "");
+    (side.rows || []).forEach(function (r) {
+      ul.appendChild(el("li", "", esc(r)));
+    });
+    d.appendChild(ul);
+    return d;
+  }
+  var wrap = el("div", "chm-compare-lr", "");
+  wrap.appendChild(panel(p.left, "lr-left"));
+  wrap.appendChild(panel(p.right, "lr-right"));
+  box.appendChild(wrap);
+  if (p.verdict) {
+    box.appendChild(el("div", "chm-compare-verdict", "结论：" + esc(p.verdict)));
+  }
   return box;
 }
 

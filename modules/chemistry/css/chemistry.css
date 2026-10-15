@@ -935,12 +935,15 @@ body[data-theme="dark"] #mathml-warn { background: #4a3a1a; color: #fde68a; }
 #chemistry-app .chm-mb-bondtip button { min-height: 44px; padding: 8px 14px; }
 
 /* ---------- C4 periodic-explore ---------- */
+/* 第二轮裁决二：18 列 ×44px 物理放不下 390px → 横向滚动容器；单元格固定 44px */
+#chemistry-app .chm-ptab-swipehint { font-size: 0.8rem; color: var(--chm-ink-soft); text-align: center; margin: 2px 0 4px; }
+#chemistry-app .chm-ptab-scroll { overflow-x: auto; margin: 8px 0; -webkit-overflow-scrolling: touch; }
 #chemistry-app .chm-ptab-grid {
-  display: grid; grid-template-columns: repeat(18, 1fr); gap: 2px;
-  margin: 8px 0; touch-action: manipulation;
+  display: grid; grid-template-columns: repeat(18, 44px); gap: 2px;
+  width: max-content; touch-action: pan-x pan-y;
 }
 #chemistry-app .chm-ptab-cell {
-  position: relative; min-height: 44px; padding: 4px 0;
+  position: relative; width: 44px; min-height: 44px; padding: 4px 0;
   border: 1px solid var(--chm-line); border-radius: 6px;
   background: var(--chm-panel); color: var(--chm-ink);
   font-size: 0.72rem; cursor: pointer; line-height: 1.15;
@@ -1168,6 +1171,15 @@ body[data-theme="dark"] #chemistry-app .chm-tri-symbol { background: #1A4A22; co
   background: var(--chm-highlight); color: var(--chm-on-hl);
   font-size: 0.75rem; font-weight: 700;
 }
+/* side-compare · left/right 分支：条列式左右对照（第二轮裁决一） */
+#chemistry-app .chm-compare-lr { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 8px 0; }
+#chemistry-app .chm-compare-side { border: 1px solid var(--chm-line); border-radius: 10px; padding: 8px 10px; background: var(--chm-panel); }
+#chemistry-app .chm-compare-sidetitle { font-weight: 700; margin-bottom: 4px; }
+#chemistry-app .chm-compare-siderows { margin: 0; padding-left: 1.15em; font-size: 0.92rem; line-height: 1.75; }
+#chemistry-app .chm-compare-verdict { margin: 8px 0; padding: 8px 10px; border-left: 4px solid var(--chm-highlight); background: var(--chm-panel); border-radius: 0 8px 8px 0; font-size: 0.92rem; }
+@media (max-width: 620px) {
+  #chemistry-app .chm-compare-lr { grid-template-columns: 1fr; }
+}
 
 /* ---------- Y12 stoich-steps ---------- */
 #chemistry-app .chm-stoich-title { font-weight: 700; font-size: 1.02rem; margin: 6px 0; }
@@ -1189,8 +1201,10 @@ body[data-theme="dark"] #chemistry-app .chm-tri-symbol { background: #1A4A22; co
 }
 #chemistry-app .chm-stoich-check { margin: 12px 0; padding: 10px; border: 1px solid var(--chm-line); border-radius: 10px; }
 #chemistry-app .chm-stoich-checkt { font-weight: 700; margin-bottom: 6px; }
-#chemistry-app .chm-check-item { display: flex; align-items: center; gap: 10px; margin: 8px 0; font-size: 0.92rem; }
-#chemistry-app .chm-check-item input { width: 24px; height: 24px; accent-color: var(--chm-corr-c); }
+#chemistry-app .chm-check-item { display: flex; align-items: center; gap: 10px; margin: 8px 0; font-size: 0.92rem; cursor: pointer; }
+/* 第二轮修复：复验脚本直量 input 本身 rect（任一维度 <44 即 FAIL），
+ * padding 不扩大 replaced 元素热区 → input 自身做到 44×44 */
+#chemistry-app .chm-check-item input[type="checkbox"] { width: 44px; height: 44px; accent-color: var(--chm-corr-c); flex: none; cursor: pointer; }
 
 /* ---------- Y13 safety-quiz ---------- */
 #chemistry-app .chm-squiz-title { font-weight: 700; font-size: 1.05rem; margin: 6px 0; }
