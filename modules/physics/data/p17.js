@@ -479,7 +479,17 @@ window.PHY_CH["p17"] = {
                     showLabels: true,
                     badge: { invariant: "没变的是：N、B、S（Em=NBSω 的'配方'）" }
                   }
-                }
+                },
+                {
+                  type: "formula-id",
+                  params: {
+                    formula: { mathml: "<math><mi>e</mi><mo>=</mo><msub><mi>E</mi><mi>m</mi></msub><mi mathvariant=\"normal\">sin</mi><mi>&#969;</mi><mi>t</mi></math>", translation: "瞬时电动势 = 最大值×sin(ωt)" },
+                    conditions: ["线圈在匀强磁场中匀速转动", "从中性面开始计时"],
+                    counterexample: "从与中性面垂直的位置开始：e=Em cosωt",
+                    dimension: "V ✓",
+                    units: { si: "V", note: "ω 的单位是 rad/s" }
+                  }
+                },
               ],
               point: "e=Em sinωt：交变电流的 e–t 图像就是正弦曲线。"
             },

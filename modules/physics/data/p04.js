@@ -180,7 +180,17 @@ window.PHY_CH["p04"] = {
                     /* Y4 口径：点列数据源；三读法本页只开"读斜率" */
                     source: { kind: "points", xLabel: "V/cm³", yLabel: "m/g", steps: ["slope"] }
                   }
-                }
+                },
+                {
+                  type: "formula-id",
+                  params: {
+                    formula: { mathml: "<math><mi>&#961;</mi><mo>=</mo><mfrac><mi>m</mi><mi>V</mi></mfrac></math>", translation: "密度 = 质量 ÷ 体积" },
+                    conditions: ["同种物质", "状态、温度一定"],
+                    counterexample: "蜡烛熔成蜡油：状态变了，“同种物质 ρ 一定”就失效",
+                    dimension: "kg/m³ = kg ÷ m³ ✓",
+                    units: { si: "kg/m³", common: "g/cm³", note: "1 g/cm³ = 1000 kg/m³" }
+                  }
+                },
               ],
               point: "ρ 是 m–V 图像的“斜率”——m 变、V 跟着变，但斜率不变；m/V 是“量”密度的方法，不是“决定”密度的原因。"
             },
@@ -383,7 +393,17 @@ window.PHY_CH["p04"] = {
                     },
                     source: { kind: "points", xLabel: "V/cm³", yLabel: "m/g", steps: ["slope"] }
                   }
-                }
+                },
+                {
+                  type: "formula-id",
+                  params: {
+                    formula: { mathml: "<math><mi>&#961;</mi><mo>=</mo><mfrac><mi>m</mi><mi>V</mi></mfrac></math>", translation: "密度 = 质量 ÷ 体积" },
+                    conditions: ["同种物质", "状态、温度一定"],
+                    counterexample: "蜡烛熔成蜡油：状态变了，“同种物质 ρ 一定”就失效",
+                    dimension: "kg/m³ = kg ÷ m³ ✓",
+                    units: { si: "kg/m³", common: "g/cm³", note: "1 g/cm³ = 1000 kg/m³" }
+                  }
+                },
               ],
               point: "未知金属块的线最陡，斜率约 8.9——查密度表，它是铜。密度是鉴别物质的“指纹”。"
             },
