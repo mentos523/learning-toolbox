@@ -309,15 +309,13 @@ pages: [
 id: "p03.2.2-p1",
 kind: "interact",
 title: "水和沙子赛升温",
-exploreTip: "先猜：同样的火，水和沙子谁升温快？猜完看对照表。",
+exploreTip: "先猜：水和沙子谁升温快？再点播放看曲线，猜完看对照表。",
 widgets: [
 {
-type: "guess-verify",
+type: "heat-compare",
 params: {
-question: "同样的火加热同样质量的水和沙子，谁升温快？",
-options: ["水快", "沙子快", "一样快"],
-recordKey: "phy_guess_p03.2.2",
-showAfter: "manual"
+mass: { min: 0.5, max: 2, step: 0.5, init: 1 }, power: 500,
+badge: { invariant: "没变的是：火力、质量、初温" }
 }
 },
 {

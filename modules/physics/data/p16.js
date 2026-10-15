@@ -415,7 +415,7 @@ window.PHY_CH["p16"] = {
               id: "p16.3.1-p1",
               kind: "interact",
               title: "磁铁进出：磁通量增还是减？",
-              exploreTip: "拖磁铁靠近中心再远离：想象中心有个线圈——靠近，Φ'增'；远离，Φ'减'。先猜再看。",
+              exploreTip: "先看磁力线，再拖磁铁进出线圈：Φ 是'增'还是'减'，电流方向就'反'还是'同'。先猜再看。",
               widgets: [
                 {
                   type: "field-viz",
@@ -428,12 +428,10 @@ window.PHY_CH["p16"] = {
                   }
                 },
                 {
-                  type: "guess-verify",
+                  type: "em-induction",
                   params: {
-                    question: "N 极插入线圈，穿过线圈的磁通量？",
-                    options: ["增加", "减少"],
-                    recordKey: "phy_guess_p16.3.1",
-                    showAfter: "manual"
+                    pole: "N",
+                    badge: { invariant: "没变的是：线圈" }
                   }
                 }
               ],

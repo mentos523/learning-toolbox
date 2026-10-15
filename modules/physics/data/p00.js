@@ -76,15 +76,15 @@ pages: [
 id: "p00.1.2-p1",
 kind: "interact",
 title: "摆一下，猜一猜",
-exploreTip: "先猜：摆绳变长、摆球变重、摆角变大，哪个会让摆动变慢？猜完再看第 2 页。",
+exploreTip: "先猜：摆绳变长、摆球变重、摆角变大，哪个会让摆动变慢？再拖动三个滑块验证：一次只改一个量。玩完看第 2 页。",
 widgets: [
 {
-type: "guess-verify",
+type: "pendulum",
 params: {
-question: "哪个改变会让摆动明显变慢？",
-options: ["摆绳变长", "摆球变重", "摆角变大"],
-recordKey: "phy_guess_p00.1.2",
-showAfter: "manual"
+length: { min: 0.2, max: 1.5, step: 0.1, init: 1 },
+mass: { min: 0.1, max: 1, step: 0.1, init: 0.5 },
+angle: { min: 5, max: 30, step: 1, init: 15 },
+badge: { invariant: "没变的是：重力加速度 g" }
 }
 }
 ],

@@ -103,15 +103,15 @@ window.PHY_CH["p17"] = {
               id: "p17.1.2-p1",
               kind: "interact",
               title: "摆球加重，周期变不变？",
-              exploreTip: "先猜：摆球换更重的，周期变大还是不变？再看图：T²–l 是过原点的直线。",
+              exploreTip: "先猜：摆球换更重的，周期变大还是不变？再拖三个滑块验证：质量滑块只改球大小。再看图：T²–l 是过原点的直线。",
               widgets: [
                 {
-                  type: "guess-verify",
+                  type: "pendulum",
                   params: {
-                    question: "摆球换成更重的，周期？",
-                    options: ["变大", "变小", "不变"],
-                    recordKey: "phy_guess_p17.1.2",
-                    showAfter: "manual"
+                    length: { min: 0.2, max: 1.5, step: 0.1, init: 1 },
+                    mass: { min: 0.1, max: 1, step: 0.1, init: 0.5 },
+                    angle: { min: 5, max: 30, step: 1, init: 15 },
+                    badge: { invariant: "没变的是：重力加速度 g" }
                   }
                 },
                 {

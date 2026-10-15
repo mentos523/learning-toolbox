@@ -133,15 +133,12 @@ window.PHY_CH["p10"] = {
               id: "p10.1.3-p1",
               kind: "interact",
               title: "电动机 vs 发电机：先猜",
-              exploreTip: "先猜：电动机和发电机，哪个是“磁生电”？猜完去第 3 页对答案——这对双胞胎是全章第一纠偏点。",
+              exploreTip: "先猜：电动机和发电机，哪个是“磁生电”？再点播放看慢动作：换向器每半圈切换一次电流方向。猜完去第 3 页对答案——这对双胞胎是全章第一纠偏点。",
               widgets: [
                 {
-                  type: "guess-verify",
+                  type: "motor-commutator",
                   params: {
-                    question: "电动机和发电机，哪个的工作原理是“磁生电”（电磁感应）？",
-                    options: ["电动机", "发电机", "都是"],
-                    recordKey: "phy_guess_p10.1.3",
-                    showAfter: "manual"
+                    badge: { invariant: "没变的是：磁铁、电源" }
                   }
                 }
               ],
@@ -194,15 +191,13 @@ window.PHY_CH["p10"] = {
               id: "p10.1.4-p1",
               kind: "interact",
               title: "磁铁不动，有电流吗？",
-              exploreTip: "先猜：磁铁插进线圈再拔出来——“动”的是什么？静止不动时，电流还在吗？",
+              exploreTip: "先猜：磁铁插进线圈再拔出来——“动”的是什么？静止不动时，电流还在吗？再拖磁铁试试：看 Φ 条和电流方向。",
               widgets: [
                 {
-                  type: "guess-verify",
+                  type: "em-induction",
                   params: {
-                    question: "磁铁插进线圈后静止不动，线圈里有感应电流吗？",
-                    options: ["有", "没有", "有时有"],
-                    recordKey: "phy_guess_p10.1.4",
-                    showAfter: "manual"
+                    pole: "N",
+                    badge: { invariant: "没变的是：线圈" }
                   }
                 }
               ],

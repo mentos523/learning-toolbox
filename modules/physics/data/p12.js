@@ -410,15 +410,13 @@ window.PHY_CH["p12"] = {
               id: "p12.2.3-p1",
               kind: "interact",
               title: "马拉车：谁的力大？",
-              exploreTip: "先猜：马拉车的力 vs 车拉马的力，谁大？答案可能跟你的直觉反着来——车的运动，看车的受力。",
+              exploreTip: "先猜：马拉车的力 vs 车拉马的力，谁大？再拖拉力滑块：两个秤的读数永远相等。答案可能跟你的直觉反着来——车的运动，看车的受力。",
               widgets: [
                 {
-                  type: "guess-verify",
+                  type: "spring-scale-pull",
                   params: {
-                    question: "马拉车：马拉车的力 vs 车拉马的力，谁大？",
-                    options: ["马拉车的大", "车拉马的大", "一样大"],
-                    recordKey: "phy_guess_p12.2.3",
-                    showAfter: "manual"
+                    force: { min: 0, max: 10, step: 0.5, init: 4 },
+                    badge: { invariant: "没变的是：两个秤都没换" }
                   }
                 }
               ],

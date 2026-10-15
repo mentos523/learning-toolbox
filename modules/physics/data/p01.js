@@ -25,15 +25,12 @@ pages: [
 id: "p01.1.1-p1",
 kind: "interact",
 title: "敲一下，水花呢？",
-exploreTip: "先猜：敲响的音叉碰到水面，水面会怎样？猜完看第 2 页的放大观察。",
+exploreTip: "先猜：敲响的音叉碰到水面，水面会怎样？再点“敲一下音叉”看水花：振动看不见，水花看得见。猜完看第 2 页的放大观察。",
 widgets: [
 {
-type: "guess-verify",
+type: "tuning-fork",
 params: {
-question: "敲响的音叉轻轻碰到水面，水面会——",
-options: ["纹丝不动", "溅起水花", "水面结冰"],
-recordKey: "phy_guess_p01.1.1",
-showAfter: "manual"
+badge: { invariant: "没变的是：音叉本身" }
 }
 }
 ],
@@ -89,15 +86,13 @@ pages: [
 id: "p01.1.2-p1",
 kind: "interact",
 title: "抽走空气会怎样？",
-exploreTip: "先猜：把罩里空气慢慢抽走，闹钟声会怎样？猜完看第 2 页。",
+exploreTip: "先猜：把罩里空气慢慢抽走，铃铛声会怎样？再拖动滑块抽气：空气越少，声波纹越少。猜完看第 2 页。",
 widgets: [
 {
-type: "guess-verify",
+type: "vacuum-chamber",
 params: {
-question: "真空罩里的空气越抽越少，闹钟声会——",
-options: ["越来越小", "越来越大", "完全不变"],
-recordKey: "phy_guess_p01.1.2",
-showAfter: "manual"
+air: { min: 0, max: 100, step: 5, init: 100 },
+badge: { invariant: "没变的是：铃铛还在响" }
 }
 }
 ],

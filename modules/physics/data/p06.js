@@ -30,24 +30,13 @@ window.PHY_CH["p06"] = {
               id: "p06.1.1-p1",
               kind: "interact",
               title: "海绵怎么说",
-              exploreTip: "控制变量：一次只变一个量，猜猜海绵的凹陷怎么说——先猜，两道题都猜完再揭晓。",
+              exploreTip: "控制变量：一次只变一个量。先猜：压力加倍，海绵凹陷会怎样？再拖压力滑块验证——面积固定，只看压力。",
               widgets: [
                 {
-                  type: "guess-verify",
+                  type: "sponge-dent",
                   params: {
-                    question: "压力相同，接触面积减半，海绵凹陷会——",
-                    options: ["更深", "更浅", "不变"],
-                    recordKey: "phy_guess_p06.1.1a",
-                    showAfter: "manual"
-                  }
-                },
-                {
-                  type: "guess-verify",
-                  params: {
-                    question: "接触面积相同，压力加倍，海绵凹陷会——",
-                    options: ["更深", "更浅", "不变"],
-                    recordKey: "phy_guess_p06.1.1b",
-                    showAfter: "manual"
+                    pressure: { min: 0, max: 20, step: 1, init: 8 },
+                    badge: { invariant: "没变的是：海绵这块" }
                   }
                 }
               ],
@@ -241,24 +230,14 @@ window.PHY_CH["p06"] = {
               id: "p06.1.4-p1",
               kind: "interact",
               title: "往中间吹，纸往哪跑",
-              exploreTip: "别记反了：流速大，压强小。先猜，再看解释。",
+              exploreTip: "别记反了：流速大，压强小。先猜：往两张纸中间吹气，纸往哪跑？再拖吹气滑块看纸条飘起。",
               widgets: [
                 {
-                  type: "guess-verify",
+                  type: "paper-blow",
                   params: {
-                    question: "往两张纸中间吹气，两张纸会——",
-                    options: ["向中间合拢", "向两边分开", "一动不动"],
-                    recordKey: "phy_guess_p06.1.4a",
-                    showAfter: "manual"
-                  }
-                },
-                {
-                  type: "guess-verify",
-                  params: {
-                    question: "火车站为什么要画安全线？",
-                    options: ["流速大压强小，人会被“推”向火车", "怕乘客掉下站台", "装饰"],
-                    recordKey: "phy_guess_p06.1.4b",
-                    showAfter: "manual"
+                    mode: "paper",
+                    blow: { min: 0, max: 10, step: 1, init: 4 },
+                    badge: { invariant: "没变的是：纸条" }
                   }
                 }
               ],
@@ -350,24 +329,13 @@ window.PHY_CH["p06"] = {
               id: "p06.2.2-p1",
               kind: "interact",
               title: "左手称重，右手排水",
-              exploreTip: "左手称重法，右手想想溢出的水——两只手对答案：先猜，再揭晓。",
+              exploreTip: "左手称重法，右手想想溢出的水——先猜：浸入越多，溢出的水越多吗？再拖滑块把物体往下压，看小烧杯水位。",
               widgets: [
                 {
-                  type: "guess-verify",
+                  type: "overflow-cup",
                   params: {
-                    question: "石块浸入水中“变轻”了 2N，溢出的水重——",
-                    options: ["2N", "比 2N 大", "比 2N 小"],
-                    recordKey: "phy_guess_p06.2.2a",
-                    showAfter: "manual"
-                  }
-                },
-                {
-                  type: "guess-verify",
-                  params: {
-                    question: "漂浮的木块，V排和 V物——",
-                    options: ["V排=V物", "V排<V物", "V排>V物"],
-                    recordKey: "phy_guess_p06.2.2b",
-                    showAfter: "manual"
+                    objVolume: { max: 200, step: 10, init: 0 },
+                    badge: { invariant: "没变的是：杯里水面的高度（与溢水口齐平）" }
                   }
                 }
               ],

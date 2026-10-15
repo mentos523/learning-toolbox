@@ -194,18 +194,19 @@ window.PHY_CH["p09"] = {
               id: "p09.1.3-p1",
               kind: "interact",
               title: "电流越大，升温越快？",
-              exploreTip: "点“加热”看煤油升温：温度升得快慢，跟电流、电阻、时间三个量都有关——这是焦耳定律的实验载体。",
+              exploreTip: "拖动电流/电阻/时间三个滑块：看热量条和读数——电流翻倍，热量变几倍？",
               widgets: [
                 {
-                  type: "thermo-sim",
+                  type: "joule-heating",
                   params: {
-                    temp: { min: 20, max: 80, step: 1, init: 20, unit: "℃" },
-                    particleCount: 120, showStates: false, heatButtons: true,
-                    badge: { invariant: "没变的是：煤油的质量" }
+                    current: { min: 0.5, max: 3, step: 0.1, init: 1 },
+                    resistance: { min: 5, max: 50, step: 1, init: 20 },
+                    time: { min: 0, max: 60, step: 1, init: 10 },
+                    badge: { invariant: "没变的是：这根电阻丝" }
                   }
                 }
               ],
-              point: "煤油升温是“热量”的眼睛：升温越快，电流的热效应越强。"
+              point: "热量条是“热量”的眼睛：条越长，电流的热效应越强。"
             },
             {
               id: "p09.1.3-p2",

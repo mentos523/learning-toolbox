@@ -26,15 +26,14 @@ window.PHY_CH["p02"] = {
               id: "p02.1.1-p1",
               kind: "interact",
               title: "小孔成像猜一猜",
-              exploreTip: "先猜：小孔开大一点，屏上的像会怎样？猜完看第 2–3 页。",
+              exploreTip: "先猜：小孔开大一点，屏上的像会怎样？再拖两个滑块试试：孔径管亮度，物距管大小。猜完看第 2–3 页。",
               widgets: [
                 {
-                  type: "guess-verify",
+                  type: "pinhole-camera",
                   params: {
-                    question: "小孔开大一点，屏上的像会——",
-                    options: ["变亮但变模糊", "变小", "由倒变正"],
-                    recordKey: "phy_guess_p02.1.1",
-                    showAfter: "manual"
+                    aperture: { min: 1, max: 6, step: 0.5, init: 2 },
+                    objDist: { min: 12, max: 38, step: 1, init: 24 },
+                    badge: { invariant: "没变的是：像距（光屏位置）" }
                   }
                 }
               ],
@@ -208,15 +207,15 @@ window.PHY_CH["p02"] = {
               id: "p02.2.1-p1",
               kind: "interact",
               title: "激光斜射入水",
-              exploreTip: "先猜：激光从空气斜射入水，折射光线往哪偏？（⚠ 现实中严禁激光直射眼睛——虚拟实验里可以，现实中绝不。）",
+              exploreTip: "先猜：激光从空气斜射入水，折射光线往哪偏？再拖入射角滑块：看光线往哪偏、偏多少。（⚠ 现实中严禁激光直射眼睛——虚拟实验里可以，现实中绝不。）",
               widgets: [
                 {
-                  type: "guess-verify",
+                  type: "optics-ray",
                   params: {
-                    question: "激光从空气斜射入水，折射光线——",
-                    options: ["偏向法线", "偏离法线", "沿原直线传播"],
-                    recordKey: "phy_guess_p02.2.1",
-                    showAfter: "manual"
+                    mode: "refraction",
+                    angle: { min: 0, max: 80, step: 1, init: 30 },
+                    n1: 1, n2: 1.33,
+                    badge: { invariant: "没变的是：两种介质" }
                   }
                 }
               ],

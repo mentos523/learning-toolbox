@@ -81,15 +81,12 @@ window.PHY_CH["p11"] = {
               id: "p11.1.2-p1",
               kind: "interact",
               title: "跑一圈，位移是多少？",
-              exploreTip: "先猜：小明绕 400m 操场跑了一圈——他“走了多远”，和“位移”是多少，是两回事。",
+              exploreTip: "先猜：小明绕 400m 操场跑了一圈——他“走了多远”，和“位移”是多少，是两回事。再拖红色终点手柄：看位移箭头和 Δx 读数。",
               widgets: [
                 {
-                  type: "guess-verify",
+                  type: "displacement-arrow",
                   params: {
-                    question: "小明绕 400m 操场跑了一圈，他的位移是——",
-                    options: ["400m", "0", "200m"],
-                    recordKey: "phy_guess_p11.1.2",
-                    showAfter: "manual"
+                    badge: { invariant: "没变的是：起点" }
                   }
                 }
               ],
@@ -382,15 +379,12 @@ window.PHY_CH["p11"] = {
               id: "p11.2.3-p1",
               kind: "interact",
               title: "羽毛和硬币，谁先落地？",
-              exploreTip: "先猜：真空管里，羽毛和硬币同时下落——谁先落地？关键在“真空”两个字。",
+              exploreTip: "先猜：真空管里，羽毛和硬币同时下落——谁先落地？再切换“有空气/抽成真空”，点播放看谁先落地。关键在“真空”两个字。",
               widgets: [
                 {
-                  type: "guess-verify",
+                  type: "vacuum-tube",
                   params: {
-                    question: "羽毛和硬币在真空管里同时下落，谁先落地？",
-                    options: ["硬币", "羽毛", "同时"],
-                    recordKey: "phy_guess_p11.2.3",
-                    showAfter: "manual"
+                    badge: { invariant: "没变的是：管子、羽毛、硬币" }
                   }
                 }
               ],
