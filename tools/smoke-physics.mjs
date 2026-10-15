@@ -321,6 +321,17 @@ console.log(fails === 0 ? "\n[PASS] 物理引擎烟雾测试全部通过" : `\n[
       components: [{ id: "bat1", kind: "battery", cell: [1, 2] }, { id: "sw1", kind: "switch", cell: [4, 2] }],
       battery: { voltage: 3 }, goal: "连一个能让灯泡亮的电路" },
       [".phy-stage", ".phy-tray", ".phy-state", ".phy-auto"]],
+    ["circuit-build", { grid: { cols: 6, rows: 4 },
+      components: [
+        { id: "bat1", kind: "battery", cell: [2, 1] },
+        { id: "w1", kind: "wire", cell: [3, 1] },
+        { id: "rh1", kind: "rheostat", cell: [3, 2], min: 0, max: 50, init: 50, step: 1 },
+        { id: "a1", kind: "ammeter", cell: [2, 2] },
+        { id: "v1", kind: "voltmeter", cell: [4, 1], across: "rh1", range: { max: 15 }, divisions: 0.5 }
+      ],
+      tray: ["bulb", "rheostat", "voltmeter", "wire"],
+      battery: { voltage: 6 }, goal: "拖滑片看电流变" },
+      [".phy-stage", ".phy-tray", ".phy-slider-row", ".phy-volt-read", ".phy-handle-hit", ".phy-rheo-val"]],
     ["optics-ray", { mode: "lens", lens: { x: 50, f: 15 },
       focal: { min: 8, max: 25, step: 1, init: 15 }, source: { x: 22, y: 62 } },
       [".phy-stage", ".phy-formula-line", ".phy-state"]],
@@ -402,6 +413,52 @@ console.log(fails === 0 ? "\n[PASS] 物理引擎烟雾测试全部通过" : `\n[
     const rec = JSON.parse(sandbox.__store["ltb-phy-phy_guess_smoke"] || "null");
     rec && rec.choice === 0 ? ok("Y1 猜测记录落盘 ltb-phy-phy_guess_smoke") : fail("Y1 记录未落盘");
   }
+}
+
+/* ---------- 第五轮：P3 滑动变阻器 / 电压表联动 ---------- */
+{
+  const { sandbox } = makeSandbox("");
+  const P = sandbox.window.PHY;
+  const ser = (n) => serialize(n);
+  // 闭环：6V 电源 + 50Ω 滑变 + 电流表（2×2 无弦回路，无开关，直接通路）
+  const n = P.widget("circuit-build", { grid: { cols: 6, rows: 4 },
+    components: [
+      { id: "bat1", kind: "battery", cell: [2, 1] },
+      { id: "w1", kind: "wire", cell: [3, 1] },
+      { id: "rh1", kind: "rheostat", cell: [3, 2], min: 0, max: 50, init: 50, step: 1 },
+      { id: "a1", kind: "ammeter", cell: [2, 2] },
+      { id: "v1", kind: "voltmeter", cell: [4, 1], across: "rh1", range: { max: 15 }, divisions: 0.5 }
+    ],
+    battery: { voltage: 6 }, goal: "拖滑片看电流变" });
+  let h = ser(n);
+  (h.includes("I = 0.12 A") && h.includes("R滑 = 50 Ω"))
+    ? ok("rheostat 初值：I=0.12A，R滑=50Ω（读数行 MathML，stub 走降级文本）")
+    : fail("rheostat 初值读数异常");
+  (h.includes("U变阻器") && h.includes("6 V"))
+    ? ok("voltmeter 读数出现：U变阻器 = 6 V（U=I·R）")
+    : fail("voltmeter 读数缺失");
+  h.includes("通路") ? ok("闭环判通路") : fail("闭环未判通路");
+  // 滑片→10Ω：I=0.6A 实时联动（I=U/ΣR）
+  const sl = queryAll(n, "input")[0];
+  if (sl) {
+    sl.value = "10"; sl.fire("input");
+    h = ser(n);
+    (h.includes("I = 0.6 A") && h.includes("R滑 = 10 Ω"))
+      ? ok("滑片拖动联动：R滑=10Ω → I=0.6A（I=U/ΣR 实时）")
+      : fail("滑片联动异常");
+  } else fail("滑片滑块缺失");
+  // 电压表串进回路 → ≈断路教学判定（2×2 回路，v1 占一条边）
+  const n2 = P.widget("circuit-build", { grid: { cols: 6, rows: 4 },
+    components: [
+      { id: "bat1", kind: "battery", cell: [2, 1] },
+      { id: "w1", kind: "wire", cell: [3, 1] },
+      { id: "v1", kind: "voltmeter", cell: [3, 2] },
+      { id: "a1", kind: "ammeter", cell: [2, 2] }
+    ],
+    battery: { voltage: 6 } });
+  ser(n2).includes("电压表串联≈断路")
+    ? ok("电压表串联 → 断路（电压表串联≈断路）")
+    : fail("电压表串联判定缺失");
 }
 
 console.log(fails === 0 ? "\n[PASS] 物理引擎烟雾测试全部通过" : `\n[FAIL] ${fails} 项未通过`);

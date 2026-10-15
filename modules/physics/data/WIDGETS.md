@@ -103,8 +103,11 @@
 |---|---|---|---|---|
 | `grid` | object | ✅ | — | `{cols, rows}`（如 6×4；格点间距 ≥13 逻辑单位） |
 | `components` | array | ✅ | — | 初始元件（可空）；`{id, kind, cell:[col,row], value?}` |
-| `components[].kind` | string | ✅ | — | `battery`/`bulb`/`switch`/`ammeter`/`resistor`/`wire` |
+| `components[].kind` | string | ✅ | — | `battery`/`bulb`/`switch`/`ammeter`/`voltmeter`/`resistor`/`rheostat`/`wire` |
 | `components[].value` | number | — | — | 灯泡默认 12Ω、电阻默认 20Ω（Ω）；电流表内阻视为 0（小字注明） |
+| `components[].min`/`max`/`init`/`step` | number | — | `0`/`50`/`=max`/自适应 | 仅 `rheostat`（滑动变阻器）：接入电阻范围 / 初始值 / 滑块步进（Ω）；`init` 缺省=最大值（规范动作：闭合开关前滑片移到阻值最大处） |
+| `components[].across` | string | — | — | 仅 `voltmeter`（电压表）：被测用电器元件 `id`（`bulb`/`resistor`/`rheostat`/`battery`）；从元件库拖入时自动连最近用电器 |
+| `components[].range`/`divisions` | object/number | — | `{max:15}`/`0.5` | 仅 `voltmeter`：量程 `{max}`（V）/ 分度值（V）；超量程出 ⚠ 警告"换大量程再测" |
 | `tray` | array | — | 全种类 | 元件库清单（`kind` 数组） |
 | `battery` | object | — | `{voltage:3}` | 电源电压（V，>0）；单电源 |
 | `goal` | string | — | — | 任务目标（一句话） |
@@ -127,10 +130,31 @@
 } }
 ```
 
-判定：通路 / 断路（开关没闭合）/ 断路（电路未闭合）/ **短路！**（导线直连电源两极 → 红色警告徽章 + ⚠ + 断路态）/ **烧表警告**（电流表并联在用电器/电源两端 → ⚠ 徽章，话术占位"待黄队定"，断路态）。
-灯泡三档：暗 / 亮 / 很亮（各有文字）；电流表读数 `I = … A`（MathML）。
+判定：通路 / 断路（开关没闭合）/ 断路（电路未闭合）/ **短路！**（导线直连电源两极 → 红色警告徽章 + ⚠ + 断路态）/ **烧表警告**（电流表并联在用电器/电源两端 → ⚠ 徽章，断路态）/ **断路（电压表串联≈断路）**（电压表内阻极大，串进回路等于断路，只能并联）。
+灯泡三档：暗 / 亮 / 很亮（各有文字）；电流表读数 `I = … A`（MathML）；有滑动变阻器时读数行追加 `R滑 = … Ω`（MathML）。
 拖拽：只支持"库→画布"和"画布→库"；点开关切换开合；附"一键连好示范电路"按钮。
+滑动变阻器：GB/T 4728 符号（电阻框 + 斜箭头）；滑片两种调法双向同步——① 符号上拖橙色手柄（隐形热区 r=7，直径 14 ≥ 6 逻辑单位）；② 下方滑块行（原生 range ≥44px + −/+ 步进，W-P9）；拖动中电流表读数实时联动（`I=U/ΣR`），松手后全量重算（灯泡档位/电流箭头/备注）。
+电压表：GB/T 4728 符号（圆圈 V）；表笔虚线 + "测×"文字连到 `across` 指定的用电器；读数行 `U_被测 = … V`（MathML，`U=I·R_被测`，被测为电源时读电源电压）；量程/分度值可配，超量程 ⚠ 警告；被测元件不在回路中时读数 "—"。
 元件符号符合 GB/T 4728（国标电路符号，符号本身即第一编码）。
+
+```js
+{ type: "circuit-build", params: {
+  grid: { cols: 6, rows: 4 },
+  components: [
+    { id: "bat1", kind: "battery", cell: [2, 1] },
+    { id: "sw1",  kind: "switch",  cell: [3, 1] },
+    { id: "rh1",  kind: "rheostat", cell: [3, 2], min: 0, max: 50, init: 50 },
+    { id: "a1",   kind: "ammeter", cell: [2, 2] },
+    { id: "v1",   kind: "voltmeter", cell: [4, 1], across: "rh1",
+      range: { max: 15 }, divisions: 0.5 }
+  ],
+  tray: ["bulb", "resistor", "rheostat", "voltmeter", "wire"],
+  battery: { voltage: 6 },
+  goal: "闭合开关，拖动滑片——接入电阻变，电流表读数跟着变",
+  badge: { invariant: "没变的是：电源电压" }
+} }
+```
+布局铁律：预置回路用 2×2 方形（或无弦 U 形）——回路中非相邻元件在网格上不得相邻，否则形成零电阻"弦"回路被误判短路。
 
 ---
 

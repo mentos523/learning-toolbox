@@ -1083,11 +1083,29 @@
   /* 降级约束（§12.2）：只做单回路串联解析求解 I=U/ΣR + 固定双支路并联
    * 模板；元件 ≤8；不做通用节点分析（MNA）。 */
   var CIRCUIT_KIND_ZH = { battery: "电源", bulb: "灯泡", "switch": "开关",
-    ammeter: "电流表", resistor: "电阻", wire: "导线" };
+    ammeter: "电流表", voltmeter: "电压表", resistor: "电阻", rheostat: "滑动变阻器", wire: "导线" };
   function circuitR(c) {
     if (c.kind === "bulb") return c.value || 12;
     if (c.kind === "resistor") return c.value || 20;
-    return 0; /* 电流表内阻视为 0（初中教学约定）；开关/导线 0 */
+    if (c.kind === "rheostat") return rheoR(c);
+    return 0; /* 电流表内阻视为 0（初中教学约定）；开关/导线 0；
+                 电压表串联另判"≈断路"，不走此分支 */
+  }
+  /* 滑动变阻器接入电阻 = min + frac*(max-min)；
+   * init 缺省=阻值最大处（"开关闭合前滑片移到阻值最大处"，规范动作） */
+  function rheoCfg(c) {
+    var mn = c.min != null ? c.min : 0, mx = c.max != null ? c.max : 50;
+    if (!(mx > mn)) mx = mn + 1;
+    return { min: mn, max: mx, step: c.step || (mx - mn) / 50 || 1 };
+  }
+  function rheoR(c) {
+    var cfg = rheoCfg(c);
+    var f = c.frac != null ? Math.max(0, Math.min(1, c.frac)) : 1;
+    return cfg.min + f * (cfg.max - cfg.min);
+  }
+  function rheoX(c, cc, s) {
+    var f = c.frac != null ? Math.max(0, Math.min(1, c.frac)) : 1;
+    return cc.x - s * 0.3 + f * s * 0.6;
   }
   function widgetCircuitBuild(p) {
     var box = el("div", "phy-widget");
@@ -1097,10 +1115,22 @@
     var cols = p.grid.cols, rows = p.grid.rows;
     var cw = 100 / cols, chh = 100 / rows;
     var U = (p.battery && p.battery.voltage) || 3;
-    var trayKinds = p.tray || ["battery", "bulb", "switch", "ammeter", "resistor", "wire"];
+    var trayKinds = p.tray || ["battery", "bulb", "switch", "ammeter", "voltmeter", "resistor", "rheostat", "wire"];
     var comps = (p.components || []).map(function (c, i) {
-      return { id: c.id || ("c" + i), kind: c.kind, cell: [c.cell[0], c.cell[1]],
+      var o = { id: c.id || ("c" + i), kind: c.kind, cell: [c.cell[0], c.cell[1]],
         value: c.value, on: c.kind === "switch" ? false : undefined };
+      if (c.kind === "rheostat") {
+        var rcfg = rheoCfg(c);
+        o.min = rcfg.min; o.max = rcfg.max; o.step = rcfg.step;
+        var initR = c.init != null ? c.init : rcfg.max; /* 缺省滑片在阻值最大处 */
+        o.frac = Math.max(0, Math.min(1, (initR - rcfg.min) / (rcfg.max - rcfg.min)));
+      }
+      if (c.kind === "voltmeter") {
+        o.across = c.across || null;
+        o.range = c.range || { max: 15 };
+        o.divisions = c.divisions != null ? c.divisions : 0.5;
+      }
+      return o;
     });
     var svg = svgStage("phy-circuit", "电路搭建：从元件库拖元件到网格");
     /* 单元格热区（格点间距 ≥13 逻辑单位：cols=6 时 16.7 ✓） */
@@ -1119,22 +1149,27 @@
     var compLayer = svgEl("g", {}); svg.appendChild(compLayer);
     var stateLine = stateBadge("把元件拖到网格里", "");
     box.appendChild(svg);
+    var ctrlBox = el("div", "phy-circuit-ctrls"); /* 滑动变阻器滑片滑块行 */
+    box.appendChild(ctrlBox);
+    var voltBox = el("div", "phy-volt-read");     /* 电压表读数行 */
+    box.appendChild(voltBox);
     box.appendChild(stateLine);
     var notes = el("div", "phy-circuit-notes");
     box.appendChild(notes);
     var tray = el("div", "phy-tray");
     tray.setAttribute("aria-label", "元件库");
     box.appendChild(tray);
+    /* 滑动变阻器运行时引用（每轮 solve() 重建） */
+    var rheoValNodes = {}, rheoCtrls = {}, rheoDrag = {};
     var autoBtn = el("button", "phy-auto", "一键连好示范电路");
     autoBtn.type = "button";
     autoBtn.addEventListener("click", function () {
+      /* 2×2 方形无弦回路：非相邻元件在网格上不相邻，避免零电阻"弦"回路误判短路 */
       comps = [
-        { id: "bat1", kind: "battery", cell: [1, 1] },
-        { id: "w1", kind: "wire", cell: [2, 1] },
-        { id: "b1", kind: "bulb", cell: [3, 1] },
-        { id: "w2", kind: "wire", cell: [3, 2] },
-        { id: "s1", kind: "switch", cell: [2, 2], on: false },
-        { id: "w3", kind: "wire", cell: [1, 2] }
+        { id: "bat1", kind: "battery", cell: [2, 1] },
+        { id: "s1", kind: "switch", cell: [3, 1], on: false },
+        { id: "b1", kind: "bulb", cell: [3, 2] },
+        { id: "w1", kind: "wire", cell: [2, 2] }
       ];
       solve(); flash(svg);
     });
@@ -1159,6 +1194,19 @@
       return m;
     }
     function byId(id) { for (var i = 0; i < comps.length; i++) if (comps[i].id === id) return comps[i]; return null; }
+    /* 电压表是"探头"：只并联测量，不进回路拓扑（表笔虚线另画） */
+    function adjNoVolt() {
+      var adj = adjOf(), out = {};
+      Object.keys(adj).forEach(function (id) {
+        var c = byId(id);
+        if (c && c.kind === "voltmeter") return;
+        out[id] = adj[id].filter(function (x) {
+          var q = byId(x);
+          return !(q && q.kind === "voltmeter");
+        });
+      });
+      return out;
+    }
 
     /* ---- GB/T 4728 元件符号（符号本身即第一编码） ---- */
     function drawSymbol(g, comp) {
@@ -1198,6 +1246,48 @@
       } else if (comp.kind === "resistor") {
         g.appendChild(svgEl("rect", { x: cc.x - s * 0.3, y: cc.y - s * 0.13,
           width: s * 0.6, height: s * 0.26, fill: "none", stroke: col, "stroke-width": 1.2 }));
+      } else if (comp.kind === "rheostat") {
+        /* GB/T 4728 滑动变阻器：电阻框 + 斜箭头（滑动触头） */
+        g.appendChild(svgEl("rect", { x: cc.x - s * 0.3, y: cc.y - s * 0.13,
+          width: s * 0.6, height: s * 0.26, fill: "none", stroke: col, "stroke-width": 1.2 }));
+        arrowHead(svg, "fh-rheo", col);
+        g.appendChild(svgEl("line", { x1: cc.x - s * 0.34, y1: cc.y + s * 0.24,
+          x2: cc.x + s * 0.34, y2: cc.y - s * 0.24,
+          stroke: col, "stroke-width": 1.1, "marker-end": "url(#fh-rheo)" }));
+        /* 滑片手柄：可视圆（橙色，第二编码）+ 隐形大热区（r=7，直径 14 ≥ 6 逻辑单位） */
+        var hx = rheoX(comp, cc, s);
+        var hd = svgEl("circle", { cx: hx, cy: cc.y - s * 0.13, r: 2.4,
+          fill: cssVar("--phy-target"), "class": "phy-handle" });
+        var hit = svgEl("circle", { cx: hx, cy: cc.y - s * 0.13, r: 7,
+          fill: "transparent", "class": "phy-handle-hit", "aria-label": "拖动滑片改变接入电阻" });
+        g.appendChild(hd); g.appendChild(hit);
+        var rv = svgText(cc.x, cc.y + s * 0.62 + 4.5, "", "phy-rheo-val");
+        rv.textContent = "R=" + fmtN(rheoR(comp), 1) + "Ω";
+        g.appendChild(rv);
+        rheoValNodes[comp.id] = rv;
+        rheoDrag[comp.id] = { hd: hd, hit: hit, cc: { x: cc.x, y: cc.y }, s: s };
+        (function (cp, ccx, ss) {
+          dragify(hit, { svg: svg, onMove: function (lx) {
+            var f = (lx - (ccx - ss * 0.3)) / (ss * 0.6);
+            cp.frac = Math.max(0, Math.min(1, f));
+            moveRheoHandle(cp);
+            liveRheo();
+          }, onEnd: function () { solve(); flash(svg); vib(10); } });
+        })(comp, cc.x, s);
+      } else if (comp.kind === "voltmeter") {
+        /* GB/T 4728 电压表：圆圈 + V */
+        g.appendChild(svgEl("circle", { cx: cc.x, cy: cc.y, r: s * 0.3,
+          fill: "none", stroke: col, "stroke-width": 1.2 }));
+        g.appendChild(svgText(cc.x, cc.y + 1.8, "V", "phy-sym-label"));
+        /* 表笔虚线：连到被测用电器（across），双编码：虚线 + "测×"文字 */
+        var tgt = comp.across ? byId(comp.across) : null;
+        if (tgt) {
+          var tc = cellCenter(tgt.cell);
+          g.appendChild(svgEl("line", { x1: cc.x, y1: cc.y, x2: tc.x, y2: tc.y,
+            stroke: cssVar("--phy-target"), "stroke-width": 1, "stroke-dasharray": "2.5,2" }));
+          g.appendChild(svgText((cc.x + tc.x) / 2, (cc.y + tc.y) / 2 - 2,
+            "测" + (CIRCUIT_KIND_ZH[tgt.kind] || tgt.kind), "phy-sym-label"));
+        }
       }
       /* wire：只连通，不画符号 */
       var lb = svgText(cc.x, cc.y + s * 0.62, CIRCUIT_KIND_ZH[comp.kind] || comp.kind, "phy-sym-label");
@@ -1213,7 +1303,8 @@
         var nbs = adj[cur] || [];
         for (var i = 0; i < nbs.length; i++) {
           var nb = nbs[i];
-          if (nb === batId && path.length >= 2) { cycles.push(path.slice()); continue; }
+          /* 成环至少 3 个不同节点：排除"去又回"的 2 节点退化路径（否则任何闭环都误判短路） */
+          if (nb === batId && path.length >= 3) { cycles.push(path.slice()); continue; }
           if (path.indexOf(nb) >= 0) continue;
           path.push(nb); dfs(nb, path); path.pop();
         }
@@ -1232,10 +1323,136 @@
       for (var i = 0; i < cy.length; i++) {
         var c = byId(cy[i]);
         if (!c || c.kind === "battery") continue;
+        if (c.kind === "voltmeter") return -1; /* 电压表内阻极大，串联≈断路 */
         if (c.kind === "switch" && !c.on) return -1; /* 断开 */
         s += circuitR(c);
       }
       return s;
+    }
+    /* 单回路串联解析求解（降级约束）：返回 {cy, adj, bat, R, I} 或 null；
+     * 电压表不进拓扑（探头），避免"挨着放"破坏串联判定 */
+    function seriesSolution() {
+      var adj = adjNoVolt();
+      var bat = null;
+      comps.forEach(function (c) { if (!bat && c.kind === "battery") bat = c; });
+      if (!bat) return null;
+      var cycles = findCycles(adj, bat.id);
+      var valid = cycles.filter(function (cy) { return cycleR(cy) >= 0; });
+      if (valid.length !== 1) return null;
+      var degs = valid[0].map(function (id) { return (adj[id] || []).length; });
+      if (Math.max.apply(null, degs) > 2) return null;
+      var R = cycleR(valid[0]);
+      return { cy: valid[0], adj: adj, bat: bat, R: R, I: U / R };
+    }
+    /* 电压表被串进回路（除此之外回路是通的）→ "≈断路"教学判定；
+     * 用全邻接检测（探头语义下电压表本不该出现在回路里） */
+    function voltBlocked() {
+      var full = adjOf(), bat = null;
+      comps.forEach(function (c) { if (!bat && c.kind === "battery") bat = c; });
+      if (!bat) return false;
+      var cycles = findCycles(full, bat.id);
+      for (var i = 0; i < cycles.length; i++) {
+        var cy = cycles[i], hasV = false, ok = true;
+        for (var j = 0; j < cy.length; j++) {
+          var c = byId(cy[j]);
+          if (!c || c.kind === "battery") continue;
+          if (c.kind === "voltmeter") { hasV = true; continue; }
+          if (c.kind === "switch" && !c.on) { ok = false; break; }
+        }
+        if (hasV && ok) return true;
+      }
+      return false;
+    }
+    /* 串联读数行（MathML）：I = … A；有滑动变阻器时追加 R滑 = … Ω */
+    function seriesReadout(sol) {
+      var parts = [{ sym: "I", mml: mi("I"), v: fmtN(sol.I, 2), u: "A" }];
+      sol.cy.map(byId).forEach(function (c) {
+        if (c && c.kind === "rheostat")
+          parts.push({ sym: "R滑", mml: "<msub><mi>R</mi><mtext>滑</mtext></msub>",
+            v: fmtN(rheoR(c), 1), u: "Ω" });
+      });
+      var m = "<math><mrow>" + parts.map(function (p, i) {
+        return (i ? '<mspace width="0.6em"/><mtext>；</mtext><mspace width="0.6em"/>' : "") +
+          p.mml + "<mo>=</mo><mn>" + esc(p.v) + "</mn>" +
+          (p.u ? '<mspace width="0.25em"/><mi mathvariant="normal">' + esc(p.u) + "</mi>" : "");
+      }).join("") + "</mrow></math>";
+      var t = parts.map(function (p) {
+        return p.sym + " = " + p.v + (p.u ? " " + p.u : "");
+      }).join("；");
+      return { mathml: m, text: t };
+    }
+    /* 滑片拖动时的轻量联动：只更读数/手柄位置，不重建 DOM（拖拽中保持 pointer capture） */
+    function moveRheoHandle(c) {
+      var d = rheoDrag[c.id];
+      if (d) {
+        var hx = rheoX(c, d.cc, d.s);
+        d.hd.setAttribute("cx", hx); d.hit.setAttribute("cx", hx);
+      }
+      if (rheoValNodes[c.id])
+        rheoValNodes[c.id].textContent = "R=" + fmtN(rheoR(c), 1) + "Ω";
+      var ctl = rheoCtrls[c.id];
+      if (ctl) ctl.set(rheoR(c), true);
+    }
+    function liveRheo() {
+      var sol = seriesSolution();
+      if (sol) {
+        var sr = seriesReadout(sol);
+        badge.setReadout(sr.mathml, sr.text);
+      } else {
+        badge.setReadout("", "I = —");
+      }
+      comps.forEach(function (c) {
+        if (c.kind === "rheostat" && rheoValNodes[c.id])
+          rheoValNodes[c.id].textContent = "R=" + fmtN(rheoR(c), 1) + "Ω";
+      });
+    }
+    /* 滑动变阻器滑块行（W-P9：原生 range ≥44px + −/+ 步进；与 SVG 滑片双向同步） */
+    function buildRheoCtrls() {
+      ctrlBox.innerHTML = ""; rheoCtrls = {};
+      comps.forEach(function (c) {
+        if (c.kind !== "rheostat") return;
+        var cfg = rheoCfg(c);
+        var ctl = uiSlider({ label: "滑动变阻器滑片", min: cfg.min, max: cfg.max,
+          step: cfg.step, init: rheoR(c), unit: "Ω",
+          fmt: function (v) { return "R=" + fmtN(v, 1); } });
+        ctrlBox.appendChild(ctl.row);
+        rheoCtrls[c.id] = ctl;
+        ctl.on(function (v) {
+          c.frac = (v - cfg.min) / ((cfg.max - cfg.min) || 1);
+          moveRheoHandle(c);
+          liveRheo();
+        });
+        ctl.input.addEventListener("change", function () { solve(); flash(svg); });
+      });
+    }
+    /* 电压表读数行（MathML）：U_被测 = I·R_被测；量程/分度值可配，超量程警告 */
+    var VOLT_SUB = { bulb: "灯泡", resistor: "电阻", rheostat: "变阻器", battery: "电源" };
+    function drawVoltmeters(sol) {
+      voltBox.innerHTML = "";
+      comps.forEach(function (c) {
+        if (c.kind !== "voltmeter") return;
+        var tgt = c.across ? byId(c.across) : null;
+        var div = c.divisions != null ? c.divisions : 0.5;
+        var dec = (String(div).split(".")[1] || "").length;
+        var line = el("div", "phy-volt-line", "");
+        var sub = tgt ? (VOLT_SUB[tgt.kind] || "用电器") : "";
+        if (tgt && sol && sol.cy.indexOf(tgt.id) >= 0) {
+          var Uv = tgt.kind === "battery" ? U : sol.I * circuitR(tgt);
+          var m = "<math><mrow><msub><mi>U</mi><mtext>" + esc(sub) + "</mtext></msub>" +
+            "<mo>=</mo><mn>" + esc(fmtN(Uv, dec)) + "</mn>" +
+            '<mspace width="0.25em"/><mi mathvariant="normal">V</mi></mrow></math>';
+          if (mathmlOK()) line.innerHTML = m;
+          else line.textContent = "U" + sub + " = " + fmtN(Uv, dec) + " V";
+          var mx = c.range && c.range.max != null ? c.range.max : 15;
+          if (Uv > mx + 1e-9)
+            line.appendChild(el("span", "phy-warn", " ⚠ 超出电压表量程（" + mx + " V），换大量程再测"));
+        } else {
+          line.textContent = "U" + sub + " = —" +
+            (!tgt ? "（电压表还没连上被测用电器：拖到用电器旁边会自动连表笔）"
+                  : "（电路未形成通路，或被测元件不在回路中）");
+        }
+        voltBox.appendChild(line);
+      });
     }
     function orderedLoop(adj, batId) {
       /* 从电池出发，优先走 + 极（符号左侧长板）方向，沿环走一圈 */
@@ -1261,7 +1478,9 @@
 
     function solve() {
       wireLayer.innerHTML = ""; compLayer.innerHTML = ""; notes.innerHTML = "";
-      var adj = adjOf();
+      voltBox.innerHTML = ""; ctrlBox.innerHTML = "";
+      rheoValNodes = {}; rheoCtrls = {}; rheoDrag = {};
+      var adj = adjNoVolt(); /* 电压表是探头：不画实线、不进回路判定 */
       /* 导线：相邻格点自动连线 */
       var drawn = {};
       comps.forEach(function (a) {
@@ -1274,6 +1493,7 @@
         });
       });
       comps.forEach(function (c) { drawSymbol(compLayer, c); });
+      buildRheoCtrls(); /* 滑动变阻器滑块行（与 SVG 滑片双向同步） */
       /* 元件总数 ≤8（降级约束） */
       var bat = null;
       comps.forEach(function (c) { if (!bat && c.kind === "battery") bat = c; });
@@ -1283,6 +1503,7 @@
       }
       if (!bat) {
         setState("断路（还没有电源）", ""); badge.setReadout("", "I = —");
+        drawVoltmeters(null);
         return;
       }
       var cycles = findCycles(adj, bat.id);
@@ -1312,6 +1533,7 @@
         setState("短路！电流过大", "bad");
         notes.appendChild(noteLine("⚠ 导线直接连了电源两极——短路电流很大，会烧坏电源，绝不允许。"));
         badge.setReadout("", "I = —（断路态）");
+        drawVoltmeters(null);
         flash(stateLine);
         return;
       }
@@ -1320,30 +1542,34 @@
         var w = stateBadge("⚠ 烧表警告：电流表内阻极小，并联会近乎短路，大电流烧表——电流表只能串联，绝不并联", "bad");
         notes.appendChild(w);
         badge.setReadout("", "I = —（断路态）");
+        drawVoltmeters(null);
         flash(w);
         return;
       }
-      /* 串联单环 */
-      var seriesCy = null;
-      if (valid.length === 1) {
-        var degs = valid[0].map(function (id) { return (adj[id] || []).length; });
-        if (Math.max.apply(null, degs) <= 2) seriesCy = valid[0];
+      /* 串联单环（解析求解 I=U/ΣR） */
+      var sol = seriesSolution();
+      if (!sol && voltBlocked()) {
+        setState("断路（电压表串联≈断路）", "");
+        notes.appendChild(noteLine("电压表内阻极大，理想时看作断路——只能并联在用电器两端，串进回路等于把路断开。"));
+        badge.setReadout("", "U = —（断路态）");
+        drawVoltmeters(null);
+        flash(stateLine);
+        return;
       }
-      if (seriesCy) {
-        var R = cycleR(seriesCy);
-        var I = U / R;
-        var order = orderedLoop(adj, bat.id);
+      if (sol) {
+        var order = orderedLoop(sol.adj, sol.bat.id);
         drawCurrent(order);
-        var bulbs = seriesCy.map(byId).filter(function (c) { return c && c.kind === "bulb"; });
-        var tier = I < 0.15 ? "暗" : I < 0.5 ? "亮" : "很亮";
+        var bulbs = sol.cy.map(byId).filter(function (c) { return c && c.kind === "bulb"; });
+        var tier = sol.I < 0.15 ? "暗" : sol.I < 0.5 ? "亮" : "很亮";
         bulbs.forEach(function (b) { glowBulb(b, tier); });
-        var amm = seriesCy.map(byId).filter(function (c) { return c && c.kind === "ammeter"; })[0];
+        var amm = sol.cy.map(byId).filter(function (c) { return c && c.kind === "ammeter"; })[0];
         setState("通路", "ok");
         var extra = amm ? "（电流表读数）" : "";
-        var r = mmlRead(mi("I"), fmtN(I, 2), "A");
-        badge.setReadout(r.mathml, "I = " + r.text + extra);
+        var sr = seriesReadout(sol);
+        badge.setReadout(sr.mathml, sr.text + extra);
         notes.appendChild(noteLine("灯泡" + tier + "（" + bulbs.length + " 只）" +
-          (amm ? "；电流表读数 " + fmtN(I, 2) + " A" : "；电流表内阻视为 0") + "。"));
+          (amm ? "；电流表读数 " + fmtN(sol.I, 2) + " A" : "；电流表内阻视为 0") + "。"));
+        drawVoltmeters(sol);
         return;
       }
       /* 固定双支路并联模板（allowParallel） */
@@ -1360,7 +1586,7 @@
             var bulbs = ph.filter(function (id) { return byId(id).kind === "bulb"; });
             var bad = ph.some(function (id) {
               var k = byId(id).kind;
-              return k === "resistor" || k === "ammeter" || (k === "switch" && !byId(id).on);
+              return k === "resistor" || k === "rheostat" || k === "ammeter" || (k === "switch" && !byId(id).on);
             });
             return bulbs.length === 1 && !bad;
           });
@@ -1384,6 +1610,7 @@
       else if (hasBranch) setState("断路（仅支持单回路串联 / 固定双支路模板）", "");
       else setState("断路（电路未闭合）", "");
       badge.setReadout("", "I = —");
+      drawVoltmeters(null);
     }
     function bfsPath(adj, from, to) {
       var prev = {}, seen = {};
@@ -1481,6 +1708,17 @@
           comps = comps.filter(function (x) { return x !== comp; });
         } else if (!compAt(cc, rr)) {
           comp.cell = [cc, rr];
+          /* 电压表落位：自动把表笔连到最近的可用电器（bulb/resistor/rheostat/battery） */
+          if (comp.kind === "voltmeter" && !comp.across) {
+            var best = null, bd = 1e9;
+            comps.forEach(function (q) {
+              if (q === comp) return;
+              if (["bulb", "resistor", "rheostat", "battery"].indexOf(q.kind) < 0) return;
+              var d = Math.abs(q.cell[0] - comp.cell[0]) + Math.abs(q.cell[1] - comp.cell[1]);
+              if (d < bd) { bd = d; best = q; }
+            });
+            if (best) comp.across = best.id;
+          }
         }
         solve(); flash(svg);
       }
@@ -1500,7 +1738,8 @@
           return;
         }
         var comp = { id: "c" + Date.now() + Math.floor(Math.random() * 999),
-          kind: kind, cell: [0, 0], on: kind === "switch" ? false : undefined };
+          kind: kind, cell: [0, 0], on: kind === "switch" ? false : undefined,
+          frac: kind === "rheostat" ? 1 : undefined }; /* 新拖入的滑片默认在阻值最大处 */
         comps.push(comp);
         startDrag(comp, e, false);
       });
@@ -3162,7 +3401,7 @@
           var r = mmlRead(mi("S"), fmtN(sum, 2), "");
           badge.setReadout(r.mathml, "S = " + r.text);
           out.textContent = "面积 S ≈ " + fmtN(sum, 2) +
-            "（轴上为正 / 轴下为负；话术待黄队定稿）";
+            "（图线在横轴上方，面积为正；在横轴下方，面积为负）";
           flash(svg);
           return;
         }

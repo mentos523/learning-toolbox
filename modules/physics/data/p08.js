@@ -288,9 +288,18 @@ window.PHY_CH["p08"] = {
                     recordKey: "phy_guess_p08.2.1b",
                     showAfter: "manual"
                   }
-                }
+                },
+                {
+                  type: "read-gauge",
+                  params: {
+                    gauge: "voltmeter",
+                    range: { min: 0, max: 15, unit: "V" },
+                    divisions: 0.5, estimate: true, eyeLine: true,
+                    trialTouch: false, tolerance: "1division"
+                  }
+                },
               ],
-              point: "有电压不一定有电流（断路），有电流一定有电压——原因和结果，别倒。"
+              point: "有电压不一定有电流（断路），有电流一定有电压——原因和结果，别倒。电压表读数也练一次：先选合适量程，估读到分度值下一位。"
             },
             {
               id: "p08.2.1-p2",
@@ -323,26 +332,28 @@ window.PHY_CH["p08"] = {
               id: "p08.2.2-p1",
               kind: "interact",
               title: "电阻越大，电流越小",
-              exploreTip: "电阻越大，电流越小——“阻碍”看得见。（长度 / 粗细 / 材料控制变量实验暂无专用组件）",
+              exploreTip: "拖动滑片：接入电阻变大→电流变小。“阻碍”看得见。（长度 / 粗细 / 材料控制变量实验暂无专用组件）",
               widgets: [
                 {
                   type: "circuit-build",
                   params: {
                     grid: { cols: 6, rows: 4 },
                     components: [
-                      { id: "bat1", kind: "battery", cell: [1, 2] },
-                      { id: "sw1",  kind: "switch",  cell: [4, 2] }
+                      { id: "bat1", kind: "battery", cell: [2, 1] },
+                      { id: "sw1",  kind: "switch",  cell: [3, 1] },
+                      { id: "rh1",  kind: "rheostat", cell: [3, 2], min: 0, max: 50, init: 50 },
+                      { id: "a1",   kind: "ammeter", cell: [2, 2] }
                     ],
-                    tray: ["resistor", "ammeter", "wire"],
+                    tray: ["bulb", "resistor", "rheostat", "wire"],
                     battery: { voltage: 6 },
-                    goal: "先串入 10Ω 电阻读电流，再换成 30Ω：电流怎么变？（电阻是导体对电流的“阻碍”）",
+                    goal: "开关闭合前，先把滑片移到阻值最大处（规范动作）；闭合开关，拖动滑片——接入电阻变，电流表读数跟着变（I=U/ΣR）。",
                     showCurrent: true,
                     badge: { invariant: "没变的是：电源电压" },
                     safety: "虚拟电路随便连、随便短路；真实电路短路会烧电源、烧表——只许在虚拟里试。"
                   }
                 }
               ],
-              point: "换大电阻，电流表示数变小——电阻是导体对电流的“阻碍”。"
+              point: "滑片一动，接入电阻变，电流表读数跟着变（I=U/ΣR）——电阻是导体对电流的“阻碍”。"
             },
             {
               id: "p08.2.2-p2",
@@ -496,7 +507,7 @@ window.PHY_CH["p08"] = {
               id: "p08.2.4-p1",
               kind: "interact",
               title: "串联分压，并联分流",
-              exploreTip: "滑动变阻器还没进元件库——先用“换电阻”模拟滑片移动，看电流和亮度怎么变。",
+              exploreTip: "滑动变阻器已进元件库：拖入电路、拖滑片，看电流和亮度怎么变。（本课重点仍是串并联规律）",
               widgets: [
                 {
                   type: "circuit-build",
@@ -506,7 +517,7 @@ window.PHY_CH["p08"] = {
                       { id: "bat1", kind: "battery", cell: [1, 2] },
                       { id: "sw1",  kind: "switch",  cell: [4, 2] }
                     ],
-                    tray: ["resistor", "bulb", "ammeter", "wire"],
+                    tray: ["resistor", "rheostat", "bulb", "ammeter", "wire"],
                     battery: { voltage: 6 },
                     goal: "串联两个电阻，读电流；再换成并联（试试两条支路）：哪种接法总电阻更小？灯泡亮度呢？",
                     allowParallel: true, showCurrent: true,
@@ -548,7 +559,7 @@ window.PHY_CH["p08"] = {
                 { type: "lead", text: "滑动变阻器滑片一动，全电路都跟着变——动态电路三步走。" },
                 { type: "text", html: "三步：① 滑片移动→接入电阻变大 / 变小；② 总电阻变→总电流变（I=U/R）；③ 各用电器电压、电流、亮度跟着变。" },
                 { type: "text", html: "例：滑片右移，接入电阻变大→总电流变小→灯泡变暗、电流表示数变小。一步一步来，别跳。" },
-                { type: "text", html: "注意：滑动变阻器元件暂未进元件库（缺口已上报），本课用“换电阻”模拟——思路一样。" },
+                { type: "text", html: "现在元件库里有真滑动变阻器了（p08.2.2 已上手）：滑片一滑，接入电阻连续变化，电流、电压、亮度一步一步跟着变——动态电路三步走，照着滑就行。" },
                 { type: "slogan", text: "滑片一动，全军跟着动。" }
               ],
               point: "动态电路不怕：电阻→电流→电压亮度，一步推一步。"

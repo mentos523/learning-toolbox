@@ -789,6 +789,17 @@ body[data-theme="dark"] #physics-app .phy-state-bad { background: #3a1d18; color
 .phy-lg i.dash { height: 0; border-top: 3px dashed; border-radius: 0; background: none !important; }
 
 /* ---------- P3 电路 ---------- */
+/* 滑动变阻器滑块行容器：无内容时不占位；电压表读数行 */
+.phy-circuit-ctrls { display: flex; flex-direction: column; gap: 0.4rem; margin: 0.4rem 0; }
+.phy-circuit-ctrls:empty { display: none; }
+.phy-volt-read { margin: 0.3rem 0; font-size: 0.95rem; color: var(--phy-ink); }
+.phy-volt-read:empty { display: none; }
+.phy-volt-line { margin: 0.15rem 0; line-height: 1.6; }
+.phy-warn { color: #b3261e; font-weight: 700; }
+body[data-theme="dark"] #physics-app .phy-warn { color: #ff8a80; }
+/* 滑片拖动手柄热区：透明大圆，只管抓取 */
+.phy-handle-hit { cursor: grab; }
+.phy-rheo-val { font-size: 3.8px; fill: var(--phy-ink-soft); }
 .phy-tray {
   display: flex;
   gap: 8px;
