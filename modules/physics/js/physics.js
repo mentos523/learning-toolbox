@@ -1317,7 +1317,7 @@
       }
       if (burn) {
         setState("断路", "");
-        var w = stateBadge("⚠ 烧表警告（话术待黄队定）", "bad");
+        var w = stateBadge("⚠ 烧表警告：电流表内阻极小，并联会近乎短路，大电流烧表——电流表只能串联，绝不并联", "bad");
         notes.appendChild(w);
         badge.setReadout("", "I = —（断路态）");
         flash(w);
