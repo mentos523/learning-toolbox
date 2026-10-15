@@ -349,7 +349,7 @@ window.PHY_CH["p12"] = {
               id: "p12.2.2-p1",
               kind: "interact",
               title: "a–F 图像：控制变量",
-              exploreTip: "点“读斜率”：m 一定时，a–F 是过原点的直线——斜率 = 1/m。质量越大，线越平。",
+              exploreTip: "点“读斜率”：m 一定时，a–F 是过原点的直线——斜率 = 1/m。质量越大，线越平。（直线为 a=F/m 理论线，非实测描点）",
               widgets: [
                 {
                   type: "graph-reader",
