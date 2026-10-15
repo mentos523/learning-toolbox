@@ -12,7 +12,14 @@
         '<text x="24" y="34" text-anchor="middle" font-size="24" font-weight="bold" fill="COLOR" font-family="serif">π</text></svg>',
     box: '<svg viewBox="0 0 48 48" width="44" height="44" aria-hidden="true">' +
          '<rect x="4" y="8" width="40" height="32" rx="6" fill="COLOR" opacity="0.15"/>' +
-         '<text x="24" y="33" text-anchor="middle" font-size="20" font-weight="bold" fill="COLOR" font-family="sans-serif">+</text></svg>'
+         '<text x="24" y="33" text-anchor="middle" font-size="20" font-weight="bold" fill="COLOR" font-family="sans-serif">+</text></svg>',
+    atom: '<svg viewBox="0 0 48 48" width="44" height="44" aria-hidden="true">' +
+         '<rect x="4" y="8" width="40" height="32" rx="6" fill="COLOR" opacity="0.15"/>' +
+         '<g fill="none" stroke="COLOR" stroke-width="2">' +
+         '<ellipse cx="24" cy="24" rx="14" ry="6"/>' +
+         '<ellipse cx="24" cy="24" rx="14" ry="6" transform="rotate(60 24 24)"/>' +
+         '<ellipse cx="24" cy="24" rx="14" ry="6" transform="rotate(120 24 24)"/>' +
+         '</g><circle cx="24" cy="24" r="3" fill="COLOR"/></svg>'
   };
 
   function icon(name, color) {

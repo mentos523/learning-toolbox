@@ -31,5 +31,15 @@ window.TOOLBOX_MODULES = [
     color: "#f59e0b",
     path: "modules/math/index.html",
     status: "ready"                  // 试点 4 页已上线
+  },
+  {
+    slug: "physics",
+    name: "物理",
+    tagline: "18 章 · 135 课",
+    description: "从八年级出发：每个公式都有身份证（适用条件），31 种虚拟实验，讲透到高中。",
+    icon: "atom",
+    color: "#10b981",
+    path: "modules/physics/index.html",
+    status: "ready"
   }
 ];

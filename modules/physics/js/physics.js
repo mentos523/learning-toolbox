@@ -155,14 +155,17 @@
     var wrap = el("div", "phy-browse");
     wrap.appendChild(el("h1", "", "物理"));
     var chs = readyChapters();
-    var nLessons = 0;
+    var nLessons = 0, nPages = 0;
     chs.forEach(function (c) {
       ((window.PHY_CH[c.id] || {}).units || []).forEach(function (u) {
-        nLessons += (u.lessons || []).length;
+        ((u.lessons || [])).forEach(function (l) {
+          nLessons++;
+          nPages += ((l.pages || []).length);
+        });
       });
     });
     wrap.appendChild(el("p", "phy-browse-sub",
-      "18 章 · 127 课 · 约 344 页（" + chs.length + " 章 · " + nLessons + " 课已就位）"));
+      chs.length + " 章 · " + nLessons + " 课 · " + nPages + " 页"));
     var list = el("ul", "phy-ch-list");
     chs.forEach(function (c) {
       var ch = window.PHY_CH[c.id];
