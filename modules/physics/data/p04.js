@@ -82,6 +82,55 @@ window.PHY_CH["p04"] = {
       title: "质量与密度",
       lessons: [
         {
+          id: "p04.1.1",
+          title: "质量",
+          prereq: "p00 导论",
+          time: "40–60 分钟",
+          formulas: {
+            massconv: {
+              mathml: "<math><mrow><mn>1</mn><mspace width=\"0.2em\"/><mi mathvariant=\"normal\">t</mi><mo>=</mo><mn>1000</mn><mspace width=\"0.2em\"/><mi mathvariant=\"normal\">kg</mi><mo>=</mo><msup><mn>10</mn><mn>6</mn></msup><mspace width=\"0.2em\"/><mi mathvariant=\"normal\">g</mi></mrow></math>",
+              translation: "1 吨 = 1000 千克 = 10 的 6 次方克"
+            }
+          },
+          pages: [
+            /* ---------- p1：讲解页（天平调平步骤 + 质量概念） ---------- */
+            {
+              id: "p04.1.1-p1",
+              kind: "explain",
+              title: "质量是“多少料”",
+              blocks: [
+                { type: "lead", text: "一瓶水带上月球，水还是那些水——变的是重量，不变的是质量。" },
+                { type: "text", html: "<strong>质量 m</strong>（标量，单位<strong>千克 kg</strong>，SI）：物体所含物质的多少。常用单位 <span class=\"phy-f\" data-f=\"massconv\"></span>，1g = 1000mg。质量是物体的“惯性量度”——质量越大，越难改变它的运动状态。" },
+                { type: "text", html: "天平调平三步：① 放平（放水平桌面）；② 归零（游码拨到标尺左端零刻度）；③ 调平（调平衡螺母——<strong>指针偏左，螺母向右调</strong>，反之亦然；“左偏右调”）。称量：左物右码，砝码用镊子夹。" },
+                { type: "trap", text: "⚠️ 别搞混：质量 = 重量——错！质量是惯性量度，跟位置无关（一瓶水月球上还是那些水）；重量是引力，会变。初中先分清。" },
+                { type: "slogan", text: "左偏右调，左物右码。" }
+              ],
+              point: "记住“左偏右调”：指针偏左，说明左边沉，平衡螺母往右调——第 2 页亲手调一次。"
+            },
+            /* ---------- p2：Y2 独立页（冻结口径：估读到下一位，容差=分度值×1） ---------- */
+            {
+              id: "p04.1.1-p2",
+              kind: "interact",
+              title: "天平称量练习",
+              exploreTip: "先调平（左偏右调），再称量：砝码质量 + 游码读数（估读到分度值下一位）。",
+              widgets: [
+                {
+                  type: "read-gauge",
+                  params: {
+                    gauge: "balance",
+                    range: { min: 0, max: 200, unit: "g" },
+                    divisions: 0.2,
+                    estimate: true,
+                    eyeLine: false,
+                    tolerance: "1division"
+                  }
+                }
+              ],
+              point: "读数 = 砝码总质量 + 游码示数：游码读左边刻度线，估读一位。"
+            }
+          ]
+        },
+        {
           id: "p04.1.2",
           title: "密度",
           prereq: "p04.1.1 质量",
@@ -236,6 +285,195 @@ window.PHY_CH["p04"] = {
                 }
               ],
               point: "下一站认旧友：p08.2.2 电阻——R=U/I 式陷阱再现，带上“等号不代表因果”去。"
+            }
+          ]
+        },
+        {
+          id: "p04.1.3",
+          title: "测量物质的密度",
+          prereq: "p04.1.2 密度",
+          time: "40–60 分钟",
+          pages: [
+            /* ---------- p1：交互页（mv-lab 复用：测石块密度全流程） ---------- */
+            {
+              id: "p04.1.3-p1",
+              kind: "interact",
+              title: "给石块“量脾气”",
+              exploreTip: "选“石块（待测）”，拖滑块加砝码：看 m–V 图像的斜率——斜率就是它的密度。",
+              widgets: [
+                {
+                  type: "mv-lab",
+                  params: {
+                    materials: [
+                      { id: "stone", name: "石块（待测）", rho: 2.6, colorRole: "force-a" }
+                    ],
+                    mMax: 500, mInit: 200, step: 10,
+                    unitM: "g", unitV: "cm³", unitRho: "g/cm³",
+                    badge: {
+                      quantityMathml: "<math><mi>&#961;</mi></math>",
+                      invariant: "没变的是：石块的密度（物质的脾气）"
+                    },
+                    source: { kind: "points", xLabel: "V/cm³", yLabel: "m/g", steps: ["slope"] }
+                  }
+                }
+              ],
+              point: "测密度的本质：量出一组 m、V，斜率 m/V 就是 ρ——第 2 页看真实实验怎么做。"
+            },
+            /* ---------- p2：讲解页（量筒使用；量筒读数量口上报为缺口） ---------- */
+            {
+              id: "p04.1.3-p2",
+              kind: "explain",
+              title: "量筒与实验顺序",
+              blocks: [
+                { type: "lead", text: "天平称质量（m），量筒量体积（V）——ρ = m/V 就有了。" },
+                { type: "text", html: "量筒读数：<strong>视线跟凹液面最低处相平</strong>。俯视读数偏大、仰视偏小——跟温度计一个毛病（p03.1.1 第 2 页练过）。" },
+                { type: "text", html: "测石块密度全流程：① 天平称石块质量 m；② 量筒倒适量水记 V₁；③ 石块浸没记 V₂，V = V₂ − V₁；④ ρ = m/V。<strong>顺序不能反</strong>：先测体积后测质量，石块沾水会让 m 偏大。" },
+                { type: "trap", text: "⚠️ 别搞混：量筒俯视/仰视无所谓——错（俯视偏大、仰视偏小）；先测体积后测质量——错（水沾石块，质量偏大，误差分析）。" },
+                { type: "slogan", text: "先质量后体积，视线要相平。" }
+              ],
+              point: "误差分析是实验的“第 ⑥ 步”（评估）：每一步都问“这会让结果偏大还是偏小”。"
+            },
+            /* ---------- p3：讲解页 ---------- */
+            {
+              id: "p04.1.3-p3",
+              kind: "explain",
+              title: "测液体密度",
+              blocks: [
+                { type: "lead", text: "测盐水密度：能直接把盐水倒进量筒量体积吗？能，但顺序有讲究。" },
+                { type: "text", html: "测液体：① 烧杯 + 液体总质量 m₁；② 倒部分液体到量筒，体积 V；③ 剩下的称 m₂；④ ρ = (m₁ − m₂)/V。反例：“先量筒量 V，再倒回烧杯称”——错，液体沾量筒壁，体积偏小。" },
+                { type: "text", html: "生活例：鉴别真假金饰——测密度是最快的一招（金的密度 19.3g/cm³，假货差得远）；次例：酒精度计、盐水选种（都是密度的应用，下一课展开）。" },
+                { type: "slogan", text: "液体防沾壁，差值算质量。" }
+              ],
+              point: "记住“差值法”：m₁ − m₂ 就是倒出去的那部分——沾壁误差被差掉了。"
+            }
+          ]
+        },
+        {
+          id: "p04.1.4",
+          title: "密度的应用",
+          prereq: "p04.1.3 测量物质的密度",
+          time: "40–60 分钟",
+          formulas: {
+            rho: {
+              mathml: "<math><mi>&#961;</mi><mo>=</mo><mfrac><mi>m</mi><mi>V</mi></mfrac></math>",
+              translation: "密度 = 质量 ÷ 体积"
+            }
+          },
+          pages: [
+            /* ---------- p1：交互页（mv-lab 复用：鉴别未知金属块） ---------- */
+            {
+              id: "p04.1.4-p1",
+              kind: "interact",
+              title: "这块金属是谁？",
+              exploreTip: "测“未知金属块”的 m–V 斜率，跟铁、铝的线比一比：它更靠近谁？",
+              widgets: [
+                {
+                  type: "mv-lab",
+                  params: {
+                    materials: [
+                      { id: "unknown", name: "未知金属块", rho: 8.9, colorRole: "target" },
+                      { id: "iron",    name: "铁（参考）", rho: 7.9, colorRole: "force-a" },
+                      { id: "al",      name: "铝（参考）", rho: 2.7, colorRole: "force-c" }
+                    ],
+                    mMax: 1000, mInit: 400, step: 10,
+                    unitM: "g", unitV: "cm³", unitRho: "g/cm³",
+                    badge: {
+                      quantityMathml: "<math><mi>&#961;</mi></math>",
+                      invariant: "没变的是：每种材料的密度（各自的脾气）"
+                    },
+                    source: { kind: "points", xLabel: "V/cm³", yLabel: "m/g", steps: ["slope"] }
+                  }
+                }
+              ],
+              point: "未知金属块的线最陡，斜率约 8.9——查密度表，它是铜。密度是鉴别物质的“指纹”。"
+            },
+            /* ---------- p2：讲解页 ---------- */
+            {
+              id: "p04.1.4-p2",
+              kind: "explain",
+              title: "鉴别与空心问题",
+              blocks: [
+                { type: "lead", text: "第 1 页你当了一回“鉴宝师”：密度对上表，身份就定了。空心问题是“进阶考法”。" },
+                { type: "text", html: "<strong>鉴别物质</strong>：测出 <span class=\"phy-f\" data-f=\"rho\"></span>，查密度表。生活例：王冠鉴别（阿基米德：排开水的体积鉴别王冠是否掺假）。" },
+                { type: "text", html: "<strong>空心球判断</strong>（三招）：铁球 m=79g、V=15cm³。① 比密度：m/V=5.3<7.9，空心；② 比质量：实心应 118.5g，不够，空心；③ 比体积：79g 铁只占 10cm³，多 5cm³——空心体积 5cm³。"},
+                { type: "trap", text: "⚠️ 别搞混：密度大的物体一定下沉——错！下沉看的是跟<strong>液体</strong>密度的比较（铁船能浮，因为平均密度小），不是绝对值。" },
+                { type: "mathlink", text: "数学呼应：代数 ch01 一元一次方程（奠基）——空心体积设未知数 x，列方程求解。" },
+                { type: "slogan", text: "比密度、比质量、比体积，三招判空心。" }
+              ],
+              point: "空心问题记住“三个比”：任选其一，算出矛盾，就是空心。"
+            }
+          ]
+        },
+        /* ---------- 章末：p04.1.0 章末小结与习题（回看比值定义第一落点，不新建） ---------- */
+        {
+          id: "p04.1.0",
+          title: "章末小结与习题",
+          prereq: "本章全部",
+          time: "40–60 分钟",
+          pages: [
+            {
+              id: "p04.1.0-p1",
+              kind: "quiz",
+              title: "本章小结",
+              questions: [
+                {
+                  type: "review",
+                  html: "① <strong>质量 m</strong>（标量，kg）：物体所含物质的多少，惯性量度，跟位置无关；天平：放平→归零→调平（<strong>左偏右调</strong>），左物右码，砝码 + 游码读数（<strong>估读到分度值下一位</strong>）。② <strong>密度 ρ=m/V</strong>（标量，SI <strong>kg/m³</strong>，常用 g/cm³，1g/cm³=1000kg/m³；条件：同种物质、状态温度一定）。③ <strong>回看·比值定义法第一落点</strong>（p04.1.2）：ρ 是 m–V 图像的“斜率”；m/V 是“量”密度的方法，不是“决定”它的原因——<strong>等号不代表因果</strong>；ρ 是物质的脾气，跟 m、V 无关。④ 测密度：天平称 m、量筒量 V（视线跟凹液面最低处相平，俯视偏大仰视偏小）；<strong>先测质量后测体积</strong>（防沾水）；液体用差值法。⑤ 应用：鉴别物质（查表）、空心球三招（比密度/比质量/比体积）；下沉看跟液体密度的比较。"
+                }
+              ],
+              point: "回看红线：等号不代表因果——带着这句话去 p08.2.2 看 R=U/I 式陷阱再现。"
+            },
+            {
+              id: "p04.1.0-p2",
+              kind: "quiz",
+              title: "综合习题",
+              questions: [
+                {
+                  type: "choice",
+                  stem: "天平调平时指针偏左，平衡螺母应该——",
+                  options: ["向左调", "向右调", "不动"],
+                  answer: 1,
+                  tip: "左偏右调：指针偏左说明左边沉，螺母往右调。"
+                },
+                {
+                  type: "choice",
+                  stem: "一块铜块切去一半，剩下一半的密度——",
+                  options: ["变为原来的一半", "变为原来的两倍", "不变"],
+                  answer: 2,
+                  tip: "ρ 是物质的脾气：切开的只是体积，脾气切不掉（p04.1.2 预防针）。"
+                },
+                {
+                  type: "choice",
+                  stem: "由 ρ=m/V 可知——",
+                  options: ["ρ 与 m 成正比", "ρ 与 V 成反比", "ρ 是物质特性，与 m、V 无关"],
+                  answer: 2,
+                  tip: "等号不代表因果：m/V 是“量”密度的方法，不是“决定”它的原因。"
+                },
+                {
+                  type: "fill",
+                  stemBefore: "水的密度是",
+                  stemAfter: "kg/m³，合",
+                  answer: "1000，1",
+                  accept: ["1000,1", "1000，1"],
+                  hint: "（g/cm³）",
+                  tip: "1g/cm³ = 1000kg/m³——水的密度是 1g/cm³，记住这个锚点。"
+                },
+                {
+                  type: "choice",
+                  stem: "测石块密度时，正确的顺序是——",
+                  options: ["先测体积后测质量", "先测质量后测体积", "顺序无所谓"],
+                  answer: 1,
+                  tip: "先测质量后测体积：石块沾水会让 m 偏大（误差分析）。"
+                },
+                {
+                  type: "choice",
+                  stem: "【估算】一间教室（长 10m、宽 6m、高 3m）里空气的质量约——（空气密度约 1.29kg/m³，数量级对即满分）",
+                  options: ["约 2kg", "约 20kg", "约 200kg", "约 2000kg"],
+                  answer: 2,
+                  tip: "依据链：V = 10×6×3 = 180m³，m = 1.29×180 ≈ 232kg——10² 量级。空气看不见，但有分量！"
+                }
+              ],
+              point: "本章完。下章 p05 力与运动：“力是改变运动状态的原因”——全书第一观念转折。"
             }
           ]
         }
