@@ -5365,6 +5365,16 @@
     appRoot.innerHTML = "";
 
     var head = el("header", "phy-head");
+    /* 目录抽屉入口（ux-review §2.1）：☰ + "目录"文字，≥44px，aria-expanded 同步 */
+    var menuBtn = el("button", "phy-menu-btn", "☰ 目录");
+    menuBtn.type = "button";
+    menuBtn.setAttribute("aria-label", "打开目录");
+    menuBtn.setAttribute("aria-expanded", "false");
+    menuBtn.addEventListener("click", function () {
+      if (drawerOpen) closeDrawer(); else openDrawer();
+    });
+    head.appendChild(menuBtn);
+    drawerBtn = menuBtn;
     var back = el("button", "phy-back", "← 返回");
     back.type = "button";
     back.setAttribute("aria-label", "返回章节浏览");
@@ -5407,11 +5417,9 @@
     var next = el("button", "phy-next", cur.pageIdx === pages.length - 1 ? "完成 ✓" : "下一页 →");
     prev.type = "button"; next.type = "button";
     prev.disabled = cur.pageIdx === 0;
-    prev.addEventListener("click", function () {
-      if (cur.pageIdx > 0) { cur.pageIdx--; render(); }
-    });
+    prev.addEventListener("click", function () { goPage(cur.pageIdx - 1); });
     next.addEventListener("click", function () {
-      if (cur.pageIdx < pages.length - 1) { cur.pageIdx++; render(); }
+      if (cur.pageIdx < pages.length - 1) goPage(cur.pageIdx + 1);
       else { markDone(found.lesson.id); showBrowser(); }
     });
     pager.appendChild(prev);
@@ -5420,24 +5428,76 @@
     bindZoneScroll(zone, zoneWrap);
   }
 
-  /* ---------------- 路由 ---------------- */
+  /* ---------------- 路由（hash 升级：#课号/页码，ux-review §2.4） ---------------- */
   function parseHash() {
-    var m = (location.hash || "").match(/[#&?]phy=([a-z0-9.]+)/i);
-    return m ? m[1] : null;
+    var h = location.hash || "";
+    var m = h.match(/^#(p\d+\.\d+\.\d+)(?:\/(\d+))?$/);
+    if (m) return { lesson: m[1], page: m[2] ? parseInt(m[2], 10) - 1 : 0 };
+    var m2 = h.match(/[#&?]phy=([a-z0-9.]+)/i);
+    if (m2) return { lesson: m2[1], page: 0, legacy: true }; /* 旧 hash 兼容：进第 1 页 */
+    return null;
   }
-  function openLesson(lessonId) {
+  /* 每课页码持久化 `phy_page_<课号>`；file:// 下降级为内存（不报错） */
+  var pageMem = {};
+  function savePage(lessonId, pageIdx) {
+    try { localStorage.setItem("phy_page_" + lessonId, String(pageIdx)); }
+    catch (e) { pageMem[lessonId] = pageIdx; }
+  }
+  function loadPage(lessonId) {
+    try {
+      var v = parseInt(localStorage.getItem("phy_page_" + lessonId), 10);
+      return isFinite(v) && v >= 0 ? v : 0;
+    } catch (e) { return pageMem[lessonId] || 0; }
+  }
+  function markVisited(lessonId) {
+    try {
+      var v = load("visited", {});
+      if (!v[lessonId]) { v[lessonId] = { ts: Date.now() }; store("visited", v); }
+    } catch (e) {}
+  }
+  /* 二期"已学完"判定预留接口（首版只用"已访问"） */
+  function lessonDone(lessonId) {
+    try { return localStorage.getItem("phy_done_" + lessonId) === "1"; }
+    catch (e) { return false; }
+  }
+  function syncHash(replace) {
+    if (!cur || !cur.found) return;
+    var url = "#" + cur.found.lesson.id + "/" + (cur.pageIdx + 1);
+    try {
+      if (replace) history.replaceState(null, "", url);
+      else history.pushState(null, "", url);
+    } catch (e) {}
+  }
+  /* 课内翻页：replaceState（不污染历史栈）+ 持久化页码 */
+  function goPage(idx) {
+    if (!cur || !cur.found) return;
+    var pages = cur.found.lesson.pages || [];
+    idx = Math.max(0, Math.min(pages.length - 1, idx));
+    if (idx === cur.pageIdx) return;
+    cur.pageIdx = idx;
+    savePage(cur.found.lesson.id, idx);
+    render();
+    syncHash(true);
+  }
+  function openLesson(lessonId, pageIdx, push) {
     var found = findLesson(lessonId);
     if (!found) return false;
-    cur = { found: found, pageIdx: 0 };
+    var pages = found.lesson.pages || [];
+    var idx = (pageIdx == null)
+      ? Math.min(loadPage(lessonId), Math.max(0, pages.length - 1))
+      : Math.max(0, Math.min(pages.length - 1, pageIdx));
+    cur = { found: found, pageIdx: idx };
+    markVisited(lessonId);
+    savePage(lessonId, idx);
     browseRoot.hidden = true;
     appRoot.hidden = false;
     render();
-    try {
-      if (parseHash() !== lessonId) {
-        history.replaceState(null, "", "#phy=" + lessonId);
-      }
-    } catch (e) {}
+    syncHash(!push);
     return true;
+  }
+  /* 跨课跳转：pushState；目标课恢复上次页码（新课进第 1 页） */
+  function goLesson(lessonId) {
+    openLesson(lessonId, undefined, true);
   }
   function showBrowser() {
     cur = null;
@@ -5451,9 +5511,192 @@
     } catch (e) {}
   }
   function route() {
-    var id = parseHash();
-    if (id && hasLesson(id)) openLesson(id);
-    else showBrowser();
+    var h = parseHash();
+    if (h && hasLesson(h.lesson)) {
+      var pages = (findLesson(h.lesson).lesson.pages || []).length;
+      var idx = Math.max(0, Math.min(pages - 1, h.page || 0));
+      /* 已在该课该页 → 不重渲染（抽屉开关不触发，保证组件状态） */
+      if (cur && cur.found && cur.found.lesson.id === h.lesson && cur.pageIdx === idx) return;
+      openLesson(h.lesson, idx, false);
+    } else {
+      showBrowser();
+    }
+  }
+
+  /* ---------------- 目录抽屉（ux-review §2 定案） ---------------- */
+  var drawer = null, drawerMask = null, drawerBtn = null;
+  var drawerOpen = false, drawerAnim = false, lastFocus = null, drawerBuilt = false;
+  function buildDrawer() {
+    if (drawerBuilt) return;
+    drawerBuilt = true;
+    drawerMask = el("div", "phy-drawer-mask");
+    drawerMask.addEventListener("click", closeDrawer);
+    drawer = el("div", "phy-drawer");
+    drawer.setAttribute("role", "dialog");
+    drawer.setAttribute("aria-label", "目录");
+    drawer.setAttribute("aria-hidden", "true");
+    /* 焦点陷阱 + Esc 关闭 */
+    drawer.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") { closeDrawer(); return; }
+      if (e.key !== "Tab") return;
+      var btns = drawer.querySelectorAll("button");
+      var f = [];
+      for (var i = 0; i < btns.length; i++)
+        if (btns[i].offsetParent !== null) f.push(btns[i]);
+      if (!f.length) return;
+      var first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault(); last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault(); first.focus();
+      }
+    });
+    /* 抽屉内左划关闭（起始于抽屉内，向左 ≥40px，垂直偏移 <30px） */
+    var dStart = null;
+    drawer.addEventListener("touchstart", function (e) {
+      var t = e.touches[0];
+      dStart = { x: t.clientX, y: t.clientY };
+    }, { passive: true });
+    drawer.addEventListener("touchend", function (e) {
+      if (!dStart) return;
+      var t = e.changedTouches[0];
+      var dx = t.clientX - dStart.x, dy = t.clientY - dStart.y;
+      dStart = null;
+      if (dx <= -40 && Math.abs(dy) < 30) closeDrawer();
+    }, { passive: true });
+    document.body.appendChild(drawerMask);
+    document.body.appendChild(drawer);
+  }
+  function renderDrawer() {
+    drawer.innerHTML = "";
+    var curId = cur && cur.found ? cur.found.lesson.id : null;
+    var curChId = cur && cur.found ? cur.found.chapter.id : null;
+    var head = el("div", "phy-drawer-head");
+    if (cur && cur.found) {
+      head.appendChild(el("div", "phy-drawer-ch", esc(cur.found.chapter.title)));
+      head.appendChild(el("div", "phy-drawer-page",
+        "第 " + (cur.pageIdx + 1) + " 页 / 共 " + (cur.found.lesson.pages || []).length + " 页"));
+    } else {
+      head.appendChild(el("div", "phy-drawer-ch", "目录"));
+    }
+    var close = el("button", "phy-drawer-close", "✕");
+    close.type = "button";
+    close.setAttribute("aria-label", "关闭目录");
+    close.addEventListener("click", closeDrawer);
+    head.appendChild(close);
+    drawer.appendChild(head);
+    var list = el("div", "phy-drawer-list");
+    var visited = load("visited", {});
+    var curLessonBtn = null, curChBox = null;
+    readyChapters().forEach(function (c) {
+      var ch = window.PHY_CH[c.id];
+      if (!ch) return;
+      var chBox = el("div", "phy-drawer-chbox");
+      var isCur = c.id === curChId;
+      var chBtn = el("button", "phy-drawer-chbtn", "");
+      chBtn.type = "button";
+      chBtn.innerHTML = "<span>" + esc(c.id) + " · " + esc(c.title) + "</span>" +
+        '<span class="phy-drawer-arrow">' + (isCur ? "▾" : "▸") + "</span>";
+      chBtn.setAttribute("aria-expanded", isCur ? "true" : "false");
+      var lessonsBox = el("div", "phy-drawer-lessons");
+      lessonsBox.style.display = isCur ? "" : "none";
+      (function (cb, lb, ab) {
+        cb.addEventListener("click", function () {
+          var open = lb.style.display !== "none";
+          lb.style.display = open ? "none" : "";
+          cb.setAttribute("aria-expanded", open ? "false" : "true");
+          ab.textContent = open ? "▸" : "▾";
+        });
+      })(chBtn, lessonsBox, chBtn.querySelector(".phy-drawer-arrow"));
+      chBox.appendChild(chBtn);
+      (ch.units || []).forEach(function (u) {
+        (u.lessons || []).forEach(function (l) {
+          var lb = el("button", "phy-drawer-lesson", "");
+          lb.type = "button";
+          var isCurL = l.id === curId;
+          /* 三编码：背景高亮 + 左侧 4px 指示条 + "当前"文字徽章；
+           * 状态点：当前课实心圆 / 已访问空心圆（首版口径） */
+          var mark = isCurL ? '<span class="phy-dot-cur" aria-hidden="true"></span>'
+            : visited[l.id] ? '<span class="phy-dot-seen" aria-hidden="true"></span>' : "";
+          lb.innerHTML = mark + '<span class="phy-drawer-lt">' + esc(l.title) + "</span>" +
+            (isCurL ? '<span class="phy-drawer-cur">当前</span>' : "");
+          if (isCurL) { lb.classList.add("phy-drawer-cur-lesson"); curLessonBtn = lb; }
+          lb.setAttribute("aria-current", isCurL ? "true" : "false");
+          (function (lid) {
+            lb.addEventListener("click", function () {
+              closeDrawer();
+              goLesson(lid);
+            });
+          })(l.id);
+          lessonsBox.appendChild(lb);
+        });
+      });
+      chBox.appendChild(lessonsBox);
+      list.appendChild(chBox);
+      if (isCur) curChBox = chBox;
+    });
+    drawer.appendChild(list);
+    var foot = el("div", "phy-drawer-foot");
+    var home = el("button", "phy-mini", "← 课程首页");
+    home.type = "button";
+    home.addEventListener("click", function () { closeDrawer(); showBrowser(); });
+    foot.appendChild(home);
+    drawer.appendChild(foot);
+    /* 自动滚动到当前章/当前课 */
+    try {
+      if (curChBox) curChBox.scrollIntoView({ block: "start" });
+      if (curLessonBtn) curLessonBtn.scrollIntoView({ block: "center" });
+    } catch (e) {}
+  }
+  function openDrawer() {
+    if (drawerOpen || drawerAnim || !cur) return;
+    buildDrawer();
+    drawerAnim = true;
+    setTimeout(function () { drawerAnim = false; }, 280);
+    drawerOpen = true;
+    renderDrawer();
+    drawerMask.classList.add("open");
+    drawer.classList.add("open");
+    drawer.classList.add("phy-drawer-anim");
+    drawer.setAttribute("aria-hidden", "false");
+    try { document.body.style.overflow = "hidden"; } catch (e) {}
+    if (drawerBtn) drawerBtn.setAttribute("aria-expanded", "true");
+    lastFocus = document.activeElement;
+    var f = drawer.querySelector("button");
+    if (f) { try { f.focus(); } catch (e) {} }
+  }
+  function closeDrawer() {
+    if (!drawerOpen || drawerAnim) return;
+    drawerAnim = true;
+    setTimeout(function () { drawerAnim = false; }, 230);
+    drawerOpen = false;
+    if (drawerMask) drawerMask.classList.remove("open");
+    if (drawer) {
+      drawer.classList.remove("open");
+      drawer.setAttribute("aria-hidden", "true");
+    }
+    try { document.body.style.overflow = ""; } catch (e) {}
+    if (drawerBtn) drawerBtn.setAttribute("aria-expanded", "false");
+    if (lastFocus && lastFocus.focus) { try { lastFocus.focus(); } catch (e) {} }
+    /* 不重渲染、不重置组件状态：覆盖层本来就没离开当前页 */
+  }
+  /* 左边缘划出手势（≤24px 热区、右划 ≥40px、垂直偏移 <30px；只在学习视图生效） */
+  var gStart = null;
+  function bindDrawerGesture() {
+    document.addEventListener("touchstart", function (e) {
+      if (!cur || !appRoot || appRoot.hidden) { gStart = null; return; }
+      var t = e.touches[0];
+      gStart = { x: t.clientX, y: t.clientY,
+        inEdge: t.clientX <= 24, inDrawer: !!(drawer && drawer.contains(e.target)) };
+    }, { passive: true });
+    document.addEventListener("touchend", function (e) {
+      if (!gStart) return;
+      var t = e.changedTouches[0];
+      var dx = t.clientX - gStart.x, dy = t.clientY - gStart.y;
+      var s = gStart; gStart = null;
+      if (!drawerOpen && s.inEdge && dx >= 40 && Math.abs(dy) < 30) openDrawer();
+      else if (drawerOpen && s.inDrawer && dx <= -40 && Math.abs(dy) < 30) closeDrawer();
+    }, { passive: true });
   }
 
   /* ---------------- 启动 ---------------- */
@@ -5461,6 +5704,8 @@
     browseRoot = document.getElementById("phy-browser");
     appRoot = document.getElementById("phy-app");
     if (!browseRoot || !appRoot) return;
+    buildDrawer();
+    bindDrawerGesture();
     if (window.addEventListener) window.addEventListener("hashchange", route);
     route();
   }

@@ -538,7 +538,80 @@ body[data-theme="dark"] #physics-app .phy-trap { background: #2b2113; }
 .phy-slope-row { min-height: 52px; }
 .phy-slope-bar { display: inline-block; height: 14px; border-radius: 4px; vertical-align: middle; }
 .phy-slope-thumb { vertical-align: middle; margin: 0 6px; }
-/* 首屏"↓下面还有"可点（通用规则 §3） */
+/* ---------- 目录抽屉（ux-review §2 定案，2026-10-15） ---------- */
+.phy-menu-btn {
+  min-width: 44px; min-height: 44px; flex: none;
+  border: 1px solid var(--phy-line); border-radius: 8px;
+  background: var(--phy-bg); color: var(--phy-ink);
+  font-size: 0.95rem; font-weight: 700; padding: 6px 10px;
+}
+.phy-drawer-mask {
+  position: fixed; inset: 0; z-index: 90;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0; visibility: hidden;
+  transition: opacity 0.2s ease-out, visibility 0.2s;
+}
+body[data-theme="dark"] .phy-drawer-mask { background: rgba(0, 0, 0, 0.6); }
+.phy-drawer-mask.open { opacity: 1; visibility: visible; }
+.phy-drawer {
+  position: fixed; top: 0; left: 0; bottom: 0; z-index: 91;
+  width: min(320px, 85vw); height: 100dvh;
+  background: var(--phy-bg); color: var(--phy-ink);
+  border-right: 1px solid var(--phy-line);
+  box-shadow: 4px 0 16px rgba(0, 0, 0, 0.15);
+  display: flex; flex-direction: column;
+  transform: translateX(-105%); visibility: hidden;
+}
+.phy-drawer.open { visibility: visible; transform: none; }
+.phy-drawer-anim { transition: transform 0.25s ease-in-out; }
+.phy-drawer:not(.open).phy-drawer-anim { transition: transform 0.2s ease-out; }
+.phy-drawer-head {
+  flex: none; display: flex; align-items: center; gap: 8px;
+  padding: 10px 12px; border-bottom: 1px solid var(--phy-line);
+}
+.phy-drawer-ch { font-weight: 700; flex: 1; min-width: 0; overflow: hidden;
+  text-overflow: ellipsis; white-space: nowrap; }
+.phy-drawer-page { font-size: 0.78rem; color: var(--phy-ink-soft); flex: none; }
+.phy-drawer-close {
+  min-width: 44px; min-height: 44px; flex: none;
+  border: 1px solid var(--phy-line); border-radius: 8px;
+  background: var(--phy-bg); color: var(--phy-ink); font-size: 1rem;
+}
+.phy-drawer-list { flex: 1; overflow-y: auto; padding: 4px 0 12px; }
+.phy-drawer-chbtn {
+  width: 100%; min-height: 48px; display: flex; align-items: center;
+  justify-content: space-between; gap: 8px; padding: 8px 16px;
+  background: none; border: none; border-bottom: 1px solid var(--phy-line);
+  color: var(--phy-ink); font-size: 0.95rem; font-weight: 700; text-align: left;
+}
+.phy-drawer-arrow { color: var(--phy-ink-soft); flex: none; }
+.phy-drawer-lessons { padding: 2px 0 6px; }
+.phy-drawer-lesson {
+  width: 100%; min-height: 44px; display: flex; align-items: center; gap: 8px;
+  padding: 8px 16px 8px 32px; background: none; border: none;
+  color: var(--phy-ink); font-size: 0.88rem; text-align: left;
+  border-left: 4px solid transparent;
+}
+.phy-drawer-lt { flex: 1; min-width: 0; overflow: hidden; display: -webkit-box;
+  -webkit-line-clamp: 2; -webkit-box-orient: vertical; line-height: 1.35; }
+/* 当前课三编码：背景高亮 + 左侧 4px 指示条 + "当前"文字徽章 */
+.phy-drawer-cur-lesson { background: var(--phy-panel); border-left-color: var(--phy-target); font-weight: 700; }
+.phy-drawer-cur {
+  flex: none; font-size: 0.7rem; font-weight: 700; color: var(--phy-bg);
+  background: var(--phy-target); border-radius: 999px; padding: 2px 8px;
+}
+/* 状态点：当前课实心圆 / 已访问空心圆 */
+.phy-dot-cur, .phy-dot-seen {
+  flex: none; width: 10px; height: 10px; border-radius: 50%;
+}
+.phy-dot-cur { background: var(--phy-target); }
+.phy-dot-seen { border: 2px solid var(--phy-ink-soft); }
+.phy-drawer-foot {
+  flex: none; padding: 10px 12px; border-top: 1px solid var(--phy-line);
+}
+.phy-drawer-foot .phy-mini { width: 100%; }
+
+/* ---------- 首屏"↓下面还有"可点（通用规则 §3） ---------- */
 .phy-zone-wrap.show-more .phy-more { pointer-events: auto; }
 .phy-more-pill { cursor: pointer; }
 button.phy-more { background: none; border: none; font: inherit; padding: 20px 0 8px; }
