@@ -692,6 +692,14 @@
     } catch (e) {}
     return { x: 50, y: 50 };
   }
+  /* 小视口判定（Y2 刻度尺审计 P1 / 滑块纵向排布共用）：
+   * 无 matchMedia（如 smoke stub）时一律返回 false，保持大视口行为 */
+  function smallViewport() {
+    try {
+      return typeof window.matchMedia === "function" &&
+        !!window.matchMedia("(max-width:480px)").matches;
+    } catch (e) { return false; }
+  }
   /* 指针拖拽：onMove(lx, ly) 给逻辑坐标；松手 onEnd(moved) */
   function dragify(node, o) {
     o = o || {};
@@ -1147,6 +1155,25 @@
     svg.appendChild(hitLayer);
     var wireLayer = svgEl("g", {}); svg.appendChild(wireLayer);
     var compLayer = svgEl("g", {}); svg.appendChild(compLayer);
+    /* P3 审计 P1：元件符号层盖在 cell 热区 rect 上层，点按符号落不到
+     * 热区 → 开关点按无反应。符号层点按委托到所在 cell 的同一处理
+     * 路径（cellDown）：点开关切换开合，其余元件走原拖拽逻辑。
+     * 滑片手柄（phy-handle-hit）自有 dragify，此处跳过避免双处理。 */
+    compLayer.addEventListener("pointerdown", function (e) {
+      try {
+        var t = e.target;
+        while (t && t !== compLayer) {
+          var cl = t.getAttribute ? t.getAttribute("class") : null;
+          if (cl && String(cl).indexOf("phy-handle-hit") >= 0) return;
+          t = t.parentNode;
+        }
+      } catch (err) {}
+      var q = toSVG(svg, e.clientX, e.clientY);
+      var cc = Math.max(0, Math.min(cols - 1, Math.floor(q.x / cw)));
+      var rr = Math.max(0, Math.min(rows - 1, Math.floor(q.y / chh)));
+      if (!compAt(cc, rr)) return;
+      cellDown(cc, rr, e);
+    });
     var stateLine = stateBadge("把元件拖到网格里", "");
     box.appendChild(svg);
     var ctrlBox = el("div", "phy-circuit-ctrls"); /* 滑动变阻器滑片滑块行 */
@@ -1991,11 +2018,13 @@
     }
     if (waveB) {
       var sumRow = el("div", "phy-check-row");
+      var sumLb = el("label", "phy-check");
       var sumCk = el("input", "");
       sumCk.type = "checkbox"; sumCk.checked = showSum;
       sumCk.setAttribute("aria-label", "显示合成波");
-      sumRow.appendChild(sumCk);
-      sumRow.appendChild(el("span", "", "显示合成波（两列波叠加）"));
+      sumLb.appendChild(sumCk);
+      sumLb.appendChild(el("span", "", "显示合成波（两列波叠加）"));
+      sumRow.appendChild(sumLb);
       box.appendChild(sumRow);
       sumCk.addEventListener("change", function () { showSum = sumCk.checked; draw(); });
     }
@@ -2481,10 +2510,12 @@
         a: (p.magnet && p.magnet.angle) || 0 };
       var nN = Math.min(p.needleCount || 8, 12);
       var filings = el("div", "phy-check-row");
+      var fLb = el("label", "phy-check");
       var fCk = el("input", "");
       fCk.type = "checkbox"; fCk.checked = !!p.ironFilings;
-      filings.appendChild(fCk);
-      filings.appendChild(el("span", "", "撒铁屑（看磁感线排布示意）"));
+      fLb.appendChild(fCk);
+      fLb.appendChild(el("span", "", "撒铁屑（看磁感线排布示意）"));
+      filings.appendChild(fLb);
       box.appendChild(filings);
       fCk.addEventListener("change", drawB);
       function Bdip(x, y) {
@@ -2981,7 +3012,7 @@
         ctx.fillText("x-t 图像", 8, 12);
       }
       var rm = mmlRead(mi("T"), fmtN(T, 2), "s");
-      badge.setReadout(rm, "T = " + rm.text);
+      badge.setReadout(rm.mathml, "T = " + rm.text);
       var eqm = "<math><mrow><mi>T</mi><mo>=</mo><mn>2</mn><mi>π</mi>" +
         "<msqrt><mfrac><mi>m</mi><mi>k</mi></mfrac></msqrt><mo>=</mo><mn>" +
         fmtN(T, 2) + "</mn><mspace width=\"0.25em\"/><mi mathvariant=\"normal\">s</mi></mrow></math>";
@@ -3107,32 +3138,46 @@
       b.addEventListener("click", function () { fb.textContent = ""; fn(); });
       return b;
     }
-    /* 刻度引擎：水平 / 垂直 */
+    /* 刻度引擎：水平 / 垂直
+     * Y2 审计 P1：p00.1.3 刻度尺 41 个标签在 390px 下糊成一片（69 对重叠）。
+     * 小视口标签跳显（只降标签密度，刻度线与 majorEvery 不动；大视口保持）。 */
     function hTicks(g, o) {
       var n = Math.round((o.max - o.min) / o.div);
+      var me = o.majorEvery || 5, le = me;
+      if (smallViewport()) le = thinLabels(n, me, o.x1 - o.x0);
       for (var i = 0; i <= n; i++) {
         var v = o.min + i * o.div;
         var x = o.x0 + i / n * (o.x1 - o.x0);
-        var major = i % (o.majorEvery || 5) === 0;
+        var major = i % me === 0;
         g.appendChild(svgEl("line", { x1: x, y1: o.y, x2: x, y2: o.y + (major ? 7 : 4),
           stroke: cssVar("--phy-body"), "stroke-width": major ? 1.2 : 0.7 }));
-        if (major) g.appendChild(svgText(x, o.y + 13, fmtN(v, decOf(o.div)), "phy-tick-label"));
+        if (major && i % le === 0)
+          g.appendChild(svgText(x, o.y + 13, fmtN(v, decOf(o.div)), "phy-tick-label"));
       }
       g.appendChild(svgEl("line", { x1: o.x0, y1: o.y, x2: o.x1, y2: o.y,
         stroke: cssVar("--phy-body"), "stroke-width": 1.4 }));
     }
     function vTicks(g, o) {
       var n = Math.round((o.max - o.min) / o.div);
+      var me = o.majorEvery || 5, le = me;
+      if (smallViewport()) le = thinLabels(n, me, o.y1 - o.y0);
       for (var i = 0; i <= n; i++) {
         var v = o.min + i * o.div;
         var y = o.y1 - i / n * (o.y1 - o.y0);
-        var major = i % (o.majorEvery || 5) === 0;
+        var major = i % me === 0;
         g.appendChild(svgEl("line", { x1: o.x, y1: y, x2: o.x + (major ? 7 : 4), y2: y,
           stroke: cssVar("--phy-body"), "stroke-width": major ? 1.2 : 0.7 }));
-        if (major) g.appendChild(svgText(o.x - 2, y + 1.5, fmtN(v, decOf(o.div)), "phy-tick-label", "end"));
+        if (major && i % le === 0)
+          g.appendChild(svgText(o.x - 2, y + 1.5, fmtN(v, decOf(o.div)), "phy-tick-label", "end"));
       }
       g.appendChild(svgEl("line", { x1: o.x, y1: o.y0, x2: o.x, y2: o.y1,
         stroke: cssVar("--phy-body"), "stroke-width": 1.4 }));
+    }
+    /* 标签跳显：按标签约 7 逻辑单位宽估算，把标签密度降到不重叠 */
+    function thinLabels(n, me, span) {
+      var labels = Math.floor(n / me) + 1;
+      var k = Math.ceil(labels * 7 / Math.max(span, 1));
+      return k > 1 ? me * k : me;
     }
 
     if (gauge === "ruler") {

@@ -758,7 +758,23 @@ body[data-theme="dark"] #physics-app .phy-state-bad { background: #3a1d18; color
   cursor: pointer;
 }
 .phy-check-row { display: flex; align-items: center; gap: 8px; font-size: 0.88rem; }
-.phy-check-row input[type="checkbox"] { width: 24px; height: 24px; accent-color: var(--phy-target); }
+/* P2 审计：checkbox 原生 24×24 且文字不可点 → <label> 包裹整行可点，
+ * 整行 ≥44px 高为触控目标（W-P9） */
+.phy-check-row label.phy-check {
+  display: flex; align-items: center; gap: 10px;
+  min-height: 44px; padding: 4px 0; cursor: pointer;
+}
+.phy-check-row input[type="checkbox"] {
+  width: 28px; height: 28px; flex: none;
+  accent-color: var(--phy-target); cursor: pointer;
+}
+
+/* P2 审计：390px 下滑块轨道过窄（p08.2.2 仅 25px、p14.2.2 仅 37px）。
+ * 小视口纵向排布：滑块独占整行，轨道宽度 ≥300px，触控目标保持 ≥44px。 */
+@media (max-width: 480px) {
+  .phy-slider-row { flex-wrap: wrap; row-gap: 2px; }
+  .phy-slider-row input[type="range"] { flex: 1 1 100%; order: 9; }
+}
 .phy-heat, .phy-cool {
   flex: 1;
   min-height: 56px;
