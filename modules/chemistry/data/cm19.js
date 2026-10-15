@@ -359,7 +359,7 @@ window.CHEM_CH["cm19"] = {
               id: "cm19.2.1-p2",
               kind: "interact",
               title: "追踪电子：从 Zn 到 Cu²⁺",
-              exploreTip: "先点元素标化合价，再点起点、终点画电子转移箭头。",
+              exploreTip: "先点元素标化合价，再点起点、终点画电子转移箭头。单质中元素化合价为 0（如 H₂ 中的 H 为 0、Zn 为 0）。",
               widgets: [
                 {
                   type: "redox-track",

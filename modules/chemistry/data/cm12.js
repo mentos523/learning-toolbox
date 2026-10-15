@@ -299,7 +299,7 @@ window.CHEM_CH["cm12"] = {
               id: "cm12.2.1-p2",
               kind: "interact",
               title: "升失氧、降得还",
-              exploreTip: "先点 Cu 标 +2，再点生成物里的 Cu 标 0：看它是'升高'还是'降低'。",
+              exploreTip: "先点 Cu 标 +2，再点生成物里的 Cu 标 0：看它是'升高'还是'降低'。单质中元素化合价为 0（如 H₂ 中的 H 为 0、Zn 为 0）。",
               widgets: [
                 {
                   type: "redox-track",
