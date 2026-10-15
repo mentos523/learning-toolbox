@@ -552,6 +552,13 @@ body[data-theme="dark"] #physics-app .phy-trap { background: #2b2113; }
   transition: opacity 0.2s ease-out, visibility 0.2s;
 }
 body[data-theme="dark"] .phy-drawer-mask { background: rgba(0, 0, 0, 0.6); }
+/* R2 2026-10-15 修复队补修2：浅色下抽屉背景不透明兜底。
+ * --phy-* 只定义在 #physics-app 内，抽屉挂在 body 下变量失效，
+ * 基线 .phy-drawer 的 background: var(--phy-bg) 无回退值 → 透明。
+ * 此处用 var 回退值给浅色（及护眼 soft）一个不透明底；
+ * 特异性 (0,1,1) 低于深色兜底 body[data-theme="dark"] .phy-drawer
+ * (0,2,1)，深色已修好的规则不受影响。 */
+body .phy-drawer { background: var(--phy-bg, #FFFFFF); color: var(--phy-ink, #1A1A1A); }
 /* R2 2026-10-15 修复队补修：抽屉挂在 body 下（#physics-app 作用域外），
  * --phy-* 变量在深色下全部失效 → 透明底 + 黑字不可读。此处在深色下给
  * 抽屉作用域内补一套深色值（与 body[data-theme="dark"] #physics-app 一致），
