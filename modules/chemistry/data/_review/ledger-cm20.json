@@ -1,0 +1,18 @@
+{
+  "schema": "chemistry-review-ledger/1.0",
+  "chapter": "cm20",
+  "entries": [
+    {
+      "id": "cm20.2.2-e1",
+      "lesson": "cm20.2.2",
+      "kind": "equation",
+      "content": "Cu²⁺ + 4H₂O = [Cu(H₂O)₄]²⁺",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：equationText 配平程序重算通过（系数内含）；终审（化学专家队）：终审：与课程页一致；跨条目无冲突；配平只调系数（CHEM-R01/R02/R06）",
+      "page": "cm20.2.2-p2"
+    }
+  ]
+}

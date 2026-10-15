@@ -1,0 +1,18 @@
+{
+  "schema": "chemistry-review-ledger/1.0",
+  "chapter": "cm11",
+  "entries": [
+    {
+      "id": "cm11.1.1-e1",
+      "lesson": "cm11.1.1",
+      "kind": "calc",
+      "content": "填空：铵态氮肥不能与碱性物质混用，否则会放出… = NH3",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：答案数值已收录，独立重算见终审；终审（化学专家队）：终审：答案与课程页 checkTable/quiz 一致；有效数字口径（B2）合规",
+      "page": "cm11.1.1-p3"
+    }
+  ]
+}

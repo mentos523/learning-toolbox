@@ -1,0 +1,18 @@
+{
+  "schema": "chemistry-review-ledger/1.0",
+  "chapter": "cm02",
+  "entries": [
+    {
+      "id": "cm02.1.2-e1",
+      "lesson": "cm02.1.2",
+      "kind": "equation",
+      "content": "3Fe + 2O₂ ＝点燃＝ Fe₃O₄",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：equationText 配平程序重算通过（系数内含）；终审（化学专家队）：终审：与课程页一致；跨条目无冲突；配平只调系数（CHEM-R01/R02/R06）",
+      "page": "cm02.1.2-p2"
+    }
+  ]
+}

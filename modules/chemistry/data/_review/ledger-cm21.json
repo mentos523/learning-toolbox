@@ -1,0 +1,30 @@
+{
+  "schema": "chemistry-review-ledger/1.0",
+  "chapter": "cm21",
+  "entries": [
+    {
+      "id": "cm21.2.3-e1",
+      "lesson": "cm21.2.3",
+      "kind": "equation",
+      "content": "CH₃CHO + 2[Ag(NH₃)₂]OH =(水浴加热)= CH₃COONH₄ + 2Ag↓ + 3NH₃ + H₂O",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：equationText 配平程序重算通过（系数内含）；终审（化学专家队）：终审：与课程页一致；跨条目无冲突；配平只调系数（CHEM-R01/R02/R06）",
+      "page": "cm21.2.3-p2"
+    },
+    {
+      "id": "cm21.3.1-e2",
+      "lesson": "cm21.3.1",
+      "kind": "calc",
+      "content": "填空：8.8g 乙酸乙酯（M=88）与 NaOH 完全反应，消耗 NaOH… = 4.0",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：答案数值已收录，独立重算见终审；终审（化学专家队）：终审：答案与课程页 checkTable/quiz 一致；有效数字口径（B2）合规",
+      "page": "cm21.3.1-p2"
+    }
+  ]
+}

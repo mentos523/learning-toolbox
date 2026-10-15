@@ -1,0 +1,42 @@
+{
+  "schema": "chemistry-review-ledger/1.0",
+  "chapter": "cm17",
+  "entries": [
+    {
+      "id": "cm17.1.3-e1",
+      "lesson": "cm17.1.3",
+      "kind": "equation",
+      "content": "CH₂=CH₂ + Br₂ = CH₂BrCH₂Br",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：equationText 配平程序重算通过（系数内含）；终审（化学专家队）：终审：与课程页一致；跨条目无冲突；配平只调系数（CHEM-R01/R02/R06）",
+      "page": "cm17.1.3-p2"
+    },
+    {
+      "id": "cm17.2.1-e2",
+      "lesson": "cm17.2.1",
+      "kind": "equation",
+      "content": "CH₃COOH + C₂H₅OH ⇌ CH₃COOC₂H₅ + H₂O",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：equationText 配平程序重算通过（系数内含）；终审（化学专家队）：终审：与课程页一致；跨条目无冲突；配平只调系数（CHEM-R01/R02/R06）",
+      "page": "cm17.2.1-p2"
+    },
+    {
+      "id": "cm17.1.1-e3",
+      "lesson": "cm17.1.1",
+      "kind": "calc",
+      "content": "填空：碳原子能形成… = 4",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：答案数值已收录，独立重算见终审；终审（化学专家队）：终审：答案与课程页 checkTable/quiz 一致；有效数字口径（B2）合规",
+      "page": "cm17.1.1-p3"
+    }
+  ]
+}

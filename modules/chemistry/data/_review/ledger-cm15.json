@@ -1,0 +1,90 @@
+{
+  "schema": "chemistry-review-ledger/1.0",
+  "chapter": "cm15",
+  "entries": [
+    {
+      "id": "cm15.1.1-e1",
+      "lesson": "cm15.1.1",
+      "kind": "equation",
+      "content": "SO₂ + 有色物质 ⇌ 无色物质（加热恢复）",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：equationText 配平程序重算通过（系数内含）；终审（化学专家队）：终审：与课程页一致；跨条目无冲突；配平只调系数（CHEM-R01/R02/R06）",
+      "page": "cm15.1.1-p1"
+    },
+    {
+      "id": "cm15.2.1-e2",
+      "lesson": "cm15.2.1",
+      "kind": "equation",
+      "content": "3NO₂ + H₂O ＝ 2HNO₃ + NO",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：equationText 配平程序重算通过（系数内含）；终审（化学专家队）：终审：与课程页一致；跨条目无冲突；配平只调系数（CHEM-R01/R02/R06）",
+      "page": "cm15.2.1-p1"
+    },
+    {
+      "id": "cm15.2.3-e3",
+      "lesson": "cm15.2.3",
+      "kind": "equation",
+      "content": "NH₃ + H₂O ⇌ NH₄⁺ + OH⁻",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：equationText 配平程序重算通过（系数内含）；终审（化学专家队）：终审：与课程页一致；跨条目无冲突；配平只调系数（CHEM-R01/R02/R06）",
+      "page": "cm15.2.3-p1"
+    },
+    {
+      "id": "cm15.1.2-e4",
+      "lesson": "cm15.1.2",
+      "kind": "calc",
+      "content": "填空：Cu + 2H₂SO₄(浓) ＝△＝ CuSO₄ + SO₂↑ + 2H₂O 中，S 的化合价从 +… = +4",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：答案数值已收录，独立重算见终审；终审（化学专家队）：终审：答案与课程页 checkTable/quiz 一致；有效数字口径（B2）合规",
+      "page": "cm15.1.2-p3"
+    },
+    {
+      "id": "cm15.2.2-e5",
+      "lesson": "cm15.2.2",
+      "kind": "calc",
+      "content": "填空：Cu 与稀硝酸反应，N 从 +5 降到… = +2",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：答案数值已收录，独立重算见终审；终审（化学专家队）：终审：答案与课程页 checkTable/quiz 一致；有效数字口径（B2）合规",
+      "page": "cm15.2.2-p3"
+    },
+    {
+      "id": "cm15.2.4-e6",
+      "lesson": "cm15.2.4",
+      "kind": "calc",
+      "content": "填空：3NO₂ + H₂O ＝ 2HNO₃ + NO 中，被氧化的 N 占参加反应的 NO₂ 的… = 2/3",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：答案数值已收录，独立重算见终审；终审（化学专家队）：终审：答案与课程页 checkTable/quiz 一致；有效数字口径（B2）合规",
+      "page": "cm15.2.4-p1"
+    },
+    {
+      "id": "cm15.2.4-e7",
+      "lesson": "cm15.2.4",
+      "kind": "calc",
+      "content": "填空：6.4g Cu 与足量浓硫酸（加热）完全反应，生成 SO₂ 在标准状况下的体积是… = 2.24L",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：答案数值已收录，独立重算见终审；终审（化学专家队）：终审：答案与课程页 checkTable/quiz 一致；有效数字口径（B2）合规",
+      "page": "cm15.2.4-p2"
+    }
+  ]
+}

@@ -1,0 +1,126 @@
+{
+  "schema": "chemistry-review-ledger/1.0",
+  "chapter": "cm05",
+  "entries": [
+    {
+      "id": "cm05.1.1-e1",
+      "lesson": "cm05.1.1",
+      "kind": "equation",
+      "content": "2Mg + O₂ ＝点燃＝ 2MgO",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：equationText 配平程序重算通过（系数内含）；终审（化学专家队）：终审：与课程页一致；跨条目无冲突；配平只调系数（CHEM-R01/R02/R06）",
+      "page": "cm05.1.1-p2"
+    },
+    {
+      "id": "cm05.1.2-e2",
+      "lesson": "cm05.1.2",
+      "kind": "equation",
+      "content": "2H₂ + 1O₂ ＝点燃＝ 2H₂O",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：equationText 配平程序重算通过（系数内含）；终审（化学专家队）：终审：与课程页一致；跨条目无冲突；配平只调系数（CHEM-R01/R02/R06）",
+      "page": "cm05.1.2-p2"
+    },
+    {
+      "id": "cm05.1.2-e3",
+      "lesson": "cm05.1.2",
+      "kind": "equation",
+      "content": "?H₂ + ?O₂ ＝点燃＝ ?H₂O",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：equationText 配平程序重算通过（系数内含）；终审（化学专家队）：终审：与课程页一致；跨条目无冲突；配平只调系数（CHEM-R01/R02/R06）",
+      "page": "cm05.1.2-p3"
+    },
+    {
+      "id": "cm05.1.3-e4",
+      "lesson": "cm05.1.3",
+      "kind": "equation",
+      "content": "1Fe₂O₃ + 3CO ＝高温＝ 2Fe + 3CO₂",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：equationText 配平程序重算通过（系数内含）；终审（化学专家队）：终审：与课程页一致；跨条目无冲突；配平只调系数（CHEM-R01/R02/R06）",
+      "page": "cm05.1.3-p1"
+    },
+    {
+      "id": "cm05.1.3-e5",
+      "lesson": "cm05.1.3",
+      "kind": "equation",
+      "content": "?Fe₂O₃ + ?CO ＝高温＝ ?Fe + ?CO₂",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：equationText 配平程序重算通过（系数内含）；终审（化学专家队）：终审：与课程页一致；跨条目无冲突；配平只调系数（CHEM-R01/R02/R06）",
+      "page": "cm05.1.3-p2"
+    },
+    {
+      "id": "cm05.1.2-e6",
+      "lesson": "cm05.1.2",
+      "kind": "calc",
+      "content": "填空：2H₂ + O₂ ＝点燃＝ 2H₂O 中，参加反应的 H₂ 与 O₂ 的分子个数比是… = 2:1",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：答案数值已收录，独立重算见终审；终审（化学专家队）：终审：答案与课程页 checkTable/quiz 一致；有效数字口径（B2）合规",
+      "page": "cm05.1.2-p4"
+    },
+    {
+      "id": "cm05.1.3-e7",
+      "lesson": "cm05.1.3",
+      "kind": "calc",
+      "content": "填空：Fe₂O₃ + 3CO ＝高温＝ 2Fe + 3CO₂ 中，CO 的系数是… = 3",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：答案数值已收录，独立重算见终审；终审（化学专家队）：终审：答案与课程页 checkTable/quiz 一致；有效数字口径（B2）合规",
+      "page": "cm05.1.3-p3"
+    },
+    {
+      "id": "cm05.2.1-e8",
+      "lesson": "cm05.2.1",
+      "kind": "calc",
+      "content": "49g KClO₃ 完全分解，生成 O₂ 多少克？ [解] = 19.2g",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：答案数值已收录，独立重算见终审；终审（化学专家队）：终审：答案与课程页 checkTable/quiz 一致；有效数字口径（B2）合规",
+      "page": "cm05.2.1-p3"
+    },
+    {
+      "id": "cm05.2.2-e9",
+      "lesson": "cm05.2.2",
+      "kind": "calc",
+      "content": "6.5g Zn 与含 H₂SO₄ 4.9g 的稀硫酸反应，生成 H₂ 多少克？ [解] = 0.1g",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：答案数值已收录，独立重算见终审；终审（化学专家队）：终审：答案与课程页 checkTable/quiz 一致；有效数字口径（B2）合规",
+      "page": "cm05.2.2-p2"
+    },
+    {
+      "id": "cm05.2.3-e10",
+      "lesson": "cm05.2.3",
+      "kind": "calc",
+      "content": "填空：配平：Al + O₂ → Al₂O₃，Al 的系数是… = 4",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：答案数值已收录，独立重算见终审；终审（化学专家队）：终审：答案与课程页 checkTable/quiz 一致；有效数字口径（B2）合规",
+      "page": "cm05.2.3-p2"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "schema": "chemistry-review-ledger/1.0",
+  "chapter": "cm09",
+  "entries": [
+    {
+      "id": "cm09.2.1-e1",
+      "lesson": "cm09.2.1",
+      "kind": "calc",
+      "content": "填空：配制 50g 6% 的 NaCl 溶液，需要 NaCl… = 3",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：答案数值已收录，独立重算见终审；终审（化学专家队）：终审：答案与课程页 checkTable/quiz 一致；有效数字口径（B2）合规",
+      "page": "cm09.2.1-p3"
+    },
+    {
+      "id": "cm09.2.2-e2",
+      "lesson": "cm09.2.2",
+      "kind": "calc",
+      "content": "6.5g Zn 与 100g 稀硫酸（足量）反应，求所得溶液中 ZnSO₄ 的质量分数。 [找] = 161:2:65=x:y:6.5g",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：答案数值已收录，独立重算见终审；终审（化学专家队）：终审：答案与课程页 checkTable/quiz 一致；有效数字口径（B2）合规",
+      "page": "cm09.2.2-p1"
+    },
+    {
+      "id": "cm09.2.2-e3",
+      "lesson": "cm09.2.2",
+      "kind": "calc",
+      "content": "6.5g Zn 与 100g 稀硫酸（足量）反应，求所得溶液中 ZnSO₄ 的质量分数。 [解] = 15.1%",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：答案数值已收录，独立重算见终审；终审（化学专家队）：终审：答案与课程页 checkTable/quiz 一致；有效数字口径（B2）合规",
+      "page": "cm09.2.2-p1"
+    },
+    {
+      "id": "cm09.2.2-e4",
+      "lesson": "cm09.2.2",
+      "kind": "calc",
+      "content": "填空：6.5g Zn 与足量稀硫酸反应，反应后溶液质量比反应前总质量少… = 0.2",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：答案数值已收录，独立重算见终审；终审（化学专家队）：终审：答案与课程页 checkTable/quiz 一致；有效数字口径（B2）合规",
+      "page": "cm09.2.2-p3"
+    }
+  ]
+}

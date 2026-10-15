@@ -1,0 +1,54 @@
+{
+  "schema": "chemistry-review-ledger/1.0",
+  "chapter": "cm12",
+  "entries": [
+    {
+      "id": "cm12.2.1-e1",
+      "lesson": "cm12.2.1",
+      "kind": "equation",
+      "content": "H₂ + CuO ＝加热＝ Cu + H₂O",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：equationText 配平程序重算通过（系数内含）；终审（化学专家队）：终审：与课程页一致；跨条目无冲突；配平只调系数（CHEM-R01/R02/R06）",
+      "page": "cm12.2.1-p1"
+    },
+    {
+      "id": "cm12.2.2-e2",
+      "lesson": "cm12.2.2",
+      "kind": "equation",
+      "content": "1H₂ + 1CuO ＝加热＝ 1Cu + 1H₂O",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：equationText 配平程序重算通过（系数内含）；终审（化学专家队）：终审：与课程页一致；跨条目无冲突；配平只调系数（CHEM-R01/R02/R06）",
+      "page": "cm12.2.2-p1"
+    },
+    {
+      "id": "cm12.2.2-e3",
+      "lesson": "cm12.2.2",
+      "kind": "equation",
+      "content": "2CuO + 1C ＝高温＝ 2Cu + 1CO₂",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：equationText 配平程序重算通过（系数内含）；终审（化学专家队）：终审：与课程页一致；跨条目无冲突；配平只调系数（CHEM-R01/R02/R06）",
+      "page": "cm12.2.2-p2"
+    },
+    {
+      "id": "cm12.2.3-e4",
+      "lesson": "cm12.2.3",
+      "kind": "calc",
+      "content": "填空：8g CuO 与足量 H₂ 完全反应，转移电子的物质的量是… = 0.2 mol",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：答案数值已收录，独立重算见终审；终审（化学专家队）：终审：答案与课程页 checkTable/quiz 一致；有效数字口径（B2）合规",
+      "page": "cm12.2.3-p2"
+    }
+  ]
+}

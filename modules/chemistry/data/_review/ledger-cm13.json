@@ -1,0 +1,138 @@
+{
+  "schema": "chemistry-review-ledger/1.0",
+  "chapter": "cm13",
+  "entries": [
+    {
+      "id": "cm13.2.1-e1",
+      "lesson": "cm13.2.1",
+      "kind": "equation",
+      "content": "2Na + 2H₂O ＝ 2NaOH + H₂↑",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：equationText 配平程序重算通过（系数内含）；终审（化学专家队）：终审：与课程页一致；跨条目无冲突；配平只调系数（CHEM-R01/R02/R06）",
+      "page": "cm13.2.1-p1"
+    },
+    {
+      "id": "cm13.2.2-e2",
+      "lesson": "cm13.2.2",
+      "kind": "equation",
+      "content": "Cl₂ + H₂O ⇌ HCl + HClO",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：equationText 配平程序重算通过（系数内含）；终审（化学专家队）：终审：与课程页一致；跨条目无冲突；配平只调系数（CHEM-R01/R02/R06）",
+      "page": "cm13.2.2-p1"
+    },
+    {
+      "id": "cm13.3.1-e3",
+      "lesson": "cm13.3.1",
+      "kind": "equation",
+      "content": "4Fe(OH)₂ + O₂ + 2H₂O ＝ 4Fe(OH)₃",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：equationText 配平程序重算通过（系数内含）；终审（化学专家队）：终审：与课程页一致；跨条目无冲突；配平只调系数（CHEM-R01/R02/R06）",
+      "page": "cm13.3.1-p1"
+    },
+    {
+      "id": "cm13.1.1-e4",
+      "lesson": "cm13.1.1",
+      "kind": "calc",
+      "content": "1.204×10²⁴ 个水分子，是几 mol？ [解] = 2 mol",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：答案数值已收录，独立重算见终审；终审（化学专家队）：终审：答案与课程页 checkTable/quiz 一致；有效数字口径（B2）合规",
+      "page": "cm13.1.1-p1"
+    },
+    {
+      "id": "cm13.1.1-e5",
+      "lesson": "cm13.1.1",
+      "kind": "calc",
+      "content": "填空：3.01×10²³ 个 O₂ 分子，物质的量是… = 0.5 mol",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：答案数值已收录，独立重算见终审；终审（化学专家队）：终审：答案与课程页 checkTable/quiz 一致；有效数字口径（B2）合规",
+      "page": "cm13.1.1-p4"
+    },
+    {
+      "id": "cm13.1.2-e6",
+      "lesson": "cm13.1.2",
+      "kind": "calc",
+      "content": "11.7g NaCl 配成 0.5L 溶液，浓度是多少？ [解] = 0.4 mol/L",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：答案数值已收录，独立重算见终审；终审（化学专家队）：终审：答案与课程页 checkTable/quiz 一致；有效数字口径（B2）合规",
+      "page": "cm13.1.2-p1"
+    },
+    {
+      "id": "cm13.1.2-e7",
+      "lesson": "cm13.1.2",
+      "kind": "calc",
+      "content": "填空：标准状况下，4.48L O₂ 的物质的量是… = 0.2 mol",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：答案数值已收录，独立重算见终审；终审（化学专家队）：终审：答案与课程页 checkTable/quiz 一致；有效数字口径（B2）合规",
+      "page": "cm13.1.2-p3"
+    },
+    {
+      "id": "cm13.1.3-e8",
+      "lesson": "cm13.1.3",
+      "kind": "calc",
+      "content": "4g H₂ 完全燃烧，需要 O₂ 多少克？ [解] = 32g",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：答案数值已收录，独立重算见终审；终审（化学专家队）：终审：答案与课程页 checkTable/quiz 一致；有效数字口径（B2）合规",
+      "page": "cm13.1.3-p1"
+    },
+    {
+      "id": "cm13.1.3-e9",
+      "lesson": "cm13.1.3",
+      "kind": "calc",
+      "content": "填空：2H₂ + O₂ ＝点燃＝ 2H₂O 中，参加反应的 H₂ 与生成 H₂O 的分子个数比是… = 1:1",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：答案数值已收录，独立重算见终审；终审（化学专家队）：终审：答案与课程页 checkTable/quiz 一致；有效数字口径（B2）合规",
+      "page": "cm13.1.3-p3"
+    },
+    {
+      "id": "cm13.3.2-e10",
+      "lesson": "cm13.3.2",
+      "kind": "calc",
+      "content": "填空：0.5 mol NaCl 的质量是… = 29.25g",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：答案数值已收录，独立重算见终审；终审（化学专家队）：终审：答案与课程页 checkTable/quiz 一致；有效数字口径（B2）合规",
+      "page": "cm13.3.2-p1"
+    },
+    {
+      "id": "cm13.3.2-e11",
+      "lesson": "cm13.3.2",
+      "kind": "calc",
+      "content": "填空：5.6g Fe 与足量稀盐酸完全反应，生成 H₂ 的物质的量是… = 0.1 mol",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：答案数值已收录，独立重算见终审；终审（化学专家队）：终审：答案与课程页 checkTable/quiz 一致；有效数字口径（B2）合规",
+      "page": "cm13.3.2-p2"
+    }
+  ]
+}

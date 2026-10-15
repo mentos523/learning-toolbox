@@ -1,0 +1,66 @@
+{
+  "schema": "chemistry-review-ledger/1.0",
+  "chapter": "cm14",
+  "entries": [
+    {
+      "id": "cm14.3.1-e1",
+      "lesson": "cm14.3.1",
+      "kind": "equation",
+      "content": "2Na + Cl₂ ＝点燃＝ 2NaCl",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：equationText 配平程序重算通过（系数内含）；终审（化学专家队）：终审：与课程页一致；跨条目无冲突；配平只调系数（CHEM-R01/R02/R06）",
+      "page": "cm14.3.1-p1"
+    },
+    {
+      "id": "cm14.1.1-e2",
+      "lesson": "cm14.1.1",
+      "kind": "calc",
+      "content": "填空：Ca（20 号）的核外电子排布是 2、8、8、… = 2",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：答案数值已收录，独立重算见终审；终审（化学专家队）：终审：答案与课程页 checkTable/quiz 一致；有效数字口径（B2）合规",
+      "page": "cm14.1.1-p3"
+    },
+    {
+      "id": "cm14.1.1-e3",
+      "lesson": "cm14.1.1",
+      "kind": "element",
+      "content": "元素数据表（window.CHEMISTRY_ELEMENTS 1–36 号，B11 六字段；人教版常用值核验）",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：元素数据表条目已登记，B11 六字段与人教版常用值核验见终审；终审（化学专家队）：终审：元素数据表字段冻结（B11）；相对原子质量为人教版教科书常用值",
+      "page": "cm14.1.1-p1"
+    },
+    {
+      "id": "cm14.1.2-e4",
+      "lesson": "cm14.1.2",
+      "kind": "element",
+      "content": "元素数据表（window.CHEMISTRY_ELEMENTS 1–36 号，B11 六字段；人教版常用值核验）",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：元素数据表条目已登记，B11 六字段与人教版常用值核验见终审；终审（化学专家队）：终审：元素数据表字段冻结（B11）；相对原子质量为人教版教科书常用值",
+      "page": "cm14.1.2-p1"
+    },
+    {
+      "id": "cm14.2.1-e5",
+      "lesson": "cm14.2.1",
+      "kind": "element",
+      "content": "元素数据表（window.CHEMISTRY_ELEMENTS 1–36 号，B11 六字段；人教版常用值核验）",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：元素数据表条目已登记，B11 六字段与人教版常用值核验见终审；终审（化学专家队）：终审：元素数据表字段冻结（B11）；相对原子质量为人教版教科书常用值",
+      "page": "cm14.2.1-p1"
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "schema": "chemistry-review-ledger/1.0",
+  "chapter": "cm03",
+  "entries": [
+    {
+      "id": "cm03.1.2-e1",
+      "lesson": "cm03.1.2",
+      "kind": "equation",
+      "content": "2H₂O ＝通电＝ 2H₂↑ + O₂↑",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：equationText 配平程序重算通过（系数内含）；终审（化学专家队）：终审：与课程页一致；跨条目无冲突；配平只调系数（CHEM-R01/R02/R06）",
+      "page": "cm03.1.2-p1"
+    },
+    {
+      "id": "cm03.2.3-e2",
+      "lesson": "cm03.2.3",
+      "kind": "equation",
+      "content": "Na − e⁻ → Na⁺（失电子）；Cl + e⁻ → Cl⁻（得电子）",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：equationText 配平程序重算通过（系数内含）；终审（化学专家队）：终审：与课程页一致；跨条目无冲突；配平只调系数（CHEM-R01/R02/R06）",
+      "page": "cm03.2.3-p1"
+    },
+    {
+      "id": "cm03.1.2-e3",
+      "lesson": "cm03.1.2",
+      "kind": "calc",
+      "content": "填空：2H₂O ＝通电＝ 2H₂↑ + O₂↑ 中，反应前 H 原子有… = 4,4",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：答案数值已收录，独立重算见终审；终审（化学专家队）：终审：答案与课程页 checkTable/quiz 一致；有效数字口径（B2）合规",
+      "page": "cm03.1.2-p2"
+    },
+    {
+      "id": "cm03.2.1-e4",
+      "lesson": "cm03.2.1",
+      "kind": "calc",
+      "content": "填空：氧原子质子数是 8，它的核外电子数是… = 8",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：答案数值已收录，独立重算见终审；终审（化学专家队）：终审：答案与课程页 checkTable/quiz 一致；有效数字口径（B2）合规",
+      "page": "cm03.2.1-p3"
+    },
+    {
+      "id": "cm03.2.1-e5",
+      "lesson": "cm03.2.1",
+      "kind": "element",
+      "content": "元素数据表（window.CHEMISTRY_ELEMENTS 1–36 号，B11 六字段；人教版常用值核验）",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：元素数据表条目已登记，B11 六字段与人教版常用值核验见终审；终审（化学专家队）：终审：元素数据表字段冻结（B11）；相对原子质量为人教版教科书常用值",
+      "page": "cm03.2.1-p1"
+    },
+    {
+      "id": "cm03.2.2-e6",
+      "lesson": "cm03.2.2",
+      "kind": "element",
+      "content": "元素数据表（window.CHEMISTRY_ELEMENTS 1–36 号，B11 六字段；人教版常用值核验）",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：元素数据表条目已登记，B11 六字段与人教版常用值核验见终审；终审（化学专家队）：终审：元素数据表字段冻结（B11）；相对原子质量为人教版教科书常用值",
+      "page": "cm03.2.2-p1"
+    }
+  ]
+}

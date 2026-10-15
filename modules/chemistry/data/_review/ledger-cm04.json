@@ -1,0 +1,42 @@
+{
+  "schema": "chemistry-review-ledger/1.0",
+  "chapter": "cm04",
+  "entries": [
+    {
+      "id": "cm04.2.3-e1",
+      "lesson": "cm04.2.3",
+      "kind": "calc",
+      "content": "填空：CaCO₃ 的相对分子质量是… = 100",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：答案数值已收录，独立重算见终审；终审（化学专家队）：终审：答案与课程页 checkTable/quiz 一致；有效数字口径（B2）合规",
+      "page": "cm04.2.3-p2"
+    },
+    {
+      "id": "cm04.2.3-e2",
+      "lesson": "cm04.2.3",
+      "kind": "calc",
+      "content": "填空：CaCO₃ 中 Ca、C、O 的元素质量比是… = 10:3:12",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：答案数值已收录，独立重算见终审；终审（化学专家队）：终审：答案与课程页 checkTable/quiz 一致；有效数字口径（B2）合规",
+      "page": "cm04.2.3-p2"
+    },
+    {
+      "id": "cm04.2.3-e3",
+      "lesson": "cm04.2.3",
+      "kind": "calc",
+      "content": "填空：CaCO₃ 中钙元素的质量分数是… = 40%",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：答案数值已收录，独立重算见终审；终审（化学专家队）：终审：答案与课程页 checkTable/quiz 一致；有效数字口径（B2）合规",
+      "page": "cm04.2.3-p2"
+    }
+  ]
+}

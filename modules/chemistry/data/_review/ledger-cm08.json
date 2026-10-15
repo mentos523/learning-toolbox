@@ -1,0 +1,78 @@
+{
+  "schema": "chemistry-review-ledger/1.0",
+  "chapter": "cm08",
+  "entries": [
+    {
+      "id": "cm08.1.2-e1",
+      "lesson": "cm08.1.2",
+      "kind": "equation",
+      "content": "Zn + H₂SO₄ = ZnSO₄ + H₂↑",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：equationText 配平程序重算通过（系数内含）；终审（化学专家队）：终审：与课程页一致；跨条目无冲突；配平只调系数（CHEM-R01/R02/R06）",
+      "page": "cm08.1.2-p1"
+    },
+    {
+      "id": "cm08.1.3-e2",
+      "lesson": "cm08.1.3",
+      "kind": "equation",
+      "content": "Fe + CuSO₄ = FeSO₄ + Cu",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：equationText 配平程序重算通过（系数内含）；终审（化学专家队）：终审：与课程页一致；跨条目无冲突；配平只调系数（CHEM-R01/R02/R06）",
+      "page": "cm08.1.3-p1"
+    },
+    {
+      "id": "cm08.2.2-e3",
+      "lesson": "cm08.2.2",
+      "kind": "calc",
+      "content": "6.5g Zn 与足量稀盐酸反应，生成 H₂ 多少克？ [写] = Zn + 2HCl = ZnCl₂ + H₂↑",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：答案数值已收录，独立重算见终审；终审（化学专家队）：终审：答案与课程页 checkTable/quiz 一致；有效数字口径（B2）合规",
+      "page": "cm08.2.2-p1"
+    },
+    {
+      "id": "cm08.2.2-e4",
+      "lesson": "cm08.2.2",
+      "kind": "calc",
+      "content": "6.5g Zn 与足量稀盐酸反应，生成 H₂ 多少克？ [找] = 65:2=6.5g:x",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：答案数值已收录，独立重算见终审；终审（化学专家队）：终审：答案与课程页 checkTable/quiz 一致；有效数字口径（B2）合规",
+      "page": "cm08.2.2-p1"
+    },
+    {
+      "id": "cm08.2.2-e5",
+      "lesson": "cm08.2.2",
+      "kind": "calc",
+      "content": "6.5g Zn 与足量稀盐酸反应，生成 H₂ 多少克？ [解] = 0.2g",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：答案数值已收录，独立重算见终审；终审（化学专家队）：终审：答案与课程页 checkTable/quiz 一致；有效数字口径（B2）合规",
+      "page": "cm08.2.2-p1"
+    },
+    {
+      "id": "cm08.2.2-e6",
+      "lesson": "cm08.2.2",
+      "kind": "calc",
+      "content": "填空：10g Fe/Cu 混合物与足量稀硫酸反应，生成 H₂ 0.2g，则混合物中 Cu 的质量分数是… = 44",
+      "written_at": "2026-10-15",
+      "written_by": "蓝队（生产）",
+      "status": "final_passed",
+      "revision": 2,
+      "note": "初审（化学专家队）：初审：答案数值已收录，独立重算见终审；终审（化学专家队）：终审：答案与课程页 checkTable/quiz 一致；有效数字口径（B2）合规",
+      "page": "cm08.2.2-p3"
+    }
+  ]
+}
