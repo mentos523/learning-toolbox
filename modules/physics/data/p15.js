@@ -57,26 +57,26 @@ window.PHY_CH["p15"] = {
               kind: "explain",
               title: "三种起电，一种守恒",
               blocks: [
-                { type: "lead", text: "负电荷放下，场线立刻“弯腰”迎接——电荷搬家，场跟着变。" },
+                { type: "lead", text: "负电荷放下，场线“弯腰”——电荷搬家，场跟着变。" },
                 {
                   type: "widget",
                   widget: {
                     type: "side-compare",
                     params: {
-                      left: { title: "导体", rows: ["电子能自由跑", "近端异号、远端同号", "感应起电的主角"] },
-                      right: { title: "绝缘体", rows: ["电子被'拴住'跑不动", "电荷待在原地", "摩擦起电的主角"] },
-                      verdict: "起电三兄弟：摩擦、接触、感应——变的都是位置，不变的是总量。"
+                      left: { title: "导体", rows: ["电子自由跑", "近端异号、远端同号", "感应靠它"] },
+                      right: { title: "绝缘体", rows: ["电子被“拴住”", "电荷不跑", "摩擦靠它"] },
+                      verdict: "变的只是位置，不变的是总量。"
                     }
                   }
                 },
-                { type: "text", html: "三种起电：摩擦（电子被“蹭”过去）、接触（电荷重新分配）、感应（近端异号远端同号）。电荷守恒：电荷不能创生消灭，只能转移——总量不变。" },
-                { type: "text", html: '最小的电荷叫元电荷<span class="phy-f" data-f="e"></span>——任何带电体的电荷量都是它的整数倍。' },
-                { type: "trap", text: "⚠️ 别搞混：接触起电'创造'了电荷——错！电荷只是转移，总量守恒。" },
-                { type: "oldfriend", text: "认旧友：p08.1.1 电荷——初中只认“两种电荷”，今天补“电荷守恒”+“三种起电”（回填深化）。" },
-                { type: "mathlink", text: "数学呼应：代数 ch00 数量级（奠基）——1.6×10⁻¹⁹ C，小到离谱。" },
+                { type: "text", html: "三种起电：摩擦（电子被蹭走）、接触（电荷重分配）、感应（近端异号、远端同号）。电荷守恒：只转移不创生——总量不变。" },
+                { type: "text", html: '最小的电荷叫元电荷<span class="phy-f" data-f="e"></span>——带电体的电荷量都是它的整数倍。' },
+                { type: "trap", text: "⚠️ 别搞混：接触起电“创造”了电荷——错！电荷只转移。" },
+                { type: "oldfriend", text: "认旧友：p08.1.1 电荷——初中只认“两种电荷”，今天补“三种起电”+“电荷守恒”。" },
+                { type: "mathlink", text: "数学呼应：代数 ch00 数量级——1.6×10⁻¹⁹ C，小到离谱。" },
                 { type: "slogan", text: "电荷搬家，总量不变。" }
               ],
-              point: "起电三兄弟：摩擦、接触、感应——总量不变。"
+              point: "摩擦、接触、感应——总量不变。"
             }
           ]
         },
@@ -128,14 +128,14 @@ window.PHY_CH["p15"] = {
                     translation: "库仑力 = k·q₁q₂ ÷ r²"
                   },
                   conditions: ["真空", "点电荷（带电体尺寸远小于距离）"],
-                  counterexample: "两个紧贴的带电金属球：距离与球尺寸相当，电荷重新分布，不成立",
+                  counterexample: "紧贴的带电金属球：距离≈球尺寸，电荷重分布，不成立",
                   dimension: "N = (N·m²/C²)·C·C/m² ✓",
-                  units: { si: "N", note: "k=9.0×10⁹ N·m²/C²，常量，与 q₁、q₂ 无关" }
+                  units: { si: "N", note: "k=9.0×10⁹ N·m²/C²，与 q 无关" }
                 },
-                { type: "text", html: "扭秤实验：把“小力”放大成偏转、再放大成光斑移动——测不清就放大。" },
+                { type: "text", html: "扭秤实验：把“小力”放大成偏转、再放大成光斑——测不清就放大。" },
                 { type: "text", html: '点电荷是模型：尺寸≪距离，就像质点。万有引力是"双胞胎"：<span class="phy-f" data-f="grav"></span> 同样平方反比——引力只吸不斥，库仑力可吸可斥（类比的边界）。' },
-                { type: "trap", text: "⚠️ 别搞混：“适用于一切带电体”——错（限真空点电荷）；“k 随 q 变”——错（k 是常量）。" },
-                { type: "mathlink", text: "数学呼应：代数 7.2 反比例函数（奠基）——F–r 图像是双曲线。" },
+                { type: "trap", text: "⚠️ 别搞混：“适用于一切带电体”——错（限真空点电荷）；“k 随 q 变”——错。" },
+                { type: "mathlink", text: "数学呼应：代数 7.2 反比例函数——F–r 图像是双曲线。" },
                 { type: "slogan", text: "平方反比，真空点电荷。" }
               ],
               point: "限真空点电荷——先背条件。"
@@ -202,14 +202,14 @@ window.PHY_CH["p15"] = {
                     translation: "电场强度 = 电场力 ÷ 电荷量"
                   },
                   conditions: ["试探电荷足够小（不影响原电场）"],
-                  counterexample: "试探电荷换成 2q：F 翻倍，E 不动——E 是场的脾气",
+                  counterexample: "换成 2q：F 翻倍，E 不动——E 是场的脾气",
                   dimension: "N/C = N ÷ C ✓",
                   units: { si: "N/C", common: "V/m", note: "1 N/C = 1 V/m" }
                 },
-                { type: "text", html: "红线「比值定义法四辨析」第三落点：E 与 F、q 无关！F 翻倍 q 跟着翻倍，比值 E 不动——场是物质，试探电荷只是来“量”它的。" },
-                { type: "trap", text: "⚠️ 别搞混：“E 与 F 成正比”——错！同一个坑第三次；“电场线真实存在”——错！线是模型。" },
+                { type: "text", html: "红线「比值定义法四辨析」第三落点：E 与 F、q 无关——F 翻倍 q 跟着翻倍，E 不动；场是物质，试探电荷只是来“量”它的。" },
+                { type: "trap", text: "⚠️ 别搞混：“E 与 F 成正比”——错！同一个坑第三次；“电场线真实存在”——错！" },
                 { type: "oldfriend", text: "认旧友：p04.1.2 密度、p08.2.2 电阻——'等号不代表因果'第三次。" },
-                { type: "mathlink", text: "数学呼应：p12.1.3 矢量叠加（回填）——场强合成用平行四边形。" },
+                { type: "mathlink", text: "数学呼应：p12.1.3 矢量叠加——场强合成用平行四边形。" },
                 { type: "slogan", text: "场是物质，与试探电荷无关。" }
               ],
               point: "E 是场的脾气，与试探电荷无关。"
@@ -283,7 +283,7 @@ window.PHY_CH["p15"] = {
                   dimension: "V = (V/m)·m ✓",
                   units: { si: "V", note: "d 必须沿场强方向，斜着量不行" }
                 },
-                { type: "text", html: "零电势是人为规定的'海平面'：电势为零处，场强不一定为零——海平面处也可以有陡坡（无必然联系！）。" },
+                { type: "text", html: "零电势是人为规定的'海平面'：电势为零处，场强不一定为零——海平面处也可以有陡坡。" },
                 { type: "trap", text: "⚠️ 别搞混：电势为零处场强为零——错！零电势是人为规定；U=Ed 无条件用——错！限匀强电场。" },
                 { type: "mathlink", text: "数学呼应：p14.1.3 势能类比（回填）——Ep=qφ ↔ Ep=mgh，电势就是电场的'高度'。" },
                 { type: "slogan", text: "电势是高度，电势差是高度差。" }
@@ -416,7 +416,7 @@ window.PHY_CH["p15"] = {
               title: "先加速，再偏转",
               blocks: [
                 { type: "lead", text: "第 1 页直线：y 跟 U₂ 成正比——斜率里还藏着 q、l、v₀、d。" },
-                { type: "text", html: '加速：电子被电压 U 加速，qU 全变成动能<span class="phy-f" data-f="acc"></span>——算出射速度 v₀。' },
+                { type: "text", html: '加速：电压 U 加速电子，qU 全变成动能<span class="phy-f" data-f="acc"></span>——算出射速度 v₀。' },
                 {
                   type: "formula-id",
                   formula: {
@@ -428,13 +428,13 @@ window.PHY_CH["p15"] = {
                   dimension: "J = C·V ✓",
                   units: { si: "J", note: "qU 是电场力做的功" }
                 },
-                { type: "text", html: '偏转：电子水平射入偏转电场——水平匀速、竖直匀加速，轨迹抛物线<span class="phy-f" data-f="defl"></span>。"类平抛"的条件：电场力恒定（匀强电场）。' },
-                { type: "trap", text: "⚠️ 别搞混：“偏转距离只与电压有关”——错！还与 v₀、l、d 有关；“类平抛即平抛”——不完全！" },
-                { type: "oldfriend", text: "认旧友：p13.1.3 平抛运动——水平匀速+竖直匀加速，同一套动作，换了“导演”（电场力）。" },
-                { type: "mathlink", text: "数学呼应：代数 7.1 抛物线（奠基）——偏转轨迹是抛物线。" },
+                { type: "text", html: '偏转：电子水平射入偏转电场——水平匀速、竖直匀加速，轨迹抛物线<span class="phy-f" data-f="defl"></span>。"类平抛"要求电场力恒定（匀强电场）。' },
+                { type: "trap", text: "⚠️ 别搞混：“偏转距离只与电压有关”——错！还与 v₀、l、d 有关；“类平抛即平抛”——错！" },
+                { type: "oldfriend", text: "认旧友：p13.1.3 平抛运动——同一套动作，换了“导演”（电场力）。" },
+                { type: "mathlink", text: "数学呼应：代数 7.1 抛物线——偏转轨迹是抛物线。" },
                 { type: "slogan", text: "先加速，再偏转走抛物线。" }
               ],
-              point: "加速算 v₀，偏转走抛物线——示波管就这么画图。"
+              point: "加速算 v₀，偏转走抛物线。"
             },
             {
               id: "p15.1.6-p3",

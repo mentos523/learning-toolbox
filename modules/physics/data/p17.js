@@ -486,7 +486,7 @@ window.PHY_CH["p17"] = {
               kind: "explain",
               title: "交变电流：e=Em sinωt",
               blocks: [
-                { type: "lead", text: "第 1 页你把正弦曲线读成了 e–t 图像——现在回答：家里的 220V，是最大值吗？" },
+                { type: "lead", text: "第 1 页你把正弦曲线读成 e–t 图像——现在回答：家里的 220V 是最大值吗？" },
                 { type: "text", html: '交变电流：线圈在匀强磁场中匀速转动，产生 <span class="phy-f" data-f="e"></span>——Em=NBSω 是最大值。' },
                 {
                   type: "formula-id",
@@ -499,10 +499,10 @@ window.PHY_CH["p17"] = {
                   dimension: "V ✓",
                   units: { si: "V", note: "ω 的单位是 rad/s" }
                 },
-                { type: "text", html: '有效值按热效应定义：正弦式 <span class="phy-f" data-f="eff"></span>。限正弦式（条件！）——非正弦式另算。' },
+                { type: "text", html: '有效值按热效应定义<span class="phy-f" data-f="eff"></span>：限正弦式——非正弦式另算。' },
                 { type: "text", html: "家庭用电 220V/50Hz：220V 是有效值，最大值约 311V。" },
-                { type: "trap", text: "⚠️ 别搞混：有效值=平均值——错！方均根，按热效应定义；Em 与转速无关——错！Em=NBSω，与 ω 成正比。" },
-                { type: "mathlink", text: "数学呼应：代数 8.3.2 正弦函数（奠基）——e–t 图像即正弦曲线（呼应点 4）。" },
+                { type: "trap", text: "⚠️ 别搞混：有效值=平均值——错！方均根；Em 与转速无关——错！Em=NBSω，与 ω 成正比。" },
+                { type: "mathlink", text: "数学呼应：代数 8.3.2 正弦函数——e–t 图像即正弦曲线。" },
                 { type: "slogan", text: "220V 是有效值，不是最大值。" }
               ],
               point: "有效值限正弦式——220V 是有效值，最大值约 311V。"

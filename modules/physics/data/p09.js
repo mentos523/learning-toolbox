@@ -194,7 +194,7 @@ window.PHY_CH["p09"] = {
               id: "p09.1.3-p1",
               kind: "interact",
               title: "电流越大，升温越快？",
-              exploreTip: "拖动电流/电阻/时间三个滑块：看热量条和读数——电流翻倍，热量变几倍？",
+              exploreTip: "先猜：拖动电流/电阻/时间三个滑块：看热量条和读数——电流翻倍，热量变几倍？",
               widgets: [
                 {
                   type: "joule-heating",

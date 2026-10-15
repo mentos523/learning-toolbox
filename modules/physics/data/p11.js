@@ -33,12 +33,12 @@ window.PHY_CH["p11"] = {
               id: "p11.1.1-p1",
               kind: "interact",
               title: "地球能看作质点吗？",
-              exploreTip: "先猜，再看对照表：能不能当质点，看研究的问题，不看大小。",
+              exploreTip: "先猜，再看对照表：能不能当质点，看问题，不看大小。",
               widgets: [
                 {
                   type: "guess-verify",
                   params: {
-                    question: "研究地球公转（四季变化），地球能看作质点吗？",
+                    question: "地球公转（四季变化），地球能看作质点吗？",
                     options: ["能", "不能", "看心情"],
                     recordKey: "phy_guess_p11.1.1",
                     showAfter: "manual"
@@ -49,11 +49,11 @@ window.PHY_CH["p11"] = {
                   params: {
                     left: { title: "能看作质点", rows: ["地球公转（看轨道）", "火车跑全程（看位置）"] },
                     right: { title: "不能看作质点", rows: ["地球自转（看昼夜）", "体操打分（看姿态）"] },
-                    verdict: "能不能当质点，看研究的问题，不看大小"
+                    verdict: "能不能当质点，看问题，不看大小"
                   }
                 }
               ],
-              point: "质点是理想模型：有质量、无大小——忽略的是形状和大小。"
+              point: "质点是理想模型：有质量、无大小。"
             },
             {
               id: "p11.1.1-p2",

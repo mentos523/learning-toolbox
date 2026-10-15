@@ -230,7 +230,7 @@ window.PHY_CH["p06"] = {
               id: "p06.1.4-p1",
               kind: "interact",
               title: "往中间吹，纸往哪跑",
-              exploreTip: "别记反了：流速大，压强小。先猜：往两张纸中间吹气，纸往哪跑？再拖吹气滑块看纸条飘起。",
+              exploreTip: "别记反了：流速大，压强小。先猜：往两张纸中间吹气，纸往哪跑？再拖吹气滑块，看两张纸往哪靠。",
               widgets: [
                 {
                   type: "paper-blow",

@@ -43,14 +43,14 @@ window.PHY_CH["p16"] = {
             {
               id: "p16.1.1-p1",
               kind: "interact",
-              title: "灯亮，靠的是'口令'还是'士兵'？",
-              exploreTip: "先猜：开关闭合后，灯泡多久亮？再看右表对答案。",
+              title: "灯亮，靠'口令'还是'士兵'？",
+              exploreTip: "先猜：开关闭合，灯泡多久亮？看右表对答案。",
               widgets: [
                 {
                   type: "guess-verify",
                   params: {
                     question: "开关闭合，灯泡多久亮？",
-                    options: ["电子从开关跑到灯泡的时间", "几乎瞬间"],
+                    options: ["电子跑到灯泡的时间", "几乎瞬间"],
                     recordKey: "phy_guess_p16.1.1",
                     showAfter: "manual"
                   }
@@ -58,22 +58,22 @@ window.PHY_CH["p16"] = {
                 {
                   type: "side-compare",
                   params: {
-                    left: { title: "电子漂移（士兵）", rows: ["速度：mm/s", "电子真正移动的速度", "跑 1m 要十几天"] },
-                    right: { title: "电场传播（口令）", rows: ["速度：近光速", "'口令'传到全电路", "全电路电子同时起步"] },
-                    verdict: "灯瞬间亮，是口令跑得快，不是士兵跑得快。"
+                    left: { title: "电子漂移（士兵）", rows: ["速度：mm/s", "电子的真实速度", "跑 1m 要十几天"] },
+                    right: { title: "电场传播（口令）", rows: ["速度：近光速", "'口令'传到全电路", "全电路同时起步"] },
+                    verdict: "灯瞬间亮：口令快，不是士兵快。"
                   }
                 }
               ],
-              point: "电子漂移 mm/s，电场近光速——灯亮靠'口令'，不是'士兵'。"
+              point: "电子漂移 mm/s，电场近光速——灯亮靠“口令”。"
             },
             {
               id: "p16.1.1-p2",
               kind: "explain",
               title: "电流的微观本质",
               blocks: [
-                { type: "lead", text: "第 1 页你猜了：灯亮是'口令'到了——现在给电流办'升级身份证'。" },
-                { type: "text", html: "微观本质：金属里跑的是自由电子，漂移仅 mm/s；电场近光速建立，全电路电子同时起步——灯“瞬间”亮。" },
-                { type: "text", html: '电流 <span class="phy-f" data-f="I"></span>；电阻定律 <span class="phy-f" data-f="R"></span>：R 是导体的"脾气"，由材料 ρ、长度 l、横截面积 S 决定。' },
+                { type: "lead", text: "第 1 页你猜了：灯亮是'口令'到了——现在给电流办'身份证'。" },
+                { type: "text", html: "微观本质：金属里跑的是自由电子，漂移仅 mm/s；电场近光速建立，全电路电子同时起步。" },
+                { type: "text", html: '电流 <span class="phy-f" data-f="I"></span>；电阻定律 <span class="phy-f" data-f="R"></span>：R 由材料 ρ、长度 l、横截面积 S 决定。' },
                 {
                   type: "formula-id",
                   formula: {
@@ -86,8 +86,8 @@ window.PHY_CH["p16"] = {
                   units: { si: "Ω", note: "ρ 的单位是 Ω·m" }
                 },
                 { type: "trap", text: "⚠️ 别搞混：灯瞬间亮是电子跑得快——错！是电场近光速建立。" },
-                { type: "mathlink", text: "数学呼应：代数 ch00 数量级（奠基）——10⁻³ vs 10⁸，11 个数量级的鸿沟。" },
-                { type: "oldfriend", text: "认旧友：p08.2.3 欧姆定律——今天补上'适用条件'和'微观本质'。" },
+                { type: "mathlink", text: "数学呼应：代数 ch00 数量级——10⁻³ vs 10⁸，差 11 个数量级。" },
+                { type: "oldfriend", text: "认旧友：p08.2.3 欧姆定律——补上'适用条件'和'微观本质'。" },
                 { type: "slogan", text: "电流是队伍在走，不是士兵在跑。" }
               ],
               point: "欧姆定律限金属导体、纯电阻——见下页。"
@@ -227,8 +227,8 @@ window.PHY_CH["p16"] = {
               title: "磁场：能让小磁针转动的空间",
               blocks: [
                 { type: "lead", text: "第 1 页的'试吃员'尝出了方向——现在给磁场'定级'：多强？" },
-                { type: "text", html: "磁场就是磁铁（或电流）周围'能让小磁针转动'的那片空间——一种特殊物质，看不见，但小磁针能'尝'出来。" },
-                { type: "text", html: '磁感应强度（矢量！）：<span class="phy-f" data-f="B"></span>——描述磁场强弱和方向。方向：小磁针静止时 N 极的指向。' },
+                { type: "text", html: "磁场是磁铁（或电流）周围'能让小磁针转动'的空间——一种特殊物质，看不见，小磁针能'尝'出来。" },
+                { type: "text", html: '磁感应强度（矢量）：<span class="phy-f" data-f="B"></span>——描述磁场强弱和方向。方向：小磁针静止时 N 极的指向。' },
                 {
                   type: "formula-id",
                   formula: {
@@ -240,11 +240,11 @@ window.PHY_CH["p16"] = {
                   dimension: "T = N/(A·m) ✓",
                   units: { si: "T（特斯拉）", note: "1T=1N/(A·m)" }
                 },
-                { type: "trap", text: "⚠️ 别搞混：F=BIl 无条件用——错！限 B⊥I；磁感线'从 N 到 S'无条件——错！外部 N→S、内部 S→N，是闭合曲线。" },
-                { type: "oldfriend", text: "认旧友：p10.1.1 磁场——初中只认'小磁针会转'，今天补上 B 的定义。" },
-                { type: "slogan", text: "磁场是物质，小磁针是试吃员。" }
+                { type: "trap", text: "⚠️ 别搞混：F=BIl 无条件用——错！限 B⊥I；磁感线'从 N 到 S'——错！外部 N→S、内部 S→N，是闭合曲线。" },
+                { type: "oldfriend", text: "认旧友：p10.1.1 磁场——初中只认'小磁针会转'，补上 B 的定义。" },
+                { type: "slogan", text: "磁场是物质。" }
               ],
-              point: "B=F/(Il) 限 B⊥I——磁场用小磁针'尝'，不用'劲'想。"
+              point: "B=F/(Il) 限 B⊥I——用小磁针'尝'，不用'劲'想。"
             },
             {
               id: "p16.2.1-p3",
@@ -299,8 +299,8 @@ window.PHY_CH["p16"] = {
               kind: "explain",
               title: "洛伦兹力永不做功",
               blocks: [
-                { type: "lead", text: "第 1 页电子转圈：箭头永远指向圆心、跟速度垂直——“永不做功”的现场。" },
-                { type: "text", html: '洛伦兹力：磁场对运动电荷的作用力。<span class="phy-f" data-f="f"></span>。方向：左手定则（四指：正电荷顺 v，负电荷逆 v）。' },
+                { type: "lead", text: "第 1 页电子转圈：箭头永远指向圆心、跟速度垂直。" },
+                { type: "text", html: '洛伦兹力：磁场对运动电荷的作用力<span class="phy-f" data-f="f"></span>。方向：左手定则（四指：正电荷顺 v，负电荷逆 v）。' },
                 {
                   type: "formula-id",
                   formula: {
@@ -314,7 +314,7 @@ window.PHY_CH["p16"] = {
                 },
                 { type: "text", html: "永不做功：f⊥v，力与位移永远垂直——只改变速度方向，不改变速率。" },
                 { type: "trap", text: "⚠️ 别搞混：洛伦兹力做功——错！永不做功；正负电荷受力方向相同——错！电荷正负反向。" },
-                { type: "oldfriend", text: "认旧友：p16.2.1 安培力——安培力是洛伦兹力的宏观表现（一群电荷的力加起来）。" },
+                { type: "oldfriend", text: "认旧友：p16.2.1 安培力——是洛伦兹力的宏观表现（一群电荷的力加起来）。" },
                 { type: "slogan", text: "洛伦兹力永不做功。" }
               ],
               point: "f=qvB（限 v⊥B）：磁场只'管'运动的电荷，静止的不管。"
@@ -374,10 +374,10 @@ window.PHY_CH["p16"] = {
                   dimension: "m = (kg·m/s)/(C·T) ✓",
                   units: { si: "m", note: "v⊥B 时成立" }
                 },
-                { type: "text", html: '周期 <span class="phy-f" data-f="T"></span>——与 v 无关！v 大 r 跟着大，路长了，时间一样。这是质谱仪、回旋加速器的原理。' },
+                { type: "text", html: '周期<span class="phy-f" data-f="T"></span>——与 v 无关！v 大 r 跟着大，路长了，时间一样。这是质谱仪、回旋加速器的原理。' },
                 { type: "trap", text: "⚠️ 别搞混：周期与速度有关——错！T=2πm/qB，无关；粒子'沿磁感线运动'——错！垂直射入才做圆周。" },
-                { type: "oldfriend", text: "认旧友：p13.2.2 向心力——F向=mv²/r，今天'导演'换成洛伦兹力。" },
-                { type: "mathlink", text: "数学呼应：几何 g07 圆（奠基）；代数 7.2（奠基）——r–v 正比、r–B 反比。" },
+                { type: "oldfriend", text: "认旧友：p13.2.2 向心力——今天'导演'换成洛伦兹力。" },
+                { type: "mathlink", text: "数学呼应：几何 g07 圆；代数 7.2——r–v 正比、r–B 反比。" },
                 { type: "slogan", text: "半径看速度，周期与速度无关。" }
               ],
               point: "r=mv/qB，T=2πm/qB——v 大了圈大，但转一圈时间一样。"
@@ -580,7 +580,7 @@ window.PHY_CH["p16"] = {
                   }
                 }
               ],
-              point: "涡流：有利（感应炉）有害（铁芯发热）——⚠ 高频加热危险，远离！"
+              point: "涡流：有利（感应炉）有害（铁芯发热）。"
             },
             {
               id: "p16.3.3-p2",
