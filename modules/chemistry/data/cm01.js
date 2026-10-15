@@ -50,9 +50,10 @@ window.CHEM_CH["cm01"] = {
                     particles: [
                       { id: "w1", kind: "molecule", label: "H₂O", charge: null, role: "reactant", count: 2 },
                       { id: "h1", kind: "atom", label: "H", charge: null, role: "product", count: 4 },
-                      { id: "o1", kind: "atom", label: "O", charge: null, role: "product", count: 2 },
-                      { id: "h2m", kind: "molecule", label: "H₂", charge: null, role: "product", count: 2 },
-                      { id: "o2m", kind: "molecule", label: "O₂", charge: null, role: "product", count: 1 }
+                      { id: "o1", kind: "atom", label: "O", charge: null, role: "product", count: 2 }
+                      /* S-8a 裁决（2026-10-15）：删 h2m/o2m 产物分子双列——
+                         第 1 帧 form 已渲染终态 H₂/O₂ 合并标签，双列致三帧全程原子+分子并存，
+                         与第 0 帧 caption"分子破裂成原子"矛盾。计数器验算左右 H×4/O×2 全等。 */
                     ],
                     keyframes: [
                       { caption: "通电：H₂O 分子被“拆开”——分子破裂成 H 原子和 O 原子（示意）。", moves: [{ id: "w1", from: [30, 50], to: [45, 50] }] },

@@ -376,6 +376,17 @@ body[data-theme="dark"] #chemistry-app .chm-trap { background: #2b2113; }
   line-height: 1.7;
 }
 .chm-mathlink::before { content: "📐 "; }
+.chm-physicslink {
+  background: var(--chm-panel);
+  border: 1px solid var(--chm-line);
+  border-radius: 10px;
+  padding: 8px 10px;
+  font-size: 0.88rem;
+  line-height: 1.7;
+}
+.chm-physicslink::before { content: "⚛️ "; }
+/* B 段：跨模块深链（数学/物理），与站内 chm-lesson-link 同视觉语言（物理模块 phy-xlink 同理用 --phy-target） */
+.chm-xlink { color: var(--chm-target, #D55E00); font-weight: 700; text-decoration: underline; }
 .chm-slogan {
   text-align: center;
   font-size: 1rem;

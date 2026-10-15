@@ -112,9 +112,8 @@ window.CHEM_CH["cm03"] = {
                     particles: [
                       { id: "w1", kind: "molecule", label: "H₂O", charge: null, role: "reactant", count: 2 },
                       { id: "h1", kind: "atom", label: "H", charge: null, role: "product", count: 4 },
-                      { id: "o1", kind: "atom", label: "O", charge: null, role: "product", count: 2 },
-                      { id: "h2m", kind: "molecule", label: "H₂", charge: null, role: "product", count: 2 },
-                      { id: "o2m", kind: "molecule", label: "O₂", charge: null, role: "product", count: 1 }
+                      { id: "o1", kind: "atom", label: "O", charge: null, role: "product", count: 2 }
+                      /* S-8a 裁决（2026-10-15）：删 h2m/o2m 产物分子双列（同 cm01.1.1，同因）。 */
                     ],
                     keyframes: [
                       { caption: "通电：H₂O 分子“散架”——分子破裂成 H 原子和 O 原子（示意）。", moves: [{ id: "w1", from: [30, 50], to: [45, 50] }] },

@@ -270,6 +270,51 @@
     });
   }
 
+  /* B 段（自学审计整改）：mathlink/physicslink 跨模块深链。
+   * 数学目标用数学模块既有 hash 格式 #p=<pageId>（math.js 原生支持，不自创格式）；
+   * 物理目标用物理模块既有 hash 格式 #<课号>（physics.js parseHash 原生支持 "#"+课号）。
+   * token 按长度降序匹配，避免短 token 误吞长 token；无匹配的文本保持纯文本（不造死链）。
+   * 目标 pageId/课号逐个核实存在（见 chem-audit/reconcile-B.md 裁决附录·蓝队方案）。 */
+  var XLINK_MATH = {
+    "代数 ch09 数列": "ch09-u1-l1-p1",
+    "代数 ch06 函数图像": "ch06-u2-l2-p1",
+    "代数 ch08 对数": "ch08-u2-l2-p1",
+    "代数 ch03 分式": "ch03-u1-l1-p1",
+    "代数 ch02 整式": "ch02-u1-l3-p1",
+    "代数 ch01 方程": "ch01-u2-l3-p1",
+    "代数 ch00": "ch00-u1-l1-p1",
+    "代数 8.2": "ch08-u2-l2-p1",   /* 兜底：R-C4 已全量统一为 chXX，数据应无残留 */
+    "代数 6.1": "ch06-u2-l2-p1"    /* 兜底：同上 */
+  };
+  var XLINK_PHY = {
+    "物理 p03.2.2": "p03.2.2", "物理 p08.1.2": "p08.1.2",
+    "物理 p16.1.1": "p16.1.1", "物理 p06.1.3": "p06.1.3"
+  };
+  function xlinkify(html) {
+    var t = String(html == null ? "" : html);
+    var segs = [{ t: t, link: null }];
+    var tokens = Object.keys(XLINK_MATH).concat(Object.keys(XLINK_PHY))
+      .sort(function (a, b) { return b.length - a.length; });
+    tokens.forEach(function (tok) {
+      var href = XLINK_MATH[tok] ? "../math/index.html#p=" + XLINK_MATH[tok]
+                                 : "../physics/index.html#" + XLINK_PHY[tok];
+      var next = [];
+      segs.forEach(function (s) {
+        if (s.link || s.t.indexOf(tok) < 0) { next.push(s); return; }
+        var parts = s.t.split(tok);
+        for (var i = 0; i < parts.length; i++) {
+          if (i > 0) next.push({ t: tok, link: href });
+          if (parts[i]) next.push({ t: parts[i], link: null });
+        }
+      });
+      segs = next;
+    });
+    /* token 本身无 HTML 特殊字符可直接拼；其余片段已是转义后/安全的 HTML */
+    return segs.map(function (s) {
+      return s.link ? '<a class="chm-xlink" href="' + s.link + '">' + s.t + "</a>" : s.t;
+    }).join("");
+  }
+
   /* ---------------- 讲解页块渲染 ---------------- */
   function renderBlock(b, formulas) {
     if (b.type === "lead") return el("p", "chm-lead", esc(b.text));
@@ -284,7 +329,8 @@
       hydrateFormulas(o, formulas);
       return o;
     }
-    if (b.type === "mathlink") return el("div", "chm-mathlink", linkifyLessons(b.text));
+    if (b.type === "mathlink") return el("div", "chm-mathlink", xlinkify(linkifyLessons(b.text)));
+    if (b.type === "physicslink") return el("div", "chm-physicslink", xlinkify(linkifyLessons(b.text)));
     if (b.type === "slogan") return el("div", "chm-slogan", esc(b.text));
     if (b.type === "widget") {
       return renderWidget((b.widget || {}).type, (b.widget || {}).params);

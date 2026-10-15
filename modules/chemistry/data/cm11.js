@@ -283,8 +283,8 @@ window.CHEM_CH["cm11"] = {
                     rows: [
                       { dim: "化合反应", a: "多变一", b: "C + O₂ ＝点燃＝ CO₂" },
                       { dim: "分解反应", a: "一变多", b: "2NaHCO₃ ＝加热＝ Na₂CO₃ + H₂O + CO₂" },
-                      { dim: "置换反应", a: "单质 + 化合物 → 新单质 + 新化合物", b: "Fe + CuSO₄ = FeSO₄ + Cu" },
-                      { dim: "复分解反应", a: "交换成分（沉淀/气体/水三者有其一）", b: "AgNO₃ + NaCl = AgCl↓ + NaNO₃" }
+                      { dim: "置换反应", a: "单质 + 化合物 → 新单质 + 新化合物", b: "Fe + CuSO₄ ＝ FeSO₄ + Cu" },
+                      { dim: "复分解反应", a: "交换成分（沉淀/气体/水三者有其一）", b: "AgNO₃ + NaCl ＝ AgCl↓ + NaNO₃" }
                     ],
                     highlightDiff: true
                   }
@@ -315,7 +315,7 @@ window.CHEM_CH["cm11"] = {
                 {
                   type: "choice",
                   stem: "下列反应中，属于置换反应的是",
-                  options: ["2NaHCO₃ ＝加热＝ Na₂CO₃ + H₂O + CO₂", "Fe + CuSO₄ = FeSO₄ + Cu", "AgNO₃ + NaCl = AgCl↓ + NaNO₃"],
+                  options: ["2NaHCO₃ ＝加热＝ Na₂CO₃ + H₂O + CO₂", "Fe + CuSO₄ ＝ FeSO₄ + Cu", "AgNO₃ + NaCl ＝ AgCl↓ + NaNO₃"],
                   answer: 1,
                   tip: "单质 + 化合物 → 新单质 + 新化合物——置换的“换”字是关键。"
                 },

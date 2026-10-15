@@ -112,7 +112,7 @@ window.CHEM_CH["cm19"] = {
                 { type: "oldfriend", text: "（就是 cm10.2.3 你玩过的 pH 标尺：拖动 pH，c(H⁺) 以 10 倍跳动——今天兑现严格形式。）" },
                 { type: "text", html: "水也电离：H₂O ⇌ H⁺ + OH⁻。Kw = c(H⁺)·c(OH⁻)，只与温度有关——25℃ 时 1.0×10⁻¹⁴。" },
                 { type: "text", html: "pH 是“数量级的尺子”：pH = −lg c(H⁺)。c(H⁺)=0.01 的盐酸 pH=2；0.01mol/L NaOH 的 pH=12。" },
-                { type: "mathlink", text: "回填：代数 8.2 对数——cm10.2.3 的预告今天兑现。" },
+                { type: "mathlink", text: "回填：代数 ch08 对数——cm10.2.3 的预告今天兑现。" },
                 { type: "trap", text: "⚠ 别搞混：pH=7 不一定中性——看温度！100℃ 时中性 pH=6；Kw=10⁻¹⁴ 只在 25℃ 成立。" }
               ],
               point: "pH = −lg c(H⁺)：小小一步，浓度大跳。下一页：亲手算 pH。"
@@ -435,6 +435,7 @@ window.CHEM_CH["cm19"] = {
                 { type: "text", html: "阴极：Cu²⁺ + 2e⁻ = Cu（还原）；阳极：2Cl⁻ − 2e⁻ = Cl₂↑（氧化）。电解池叫阴、阳极！" },
                 { type: "text", html: "放电顺序：阳离子 Ag⁺ > Fe³⁺ > Cu²⁺ > H⁺；阴离子 S²⁻ > I⁻ > Br⁻ > Cl⁻ > OH⁻。“排前面”先放电。电解 NaCl 溶液阴极放 H₂——本质是水电离的 H⁺，表述要严谨。" },
                 { type: "text", html: "应用：电镀、精炼铜、氯碱工业（2NaCl + 2H₂O ＝通电＝ 2NaOH + H₂↑ + Cl₂↑）。" },
+                { type: "physicslink", text: "物理呼应：物理 p16.1.1 电流（高中深化）——用恒定电流的视角看电解：外电源把电子“泵”进阴极，阳极的电子被“抽”走。" },
                 { type: "trap", text: "⚠ 别搞混：阳极氧化（阳氧），阴极还原；放电顺序是“先后”不是“能不能”。" }
               ],
               point: "阳氧阴还；放电看顺序。下一页看 CuCl₂ 电解。"
