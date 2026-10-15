@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230072B2'/%3E%3Ctext x='32' y='44' font-size='30' text-anchor='middle' fill='white' font-family='sans-serif'%3E%E5%8C%96%3C/text%3E%3C/svg%3E">
+<title>化学 — 学习工具箱</title>
+<meta name="description" content="下标是身份证，系数是人数：从质量守恒到化学方程式，配平绝不改下标。">
+<link rel="stylesheet" href="css/chemistry.css">
+</head>
+<body data-theme="light">
+<!-- 深色模式入口：跟随系统 prefers-color-scheme，系统切换时实时响应；
+     化学 SVG/CSS 全走 --chm-* 变量（别名 --geo-*），切换主题不重绘画布。 -->
+<script>
+(function () {
+  var mq = window.matchMedia("(prefers-color-scheme: dark)");
+  function apply() { document.body.setAttribute("data-theme", mq.matches ? "dark" : "light"); }
+  apply();
+  if (mq.addEventListener) mq.addEventListener("change", apply);
+  else if (mq.addListener) mq.addListener(apply);  // 旧版 Safari
+})();
+</script>
+
+<!-- 章节浏览器（蓝队 2026-10-15）：22 章 cm00–cm21 元信息见 data/chapters.js，
+     章节与课数由 data/cmNN.js 数据驱动（试点只有 cm05 已就位）。
+     #chm=<课号> 深链冷启动直达（旧 hash 兼容）。 -->
+<main class="chm-app" id="chm-browser" aria-label="化学章节浏览"></main>
+
+<!-- 化学 SPA 学习页：js/chemistry.js 引擎渲染；数据见 data/cmNN.js；
+     样式见 css/chemistry.css（chm- 前缀，与其他学科隔离）。 -->
+<section id="chemistry-app" aria-label="化学学习">
+  <div class="chm-app" id="chm-app" hidden></div>
+</section>
+
+<!-- 框架：MathML 环境检测（复用数学模块已验证实现；缺失时 chemistry.js
+     本地兜底） → 章注册表 → 章数据 → 主引擎 -->
+<script src="../math/js/mathml-check.js"></script>
+<script src="data/chapters.js"></script>
+<script src="data/cm05.js"></script>
+<script src="js/chemistry.js"></script>
+</body>
+</html>

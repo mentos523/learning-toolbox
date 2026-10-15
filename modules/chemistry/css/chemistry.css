@@ -1,0 +1,826 @@
+/* ============================================================
+ * 化学 SPA 样式（蓝队 2026-10-15，骨架 + 试点 cm05.1.2）
+ *
+ * 命名空间隔离铁律：所有类名前缀 chm-（chemistry），只作用于
+ * #chemistry-app 容器内；不触碰其他学科的任何样式。
+ * 色板：--chm-* 语义变量，值全部别名 --geo-*（浅色/深色两套，
+ * 随 body[data-theme] 自动切换；见 docs/chemistry-interactions.md §0.2）。
+ * 全局约束：每页一屏（100dvh）、触控目标 ≥44px、
+ * 色盲双编码（颜色 + 文字标签）、file:// 可用、零依赖。
+ * 区内滚动口径（沿用物理白队教训 F1–F3）：.chm-zone 是唯一滚动容器，
+ * overflow-y:auto + overscroll-behavior-y:contain；页面级
+ * #chemistry-app { overflow:hidden }（一屏不变量）；任何内容容器
+ * 不许「固定高度 + overflow:hidden」静默裁剪。
+ *
+ * ---------- 纵向空间预算（白队 5 件事之 1，先行定死） ----------
+ * 视口 100dvh 内自上而下：
+ *   .chm-head   flex:none，约 60px（44px 按钮 + 上下 padding + 底边框）
+ *   .chm-crumb  flex:none，约 24px（一行小字面包屑）
+ *   .chm-title  flex:none，约 40px（一行页标题）
+ *   .chm-zone-wrap  flex:1，min-height:0 —— 主交互区（唯一弹性区）
+ *     .chm-zone     内部纵向滚动，子项 flex:none 只滚动不压扁
+ *   .chm-point  flex:none，常规 ≤3 行；超长时 max-height:36vh 区内滚动
+ *   .chm-pager  flex:none，约 60px（44px 翻页按钮 + padding）
+ * 预算一经定死，后续只允许压缩、不允许膨胀。动态内容区（原子计数表、
+ * 称量区、回放字幕）按全库最大行数定死 min-height，无布局抖动。
+ * ============================================================ */
+
+/* ---------- --chm-* 语义色板（别名 --geo-*，深色自动跟随） ---------- */
+#chemistry-app {
+  --geo-bg: #FFFFFF;
+  --geo-text: #1A1A1A;
+  --geo-known: #0072B2;        /* 已知：蓝 —— 已知质量、已知浓度、已知 pH */
+  --geo-target: #D55E00;       /* 待求/可调：朱红 —— 可调配平系数（加粗） */
+  --geo-corr-a: #E69F00;       /* 对应 A：橙 —— 金属区/失电子/还原剂 */
+  --geo-corr-b: #56B4E9;       /* 对应 B：天蓝 —— 非金属区/得电子/氧化剂 */
+  --geo-corr-c: #009E73;       /* 对应 C：蓝绿 —— 成功徽章 */
+  --geo-corr-angle: #CC79A7;   /* 对应角：紫红（备用） */
+  --geo-line: #000000;         /* 常规描边 */
+  --geo-aux: #7A7A7A;          /* 辅助（灰） */
+  --geo-grid: #E5E5E5;         /* 网格线 */
+  --geo-highlight: #F0E442;    /* 高亮：黄（配深色字） */
+
+  --chm-known:    var(--geo-known);
+  --chm-target:   var(--geo-target);
+  --chm-cation:   var(--geo-target);    /* 阳离子：朱红 + "+" 文字 */
+  --chm-anion:    var(--geo-known);     /* 阴离子：蓝 + "−" 文字 */
+  --chm-metal:    var(--geo-corr-a);    /* 金属：橙 + "金"角标/图例 */
+  --chm-nonmetal: var(--geo-corr-b);    /* 非金属：天蓝 + "非"角标/图例 */
+  --chm-acid-tag: var(--geo-target);    /* 酸性标签：朱红 + "酸性"文字 */
+  --chm-base-tag: var(--geo-known);     /* 碱性标签：蓝 + "碱性"文字 */
+  --chm-oxidizer: var(--geo-corr-b);    /* 氧化剂：天蓝 + 文字（得电子者） */
+  --chm-reducer:  var(--geo-corr-a);    /* 还原剂：橙 + 文字（失电子者） */
+  --chm-reactant: var(--geo-known);     /* 反应物：蓝（方程式左侧） */
+  --chm-product:  var(--geo-target);   /* 生成物：朱红（方程式右侧） */
+  --chm-electron: var(--geo-corr-b);    /* 电子：天蓝小点 + e⁻ 文字 */
+  --chm-lose-e:   var(--geo-corr-a);    /* 失电子/化合价升高：橙 + ↑ + 文字 */
+  --chm-gain-e:   var(--geo-corr-b);    /* 得电子/化合价降低：天蓝 + ↓ + 文字 */
+  --chm-apparatus: var(--geo-line);     /* 实验仪器描边 */
+  --chm-vapor:    var(--geo-aux);       /* 气体/烟雾示意：灰（+ ↑ 文字） */
+  --chm-highlight: var(--geo-highlight);/* 高亮闪烁：黄（配深色字） */
+  --chm-corr-a:   var(--geo-corr-a);    /* 对应 A 别名（成功/警告徽章用） */
+  --chm-corr-b:   var(--geo-corr-b);
+  --chm-corr-c:   var(--geo-corr-c);
+
+  --chm-bg:       var(--geo-bg);
+  --chm-ink:      var(--geo-text);
+  --chm-ink-soft: var(--geo-aux);
+  --chm-panel:    #F7F7F7;
+  --chm-line:     #DDDDDD;
+  --chm-on-hl:    #1A1A1A;     /* 黄底上的深色字 */
+  --chm-next-bg:  #B44A00;     /* 「下一页」按钮底：朱红加深，白字对比度 5.36 ≥ 4.5 */
+}
+body[data-theme="dark"] #chemistry-app {
+  --geo-bg: #121212;
+  --geo-text: #F5F5F5;
+  --geo-known: #56B4E9;
+  --geo-target: #FF7043;
+  --geo-corr-a: #FFB020;
+  --geo-corr-b: #7FD4FF;
+  --geo-corr-c: #3DDC97;
+  --geo-corr-angle: #E69BBE;
+  --geo-line: #F5F5F5;
+  --geo-aux: #9E9E9E;
+  --geo-grid: #333333;
+  --geo-highlight: #F0E442;
+
+  --chm-panel:    #1E1E1E;
+  --chm-line:     #3A3A3A;
+  --chm-on-hl:    #1A1A1A;
+  --chm-next-bg:  #C1440E;     /* 深色按钮底：朱红加深，白字对比度 5.12 ≥ 4.5 */
+}
+/* 护眼主题沿用浅色值（body[data-theme="soft"] 不覆盖） */
+
+/* ---------- App 骨架：一屏五块（预算见文件头） ---------- */
+#chemistry-app {
+  background: var(--chm-bg);
+  color: var(--chm-ink);
+  font-family: inherit;
+  overflow: hidden;              /* 页面级一屏不变量：唯一允许的 overflow:hidden */
+}
+.chm-app {
+  box-sizing: border-box;        /* 100dvh 含 padding：无隐藏裁剪 */
+  height: 100dvh;
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  padding: 0 14px calc(10px + env(safe-area-inset-bottom));
+}
+.chm-head {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0 6px;
+  border-bottom: 1px solid var(--chm-line);
+}
+.chm-head h1 {
+  margin: 0;
+  font-size: 1rem;
+  flex: 1;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.chm-page-tag {
+  flex: none;
+  font-size: 0.72rem;
+  color: var(--chm-ink-soft);
+  border: 1px solid var(--chm-line);
+  border-radius: 999px;
+  padding: 3px 9px;
+  white-space: nowrap;
+}
+.chm-back {
+  flex: none;
+  min-width: 44px;
+  min-height: 44px;
+  border: 1px solid var(--chm-line);
+  border-radius: 10px;
+  background: var(--chm-panel);
+  color: var(--chm-ink);
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+.chm-crumb {
+  flex: none;
+  margin: 6px 0 0;
+  font-size: 0.72rem;
+  color: var(--chm-ink-soft);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.chm-main {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 8px 0;
+  overflow: hidden;
+}
+.chm-title {
+  flex: none;
+  margin: 0 0 8px;
+  font-size: 1.08rem;
+  line-height: 1.45;
+}
+
+/* ---------- 区内滚动（沿用物理白队 F1–F3 口径） ---------- */
+.chm-zone-wrap {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+.chm-zone {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;              /* 区内纵向滚动，绝不裁剪 */
+  overflow-x: hidden;
+  overscroll-behavior-y: contain;/* 防链式滚动：body 永不滚动 */
+  -webkit-overflow-scrolling: touch;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.chm-zone > * { flex: none; }    /* 直系子项不参与压缩：只滚动、不压扁 */
+.chm-more {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  z-index: 6;
+  display: flex;
+  justify-content: center;
+  padding: 20px 0 8px;
+  background: linear-gradient(to bottom, transparent, var(--chm-bg) 75%);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s;
+  pointer-events: none;
+}
+.chm-zone-wrap.show-more .chm-more { opacity: 1; visibility: visible; }
+.chm-zone-wrap.show-more .chm-more { pointer-events: auto; }
+.chm-more-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  color: var(--chm-ink-soft);
+  background: var(--chm-panel);
+  border: 1px solid var(--chm-line);
+  border-radius: 999px;
+  padding: 6px 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+}
+.chm-more-pill .arr {
+  display: inline-block;
+  animation: chmMoreBounce 1.4s ease-in-out infinite;
+}
+@keyframes chmMoreBounce { 50% { transform: translateY(3px); } }
+@media (prefers-reduced-motion: reduce) {
+  .chm-more-pill .arr { animation: none; }
+}
+button.chm-more { background: none; border: none; font: inherit; padding: 20px 0 8px; }
+
+/* ---------- 点拨区 ---------- */
+.chm-point {
+  flex: none;
+  margin: 8px 0 0;
+  padding: 8px 10px;
+  background: var(--chm-panel);
+  border-left: 4px solid var(--chm-target);
+  border-radius: 0 8px 8px 0;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--chm-ink);
+}
+.chm-point.scroll { max-height: 36vh; overflow-y: auto; }
+
+/* ---------- 翻页器 ---------- */
+.chm-pager {
+  flex: none;
+  display: flex;
+  gap: 10px;
+  padding-top: 8px;
+}
+.chm-pager button {
+  flex: 1;
+  min-height: 44px;
+  border-radius: 10px;
+  border: 1px solid var(--chm-line);
+  background: var(--chm-panel);
+  color: var(--chm-ink);
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+.chm-pager button:disabled { opacity: 0.35; cursor: default; }
+.chm-pager .chm-next { background: var(--chm-next-bg); border-color: var(--chm-next-bg); color: #fff; }
+
+/* ---------- 章节浏览器 ---------- */
+/* 浏览器是导航列表页（非一屏课页）：内容超高时自身滚动，
+ * 与课页 .chm-zone 口径一致，body 永不滚动。
+ * hidden 壳不得占空间：#chm-browser.chm-app 的 display:block 特异性高于
+ * UA [hidden]{display:none}，此处 !important 兜底（物理 R1 教训）。 */
+#chm-browser[hidden], #chm-app[hidden] { display: none !important; }
+body { margin: 0; }
+#chm-browser.chm-app { display: block; overflow-y: auto; overscroll-behavior-y: contain; }
+.chm-browse { padding: 12px 0 24px; }
+.chm-browse h1 { font-size: 1.15rem; margin: 6px 0 4px; }
+.chm-browse-sub { color: var(--chm-ink-soft); font-size: 0.85rem; margin: 0 0 12px; }
+.chm-ch-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.chm-ch-btn {
+  width: 100%;
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-align: left;
+  border: 1px solid var(--chm-line);
+  border-radius: 12px;
+  background: var(--chm-panel);
+  color: var(--chm-ink);
+  padding: 10px 14px;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+.chm-ch-id {
+  flex: none;
+  font-size: 0.72rem;
+  color: var(--chm-ink-soft);
+  border: 1px solid var(--chm-line);
+  border-radius: 999px;
+  padding: 2px 8px;
+}
+.chm-ch-title { flex: 1; font-weight: 600; }
+.chm-ch-count { flex: none; font-size: 0.78rem; color: var(--chm-ink-soft); }
+.chm-unit { margin: 12px 0 4px; font-size: 0.9rem; color: var(--chm-ink-soft); }
+.chm-lesson-list { list-style: none; margin: 0 0 8px; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.chm-lesson-btn {
+  width: 100%;
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-align: left;
+  border: 1px solid var(--chm-line);
+  border-radius: 10px;
+  background: var(--chm-bg);
+  color: var(--chm-ink);
+  padding: 10px 14px;
+  font-size: 0.92rem;
+  cursor: pointer;
+}
+.chm-lesson-id { flex: none; font-size: 0.72rem; color: var(--chm-known); font-weight: 700; }
+.chm-lesson-title { flex: 1; }
+.chm-lesson-go { flex: none; color: var(--chm-ink-soft); }
+.chm-done { flex: none; color: var(--chm-corr-c, var(--geo-corr-c)); font-size: 0.8rem; }
+
+/* ---------- 通用内容块（沿用物理六段式，化学微调） ---------- */
+.chm-tip {
+  background: var(--chm-panel);
+  border: 1px dashed var(--chm-line);
+  border-radius: 10px;
+  padding: 8px 10px;
+  font-size: 0.85rem;
+  color: var(--chm-ink-soft);
+  line-height: 1.6;
+}
+.chm-lead { font-size: 0.95rem; line-height: 1.7; margin: 0; }
+.chm-text { font-size: 0.92rem; line-height: 1.75; margin: 0; color: var(--chm-ink); }
+.chm-trap {
+  background: #FFF7E6;
+  border: 1px solid var(--chm-corr-a, var(--geo-corr-a));
+  border-left-width: 4px;
+  border-radius: 0 10px 10px 0;
+  padding: 8px 10px;
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+body[data-theme="dark"] #chemistry-app .chm-trap { background: #2b2113; }
+.chm-oldfriend {
+  background: var(--chm-panel);
+  border: 1px solid var(--chm-line);
+  border-radius: 10px;
+  padding: 8px 10px;
+  font-size: 0.88rem;
+  line-height: 1.7;
+}
+.chm-oldfriend::before { content: "🔗 "; }
+.chm-mathlink {
+  background: var(--chm-panel);
+  border: 1px solid var(--chm-line);
+  border-radius: 10px;
+  padding: 8px 10px;
+  font-size: 0.88rem;
+  line-height: 1.7;
+}
+.chm-mathlink::before { content: "📐 "; }
+.chm-slogan {
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--chm-target);
+  background: var(--chm-panel);
+  border-radius: 10px;
+  padding: 10px;
+  line-height: 1.6;
+}
+
+/* ---------- 练习题（判分口径沿用语法 Y3：canonical + accept 全集） ---------- */
+.chm-q {
+  border: 1px solid var(--chm-line);
+  border-radius: 10px;
+  padding: 10px 12px;
+  background: var(--chm-bg);
+}
+.chm-q-stem { font-size: 0.95rem; line-height: 1.7; margin-bottom: 8px; }
+.chm-q-opts { display: flex; flex-direction: column; gap: 8px; }
+.chm-q-opts button {
+  min-height: 44px;
+  text-align: left;
+  border: 1px solid var(--chm-line);
+  border-radius: 8px;
+  background: var(--chm-panel);
+  color: var(--chm-ink);
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+.chm-q-opts button.judged-ok { border-color: var(--chm-corr-c, var(--geo-corr-c)); border-width: 2px; }
+.chm-q-opts button.judged-bad { border-color: var(--chm-target); opacity: 0.55; }
+.chm-q-check {
+  min-height: 44px;
+  min-width: 88px;
+  margin-top: 8px;
+  border-radius: 8px;
+  border: 1px solid var(--chm-line);
+  background: var(--chm-panel);
+  color: var(--chm-ink);
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+.chm-q input[type="text"] {
+  min-height: 44px;
+  font-size: 1rem;
+  border: 1px solid var(--chm-line);
+  border-radius: 8px;
+  background: var(--chm-bg);
+  color: var(--chm-ink);
+  padding: 4px 10px;
+}
+.chm-q-fb { margin-top: 8px; font-size: 0.88rem; line-height: 1.6; min-height: 1.6em; }
+.chm-q-fb .ok { color: var(--chm-corr-c, var(--geo-corr-c)); font-weight: 700; }
+.chm-q-fb .bad { color: var(--chm-target); font-weight: 700; }
+.chm-q-fb .tip { color: var(--chm-ink-soft); }
+
+/* ---------- 落定反馈（M6：视觉必选） ---------- */
+.chm-flash { animation: chmFlash 0.35s ease-out; }
+@keyframes chmFlash {
+  0% { box-shadow: 0 0 0 3px var(--chm-highlight); }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .chm-flash { animation: none; }
+}
+
+/* ---------- 公式降级文本 ---------- */
+.chm-formula-fallback {
+  font-style: italic;
+  color: var(--chm-ink-soft);
+}
+
+/* ---------- 通用组件壳 ---------- */
+.chm-widget { display: flex; flex-direction: column; gap: 10px; position: relative; }
+.chm-state {
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  background: var(--chm-panel);
+  border: 1px solid var(--chm-line);
+  color: var(--chm-ink);
+}
+.chm-state-ok { border-color: var(--chm-corr-c, var(--geo-corr-c)); border-left-width: 4px; }
+.chm-state-warn { border-color: var(--chm-corr-a, var(--geo-corr-a)); border-left-width: 4px; }
+.chm-state-bad {
+  border-color: var(--chm-target);
+  border-left-width: 4px;
+  background: #FDECEA;
+  color: #8f1d12;
+  font-weight: 700;
+}
+body[data-theme="dark"] #chemistry-app .chm-state-bad { background: #3a1d18; color: #ffb4a2; }
+.chm-note { font-size: 0.82rem; color: var(--chm-ink-soft); line-height: 1.6; }
+.chm-formula-line {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  background: var(--chm-panel);
+  border-radius: 10px;
+  padding: 8px 10px;
+  overflow-x: auto;
+}
+.chm-unknown {
+  border: 1px dashed var(--chm-target);
+  border-radius: 10px;
+  padding: 10px;
+  color: var(--chm-target);
+}
+
+/* ---------- 播放条 / 步进器 / 按钮行 ---------- */
+.chm-playbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--chm-panel);
+  border: 1px solid var(--chm-line);
+  border-radius: 10px;
+  padding: 6px 10px;
+}
+.chm-playbar button {
+  flex: none;
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: 8px;
+  border: 1px solid var(--chm-line);
+  background: var(--chm-bg);
+  color: var(--chm-ink);
+  font-size: 1rem;
+  cursor: pointer;
+}
+.chm-playbar button:disabled { opacity: 0.35; cursor: default; }
+.chm-stepper {
+  flex: none;
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: 8px;
+  border: 1px solid var(--chm-line);
+  background: var(--chm-bg);
+  color: var(--chm-ink);
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+.chm-btn-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.chm-btn-row button {
+  min-height: 44px;
+  border-radius: 10px;
+  border: 1px solid var(--chm-line);
+  background: var(--chm-panel);
+  color: var(--chm-ink);
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+.chm-btn-row button[aria-pressed="true"] { border-color: var(--chm-target); font-weight: 700; }
+
+/* ============================================================
+ * C3 equation-balance 组件样式
+ * ============================================================ */
+.chm-eq { display: flex; flex-direction: column; gap: 10px; }
+.chm-eq-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  background: var(--chm-panel);
+  border: 1px solid var(--chm-line);
+  border-radius: 10px;
+  padding: 10px 8px;
+  font-size: 1.05rem;
+  line-height: 2;
+}
+.chm-coeff-ctl { display: inline-flex; align-items: center; gap: 2px; }
+.chm-coeff-num {
+  min-width: 1.6em;
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--chm-target);       /* 可调系数：朱红 + 加粗（双编码"可调"） */
+}
+.chm-coeff-flash { animation: chmFlash 0.35s ease-out; }
+.chm-formula { display: inline-flex; align-items: baseline; font-size: 1.1rem; }
+.chm-formula .chm-base { font-weight: 600; }
+.chm-sub {
+  border: none;
+  background: none;
+  min-width: 44px;               /* 陷阱也要好点：热区 ≥44px（W-C8） */
+  min-height: 44px;
+  padding: 4px 6px;
+  font-size: 0.72em;
+  color: var(--chm-ink);
+  cursor: pointer;
+  border-bottom: 2px dotted var(--chm-ink-soft);  /* 陷阱 affordance：虚线下划线 */
+  line-height: 1;
+}
+.chm-sub .chm-lock { font-size: 0.9em; margin-left: 1px; }  /* 锁形小标 */
+.chm-sub-plain { font-size: 0.72em; }  /* trapSubscript:false 时的静态下标 */
+.chm-eq-op { color: var(--chm-ink-soft); font-size: 1rem; white-space: nowrap; }
+.chm-eq-cond {
+  font-size: 0.75rem;
+  color: var(--chm-ink-soft);
+  border: 1px solid var(--chm-line);
+  border-radius: 6px;
+  padding: 1px 6px;
+  white-space: nowrap;
+}
+.chm-count-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  background: var(--chm-bg);
+}
+.chm-count-table th, .chm-count-table td {
+  border: 1px solid var(--chm-line);
+  padding: 6px 8px;
+  text-align: center;
+}
+.chm-count-table th { background: var(--chm-panel); font-weight: 600; }
+.chm-count-table .chm-l { color: var(--chm-reactant); font-weight: 700; }
+.chm-count-table .chm-r { color: var(--chm-product); font-weight: 700; }
+.chm-count-table .chm-eq-ok { color: var(--chm-corr-c, var(--geo-corr-c)); font-weight: 700; }
+/* 称量区：固定预算，无布局抖动 */
+.chm-weigh {
+  min-height: 120px;
+  background: var(--chm-panel);
+  border: 1px solid var(--chm-line);
+  border-radius: 10px;
+  padding: 6px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+.chm-weigh svg { width: 100%; max-width: 300px; height: auto; display: block; }
+.chm-weigh-cap { font-size: 0.82rem; color: var(--chm-ink-soft); }
+
+/* ============================================================
+ * Y1 formula-read 组件样式
+ * ============================================================ */
+.chm-read { display: flex; flex-direction: column; gap: 8px; }
+.chm-read-formula {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  background: var(--chm-panel);
+  border: 1px solid var(--chm-line);
+  border-radius: 10px;
+  padding: 12px 8px;
+}
+.chm-read-seg {
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background: none;
+  color: var(--chm-ink);
+  padding: 8px 10px;             /* 分段点选热区 ≥44px */
+  min-height: 44px;
+  min-width: 44px;
+  font-size: 1.25rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+}
+.chm-read-seg[aria-pressed="true"] {
+  border-color: var(--chm-target);
+  background: var(--chm-bg);
+}
+.chm-read-seg.chm-sub-seg math { font-size: 0.72em; vertical-align: sub; }
+.chm-read-gloss {
+  min-height: 3.2em;             /* 固定预算：两行文案不抖动 */
+  background: var(--chm-bg);
+  border: 1px solid var(--chm-line);
+  border-left: 4px solid var(--chm-known);
+  border-radius: 0 10px 10px 0;
+  padding: 8px 10px;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+.chm-read-gloss.micro { border-left-color: var(--chm-target); }
+.chm-level-tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 1px 8px;
+  margin-right: 6px;
+  border: 1px solid var(--chm-line);
+  color: var(--chm-ink-soft);
+}
+.chm-read-bar { display: flex; gap: 8px; align-items: center; }
+
+/* ============================================================
+ * Y3 balance-replay 组件样式
+ * ============================================================ */
+.chm-replay { display: flex; flex-direction: column; gap: 10px; }
+.chm-replay-stage {
+  background: var(--chm-panel);
+  border: 1px solid var(--chm-line);
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}
+.chm-replay-eq {
+  font-size: 1.1rem;
+  line-height: 2;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px;
+}
+.chm-replay-hl {
+  color: var(--chm-target);
+  font-weight: 700;
+  animation: chmFlash 0.6s ease-out 2;
+}
+.chm-replay-caption {
+  min-height: 4.8em;            /* 固定预算：三行字幕不抖动 */
+  font-size: 0.9rem;
+  line-height: 1.6;
+  text-align: left;
+  width: 100%;
+}
+.chm-replay-step { font-size: 0.8rem; color: var(--chm-ink-soft); }
+.chm-replay-count { font-size: 0.82rem; color: var(--chm-ink-soft); }
+.chm-micro { display: flex; flex-direction: column; gap: 8px; align-items: center; }
+.chm-micro svg { width: 100%; max-width: 320px; height: auto; display: block; }
+.chm-micro-frames { display: flex; gap: 8px; }
+.chm-micro-frames button {
+  min-height: 44px;
+  border-radius: 8px;
+  border: 1px solid var(--chm-line);
+  background: var(--chm-panel);
+  color: var(--chm-ink);
+  padding: 6px 14px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+.chm-micro-frames button[aria-pressed="true"] { border-color: var(--chm-target); font-weight: 700; }
+.chm-micro-cap { font-size: 0.85rem; line-height: 1.6; color: var(--chm-ink); text-align: center; }
+
+/* ---------- 目录抽屉（沿用物理 ux-review §2 定案；chm- 命名空间） ---------- */
+.chm-menu-btn {
+  min-width: 44px; min-height: 44px; flex: none;
+  border: 1px solid var(--chm-line); border-radius: 8px;
+  background: var(--chm-bg); color: var(--chm-ink);
+  font-size: 0.95rem; font-weight: 700; padding: 6px 10px;
+  cursor: pointer;
+}
+.chm-drawer-mask {
+  position: fixed; inset: 0; z-index: 90;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0; visibility: hidden;
+  transition: opacity 0.2s ease-out, visibility 0.2s;
+}
+body[data-theme="dark"] .chm-drawer-mask { background: rgba(0, 0, 0, 0.6); }
+/* 抽屉挂在 body 下（#chemistry-app 作用域外），--chm-* 变量失效。
+ * 物理 R2 教训：抽屉作用域内自备浅色/深色两套值，不许依赖外层变量。 */
+body .chm-drawer {
+  --chm-bg: #FFFFFF; --chm-ink: #1A1A1A; --chm-ink-soft: #7A7A7A;
+  --chm-panel: #F7F7F7; --chm-line: #DDDDDD; --chm-target: #D55E00;
+  background: var(--chm-bg, #FFFFFF); color: var(--chm-ink, #1A1A1A);
+}
+body[data-theme="light"] .chm-drawer .chm-drawer-cur { color: #000000; } /* 橙底白字对比度不足，取纯黑 5.43:1 */
+body[data-theme="dark"] .chm-drawer {
+  --chm-bg: #121212; --chm-ink: #F5F5F5; --chm-ink-soft: #9E9E9E;
+  --chm-panel: #1E1E1E; --chm-line: #3A3A3A; --chm-target: #FF7043;
+  background: var(--chm-bg); color: var(--chm-ink);
+}
+.chm-drawer-mask.open { opacity: 1; visibility: visible; }
+.chm-drawer {
+  position: fixed; top: 0; left: 0; bottom: 0; z-index: 91;
+  width: min(320px, 85vw); height: 100dvh;
+  background: var(--chm-bg); color: var(--chm-ink);
+  border-right: 1px solid var(--chm-line);
+  box-shadow: 4px 0 16px rgba(0, 0, 0, 0.15);
+  display: flex; flex-direction: column;
+  transform: translateX(-105%); visibility: hidden;
+}
+.chm-drawer.open { visibility: visible; transform: none; }
+.chm-drawer-anim { transition: transform 0.25s ease-in-out; }
+.chm-drawer:not(.open).chm-drawer-anim { transition: transform 0.2s ease-out; }
+.chm-drawer-head {
+  flex: none; display: flex; align-items: center; gap: 8px;
+  padding: 10px 12px; border-bottom: 1px solid var(--chm-line);
+}
+.chm-drawer-ch { font-weight: 700; flex: 1; min-width: 0; overflow: hidden;
+  text-overflow: ellipsis; white-space: nowrap; }
+.chm-drawer-page { font-size: 0.78rem; color: var(--chm-ink-soft); flex: none; }
+.chm-drawer-close {
+  min-width: 44px; min-height: 44px; flex: none;
+  border: 1px solid var(--chm-line); border-radius: 8px;
+  background: var(--chm-bg); color: var(--chm-ink); font-size: 1rem;
+  cursor: pointer;
+}
+.chm-drawer-list { flex: 1; overflow-y: auto; padding: 4px 0 12px; }
+.chm-drawer-chbtn {
+  width: 100%; min-height: 48px; display: flex; align-items: center;
+  justify-content: space-between; gap: 8px; padding: 8px 16px;
+  background: none; border: none; border-bottom: 1px solid var(--chm-line);
+  color: var(--chm-ink); font-size: 0.95rem; font-weight: 700; text-align: left;
+  cursor: pointer;
+}
+.chm-drawer-arrow { color: var(--chm-ink-soft); flex: none; }
+.chm-drawer-lessons { padding: 2px 0 6px; }
+.chm-drawer-lesson {
+  width: 100%; min-height: 44px; display: flex; align-items: center; gap: 8px;
+  padding: 8px 16px 8px 32px; background: none; border: none;
+  color: var(--chm-ink); font-size: 0.88rem; text-align: left;
+  border-left: 4px solid transparent;
+  cursor: pointer;
+}
+.chm-drawer-lt { flex: 1; min-width: 0; overflow: hidden; display: -webkit-box;
+  -webkit-line-clamp: 2; -webkit-box-orient: vertical; line-height: 1.35; }
+/* 当前课三编码：背景高亮 + 左侧 4px 指示条 + "当前"文字徽章 */
+.chm-drawer-cur-lesson { background: var(--chm-panel); border-left-color: var(--chm-target); font-weight: 700; }
+.chm-drawer-cur {
+  flex: none; font-size: 0.7rem; font-weight: 700; color: var(--chm-bg);
+  background: var(--chm-target); border-radius: 999px; padding: 2px 8px;
+}
+/* 状态点：当前课实心圆 / 已访问空心圆 */
+.chm-dot-cur, .chm-dot-seen {
+  flex: none; width: 10px; height: 10px; border-radius: 50%;
+}
+.chm-dot-cur { background: var(--chm-target); }
+.chm-dot-seen { border: 2px solid var(--chm-ink-soft); }
+.chm-drawer-foot {
+  flex: none; padding: 10px 12px; border-top: 1px solid var(--chm-line);
+}
+.chm-drawer-foot .chm-mini { width: 100%; min-height: 44px; border-radius: 8px;
+  border: 1px solid var(--chm-line); background: var(--chm-bg); color: var(--chm-ink);
+  font-size: 0.9rem; cursor: pointer; }
+
+/* ---------- MathML 环境检测提示条 ---------- */
+#mathml-warn {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 50;
+  background: #FEF3C7;
+  color: #92400E;
+  padding: 10px 14px;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+#mathml-warn button {
+  margin-left: auto;
+  min-width: 44px; min-height: 44px;
+  border: none; background: transparent;
+  font-size: 1rem; cursor: pointer; color: inherit;
+}
+body[data-theme="dark"] #mathml-warn { background: #4a3a1a; color: #fde68a; }
+
+/* ---------- 390px 收紧 ---------- */
+@media (max-width: 620px) {
+  .chm-app { padding-left: 10px; padding-right: 10px; }
+  .chm-eq-line { font-size: 0.98rem; }
+}
