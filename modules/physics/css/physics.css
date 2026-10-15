@@ -552,6 +552,15 @@ body[data-theme="dark"] #physics-app .phy-trap { background: #2b2113; }
   transition: opacity 0.2s ease-out, visibility 0.2s;
 }
 body[data-theme="dark"] .phy-drawer-mask { background: rgba(0, 0, 0, 0.6); }
+/* R2 2026-10-15 修复队补修：抽屉挂在 body 下（#physics-app 作用域外），
+ * --phy-* 变量在深色下全部失效 → 透明底 + 黑字不可读。此处在深色下给
+ * 抽屉作用域内补一套深色值（与 body[data-theme="dark"] #physics-app 一致），
+ * 仿上行 mask 的写法；浅色沿用 body 白底（此前被掩盖，无需改）。 */
+body[data-theme="dark"] .phy-drawer {
+  --phy-bg: #121212; --phy-ink: #F5F5F5; --phy-ink-soft: #9E9E9E;
+  --phy-panel: #1E1E1E; --phy-line: #3A3A3A; --phy-target: #FF7043;
+  background: var(--phy-bg); color: var(--phy-ink);
+}
 .phy-drawer-mask.open { opacity: 1; visibility: visible; }
 .phy-drawer {
   position: fixed; top: 0; left: 0; bottom: 0; z-index: 91;

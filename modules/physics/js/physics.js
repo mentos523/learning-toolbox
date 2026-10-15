@@ -4395,8 +4395,12 @@
       st.textContent = "倒立的实像" + (blur ? "（孔太大：变亮但变模糊）" : "（孔小：暗但清晰）");
       st.className = "phy-state " + (blur ? "phy-state-warn" : "phy-state-ok");
       var r = mmlRead(mi("m"), fmtN(m, 2), "");
-      badge.setReadout(r.mathml, "放大率 m = 像距/物距 = " + fmtN(m, 2) +
-        (m < 1 ? "（缩小）" : m > 1 ? "（放大）" : "（等大）"));
+      /* W4 补修（2026-10-15）：setReadout 在 MathML 可用时只渲染 mathml 分支，
+       * 缩放词必须写进 MathML 的 DOM 里（<mtext>），否则 Chrome 下永不显示 */
+      var zoomWord = m < 1 ? "（缩小）" : m > 1 ? "（放大）" : "（等大）";
+      badge.setReadout(
+        r.mathml.replace("</mrow>", "<mtext>" + zoomWord + "</mtext></mrow>"),
+        "放大率 m = 像距/物距 = " + fmtN(m, 2) + zoomWord);
     }
     sAp.on(draw); sOd.on(draw);
     draw();
