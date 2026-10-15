@@ -249,7 +249,7 @@ window.PHY_CH["p12"] = {
                     body: { x: 50, y: 55, size: 14, label: "木块" },
                     forces: [
                       { id: "g", kind: "gravity", label: "G", angleDeg: 270, mag: 10, fixed: true },
-                      { id: "n", kind: "normal", label: "N", angleDeg: 60, mag: 8.7, fixed: true }
+                      { id: "n", kind: "normal", label: "N", angleDeg: 120, mag: 8.7, fixed: true }
                     ],
                     showResultant: false, surface: "incline", inclineDeg: 30, unit: "N",
                     badge: { invariant: "没变的是：重力 G（大小方向都不变）" }
@@ -360,7 +360,7 @@ window.PHY_CH["p12"] = {
                   }
                 }
               ],
-              point: "m 一定，a 与 F 成正比——控制变量，图像法，这是实验的结论。"
+              point: "m 一定，a 与 F 成正比——控制变量，图像法，这是实验的结论。提醒：这条 a–F 直线是理想实验的结果——钩码得远轻于小车（拉力才≈钩码重力），还要先平衡掉摩擦力；钩码太重，图线会\"弯\"（近似失效）。"
             },
             {
               id: "p12.2.2-p2",
@@ -391,6 +391,7 @@ window.PHY_CH["p12"] = {
               title: "质量是惯性量度，N 的定义",
               blocks: [
                 { type: "lead", text: "a–m 图像：F 一定时，m 越大 a 越小——质量是“懒”的量度，不是“阻力”。" },
+                { type: "trap", text: "提醒：这条 a–m 曲线也是理想实验的结果——前提跟第 1 页一样：钩码远轻于小车、摩擦力已平衡；条件不满足，曲线会\"变形\"。" },
                 { type: "text", html: "单位制：1N = 1kg·m/s²——使 1kg 物体产生 1m/s² 加速度的力，就是 1N。估算锚点：托起两个鸡蛋约 1N；你的体重约 500N。" },
                 { type: "trap", text: "⚠️ 别搞混：m 越大 a 越小，所以质量是“阻力”——错。质量是惯性量度：难改变运动状态，不是“挡路”。" },
                 { type: "mathlink", text: "数学呼应：代数 6.2 一次函数（奠基）——a–F 正比图像，斜率 = 1/m。" },
