@@ -154,6 +154,22 @@
     return null;
   }
   function hasLesson(lessonId) { return !!findLesson(lessonId); }
+  /* G1：按章内顺序取下一课；章末则进下一章第 1 课 */
+  function lessonOrder() {
+    var order = [];
+    readyChapters().forEach(function (c) {
+      var ch = window.CHEM_CH[c.id];
+      (ch.units || []).forEach(function (u) {
+        (u.lessons || []).forEach(function (l) { order.push(l.id); });
+      });
+    });
+    return order;
+  }
+  function nextLessonId(lessonId) {
+    var order = lessonOrder();
+    var i = order.indexOf(lessonId);
+    return (i >= 0 && i < order.length - 1) ? order[i + 1] : null;
+  }
   function isDone(lessonId) {
     var p = load("progress", {});
     return !!(p[lessonId] && p[lessonId].done);
@@ -166,17 +182,41 @@
     wrap.appendChild(el("h1", "", "化学"));
     wrap.appendChild(el("p", "chm-browse-sub",
       "下标是身份证，系数是人数——配平绝不改下标。"));
+    /* G2：继续学习入口（读 ltb-chm-visited / ltb-chm-page-<课号>，只读不写） */
+    (function () {
+      var visited = load("visited", {});
+      var best = null, bestTs = 0;
+      Object.keys(visited).forEach(function (lid) {
+        var ts = (visited[lid] || {}).ts || 0;
+        if (ts > bestTs && findLesson(lid)) { bestTs = ts; best = lid; }
+      });
+      if (!best) return;
+      var f = findLesson(best);
+      var pg = loadPage(best) || 0;
+      var card = el("button", "chm-continue", "");
+      card.type = "button";
+      card.innerHTML = '<span class="chm-continue-t">▶ 继续学习</span>' +
+        '<span class="chm-continue-l">' + esc(best) + "《" + esc(f.lesson.title || "") + "》" +
+        "（上次看到第 " + (pg + 1) + " 页）</span>";
+      card.addEventListener("click", function () { goLesson(best); });
+      wrap.appendChild(card);
+    })();
     var list = el("ul", "chm-ch-list");
     readyChapters().forEach(function (c) {
       var ch = window.CHEM_CH[c.id];
-      var n = 0;
-      (ch.units || []).forEach(function (u) { n += (u.lessons || []).length; });
+      var n = 0, done = 0;
+      (ch.units || []).forEach(function (u) {
+        (u.lessons || []).forEach(function (l) {
+          n++;
+          if (isDone(l.id)) done++;
+        });
+      });
       var li = el("li", "");
       var btn = el("button", "chm-ch-btn", "");
       btn.type = "button";
       btn.innerHTML = '<span class="chm-ch-id">' + esc(c.id) + "</span>" +
         '<span class="chm-ch-title">' + esc(c.title) + "</span>" +
-        '<span class="chm-ch-count">' + n + " 课</span>";
+        '<span class="chm-ch-count">' + done + "/" + n + " 课</span>";
       (function (cid) {
         btn.addEventListener("click", function () { toggleChapter(li, cid); });
       })(c.id);
@@ -1852,9 +1892,12 @@ function widgetPeriodicExplore(p) {
     card.appendChild(atomDiagram(E));
     var info = el("div", "chm-ptab-cinfo", "");
     var pos = posOf(zz);
+    /* R2：只列有电子的层（H 显示"K：1"，不显示空层） */
+    var shells = ["K", "L", "M", "N"];
+    var cfgTxt = E.cfg.map(function (n, i) { return shells[i] + "：" + n; }).join("、");
     info.innerHTML =
       "<div>质子数 ＝ " + E.z + "（圈内数字）</div>" +
-      "<div>核外电子排布（简化）：K L M N → " + E.cfg.join("、") + "</div>" +
+      "<div>核外电子排布（简化）：" + cfgTxt + "</div>" +
       "<div>相对原子质量：" + E.m + "</div>" +
       "<div>分区：" + (E.metal === "金" ? "金属" : E.metal === "非" ? "非金属" : "类金属") +
       "　|　第 " + pos[0] + " 周期，" + groupOf(pos[1]) + " 族</div>";
@@ -1867,7 +1910,7 @@ function widgetPeriodicExplore(p) {
     flash(card);
   }
   if (showDetail) select(range[0]);
-  box.appendChild(el("div", "chm-note", "镧系/锕系：此处省略（本表只到 36 号）。"));
+  box.appendChild(el("div", "chm-note", "镧系/锕系：此处省略（本表只到 " + range[1] + " 号）。"));  /* G4：range 感知 */
   return box;
 }
 
@@ -2071,10 +2114,17 @@ function widgetLabAssemble(p) {
     });
     g.appendChild(r);
     var t = svgEl("text", {
-      x: rb.x + rb.w / 2, y: rb.y + rb.h / 2, "text-anchor": "middle",
-      "font-size": 4, fill: "var(--chm-ink-soft)"
+      x: rb.x + rb.w / 2, y: rb.y + 4.6, "text-anchor": "middle",
+      "font-size": 3.4, fill: "var(--chm-ink-soft)"
     });
-    t.textContent = s.hint || "槽位";
+    /* G5：槽位标签换行（长 hint 不再溢出虚线框） */
+    var hint = s.hint || "槽位";
+    var perLine = Math.max(2, Math.floor((rb.w - 2) / 3.6));
+    for (var li = 0; li * perLine < hint.length; li++) {
+      var ts = svgEl("tspan", { x: rb.x + rb.w / 2, dy: li === 0 ? 0 : 4 });
+      ts.textContent = hint.slice(li * perLine, (li + 1) * perLine);
+      t.appendChild(ts);
+    }
     g.appendChild(t);
     slotLayer.appendChild(g);
     slotNodes[s.id] = g;
@@ -2457,7 +2507,7 @@ function widgetSolutionMix(p) {
         return Math.round(s * 10) / 10;
       }
       function updW() {
-        wread.innerHTML = "天平读数：" + fmtN(total(), 1) + " g（估读到下一位）";
+        wread.innerHTML = "天平读数：" + fmtN(total(), 1) + " g（读到 0.1g）";  /* S1：solution-mix 天平口径 */
       }
       rider.on(updW); updW();
       stage.appendChild(nextBtn("称量完成 →", function () {
@@ -2922,6 +2972,8 @@ function widgetReactionParticle(p) {
   renderFrame();  /* 初始渲染：舞台第一帧（修：此前漏调，SVG 为空） */
   /* B4 常驻 */
   box.appendChild(scaleNote(p));
+  /* R7：球色为 CPK 教科书惯例配色，加一句话说明 */
+  box.appendChild(el("div", "chm-note", "粒子球色为教科书惯例配色（CPK），不代表真实颜色；球上符号为识别依据。"));
   return box;
 }
 
@@ -3022,9 +3074,11 @@ function widgetPhScale(p) {
       "c(H⁺) 相对大小（对数条，示意）："));
     tenBox.appendChild(bar);
     tenBox.appendChild(el("div", "chm-ph-tennum",
-      "pH = " + cur + " 时，c(H⁺) 是 pH = 7 时的 " +
-        (rel >= 1 ? rel.toLocaleString("en-US") : "1/" + Math.round(1 / rel)) +
-        " 倍"));
+      cur === 7
+        ? "pH = 7（中性）：以此为基准，pH < 7 酸性、pH > 7 碱性"  /* R1：pH=7 时不说"1 倍" */
+        : "pH = " + cur + " 时，c(H⁺) 是 pH = 7 时的 " +
+          (rel >= 1 ? rel.toLocaleString("en-US") : "1/" + Math.round(1 / rel)) +
+          " 倍"));
     tenBox.appendChild(el("div", "chm-note",
       "pH 差 1，c(H⁺) 差 10 倍——pH 是\"浓度的密码\"。"));
   }
@@ -3083,6 +3137,14 @@ function widgetRateEquilibrium(p) {
   var box = el("div", "chm-widget chm-c9", "");
   var eqLine = el("div", "chm-c9-eq", esc(reaction.equationText || ""));
   box.appendChild(eqLine);
+  /* D1/G6：读图直观版（v–t/c–t 判读三句话，不依赖代数 ch06 已学） */
+  if (p.readGuide && p.readGuide.length) {
+    var rg = el("div", "chm-c9-guide", "");
+    p.readGuide.forEach(function (g, i) {
+      rg.appendChild(el("div", "chm-c9-guide-l" + (i === 0 ? "h" : ""), esc(g)));
+    });
+    box.appendChild(rg);
+  }
 
   var canvas = document.createElement("canvas");
   canvas.className = "chm-c9-cv";
@@ -3143,6 +3205,8 @@ function widgetRateEquilibrium(p) {
     var t = targets();
     /* 扰动：两线瞬间跳到新 v∞，再指数趋近新 vEq（经典 v–t 图像） */
     F = t.vF; R = t.vR; vEq = t.vEq; tF = t.vF; tR = t.vR;
+    /* G3：Qc 按滑块跳变到扰动值，随后向 K 演化（见 draw） */
+    if (mode === "quantitative") { var q0 = qcNow(); if (q0 != null) QcDisp = q0; }
     moving = true; moveTimer = 0;
     paintBadge();
     paintReadout();
@@ -3160,22 +3224,38 @@ function widgetRateEquilibrium(p) {
     return pts[pts.length - 1].K;
   }
   var K0 = kOfTemp(gi("temp"));
+  /* G3 专家队口径：定量模式下 Qc 为"当前浓度商"，扰动后向 K 指数收敛（与 v–t 同一示意时间尺度）；
+   * 收敛判据 |Qc−K|/K ≤ 5%。QcDisp 为显示用演化值。 */
+  var QcDisp = (mode === "quantitative" && K0 != null) ? K0 : null;
+  function qcNow() {
+    return K0 != null ? K0 * Math.pow(gi("conc") / gv("conc"), gs.fwd || 1) : null;
+  }
   function paintBadge() {
     var diff = Math.abs(F - R) / Math.max(1, vEq);
-    if (moving && diff > 0.03) {
+    var K = kOfTemp(gv("temp"));
+    var qRel = (mode === "quantitative" && K != null && QcDisp != null)
+      ? Math.abs(QcDisp - K) / Math.max(K, 1e-12) : 0;
+    if (moving && (diff > 0.03 || qRel > 0.05)) {
       badge.className = "chm-state chm-state-warn";
-      badge.textContent = "平衡移动中…（两线分开）";
+      if (mode === "quantitative" && K != null && QcDisp != null && qRel > 0.05) {
+        badge.textContent = QcDisp > K
+          ? "移动中：Qc > K，逆向移动（向反应物方向）"
+          : "移动中：Qc < K，正向移动（向生成物方向）";
+      } else {
+        badge.textContent = "平衡移动中…（两线分开）";
+      }
     } else {
       moving = false;
       badge.className = "chm-state chm-state-ok";
-      /* CHEM-R59：≠0 必须渲染 */
-      badge.textContent = "✓ v(正) = v(逆) ≠ 0 · 动态平衡";
+      /* CHEM-R59：≠0 必须渲染；定量模式追加 Qc=K 一致性 */
+      badge.textContent = "✓ v(正) = v(逆) ≠ 0 · 动态平衡" +
+        (mode === "quantitative" ? "（Qc = K）" : "");
     }
   }
   function paintReadout() {
     if (mode !== "quantitative") { readLine.textContent = ""; return; }
     var K = kOfTemp(gv("temp"));
-    var Qc = K0 != null ? K0 * Math.pow(gi("conc") / gv("conc"), gs.fwd || 1) : null;
+    var Qc = QcDisp;
     var html = "";
     if (mathmlOK()) {
       html = "<math><mi>K</mi><mo>=</mo><mn>" + (K != null ? fmtN(K, 3) : "—") +
@@ -3185,7 +3265,7 @@ function widgetRateEquilibrium(p) {
       html = "K = " + (K != null ? fmtN(K, 3) : "—") +
         "　Qc = " + (Qc != null ? fmtN(Qc, 3) : "—");
     }
-    readLine.innerHTML = html + "（K 只与温度有关）";
+    readLine.innerHTML = html + "（K 只与温度有关；Qc 随平衡移动向 K 演化，示意）";
   }
   /* 催化剂开关（CHEM-R63：两线同等变陡、平衡位置不动） */
   if (p.catalystSwitch) {
@@ -3222,6 +3302,11 @@ function widgetRateEquilibrium(p) {
     /* 动力学：指数趋近（示意） */
     var a = (catalystOn ? 0.09 : 0.045);
     F += (vEq - F) * a; R += (vEq - R) * a;
+    /* G3：Qc 显示值同步向 K 演化（与两线同一示意时间尺度） */
+    if (mode === "quantitative" && moving && QcDisp != null) {
+      var Ke = kOfTemp(gv("temp"));
+      if (Ke != null) { QcDisp += (Ke - QcDisp) * a; paintReadout(); }
+    }
     hist.push({ f: F, r: R });
     if (hist.length > 120) hist.shift();
     if (moving) {
@@ -3275,7 +3360,7 @@ function widgetRateEquilibrium(p) {
     });
   }
   paintBadge(); paintReadout();
-  box.appendChild(el("div", "chm-note", "曲线为示意，非真实动力学模拟（B3 冻结公式）。"));
+  box.appendChild(el("div", "chm-note", "曲线与 Qc 演化均为示意，非真实动力学模拟（B3 冻结公式）。"));
   return box;
 }
 
@@ -3897,7 +3982,9 @@ function widgetTriRep(p) {
 
 /* ============================================================
  * Y10 · read-gauge-chem（化学仪表读数）
- * 物理 Y2 口径：容差 = 分度值×1（冻结，B13.4）、估读到下一位。
+ * 物理 Y2 口径：容差 = 分度值×1（冻结，B13.4）；估读规则按量具口径：
+ * 量筒（division=1）估读到 0.1mL、天平读到 0.1g（中考口径，不估读到下一位），
+ * 滴定管（division=0.1）估读到 0.01mL。
  * 四 gauge：cylinder（量筒：视线水平/俯视/仰视）/ balance（托盘天平）/
  * ph-paper（pH 试纸比色）/ burette（滴定管）。
  * 与 C8 分工：Y10 练读数规范，C8 练 pH 含义。
@@ -4051,8 +4138,8 @@ function widgetReadGaugeChem(p) {
         "先选\"视线水平\"再读数：俯视偏大、仰视偏小——规范不是讲究，是准确。"));
     }
     stage.appendChild(el("div", "chm-note",
-      "量筒读数估读到下一位（分度值 " + division + "mL，估读到 0.0" +
-      (division === 0.1 ? "1" : "") + "mL）。"));
+      "量筒读数估读到下一位（分度值 " + division + "mL，估读到 " +
+      String(division / 10) + "mL）。"));  /* S1：division 驱动估读位；量筒 division=1→估读到 0.1mL */
     var inp = numInput("输入你的读数 / mL");
     stage.appendChild(inp);
     stage.appendChild(checkBtn("检查读数", function () {
@@ -4063,8 +4150,8 @@ function widgetReadGaugeChem(p) {
       }
       if (!isFinite(v)) { say(false, "先输入一个读数。"); return; }
       if (Math.abs(v - T) <= tolerance + 1e-9)
-        say(true, "读数 " + fmtN(v, 2) + " mL 在容差内（标准 " + T +
-          " mL，容差 ±" + tolerance + "mL）。");
+        say(true, "读数 " + fmtN(v, division >= 1 ? 1 : 2) + " mL 在容差内（标准 " + T +
+          " mL，容差 ±" + tolerance + "mL）。");  /* S1：显示位数跟分度值走，不教多余精度 */
       else
         say(false, "差太多了（容差 ±" + tolerance + "mL）——看凹液面最低处，估读到下一位。");
     }));
@@ -4072,7 +4159,7 @@ function widgetReadGaugeChem(p) {
     /* 托盘天平：砝码 + 游码 */
     var T2 = parseTarget();
     stage.appendChild(el("div", "chm-text",
-      "托盘天平读数 = 砝码 + 游码（分度值 " + division + "g，估读到下一位）。"));
+      "托盘天平读数 = 砝码 + 游码（读到 " + division + "g，游码看左侧）。"));  /* S1：中考口径，不估读到下一位 */
     var weights = [10, 5, 2, 1];
     var picked = [];
     var wrow = el("div", "chm-btn-row", "");
@@ -4108,7 +4195,7 @@ function widgetReadGaugeChem(p) {
       if (Math.abs(total() - T2) <= tolerance + 1e-9)
         say(true, "读数 " + fmtN(total(), 1) + " g ✓（标准 " + T2 + "g）。");
       else
-        say(false, "还不对（容差 ±" + tolerance + "g）——左物右码，游码估读到下一位。");
+        say(false, "还不对（容差 ±" + tolerance + "g）——左物右码，游码读到 " + division + "g 即可。");  /* S1 */
     }));
   } else if (gauge === "ph-paper") {
     /* pH 试纸比色：标准比色卡 0–14，点选档位 */
@@ -4641,6 +4728,20 @@ var CHEM_NEW_WIDGETS = {
     });
     pager.appendChild(prev);
     pager.appendChild(next);
+    /* G1：课末加"下一课 →"（不断流；点击同时记为已学） */
+    if (cur.pageIdx === pages.length - 1) {
+      var nl = nextLessonId(found.lesson.id);
+      if (nl) {
+        var nextL = el("button", "chm-next-lesson", "下一课 →");
+        nextL.type = "button";
+        (function (nid) {
+          nextL.addEventListener("click", function () {
+            markDone(found.lesson.id); goLesson(nid);
+          });
+        })(nl);
+        pager.appendChild(nextL);
+      }
+    }
     appRoot.appendChild(pager);
     bindZoneScroll(zone, zoneWrap);
   }
@@ -4694,6 +4795,7 @@ var CHEM_NEW_WIDGETS = {
     savePage(cur.found.lesson.id, idx);
     render();
     syncHash(true);
+    syncDesktopSidebar();  /* G8：更新侧边栏当前页 */
   }
   function openLesson(lessonId, pageIdx, push) {
     var found = findLesson(lessonId);
@@ -4707,8 +4809,10 @@ var CHEM_NEW_WIDGETS = {
     savePage(lessonId, idx);
     browseRoot.hidden = true;
     appRoot.hidden = false;
+    try { document.body.classList.add("chm-in-lesson"); } catch (e) {}
     render();
     syncHash(!push);
+    syncDesktopSidebar();  /* G8 */
     return true;
   }
   /* 跨课跳转：pushState；目标课恢复上次页码（新课进第 1 页） */
@@ -4717,6 +4821,7 @@ var CHEM_NEW_WIDGETS = {
   }
   function showBrowser() {
     cur = null;
+    try { document.body.classList.remove("chm-in-lesson"); } catch (e) {}
     if (appRoot) appRoot.hidden = true;
     if (browseRoot) {
       browseRoot.hidden = false;
@@ -4742,6 +4847,18 @@ var CHEM_NEW_WIDGETS = {
   /* ---------------- 目录抽屉（附表 D 规格） ---------------- */
   var drawer = null, drawerMask = null, drawerBtn = null;
   var drawerOpen = false, drawerAnim = false, lastFocus = null, drawerBuilt = false;
+  /* G8：桌面端常驻侧边栏（≥1024px，对齐数学模块模式）；移动端保持抽屉 */
+  function isDesktop() {
+    try { return window.matchMedia("(min-width: 1024px)").matches; }
+    catch (e) { return false; }
+  }
+  function syncDesktopSidebar() {
+    if (!isDesktop() || !cur) return;
+    buildDrawer();
+    renderDrawer();
+    drawer.setAttribute("aria-hidden", "false");
+    drawer.removeAttribute("role");  /* 常驻侧边栏不是 dialog */
+  }
   function buildDrawer() {
     if (drawerBuilt) return;
     drawerBuilt = true;
@@ -4888,6 +5005,7 @@ var CHEM_NEW_WIDGETS = {
     if (f) { try { f.focus(); } catch (e) {} }
   }
   function closeDrawer() {
+    if (isDesktop()) return;  /* G8：桌面端侧边栏常驻，不可关闭 */
     if (!drawerOpen || drawerAnim) return;
     drawerAnim = true;
     setTimeout(function () { drawerAnim = false; }, 230);

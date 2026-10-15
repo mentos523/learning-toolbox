@@ -34,7 +34,7 @@ window.CHEM_CH["cm21"] = {
                 { type: "oldfriend", text: "（cm17.1.2 拼过的两种丁烷：分子式是“原料清单”，结构是“拼装图纸”。）" },
                 { type: "text", html: "三类型：碳链异构（正丁烷/异丁烷）、位置异构（1-丁烯/2-丁烯）、官能团异构（乙醇/二甲醚）。" },
                 { type: "text", html: "三件套：质谱 → 相对分子质量（不是结构式！）；核磁共振氢谱 → 等效氢种类与个数比（CH₃CH₂OH 三组峰 3∶2∶1）；红外光谱 → 官能团。" },
-                { type: "mathlink", text: "奠基：代数 ch01 比例——峰面积比 = 氢原子个数比。" },
+                { type: "mathlink", text: "直观版（比例）：峰面积比 = 氢原子个数比。" },
                 { type: "trap", text: "⚠ 别搞混：质谱给不出结构式；峰面积比 = 氢原子个数比。" }
               ],
               point: "先称多重，再数几种氢，最后认官能团。下一页：三件套对照。"
@@ -440,7 +440,7 @@ window.CHEM_CH["cm21"] = {
               title: "合成：官能团接力赛",
               blocks: [
                 { type: "lead", text: "乙烯 → 乙酸乙酯：四步，每步只变一个官能团。有机合成就是设计这场“接力赛”。" },
-                { type: "text", html: "路线：① 加成 CH₂=CH₂ + H₂O → CH₃CH₂OH；② 催化氧化 2CH₃CH₂OH + O₂ ＝Cu,加热＝ 2CH₃CHO + 2H₂O；③ 氧化 2CH₃CHO + O₂ ＝催化剂,加热＝ 2CH₃COOH；④ 酯化 CH₃COOH + C₂H₅OH ⇌浓硫酸,加热⇌ CH₃COOC₂H₅ + H₂O。" },
+                { type: "text", html: "路线：① 加成 CH₂=CH₂ + H₂O ＝ CH₃CH₂OH；② 催化氧化 2CH₃CH₂OH + O₂ ＝Cu,加热＝ 2CH₃CHO + 2H₂O；③ 氧化 2CH₃CHO + O₂ ＝催化剂,加热＝ 2CH₃COOH；④ 酯化 CH₃COOH + C₂H₅OH ⇌浓硫酸,加热⇌ CH₃COOC₂H₅ + H₂O。" },
                 { type: "text", html: "合成策略：引入官能团、转化官能团、保护官能团（如 –OH 易被氧化时先保护）。路线不是越短越好——产率、条件、成本综合算账。" },
                 { type: "trap", text: "⚠ 别搞混：“一步到位”多半不现实——官能团转化常常要“绕路”（保护策略）；选路线要算综合账。" }
               ],
@@ -457,7 +457,7 @@ window.CHEM_CH["cm21"] = {
                   params: {
                     left: {
                       title: "乙烯 → 乙酸",
-                      rows: ["① 加成：CH₂=CH₂ + H₂O → CH₃CH₂OH", "② 催化氧化：2CH₃CH₂OH + O₂ → 2CH₃CHO + 2H₂O", "③ 氧化：2CH₃CHO + O₂ → 2CH₃COOH"]
+                      rows: ["① 加成：CH₂=CH₂ + H₂O ＝ CH₃CH₂OH", "② 催化氧化：2CH₃CH₂OH + O₂ ＝ 2CH₃CHO + 2H₂O", "③ 氧化：2CH₃CHO + O₂ ＝ 2CH₃COOH"]
                     },
                     right: {
                       title: "乙酸 → 乙酸乙酯",
@@ -514,7 +514,7 @@ window.CHEM_CH["cm21"] = {
                 },
                 {
                   type: "fill",
-                  stemBefore: "8.8g 乙酸乙酯（M=88）与 NaOH 完全反应，消耗 NaOH",
+                  stemBefore: "8.8g 乙酸乙酯（M=88）与足量 NaOH 溶液反应，消耗 NaOH",
                   stemAfter: "g。",
                   answer: "4.0",
                   accept: ["4"],

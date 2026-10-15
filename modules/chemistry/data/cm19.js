@@ -35,7 +35,7 @@ window.CHEM_CH["cm19"] = {
                 { type: "text", html: "加水稀释：促进电离（电离程度变大），但 c(H⁺) 反而减小——体积变大的速度，超过了电离增加的速度。“程度”和“浓度”，两回事！" },
                 { type: "trap", text: "⚠ 别搞混：弱酸溶液里不“只有”弱酸分子——分子、酸根离子、H⁺ 共存；稀释促进电离，但 c(H⁺) 减小！" }
               ],
-              point: "电离可逆、部分电离；稀释：程度↑、浓度↓。下一页看微观动画。"
+              point: "电离可逆、部分电离；稀释：电离程度增大、浓度减小。下一页看微观动画。"
             },
             {
               id: "cm19.1.1-p2",
@@ -56,7 +56,7 @@ window.CHEM_CH["cm19"] = {
                     keyframes: [
                       { caption: "3 个醋酸分子入水：只有 1 个“舍得”电离（示意：实际电离比例更小）", moves: [] },
                       { caption: "CH₃COO⁻ 与 H⁺ 也会“复合”回去——电离是可逆的", moves: [] },
-                      { caption: "加水稀释：电离的比例变大了（程度↑），但 H⁺ 被水“冲淡”了（c↓）", form: [{ ids: ["hac"], label: "CH₃COO⁻+H⁺" }] }
+                      { caption: "加水稀释：电离的比例变大了（程度增大），但 H⁺ 被水“冲淡”了（c(H⁺)减小）", form: [{ ids: ["hac"], label: "CH₃COO⁻+H⁺" }] }
                     ],
                     counter: true,
                     spectatorFade: true,
@@ -83,7 +83,7 @@ window.CHEM_CH["cm19"] = {
                   stem: "加水稀释醋酸，c(H⁺)？",
                   options: ["增大", "减小", "不变"],
                   answer: 1,
-                  tip: "稀释促进电离（程度↑），但 c(H⁺) 减小（浓度↓）。"
+                  tip: "稀释促进电离（程度增大），但 c(H⁺) 减小（浓度减小）。"
                 },
                 {
                   type: "choice",

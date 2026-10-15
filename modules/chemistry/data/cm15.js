@@ -193,10 +193,10 @@ window.CHEM_CH["cm15"] = {
                   params: {
                     reaction: { equationText: "3NO₂ + H₂O ＝ 2HNO₃ + NO" },
                     particles: [
-                      { id: "no2", kind: "molecule", label: "NO₂", charge: null, role: "reactant", count: 6 },
-                      { id: "h2o", kind: "molecule", label: "H₂O", charge: null, role: "reactant", count: 4 },
-                      { id: "hno3", kind: "molecule", label: "HNO₃", charge: null, role: "product", count: 4 },
-                      { id: "no", kind: "molecule", label: "NO", charge: null, role: "product", count: 2 }
+                      { id: "no2", kind: "molecule", label: "NO₂", charge: null, role: "reactant", count: 3 },
+                      { id: "h2o", kind: "molecule", label: "H₂O", charge: null, role: "reactant", count: 1 },
+                      { id: "hno3", kind: "molecule", label: "HNO₃", charge: null, role: "product", count: 2 },
+                      { id: "no", kind: "molecule", label: "NO", charge: null, role: "product", count: 1 }
                     ],
                     keyframes: [
                       { caption: "红棕色 NO₂ 通入水中，颜色变浅。" },

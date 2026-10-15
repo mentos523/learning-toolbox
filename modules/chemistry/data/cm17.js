@@ -257,7 +257,7 @@ window.CHEM_CH["cm17"] = {
                   stemAfter: "。",
                   answer: "乙烷",
                   accept: ["CH₃CH₃", "C₂H₆"],
-                  hint: "CH₂=CH₂ + H₂ → ?",
+                  hint: "CH₂=CH₂ + H₂ ＝ ?",
                   tip: "双键打开，加两个 H：CH₂=CH₂ + H₂ = CH₃CH₃。"
                 }
               ],
@@ -349,7 +349,7 @@ window.CHEM_CH["cm17"] = {
                     ],
                     keyframes: [
                       { caption: "浓硫酸催化、加热：羧基上的 –OH 与羟基上的 H“看对眼”", moves: [] },
-                      { caption: "脱去一分子水：CH₃COOH + C₂H₅OH → CH₃COOC₂H₅ + H₂O", form: [{ ids: ["aa", "et"], label: "CH₃COOC₂H₅" }] },
+                      { caption: "脱去一分子水：CH₃COOH + C₂H₅OH ⇌ CH₃COOC₂H₅ + H₂O", form: [{ ids: ["aa", "et"], label: "CH₃COOC₂H₅" }] },
                       { caption: "这是可逆反应：产物里加水，反应会往回走——⇌ 别写成 ＝", moves: [] }
                     ],
                     counter: true,

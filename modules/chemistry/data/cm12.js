@@ -230,7 +230,7 @@ window.CHEM_CH["cm12"] = {
                       reversible: false
                     },
                     coefficients: [1, 1, 1, 1],
-                    split: { ions: ["AgNO₃", "NaCl"], formulas: ["AgCl"] },
+                    split: { ions: ["AgNO₃", "NaCl", "NaNO₃"], formulas: ["AgCl"] },
                     spectators: ["Na⁺", "NO₃⁻"],
                     fullIonic: "Ag⁺ + NO₃⁻ + Na⁺ + Cl⁻ ＝ AgCl↓ + Na⁺ + NO₃⁻",
                     netIonic: "Ag⁺ + Cl⁻ ＝ AgCl↓"
@@ -247,7 +247,7 @@ window.CHEM_CH["cm12"] = {
                 { type: "text", html: "③ 删——删去两边都有的旁观离子：上例删去 Na⁺、NO₃⁻，得到 Ag⁺ + Cl⁻ ＝ AgCl↓。Ba(OH)₂ + H₂SO₄ 那一例没有旁观离子，全部参加反应。" },
                 { type: "text", html: "④ 查——查两遍，一个不能少。原子守恒：Ag 1、Cl 1，两边相等。电荷守恒：左边 +1−1＝0，右边 0。离子方程式是等式：原子、电荷双守恒。" },
                 { type: "oldfriend", text: "（就是你 cm10.3.1 学过的复分解反应：AgNO₃ + NaCl 有沉淀生成，符合'沉淀、气体、水三者有其一'——离子方程式是复分解的'微观版'。）" },
-                { type: "mathlink", text: "数学呼应（奠基）：电荷守恒 + 原子守恒，就是代数 ch01 的方程组思想——两边相等，列式求解。" }
+                { type: "mathlink", text: "直观版（方程组思想）：电荷守恒 + 原子守恒——两边相等，列式求解。" }
               ],
               point: "删旁观离子，查双守恒——离子方程式写完，查两遍再交卷。"
             }

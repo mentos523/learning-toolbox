@@ -5,8 +5,8 @@
  * C1 particle-view（cm01.1.1 水沸腾分子种类不变）；
  * C7 reaction-particle（cm01.1.1 水电解分子种类改变）；
  * Y6 tri-rep（cm01.1.2/cm01.1.3 证据三重表征）；
- * Y10 read-gauge-chem（cm01.1.4 量筒读数，D3 落点；容差=分度值×1，
- * 估读到下一位，B13.4 冻结）；Y13 safety-quiz（cm01.1.5 酒精灯）。
+ * Y10 read-gauge-chem（cm01.1.4 量筒读数，D3 落点；容差=分度值×1；
+ * 量筒 division=1，估读到 0.1mL（中考口径，S1 终裁），B13.4 冻结）；Y13 safety-quiz（cm01.1.5 酒精灯）。
  * 跃升 2（物理/化学变化判据）+ 红线辨析③立靶在本章。
  * ============================================================ */
 window.CHEM_CH = window.CHEM_CH || {};
@@ -214,7 +214,7 @@ window.CHEM_CH["cm01"] = {
                 { type: "text", html: "吸入 vs 呼出（体积分数）：O₂ 21% → 16%，CO₂ 0.03% → 约 4%，水蒸气变多，N₂ 基本不变（还是最多，约 78%）。" },
                 { type: "text", html: "三种检验配对：燃着的木条（O₂：燃得更旺 / CO₂：熄灭）、澄清石灰水（CO₂：变浑浊）、干燥玻璃片（水蒸气：出现水雾）。排水法收集气体：气体难溶于水才能用。" },
                 { type: "trap", text: "⚠ “呼出气体全是 CO₂”是错觉：CO₂ 只从 0.03% 升到约 4%——最多的仍是氮气。" },
-                { type: "mathlink", text: "数学呼应 · 代数 ch00 百分比（奠基）：体积分数是百分比——21%、0.03%、4%，先会读数再谈化学。" }
+                { type: "mathlink", text: "直观版（百分比）：体积分数是百分比——21%、0.03%、4%，先会读数再谈化学。" }
               ],
               point: "数据记牢：O₂ 21%→16%，CO₂ 0.03%→4%——呼出气最多的仍是 N₂。"
             },
@@ -308,16 +308,16 @@ window.CHEM_CH["cm01"] = {
                   type: "read-gauge-chem",
                   params: {
                     gauge: "cylinder",
-                    division: 0.1,
+                    division: 1,
                     tolerance: 0.1,
                     estimateNext: true,
                     sightDemo: true,
-                    targetValue: 12.3,
+                    targetValue: 12,
                     recordKey: "chm_gauge_cm01.1.4"
                   }
                 }
               ],
-              point: "量筒分度值 0.1mL，估读到下一位——读数规范练的是“诚实”。"
+              point: "量筒分度值 1mL，估读到 0.1mL——读数规范练的是“诚实”。"
             }
           ]
         },

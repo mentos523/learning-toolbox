@@ -134,7 +134,7 @@ window.CHEM_CH["cm08"] = {
               kind: "explain",
               title: "金属的两类反应",
               blocks: [
-                { type: "lead", text: "上一页锌把氢“换”了出来——金属化学性质第一类就是“抢”。" },
+                { type: "lead", text: "上一页锌把氢“换”了出来——金属化学性质第一类就是“换”（置换）：" },
                 { type: "text", html: "与氧气：2Mg + O₂ ＝点燃＝ 2MgO（剧烈），4Al + 3O₂ ＝点燃＝ 2Al₂O₃，Cu 加热变黑，Au 很难反应——越活泼越易反应。铝锅耐腐蚀靠表面致密的 Al₂O₃ 保护膜。" },
                 { type: "text", html: "与酸：Mg + 2HCl = MgCl₂ + H₂↑（最快），Zn 次之，Fe 最慢；Cu、Ag 不能置换出氢。适用条件：稀盐酸/稀硫酸，氢前面的活泼金属。" },
                 { type: "text", html: "这类反应叫置换反应：单质 + 化合物 → 新单质 + 新化合物。如 Zn + H₂SO₄ = ZnSO₄ + H₂↑（↑ 因 H₂ 从溶液里冒出）。" },

@@ -207,6 +207,8 @@ body[data-theme="dark"] #chemistry-app {
 }
 .chm-zone-wrap.show-more .chm-more { opacity: 1; visibility: visible; }
 .chm-zone-wrap.show-more .chm-more { pointer-events: auto; }
+/* 顺手修：pill 显示时给内容区留底边距，不再盖住输入行 */
+.chm-zone-wrap.show-more .chm-zone { padding-bottom: 56px; }
 .chm-more-pill {
   display: inline-flex;
   align-items: center;
@@ -263,6 +265,8 @@ button.chm-more { background: none; border: none; font: inherit; padding: 20px 0
 }
 .chm-pager button:disabled { opacity: 0.35; cursor: default; }
 .chm-pager .chm-next { background: var(--chm-next-bg); border-color: var(--chm-next-bg); color: #fff; }
+/* G1：下一课按钮（朱红主题色，与下一页一致） */
+.chm-pager .chm-next-lesson { background: var(--chm-next-bg); border-color: var(--chm-next-bg); color: #fff; font-weight: 700; }
 
 /* ---------- 章节浏览器 ---------- */
 /* 浏览器是导航列表页（非一屏课页）：内容超高时自身滚动，
@@ -275,6 +279,15 @@ body { margin: 0; }
 .chm-browse { padding: 12px 0 24px; }
 .chm-browse h1 { font-size: 1.15rem; margin: 6px 0 4px; }
 .chm-browse-sub { color: var(--chm-ink-soft); font-size: 0.85rem; margin: 0 0 12px; }
+/* G2：继续学习入口卡片（#chm-browser 在 #chemistry-app 作用域外，变量加 fallback） */
+.chm-browse .chm-continue {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 4px;
+  width: 100%; min-height: 44px; text-align: left; cursor: pointer;
+  background: var(--chm-next-bg, #B44A00); color: #fff; border: none; border-radius: 12px;
+  padding: 12px 16px; margin: 0 0 14px; font-size: 0.95rem;
+}
+.chm-continue-t { font-weight: 700; font-size: 1.02rem; }
+.chm-continue-l { opacity: 0.92; font-size: 0.85rem; }
 .chm-ch-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
 .chm-ch-btn {
   width: 100%;
@@ -869,6 +882,12 @@ body[data-theme="dark"] #mathml-warn { background: #4a3a1a; color: #fde68a; }
   border: 1px solid var(--chm-line); border-radius: 8px;
   background: var(--chm-bg); color: var(--chm-ink); margin: 4px 0;
 }
+/* 可点 ≥44px：quiz 行内填空输入框 */
+#chemistry-app .chm-q-stem input[type="text"] {
+  min-height: 44px; font-size: 1rem; padding: 6px 8px;
+  border: 1px solid var(--chm-line); border-radius: 8px;
+  background: var(--chm-bg); color: var(--chm-ink);
+}
 
 /* ---------- C1 particle-view ---------- */
 #chemistry-app .chm-pview-cv {
@@ -921,7 +940,7 @@ body[data-theme="dark"] #mathml-warn { background: #4a3a1a; color: #fde68a; }
   margin: 8px 0; touch-action: manipulation;
 }
 #chemistry-app .chm-ptab-cell {
-  position: relative; min-height: 34px; padding: 2px 0;
+  position: relative; min-height: 44px; padding: 4px 0;
   border: 1px solid var(--chm-line); border-radius: 6px;
   background: var(--chm-panel); color: var(--chm-ink);
   font-size: 0.72rem; cursor: pointer; line-height: 1.15;
@@ -1030,6 +1049,9 @@ body[data-theme="dark"] #mathml-warn { background: #4a3a1a; color: #fde68a; }
 
 /* ---------- C9 rate-equilibrium ---------- */
 #chemistry-app .chm-c9-eq { text-align: center; font-size: 1.02rem; margin: 4px 0; }
+/* D1/G6：读图直观版引导框 */
+#chemistry-app .chm-c9-guide { background: var(--chm-soft); border-radius: 8px; padding: 8px 10px; margin: 6px 0; font-size: 0.82rem; line-height: 1.55; }
+#chemistry-app .chm-c9-guide-lh { font-weight: 700; margin-bottom: 2px; }
 #chemistry-app .chm-c9-cv {
   width: 100%; height: 170px; display: block;
   border: 1px solid var(--chm-line); border-radius: 10px;
@@ -1077,6 +1099,8 @@ body[data-theme="dark"] #mathml-warn { background: #4a3a1a; color: #fde68a; }
 #chemistry-app .chm-rx-modebar button[disabled] { opacity: 0.45; cursor: not-allowed; }
 /* G1：课号引用深链（oldfriend/mathlink 自动转链） */
 .chm-lesson-link { color: var(--chm-target, #D55E00); font-weight: 700; text-decoration: underline; }
+/* 可点 ≥44px：行内跨课链接改为 inline-block 芯片，保证触控高度 */
+#chemistry-app .chm-lesson-link { display: inline-block; min-height: 44px; line-height: 1.4; padding: 10px 6px; }
 /* Y10：视线相关读数显示 */
 #chemistry-app .chm-gauge-readout { font-size: 1.05rem; margin: 8px 0 2px; }
 #chemistry-app .chm-gauge-readout b { color: var(--chm-target); }
@@ -1126,7 +1150,7 @@ body[data-theme="dark"] #chemistry-app .chm-tri-symbol { background: #1A4A22; co
 #chemistry-app .chm-gauge-svg { width: 100%; height: 210px; display: block; margin: 6px 0; }
 #chemistry-app .chm-gauge-card { display: flex; gap: 4px; flex-wrap: wrap; margin: 8px 0; }
 #chemistry-app .chm-gauge-ph {
-  width: 40px; height: 44px; border: 1px solid #00000033; border-radius: 6px;
+  min-width: 44px; min-height: 44px; border: 1px solid #00000033; border-radius: 6px;
   font-weight: 700; color: #1A1A1A; cursor: pointer; font-size: 0.8rem;
 }
 #chemistry-app .chm-gauge-ph.sel { outline: 3px solid var(--chm-highlight); }
@@ -1171,3 +1195,18 @@ body[data-theme="dark"] #chemistry-app .chm-tri-symbol { background: #1A4A22; co
 /* ---------- Y13 safety-quiz ---------- */
 #chemistry-app .chm-squiz-title { font-weight: 700; font-size: 1.05rem; margin: 6px 0; }
 #chemistry-app .chm-squiz-scene { font-size: 1rem; margin: 10px 0; padding: 10px; border-radius: 10px; background: var(--chm-panel); }
+
+/* ---------- G8：桌面端常驻侧边栏（≥1024px，对齐数学模块模式） ----------
+ * 移动端（<1024px）保持 overlay 抽屉不变。 */
+@media (min-width: 1024px) {
+  body.chm-in-lesson .chm-drawer {
+    position: fixed; left: 0; top: 0; bottom: 0;
+    width: 300px; z-index: 40;
+    transform: none !important; visibility: visible !important;
+    box-shadow: none;
+  }
+  body.chm-in-lesson .chm-drawer-mask { display: none !important; }
+  body.chm-in-lesson #chemistry-app .chm-menu-btn { display: none; }
+  body.chm-in-lesson .chm-drawer-close { display: none; }
+  body.chm-in-lesson #chemistry-app { margin-left: 300px; }
+}

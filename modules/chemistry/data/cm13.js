@@ -71,7 +71,7 @@ window.CHEM_CH["cm13"] = {
                 { type: "lead", text: "'堆'是化学的计量中枢：微观粒子数和宏观可称量，靠'堆'连起来了。" },
                 { type: "text", html: "n = N / N_A：N 是'多少个'，n 是'多少堆'。后面还会学：n = m / M（堆 ↔ 质量）、n = V / V_m（堆 ↔ 体积）、c = n / V（堆 ↔ 浓度）——n 是中转站。" },
                 { type: "oldfriend", text: "（就是你 cm05.2.1 玩过的系数比 = 粒子数比：2H₂ + O₂ ＝点燃＝ 2H₂O 里，'2∶1∶2'既是粒子数比，也是'堆数'比——mol 就是给'粒子数'起的堆名。）" },
-                { type: "mathlink", text: "数学呼应（奠基）：代数 ch00 数量级/科学记数法——6.02×10²³ 的'10²³'就是数量级的语言。" }
+                { type: "mathlink", text: "直观版（数量级/科学记数法）：6.02×10²³ 的'10²³'就是数量级的语言。" }
               ],
               point: "n 是中枢：个数、质量、体积、浓度，都通过 n 互推。"
             },
@@ -163,7 +163,7 @@ window.CHEM_CH["cm13"] = {
                   stem: "22.4 L/mol 能用的条件是（  ）",
                   options: ["任何时候", "标准状况（0℃、101kPa）", "常温常压", "溶液中"],
                   answer: 1,
-                  tip: "气体摩尔体积 22.4 L/mol 限标准状况（0℃、101kPa）——常温常压不是！"
+                  tip: "气体摩尔体积 22.4 L/mol 限标准状况（0℃、101kPa）——常温常压（约 25℃）不是！"
                 },
                 {
                   type: "choice",
@@ -288,9 +288,9 @@ window.CHEM_CH["cm13"] = {
                     reaction: { equationText: "2Na + 2H₂O ＝ 2NaOH + H₂↑" },
                     particles: [
                       { id: "na", kind: "atom", label: "Na", charge: null, role: "reactant", count: 2 },
-                      { id: "h2o", kind: "molecule", label: "H₂O", charge: null, role: "reactant", count: 4 },
+                      { id: "h2o", kind: "molecule", label: "H₂O", charge: null, role: "reactant", count: 2 },
                       { id: "naoh", kind: "molecule", label: "NaOH", charge: null, role: "product", count: 2 },
-                      { id: "h2", kind: "molecule", label: "H₂", charge: null, role: "product", count: 2 }
+                      { id: "h2", kind: "molecule", label: "H₂", charge: null, role: "product", count: 1 }
                     ],
                     keyframes: [
                       { caption: "钠块投入水中：浮在水面上（密度比水小）。" },
@@ -370,10 +370,10 @@ window.CHEM_CH["cm13"] = {
                   params: {
                     reaction: { equationText: "Cl₂ + H₂O ⇌ HCl + HClO" },
                     particles: [
-                      { id: "cl2", kind: "molecule", label: "Cl₂", charge: null, role: "reactant", count: 3 },
-                      { id: "h2o", kind: "molecule", label: "H₂O", charge: null, role: "reactant", count: 6 },
-                      { id: "hcl", kind: "molecule", label: "HCl", charge: null, role: "product", count: 2 },
-                      { id: "hclo", kind: "molecule", label: "HClO", charge: null, role: "product", count: 2 }
+                      { id: "cl2", kind: "molecule", label: "Cl₂", charge: null, role: "reactant", count: 1 },
+                      { id: "h2o", kind: "molecule", label: "H₂O", charge: null, role: "reactant", count: 1 },
+                      { id: "hcl", kind: "molecule", label: "HCl", charge: null, role: "product", count: 1 },
+                      { id: "hclo", kind: "molecule", label: "HClO", charge: null, role: "product", count: 1 }
                     ],
                     keyframes: [
                       { caption: "黄绿色 Cl₂ 通入水中，溶液变成黄绿色。" },
@@ -461,7 +461,8 @@ window.CHEM_CH["cm13"] = {
                     reaction: { equationText: "4Fe(OH)₂ + O₂ + 2H₂O ＝ 4Fe(OH)₃" },
                     particles: [
                       { id: "feoh2", kind: "molecule", label: "Fe(OH)₂", charge: null, role: "reactant", count: 4 },
-                      { id: "o2", kind: "molecule", label: "O₂", charge: null, role: "reactant", count: 2 },
+                      { id: "o2", kind: "molecule", label: "O₂", charge: null, role: "reactant", count: 1 },
+                      { id: "h2o", kind: "molecule", label: "H₂O", charge: null, role: "reactant", count: 2 },
                       { id: "feoh3", kind: "molecule", label: "Fe(OH)₃", charge: null, role: "product", count: 4 }
                     ],
                     keyframes: [

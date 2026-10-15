@@ -117,11 +117,11 @@ window.CHEM_CH["cm16"] = {
                     sliders: {
                       conc: { min: 1, max: 10, step: 1, init: 5, label: "反应物浓度" },
                       pressure: { min: 1, max: 100, step: 5, init: 10, label: "压强/MPa" },
-                      temp: { min: 300, max: 800, step: 50, init: 500, label: "温度/K" }
+                      temp: { min: 300, max: 800, step: 50, init: 500, label: "温度/K（ΔH < 0，放热）" }
                     },
                     mode: "qualitative",
                     equilibriumBadge: true,
-                    shiftNote: "增大压强，平衡正向移动——减弱这种改变，不是抵消（ΔH < 0，放热）",
+                    shiftNote: "增大压强，平衡正向移动——减弱这种改变，不是抵消",
                     recordKey: "chm_shift_cm16.1.2"
                   }
                 }
@@ -304,7 +304,8 @@ window.CHEM_CH["cm16"] = {
                       { id: "baoh2", kind: "molecule", label: "Ba(OH)₂·8H₂O", charge: null, role: "reactant", count: 2 },
                       { id: "nh4cl", kind: "molecule", label: "NH₄Cl", charge: null, role: "reactant", count: 4 },
                       { id: "bacl2", kind: "molecule", label: "BaCl₂", charge: null, role: "product", count: 2 },
-                      { id: "nh3", kind: "molecule", label: "NH₃", charge: null, role: "product", count: 4 }
+                      { id: "nh3", kind: "molecule", label: "NH₃", charge: null, role: "product", count: 4 },
+                      { id: "h2o", kind: "molecule", label: "H₂O", charge: null, role: "product", count: 20 }
                     ],
                     keyframes: [
                       { caption: "Ba(OH)₂·8H₂O 与 NH₄Cl 混合搅拌。" },
