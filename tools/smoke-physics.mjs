@@ -298,9 +298,14 @@ console.log(fails === 0 ? "\n[PASS] 物理引擎烟雾测试全部通过" : `\n[
   const EXPECTED_TYPES = ["force-drag", "motion-sim", "circuit-build", "optics-ray",
     "wave-tune", "pulley-lever", "collision-lab", "field-viz", "thermo-sim",
     "spring-shm", "guess-verify", "read-gauge", "formula-id", "graph-reader",
-    "side-compare"];
+    "side-compare",
+    /* 阶段四新增（黄队 P0/P1，2026-10-15） */
+    "tuning-fork", "vacuum-chamber", "pinhole-camera", "overflow-cup",
+    "em-induction", "displacement-arrow", "spring-scale-pull",
+    "heat-compare", "sponge-dent", "paper-blow", "joule-heating",
+    "motor-commutator", "vacuum-tube", "pendulum"];
   const missing = EXPECTED_TYPES.filter(t => !(P.types || []).includes(t));
-  missing.length === 0 ? ok("PHY.types 含全部 15 种组件类型") : fail("PHY.types 缺失：" + missing.join(","));
+  missing.length === 0 ? ok("PHY.types 含全部 29 种组件类型") : fail("PHY.types 缺失：" + missing.join(","));
   (P.types || []).includes("mv-lab") && (P.types || []).includes("slope-compare")
     ? ok("PHY.types 保留试点 mv-lab/slope-compare") : fail("试点类型丢失");
 
@@ -371,6 +376,37 @@ console.log(fails === 0 ? "\n[PASS] 物理引擎烟雾测试全部通过" : `\n[
     ["side-compare", { left: { title: "电动机", rows: ["电 → 机械能"] },
       right: { title: "发电机", rows: ["机械能 → 电"] }, verdict: "名字像双胞胎，原理是反的" },
       [".phy-compare", ".phy-verdict", ".phy-col"]],
+    /* ---------- 阶段四新增（黄队 P0/P1）：最小渲染冒烟 ---------- */
+    ["tuning-fork", {}, [".phy-stage", ".phy-state", "button"]],
+    ["vacuum-chamber", { air: { min: 0, max: 100, step: 5, init: 100 } },
+      [".phy-stage", ".phy-slider-row", ".phy-state"]],
+    ["pinhole-camera", { aperture: { min: 1, max: 6, step: 0.5, init: 2 },
+      objDist: { min: 12, max: 38, step: 1, init: 24 } },
+      [".phy-stage", ".phy-slider-row", ".phy-state"]],
+    ["optics-ray", { mode: "refraction", angle: { min: 0, max: 80, step: 1, init: 30 },
+      n1: 1, n2: 1.33 },
+      [".phy-stage", ".phy-slider-row", ".phy-state", ".phy-formula-line"]],
+    ["overflow-cup", { objVolume: { max: 200, step: 10, init: 0 } },
+      [".phy-stage", ".phy-slider-row", ".phy-state"]],
+    ["em-induction", { pole: "N" }, [".phy-stage", ".phy-state"]],
+    ["displacement-arrow", {}, [".phy-stage", ".phy-state"]],
+    ["spring-scale-pull", { force: { min: 0, max: 10, step: 0.5, init: 4 } },
+      [".phy-stage", ".phy-slider-row", ".phy-state"]],
+    ["heat-compare", { mass: { min: 0.5, max: 2, step: 0.5, init: 1 }, power: 500 },
+      [".phy-stage", ".phy-slider-row", ".phy-playbar", ".phy-state"]],
+    ["sponge-dent", { pressure: { max: 20, step: 1, init: 8 } },
+      [".phy-stage", ".phy-slider-row"]],
+    ["paper-blow", { mode: "paper", blow: { max: 10, step: 1, init: 4 } },
+      [".phy-stage", ".phy-slider-row", ".phy-state"]],
+    ["paper-blow", { mode: "wing" }, [".phy-stage", ".phy-state"]],
+    ["joule-heating", { current: { min: 0.5, max: 3, step: 0.1, init: 1 },
+      resistance: { min: 5, max: 50, step: 1, init: 20 }, time: { max: 60, step: 1, init: 10 } },
+      [".phy-stage", ".phy-slider-row"]],
+    ["motor-commutator", {}, [".phy-stage", ".phy-playbar", ".phy-state"]],
+    ["vacuum-tube", {}, [".phy-stage", ".phy-playbar", ".phy-btn-row"]],
+    ["pendulum", { length: { min: 0.2, max: 1.5, step: 0.1, init: 1 },
+      mass: { min: 0.1, max: 1, step: 0.1, init: 0.5 }, angle: { min: 5, max: 30, step: 1, init: 15 } },
+      [".phy-stage", ".phy-slider-row", ".phy-playbar"]],
   ];
   for (const theme of ["light", "dark"]) {
     if (theme === "dark") body.setAttribute("data-theme", "dark");
@@ -412,6 +448,35 @@ console.log(fails === 0 ? "\n[PASS] 物理引擎烟雾测试全部通过" : `\n[
     vb.click();
     const rec = JSON.parse(sandbox.__store["ltb-phy-phy_guess_smoke"] || "null");
     rec && rec.choice === 0 ? ok("Y1 猜测记录落盘 ltb-phy-phy_guess_smoke") : fail("Y1 记录未落盘");
+  }
+  /* 冒烟交互路径：新增组件关键联动不抛错 */
+  {
+    // joule-heating：I=2,R=20,t=10 → Q=800J
+    const j = P.widget("joule-heating", { current: { min: 0.5, max: 3, step: 0.1, init: 1 },
+      resistance: { min: 5, max: 50, step: 1, init: 20 }, time: { max: 60, step: 1, init: 10 } });
+    const jsl = queryAll(j, "input")[0];
+    let jerr = null;
+    try { jsl.value = "2"; jsl.fire("input"); } catch (e) { jerr = e; }
+    (!jerr && serialize(j).includes("800"))
+      ? ok("joule-heating 滑块联动：I=2A → Q=800J") : fail("joule-heating 联动异常：" + (jerr && jerr.message));
+    // tuning-fork：敲击按钮不抛错，切到振动态
+    const tf = P.widget("tuning-fork", {});
+    const kb = queryAll(tf, "button")[0];
+    let kerr = null;
+    try { kb.click(); } catch (e) { kerr = e; }
+    (!kerr && serialize(tf).includes("振动中"))
+      ? ok("tuning-fork 敲击 → 振动态") : fail("tuning-fork 敲击异常：" + (kerr && kerr.message));
+    // vacuum-tube：切真空 → 状态文案切换
+    const vt = P.widget("vacuum-tube", {});
+    const vb2 = queryAll(vt, "button").find(b => (b._text || "").includes("真空"));
+    let verr = null;
+    try { vb2.click(); } catch (e) { verr = e; }
+    (!verr && serialize(vt).includes("真空管"))
+      ? ok("vacuum-tube 切真空 → 文案切换") : fail("vacuum-tube 切换异常：" + (verr && verr.message));
+    // em-induction：初始渲染 Φ 不变 → 无感应电流
+    const em = P.widget("em-induction", { pole: "N" });
+    serialize(em).includes("无感应电流")
+      ? ok("em-induction 初始态：Φ 不变 → 无感应电流") : fail("em-induction 初始态异常");
   }
 }
 

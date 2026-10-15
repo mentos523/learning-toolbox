@@ -1783,7 +1783,8 @@
     var box = el("div", "phy-widget");
     var badge = readoutBadge(p);
     box.appendChild(badge.box);
-    var svg = svgStage("", p.mode === "mirror" ? "平面镜反射光路" : "凸透镜成像光路");
+    var svg = svgStage("", p.mode === "mirror" ? "平面镜反射光路"
+      : p.mode === "refraction" ? "激光斜射入水折射" : "凸透镜成像光路");
     box.appendChild(svg);
     var imgBadge = stateBadge("—", "");
     box.appendChild(imgBadge);
@@ -1839,6 +1840,74 @@
         formulaLine.innerHTML = "入射角 = 反射角（作图保证）";
       }
       drawMirror();
+      return box;
+    }
+
+    /* 折射模式（p02.2.1）：激光从空气斜射入水，入射角滑块联动折射角 */
+    if (p.mode === "refraction") {
+      var n1 = p.n1 || 1, n2 = p.n2 || 1.33;
+      var acfg = p.angle || {};
+      var sA = uiSlider({ label: "入射角 i", min: acfg.min != null ? acfg.min : 0,
+        max: acfg.max != null ? acfg.max : 80, step: acfg.step || 1,
+        init: acfg.init != null ? acfg.init : 30, unit: "°",
+        fmt: function (v) { return fmtN(v, 0); } });
+      box.appendChild(sA.row);
+      var refrSt = stateBadge("向法线偏折", "ok");
+      box.appendChild(refrSt);
+      function drawRefr() {
+        svg.innerHTML = "";
+        var iDeg = sA.get(), i = iDeg * Math.PI / 180, WY = 46;
+        svg.appendChild(svgEl("rect", { x: 6, y: WY, width: 88, height: 48,
+          fill: cssVar("--phy-known"), opacity: 0.12 }));
+        svg.appendChild(svgEl("line", { x1: 6, y1: WY, x2: 94, y2: WY,
+          stroke: cssVar("--phy-body"), "stroke-width": 1.4 }));
+        svg.appendChild(svgText(88, WY - 5, "空气", "phy-note-text", "end"));
+        svg.appendChild(svgText(88, WY + 8, "水", "phy-note-text", "end"));
+        svg.appendChild(svgEl("line", { x1: 50, y1: 10, x2: 50, y2: 92, "class": "phy-normal" }));
+        svg.appendChild(svgText(54, 14, "法线", "phy-note-text", "start"));
+        arrowHead(svg, "fh-refr", cssVar("--phy-target"));
+        var L = 34;
+        var sx = 50 - L * Math.sin(i), sy = WY - L * Math.cos(i);
+        svg.appendChild(svgEl("line", { x1: sx.toFixed(1), y1: sy.toFixed(1), x2: 50, y2: WY,
+          stroke: cssVar("--phy-target"), "stroke-width": 1.6, "marker-end": "url(#fh-refr)" }));
+        svg.appendChild(svgText(sx - 4, sy - 2, "激光", "phy-note-text", "end"));
+        var rDeg = Math.asin(Math.min(1, n1 * Math.sin(i) / n2)) * 180 / Math.PI;
+        var r = rDeg * Math.PI / 180;
+        var ex = 50 + L * Math.sin(r), ey = WY + L * Math.cos(r);
+        svg.appendChild(svgEl("line", { x1: 50, y1: WY,
+          x2: ex.toFixed(1), y2: ey.toFixed(1),
+          stroke: cssVar("--phy-target"), "stroke-width": 1.6, "marker-end": "url(#fh-refr)" }));
+        /* 角度弧线（双编码：弧 + 数字） */
+        function arc(cx, cy, rr, a0, a1, flip) {
+          var x0 = cx + rr * Math.sin(a0), y0 = cy - rr * Math.cos(a0) * (flip ? -1 : 1);
+          var x1 = cx + rr * Math.sin(a1), y1 = cy - rr * Math.cos(a1) * (flip ? -1 : 1);
+          return "M" + x0.toFixed(1) + "," + y0.toFixed(1) +
+            " A" + rr + "," + rr + " 0 0 " + (flip ? 1 : 0) + " " + x1.toFixed(1) + "," + y1.toFixed(1);
+        }
+        if (iDeg > 0) {
+          svg.appendChild(svgEl("path", { d: arc(50, WY, 11, 0, i, false),
+            fill: "none", stroke: cssVar("--phy-body"), "stroke-width": 1 }));
+          svg.appendChild(svgText(50 - 15 * Math.sin(i / 2), WY - 15 * Math.cos(i / 2),
+            "i", "phy-f-label"));
+        }
+        if (rDeg > 0.5) {
+          svg.appendChild(svgEl("path", { d: arc(50, WY, 11, 0, r, true),
+            fill: "none", stroke: cssVar("--phy-body"), "stroke-width": 1 }));
+          svg.appendChild(svgText(50 + 15 * Math.sin(r / 2), WY + 15 * Math.cos(r / 2),
+            "r", "phy-f-label"));
+        }
+        var rm = mmlRead(mi("r"), fmtN(rDeg, 1), "°");
+        badge.setReadout(rm.mathml, "i = " + fmtN(iDeg, 0) + "°，r = " + fmtN(rDeg, 1) + "°");
+        refrSt.textContent = iDeg === 0 ? "垂直入射：不偏折（i = r = 0）"
+          : "光从空气斜射入水：向法线偏折（r < i）";
+        refrSt.className = "phy-state phy-state-ok";
+        if (mathmlOK())
+          formulaLine.innerHTML = "<math><mrow><mi>n</mi><mn>1</mn><mi>sin</mi><mi>i</mi><mo>=</mo>" +
+            "<mi>n</mi><mn>2</mn><mi>sin</mi><mi>r</mi></mrow></math>";
+        else formulaLine.textContent = "n1·sin i = n2·sin r（n空气=1，n水=1.33）";
+      }
+      sA.on(drawRefr);
+      drawRefr();
       return box;
     }
 
@@ -3513,13 +3582,936 @@
     return box;
   }
 
+  /* ============================================================
+   * 阶段四新增组件（黄队 P0：策略路径断裂必补）
+   * 全部遵守 §0.3 全局铁律：params 零色值（只用 colorRole/cssVar）、
+   * 触控目标 ≥44px、双编码（颜色+文字/形状）、深色自动跟随。
+   * ============================================================ */
+
+  /* ---------------- P0 · tuning-fork（音叉溅水花） ---------------- */
+  /* p01.1.1：敲击 → 音叉振动 → 水花溅起（振动发声的证据） */
+  function widgetTuningFork(p) {
+    var box = el("div", "phy-widget");
+    var badge = readoutBadge(p);
+    box.appendChild(badge.box);
+    var svg = svgStage("", "音叉振动溅水花");
+    box.appendChild(svg);
+    var st = stateBadge("静止：点“敲一下音叉”", "");
+    box.appendChild(st);
+    var btn = el("button", "phy-mini", "🔨 敲一下音叉");
+    btn.type = "button";
+    box.appendChild(btn);
+    var t0 = -1, drops = [], rafId = 0;
+    function draw() {
+      svg.innerHTML = "";
+      var t = t0 < 0 ? 99 : (nowMs() - t0) / 1000;
+      var amp = t0 < 0 ? 0 : Math.max(0, 3.4 * Math.exp(-1.8 * t));
+      var dx = amp * Math.sin(t * 2 * Math.PI * 5); /* 5Hz 示意（非真实频率） */
+      /* 底座 */
+      svg.appendChild(svgEl("rect", { x: 42, y: 78, width: 16, height: 6, "class": "phy-body-box" }));
+      svg.appendChild(svgEl("line", { x1: 36, y1: 86, x2: 64, y2: 86, "class": "phy-ground" }));
+      /* 两臂（反向振动） */
+      svg.appendChild(svgEl("line", { x1: 46, y1: 78, x2: 46 - dx, y2: 32,
+        stroke: cssVar("--phy-body"), "stroke-width": 3.4 }));
+      svg.appendChild(svgEl("line", { x1: 54, y1: 78, x2: 54 + dx, y2: 32,
+        stroke: cssVar("--phy-body"), "stroke-width": 3.4 }));
+      if (amp > 0.4)
+        svg.appendChild(svgEl("path", { d: "M38,54 q-5,5 0,10 M62,54 q5,5 0,10",
+          fill: "none", stroke: cssVar("--phy-wave-a"), "stroke-width": 1.2 }));
+      /* 水面 */
+      var wv = "M18,70";
+      for (var i = 0; i <= 13; i++) wv += " L" + (18 + i * 5) + "," + (70 + (i % 2 ? 1.6 : -1.6));
+      svg.appendChild(svgEl("path", { d: wv, fill: "none",
+        stroke: cssVar("--phy-known"), "stroke-width": 1.4 }));
+      svg.appendChild(svgText(84, 65, "水", "phy-note-text", "start"));
+      drops.forEach(function (d) {
+        svg.appendChild(svgEl("circle", { cx: d.x.toFixed(1), cy: d.y.toFixed(1),
+          r: 1.1, fill: cssVar("--phy-known") }));
+      });
+      if (amp > 0.15) {
+        st.textContent = "振动中…：水花被溅起来了";
+        st.className = "phy-state phy-state-ok";
+        badge.setReadout("", "音叉在振动 → 水花溅起（发声的物体在振动）");
+      } else {
+        st.textContent = "静止：点“敲一下音叉”";
+        st.className = "phy-state";
+        badge.setReadout("", "音叉静止 → 水面平静");
+      }
+    }
+    function loop() {
+      var t = (nowMs() - t0) / 1000, dt = 0.016;
+      drops.forEach(function (d) { d.vy += 60 * dt; d.x += d.vx * dt; d.y += d.vy * dt; });
+      drops = drops.filter(function (d) { return d.y < 70 && t < 2.5; });
+      draw();
+      if (drops.length || 3.4 * Math.exp(-1.8 * t) > 0.15) rafId = rafFn(loop);
+      else { rafId = 0; draw(); }
+    }
+    btn.addEventListener("click", function () {
+      t0 = nowMs();
+      drops = [];
+      for (var i = 0; i < 16; i++)
+        drops.push({ x: 40 + Math.random() * 20, y: 66,
+          vx: (Math.random() - 0.5) * 26, vy: -(28 + Math.random() * 30) });
+      if (rafId) cafFn(rafId);
+      loop(); flash(svg); vib(15);
+    });
+    draw();
+    return box;
+  }
+
+  /* ---------------- P0 · vacuum-chamber（真空罩抽气） ---------------- */
+  /* p01.1.2：抽气 → 空气变稀 → 铃声变小（真空不能传声） */
+  function widgetVacuumChamber(p) {
+    var box = el("div", "phy-widget");
+    var badge = readoutBadge(p);
+    box.appendChild(badge.box);
+    var svg = svgStage("", "真空罩抽气实验");
+    box.appendChild(svg);
+    var ac = p.air || {};
+    var sAir = uiSlider({ label: "罩内空气", min: ac.min != null ? ac.min : 0,
+      max: ac.max != null ? ac.max : 100, step: ac.step || 5,
+      init: ac.init != null ? ac.init : 100, unit: "%",
+      fmt: function (v) { return fmtN(v, 0); } });
+    box.appendChild(sAir.row);
+    var st = stateBadge("", "ok");
+    box.appendChild(st);
+    var dots = [];
+    for (var i = 0; i < 40; i++)
+      dots.push({ x: 25 + (i * 37 % 50), y: 20 + (i * 53 % 54) });
+    function draw() {
+      var air = sAir.get();
+      svg.innerHTML = "";
+      svg.appendChild(svgEl("path", { d: "M20,88 L20,30 Q20,14 36,14 L64,14 Q80,14 80,30 L80,88",
+        fill: "none", stroke: cssVar("--phy-body"), "stroke-width": 1.6 }));
+      svg.appendChild(svgEl("line", { x1: 14, y1: 88, x2: 86, y2: 88, "class": "phy-ground" }));
+      svg.appendChild(svgText(50, 8, "真空罩", "phy-note-text"));
+      /* 铃铛 */
+      svg.appendChild(svgEl("line", { x1: 50, y1: 16, x2: 50, y2: 27,
+        stroke: cssVar("--phy-body"), "stroke-width": 1.2 }));
+      svg.appendChild(svgEl("circle", { cx: 50, cy: 34, r: 7, fill: "none",
+        stroke: cssVar("--phy-force-a"), "stroke-width": 1.6 }));
+      /* 声波纹：数量随空气量（双编码：波纹 + 文字） */
+      var waves = Math.round(air / 100 * 4);
+      for (var w = 0; w < waves; w++) {
+        var r = 12 + w * 7;
+        svg.appendChild(svgEl("path", { d: "M" + (50 - r) + ",34 a" + r + "," + r + " 0 0 1 " + (2 * r) + ",0",
+          fill: "none", stroke: cssVar("--phy-wave-a"), "stroke-width": 1.2 }));
+      }
+      var n = Math.round(air / 100 * dots.length);
+      for (var k = 0; k < n; k++)
+        svg.appendChild(svgEl("circle", { cx: dots[k].x, cy: dots[k].y, r: 1,
+          fill: cssVar("--phy-ink-soft") }));
+      svg.appendChild(svgText(50, 96, air <= 0 ? "真空（几乎无空气）" : "空气 " + fmtN(air, 0) + "%",
+        "phy-note-text"));
+      if (air <= 0) {
+        st.textContent = "几乎听不见铃声：真空不能传声";
+        st.className = "phy-state phy-state-warn";
+        badge.setReadout("", "铃声 ≈ 0（真空不能传声）");
+      } else if (air < 40) {
+        st.textContent = "铃声变小：空气变稀薄了";
+        st.className = "phy-state phy-state-warn";
+        badge.setReadout("", "铃声变小（介质减少）");
+      } else {
+        st.textContent = "铃声清晰：空气充足";
+        st.className = "phy-state phy-state-ok";
+        badge.setReadout("", "铃声清晰（空气传声）");
+      }
+    }
+    sAir.on(draw);
+    draw();
+    return box;
+  }
+
+  /* ---------------- P0 · pinhole-camera（小孔成像） ---------------- */
+  /* p02.1.1：孔大小 / 物距可调 → 像的亮度、大小、清晰度变化 */
+  function widgetPinholeCamera(p) {
+    var box = el("div", "phy-widget");
+    var badge = readoutBadge(p);
+    box.appendChild(badge.box);
+    var svg = svgStage("", "小孔成像");
+    box.appendChild(svg);
+    var ap = p.aperture || {}, od = p.objDist || {};
+    var sAp = uiSlider({ label: "小孔孔径", min: ap.min != null ? ap.min : 1,
+      max: ap.max != null ? ap.max : 6, step: ap.step || 0.5,
+      init: ap.init != null ? ap.init : 2, unit: "",
+      fmt: function (v) { return fmtN(v, 1); } });
+    var sOd = uiSlider({ label: "物距", min: od.min != null ? od.min : 12,
+      max: od.max != null ? od.max : 38, step: od.step || 1,
+      init: od.init != null ? od.init : 24, unit: "",
+      fmt: function (v) { return fmtN(v, 0); } });
+    box.appendChild(sAp.row); box.appendChild(sOd.row);
+    var st = stateBadge("倒立的实像", "ok");
+    box.appendChild(st);
+    function draw() {
+      svg.innerHTML = "";
+      var holeR = sAp.get(), u = sOd.get();
+      var wallX = 55, scrX = 88, HY = 50; /* 小孔高度 */
+      var objX = Math.max(8, wallX - u);
+      var objH = 22, baseY = HY + objH / 2, topY = HY - objH / 2;
+      /* 蜡烛 */
+      svg.appendChild(svgEl("line", { x1: objX, y1: baseY, x2: objX, y2: topY,
+        stroke: cssVar("--phy-body"), "stroke-width": 2 }));
+      svg.appendChild(svgEl("circle", { cx: objX, cy: topY - 2.6, r: 2.2,
+        fill: cssVar("--phy-force-a") }));
+      svg.appendChild(svgText(objX, baseY + 6, "蜡烛", "phy-note-text"));
+      /* 挡板 + 小孔 */
+      svg.appendChild(svgEl("line", { x1: wallX, y1: 12, x2: wallX, y2: HY - holeR,
+        stroke: cssVar("--phy-body"), "stroke-width": 2.5 }));
+      svg.appendChild(svgEl("line", { x1: wallX, y1: HY + holeR, x2: wallX, y2: 88,
+        stroke: cssVar("--phy-body"), "stroke-width": 2.5 }));
+      svg.appendChild(svgText(wallX, 94, "挡板（小孔）", "phy-note-text"));
+      /* 光屏 */
+      svg.appendChild(svgEl("line", { x1: scrX, y1: 20, x2: scrX, y2: 80,
+        stroke: cssVar("--phy-body"), "stroke-width": 1.6 }));
+      svg.appendChild(svgText(scrX, 86, "光屏", "phy-note-text"));
+      /* 成像几何：过孔心的两条光线（倒像：顶→底、底→顶） */
+      var v = scrX - wallX, m = v / u, imgH = objH * m;
+      var iTop = HY - imgH / 2, iBot = HY + imgH / 2;
+      arrowHead(svg, "fh-pin", cssVar("--phy-ray"));
+      function ray(x1, y1, x2, y2) {
+        svg.appendChild(svgEl("line", { x1: x1, y1: y1, x2: x2, y2: y2,
+          stroke: cssVar("--phy-ray"), "stroke-width": 0.7 + holeR * 0.32,
+          "marker-end": "url(#fh-pin)" }));
+      }
+      ray(objX, topY, scrX, iBot);
+      ray(objX, baseY, scrX, iTop);
+      /* 像（倒立；孔大 → 亮但模糊：叠一层虚影） */
+      svg.appendChild(svgEl("line", { x1: scrX, y1: iTop, x2: scrX, y2: iBot,
+        stroke: cssVar("--phy-body"), "stroke-width": 2 }));
+      svg.appendChild(svgEl("circle", { cx: scrX, cy: iBot + 2.6, r: 2.2,
+        fill: cssVar("--phy-force-a") }));
+      if (holeR > 3.5)
+        svg.appendChild(svgEl("line", { x1: scrX - 2.5, y1: iTop, x2: scrX - 2.5, y2: iBot,
+          stroke: cssVar("--phy-body"), "stroke-width": 2, opacity: 0.35,
+          "stroke-dasharray": "2,1.5" }));
+      var blur = holeR > 3.5;
+      st.textContent = "倒立的实像" + (blur ? "（孔太大：变亮但变模糊）" : "（孔小：暗但清晰）");
+      st.className = "phy-state " + (blur ? "phy-state-warn" : "phy-state-ok");
+      var r = mmlRead(mi("m"), fmtN(m, 2), "");
+      badge.setReadout(r.mathml, "放大率 m = 像距/物距 = " + fmtN(m, 2) +
+        (m < 1 ? "（缩小）" : m > 1 ? "（放大）" : "（等大）"));
+    }
+    sAp.on(draw); sOd.on(draw);
+    draw();
+    return box;
+  }
+
+  /* ---------------- P0 · overflow-cup（溢水杯） ---------------- */
+  /* p06.2.2：物体浸入 → 水位到溢水口 → 溢出量 = 排开体积 */
+  function widgetOverflowCup(p) {
+    var box = el("div", "phy-widget");
+    var badge = readoutBadge(p);
+    box.appendChild(badge.box);
+    var svg = svgStage("", "溢水杯实验");
+    box.appendChild(svg);
+    var vc = p.objVolume || {};
+    var vMax = vc.max || 200;
+    var sV = uiSlider({ label: "物体浸入体积", min: 0, max: vMax, step: vc.step || 10,
+      init: vc.init != null ? vc.init : 0, unit: "cm³",
+      fmt: function (v) { return fmtN(v, 0); } });
+    box.appendChild(sV.row);
+    var st = stateBadge("把物体按进水里，看溢出多少水", "");
+    box.appendChild(st);
+    function draw() {
+      var vIn = sV.get(), frac = Math.min(1, vIn / vMax);
+      svg.innerHTML = "";
+      var cx0 = 12, cx1 = 56, topY = 24, botY = 84, wl = topY + 12;
+      /* 杯体 + 溢水口 */
+      svg.appendChild(svgEl("path", { d: "M" + cx0 + "," + topY + " L" + cx0 + "," + botY +
+        " L" + cx1 + "," + botY + " L" + cx1 + "," + wl,
+        fill: "none", stroke: cssVar("--phy-body"), "stroke-width": 1.6 }));
+      svg.appendChild(svgEl("line", { x1: cx1, y1: wl, x2: cx1 + 9, y2: wl,
+        stroke: cssVar("--phy-body"), "stroke-width": 1.6 }));
+      /* 杯中水（水面恒与溢水口齐平：多余的流走了） */
+      svg.appendChild(svgEl("rect", { x: cx0 + 1, y: wl, width: cx1 - cx0 - 2,
+        height: botY - wl - 1, fill: cssVar("--phy-known"), opacity: 0.25 }));
+      svg.appendChild(svgText((cx0 + cx1) / 2, wl - 4, "水面（与溢水口齐平）", "phy-note-text"));
+      /* 物体：下压深度 ∝ 浸入体积 */
+      var dep = 3 + frac * 26, bTop = wl - dep, bH = 32;
+      svg.appendChild(svgEl("rect", { x: 24, y: bTop, width: 20, height: bH,
+        "class": "phy-body-box" }));
+      svg.appendChild(svgText(34, bTop - 4, "物体", "phy-note-text"));
+      /* 溢出水：从溢水口滴到小烧杯 */
+      if (vIn > 0) {
+        svg.appendChild(svgEl("line", { x1: cx1 + 9, y1: wl + 1, x2: cx1 + 9, y2: wl + 12,
+          stroke: cssVar("--phy-known"), "stroke-width": 1.6 }));
+        svg.appendChild(svgEl("circle", { cx: cx1 + 9, cy: wl + 15, r: 1.4,
+          fill: cssVar("--phy-known") }));
+      }
+      /* 小烧杯接水 */
+      var bx0 = 72, bx1 = 90, bBot = 84, fillH = frac * 44;
+      svg.appendChild(svgEl("path", { d: "M" + bx0 + ",40 L" + bx0 + "," + bBot +
+        " L" + bx1 + "," + bBot + " L" + bx1 + ",40",
+        fill: "none", stroke: cssVar("--phy-body"), "stroke-width": 1.4 }));
+      if (fillH > 0.5)
+        svg.appendChild(svgEl("rect", { x: bx0 + 1, y: bBot - fillH, width: bx1 - bx0 - 2,
+          height: fillH - 1, fill: cssVar("--phy-known"), opacity: 0.35 }));
+      svg.appendChild(svgText(81, 90, "接水杯", "phy-note-text"));
+      var r = mmlRead(msub("V", "溢"), fmtN(vIn, 0), "cm³");
+      badge.setReadout(r.mathml, "V溢 = " + fmtN(vIn, 0) + " cm³ = 排开水的体积");
+      st.textContent = vIn <= 0 ? "把物体按进水里，看溢出多少水"
+        : "溢出的水，正好等于物体排开的水";
+      st.className = "phy-state " + (vIn > 0 ? "phy-state-ok" : "");
+    }
+    sV.on(draw);
+    draw();
+    return box;
+  }
+
+  /* ---------------- P0 · em-induction（电磁感应） ---------------- */
+  /* p10.1.4（复用 p16.3.1/p16.3.3）：磁铁插入/拔出 → Φ变化 → 感应电流方向
+   * 方向口径（楞次定律）：N 极插入 → Φ 增大 → 感应电流磁场阻碍增大；
+   * 从磁铁一侧看为逆时针；上导线 ⊗（入纸）、下导线 ⊙（出纸）。 */
+  function widgetEmInduction(p) {
+    var box = el("div", "phy-widget");
+    var badge = readoutBadge(p);
+    box.appendChild(badge.box);
+    var svg = svgStage("", "电磁感应：磁铁插入线圈");
+    box.appendChild(svg);
+    var pole = p.pole === "S" ? "S" : "N";
+    var mx = 28, prevPhi = null;
+    var st = stateBadge("拖动磁铁靠近 / 插入线圈", "");
+    box.appendChild(st);
+    function draw() {
+      svg.innerHTML = "";
+      /* 线圈（三匝） */
+      for (var i = 0; i < 3; i++) {
+        var cxp = 60 + i * 5;
+        svg.appendChild(svgEl("ellipse", { cx: cxp, cy: 50, rx: 3.4, ry: 17,
+          fill: "none", stroke: cssVar("--phy-force-b"), "stroke-width": 1.6 }));
+      }
+      svg.appendChild(svgText(67, 76, "线圈", "phy-note-text"));
+      /* 磁铁（可拖） */
+      svg.appendChild(svgEl("rect", { x: mx - 9, y: 44, width: 9, height: 12,
+        fill: pole === "N" ? cssVar("--phy-charge-pos") : cssVar("--phy-charge-neg") }));
+      svg.appendChild(svgEl("rect", { x: mx, y: 44, width: 9, height: 12,
+        fill: pole === "N" ? cssVar("--phy-charge-neg") : cssVar("--phy-charge-pos") }));
+      svg.appendChild(svgEl("rect", { x: mx - 9, y: 44, width: 18, height: 12,
+        fill: "none", stroke: cssVar("--phy-body"), "stroke-width": 1.2 }));
+      svg.appendChild(svgText(mx - 4.5, 52.5, pole === "N" ? "N" : "S", "phy-f-label"));
+      svg.appendChild(svgText(mx + 4.5, 52.5, pole === "N" ? "S" : "N", "phy-f-label"));
+      var hd = svgEl("rect", { x: mx - 13, y: 39, width: 26, height: 22,
+        fill: "transparent", "class": "phy-handle", "aria-label": "拖动磁铁" });
+      svg.appendChild(hd);
+      dragify(hd, { svg: svg, onMove: function (lx) {
+        mx = Math.max(14, Math.min(50, lx)); draw();
+      }, onEnd: function () { flash(svg); } });
+      /* Φ ∝ 1/距离 */
+      var d = Math.max(4, 60 - (mx + 9));
+      var phi = 100 / d, dPhi = prevPhi == null ? 0 : phi - prevPhi;
+      prevPhi = phi;
+      var cur = Math.abs(dPhi) > 0.02 ? (dPhi > 0 ? "in" : "out") : "none";
+      /* 感应电流方向标注（双编码：⊙/⊗ 符号 + 文字说明） */
+      if (cur !== "none") {
+        var topS = cur === "in" ? "⊗" : "⊙", botS = cur === "in" ? "⊙" : "⊗";
+        var tTop = svgText(65, 36, topS, "phy-f-label");
+        tTop.setAttribute("fill", cssVar("--phy-current"));
+        var tBot = svgText(65, 66, botS, "phy-f-label");
+        tBot.setAttribute("fill", cssVar("--phy-current"));
+        svg.appendChild(tTop); svg.appendChild(tBot);
+        svg.appendChild(svgText(65, 29, cur === "in" ? "上入下出" : "上出下入", "phy-note-text"));
+      }
+      /* Φ 条 */
+      var fw = Math.min(30, phi / 25 * 30);
+      svg.appendChild(svgEl("rect", { x: 8, y: 86, width: 30, height: 5, "class": "phy-body-box" }));
+      if (fw > 0.5)
+        svg.appendChild(svgEl("rect", { x: 8.6, y: 86.6, width: fw, height: 3.8,
+          fill: cssVar("--phy-force-a") }));
+      svg.appendChild(svgText(42, 90.5, "Φ", "phy-note-text", "start"));
+      if (cur === "in") {
+        st.textContent = "插入：Φ 增大 → 感应电流（从左看逆时针），磁场阻碍增大";
+        st.className = "phy-state phy-state-ok";
+        badge.setReadout("", "Φ 增大 → 感应电流：上 ⊗ 下 ⊙（从磁铁一侧看：逆时针）");
+      } else if (cur === "out") {
+        st.textContent = "拔出：Φ 减小 → 感应电流反向（从左看顺时针），磁场阻碍减小";
+        st.className = "phy-state phy-state-ok";
+        badge.setReadout("", "Φ 减小 → 感应电流：上 ⊙ 下 ⊗（从磁铁一侧看：顺时针）");
+      } else {
+        st.textContent = "磁铁不动：Φ 不变 → 无感应电流";
+        st.className = "phy-state";
+        badge.setReadout("", "Φ 不变 → 无感应电流（“变”才是条件）");
+      }
+    }
+    draw();
+    return box;
+  }
+
+  /* ---------------- P0 · displacement-arrow（位移箭头绘制） ---------------- */
+  /* p11.1.2：起点固定，拖终点画位移箭头（直线距离；分量虚线双编码） */
+  function widgetDisplacementArrow(p) {
+    var box = el("div", "phy-widget");
+    var badge = readoutBadge(p);
+    box.appendChild(badge.box);
+    var svg = svgStage("", "位移箭头绘制");
+    box.appendChild(svg);
+    var st = stateBadge("从起点拖到终点，画位移箭头", "");
+    box.appendChild(st);
+    var A = { x: 20, y: 70 }, B = { x: 68, y: 34 };
+    function draw() {
+      svg.innerHTML = "";
+      for (var gx = 10; gx <= 90; gx += 10)
+        svg.appendChild(svgEl("line", { x1: gx, y1: 10, x2: gx, y2: 90,
+          stroke: cssVar("--phy-line"), "stroke-width": 0.4 }));
+      for (var gy = 10; gy <= 90; gy += 10)
+        svg.appendChild(svgEl("line", { x1: 10, y1: gy, x2: 90, y2: gy,
+          stroke: cssVar("--phy-line"), "stroke-width": 0.4 }));
+      /* 分量虚线（先画，压在箭头下） */
+      svg.appendChild(svgEl("line", { x1: A.x, y1: A.y, x2: B.x, y2: A.y, "class": "phy-track-line" }));
+      svg.appendChild(svgEl("line", { x1: B.x, y1: A.y, x2: B.x, y2: B.y, "class": "phy-track-line" }));
+      /* 起点 */
+      svg.appendChild(svgEl("circle", { cx: A.x, cy: A.y, r: 2, fill: cssVar("--phy-known") }));
+      svg.appendChild(svgText(A.x, A.y + 6.5, "起点", "phy-note-text"));
+      /* 位移箭头 */
+      arrowHead(svg, "fh-disp", cssVar("--phy-target"));
+      svg.appendChild(svgEl("line", { x1: A.x, y1: A.y, x2: B.x, y2: B.y,
+        stroke: cssVar("--phy-target"), "stroke-width": 2, "marker-end": "url(#fh-disp)" }));
+      svg.appendChild(svgText((A.x + B.x) / 2, (A.y + B.y) / 2 - 4, "位移", "phy-force-label"));
+      svg.appendChild(svgText(B.x, B.y - 7, "终点", "phy-note-text"));
+      /* 终点手柄 */
+      var hd = svgEl("circle", { cx: B.x, cy: B.y, r: 6, "class": "phy-handle",
+        fill: cssVar("--phy-target"), "aria-label": "拖动终点" });
+      svg.appendChild(hd);
+      dragify(hd, { svg: svg, onMove: function (lx, ly) {
+        B.x = Math.max(10, Math.min(90, lx)); B.y = Math.max(10, Math.min(90, ly)); draw();
+      }, onEnd: function () { flash(svg); } });
+      var dx = (B.x - A.x) / 10, dy = (A.y - B.y) / 10; /* 格为单位，y 向上为正 */
+      var disp = Math.sqrt(dx * dx + dy * dy);
+      var r = mmlRead(mi("Δx"), fmtN(disp, 1), "格");
+      badge.setReadout(r.mathml, "位移 Δx = " + fmtN(disp, 1) + " 格（只看起点→终点的直线）");
+      st.textContent = "位移只看起点→终点：Δx = " + fmtN(disp, 1) + " 格（方向：箭头指向）";
+      st.className = "phy-state phy-state-ok";
+    }
+    draw();
+    return box;
+  }
+
+  /* ---------------- P0 · spring-scale-pull（两弹簧秤对拉） ---------------- */
+  /* p12.2.3：滑块拉力 → 两秤伸长相同 → 读数永远相等（相互作用力） */
+  function widgetSpringScalePull(p) {
+    var box = el("div", "phy-widget");
+    var badge = readoutBadge(p);
+    box.appendChild(badge.box);
+    var svg = svgStage("", "两弹簧秤对拉");
+    box.appendChild(svg);
+    var fc = p.force || {}, fMax = fc.max || 10;
+    var sF = uiSlider({ label: "拉力", min: fc.min != null ? fc.min : 0, max: fMax,
+      step: fc.step || 0.5, init: fc.init != null ? fc.init : 4, unit: "N",
+      fmt: function (v) { return fmtN(v, 1); } });
+    box.appendChild(sF.row);
+    var st = stateBadge("两个秤的读数永远一样", "ok");
+    box.appendChild(st);
+    function draw() {
+      var F = sF.get(), ext = F / fMax * 13;
+      svg.innerHTML = "";
+      function scale(cx, flip, label) {
+        var dir = flip ? -1 : 1;
+        svg.appendChild(svgEl("rect", { x: cx - 7, y: 38, width: 14, height: 22,
+          "class": "phy-body-box" }));
+        svg.appendChild(svgText(cx, 34, label, "phy-note-text"));
+        var x0 = cx + dir * 7, x1 = cx + dir * (7 + ext), d = "M" + x0 + ",49";
+        for (var j = 0; j <= 6; j++)
+          d += " L" + (x0 + (x1 - x0) * j / 6).toFixed(1) + "," + (49 + (j % 2 ? -3 : 3));
+        svg.appendChild(svgEl("path", { d: d, fill: "none",
+          stroke: cssVar("--phy-body"), "stroke-width": 1.4 }));
+        svg.appendChild(svgEl("circle", { cx: x1 + dir * 3.4, cy: 49, r: 2.4, fill: "none",
+          stroke: cssVar("--phy-body"), "stroke-width": 1.2 }));
+        svg.appendChild(svgText(cx, 68, fmtN(F, 1) + " N", "phy-force-label"));
+      }
+      scale(30, true, "甲秤");
+      scale(70, false, "乙秤");
+      svg.appendChild(svgText(50, 49, "对拉", "phy-note-text"));
+      svg.appendChild(svgEl("line", { x1: 41, y1: 49, x2: 59, y2: 49,
+        stroke: cssVar("--phy-track"), "stroke-width": 1, "stroke-dasharray": "2.5,2" }));
+      var r = mmlRead(msub("F", "甲"), fmtN(F, 1), "N");
+      badge.setReadout(r.mathml, "F甲 = F乙 = " + fmtN(F, 1) + " N");
+      st.textContent = "甲拉乙的力 = 乙拉甲的力：大小相等、方向相反";
+    }
+    sF.on(draw);
+    draw();
+    return box;
+  }
+
+  /* ============================================================
+   * 阶段四新增组件（黄队 P1：核心定量无载体必补）
+   * ============================================================ */
+
+  /* ---------------- P1 · heat-compare（水 vs 沙子双加热曲线） ---------------- */
+  /* p03.2.2：同功率加热 → 沙子升温快（比热容小）；T-t 双曲线 */
+  function widgetHeatCompare(p) {
+    var box = el("div", "phy-widget");
+    var badge = readoutBadge(p);
+    box.appendChild(badge.box);
+    var svg = svgStage("", "水和沙子加热曲线对比");
+    box.appendChild(svg);
+    box.appendChild(noteLine("动画加速 ×20（非真实时间）；初温都按 20℃。"));
+    var mc = p.mass || {}, P0 = p.power || 500;
+    var sM = uiSlider({ label: "质量", min: mc.min != null ? mc.min : 0.5,
+      max: mc.max || 2, step: mc.step || 0.5, init: mc.init != null ? mc.init : 1,
+      unit: "kg", fmt: function (v) { return fmtN(v, 1); } });
+    box.appendChild(sM.row);
+    var t = 0, playing = false, rafId = 0, lastT = 0;
+    var tMax = 300, cW = 4200, cS = 920; /* J/(kg·℃) */
+    var bar = uiPlaybar({
+      onPlay: function () { playing = true; lastT = nowMs(); loop(); },
+      onPause: function () { playing = false; if (rafId) cafFn(rafId); rafId = 0; },
+      onReplay: function () { playing = false; if (rafId) cafFn(rafId); rafId = 0; t = 0; draw(); }
+    });
+    bar.scrub.style.display = "none";
+    box.appendChild(bar.bar);
+    var st = stateBadge("按 ▶ 开始加热", "");
+    box.appendChild(st);
+    function Tof(c, tt) { return 20 + P0 * tt / (sM.get() * c); }
+    function X(tt) { return 13 + tt / tMax * 79; }
+    function Y(T) { return 88 - Math.min(T, 140) / 140 * 74; }
+    function curve(c, color, dash) {
+      var pts = [];
+      for (var tt = 0; tt <= t + 1; tt += 5)
+        pts.push(X(tt).toFixed(1) + "," + Y(Tof(c, tt)).toFixed(1));
+      if (pts.length < 2) pts.push(X(0).toFixed(1) + "," + Y(20).toFixed(1));
+      svg.appendChild(svgEl("polyline", { points: pts.join(" "), fill: "none",
+        stroke: color, "stroke-width": 1.8, "stroke-dasharray": dash || "none" }));
+    }
+    function draw() {
+      svg.innerHTML = "";
+      svg.appendChild(svgEl("line", { x1: 13, y1: 12, x2: 13, y2: 88,
+        stroke: cssVar("--phy-body"), "stroke-width": 1 }));
+      svg.appendChild(svgEl("line", { x1: 13, y1: 88, x2: 94, y2: 88,
+        stroke: cssVar("--phy-body"), "stroke-width": 1 }));
+      svg.appendChild(svgText(92, 94, "t/s", "phy-note-text", "end"));
+      svg.appendChild(svgText(7, 14, "T/℃", "phy-note-text", "end"));
+      curve(cS, cssVar("--phy-force-a"));         /* 沙子：橙实线（升温快） */
+      curve(cW, cssVar("--phy-known"), "3,2");    /* 水：蓝虚线（升温慢） */
+      svg.appendChild(svgText(94, Y(Tof(cS, t)) - 3, "沙子", "phy-note-text", "end"));
+      svg.appendChild(svgText(94, Y(Tof(cW, t)) + 6, "水", "phy-note-text", "end"));
+      var dTw = Tof(cW, t) - 20, dTs = Tof(cS, t) - 20;
+      var r = mmlRead(mi("ΔT"), fmtN(dTs, 1), "℃");
+      badge.setReadout(r.mathml, "加热 " + fmtN(t, 0) + "s：水 +" + fmtN(dTw, 1) +
+        "℃，沙子 +" + fmtN(dTs, 1) + "℃");
+      st.textContent = t >= tMax ? "加热结束：沙子升温是水的约 " + fmtN(cW / cS, 1) + " 倍"
+        : t > 0 ? "加热中…：沙子线更陡（升温快）" : "按 ▶ 开始加热";
+      st.className = "phy-state " + (t > 0 ? "phy-state-ok" : "");
+    }
+    function loop() {
+      if (!playing) return;
+      var now = nowMs(), dt = Math.min(0.1, (now - lastT) / 1000 || 0.016);
+      lastT = now; t = Math.min(tMax, t + dt * 20);
+      draw();
+      if (t >= tMax) { playing = false; bar.setPlaying(false); return; }
+      rafId = rafFn(loop);
+    }
+    sM.on(function () { t = 0; draw(); });
+    draw();
+    return box;
+  }
+
+  /* ---------------- P1 · sponge-dent（海绵凹陷） ---------------- */
+  /* p06.1.1：压力滑块 → 凹陷深度（压力作用效果的直观证据） */
+  function widgetSpongeDent(p) {
+    var box = el("div", "phy-widget");
+    var badge = readoutBadge(p);
+    box.appendChild(badge.box);
+    var svg = svgStage("", "海绵凹陷：压力的作用效果");
+    box.appendChild(svg);
+    var pc = p.pressure || {}, pMax = pc.max || 20;
+    var sP = uiSlider({ label: "压力", min: pc.min != null ? pc.min : 0, max: pMax,
+      step: pc.step || 1, init: pc.init != null ? pc.init : 8, unit: "N",
+      fmt: function (v) { return fmtN(v, 0); } });
+    box.appendChild(sP.row);
+    var st = stateBadge("", "");
+    box.appendChild(st);
+    function draw() {
+      var F = sP.get(), dent = F / pMax * 12;
+      svg.innerHTML = "";
+      svg.appendChild(svgEl("line", { x1: 10, y1: 84, x2: 90, y2: 84, "class": "phy-ground" }));
+      var d = "M22,84 L22,52 Q36," + (52 + dent).toFixed(1) + " 50," + (52 + dent).toFixed(1) +
+        " Q64," + (52 + dent).toFixed(1) + " 78,52 L78,84 Z";
+      svg.appendChild(svgEl("path", { d: d, "class": "phy-body-box" }));
+      svg.appendChild(svgText(50, 74, "海绵", "phy-note-text"));
+      /* 下压的砝码 */
+      svg.appendChild(svgEl("rect", { x: 42, y: 52 + dent - 24, width: 16, height: 24,
+        fill: cssVar("--phy-force-a"), opacity: 0.85 }));
+      svg.appendChild(svgText(50, 52 + dent - 28, "压力 " + fmtN(F, 0) + "N", "phy-note-text"));
+      if (dent > 1) {
+        svg.appendChild(svgEl("line", { x1: 83, y1: 52, x2: 83, y2: 52 + dent,
+          stroke: cssVar("--phy-target"), "stroke-width": 1.2,
+          "marker-start": "url(#fh-dent)", "marker-end": "url(#fh-dent)" }));
+        arrowHead(svg, "fh-dent", cssVar("--phy-target"));
+        svg.appendChild(svgText(88, 52 + dent / 2, fmtN(dent, 1), "phy-sym-label", "start"));
+      }
+      var r = mmlRead(mi("F"), fmtN(F, 0), "N");
+      badge.setReadout(r.mathml, "压力 " + fmtN(F, 0) + " N → 凹陷 " + fmtN(dent, 1) + "（示意单位）");
+      st.textContent = dent < 2 ? "压力小：几乎看不出凹陷"
+        : "压力越大，海绵凹陷越深（压力作用效果越明显）";
+      st.className = "phy-state " + (dent >= 2 ? "phy-state-ok" : "");
+    }
+    sP.on(draw);
+    draw();
+    return box;
+  }
+
+  /* ---------------- P1 · paper-blow（吹纸 / 机翼流线） ---------------- */
+  /* p06.1.4：吹气强度 → 纸条上飘 / 机翼上下流速差 → 升力 */
+  function widgetPaperBlow(p) {
+    var box = el("div", "phy-widget");
+    var badge = readoutBadge(p);
+    box.appendChild(badge.box);
+    var mode = p.mode === "wing" ? "wing" : "paper";
+    var svg = svgStage("", mode === "wing" ? "机翼流线与升力" : "吹纸条");
+    box.appendChild(svg);
+    var bc = p.blow || {}, bMax = bc.max || 10;
+    var sB = uiSlider({ label: "吹气强度", min: bc.min != null ? bc.min : 0, max: bMax,
+      step: bc.step || 1, init: bc.init != null ? bc.init : 4, unit: "档",
+      fmt: function (v) { return fmtN(v, 0); } });
+    box.appendChild(sB.row);
+    var st = stateBadge("", "ok");
+    box.appendChild(st);
+    function draw() {
+      var b = sB.get();
+      svg.innerHTML = "";
+      arrowHead(svg, "fh-blow", cssVar("--phy-known"));
+      if (mode === "wing") {
+        svg.appendChild(svgEl("path", { d: "M20,52 Q50,34 82,50 Q50,58 20,52 Z",
+          "class": "phy-body-box" }));
+        svg.appendChild(svgText(50, 66, "机翼", "phy-note-text"));
+        var k;
+        for (k = 0; k < 3; k++) { /* 上方：密（快） */
+          var y = 40 - k * 5;
+          svg.appendChild(svgEl("path", { d: "M8," + y + " Q50," + (y - 7) + " 92," + y,
+            fill: "none", stroke: cssVar("--phy-known"),
+            "stroke-width": (0.8 + b * 0.14).toFixed(2), "marker-end": "url(#fh-blow)" }));
+        }
+        for (k = 0; k < 2; k++) { /* 下方：疏（慢） */
+          var y2 = 60 + k * 6;
+          svg.appendChild(svgEl("line", { x1: 8, y1: y2, x2: 92, y2: y2,
+            stroke: cssVar("--phy-known"), "stroke-width": 0.9,
+            "marker-end": "url(#fh-blow)" }));
+        }
+        svg.appendChild(svgText(90, 28, "快", "phy-note-text", "end"));
+        svg.appendChild(svgText(90, 72, "慢", "phy-note-text", "end"));
+        var lh = b / bMax * 18;
+        if (lh > 1) {
+          svg.appendChild(svgEl("line", { x1: 50, y1: 44, x2: 50, y2: 44 - lh,
+            stroke: cssVar("--phy-target"), "stroke-width": 2, "marker-end": "url(#fh-blow)" }));
+          svg.appendChild(svgText(50, 42 - lh, "升力", "phy-force-label"));
+        }
+        st.textContent = "上方流速快 → 压强小：机翼被往上“托”（升力）";
+        badge.setReadout("", "吹气 " + fmtN(b, 0) + " 档：上快下慢 → 产生升力");
+      } else {
+        var ang = b / bMax * 50, rad = ang * Math.PI / 180;
+        var px = 30, py = 56, len = 44;
+        var ex = px + len * Math.cos(rad), ey = py - len * Math.sin(rad);
+        svg.appendChild(svgEl("line", { x1: px, y1: py, x2: ex, y2: ey,
+          stroke: cssVar("--phy-body"), "stroke-width": 2.6 }));
+        svg.appendChild(svgEl("circle", { cx: px, cy: py, r: 2.2, fill: cssVar("--phy-body") }));
+        svg.appendChild(svgText(24, py + 6, "纸条", "phy-note-text", "end"));
+        for (var g = 0; g < 3; g++) {
+          var gy = py - 9 - g * 5;
+          svg.appendChild(svgEl("line", { x1: 36, y1: gy, x2: 92, y2: gy,
+            stroke: cssVar("--phy-known"), "stroke-width": (0.8 + b * 0.16).toFixed(2),
+            "marker-end": "url(#fh-blow)" }));
+        }
+        svg.appendChild(svgText(64, py - 24, "吹气", "phy-note-text"));
+        st.textContent = ang < 5 ? "没吹气：纸条下垂"
+          : "纸条上方流速快、压强小，被“吸”了起来";
+        badge.setReadout("", "吹气 " + fmtN(b, 0) + " 档 → 纸条上飘 " + fmtN(ang, 0) + "°");
+      }
+    }
+    sB.on(draw);
+    draw();
+    return box;
+  }
+
+  /* ---------------- P1 · joule-heating（电流热效应） ---------------- */
+  /* p09.1.3：I / R / t 三滑块 → Q = I²Rt（热量条双编码） */
+  function widgetJouleHeating(p) {
+    var box = el("div", "phy-widget");
+    var badge = readoutBadge(p);
+    box.appendChild(badge.box);
+    var svg = svgStage("", "电流热效应：Q = I²Rt");
+    box.appendChild(svg);
+    var cc = p.current || {}, rc = p.resistance || {}, tc = p.time || {};
+    var iMax = cc.max || 3, rMax = rc.max || 50, tMax = tc.max || 60;
+    var sI = uiSlider({ label: "电流 I", min: cc.min != null ? cc.min : 0.5, max: iMax,
+      step: cc.step || 0.1, init: cc.init != null ? cc.init : 1, unit: "A",
+      fmt: function (v) { return fmtN(v, 1); } });
+    var sR = uiSlider({ label: "电阻 R", min: rc.min != null ? rc.min : 5, max: rMax,
+      step: rc.step || 1, init: rc.init != null ? rc.init : 20, unit: "Ω",
+      fmt: function (v) { return fmtN(v, 0); } });
+    var sT = uiSlider({ label: "时间 t", min: tc.min != null ? tc.min : 0, max: tMax,
+      step: tc.step || 1, init: tc.init != null ? tc.init : 10, unit: "s",
+      fmt: function (v) { return fmtN(v, 0); } });
+    box.appendChild(sI.row); box.appendChild(sR.row); box.appendChild(sT.row);
+    var st = stateBadge("电流翻倍，热量变 4 倍（I 是平方关系）", "ok");
+    box.appendChild(st);
+    function draw() {
+      var I = sI.get(), R = sR.get(), t = sT.get(), Q = I * I * R * t;
+      svg.innerHTML = "";
+      svg.appendChild(svgEl("path", { d: "M14,48 q6,-10 12,0 t12,0 t12,0 t12,0",
+        fill: "none", stroke: cssVar("--phy-force-a"), "stroke-width": 2 }));
+      svg.appendChild(svgText(50, 36, "电阻丝（发热）", "phy-note-text"));
+      var qMax = iMax * iMax * rMax * tMax, frac = qMax > 0 ? Math.min(1, Q / qMax) : 0;
+      svg.appendChild(svgEl("rect", { x: 14, y: 60, width: 72, height: 10, "class": "phy-body-box" }));
+      if (frac > 0.005)
+        svg.appendChild(svgEl("rect", { x: 15, y: 61, width: (70 * frac).toFixed(1), height: 8,
+          fill: cssVar("--phy-force-a") }));
+      svg.appendChild(svgText(50, 78, "热量", "phy-note-text"));
+      var eqm = "<math><mrow><mi>Q</mi><mo>=</mo><msup><mi>I</mi><mn>2</mn></msup>" +
+        "<mi>R</mi><mi>t</mi><mo>=</mo><mn>" + fmtN(Q, 0) + "</mn>" +
+        "<mspace width=\"0.25em\"/><mi mathvariant=\"normal\">J</mi></mrow></math>";
+      badge.setReadout(eqm, "Q = I²Rt = " + fmtN(Q, 0) + " J");
+      st.textContent = "电流翻倍 → 热量变 4 倍；电阻/时间翻倍 → 热量变 2 倍";
+    }
+    [sI, sR, sT].forEach(function (s) { s.on(draw); });
+    draw();
+    return box;
+  }
+
+  /* ---------------- P1 · motor-commutator（电动机换向器慢动作） ---------------- */
+  /* p10.1.3：慢放看清“转过平衡位置 → 换向器换向 → 电流反向 → 继续同向转” */
+  function widgetMotorCommutator(p) {
+    var box = el("div", "phy-widget");
+    var badge = readoutBadge(p);
+    box.appendChild(badge.box);
+    var svg = svgStage("", "电动机换向器慢动作");
+    box.appendChild(svg);
+    box.appendChild(noteLine("慢放 ×0.2（非真实转速）：看清换向器什么时候换向。"));
+    var ang = 0, playing = false, rafId = 0, lastT = 0;
+    var bar = uiPlaybar({
+      onPlay: function () { playing = true; lastT = nowMs(); loop(); },
+      onPause: function () { playing = false; if (rafId) cafFn(rafId); rafId = 0; },
+      onReplay: function () { playing = false; if (rafId) cafFn(rafId); rafId = 0; ang = 0; draw(); }
+    });
+    bar.scrub.style.display = "none";
+    box.appendChild(bar.bar);
+    var st = stateBadge("按 ▶ 看慢动作", "");
+    box.appendChild(st);
+    var PHASES = ["① 通电线圈在磁场中受力，开始转动",
+      "② 靠惯性转过平衡位置", "③ 换向器切换：线圈里的电流反向", "④ 受力方向不变，继续朝同一方向转"];
+    function draw() {
+      svg.innerHTML = "";
+      var cx = 50, cy = 46, R = 20, a = ang * Math.PI / 180;
+      /* 磁铁 N / S */
+      svg.appendChild(svgEl("rect", { x: 8, y: 28, width: 10, height: 36,
+        fill: cssVar("--phy-charge-pos") }));
+      svg.appendChild(svgText(13, 48, "N", "phy-f-label"));
+      svg.appendChild(svgEl("rect", { x: 82, y: 28, width: 10, height: 36,
+        fill: cssVar("--phy-charge-neg") }));
+      svg.appendChild(svgText(87, 48, "S", "phy-f-label"));
+      /* 线圈（旋转矩形） */
+      function rot(x, y) {
+        return { x: cx + x * Math.cos(a) - y * Math.sin(a),
+                 y: cy + x * Math.sin(a) + y * Math.cos(a) };
+      }
+      var p1 = rot(-R, -8), p2 = rot(R, -8), p3 = rot(R, 8), p4 = rot(-R, 8);
+      var poly = [p1, p2, p3, p4].map(function (q) {
+        return q.x.toFixed(1) + "," + q.y.toFixed(1); }).join(" ");
+      svg.appendChild(svgEl("polygon", { points: poly, fill: "none",
+        stroke: cssVar("--phy-body"), "stroke-width": 1.8 }));
+      svg.appendChild(svgText(cx, cy - 13, "线圈", "phy-note-text"));
+      /* 电流方向（每半圈翻转；双编码：箭头 + 文字） */
+      var half = Math.floor(ang / 180) % 2;
+      arrowHead(svg, "fh-mot", cssVar("--phy-current"));
+      function edgeArrow(q1, q2, fwd) {
+        var mx = (q1.x + q2.x) / 2, my = (q1.y + q2.y) / 2;
+        var dx = (q2.x - q1.x), dy = (q2.y - q1.y), L = Math.hypot(dx, dy) || 1;
+        var s = fwd ? 1 : -1;
+        svg.appendChild(svgEl("line", {
+          x1: (mx - dx / L * 4 * s).toFixed(1), y1: (my - dy / L * 4 * s).toFixed(1),
+          x2: (mx + dx / L * 4 * s).toFixed(1), y2: (my + dy / L * 4 * s).toFixed(1),
+          stroke: cssVar("--phy-current"), "stroke-width": 1.6,
+          "marker-end": "url(#fh-mot)" }));
+      }
+      edgeArrow(p1, p2, half === 0);
+      edgeArrow(p3, p4, half !== 0);
+      svg.appendChild(svgText(cx, cy + 15, half === 0 ? "电流：上→右" : "电流：上→左", "phy-note-text"));
+      /* 换向器：两半环（随线圈转）+ 固定电刷 */
+      var hr = 5.5;
+      function arcPath(a0, a1) {
+        var x0 = (cx + hr * Math.cos(a0)).toFixed(1), y0 = (cy + hr * Math.sin(a0)).toFixed(1);
+        var x1 = (cx + hr * Math.cos(a1)).toFixed(1), y1 = (cy + hr * Math.sin(a1)).toFixed(1);
+        return "M" + x0 + "," + y0 + " A" + hr + "," + hr + " 0 0 1 " + x1 + "," + y1;
+      }
+      svg.appendChild(svgEl("path", { d: arcPath(a, a + Math.PI), fill: "none",
+        stroke: cssVar("--phy-force-a"), "stroke-width": 2.6 }));
+      svg.appendChild(svgEl("path", { d: arcPath(a + Math.PI, a + 2 * Math.PI), fill: "none",
+        stroke: cssVar("--phy-force-b"), "stroke-width": 2.6 }));
+      svg.appendChild(svgText(cx, cy + 1.6, "换向器", "phy-sym-label"));
+      svg.appendChild(svgEl("rect", { x: cx - hr - 6, y: cy - 2, width: 5, height: 4,
+        fill: cssVar("--phy-body") }));
+      svg.appendChild(svgEl("rect", { x: cx + hr + 1, y: cy - 2, width: 5, height: 4,
+        fill: cssVar("--phy-body") }));
+      svg.appendChild(svgText(cx - hr - 8, cy + 8, "+刷", "phy-note-text", "end"));
+      svg.appendChild(svgText(cx + hr + 8, cy + 8, "−刷", "phy-note-text", "start"));
+      var phase = Math.floor(ang / 90) % 4;
+      st.textContent = PHASES[phase];
+      st.className = "phy-state " + (phase === 2 ? "phy-state-warn" : "phy-state-ok");
+      badge.setReadout("", "已转 " + fmtN(ang / 360, 1) + " 圈（慢放示意）");
+    }
+    function loop() {
+      if (!playing) return;
+      var now = nowMs(), dt = Math.min(0.1, (now - lastT) / 1000 || 0.016);
+      lastT = now; ang = (ang + dt * 72) % 3600; /* 慢放 */
+      draw();
+      rafId = rafFn(loop);
+    }
+    draw();
+    return box;
+  }
+
+  /* ---------------- P1 · vacuum-tube（真空管：羽毛 vs 硬币） ---------------- */
+  /* p11.2.3：有空气 → 硬币先落地；抽真空 → 同时落地（自由落体） */
+  function widgetVacuumTube(p) {
+    var box = el("div", "phy-widget");
+    var badge = readoutBadge(p);
+    box.appendChild(badge.box);
+    var svg = svgStage("", "真空管：羽毛和硬币一起落");
+    box.appendChild(svg);
+    var row = el("div", "phy-btn-row");
+    var bAir = el("button", "", "有空气"); bAir.type = "button";
+    var bVac = el("button", "", "抽成真空"); bVac.type = "button";
+    row.appendChild(bAir); row.appendChild(bVac);
+    box.appendChild(row);
+    var t = 0, playing = false, rafId = 0, lastT = 0, vacuum = false;
+    var bar = uiPlaybar({
+      onPlay: function () { playing = true; t = 0; lastT = nowMs(); loop(); },
+      onPause: function () { playing = false; if (rafId) cafFn(rafId); rafId = 0; },
+      onReplay: function () { playing = false; if (rafId) cafFn(rafId); rafId = 0; t = 0; draw(); }
+    });
+    bar.scrub.style.display = "none";
+    box.appendChild(bar.bar);
+    var st = stateBadge("先选“有空气 / 真空”，再按 ▶", "");
+    box.appendChild(st);
+    var H = 54, dC = 1.2;
+    function setVac(v) {
+      vacuum = v; t = 0;
+      bAir.setAttribute("aria-pressed", v ? "false" : "true");
+      bVac.setAttribute("aria-pressed", v ? "true" : "false");
+      draw(); flash(svg);
+    }
+    function draw() {
+      svg.innerHTML = "";
+      var dF = vacuum ? dC : 3.6;
+      svg.appendChild(svgEl("rect", { x: 30, y: 12, width: 40, height: 72, "class": "phy-body-box" }));
+      svg.appendChild(svgText(50, 90, vacuum ? "真空管" : "有空气的管", "phy-note-text"));
+      var yc = 18 + H * Math.pow(Math.min(1, t / dC), 2);
+      var yf = 18 + H * Math.pow(Math.min(1, t / dF), 2);
+      var xf = 43 + (vacuum ? 0 : Math.sin(t * 9) * 3 * Math.max(0, 1 - t / dF));
+      /* 硬币 */
+      svg.appendChild(svgEl("circle", { cx: 59, cy: yc.toFixed(1), r: 3.4, fill: "none",
+        stroke: cssVar("--phy-force-a"), "stroke-width": 1.6 }));
+      svg.appendChild(svgText(59, yc + 7, "硬币", "phy-note-text"));
+      /* 羽毛 */
+      svg.appendChild(svgEl("ellipse", { cx: xf.toFixed(1), cy: yf.toFixed(1), rx: 2.6, ry: 4.8,
+        fill: cssVar("--phy-known"), opacity: 0.8,
+        transform: "rotate(18 " + xf.toFixed(1) + " " + yf.toFixed(1) + ")" }));
+      svg.appendChild(svgText(xf, yf - 8, "羽毛", "phy-note-text"));
+      var done = t >= Math.max(dC, dF);
+      if (done) {
+        st.textContent = vacuum ? "同时落地 ✓：真空里只受重力，下落一样快"
+          : "硬币先落地：空气阻力拖住了羽毛";
+        st.className = "phy-state " + (vacuum ? "phy-state-ok" : "phy-state-warn");
+        badge.setReadout("", vacuum ? "真空：同时落地（自由落体）" : "有空气：硬币快、羽毛慢");
+      } else {
+        st.textContent = t > 0 ? "下落中…" : "先选“有空气 / 真空”，再按 ▶";
+        st.className = "phy-state";
+      }
+    }
+    function loop() {
+      if (!playing) return;
+      var now = nowMs(), dt = Math.min(0.1, (now - lastT) / 1000 || 0.05);
+      lastT = now; t += dt; draw();
+      if (t >= Math.max(dC, vacuum ? dC : 3.6)) {
+        playing = false; bar.setPlaying(false); draw(); return;
+      }
+      rafId = rafFn(loop);
+    }
+    bAir.addEventListener("click", function () { setVac(false); });
+    bVac.addEventListener("click", function () { setVac(true); });
+    setVac(false);
+    return box;
+  }
+
+  /* ---------------- P1 · pendulum（虚拟摆） ---------------- */
+  /* p00.1.2（复用 p17.1.2）：摆长 / 摆球 / 摆角可调 → T = 2π√(L/g) */
+  function widgetPendulum(p) {
+    var box = el("div", "phy-widget");
+    var badge = readoutBadge(p);
+    box.appendChild(badge.box);
+    var svg = svgStage("", "单摆");
+    box.appendChild(svg);
+    box.appendChild(noteLine("小角度（≤10°）时公式最准；摆角给到 30° 是为了看清摆动。"));
+    var lc = p.length || {}, mc = p.mass || {}, ac = p.angle || {};
+    var sL = uiSlider({ label: "摆长 L", min: lc.min != null ? lc.min : 0.2, max: lc.max || 1.5,
+      step: lc.step || 0.1, init: lc.init != null ? lc.init : 1, unit: "m",
+      fmt: function (v) { return fmtN(v, 1); } });
+    var sM = uiSlider({ label: "摆球质量", min: mc.min != null ? mc.min : 0.1, max: mc.max || 1,
+      step: mc.step || 0.1, init: mc.init != null ? mc.init : 0.5, unit: "kg",
+      fmt: function (v) { return fmtN(v, 1); } });
+    var sA = uiSlider({ label: "摆角", min: ac.min != null ? ac.min : 5, max: ac.max || 30,
+      step: ac.step || 1, init: ac.init != null ? ac.init : 15, unit: "°",
+      fmt: function (v) { return fmtN(v, 0); } });
+    box.appendChild(sL.row); box.appendChild(sM.row); box.appendChild(sA.row);
+    var tV = 0, playing = true, rafId = 0, lastT = nowMs();
+    var bar = uiPlaybar({
+      onPlay: function () { playing = true; lastT = nowMs(); loop(); },
+      onPause: function () { playing = false; if (rafId) cafFn(rafId); rafId = 0; },
+      onReplay: function () { tV = 0; draw(); }
+    });
+    bar.scrub.style.display = "none";
+    box.appendChild(bar.bar);
+    var st = stateBadge("周期只跟摆长有关", "ok");
+    box.appendChild(st);
+    function draw() {
+      var L = sL.get(), m = sM.get(), a0 = sA.get() * Math.PI / 180;
+      var T = 2 * Math.PI * Math.sqrt(L / 9.8), w = 2 * Math.PI / T;
+      var th = a0 * Math.cos(w * tV);
+      svg.innerHTML = "";
+      var pxLen = 22 + (L - 0.2) / 1.3 * 38;
+      var bx = 50 + pxLen * Math.sin(th), by = 16 + pxLen * Math.cos(th);
+      /* 支架 */
+      svg.appendChild(svgEl("line", { x1: 30, y1: 14, x2: 70, y2: 14, "class": "phy-ground" }));
+      /* 摆线 + 摆球（大小 ∝ 质量，示意） */
+      svg.appendChild(svgEl("line", { x1: 50, y1: 14, x2: bx.toFixed(1), y2: by.toFixed(1),
+        stroke: cssVar("--phy-body"), "stroke-width": 1.4 }));
+      svg.appendChild(svgEl("circle", { cx: 50, cy: 14, r: 1.6, fill: cssVar("--phy-body") }));
+      var br = 2.4 + m * 3;
+      svg.appendChild(svgEl("circle", { cx: bx.toFixed(1), cy: by.toFixed(1), r: br.toFixed(1),
+        fill: cssVar("--phy-force-a"), stroke: cssVar("--phy-body"), "stroke-width": 1 }));
+      /* 平衡位置虚线 */
+      svg.appendChild(svgEl("line", { x1: 50, y1: 14, x2: 50, y2: 16 + pxLen, "class": "phy-track-line" }));
+      var eqm = "<math><mrow><mi>T</mi><mo>=</mo><mn>2</mn><mi>π</mi>" +
+        "<msqrt><mfrac><mi>L</mi><mi>g</mi></mfrac></msqrt><mo>=</mo><mn>" +
+        fmtN(T, 2) + "</mn><mspace width=\"0.25em\"/><mi mathvariant=\"normal\">s</mi></mrow></math>";
+      badge.setReadout(eqm, "T = 2π√(L/g) = " + fmtN(T, 2) + " s");
+      st.textContent = "换摆球质量 / 摆角 → 周期不变；摆长变 → 周期变";
+    }
+    function loop() {
+      if (!playing) return;
+      var now = nowMs(), dt = Math.min(0.05, (now - lastT) / 1000 || 0.016);
+      lastT = now; tV += dt;
+      draw();
+      rafId = rafFn(loop);
+    }
+    sL.on(function () { draw(); });
+    sM.on(function () { draw(); });
+    sA.on(function () { tV = 0; draw(); });
+    draw();
+    loop();
+    return box;
+  }
+
   /* ---------------- 组件注册表 ---------------- */
   /* 校验清单第 8 条：interaction.type 口径与渲染器同步 */
   var PHYSICS_INTERACTION_TYPES = [
     "force-drag", "motion-sim", "circuit-build", "optics-ray", "wave-tune",
     "pulley-lever", "collision-lab", "field-viz", "thermo-sim", "spring-shm",
     "guess-verify", "read-gauge", "formula-id", "graph-reader", "side-compare",
-    "mv-lab", "slope-compare"
+    "mv-lab", "slope-compare",
+    /* 阶段四新增（黄队 P0/P1，2026-10-15） */
+    "tuning-fork", "vacuum-chamber", "pinhole-camera", "overflow-cup",
+    "em-induction", "displacement-arrow", "spring-scale-pull",
+    "heat-compare", "sponge-dent", "paper-blow", "joule-heating",
+    "motor-commutator", "vacuum-tube", "pendulum"
   ];
   var WIDGETS = {
     "force-drag": widgetForceDrag,
@@ -3538,7 +4530,22 @@
     "graph-reader": widgetGraphReader,
     "side-compare": widgetSideCompare,
     "mv-lab": widgetMvLab,
-    "slope-compare": widgetSlopeCompare
+    "slope-compare": widgetSlopeCompare,
+    /* 阶段四新增（黄队 P0/P1，2026-10-15） */
+    "tuning-fork": widgetTuningFork,
+    "vacuum-chamber": widgetVacuumChamber,
+    "pinhole-camera": widgetPinholeCamera,
+    "overflow-cup": widgetOverflowCup,
+    "em-induction": widgetEmInduction,
+    "displacement-arrow": widgetDisplacementArrow,
+    "spring-scale-pull": widgetSpringScalePull,
+    "heat-compare": widgetHeatCompare,
+    "sponge-dent": widgetSpongeDent,
+    "paper-blow": widgetPaperBlow,
+    "joule-heating": widgetJouleHeating,
+    "motor-commutator": widgetMotorCommutator,
+    "vacuum-tube": widgetVacuumTube,
+    "pendulum": widgetPendulum
   };
   function renderWidget(type, params) {
     var fn = WIDGETS[type];
