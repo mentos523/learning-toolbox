@@ -118,7 +118,7 @@ window.PHY_CH["p07"] = {
               id: "p07.1.2-p1",
               kind: "interact",
               title: "做功多，不一定功率大",
-              exploreTip: "做功多≠功率大——还得看时间。先猜，再看解释。（爬楼估算器暂无专用组件）",
+              exploreTip: "做功多≠功率大——还得看时间。先猜，再看解释。",
               widgets: [
                 {
                   type: "guess-verify",
@@ -273,7 +273,7 @@ window.PHY_CH["p07"] = {
               id: "p07.2.2-p1",
               kind: "interact",
               title: "滚摆越滚越低，能量去哪了",
-              exploreTip: "能量不会消失——只会“换衣服”。先猜，再看解释。（单摆 / 滚摆能量演示暂无专用组件）",
+              exploreTip: "能量不会消失——只会“换衣服”。先猜，再看解释。",
               widgets: [
                 {
                   type: "guess-verify",
@@ -364,7 +364,7 @@ window.PHY_CH["p07"] = {
                   conditions: ["杠杆平衡（静止或匀速转动）"],
                   counterexample: "斜着拉：力臂比“作用点到支点的距离”短——按距离算，F₁ 就算错了",
                   dimension: "N·m = N·m ✓",
-                  units: { si: "N·m（力矩单位，初中只验算）" }
+                  units: { si: "N·m" }
                 },
                 { type: "trap", text: "⚠️ 别搞混：“动力臂=动力作用点到支点的距离”——错！力臂是垂线段（几何 g02 点到直线的距离）。" },
                 { type: "mathlink", text: "数学呼应：代数 ch01 方程（奠基）；几何 g02 点到直线的距离（奠基）——力臂就是垂线段，数学回链。" }
@@ -401,7 +401,7 @@ window.PHY_CH["p07"] = {
               id: "p07.3.2-p1",
               kind: "interact",
               title: "定滑轮 vs 动滑轮",
-              exploreTip: "定滑轮拉一次，动滑轮拉一次：读数差一半，绳子多拉一倍。（滑轮组暂无专用组件）",
+              exploreTip: "定滑轮拉一次，动滑轮拉一次：读数差一半，绳子多拉一倍。",
               widgets: [
                 {
                   type: "pulley-lever",

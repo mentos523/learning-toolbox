@@ -30,7 +30,7 @@ window.PHY_CH["p08"] = {
               id: "p08.1.1-p1",
               kind: "interact",
               title: "摩擦生电，验电器作证",
-              exploreTip: "冬天脱毛衣的噼啪声，和验电器是同一个道理。先猜，再看解释。（验电器张角暂无专用组件）",
+              exploreTip: "冬天脱毛衣的噼啪声，和验电器是同一个道理。先猜，再看解释。",
               widgets: [
                 {
                   type: "guess-verify",
@@ -269,7 +269,7 @@ window.PHY_CH["p08"] = {
               id: "p08.2.1-p1",
               kind: "interact",
               title: "电压是“原因”，电流是“结果”",
-              exploreTip: "电压是“原因”，电流是“结果”——因果别倒。先猜，再看解释。（水压类比动画暂无专用组件）",
+              exploreTip: "电压是“原因”，电流是“结果”——因果别倒。先猜，再看解释。",
               widgets: [
                 {
                   type: "guess-verify",
@@ -306,7 +306,7 @@ window.PHY_CH["p08"] = {
               kind: "explain",
               title: "电压与电压表",
               blocks: [
-                { type: "lead", text: "水位差让水流，电压让电流——水压类比开场（边界：水会被用掉，电荷不会）。" },
+                { type: "lead", text: "水位差让水流，电压让电流——水压类比开场（边界：“用掉”的从来不是水也不是电荷，而是能量）。" },
                 { type: "text", html: "电压：使电荷定向移动形成电流的原因。电源是提供电压的装置。有电压不一定有电流（断路时），有电流一定有电压。" },
                 { type: "text", html: "电压表：内阻极大，理想时看作断路——所以要并联在用电器两端。有条件：电压表内阻极大，可以“串联”在电源两极测电源电压（测的是电源电压，不烧表）。" },
                 { type: "text", html: "串并联电压规律：串联 U=U₁+U₂（分电压），并联 U=U₁=U₂（各支路相等）。" },
@@ -332,7 +332,7 @@ window.PHY_CH["p08"] = {
               id: "p08.2.2-p1",
               kind: "interact",
               title: "电阻越大，电流越小",
-              exploreTip: "拖动滑片：接入电阻变大→电流变小。“阻碍”看得见。（长度 / 粗细 / 材料控制变量实验暂无专用组件）",
+              exploreTip: "拖动滑片：接入电阻变大→电流变小——“阻碍”看得见。",
               widgets: [
                 {
                   type: "circuit-build",
@@ -451,7 +451,7 @@ window.PHY_CH["p08"] = {
                   widget: {
                     type: "graph-reader",
                     params: {
-                      source: { kind: "function", expr: "I = U/20", xLabel: "U/V", yLabel: "I/A", steps: ["slope"] },
+                      source: { kind: "function", expr: "I = t/20", xLabel: "U/V", yLabel: "I/A", steps: ["slope"] },
                       badge: { invariant: "没变的是：电阻（20Ω）" }
                     }
                   }
@@ -597,7 +597,7 @@ window.PHY_CH["p08"] = {
               questions: [
                 {
                   type: "review",
-                  html: "① <b>电流方向</b>：正电荷定向移动方向；与电子移动方向相反（全书级易错）。② <b>串联</b>处处电流相等；<b>并联</b>电压相同才互不影响。③ <b>电流表</b>：串联，禁并联（烧表红线）；试触选量程。④ <b>电压</b>是“原因”，电流是“结果”；电压表内阻极大。⑤ <b>电阻</b> <span class=\"phy-f\" data-f=\"res\"></span>：是“量”不是“决定”（等号不代表因果）。⑥ <b>欧姆定律</b> <span class=\"phy-f\" data-f=\"ohm\"></span>：金属导体、纯电阻、温度不变。⑦ <b>串联</b> <span class=\"phy-f\" data-f=\"rseries\"></span>；<b>并联</b> <span class=\"phy-f\" data-f=\"rparallel\"></span>（总电阻比任一支路小）。"
+                  html: "① <b>电流方向</b>：正电荷定向移动方向；与电子移动方向相反（全书级易错）。② <b>串联</b>处处电流相等；<b>并联</b>电压相同才互不影响。③ <b>电流表</b>：串联，禁并联（烧表红线）；试触选量程。④ <b>电压</b>是“原因”，电流是“结果”；电压表内阻极大。⑤ <b>电阻</b> <span class=\"phy-f\" data-f=\"res\"></span>：是“量”不是“决定”（等号不代表因果）。⑥ <b>欧姆定律</b> <span class=\"phy-f\" data-f=\"ohm\"></span>：金属导体、纯电阻、温度不变。⑦ <b>串联</b> <span class=\"phy-f\" data-f=\"rseries\"></span>；<b>并联</b> <span class=\"phy-f\" data-f=\"rparallel\"></span>（总电阻比任一支路小）。⑧ <b>数量级锚点</b>：干电池 1.5V、家庭电路 220V、手机充电电流约 1–2A——估算先有锚。"
                 }
               ],
               point: "七句话收束本章：p09 电功率——公式更多，条件更多，拿“身份证”去。"

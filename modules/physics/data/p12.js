@@ -49,7 +49,7 @@ window.PHY_CH["p12"] = {
                 {
                   type: "graph-reader",
                   params: {
-                    source: { kind: "function", expr: "F = 50*x", xLabel: "x/m", yLabel: "F/N" },
+                    source: { kind: "function", expr: "F = 50*t", xLabel: "x/m", yLabel: "F/N" },
                     steps: ["slope"], xRange: [0, 0.2],
                     badge: { invariant: "没变的是：弹簧的劲度系数" }
                   }
@@ -354,7 +354,7 @@ window.PHY_CH["p12"] = {
                 {
                   type: "graph-reader",
                   params: {
-                    source: { kind: "function", expr: "a = 2*F", xLabel: "F/N", yLabel: "a/(m/s²)" },
+                    source: { kind: "function", expr: "a = 2*t", xLabel: "F/N", yLabel: "a/(m/s²)" },
                     steps: ["slope"], xRange: [0, 5],
                     badge: { invariant: "没变的是：物体的质量" }
                   }

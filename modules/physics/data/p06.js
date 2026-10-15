@@ -30,7 +30,7 @@ window.PHY_CH["p06"] = {
               id: "p06.1.1-p1",
               kind: "interact",
               title: "海绵怎么说",
-              exploreTip: "控制变量：一次只变一个量，猜猜海绵的凹陷怎么说。（海绵凹陷暂无专用组件，先猜后验。）",
+              exploreTip: "控制变量：一次只变一个量，猜猜海绵的凹陷怎么说——先猜，两道题都猜完再揭晓。",
               widgets: [
                 {
                   type: "guess-verify",
@@ -111,7 +111,7 @@ window.PHY_CH["p06"] = {
                 {
                   type: "graph-reader",
                   params: {
-                    source: { kind: "function", expr: "p = 9800*h", xLabel: "h/m", yLabel: "p/Pa", steps: ["slope"] },
+                    source: { kind: "function", expr: "p = 9800*t", xLabel: "h/m", yLabel: "p/Pa", steps: ["slope"] },
                     badge: { invariant: "没变的是：液体密度（水）" }
                   }
                 },
@@ -156,7 +156,7 @@ window.PHY_CH["p06"] = {
               title: "压强计与连通器",
               blocks: [
                 { type: "lead", text: "压强计是液体的“听诊器”：U 形管两边高度差越大，压强越大。" },
-                { type: "text", html: "三探头结论（压强计虚拟实验暂无专用组件，结论先记）：① 深度越深，压强越大；② 同一深度，各个方向压强相等；③ 深度相同时，液体密度越大，压强越大。" },
+                { type: "text", html: "三探头结论（结论先记）：① 深度越深，压强越大；② 同一深度，各个方向压强相等；③ 深度相同时，液体密度越大，压强越大。" },
                 { type: "text", html: "连通器：上端开口、底部连通的容器。液体静止时，各液面相平——茶壶、船闸都是连通器。" },
                 { type: "slogan", text: "深度为王，方向平等。" }
               ],
@@ -241,7 +241,7 @@ window.PHY_CH["p06"] = {
               id: "p06.1.4-p1",
               kind: "interact",
               title: "往中间吹，纸往哪跑",
-              exploreTip: "别记反了：流速大，压强小。先猜，再看解释。（流线演示暂无专用组件）",
+              exploreTip: "别记反了：流速大，压强小。先猜，再看解释。",
               widgets: [
                 {
                   type: "guess-verify",
@@ -350,7 +350,7 @@ window.PHY_CH["p06"] = {
               id: "p06.2.2-p1",
               kind: "interact",
               title: "左手称重，右手排水",
-              exploreTip: "左手称重法，右手想想溢出的水——两只手对答案。（溢水杯暂无专用组件，先猜后验。）",
+              exploreTip: "左手称重法，右手想想溢出的水——两只手对答案：先猜，再揭晓。",
               widgets: [
                 {
                   type: "guess-verify",
