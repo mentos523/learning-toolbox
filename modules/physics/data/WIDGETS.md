@@ -162,14 +162,25 @@
 
 | 参数 | 类型 | 必填 | 默认 | 说明 |
 |---|---|---|---|---|
-| `mode` | string | ✅ | — | `"lens"`（透镜）/ `"mirror"`（平面镜反射） |
+| `mode` | string | ✅ | — | `"lens"`（透镜）/ `"mirror"`（平面镜反射）/ `"refraction"`（折射：激光斜射入水） |
 | `lens` | object | △ | — | `lens` 必填：`{x, f}`；`x` 透镜中心横坐标，`f` 焦距（可配 `focal` 滑块） |
 | `focal` | object | — | — | 焦距滑块 `{min,max,step,init}`（逻辑单位，>0） |
-| `source` | object | ✅ | — | `{x, y}` 可拖拽（箭头状物体） |
+| `source` | object | ✅ | — | `{x, y}` 可拖拽（箭头状物体）；`lens`/`mirror` 用 |
 | `rays` | array | — | 全开 | `"parallel"`/`"center"`/`"focus"` 子集（初学建议只开前两条） |
 | `showImage` | boolean | — | `true` | 像（实像实线 / 虚像虚线 + 性质徽章） |
 | `mirrorX` | number | △ | — | `mirror` 必填：平面镜横坐标 |
+| `angle` | object | △ | — | `refraction` 必填：入射角滑块 `{min,max,step,init}`（度，0–80） |
+| `n1`/`n2` | number | — | `1`/`1.33` | `refraction`：两种介质折射率（默认空气→水） |
 | `badge` | object | — | — | 读数徽章 |
+
+```js
+{ type: "optics-ray", params: {
+  mode: "refraction",
+  angle: { min: 0, max: 80, step: 1, init: 30 },
+  n1: 1, n2: 1.33,
+  badge: { invariant: "没变的是：两种介质" }
+} }
+```
 
 ```js
 { type: "optics-ray", params: {
@@ -186,6 +197,7 @@
 计算：薄透镜公式 `1/f = 1/u + 1/v`（MathML 数值验算行）；`u=f` → 徽章"不成像（u=f）"，不硬画线。
 像性质徽章："倒立缩小实像" / "倒立放大实像" / "正立放大虚像" / "正立等大虚像"（mirror）。
 焦点 F 为只读标记（不可拖）；法线灰虚线。
+折射模式：斯涅尔定律 `n₁·sin i = n₂·sin r`（公式行 MathML，降级纯文本）；入射角滑块联动折射光线 + `i`/`r` 角度弧线；`i=0` → "垂直入射：不偏折"；读数 `i = …°，r = …°`（MathML）。
 
 ---
 
@@ -484,13 +496,354 @@
 
 ---
 
-## 试点组件（p04.1.2 已有，保留）
+## 补充 · mv-lab（m–V 图像虚拟实验）
 
-### mv-lab（m–V 图像虚拟实验）
-`params: { materials:[{id,name,rho,colorRole}], mMax, mInit, step, unitM, unitV, unitRho, badge, source:{kind:"points", xLabel, yLabel, steps:["slope"]} }`
+（白队 P3-8：原试点组件补入主目录。Y4 口径：点列数据源。）
 
-### slope-compare（斜率直观版）
-`params: { materials:[{id,name,rho,colorRole}], order:[ids], unitRho }`
+| 参数 | 类型 | 必填 | 默认 | 说明 |
+|---|---|---|---|---|
+| `materials` | array | ✅ | — | 非空；每项 `{id, name, rho, colorRole}`（`rho` 密度，`colorRole` 语义色名） |
+| `mMax` | number | — | `1000` | 质量轴上限（g） |
+| `mInit` | number | — | `400` | 质量滑块初值（g） |
+| `step` | number | — | `10` | 质量滑块步进（g） |
+| `unitM`/`unitV`/`unitRho` | string | — | `"g"`/`"cm³"`/`""` | 质量 / 体积 / 密度单位说明 |
+| `source` | object | — | — | `{kind:"points", xLabel, yLabel, steps:["slope"]}`；`xLabel` 默认 `"V/cm³"`，`yLabel` 默认 `"m/g"` |
+| `badge` | object | — | — | 读数徽章（当前材料 ρ 读数 + `invariant` 黄队文案） |
+
+```js
+{ type: "mv-lab", params: {
+  materials: [
+    { id: "al", name: "铝块", rho: 2.7, colorRole: "force-a" },
+    { id: "fe", name: "铁块", rho: 7.9, colorRole: "target" },
+    { id: "w",  name: "水",   rho: 1.0, colorRole: "known" }
+  ],
+  mMax: 1000, mInit: 400, step: 10, unitM: "g", unitV: "cm³", unitRho: "g/cm³",
+  source: { kind: "points", xLabel: "V/cm³", yLabel: "m/g", steps: ["slope"] },
+  badge: { invariant: "没变的是：每种材料的密度" }
+} }
+```
+
+交互：材料三选（tabs，`aria-pressed`）→ 高亮对应直线；质量滑块 → 活动点沿直线走，读数 `V = m/ρ`；斜率标签 `ρ=…`（Y4：直线段给精确值）。
+触控：滑块原生 range（≥44px）；材料 tabs 为按钮组（≥44px）。
+双编码：三条线颜色 + 斜率标签文字 `ρ=…`。
+
+---
+
+## 补充 · slope-compare（斜率直观版）
+
+（白队 P3-8：原试点组件补入主目录。）
+
+| 参数 | 类型 | 必填 | 默认 | 说明 |
+|---|---|---|---|---|
+| `materials` | array | ✅ | — | 非空；每项 `{id, name, rho, colorRole}` |
+| `order` | array | ✅ | — | 材料 id 数组，按"线最陡 → 最平缓"排序（即 ρ 从大到小） |
+| `unitRho` | string | — | `""` | 密度单位说明 |
+
+```js
+{ type: "slope-compare", params: {
+  materials: [
+    { id: "fe", name: "铁块", rho: 7.9, colorRole: "target" },
+    { id: "al", name: "铝块", rho: 2.7, colorRole: "force-a" },
+    { id: "w",  name: "水",   rho: 1.0, colorRole: "known" }
+  ],
+  order: ["fe", "al", "w"], unitRho: "g/cm³"
+} }
+```
+
+交互：点选每行（`aria-pressed` 单选）→ 下方文案"×：ρ = …，线最陡/次之/最平缓 → 密度最大/居中/最小" + flash。
+触控：每行 ≥52px 高按钮。
+双编码：排名数字徽章 + 色条 + ρ 数值文字。
+
+---
+
+## 阶段四新增（黄队 P0/P1，蓝队 2026-10-15）
+
+> P0 = 策略路径断裂必补（写得再好也讲不透）；P1 = 核心定量无载体必补。
+> 全部遵守 §0.3 全局铁律。`pXX` 为内容侧复用课号（内容代理接线用）。
+
+---
+
+### P0 · tuning-fork（音叉溅水花）—— p01.1.1
+
+| 参数 | 类型 | 必填 | 默认 | 说明 |
+|---|---|---|---|---|
+| `badge` | object | — | — | 读数徽章（`invariant` 黄队文案，如"没变的是：音叉本身"） |
+
+```js
+{ type: "tuning-fork", params: {
+  badge: { invariant: "没变的是：音叉本身" }
+} }
+```
+
+交互："🔨 敲一下音叉"按钮（`phy-mini`，≥44px）→ 两臂反向振动（振幅指数衰减，5Hz 示意非真实频率）+ 水花粒子抛物线溅起（2.5s 内自停）+ 振动弧线示意。
+输出：状态徽章"振动中…：水花被溅起来了" / "静止"；读数行"音叉在振动 → 水花溅起（发声的物体在振动）"。
+双编码：振动弧线 + 状态文字。
+
+---
+
+### P0 · vacuum-chamber（真空罩抽气）—— p01.1.2
+
+| 参数 | 类型 | 必填 | 默认 | 说明 |
+|---|---|---|---|---|
+| `air` | object | — | `{min:0,max:100,step:5,init:100}` | 罩内空气量滑块（%） |
+| `badge` | object | — | — | 读数徽章 |
+
+```js
+{ type: "vacuum-chamber", params: {
+  air: { min: 0, max: 100, step: 5, init: 100 },
+  badge: { invariant: "没变的是：铃铛还在响" }
+} }
+```
+
+交互：滑块抽气 → 罩内空气分子点减少 → 铃铛声波纹减少（0–4 道弧线）。
+输出三档：`≥40%` "铃声清晰" / `<40%` "铃声变小（介质减少）" / `0%` "几乎听不见：真空不能传声"。
+双编码：波纹数量 + 状态文字。
+
+---
+
+### P0 · pinhole-camera（小孔成像）—— p02.1.1
+
+| 参数 | 类型 | 必填 | 默认 | 说明 |
+|---|---|---|---|---|
+| `aperture` | object | — | `{min:1,max:6,step:0.5,init:2}` | 小孔孔径滑块（示意单位） |
+| `objDist` | object | — | `{min:12,max:38,step:1,init:24}` | 物距滑块（逻辑单位） |
+| `badge` | object | — | — | 读数徽章 |
+
+```js
+{ type: "pinhole-camera", params: {
+  aperture: { min: 1, max: 6, step: 0.5, init: 2 },
+  objDist: { min: 12, max: 38, step: 1, init: 24 },
+  badge: { invariant: "没变的是：像距（光屏位置）" }
+} }
+```
+
+几何：过孔心两条光线（蜡烛顶→像底、蜡烛底→像顶），像高 = 物高 × 像距/物距；孔径 → 光线粗细（亮度）。
+输出：读数 `m = 像距/物距 = …`（MathML，附"缩小/等大/放大"）；孔径 >3.5 叠虚影线 + "孔太大：变亮但变模糊"警告态。
+双编码：倒像方向 + 状态文字。
+
+---
+
+### P0 · overflow-cup（溢水杯）—— p06.2.2
+
+| 参数 | 类型 | 必填 | 默认 | 说明 |
+|---|---|---|---|---|
+| `objVolume` | object | — | `{max:200,step:10,init:0}` | 物体浸入体积滑块（cm³；`min` 固定 0） |
+| `badge` | object | — | — | 读数徽章 |
+
+```js
+{ type: "overflow-cup", params: {
+  objVolume: { max: 200, step: 10, init: 0 },
+  badge: { invariant: "没变的是：杯里水面的高度（与溢水口齐平）" }
+} }
+```
+
+交互：滑块 → 物体下压深度 → 溢水口滴水 → 小烧杯水位上升。
+输出：读数 `V溢 = … cm³ = 排开水的体积`（MathML）；状态"溢出的水，正好等于物体排开的水"。
+双编码：烧杯水位 + 读数文字。
+
+---
+
+### P0 · em-induction（电磁感应）—— p10.1.4（复用 p16.3.1/p16.3.3）
+
+| 参数 | 类型 | 必填 | 默认 | 说明 |
+|---|---|---|---|---|
+| `pole` | string | — | `"N"` | 朝向线圈的磁极 `"N"`/`"S"`（S 极时方向口径镜像） |
+| `badge` | object | — | — | 读数徽章 |
+
+```js
+{ type: "em-induction", params: {
+  pole: "N",
+  badge: { invariant: "没变的是：线圈" }
+} }
+```
+
+交互：拖磁铁（`phy-handle` 热区）→ Φ 条（∝1/距离）→ Φ 变化率判电流。
+方向口径（楞次定律，N 极朝向线圈）：插入（Φ 增大）→ 从磁铁一侧看逆时针，上导线 ⊗（入纸）下导线 ⊙（出纸）；拔出反向；不动 → "Φ 不变 → 无感应电流（"变"才是条件）"。
+双编码：⊙/⊗ 符号 + 方向文字；线圈天蓝三匝，磁铁 N/S 两色 + 文字。
+
+---
+
+### P0 · displacement-arrow（位移箭头绘制）—— p11.1.2
+
+| 参数 | 类型 | 必填 | 默认 | 说明 |
+|---|---|---|---|---|
+| `badge` | object | — | — | 读数徽章 |
+
+```js
+{ type: "displacement-arrow", params: {
+  badge: { invariant: "没变的是：起点" }
+} }
+```
+
+交互：起点固定（蓝点），拖终点手柄（朱红，r=6 ≥ 6 逻辑单位）→ 位移箭头 + 分量虚线。
+输出：读数 `Δx = … 格（只看起点→终点的直线）`（MathML）；状态"位移只看起点→终点：Δx = … 格（方向：箭头指向）"。
+双编码：箭头方向 + "位移"文字标签。
+
+---
+
+### P0 · spring-scale-pull（两弹簧秤对拉）—— p12.2.3
+
+| 参数 | 类型 | 必填 | 默认 | 说明 |
+|---|---|---|---|---|
+| `force` | object | — | `{min:0,max:10,step:0.5,init:4}` | 拉力滑块（N） |
+| `badge` | object | — | — | 读数徽章 |
+
+```js
+{ type: "spring-scale-pull", params: {
+  force: { min: 0, max: 10, step: 0.5, init: 4 },
+  badge: { invariant: "没变的是：两个秤都没换" }
+} }
+```
+
+交互：滑块 → 两弹簧伸长量相同 → 读数永远相等。
+输出：读数 `F甲 = F乙 = … N`（MathML）；状态"甲拉乙的力 = 乙拉甲的力：大小相等、方向相反"。
+双编码：弹簧伸长量 + 读数文字。
+
+---
+
+### P1 · heat-compare（水 vs 沙子双加热曲线）—— p03.2.2
+
+| 参数 | 类型 | 必填 | 默认 | 说明 |
+|---|---|---|---|---|
+| `mass` | object | — | `{min:0.5,max:2,step:0.5,init:1}` | 质量滑块（kg，水/沙子同质量） |
+| `power` | number | — | `500` | 加热功率（W；`c水=4200、c沙=920 J/(kg·℃)` 冻结） |
+| `badge` | object | — | — | 读数徽章 |
+
+```js
+{ type: "heat-compare", params: {
+  mass: { min: 0.5, max: 2, step: 0.5, init: 1 }, power: 500,
+  badge: { invariant: "没变的是：加热功率、质量、初温" }
+} }
+```
+
+交互：▶/⏸/↺ 播放条（scrubber 隐藏）→ 双 T-t 曲线（沙子橙实线陡、水蓝虚线缓），动画加速 ×20（文案注明"非真实时间"），300s 播完自停。
+输出：读数 `加热 …s：水 +…℃，沙子 +…℃`；终态"沙子升温是水的约 4.6 倍"。
+双编码：线色 + 线型 + 图例文字。
+
+---
+
+### P1 · sponge-dent（海绵凹陷）—— p06.1.1
+
+| 参数 | 类型 | 必填 | 默认 | 说明 |
+|---|---|---|---|---|
+| `pressure` | object | — | `{min:0,max:20,step:1,init:8}` | 压力滑块（N；`min` 缺省 0） |
+| `badge` | object | — | — | 读数徽章 |
+
+```js
+{ type: "sponge-dent", params: {
+  pressure: { min: 0, max: 20, step: 1, init: 8 },
+  badge: { invariant: "没变的是：海绵这块" }
+} }
+```
+
+交互：滑块 → 海绵顶部凹陷曲线深度（∝ 压力）+ 双向箭头标注凹陷量。
+输出：读数 `压力 … N → 凹陷 …（示意单位）`；状态"压力越大，海绵凹陷越深（压力作用效果越明显）"。
+双编码：凹陷形状 + 深度数字标注。
+
+---
+
+### P1 · paper-blow（吹纸 / 机翼流线）—— p06.1.4
+
+| 参数 | 类型 | 必填 | 默认 | 说明 |
+|---|---|---|---|---|
+| `mode` | string | — | `"paper"` | `"paper"`（吹纸条）/ `"wing"`（机翼流线） |
+| `blow` | object | — | `{min:0,max:10,step:1,init:4}` | 吹气强度滑块（档） |
+| `badge` | object | — | — | 读数徽章 |
+
+```js
+{ type: "paper-blow", params: {
+  mode: "paper", blow: { min: 0, max: 10, step: 1, init: 4 },
+  badge: { invariant: "没变的是：纸条/机翼" }
+} }
+```
+
+`paper`：吹气 → 纸条上飘角度（0–50°）；气流线粗细 ∝ 强度；状态"纸条上方流速快、压强小，被"吸"了起来"。
+`wing`：机翼剖面 + 上方 3 条密流线（快）/ 下方 2 条疏流线（慢）+ 升力箭头（长度 ∝ 强度）。
+双编码：流线疏密 + "快/慢"文字。
+
+---
+
+### P1 · joule-heating（电流热效应）—— p09.1.3
+
+| 参数 | 类型 | 必填 | 默认 | 说明 |
+|---|---|---|---|---|
+| `current` | object | — | `{min:0.5,max:3,step:0.1,init:1}` | 电流滑块（A） |
+| `resistance` | object | — | `{min:5,max:50,step:1,init:20}` | 电阻滑块（Ω） |
+| `time` | object | — | `{min:0,max:60,step:1,init:10}` | 时间滑块（s；`min` 缺省 0） |
+| `badge` | object | — | — | 读数徽章 |
+
+```js
+{ type: "joule-heating", params: {
+  current: { min: 0.5, max: 3, step: 0.1, init: 1 },
+  resistance: { min: 5, max: 50, step: 1, init: 20 },
+  time: { min: 0, max: 60, step: 1, init: 10 },
+  badge: { invariant: "没变的是：这根电阻丝" }
+} }
+```
+
+输出：读数 `Q = I²Rt = … J`（MathML，`I²` 上标）；热量条（∝ Q/最大值）；状态"电流翻倍 → 热量变 4 倍；电阻/时间翻倍 → 热量变 2 倍"。
+双编码：热量条长度 + 读数文字。
+
+---
+
+### P1 · motor-commutator（电动机换向器慢动作）—— p10.1.3
+
+| 参数 | 类型 | 必填 | 默认 | 说明 |
+|---|---|---|---|---|
+| `badge` | object | — | — | 读数徽章 |
+
+```js
+{ type: "motor-commutator", params: {
+  badge: { invariant: "没变的是：磁铁、电源" }
+} }
+```
+
+交互：▶/⏸/↺（慢放 ×0.2，文案注明"非真实转速"）→ 线圈在 N/S 磁场中转动；换向器两半环（橙 A / 天蓝 B，随线圈转）+ 固定电刷（+ / −）；电流方向每半圈翻转（青绿箭头 + "电流：上→右/上→左"文字）。
+输出四步状态：①受力转动 → ②惯性过平衡位置 → ③换向器切换、电流反向（警告态高亮）→ ④继续同向转；读数"已转 … 圈（慢放示意）"。
+双编码：半环颜色 + 步骤文字。
+
+---
+
+### P1 · vacuum-tube（真空管：羽毛 vs 硬币）—— p11.2.3
+
+| 参数 | 类型 | 必填 | 默认 | 说明 |
+|---|---|---|---|---|
+| `badge` | object | — | — | 读数徽章 |
+
+```js
+{ type: "vacuum-tube", params: {
+  badge: { invariant: "没变的是：管子、羽毛、硬币" }
+} }
+```
+
+交互："有空气 / 抽成真空"二选（`aria-pressed`，≥44px）→ ▶ 下落：硬币 1.2s 落地；羽毛有空气 3.6s + 左右飘摆、真空 1.2s。
+输出：有空气"硬币先落地：空气阻力拖住了羽毛"（警告态）；真空"同时落地 ✓：真空里只受重力，下落一样快"。
+双编码：下落快慢 + 结论文字。
+
+---
+
+### P1 · pendulum（虚拟摆）—— p00.1.2（复用 p17.1.2）
+
+| 参数 | 类型 | 必填 | 默认 | 说明 |
+|---|---|---|---|---|
+| `length` | object | — | `{min:0.2,max:1.5,step:0.1,init:1}` | 摆长滑块（m） |
+| `mass` | object | — | `{min:0.1,max:1,step:0.1,init:0.5}` | 摆球质量滑块（kg；只影响球大小示意） |
+| `angle` | object | — | `{min:5,max:30,step:1,init:15}` | 摆角滑块（°；改动后从该角释放） |
+| `badge` | object | — | — | 读数徽章 |
+
+```js
+{ type: "pendulum", params: {
+  length: { min: 0.2, max: 1.5, step: 0.1, init: 1 },
+  mass: { min: 0.1, max: 1, step: 0.1, init: 0.5 },
+  angle: { min: 5, max: 30, step: 1, init: 15 },
+  badge: { invariant: "没变的是：重力加速度 g" }
+} }
+```
+
+交互：三滑块 + ▶/⏸/↺（默认播放）；摆角滑块改动后从该角释放（`tV=0`）。
+输出：读数 `T = 2π√(L/g) = … s`（MathML）；状态"换摆球质量 / 摆角 → 周期不变；摆长变 → 周期变"。
+口径：小角度（≤10°）公式最准（文案注明）；`g=9.8`。
+双编码：摆动 + 读数文字。
 
 ---
 
