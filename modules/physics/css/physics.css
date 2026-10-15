@@ -433,7 +433,14 @@ body[data-theme="dark"] #physics-app .phy-trap { background: #2b2113; }
   border-color: currentColor;
   font-weight: 700;
   background: var(--phy-bg);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
 }
+/* mv-lab ρ 标签引线（W6/黄队改法 2：引线锚定线端，颜色随线） */
+.phy-tag-leader { stroke-width: 0.8; }
+/* 杠杆力臂标签 L₁/L₂（PHY-M09 双编码：斜体字 + 引线） */
+.phy-arm-tag { font-size: 4.2px; font-style: italic; font-weight: 700; fill: var(--phy-ink); }
 .phy-plot {
   width: 100%;
   height: auto;

@@ -302,30 +302,43 @@
       svg.appendChild(t2);
     });
     /* 三条过原点的直线 m = ρV（点列数据源，Y4 口径） */
-    var traces = {};
+    var traces = {}, endDots = {};
     mats.forEach(function (mt) {
+      /* W5 修复（2026-10-15）：端点必达。旧循环 v<=vEnd+1 步进 100，
+       * vEnd 非 100 倍数时端点分支永不执行（ρ=2.7 止于 300、ρ=7.9 止于 100）。 */
       var vEnd = Math.min(vMax, mMax / mt.rho);
       var pts = [];
-      for (var v = 0; v <= vEnd + 1; v += 100) {
-        var vv = Math.min(v, vEnd);
-        pts.push(X(vv).toFixed(2) + "," + Y(mt.rho * vv).toFixed(2));
-        if (vv >= vEnd) break;
-      }
-      var pl = svgEl("polyline", {
-        "class": "phy-trace", points: pts.join(" "),
-        stroke: roleColor(mt.colorRole)
-      });
+      for (var v = 0; v < vEnd; v += 100)
+        pts.push(X(v).toFixed(2) + "," + Y(mt.rho * v).toFixed(2));
+      pts.push(X(vEnd).toFixed(2) + "," + Y(mt.rho * vEnd).toFixed(2));
+      var pl = svgEl("polyline", { "class": "phy-trace", points: pts.join(" ") });
+      /* W6 修复（2026-10-15，专家队裁决）：行内样式恢复颜色编码。
+       * CSS .phy-trace 的灰色虚线会覆盖表现属性；行内样式优先级最高，
+       * 且不影响位移迹线等另两处 .phy-trace 用法（零副作用）。 */
+      pl.style.stroke = roleColor(mt.colorRole);
+      pl.style.strokeDasharray = "none";
       svg.appendChild(pl);
       traces[mt.id] = pl;
+      /* 端点圆点（黄队 mv-lab 改法 1：选中态放大 1.5 倍，与加粗直线双编码） */
+      var ed = svgEl("circle", { cx: X(vEnd).toFixed(2), cy: Y(mt.rho * vEnd).toFixed(2),
+        r: 1.6, "class": "phy-dot" });
+      ed.style.fill = roleColor(mt.colorRole);
+      svg.appendChild(ed);
+      endDots[mt.id] = ed;
       /* 斜率标签（Y4：直线段给精确值）
-       * 附带观察（2026-10-15）：陡线（铁，线端贴近 y 轴）的标签若放线端
-       * 左上，会与 y 轴 "1000" 刻度在左上角相挤；此时改放线端右下方。 */
+       * 黄队 mv-lab 改法 2：ρ 标签用引线锚定在实际线端（引线端点距直线 ≤4 逻辑单位），
+       * 标签跟随直线；陡线（铁，线端贴近 y 轴）标签放线端右下方防与刻度相挤。 */
       var tagEndX = X(vEnd), tagEndY = Y(mt.rho * vEnd);
       var tagCrowded = tagEndX < 30;
+      var tagX = tagCrowded ? tagEndX + 1.5 : tagEndX - 1;
+      var tagY = tagCrowded ? tagEndY + 3.5 : tagEndY - 2;
+      var leader = svgEl("line", { x1: tagEndX.toFixed(2), y1: tagEndY.toFixed(2),
+        x2: tagX.toFixed(2), y2: tagY.toFixed(2), "class": "phy-tag-leader" });
+      leader.style.stroke = roleColor(mt.colorRole);
+      svg.appendChild(leader);
       var tag = svgEl("text", {
         "class": "phy-slope-tag",
-        x: tagCrowded ? tagEndX + 1.5 : tagEndX - 1,
-        y: tagCrowded ? tagEndY + 4.5 : tagEndY - 2,
+        x: tagX.toFixed(2), y: tagY.toFixed(2),
         fill: roleColor(mt.colorRole),
         "text-anchor": tagCrowded ? "start" : "end"
       });
@@ -356,8 +369,14 @@
       dot.setAttribute("cx", X(v).toFixed(2));
       dot.setAttribute("cy", Y(state.m).toFixed(2));
       dot.setAttribute("fill", mt ? roleColor(mt.colorRole) : "#D55E00");
+      /* 黄队 mv-lab 改法 1：选中态不许只靠透明度——选中直线加粗 2px +
+       * 端点圆点放大 1.5 倍，非选中线降到 40% 透明（透明度只做辅助）。 */
       for (var id in traces) {
-        traces[id].style.opacity = (!mt || id === mt.id) ? "1" : "0.25";
+        var sel = !mt || id === mt.id;
+        traces[id].style.opacity = sel ? "1" : "0.4";
+        traces[id].style.strokeWidth = sel ? "2px" : "";
+        endDots[id].setAttribute("r", sel ? 2.4 : 1.6);
+        endDots[id].style.opacity = sel ? "1" : "0.4";
       }
       badge.val.textContent = mt ? mt.rho.toFixed(1) : "—";
       badge.unit.textContent = " " + (params.unitRho || "");
@@ -1791,6 +1810,8 @@
     box.appendChild(svg);
     var imgBadge = stateBadge("—", "");
     box.appendChild(imgBadge);
+    var imgHuman = el("div", "phy-note", "");
+    box.appendChild(imgHuman);
     var formulaLine = el("div", "phy-formula-line", "");
     box.appendChild(formulaLine);
     var AX = 52; /* 主光轴 y */
@@ -1826,7 +1847,10 @@
         svg.appendChild(svgEl("line", { x1: topX, y1: topY, x2: hx, y2: hy,
           stroke: cssVar("--phy-ray"), "stroke-width": 1.2, "marker-end": "url(#fh-ray)" }));
         var dx = hx - topX, dy = hy - topY;
-        var rx2 = hx - dx, ry2 = hy + dy * 0.9;
+        /* F14–F15 修复（2026-10-15）：反射角必须=入射角（PHY-O01，≤1°）。
+         * 旧 ry2=hy+dy*0.9 致 r=atan(0.9·tan i)<i 恒成立。镜面竖直，
+         * 反射即水平分量反向、竖直分量不变：ry2=hy+dy（构造保证，对拖动位形亦然）。 */
+        var rx2 = hx - dx, ry2 = hy + dy;
         svg.appendChild(svgEl("line", { x1: hx, y1: hy, x2: rx2, y2: Math.min(95, ry2),
           stroke: cssVar("--phy-ray"), "stroke-width": 1.2, "marker-end": "url(#fh-ray)" }));
         /* 法线（灰虚线） */
@@ -2017,20 +2041,35 @@
         badgeText = "不成像（u=f）";
         tone = "";
         imgBadge.textContent = badgeText;
+        imgHuman.textContent = "物正好在焦点上：折射光线平行，交不到一起";
       } else if (p.showImage === false) {
         imgBadge.textContent = "（像已隐藏）";
+        imgHuman.textContent = "";
         tone = "";
       } else {
+        /* F16–F20 修复（2026-10-15）：像箭头方向画反。逻辑 y 向上、SVG y 向下：
+         * 物在轴上方（SVG y2=topY<AX）；实像倒立→像尖应在轴下方（SVG y=AX+ih），
+         * 虚像正立→像尖应在轴上方（SVG y=AX−ih）。iy 的计算本就正确，
+         * 错的是下面 y2 把实/虚写反了——直接用 iy。 */
         var iy = AX + (kind === "real" ? ih : -ih);
-        var iln = svgEl("line", { x1: ix, y1: AX, x2: ix, y2: kind === "real" ? AX - ih : AX + ih,
+        var iln = svgEl("line", { x1: ix, y1: AX, x2: ix, y2: iy,
           stroke: cssVar("--phy-body"), "stroke-width": 1.8,
           "stroke-dasharray": kind === "virtual" ? "2.5,2" : "none",
           "marker-end": kind === "real" ? "url(#fh-ray)" : "none" });
         svg.appendChild(iln);
+        /* F21 修复（2026-10-15，专家队裁决 A）：|m| 三态徽章。
+         * u=2f 时 |m|=1 是"放大/缩小"的分界，必须独立为"倒立等大实像"；
+         * ±5% 容差带防拖拽边界抖动（裁决 A）。 */
+        var am = Math.abs(m);
         var prop = kind === "real"
-          ? (Math.abs(m) < 1 ? "倒立缩小实像" : "倒立放大实像")
+          ? (am < 0.95 ? "倒立缩小实像" : am <= 1.05 ? "倒立等大实像" : "倒立放大实像")
           : "正立放大虚像";
         imgBadge.textContent = prop + (kind === "virtual" ? "（虚像用虚线画，因为光线没真交于那）" : "");
+        /* 黄队 P4（直观性）：徽章只报术语不够，加一句人话——放独立 .phy-note 元素，
+         * 不进 imgBadge（白队 O13 对徽章做精确匹配，文本必须保持术语原样）。 */
+        imgHuman.textContent = kind === "virtual" ? "像跑到物体这边来了——这就是放大镜的秘密"
+          : am < 0.95 ? "像比物体小、倒过来了"
+          : am <= 1.05 ? "像和物体一样大、倒过来了" : "像比物体大、倒过来了";
         badgeText = prop;
       }
       imgBadge.className = "phy-state" + (tone ? " phy-state-" + tone : "");
@@ -2156,14 +2195,20 @@
       var ctx = fitCanvas(cv, W, H);
       var A = sAmp.get(), f = sFreq.get(), phd = sPhase.get();
       driftHz = Math.min(Math.max(f, 0), 3);
-      /* 读数行：λ=v/f，v=340m/s 注明 */
-      var lam = 340 / f;
+      /* 读数行：λ=v/f
+       * 声速备注修复（2026-10-15）：v=340m/s 写死致非声学页（p17.2.3 交流电）读数行出现
+       * "声速"误导。数据侧无 v 参数，渲染器层修：p.v 可覆盖波速、p.vNote 可覆盖备注；
+       * 缺省时仅声学语境（playSound，可发声演示）保留"声速"注，非声学页只显示 λ 数值。 */
+      var vWave = p.v || 340;
+      var lam = vWave / f;
+      var vNote = p.vNote != null ? p.vNote
+        : (p.v ? "（v=" + p.v + "m/s）" : (p.playSound !== false ? "（v=340m/s，声速）" : ""));
       var rm = "<math><mrow><mi>A</mi><mo>=</mo><mn>" + fmtN(A, 1) +
         "</mn><mo>,</mo><mi>f</mi><mo>=</mo><mn>" + fmtN(f, 0) +
         "</mn><mspace width=\"0.25em\"/><mi mathvariant=\"normal\">Hz</mi><mo>,</mo>" +
         "<mi>λ</mi><mo>=</mo><mi>v</mi><mo>/</mo><mi>f</mi><mo>=</mo><mn>" + fmtN(lam, 2) +
         "</mn><mspace width=\"0.25em\"/><mi mathvariant=\"normal\">m</mi></mrow></math>";
-      badge.setReadout(rm, "A=" + fmtN(A, 1) + "，f=" + fmtN(f, 0) + " Hz，λ=v/f=" + fmtN(lam, 2) + " m（v=340m/s，声速）");
+      badge.setReadout(rm, "A=" + fmtN(A, 1) + "，f=" + fmtN(f, 0) + " Hz，λ=v/f=" + fmtN(lam, 2) + " m" + vNote);
       legend.innerHTML = "";
       var lgA = el("span", "phy-lg",
         '<i style="background:' + roleColor("wave-a") + '"></i>波 A（实线）');
@@ -2183,17 +2228,23 @@
         ctx.setLineDash(dash || []);
         ctx.beginPath();
         for (var i = 0; i <= N; i++) {
-          var x = i / N * 4; /* 显示 4 个周期（示意） */
+          var x = i / N * 4; /* 显示域固定 4 个单位；周期数 = NP·f/fInit，随频率成比例变化 */
           var px = 10 + i / N * (W - 20), py = yOf(fn(x, t));
           if (i === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
         }
         ctx.stroke(); ctx.setLineDash([]);
       }
-      var fA = function (x, t) { return waveVal(A, 1, phd, x / (2 * Math.PI), t); };
+      /* F1–F4 修复（2026-10-15）：频率滑块必须改变波形。显示域固定为 x∈[0,4]，
+       * 空间相位 = 2π·NP·(f/fInit)·(x/4)，NP=3（初值档显示 3 个周期）：
+       * 两档频率下像素波长比 λ1/λ2 = f2/f1 精确成立（PHY-G06），
+       * 且低频档也有 ≥2 个上升过零点、像素可测。 */
+      var fInit = (p.freq && p.freq.init) || 440;
+      var NP = 3;
+      var fA = function (x, t) { return waveVal(A, NP * f / fInit, phd, x / 4, t); };
       plot(fA, cssVar("--phy-wave-a"));
       readWaveB();
       if (waveB) {
-        var fB = function (x, t) { return waveVal(bAmp, 1, bPh, x / (2 * Math.PI), t); };
+        var fB = function (x, t) { return waveVal(bAmp, NP * bFreq / fInit, bPh, x / 4, t); };
         plot(fB, cssVar("--phy-wave-b"), [6, 4]);
         if (showSum) plot(function (x, t) { return fA(x, t) + fB(x, t); },
           cssVar("--phy-target"), [], 3);
@@ -2328,6 +2379,7 @@
     var F2 = (p.load && p.load.weight) || 10;
     var Lx = 15, Rx = 85, BY = 55;
     var tiltShown = 0, tiltRaf = 0; /* 倾斜动画 300ms 缓动（触控要求） */
+    var armAnimDone = false; /* 力臂描画动画：每页视图只播一次 */
     function drawLever() {
       svg.innerHTML = "";
       var O = ful.get();
@@ -2348,23 +2400,103 @@
       var beam = svgEl("g", { "class": "phy-beam" });
       beam.appendChild(svgEl("line", { x1: Lx, y1: BY, x2: Rx, y2: BY,
         stroke: cssVar("--phy-body"), "stroke-width": 2.4 }));
-      /* 阻力（橙，已知） */
-      beam.appendChild(svgEl("rect", { x: Lx - 4, y: BY + 2, width: 8, height: 7, "class": "phy-body-box" }));
-      arrowHead(svg, "fh-f2", cssVar("--phy-force-a"));
-      beam.appendChild(svgEl("line", { x1: Lx, y1: BY + 2, x2: Lx, y2: BY - 10,
-        stroke: cssVar("--phy-force-a"), "stroke-width": 1.8, "marker-end": "url(#fh-f2)" }));
-      beam.appendChild(svgText(Lx - 1, BY - 12, "F₂", "phy-force-label", "end"));
-      /* 动力（朱红，待求） */
-      arrowHead(svg, "fh-f1", cssVar("--phy-target"));
-      beam.appendChild(svgEl("line", { x1: Ex, y1: BY + 2, x2: Ex, y2: BY - 10,
-        stroke: cssVar("--phy-target"), "stroke-width": 2.2, "marker-end": "url(#fh-f1)" }));
-      beam.appendChild(svgText(Ex + 1, BY - 12, "F₁", "phy-force-label", "start"));
-      /* 力臂弧线（单弧/双弧双编码） */
-      beam.appendChild(svgEl("path", { d: "M" + Lx + "," + (BY - 14) + " A14,14 0 0 1 " + O + "," + (BY - 14),
-        fill: "none", stroke: cssVar("--phy-force-a"), "stroke-width": 1 }));
-      beam.appendChild(svgEl("path", { d: "M" + O + "," + (BY - 14) + " A14,14 0 0 1 " + Ex + "," + (BY - 14),
-        fill: "none", stroke: cssVar("--phy-force-b"), "stroke-width": 1,
-        "stroke-dasharray": "2,1.5" }));
+      /* === 杠杆受力图重画（2026-10-15）：专家队裁决 B + PHY-M08/M09 + 黄队 P6 改法 2 ===
+       * 坐标：SVG y 向下；逻辑 y 向上。竖直向下 = SVG +y = 逻辑 270°。
+       * F₂/F₁ 箭头一律竖直向下（270°±2°，PHY-M01），作用点落在梁线上（PHY-M07）；
+       * 箭长 ∝ 力的大小（PHY-M05，同一比例系数）；全部位于 beam 组内，随倾斜一起旋转。 */
+      if (!badArm) {
+        var maxF = Math.max(F1, F2, 1e-9);
+        var len2 = 14 * F2 / maxF, len1 = 14 * F1 / maxF;
+        /* --- F₂（阻力=钩码重力）：作用点在悬挂点 (Lx,BY)，竖直向下穿入钩码顶部 ---
+         * 箭头绘制长度严格 = len2（∝F₂，PHY-M05 测量口径）；钩码顶部比箭头短 2，
+         * 箭头穿入顶部 2 单位（先画钩码、后画箭头，箭头可见）。 */
+        var boxTop2 = BY + len2 - 2;
+        beam.appendChild(svgEl("line", { x1: Lx, y1: BY, x2: Lx, y2: boxTop2,
+          stroke: cssVar("--phy-track"), "stroke-width": 0.9 })); /* 悬挂线 */
+        beam.appendChild(svgEl("rect", { x: Lx - 4, y: boxTop2, width: 8, height: 8,
+          "class": "phy-body-box" })); /* 钩码 */
+        arrowHead(svg, "fh-f2", cssVar("--phy-force-a"));
+        beam.appendChild(svgEl("line", { x1: Lx, y1: BY, x2: Lx, y2: BY + len2,
+          stroke: cssVar("--phy-force-a"), "stroke-width": 1.8, "marker-end": "url(#fh-f2)" }));
+        beam.appendChild(svgText(Lx - 2.4, BY + len2 * 0.45, "F₂", "phy-force-label", "end"));
+        /* --- F₁（动力）：作用点在动力端 (Ex,BY)，竖直向下（人手下压杠杆） --- */
+        arrowHead(svg, "fh-f1", cssVar("--phy-target"));
+        beam.appendChild(svgEl("line", { x1: Ex, y1: BY, x2: Ex, y2: BY + len1,
+          stroke: cssVar("--phy-target"), "stroke-width": 2.2, "marker-end": "url(#fh-f1)" }));
+        beam.appendChild(svgText(Ex + 2.4, BY + len1 * 0.55, "F₁", "phy-force-label", "start"));
+        /* --- 力臂（PHY-M08）：支点 O 到竖直力线的垂线段。
+         * 力线竖直（x=Lx / x=Ex），垂足即作用点，臂线沿梁线；
+         * 加粗高亮 + 垂足直角标记。 --- */
+        function armSeg(xFoot, color) {
+          var seg = svgEl("line", { x1: O, y1: BY, x2: xFoot, y2: BY,
+            stroke: color, "stroke-width": 4.5, opacity: 0.55 });
+          beam.appendChild(seg);
+          return seg;
+        }
+        var seg2 = armSeg(Lx, cssVar("--phy-force-a"));
+        var seg1 = armSeg(Ex, cssVar("--phy-force-b"));
+        function rightMark(xFoot, dirX) {
+          /* 垂足直角标记：臂方向（dirX=±1，自垂足指向 O）与竖直力线之间的小方角 */
+          var s = 2.6;
+          beam.appendChild(svgEl("path", {
+            d: "M" + (xFoot + dirX * s).toFixed(1) + "," + BY +
+               " L" + (xFoot + dirX * s).toFixed(1) + "," + (BY + s) +
+               " L" + xFoot + "," + (BY + s),
+            fill: "none", stroke: cssVar("--phy-body"), "stroke-width": 1 }));
+        }
+        rightMark(Lx, 1);
+        rightMark(Ex, -1);
+        /* --- 力臂弧线（PHY-M09）：圆心=支点 O，单弧/双弧区分两臂。
+         * L₂ 单弧（橙）：中心 (O,BY) 半径 L₂，自梁上 (Lx,BY) 扫到 O 正上方；
+         * L₁ 双弧：中心 (O,BY)，半径 L₁ 与 L₁−2.5，同向。
+         * 屏坐标顺时针为正：L₂ 自 9 点到 12 点取 sweep=1；L₁ 自 3 点到 12 点取 sweep=0。 --- */
+        var arcCol2 = cssVar("--phy-force-a"), arcCol1 = cssVar("--phy-force-b");
+        beam.appendChild(svgEl("path", {
+          d: "M" + Lx + "," + BY + " A" + L2 + "," + L2 + " 0 0 1 " + O + "," + (BY - L2),
+          fill: "none", stroke: arcCol2, "stroke-width": 1.2 }));
+        var r1b = Math.max(L1 - 2.5, 1);
+        beam.appendChild(svgEl("path", {
+          d: "M" + Ex + "," + BY + " A" + L1 + "," + L1 + " 0 0 0 " + O + "," + (BY - L1),
+          fill: "none", stroke: arcCol1, "stroke-width": 1.2 }));
+        beam.appendChild(svgEl("path", {
+          d: "M" + (O + r1b).toFixed(1) + "," + BY + " A" + r1b + "," + r1b +
+             " 0 0 0 " + O + "," + (BY - r1b).toFixed(1),
+          fill: "none", stroke: arcCol1, "stroke-width": 1.2 }));
+        /* 弧线标签 L₁/L₂（斜体）+ 引线连到弧中点 */
+        function arcLabel(r, deg, txt, color) {
+          var a = deg * Math.PI / 180;
+          var mxp = O + r * Math.cos(a), myp = BY + r * Math.sin(a);
+          var lxp = O + (r + 6.5) * Math.cos(a), lyp = BY + (r + 6.5) * Math.sin(a);
+          beam.appendChild(svgEl("line", { x1: mxp.toFixed(1), y1: myp.toFixed(1),
+            x2: lxp.toFixed(1), y2: lyp.toFixed(1), stroke: color, "stroke-width": 0.8 }));
+          beam.appendChild(svgText(lxp.toFixed(1), (lyp + 1.5).toFixed(1), txt, "phy-arm-tag", "middle"));
+        }
+        arcLabel(L2, 225, "L₂", arcCol2);
+        arcLabel(L1, 315, "L₁", arcCol1);
+        /* 首次进入：力臂线段描画动画（从支点 O 画到垂足，600ms） */
+        if (!armAnimDone) {
+          armAnimDone = true;
+          try {
+            [seg2, seg1].forEach(function (sg) {
+              var L = Math.abs(parseFloat(sg.getAttribute("x2")) - parseFloat(sg.getAttribute("x1"))) || 1;
+              sg.style.strokeDasharray = String(L);
+              sg.style.strokeDashoffset = String(L);
+            });
+            var tA0 = nowMs();
+            (function animArm() {
+              var kk = Math.min(1, (nowMs() - tA0) / 600);
+              [seg2, seg1].forEach(function (sg) {
+                var L = Math.abs(parseFloat(sg.getAttribute("x2")) - parseFloat(sg.getAttribute("x1"))) || 1;
+                sg.style.strokeDashoffset = (L * (1 - kk)).toFixed(1);
+              });
+              if (kk < 1) rafFn(animArm);
+              else [seg2, seg1].forEach(function (sg) {
+                sg.style.strokeDasharray = ""; sg.style.strokeDashoffset = "";
+              });
+            })();
+          } catch (e) {}
+        }
+      }
       svg.appendChild(beam);
       /* 300ms 缓动：从当前显示角度 tween 到目标角度 */
       (function (g, ox, oy, from, to) {
@@ -2886,12 +3018,24 @@
     }
     hold(bHeat, 1); hold(bCool, -1);
     function tierOf(sp) { return sp < 0.5 ? 0 : sp < 0.85 ? 1 : 2; }
+    /* F5–F9 修复（2026-10-15）：粒子速率必须随 T 严格单调上升
+     *（文案"加热=粒子加速"为真值，PHY-X08）。旧 sc=min(1,1.1/(1.5·vScale))
+     * 在全部可达温度下把 vScale 完全抵消，致速率恒定。
+     * 新映射：k(T) = 0.35+0.65·(vScale−vMin)/(vMax−vMin)，vScale=√(T_K/293.15)，
+     * 按本页温度范围归一化——严格单调（速率 ∝ √T 趋势），高温端钳制在
+     * 可视速度内（"已慢放"示意保留）。 */
+    var vTMin = Math.sqrt((p.temp.min + 273.15) / 293.15);
+    var vTMax = Math.sqrt((p.temp.max + 273.15) / 293.15);
+    function speedK(T) {
+      var vs = Math.sqrt((T + 273.15) / 293.15);
+      var q = vTMax > vTMin ? (vs - vTMin) / (vTMax - vTMin) : 1;
+      q = Math.max(0, Math.min(1, q));
+      return 0.35 + 0.65 * q;
+    }
     var TIER_COL = ["--phy-charge-neg", "--phy-force-a", "--phy-charge-pos"];
     var TIER_ZH = ["慢", "中", "快"];
     function draw() {
       var T = tCtl.get();
-      var Tk = T + 273.15;
-      var vScale = Math.sqrt(Tk / 293.15);
       var W = 340, H = 190;
       var ctx = fitCanvas(cv, W, H);
       /* 物态徽章 */
@@ -2923,12 +3067,12 @@
         ctx.fillStyle = cssVar("--phy-body"); ctx.font = "10px sans-serif"; ctx.textAlign = "center";
         ctx.fillText(tv + "℃", px, ty + 18);
       });
-      var rawMax = 1.5 * vScale, target = 1.1, sc = Math.min(1, target / rawMax);
-      slowNote.style.display = sc < 1 ? "" : "none";
-      if (sc < 1) slowNote.textContent = "已慢放（高温粒子太快，动画降速示意）。";
+      /* F5–F9：慢放标注常驻（动画速度经缩放示意，非真实分子速率） */
+      slowNote.style.display = "";
+      slowNote.textContent = "已慢放（高温粒子太快，动画降速示意）。";
       /* 粒子 */
       ps.forEach(function (q) {
-        var sp = q.sp * vScale * sc;
+        var sp = q.sp * speedK(T);
         var tier = tierOf(q.sp);
         var px = 4 + q.x / 100 * (W - 8), py = 4 + q.y / 100 * (H - 38);
         ctx.fillStyle = cssVar(TIER_COL[tier]);
@@ -2955,10 +3099,9 @@
       }
     }
     function stepPhys(dt) {
-      var T = tCtl.get(), vScale = Math.sqrt((T + 273.15) / 293.15);
-      var rawMax = 1.5 * vScale, sc = Math.min(1, 1.1 / rawMax);
+      var T = tCtl.get(), kNow = speedK(T);
       ps.forEach(function (q) {
-        var sp = q.sp * vScale * sc;
+        var sp = q.sp * kNow;
         q.x += Math.cos(q.a) * sp; q.y += Math.sin(q.a) * sp * 0.8;
         if (q.x < 8 || q.x > 92) { q.a = Math.PI - q.a; q.x = Math.max(8, Math.min(92, q.x)); }
         if (q.y < 10 || q.y > 82) { q.a = -q.a; q.y = Math.max(10, Math.min(82, q.y)); }
@@ -3189,7 +3332,10 @@
         say(false, "估读只到分度值下一位（" + needDec + " 位小数）。");
         return;
       }
-      if (Math.abs(v - target) <= tolHere + 1e-9) say(true, "读数 " + fmtN(target, needDec) + " " + unit + "。");
+      /* W1 修复（2026-10-15，专家队裁决升级为 FAIL）：判对反馈是示范答案，
+       * 必须定长显示估读位（PHY-R03：少一位都算 FAIL）。只改这一处；
+       * 刻度标签与"差了 X"提示保持去尾零不动。 */
+      if (Math.abs(v - target) <= tolHere + 1e-9) say(true, "读数 " + Number(target).toFixed(needDec) + " " + unit + "。");
       else say(false, "差了 " + fmtN(Math.abs(v - target), 2) + unit + "，再对一次刻度。");
     }
     function inputRow(target, unit, ph, dv) {
@@ -3422,6 +3568,20 @@
     box.appendChild(out);
     var src = p.source || {};
     var steps = p.steps || ["slope", "area", "intercept"];
+    /* W13 边界（2026-10-15 专家队裁决"一并考虑"）：斜率读数为数值物理量时，
+     * 若轴标签是真"量/单位"式则补单位；符号化比例图（哑标签如 "ΔΦ/Δt"）豁免，
+     * 不硬加（防把哑系数伪装成实测值）。 */
+    function axisUnit(lbl) {
+      var s = String(lbl || "");
+      var m = /\(([^()]+)\)$/.exec(s) || /\/([^/()（）]+)$/.exec(s);
+      if (!m) return "";
+      var u = m[1].trim();
+      return /^[\w°·/().×^ \-]+$/.test(u) ? u : "";
+    }
+    function slopeUnit() {
+      var yu = axisUnit(src.yLabel), xu = axisUnit(src.xLabel);
+      return yu ? (xu ? yu + "/" + xu : yu) : "";
+    }
     var slices = Math.min(p.areaSlices || 40, 60);
     if ((p.areaSlices || 40) > 60 && typeof console !== "undefined" && console.warn)
       console.warn("[graph-reader] areaSlices 超 60，已钳制。");
@@ -3496,16 +3656,33 @@
       if (fn) {
         var mid = (a + b) / 2, ym = sampleY(mid);
         exact = Math.abs(ym - (ya + yb) / 2) < 1e-6 * (yMax - yMin);
-      } else if (pts) exact = true; /* 点列：直线段给精确值 */
+      } else if (pts) {
+        /* F10–F12 修复（2026-10-15）：点列不再硬编码 exact=true。
+         * 直线度检验：[a,b] 内 8 等分采样，任一点偏离弦超过弦 y 跨度 2%
+         * 即判为曲线段（只许"近似"，PHY-G01；归一化口径与白队审计一致）。
+         * 弦近水平时退回全量程归一化（防除零）。 */
+        var yr = Math.abs(yb - ya), fullR = (yMax - yMin) || 1;
+        if (yr < 1e-9 * fullR) yr = fullR;
+        var dev = 0;
+        for (var si = 0; si <= 8; si++) {
+          var sx3 = a + (b - a) * si / 8, sy3 = sampleY(sx3);
+          if (isFinite(sy3)) {
+            var ych = ya + (yb - ya) * (sx3 - a) / (b - a);
+            dev = Math.max(dev, Math.abs(sy3 - ych));
+          }
+        }
+        exact = dev <= 0.02 * yr;
+      }
       var col = exact ? cssVar("--phy-force-c") : cssVar("--phy-target");
       svg.appendChild(svgEl("line", { x1: X(a), y1: Y(ya), x2: X(b), y2: Y(yb),
         stroke: col, "stroke-width": 1.6, "stroke-dasharray": exact ? "none" : "3,2" }));
+      var ku = slopeUnit(), kuS = ku ? " " + ku : "";
       svg.appendChild(svgText((X(a) + X(b)) / 2, Math.min(Y(ya), Y(yb)) - 3,
-        "k=" + fmtN(k, 2) + (exact ? "" : "（近似）"), "phy-slope-tag"));
+        "k=" + fmtN(k, 2) + kuS + (exact ? "" : "（近似）"), "phy-slope-tag"));
       out.textContent = exact
-        ? "斜率 k = " + fmtN(k, 2) + "（直线段，精确值）"
-        : "斜率 ≈ " + fmtN(k, 2) + "（曲线段，近似——切线斜率示意，别当精确值抄）";
-      var r = mmlRead(mi("k"), fmtN(k, 2) + (exact ? "" : "（近似）"), "");
+        ? "斜率 k = " + fmtN(k, 2) + kuS + "（直线段，精确值）"
+        : "斜率 ≈ " + fmtN(k, 2) + kuS + "（曲线段，近似——切线斜率示意，别当精确值抄）";
+      var r = mmlRead(mi("k"), fmtN(k, 2) + (exact ? "" : "（近似）"), ku);
       badge.setReadout(r.mathml, "k = " + r.text);
     });
     stepBtn("area", "读面积", function () {
@@ -3516,6 +3693,9 @@
       out.textContent = "面积分割中…（" + n + " 片）";
       (function paint() {
         if (i >= n) {
+          /* W16 修复（2026-10-15）：对称区间积分为 0 显示 "-0" 是浮点符号位残留；
+           * |sum|<ε 先归零，只改显示不动积分逻辑。 */
+          if (Math.abs(sum) < 1e-9) sum = 0;
           var r = mmlRead(mi("S"), fmtN(sum, 2), "");
           badge.setReadout(r.mathml, "S = " + r.text);
           out.textContent = "面积 S ≈ " + fmtN(sum, 2) +
@@ -3538,13 +3718,31 @@
       })();
     });
     stepBtn("intercept", "读截距", function () {
+      /* F13 修复（2026-10-15；W14/W15 同根因顺带）：零点恰落在采样点/数据点上时，
+       * 严格不等式 ya*yb<0 会漏报。改为：变号内插 + 端点零点检查 + 数据点零点兜底，
+       * 相邻重复去重（容差一个采样步长）。 */
       var found = [];
+      var epsX = (x1 - x0) / 120;
+      function addZero(zx) {
+        for (var k = 0; k < found.length; k++)
+          if (Math.abs(found[k] - zx) <= epsX) return;
+        found.push(zx);
+      }
+      var prevZero = false;
       for (var i = 0; i < 120; i++) {
         var xa = x0 + (x1 - x0) * i / 120, xb = x0 + (x1 - x0) * (i + 1) / 120;
         var ya = sampleY(xa), yb = sampleY(xb);
-        if (isFinite(ya) && isFinite(yb) && ya * yb < 0)
-          found.push(xa - ya * (xb - xa) / (yb - ya));
+        if (!isFinite(ya) || !isFinite(yb)) { prevZero = false; continue; }
+        if (ya * yb < 0) { found.push(xa - ya * (xb - xa) / (yb - ya)); prevZero = false; }
+        else if (ya === 0 && !prevZero) { addZero(xa); prevZero = true; }
+        else prevZero = (ya === 0);
       }
+      var yEnd = sampleY(x1);
+      if (yEnd === 0) addZero(x1);
+      if (pts) for (var pi = 0; pi < pts.length; pi++) {
+        if (pts[pi].y === 0 && pts[pi].x >= x0 && pts[pi].x <= x1) addZero(pts[pi].x);
+      }
+      found.sort(function (m, n) { return m - n; });
       found.slice(0, 4).forEach(function (zx) {
         svg.appendChild(svgEl("circle", { cx: X(zx), cy: Y(0), r: 1.8, "class": "phy-dot" }));
         svg.appendChild(svgText(X(zx), Y(0) - 3, fmtN(zx, 2), "phy-tick-label"));
