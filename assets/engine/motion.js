@@ -8,8 +8,9 @@
  * 速度场（field）：
  *  - 'brownian'    随机游走/扩散：恒定速率 + 每步按概率转向，边界弹性反射。
  *  - 'thermal'     热运动：brownian + 速率 ∝ √temperatureK（示意）。
- *  - 'drift'       电场定向漂移：热运动 + 按 kind 叠加恒定漂移速度 driftVxMps
- *                  （无规则运动一直都在，只叠加定向分量）。
+ *  - 'drift'       电场定向漂移：热运动 + 通电时（fieldState.on）按 kind
+ *                  叠加恒定漂移速度 driftVxMps（无规则运动一直都在，只在
+ *                  通电时叠加定向分量；未通电时退化为纯热运动——N-1）。
  *  - 'lattice'     晶格振动：粒子锁定格点做简谐振动（位置为 simTime 的纯函数）。
  *  - 'dissolve'    溶解：solvent 做 brownian；solute 初始为晶格态，每步按概率
  *                  detachProbPerStep 脱离为自由态（脱离后 brownian + 水合标志）。
@@ -271,7 +272,9 @@
       p.vx = v.vx; p.vy = v.vy;
     }
     var dx = p.vx * dt, dy = p.vy * dt;
-    if (this.field === 'drift' && kindDef) {
+    /* N-1（2026-10-17）：定向漂移只在通电时叠加。fieldState.on 由构造参数
+     * fieldOn 决定（§六 6.1）；未通电时 drift 场退化为纯热运动，质心不漂移。 */
+    if (this.field === 'drift' && kindDef && this.fieldState.on) {
       var dvx = isNum(kindDef.driftVxMps) ? kindDef.driftVxMps : 0;
       dx += dvx * dt; /* 定向漂移叠加在热运动之上（YC-B3） */
     }
