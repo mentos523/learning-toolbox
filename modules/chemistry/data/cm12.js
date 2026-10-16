@@ -128,16 +128,16 @@ window.CHEM_CH["cm12"] = {
                       { label: "未通电的 NaCl 溶液", sub: "离子只做无规则热运动，灯泡不亮",
                         motion: { field: "drift", fieldOn: false, seed: 41,
                           kinds: [
-                            { kind: "Na", count: 28, color: "#AB47BC", r: 1.7, label: "Na⁺", speedMps: 9, driftVxMps: 0.45 },
-                            { kind: "Cl", count: 28, color: "#66BB6A", r: 1.7, label: "Cl⁻", speedMps: 9, driftVxMps: -0.45 },
+                            { kind: "Na", count: 28, color: "#AB47BC", r: 1.7, label: "Na⁺", speedMps: 9, driftVxMps: -0.45 },
+                            { kind: "Cl", count: 28, color: "#66BB6A", r: 1.7, label: "Cl⁻", speedMps: 9, driftVxMps: 0.45 },
                             { kind: "water", count: 60, color: "#90CAF9", r: 1.2, label: "水", speedMps: 9 }
                           ] },
                         decor: { electrodes: true } },
                       { label: "通电的 NaCl 溶液", sub: "热运动 + 定向漂移，灯泡亮",
                         motion: { field: "drift", fieldOn: true, seed: 42, anodeDir: { x: 1, y: 0 },
                           kinds: [
-                            { kind: "Na", count: 28, color: "#AB47BC", r: 1.7, label: "Na⁺", speedMps: 9, driftVxMps: 0.45 },
-                            { kind: "Cl", count: 28, color: "#66BB6A", r: 1.7, label: "Cl⁻", speedMps: 9, driftVxMps: -0.45 },
+                            { kind: "Na", count: 28, color: "#AB47BC", r: 1.7, label: "Na⁺", speedMps: 9, driftVxMps: -0.45 },
+                            { kind: "Cl", count: 28, color: "#66BB6A", r: 1.7, label: "Cl⁻", speedMps: 9, driftVxMps: 0.45 },
                             { kind: "water", count: 60, color: "#90CAF9", r: 1.2, label: "水", speedMps: 9 }
                           ] },
                         decor: { electrodes: true } },

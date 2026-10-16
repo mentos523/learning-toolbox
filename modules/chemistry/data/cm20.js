@@ -127,7 +127,7 @@ window.CHEM_CH["cm20"] = {
                   steps: [
                     { stepIndex: 0, label: "1s + 3p 杂化成 4 个等同轨道", "break": [], form: ["4×sp³杂化轨道"],
                       hybridFrom: true, lonePairs: 0, bondAngleDeg: 109.5,
-                      note: "sp³ 杂化（定性）：1s+3p → 4 个等同轨道" },
+                      note: "sp³ 杂化（定性）：1s+3p 杂化成 4 个等同轨道" },
                     { stepIndex: 1, label: "第 1 个孤对电子加入，键角 109.5° → 107°", "break": [], form: [], squeeze: true,
                       lonePairs: 1, bondAngleFrom: 109.5, bondAngleDeg: 107,
                       note: "孤对“挤”：NH₃，三角锥形" },
@@ -267,9 +267,9 @@ window.CHEM_CH["cm20"] = {
                           { stepIndex: 0, label: "两个水分子靠近", "break": [], form: [], annotate: true,
                             sepFrom: 36, sep: 24, note: "一个分子的 H 朝向另一个分子的 O" },
                           { stepIndex: 1, label: "氢键形成", "break": [], form: ["氢键（分子间作用力）"],
-                            sep: 20, hbond: true, note: "O−H···O：氢键不是化学键，是分子间作用力" },
+                            sep: 28, hbond: true, note: "O−H···O：氢键不是化学键，是分子间作用力" },
                           { stepIndex: 2, label: "氢键断裂", "break": ["氢键"], form: [],
-                            sepFrom: 20, sep: 30, hbond: false, note: "断裂后水分子完整：O–H 键没断" }
+                            sepFrom: 28, sep: 30, hbond: false, note: "断裂后水分子完整：O–H 键没断" }
                         ],
                         autoplay: true,
                         reminder: "粒子大小、数量、运动速度均为示意，未按真实比例；粒子碰撞为示意，非真实碰撞过程。",
@@ -290,9 +290,9 @@ window.CHEM_CH["cm20"] = {
                       { stepIndex: 0, label: "两个水分子靠近", "break": [], form: [], annotate: true,
                         sepFrom: 36, sep: 24, note: "一个分子的 H 朝向另一个分子的 O" },
                       { stepIndex: 1, label: "氢键形成", "break": [], form: ["氢键（分子间作用力）"],
-                        sep: 20, hbond: true, note: "O−H···O：氢键不是化学键，是分子间作用力" },
+                        sep: 28, hbond: true, note: "O−H···O：氢键不是化学键，是分子间作用力" },
                       { stepIndex: 2, label: "氢键断裂", "break": ["氢键"], form: [],
-                        sepFrom: 20, sep: 30, hbond: false, note: "断裂后水分子完整：O–H 键没断" },
+                        sepFrom: 28, sep: 30, hbond: false, note: "断裂后水分子完整：O–H 键没断" },
                       { stepIndex: 3, label: "对照：H₂S 分子之间没有“拉手”", "break": [], form: [], annotate: true,
                         compare: "H2S", note: "H₂S 只有范德华力（示意）" }
                     ],

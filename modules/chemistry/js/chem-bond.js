@@ -194,7 +194,23 @@
       paint();
     }
     function autoNext() {
-      if (curFrame() >= steps.length - 1) { stopAuto(); return; }
+      if (curFrame() >= steps.length - 1) {
+        /* ⑦-2 末帧：同样完整运行 tween（u 0→1），播完后结束自动播、不再 next */
+        autoTween = Eng.Tween({
+          durationMs: STEP_MS / speed,
+          onUpdate: function (u) { stu.u = u; paint(); },
+          onDone: function () {
+            stu.u = 1; paint();
+            holdTimer = setTimeout(function () {
+              holdTimer = null;
+              stopAuto(); /* 停留在末帧 u=1 终态 */
+            }, HOLD_MS);
+          }
+        });
+        stu.u = 0;
+        autoTween.start();
+        return;
+      }
       autoTween = Eng.Tween({
         durationMs: STEP_MS / speed,
         onUpdate: function (u) { stu.u = u; paint(); },
@@ -220,7 +236,7 @@
 
     prevB.addEventListener('click', function () { stopAuto(); player.prev(); stu.u = 0; paint(); });
     nextB.addEventListener('click', function () { stopAuto(); player.next(); stu.u = 0; paint(); });
-    reB.addEventListener('click', function () { stopAuto(); player.replay(); stu.u = 0; paint(); });
+    reB.addEventListener('click', function () { stopAuto(); player.gotoFrame(0); stu.u = 0; paint(); }); /* ⑦-3 重播复位到第 0 帧（与数学侧/ molecule-motion 一致） */
     playB.addEventListener('click', togglePlay);
     slowB.addEventListener('click', function () {
       speed = speed === 1 ? 0.5 : 1;
@@ -422,8 +438,8 @@
       if (li === 0) {
         /* CH3CH2Br → CH3CH2OH */
         noteText(g, L.x - 12, 26, 'CH₃CH₂', 4);
-        atomCircle(g, L.x + 2, 26, 5.5, 'Br', 4.2);
         var brk = active && (st['break'] || []).indexOf('C–Br') >= 0;
+        if (!(active && brk)) atomCircle(g, L.x + 2, 26, 5.5, 'Br', 4.2); /* ⑧-3 去重：断键时离去 Br 已绘制（u=0 时同坐标） */
         if (!(active && brk && u > 0.4)) bondLine(g, L.x - 6, 26, L.x - 3, 26, false, 1.1);
         if (active && brk) {
           var by = 26 + u * 12;
