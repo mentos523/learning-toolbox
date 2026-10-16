@@ -68,6 +68,17 @@ const INTERACTION_TYPES = {
   "net-fold": ["net", "foldSequence", "views"],
   // 几何 g09 接入（蓝队 2026-10-11：params 手册 v1.4）
   "ratio-slider": ["kMin", "kMax"],
+  // 波 A 新增（2026-10-16：eq-bind.js / geom-process.js）
+  // 注：eq-graph-lab 的 min/max 只在滑块类 kind 需要，system2x2 等走 graph schema，
+  // 构建门只校验 graph 存在，min<max 语义由渲染器运行时门禁负责。
+  "eq-graph-lab": ["graph"],
+  "eq-graph": ["min", "max", "expr"],
+  "ineq-shade-lab": ["source", "sets"],
+  "sys-lab": ["sliders"],
+  "sys-steps": ["steps"],
+  "static-compare": ["left", "right"],
+  "morph-toggle": ["views"],
+  "complete-square-lab": [],
 };
 
 /* ============================================================

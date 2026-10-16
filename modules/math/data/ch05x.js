@@ -64,8 +64,9 @@ window.MATH_CH["ch05x"] = {
               title: "两个方程，解就定了：方程组的解",
               concept: "二元一次方程组",
               formulas: [
-                { id: "f1", latex: "\\begin{cases} x + y = 10 \\\\ 2x - y = 8 \\end{cases}", translation: "方程组：x 加 y 等于 10，2x 减 y 等于 8——两个方程联立" },
-                { id: "f2", latex: "(6, 4)", translation: "解是 (6,4)：6+4=10，2×6−4=8，两个都成立" }
+                { id: "f1", latex: "x + y = 10", translation: "方程组①：x 加 y 等于 10" },
+                { id: "f2", latex: "2x - y = 8", translation: "方程组②：2x 减 y 等于 8——两个方程联立" },
+                { id: "f3", latex: "(6, 4)", translation: "解是 (6,4)：6+4=10，2×6−4=8，两个都成立" }
               ],
               interaction: {
                 type: "sys-lab",
@@ -149,9 +150,10 @@ window.MATH_CH["ch05x"] = {
               title: "代入法三步：变形→代入→回代检验",
               concept: "代入消元（推导）",
               formulas: [
-                { id: "f1", latex: "\\begin{cases} x + y = 10 \\\\ 2x + y = 14 \\end{cases}", translation: "例：x+y=10，2x+y=14" },
-                { id: "f2", latex: "x = 10 - y \\Rightarrow 2(10-y) + y = 14", translation: "变形→代入：一元一次方程" },
-                { id: "f3", latex: "y = 6, x = 4", translation: "解得 y=6，回代得 x=4；检验：4+6=10，8+6=14 ✓" }
+                { id: "f1", latex: "x + y = 10", translation: "例①：x+y=10" },
+                { id: "f2", latex: "2x + y = 14", translation: "例②：2x+y=14" },
+                { id: "f3", latex: "x = 10 - y \\Rightarrow 2(10-y) + y = 14", translation: "变形→代入：一元一次方程" },
+                { id: "f4", latex: "y = 6, x = 4", translation: "解得 y=6，回代得 x=4；检验：4+6=10，8+6=14 ✓" }
               ],
               interaction: {
                 type: "sys-lab",
@@ -197,9 +199,10 @@ window.MATH_CH["ch05x"] = {
               title: "加减：让一个未知数直接消失",
               concept: "加减消元（直觉）",
               formulas: [
-                { id: "f1", latex: "\\begin{cases} x + y = 10 \\\\ x - y = 2 \\end{cases}", translation: "例：x+y=10，x−y=2" },
-                { id: "f2", latex: "(x+y) + (x-y) = 2x = 12", translation: "①+②：y 消失了——2x=12" },
-                { id: "f3", latex: "x = 6, y = 4", translation: "解得 x=6，回代得 y=4" }
+                { id: "f1", latex: "x + y = 10", translation: "例①：x+y=10" },
+                { id: "f2", latex: "x - y = 2", translation: "例②：x−y=2" },
+                { id: "f3", latex: "(x+y) + (x-y) = 2x = 12", translation: "①+②：y 消失了——2x=12" },
+                { id: "f4", latex: "x = 6, y = 4", translation: "解得 x=6，回代得 y=4" }
               ],
               interaction: {
                 type: "sys-lab",
@@ -239,9 +242,10 @@ window.MATH_CH["ch05x"] = {
               title: "先凑系数，再加减",
               concept: "加减消元（推导）",
               formulas: [
-                { id: "f1", latex: "\\begin{cases} 2x + 3y = 12 \\\\ 3x - 2y = 5 \\end{cases}", translation: "例：2x+3y=12，3x−2y=5（解 (3,2)）" },
-                { id: "f2", latex: "4x + 6y = 24, \\quad 9x - 6y = 15", translation: "①×2 得 4x+6y=24，②×3 得 9x−6y=15——6y 与 −6y 凑成相反数" },
-                { id: "f3", latex: "13x = 39 \\Rightarrow x = 3, y = 2", translation: "相加消 y 得 13x=39 → x=3，回代得 y=2；检验 9−4=5 ✓" }
+                { id: "f1", latex: "2x + 3y = 12", translation: "例①：2x+3y=12" },
+                { id: "f2", latex: "3x - 2y = 5", translation: "例②：3x−2y=5（解 (3,2)）" },
+                { id: "f3", latex: "4x + 6y = 24, \\quad 9x - 6y = 15", translation: "①×2 得 4x+6y=24，②×3 得 9x−6y=15——6y 与 −6y 凑成相反数" },
+                { id: "f4", latex: "13x = 39 \\Rightarrow x = 3, y = 2", translation: "相加消 y 得 13x=39 → x=3，回代得 y=2；检验 9−4=5 ✓" }
               ],
               interaction: {
                 type: "sys-steps",
@@ -334,9 +338,10 @@ window.MATH_CH["ch05x"] = {
               title: "方程组的解 = 两条直线交点的坐标",
               concept: "图像法解方程组",
               formulas: [
-                { id: "f1", latex: "\\begin{cases} x + y = 10 \\\\ 2x - y = 8 \\end{cases}", translation: "运行例：x+y=10，2x−y=8" },
-                { id: "f2", latex: "x_0 = \\frac{c_1 b_2 - b_1 c_2}{D}, \\quad y_0 = \\frac{a_1 c_2 - c_1 a_2}{D}", translation: "克拉默法则：D=a₁b₂−a₂b₁≠0 时交点坐标公式" },
-                { id: "f3", latex: "(6, 4)", translation: "解 = 交点坐标 (6,4)：代数⟷几何双向读" }
+                { id: "f1", latex: "x + y = 10", translation: "运行例①：x+y=10" },
+                { id: "f2", latex: "2x - y = 8", translation: "运行例②：x+y=10，2x−y=8" },
+                { id: "f3", latex: "x_0 = \\frac{c_1 b_2 - b_1 c_2}{D}, \\quad y_0 = \\frac{a_1 c_2 - c_1 a_2}{D}", translation: "克拉默法则：D=a₁b₂−a₂b₁≠0 时交点坐标公式" },
+                { id: "f4", latex: "(6, 4)", translation: "解 = 交点坐标 (6,4)：代数⟷几何双向读" }
               ],
               interaction: {
                 type: "eq-graph-lab",
@@ -381,9 +386,9 @@ window.MATH_CH["ch05x"] = {
               title: "三种位置，三种解：相交 / 平行 / 重合",
               concept: "解的个数与直线位置",
               formulas: [
-                { id: "f1", latex: "D \\ne 0 \\Rightarrow 交于一点 \\Rightarrow 唯一解", translation: "D≠0 → 相交 → 唯一解" },
-                { id: "f2", latex: "D = 0 且不成比例 \\Rightarrow 平行 \\Rightarrow 无解", translation: "D=0 且不成比例 → 平行 → 无解（如 {x+y=4, x+y=7} 得 4=7 矛盾）" },
-                { id: "f3", latex: "D = 0 且成比例 \\Rightarrow 重合 \\Rightarrow 无数组解", translation: "D=0 且成比例 → 重合 → 无数组解（如 {x+y=4, 2x+2y=8} 得 8=8 恒成立）" }
+                { id: "f1", latex: "D \\neq 0 \\Rightarrow \\text{交于一点} \\Rightarrow \\text{唯一解}", translation: "D≠0 → 相交 → 唯一解" },
+                { id: "f2", latex: "D = 0 \\ \\text{且不成比例} \\Rightarrow \\text{平行} \\Rightarrow \\text{无解}", translation: "D=0 且不成比例 → 平行 → 无解（如 {x+y=4, x+y=7} 得 4=7 矛盾）" },
+                { id: "f3", latex: "D = 0 \\ \\text{且成比例} \\Rightarrow \\text{重合} \\Rightarrow \\text{无数组解}", translation: "D=0 且成比例 → 重合 → 无数组解（如 {x+y=4, 2x+2y=8} 得 8=8 恒成立）" }
               ],
               interaction: {
                 type: "eq-graph-lab",
@@ -433,8 +438,8 @@ window.MATH_CH["ch05x"] = {
               title: "一图流：三条路，一座桥",
               concept: "本章小结",
               formulas: [
-                { id: "f1", latex: "代入消元 \\quad | \\quad 加减消元 \\quad | \\quad 图像法", translation: "三条路：代入、加减、图像——都会到同一个解" },
-                { id: "f2", latex: "解 = 交点坐标", translation: "一座桥：方程组的解 = 两条直线交点的坐标" }
+                { id: "f1", latex: "\\text{代入消元} \\quad | \\quad \\text{加减消元} \\quad | \\quad \\text{图像法}", translation: "三条路：代入、加减、图像——都会到同一个解" },
+                { id: "f2", latex: "\\text{解} = \\text{交点坐标}", translation: "一座桥：方程组的解 = 两条直线交点的坐标" }
               ],
               interaction: {
                 type: "static-compare",
