@@ -12,8 +12,9 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO = path.resolve(__dirname, "..");
 const MATH = path.join(REPO, "modules", "math");
 const HEADLESS = process.argv.includes("--headless");
+const FULL = process.argv.includes("--full");
 
-const report = { static: [], headless: [], errors: [] };
+const report = { static: [], headless: [], full: [], errors: [] };
 
 function flatten(ch) {
   const out = [];
@@ -201,15 +202,115 @@ async function headlessCheck() {
   await browser.close();
 }
 
+/* ---------- headless 全量：零吞没异常（N-2 门7） ----------
+ * 逐页访问全部 630 页（代数 289 + 几何 341），每页断言：
+ *  ① 无 console.error（math.js renderError 走 console.error，
+ *     [math-render] 通道；.formulas.js 按需 404 为预期降级，不计）；
+ *  ② 无 pageerror；
+ *  ③ 无 DOM 错误标记（.ix-render-error / .formula-error / .render-error）。
+ * 任一命中即该页 FAIL 并逐页列出（不掩盖）；全绿 = 零吞没异常。
+ * 用法：node tools/waveA-verify.mjs --full（4 并发，约数分钟）
+ */
+async function fullHeadlessCheck() {
+  let pw;
+  try {
+    const m = await import("/home/hatch/workspace/phy-audit/node_modules/playwright-core/index.mjs");
+    pw = m.chromium;
+  } catch (e) {
+    report.errors.push("FULL: playwright-core 不可用，跳过 (" + e.message.slice(0, 100) + ")");
+    return;
+  }
+  const dataDir = path.join(MATH, "data");
+  const files = fs.readdirSync(dataDir).filter(f => f.endsWith(".js"));
+  const allCh = files.map(f => f.replace(/\.js$/, ""))
+    .filter(id => /^(ch\d+|g\d+|ch05x)$/.test(id));
+  const ids = [];
+  for (const chId of allCh) {
+    try { flatten(loadCh(chId)).forEach(p => ids.push(p.id)); }
+    catch (e) { report.errors.push("FULL: " + chId + ".js 加载失败: " + e.message); }
+  }
+  report.full.push(`全量页数: ${ids.length}（期望 630）` +
+    (ids.length === 630 ? " PASS" : " FAIL"));
+  if (ids.length !== 630) report.errors.push(`FULL: 页数=${ids.length}，期望 630`);
+
+  const browser = await pw.launch({
+    executablePath: "/opt/meta-chromium/chrome",
+    args: ["--no-sandbox", "--disable-dev-shm-usage"]
+  });
+  const WORKERS = 4;
+  const fails = [];
+  let done = 0;
+  async function worker(slice) {
+    const pg = await browser.newPage();
+    let cur = null;
+    pg.on("pageerror", e => { if (cur) cur.push("pageerror: " + e.message); });
+    pg.on("console", m => {
+      if (!cur || m.type() !== "error") return;
+      const txt = m.text();
+      const loc = m.location();
+      const url = (loc && loc.url) || "";
+      /* .formulas.js 按需加载 404 是预期的 catch 降级，不计为错误 */
+      if (/\.formulas\.js/.test(url) || /\.formulas\.js/.test(txt)) return;
+      /* navigator.vibrate 无手势拦截：Chromium 在无用户手势时打 console.error，
+       * 非异常、不可被 try/catch 捕获；geom-primitives.js 已有能力检测+降级，
+       * 真机用户手势下无此信息。属 headless 环境噪声，不计为吞没异常。 */
+      if (/navigator\.vibrate/.test(txt)) return;
+      cur.push("console: " + txt.slice(0, 300));
+    });
+    for (const pid of slice) {
+      cur = [];
+      try {
+        await pg.goto(`file://${MATH}/index.html#p=${pid}`,
+          { waitUntil: "load", timeout: 20000 });
+        await pg.waitForTimeout(900);
+        const dom = await pg.evaluate(() => {
+          const q = s => [...document.querySelectorAll(s)]
+            .map(e => e.textContent.slice(0, 80));
+          return {
+            ixErr: q(".ix-render-error"),
+            fErr: q(".formula-error"),
+            pgErr: q(".render-error"),
+            title: (document.getElementById("p-title") || {}).textContent || ""
+          };
+        });
+        if (dom.title === "章节加载失败") cur.push("章节加载失败（数据未载入）");
+        ["ixErr", "fErr", "pgErr"].forEach(k => {
+          if (dom[k].length) cur.push(`DOM错误标记 .${k}: ${dom[k].length} 处 [${dom[k].join(" | ")}]`);
+        });
+      } catch (e) {
+        cur.push("goto/评估失败: " + e.message.slice(0, 150));
+      }
+      done++;
+      if (cur.length) {
+        fails.push(pid);
+        report.errors.push("FULL " + pid + ": " + cur.join("; "));
+      }
+      if (done % 100 === 0) console.log(`  ... ${done}/${ids.length}`);
+    }
+    await pg.close();
+  }
+  const slices = [];
+  for (let w = 0; w < WORKERS; w++) slices.push(ids.filter((_, i) => i % WORKERS === w));
+  await Promise.all(slices.map(worker));
+  await browser.close();
+  report.full.push(`全量零吞没: ${ids.length - fails.length}/${ids.length} 页干净` +
+    (fails.length ? ` FAIL(${fails.length} 页: ${fails.join(", ")})` : " PASS"));
+}
+
 /* ---------- 运行 ---------- */
 staticGates();
 if (HEADLESS) await headlessCheck();
+if (FULL) await fullHeadlessCheck();
 
 console.log("=== 静态门 ===");
 report.static.forEach(s => console.log("  " + s));
 if (HEADLESS) {
   console.log("=== Headless 抽查 ===");
   report.headless.forEach(s => console.log("  " + s));
+}
+if (FULL) {
+  console.log("=== Headless 全量（零吞没异常） ===");
+  report.full.forEach(s => console.log("  " + s));
 }
 console.log("=== 错误 ===");
 if (report.errors.length) report.errors.forEach(e => console.log("  " + e));

@@ -20,6 +20,19 @@
   }
   function $(id) { return document.getElementById(id); }
 
+  /* 渲染异常上报（N-2 口径：不许静默吞没）。
+   * 任何组件渲染失败必须同时满足：(a) console.error 输出异常详情
+   * （含组件位置与 pageId，便于 headless 断言捕获）；(b) 在该组件的
+   * 页面位置给出可见降级提示；(c) 不中断其余组件、不整页白屏。 */
+  function renderError(where, pageId, e) {
+    try {
+      if (typeof console !== "undefined" && console.error) {
+        console.error("[math-render] " + where + " 失败 page=" + pageId +
+          " :: " + (e && e.stack ? e.stack : String(e)));
+      }
+    } catch (ignore) {}
+  }
+
   function loadScript(src) {
     return new Promise(function (resolve, reject) {
       // 已加载则跳过（幂等）
@@ -156,19 +169,45 @@
     }
   }
 
-  /* ---------------- 页面渲染 ---------------- */
+  /* ---------------- 页面渲染 ----------------
+   * renderPage 为守卫壳：renderPageInner 任一组件抛错都不许整页白屏，
+   * 兜底为可见错误横幅 + console.error（不许静默）。 */
   function renderPage() {
     var cur = state.flat[state.index];
     if (!cur) return;
     var page = cur.page;
+    try {
+      renderPageInner(cur, page);
+    } catch (e) {
+      renderError("页面整体", page.id, e);
+      var t = $("p-title");
+      if (t) t.textContent = "页面渲染失败";
+      var hb = $("p-hints");
+      if (hb) {
+        hb.className = "m-hints";
+        hb.innerHTML = '<p class="render-error" style="color:#b3261e;border:1px dashed ' +
+          '#b3261e;padding:6px 10px;border-radius:4px;">页面渲染失败：' +
+          esc(e && e.message) + '（已记录到控制台，不影响翻页）</p>';
+      }
+      try { fitInteraction(); } catch (ignore) {}
+    }
+  }
 
+  function renderPageInner(cur, page) {
     $("p-title").textContent = page.title || "";
     $("page-ind").textContent =
       (state.index + 1) + " / " + state.flat.length + " · " + cur.lessonTitle;
 
-    // 公式
+    // 公式（单条公式失败只降级该条：console.error + 可见标记，不中断整页）
     var fh = "";
-    (page.formulas || []).forEach(function (f) { fh += formulaHtml(f, page.id); });
+    (page.formulas || []).forEach(function (f) {
+      try { fh += formulaHtml(f, page.id); }
+      catch (e) {
+        renderError("公式", page.id, e);
+        fh += '<span class="formula-error" style="color:#b3261e;border:1px dashed ' +
+          '#b3261e;padding:2px 6px;border-radius:4px;">公式渲染失败（已记录到控制台）</span>';
+      }
+    });
     $("p-formulas").innerHTML = fh;
 
     // 主交互
@@ -179,7 +218,12 @@
       var fn = ixRenderers[page.interaction.type];
       if (fn) {
         try { fn(ixBox, page.interaction.params || {}, page); }
-        catch (e) { ixBox.innerHTML = '<div class="ix-stub">交互渲染出错：' + esc(e.message) + "</div>"; }
+        catch (e) {
+          renderError("主交互 " + page.interaction.type, page.id, e);
+          ixBox.innerHTML = '<div class="ix-stub ix-render-error" style="border-left:4px solid ' +
+            '#b3261e;color:#b3261e;">交互渲染出错：' +
+            esc(e.message) + "<br>（已记录到控制台）</div>";
+        }
       } else {
         ixBox.innerHTML = '<div class="ix-stub">交互占位：' + esc(page.interaction.type) +
           "<br>（渲染器待实现，不影响浏览）</div>";
@@ -198,7 +242,12 @@
       ixBox.classList.add("has-aux");  // 竖向堆叠：主交互在上，辅交互在下
       if (auxFn) {
         try { auxFn(auxBox, page.auxInteraction.params || {}, page); }
-        catch (e) { auxBox.innerHTML = '<div class="ix-stub">辅交互渲染出错：' + esc(e.message) + "</div>"; }
+        catch (e) {
+          renderError("辅交互 " + page.auxInteraction.type, page.id, e);
+          auxBox.innerHTML = '<div class="ix-stub ix-render-error" style="border-left:4px solid ' +
+            '#b3261e;color:#b3261e;">辅交互渲染出错：' +
+            esc(e.message) + "<br>（已记录到控制台）</div>";
+        }
       } else {
         auxBox.innerHTML = '<div class="ix-stub">辅交互占位：' + esc(page.auxInteraction.type) +
           "<br>（渲染器待实现，不影响浏览）</div>";
@@ -219,6 +268,7 @@
     // 可滚动（CSS .m-hints.explain / .explain-scroll，复用习题页模式）。
     var isExercise = page.concept === "本章习题";
     var isExplain = page.pageKind === "explain";
+    try {
     var hh = "";
     (page.hints || []).forEach(function (h, i) {
       hh += "<p>" + (i === 0 ? '<span class="point">💡</span> ' : "") + esc(h) + "</p>";
@@ -241,6 +291,12 @@
         det.appendChild(ap);
         hintsBox.appendChild(det);
       });
+    }
+    } catch (e) {
+      renderError("点拨/答案", page.id, e);
+      var hb2 = $("p-hints");
+      if (hb2) hb2.innerHTML = '<p class="render-error" style="color:#b3261e;border:1px dashed ' +
+        '#b3261e;padding:6px 10px;border-radius:4px;">点拨区渲染失败（已记录到控制台）</p>';
     }
 
     // 翻页按钮
