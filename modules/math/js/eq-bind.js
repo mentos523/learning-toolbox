@@ -365,6 +365,17 @@
     /* —— 静态层：坐标轴/网格/曲线/目标线 —— */
     var gStatic = svgEl("g", { "class": "eqb-static" });
     svg.appendChild(gStatic);
+    /* numberline 解 tick：求 evalR(x)=target 的解（扫描+二分，复用 findRoots；
+     * 返工 F-01：此前引用了未定义的 solveLinearTick，致全部 numberline 页渲染失败） */
+    function solveLinearTick() {
+      if (!hasTarget) return null;
+      var gg = function (x) {
+        var y = evalR(x);
+        return isFinite(y) ? y - target : NaN;
+      };
+      var roots = findRoots(gg, fr.xMin, fr.xMax, []);
+      return roots.length ? roots[0] : null;
+    }
     drawAxes(gStatic, fr, isNL);
     if (!isNL) {
       drawCurve(gStatic, fr, kind, graph, expr, label);
@@ -431,7 +442,8 @@
         vl.textContent = "顶点 (" + fmt(hv) + ", " + fmt(kv) + ")";
         gStatic.appendChild(vl);
       }
-    } else {
+    }
+    else {
       /* numberline：数轴 + 解 tick */
       var solX = solveLinearTick();
       if (solX != null) {
