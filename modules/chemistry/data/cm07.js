@@ -214,6 +214,35 @@ window.CHEM_CH["cm07"] = {
                       symbol: "现在看：符号表达"
                     }
                   }
+                },
+                {
+                  type: "molecule-motion",
+                  params: {
+                    view: { w: 620, h: 380 },
+                    motion: { field: "fractionate", seed: 51,
+                      kinds: [
+                        { kind: "gasoline", count: 30, color: "#FFD54F", r: 1.7, label: "汽油", boilC: 150, speedMps: 7 },
+                        { kind: "kerosene", count: 30, color: "#FF9800", r: 1.8, label: "煤油", boilC: 250, speedMps: 7 },
+                        { kind: "diesel", count: 30, color: "#8D6E63", r: 1.9, label: "柴油", boilC: 350, speedMps: 7 }
+                      ],
+                      groups: [
+                        { name: "汽油", boilRank: 1 },
+                        { name: "煤油", boilRank: 2 },
+                        { name: "柴油", boilRank: 3 }
+                      ],
+                      tower: { tempStartC: 20, rampCps: 25, tempMaxC: 400, tempTopC: 20,
+                               yBottom: 0, yTop: 100, riseSpeedMps: 16 } },
+                    decor: { tower: true },
+                    loop: true,
+                    autoplay: true,
+                    legend: "图例：黄=汽油分子，橙=煤油分子，棕=柴油分子；沸点为示意值；每种“分子”代表一类沸点相近的馏分",
+                    reminder: "粒子大小、数量、运动速度均为示意，未按真实比例；粒子碰撞为示意，非真实碰撞过程。\n提醒：塔里的温度梯度是简化画的；每种\"分子\"代表的是一类沸点相近的馏分，不是某一种纯物质——真实石油是上千种物质的混合物。",
+                    ax01: {
+                      assumptions: ["塔底渐进加热（示意）", "温度场为线性梯度（示意）"],
+                      approximations: ["二维示意；粒子为质点", "每种馏分以单一示意沸点代表"],
+                      errorEstimate: "随机游走为教学示意模型，无解析对账；确定性由播种 RNG 保证"
+                    }
+                  }
                 }
               ],
               point: "石油是混合物，按沸点分馏是物理变化——分子种类没变。"

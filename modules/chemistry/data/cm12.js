@@ -119,6 +119,44 @@ window.CHEM_CH["cm12"] = {
                       symbol: "现在看：符号表达——电解质定义"
                     }
                   }
+                },
+                {
+                  type: "molecule-motion",
+                  params: {
+                    view: { w: 620, h: 300 },
+                    compare: [
+                      { label: "未通电的 NaCl 溶液", sub: "离子只做无规则热运动，灯泡不亮",
+                        motion: { field: "drift", fieldOn: false, seed: 41,
+                          kinds: [
+                            { kind: "Na", count: 28, color: "#AB47BC", r: 1.7, label: "Na⁺", speedMps: 9, driftVxMps: 0.45 },
+                            { kind: "Cl", count: 28, color: "#66BB6A", r: 1.7, label: "Cl⁻", speedMps: 9, driftVxMps: -0.45 },
+                            { kind: "water", count: 60, color: "#90CAF9", r: 1.2, label: "水", speedMps: 9 }
+                          ] },
+                        decor: { electrodes: true } },
+                      { label: "通电的 NaCl 溶液", sub: "热运动 + 定向漂移，灯泡亮",
+                        motion: { field: "drift", fieldOn: true, seed: 42, anodeDir: { x: 1, y: 0 },
+                          kinds: [
+                            { kind: "Na", count: 28, color: "#AB47BC", r: 1.7, label: "Na⁺", speedMps: 9, driftVxMps: 0.45 },
+                            { kind: "Cl", count: 28, color: "#66BB6A", r: 1.7, label: "Cl⁻", speedMps: 9, driftVxMps: -0.45 },
+                            { kind: "water", count: 60, color: "#90CAF9", r: 1.2, label: "水", speedMps: 9 }
+                          ] },
+                        decor: { electrodes: true } },
+                      { label: "固体食盐", sub: "离子被锁在晶格里，动不了，灯泡不亮",
+                        motion: { field: "lattice", seed: 43,
+                          kinds: [
+                            { kind: "salt", count: 48, color: "#B0BEC5", r: 1.8, label: "Na⁺/Cl⁻" }
+                          ],
+                          lattice: { cols: 8, rows: 6, x0: 14, y0: 26, dx: 10, dy: 10 } } }
+                    ],
+                    autoplay: true,
+                    legend: "图例：紫=Na⁺，绿=Cl⁻，浅蓝=水分子；电极\"示意\"",
+                    reminder: "粒子大小、数量、运动速度均为示意，未按真实比例；粒子碰撞为示意，非真实碰撞过程。\n提醒：这页的离子数量是示意（真实溶液里多得多）；电场画成了均匀的——真实电极附近电场不均匀；离子的漂移速度被放慢了，真实定向漂移比无规则运动慢得多。",
+                    ax01: {
+                      assumptions: ["电场为均匀示意", "离子为质点"],
+                      approximations: ["二维示意；漂移速度为示意放慢"],
+                      errorEstimate: "随机游走为教学示意模型，无解析对账；确定性由播种 RNG 保证"
+                    }
+                  }
                 }
               ],
               point: "电解质是化合物——铜能导电，但铜是单质，不是电解质。固体食盐不导电：离子动不了。"
@@ -301,6 +339,37 @@ window.CHEM_CH["cm12"] = {
               title: "升失氧、降得还",
               exploreTip: "先点 Cu 标 +2，再点生成物里的 Cu 标 0：看它是'升高'还是'降低'。单质中元素化合价为 0（如 H₂ 中的 H 为 0、Zn 为 0）。",
               widgets: [
+                {
+                  type: "bond-step",
+                  params: {
+                    title: "电子从 H 流向 Cu（自动演示）",
+                    layout: "e-flow",
+                    steps: [
+                      { stepIndex: 0, label: "H 失电子：0 → +1", "break": [], form: [],
+                        transfer: { from: "H", to: "Cu", electrons: 2 },
+                        valenceTags: [{ x: 20, y: 16, text: "H：0 → +1（失 2e⁻）" }],
+                        caption: "H 失去电子" },
+                      { stepIndex: 1, label: "电子从 H 连续流向 Cu", "break": [], form: [], annotate: true,
+                        eflow: { electrons: 2, label: "电子：从 H（失）→ Cu（得）" },
+                        valenceTags: [{ x: 20, y: 16, text: "H：0 → +1" }, { x: 80, y: 16, text: "Cu：+2 → 0" }] },
+                      { stepIndex: 2, label: "Cu 得电子：+2 → 0", "break": [], form: [],
+                        transfer: { from: "H", to: "Cu", electrons: 2, phase: "arrive" },
+                        valenceTags: [{ x: 80, y: 16, text: "Cu：+2 → 0（得 2e⁻）" }],
+                        motto: "H：升高 → 失电子 → 被氧化 → 做还原剂；Cu：降低 → 得电子 → 被还原 → 做氧化剂",
+                        caption: "终态：Cu + H₂O" }
+                    ],
+                    scene: {
+                      nodes: [
+                        { label: "H₂", x: 20, y: 31, r: 7, sub: "失 2e⁻" },
+                        { label: "CuO", x: 80, y: 31, r: 7, sub: "得 2e⁻" }
+                      ],
+                      wirePath: [{ x: 28, y: 31 }, { x: 72, y: 31 }]
+                    },
+                    autoplay: true, holdMs: 2000,
+                    reminder: "粒子大小、数量、运动速度均为示意，未按真实比例；粒子碰撞为示意，非真实碰撞过程。\n提醒：电子画成天蓝色小点是示意；H₂ 还原 CuO 的真实过程分多步，这里只画\"电子从 H 流向 Cu\"这一核心。",
+                    ax01: { assumptions: ["电子画成小点示意"], approximations: ["二维示意"], errorEstimate: "定性示意，无数值口径" }
+                  }
+                },
                 {
                   type: "redox-track",
                   params: {

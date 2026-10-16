@@ -57,7 +57,19 @@ window.CHEM_CH["cm03"] = {
                     topic: "品红扩散：红色自己散开了",
                     views: {
                       macro: { text: "一滴品红滴进清水，红色自己慢慢散开，最后整杯水都红了——没人搅拌。" },
-                      micro: { text: "品红分子和水分子都在永不停息地运动，互相碰撞、散开（示意）。热水里散得更快——温度越高，分子运动越剧烈。", anim: "ref:particle-view" },
+                      micro: { text: "品红分子和水分子都在永不停息地运动，互相碰撞、散开（示意）。热水里散得更快——温度越高，分子运动越剧烈。", anim: { widget: "molecule-motion", params: {
+                        view: { w: 480, h: 300 },
+                        motion: { field: "brownian", seed: 21,
+                          kinds: [
+                            { kind: "magenta", count: 36, color: "#E0407A", r: 1.8, label: "品红", speedMps: 10 },
+                            { kind: "water", count: 60, color: "#90CAF9", r: 1.3, label: "水", speedMps: 10 }
+                          ],
+                          cluster: { kind: "magenta", cx: 50, cy: 78, sigma: 8 } },
+                        autoplay: true,
+                        legend: "图例：红色=品红分子，浅蓝=水分子",
+                        reminder: "粒子大小、数量、运动速度均为示意，未按真实比例；粒子碰撞为示意，非真实碰撞过程。",
+                        ax01: { assumptions: ["品红滴入瞬间设为高斯集中（示意）"], approximations: ["二维示意"], errorEstimate: "随机游走为教学示意模型，无解析对账" }
+                      } } },
                       symbol: {
                         mathml: "<math><mtext>（无化学反应，不写方程式——这是物理变化）</mtext></math>",
                         gloss: "符号这一重是空的：没有新物质生成，所以没有化学方程式可写——这正说明扩散是物理变化（红线辨析③预告）。"
@@ -68,6 +80,36 @@ window.CHEM_CH["cm03"] = {
                       macro: "现在看：宏观现象",
                       micro: "现在看：微观粒子",
                       symbol: "现在看：符号表达"
+                    }
+                  }
+                },
+                {
+                  type: "molecule-motion",
+                  params: {
+                    view: { w: 620, h: 360 },
+                    compare: [
+                      { label: "常温 20℃", sub: "品红分子随机游走，红色慢慢散开",
+                        motion: { field: "brownian", seed: 11,
+                          kinds: [
+                            { kind: "magenta", count: 40, color: "#E0407A", r: 1.8, label: "品红", speedMps: 9 },
+                            { kind: "water", count: 80, color: "#90CAF9", r: 1.3, label: "水", speedMps: 9 }
+                          ],
+                          cluster: { kind: "magenta", cx: 50, cy: 78, sigma: 8 } } },
+                      { label: "热水 90℃", sub: "分子运动更剧烈，红色散得更快",
+                        motion: { field: "brownian", seed: 12,
+                          kinds: [
+                            { kind: "magenta", count: 40, color: "#E0407A", r: 1.8, label: "品红", speedMps: 12 },
+                            { kind: "water", count: 80, color: "#90CAF9", r: 1.3, label: "水", speedMps: 12 }
+                          ],
+                          cluster: { kind: "magenta", cx: 50, cy: 78, sigma: 8 } } }
+                    ],
+                    autoplay: true,
+                    legend: "图例：红色=品红分子，浅蓝=水分子（颜色示意）",
+                    reminder: "粒子大小、数量、运动速度均为示意，未按真实比例；粒子碰撞为示意，非真实碰撞过程。\n提醒：这页的粒子大小、数量、运动速度都是示意——真实分子小得多、多得多；\"热水散得快\"是加速画出来的，真实扩散要慢得多，但\"温度越高、分子运动越剧烈\"的结论不变。",
+                    ax01: {
+                      assumptions: ["品红滴入瞬间设为高斯集中（示意）", "水为均匀背景"],
+                      approximations: ["二维示意；粒子为质点，无真实碰撞", "扩散为加速示意"],
+                      errorEstimate: "随机游走为教学示意模型，无解析对账；确定性由播种 RNG 保证"
                     }
                   }
                 }

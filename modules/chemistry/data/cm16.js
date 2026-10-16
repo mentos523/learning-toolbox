@@ -331,7 +331,26 @@ window.CHEM_CH["cm16"] = {
                 { type: "text", html: "断键吸热，成键放热：断开反应物的化学键吸收能量，形成生成物的化学键放出能量。放出的 > 吸收的 → 放热反应（如燃烧）；吸收的 > 放出的 → 吸热反应（如 Ba(OH)₂·8H₂O + NH₄Cl、C + H₂O ＝高温＝ CO + H₂）。" },
                 { type: "text", html: "ΔH < 0 放热，ΔH > 0 吸热。常见的放热：燃烧、中和、金属与酸；常见的吸热：Ba(OH)₂·8H₂O + NH₄Cl、C + CO₂ ＝高温＝ 2CO。" },
                 { type: "physicslink", text: "物理呼应·奠基：物理 p03.2.2 内能与比热容——热量、内能是理解吸热/放热的物理底座：化学键里存着的，就是内能的一种。" },
-                { type: "trap", text: "⚠ 别搞混：'吸热反应不能自发'？Ba(OH)₂·8H₂O + NH₄Cl 自发吸热！点燃、加热是条件，不是吸放热！" }
+                { type: "trap", text: "⚠ 别搞混：'吸热反应不能自发'？Ba(OH)₂·8H₂O + NH₄Cl 自发吸热！点燃、加热是条件，不是吸放热！" },
+                { type: "widget", widget: { type: "bond-step", params: {
+                  title: "两笔账：断键吸热，成键放热",
+                  layout: "energy",
+                  steps: [
+                    { stepIndex: 0, label: "断开旧键：吸收能量", "break": ["反应物的化学键"], form: [],
+                      molStage: "break", energyLabel: "吸收能量", curveSlopeSign: 1,
+                      caption: "断开反应物的化学键——吸收能量" },
+                    { stepIndex: 1, label: "形成新键：放出能量", "break": [], form: ["生成物的化学键"],
+                      molStage: "form", energyLabel: "放出能量", curveSlopeSign: -1,
+                      caption: "形成生成物的化学键——放出能量" },
+                    { stepIndex: 2, label: "结算：放出的 ＞ 吸收的 → 放热", "break": [], form: [], annotate: true,
+                      molStage: "form", settleLabel: "放出的 ＞ 吸收的 → 放热",
+                      caption: "两笔账一算：放出的 ＞ 吸收的 → 放热反应" }
+                  ],
+                  scene: { energyCurve: { points: [{ x: 5, y: 30 }, { x: 50, y: 8 }, { x: 95, y: 22 }] } },
+                  autoplay: true,
+                  reminder: "粒子大小、数量、运动速度均为示意，未按真实比例；粒子碰撞为示意，非真实碰撞过程。\n提醒：能量曲线是示意曲线，不是实测数据；\"断键\"和\"成键\"在真实反应里常常是交织进行的，这里为了讲清道理把它们拆成了两步。",
+                  ax01: { assumptions: ["断键与成键分两步呈现（示意）"], approximations: ["能量曲线为示意曲线"], errorEstimate: "定性示意，无数值口径" }
+                } } }
               ],
               point: "断键吸热、成键放热：两笔账一算，吸放热自明——条件（点燃/加热）不是吸放热。"
             },

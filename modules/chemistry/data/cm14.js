@@ -381,7 +381,55 @@ window.CHEM_CH["cm14"] = {
                 { type: "lead", text: "共用电子对不一定'平分'：谁抢电子能力强，电子对就偏向谁。" },
                 { type: "text", html: "非极性共价键：同种原子之间，共用电子对不偏向，如 H—H、Cl—Cl。极性共价键：不同种原子之间，电子对偏向得电子能力强的一方，如 H—Cl（偏向 Cl）、H—O（偏向 O）。" },
                 { type: "text", html: "化合物分类判据：只含共价键 → 共价化合物（H₂O、CO₂）；含离子键 → 离子化合物（NaCl、NaOH）。注意：共价化合物里可以有极性键和非极性键（如 H₂O₂）。" },
-                { type: "trap", text: "⚠ 别搞混：'含极性键的一定是极性分子'？CO₂ 含极性键但是非极性分子（对称抵消）！判据看分子构型，不只看键。" }
+                { type: "trap", text: "⚠ 别搞混：'含极性键的一定是极性分子'？CO₂ 含极性键但是非极性分子（对称抵消）！判据看分子构型，不只看键。" },
+                { type: "widget", widget: { type: "bond-step", params: {
+                  title: "H–H：共用电子对不偏向",
+                  layout: "bond-shift",
+                  steps: [
+                    { stepIndex: 0, label: "两个 H 原子靠近", "break": [], form: [], annotate: true,
+                      atoms: [{ id: "H1", label: "H", x0: 22, x1: 40, y: 31 }, { id: "H2", label: "H", x0: 78, x1: 60, y: 31 }] },
+                    { stepIndex: 1, label: "共用电子对出现在两核中间", "break": [], form: ["共价键"],
+                      atoms: [{ id: "H1", label: "H", x: 40, y: 31 }, { id: "H2", label: "H", x: 60, y: 31 }],
+                      pair: { show: true, appear: true, shift0: 0, shift1: 0 },
+                      note: "电子对居中：非极性共价键" }
+                  ],
+                  autoplay: true,
+                  reminder: "粒子大小、数量、运动速度均为示意，未按真实比例；粒子碰撞为示意，非真实碰撞过程。\n提醒：电子对画成的\"云\"是示意，不是电子的真实形状；\"偏心\"的程度也是示意——真实偏移是连续的概率分布，这里只想让你看清\"往哪偏\"。",
+                  ax01: { assumptions: ["电子对画成云状示意"], approximations: ["二维示意"], errorEstimate: "定性示意，无数值口径" }
+                } } },
+                { type: "widget", widget: { type: "bond-step", params: {
+                  title: "Cl–Cl：共用电子对不偏向",
+                  layout: "bond-shift",
+                  steps: [
+                    { stepIndex: 0, label: "两个 Cl 原子靠近", "break": [], form: [], annotate: true,
+                      atoms: [{ id: "C1", label: "Cl", x0: 22, x1: 40, y: 31 }, { id: "C2", label: "Cl", x0: 78, x1: 60, y: 31 }] },
+                    { stepIndex: 1, label: "共用电子对出现在两核中间", "break": [], form: ["共价键"],
+                      atoms: [{ id: "C1", label: "Cl", x: 40, y: 31 }, { id: "C2", label: "Cl", x: 60, y: 31 }],
+                      pair: { show: true, appear: true, shift0: 0, shift1: 0 },
+                      note: "电子对居中：非极性共价键" }
+                  ],
+                  autoplay: true,
+                  reminder: "粒子大小、数量、运动速度均为示意，未按真实比例；粒子碰撞为示意，非真实碰撞过程。\n提醒：电子对画成的\"云\"是示意，不是电子的真实形状；\"偏心\"的程度也是示意——真实偏移是连续的概率分布，这里只想让你看清\"往哪偏\"。",
+                  ax01: { assumptions: ["电子对画成云状示意"], approximations: ["二维示意"], errorEstimate: "定性示意，无数值口径" }
+                } } },
+                { type: "widget", widget: { type: "bond-step", params: {
+                  title: "H–Cl：共用电子对偏向 Cl",
+                  layout: "bond-shift",
+                  steps: [
+                    { stepIndex: 0, label: "H 与 Cl 原子靠近", "break": [], form: [], annotate: true,
+                      atoms: [{ id: "H1", label: "H", x0: 22, x1: 40, y: 31 }, { id: "C1", label: "Cl", x0: 78, x1: 60, y: 31 }] },
+                    { stepIndex: 1, label: "共用电子对出现在两核之间", "break": [], form: ["共价键"],
+                      atoms: [{ id: "H1", label: "H", x: 40, y: 31 }, { id: "C1", label: "Cl", x: 60, y: 31 }],
+                      pair: { show: true, appear: true, shift0: 0, shift1: 0 } },
+                    { stepIndex: 2, label: "电子对偏向 Cl", "break": [], form: [], annotate: true,
+                      atoms: [{ id: "H1", label: "H", x: 40, y: 31 }, { id: "C1", label: "Cl", x: 60, y: 31 }],
+                      pair: { show: true, shift0: 0, shift1: 0.62, shiftTo: "B", shiftLabel: "偏向 Cl" },
+                      note: "Cl 得电子能力强，电子对偏向 Cl → 极性共价键" }
+                  ],
+                  autoplay: true,
+                  reminder: "粒子大小、数量、运动速度均为示意，未按真实比例；粒子碰撞为示意，非真实碰撞过程。\n提醒：电子对画成的\"云\"是示意，不是电子的真实形状；\"偏心\"的程度也是示意——真实偏移是连续的概率分布，这里只想让你看清\"往哪偏\"。",
+                  ax01: { assumptions: ["电子对画成云状示意"], approximations: ["二维示意"], errorEstimate: "定性示意，无数值口径" }
+                } } }
               ],
               point: "极性看电子对偏向，分子极性看构型——键极性 ≠ 分子极性。"
             },

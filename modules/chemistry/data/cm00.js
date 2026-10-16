@@ -103,7 +103,7 @@ window.CHEM_CH["cm00"] = {
                     topic: "证据“罩壁水雾”的三种讲法",
                     views: {
                       macro: { text: "罩住燃烧的蜡烛，杯子内壁出现一层水雾——这是肉眼看到的证据。" },
-                      micro: { text: "水蒸气分子碰到冷杯壁，运动减慢、聚成小水滴（示意）。", anim: "ref:particle-view" },
+                      micro: { text: "此处为文字描述：水蒸气分子碰到冷杯壁，运动减慢、聚成小水滴——微观过程的动画在 cm01.1.1-p1《水沸腾 vs 水电解》可以看到同类粒子运动。" },
                       symbol: {
                         mathml: "<math><msub><mi>H</mi><mn>2</mn></msub><mi>O</mi></math>",
                         gloss: "符号读“H₂O”：宏观读“水”，微观读“水分子”——证据指向：燃烧产物里有水。"
@@ -285,7 +285,7 @@ window.CHEM_CH["cm00"] = {
                     topic: "水 → H₂O 的符号之旅",
                     views: {
                       macro: { text: "一杯水：无色、透明的液体，倒进杯子里有“哗哗”声。" },
-                      micro: { text: "一群水分子在永不停息地运动，互相碰撞、散开（示意）。", anim: "ref:particle-view" },
+                      micro: { text: "此处为文字描述：一群水分子在永不停息地运动，互相碰撞、散开。想看真的分子运动，去 cm03.1.1-p1《加热水：分子越跑越快》。" },
                       symbol: {
                         mathml: "<math><msub><mi>H</mi><mn>2</mn></msub><mi>O</mi></math>",
                         gloss: "符号读“H₂O”：宏观读“水”，微观读“一个水分子由两个氢原子和一个氧原子构成”——压缩包，解压要读两遍。"

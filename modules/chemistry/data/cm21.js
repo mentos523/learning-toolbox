@@ -228,6 +228,26 @@ window.CHEM_CH["cm21"] = {
                     },
                     verdict: "试剂一样，溶剂不同，反应类型完全不同——条件决定去向"
                   }
+                },
+                {
+                  type: "bond-step",
+                  params: {
+                    title: "断键成键两步走：取代 vs 消去",
+                    layout: "substitute",
+                    steps: [
+                      { stepIndex: 0, label: "取代①断键：C–Br 断裂", "break": ["C–Br"], form: [], lane: 0,
+                        caption: "Br⁻ 离去" },
+                      { stepIndex: 1, label: "取代②成键：C–O 形成", "break": [], form: ["C–O"], lane: 0,
+                        caption: "得 CH₃CH₂OH" },
+                      { stepIndex: 2, label: "消去①断键：C–Br 与 C–H 同时断裂", "break": ["C–Br", "C–H"], form: [],
+                        lane: 1, simultaneousBreak: true, caption: "脱去 HBr" },
+                      { stepIndex: 3, label: "消去②成键：C=C 形成", "break": [], form: ["C=C"], lane: 1,
+                        caption: "得 CH₂=CH₂" }
+                    ],
+                    autoplay: false,
+                    reminder: "粒子大小、数量、运动速度均为示意，未按真实比例；粒子碰撞为示意，非真实碰撞过程。\n提醒：中间画的\"断键瞬间\"是示意——真实反应经过渡态，这里只画\"断了\"和\"成了\"两个状态；反应条件标在文字里，动画里没有画加热和溶剂。",
+                    ax01: { assumptions: ["断键中间态为示意"], approximations: ["二维示意"], errorEstimate: "定性示意，无数值口径" }
+                  }
                 }
               ],
               point: "条件决定去向——做题先看条件。"

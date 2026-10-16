@@ -178,6 +178,36 @@
 | `Input(view)` + `bindDrag(node, {onEnd})` + `ensureHitArea(node)` | pointer 统一鼠标/触控；命中区 ≥44px（ENG-56）；拖拽落点=读回位置（ENG-57） | ENG-55~58 |
 | `Eng.prefersReducedMotion()` | reduced-motion 时用分步播放器等效替代连续动画（YP-09） | — |
 
+### 2.8 粒子运动原语（motion.js，波 C 落地 2026.10.16.9）
+
+| API | 说明 | 口径 |
+|---|---|---|
+| `Eng.MoleculeMotion(opt)` | 粒子系 + 参数化速度场；由 Eng.Driver 固定步进驱动（默认 dt=1/60，ENG-06/16）；教学随机走 Eng.SeededRNG（CHEMC-05 通用铁律：禁用 Math.random()） | CHEMC-01~19 |
+| `opt.field` | `'brownian'` 随机游走/扩散 ／ `'thermal'` 热运动（速率∝√T） ／ `'drift'` 电场定向漂移（热运动+漂移叠加） ／ `'lattice'` 晶格振动 ／ `'dissolve'` 溶解（晶体逐个脱离） ／ `'fractionate'` 分馏（按沸点气化/冷凝） | CHEMC-01/03/09/11/13 |
+| `opt.kinds` | `[{kind, count, color, r, speedMps?, driftVxMps?, boilC?}]`；粒子数 40–150（CHEMC-19 WARN） | — |
+| `opt.cluster` | `{kind, cx, cy, sigma}`：该 kind 按高斯（Box-Muller，经 RNG）集中（CHEMC-18：扩散页品红 2σ 内 ≥80%） | CHEMC-18/31 |
+| `opt.tower` | `{tempStartC, rampCps, tempMaxC, tempTopC, yBottom, yTop, riseSpeedMps}`：渐进加热（CHEMC-13 气化顺序=沸点升序）；冷凝高度按稳态场固定（CHEMC-14） | CHEMC-13/14 |
+| `opt.groups` | `[{name, boilRank}]`：分馏分组（§六 6.1 快照字段） | — |
+| `step(n)` / `reset()` / `play()` / `pause()` / `setSpeed(r)` / `simTimeSec()` / `stepCountN()` | Eng.PRIMITIVE_IFACE；可直接被 Eng.StepPlayer 包装（手动步进） | ENG-06~12 |
+| `state()` / `snapshot()` / `restore(snap)` | 快照字段按化学 §六 6.1：`{stepN, simTimeSec, particles:[{id,type,pos:{x,y},vel:{x,y},state}], field:{on,anodeDir}, groups}`；深拷贝（ENG-10）；同种子两次运行逐位一致（ENG-09） | CHEMC §六 |
+| `positions()` / `sampleConcentration(bx,by)` / `countByState()` / `countByKind()` | 轻量读回；浓度分布采样（扩散均匀性/粒子守恒断言）；状态/种类计数 | CHEMC-06/32 |
+| `tempCAt(y,tSec)` / `condenseYFor(boilC)` / `tempBottomAt(tSec)` | 温度场读回（逻辑单位 0–100、y 向上，§0 0.4） | — |
+
+真值要点（实现侧自检，断言归白队）：
+- 禁止恒定外力"推"粒子（CHEMC-02/17）："推"是教学比喻，动画按随机游走；漂移场 `mean|v_drift| ≤ 0.1×mean|v_thermal|`（CHEMC-10/40）。
+- dissolve 单步至多 1 个脱离（`ΔcrystalCount ∈ {0,−1}`，CHEMC-05）；粒子数守恒（CHEMC-06）。
+- lattice 振幅 < 10% 晶格间距（CHEMC-11）。
+- 溶液区不得出现 `type:"electron"` 粒子（CHEMC-12）。
+- 温度两档速率比 ≥ 1.2（CHEMC-03/33）；不得标注真实分子速率数值（CHEMC-04）。
+- 每页强制近似声明句（CHEMC-16）："粒子大小、数量、运动速度均为示意，未按真实比例；粒子碰撞为示意，非真实碰撞过程。"
+- dt/N 声明（ENG-16）：默认 dt=1/60；随机游走无解析对账，确定性由播种 RNG 保证。
+
+化学侧 BondStep 未进引擎（ENGINE.md §6.3 波 A 先例：学科专用语义自实现）：
+`modules/chemistry/js/chem-bond.js` 的 `ChemBond.render(params)` 用
+Eng.StepPlayer（前进/后退/重播/慢放/键盘）+ Eng.Tween（步内连续插值）驱动；
+步骤数据格式 `{stepIndex,label,break[],form[],transfer?,energyLabel?,curveSlopeSign?}`
+按化学 §六 6.1；分步铁律 CHEMC-20/21/22/23 由 `ChemBond.validateSteps` 生产侧自检。
+
 ### 2.7 补间原语（tween.js）
 
 | API | 说明 | 口径 |
@@ -353,7 +383,7 @@ assets/vendor/
 assets/engine/
   core.js  coords.js  driver.js  konva-view.js  input.js
   mech.js  meters.js  plot.js  steps.js  guides.js
-  tween.js  circuit.js
+  tween.js  circuit.js  motion.js
 docs/ENGINE.md（本文件）
 tools/engine-verify/
   verify.css  verify-lib.js  run-verify.cjs
@@ -363,7 +393,7 @@ tools/engine-verify/
   v-meters-electrical.html  v-meters-length-angle.html
   v-meters-thermo-balance.html  v-meters-lab.html
   v-plot.html  v-input.html  v-steps.html  v-data-chart.html  v-konva-view.html
-  v-tween.html
+  v-tween.html  v-motion.html
 ```
 
 验证：`node tools/engine-verify/run-verify.cjs`（headless Chromium 真实 file:// 打开；

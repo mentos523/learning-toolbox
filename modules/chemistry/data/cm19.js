@@ -191,7 +191,22 @@ window.CHEM_CH["cm19"] = {
                 { type: "text", html: "水解实质：弱离子“抢”水电离出的 H⁺/OH⁻，生成弱电解质。CH₃COO⁻ + H₂O ⇌ CH₃COOH + OH⁻——显碱性。" },
                 { type: "text", html: "规律：有弱才水解；越弱越水解；谁强显谁性。Na₂CO₃ 是盐却显碱性——cm10.3.1 的误区今天正名。" },
                 { type: "text", html: "应用：泡沫灭火器（双水解：2Al³⁺+6HCO₃⁻=2Al(OH)₃↓+6CO₂↑）；明矾净水（Al(OH)₃ 胶体吸附）。" },
-                { type: "trap", text: "⚠ 别搞混：盐溶液不都是中性！CH₃COONa 碱性，NH₄Cl 酸性。" }
+                { type: "trap", text: "⚠ 别搞混：盐溶液不都是中性！CH₃COONa 碱性，NH₄Cl 酸性。" },
+                { type: "widget", widget: { type: "bond-step", params: {
+                  title: "CH₃COO⁻ 抢 H⁺",
+                  layout: "hydrolysis",
+                  steps: [
+                    { stepIndex: 0, label: "水极少量电离：H₂O ⇌ H⁺ + OH⁻", "break": [], form: [], annotate: true,
+                      caption: "水电离极微弱（示意已放大）" },
+                    { stepIndex: 1, label: "CH₃COO⁻ “抢”走 H⁺", "break": [], form: ["O–H（羧基羟基）"],
+                      caption: "生成弱电解质 CH₃COOH" },
+                    { stepIndex: 2, label: "剩余 OH⁻ → 溶液显碱性", "break": [], form: [], annotate: true,
+                      caption: "CH₃COO⁻ + H₂O ⇌ CH₃COOH + OH⁻；有弱才水解" }
+                  ],
+                  autoplay: true,
+                  reminder: "粒子大小、数量、运动速度均为示意，未按真实比例；粒子碰撞为示意，非真实碰撞过程。\n提醒：水电离出的 H⁺/OH⁻ 画得比真实多得多——真实水电离极微弱；\"抢\"的程度也是示意，水解是可逆的（方程式用 ⇌），大部分 CH₃COO⁻ 并没有抢。",
+                  ax01: { assumptions: ["水电离示意放大"], approximations: ["二维示意"], errorEstimate: "定性示意，无数值口径" }
+                } } }
               ],
               point: "酸碱中和不一定 pH=7——水解说了算。下一页：测四种盐的 pH。"
             },
@@ -361,6 +376,38 @@ window.CHEM_CH["cm19"] = {
               title: "追踪电子：从 Zn 到 Cu²⁺",
               exploreTip: "先点元素标化合价，再点起点、终点画电子转移箭头。单质中元素化合价为 0（如 H₂ 中的 H 为 0、Zn 为 0）。",
               widgets: [
+                {
+                  type: "bond-step",
+                  params: {
+                    title: "电子沿外电路从 Zn 流向 Cu（自动演示）",
+                    layout: "e-flow",
+                    steps: [
+                      { stepIndex: 0, label: "Zn 失电子：0 → +2（负极·氧化反应）", "break": [], form: [],
+                        transfer: { from: "Zn", to: "Cu", electrons: 2 },
+                        valenceTags: [{ x: 16, y: 16, text: "Zn：0 → +2（失 2e⁻）" }],
+                        caption: "Zn 失去电子" },
+                      { stepIndex: 1, label: "电子沿导线从 Zn 极流向 Cu 极", "break": [], form: [], annotate: true,
+                        eflow: { electrons: 2, label: "电子只走导线，不进溶液" },
+                        valenceTags: [{ x: 16, y: 16, text: "Zn：0 → +2" }, { x: 84, y: 16, text: "Cu²⁺：+2 → 0" }] },
+                      { stepIndex: 2, label: "Cu²⁺ 得电子：+2 → 0（正极·还原反应）", "break": [], form: [],
+                        transfer: { from: "Zn", to: "Cu", electrons: 2, phase: "arrive" },
+                        valenceTags: [{ x: 84, y: 16, text: "Cu²⁺：+2 → 0（得 2e⁻）" }],
+                        motto: "Zn（负极）：升高 → 失 2e⁻ → 氧化反应 → 还原剂；Cu²⁺（正极）：降低 → 得 2e⁻ → 还原反应 → 氧化剂",
+                        caption: "终态：ZnSO₄ + Cu" }
+                    ],
+                    scene: {
+                      nodes: [
+                        { label: "Zn", x: 14, y: 34, r: 7, sub: "负极" },
+                        { label: "Cu", x: 86, y: 34, r: 7, sub: "正极" },
+                        { shape: "wire" }
+                      ],
+                      wirePath: [{ x: 22, y: 16 }, { x: 50, y: 16 }, { x: 78, y: 16 }]
+                    },
+                    autoplay: true, holdMs: 3000,
+                    reminder: "粒子大小、数量、运动速度均为示意，未按真实比例；粒子碰撞为示意，非真实碰撞过程。\n提醒：电子流画成了连续的小点\"跑\"过去，是示意——真实电流是电子整体的缓慢漂移，不是电子在赛跑；导线里自由电子本来就很多，这里只画\"定向的那一份\"。",
+                    ax01: { assumptions: ["电子画成小点示意"], approximations: ["二维示意"], errorEstimate: "定性示意，无数值口径" }
+                  }
+                },
                 {
                   type: "redox-track",
                   params: {

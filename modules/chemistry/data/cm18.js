@@ -209,7 +209,42 @@ window.CHEM_CH["cm18"] = {
                 { type: "oldfriend", text: "认旧友：还记得 cm02.1.3 的“一变二不变”吗？催化剂改变化学反应速率，但反应前后质量和化学性质都不变——今天看它“怎么办到”的：换一条活化能更低的路。" },
                 { type: "text", html: "同一反应，用不同物质表示的速率之比 = 系数比。v(N₂)∶v(H₂)∶v(NH₃) = 1∶3∶2。速率单位别丢时间：mol/(L·min) 或 mol/(L·s)。" },
                 { type: "text", html: "微观上：有效碰撞 = 能量够 + 取向对。活化能是反应的“门槛”——催化剂换一条“矮门”的路（降低活化能），正逆速率都加快，但 ΔH 不变、平衡不移动。" },
-                { type: "trap", text: "⚠ 别搞混：不同物质表示的速率不相等，比值才等于系数比；催化剂不改 ΔH、不改平衡、不改 K（K = 平衡常数，下一课 cm18.2.2 见），只降活化能、加快率。" }
+                { type: "trap", text: "⚠ 别搞混：不同物质表示的速率不相等，比值才等于系数比；催化剂不改 ΔH、不改平衡、不改 K（K = 平衡常数，下一课 cm18.2.2 见），只降活化能、加快率。" },
+                { type: "widget", widget: { type: "bond-step", params: {
+                  title: "有效碰撞：能量够 + 取向对",
+                  layout: "collision",
+                  steps: [
+                    { stepIndex: 0, label: "A：能量不够 → 弹开", "break": [], form: [], annotate: true,
+                      lane: 0, phase: "collide", energyTag: "能量不够 ＜ 活化能" },
+                    { stepIndex: 1, label: "B：取向不对 → 弹开", "break": [], form: [], annotate: true,
+                      lane: 1, phase: "collide", energyTag: "取向不对" },
+                    { stepIndex: 2, label: "C：能量够 + 取向对 → 断开旧键", "break": ["旧键"], form: [],
+                      lane: 2, phase: "collide", energyTag: "能量够 + 取向对", note: "旧键断开" },
+                    { stepIndex: 3, label: "C：形成新键", "break": [], form: ["新键"],
+                      lane: 2, phase: "collide", energyTag: "能量够 + 取向对", note: "新键形成" }
+                  ],
+                  autoplay: true,
+                  reminder: "粒子大小、数量、运动速度均为示意，未按真实比例；粒子碰撞为示意，非真实碰撞过程。\n提醒：\"能量够\"的门槛画成了一道\"门\"，是示意——真实活化能是能量数值；分子的取向被简化成了几个固定角度，真实碰撞的取向是任意的。",
+                  ax01: { assumptions: ["碰撞示意"], approximations: ["二维示意"], errorEstimate: "定性示意，无数值口径" }
+                } } },
+                { type: "widget", widget: { type: "bond-step", params: {
+                  title: "催化剂：换一条“矮门”的路",
+                  layout: "energy",
+                  steps: [
+                    { stepIndex: 0, label: "无催化剂：活化能高", "break": [], form: [], annotate: true,
+                      molStage: "form", caption: "起点 → 高门槛 → 终点" },
+                    { stepIndex: 1, label: "有催化剂：活化能更低，ΔH 不变", "break": [], form: [], annotate: true,
+                      molStage: "form", energyLabel: "活化能更低", settleLabel: "ΔH 不变",
+                      caption: "催化剂：活化能更低的路；不改 ΔH、不改平衡、不改 K" }
+                  ],
+                  scene: { energyCurve: {
+                    points: [{ x: 5, y: 30 }, { x: 50, y: 8 }, { x: 95, y: 30 }],
+                    altPath: [{ x: 5, y: 30 }, { x: 50, y: 20 }, { x: 95, y: 30 }]
+                  } },
+                  autoplay: true,
+                  reminder: "粒子大小、数量、运动速度均为示意，未按真实比例；粒子碰撞为示意，非真实碰撞过程。",
+                  ax01: { assumptions: ["能量曲线为示意"], approximations: ["二维示意"], errorEstimate: "定性示意" }
+                } } }
               ],
               point: "速率比=系数比；催化剂降活化能、不改 ΔH。下一页：拨滑块看速率变化。"
             },

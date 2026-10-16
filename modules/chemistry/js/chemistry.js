@@ -22,7 +22,8 @@
     "particle-view", "molecule-build", "periodic-explore", "lab-assemble",
     "solution-mix", "reaction-particle", "ph-scale", "rate-equilibrium",
     "redox-track", "safety-badge", "ion-split", "tri-rep",
-    "read-gauge-chem", "stoich-steps", "safety-quiz", "side-compare"
+    "read-gauge-chem", "stoich-steps", "safety-quiz", "side-compare",
+    "molecule-motion", "bond-step"
   ];
   /* 试点阶段实现 3 种；C1–C10/Y6/Y10/Y12/Y13 随阶段三按
    * docs/chemistry-interactions.md spec 增补（类型名冻结，不得自创）。 */
@@ -1565,6 +1566,288 @@ function widgetParticleView(p) {
   /* B4 常驻（不可关闭） */
   box.appendChild(scaleNote(p));
   return box;
+}
+
+/* ============================================================
+ * 波 C · molecule-motion（分子运动引擎视图）
+ * Eng.MoleculeMotion（状态/固定步进驱动）+ Konva 渲染（只消费 state()）。
+ * p = {
+ *   motion: {...},                       // 单场景 Eng.MoleculeMotion 参数
+ *   compare: [{label, sub, motion:{...}}],// 或多场景对照（B1 冷/热、B3 三态）
+ *   view: {w, h},                        // 每场景显示尺寸 px（默认 620×380）
+ *   stepper: {stepsPerFrame, summaries[], auto}, // 手动步进（B2 溶解四步）
+ *   loop: bool,                          // 终态自动重播（B4 分馏）
+ *   autoplay: bool,
+ *   ax01: {assumptions, approximations, errorEstimate},
+ *   reminder: "…",                       // CHEMC-16 统一句 + 黄队各页提醒
+ *   legend: "…",                         // 编号图例（YC-F 密集处）
+ *   decor: {tower, electrodes, bulb}     // 场景装饰
+ * }
+ * 真值口径：chem-truth-criteria-C.md §一（CHEMC-01~19）。
+ * ============================================================ */
+var chmMmSeq = 0;
+function widgetMoleculeMotion(p) {
+  p = p || {};
+  var Eng = window.Eng;
+  var box = el("div", "chm-widget chm-mmotion", "");
+  if (!Eng || !Eng.MoleculeMotion) {
+    box.appendChild(el("div", "chm-note", "引擎未加载：molecule-motion 不可用。"));
+    return box;
+  }
+  var cfgs = p.compare && p.compare.length ? p.compare :
+    [{ label: p.label || "", sub: p.sub || "", motion: p.motion || {} }];
+  var vw = (p.view && p.view.w) || 620, vh = (p.view && p.view.h) || 380;
+  if (cfgs.length > 1) { vw = Math.min(vw, 400); vh = Math.round(vw * 0.62); }
+  var ax01 = p.ax01 || {};
+  var scenes = [];
+  var theme = 'light';
+  try {
+    theme = document.body && document.body.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+  } catch (e) {}
+
+  /* 数据层：motion 立即创建（不依赖 DOM）；视图层延迟到 box 入树后初始化
+   *（Eng.KonvaView 用 getElementById 查找容器）。 */
+  cfgs.forEach(function (c) {
+    var wrap = el("div", "chm-mm-scene", "");
+    if (c.label) wrap.appendChild(el("div", "chm-mm-label", c.label));
+    var cid = 'chm-mm-' + (++chmMmSeq);
+    var stageDiv = el("div", "chm-mm-stage", "");
+    stageDiv.id = cid;
+    wrap.appendChild(stageDiv);
+    if (c.sub) wrap.appendChild(el("div", "chm-mm-sub", c.sub));
+    box.appendChild(wrap);
+
+    var mopt = {};
+    for (var k in (c.motion || {})) mopt[k] = c.motion[k];
+    mopt.assumptions = ax01.assumptions || ['粒子运动为教学示意'];
+    mopt.approximations = ax01.approximations || ['二维示意；粒子为质点'];
+    mopt.errorEstimate = ax01.errorEstimate || '随机游走为教学示意模型，无解析对账；确定性由播种 RNG 保证';
+    var motion = new Eng.MoleculeMotion(mopt);
+    var sc = {
+      motion: motion, cid: cid, cfg: c, mopt: mopt,
+      view: null, id2node: {}, inited: false,
+      repaint: function () {
+        if (!sc.inited) return;
+        var s = motion.state(), bounds = motion.bounds;
+        var scale = vw / (bounds.xMax - bounds.xMin);
+        for (var i = 0; i < s.particles.length; i++) {
+          var pt = s.particles[i], nd = sc.id2node[pt.id];
+          if (!nd) continue;
+          var q = sc.view.logicalToPixel(pt.pos.x, pt.pos.y);
+          nd.node.x(q.x); nd.node.y(q.y);
+          /* 水合示意（CHEMC-07）：水合圈 + "示意"由 reminder 文案承担 */
+          nd.halo.x(q.x); nd.halo.y(q.y);
+          nd.halo.visible(pt.hydrated === true);
+          /* 分馏 condensed：转为液滴色 */
+          if (pt.state === 'condensed') nd.node.fill('#1E88E5');
+        }
+        sc.view.layer.batchDraw();
+      }
+    };
+    motion.onTick = function () {
+      sc.repaint();
+      if (p.loop && motion.field === 'fractionate') {
+        var c2 = motion.countByState();
+        var total = motion.particleCountN();
+        if ((c2.condensed || 0) === total && total > 0) motion.reset();
+      }
+    };
+    scenes.push(sc);
+  });
+
+  /* 视图层初始化（延迟：等 box 插入 DOM 树） */
+  function initView(sc, tries) {
+    if (sc.inited) return;
+    if (!document.getElementById(sc.cid)) {
+      if ((tries || 0) < 40) setTimeout(function () { initView(sc, (tries || 0) + 1); }, 50);
+      return;
+    }
+    sc.inited = true;
+    var motion = sc.motion, mopt = sc.mopt, c = sc.cfg;
+    var bounds = motion.bounds;
+    var view = new Eng.KonvaView({
+      containerId: sc.cid,
+      bounds: { xMin: bounds.xMin, xMax: bounds.xMax, yMin: bounds.yMin, yMax: bounds.yMax },
+      viewportWPx: vw, viewportHPx: vh, theme: theme,
+      assumptions: mopt.assumptions, approximations: mopt.approximations,
+      errorEstimate: mopt.errorEstimate
+    });
+    sc.view = view;
+    var decor = c.decor || p.decor || {};
+    if (decor.tower) drawMmTower(view, motion);
+    if (decor.electrodes) drawMmElectrodes(view, motion);
+    var kindStyle = {};
+    (mopt.kinds || []).forEach(function (kd) {
+      kindStyle[kd.kind] = { color: kd.color || '#0072B2', r: kd.r || 1.7 };
+    });
+    var layer = view.layer;
+    var scale = vw / (bounds.xMax - bounds.xMin);
+    motion.state().particles.forEach(function (pt) {
+      var ks = kindStyle[pt.type] || { color: '#0072B2', r: 1.7 };
+      var q = view.logicalToPixel(pt.pos.x, pt.pos.y);
+      var node = new Konva.Circle({
+        x: q.x, y: q.y, radius: ks.r * scale,
+        fill: ks.color, stroke: '#00000033', strokeWidth: 1, listening: false
+      });
+      var halo = new Konva.Circle({
+        x: q.x, y: q.y, radius: ks.r * scale + 5,
+        stroke: ks.color, strokeWidth: 1.2, dash: [4, 3],
+        opacity: 0.8, visible: false, listening: false
+      });
+      layer.add(halo); layer.add(node);
+      sc.id2node[pt.id] = { node: node, halo: halo };
+    });
+    if (p.legend) {
+      layer.add(Eng.konvaText({
+        x: 8, y: vh - 24, fontSize: 13, fill: view.palette.subtext,
+        text: p.legend, listening: false
+      }));
+    }
+    layer.draw();
+    sc.repaint();
+    if (p.autoplay && !motion.isPlaying()) {
+      motion.play();
+      var pb = box.querySelector('.chm-playbar button');
+      if (pb) pb.textContent = '⏸';
+    }
+  }
+  scenes.forEach(function (sc) { setTimeout(function () { initView(sc, 0); }, 0); });
+
+  /* 播放条 */
+  var bar = el("div", "chm-playbar", "");
+  function pbtn(t, label) { var b = el("button", "", t); b.type = "button"; b.setAttribute("aria-label", label); return b; }
+  var playB = pbtn('▶', '播放/暂停'), reB = pbtn('↺', '重播'), slowB = pbtn('0.5×', '慢放');
+  bar.appendChild(playB); bar.appendChild(reB); bar.appendChild(slowB);
+  var stepTag = null, prevB = null, nextB = null, player = null;
+  if (p.stepper) {
+    /* B2：手动步进（Eng.StepPlayer 包装 MoleculeMotion） */
+    prevB = pbtn('‹', '上一步'); nextB = pbtn('›', '下一步');
+    bar.insertBefore(prevB, playB); bar.insertBefore(nextB, reB);
+    stepTag = el("div", "chm-replay-step", "");
+    var capDiv = el("div", "chm-replay-caption", "");
+    box.appendChild(capDiv);
+    var nSteps = Math.max(1, (p.stepper.summaries || []).length);
+    var main = scenes[0].motion;
+    player = new Eng.StepPlayer({
+      primitive: main,
+      stepsPerFrame: p.stepper.stepsPerFrame || 120,
+      totalFrames: nSteps - 1,
+      stepSummaries: (function () {
+        var ss = (p.stepper.summaries || []).slice();
+        while (ss.length < nSteps) ss.push('第 ' + (ss.length + 1) + ' 步');
+        return ss;
+      })(),
+      assumptions: (p.stepper.ax01 && p.stepper.ax01.assumptions) || ['分步为教学示意'],
+      approximations: (p.stepper.ax01 && p.stepper.ax01.approximations) || ['二维示意'],
+      errorEstimate: (p.stepper.ax01 && p.stepper.ax01.errorEstimate) || '定性示意',
+      onFrame: function (f) {
+        scenes.forEach(function (sc) { sc.repaint(); });
+        capDiv.textContent = (p.stepper.summaries || [])[f] || '';
+        if (stepTag) stepTag.textContent = '第 ' + (f + 1) + ' 步 / 共 ' + nSteps + ' 步';
+        prevB.disabled = f === 0;
+        nextB.disabled = f === nSteps - 1;
+      }
+    });
+    prevB.addEventListener('click', function () { pauseAll(); player.prev(); });
+    nextB.addEventListener('click', function () { pauseAll(); player.next(); });
+    box.appendChild(stepTag);
+    player.onFrame(0);
+  }
+  box.appendChild(bar);
+
+  function pauseAll() {
+    scenes.forEach(function (sc) { sc.motion.pause(); });
+    playB.textContent = '▶';
+  }
+  var slow = false;
+  playB.addEventListener('click', function () {
+    var anyPlaying = scenes.some(function (sc) { return sc.motion.isPlaying(); });
+    if (anyPlaying) { pauseAll(); return; }
+    scenes.forEach(function (sc) { sc.motion.play(); });
+    playB.textContent = '⏸';
+  });
+  reB.addEventListener('click', function () {
+    pauseAll();
+    scenes.forEach(function (sc) { sc.motion.reset(); sc.repaint(); });
+    if (player) { player.resetAll(); }
+  });
+  slowB.addEventListener('click', function () {
+    slow = !slow;
+    scenes.forEach(function (sc) { sc.motion.setSpeed(slow ? 0.5 : 1); });
+    slowB.textContent = slow ? '1×' : '0.5×';
+    slowB.classList.toggle('on', slow);
+  });
+
+  /* 文案区：CHEMC-16 统一句 + 黄队各页提醒（学生可见） */
+  if (p.reminder) {
+    var rm = el("div", "chm-note", "");
+    rm.textContent = p.reminder;
+    box.appendChild(rm);
+  }
+  /* 调试/自测句柄（白队复验与过程证据采样用） */
+  box._mmScenes = scenes;
+  return box;
+}
+
+/* 分馏塔装饰：温度梯度背景 + 冷凝高度线（CHEMC-14） */
+function drawMmTower(view, motion) {
+  var layer = view.layer, W = view.stage.width(), H = view.stage.height();
+  var b = motion.bounds;
+  /* 梯度背景（下热上冷，示意） */
+  var yBot = view.logicalToPixel(0, b.yMin).y, yTop = view.logicalToPixel(0, b.yMax).y;
+  var grad = new Konva.Rect({
+    x: 0, y: yTop, width: W, height: yBot - yTop,
+    fillLinearGradientStartPoint: { x: 0, y: yTop },
+    fillLinearGradientEndPoint: { x: 0, y: yBot },
+    fillLinearGradientColorStops: [0, '#E3F2FD', 1, '#FFCCBC'],
+    opacity: 0.5, listening: false
+  });
+  layer.add(grad);
+  /* 冷凝高度线（按 groups boilRank） */
+  (motion.groups || []).forEach(function (g, i) {
+    var kd = null;
+    (motion.kinds || []).forEach(function (k) { if (k.kind === g.name || k.label === g.name) kd = k; });
+    var boilC = kd && kd.boilC;
+    if (boilC === undefined) return;
+    var y = view.logicalToPixel(0, motion.condenseYFor(boilC)).y;
+    layer.add(new Konva.Line({
+      points: [0, y, W, y], stroke: '#888', strokeWidth: 1, dash: [6, 4], listening: false
+    }));
+    var t = Eng.konvaText({
+      x: 6, y: y - 18, fontSize: 13, fill: view.palette.text,
+      text: g.name + '在此冷凝（示意）', listening: false
+    });
+    layer.add(t);
+  });
+  var tb = Eng.konvaText({
+    x: 6, y: yBot - 20, fontSize: 13, fill: view.palette.text,
+    text: '塔底加热（示意）', listening: false
+  });
+  layer.add(tb);
+}
+
+/* 电场装饰：电极板 + "示意"标注（CHEMC-39） */
+function drawMmElectrodes(view, motion) {
+  var layer = view.layer, W = view.stage.width(), H = view.stage.height();
+  var on = motion.fieldState.on;
+  var dir = motion.fieldState.anodeDir || { x: 1, y: 0 };
+  /* 左极板 / 右极板 */
+  var left = Eng.konvaText({
+    x: 8, y: H / 2 - 10, fontSize: 15, fill: view.palette.text,
+    text: dir.x >= 0 ? '−（阴极）' : '+（阳极）', listening: false
+  });
+  var right = Eng.konvaText({
+    x: W - 78, y: H / 2 - 10, fontSize: 15, fill: view.palette.text,
+    text: dir.x >= 0 ? '+（阳极）' : '−（阴极）', listening: false
+  });
+  layer.add(left); layer.add(right);
+  layer.add(new Konva.Rect({ x: 2, y: H * 0.2, width: 3, height: H * 0.6, fill: view.palette.text, listening: false }));
+  layer.add(new Konva.Rect({ x: W - 5, y: H * 0.2, width: 3, height: H * 0.6, fill: view.palette.text, listening: false }));
+  var tag = Eng.konvaText({
+    x: 8, y: 8, fontSize: 13, fill: view.palette.subtext,
+    text: on ? '通电（电极示意）' : '未通电（示意）', listening: false
+  });
+  layer.add(tag);
 }
 
 /* ============================================================
@@ -4432,11 +4715,22 @@ function widgetTriRep(p) {
     } else if (cur === "symbol" && v.mathml) {
       body.appendChild(el("div", "chm-tri-symbol", esc(v.gloss || "")));
     }
-    if (v.text) body.appendChild(el("div", "chm-text", esc(v.text)));
+    if (v.text) {
+      var tdiv = el("div", "chm-text", "");
+      /* YC-T2：micro 视角文案中的课号自动链为 XLINK（linkifyLessons）；其余视角保持 esc */
+      tdiv.innerHTML = cur === "micro" ? linkifyLessons(v.text) : esc(v.text);
+      body.appendChild(tdiv);
+    }
     if (cur === "symbol" && v.gloss && !(v.mathml && !mathmlOK()))
       body.appendChild(el("div", "chm-note", esc(v.gloss)));
-    if (cur === "micro" && v.anim)
-      body.appendChild(el("div", "chm-note", "（微观粒子动画见本课粒子页，此处为文字描述）"));
+    if (cur === "micro" && v.anim) {
+      if (v.anim && typeof v.anim === "object" && v.anim.widget) {
+        /* YC-T3/T5：micro 页签嵌入真实动画（一处实现、两处受益） */
+        body.appendChild(renderWidget(v.anim.widget, v.anim.params || {}));
+      } else {
+        body.appendChild(el("div", "chm-note", "（微观粒子动画见本课粒子页，此处为文字描述）"));
+      }
+    }
     flash(body);
   }
   paint();
@@ -5032,7 +5326,9 @@ var CHEM_NEW_WIDGETS = {
   "read-gauge-chem": widgetReadGaugeChem,
   "stoich-steps": widgetStoichSteps,
   "safety-quiz": widgetSafetyQuiz,
-  "side-compare": widgetSideCompare
+  "side-compare": widgetSideCompare,
+  "molecule-motion": widgetMoleculeMotion,
+  "bond-step": function (p) { return window.ChemBond.render(p); }
 };
 
   /* ---------------- 组件注册表 ---------------- */
@@ -5055,7 +5351,9 @@ var CHEM_NEW_WIDGETS = {
     "read-gauge-chem": widgetReadGaugeChem,
     "stoich-steps": widgetStoichSteps,
     "safety-quiz": widgetSafetyQuiz,
-    "side-compare": widgetSideCompare
+    "side-compare": widgetSideCompare,
+    "molecule-motion": widgetMoleculeMotion,
+    "bond-step": function (p) { return window.ChemBond.render(p); }
   };
   function renderWidget(type, params) {
     var fn = WIDGETS[type];

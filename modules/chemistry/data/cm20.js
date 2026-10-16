@@ -120,7 +120,26 @@ window.CHEM_CH["cm20"] = {
                 { type: "text", html: "VSEPR：价层电子对（成键+孤对）互相排斥。CH₄：4 对成键 → 正四面体（109.5°）；NH₃：3+1 → 三角锥形（107°）；H₂O：2+2 → 折线形（105°）；CO₂：2 对 → 直线形（180°）。" },
                 { type: "text", html: "孤对越多“挤”得越狠：109.5° > 107° > 105°。sp³ 杂化（定性）：CH₄ 的 1s+3p“杂”成 4 个等同轨道。" },
                 { type: "oldfriend", text: "（红线辨析④高中回填：分子是微观粒子，说“构成”用原子——一个水分子由两个氢原子和一个氧原子构成。“水由氢、氧元素组成”是宏观说法，两句话别串。）" },
-                { type: "trap", text: "⚠ 别搞混：H₂O 是折线形！“共价键=共用电子对”太粗——σ 和 π 不一样。" }
+                { type: "trap", text: "⚠ 别搞混：H₂O 是折线形！“共价键=共用电子对”太粗——σ 和 π 不一样。" },
+                { type: "widget", widget: { type: "bond-step", params: {
+                  title: "sp³ 杂化与孤对挤压",
+                  layout: "hybrid",
+                  steps: [
+                    { stepIndex: 0, label: "1s + 3p 杂化成 4 个等同轨道", "break": [], form: ["4×sp³杂化轨道"],
+                      hybridFrom: true, lonePairs: 0, bondAngleDeg: 109.5,
+                      note: "sp³ 杂化（定性）：1s+3p → 4 个等同轨道" },
+                    { stepIndex: 1, label: "第 1 个孤对电子加入，键角 109.5° → 107°", "break": [], form: [], squeeze: true,
+                      lonePairs: 1, bondAngleFrom: 109.5, bondAngleDeg: 107,
+                      note: "孤对“挤”：NH₃，三角锥形" },
+                    { stepIndex: 2, label: "第 2 个孤对电子加入，键角 107° → 105°", "break": [], form: [], squeeze: true,
+                      lonePairs: 2, bondAngleFrom: 107, bondAngleDeg: 105,
+                      note: "孤对越多挤得越狠：H₂O，折线形" }
+                  ],
+                  scene: { center: "C" },
+                  autoplay: true, holdMs: 3000,
+                  reminder: "粒子大小、数量、运动速度均为示意，未按真实比例；粒子碰撞为示意，非真实碰撞过程。\n提醒：轨道画成的\"瓣\"是示意，不是电子云的真实形状；\"杂化\"是解释实验事实的模型，不是原子真的把轨道\"搅拌\"了——先有\"四个 H 等价\"的实验事实，才有杂化这个说法。",
+                  ax01: { assumptions: ["轨道画成瓣状示意"], approximations: ["二维投影示意"], errorEstimate: "定性示意，无数值口径" }
+                } } }
               ],
               point: "孤对越多，挤得越狠，键角越小。下一页：四种分子对照。"
             },
@@ -156,6 +175,25 @@ window.CHEM_CH["cm20"] = {
                       rows: ["成键电子对：2", "孤电子对：0", "构型：直线形", "键角：180°"]
                     },
                     verdict: "孤对越多，挤得越狠，键角越小——VSEPR 一次看透"
+                  }
+                },
+                {
+                  type: "bond-step",
+                  params: {
+                    title: "挤一挤：键角变化示意",
+                    layout: "hybrid",
+                    view: { w: 420, h: 260 },
+                    steps: [
+                      { stepIndex: 0, label: "CH₄：无孤对，109.5°", "break": [], form: [], squeeze: true,
+                        lonePairs: 0, bondAngleDeg: 109.5 },
+                      { stepIndex: 1, label: "H₂O：2 个孤对，105°", "break": [], form: [], squeeze: true,
+                        lonePairs: 2, bondAngleFrom: 109.5, bondAngleDeg: 105,
+                        note: "孤电子对把成键电子对“挤”弯了：109.5° → 105°" }
+                    ],
+                    scene: { center: "C" },
+                    autoplay: true,
+                    reminder: "粒子大小、数量、运动速度均为示意，未按真实比例；粒子碰撞为示意，非真实碰撞过程。",
+                    ax01: { assumptions: ["轨道画成瓣状示意"], approximations: ["二维投影示意"], errorEstimate: "定性示意" }
                   }
                 }
               ],
@@ -222,11 +260,45 @@ window.CHEM_CH["cm20"] = {
                     topic: "氢键：水为什么 100℃ 才开",
                     views: {
                       macro: { text: "水 100℃ 沸腾，H₂S −60℃ 就是气体——都是 H₂X 型，脾气差这么多" },
-                      micro: { text: "水分子之间有氢键“拉手”，H₂S 分子之间只有范德华力（示意，未按比例）", anim: "ref:particle-view" },
+                      micro: { text: "水分子之间有氢键“拉手”，H₂S 分子之间只有范德华力（示意，未按比例）", anim: { widget: "bond-step", params: {
+                        layout: "h-bond",
+                        view: { w: 480, h: 300 },
+                        steps: [
+                          { stepIndex: 0, label: "两个水分子靠近", "break": [], form: [], annotate: true,
+                            sepFrom: 36, sep: 24, note: "一个分子的 H 朝向另一个分子的 O" },
+                          { stepIndex: 1, label: "氢键形成", "break": [], form: ["氢键（分子间作用力）"],
+                            sep: 20, hbond: true, note: "O−H···O：氢键不是化学键，是分子间作用力" },
+                          { stepIndex: 2, label: "氢键断裂", "break": ["氢键"], form: [],
+                            sepFrom: 20, sep: 30, hbond: false, note: "断裂后水分子完整：O–H 键没断" }
+                        ],
+                        autoplay: true,
+                        reminder: "粒子大小、数量、运动速度均为示意，未按真实比例；粒子碰撞为示意，非真实碰撞过程。",
+                        ax01: { assumptions: ["氢键示意"], approximations: ["二维示意"], errorEstimate: "定性示意" }
+                      } } },
                       symbol: { mathml: "O−H···O", gloss: "宏观读“氢键”；微观读“H 连着 O，再拉住另一个分子的 O”" }
                     },
                     defaultView: "macro",
                     badgeText: { macro: "现在看：宏观现象", micro: "现在看：微观粒子", symbol: "现在看：符号表达" }
+                  }
+                },
+                {
+                  type: "bond-step",
+                  params: {
+                    title: "氢键：拉手形成与断裂",
+                    layout: "h-bond",
+                    steps: [
+                      { stepIndex: 0, label: "两个水分子靠近", "break": [], form: [], annotate: true,
+                        sepFrom: 36, sep: 24, note: "一个分子的 H 朝向另一个分子的 O" },
+                      { stepIndex: 1, label: "氢键形成", "break": [], form: ["氢键（分子间作用力）"],
+                        sep: 20, hbond: true, note: "O−H···O：氢键不是化学键，是分子间作用力" },
+                      { stepIndex: 2, label: "氢键断裂", "break": ["氢键"], form: [],
+                        sepFrom: 20, sep: 30, hbond: false, note: "断裂后水分子完整：O–H 键没断" },
+                      { stepIndex: 3, label: "对照：H₂S 分子之间没有“拉手”", "break": [], form: [], annotate: true,
+                        compare: "H2S", note: "H₂S 只有范德华力（示意）" }
+                    ],
+                    autoplay: true,
+                    reminder: "粒子大小、数量、运动速度均为示意，未按真实比例；粒子碰撞为示意，非真实碰撞过程。\n提醒：\"拉手\"的松紧是示意——真实氢键的强弱是连续的能量数值；水分子的相对取向被简化了，真实\"拉手\"对方向有要求。",
+                    ax01: { assumptions: ["氢键画成虚线示意"], approximations: ["二维示意；取向简化"], errorEstimate: "定性示意，无数值口径" }
                   }
                 }
               ],

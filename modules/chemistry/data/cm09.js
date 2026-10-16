@@ -50,6 +50,33 @@ window.CHEM_CH["cm09"] = {
                       symbol: "现在看：符号表达"
                     }
                   }
+                },
+                {
+                  type: "molecule-motion",
+                  params: {
+                    view: { w: 620, h: 380 },
+                    motion: { field: "dissolve", seed: 31,
+                      kinds: [
+                        { kind: "water", count: 90, color: "#90CAF9", r: 1.3, label: "水", speedMps: 9 },
+                        { kind: "sugar", count: 9, color: "#FFB74D", r: 2.2, label: "蔗糖", speedMps: 7 }
+                      ],
+                      soluteKind: "sugar", detachProbPerStep: 0.004,
+                      lattice: { cols: 3, rows: 3, x0: 40, y0: 64, dx: 9, dy: 9 } },
+                    stepper: { stepsPerFrame: 200, summaries: [
+                      "晶体表面的蔗糖分子被水分子一个个“拉”下来（脱离）",
+                      "脱离的蔗糖分子在水中随机游走散开（扩散）",
+                      "水分子包围在蔗糖分子周围（水合示意）",
+                      "蔗糖分子均匀分散，晶体不见了但分子都在（均匀）"
+                    ] },
+                    autoplay: false,
+                    legend: "图例：橙色=蔗糖分子，浅蓝=水分子；虚线圈=水合示意",
+                    reminder: "粒子大小、数量、运动速度均为示意，未按真实比例；粒子碰撞为示意，非真实碰撞过程。\n提醒：蔗糖分子画成了一个小球、水分子包围它的\"水合壳\"也是示意——真实分子的形状和包围方式更复杂；这里只想让你看清\"脱离—散开—被包围\"三步。",
+                    ax01: {
+                      assumptions: ["蔗糖晶体为 3×3 示意晶格", "水为均匀背景"],
+                      approximations: ["二维示意；粒子为质点", "水合壳为示意圈"],
+                      errorEstimate: "随机游走为教学示意模型，无解析对账；确定性由播种 RNG 保证"
+                    }
+                  }
                 }
               ],
               point: "溶液：均一、稳定的混合物；溶质 + 溶剂，缺一不可。"

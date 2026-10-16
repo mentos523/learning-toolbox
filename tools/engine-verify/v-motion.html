@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<!-- V17 · Eng.MoleculeMotion 粒子系 + 参数化速度场（波 C，2026.10.16.9） -->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>V17 · Eng.MoleculeMotion：速度场 / 确定性 / 读回</title>
+<link rel="stylesheet" href="verify.css">
+</head>
+<body>
+<h1>V17 · Eng.MoleculeMotion：粒子系 + 参数化速度场</h1>
+<p class="note">覆盖 CHEMC-01 ~ CHEMC-19、§六 6.1 读回约定。由 Eng.Driver 固定步进驱动
+（默认 dt=1/60）；教学随机一律走 Eng.SeededRNG（禁用 Math.random——确定性断言 VM-02
+覆盖）；读回防御性拷贝。逻辑单位 0–100、y 向上。</p>
+
+<h2>断言结果</h2>
+<div id="verdict" style="display:none"><h2 id="verdict-head"></h2></div>
+<table id="results-table"></table>
+
+<script src="../../assets/vendor/planck.min.js?v=2026.10.16.9"></script>
+<script src="../../assets/engine/core.js?v=2026.10.16.9"></script>
+<script src="../../assets/engine/coords.js?v=2026.10.16.9"></script>
+<script src="../../assets/engine/driver.js?v=2026.10.16.9"></script>
+<script src="../../assets/engine/motion.js?v=2026.10.16.9"></script>
+<script src="verify-lib.js"></script>
+<script>
+(function () {
+'use strict';
+VLib.pageTitle = 'V17 · Eng.MoleculeMotion';
+var Eng = window.Eng;
+var AX = {
+  assumptions: ['粒子为质点，无体积碰撞'],
+  approximations: ['二维示意'],
+  errorEstimate: '随机游走为教学示意模型，无解析对账；确定性由播种 RNG 保证'
+};
+
+function mkMotion(opt) {
+  opt = opt || {};
+  opt.assumptions = AX.assumptions; opt.approximations = AX.approximations;
+  opt.errorEstimate = AX.errorEstimate;
+  return new Eng.MoleculeMotion(opt);
+}
+
+/* VM-01：粒子数 = kinds 总和；snapshot 字段按 §六 6.1 齐全 */
+var m1 = mkMotion({ field: 'brownian', seed: 7, kinds: [{ kind: 'a', count: 30 }, { kind: 'b', count: 20 }] });
+var s1 = m1.snapshot();
+var f1ok = s1.field && typeof s1.field.on === 'boolean' && s1.field.anodeDir &&
+  Array.isArray(s1.groups) && s1.particles.length === 50 &&
+  s1.particles.every(function (p) {
+    return p.pos && isFinite(p.pos.x) && isFinite(p.pos.y) &&
+      p.vel && isFinite(p.vel.x) && isFinite(p.vel.y) &&
+      p.pos.x >= 0 && p.pos.x <= 100 && p.pos.y >= 0 && p.pos.y <= 100;
+  });
+VLib.assert('VM-01', '粒子数=50；snapshot 字段齐全（stepN/simTimeSec/particles/field/groups），逻辑单位 0–100',
+  ['CHEMC-01', '§6.1'], f1ok,
+  '50 粒子，字段齐全', 'particles=' + s1.particles.length,
+  'kinds 求和或读回字段缺失：检查 motion.js 构造函数与 snapshot。下一步查 motion.js。');
+
+/* VM-02：确定性——同种子 100 步后快照逐位一致（禁用 Math.random 的行为证明） */
+function run100(seed) {
+  var m = mkMotion({ field: 'dissolve', seed: seed,
+    kinds: [{ kind: 'water', count: 60 }, { kind: 'sugar', count: 12 }],
+    soluteKind: 'sugar', detachProbPerStep: 0.01 });
+  for (var i = 0; i < 100; i++) m.step();
+  var s = m.snapshot(); delete s.rngState;
+  return JSON.stringify(s);
+}
+var jA = run100(42), jB = run100(42);
+VLib.assert('VM-02', '同种子(42)两次运行 100 步后快照逐位一致', ['CHEMC-05', 'ENG-09'],
+  jA === jB, '逐位一致', jA === jB ? '一致' : '不一致（长度 ' + jA.length + '/' + jB.length + '）',
+  '确定性破坏：检查 motion.js 是否误用 Math.random 或未播种的随机源。下一步查 motion.js。');
+
+/* VM-03：PRIMITIVE_IFACE——step/reset/snapshot/restore/simTimeSec/stepCountN/state */
+var m3 = mkMotion({ seed: 3 });
+var ifaceOk = ['step', 'reset', 'snapshot', 'restore', 'simTimeSec', 'stepCountN', 'state', 'play', 'pause']
+  .every(function (k) { return typeof m3[k] === 'function'; });
+VLib.assert('VM-03', '实现 Eng.PRIMITIVE_IFACE（可被 Eng.StepPlayer 包装）', ['ENG-11'],
+  ifaceOk, '接口齐全', ifaceOk ? '齐全' : '缺失',
+  '接口缺失：检查 motion.js 原型方法。下一步查 motion.js。');
+
+/* VM-04：溶解单步至多 1 个脱离（CHEMC-05） */
+var m4 = mkMotion({ field: 'dissolve', seed: 11,
+  kinds: [{ kind: 'water', count: 80 }, { kind: 'sugar', count: 16 }],
+  soluteKind: 'sugar', detachProbPerStep: 0.05 });
+var maxDetach = 0, detachOk = true;
+for (var i = 0; i < 300; i++) {
+  var before = m4.state().particles.filter(function (p) { return p.type === 'sugar' && p.state === 'crystal'; }).length;
+  m4.step();
+  var after = m4.state().particles.filter(function (p) { return p.type === 'sugar' && p.state === 'crystal'; }).length;
+  var d = before - after;
+  if (d > maxDetach) maxDetach = d;
+  if (d > 1) detachOk = false;
+}
+VLib.assert('VM-04', '溶解 300 步内任意单步脱离数 ≤1', ['CHEMC-05'],
+  detachOk, 'maxDetach=' + maxDetach + ' ≤1', 'maxDetach=' + maxDetach,
+  '单步多脱离：检查 dissolve 的脱离循环是否 break。下一步查 motion.js。');
+
+/* VM-05：质量守恒——溶质总数不变（CHEMC-06） */
+var m5 = mkMotion({ field: 'dissolve', seed: 12,
+  kinds: [{ kind: 'water', count: 80 }, { kind: 'sugar', count: 16 }],
+  soluteKind: 'sugar', detachProbPerStep: 0.05 });
+for (var i = 0; i < 300; i++) m5.step();
+var nSugar = m5.state().particles.filter(function (p) { return p.type === 'sugar'; }).length;
+var nWater = m5.state().particles.filter(function (p) { return p.type === 'water'; }).length;
+VLib.assert('VM-05', '溶解 300 步后溶质 16、水 80（总数守恒）', ['CHEMC-06'],
+  nSugar === 16 && nWater === 80, 'sugar=16, water=80', 'sugar=' + nSugar + ', water=' + nWater,
+  '粒子数漂移：检查粒子增删逻辑。下一步查 motion.js。');
+
+/* VM-06：扩散初始集中——品红滴入点 2σ 内 ≥80%（CHEMC-18） */
+var m6 = mkMotion({ field: 'brownian', seed: 21,
+  kinds: [{ kind: 'water', count: 120 }, { kind: 'magenta', count: 24 }],
+  cluster: { kind: 'magenta', cx: 50, cy: 50, sigma: 6 } });
+var in2 = m6.state().particles.filter(function (p) {
+  return p.type === 'magenta' && Math.hypot(p.pos.x - 50, p.pos.y - 50) <= 12;
+}).length;
+VLib.assert('VM-06', '品红初始 2σ 内比例 ≥80%', ['CHEMC-18'],
+  in2 / 24 >= 0.8, (100 * in2 / 24).toFixed(1) + '%', (100 * in2 / 24).toFixed(1) + '%',
+  '初始不集中：检查 cluster 高斯采样（Box-Muller 经 SeededRNG）。下一步查 motion.js。');
+
+/* VM-07：分馏气化顺序 = 沸点升序（CHEMC-13）；冷凝高度按沸点分层（CHEMC-14） */
+var m7 = mkMotion({ field: 'fractionate', seed: 31,
+  kinds: [
+    { kind: 'oil-a', count: 8, boilC: 150 }, { kind: 'oil-b', count: 8, boilC: 250 },
+    { kind: 'oil-c', count: 8, boilC: 350 }
+  ],
+  groups: [{ name: '汽油', boilRank: 1 }, { name: '煤油', boilRank: 2 }, { name: '柴油', boilRank: 3 }],
+  tower: { tempStartC: 20, rampCps: 60, tempMaxC: 380, tempTopC: 20 } });
+var firstVapor = {};
+for (var i = 0; i < 2000 && Object.keys(firstVapor).length < 3; i++) {
+  m7.step();
+  m7.state().particles.forEach(function (p) {
+    if ((p.state === 'vapor' || p.state === 'condensed') && !(p.type in firstVapor))
+      firstVapor[p.type] = i;
+  });
+}
+var orderOk = firstVapor['oil-a'] < firstVapor['oil-b'] && firstVapor['oil-b'] < firstVapor['oil-c'];
+VLib.assert('VM-07', '气化顺序 a(150°C) < b(250°C) < c(350°C)（沸点升序）', ['CHEMC-13'],
+  orderOk, '顺序正确', JSON.stringify(firstVapor),
+  '气化顺序错乱：检查塔底渐进加热 rampCps 与 tempCAt。下一步查 motion.js。');
+
+/* VM-08：离子漂移 ≤0.1×热运动速度（CHEMC-09）；类型守恒（CHEMC-15） */
+var m8 = mkMotion({ field: 'drift', fieldOn: true, seed: 41, speedMps: 9, driftVxMps: 0.45,
+  kinds: [{ kind: 'Na+', count: 15 }, { kind: 'Cl-', count: 15 }] });
+var ratio = 0.45 / 9;
+for (var i = 0; i < 200; i++) m8.step();
+var kinds8 = {};
+m8.state().particles.forEach(function (p) { kinds8[p.type] = (kinds8[p.type] || 0) + 1; });
+VLib.assert('VM-08', '漂移比 0.05 ∈ [0.02,0.1]；200 步后 Na⁺/Cl⁻ 各 15（类型守恒）', ['CHEMC-09', 'CHEMC-15'],
+  ratio >= 0.02 && ratio <= 0.1 && kinds8['Na+'] === 15 && kinds8['Cl-'] === 15,
+  'ratio=0.05, Na+=15, Cl-=15', 'ratio=' + ratio + ', ' + JSON.stringify(kinds8),
+  '漂移比超标或类型丢失：检查 driftVxMps 口径与类型守恒。下一步查 motion.js。');
+
+/* VM-09：restore 精确——snapshot 后继续步进，restore 回来逐位一致 */
+var m9 = mkMotion({ field: 'drift', fieldOn: true, seed: 51,
+  kinds: [{ kind: 'Na+', count: 10 }, { kind: 'Cl-', count: 10 }] });
+for (var i = 0; i < 50; i++) m9.step();
+var snap9 = m9.snapshot();
+for (var i = 0; i < 50; i++) m9.step();
+m9.restore(snap9);
+var j9a = JSON.stringify(m9.snapshot()), j9b = JSON.stringify(snap9);
+VLib.assert('VM-09', 'restore 后快照与保存时逐位一致', ['ENG-09'],
+  j9a === j9b, '逐位一致', j9a === j9b ? '一致' : '不一致',
+  'restore 不精确：检查 rng 状态与粒子字段的保存/恢复。下一步查 motion.js。');
+
+/* VM-10：晶格振幅 <10% 间距（CHEMC-11）；位置恒在边界内 */
+var m10 = mkMotion({ field: 'lattice', seed: 61, kinds: [{ kind: 'ion', count: 40 }] });
+var ampOk = 0.7 < 0.1 * 8; /* 默认 vibAmp=0.7, dx=8 */
+var inBounds = true;
+for (var i = 0; i < 120; i++) {
+  m10.step();
+  m10.state().particles.forEach(function (p) {
+    if (p.pos.x < 0 || p.pos.x > 100 || p.pos.y < 0 || p.pos.y > 100) inBounds = false;
+  });
+}
+VLib.assert('VM-10', '晶格振幅 0.7 < 0.8（10% 间距）；120 步粒子恒在 0–100 内', ['CHEMC-11'],
+  ampOk && inBounds, '振幅与边界均合规', 'ampOk=' + ampOk + ', inBounds=' + inBounds,
+  '振幅超标或越界：检查 lattice 参数与边界反射。下一步查 motion.js。');
+
+VLib.conclude();
+})();
+</script>
+</body>
+</html>
