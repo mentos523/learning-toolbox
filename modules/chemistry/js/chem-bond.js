@@ -251,6 +251,12 @@
       player: player,
       steps: steps,
       state: function () { return { frame: player.frameIndex(), u: stu.u }; },
+      /* N-3：帧内进度置位（文本重叠断言用）。仅测试/自测调用，
+       * 生产渲染仍走 Eng.Tween；不改变任何渲染语义。 */
+      setU: function (u) {
+        stu.u = Math.max(0, Math.min(1, +u || 0));
+        paint();
+      },
       validateProblems: problems
     };
     if (p.autoplay) togglePlay(); else paint();
@@ -559,7 +565,11 @@
     svg.appendChild(svgEl('line', { x1: 4, y1: 36, x2: 98, y2: 36, stroke: 'var(--chm-ink-soft,#555)', 'stroke-width': 0.7 }));
     noteText(svg, 50, 39.5, '反应进程 →', 3.2);
     var st = steps[frame] || {};
-    if (st.energyLabel && u > 0.4) noteText(svg, 82, 6, st.energyLabel, 3.4);
+    /* N-2：altPath 注记（顶部居中，文字宽）存在时，能量标签下移至 y=12
+     * 避让——否则两者在右上相交（cm18.2.1-p1 催化剂挂件）。无 altPath
+     * 时保持原位 (82,6)，不影响既有布局。 */
+    var eLabelY = (curve.altPath && curve.altPath.length >= 2) ? 12 : 6;
+    if (st.energyLabel && u > 0.4) noteText(svg, 82, eLabelY, st.energyLabel, 3.4);
     if (st.curveSlopeSign) {
       /* 斜率符号自检（生产侧）：断键>0 / 成键<0 */
       var a = pts[Math.min(frame, pts.length - 2)], b = pts[Math.min(frame + 1, pts.length - 1)];
@@ -583,7 +593,9 @@
         noteText(svg, 69, 40, '水极少量电离（示意已放大）', 3.4);
       }
     } else if (frame === 1) {
-      var hx = lerp(62, 34, u);
+      /* N-3：H⁺ 终点与 CH₃COO⁻ 右缘留 ≥1 单位间隙（文本定位），
+       * 终点 34 会与 CH₃COO⁻ 字形相接 1.56 单位。 */
+      var hx = lerp(62, 37, u);
       noteText(svg, 24, 26, 'CH₃COO⁻', 4.4);
       noteText(svg, hx, 26, 'H⁺', 4.6);
       if (u > 0.7) {
@@ -663,7 +675,26 @@
           stroke: 'none'
         }));
       }
-      if (st.eflow.label && u > 0.5) noteText(svg, 50, 52, st.eflow.label, 3.6);
+    }
+    /* N-3：底部文本避让（文本定位正道，非逐页补丁）。
+     * eflow 标注 / motto / note 统一在节点内容下方堆叠：起始 y 取
+     * max(44, 节点区下缘 + 5)，逐行 +6。旧固定值（44/52/60）在节点
+     * sub（如「负极」y=46）较高时会与 motto 长行相交（cm19.2.1-p2、
+     * cm12.2.1-p2 终态）。无碰撞的布局保持原位（stackY 回落到 44）。 */
+    var contentBottom = 0;
+    (scene.nodes || []).forEach(function (nd) {
+      if (nd.shape === 'wire') return;
+      var subB = nd.y + (nd.r || 7) + (nd.sub ? 5 + 1.8 : 1.8);
+      if (subB > contentBottom) contentBottom = subB;
+    });
+    (st.valenceTags || []).forEach(function (vt) {
+      if (vt.y + 1.8 > contentBottom) contentBottom = vt.y + 1.8;
+    });
+    var stackY = Math.max(44, contentBottom + 5);
+    var stackN = 0;
+    if (st.eflow && st.eflow.label && u > 0.5) {
+      noteText(svg, 50, stackY + stackN * 6, st.eflow.label, 3.6);
+      stackN++;
     }
     /* 化合价标注（CHEMC-76/79 互锁） */
     (st.valenceTags || []).forEach(function (vt) {
@@ -672,10 +703,11 @@
     if (st.motto && u > 0.6) {
       var lines = st.motto.split('；');
       lines.forEach(function (ln, i) {
-        noteText(svg, 50, 44 + i * 6, ln, 3.6);
+        noteText(svg, 50, stackY + (stackN + i) * 6, ln, 3.6);
       });
+      stackN += lines.length;
     }
-    if (st.note) noteText(svg, 50, 60, st.note, 3.4);
+    if (st.note) noteText(svg, 50, stackY + stackN * 6 + 2, st.note, 3.4);
   }
   function pathPoint(path, u) {
     if (path.length < 2) return path[0] || { x: 50, y: 31 };
