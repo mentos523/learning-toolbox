@@ -1,0 +1,18 @@
+{
+ "static": [
+  "门1 无TBD: PASS",
+  "门2 id唯一: PASS",
+  "门3 页数: 代数=289/289 几何=341/341 PASS",
+  "门4 新类型engine: PASS",
+  "门5 ch05x: 10/10页 PASS",
+  "门6 链闭合: PASS"
+ ],
+ "headless": [
+  "ch00-u1-l1-p1: PASS",
+  "ch05-u1-l1-p1b: PASS",
+  "ch05x-u1-l1-p1: PASS",
+  "ch05x-u3-l1-p2: PASS",
+  "g08-u1-l3-p1: PASS"
+ ],
+ "errors": []
+}

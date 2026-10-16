@@ -1,0 +1,34 @@
+{
+ "dryRun": false,
+ "filesChanged": 95,
+ "transformed": 81,
+ "auxAdded": [
+  "ch00-u1-l1-p1b",
+  "ch00-u1-l1-p2",
+  "ch01-u1-l1-p1b",
+  "ch01-u1-l2-p1",
+  "ch01-u1-l2-p1b",
+  "ch01-u2-l1-p1",
+  "ch01-u2-l1-p1b",
+  "ch01-ux-l1-p1"
+ ],
+ "morph": [
+  "g00-u1-l3-p1",
+  "g02-u2-l4-p3",
+  "g08-u1-l3-p1",
+  "g11-u1-l5-p3",
+  "g13-u1-l7-p2"
+ ],
+ "backlinks": [
+  "ch06-u2-l4-p1",
+  "ch06-u2-l4-p1b",
+  "ch06-u0-l1-p1",
+  "ch06-u0-l1-p1b"
+ ],
+ "fieldEdits": [
+  "ch05-ux-l1-p1.next → ch05x-u1-l1-p1",
+  "ch06-u0-l1-p1.prev → ch05x-u3-l2-p1"
+ ],
+ "needsReview": [],
+ "errors": []
+}
