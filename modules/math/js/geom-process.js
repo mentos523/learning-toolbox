@@ -446,10 +446,11 @@
       });
       vBtns[0].addEventListener("click", function () { tw.cancel(); api.seek(0); syncUI(); });
       vBtns[1].addEventListener("click", function () { tw.cancel(); api.seek(1); syncUI(); });
-      /* 键盘（与 Eng.StepPlayer 口径一致） */
+      /* 键盘（与 Eng.StepPlayer 口径一致）；
+       * 返工 F-04：←/→ 被 morph 消费后 stopPropagation，不再冒泡到 math.js 全局翻页 */
       wrap.addEventListener("keydown", function (ev) {
-        if (ev.key === "ArrowLeft") { tw.cancel(); api.seek(api.u() - 0.1); syncUI(); ev.preventDefault(); }
-        else if (ev.key === "ArrowRight") { tw.cancel(); api.seek(api.u() + 0.1); syncUI(); ev.preventDefault(); }
+        if (ev.key === "ArrowLeft") { tw.cancel(); api.seek(api.u() - 0.1); syncUI(); ev.preventDefault(); ev.stopPropagation(); }
+        else if (ev.key === "ArrowRight") { tw.cancel(); api.seek(api.u() + 0.1); syncUI(); ev.preventDefault(); ev.stopPropagation(); }
         else if (ev.key === " ") { if (btnPlay) btnPlay.click(); ev.preventDefault(); }
         else if (ev.key === "r" || ev.key === "R") { tw.replay(); syncUI(); }
       });
