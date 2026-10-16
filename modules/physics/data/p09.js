@@ -116,7 +116,7 @@ window.PHY_CH["p09"] = {
                       { id: "bat1", kind: "battery", cell: [1, 2] },
                       { id: "sw1", kind: "switch", cell: [4, 2] }
                     ],
-                    tray: ["bulb", "ammeter", "resistor", "wire"],
+                    tray: ["bulb", "ammeter", "resistor", "wire", "voltmeter"],
                     battery: { voltage: 6 },
                     goal: "从元件库拖灯泡、电流表和导线，连一个能让灯泡亮的电路",
                     allowParallel: false, showCurrent: true,

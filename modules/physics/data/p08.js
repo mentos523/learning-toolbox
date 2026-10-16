@@ -517,7 +517,7 @@ window.PHY_CH["p08"] = {
                       { id: "bat1", kind: "battery", cell: [1, 2] },
                       { id: "sw1",  kind: "switch",  cell: [4, 2] }
                     ],
-                    tray: ["resistor", "rheostat", "bulb", "ammeter", "wire"],
+                    tray: ["resistor", "rheostat", "bulb", "ammeter", "wire", "voltmeter"],
                     battery: { voltage: 6 },
                     goal: "串联两电阻读电流，再换并联：哪种接法总电阻更小？亮度呢？",
                     allowParallel: true, showCurrent: true,
