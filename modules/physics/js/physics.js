@@ -1507,7 +1507,101 @@
     var f = c.frac != null ? Math.max(0, Math.min(1, c.frac)) : 1;
     return cc.x - s * 0.3 + f * s * 0.6;
   }
-  function widgetCircuitBuild(p) {
+  /* ---------------- 波 B 阶段二 · circuit-build 新实现（Eng.CircuitUI 适配层） ----------------
+   * 8 页课页数据 → Eng.Circuit 数据契约映射（CIRCUIT-DESIGN.md §10）：
+   *  - tray kind 数组 → CircuitUI trayTypes（kind→type 映射见 CIRCUIT_KIND2TYPE；
+   *    p08.2.4-p1 / p09.1.2-p1 另加 voltmeter，黄队 §8.6 裁决，见 closure-mapping F-11）；
+   *  - battery.voltage → source.emfV（经 opt.sourceVoltageV；旧 voltageV 别名兼容，数据零改动）；
+   *  - components 预设 → placeElement(type, col, row, params)
+   *    （rheostat 的 min/max/init 经旧 rheoCfg 口径 → minOhm/maxOhm/fraction）；
+   *  - 相邻预设（曼哈顿距离 1）按旧隐式邻接语义预连显式导线（仅 p08.2.2-p1 的 2×2 方阵触发），
+   *    其余 7 页预设不相邻、无预连线——与旧实现初始连通性一致；
+   *  - goal → 目标行；badge.invariant → "没变的是"行（文案冻结，顺序沿用旧布局）；
+   *  - safety 由 renderWidget 统一渲染（W-P20），本层不碰；
+   *  - allowParallel 参数作废（新求解器天然支持并联，无需开关参数；数据字段保留冻结）；
+   *  - 文案/深链/学习数据键/页数冻结；localStorage 沿用 phy_hint_seen_<页id>-circuit（markHintSeen）。
+   * 读数一律走 ENG-38（Eng.estimateReading，经 CircuitUI 状态行），本层无手写 toFixed。
+   * F-01~F-11 关闭机制见 closure-mapping.md（根治在本设计内实现，非平移）。
+   */
+  var CIRCUIT_KIND2TYPE = { battery: "source", bulb: "bulb", "switch": "switch",
+    ammeter: "ammeter", voltmeter: "voltmeter", resistor: "resistor",
+    rheostat: "rheostat", wire: "wire" };
+  var circuitUiSeq = 0;
+  function widgetCircuitBuildNew(p) {
+    var box = el("div", "phy-widget");
+    var host = el("div");
+    host.id = "cirui-" + (++circuitUiSeq);
+    box.appendChild(host);
+    var trayTypes = (p.tray || ["bulb", "wire"]).map(function (k) { return CIRCUIT_KIND2TYPE[k] || k; });
+    var ui = new Eng.CircuitUI({
+      containerId: host.id,
+      title: "搭电路",
+      goalText: p.goal || "",
+      cols: (p.grid && p.grid.cols) || 6,
+      rows: (p.grid && p.grid.rows) || 4,
+      trayTypes: trayTypes,
+      sourceVoltageV: (p.battery && p.battery.voltage) || 3
+    });
+    /* 预设元件：位置/参数语义沿用原 components */
+    var placed = [];
+    (p.components || []).forEach(function (c) {
+      var type = CIRCUIT_KIND2TYPE[c.kind] || c.kind;
+      var params = null;
+      if (c.kind === "battery") params = { emfV: (p.battery && p.battery.voltage) || 3, internalROhm: 0 };
+      else if (c.kind === "switch") params = { closed: false };
+      else if (c.kind === "rheostat") {
+        var mn = c.min != null ? c.min : 0, mx = c.max != null ? c.max : 50;
+        if (!(mx > mn)) mx = mn + 1;
+        var init = c.init != null ? c.init : mx; /* 缺省滑片在阻值最大处（沿用旧 rheoCfg 口径） */
+        params = { minOhm: mn, maxOhm: mx, fraction: Math.max(0, Math.min(1, (init - mn) / (mx - mn))) };
+      }
+      else if (c.kind === "ammeter") params = { rangeMaxA: 3, divisionA: 0.1 };
+      var uid = ui.placeElement(type, c.cell[0], c.cell[1], params);
+      placed.push({ uid: uid, col: c.cell[0], row: c.cell[1] });
+    });
+    /* 相邻预设预连线：复刻旧隐式邻接的初始连通性（p08.2.2-p1 2×2 方阵），转为显式 connections */
+    var CELL = 100; /* 与 CircuitUI 默认 cellPx 一致 */
+    function termXY(col, row, term) {
+      return { x: (col + 0.5) * CELL + (term === "L" ? -0.42 : 0.42) * CELL, y: (row + 0.5) * CELL };
+    }
+    for (var i = 0; i < placed.length; i++) for (var j = i + 1; j < placed.length; j++) {
+      var a = placed[i], b = placed[j];
+      if (Math.abs(a.col - b.col) + Math.abs(a.row - b.row) !== 1) continue;
+      var best = null;
+      ["L", "R"].forEach(function (ta) {
+        ["L", "R"].forEach(function (tb) {
+          var pa = termXY(a.col, a.row, ta), pb = termXY(b.col, b.row, tb);
+          var d = Math.hypot(pa.x - pb.x, pa.y - pb.y);
+          if (!best || d < best.d) best = { d: d, ta: ta, tb: tb };
+        });
+      });
+      ui.addWire(a.uid, best.ta, b.uid, best.tb);
+    }
+    /* badge.invariant（"没变的是"行）：文案冻结，位置沿用旧顺序（目标行之下） */
+    if (p.badge && p.badge.invariant) {
+      var inv = el("div", "phy-invariant", esc(p.badge.invariant));
+      var head = host.querySelector(".cir-head");
+      if (head && head.parentNode) head.parentNode.insertBefore(inv, head.nextSibling);
+      else box.insertBefore(inv, host);
+    }
+    host._cirUI = ui; /* 自测/复验取证用句柄（生产逻辑不依赖） */
+    markHintSeen(curPageId + "-circuit"); /* localStorage 键不变：phy_hint_seen_<页id>-circuit */
+    return box;
+  }
+  /* 波 B 阶段二注册分发：默认新实现；旧实现退役为兼容层，仅经 ?dbgCircuitLegacy=1 可达
+   *（file:// 下 location.search 可用；正常课页无此参数）。 */
+  var CIRCUIT_DBG_LEGACY = (function () {
+    try { return /(?:\?|&)dbgCircuitLegacy=1(?:&|$)/.test(location.search || ""); }
+    catch (e) { return false; }
+  })();
+  function widgetCircuitBuildDispatch(pr) {
+    if (CIRCUIT_DBG_LEGACY) return widgetCircuitBuildLegacy(pr || {});
+    return widgetCircuitBuildNew(pr || {});
+  }
+  /* 波 B 退役：旧渲染器整体退役为兼容层 widgetCircuitBuildLegacy，仅经 ?dbgCircuitLegacy=1 可达；
+   * 函数体冻结不再维护；其上的波 0 过渡性止血代码（pointer-events/托盘备战模式）随旧实现退役，
+   * 新实现内已有转正版本（wireLayer listening=false / 备战-阈值创建），不双轨并存。 */
+  function widgetCircuitBuildLegacy(p) {
     /* 波0止血·过渡性：本 widget（旧渲染器）在波 B 建 Eng.Circuit 时整体重建；
      * 本轮只做 F-05（导线抓取死区）/F-03/F-04（单击托盘隐形元件）最小修复，
      * 不引入新架构、不改求解器与数据模型。 */
@@ -5586,7 +5680,7 @@
   var WIDGETS = {
     "force-drag": widgetForceDrag,
     "motion-sim": widgetMotionSim,
-    "circuit-build": widgetCircuitBuild,
+    "circuit-build": widgetCircuitBuildDispatch, /* 波 B 阶段二：新实现（Eng.CircuitUI）；旧实现退役，仅 ?dbgCircuitLegacy=1 可达 */
     "optics-ray": widgetOpticsRay,
     "wave-tune": widgetWaveTune,
     "pulley-lever": widgetPulleyLever,
