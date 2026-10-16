@@ -268,12 +268,13 @@
                  String(params.guide).trim() !== "")
       ? String(params.guide) : EQGUIDE;
 
-    if (!(min < max)) {
-      container.appendChild(el("div", "ix-stub", "参数错误：min 必须 < max"));
+    if (kind === "system2x2") {
+      /* 返工 F-02：system2x2 不用 min/max 滑块语义，分支必须在 min<max 门禁之前 */
+      renderSystem2x2(container, params, page);
       return;
     }
-    if (kind === "system2x2") {
-      renderSystem2x2(container, params, page);
+    if (!(min < max)) {
+      container.appendChild(el("div", "ix-stub", "参数错误：min 必须 < max"));
       return;
     }
 
@@ -944,8 +945,9 @@
           });
           gLines.appendChild(p);
           var hit = svgEl("path", {
-            d: d, fill: "none", stroke: "transparent",
-            "stroke-width": 24, style: "cursor:grab;pointer-events:stroke"
+            d: d, fill: "none", stroke: col,
+            "stroke-width": 24, opacity: "0",
+            style: "cursor:grab;pointer-events:stroke"
           });
           gMark.appendChild(hit);
           hitLines.push({ el: hit, idx: idx, vertical: false });
@@ -975,10 +977,12 @@
         attachSysDrag(pad, false, -1);
         var sl = svgEl("text", {
           x: fr.X(sol.x) + 12, y: fr.Y(sol.y) - 10,
-          "font-size": "12.5", fill: "var(--geo-target)"
+          "font-size": "12.5", fill: "var(--geo-target)",
+          style: "cursor:grab"
         });
         sl.textContent = "交点（拖我）";
         gMark.appendChild(sl);
+        attachSysDrag(sl, false, -1);  /* 返工 F-02：标签本身可拖（与圆点同一反写入口） */
       }
       /* 直线拖拽（整体平移 → c 变化） */
       hitLines.forEach(function (h) {

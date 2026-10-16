@@ -341,48 +341,27 @@ window.MATH_CH["ch05x"] = {
               interaction: {
                 type: "eq-graph-lab",
                 params: {
-                  graph: { kind: "system2x2" },
-                  sliders: [
-                    { id: "a1", label: "a₁", min: -5, max: 5, step: 1, initial: 1 },
-                    { id: "b1", label: "b₁", min: -5, max: 5, step: 1, initial: 1 },
-                    { id: "c1", label: "c₁", min: -12, max: 12, step: 1, initial: 10 },
-                    { id: "a2", label: "a₂", min: -5, max: 5, step: 1, initial: 2 },
-                    { id: "b2", label: "b₂", min: -5, max: 5, step: 1, initial: -1 },
-                    { id: "c2", label: "c₂", min: -12, max: 12, step: 1, initial: 8 }
-                  ],
-                  point: {
-                    draggable: true,
-                    xExpr: "(c1*b2 - b1*c2)/(a1*b2 - a2*b1)",
-                    yExpr: "(a1*c2 - c1*a2)/(a1*b2 - a2*b1)",
-                    caption: "交点标记：拖动时约束在两直线交点上"
-                  },
-                  reverseWrite: {
-                    onDrag: "c1 = a1*x0 + b1*y0; c2 = a2*x0 + b2*y0",
-                    note: "拖交点→c 反写：直线平移经过新交点；c 可以是小数"
-                  },
-                  readouts: [
-                    { expr: "(c1*b2 - b1*c2)/(a1*b2 - a2*b1)", label: "x₀", digits: 2 },
-                    { expr: "(a1*c2 - c1*a2)/(a1*b2 - a2*b1)", label: "y₀", digits: 2 },
-                    { expr: "a1*b2 - a2*b1", label: "D = a₁b₂−a₂b₁", digits: 2 }
-                  ],
-                  check: {
-                    label: "把精确解代回两式：余数",
-                    exprs: ["a1*x0 + b1*y0 - c1", "a2*x0 + b2*y0 - c2"],
-                    precision: "full",
-                    note: "按内部全精度计算，非 2 位小数显示值；正常应为 0.00、0.00"
-                  },
-                  presets: [
-                    { label: "相交", a1: 1, b1: 1, c1: 10, a2: 2, b2: -1, c2: 8 },
-                    { label: "平行", a1: 1, b1: 1, c1: 4, a2: 1, b2: 1, c2: 7 },
-                    { label: "重合", a1: 1, b1: 1, c1: 4, a2: 2, b2: 2, c2: 8 }
-                  ],
-                  guard: {
-                    when: "(a1 == 0 && b1 == 0) || (a2 == 0 && b2 == 0)",
-                    message: "a、b 不能同时为 0——这不是二元一次方程"
-                  },
-                  note: "图上读出来的是近似值（比如 5.99），要精确解，用 u1、u2 的代入/加减法算"
+                  graph: {
+                    kind: "system2x2",
+                    /* 返工 F-02：统一为渲染器 schema（graph.coeffs/ranges/presets/showD）。
+                     * 原 sliders/point/reverseWrite/readouts/check/guard/presets-flat 语义逐项映射：
+                     *  6 滑块→coeffs+ranges；交点拖拽→渲染器内建 c 反写（保持 a,b；c 可小数）；
+                     *  readouts(x0,y0,D)→读出 (x0,y0)+showD；check 余数→余数行；guard→invalid 态；
+                     *  presets→预设按钮。params.note 无渲染路径，并入 hints。 */
+                    coeffs: { a1: 1, b1: 1, c1: 10, a2: 2, b2: -1, c2: 8 },
+                    ranges: {
+                      ab: { min: -5, max: 5, step: 1 },
+                      c: { min: -12, max: 12, step: 1 }
+                    },
+                    presets: [
+                      { label: "相交", coeffs: { a1: 1, b1: 1, c1: 10, a2: 2, b2: -1, c2: 8 } },
+                      { label: "平行", coeffs: { a1: 1, b1: 1, c1: 4, a2: 1, b2: 1, c2: 7 } },
+                      { label: "重合", coeffs: { a1: 1, b1: 1, c1: 4, a2: 2, b2: 2, c2: 8 } }
+                    ],
+                    showD: true
+                  }
                 },
-                engine: { primitive: "EqGraphLab", version: "2026.10.16.A", params: { kind: "system2x2", reverseWrite: true } }
+                engine: { primitive: "EqGraphLab", version: "2026.10.16.A", params: { kind: "system2x2", mode: "coeffs" } }
               },
               examples: [
                 { text: "ch04 其实也是在解方程组——{y=抛物线, y=0}，只是一条边恰好是横轴；这里两条边都是一般的直线。", figure: "衔接" }
@@ -391,6 +370,7 @@ window.MATH_CH["ch05x"] = {
                 "方程组的解 = 两条直线交点的坐标（= 式命名，与 ch04 脚手架③平行）。",
                 "改系数→交点动；拖交点→读出解，还反写 c——双向绑定。",
                 "上面的方程组也变了：拖交点后 c 可以是小数——直线平移不要求 c 是整数。",
+                "图上读出来的是近似值（比如 5.99）；要精确解，用 u1、u2 的代入/加减法算。",
                 "SYS-INT 断言钩子：默认 (6.00,4.00)；a₁ 1→2 变 (4.50,1.00)；拖交点到 (2,1) 反写 c₁=c₂=3.00；D=0 判平行/重合；几何一致性残差 <1e−6。"
               ],
               prev: "ch05x-u3-l1-p1",
@@ -408,37 +388,27 @@ window.MATH_CH["ch05x"] = {
               interaction: {
                 type: "eq-graph-lab",
                 params: {
-                  graph: { kind: "system2x2" },
-                  sliders: [
-                    { id: "a1", label: "a₁", min: -5, max: 5, step: 1, initial: 1 },
-                    { id: "b1", label: "b₁", min: -5, max: 5, step: 1, initial: 1 },
-                    { id: "c1", label: "c₁", min: -12, max: 12, step: 1, initial: 4 },
-                    { id: "a2", label: "a₂", min: -5, max: 5, step: 1, initial: 1 },
-                    { id: "b2", label: "b₂", min: -5, max: 5, step: 1, initial: 1 },
-                    { id: "c2", label: "c₂", min: -12, max: 12, step: 1, initial: 7 }
-                  ],
-                  presets: [
-                    { label: "相交", a1: 1, b1: 1, c1: 10, a2: 2, b2: -1, c2: 8, note: "唯一解 (6,4)" },
-                    { label: "平行", a1: 1, b1: 1, c1: 4, a2: 1, b2: 1, c2: 7, note: "无解：两条直线永不相见" },
-                    { label: "重合", a1: 1, b1: 1, c1: 4, a2: 2, b2: 2, c2: 8, note: "无数组解：其实是同一条直线" }
-                  ],
-                  readouts: [
-                    { expr: "a1*b2 - a2*b1", label: "判别式 D = a₁b₂−a₂b₁", digits: 2 },
-                    { expr: "a1*c2 - a2*c1", label: "a₁c₂−a₂c₁", digits: 2 },
-                    { expr: "b1*c2 - b2*c1", label: "b₁c₂−b₂c₁", digits: 2 }
-                  ],
-                  status: {
-                    expr: "a1*b2 - a2*b1",
-                    states: [
-                      { when: "D != 0", text: "相交：唯一解", color: "target" },
-                      { when: "D == 0 && proportional", text: "重合：无数组解", color: "known" },
-                      { when: "D == 0 && !proportional", text: "平行：无解", color: "aux" }
+                  graph: {
+                    kind: "system2x2",
+                    /* 返工 F-02：统一为渲染器 schema（graph.coeffs/ranges/presets/showD）。
+                     * 原 sliders/presets-flat/readouts/status 语义逐项映射：
+                     *  6 滑块→coeffs+ranges；三预设→预设按钮（note 留作数据注记）；
+                     *  readouts(D 等)→showD；status 三态→渲染器内建 相交/平行/重合 状态行；
+                     *  params.note 无渲染路径，并入 hints。 */
+                    coeffs: { a1: 1, b1: 1, c1: 4, a2: 1, b2: 1, c2: 7 },
+                    ranges: {
+                      ab: { min: -5, max: 5, step: 1 },
+                      c: { min: -12, max: 12, step: 1 }
+                    },
+                    presets: [
+                      { label: "相交", coeffs: { a1: 1, b1: 1, c1: 10, a2: 2, b2: -1, c2: 8 }, note: "唯一解 (6,4)" },
+                      { label: "平行", coeffs: { a1: 1, b1: 1, c1: 4, a2: 1, b2: 1, c2: 7 }, note: "无解：两条直线永不相见" },
+                      { label: "重合", coeffs: { a1: 1, b1: 1, c1: 4, a2: 2, b2: 2, c2: 8 }, note: "无数组解：其实是同一条直线" }
                     ],
-                    note: "重合 ⟺ a₁b₂=a₂b₁ 且 a₁c₂=a₂c₁ 且 b₁c₂=b₂c₁（它就是系数矩阵的行列式）"
-                  },
-                  note: "p2 说方程组的解 = 两条直线交点的坐标，那是两直线相交的情形；现在看另外两种位置"
+                    showD: true
+                  }
                 },
-                engine: { primitive: "EqGraphLab", version: "2026.10.16.A", params: { kind: "system2x2", presets: 3 } }
+                engine: { primitive: "EqGraphLab", version: "2026.10.16.A", params: { kind: "system2x2", mode: "coeffs" } }
               },
               examples: [
                 { text: "代数视角：用代入/加减法解平行的方程组（如 {x+y=4, x+y=7}），消元后得到 4=7 矛盾式（即 0=3）→ 无解；解重合的（如 {x+y=4, 2x+2y=8}），得到 8=8（即 0=0）恒成立 → 无数组解。", figure: "代数" }
@@ -446,7 +416,8 @@ window.MATH_CH["ch05x"] = {
               hints: [
                 "D≠0 → 相交 → 唯一解；D=0 时再看 c 是否成比例。",
                 "判别式 D=a₁b₂−a₂b₁——它就是系数矩阵的行列式，D≠0 时方程组有唯一解（与 ch04 用 Δ 看交点个数呼应）。",
-                "三预设按钮：相交 / 平行 / 重合，一键切换看三种命运。"
+                "三预设按钮：相交 / 平行 / 重合，一键切换看三种命运。",
+                "p2 说方程组的解 = 两条直线交点的坐标，那是两直线相交的情形；现在看另外两种位置。"
               ],
               prev: "ch05x-u3-l1-p2",
               next: "ch05x-u3-l2-p1"
