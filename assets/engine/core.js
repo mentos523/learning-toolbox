@@ -7,7 +7,7 @@
   'use strict';
 
   var Eng = (window.Eng = window.Eng || {});
-  Eng.VERSION = '2026.10.16.1-dev'; // 目标升版 2026.10.16.1
+  Eng.VERSION = '2026.10.16.1'; // 目标升版 2026.10.16.1
 
   /* ---------- 基础工具 ---------- */
 
