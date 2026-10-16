@@ -937,34 +937,120 @@ next: "g11-u1-l5-p1"
                 }
               ],
               interaction: {
-                type: "compare-toggle",
+                type: "morph-toggle",
                 params: {
                   views: [
                     {
                       label: "8 瓣拼",
                       caption: "8 瓣拼成的带子：波浪边很明显，还不太“方”。",
                       shapes: [
-                        { t: "poly", pts: [[14,30],[31.3,30],[22.6,52]], color: "known", width: 1.5 },
-                        { t: "poly", pts: [[31.3,30],[48.6,30],[39.9,52]], color: "known", width: 1.5 },
-                        { t: "poly", pts: [[48.6,30],[65.8,30],[57.2,52]], color: "known", width: 1.5 },
-                        { t: "poly", pts: [[65.8,30],[83.1,30],[74.5,52]], color: "known", width: 1.5 },
-                        { t: "poly", pts: [[22.6,30],[39.9,30],[31.3,52]], color: "corrA", width: 1.5 },
-                        { t: "poly", pts: [[39.9,30],[57.2,30],[48.6,52]], color: "corrA", width: 1.5 },
-                        { t: "poly", pts: [[57.2,30],[74.5,30],[65.8,52]], color: "corrA", width: 1.5 },
-                        { t: "poly", pts: [[74.5,30],[91.8,30],[83.1,52]], color: "corrA", width: 1.5 },
-                        { t: "txt", p: [50,66], text: "8 瓣：波浪边明显", size: 13 }
+                        {
+                          t: "poly",
+                          pts: [ [ 14, 30 ], [ 31.3, 30 ], [ 22.6, 52 ] ],
+                          color: "known",
+                          width: 1.5
+                        },
+                        {
+                          t: "poly",
+                          pts: [ [ 31.3, 30 ], [ 48.6, 30 ], [ 39.9, 52 ] ],
+                          color: "known",
+                          width: 1.5
+                        },
+                        {
+                          t: "poly",
+                          pts: [ [ 48.6, 30 ], [ 65.8, 30 ], [ 57.2, 52 ] ],
+                          color: "known",
+                          width: 1.5
+                        },
+                        {
+                          t: "poly",
+                          pts: [ [ 65.8, 30 ], [ 83.1, 30 ], [ 74.5, 52 ] ],
+                          color: "known",
+                          width: 1.5
+                        },
+                        {
+                          t: "poly",
+                          pts: [ [ 22.6, 30 ], [ 39.9, 30 ], [ 31.3, 52 ] ],
+                          color: "corrA",
+                          width: 1.5
+                        },
+                        {
+                          t: "poly",
+                          pts: [ [ 39.9, 30 ], [ 57.2, 30 ], [ 48.6, 52 ] ],
+                          color: "corrA",
+                          width: 1.5
+                        },
+                        {
+                          t: "poly",
+                          pts: [ [ 57.2, 30 ], [ 74.5, 30 ], [ 65.8, 52 ] ],
+                          color: "corrA",
+                          width: 1.5
+                        },
+                        {
+                          t: "poly",
+                          pts: [ [ 74.5, 30 ], [ 91.8, 30 ], [ 83.1, 52 ] ],
+                          color: "corrA",
+                          width: 1.5
+                        },
+                        {
+                          t: "txt",
+                          p: [ 50, 66 ],
+                          text: "8 瓣：波浪边明显",
+                          size: 13
+                        }
                       ]
                     },
                     {
                       label: "128 瓣拼",
                       caption: "128 瓣拼成的带子：几乎就是长方形——瓣越多，越接近。",
                       shapes: [
-                        { t: "poly", pts: [[14,30],[87,30],[87,52],[14,52]], color: "target", width: 2.5 },
-                        { t: "txt", p: [50,41], text: "≈ 长方形", size: 14, bold: true },
-                        { t: "txt", p: [50,66], text: "128 瓣：几乎长方形", size: 13, color: "target" }
+                        {
+                          t: "poly",
+                          pts: [ [ 14, 30 ], [ 87, 30 ], [ 87, 52 ], [ 14, 52 ] ],
+                          color: "target",
+                          width: 2.5
+                        },
+                        {
+                          t: "txt",
+                          p: [ 50, 41 ],
+                          text: "≈ 长方形",
+                          size: 14,
+                          bold: true
+                        },
+                        {
+                          t: "txt",
+                          p: [ 50, 66 ],
+                          text: "128 瓣：几乎长方形",
+                          size: 13,
+                          color: "target"
+                        }
                       ]
                     }
-                  ]
+                  ],
+                  morph: {
+                    kind: "discrete-steps",
+                    durationMs: 750,
+                    steps: [ 8, 16, 32, 64, 128 ],
+                    generator: "petal-strip",
+                    genParams: {
+                      cx: 50,
+                      cy: 41,
+                      R: 38
+                    }
+                  },
+                  controls: {
+                    play: true,
+                    scrub: true,
+                    step: true,
+                    replay: true
+                  }
+                },
+                engine: {
+                  primitive: "MorphToggle",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "discrete-steps"
+                  }
                 }
               },
               auxInteraction: null,

@@ -194,7 +194,7 @@ window.MATH_CH["ch04"] = {
                 { id: "f2", latex: "a \\neq 0", translation: "a 不等于 0：如果 a 是 0，二次项就没了" }
               ],
               interaction: {
-                type: "slider-lab",
+                type: "eq-graph-lab",
                 params: {
                   min: -2,
                   max: 4,
@@ -202,7 +202,23 @@ window.MATH_CH["ch04"] = {
                   label: "x",
                   expr: "x^2 - 3*x + 2",
                   target: 0,
-                  targetLabel: "等于 0 的点"
+                  targetLabel: "等于 0 的点",
+                  graph: {
+                    kind: "parabola",
+                    a: 1,
+                    b: -3,
+                    c: 2
+                  }
+                },
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "parabola",
+                    a: 1,
+                    b: -3,
+                    c: 2
+                  }
                 }
               },
               auxInteraction: null,
@@ -233,16 +249,32 @@ window.MATH_CH["ch04"] = {
               ],
               id: "ch04-u1-l1-p1b",
               interaction: {
+                type: "eq-graph-lab",
                 params: {
-                  expr: "2*x^2 - 3*x + 1",
-                  label: "x",
-                  max: 3,
                   min: -1,
+                  max: 3,
                   step: 0.5,
+                  label: "x",
+                  expr: "2*x^2 - 3*x + 1",
                   target: 0,
-                  targetLabel: "等于 0 的点"
+                  targetLabel: "等于 0 的点",
+                  graph: {
+                    kind: "parabola",
+                    a: 2,
+                    b: -3,
+                    c: 1
+                  }
                 },
-                type: "slider-lab"
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "parabola",
+                    a: 2,
+                    b: -3,
+                    c: 1
+                  }
+                }
               },
               title: "一元二次方程：三要素",
               prev: "ch04-u1-l1-p1",
@@ -266,30 +298,24 @@ window.MATH_CH["ch04"] = {
                 }
               ],
               interaction: {
-                type: "side-compare",
+                type: "complete-square-lab",
                 params: {
-                  left: {
-                    kind: "slider-lab",
-                    params: {
-                      min: 0,
-                      max: 6,
-                      step: 1,
-                      label: "x",
-                      expr: "x^2 + 6*x"
-                    }
-                  },
-                  right: {
-                    kind: "slider-lab",
-                    params: {
-                      min: 0,
-                      max: 6,
-                      step: 1,
-                      label: "x",
-                      expr: "(x+3)^2 - 9"
-                    }
-                  },
-                  sync: [ "x" ],
+                  min: 0,
+                  max: 6,
+                  step: 1,
+                  label: "x",
+                  initial: 2,
+                  half: 3,
+                  exprLeft: "x^2 + 6*x",
+                  exprRight: "(x+3)^2 - 9",
                   labels: [ "配方前：缺角的正方形", "配方后：完整正方形减去小块" ]
+                },
+                engine: {
+                  primitive: "CompleteSquareLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    half: 3
+                  }
                 }
               },
               auxInteraction: null,
@@ -395,7 +421,7 @@ window.MATH_CH["ch04"] = {
                 { id: "f3", latex: "x + 3 = \\pm 2", translation: "x 加 3 等于正负 2：开平方，一次方程出现了" }
               ],
               interaction: {
-                type: "slider-lab",
+                type: "eq-graph-lab",
                 params: {
                   min: -8,
                   max: 2,
@@ -403,7 +429,23 @@ window.MATH_CH["ch04"] = {
                   label: "x",
                   expr: "(x+3)^2",
                   target: 4,
-                  targetLabel: "右边 = 4"
+                  targetLabel: "右边 = 4",
+                  graph: {
+                    kind: "parabola",
+                    a: 1,
+                    b: 6,
+                    c: 9
+                  }
+                },
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "parabola",
+                    a: 1,
+                    b: 6,
+                    c: 9
+                  }
                 }
               },
               auxInteraction: null,
@@ -438,16 +480,32 @@ window.MATH_CH["ch04"] = {
               ],
               id: "ch04-u1-l2-p2b",
               interaction: {
+                type: "eq-graph-lab",
                 params: {
-                  expr: "(x-2)^2",
-                  label: "x",
-                  max: 7,
                   min: -3,
+                  max: 7,
                   step: 1,
+                  label: "x",
+                  expr: "(x-2)^2",
                   target: 9,
-                  targetLabel: "右边 = 9"
+                  targetLabel: "右边 = 9",
+                  graph: {
+                    kind: "parabola",
+                    a: 1,
+                    b: -4,
+                    c: 4
+                  }
                 },
-                type: "slider-lab"
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "parabola",
+                    a: 1,
+                    b: -4,
+                    c: 4
+                  }
+                }
               },
               title: "配方解方程：完整三步",
               prev: "ch04-u1-l2-p2",
@@ -472,7 +530,7 @@ window.MATH_CH["ch04"] = {
                 { id: "f2", latex: "\\Delta = b^2 - 4ac", translation: "德尔塔等于 b 平方减 4ac：判别式，就是根号里的东西" }
               ],
               interaction: {
-                type: "slider-lab",
+                type: "eq-graph-lab",
                 params: {
                   min: 0,
                   max: 5,
@@ -480,7 +538,23 @@ window.MATH_CH["ch04"] = {
                   label: "x",
                   expr: "x^2 - 5*x + 6",
                   target: 0,
-                  targetLabel: "等于 0 的点"
+                  targetLabel: "等于 0 的点",
+                  graph: {
+                    kind: "parabola",
+                    a: 1,
+                    b: -5,
+                    c: 6
+                  }
+                },
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "parabola",
+                    a: 1,
+                    b: -5,
+                    c: 6
+                  }
                 }
               },
               auxInteraction: null,
@@ -514,16 +588,32 @@ window.MATH_CH["ch04"] = {
               ],
               id: "ch04-u1-l3-p1b",
               interaction: {
+                type: "eq-graph-lab",
                 params: {
-                  expr: "2*x^2 + 5*x + 2",
-                  label: "x",
-                  max: 1,
                   min: -3,
+                  max: 1,
                   step: 0.5,
+                  label: "x",
+                  expr: "2*x^2 + 5*x + 2",
                   target: 0,
-                  targetLabel: "等于 0 的点"
+                  targetLabel: "等于 0 的点",
+                  graph: {
+                    kind: "parabola",
+                    a: 2,
+                    b: 5,
+                    c: 2
+                  }
                 },
-                type: "slider-lab"
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "parabola",
+                    a: 2,
+                    b: 5,
+                    c: 2
+                  }
+                }
               },
               title: "求根公式：代入三步",
               prev: "ch04-u1-l3-p1",
@@ -545,7 +635,7 @@ window.MATH_CH["ch04"] = {
                 { id: "f3", latex: "x + 3 = 0", translation: "x 加 3 等于 0：第二个因式为零，得 x=−3" }
               ],
               interaction: {
-                type: "slider-lab",
+                type: "eq-graph-lab",
                 params: {
                   min: -5,
                   max: 1,
@@ -553,7 +643,23 @@ window.MATH_CH["ch04"] = {
                   label: "x",
                   expr: "(x+2)*(x+3)",
                   target: 0,
-                  targetLabel: "乘积为 0"
+                  targetLabel: "乘积为 0",
+                  graph: {
+                    kind: "parabola",
+                    a: 1,
+                    b: 5,
+                    c: 6
+                  }
+                },
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "parabola",
+                    a: 1,
+                    b: 5,
+                    c: 6
+                  }
                 }
               },
               auxInteraction: null,
@@ -585,16 +691,32 @@ window.MATH_CH["ch04"] = {
               ],
               id: "ch04-u1-l4-p1b",
               interaction: {
+                type: "eq-graph-lab",
                 params: {
-                  expr: "x*(x - 3)",
-                  label: "x",
-                  max: 4,
                   min: -1,
+                  max: 4,
                   step: 1,
+                  label: "x",
+                  expr: "x*(x - 3)",
                   target: 0,
-                  targetLabel: "乘积为 0"
+                  targetLabel: "乘积为 0",
+                  graph: {
+                    kind: "parabola",
+                    a: 1,
+                    b: -3,
+                    c: 0
+                  }
                 },
-                type: "slider-lab"
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "parabola",
+                    a: 1,
+                    b: -3,
+                    c: 0
+                  }
+                }
               },
               title: "因式分解法：先化一边为零",
               prev: "ch04-u1-l4-p1",
@@ -667,14 +789,32 @@ window.MATH_CH["ch04"] = {
               ],
               id: "ch04-u2-l1-p1b",
               interaction: {
+                type: "eq-graph-lab",
                 params: {
-                  expr: "3*x^2 + 2*x + 1",
-                  label: "x",
-                  max: 2,
                   min: -2,
-                  step: 0.5
+                  max: 2,
+                  step: 0.5,
+                  label: "x",
+                  expr: "3*x^2 + 2*x + 1",
+                  target: 0,
+                  targetLabel: "y = 0（横轴）",
+                  graph: {
+                    kind: "parabola",
+                    a: 3,
+                    b: 2,
+                    c: 1
+                  }
                 },
-                type: "slider-lab"
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "parabola",
+                    a: 3,
+                    b: 2,
+                    c: 1
+                  }
+                }
               },
               title: "判别式：先算 Δ 再动手",
               prev: "ch04-u2-l1-p1",
@@ -695,7 +835,7 @@ window.MATH_CH["ch04"] = {
                 { id: "f2", latex: "x_1 x_2 = \\frac{c}{a}", translation: "两根之积等于 a 分之 c" }
               ],
               interaction: {
-                type: "slider-lab",
+                type: "eq-graph-lab",
                 params: {
                   min: 0,
                   max: 6,
@@ -703,7 +843,23 @@ window.MATH_CH["ch04"] = {
                   label: "x",
                   expr: "x^2 - 5*x + 6",
                   target: 0,
-                  targetLabel: "等于 0 的点"
+                  targetLabel: "等于 0 的点",
+                  graph: {
+                    kind: "parabola",
+                    a: 1,
+                    b: -5,
+                    c: 6
+                  }
+                },
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "parabola",
+                    a: 1,
+                    b: -5,
+                    c: 6
+                  }
                 }
               },
               auxInteraction: null,
@@ -733,16 +889,32 @@ window.MATH_CH["ch04"] = {
               ],
               id: "ch04-u2-l2-p1b",
               interaction: {
+                type: "eq-graph-lab",
                 params: {
-                  expr: "x^2 - 7*x + 10",
-                  label: "x",
-                  max: 7,
                   min: 0,
+                  max: 7,
                   step: 1,
+                  label: "x",
+                  expr: "x^2 - 7*x + 10",
                   target: 0,
-                  targetLabel: "等于 0 的点"
+                  targetLabel: "等于 0 的点",
+                  graph: {
+                    kind: "parabola",
+                    a: 1,
+                    b: -7,
+                    c: 10
+                  }
                 },
-                type: "slider-lab"
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "parabola",
+                    a: 1,
+                    b: -7,
+                    c: 10
+                  }
+                }
               },
               title: "韦达定理：不用解方程",
               prev: "ch04-u2-l2-p1",
@@ -763,7 +935,7 @@ window.MATH_CH["ch04"] = {
                 { id: "f2", latex: "x = 4", translation: "x 等于 4：宽 4 米（负根舍去，边长为正）" }
               ],
               interaction: {
-                type: "slider-lab",
+                type: "eq-graph-lab",
                 params: {
                   min: 1,
                   max: 10,
@@ -771,7 +943,23 @@ window.MATH_CH["ch04"] = {
                   label: "x",
                   expr: "x*(x+2)",
                   target: 24,
-                  targetLabel: "面积 = 24"
+                  targetLabel: "面积 = 24",
+                  graph: {
+                    kind: "parabola",
+                    a: 1,
+                    b: 2,
+                    c: 0
+                  }
+                },
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "parabola",
+                    a: 1,
+                    b: 2,
+                    c: 0
+                  }
                 }
               },
               auxInteraction: null,
@@ -802,17 +990,33 @@ window.MATH_CH["ch04"] = {
               ],
               id: "ch04-u2-l3-p1b",
               interaction: {
+                type: "eq-graph-lab",
                 params: {
-                  expr: "x*(x + 3)",
-                  label: "x",
-                  max: 10,
                   min: 1,
+                  max: 10,
                   step: 1,
+                  label: "x",
+                  expr: "x*(x + 3)",
                   target: 40,
                   targetLabel: "面积 = 40",
-                  unit: "平方米"
+                  unit: "平方米",
+                  graph: {
+                    kind: "parabola",
+                    a: 1,
+                    b: 3,
+                    c: 0
+                  }
                 },
-                type: "slider-lab"
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "parabola",
+                    a: 1,
+                    b: 3,
+                    c: 0
+                  }
+                }
               },
               title: "应用题：设列解验四步",
               prev: "ch04-u2-l3-p1",
@@ -841,7 +1045,7 @@ window.MATH_CH["ch04"] = {
                 }
               ],
               interaction: {
-                type: "slider-lab",
+                type: "eq-graph-lab",
                 params: {
                   min: -3,
                   max: 3,
@@ -849,7 +1053,23 @@ window.MATH_CH["ch04"] = {
                   label: "x",
                   expr: "x^2 - 4",
                   target: 0,
-                  targetLabel: "等于 0"
+                  targetLabel: "等于 0",
+                  graph: {
+                    kind: "parabola",
+                    a: 1,
+                    b: 0,
+                    c: -4
+                  }
+                },
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "parabola",
+                    a: 1,
+                    b: 0,
+                    c: -4
+                  }
                 }
               },
               auxInteraction: null,
@@ -899,16 +1119,32 @@ window.MATH_CH["ch04"] = {
               ],
               id: "ch04-ux-l1-p1",
               interaction: {
+                type: "eq-graph-lab",
                 params: {
-                  expr: "x^2 - 5*x + 6",
-                  label: "x",
-                  max: 5,
                   min: 0,
+                  max: 5,
                   step: 0.5,
+                  label: "x",
+                  expr: "x^2 - 5*x + 6",
                   target: 0,
-                  targetLabel: "等于 0 的点（第 1 题）"
+                  targetLabel: "等于 0 的点（第 1 题）",
+                  graph: {
+                    kind: "parabola",
+                    a: 1,
+                    b: -5,
+                    c: 6
+                  }
                 },
-                type: "slider-lab"
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "parabola",
+                    a: 1,
+                    b: -5,
+                    c: 6
+                  }
+                }
               },
               title: "第四章习题：一元二次方程",
               prev: "ch04-u2-l4-p1",

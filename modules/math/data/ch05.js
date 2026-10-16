@@ -50,15 +50,48 @@ window.MATH_CH["ch05"] = {
                 { id: "f2", latex: "3 < 5", translation: "3 小于 5：右边 5 克更重，天平向右倾" }
               ],
               interaction: {
-                type: "slider-lab",
+                type: "ineq-shade-lab",
                 params: {
-                  min: 0,
-                  max: 10,
-                  step: 1,
-                  label: "x",
-                  expr: "x",
-                  target: 5,
-                  targetLabel: "另一边是 5"
+                  source: {
+                    label: "x",
+                    min: 0,
+                    max: 10,
+                    step: 1
+                  },
+                  mode: "compare",
+                  sets: [
+                    {
+                      expr: "x-5",
+                      ineq: ">",
+                      label: "x>5（左边沉）"
+                    },
+                    {
+                      expr: "5-x",
+                      ineq: ">",
+                      label: "x<5（右边沉）"
+                    }
+                  ],
+                  showProbe: true,
+                  note: "同一数轴同时呈现 x>5 与 x<5 两个区域：开口朝大的一边"
+                },
+                engine: {
+                  primitive: "IneqShadeLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    mode: "compare",
+                    sets: [
+                      {
+                        expr: "x-5",
+                        ineq: ">",
+                        label: "x>5（左边沉）"
+                      },
+                      {
+                        expr: "5-x",
+                        ineq: ">",
+                        label: "x<5（右边沉）"
+                      }
+                    ]
+                  }
                 }
               },
               auxInteraction: null,
@@ -87,16 +120,49 @@ window.MATH_CH["ch05"] = {
               ],
               id: "ch05-u1-l1-p1b",
               interaction: {
+                type: "ineq-shade-lab",
                 params: {
-                  expr: "x",
-                  label: "x",
-                  max: 10,
-                  min: 0,
-                  step: 1,
-                  target: 5,
-                  targetLabel: "另一边是 5"
+                  source: {
+                    label: "x",
+                    min: 0,
+                    max: 10,
+                    step: 1
+                  },
+                  mode: "compare",
+                  sets: [
+                    {
+                      expr: "x-5",
+                      ineq: ">",
+                      label: "x>5：开口朝左，左边大"
+                    },
+                    {
+                      expr: "x-5",
+                      ineq: "<",
+                      label: "x<5：开口朝右，右边大"
+                    }
+                  ],
+                  showProbe: true,
+                  note: "同一数轴同时呈现 x>5 与 x<5 两个区域：> 左边大，< 右边大"
                 },
-                type: "slider-lab"
+                engine: {
+                  primitive: "IneqShadeLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    mode: "compare",
+                    sets: [
+                      {
+                        expr: "x-5",
+                        ineq: ">",
+                        label: "x>5：开口朝左，左边大"
+                      },
+                      {
+                        expr: "x-5",
+                        ineq: "<",
+                        label: "x<5：开口朝右，右边大"
+                      }
+                    ]
+                  }
+                }
               },
               title: "不等号：开口朝大的一边",
               prev: "ch05-u1-l1-p1",
@@ -111,30 +177,49 @@ window.MATH_CH["ch05"] = {
                 { id: "f2", latex: "5 + a < 8 + a", translation: "5 加 a 小于 8 加 a：两边加同一个数 a，小的还是小的" }
               ],
               interaction: {
-                type: "side-compare",
+                type: "ineq-shade-lab",
                 params: {
-                  left: {
-                    kind: "slider-lab",
-                    params: {
-                      min: -5,
-                      max: 5,
-                      step: 1,
-                      label: "a",
-                      expr: "5 + a"
-                    }
+                  source: {
+                    label: "a",
+                    min: -5,
+                    max: 5,
+                    step: 1
                   },
-                  right: {
-                    kind: "slider-lab",
-                    params: {
-                      min: -5,
-                      max: 5,
-                      step: 1,
-                      label: "a",
-                      expr: "8 + a"
+                  mode: "compare",
+                  sets: [
+                    {
+                      expr: "5-8",
+                      ineq: "<",
+                      label: "变形前：5<8"
+                    },
+                    {
+                      expr: "(5+a)-(8+a)",
+                      ineq: "<",
+                      label: "变形后：5+a<8+a"
                     }
-                  },
-                  sync: [ "a" ],
-                  labels: [ "左边：5 + a", "右边：8 + a" ]
+                  ],
+                  showProbe: true,
+                  note: "方向不变 ✅：两边加减同一个数，小的还是小的",
+                  compareLabels: [ "左边：5 + a", "右边：8 + a" ]
+                },
+                engine: {
+                  primitive: "IneqShadeLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    mode: "compare",
+                    sets: [
+                      {
+                        expr: "5-8",
+                        ineq: "<",
+                        label: "变形前：5<8"
+                      },
+                      {
+                        expr: "(5+a)-(8+a)",
+                        ineq: "<",
+                        label: "变形后：5+a<8+a"
+                      }
+                    ]
+                  }
                 }
               },
               auxInteraction: null,
@@ -165,31 +250,50 @@ window.MATH_CH["ch05"] = {
               ],
               id: "ch05-u1-l1-p2b",
               interaction: {
+                type: "ineq-shade-lab",
                 params: {
-                  labels: [ "左边：3+a", "右边：7+a" ],
-                  left: {
-                    kind: "slider-lab",
-                    params: {
-                      expr: "3 + a",
-                      label: "a",
-                      max: 5,
-                      min: -5,
-                      step: 1
-                    }
+                  source: {
+                    label: "a",
+                    min: -5,
+                    max: 5,
+                    step: 1
                   },
-                  right: {
-                    kind: "slider-lab",
-                    params: {
-                      expr: "7 + a",
-                      label: "a",
-                      max: 5,
-                      min: -5,
-                      step: 1
+                  mode: "compare",
+                  sets: [
+                    {
+                      expr: "3-7",
+                      ineq: "<",
+                      label: "变形前：3<7"
+                    },
+                    {
+                      expr: "(3-5)-(7-5)",
+                      ineq: "<",
+                      label: "变形后：3−5<7−5"
                     }
-                  },
-                  sync: [ "a" ]
+                  ],
+                  showProbe: true,
+                  note: "方向不变 ✅：性质一，两边加减同一个数",
+                  compareLabels: [ "左边：3+a", "右边：7+a" ]
                 },
-                type: "side-compare"
+                engine: {
+                  primitive: "IneqShadeLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    mode: "compare",
+                    sets: [
+                      {
+                        expr: "3-7",
+                        ineq: "<",
+                        label: "变形前：3<7"
+                      },
+                      {
+                        expr: "(3-5)-(7-5)",
+                        ineq: "<",
+                        label: "变形后：3−5<7−5"
+                      }
+                    ]
+                  }
+                }
               },
               title: "性质一：加减方向不变",
               prev: "ch05-u1-l1-p2",
@@ -204,30 +308,49 @@ window.MATH_CH["ch05"] = {
                 { id: "f2", latex: "4k > 6k (k < 0)", translation: "k 小于 0 时 4k 大于 6k：两边乘同一个负数，不等号反向" }
               ],
               interaction: {
-                type: "side-compare",
+                type: "ineq-shade-lab",
                 params: {
-                  left: {
-                    kind: "slider-lab",
-                    params: {
-                      min: -2,
-                      max: 2,
-                      step: 1,
-                      label: "k",
-                      expr: "4 * k"
-                    }
+                  source: {
+                    label: "k",
+                    min: -2,
+                    max: 2,
+                    step: 1
                   },
-                  right: {
-                    kind: "slider-lab",
-                    params: {
-                      min: -2,
-                      max: 2,
-                      step: 1,
-                      label: "k",
-                      expr: "6 * k"
+                  mode: "compare",
+                  sets: [
+                    {
+                      expr: "4-6",
+                      ineq: "<",
+                      label: "变形前：4<6"
+                    },
+                    {
+                      expr: "4*k-6*k",
+                      ineq: ">",
+                      label: "变形后：4k>6k（k<0）"
                     }
-                  },
-                  sync: [ "k" ],
-                  labels: [ "左边：4k", "右边：6k" ]
+                  ],
+                  showProbe: true,
+                  note: "方向反转 ⚠️：两边乘同一个负数，不等号翻面",
+                  compareLabels: [ "左边：4k", "右边：6k" ]
+                },
+                engine: {
+                  primitive: "IneqShadeLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    mode: "compare",
+                    sets: [
+                      {
+                        expr: "4-6",
+                        ineq: "<",
+                        label: "变形前：4<6"
+                      },
+                      {
+                        expr: "4*k-6*k",
+                        ineq: ">",
+                        label: "变形后：4k>6k（k<0）"
+                      }
+                    ]
+                  }
                 }
               },
               auxInteraction: null,
@@ -258,31 +381,50 @@ window.MATH_CH["ch05"] = {
               ],
               id: "ch05-u1-l1-p3b",
               interaction: {
+                type: "ineq-shade-lab",
                 params: {
-                  labels: [ "左边：2k", "右边：5k" ],
-                  left: {
-                    kind: "slider-lab",
-                    params: {
-                      expr: "2*k",
-                      label: "k",
-                      max: 2,
-                      min: -2,
-                      step: 1
-                    }
+                  source: {
+                    label: "k",
+                    min: -2,
+                    max: 2,
+                    step: 1
                   },
-                  right: {
-                    kind: "slider-lab",
-                    params: {
-                      expr: "5*k",
-                      label: "k",
-                      max: 2,
-                      min: -2,
-                      step: 1
+                  mode: "compare",
+                  sets: [
+                    {
+                      expr: "2-5",
+                      ineq: "<",
+                      label: "变形前：2<5"
+                    },
+                    {
+                      expr: "2*k-5*k",
+                      ineq: ">",
+                      label: "变形后：2k>5k（k<0）"
                     }
-                  },
-                  sync: [ "k" ]
+                  ],
+                  showProbe: true,
+                  note: "方向反转 ⚠️：两边同乘 −3，−6>−15",
+                  compareLabels: [ "左边：2k", "右边：5k" ]
                 },
-                type: "side-compare"
+                engine: {
+                  primitive: "IneqShadeLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    mode: "compare",
+                    sets: [
+                      {
+                        expr: "2-5",
+                        ineq: "<",
+                        label: "变形前：2<5"
+                      },
+                      {
+                        expr: "2*k-5*k",
+                        ineq: ">",
+                        label: "变形后：2k>5k（k<0）"
+                      }
+                    ]
+                  }
+                }
               },
               title: "乘负数：不等号要翻面",
               prev: "ch05-u1-l1-p3",
@@ -304,15 +446,37 @@ window.MATH_CH["ch05"] = {
                 { id: "f3", latex: "(3, +\\infty)", translation: "3 到正无穷：数轴上是空心圆圈 3 加向右的射线" }
               ],
               interaction: {
-                type: "slider-lab",
+                type: "ineq-shade-lab",
                 params: {
-                  min: 0,
-                  max: 10,
-                  step: 1,
-                  label: "x",
-                  expr: "2*x + 1",
-                  target: 7,
-                  targetLabel: "边界：2x+1 = 7"
+                  source: {
+                    label: "x",
+                    min: 0,
+                    max: 10,
+                    step: 1
+                  },
+                  mode: "single",
+                  sets: [
+                    {
+                      expr: "2*x+1-7",
+                      ineq: ">",
+                      label: "2x+1>7"
+                    }
+                  ],
+                  showProbe: true
+                },
+                engine: {
+                  primitive: "IneqShadeLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    mode: "single",
+                    sets: [
+                      {
+                        expr: "2*x+1-7",
+                        ineq: ">",
+                        label: "2x+1>7"
+                      }
+                    ]
+                  }
                 }
               },
               auxInteraction: null,
@@ -341,16 +505,48 @@ window.MATH_CH["ch05"] = {
               ],
               id: "ch05-u1-l2-p1b",
               interaction: {
+                type: "ineq-shade-lab",
                 params: {
-                  expr: "3*x - 5",
-                  label: "x",
-                  max: 10,
-                  min: 0,
-                  step: 1,
-                  target: 10,
-                  targetLabel: "边界：3x−5=10"
+                  source: {
+                    label: "x",
+                    min: 0,
+                    max: 10,
+                    step: 1
+                  },
+                  mode: "single",
+                  sets: [
+                    {
+                      expr: "3*x-5-10",
+                      ineq: "<",
+                      label: "3x−5<10"
+                    },
+                    {
+                      expr: "-4*x-12",
+                      ineq: ">=",
+                      label: "−4x≥12（实心端点演示）"
+                    }
+                  ],
+                  showProbe: true
                 },
-                type: "slider-lab"
+                engine: {
+                  primitive: "IneqShadeLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    mode: "single",
+                    sets: [
+                      {
+                        expr: "3*x-5-10",
+                        ineq: "<",
+                        label: "3x−5<10"
+                      },
+                      {
+                        expr: "-4*x-12",
+                        ineq: ">=",
+                        label: "−4x≥12（实心端点演示）"
+                      }
+                    ]
+                  }
+                }
               },
               title: "解集画数轴：空心实心",
               prev: "ch05-u1-l2-p1",
@@ -407,7 +603,7 @@ window.MATH_CH["ch05"] = {
                 { id: "f3", latex: "2 < x < 5", translation: "2 小于 x 小于 5：两个解集的公共部分" }
               ],
               interaction: {
-                type: "linked-dashboard",
+                type: "ineq-shade-lab",
                 params: {
                   source: {
                     label: "x",
@@ -416,10 +612,39 @@ window.MATH_CH["ch05"] = {
                     step: 0.5,
                     initial: 3
                   },
-                  views: [
-                    { kind: "readout", expr: "x - 2", label: "x−2" },
-                    { kind: "readout", expr: "5 - x", label: "5−x" }
-                  ]
+                  mode: "system",
+                  sets: [
+                    {
+                      expr: "x-2",
+                      ineq: ">",
+                      label: "x>2"
+                    },
+                    {
+                      expr: "5-x",
+                      ineq: ">",
+                      label: "x<5"
+                    }
+                  ],
+                  showProbe: true
+                },
+                engine: {
+                  primitive: "IneqShadeLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    mode: "system",
+                    sets: [
+                      {
+                        expr: "x-2",
+                        ineq: ">",
+                        label: "x>2"
+                      },
+                      {
+                        expr: "5-x",
+                        ineq: ">",
+                        label: "x<5"
+                      }
+                    ]
+                  }
                 }
               },
               auxInteraction: null,
@@ -448,6 +673,7 @@ window.MATH_CH["ch05"] = {
               ],
               id: "ch05-u1-l3-p1b",
               interaction: {
+                type: "ineq-shade-lab",
                 params: {
                   source: {
                     initial: 4,
@@ -456,12 +682,40 @@ window.MATH_CH["ch05"] = {
                     min: 0,
                     step: 0.5
                   },
-                  views: [
-                    { expr: "x - 3", kind: "readout", label: "x−3" },
-                    { expr: "5 - x", kind: "readout", label: "5−x" }
-                  ]
+                  mode: "system",
+                  sets: [
+                    {
+                      expr: "x-3",
+                      ineq: ">",
+                      label: "x>3（x+1>4 解得）"
+                    },
+                    {
+                      expr: "5-x",
+                      ineq: ">",
+                      label: "x<5（2x<10 解得）"
+                    }
+                  ],
+                  showProbe: true
                 },
-                type: "linked-dashboard"
+                engine: {
+                  primitive: "IneqShadeLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    mode: "system",
+                    sets: [
+                      {
+                        expr: "x-3",
+                        ineq: ">",
+                        label: "x>3（x+1>4 解得）"
+                      },
+                      {
+                        expr: "5-x",
+                        ineq: ">",
+                        label: "x<5（2x<10 解得）"
+                      }
+                    ]
+                  }
+                }
               },
               title: "不等式组：分开解取公共",
               prev: "ch05-u1-l3-p1",
@@ -562,30 +816,49 @@ window.MATH_CH["ch05"] = {
                 }
               ],
               interaction: {
-                type: "side-compare",
+                type: "ineq-shade-lab",
                 params: {
-                  left: {
-                    kind: "slider-lab",
-                    params: {
-                      min: -3,
-                      max: 1,
-                      step: 0.5,
-                      label: "x",
-                      expr: "x^2 + 2*x + 1"
-                    }
+                  source: {
+                    label: "x",
+                    min: -3,
+                    max: 3,
+                    step: 0.5
                   },
-                  right: {
-                    kind: "slider-lab",
-                    params: {
-                      min: -3,
-                      max: 3,
-                      step: 0.5,
-                      label: "x",
-                      expr: "x^2 + x + 1"
+                  mode: "compare",
+                  sets: [
+                    {
+                      expr: "x^2+2*x+1",
+                      ineq: ">",
+                      label: "相切：x²+2x+1>0"
+                    },
+                    {
+                      expr: "x^2+x+1",
+                      ineq: ">",
+                      label: "悬空：x²+x+1>0"
                     }
-                  },
-                  sync: [ "x" ],
-                  labels: [ "相切：x²+2x+1", "悬空：x²+x+1" ]
+                  ],
+                  showProbe: true,
+                  note: "方向同、解集异：相切时 x≠−1；悬空时恒成立（全体实数）",
+                  compareLabels: [ "相切：x²+2x+1", "悬空：x²+x+1" ]
+                },
+                engine: {
+                  primitive: "IneqShadeLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    mode: "compare",
+                    sets: [
+                      {
+                        expr: "x^2+2*x+1",
+                        ineq: ">",
+                        label: "相切：x²+2x+1>0"
+                      },
+                      {
+                        expr: "x^2+x+1",
+                        ineq: ">",
+                        label: "悬空：x²+x+1>0"
+                      }
+                    ]
+                  }
                 }
               },
               auxInteraction: null,
@@ -616,31 +889,50 @@ window.MATH_CH["ch05"] = {
               ],
               id: "ch05-u2-l1-p2b",
               interaction: {
+                type: "ineq-shade-lab",
                 params: {
-                  labels: [ "相切：x²−4x+4", "悬空：x²+1" ],
-                  left: {
-                    kind: "slider-lab",
-                    params: {
-                      expr: "x^2 - 4*x + 4",
-                      label: "x",
-                      max: 5,
-                      min: -1,
-                      step: 0.5
-                    }
+                  source: {
+                    label: "x",
+                    min: -3,
+                    max: 5,
+                    step: 0.5
                   },
-                  right: {
-                    kind: "slider-lab",
-                    params: {
-                      expr: "x^2 + 1",
-                      label: "x",
-                      max: 3,
-                      min: -3,
-                      step: 0.5
+                  mode: "compare",
+                  sets: [
+                    {
+                      expr: "x^2-4*x+4",
+                      ineq: "<",
+                      label: "相切：x²−4x+4<0（无解）"
+                    },
+                    {
+                      expr: "x^2+1",
+                      ineq: ">",
+                      label: "悬空：x²+1>0（恒成立）"
                     }
-                  },
-                  sync: [ "x" ]
+                  ],
+                  showProbe: true,
+                  note: "左：(x−2)²<0 无解；右：x²+1>0 恒成立",
+                  compareLabels: [ "相切：x²−4x+4", "悬空：x²+1" ]
                 },
-                type: "side-compare"
+                engine: {
+                  primitive: "IneqShadeLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    mode: "compare",
+                    sets: [
+                      {
+                        expr: "x^2-4*x+4",
+                        ineq: "<",
+                        label: "相切：x²−4x+4<0（无解）"
+                      },
+                      {
+                        expr: "x^2+1",
+                        ineq: ">",
+                        label: "悬空：x²+1>0（恒成立）"
+                      }
+                    ]
+                  }
+                }
               },
               title: "Δ=0 与 Δ<0：先看判别式",
               prev: "ch05-u2-l1-p2",
@@ -718,6 +1010,7 @@ window.MATH_CH["ch05"] = {
               ],
               id: "ch05-u2-l2-p1b",
               interaction: {
+                type: "ineq-shade-lab",
                 params: {
                   source: {
                     initial: 3,
@@ -726,12 +1019,35 @@ window.MATH_CH["ch05"] = {
                     min: 0,
                     step: 0.5
                   },
-                  views: [
-                    { expr: "a", kind: "readout", label: "a" },
-                    { expr: "a - 2", kind: "readout", label: "a−2" }
-                  ]
+                  mode: "param-sweep",
+                  sets: [
+                    {
+                      expr: "(x-2)*(x-a)",
+                      ineq: ">",
+                      label: "(x−2)(x−a)>0"
+                    }
+                  ],
+                  showProbe: true,
+                  xAxis: {
+                    min: -1,
+                    max: 7
+                  },
+                  note: "a>2：x<2 或 x>a；a=2：x≠2；a<2：x<a 或 x>2"
                 },
-                type: "linked-dashboard"
+                engine: {
+                  primitive: "IneqShadeLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    mode: "param-sweep",
+                    sets: [
+                      {
+                        expr: "(x-2)*(x-a)",
+                        ineq: ">",
+                        label: "(x−2)(x−a)>0"
+                      }
+                    ]
+                  }
+                }
               },
               title: "含参讨论：按大小分类",
               prev: "ch05-u2-l2-p1",
@@ -756,7 +1072,7 @@ window.MATH_CH["ch05"] = {
                 { id: "f2", latex: "x = 5", translation: "x 等于 5 时取到 25：长=宽=5，正方形面积最大" }
               ],
               interaction: {
-                type: "slider-lab",
+                type: "eq-graph-lab",
                 params: {
                   min: 0,
                   max: 10,
@@ -764,7 +1080,23 @@ window.MATH_CH["ch05"] = {
                   label: "x",
                   expr: "x*(10-x)",
                   target: 25,
-                  targetLabel: "最大值 25"
+                  targetLabel: "最大值 25",
+                  graph: {
+                    kind: "vertex",
+                    a: -1,
+                    b: 10,
+                    c: 0
+                  }
+                },
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "vertex",
+                    a: -1,
+                    b: 10,
+                    c: 0
+                  }
                 }
               },
               auxInteraction: null,
@@ -795,16 +1127,32 @@ window.MATH_CH["ch05"] = {
               ],
               id: "ch05-u2-l3-p1b",
               interaction: {
+                type: "eq-graph-lab",
                 params: {
-                  expr: "x*(12-x)",
-                  label: "x",
-                  max: 12,
                   min: 0,
+                  max: 12,
                   step: 1,
+                  label: "x",
+                  expr: "x*(12-x)",
                   target: 36,
-                  targetLabel: "最大值 36"
+                  targetLabel: "最大值 36",
+                  graph: {
+                    kind: "vertex",
+                    a: -1,
+                    b: 12,
+                    c: 0
+                  }
                 },
-                type: "slider-lab"
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "vertex",
+                    a: -1,
+                    b: 12,
+                    c: 0
+                  }
+                }
               },
               title: "最值应用：和定积最大",
               prev: "ch05-u2-l3-p1",
@@ -825,15 +1173,37 @@ window.MATH_CH["ch05"] = {
                 { id: "f2", latex: "ax^2 + bx + c > 0", translation: "二次不等式：抛物线在横轴上方（>0）的 x 范围" }
               ],
               interaction: {
-                type: "slider-lab",
+                type: "ineq-shade-lab",
                 params: {
-                  min: -2,
-                  max: 5,
-                  step: 1,
-                  label: "x",
-                  expr: "x^2 - 3*x + 2",
-                  target: 0,
-                  targetLabel: "分界点（=0）"
+                  source: {
+                    label: "x",
+                    min: -2,
+                    max: 5,
+                    step: 1
+                  },
+                  mode: "single",
+                  sets: [
+                    {
+                      expr: "x^2-3*x+2",
+                      ineq: ">",
+                      label: "x²−3x+2>0"
+                    }
+                  ],
+                  showProbe: true
+                },
+                engine: {
+                  primitive: "IneqShadeLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    mode: "single",
+                    sets: [
+                      {
+                        expr: "x^2-3*x+2",
+                        ineq: ">",
+                        label: "x²−3x+2>0"
+                      }
+                    ]
+                  }
                 }
               },
               auxInteraction: null,
@@ -882,20 +1252,36 @@ window.MATH_CH["ch05"] = {
               ],
               id: "ch05-ux-l1-p1",
               interaction: {
+                type: "eq-graph-lab",
                 params: {
-                  expr: "x*(10-x)",
-                  label: "x",
-                  max: 10,
                   min: 0,
+                  max: 10,
                   step: 1,
+                  label: "x",
+                  expr: "x*(10-x)",
                   target: 25,
-                  targetLabel: "最大值 25（第 6 题）"
+                  targetLabel: "最大值 25（第 6 题）",
+                  graph: {
+                    kind: "vertex",
+                    a: -1,
+                    b: 10,
+                    c: 0
+                  }
                 },
-                type: "slider-lab"
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "vertex",
+                    a: -1,
+                    b: 10,
+                    c: 0
+                  }
+                }
               },
               title: "第五章习题：不等式",
               prev: "ch05-u2-l4-p1",
-              next: null
+              next: "ch05x-u1-l1-p1"
             }
           ]
         }

@@ -104,7 +104,7 @@ window.MATH_CH["ch03"] = {
                 { id: "f2", latex: "x - 2 \\neq 0", translation: "x 减 2 不等于 0：分式有意义的条件" }
               ],
               interaction: {
-                type: "slider-lab",
+                type: "eq-graph-lab",
                 params: {
                   min: -2,
                   max: 6,
@@ -112,7 +112,19 @@ window.MATH_CH["ch03"] = {
                   label: "x",
                   expr: "x - 2",
                   target: 0,
-                  targetLabel: "分母为零的点"
+                  targetLabel: "分母为零的点",
+                  graph: {
+                    kind: "rational",
+                    forbidAt: []
+                  }
+                },
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "rational",
+                    forbidAt: []
+                  }
                 }
               },
               auxInteraction: null,
@@ -141,16 +153,28 @@ window.MATH_CH["ch03"] = {
               ],
               id: "ch03-u1-l1-p2b",
               interaction: {
+                type: "eq-graph-lab",
                 params: {
-                  expr: "x + 3",
-                  label: "x",
-                  max: 2,
                   min: -6,
+                  max: 2,
                   step: 1,
+                  label: "x",
+                  expr: "x + 3",
                   target: 0,
-                  targetLabel: "禁区：分母为零"
+                  targetLabel: "禁区：分母为零",
+                  graph: {
+                    kind: "rational",
+                    forbidAt: []
+                  }
                 },
-                type: "slider-lab"
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "rational",
+                    forbidAt: []
+                  }
+                }
               },
               title: "禁区：让分母等于零的 x",
               prev: "ch03-u1-l1-p2",
@@ -484,7 +508,7 @@ window.MATH_CH["ch03"] = {
                 { id: "f2", latex: "3 = x", translation: "两边同乘最简公分母 x：得到 3 等于 x" }
               ],
               interaction: {
-                type: "slider-lab",
+                type: "eq-graph-lab",
                 params: {
                   min: 1,
                   max: 10,
@@ -492,7 +516,19 @@ window.MATH_CH["ch03"] = {
                   label: "x",
                   expr: "3/x",
                   target: 1,
-                  targetLabel: "右边 = 1"
+                  targetLabel: "右边 = 1",
+                  graph: {
+                    kind: "rational",
+                    forbidAt: [ 0 ]
+                  }
+                },
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "rational",
+                    forbidAt: [ 0 ]
+                  }
                 }
               },
               auxInteraction: null,
@@ -524,16 +560,28 @@ window.MATH_CH["ch03"] = {
               ],
               id: "ch03-u2-l3-p1b",
               interaction: {
+                type: "eq-graph-lab",
                 params: {
-                  expr: "4/x",
-                  label: "x",
-                  max: 10,
                   min: 1,
+                  max: 10,
                   step: 1,
+                  label: "x",
+                  expr: "4/x",
                   target: 2,
-                  targetLabel: "右边 = 2"
+                  targetLabel: "右边 = 2",
+                  graph: {
+                    kind: "rational",
+                    forbidAt: [ 0 ]
+                  }
                 },
-                type: "slider-lab"
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "rational",
+                    forbidAt: [ 0 ]
+                  }
+                }
               },
               title: "分式方程：去分母三步",
               prev: "ch03-u2-l3-p1",
@@ -556,7 +604,7 @@ window.MATH_CH["ch03"] = {
                 }
               ],
               interaction: {
-                type: "slider-lab",
+                type: "eq-graph-lab",
                 params: {
                   min: 0,
                   max: 5,
@@ -564,7 +612,21 @@ window.MATH_CH["ch03"] = {
                   label: "x",
                   expr: "x - 2",
                   target: 0,
-                  targetLabel: "禁区：分母为零"
+                  targetLabel: "禁区：分母为零",
+                  graph: {
+                    kind: "rational",
+                    forbidAt: [],
+                    markX: [ 2 ]
+                  }
+                },
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "rational",
+                    forbidAt: [],
+                    markX: [ 2 ]
+                  }
                 }
               },
               auxInteraction: null,
@@ -595,16 +657,30 @@ window.MATH_CH["ch03"] = {
               ],
               id: "ch03-u2-l3-p2b",
               interaction: {
+                type: "eq-graph-lab",
                 params: {
-                  expr: "x - 3",
-                  label: "x",
-                  max: 6,
                   min: 0,
+                  max: 6,
                   step: 1,
+                  label: "x",
+                  expr: "x - 3",
                   target: 0,
-                  targetLabel: "禁区：分母为零"
+                  targetLabel: "禁区：分母为零",
+                  graph: {
+                    kind: "rational",
+                    forbidAt: [],
+                    markX: [ 3 ]
+                  }
                 },
-                type: "slider-lab"
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "rational",
+                    forbidAt: [],
+                    markX: [ 3 ]
+                  }
+                }
               },
               title: "增根：解完必须检验",
               prev: "ch03-u2-l3-p2",
@@ -682,16 +758,28 @@ window.MATH_CH["ch03"] = {
               ],
               id: "ch03-ux-l1-p1",
               interaction: {
+                type: "eq-graph-lab",
                 params: {
-                  expr: "4/x",
-                  label: "x",
-                  max: 10,
                   min: 1,
+                  max: 10,
                   step: 1,
+                  label: "x",
+                  expr: "4/x",
                   target: 1,
-                  targetLabel: "右边 = 1（第 6 题）"
+                  targetLabel: "右边 = 1（第 6 题）",
+                  graph: {
+                    kind: "rational",
+                    forbidAt: [ 0 ]
+                  }
                 },
-                type: "slider-lab"
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "rational",
+                    forbidAt: [ 0 ]
+                  }
+                }
               },
               title: "第三章习题：分式",
               prev: "ch03-u2-l4-p1",

@@ -36,7 +36,7 @@ window.MATH_CH["ch01"] = {
                 { id: "f1", latex: "2x + 1 = 11", translation: "2 乘 x 加 1 等于 11" }
               ],
               interaction: {
-                type: "slider-lab",
+                type: "eq-graph-lab",
                 params: {
                   min: 0,
                   max: 10,
@@ -44,7 +44,17 @@ window.MATH_CH["ch01"] = {
                   label: "x",
                   expr: "2*x + 1",
                   target: 11,
-                  targetLabel: "让左边等于 11"
+                  targetLabel: "让左边等于 11",
+                  graph: {
+                    kind: "numberline"
+                  }
+                },
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "numberline"
+                  }
                 }
               },
               auxInteraction: null,
@@ -57,7 +67,28 @@ window.MATH_CH["ch01"] = {
               next: "ch01-u1-l1-p1b"
             },
             {
-              auxInteraction: null,
+              auxInteraction: {
+                type: "eq-graph",
+                params: {
+                  min: 0,
+                  max: 12,
+                  step: 1,
+                  label: "x",
+                  expr: "2*x + 1",
+                  target: 11,
+                  targetLabel: "2x + 1 = 11 的解",
+                  caption: "天平上 2x+1=11 的解 x=5，在数轴上就是这个点"
+                },
+                engine: {
+                  primitive: "EqGraph",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "numberline",
+                    expr: "2*x + 1",
+                    target: 11
+                  }
+                }
+              },
               concept: "讲解：解 2x+1=11",
               examples: [
                 { figure: "变式练习", text: "变式：3x+2=14。先减 2 得 3x=12，再除以 3 得 x=4。" }
@@ -156,7 +187,7 @@ window.MATH_CH["ch01"] = {
                 { id: "f2", latex: "2x + 5 = 13", translation: "2 乘 x 加 5 等于 13" }
               ],
               interaction: {
-                type: "slider-lab",
+                type: "eq-graph-lab",
                 params: {
                   min: 0,
                   max: 10,
@@ -164,7 +195,17 @@ window.MATH_CH["ch01"] = {
                   label: "x",
                   expr: "2*x + 5",
                   target: 13,
-                  targetLabel: "方程 2x+5 = 13 要找的那个 x"
+                  targetLabel: "方程 2x+5 = 13 要找的那个 x",
+                  graph: {
+                    kind: "numberline"
+                  }
+                },
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "numberline"
+                  }
                 }
               },
               auxInteraction: null,
@@ -242,7 +283,28 @@ window.MATH_CH["ch01"] = {
                   rule: "等式两边加减同一个数，等式依然成立"
                 }
               },
-              auxInteraction: null,
+              auxInteraction: {
+                type: "eq-graph",
+                params: {
+                  min: 0,
+                  max: 10,
+                  step: 1,
+                  label: "x",
+                  expr: "x + 3",
+                  target: 8,
+                  targetLabel: "x + 3 = 8 的解",
+                  caption: "两边同减 3 后 x=5：解点在数轴上不动，变的只是写法"
+                },
+                engine: {
+                  primitive: "EqGraph",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "numberline",
+                    expr: "x + 3",
+                    target: 8
+                  }
+                }
+              },
               hints: [
                 "拖走左边 3g，右边也拖走 3g。",
                 "天平没动：这就是等式的性质 1——两边加减同一个数，等式不变。"
@@ -252,7 +314,28 @@ window.MATH_CH["ch01"] = {
               next: "ch01-u1-l2-p1b"
             },
             {
-              auxInteraction: null,
+              auxInteraction: {
+                type: "eq-graph",
+                params: {
+                  min: 0,
+                  max: 16,
+                  step: 1,
+                  label: "x",
+                  expr: "x + 7",
+                  target: 15,
+                  targetLabel: "x + 7 = 15 的解",
+                  caption: "性质 1：两边加减同一数，解点在数轴上的位置不变"
+                },
+                engine: {
+                  primitive: "EqGraph",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "numberline",
+                    expr: "x + 7",
+                    target: 15
+                  }
+                }
+              },
               concept: "讲解：等式的性质 1",
               examples: [
                 { figure: "变式练习", text: "x−6=4：两边同加 6 得 x=10。加减看符号，缺什么补什么。" }
@@ -292,7 +375,7 @@ window.MATH_CH["ch01"] = {
                 { id: "f2", latex: "\\frac{2x}{2} = \\frac{10}{2}", translation: "2 乘 x 除以 2 等于 10 除以 2" }
               ],
               interaction: {
-                type: "slider-lab",
+                type: "eq-graph-lab",
                 params: {
                   min: 0,
                   max: 10,
@@ -301,7 +384,16 @@ window.MATH_CH["ch01"] = {
                   expr: "2*x",
                   target: 10,
                   targetLabel: "2x = 10",
-                  unit: ""
+                  graph: {
+                    kind: "numberline"
+                  }
+                },
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "numberline"
+                  }
                 }
               },
               auxInteraction: null,
@@ -334,16 +426,26 @@ window.MATH_CH["ch01"] = {
               ],
               id: "ch01-u1-l2-p2b",
               interaction: {
+                type: "eq-graph-lab",
                 params: {
-                  expr: "x/3",
-                  label: "x",
-                  max: 24,
                   min: 0,
+                  max: 24,
                   step: 1,
+                  label: "x",
+                  expr: "x/3",
                   target: 4,
-                  targetLabel: "x÷3 = 4"
+                  targetLabel: "x÷3 = 4",
+                  graph: {
+                    kind: "numberline"
+                  }
                 },
-                type: "slider-lab"
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "numberline"
+                  }
+                }
               },
               title: "性质 2：两边乘除同一数",
               prev: "ch01-u1-l2-p2",
@@ -381,7 +483,28 @@ window.MATH_CH["ch01"] = {
                   rule: "把 5 拖到右边的 12 上，两边同时减去 5"
                 }
               },
-              auxInteraction: null,
+              auxInteraction: {
+                type: "eq-graph",
+                params: {
+                  min: 0,
+                  max: 14,
+                  step: 1,
+                  label: "x",
+                  expr: "x + 5",
+                  target: 12,
+                  targetLabel: "x + 5 = 12 的解",
+                  caption: "把 x 单独留下：解 x=7 在数轴上的位置"
+                },
+                engine: {
+                  primitive: "EqGraph",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "numberline",
+                    expr: "x + 5",
+                    target: 12
+                  }
+                }
+              },
               hints: [
                 "试试把左边的 5 拖到右边的 12 上面松开。",
                 "这就是\"移项\"的动作：+5 从左边搬到右边，变成了 −5。"
@@ -391,7 +514,28 @@ window.MATH_CH["ch01"] = {
               next: "ch01-u2-l1-p1b"
             },
             {
-              auxInteraction: null,
+              auxInteraction: {
+                type: "eq-graph",
+                params: {
+                  min: 0,
+                  max: 8,
+                  step: 1,
+                  label: "x",
+                  expr: "2*x - 8",
+                  target: 0,
+                  targetLabel: "2x − 8 = 0 的解（x+8=3x 移项得）",
+                  caption: "移项：+8 搬到右边变 −8，解 x=4 落在数轴这里"
+                },
+                engine: {
+                  primitive: "EqGraph",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "numberline",
+                    expr: "2*x - 8",
+                    target: 0
+                  }
+                }
+              },
               concept: "讲解：移项",
               examples: [
                 { figure: "变式练习", text: "5x−6=3x+4：移项得 5x−3x=4+6，2x=10，x=5。" }
@@ -435,7 +579,7 @@ window.MATH_CH["ch01"] = {
                 { id: "f2", latex: "5x = 25", translation: "5 乘 x 等于 25" }
               ],
               interaction: {
-                type: "slider-lab",
+                type: "eq-graph-lab",
                 params: {
                   min: 0,
                   max: 10,
@@ -443,7 +587,17 @@ window.MATH_CH["ch01"] = {
                   label: "x",
                   expr: "2*x + 3*x",
                   target: 25,
-                  targetLabel: "5x = 25"
+                  targetLabel: "5x = 25",
+                  graph: {
+                    kind: "numberline"
+                  }
+                },
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "numberline"
+                  }
                 }
               },
               auxInteraction: null,
@@ -474,16 +628,26 @@ window.MATH_CH["ch01"] = {
               ],
               id: "ch01-u2-l1-p2b",
               interaction: {
+                type: "eq-graph-lab",
                 params: {
-                  expr: "3*x + 4 + 5*x",
-                  label: "x",
-                  max: 5,
                   min: 0,
+                  max: 5,
                   step: 0.5,
+                  label: "x",
+                  expr: "3*x + 4 + 5*x",
                   target: 20,
-                  targetLabel: "3x+4+5x = 20"
+                  targetLabel: "3x+4+5x = 20",
+                  graph: {
+                    kind: "numberline"
+                  }
                 },
-                type: "slider-lab"
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "numberline"
+                  }
+                }
               },
               title: "同类项：长得一样才能并",
               prev: "ch01-u2-l1-p2",
@@ -504,7 +668,7 @@ window.MATH_CH["ch01"] = {
                 { id: "f2", latex: "2x + 6 = 14", translation: "2 乘 x 加 6 等于 14" }
               ],
               interaction: {
-                type: "slider-lab",
+                type: "eq-graph-lab",
                 params: {
                   min: 0,
                   max: 10,
@@ -512,7 +676,17 @@ window.MATH_CH["ch01"] = {
                   label: "x",
                   expr: "2*(x + 3)",
                   target: 14,
-                  targetLabel: "2(x+3) = 14"
+                  targetLabel: "2(x+3) = 14",
+                  graph: {
+                    kind: "numberline"
+                  }
+                },
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "numberline"
+                  }
                 }
               },
               auxInteraction: null,
@@ -543,16 +717,26 @@ window.MATH_CH["ch01"] = {
               ],
               id: "ch01-u2-l2-p1b",
               interaction: {
+                type: "eq-graph-lab",
                 params: {
-                  expr: "3*(x - 2)",
-                  label: "x",
-                  max: 12,
                   min: 0,
+                  max: 12,
                   step: 0.5,
+                  label: "x",
+                  expr: "3*(x - 2)",
                   target: 15,
-                  targetLabel: "3(x−2) = 15"
+                  targetLabel: "3(x−2) = 15",
+                  graph: {
+                    kind: "numberline"
+                  }
                 },
-                type: "slider-lab"
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "numberline"
+                  }
+                }
               },
               title: "去括号：括号外乘进来",
               prev: "ch01-u2-l2-p1",
@@ -567,7 +751,7 @@ window.MATH_CH["ch01"] = {
                 { id: "f2", latex: "x + 2 = 10", translation: "x 加 2 等于 10" }
               ],
               interaction: {
-                type: "slider-lab",
+                type: "eq-graph-lab",
                 params: {
                   min: 0,
                   max: 20,
@@ -575,7 +759,17 @@ window.MATH_CH["ch01"] = {
                   label: "x",
                   expr: "x/2 + 1",
                   target: 5,
-                  targetLabel: "x/2 + 1 = 5"
+                  targetLabel: "x/2 + 1 = 5",
+                  graph: {
+                    kind: "numberline"
+                  }
+                },
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "numberline"
+                  }
                 }
               },
               auxInteraction: null,
@@ -611,16 +805,26 @@ window.MATH_CH["ch01"] = {
               ],
               id: "ch01-u2-l2-p2b",
               interaction: {
+                type: "eq-graph-lab",
                 params: {
-                  expr: "x/2 + x/3",
-                  label: "x",
-                  max: 12,
                   min: 0,
+                  max: 12,
                   step: 0.5,
+                  label: "x",
+                  expr: "x/2 + x/3",
                   target: 5,
-                  targetLabel: "x/2+x/3 = 5"
+                  targetLabel: "x/2+x/3 = 5",
+                  graph: {
+                    kind: "numberline"
+                  }
                 },
-                type: "slider-lab"
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "numberline"
+                  }
+                }
               },
               title: "去分母：两边同乘最小公倍数",
               prev: "ch01-u2-l2-p2",
@@ -641,7 +845,7 @@ window.MATH_CH["ch01"] = {
                 { id: "f2", latex: "x = 5", translation: "x 等于 5" }
               ],
               interaction: {
-                type: "slider-lab",
+                type: "eq-graph-lab",
                 params: {
                   min: 0,
                   max: 10,
@@ -650,7 +854,17 @@ window.MATH_CH["ch01"] = {
                   expr: "2*(2*x + 3)",
                   target: 26,
                   targetLabel: "周长 = 26 厘米",
-                  unit: "厘米"
+                  unit: "厘米",
+                  graph: {
+                    kind: "numberline"
+                  }
+                },
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "numberline"
+                  }
                 }
               },
               auxInteraction: null,
@@ -682,17 +896,27 @@ window.MATH_CH["ch01"] = {
               ],
               id: "ch01-u2-l3-p1b",
               interaction: {
+                type: "eq-graph-lab",
                 params: {
-                  expr: "2*(x + x + 5)",
-                  label: "x",
-                  max: 12,
                   min: 0,
+                  max: 12,
                   step: 0.5,
+                  label: "x",
+                  expr: "2*(x + x + 5)",
                   target: 34,
                   targetLabel: "周长 = 34 厘米",
-                  unit: "厘米"
+                  unit: "厘米",
+                  graph: {
+                    kind: "numberline"
+                  }
                 },
-                type: "slider-lab"
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "numberline"
+                  }
+                }
               },
               title: "列方程：设、找、列三步走",
               prev: "ch01-u2-l3-p1",
@@ -713,7 +937,7 @@ window.MATH_CH["ch01"] = {
                 { id: "f2", latex: "x = 2", translation: "x 等于 2" }
               ],
               interaction: {
-                type: "slider-lab",
+                type: "eq-graph-lab",
                 params: {
                   min: 0,
                   max: 5,
@@ -722,7 +946,17 @@ window.MATH_CH["ch01"] = {
                   expr: "40*x + 20*x",
                   target: 120,
                   targetLabel: "甲乙路程之和 = 120 千米",
-                  unit: "千米"
+                  unit: "千米",
+                  graph: {
+                    kind: "numberline"
+                  }
+                },
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "numberline"
+                  }
                 }
               },
               auxInteraction: null,
@@ -754,17 +988,27 @@ window.MATH_CH["ch01"] = {
               ],
               id: "ch01-u2-l4-p1b",
               interaction: {
+                type: "eq-graph-lab",
                 params: {
-                  expr: "60*x - 40*x",
-                  label: "x",
-                  max: 3,
                   min: 0,
+                  max: 3,
                   step: 0.25,
+                  label: "x",
+                  expr: "60*x - 40*x",
                   target: 30,
                   targetLabel: "甲比乙多走 30 千米",
-                  unit: "千米"
+                  unit: "千米",
+                  graph: {
+                    kind: "numberline"
+                  }
                 },
-                type: "slider-lab"
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "numberline"
+                  }
+                }
               },
               title: "追及问题：快的追慢的",
               prev: "ch01-u2-l4-p1",
@@ -874,7 +1118,7 @@ window.MATH_CH["ch01"] = {
                 { id: "f3", latex: "x = 5", translation: "x 等于 5" }
               ],
               interaction: {
-                type: "slider-lab",
+                type: "eq-graph-lab",
                 params: {
                   min: 0,
                   max: 10,
@@ -882,7 +1126,17 @@ window.MATH_CH["ch01"] = {
                   label: "x",
                   expr: "3*x - 5",
                   target: 10,
-                  targetLabel: "3x − 5 = 10"
+                  targetLabel: "3x − 5 = 10",
+                  graph: {
+                    kind: "numberline"
+                  }
+                },
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "numberline"
+                  }
                 }
               },
               auxInteraction: null,
@@ -907,7 +1161,28 @@ window.MATH_CH["ch01"] = {
           title: "第一章习题",
           pages: [
             {
-              auxInteraction: null,
+              auxInteraction: {
+                type: "eq-graph",
+                params: {
+                  min: 0,
+                  max: 8,
+                  step: 1,
+                  label: "x",
+                  expr: "3*x - 12",
+                  target: 0,
+                  targetLabel: "3x − 12 = 0 的解（5x−3=2x+9 移项得）",
+                  caption: "第 4 题 5x−3=2x+9：移项得 3x=12，解 x=4"
+                },
+                engine: {
+                  primitive: "EqGraph",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "numberline",
+                    expr: "3*x - 12",
+                    target: 0
+                  }
+                }
+              },
               concept: "本章习题",
               examples: [
                 {

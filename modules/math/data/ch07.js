@@ -251,16 +251,32 @@ window.MATH_CH["ch07"] = {
               ],
               id: "ch07-u1-l2-p1b",
               interaction: {
+                type: "eq-graph-lab",
                 params: {
-                  expr: "2*(x+1)^2-3",
-                  label: "x",
-                  max: 2,
                   min: -4,
+                  max: 2,
                   step: 0.5,
+                  label: "x",
+                  expr: "2*(x+1)^2-3",
                   target: -3,
-                  targetLabel: "最小值 −3"
+                  targetLabel: "最小值 −3",
+                  graph: {
+                    kind: "vertex",
+                    a: 2,
+                    b: 4,
+                    c: -1
+                  }
                 },
-                type: "slider-lab"
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "vertex",
+                    a: 2,
+                    b: 4,
+                    c: -1
+                  }
+                }
               },
               title: "顶点式：顶点写在脸上",
               prev: "ch07-u1-l2-p1",
@@ -436,7 +452,7 @@ window.MATH_CH["ch07"] = {
                 { id: "f2", latex: "x = 1", translation: "对称轴 x=1：x=1+t 与 x=1−t 的函数值永远相等，抛物线左右镜像" }
               ],
               interaction: {
-                type: "slider-lab",
+                type: "eq-graph-lab",
                 params: {
                   min: -2,
                   max: 4,
@@ -444,7 +460,23 @@ window.MATH_CH["ch07"] = {
                   label: "x",
                   expr: "(x-1)^2-3",
                   target: -3,
-                  targetLabel: "最小值 −3"
+                  targetLabel: "最小值 −3",
+                  graph: {
+                    kind: "vertex",
+                    a: 1,
+                    b: -2,
+                    c: -2
+                  }
+                },
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "vertex",
+                    a: 1,
+                    b: -2,
+                    c: -2
+                  }
                 }
               },
               auxInteraction: null,
@@ -474,16 +506,32 @@ window.MATH_CH["ch07"] = {
               ],
               id: "ch07-u1-l3-p1b",
               interaction: {
+                type: "eq-graph-lab",
                 params: {
-                  expr: "(x+1)^2-1",
-                  label: "x",
-                  max: 2,
                   min: -4,
+                  max: 2,
                   step: 0.5,
+                  label: "x",
+                  expr: "(x+1)^2-1",
                   target: -1,
-                  targetLabel: "最小值 −1"
+                  targetLabel: "最小值 −1",
+                  graph: {
+                    kind: "vertex",
+                    a: 1,
+                    b: 2,
+                    c: 0
+                  }
                 },
-                type: "slider-lab"
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "vertex",
+                    a: 1,
+                    b: 2,
+                    c: 0
+                  }
+                }
               },
               title: "对称轴：对折重合的线",
               prev: "ch07-u1-l3-p1",
@@ -512,7 +560,7 @@ window.MATH_CH["ch07"] = {
                 }
               ],
               interaction: {
-                type: "slider-lab",
+                type: "eq-graph-lab",
                 params: {
                   min: 0,
                   max: 10,
@@ -521,7 +569,23 @@ window.MATH_CH["ch07"] = {
                   expr: "-2*x^2+20*x",
                   target: 50,
                   targetLabel: "最大面积 50",
-                  unit: "平方米"
+                  unit: "平方米",
+                  graph: {
+                    kind: "vertex",
+                    a: -2,
+                    b: 20,
+                    c: 0
+                  }
+                },
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "vertex",
+                    a: -2,
+                    b: 20,
+                    c: 0
+                  }
                 }
               },
               auxInteraction: null,
@@ -553,17 +617,33 @@ window.MATH_CH["ch07"] = {
               ],
               id: "ch07-u1-l4-p1b",
               interaction: {
+                type: "eq-graph-lab",
                 params: {
-                  expr: "x*(60-2*x)",
-                  label: "x",
-                  max: 30,
                   min: 0,
+                  max: 30,
                   step: 1,
+                  label: "x",
+                  expr: "x*(60-2*x)",
                   target: 450,
                   targetLabel: "最大面积 450",
-                  unit: "平方米"
+                  unit: "平方米",
+                  graph: {
+                    kind: "vertex",
+                    a: -2,
+                    b: 60,
+                    c: 0
+                  }
                 },
-                type: "slider-lab"
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "vertex",
+                    a: -2,
+                    b: 60,
+                    c: 0
+                  }
+                }
               },
               title: "最值应用：建模三步",
               prev: "ch07-u1-l4-p1",

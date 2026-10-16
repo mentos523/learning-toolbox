@@ -267,34 +267,139 @@ window.MATH_CH["g00"] = {
                 }
               ],
               interaction: {
-                type: "compare-toggle",
+                type: "morph-toggle",
                 params: {
                   views: [
                     {
                       label: "三个角分开",
                       caption: "三角形的三个角：∠1、∠2、∠3，各待各的位置。",
                       shapes: [
-                        { t: "poly", pts: [[20,70],[80,70],[50,27.14]], color: "line", width: 3 },
-                        { t: "arc", v: [20,70], a1: -55, a2: 0, r: 10, group: 1, color: "corrAngle" },
-                        { t: "arc", v: [80,70], a1: 180, a2: 235, r: 10, group: 2, color: "corrAngle" },
-                        { t: "arc", v: [50,27.14], a1: 55, a2: 125, r: 10, group: 3, color: "corrAngle" },
-                        { t: "txt", p: [31,61], text: "∠1", size: 13 },
-                        { t: "txt", p: [69,61], text: "∠2", size: 13 },
-                        { t: "txt", p: [50,40], text: "∠3", size: 13 }
+                        {
+                          t: "poly",
+                          pts: [ [ 20, 70 ], [ 80, 70 ], [ 50, 27.14 ] ],
+                          color: "line",
+                          width: 3
+                        },
+                        {
+                          t: "arc",
+                          v: [ 20, 70 ],
+                          a1: -55,
+                          a2: 0,
+                          r: 10,
+                          group: 1,
+                          color: "corrAngle"
+                        },
+                        {
+                          t: "arc",
+                          v: [ 80, 70 ],
+                          a1: 180,
+                          a2: 235,
+                          r: 10,
+                          group: 2,
+                          color: "corrAngle"
+                        },
+                        {
+                          t: "arc",
+                          v: [ 50, 27.14 ],
+                          a1: 55,
+                          a2: 125,
+                          r: 10,
+                          group: 3,
+                          color: "corrAngle"
+                        },
+                        {
+                          t: "txt",
+                          p: [ 31, 61 ],
+                          text: "∠1",
+                          size: 13
+                        },
+                        {
+                          t: "txt",
+                          p: [ 69, 61 ],
+                          text: "∠2",
+                          size: 13
+                        },
+                        {
+                          t: "txt",
+                          p: [ 50, 40 ],
+                          text: "∠3",
+                          size: 13
+                        }
                       ]
                     },
                     {
                       label: "拼成一条直线",
                       caption: "把三个角撕下来，顶点拼到一起——正好拼成一条直线！",
                       shapes: [
-                        { t: "seg", a: [20,45], b: [80,45], color: "line", width: 3 },
-                        { t: "arc", v: [50,45], a1: 0, a2: 55, r: 10, group: 1, color: "corrAngle" },
-                        { t: "arc", v: [50,45], a1: 55, a2: 125, r: 12, group: 2, color: "corrAngle" },
-                        { t: "arc", v: [50,45], a1: 125, a2: 180, r: 14, group: 3, color: "corrAngle" },
-                        { t: "txt", p: [50,28], text: "180°", size: 14, bold: true }
+                        {
+                          t: "seg",
+                          a: [ 20, 45 ],
+                          b: [ 80, 45 ],
+                          color: "line",
+                          width: 3
+                        },
+                        {
+                          t: "arc",
+                          v: [ 50, 45 ],
+                          a1: 0,
+                          a2: 55,
+                          r: 10,
+                          group: 1,
+                          color: "corrAngle"
+                        },
+                        {
+                          t: "arc",
+                          v: [ 50, 45 ],
+                          a1: 55,
+                          a2: 125,
+                          r: 12,
+                          group: 2,
+                          color: "corrAngle"
+                        },
+                        {
+                          t: "arc",
+                          v: [ 50, 45 ],
+                          a1: 125,
+                          a2: 180,
+                          r: 14,
+                          group: 3,
+                          color: "corrAngle"
+                        },
+                        {
+                          t: "txt",
+                          p: [ 50, 28 ],
+                          text: "180°",
+                          size: 14,
+                          bold: true
+                        }
                       ]
                     }
-                  ]
+                  ],
+                  morph: {
+                    kind: "assemble",
+                    durationMs: 1400,
+                    pairs: [ [ 1, 1 ], [ 2, 2 ], [ 3, 3 ] ],
+                    stagger: 0.15,
+                    readout: {
+                      template: "∠1+∠2+∠3 = {v}°",
+                      from: 0,
+                      to: 180,
+                      decimals: 0
+                    }
+                  },
+                  controls: {
+                    play: true,
+                    scrub: true,
+                    step: true,
+                    replay: true
+                  }
+                },
+                engine: {
+                  primitive: "MorphToggle",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "assemble"
+                  }
                 }
               },
               auxInteraction: null,

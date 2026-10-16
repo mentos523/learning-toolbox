@@ -31,7 +31,7 @@ window.MATH_CH["ch00"] = {
                 { id: "f1", latex: "x + 5 = 12", translation: "x 加 5 等于 12" }
               ],
               interaction: {
-                type: "slider-lab",
+                type: "eq-graph-lab",
                 params: {
                   min: 0,
                   max: 20,
@@ -39,7 +39,17 @@ window.MATH_CH["ch00"] = {
                   label: "x",
                   expr: "x + 5",
                   target: 12,
-                  targetLabel: "目标 12"
+                  targetLabel: "目标 12",
+                  graph: {
+                    kind: "numberline"
+                  }
+                },
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "numberline"
+                  }
                 }
               },
               auxInteraction: null,
@@ -52,7 +62,28 @@ window.MATH_CH["ch00"] = {
               next: "ch00-u1-l1-p1b"
             },
             {
-              auxInteraction: null,
+              auxInteraction: {
+                type: "eq-graph",
+                params: {
+                  min: 0,
+                  max: 14,
+                  step: 1,
+                  label: "x",
+                  expr: "x + 5",
+                  target: 12,
+                  targetLabel: "x + 5 = 12 的解",
+                  caption: "天平上把 x 单独留下——解点在数轴上的位置"
+                },
+                engine: {
+                  primitive: "EqGraph",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "numberline",
+                    expr: "x + 5",
+                    target: 12
+                  }
+                }
+              },
               concept: "讲解：解 x+5=12",
               examples: [
                 { figure: "变式练习", text: "变式：y+9=20，y 是几？（两边同减 9，得 y=11）" }
@@ -103,7 +134,28 @@ window.MATH_CH["ch00"] = {
                   rule: "两边同时拿走同样多，天平依然平衡"
                 }
               },
-              auxInteraction: null,
+              auxInteraction: {
+                type: "eq-graph",
+                params: {
+                  min: 0,
+                  max: 10,
+                  step: 1,
+                  label: "x",
+                  expr: "x + 3",
+                  target: 8,
+                  targetLabel: "x + 3 = 8 的解",
+                  caption: "等式 x+3=8 的解 x=5，在数轴上就是这个点"
+                },
+                engine: {
+                  primitive: "EqGraph",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "numberline",
+                    expr: "x + 3",
+                    target: 8
+                  }
+                }
+              },
               hints: [
                 "你刚才做的，就是解方程 x + 3 = 8 的全过程。",
                 "移项这些名词以后慢慢认，动作你已经会了。"
@@ -129,16 +181,26 @@ window.MATH_CH["ch00"] = {
               ],
               id: "ch00-u1-l1-p2b",
               interaction: {
+                type: "eq-graph-lab",
                 params: {
-                  expr: "x + 3",
-                  label: "x",
-                  max: 10,
                   min: 0,
+                  max: 10,
                   step: 1,
+                  label: "x",
+                  expr: "x + 3",
                   target: 8,
-                  targetLabel: "等于 8"
+                  targetLabel: "等于 8",
+                  graph: {
+                    kind: "numberline"
+                  }
                 },
-                type: "slider-lab"
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "numberline"
+                  }
+                }
               },
               title: "天平解方程：两边同减 3",
               prev: "ch00-u1-l1-p2",

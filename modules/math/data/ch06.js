@@ -65,10 +65,11 @@ window.MATH_CH["ch06"] = {
               auxInteraction: null,
               hints: [
                 "拖动 x：同一台机器“加 2”，x 滑过去 y 就跟着变。",
-                "方程问“输出 5 时投入几”，函数问“投入变时输出怎么变”。"
+                "方程问“输出 5 时投入几”，函数问“投入变时输出怎么变”。",
+                "预告回音：#p=ch05x-u3-l2-p1 说过，下一章这些直线会有新名字——一次函数。"
               ],
               examples: [ { text: "自动售货机：投币 x 元，出货 y 件", figure: "仪表盘" } ],
-              prev: null,
+              prev: "ch05x-u3-l2-p1",
               next: "ch06-u0-l1-p1b"
             },
             {
@@ -86,7 +87,8 @@ window.MATH_CH["ch06"] = {
               ],
               hints: [
                 "方程是“求数”：答案是一个数；函数是“看关系”：答案是一串对应。",
-                "y=3x 里令 y=12，就变回方程 3x=12——函数是方程的“动态版”。"
+                "y=3x 里令 y=12，就变回方程 3x=12——函数是方程的“动态版”。",
+                "预告回音：#p=ch05x-u3-l2-p1 说过，下一章这些直线会有新名字——一次函数。"
               ],
               id: "ch06-u0-l1-p1b",
               interaction: {
@@ -1028,7 +1030,8 @@ window.MATH_CH["ch06"] = {
               auxInteraction: null,
               hints: [
                 "拖到 y=0 处：x=2 就是方程 2x−4=0 的解。",
-                "y>0 的点都在 x 轴上方——不等式 2x−4>0 的解是 x>2。"
+                "y>0 的点都在 x 轴上方——不等式 2x−4>0 的解是 x>2。",
+                "大会师回看：#p=ch05x-u3-l1-p2「方程组的解 = 两条直线的交点」——交点即解的思想从这里来。"
               ],
               examples: [ { text: "第五章的“分界点”：先解等号，再看一边", figure: "仪表盘" } ],
               prev: "ch06-u2-l3-p1b",
@@ -1047,7 +1050,8 @@ window.MATH_CH["ch06"] = {
               ],
               hints: [
                 "方程的解=交点横坐标；不等式的解=图像在上/下方的 x 范围。",
-                "第五章“先找分界点”就是这句话：分界点就是交点。"
+                "第五章“先找分界点”就是这句话：分界点就是交点。",
+                "交点即解的完整形态见 #p=ch05x-u3-l1-p2：二元一次方程组的解就是两条直线交点的坐标。"
               ],
               id: "ch06-u2-l4-p1b",
               interaction: {
@@ -1085,7 +1089,7 @@ window.MATH_CH["ch06"] = {
                 { id: "f2", latex: "y = kx", translation: "b=0 时退化为正比例函数，图像必过原点" }
               ],
               interaction: {
-                type: "slider-lab",
+                type: "eq-graph-lab",
                 params: {
                   min: -2,
                   max: 5,
@@ -1093,7 +1097,17 @@ window.MATH_CH["ch06"] = {
                   label: "x",
                   expr: "2*x + 1",
                   target: 0,
-                  targetLabel: "y=0：交点"
+                  targetLabel: "y=0：交点",
+                  graph: {
+                    kind: "line"
+                  }
+                },
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "line"
+                  }
                 }
               },
               auxInteraction: null,

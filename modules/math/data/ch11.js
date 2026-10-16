@@ -825,7 +825,7 @@ window.MATH_CH["ch11"] = {
                 }
               ],
               interaction: {
-                type: "slider-lab",
+                type: "eq-graph-lab",
                 params: {
                   min: -2,
                   max: 2,
@@ -833,7 +833,17 @@ window.MATH_CH["ch11"] = {
                   label: "x",
                   expr: "3*x^2-3",
                   target: 0,
-                  targetLabel: "找 f'(x)=0 的点（有两个）"
+                  targetLabel: "找 f'(x)=0 的点（有两个）",
+                  graph: {
+                    kind: "zero"
+                  }
+                },
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "zero"
+                  }
                 }
               },
               auxInteraction: null,
@@ -868,16 +878,26 @@ window.MATH_CH["ch11"] = {
               ],
               id: "ch11-u3-l2-p1b",
               interaction: {
+                type: "eq-graph-lab",
                 params: {
-                  expr: "3*x^2-6*x",
-                  label: "x",
-                  max: 3,
                   min: -1,
+                  max: 3,
                   step: 0.25,
+                  label: "x",
+                  expr: "3*x^2-6*x",
                   target: 0,
-                  targetLabel: "找 f'(x)=0 的点"
+                  targetLabel: "找 f'(x)=0 的点",
+                  graph: {
+                    kind: "zero"
+                  }
                 },
-                type: "slider-lab"
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "zero"
+                  }
+                }
               },
               title: "极值：驻点再看换向",
               prev: "ch11-u3-l2-p1",
@@ -906,7 +926,7 @@ window.MATH_CH["ch11"] = {
                 }
               ],
               interaction: {
-                type: "slider-lab",
+                type: "eq-graph-lab",
                 params: {
                   min: -1,
                   max: 2,
@@ -914,7 +934,17 @@ window.MATH_CH["ch11"] = {
                   label: "x",
                   expr: "x^2",
                   target: 4,
-                  targetLabel: "最大值在哪"
+                  targetLabel: "最大值在哪",
+                  graph: {
+                    kind: "zero"
+                  }
+                },
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "zero"
+                  }
                 }
               },
               auxInteraction: null,
@@ -948,16 +978,26 @@ window.MATH_CH["ch11"] = {
               ],
               id: "ch11-u3-l3-p1b",
               interaction: {
+                type: "eq-graph-lab",
                 params: {
-                  expr: "x^3-3*x",
-                  label: "x",
-                  max: 2,
                   min: -2,
+                  max: 2,
                   step: 0.25,
+                  label: "x",
+                  expr: "x^3-3*x",
                   target: 2,
-                  targetLabel: "最大值 2 在哪"
+                  targetLabel: "最大值 2 在哪",
+                  graph: {
+                    kind: "zero"
+                  }
                 },
-                type: "slider-lab"
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "zero"
+                  }
+                }
               },
               title: "最值：闭区间三步",
               prev: "ch11-u3-l3-p1",

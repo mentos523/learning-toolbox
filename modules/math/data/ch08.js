@@ -65,7 +65,7 @@ window.MATH_CH["ch08"] = {
                 }
               ],
               interaction: {
-                type: "slider-lab",
+                type: "eq-graph-lab",
                 params: {
                   min: -3,
                   max: 3,
@@ -73,7 +73,17 @@ window.MATH_CH["ch08"] = {
                   label: "n",
                   expr: "2^n",
                   target: 0.125,
-                  targetLabel: "2⁻³=1/8"
+                  targetLabel: "2⁻³=1/8",
+                  graph: {
+                    kind: "exp"
+                  }
+                },
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "exp"
+                  }
                 }
               },
               auxInteraction: null,
@@ -108,16 +118,26 @@ window.MATH_CH["ch08"] = {
               ],
               id: "ch08-u1-l1-p1b",
               interaction: {
+                type: "eq-graph-lab",
                 params: {
-                  expr: "2^n",
-                  label: "n",
-                  max: 3,
                   min: -3,
+                  max: 3,
                   step: 1,
+                  label: "n",
+                  expr: "2^n",
                   target: 0.125,
-                  targetLabel: "2⁻³=1/8"
+                  targetLabel: "2⁻³=1/8",
+                  graph: {
+                    kind: "exp"
+                  }
                 },
-                type: "slider-lab"
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "exp"
+                  }
+                }
               },
               title: "负指数：倒着数",
               prev: "ch08-u1-l1-p1",
@@ -146,7 +166,7 @@ window.MATH_CH["ch08"] = {
                 }
               ],
               interaction: {
-                type: "slider-lab",
+                type: "eq-graph-lab",
                 params: {
                   min: 1,
                   max: 4,
@@ -154,7 +174,17 @@ window.MATH_CH["ch08"] = {
                   label: "n",
                   expr: "8^(1/n)",
                   target: 2,
-                  targetLabel: "8 的 1/3 次方 = 2"
+                  targetLabel: "8 的 1/3 次方 = 2",
+                  graph: {
+                    kind: "exp"
+                  }
+                },
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "exp"
+                  }
                 }
               },
               auxInteraction: null,
@@ -185,16 +215,26 @@ window.MATH_CH["ch08"] = {
               ],
               id: "ch08-u1-l2-p1b",
               interaction: {
+                type: "eq-graph-lab",
                 params: {
-                  expr: "8^(1/n)",
-                  label: "n",
-                  max: 4,
                   min: 1,
+                  max: 4,
                   step: 1,
+                  label: "n",
+                  expr: "8^(1/n)",
                   target: 2,
-                  targetLabel: "8 的 1/3 次方 = 2"
+                  targetLabel: "8 的 1/3 次方 = 2",
+                  graph: {
+                    kind: "exp"
+                  }
                 },
-                type: "slider-lab"
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "exp"
+                  }
+                }
               },
               title: "分数指数：分母管开方",
               prev: "ch08-u1-l2-p1",
@@ -303,7 +343,7 @@ window.MATH_CH["ch08"] = {
                 }
               ],
               interaction: {
-                type: "slider-lab",
+                type: "eq-graph-lab",
                 params: {
                   min: 0.5,
                   max: 3,
@@ -311,7 +351,17 @@ window.MATH_CH["ch08"] = {
                   label: "a",
                   expr: "a^2",
                   target: 4,
-                  targetLabel: "a=2 时 y=4"
+                  targetLabel: "a=2 时 y=4",
+                  graph: {
+                    kind: "exp"
+                  }
+                },
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "exp"
+                  }
                 }
               },
               auxInteraction: null,
@@ -341,16 +391,26 @@ window.MATH_CH["ch08"] = {
               ],
               id: "ch08-u2-l1-p1b",
               interaction: {
+                type: "eq-graph-lab",
                 params: {
-                  expr: "a^2",
-                  label: "a",
-                  max: 3,
                   min: 0.5,
+                  max: 3,
                   step: 0.5,
+                  label: "a",
+                  expr: "a^2",
                   target: 4,
-                  targetLabel: "a=2 时 y=4"
+                  targetLabel: "a=2 时 y=4",
+                  graph: {
+                    kind: "exp"
+                  }
                 },
-                type: "slider-lab"
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "exp"
+                  }
+                }
               },
               title: "指数函数：底数定性格",
               prev: "ch08-u2-l1-p1",
@@ -375,7 +435,7 @@ window.MATH_CH["ch08"] = {
                 }
               ],
               interaction: {
-                type: "slider-lab",
+                type: "eq-graph-lab",
                 params: {
                   min: 1,
                   max: 6,
@@ -383,7 +443,17 @@ window.MATH_CH["ch08"] = {
                   label: "x",
                   expr: "2^x",
                   target: 32,
-                  targetLabel: "2⁵=32：x=5 即 log₂32=5"
+                  targetLabel: "2⁵=32：x=5 即 log₂32=5",
+                  graph: {
+                    kind: "exp"
+                  }
+                },
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "exp"
+                  }
                 }
               },
               auxInteraction: null,
@@ -417,16 +487,26 @@ window.MATH_CH["ch08"] = {
               ],
               id: "ch08-u2-l2-p1b",
               interaction: {
+                type: "eq-graph-lab",
                 params: {
-                  expr: "2^x",
-                  label: "x",
-                  max: 6,
                   min: 1,
+                  max: 6,
                   step: 1,
+                  label: "x",
+                  expr: "2^x",
                   target: 32,
-                  targetLabel: "2⁵=32：x=5 即 log₂32=5"
+                  targetLabel: "2⁵=32：x=5 即 log₂32=5",
+                  graph: {
+                    kind: "exp"
+                  }
                 },
-                type: "slider-lab"
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "exp"
+                  }
+                }
               },
               title: "对数：把指数请下来",
               prev: "ch08-u2-l2-p1",
@@ -1166,16 +1246,26 @@ window.MATH_CH["ch08"] = {
               ],
               id: "ch08-ux-l1-p1",
               interaction: {
+                type: "eq-graph-lab",
                 params: {
-                  expr: "2^x",
-                  label: "x",
-                  max: 6,
                   min: 1,
+                  max: 6,
                   step: 1,
+                  label: "x",
+                  expr: "2^x",
                   target: 8,
-                  targetLabel: "2³=8（第 7 题）"
+                  targetLabel: "2³=8（第 7 题）",
+                  graph: {
+                    kind: "exp"
+                  }
                 },
-                type: "slider-lab"
+                engine: {
+                  primitive: "EqGraphLab",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "exp"
+                  }
+                }
               },
               title: "第八章习题：指数对数",
               prev: "ch08-u3-l3-p1",

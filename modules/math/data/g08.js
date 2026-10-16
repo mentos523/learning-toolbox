@@ -622,40 +622,173 @@ window.MATH_CH["g08"] = {
                 }
               ],
               interaction: {
-                type: "compare-toggle",
+                type: "morph-toggle",
                 params: {
                   views: [
                     {
                       label: "展开看",
                       caption: "从圆外一点 P 画两条切线 PA、PB——猜一猜：哪条长？",
                       shapes: [
-                        { t: "circle", c: [45,55], r: 22, color: "known", width: 3 },
-                        { t: "pt", p: [45,55], label: "O", color: "known", r: 4 },
-                        { t: "pt", p: [88,30], label: "P", color: "known", r: 4 },
-                        { t: "pt", p: [63.4,67.2], label: "A", color: "target", r: 4 },
-                        { t: "pt", p: [43.5,33], label: "B", color: "target", r: 4 },
-                        { t: "seg", a: [88,30], b: [63.4,67.2], color: "target", width: 3 },
-                        { t: "seg", a: [88,30], b: [43.5,33], color: "target", width: 3 },
-                        { t: "seg", a: [45,55], b: [63.4,67.2], color: "aux", width: 2, dash: "5,4" },
-                        { t: "seg", a: [45,55], b: [43.5,33], color: "aux", width: 2, dash: "5,4" },
-                        { t: "txt", p: [76,52], text: "PA 和 PB，谁长？", size: 13, bold: true }
+                        {
+                          t: "circle",
+                          c: [ 45, 55 ],
+                          r: 22,
+                          color: "known",
+                          width: 3
+                        },
+                        {
+                          t: "pt",
+                          p: [ 45, 55 ],
+                          label: "O",
+                          color: "known",
+                          r: 4
+                        },
+                        {
+                          t: "pt",
+                          p: [ 88, 30 ],
+                          label: "P",
+                          color: "known",
+                          r: 4
+                        },
+                        {
+                          t: "pt",
+                          p: [ 63.4, 67.2 ],
+                          label: "A",
+                          color: "target",
+                          r: 4
+                        },
+                        {
+                          t: "pt",
+                          p: [ 43.5, 33 ],
+                          label: "B",
+                          color: "target",
+                          r: 4
+                        },
+                        {
+                          t: "seg",
+                          a: [ 88, 30 ],
+                          b: [ 63.4, 67.2 ],
+                          color: "target",
+                          width: 3
+                        },
+                        {
+                          t: "seg",
+                          a: [ 88, 30 ],
+                          b: [ 43.5, 33 ],
+                          color: "target",
+                          width: 3
+                        },
+                        {
+                          t: "seg",
+                          a: [ 45, 55 ],
+                          b: [ 63.4, 67.2 ],
+                          color: "aux",
+                          width: 2,
+                          dash: "5,4"
+                        },
+                        {
+                          t: "seg",
+                          a: [ 45, 55 ],
+                          b: [ 43.5, 33 ],
+                          color: "aux",
+                          width: 2,
+                          dash: "5,4"
+                        },
+                        {
+                          t: "txt",
+                          p: [ 76, 52 ],
+                          text: "PA 和 PB，谁长？",
+                          size: 13,
+                          bold: true
+                        }
                       ]
                     },
                     {
                       label: "对折看",
                       caption: "沿 OP 对折：PA 正好落在 PB 上——一样长！",
                       shapes: [
-                        { t: "circle", c: [45,55], r: 22, color: "known", width: 3 },
-                        { t: "pt", p: [45,55], label: "O", color: "known", r: 4 },
-                        { t: "pt", p: [88,30], label: "P", color: "known", r: 4 },
-                        { t: "seg", a: [45,55], b: [88,30], color: "aux", width: 3, dash: "8,4" },
-                        { t: "seg", a: [88,30], b: [63.4,67.2], color: "target", width: 3 },
-                        { t: "seg", a: [88,30], b: [43.5,33], color: "target", width: 3, dash: "5,4" },
-                        { t: "txt", p: [66,20], text: "折痕 OP", size: 12, color: "aux" },
-                        { t: "txt", p: [76,52], text: "PA 落在 PB 上，完全重合", size: 13, bold: true, color: "target" }
+                        {
+                          t: "circle",
+                          c: [ 45, 55 ],
+                          r: 22,
+                          color: "known",
+                          width: 3
+                        },
+                        {
+                          t: "pt",
+                          p: [ 45, 55 ],
+                          label: "O",
+                          color: "known",
+                          r: 4
+                        },
+                        {
+                          t: "pt",
+                          p: [ 88, 30 ],
+                          label: "P",
+                          color: "known",
+                          r: 4
+                        },
+                        {
+                          t: "seg",
+                          a: [ 45, 55 ],
+                          b: [ 88, 30 ],
+                          color: "aux",
+                          width: 3,
+                          dash: "8,4"
+                        },
+                        {
+                          t: "seg",
+                          a: [ 88, 30 ],
+                          b: [ 63.4, 67.2 ],
+                          color: "target",
+                          width: 3
+                        },
+                        {
+                          t: "seg",
+                          a: [ 88, 30 ],
+                          b: [ 43.5, 33 ],
+                          color: "target",
+                          width: 3,
+                          dash: "5,4"
+                        },
+                        {
+                          t: "txt",
+                          p: [ 66, 20 ],
+                          text: "折痕 OP",
+                          size: 12,
+                          color: "aux"
+                        },
+                        {
+                          t: "txt",
+                          p: [ 76, 52 ],
+                          text: "PA 落在 PB 上，完全重合",
+                          size: 13,
+                          bold: true,
+                          color: "target"
+                        }
                       ]
                     }
-                  ]
+                  ],
+                  morph: {
+                    kind: "fold",
+                    durationMs: 1400,
+                    axis: [ [ 45, 55 ], [ 88, 30 ] ],
+                    moving: [ 5, 3 ],
+                    hide1: [ 4 ]
+                  },
+                  controls: {
+                    play: true,
+                    scrub: true,
+                    step: true,
+                    replay: true
+                  }
+                },
+                engine: {
+                  primitive: "MorphToggle",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "fold"
+                  }
                 }
               },
               auxInteraction: null,

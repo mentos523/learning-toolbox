@@ -1686,31 +1686,110 @@ window.MATH_CH["g02"] = {
                 }
               ],
               interaction: {
-                type: "compare-toggle",
+                type: "morph-toggle",
                 params: {
                   views: [
                     {
                       label: "y = x",
                       caption: "直线 y = x：经过原点，斜着往上走。",
                       shapes: [
-                        { t: "seg", a: [15,25], b: [75,85], color: "known", width: 3 },
-                        { t: "txt", p: [62,60], text: "y = x", size: 15, bold: true, color: "known" },
-                        { t: "pt", p: [45,55], r: 3, color: "known" },
-                        { t: "txt", p: [45,48], text: "原点", size: 12 }
+                        {
+                          t: "seg",
+                          a: [ 15, 25 ],
+                          b: [ 75, 85 ],
+                          color: "known",
+                          width: 3
+                        },
+                        {
+                          t: "txt",
+                          p: [ 62, 60 ],
+                          text: "y = x",
+                          size: 15,
+                          bold: true,
+                          color: "known"
+                        },
+                        {
+                          t: "pt",
+                          p: [ 45, 55 ],
+                          r: 3,
+                          color: "known"
+                        },
+                        {
+                          t: "txt",
+                          p: [ 45, 48 ],
+                          text: "原点",
+                          size: 12
+                        }
                       ]
                     },
                     {
                       label: "往上滑 2 格",
                       caption: "整体往上平移 2 格，变成 y = x + 2——b 就是往上滑的格数。",
                       shapes: [
-                        { t: "seg", a: [15,25], b: [68,78], color: "aux", width: 2, dash: "5,4" },
-                        { t: "seg", a: [15,45], b: [68,98], color: "target", width: 3 },
-                        { t: "seg", a: [40,50], b: [40,70], color: "corrA", width: 2.5 },
-                        { t: "txt", p: [62,80], text: "y = x + 2", size: 15, bold: true, color: "target" },
-                        { t: "txt", p: [30,60], text: "上移 2 格", size: 12, color: "corrA" }
+                        {
+                          t: "seg",
+                          a: [ 15, 25 ],
+                          b: [ 68, 78 ],
+                          color: "aux",
+                          width: 2,
+                          dash: "5,4"
+                        },
+                        {
+                          t: "seg",
+                          a: [ 15, 45 ],
+                          b: [ 68, 98 ],
+                          color: "target",
+                          width: 3
+                        },
+                        {
+                          t: "seg",
+                          a: [ 40, 50 ],
+                          b: [ 40, 70 ],
+                          color: "corrA",
+                          width: 2.5
+                        },
+                        {
+                          t: "txt",
+                          p: [ 62, 80 ],
+                          text: "y = x + 2",
+                          size: 15,
+                          bold: true,
+                          color: "target"
+                        },
+                        {
+                          t: "txt",
+                          p: [ 30, 60 ],
+                          text: "上移 2 格",
+                          size: 12,
+                          color: "corrA"
+                        }
                       ]
                     }
-                  ]
+                  ],
+                  morph: {
+                    kind: "translate",
+                    durationMs: 1200,
+                    pairs: [ [ 0, 1 ] ],
+                    readout: {
+                      template: "y = x + {v}",
+                      from: 0,
+                      to: 2,
+                      decimals: 1
+                    }
+                  },
+                  controls: {
+                    play: true,
+                    scrub: true,
+                    step: true,
+                    replay: true
+                  }
+                },
+                engine: {
+                  primitive: "MorphToggle",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "translate"
+                  }
                 }
               },
               auxInteraction: null,

@@ -1743,24 +1743,96 @@ window.MATH_CH["g13"] = {
                 }
               ],
               interaction: {
-                type: "compare-toggle",
+                type: "morph-toggle",
                 params: {
                   views: [
-                    { label: "圆心在原点",
+                    {
+                      label: "圆心在原点",
                       caption: "圆心 O(0,0)：x²+y²=r²（g08.1.5）。",
                       shapes: [
-                        { t: "circle", c: [50,52], r: 24, color: "known", width: 3 },
-                        { t: "pt", p: [50,52], label: "O", color: "known", r: 5 },
-                        { t: "txt", p: [50,90], text: "x² + y² = r²", size: 15, bold: true, color: "known" }
-                      ] },
-                    { label: "圆心在 (a,b)",
+                        {
+                          t: "circle",
+                          c: [ 50, 52 ],
+                          r: 24,
+                          color: "known",
+                          width: 3
+                        },
+                        {
+                          t: "pt",
+                          p: [ 50, 52 ],
+                          label: "O",
+                          color: "known",
+                          r: 5
+                        },
+                        {
+                          t: "txt",
+                          p: [ 50, 90 ],
+                          text: "x² + y² = r²",
+                          size: 15,
+                          bold: true,
+                          color: "known"
+                        }
+                      ]
+                    },
+                    {
+                      label: "圆心在 (a,b)",
                       caption: "把圆“搬”到 (a,b)：x 换成 x−a，y 换成 y−b。",
                       shapes: [
-                        { t: "circle", c: [62,58], r: 24, color: "target", width: 3 },
-                        { t: "pt", p: [62,58], label: "C", color: "target", r: 5 },
-                        { t: "txt", p: [50,90], text: "(x−a)² + (y−b)² = r²", size: 14, bold: true, color: "target" }
-                      ] }
-                  ]
+                        {
+                          t: "circle",
+                          c: [ 62, 58 ],
+                          r: 24,
+                          color: "target",
+                          width: 3
+                        },
+                        {
+                          t: "pt",
+                          p: [ 62, 58 ],
+                          label: "C",
+                          color: "target",
+                          r: 5
+                        },
+                        {
+                          t: "txt",
+                          p: [ 50, 90 ],
+                          text: "(x−a)² + (y−b)² = r²",
+                          size: 14,
+                          bold: true,
+                          color: "target"
+                        }
+                      ]
+                    }
+                  ],
+                  morph: {
+                    kind: "translate",
+                    durationMs: 1200,
+                    pairs: [ [ 0, 0 ], [ 1, 1 ] ],
+                    readout: {
+                      template: "(x−{a})²+(y−{b})²=r²",
+                      a: {
+                        from: 0,
+                        to: 1
+                      },
+                      b: {
+                        from: 0,
+                        to: 1
+                      },
+                      decimals: 1
+                    }
+                  },
+                  controls: {
+                    play: true,
+                    scrub: true,
+                    step: true,
+                    replay: true
+                  }
+                },
+                engine: {
+                  primitive: "MorphToggle",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "translate"
+                  }
                 }
               },
               auxInteraction: null,
