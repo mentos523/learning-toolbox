@@ -1819,6 +1819,18 @@
       wrap.appendChild(col);
     });
     container.appendChild(wrap);
+    /* 返工 F-06（可选）：bridge/deepLink 曾是死参，现渲染（数据本就携带） */
+    if (params.bridge) {
+      var bg = el("div", "ix-compare-bridge", esc(params.bridge));
+      bg.style.cssText = "font-size:.85rem;color:var(--m-ink-soft);margin-top:8px;line-height:1.7;";
+      container.appendChild(bg);
+    }
+    if (params.deepLink) {
+      var lk = el("a", "ix-compare-deeplink", "→ 跳转");
+      lk.setAttribute("href", String(params.deepLink));
+      lk.style.cssText = "display:inline-block;margin-top:6px;font-size:.85rem;";
+      container.appendChild(lk);
+    }
     regInst(page, "static", { ok: function () { return true; } });
   }
 
