@@ -1403,6 +1403,9 @@
     return cc.x - s * 0.3 + f * s * 0.6;
   }
   function widgetCircuitBuild(p) {
+    /* 波0止血·过渡性：本 widget（旧渲染器）在波 B 建 Eng.Circuit 时整体重建；
+     * 本轮只做 F-05（导线抓取死区）/F-03/F-04（单击托盘隐形元件）最小修复，
+     * 不引入新架构、不改求解器与数据模型。 */
     var box = el("div", "phy-widget");
     if (p.goal) box.appendChild(el("div", "phy-goal", "🎯 " + p.goal));
     var badge = readoutBadge(p);
@@ -1440,7 +1443,11 @@
       })(c, r);
     }
     svg.appendChild(hitLayer);
-    var wireLayer = svgEl("g", {}); svg.appendChild(wireLayer);
+    /* 波0止血 F-05（过渡性，波 B 建 Eng.Circuit 时整体重建）：
+     * 自动连线层不吃 pointer 事件——点按落在连线上时透传到下层的
+     * 格子热区 / 元件符号层委托，cellDown 才能启动拖拽
+     * （此前格子中心被 stroke 1.2 的连线盖住，成为拖拽死区）。 */
+    var wireLayer = svgEl("g", { "pointer-events": "none" }); svg.appendChild(wireLayer);
     var compLayer = svgEl("g", {}); svg.appendChild(compLayer);
     /* P3 审计 P1：元件符号层盖在 cell 热区 rect 上层，点按符号落不到
      * 热区 → 开关点按无反应。符号层点按委托到所在 cell 的同一处理
@@ -2027,9 +2034,10 @@
       if (!existing) return;
       startDrag(existing, e, true);
     }
-    function startDrag(comp, e, fromCell) {
+    function startDrag(comp, e, fromCell, preMoved) {
       if (e.preventDefault) e.preventDefault();
-      var sx = e.clientX, sy = e.clientY, moved = false;
+      var sx = e.clientX, sy = e.clientY, moved = !!preMoved; /* 波0止血 F-03/F-04：
+       * 托盘备战越过阈值后才起拖，此时即视为有效拖拽（过渡性，波 B 重建） */
       ghost = el("div", "phy-ghost", CIRCUIT_KIND_ZH[comp.kind] || comp.kind);
       box.appendChild(ghost);
       function mv(ev) {
@@ -2108,16 +2116,46 @@
       b.type = "button";
       b.setAttribute("aria-label", "添加" + (CIRCUIT_KIND_ZH[kind] || kind));
       b.addEventListener("pointerdown", function (e) {
+        /* 波0止血 F-03/F-04（过渡性，波 B 建 Eng.Circuit 时整体重建）：
+         * pointerdown 只"备战"不创建元件——拖动距离超过阈值（8px）才真正
+         * push 元件并起拖；纯单击（未拖动）直接收尾，不产生占 [0,0] 的隐形
+         * 元件、不吃 8 上限名额。黄队口径：学生误点一下托盘不应有任何残留。 */
         if (comps.length >= 8) {
           notes.innerHTML = "";
           notes.appendChild(noteLine("元件已到 8 个上限（降级约束）。"));
           return;
         }
-        var comp = { id: "c" + Date.now() + Math.floor(Math.random() * 999),
-          kind: kind, cell: [0, 0], on: kind === "switch" ? false : undefined,
-          frac: kind === "rheostat" ? 1 : undefined }; /* 新拖入的滑片默认在阻值最大处 */
-        comps.push(comp);
-        startDrag(comp, e, false);
+        if (e.preventDefault) e.preventDefault();
+        var tx0 = e.clientX, ty0 = e.clientY, armed = false;
+        function disarm() {
+          try {
+            window.removeEventListener("pointermove", pm);
+            window.removeEventListener("pointerup", pu);
+            window.removeEventListener("pointercancel", pu);
+          } catch (err) {}
+        }
+        function pm(ev) {
+          if (armed) return;
+          if (Math.hypot(ev.clientX - tx0, ev.clientY - ty0) <= 8) return; /* 未越阈值：继续备战 */
+          armed = true;
+          disarm();
+          if (comps.length >= 8) { /* 备战期间名额被占满则放弃创建 */
+            notes.innerHTML = "";
+            notes.appendChild(noteLine("元件已到 8 个上限（降级约束）。"));
+            return;
+          }
+          var comp = { id: "c" + Date.now() + Math.floor(Math.random() * 999),
+            kind: kind, cell: [0, 0], on: kind === "switch" ? false : undefined,
+            frac: kind === "rheostat" ? 1 : undefined }; /* 新拖入的滑片默认在阻值最大处 */
+          comps.push(comp);
+          startDrag(comp, e, false, true); /* 已越阈值：本次即有效拖拽 */
+        }
+        function pu() { disarm(); } /* 纯单击：无创建、无残留 */
+        if (typeof window.addEventListener === "function") {
+          window.addEventListener("pointermove", pm);
+          window.addEventListener("pointerup", pu);
+          window.addEventListener("pointercancel", pu);
+        }
       });
       tray.appendChild(b);
     });
@@ -2603,7 +2641,7 @@
       /* 峰/谷标注（圆点 + "峰"/"谷"文字） */
       if (p.showLabels !== false) {
         ctx.fillStyle = cssVar("--phy-wave-a");
-        ctx.font = "11px sans-serif"; ctx.textAlign = "center";
+        ctx.font = Eng.canvasFont(11); ctx.textAlign = "center";
         var prev = fA(0, t), prevD = 0, marked = 0;
         for (var i = 1; i <= N && marked < 4; i++) {
           var v = fA(i / N * 4, t);
@@ -3522,7 +3560,7 @@
         var px = tx0 + (tv - p.temp.min) / (p.temp.max - p.temp.min) * (tx1 - tx0);
         ctx.strokeStyle = cssVar("--phy-highlight"); ctx.lineWidth = 5;
         ctx.beginPath(); ctx.moveTo(px, ty - 6); ctx.lineTo(px, ty + 6); ctx.stroke();
-        ctx.fillStyle = cssVar("--phy-body"); ctx.font = "10px sans-serif"; ctx.textAlign = "center";
+        ctx.fillStyle = cssVar("--phy-body"); ctx.font = Eng.canvasFont(10); ctx.textAlign = "center";
         ctx.fillText(tv + " ℃", px, ty + 18);
       });
       /* F5–F9：慢放标注常驻（动画速度经缩放示意，非真实分子速率） */
@@ -3542,7 +3580,7 @@
         q.px = px; q.py = py; q.tier = tier;
       });
       /* 图例：颜色+形状+文字三编码 */
-      ctx.font = "10px sans-serif"; ctx.textAlign = "left";
+      ctx.font = Eng.canvasFont(10); ctx.textAlign = "left";
       TIER_ZH.forEach(function (z, i) {
         var lx = 10 + i * 52, ly2 = 14;
         ctx.fillStyle = cssVar(TIER_COL[i]);
@@ -3682,7 +3720,7 @@
           ctx.strokeStyle = cssVar("--phy-target"); ctx.lineWidth = 1;
           ctx.beginPath(); ctx.moveTo(cxp, 4); ctx.lineTo(cxp, H - 4); ctx.stroke();
         }
-        ctx.fillStyle = cssVar("--phy-body"); ctx.font = "10px sans-serif";
+        ctx.fillStyle = cssVar("--phy-body"); ctx.font = Eng.canvasFont(10);
         ctx.fillText("x-t 图像", 8, 12);
       }
       var rm = mmlRead(mi("T"), fmtN(T, 2), "s");
