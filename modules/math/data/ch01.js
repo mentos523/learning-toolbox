@@ -140,7 +140,28 @@ window.MATH_CH["ch01"] = {
                   rule: "天平平衡叫等式；含有未知数 x 的等式叫方程"
                 }
               },
-              auxInteraction: null,
+              auxInteraction: {
+                type: "eq-graph",
+                params: {
+                  min: 0,
+                  max: 20,
+                  step: 1,
+                  label: "x",
+                  expr: "x + 5",
+                  target: 12,
+                  targetLabel: "x + 5 = 12 的解",
+                  caption: "天平上 x+5=12 的解 x=7，在数轴上就是这个点"
+                },
+                engine: {
+                  primitive: "EqGraph",
+                  version: "2026.10.16.A",
+                  params: {
+                    kind: "numberline",
+                    expr: "x + 5",
+                    target: 12
+                  }
+                }
+              },
               hints: [
                 "天平平衡：两边一样重，这就是等式。",
                 "左边多了个 x 盒子——含有未知数的等式，叫方程。"
