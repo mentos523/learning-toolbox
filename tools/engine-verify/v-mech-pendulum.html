@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<!-- YP-35/36/37/38/39 -->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>V6 · 单摆：小角度周期和 2π√(L/g) 对得上吗，大摆角有交代吗</title>
+<link rel="stylesheet" href="verify.css">
+</head>
+<body>
+<h1>V6 · 单摆：小角度周期和 2π√(L/g) 对得上吗，大摆角有交代吗</h1>
+<p class="note">覆盖 ENG-28 ~ ENG-29。校准锚点 P1：L=2.0 m、g=9.8、θ₀=0.08 rad、dt=1/240，
+过零点 t₁=0.70793 s、t₂=3.54795 s → T=2.84002 s，理论 2.8383 s，误差 0.055%，门限 &lt;2%。
+容差 = θ₀²/16 + 0.02% + 0.05%（ENG-28）。θ₀&gt;5° 必须显性化（ENG-29）。</p>
+
+<div class="guide-sample"><span class="tag"></span>
+拖：拖动摆球，换一个摆角再松手，看周期变不变。
+记：点"记录数据"，把每次的摆长和周期记下来。
+看：算一算 T = 2π√(L/g)，和测出来的差多少？（提示：这个公式只在"摆角很小"时才准）</div>
+
+<h2>断言结果</h2>
+<div id="verdict" style="display:none"><h2 id="verdict-head"></h2></div>
+<table id="results-table"></table>
+
+<script src="../../assets/vendor/planck.min.js"></script>
+<script src="../../assets/engine/core.js"></script>
+<script src="../../assets/engine/coords.js"></script>
+<script src="../../assets/engine/driver.js"></script>
+<script src="../../assets/engine/mech.js"></script>
+<script src="verify-lib.js"></script>
+<script>
+(function () {
+'use strict';
+VLib.pageTitle = 'V6 · 单摆';
+var Eng = window.Eng;
+function AX() { return { assumptions: ['小角度近似'], approximations: ['半隐式欧拉'], errorEstimate: 'θ0²/16+0.02%+0.05%'};}
+
+var L = 2.0, G = 9.8, TH0 = 0.08, DT = 1 / 240;
+var d = new Eng.Driver(Object.assign({ dt: DT, gravityMps2: G}, AX()));
+var pend = new Eng.Pendulum(d, Object.assign({ lengthM: L, initialAngleRad: TH0}, AX()));
+
+// ENG-28：小角周期对账
+var meas = pend.measurePeriodSec(12);
+var Ttrue = 2 * Math.PI * Math.sqrt(L / G); // 2.8383
+var tol = Math.pow(TH0, 2) / 16 + 0.0002 + 0.0005;
+var errPct = Math.abs(meas.periodSec - Ttrue) / Ttrue * 100;
+VLib.assert('V6-01', '小角周期：误差 ≤ θ₀²/16 + 0.02% + 0.05%', ['ENG-28'],
+meas!== null && (Math.abs(meas.periodSec - Ttrue) / Ttrue) <= tol && errPct < 2,
+'T=' + VLib.fmt(Ttrue, 4) + 's，误差<2%', 'T=' + VLib.fmt(meas.periodSec, 5) + 's，误差 ' + VLib.fmt(errPct, 4) + '%',
+'周期超差：检查铰链约束/过零点检测/步长。注意容差含小角近似自身偏差 θ₀²/16（ENG-28）。下一步查 mech.js。');
+VLib.assert('V6-02', 'P1 锚点复现：T ≈ 2.84002 s', ['ENG-28'],
+Math.abs(meas.periodSec - 2.84002) < 1e-4, '2.84002', VLib.fmt(meas.periodSec, 5),
+'锚点漂移：实现与原型行为不一致。下一步查 mech.js。');
+
+// 摆角读回（rad 与 ° 双读回，ENG 总则 5）
+var d2 = new Eng.Driver(Object.assign({ dt: DT, gravityMps2: G}, AX()));
+var pend2 = new Eng.Pendulum(d2, Object.assign({ lengthM: L, initialAngleRad: TH0}, AX()));
+var st2 = pend2.state();
+VLib.assert('V6-03', '摆角同时读回 rad 与 °（一致）', ['ENG-总则5'],
+Math.abs(st2.angleDeg - st2.angleRad * 180 / Math.PI) < 1e-9 && Math.abs(st2.angleRad - TH0) < 1e-6,
+'θ=0.08rad', 'θ=' + VLib.fmt(st2.angleRad, 6) + 'rad / ' + VLib.fmt(st2.angleDeg, 4) + '°',
+'摆角读回不对：检查 atan2 读回。下一步查 mech.js。');
+
+// ENG-29：大摆角显性化
+var d3 = new Eng.Driver(Object.assign({ dt: DT, gravityMps2: G}, AX()));
+var pendBig = new Eng.Pendulum(d3, Object.assign({ lengthM: 1, initialAngleRad: 0.5}, AX())); // 28.6° > 5°
+VLib.assert('V6-04', 'θ₀>5° 时标记 beyondSmallAngle（供文案显性化）', ['ENG-29'],
+pendBig.beyondSmallAngle === true && pend.beyondSmallAngle === false,
+'大摆角标记 true / 小摆角 false', 'big=' + pendBig.beyondSmallAngle + ', small=' + pend.beyondSmallAngle,
+'边界标记缺失：大摆角下周期公式为近似值，必须让课页文案能拿到这个标记。下一步查 mech.js。');
+var d4 = new Eng.Driver(Object.assign({ dt: DT, gravityMps2: G}, AX()));
+var pendDef = new Eng.Pendulum(d4, Object.assign({ lengthM: 1}, AX()));
+VLib.assert('V6-05', 'θ₀ 默认 ≤ 5°', ['ENG-29'],
+pendDef.initialAngleRad <= 5 * Math.PI / 180 + 1e-12,
+'默认 ≤5°', VLib.fmt(pendDef.initialAngleRad * 180 / Math.PI, 2) + '°',
+'默认摆角超出小角度近似边界。下一步查 mech.js。');
+
+VLib.conclude();
+})();
+</script>
+</body>
+</html>

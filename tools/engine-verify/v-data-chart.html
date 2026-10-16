@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<!-- YP-35/36/37/38/39 -->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>V16 · 数据驱动制图：图随数据变吗，非法输入会静默画错吗</title>
+<link rel="stylesheet" href="verify.css">
+</head>
+<body>
+<h1>V16 · 数据驱动制图：图随数据变吗，非法输入会静默画错吗</h1>
+<p class="note">覆盖 ENG-64 ~ ENG-66。图形 = render(数据集) 纯函数；数据源必须可追溯声明；
+非法输入（NaN/越界）拒绝渲染并给出明确错误态，不许静默画错图。</p>
+
+<div class="guide-sample"><span class="tag"></span>
+记：先用"记录数据"攒几组数据。
+看：点"生成图表"，看你的数据画成了什么样。
+想：图的样子和你预想的一样吗？不一样的话，数据哪里出了问题？</div>
+
+<h2>断言结果</h2>
+<div id="verdict" style="display:none"><h2 id="verdict-head"></h2></div>
+<table id="results-table"></table>
+<div class="stage-box"><div id="stage-chart"></div></div>
+
+<script src="../../assets/vendor/konva.min.js"></script>
+<script src="../../assets/vendor/jsxgraphcore.js"></script>
+<script src="../../assets/engine/core.js"></script>
+<script src="../../assets/engine/coords.js"></script>
+<script src="../../assets/engine/konva-view.js"></script>
+<script src="../../assets/engine/plot.js"></script>
+<script src="verify-lib.js"></script>
+<script>
+(function () {
+'use strict';
+VLib.pageTitle = 'V16 · 数据驱动制图';
+var Eng = window.Eng;
+function AX() { return { assumptions: ['a'], approximations: ['b'], errorEstimate: 'e'};}
+
+var view = new Eng.KonvaView(Object.assign({
+containerId: 'stage-chart', bounds: { xMin: 0, xMax: 10, yMin: 0, yMax: 10},
+viewportWPx: 520, viewportHPx: 360, theme: 'light'
+}, AX()));
+
+// ENG-65：缺 dataSource 构造即抛错
+var noSrc = false;
+try { new Eng.DataChart(view, Object.assign({ valueMax: 10}, AX()));} catch (e) { noSrc = true;}
+VLib.assert('V16-01', '缺 dataSource 声明即抛错（ENG-65）', ['ENG-65'],
+noSrc, '抛错', noSrc? '已拒绝': '未拒绝',
+'数据源未声明：图由数据生成必须可追溯。下一步查 plot.js。');
+
+var chart = new Eng.DataChart(view, Object.assign({
+valueMax: 10, chartKind: 'bar',
+dataSource: { kind: '学生输入', ref: 'v16-test'}
+}, AX()));
+
+// ENG-64：D1 渲染 → 改 D2 → 图形随变且与 render(D2) 一致
+var r1 = chart.setData({ values: [2, 5, 8], labels: ['a', 'b', 'c']});
+var bar0d1 = chart.barValue(0);
+var r2 = chart.setData({ values: [9, 1, 4], labels: ['a', 'b', 'c']});
+var bar0d2 = chart.barValue(0);
+VLib.assert('V16-02', '数据变 → 图形随变（bar 值 = 数据集值）', ['ENG-64'],
+r1.ok && r2.ok && bar0d1 === 2 && bar0d2 === 9,
+'2 → 9', 'D1=' + bar0d1 + ', D2=' + bar0d2,
+'图形写死不随数据变：检查 setData 是否重绘。下一步查 plot.js。');
+
+// ENG-66：非法输入拒绝渲染 + 明确错误态
+var bad1 = chart.setData({ values: [3, NaN, 5]});
+VLib.assert('V16-03', 'NaN 输入：拒绝渲染并给出错误态', ['ENG-66'],
+bad1.ok === false && /非法/.test(bad1.error), '拒绝+错误态', 'ok=' + bad1.ok + ', err=' + bad1.error,
+'非法输入被静默渲染：下一步查 plot.js validate()。');
+var bad2 = chart.setData({ values: [3, 999, 5]});
+VLib.assert('V16-04', '越界输入（999 > valueMax=10）：拒绝渲染', ['ENG-66'],
+bad2.ok === false && /越界/.test(bad2.error), '拒绝+错误态', 'ok=' + bad2.ok + ', err=' + bad2.error,
+'越界输入被静默渲染。下一步查 plot.js validate()。');
+// 错误态之后合法数据仍可渲染（恢复）
+var r3 = chart.setData({ values: [1, 2, 3]});
+VLib.assert('V16-05', '错误态后合法数据可恢复渲染', ['ENG-66'],
+r3.ok && chart.error() === null, '恢复', 'ok=' + r3.ok,
+'错误态不可恢复。下一步查 plot.js。');
+
+// 数据源声明可读回
+var ds = view.dataSource();
+VLib.assert('V16-06', '数据源声明可追溯读回', ['ENG-65'],
+ds && ds.kind === '学生输入' && ds.ref === 'v16-test',
+'学生输入 / v16-test', ds? ds.kind + ' / ' + ds.ref: '无',
+'数据源声明丢失。下一步查 konva-view.js renderDataset。');
+
+VLib.conclude();
+})();
+</script>
+</body>
+</html>

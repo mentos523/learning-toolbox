@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<!-- YP-35/36/37/38/39 -->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>V7 · 滑轮组与杠杆：省力倍数、绳长关系、平衡条件对得上吗</title>
+<link rel="stylesheet" href="verify.css">
+</head>
+<body>
+<h1>V7 · 滑轮组与杠杆：省力倍数、绳长关系、平衡条件对得上吗</h1>
+<p class="note">覆盖 ENG-30 ~ ENG-33。理想条件（轻绳、轻滑轮、无摩擦 / 轻质杠杆）按 ENG-AX01 显性化；
+滑轮组为理想解析模型（几何约束逐位成立），杠杆为理想静态模型。</p>
+
+<div class="guide-sample"><span class="tag"></span>
+滑轮组——拖：拖动自由端的绳子，看重物上升多少。
+记：点"记录数据"，记下拉绳长度和重物上升高度。
+看：拉 2 米绳，重物升几米？拉力是重物的几分之一？
+杠杆——点：换一组力，看杠杆往哪边偏。
+看：什么时候杠杆不动？力×力臂，左右两边有什么关系？</div>
+
+<h2>断言结果</h2>
+<div id="verdict" style="display:none"><h2 id="verdict-head"></h2></div>
+<table id="results-table"></table>
+
+<script src="../../assets/vendor/planck.min.js"></script>
+<script src="../../assets/engine/core.js"></script>
+<script src="../../assets/engine/coords.js"></script>
+<script src="../../assets/engine/driver.js"></script>
+<script src="../../assets/engine/mech.js"></script>
+<script src="verify-lib.js"></script>
+<script>
+(function () {
+'use strict';
+VLib.pageTitle = 'V7 · 滑轮组与杠杆';
+var Eng = window.Eng;
+function AX() { return { assumptions: ['轻绳', '轻滑轮', '无摩擦'], approximations: ['理想静力学模型'], errorEstimate: '解析精确'};}
+
+// ENG-30：F = G/n（n=3, G=30 → 10N，容差 1%）
+var pu = new Eng.Pulley(Object.assign({ ropeSegmentsN: 3, loadWeightN: 30}, AX()));
+var F = pu.tensionN(), Ftrue = 10;
+VLib.assert('V7-01', '理想机械效益：|F读回 − G/n| ≤ 1%', ['ENG-30'],
+Math.abs(F - Ftrue) / Ftrue <= 0.01, 'F=10N', 'F=' + F + 'N',
+'拉力不对：检查 tensionN = G/n。下一步查 mech.js。');
+
+// ENG-31：s绳 = n·s物（≤1e-9，纯几何）
+pu.pullRopeM(2.4);
+var st = pu.state();
+var dev31 = Math.abs(st.ropePulledM - 3 * st.loadRiseM);
+VLib.assert('V7-02', '绳段位移：|s绳 − n·s物| ≤ 1e-9', ['ENG-31'],
+dev31 <= 1e-9, '≤1e-9m', '偏差 ' + dev31.toExponential(2) + 'm（s绳=' + st.ropePulledM + '，s物=' + st.loadRiseM + '）',
+'绳长关系破坏：检查 pullRopeM 的几何约束。下一步查 mech.js。');
+
+// ENG-32：平衡条件 F1·l1 = F2·l2；静置 2s 转角偏离 ≤1°
+var lvAX = { assumptions: ['轻质杠杆（杠杆自重忽略）', '理想支点（无摩擦）'], approximations: ['静态理想模型'], errorEstimate: '解析精确' };
+  var lv = new Eng.Lever(Object.assign({ arm1M: 0.3, arm2M: 0.6, force1N: 20, force2N: 10}, lvAX)); // 6=6 平衡
+lv.step(480); // 2 s（dt=1/240）
+var lst = lv.state();
+VLib.assert('V7-03', '平衡摆位静置 2s：转角偏离 ≤ 1°', ['ENG-32'],
+lst.isBalanced && Math.abs(lst.angleDeg) <= 1, '平衡且偏离≤1°', 'balanced=' + lst.isBalanced + ', angle=' + lst.angleDeg + '°',
+'平衡判定或转角不对：检查 F1·l1=F2·l2 判定。下一步查 mech.js。');
+// 方向断言：左边力矩大 → 逆时针（左侧下沉）
+var lv2 = new Eng.Lever(Object.assign({ arm1M: 0.3, arm2M: 0.6, force1N: 30, force2N: 10}, lvAX)); // 9 > 6
+VLib.assert('V7-04', '失衡时向力矩大的一侧转动（左 9N·m > 右 6N·m → 逆时针）', ['ENG-32'],
+lv2.tipDirection() === 'counterclockwise', 'counterclockwise', lv2.tipDirection(),
+'方向断言失败：检查力矩符号约定（逆时针为正）。下一步查 mech.js。');
+var lv3 = new Eng.Lever(Object.assign({ arm1M: 0.3, arm2M: 0.6, force1N: 10, force2N: 20}, lvAX)); // 3 < 12
+VLib.assert('V7-05', '失衡时向力矩大的一侧转动（右 12N·m > 左 3N·m → 顺时针）', ['ENG-32'],
+lv3.tipDirection() === 'clockwise', 'clockwise', lv3.tipDirection(),
+'方向断言失败。下一步查 mech.js。');
+
+// ENG-33：力矩读回 |τ读回 − rF·sinθ| ≤ 1e-9
+var dev33a = Math.abs(lv.torque1Nm() - 20 * 0.3);
+var dev33b = Math.abs(lv.torque2Nm() - (-10 * 0.6));
+VLib.assert('V7-06', '力矩读回：|τ − rF·sinθ| ≤ 1e-9 N·m', ['ENG-33'],
+dev33a <= 1e-9 && dev33b <= 1e-9, '≤1e-9', '偏差 ' + dev33a.toExponential(1) + ' / ' + dev33b.toExponential(1),
+'力矩读回不对：检查 τ = r×F 符号约定。下一步查 mech.js。');
+
+// 非法绳段数拒绝
+var badN = false;
+try { new Eng.Pulley(Object.assign({ ropeSegmentsN: 0}, AX()));} catch (e) { badN = true;}
+VLib.assert('V7-07', '非法绳段数（n<1）被拒绝', ['ENG-30'],
+badN, '抛错', badN? '已拒绝': '未拒绝',
+'非法参数未被拒绝。下一步查 mech.js。');
+
+// AX01 显性化
+VLib.assert('V7-08', '滑轮/杠杆 assumptions 含轻绳/轻滑轮/无摩擦/轻质杠杆', ['ENG-15'],
+/轻绳/.test(pu.assumptions.join('')) && /轻质杠杆/.test(lv.assumptions.join('')),
+'显性化', '滑轮：' + pu.assumptions.join('；') + '｜杠杆：' + lv.assumptions.join('；'),
+'假设未显性化：教学不诚实。下一步查 mech.js。');
+
+VLib.conclude();
+})();
+</script>
+</body>
+</html>

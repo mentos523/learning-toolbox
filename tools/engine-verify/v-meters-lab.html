@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<!-- YP-35/36/37/38/39 -->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>V12 · 停表/量筒/滴定管：读数跟仿真时间走吗，估读口径守得住吗</title>
+<link rel="stylesheet" href="verify.css">
+</head>
+<body>
+<h1>V12 · 停表 / 量筒 / 滴定管：读数跟仿真时间走吗，估读口径守得住吗</h1>
+<p class="note">覆盖 ENG-43、ENG-44、ENG-45。停表读数由驱动器 simTime 直接驱动（不估读）；
+量筒分度值强制 1mL（0.1mL 构造即抛错，ENG-44 🔴）；滴定管估读到 0.01mL（ENG-45）。</p>
+
+<div class="guide-sample"><span class="tag"></span>
+停表——点：点"开始"计时，点"暂停"定格。读：读到 0.1 秒（不估读）。
+量筒——看：把量筒放平，视线与凹液面最低处齐平。读：估读到 0.1mL。
+滴定管——看：视线与凹液面最低处齐平。读：估读到 0.01mL。</div>
+
+<h2>断言结果</h2>
+<div id="verdict" style="display:none"><h2 id="verdict-head"></h2></div>
+<table id="results-table"></table>
+
+<script src="../../assets/vendor/planck.min.js"></script>
+<script src="../../assets/engine/core.js"></script>
+<script src="../../assets/engine/coords.js"></script>
+<script src="../../assets/engine/driver.js"></script>
+<script src="../../assets/engine/mech.js"></script>
+<script src="../../assets/engine/meters.js"></script>
+<script src="../../assets/engine/guides.js"></script>
+<script src="verify-lib.js"></script>
+<script>
+(function () {
+'use strict';
+VLib.pageTitle = 'V12 · 停表/量筒/滴定管';
+var Eng = window.Eng;
+function AX() { return { assumptions: ['a'], approximations: ['b'], errorEstimate: 'e'};}
+
+// ENG-43：停表由 simTime 驱动；step(n) 后增量 = n·dt（到 0.1s 精度）
+var d = new Eng.Driver(Object.assign({ dt: 1 / 240, gravityMps2: 9.8}, AX()));
+new Eng.RigidBody(d, Object.assign({ shape: 'circle', radiusM: 0.1, positionM: { x: 0, y: 5}}, AX()));
+var sw = new Eng.Stopwatch(Object.assign({ driver: d}, AX()));
+d.reset(); d.step(300); // 1.25 s
+var r1 = sw.readTimeSec();
+VLib.assert('V12-01', '停表读数 = floor(simTime×10)/10（1.25s → 1.2s，不估读）', ['ENG-43'],
+r1.value === 1.2 && r1.text === '1.2 s', '1.2 s', r1.text,
+'停表与 simTime 脱钩：检查 getValue 是否读 driver.simTimeSec。下一步查 meters.js。');
+d.step(240); // 再 +1.0 s → 2.25 s
+var r2 = sw.readTimeSec();
+VLib.assert('V12-02', 'step(n) 后读数增量 = n·dt（到 0.1s 精度）', ['ENG-43'],
+Math.abs((r2.value - r1.value) - 1.0) <= 0.1 + 1e-9, '增量 1.0s', '增量 ' + (r2.value - r1.value) + 's',
+'增量不对：检查 floor 到 0.1s 的逻辑。下一步查 meters.js。');
+
+// ENG-44：量筒分度值强制 1mL；估读到 0.1mL
+var rej44 = false;
+try { new Eng.GraduatedCylinder(Object.assign({ divisionMl: 0.1, getValue: function () { return 10;}}, AX()));}
+catch (e) { rej44 = true;}
+VLib.assert('V12-03', '量筒分度值 0.1mL 构造即抛错（ENG-44 🔴）', ['ENG-44'],
+rej44, '抛错', rej44? '已拒绝': '未拒绝',
+'0.1mL 分度值未被拒绝：会导致"估读到 0.01mL"与中考冲突。下一步查 meters.js。');
+var cy = new Eng.GraduatedCylinder(Object.assign({ getValue: function () { return 25.36;}}, AX()));
+VLib.assert('V12-04', '量筒：25.36mL → 25.4mL（估读到 0.1）', ['ENG-44', 'ENG-38'],
+cy.readText() === '25.4 mL', '25.4 mL', cy.readText(),
+'估读位数不对：1mL 首位为 1 → 估读到下一位（0.1）。下一步查 meters.js。');
+
+// ENG-45：滴定管估读到 0.01mL
+var bu = new Eng.Burette(Object.assign({ getValue: function () { return 12.345;}}, AX()));
+VLib.assert('V12-05', '滴定管：12.345mL → 12.35mL（估读到 0.01）', ['ENG-45', 'ENG-38'],
+bu.readText() === '12.35 mL', '12.35 mL', bu.readText(),
+'估读位数不对：0.1mL 首位为 1 → 估读到下一位（0.01）。下一步查 meters.js。');
+
+// ENG-35：三表读数都随状态变
+var vol = { v: 10};
+var cy2 = new Eng.GraduatedCylinder(Object.assign({ getValue: function () { return vol.v;}}, AX()));
+var t1 = cy2.readText(); vol.v = 20;
+VLib.assert('V12-06', '量筒读数随状态变化', ['ENG-35'],
+t1!== cy2.readText(), '变化', t1 + ' → ' + cy2.readText(),
+'读数写死。下一步查 meters.js。');
+
+VLib.conclude();
+})();
+</script>
+</body>
+</html>

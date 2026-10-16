@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<!-- YP-35/36/37/38/39 -->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>V10 · 刻度尺/量角器：磨损尺两端读数、视线偏差诚实、内外圈不读反吗</title>
+<link rel="stylesheet" href="verify.css">
+</head>
+<body>
+<h1>V10 · 刻度尺 / 量角器：磨损尺两端读数、视线偏差诚实、内外圈不读反吗</h1>
+<p class="note">覆盖 ENG-36、ENG-37。磨损尺执行 PHY-R05 两端读数法；视线按 PHY-R04 标记；
+错误姿势读数必须真实反映偏差（YP-14：俯视偏大示意）；量角器内外圈由 clockwise 声明（读反 = FAIL）。</p>
+
+<div class="guide-sample"><span class="tag"></span>
+刻度尺——看：找到 0 刻度线（磨损的尺从磨损处两端读数）。
+读：视线平视刻度，读到分度值下一位（估读一位）。
+量角器——看：把中心对准角的顶点，0° 线对准一条边。
+读：看另一条边指向多少度（注意内外圈别读反）。</div>
+
+<h2>断言结果</h2>
+<div id="verdict" style="display:none"><h2 id="verdict-head"></h2></div>
+<table id="results-table"></table>
+
+<script src="../../assets/engine/core.js"></script>
+<script src="../../assets/engine/coords.js"></script>
+<script src="../../assets/engine/meters.js"></script>
+<script src="../../assets/engine/guides.js"></script>
+<script src="verify-lib.js"></script>
+<script>
+(function () {
+'use strict';
+VLib.pageTitle = 'V10 · 刻度尺/量角器';
+var Eng = window.Eng;
+function AX() { return { assumptions: ['a'], approximations: ['b'], errorEstimate: 'e'};}
+
+// ENG-36：正常尺 1mm 分度 → 估读到 0.1mm
+var ruler = new Eng.Ruler(Object.assign({ getValue: function () { return 12.34;}, divisionMm: 1}, AX()));
+var rr = ruler.readLengthMm(12.34);
+VLib.assert('V10-01', '刻度尺：12.34mm → 12.3mm（估读到 0.1）', ['ENG-36', 'ENG-38'],
+rr.text === '12.3 mm', '12.3 mm', rr.text,
+'估读位数不对：1mm 首位为 1 → 估读到下一位（0.1）。下一步查 meters.js。');
+
+// ENG-36 / PHY-R05：磨损尺两端读数法（wornZero 仍从 0 起读 = FAIL）
+var worn = new Eng.Ruler(Object.assign({ getValue: function () { return 0;}, divisionMm: 1, wornZero: true}, AX()));
+var wr = worn.readLengthMm(2.0, 15.35); // 左端对 2.0mm，右端对 15.35mm
+VLib.assert('V10-02', '磨损尺两端读数：15.35−2.0=13.35 → 13.4mm', ['ENG-36'],
+wr.value === 13.4, '13.4', wr.value + ' / ' + wr.text,
+'磨损尺仍从 0 起读：检查 wornZero 分支是否执行两端读数法（PHY-R05）。下一步查 meters.js。');
+
+// YP-14 / PHY-R04：视线诚实 —— 俯视偏大示意且读数真变大
+var over = new Eng.Ruler(Object.assign({ getValue: function () { return 10.0;}, divisionMm: 1, sight: 'over'}, AX()));
+var orr = over.readLengthMm(10.0);
+var under = new Eng.Ruler(Object.assign({ getValue: function () { return 10.0;}, divisionMm: 1, sight: 'under'}, AX()));
+var urr = under.readLengthMm(10.0);
+var level = new Eng.Ruler(Object.assign({ getValue: function () { return 10.0;}, divisionMm: 1, sight: 'level'}, AX()));
+var lrr = level.readLengthMm(10.0);
+VLib.assert('V10-03', '俯视读数偏大且标注"偏大示意"（真值不同）', ['YP-14'],
+orr.value > lrr.value && /偏大/.test(orr.text), '偏大+标注', orr.text + ' vs 平视 ' + lrr.text,
+'假诚实：三档显示同一读数（化学深审 Y10 教训）。错误姿势读数必须真实反映偏差。下一步查 meters.js。');
+VLib.assert('V10-04', '仰视读数偏小且标注"偏小示意"', ['YP-14'],
+urr.value < lrr.value && /偏小/.test(urr.text), '偏小+标注', urr.text + ' vs 平视 ' + lrr.text,
+'假诚实：同上。下一步查 meters.js。');
+
+// ENG-37：量角器 1° 分度 → 估读到 0.1°；内外圈声明
+var pro = new Eng.Protractor(Object.assign({ getValue: function () { return 47.26;}, divisionDeg: 1, clockwise: false}, AX()));
+var pr = pro.readAngleDeg();
+VLib.assert('V10-05', '量角器：47.26° → 47.3°（估读到 0.1°）', ['ENG-37', 'ENG-38'],
+pr.value === 47.3, '47.3', pr.value + ' / ' + pr.text,
+'估读位数不对。下一步查 meters.js。');
+VLib.assert('V10-06', '内外圈方向由 clockwise 声明（不读反）', ['ENG-37'],
+/外圈/.test(pro.readText()) && pro.clockwise === false, '外圈声明', pro.readText(),
+'内外圈读反或无声明：检查 clockwise 分支。下一步查 meters.js。');
+var dev47 = pro.pointerConsistencyDev(47.26);
+VLib.assert('V10-07', '量角器指针角度→读数偏差 ≤ 0.5 分度', ['ENG-47'],
+dev47 <= 0.5, '≤0.5分度', dev47 + '分度',
+'指针几何与文本读数矛盾。下一步查 meters.js。');
+// 量角器指针映射方向：读数 0 → 指针指右（0°），读数 90 → 指上（−90°）
+var a0 = pro.pointerAngleDeg(0), a90 = pro.pointerAngleDeg(90);
+VLib.assert('V10-08', '量角器指针方向正确（0°指右，90°指上）', ['ENG-37'],
+Math.abs(a0) < 1e-9 && Math.abs(a90 + 90) < 1e-9, '0°/−90°', a0 + '°/' + a90 + '°',
+'指针方向错误：检查 dialStartDeg/dialSweepDeg。下一步查 meters.js。');
+
+VLib.conclude();
+})();
+</script>
+</body>
+</html>

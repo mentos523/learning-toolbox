@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<!-- YP-35/36/37/38/39 -->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>V14 · 输入统一层：触控鼠标同一语义、44px 命中区、拖拽落点分毫不差吗</title>
+<link rel="stylesheet" href="verify.css">
+</head>
+<body>
+<h1>V14 · 输入统一层：触控鼠标同一语义、44px 命中区、拖拽落点分毫不差吗</h1>
+<p class="note">覆盖 ENG-55 ~ ENG-58。真实指针拖拽与触控 tap 由 run-verify.cjs 发起
+（CDP 真实事件，P2 跑道写法）；本页静态断言在加载时跑，拖拽/tap 断言由
+<code>__INPUT.finishDrag()</code> / <code>__INPUT.finishTap()</code> 完成。</p>
+
+<div class="guide-sample"><span class="tag"></span>
+拖：用手指或鼠标拖动小球，它会跟到你的指尖（落点分毫不差）。
+点：轻点一下小球，它会回应你。
+想：在手机上和电脑上，拖起来的感觉一样吗？（应该一样）</div>
+
+<h2>断言结果</h2>
+<div id="verdict" style="display:none"><h2 id="verdict-head"></h2></div>
+<table id="results-table"></table>
+<div class="stage-box"><div id="stage-main"></div></div>
+
+<script src="../../assets/vendor/konva.min.js"></script>
+<script src="../../assets/engine/core.js"></script>
+<script src="../../assets/engine/coords.js"></script>
+<script src="../../assets/engine/konva-view.js"></script>
+<script src="../../assets/engine/input.js"></script>
+<script src="verify-lib.js"></script>
+<script>
+(function () {
+'use strict';
+VLib.pageTitle = 'V14 · 输入统一层';
+var Eng = window.Eng;
+function AX() { return { assumptions: ['Konva pointer 统一'], approximations: ['无'], errorEstimate: '像素精度'};}
+
+var view = new Eng.KonvaView(Object.assign({
+containerId: 'stage-main', bounds: { xMin: 0, xMax: 10, yMin: 0, yMax: 10},
+viewportWPx: 900, viewportHPx: 620, theme: 'light'
+}, AX()));
+var input = new Eng.Input(view);
+
+// 小手柄（视觉 r=8 <44px）→ 必须配透明命中区 ≥44px（ENG-56）
+var startQ = view.logicalToPixel(2, 8);
+var ball = new Konva.Circle({ x: startQ.x, y: startQ.y, radius: 8, fill: '#0b5cad', name: 'ball'});
+view.layer.add(ball);
+var lastDrop = null;
+input.bindDrag(ball, { onEnd: function (logical, px) { lastDrop = { logical: logical, px: px};}});
+view.draw();
+
+var hitRect = view.stage.findOne('.eng-hitarea');
+var hitOk = false, hitSize = '无命中区';
+if (hitRect) {
+hitSize = hitRect.width() + '×' + hitRect.height();
+hitOk = hitRect.width() >= 44 && hitRect.height() >= 44;
+}
+VLib.assert('V14-01', '小手柄命中区 ≥44px（透明扩展区）', ['ENG-56', 'YP-07'],
+hitOk, '≥44×44px', hitSize,
+'命中区不足 44px：检查 ensureHitArea 扩展逻辑。下一步查 input.js。');
+
+// 大目标（视觉已 ≥44px）→ 不需要扩展区
+var bigQ = view.logicalToPixel(7, 3);
+var big = new Konva.Rect({ x: bigQ.x - 30, y: bigQ.y - 30, width: 60, height: 60, fill: '#2a9d48', name: 'big'});
+view.layer.add(big);
+input.bindDrag(big, {});
+view.draw();
+var bigHits = view.stage.find('.eng-hitarea').length;
+VLib.assert('V14-02', '视觉 ≥44px 的目标不加冗余命中区', ['ENG-56'],
+bigHits === 1, '命中区总数=1', '总数=' + bigHits,
+'冗余命中区：检查 ensureHitArea 的免扩展分支。下一步查 input.js。');
+
+// ENG-58：命中测试与视觉一致
+var hitBall = input.hitTest(startQ.x, startQ.y);
+var hitEmpty = input.hitTest(850, 600);
+VLib.assert('V14-03', '命中测试：点中小球有命中，点空白无命中', ['ENG-58'],
+!!hitBall &&!hitEmpty, '命中/落空', '小球=' +!!hitBall + ', 空白=' +!!hitEmpty,
+'命中测试与视觉不一致。下一步查 input.js。');
+
+var tapSeen = 0;
+input.onTap = function () { tapSeen++;};
+
+var dragStartNodePos = null;
+ball.on('dragstart', function () {
+var p0 = ball.getAbsolutePosition();
+dragStartNodePos = { x: p0.x, y: p0.y };
+});
+
+window.__INPUT = {
+ready: true,
+view: view,
+ballScreenXY: function () { var p = ball.getAbsolutePosition(); var r = view.stage.container().getBoundingClientRect(); return { clientX: r.left + p.x, clientY: r.top + p.y};},
+// ENG-57：真实拖拽 (x1,y1)→(580,380) 后，被拖对象位置读回与落点分毫不差（P2 校准）
+finishDrag: function (dropClient, startClient) {
+// ENG-57 的诚实测法：Konva 原生拖拽带 grab-offset（按下点−节点原点）；
+// 引擎层必须做到"零附加偏移"，即：读回 = 落点舞台坐标 − grabOffset（逐位一致）。
+// （CDP 合成事件对小数坐标有量化，起点取整以保证确定性。）
+var rect = view.stage.container().getBoundingClientRect();
+var dropSX = dropClient.clientX - rect.left, dropSY = dropClient.clientY - rect.top;
+var startSX = startClient.clientX - rect.left, startSY = startClient.clientY - rect.top;
+var expX = dropSX - (startSX - dragStartNodePos.x);
+var expY = dropSY - (startSY - dragStartNodePos.y);
+var okPx = lastDrop && lastDrop.px.x === expX && lastDrop.px.y === expY;
+VLib.assert('V14-04', '拖拽落点 = 读回位置（扣除 Konva 原生 grab-offset 后分毫不差）', ['ENG-57'],
+!!okPx, '(' + expX + ',' + expY + ')', lastDrop ? '(' + lastDrop.px.x + ',' + lastDrop.px.y + ')' : '无拖拽记录',
+'落点偏移：引擎层引入了 Konva 原生语义之外的偏移。下一步查 input.js。');
+if (lastDrop) {
+var lg = view.pixelToLogical(expX, expY);
+var dev = Math.hypot(lastDrop.logical.x - lg.x, lastDrop.logical.y - lg.y);
+VLib.assert('V14-05', '像素→逻辑换算后偏差 ≤ ENG-03 限', ['ENG-57', 'ENG-03'],
+dev <= 1e-9, '≤1e-9', dev.toExponential(2),
+'换算超差。下一步查 coords.js。');
+}
+},
+// ENG-55：触控 tap 与鼠标 click 同一回调
+finishTap: function () {
+VLib.assert('V14-06', '触控 tap 触发同一语义回调', ['ENG-55'],
+tapSeen >= 1, 'tapReceived', 'tapSeen=' + tapSeen,
+'触控与鼠标走了两套路径：检查 pointerup 统一处理。下一步查 input.js。');
+VLib.conclude();
+}
+};
+})();
+</script>
+</body>
+</html>

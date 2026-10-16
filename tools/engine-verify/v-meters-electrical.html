@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<!-- YP-35/36/37/38/39 -->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>V9 · 电流表/电压表：估读口径、量程接线柱、指针读数一致吗</title>
+<link rel="stylesheet" href="verify.css">
+</head>
+<body>
+<h1>V9 · 电流表 / 电压表：估读口径、量程接线柱、指针读数一致吗</h1>
+<p class="note">覆盖 ENG-35、ENG-38（估读总规则）、ENG-39、ENG-40、ENG-46、ENG-47、ENG-48。
+读数必须由被测状态驱动（ENG-35），不许写死。深色主题对比度 ≥4.5（ENG-48）。</p>
+
+<div class="guide-sample"><span class="tag"></span>
+看：先看指针停在几安，再看接线柱上标的是哪个量程（0.6A 还是 3A）。
+点：点"换量程"，看同一电流下指针位置怎么变。
+记：点"记录数据"，按估读规则写下读数（0.6A 档估读到 0.01A）。</div>
+
+<h2>断言结果</h2>
+<div id="verdict" style="display:none"><h2 id="verdict-head"></h2></div>
+<table id="results-table"></table>
+<div class="stage-box"><div id="stage-light"></div></div>
+<div class="stage-box"><div id="stage-dark"></div></div>
+
+<script src="../../assets/vendor/konva.min.js"></script>
+<script src="../../assets/engine/core.js"></script>
+<script src="../../assets/engine/coords.js"></script>
+<script src="../../assets/engine/konva-view.js"></script>
+<script src="../../assets/engine/meters.js"></script>
+<script src="../../assets/engine/guides.js"></script>
+<script src="verify-lib.js"></script>
+<script>
+(function () {
+'use strict';
+VLib.pageTitle = 'V9 · 电流表/电压表';
+var Eng = window.Eng;
+function AX() { return { assumptions: ['理想电表'], approximations: ['线性刻度'], errorEstimate: '估读位±1'};}
+
+// ENG-35：读数由状态驱动 —— 改状态 → 读数随之变
+var cur = { I: 0.356};
+var am = new Eng.Ammeter(Object.assign({ getValue: function () { return cur.I;}, rangeMaxA: 0.6}, AX()));
+var r1 = am.readText();
+cur.I = 0.512;
+var r2 = am.readText();
+VLib.assert('V9-01', '读数随被测状态变化（不写死）', ['ENG-35'],
+r1!== r2, '状态变→读数变', r1 + ' → ' + r2,
+'读数不随状态变（写死）：检查 getValue 是否被调用。下一步查 meters.js。');
+
+// ENG-38：0.6A 档分度 0.02 → 估读到 0.01（2 位）；3A 档分度 0.1 → 0.01（2 位）
+cur.I = 0.356;
+VLib.assert('V9-02', '0.6A 档：0.356A → 0.36A（估读到 0.01）', ['ENG-38', 'ENG-40'],
+am.readText() === '0.36 A', '0.36 A', am.readText(),
+'估读位数不对：0.02 首位为 2 → 估读到本位（0.01）。检查 Eng.estimateReading。下一步查 meters.js。');
+var am3 = new Eng.Ammeter(Object.assign({ getValue: function () { return 1.234;}, rangeMaxA: 3}, AX()));
+VLib.assert('V9-03', '3A 档：1.234A → 1.23A（估读到 0.01）', ['ENG-38', 'ENG-40'],
+am3.readText() === '1.23 A', '1.23 A', am3.readText(),
+'估读位数不对：0.1 首位为 1 → 估读到下一位（0.01）。下一步查 meters.js。');
+
+// ENG-39：电压表 3V 档 0.1→0.01；15V 档 0.5→0.1
+var vt3 = new Eng.Voltmeter(Object.assign({ getValue: function () { return 2.456;}, rangeMaxV: 3}, AX()));
+VLib.assert('V9-04', '3V 档：2.456V → 2.46V（估读到 0.01）', ['ENG-38', 'ENG-39'],
+vt3.readText() === '2.46 V', '2.46 V', vt3.readText(),
+'估读位数不对。下一步查 meters.js。');
+var vt15 = new Eng.Voltmeter(Object.assign({ getValue: function () { return 7.43;}, rangeMaxV: 15}, AX()));
+VLib.assert('V9-05', '15V 档：7.43V → 7.4V（估读到 0.1）', ['ENG-38', 'ENG-39'],
+vt15.readText() === '7.4 V', '7.4 V', vt15.readText(),
+'估读位数不对：0.5 首位为 5 → 估读到本位（0.1）。下一步查 meters.js。');
+
+// ENG-39/40：接线柱标注与量程一致
+VLib.assert('V9-06', '接线柱标注与启用量程一致', ['ENG-39', 'ENG-40'],
+am.terminalLabel === '0.6A' && am3.terminalLabel === '3A' && vt3.terminalLabel === '3V' && vt15.terminalLabel === '15V',
+'0.6A/3A/3V/15V', [am.terminalLabel, am3.terminalLabel, vt3.terminalLabel, vt15.terminalLabel].join('/'),
+'接线柱文字与量程矛盾。下一步查 meters.js。');
+
+// ENG-47：指针角度→读数一致 ≤ 0.5 分度
+var dev47 = am.pointerConsistencyDev(0.356);
+VLib.assert('V9-07', '指针角度→读数偏差 ≤ 0.5 分度', ['ENG-47'],
+dev47 <= 0.5, '≤0.5分度', dev47 + '分度',
+'指针几何与文本读数矛盾：检查 pointerAngleDeg/valueFromPointerDeg 互逆。下一步查 meters.js。');
+
+// ENG-46：刻度均匀性（相邻刻线间距相对偏差 ≤5%）
+var angs = [];
+for (var k = 0; k <= 30; k++) angs.push(am.pointerAngleDeg(k * 0.02)); // 0.6A/0.02=30 格
+var diffs = [];
+for (var j = 1; j < angs.length; j++) diffs.push(angs[j] - angs[j - 1]);
+var mean = diffs.reduce(function (a, b) { return a + b;}, 0) / diffs.length;
+var maxRel = Math.max.apply(null, diffs.map(function (x) { return Math.abs(x - mean) / mean;}));
+VLib.assert('V9-08', '刻度均匀：相邻间距相对偏差 ≤5%', ['ENG-46'],
+maxRel <= 0.05, '≤5%', (maxRel * 100).toFixed(3) + '%',
+'刻度不均匀：检查线性映射。下一步查 meters.js。');
+
+// 渲染 + ENG-48 深色对比度
+var vl = new Eng.KonvaView(Object.assign({ containerId: 'stage-light', bounds: { xMin: 0, xMax: 10, yMin: 0, yMax: 10}, viewportWPx: 390, theme: 'light'}, AX()));
+Eng.renderDialMeter(vl, am, 195, 150, 110);
+vl.draw();
+var vd = new Eng.KonvaView(Object.assign({ containerId: 'stage-dark', bounds: { xMin: 0, xMax: 10, yMin: 0, yMax: 10}, viewportWPx: 390, theme: 'dark'}, AX()));
+Eng.renderDialMeter(vd, am, 195, 150, 110);
+vd.draw();
+var cr = Eng.contrastRatio(Eng.PALETTES.dark.readout, Eng.PALETTES.dark.bg);
+VLib.assert('V9-09', '深色主题读数对比度 ≥4.5（WCAG AA）', ['ENG-48', 'YP-10'],
+cr >= 4.5, '≥4.5', cr.toFixed(2),
+'深色下读数不可读：检查 PALETTES.dark 配色。下一步查 konva-view.js。');
+
+// YP-17：记录数据动作存在
+var n0 = am.dock.entries().length;
+am.recordData('test');
+VLib.assert('V9-10', '仪表配"记录数据"动作（YP-17）', ['YP-17'],
+am.dock.entries().length === n0 + 1, '记录+1', '记录数=' + am.dock.entries().length,
+'记录数据动作缺失。下一步查 meters.js。');
+
+  // YP-12：graduation（分度值）、estimateDigit（估读位）字段
+  VLib.assert('V9-11', '仪表有 graduation / estimateDigit 字段（YP-12）', ['YP-12'],
+    am.graduation === 0.02 && am.estimateDigit === 2 && vt15.graduation === 0.5 && vt15.estimateDigit === 1,
+    '0.02/2, 0.5/1', am.graduation + '/' + am.estimateDigit + ', ' + vt15.graduation + '/' + vt15.estimateDigit,
+    '字段缺失：检查 Meter 原型的 graduation/estimateDigit。下一步查 meters.js。');
+
+VLib.conclude();
+})();
+</script>
+</body>
+</html>

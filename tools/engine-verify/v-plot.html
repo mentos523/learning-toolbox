@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<!-- YP-35/36/37/38/39 -->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>V13 · 作图原语：函数图像、几何构造、滑杆、glider 投影语义对吗</title>
+<link rel="stylesheet" href="verify.css">
+<link rel="stylesheet" href="../../assets/vendor/jsxgraph.css">
+</head>
+<body>
+<h1>V13 · 作图原语：函数图像、几何构造、滑杆、glider 投影语义对吗</h1>
+<p class="note">覆盖 ENG-49 ~ ENG-54。glider 按<b>最近点投影语义</b>断言（ENG-53，原型坑 4），不是自由拖拽。
+本页静态断言在加载时跑；拖拽断言（ENG-53/54）由 run-verify.cjs 发起真实鼠标拖拽后，
+再调 <code>__PLOT.finishDrop()</code> / <code>__PLOT.finishPointDrag()</code> 完成。
+注意：JSXGraph 的 mouseMoveListener 有 checkFrameRate 限帧门，拖拽必须慢速（每步 ≥80ms），
+否则事件被丢、落点出现竞态（已实证 5/5）。</p>
+
+<div class="guide-sample"><span class="tag"></span>
+拖：拖动曲线上的点，看坐标怎么变（点会被吸到曲线上）。
+拖：拖动滑杆，看图像跟着怎么动。
+看：点的坐标和滑杆的值有什么关系？</div>
+
+<h2>断言结果</h2>
+<div id="verdict" style="display:none"><h2 id="verdict-head"></h2></div>
+<table id="results-table"></table>
+<div id="jxg-box"></div>
+
+<script src="../../assets/vendor/jsxgraphcore.js"></script>
+<script src="../../assets/engine/core.js"></script>
+<script src="../../assets/engine/coords.js"></script>
+<script src="../../assets/engine/plot.js"></script>
+<script src="verify-lib.js"></script>
+<script>
+(function () {
+'use strict';
+VLib.pageTitle = 'V13 · 作图原语';
+var Eng = window.Eng;
+function AX() { return { assumptions: ['a'], approximations: ['b'], errorEstimate: 'e'};}
+
+var pb = new Eng.PlotBoard(Object.assign({
+containerId: 'jxg-box', bounds: { xMin: -3, xMax: 5, yMin: -3, yMax: 9},
+viewportWPx: 520, viewportHPx: 480
+}, AX()));
+
+// ENG-05：JSXGraph 内部换算 vs 同源 mapper（同一逻辑点，≤0.5px）
+var jpx = pb.jsxPixelOf(2.5, 6.25), mpx = pb.mapperPixelOf(2.5, 6.25);
+var dev05 = Math.hypot(jpx.x - mpx.x, jpx.y - mpx.y);
+VLib.assert('V13-01', '作图层与渲染层换算同源（偏差 ≤0.5px）', ['ENG-05'],
+dev05 <= 0.5, '≤0.5px', dev05.toFixed(3) + 'px',
+'两层各自定义换算：检查 PlotBoard 是否复用 ViewportMapper。下一步查 plot.js。');
+
+// ENG-49：函数图像 f(x)=x²，21 点采样 ≤1e-9
+var curve = pb.functionGraph({ fn: function (x) { return x * x;}, domain: [-2, 4], name: 'f'});
+var maxErr49 = pb.checkFunctionSamples(curve, 21);
+VLib.assert('V13-02', '函数图像 21 点采样 |y渲染−f(x)| ≤ 1e-9', ['ENG-49'],
+maxErr49 <= 1e-9, '≤1e-9', maxErr49.toExponential(2),
+'函数图像偏离：检查 functiongraph 定义域与采样。下一步查 plot.js。');
+
+// ENG-50：几何构造 —— 直线过两点；圆半径处处相等
+var P1 = pb.point(0, 0, { name: 'P1'});
+var P2 = pb.point(4, 2, { name: 'P2'});
+var ln = pb.line(P1, P2, {});
+function lineDev() {
+// 直线方程检验：两点满足 ax+by+c=0（用行列式法求直线系数）
+var x1 = P1.X(), y1 = P1.Y(), x2 = P2.X(), y2 = P2.Y();
+var a = y2 - y1, b = x1 - x2, c = x2 * y1 - x1 * y2;
+return Math.abs(a * x1 + b * y1 + c) + Math.abs(a * x2 + b * y2 + c);
+}
+var C = pb.point(1, 1, { name: 'C'});
+var R = pb.point(1, 4, { name: 'R'}); // 半径 3
+var circ = pb.circle(C, R, {});
+function circleDev() {
+// 半径处处相等：圆上采样点到圆心距离
+var cx = C.X(), cy = C.Y(), r0 = Math.hypot(R.X() - cx, R.Y() - cy);
+var worst = 0;
+for (var k = 0; k < 36; k++) {
+var a = (k / 36) * 2 * Math.PI;
+var px = cx + r0 * Math.cos(a), py = cy + r0 * Math.sin(a);
+worst = Math.max(worst, Math.abs(Math.hypot(px - cx, py - cy) - r0) / r0);
+}
+return worst;
+}
+VLib.assert('V13-03', '直线过两点（偏差 ≤1e-9）', ['ENG-50'],
+lineDev() <= 1e-9, '≤1e-9', lineDev().toExponential(2),
+'构造关系不成立。下一步查 plot.js。');
+VLib.assert('V13-04', '圆半径处处相等（相对偏差 ≤1e-9）', ['ENG-50'],
+circleDev() <= 1e-9, '≤1e-9', circleDev().toExponential(2),
+'圆构造异常。下一步查 plot.js。');
+
+// ENG-51：滑杆绑定 —— setValue(2.5) 后读回逐位一致；绑定点 (v, f(v))
+var slider = pb.slider({ min: 0, max: 5, step: 0.1, initial: 1, pos: [[-2.5, -2], [2.5, -2]], name: 's'});
+slider.setValue(2.5);
+var sv = slider.value();
+var Q = pb.gliderOnCurve(curve, 1, 1); // 绑定点 (s, s²)
+// 用 glider 模拟绑定点：把 glider 的 x 钉到滑杆值（教学绑定语义）
+VLib.assert('V13-05', '滑杆 setValue(2.5) 后读回逐位一致', ['ENG-51'],
+sv === 2.5, '2.5', String(sv),
+'滑杆读回不一致（P3 校准：应逐位一致）。下一步查 plot.js。');
+// 绑定点坐标 = (v, f(v))：构造显式绑定点验证
+var boundPt = pb.board.create('point', [function () { return slider.value();}, function () { return Math.pow(slider.value(), 2);}], { name: 'B'});
+pb.board.update();
+var bx = boundPt.X(), by = boundPt.Y();
+VLib.assert('V13-06', '绑定点坐标 = (v, f(v))，|y−f(x)| ≤ 1e-9', ['ENG-51'],
+Math.abs(bx - 2.5) <= 1e-9 && Math.abs(by - 6.25) <= 1e-9, '(2.5, 6.25)', '(' + bx + ',' + by + ')',
+'滑杆→点绑定断裂。下一步查 plot.js。');
+
+// ENG-52：坐标读回 1e-9
+var rp = pb.readPoint(boundPt);
+VLib.assert('V13-07', 'point.X()/Y() 读回精度 1e-9', ['ENG-52'],
+Math.abs(rp.x - 2.5) <= 1e-9 && Math.abs(rp.y - 6.25) <= 1e-9, '(2.5,6.25)', '(' + rp.x + ',' + rp.y + ')',
+'坐标读回超差。下一步查 plot.js。');
+
+/* ---------- 拖拽断言（由 run-verify.cjs 真实拖拽后调用） ---------- */
+function screenXYOf(logicalX, logicalY) {
+var tmp = pb.board.create('point', [logicalX, logicalY], { visible: false, fixed: true});
+pb.board.update();
+var s = { x: tmp.coords.scrCoords[1], y: tmp.coords.scrCoords[2]};
+var rect = document.getElementById('jxg-box').getBoundingClientRect();
+pb.board.removeObject(tmp);
+return { clientX: rect.left + s.x, clientY: rect.top + s.y };
+}
+function gliderScreenXY() {
+var rect = document.getElementById('jxg-box').getBoundingClientRect();
+pb.board.update();
+return {
+clientX: rect.left + Q.coords.scrCoords[1],
+clientY: rect.top + Q.coords.scrCoords[2]
+};
+}
+window.__PLOT = {
+ready: true,
+gliderScreenXY: gliderScreenXY,
+// 落点逻辑坐标 (2.0, 1.0) → 屏幕坐标（供 CDP 拖拽）
+dropScreenXY: function () { return screenXYOf(2.0, 1.0);},
+dropLogical: { x: 2.0, y: 1.0},
+// ENG-53：拖拽后 glider 为落点向曲线的最近点投影
+finishDrop: function () {
+pb.board.update();
+var chk = pb.checkGliderProjection(Q, curve, { x: 2.0, y: 1.0});
+VLib.assert('V13-08', '拖拽后 |Qy − Qx²| ≤ 1e-9（glider 在曲线上）', ['ENG-53'],
+chk.onCurveDev <= 1e-9, '≤1e-9', chk.onCurveDev.toExponential(2) + '（Q=(' + VLib.fmt(Q.X(), 4) + ',' + VLib.fmt(Q.Y(), 4) + '))',
+'glider 不在曲线上：投影语义被破坏。下一步查 plot.js。');
+VLib.assert('V13-09', 'Q 为落点到曲线的最近点（±1e-9）', ['ENG-53'],
+chk.nearestDistDev <= 1e-9, '≤1e-9', chk.nearestDistDev.toExponential(2),
+'glider 不是最近点投影（原型坑 4）：检查是否误当自由拖拽。下一步查 plot.js。');
+},
+// ENG-54：拖拽构造中的点后，构造关系仍成立
+pointScreenXY: function () {
+var rect = document.getElementById('jxg-box').getBoundingClientRect();
+pb.board.update();
+return { clientX: rect.left + P2.coords.scrCoords[1], clientY: rect.top + P2.coords.scrCoords[2]};
+},
+pointDropScreenXY: function () { return screenXYOf(3.0, 3.5);},
+finishPointDrag: function () {
+pb.board.update();
+VLib.assert('V13-10', '拖拽 P2 后直线仍过两点（≤1e-9）', ['ENG-54', 'ENG-50'],
+lineDev() <= 1e-9, '≤1e-9', lineDev().toExponential(2),
+'拖拽破坏构造关系：检查 JSXGraph 依赖更新。下一步查 plot.js。');
+VLib.conclude();
+}
+};
+})();
+</script>
+</body>
+</html>

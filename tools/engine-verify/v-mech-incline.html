@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<!-- YP-35/36/37/38/39 -->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>V4 · 无摩擦斜面：下滑距离、边长自配、姿态保持对得上吗</title>
+<link rel="stylesheet" href="verify.css">
+</head>
+<body>
+<h1>V4 · 无摩擦斜面：下滑距离、边长自配、姿态保持对得上吗</h1>
+<p class="note">覆盖 ENG-23 ~ ENG-25。校准锚点 P4：α=30°、t=2.0 s、dt=1/120（N=240），
+解析值 9.8 m，实测 9.84083 m，误差 0.417%，门限 &lt;2%。
+边长按 L = ½·g·sinα·T² + margin（margin≥2m）自动配（ENG-24，原型坑 5）。</p>
+
+<div class="guide-sample"><span class="tag"></span>
+点：点"下一步"，看滑块沿斜面往下滑，数一数走了几米。
+记：点"记录数据"，记下时间和滑块走的距离。
+看：距离和时间的平方成正比吗？算一算 s = ½×9.8×sin30°×t²，和仿真差多少？</div>
+
+<h2>断言结果</h2>
+<div id="verdict" style="display:none"><h2 id="verdict-head"></h2></div>
+<table id="results-table"></table>
+
+<script src="../../assets/vendor/planck.min.js"></script>
+<script src="../../assets/engine/core.js"></script>
+<script src="../../assets/engine/coords.js"></script>
+<script src="../../assets/engine/driver.js"></script>
+<script src="../../assets/engine/mech.js"></script>
+<script src="verify-lib.js"></script>
+<script>
+(function () {
+'use strict';
+VLib.pageTitle = 'V4 · 无摩擦斜面';
+var Eng = window.Eng;
+function AX() { return { assumptions: ['无摩擦', '忽略空气阻力'], approximations: ['半隐式欧拉'], errorEstimate: '1/N'};}
+
+var ALPHA = 30, T = 2.0, DT = 1 / 120, N = 240;
+var d = new Eng.Driver(Object.assign({ dt: DT, gravityMps2: 9.8}, AX()));
+var inc = new Eng.Incline(d, Object.assign({ angleDeg: ALPHA, simTimeSec: T}, AX()));
+
+// ENG-24：边长公式 Lmin = 1/2·g·sinα·T² + margin
+var Lexp = 0.5 * 9.8 * Math.sin(Math.PI / 6) * T * T + 2;
+VLib.assert('V4-01', '斜面边长按模拟时长自动配（公式一致）', ['ENG-24'],
+Math.abs(inc.rampLengthM - Lexp) < 1e-9, 'L=' + VLib.fmt(Lexp, 4) + 'm', 'L=' + VLib.fmt(inc.rampLengthM, 4) + 'm',
+'边长公式不对：应为 ½·g·sinα·T² + margin（margin≥2）。下一步查 mech.js。');
+
+// 逐段推进：ENG-24 接触不断 + ENG-23 位移对账 + ENG-25 姿态
+var contactLostAt = -1, maxAngleDev = 0;
+for (var i = 0; i < N; i++) {
+d.step(1);
+if (!inc.inContactNow() && contactLostAt < 0) contactLostAt = i + 1;
+maxAngleDev = Math.max(maxAngleDev, inc.angleDeviationDeg());
+}
+VLib.assert('V4-02', 'T_sim 内滑块始终保持接触（法向约束不断）', ['ENG-24'],
+contactLostAt < 0, '全程接触', contactLostAt < 0? '240 步全程接触': '第 ' + contactLostAt + ' 步脱离',
+'滑块提前滑出斜面（原型坑 5）：边长不够或初位不对。检查 ENG-24 边长公式与滑块初位。下一步查 mech.js。');
+
+var s = inc.sAbsM();
+var sTrue = 0.5 * 9.8 * Math.sin(Math.PI / 6) * T * T; // 9.8
+var tol = Eng.tolerance3(0, N) * sTrue;
+var errPct = Math.abs(s - sTrue) / sTrue * 100;
+VLib.assert('V4-03', '沿面位移：|读回−9.8| ≤ 容差三项和', ['ENG-23', 'ENG-14'],
+Math.abs(s - sTrue) <= tol && errPct < 2,
+'9.8m，误差<2%', '读回 ' + VLib.fmt(s, 5) + 'm，误差 ' + VLib.fmt(errPct, 4) + '%',
+'位移超差：检查倾角/摩擦系数是否为 0/步数。注意半隐式欧拉自带约 0.42% 系统误差（ENG-13），属预期。下一步查 mech.js。');
+VLib.assert('V4-04', 'P4 锚点复现：读回 ≈ 9.84083 m', ['ENG-23'],
+Math.abs(s - 9.84083) < 1e-4, '9.84083', VLib.fmt(s, 5),
+'锚点漂移：实现与原型行为不一致。下一步查 mech.js。');
+
+VLib.assert('V4-05', '滑块姿态保持：转角偏离 ≤ 1°（P4 校准 0.024°）', ['ENG-25'],
+maxAngleDev <= 1, '≤1°', VLib.fmt(maxAngleDev, 4) + '°',
+'滑块翻转/偏转：接触或摩擦参数异常（无摩擦下滑不应有力矩）。检查 fixture friction=0。下一步查 mech.js。');
+
+// ENG-29 类比：大倾角构造仍可配边长（边界由课页文案处理）
+var d2 = new Eng.Driver(Object.assign({ dt: 1 / 120, gravityMps2: 9.8}, AX()));
+var inc2 = new Eng.Incline(d2, Object.assign({ angleDeg: 60, simTimeSec: 1.0}, AX()));
+var Lexp2 = 0.5 * 9.8 * Math.sin(Math.PI / 3) * 1 + 2;
+VLib.assert('V4-06', '大倾角同样按公式配边长', ['ENG-24'],
+Math.abs(inc2.rampLengthM - Lexp2) < 1e-9, 'L=' + VLib.fmt(Lexp2, 4), 'L=' + VLib.fmt(inc2.rampLengthM, 4),
+'边长公式未通用化。下一步查 mech.js。');
+
+VLib.conclude();
+})();
+</script>
+</body>
+</html>

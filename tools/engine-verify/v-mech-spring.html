@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<!-- YP-35/36/37/38/39 -->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>V5 · 弹簧振子：胡克定律读回准吗，周期和 2π√(m/k) 对得上吗</title>
+<link rel="stylesheet" href="verify.css">
+</head>
+<body>
+<h1>V5 · 弹簧振子：胡克定律读回准吗，周期和 2π√(m/k) 对得上吗</h1>
+<p class="note">覆盖 ENG-26 ~ ENG-27。k=10 N/m、m=1 kg、dt=1/240；
+周期容差 = 0 + (ω·dt)²/24 + 0.05%（ω=√(k/m)，预算 ≈7.3e-6）。
+假设"无阻尼、轻弹簧"按 ENG-AX01 显性化。</p>
+
+<div class="guide-sample"><span class="tag"></span>
+拖：把小球拉到不同位置松手，看它来回振动。
+记：点"记录数据"，记下每次的振幅和周期。
+看：振幅变了，周期变不变？算一算 T = 2π√(m/k)，和测出来的一样吗？</div>
+
+<h2>断言结果</h2>
+<div id="verdict" style="display:none"><h2 id="verdict-head"></h2></div>
+<table id="results-table"></table>
+
+<script src="../../assets/vendor/planck.min.js"></script>
+<script src="../../assets/engine/core.js"></script>
+<script src="../../assets/engine/coords.js"></script>
+<script src="../../assets/engine/driver.js"></script>
+<script src="../../assets/engine/mech.js"></script>
+<script src="verify-lib.js"></script>
+<script>
+(function () {
+'use strict';
+VLib.pageTitle = 'V5 · 弹簧振子';
+var Eng = window.Eng;
+function AX() { return { assumptions: ['无阻尼', '轻弹簧'], approximations: ['半隐式欧拉'], errorEstimate: '(ωdt)²/24'};}
+
+var K = 10, M = 1, X0 = 0, A = 0.5, DT = 1 / 240;
+var d = new Eng.Driver(Object.assign({ dt: DT, gravityMps2: 0}, AX())); // 水平弹簧：g=0
+var sp = new Eng.SpringMass(d, Object.assign({
+springConstantNpm: K, massKg: M, equilibriumXM: X0, amplitudeM: A
+}, AX()));
+
+// ENG-26：|F + k(x−x0)| ≤ 1e-9（多步抽查）
+var ok26 = true, maxDev = 0;
+for (var i = 0; i < 120; i++) {
+d.step(1);
+var st = sp.state();
+var dev = Math.abs(st.springForceN + K * st.displacementM);
+maxDev = Math.max(maxDev, dev);
+if (dev > 1e-9) ok26 = false;
+}
+VLib.assert('V5-01', '胡克定律读回：|F + k(x−x0)| ≤ 1e-9（120 步）', ['ENG-26'],
+ok26, '≤1e-9 N', '最大偏差 ' + maxDev.toExponential(2) + ' N',
+'弹力与位移对不上：检查读回的 F 是否定义为"读回位置的瞬时胡克力"。下一步查 mech.js。');
+
+// 质量读回（动力学正确性前提）
+var massOk = Math.abs(sp.state().massKg - M) / M < 1e-9;
+VLib.assert('V5-02', '振子质量读回 = 构造值（ω=√(k/m) 的前提）', ['ENG-27'],
+massOk, M + ' kg', sp.state().massKg + ' kg',
+'质量不对：检查 density = mass/area 换算。下一步查 mech.js。');
+
+// ENG-27：周期对账（过零点法）
+var d2 = new Eng.Driver(Object.assign({ dt: DT, gravityMps2: 0}, AX()));
+var sp2 = new Eng.SpringMass(d2, Object.assign({
+springConstantNpm: K, massKg: M, equilibriumXM: X0, amplitudeM: A
+}, AX()));
+var meas = sp2.measurePeriodSec(10);
+var omega = Math.sqrt(K / M);
+var Ttrue = 2 * Math.PI * Math.sqrt(M / K);
+var budget = Math.pow(omega * DT, 2) / 24 + 0.0005; // (ωdt)²/24 + 0.05%
+var errPct = Math.abs(meas.periodSec - Ttrue) / Ttrue;
+VLib.assert('V5-03', '周期：|T实−T真|/T真 ≤ (ωdt)²/24 + 0.05%', ['ENG-27'],
+meas!== null && errPct <= budget,
+'T=' + VLib.fmt(Ttrue, 5) + 's，容差 ' + (budget * 100).toFixed(4) + '%',
+meas? 'T=' + VLib.fmt(meas.periodSec, 5) + 's，误差 ' + (errPct * 100).toFixed(5) + '%': '未测到两个过零点',
+'周期超差：检查施力时机（步首位置显式力）或过零点检测。下一步查 mech.js。');
+
+// AX01 显性化字段存在
+VLib.assert('V5-04', 'assumptions 含"无阻尼、轻弹簧"（ENG-AX01）', ['ENG-15'],
+/无阻尼/.test(sp.assumptions.join('')) && /轻弹簧/.test(sp.assumptions.join('')),
+'含无阻尼/轻弹簧', sp.assumptions.join('；'),
+'假设未显性化：教学不诚实。检查 SpringMass 默认 AX01。下一步查 mech.js。');
+
+VLib.conclude();
+})();
+</script>
+</body>
+</html>

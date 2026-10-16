@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<!-- YP-35/36/37/38/39 -->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>V3 · 刚体与自由落体：盒子尺寸、摆位精度、下落高度和理论对得上吗</title>
+<link rel="stylesheet" href="verify.css">
+</head>
+<body>
+<h1>V3 · 刚体与自由落体：盒子尺寸、摆位精度、下落高度和理论公式对得上吗</h1>
+<p class="note">覆盖 ENG-17 ~ ENG-22。校准锚点 P1：y₀=10 m、t=1.0 s、dt=1/240（N=240），解析值 5.1 m，
+实测 5.07958 m，误差 0.400%，门限 &lt;1%。容差 = 0 + 1/N + 0.05%（ENG-14）。</p>
+
+<div class="guide-sample"><span class="tag"></span>
+点：点"开始"，看小球从 10 米高处落下。
+记：点"记录数据"，记下 1 秒后小球的高度。
+看：算一算 h = 10 − ½×9.8×1² 应该是多少？仿真值和你算的一样吗？差的那一点点从哪来？（提示：看"近似条件"里的积分误差）</div>
+
+<h2>断言结果</h2>
+<div id="verdict" style="display:none"><h2 id="verdict-head"></h2></div>
+<table id="results-table"></table>
+
+<script src="../../assets/vendor/planck.min.js"></script>
+<script src="../../assets/engine/core.js"></script>
+<script src="../../assets/engine/coords.js"></script>
+<script src="../../assets/engine/driver.js"></script>
+<script src="../../assets/engine/mech.js"></script>
+<script src="verify-lib.js"></script>
+<script>
+(function () {
+'use strict';
+VLib.pageTitle = 'V3 · 刚体与自由落体';
+var Eng = window.Eng;
+function AX() { return { assumptions: ['刚体', '忽略空气阻力'], approximations: ['半隐式欧拉'], errorEstimate: '1/N'};}
+
+// ENG-20：构造用全宽全高，内部按半宽半高换算（原型坑 2）
+var d = new Eng.Driver(Object.assign({ dt: 1 / 240, gravityMps2: 9.8}, AX()));
+var box = new Eng.RigidBody(d, Object.assign({ shape: 'box', sizeWM: 1, sizeHM: 1, positionM: { x: 0, y: 5}}, AX()));
+var span = box.vertexSpanM();
+VLib.assert('V3-01', '1×1 盒体顶点跨度 = 1 m ±1e-9（半宽半高换算）', ['ENG-20'],
+Math.abs(span.spanXM - 1) <= 1e-9 && Math.abs(span.spanYM - 1) <= 1e-9,
+'跨度 1m', 'x跨度=' + span.spanXM + ', y跨度=' + span.spanYM,
+'盒子尺寸翻倍：把全宽直接传给了 planck.Box（原型坑 2）。检查 Box(w/2,h/2) 换算。下一步查 mech.js。');
+// ENG-21：圆体半径读回逐位一致
+var cir = new Eng.RigidBody(d, Object.assign({ shape: 'circle', radiusM: 0.35, positionM: { x: 3, y: 5}}, AX()));
+VLib.assert('V3-02', '圆体半径读回与构造值逐位一致', ['ENG-21'],
+cir.radiusM === 0.35, '0.35', String(cir.radiusM),
+'半径读回不一致：检查构造参数是否被改写。下一步查 mech.js。');
+
+// ENG-18：初始摆位精确设定
+var st = box.setTransform({ xM: 2.5, yM: 6.25, angleRad: 0.7});
+var ok18 = Math.abs(st.positionM.x - 2.5) <= 1e-9 && Math.abs(st.positionM.y - 6.25) <= 1e-9 &&
+Math.abs(st.angleRad - 0.7) <= 1e-9;
+VLib.assert('V3-03', 'setTransform 摆位精度 ≤1e-9 m / 1e-9 rad', ['ENG-18'],
+ok18, '≤1e-9', 'pos=(' + st.positionM.x + ',' + st.positionM.y + '), angle=' + st.angleRad,
+'摆位不精确：检查 setTransform 是否立即读回。下一步查 mech.js。');
+var stv = box.setVelocity({ vxMps: 1.5, vyMps: -2.5, omegaRadps: 0.9});
+var ok18v = Math.abs(stv.velocityMps.x - 1.5) <= 1e-9 && Math.abs(stv.velocityMps.y + 2.5) <= 1e-9 &&
+Math.abs(stv.angularVelocityRadps - 0.9) <= 1e-9;
+VLib.assert('V3-04', 'setVelocity 精度 ≤1e-9 m/s', ['ENG-18'],
+ok18v, '≤1e-9', 'v=(' + stv.velocityMps.x + ',' + stv.velocityMps.y + ')',
+'速度设定不精确。下一步查 mech.js。');
+
+// ENG-19：每步状态可读回（字段齐全 + 深拷贝）
+var d19 = new Eng.Driver(Object.assign({ dt: 1 / 240, gravityMps2: 9.8}, AX()));
+var rb19 = new Eng.RigidBody(d19, Object.assign({ shape: 'circle', radiusM: 0.1, positionM: { x: 0, y: 10}}, AX()));
+var s19 = rb19.state();
+var fieldsOk = s19.positionM && typeof s19.angleRad === 'number' && s19.velocityMps &&
+typeof s19.angularVelocityRadps === 'number' && typeof s19.simTimeSec === 'number';
+s19.positionM.x = 99999; // 篡改读回
+var s19b = rb19.state();
+VLib.assert('V3-05', 'state() 字段齐全且为深拷贝（篡改读回不影响内部）', ['ENG-19', 'ENG-10'],
+fieldsOk && s19b.positionM.x!== 99999, '字段全+防篡改', '字段全=' + fieldsOk + ', 防篡改=' + (s19b.positionM.x!== 99999),
+'读回返回了活引用或字段缺失（原型坑 1）。检查 state() 是否逐字段拷贝。下一步查 mech.js。');
+
+// ENG-22：自由落体对账（P1 锚点）
+var d22 = new Eng.Driver(Object.assign({ dt: 1 / 240, gravityMps2: 9.8}, AX()));
+var drop = new Eng.RigidBody(d22, Object.assign({ shape: 'circle', radiusM: 0.1, positionM: { x: 0, y: 10}}, AX()));
+d22.step(240); // t = 1.0 s, N = 240
+var y = drop.state().positionM.y;
+var yTrue = 10 - 0.5 * 9.8 * 1; // 5.1
+var tol = Eng.tolerance3(0, 240) * yTrue; // 容差三项和（ENG-14）
+var errPct = Math.abs(y - yTrue) / yTrue * 100;
+VLib.assert('V3-06', '自由落体 1s 高度：|读回−5.1| ≤ 容差三项和', ['ENG-22', 'ENG-14'],
+Math.abs(y - yTrue) <= tol && errPct < 1,
+'5.1m，误差<1%', '读回 ' + VLib.fmt(y, 5) + 'm，误差 ' + VLib.fmt(errPct, 4) + '%',
+'自由落体超差：检查重力方向/步长/步数（240 步×1/240=1s）。注意半隐式欧拉自带约 0.42% 系统误差（ENG-13），属预期。下一步查 mech.js / driver.js。');
+// 锚点复现：实测应 ≈5.07958
+VLib.assert('V3-07', 'P1 锚点复现：读回 ≈ 5.07958 m', ['ENG-22'],
+Math.abs(y - 5.07958) < 1e-4, '5.07958', VLib.fmt(y, 5),
+'锚点漂移：实现与原型行为不一致。检查 Planck 版本与步进逻辑。下一步查 mech.js。');
+
+// ENG-17：真值参数与渲染参数分离（构造参数可 introspect）
+VLib.assert('V3-08', '真值参数（radiusM/sizeWM）与渲染分离存储', ['ENG-17'],
+box.sizeWM === 1 && cir.radiusM === 0.35, '真值参数独立可读', 'sizeWM=' + box.sizeWM + ', radiusM=' + cir.radiusM,
+'真值参数与渲染混杂：检查构造参数是否分离存储。下一步查 mech.js。');
+
+VLib.conclude();
+})();
+</script>
+</body>
+</html>

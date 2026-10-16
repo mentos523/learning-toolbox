@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<!-- YP-35/36/37/38/39 -->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>V11 · 温度计/天平：零下带负号、游码左侧为准、不估读守得住吗</title>
+<link rel="stylesheet" href="verify.css">
+</head>
+<body>
+<h1>V11 · 温度计 / 天平：零下带负号、游码左侧为准、不估读守得住吗</h1>
+<p class="note">覆盖 ENG-41、ENG-42。温度计零下读数带负号（PHY-R06）；
+天平游码以左侧刻线为准（PHY-R07），读到 0.1g <b>不估读</b>（化学深审终裁，ENG-38 特例；
+出现"估读到 0.01g"为 🔴 级 FAIL）。</p>
+
+<div class="guide-sample"><span class="tag"></span>
+温度计——看：先看液柱顶端在 0° 上面还是下面（下面读数带负号）。
+读：视线平视液柱顶端，估读到 0.1℃。
+天平——看：先看游码在不在 0 处，再加砝码。
+读：砝码质量 + 游码左侧刻线，读到 0.1g（不估读）。</div>
+
+<h2>断言结果</h2>
+<div id="verdict" style="display:none"><h2 id="verdict-head"></h2></div>
+<table id="results-table"></table>
+
+<script src="../../assets/engine/core.js"></script>
+<script src="../../assets/engine/coords.js"></script>
+<script src="../../assets/engine/meters.js"></script>
+<script src="../../assets/engine/guides.js"></script>
+<script src="verify-lib.js"></script>
+<script>
+(function () {
+'use strict';
+VLib.pageTitle = 'V11 · 温度计/天平';
+var Eng = window.Eng;
+function AX() { return { assumptions: ['a'], approximations: ['b'], errorEstimate: 'e'};}
+
+// ENG-41：零下读数带负号
+var thNeg = new Eng.Thermometer(Object.assign({ getValue: function () { return -3.25;}, divisionC: 1, rangeMinC: -20}, AX()));
+var tn = thNeg.readTempC();
+VLib.assert('V11-01', '零下温度读数带负号（−3.25℃ → −3.2℃）', ['ENG-41'],
+tn.value === -3.2 && tn.text.charAt(0) === '-' && tn.belowZero === true,
+'-3.2 ℃', tn.text,
+'零下缺负号（PHY-R06）：检查 readTempC 负号分支。下一步查 meters.js。');
+var thPos = new Eng.Thermometer(Object.assign({ getValue: function () { return 36.55;}, divisionC: 1}, AX()));
+VLib.assert('V11-02', '零上正常估读（36.55℃ → 36.6℃）', ['ENG-41', 'ENG-38'],
+thPos.readText() === '36.6 ℃', '36.6 ℃', thPos.readText(),
+'估读位数不对：1℃ 首位为 1 → 估读到下一位（0.1）。下一步查 meters.js。');
+// 液柱位置一致性（ENG-47 类比）
+var devL = thPos.pointerConsistencyDev(36.55);
+VLib.assert('V11-03', '液柱位置→读数偏差 ≤ 0.5 分度', ['ENG-47'],
+devL <= 0.5, '≤0.5分度', devL + '分度',
+'液柱几何与文本读数矛盾。下一步查 meters.js。');
+
+// ENG-42：天平 = 砝码 + 游码左侧刻线，读到 0.1g 不估读
+var ba = new Eng.Balance(Object.assign({ weightsG: [20, 10, 5], riderG: 2.3}, AX()));
+var br = ba.readMassG();
+VLib.assert('V11-04', '天平读数 = 20+10+5+2.3 = 37.3g（不估读）', ['ENG-42'],
+br.value === 37.3 && br.text === '37.3 g', '37.3 g', br.text,
+'读数不对：检查砝码求和与游码左侧刻线。下一步查 meters.js。');
+// 🔴 级：不许出现估读到 0.01g
+var ba2 = new Eng.Balance(Object.assign({ weightsG: [10], riderG: 2.34}, AX()));
+var br2 = ba2.readMassG();
+VLib.assert('V11-05', '天平不估读（2.34 → 读到 0.1g，不出 0.01 位）', ['ENG-42', 'ENG-38'],
+br2.text === '12.3 g', '12.3 g', br2.text,
+'出现"估读到 0.01g"：与中考冲突的 🔴 级错误（化学深审终裁）。检查 noEstimate。下一步查 meters.js。');
+// 游码变化 → 读数随之变（ENG-35）
+ba.setWeights([20, 10, 5], 4.1);
+VLib.assert('V11-06', '游码移动 → 读数随之变（状态驱动）', ['ENG-35'],
+ba.readMassG().value === 39.1, '39.1 g', ba.readMassG().text,
+'读数不随状态变。下一步查 meters.js。');
+
+VLib.conclude();
+})();
+</script>
+</body>
+</html>

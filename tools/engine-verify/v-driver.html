@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<!-- YP-35/36/37/38/39 见 verify-lib.js 与下方注释 -->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>V2 · 确定性驱动器：固定步进、暂停单步重置、快照防篡改都可靠吗</title>
+<link rel="stylesheet" href="verify.css">
+</head>
+<body>
+<h1>V2 · 确定性驱动器：固定步进、暂停单步重置、快照防篡改都可靠吗</h1>
+<p class="note">覆盖 ENG-06 ~ ENG-12。默认 dt=1/240 s；simTime = N·dt 精确读回；snapshot() 防御性深拷贝（原型坑 1）；
+同一场景两次运行逐位一致（file:// 与 http 双环境对账由 run-verify.cjs 做，ENG-11）。</p>
+
+<div class="guide-sample"><span class="tag"></span>
+点：点"开始"，小球按固定节拍往前走；点"暂停"，时间冻住。
+点：点"单步"，一次只走一小步，看清每一步的变化。
+点：点"重置"，一切回到最初的样子，可以再玩一次。</div>
+
+<h2>断言结果</h2>
+<div id="verdict" style="display:none"><h2 id="verdict-head"></h2></div>
+<table id="results-table"></table>
+
+<script src="../../assets/vendor/planck.min.js"></script>
+<script src="../../assets/engine/core.js"></script>
+<script src="../../assets/engine/coords.js"></script>
+<script src="../../assets/engine/driver.js"></script>
+<script src="../../assets/engine/mech.js"></script>
+<script src="verify-lib.js"></script>
+<script>
+(function () {
+'use strict';
+VLib.pageTitle = 'V2 · 确定性驱动器';
+var Eng = window.Eng;
+function AX() { return { assumptions: ['刚体', '均匀重力场'], approximations: ['半隐式欧拉'], errorEstimate: '1/N'};}
+
+// ENG-06：默认 dt=1/240；变 dt 禁止（只能构造时指定固定值）
+var d = new Eng.Driver(Object.assign({ gravityMps2: 9.8}, AX()));
+VLib.assert('V2-01', '默认 dt = 1/240 s', ['ENG-06'],
+d.dt === 1 / 240, 'dt=1/240', 'dt=' + d.dt,
+'默认步长不对：检查 Driver 构造默认值。下一步查 driver.js。');
+var badDt = false;
+try { new Eng.Driver(Object.assign({ dt: 0}, AX()));} catch (e) { badDt = true;}
+VLib.assert('V2-02', '非法 dt 被拒绝（固定步进铁律）', ['ENG-06'],
+badDt, 'dt≤0 抛错', badDt? '已拒绝': '未拒绝',
+'非法 dt 未被拒绝：检查 Driver 构造校验。下一步查 driver.js。');
+
+var rb = new Eng.RigidBody(d, Object.assign({ shape: 'circle', radiusM: 0.1, positionM: { x: 0, y: 10}}, AX()));
+
+// ENG-07：step(n) 恰好推进 n 步；pause 后 simTime 冻结
+d.reset();
+d.step(7);
+VLib.assert('V2-03', 'step(7) 恰好推进 7 步', ['ENG-07'],
+d.stepCountN() === 7, 'stepCount=7', 'stepCount=' + d.stepCountN(),
+'步数不对：检查 step 循环。下一步查 driver.js。');
+d.pause();
+var tBefore = d.simTimeSec();
+VLib.assert('V2-04', 'pause() 后 simTime 冻结', ['ENG-07'],
+d.simTimeSec() === tBefore && d.isPlaying() === false, '冻结', 'simTime=' + tBefore,
+'暂停后时间仍在走：检查 pause 是否清掉了 timer。下一步查 driver.js。');
+
+// ENG-08：simTime = N·dt 精确（P4 校准：reset→step(60)→0.5s，dt=1/120）
+var d2 = new Eng.Driver(Object.assign({ dt: 1 / 120, gravityMps2: 9.8}, AX()));
+new Eng.RigidBody(d2, Object.assign({ shape: 'circle', radiusM: 0.1, positionM: { x: 0, y: 5}}, AX()));
+d2.reset(); d2.step(60);
+var dev8 = Math.abs(d2.simTimeSec() - 60 * (1 / 120));
+VLib.assert('V2-05', 'simTime = N·dt 精确（允许 1 ulp）', ['ENG-08'],
+dev8 <= 1e-15, '0.5s', d2.simTimeSec() + 's（偏差 ' + dev8 + '）',
+'simTime ≠ N·dt：检查是否按步数计算而非 wall-time 累加。下一步查 driver.js。');
+
+// ENG-09：同一场景两次运行，快照逐位一致（N=0,1,60,240,1200）
+function runSeq() {
+var dd = new Eng.Driver(Object.assign({ dt: 1 / 240, gravityMps2: 9.8}, AX()));
+new Eng.RigidBody(dd, Object.assign({ shape: 'box', sizeWM: 1, sizeHM: 1, positionM: { x: 1, y: 8}, angleRad: 0.3}, AX()));
+var snaps = [Eng.deepCopy(dd.snapshot())];
+var marks = [1, 60, 240, 1200], mi = 0;
+for (var i = 1; i <= 1200; i++) {
+dd.step(1);
+if (i === marks[mi]) { snaps.push(Eng.deepCopy(dd.snapshot())); mi++;}
+}
+return snaps;
+}
+var A = runSeq(), B = runSeq(), bitOk = true, bitDetail = '';
+for (var i = 0; i < A.length; i++) {
+if (!Eng.bitwiseEqual(A[i], B[i])) { bitOk = false; bitDetail = '采样点 ' + i + ' 不一致'; break;}
+}
+VLib.assert('V2-06', '两次运行快照逐位一致（N=0,1,60,240,1200）', ['ENG-09'],
+bitOk, '逐位一致', bitOk? '5 个采样点全一致': bitDetail,
+'确定性破坏：物理路径混入了随机源（Date.now/Math.random）或 Planck 世界未隔离。下一步查 driver.js。');
+
+// ENG-10：防御性拷贝（原型坑 1）—— snapshot 后再 step，历史快照不变
+var d3 = new Eng.Driver(Object.assign({ dt: 1 / 240, gravityMps2: 9.8}, AX()));
+new Eng.RigidBody(d3, Object.assign({ shape: 'circle', radiusM: 0.1, positionM: { x: 0, y: 10}}, AX()));
+d3.reset(); d3.step(30);
+var sHist = d3.snapshot();
+var yHist = sHist.bodies[0].positionM.y;
+d3.step(50);
+VLib.assert('V2-07', 'step 后历史快照不被改写（防御性拷贝）', ['ENG-10'],
+sHist.bodies[0].positionM.y === yHist, '历史 y 不变', '历史 y=' + sHist.bodies[0].positionM.y,
+'历史快照被改写：某处返回了活引用（原型坑 1：Planck getPosition 返回内部 Vec2）。检查 snapshot/state 是否逐字段拷贝。下一步查 driver.js / mech.js。');
+
+// ENG-12：reset 语义
+var d4 = new Eng.Driver(Object.assign({ dt: 1 / 240, gravityMps2: 9.8}, AX()));
+var rb4 = new Eng.RigidBody(d4, Object.assign({
+shape: 'box', sizeWM: 1, sizeHM: 1, positionM: { x: 2, y: 7}, angleRad: 0.5,
+velocityMps: { vxMps: 1, vyMps: -2, omegaRadps: 0.7}
+}, AX()));
+d4.reset(); d4.step(100);
+d4.reset();
+var st4 = rb4.state();
+var okReset = d4.simTimeSec() === 0 && d4.stepCountN() === 0 &&
+Math.abs(st4.positionM.x - 2) <= 1e-9 && Math.abs(st4.positionM.y - 7) <= 1e-9 &&
+Math.abs(st4.angleRad - 0.5) <= 1e-9 &&
+Math.abs(st4.velocityMps.x - 1) <= 1e-9 && Math.abs(st4.velocityMps.y + 2) <= 1e-9 &&
+Math.abs(st4.angularVelocityRadps - 0.7) <= 1e-9;
+VLib.assert('V2-08', 'reset() 后时间/步数清零、刚体回初始摆位', ['ENG-12'],
+okReset, '全归零且摆位还原', 'simTime=' + d4.simTimeSec() + ', pos=(' + VLib.fmt(st4.positionM.x) + ',' + VLib.fmt(st4.positionM.y) + ')',
+'reset 残留旧状态：检查 registerBody 是否记录了初始摆位、reset 是否恢复了位置/角度/速度。下一步查 driver.js。');
+
+// YP-25：AX01 三字段缺一不可
+var axOk = false;
+try { new Eng.Driver({ dt: 1 / 240});} catch (e) { axOk = /assumptions|approximations|errorEstimate/.test(e.message);}
+VLib.assert('V2-09', '缺 AX01 字段时构造抛错（YP-25）', ['YP-25'],
+axOk, '抛错', axOk? '已拒绝': '未拒绝',
+'AX01 校验缺失：近似/假设被静默。检查 Eng.checkAx01 调用。下一步查 core.js / driver.js。');
+
+VLib.conclude();
+})();
+</script>
+</body>
+</html>

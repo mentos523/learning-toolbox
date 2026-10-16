@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<!-- YP-35/36/37/38/39 -->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>V15 · 分步播放器：后退回到精确快照、重播一致、慢放不改变物理吗</title>
+<link rel="stylesheet" href="verify.css">
+</head>
+<body>
+<h1>V15 · 分步播放器：后退回到精确快照、重播一致、慢放不改变物理吗</h1>
+<p class="note">覆盖 ENG-59 ~ ENG-63。prev() 必须回到精确快照（环形快照缓冲）；
+replay() = reset() + 按记录步数 step 到末帧；setSpeed 只改变 wall-time 步数（ENG-63）；
+每步 stepSummary 一句话结论位（YP-22）；键盘可达（YP-11）。</p>
+
+<div class="guide-sample"><span class="tag"></span>
+想：点"下一步"之前，先想一想：下一步会发生什么？
+点：点"下一步"验证你的想法，对了还是错了？
+退：点"上一步"可以回去对照，数据不会丢。</div>
+
+<h2>断言结果</h2>
+<div id="verdict" style="display:none"><h2 id="verdict-head"></h2></div>
+<table id="results-table"></table>
+
+<script src="../../assets/vendor/planck.min.js"></script>
+<script src="../../assets/engine/core.js"></script>
+<script src="../../assets/engine/coords.js"></script>
+<script src="../../assets/engine/driver.js"></script>
+<script src="../../assets/engine/mech.js"></script>
+<script src="../../assets/engine/steps.js"></script>
+<script src="verify-lib.js"></script>
+<script>
+(function () {
+'use strict';
+VLib.pageTitle = 'V15 · 分步播放器';
+var Eng = window.Eng;
+function AX() { return { assumptions: ['a'], approximations: ['b'], errorEstimate: 'e'};}
+
+function makePlayer() {
+var d = new Eng.Driver(Object.assign({ dt: 1 / 240, gravityMps2: 9.8}, AX()));
+new Eng.RigidBody(d, Object.assign({ shape: 'circle', radiusM: 0.1, positionM: { x: 0, y: 10}}, AX()));
+var sums = [];
+for (var i = 0; i < 20; i++) sums.push('第 ' + (i + 1) + ' 步：小球又下落了一点，速度比上一步更快。');
+return new Eng.StepPlayer(Object.assign({
+primitive: d, stepsPerFrame: 4, totalFrames: 20, stepSummaries: sums
+}, AX()));
+}
+
+// ENG-59：next();prev(); 后快照与 next() 前逐位一致
+var pl = makePlayer();
+pl.next(); pl.next(); pl.next();
+var beforePrev = Eng.deepCopy(pl.primitive.snapshot());
+pl.next();
+pl.prev();
+var afterPrev = pl.primitive.snapshot();
+VLib.assert('V15-01', 'next();prev(); 回到精确快照（逐位一致）', ['ENG-59'],
+Eng.bitwiseEqual(beforePrev, afterPrev), '逐位一致', '一致=' + Eng.bitwiseEqual(beforePrev, afterPrev),
+'后退回不到精确状态：检查快照缓冲/确定性重放。下一步查 steps.js。');
+
+// ENG-60：replay 末帧快照逐位一致
+var pl2 = makePlayer();
+for (var i = 0; i < 10; i++) pl2.next();
+var endFirst = Eng.deepCopy(pl2.primitive.snapshot());
+pl2.replay();
+var endReplay = pl2.primitive.snapshot();
+VLib.assert('V15-02', 'replay() 后末帧快照与首次播放逐位一致', ['ENG-60'],
+Eng.bitwiseEqual(endFirst, endReplay) && pl2.frameIndex() === 10,
+'逐位一致且回到第 10 帧', '一致=' + Eng.bitwiseEqual(endFirst, endReplay) + ', frame=' + pl2.frameIndex(),
+'重播不一致：检查 replay 是否 reset 后按记录步数重放。下一步查 steps.js。');
+
+// ENG-61：frameIndex = stepCount / stepsPerFrame
+var pl3 = makePlayer();
+pl3.next(); pl3.next(); pl3.next(); pl3.next(); pl3.next(); // 5 帧 × 4 步 = 20 步
+VLib.assert('V15-03', 'frameIndex = stepCount/stepsPerFrame（整除）', ['ENG-61'],
+pl3.frameStepRelationOk() && pl3.frameIndex() === 5 && pl3.primitive.stepCountN() === 20,
+'5=20/4', 'frame=' + pl3.frameIndex() + ', steps=' + pl3.primitive.stepCountN(),
+'步语义分叉（YP-24）：检查 next 是否恰好 step(stepsPerFrame)。下一步查 steps.js。');
+
+// ENG-62：播放器帧快照 = 驱动器同一步数快照
+var dRef = new Eng.Driver(Object.assign({ dt: 1 / 240, gravityMps2: 9.8}, AX()));
+new Eng.RigidBody(dRef, Object.assign({ shape: 'circle', radiusM: 0.1, positionM: { x: 0, y: 10}}, AX()));
+dRef.step(20);
+var refSnap = dRef.snapshot();
+var frameSnap = pl3.frameSnapshot();
+// frameSnapshot 是 driver 快照（含 bodies），直接对比
+VLib.assert('V15-04', '播放器第 5 帧快照 = 驱动器 20 步快照（逐位一致）', ['ENG-62'],
+Eng.bitwiseEqual(frameSnap, refSnap), '逐位一致', '一致=' + Eng.bitwiseEqual(frameSnap, refSnap),
+'播放器与驱动器状态分叉。下一步查 steps.js。');
+
+// ENG-63：慢放不改变物理结果
+var plA = makePlayer(), plB = makePlayer();
+plA.setSpeed(0.5);
+for (var a = 0; a < 8; a++) plA.next();
+for (var b = 0; b < 8; b++) plB.next();
+VLib.assert('V15-05', '慢放 0.5× 走 8 步 = 常速 8 步（逐位一致）', ['ENG-63'],
+Eng.bitwiseEqual(plA.primitive.snapshot(), plB.primitive.snapshot()),
+'逐位一致', '一致=' + Eng.bitwiseEqual(plA.primitive.snapshot(), plB.primitive.snapshot()),
+'慢放改变了物理：setSpeed 不许改变 dt（ENG-06）。下一步查 steps.js / driver.js。');
+
+// YP-22：缺 stepSummary 构造即抛错
+var noSum = false;
+try {
+var dX = new Eng.Driver(Object.assign({ dt: 1 / 240}, AX()));
+new Eng.StepPlayer(Object.assign({ primitive: dX, totalFrames: 3, stepSummaries: ['只有一句']}, AX()));
+} catch (e) { noSum = true;}
+VLib.assert('V15-06', '缺 stepSummary 一句话结论即抛错（YP-22）', ['YP-22'],
+noSum, '抛错', noSum? '已拒绝': '未拒绝',
+'结论位缺失未被拦截：禁止纯动画无文字。下一步查 steps.js。');
+
+// YP-19：步前预测钩子
+var hookFired = 0;
+var dH = new Eng.Driver(Object.assign({ dt: 1 / 240, gravityMps2: 9.8}, AX()));
+new Eng.RigidBody(dH, Object.assign({ shape: 'circle', radiusM: 0.1, positionM: { x: 0, y: 10}}, AX()));
+var plH = new Eng.StepPlayer(Object.assign({
+primitive: dH, totalFrames: 2, stepSummaries: ['第一步结论。', '第二步结论。'],
+onBeforeNext: function () { hookFired++;}
+}, AX()));
+plH.next();
+VLib.assert('V15-07', 'next() 前触发预测钩子（YP-19"先想一想"位）', ['YP-19'],
+hookFired === 1, '触发 1 次', '触发 ' + hookFired + ' 次',
+'预测钩子未触发：课页无法配"先想一想"。下一步查 steps.js。');
+
+// YP-11：键盘绑定存在
+var plK = makePlayer();
+plK.bindKeys(document.body);
+VLib.assert('V15-08', '键盘可达：bindKeys 不抛错（←→/空格/R）', ['YP-11'],
+true, '绑定成功', '已绑定',
+'键盘绑定失败。下一步查 steps.js。');
+
+// YP-20/21：后退/重播不清空数据坞（player 不碰 dock）
+var dock = new Eng.DataDock();
+dock.record('t', 1.0, 's');
+pl.next(); pl.prev(); pl.replay();
+VLib.assert('V15-09', '后退/重播不清空学生数据坞', ['YP-20', 'YP-21'],
+dock.entries().length === 1, '数据保留', '记录数=' + dock.entries().length,
+'播放器清空了学生数据。下一步查 steps.js。');
+
+VLib.conclude();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<!-- YP-35/36/37/38/39 -->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>V8 · 一维完全弹性碰撞：动量守恒、末速度公式对得上吗</title>
+<link rel="stylesheet" href="verify.css">
+</head>
+<body>
+<h1>V8 · 一维完全弹性碰撞：动量守恒、末速度公式对得上吗</h1>
+<p class="note">覆盖 ENG-34（可选原语，已实现为解析模型）。
+动量守恒 |Σp后−Σp前| ≤ 1e-6 kg·m/s；末速度相对误差 ≤ 2%。
+超出"一维、完全弹性"范围的碰撞演示按 ENG-NC01 标不可对账。</p>
+
+<div class="guide-sample"><span class="tag"></span>
+点：点"开始碰撞"，看两球碰后各自往哪走、多快。
+记：点"记录数据"，记下碰前碰后两球的速度。
+看：碰前两球的总动量和碰后比，变了没？（提示：这就是"动量守恒"）</div>
+
+<h2>断言结果</h2>
+<div id="verdict" style="display:none"><h2 id="verdict-head"></h2></div>
+<table id="results-table"></table>
+
+<script src="../../assets/vendor/planck.min.js"></script>
+<script src="../../assets/engine/core.js"></script>
+<script src="../../assets/engine/coords.js"></script>
+<script src="../../assets/engine/driver.js"></script>
+<script src="../../assets/engine/mech.js"></script>
+<script src="verify-lib.js"></script>
+<script>
+(function () {
+'use strict';
+VLib.pageTitle = 'V8 · 一维完全弹性碰撞';
+var Eng = window.Eng;
+function AX() { return { assumptions: ['一维对心', '完全弹性'], approximations: ['解析模型'], errorEstimate: '解析精确'};}
+
+// m1=1, m2=3, v1=4, v2=0：解析 v1'=(1-3)*4/4=-2, v2'=(2*1*4)/4=2
+var co = new Eng.Collision1D(Object.assign({
+mass1Kg: 1, mass2Kg: 3, velocity1Mps: 4, velocity2Mps: 0, initialGapM: 2.0, radiusM: 0.1
+}, AX()));
+co.step(3000); // 12.5 s，足够发生碰撞
+var st = co.state();
+var pDev = Math.abs(st.momentumAfterKgmps - st.momentumBeforeKgmps);
+VLib.assert('V8-01', '碰撞已发生', ['ENG-34'],
+st.hasCollided, 'true', String(st.hasCollided),
+'碰撞未发生：步数不够或碰撞时刻计算错误。下一步查 mech.js。');
+VLib.assert('V8-02', '动量守恒：|Σp后−Σp前| ≤ 1e-6', ['ENG-34'],
+pDev <= 1e-6, '≤1e-6 kg·m/s', '偏差 ' + pDev.toExponential(2),
+'动量不守恒：检查碰撞前后速度赋值。下一步查 mech.js。');
+var e1 = Math.abs(st.velocity1Mps - st.analyticV1pMps) / Math.abs(st.analyticV1pMps);
+var e2 = Math.abs(st.velocity2Mps - st.analyticV2pMps) / Math.abs(st.analyticV2pMps);
+VLib.assert('V8-03', '末速度相对误差 ≤ 2%（v1′=−2, v2′=2）', ['ENG-34'],
+e1 <= 0.02 && e2 <= 0.02, '≤2%', 'v1′=' + VLib.fmt(st.velocity1Mps, 6) + '（' + (e1 * 100).toFixed(4) + '%），v2′=' + VLib.fmt(st.velocity2Mps, 6),
+'末速度不对：检查解析公式 v1′=((m1−m2)v1+2m2v2)/(m1+m2)。下一步查 mech.js。');
+
+// 确定性：两次运行逐位一致
+var co2 = new Eng.Collision1D(Object.assign({
+mass1Kg: 1, mass2Kg: 3, velocity1Mps: 4, velocity2Mps: 0, initialGapM: 2.0, radiusM: 0.1
+}, AX()));
+co2.step(3000);
+VLib.assert('V8-04', '两次运行快照逐位一致', ['ENG-09'],
+Eng.bitwiseEqual(co.snapshot(), co2.snapshot()), '逐位一致', '一致=' + Eng.bitwiseEqual(co.snapshot(), co2.snapshot()),
+'确定性破坏。下一步查 mech.js。');
+
+// reset 语义
+co.reset();
+var rst = co.state();
+VLib.assert('V8-05', 'reset() 后回到初态（未碰撞、速度还原）', ['ENG-12'],
+rst.hasCollided === false && rst.velocity1Mps === 4 && rst.simTimeSec === 0,
+'初态', 'collided=' + rst.hasCollided + ', v1=' + rst.velocity1Mps,
+'reset 未还原。下一步查 mech.js。');
+
+// 非法初速拒绝（1 不追 2 则永不碰撞）
+var badV = false;
+try {
+new Eng.Collision1D(Object.assign({ mass1Kg: 1, mass2Kg: 1, velocity1Mps: 1, velocity2Mps: 2}, AX()));
+} catch (e) { badV = true;}
+VLib.assert('V8-06', '非法初速（v1≤v2）被拒绝', ['ENG-34'],
+badV, '抛错', badV? '已拒绝': '未拒绝',
+'非法参数未被拒绝。下一步查 mech.js。');
+
+VLib.conclude();
+})();
+</script>
+</body>
+</html>

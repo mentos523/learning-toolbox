@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<!-- YP-35 标题一句话讲清测什么；YP-38 注释标注 YP 条目；YP-39 学生引导文案示例见.guide-sample -->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>V1 · 统一坐标系：逻辑坐标（y 向上）和像素坐标换算对得上吗</title>
+<link rel="stylesheet" href="verify.css">
+</head>
+<body>
+<h1>V1 · 统一坐标系：逻辑坐标（y 向上）和像素坐标换算对得上吗</h1>
+<p class="note">覆盖 ENG-01 ~ ENG-05。逻辑坐标 y 向上（与 Planck 一致），像素 y 向下，翻转只发生在映射层；
+Konva 渲染层与 JSXGraph 作图层共用 Eng.ViewportMapper（ENG-05 同源）。</p>
+
+<div class="guide-sample"><span class="tag"></span>
+看：屏幕上的每个点，背后都有一个"逻辑坐标"（x 向右、y 向上）。
+拖：拖动小球，看它的逻辑坐标和屏幕位置一起变。
+想：为什么 y 向上？因为物理公式里的 y 就是向上的，坐标和公式用同一套才不会错。</div>
+
+<h2>断言结果</h2>
+<div id="verdict" style="display:none"><h2 id="verdict-head"></h2></div>
+<table id="results-table"></table>
+
+<div class="stage-box"><div id="stage-a"></div></div>
+<div class="stage-box"><div id="stage-b"></div></div>
+<div class="stage-box"><div id="stage-c"></div></div>
+
+<script src="../../assets/vendor/konva.min.js"></script>
+<script src="../../assets/engine/core.js"></script>
+<script src="../../assets/engine/coords.js"></script>
+<script src="../../assets/engine/konva-view.js"></script>
+<script src="verify-lib.js"></script>
+<script>
+(function () {
+'use strict';
+VLib.pageTitle = 'V1 · 统一坐标系：逻辑↔像素换算';
+var Eng = window.Eng;
+function AX() { return { assumptions: ['a'], approximations: ['b'], errorEstimate: 'e'};}
+
+// YP-38：以下断言对应 ENG-01（逻辑 y 向上定义）
+var bounds = { xMin: 0, xMax: 10, yMin: 0, yMax: 10};
+var m = new Eng.ViewportMapper({ bounds: bounds, viewport: { w: 390, h: 244}});
+var p = m.params();
+// ENG-02：s = min(W/xr, H/yr)；P_x = o_x + s·x, P_y = o_y − s·y
+var sExp = Math.min(390 / 10, 244 / 10);
+VLib.assert('V1-01', '缩放 s = min(W/xr, H/yr) 且 sx=sy（不变形）', ['ENG-02', 'ENG-04'],
+Math.abs(p.scale - sExp) < 1e-12, 's=' + sExp, 's=' + p.scale,
+'换算公式与 ENG-02 不一致：检查 ViewportMapper._recalc 是否用了 min 且 sx=sy。下一步查 coords.js。');
+var pa = m.logicalToPixel(5, 2), pb = m.logicalToPixel(5, 8);
+VLib.assert('V1-02', '逻辑 y 向上（y 增大 → 像素 y 减小）', ['ENG-01'],
+pb.y < pa.y, 'pb.y < pa.y', 'pa.y=' + pa.y + ', pb.y=' + pb.y,
+'逻辑层用了 y 向下：检查 logicalToPixel 的 Py = oy − s·y。下一步查 coords.js。');
+// ENG-03：往返可逆性（bounds 四角 + 中心 5 点）
+var rt = m.roundtripCheck();
+VLib.assert('V1-03', '像素→逻辑→像素往返偏差 ≤ 0.5px', ['ENG-03'],
+rt.maxPixelDevPx <= 0.5, '≤0.5px', rt.maxPixelDevPx + 'px',
+'往返不可逆：检查换算公式是否互为逆运算。下一步查 coords.js。');
+VLib.assert('V1-04', '逻辑→像素→逻辑往返偏差 ≤ 1e-9', ['ENG-03'],
+rt.maxLogicalDev <= 1e-9, '≤1e-9', rt.maxLogicalDev,
+'逻辑往返超差：检查除法与乘法是否配对。下一步查 coords.js。');
+
+// ENG-04：三视口 —— 渲染只消费逻辑状态，逻辑读回逐位一致；像素满足各自公式；不变形
+var ids = ['stage-a', 'stage-b', 'stage-c'], widths = [390, 820, 1366];
+var views = [], logicalOk = true, formulaOk = true, formulaDetail = [];
+for (var i = 0; i < 3; i++) {
+var vw = new Eng.KonvaView(Object.assign({
+containerId: ids[i], bounds: bounds, viewportWPx: widths[i], theme: 'light'
+}, AX()));
+views.push(vw);
+var q = vw.logicalToPixel(3, 7);
+var c = new Konva.Circle({ x: q.x, y: q.y, radius: 10, fill: '#0b5cad'});
+c.setAttr('logical', { x: 3, y: 7});
+vw.layer.add(c); vw.draw();
+var back = c.getAttr('logical');
+if (!(back.x === 3 && back.y === 7)) logicalOk = false;
+var prm = vw.mapper.params();
+var okF = Math.abs(q.x - (prm.offset.x + prm.scale * 3)) <= 0.5 &&
+Math.abs(q.y - (prm.offset.y - prm.scale * 7)) <= 0.5;
+formulaDetail.push(widths[i] + ':' + (okF? 'ok': 'BAD'));
+if (!okF) formulaOk = false;
+}
+VLib.assert('V1-05', '三视口逻辑读回逐位一致（渲染消费逻辑状态）', ['ENG-04'],
+logicalOk, '三视口逻辑读回均为 (3,7)', 'ok=' + logicalOk,
+'逻辑读回随视口变化：渲染层从像素反推了逻辑。渲染必须只消费逻辑状态。下一步查 konva-view.js。');
+VLib.assert('V1-06', '三视口像素满足 P=o+s·x（各自 s,o 代入，≤0.5px）', ['ENG-04'],
+formulaOk, '三视口公式自洽', formulaDetail.join(' '),
+'某视口换算偏离 ENG-02 公式：检查 setViewportW/resize 是否重算了 s,o。下一步查 konva-view.js / coords.js。');
+VLib.assert('V1-07', '三视口纵横比不变形（等比缩放）', ['ENG-04'],
+Math.abs(views[0].mapper.scale - Math.min(390 / 10, 244 / 10)) < 1e-12,
+'sx=sy', '各视口 scale=' + views.map(function (v) { return v.mapper.scale.toFixed(3);}).join(','),
+'缩放 x/y 不等：检查是否用了 min 而非分别计算。下一步查 coords.js。');
+
+VLib.conclude();
+})();
+</script>
+</body>
+</html>

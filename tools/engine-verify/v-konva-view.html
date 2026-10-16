@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<!-- YP-35/36/37/38/39 -->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>V17 · Konva 渲染基座：三视口、深色模式、引导层、空态都对吗</title>
+<link rel="stylesheet" href="verify.css">
+</head>
+<body>
+<h1>V17 · Konva 渲染基座：三视口、深色模式、引导层、空态都对吗</h1>
+<p class="note">覆盖 ENG-04（渲染基座视角）、深色模式（ENG-48/YP-10）、
+引导层（YP-01/02/06）、空态占位（YP-03）。</p>
+
+<div class="guide-sample"><span class="tag"></span>
+看：先读这段引导，它会告诉你第一步做什么。
+点：跟着引导动手试，试错了也没关系。
+记：随时点"记录数据"，你的每一步都算数。</div>
+
+<h2>断言结果</h2>
+<div id="verdict" style="display:none"><h2 id="verdict-head"></h2></div>
+<table id="results-table"></table>
+<div class="stage-box"><div id="stage-v"></div></div>
+
+<script src="../../assets/vendor/konva.min.js"></script>
+<script src="../../assets/engine/core.js"></script>
+<script src="../../assets/engine/coords.js"></script>
+<script src="../../assets/engine/konva-view.js"></script>
+<script src="verify-lib.js"></script>
+<script>
+(function () {
+'use strict';
+VLib.pageTitle = 'V17 · Konva 渲染基座';
+var Eng = window.Eng;
+function AX() { return { assumptions: ['a'], approximations: ['b'], errorEstimate: 'e'};}
+
+var view = new Eng.KonvaView(Object.assign({
+containerId: 'stage-v', bounds: { xMin: 0, xMax: 10, yMin: 0, yMax: 10},
+viewportWPx: 390, theme: 'light'
+}, AX()));
+
+// ENG-04：setViewportW 切换三视口，mapper 参数按公式重算
+var sizesOk = true, detail = [];
+[390, 820, 1366].forEach(function (w) {
+view.setViewportW(w);
+var h = Math.round(w * 10 / 16);
+var prm = view.mapper.params();
+var sExp = Math.min(w / 10, h / 10);
+var ok = view.stage.width() === w && view.stage.height() === h && Math.abs(prm.scale - sExp) < 1e-12;
+detail.push(w + ':' + (ok? 'ok': 'BAD'));
+if (!ok) sizesOk = false;
+});
+VLib.assert('V17-01', '三视口切换：尺寸=H按16:10取整，scale 重算', ['ENG-04'],
+sizesOk, '390/820/1366 自洽', detail.join(' '),
+'视口切换后换算未重算。下一步查 konva-view.js setViewportW。');
+
+// YP-01/02/06：引导层默认呈现；空字符串不许清空为静默
+var g1 = view.showGuide('拖：拖动小球，看它动起来。');
+var g2 = view.showGuide(' '); // 空白 → 回退默认
+VLib.assert('V17-02', '引导可覆盖；空白引导回退默认（不许静默）', ['YP-01', 'YP-06'],
+g1.indexOf('拖：') === 0 && g2.length > 0 && g2!== ' ',
+'覆盖+回退', 'g1=' + g1.slice(0, 6) + '…, g2=' + g2.slice(0, 8) + '…',
+'引导可被清空为静默（YP-06 FAIL）。下一步查 konva-view.js showGuide。');
+view.hideGuide();
+
+// YP-03：空态占位引导（不许空白画布）
+view.showEmpty('这里还没有数据：先拖一下小球。');
+var hasEmpty =!!view._emptyNode;
+view.hideEmpty();
+VLib.assert('V17-03', '空态显示占位引导（不许空白画布）', ['YP-03'],
+hasEmpty, '有占位', 'hasEmpty=' + hasEmpty,
+'空态无引导。下一步查 konva-view.js showEmpty。');
+
+// 深色模式切换 + 对比度（ENG-48/YP-10）
+view.setTheme('dark');
+var cr = Eng.contrastRatio(Eng.PALETTES.dark.text, Eng.PALETTES.dark.bg);
+var crSub = Eng.contrastRatio(Eng.PALETTES.dark.subtext, Eng.PALETTES.dark.bg);
+VLib.assert('V17-04', '深色主题文字对比度 ≥4.5', ['ENG-48', 'YP-10'],
+cr >= 4.5 && crSub >= 4.5, '≥4.5', 'text=' + cr.toFixed(2) + ', subtext=' + crSub.toFixed(2),
+'深色下不可读。下一步查 konva-view.js PALETTES。');
+view.setTheme('light');
+
+// DPR：stage pixelRatio 已设置（headless 下为 1，API 存在即可）
+var dpr = view.stage.getAttr('pixelRatio');
+VLib.assert('V17-05', 'DPR 已设置（高分屏清晰度，默认=设备 DPR）', ['ENG-基座'],
+typeof dpr === 'number' && dpr >= 1, '≥1', String(dpr),
+'DPR 未设置。下一步查 konva-view.js。');
+
+VLib.conclude();
+})();
+</script>
+</body>
+</html>
