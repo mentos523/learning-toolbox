@@ -288,7 +288,9 @@ var scene = Eng.OpticsScene({
 
 > 实现：`Eng.Circuit`（求解器）+ `Eng.CircuitUI`（Konva 交互层，解耦：UI 只消费
 > `ckt.snapshot()`）。真值口径：`~/workspace/circuit-build/design/circuit-truth-criteria.md`
->（CIR-01~48，独立复验 56/56 PASS）。physics.js 课页迁移接线待后续版本。
+>（CIR-01~48，独立复验 56/56 PASS）。physics.js 课页迁移（p08/p09 共 8 页
+> circuit-build 切到 `Eng.CircuitUI`）已于 2026.10.16.8 落地，旧实现退役为
+> `?dbgCircuitLegacy=1` 兼容层。
 
 ```js
 var ckt = Eng.Circuit({
