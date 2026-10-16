@@ -105,10 +105,24 @@
   // V-02（白队 2026-10-16）：Konva 文字统一走设计字体栈。
   // 调用方一律用 Eng.konvaText(cfg) 代替 new Konva.Text(cfg)；
   // cfg.fontFamily 显式传入时以传入值为准（允许特例覆盖）。
+  // P-02（2026-10-16）：cfg.halo === true 时加小底衬——以当前主题画布底色
+  // 做描边（stroke 在字形下，fillAfterStrokeEnabled），防标签压线/压图时
+  // 难读；底色取自 Eng.PALETTES[当前主题].bg（与课页层 cssVar 同路）。
   Eng.konvaText = function (cfg) {
     cfg = cfg || {};
     if (cfg.fontFamily == null) cfg.fontFamily = Eng.FONT_STACK;
-    return new Konva.Text(cfg);
+    var t = new Konva.Text(cfg);
+    if (cfg.halo === true) {
+      var theme = 'light';
+      try {
+        theme = document.body && document.body.getAttribute('data-theme') === 'dark'
+          ? 'dark' : 'light';
+      } catch (e) {}
+      t.stroke(Eng.PALETTES[theme].bg);
+      t.strokeWidth(4);
+      t.fillAfterStrokeEnabled(true);
+    }
+    return t;
   };
 
   Eng.KonvaView = function (opt) {
@@ -153,8 +167,7 @@
   };
 
   // ENG-04：切换三视口之一（390/820/1366），逻辑读回必须逐位一致
-  Eng.KonvaView.prototype.setViewportW = function (w) {
-    var h = Math.round((w * 10) / 16);
+  Eng.KonvaView.prototype.setViewportW = function (w) {    var h = Math.round((w * 10) / 16);
     this.mapper.resize(w, h);
     this.stage.width(w);
     this.stage.height(h);
@@ -163,6 +176,16 @@
     var c = document.getElementById(this.containerId);
     c.style.width = w + 'px';
     c.style.height = h + 'px';
+  };
+
+  // P-01（2026-10-16）：按内容自适应 bounds。调用方先实测内容包围盒
+  // （逻辑坐标），再调 setBounds 收紧/放宽；mapper 等比换算（ENG-05）
+  // 与 DPR/主题不受影响，调用后需重绘一次。
+  Eng.KonvaView.prototype.setBounds = function (b) {
+    this.mapper.bounds = {
+      xMin: b.xMin, xMax: b.xMax, yMin: b.yMin, yMax: b.yMax
+    };
+    this.mapper._recalc();
   };
 
   Eng.KonvaView.prototype.setTheme = function (theme) {

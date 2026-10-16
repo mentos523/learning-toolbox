@@ -170,20 +170,17 @@ body[data-theme="dark"] #physics-app, body[data-theme="dark"] #phy-browser {
   gap: 10px;
 }
 .phy-zone > * { flex: none; }    /* 直系子项不参与压缩：只滚动、不压扁 */
+/* P-03（2026-10-16 黄队口径：嵌入流内）：pill 不再绝对定位悬浮覆盖内容，
+ * 改为 zone 下方文档流占位；"可滚且未到底" 的 show-more 显示逻辑不变。 */
 .phy-more {
-  position: absolute;
-  left: 0; right: 0; bottom: 0;
-  z-index: 6;
-  display: flex;
+  flex: none;
+  display: none;
   justify-content: center;
-  padding: 20px 0 8px;
-  background: linear-gradient(to bottom, transparent, var(--phy-bg) 75%);
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.25s ease, visibility 0.25s;
-  pointer-events: none;
+  padding: 8px 0 6px;
+  background: none;
+  pointer-events: auto;
 }
-.phy-zone-wrap.show-more .phy-more { opacity: 1; visibility: visible; }
+.phy-zone-wrap.show-more .phy-more { display: flex; }
 .phy-more-pill {
   display: inline-flex;
   align-items: center;
@@ -256,6 +253,11 @@ body {
   font-family: -apple-system, "PingFang SC", "Hiragino Sans GB",
                "Microsoft YaHei", "Noto Sans SC", sans-serif;
 }
+/* P-05 扩大（2026-10-16）：表单元素字体继承设计栈——Chromium UA 样式表
+ * 给无显式字体的 button/input/select/textarea 指定 Arial，致全模块
+ * 按钮/输入框字体与正文脱钩；此处统一继承 body 设计栈。 */
+button, input, select, textarea { font-family: inherit; }
+
 #phy-browser.phy-app {
   display: block; overflow-y: auto; overscroll-behavior-y: contain;
   /* E-04：入口底色跟随主题（token 在 #phy-browser 作用域内已定义） */
@@ -347,6 +349,19 @@ body {
 }
 @media (min-width: 700px) {
   .phy-track-grid { grid-template-columns: 1fr 1fr; }
+}
+/* P-04（2026-10-16）：宽屏入口补齐。入口壳在 ≥820px 视口放宽到 980
+ *（与数学 .m-main 对齐；课页 .phy-app 保持 720 不变）；卡片 hover 抬起
+ * 与数学卡片视觉语言对齐；学段目录章列表 ≥820px 双列、行高收紧。 */
+@media (min-width: 820px) {
+  #phy-browser.phy-app { max-width: 980px; padding-left: 24px; padding-right: 24px; }
+  .phy-ch-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .phy-ch-btn { min-height: 52px; }
+}
+.phy-track-card { transition: transform 0.15s ease, box-shadow 0.15s ease; }
+.phy-track-card:hover { transform: translateY(-3px); box-shadow: 0 6px 18px rgba(0,0,0,0.10); }
+@media (prefers-reduced-motion: reduce) {
+  .phy-track-card:hover { transform: none; }
 }
 .phy-track-card {
   display: flex; flex-direction: column; align-items: stretch; gap: 8px;
@@ -725,7 +740,7 @@ body[data-theme="dark"] .phy-drawer {
 /* ---------- 首屏"↓下面还有"可点（通用规则 §3） ---------- */
 .phy-zone-wrap.show-more .phy-more { pointer-events: auto; }
 .phy-more-pill { cursor: pointer; }
-button.phy-more { background: none; border: none; font: inherit; padding: 20px 0 8px; }
+button.phy-more { background: none; border: none; font: inherit; padding: 8px 0 6px; }
 .phy-plot {
   width: 100%;
   height: auto;

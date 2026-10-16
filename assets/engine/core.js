@@ -14,6 +14,24 @@
    * 文字一律经此常量设置，不再各自默认（Arial）或继承 body 误伤。 */
   Eng.FONT_STACK = '-apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif';
 
+  /* P-05（2026-10-16）：2D canvas 文字字体走设计令牌。
+   * 口径：优先从 body 计算样式解析 font-family（设计令牌的运行时真相，
+   * 物理/化学/数学/英语四科 body 均已声明设计栈）；读不到时回退
+   * Eng.FONT_STACK（与设计栈同值的单源常量）。调用方一律用
+   * Eng.canvasFont(px) 代替 "Npx sans-serif" 等字面量——新画布不许
+   * 硬编码字体（见 docs/white-team-lessons.md 第十一节第 5 条）。 */
+  Eng.canvasFont = function (px) {
+    var stack = null;
+    try {
+      if (window.getComputedStyle && document.body) {
+        var ff = window.getComputedStyle(document.body).fontFamily;
+        if (ff && ff.replace(/["'\s]/g, "").length > 0) stack = ff;
+      }
+    } catch (e) { stack = null; }
+    if (!stack) stack = Eng.FONT_STACK;
+    return Math.round(px) + 'px ' + stack;
+  };
+
   /* ---------- 基础工具 ---------- */
 
   Eng.isFiniteNumber = function (v) {

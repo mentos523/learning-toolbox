@@ -802,7 +802,7 @@
       refs.bodyRect = bodyRect;
       if (body.label) {
         var bodyLabel = Eng.konvaText({ text: body.label, fontSize: 13,
-          fill: cssVar("--phy-body"), listening: false });
+          fill: cssVar("--phy-body"), listening: false, halo: true });
         layer.add(bodyLabel);
         refs.bodyLabel = bodyLabel;
       }
@@ -820,6 +820,8 @@
         layer.add(arrow);
         var label = Eng.konvaText({ text: f.label, fontSize: 14, fill: col,
           listening: false });
+        /* P-02 返工（2026-10-16 复验）：data-force 标识标签所属箭头（见 resLabel） */
+        label.setAttr("data-force", f.id);
         layer.add(label);
         var rec = { arrow: arrow, label: label, handle: null, shaft: null, f: f,
           hitTip: null, hitShaft: null };
@@ -878,25 +880,136 @@
       layer.add(res);
       var resLabel = Eng.konvaText({ text: "F合", fontSize: 14, fill: resCol,
         listening: false });
+      /* P-02 返工（2026-10-16 复验）：data-force 标识标签所属箭头，供"他杆"断言
+       * 排除自身箭头（尖端锚定+halo 是正确做法，不适用 6px 门禁）。 */
+      resLabel.setAttr("data-force", "Fres");
       layer.add(resLabel);
       refs.res = res; refs.resLabel = resLabel;
     }
-    function redraw() {
-      if (!view || !refs) return;
+    /* P-01/P-02（2026-10-16）：
+     * - 内容自适应 bounds：grow-only，中心恒为物块中心。半宽 forceR 按实测
+     *   内容包围盒 + 14px 安全边距确定；拖拽导致内容超出时只放大不缩小
+     *   （不许裁掉任何内容；中心固定故无缩放跳变）。
+     *   黄队口径：初始内容包围盒/画布面积 ≥35%，内容边距 ≥8px。
+     * - 标签避让：力标签/合力标签按候选位评分选零碰撞位置；紧贴时加 halo。
+     * - 地面线收缩到内容范围；水平面贴住物块底部（原 y=22 悬空，不合直觉）。
+     * 逻辑几何（FORCE_K/tipOf/角度）零改动：回归断言钉的是逻辑层，不受影响。 */
+    var forceR = 0;
+    var forceInLayout = false;
+    function overlapArea(a, b) {
+      var ix = Math.min(a.x + a.w, b.x + b.w) - Math.max(a.x, b.x);
+      var iy = Math.min(a.y + a.h, b.y + b.h) - Math.max(a.y, b.y);
+      return (ix > 0 && iy > 0) ? ix * iy : 0;
+    }
+    function pxDistToSeg(px, py, ax, ay, bx, by) {
+      var dx = bx - ax, dy = by - ay;
+      var L2 = dx * dx + dy * dy;
+      var t = L2 > 0 ? ((px - ax) * dx + (py - ay) * dy) / L2 : 0;
+      t = Math.max(0, Math.min(1, t));
+      return Math.hypot(px - (ax + t * dx), py - (ay + t * dy));
+    }
+    function boxSegDist(box, s) {
+      /* 矩形与线段最短距离：端点在内或线段穿盒即 0 */
+      if (s.ax >= box.x && s.ax <= box.x + box.w && s.ay >= box.y && s.ay <= box.y + box.h) return 0;
+      if (s.bx >= box.x && s.bx <= box.x + box.w && s.by >= box.y && s.by <= box.y + box.h) return 0;
+      var cx = box.x + box.w / 2, cy = box.y + box.h / 2;
+      if (pxDistToSeg(cx, cy, s.ax, s.ay, s.bx, s.by) < Math.min(box.w, box.h) / 2) return 0;
+      return Math.min(
+        pxDistToSeg(box.x, box.y, s.ax, s.ay, s.bx, s.by),
+        pxDistToSeg(box.x + box.w, box.y, s.ax, s.ay, s.bx, s.by),
+        pxDistToSeg(box.x, box.y + box.h, s.ax, s.ay, s.bx, s.by),
+        pxDistToSeg(box.x + box.w, box.y + box.h, s.ax, s.ay, s.bx, s.by));
+    }
+    /* P-02 标签避让：候选位评分（零碰撞优先、位移最小次之）。
+     * items: [{node, tip:{x,y}}]；fixedBoxes: 固定障碍盒；shafts: 杆线段；
+     * W/H: 画布像素。返回已放置的标签盒数组。 */
+    function avoidLabels(items, fixedBoxes, shafts, W, H) {
+      var placed = [];
+      items.forEach(function (it) {
+        var node = it.node, tip = it.tip;
+        var w = node.width(), h = node.height();
+        var cands = [
+          { dx: 6, dy: -10 }, { dx: -6 - w, dy: -10 },
+          { dx: 6, dy: 10 }, { dx: -6 - w, dy: 10 },
+          { dx: -w / 2, dy: -10 - h }, { dx: -w / 2, dy: 10 }
+        ];
+        /* 候选评分：零碰撞优先、位移最小次之。minDOther 供合力逃逸触发器用。
+         * pad/thr：常规路径 pad=0、thr=6（与复验已验证版本逐像素一致）；
+         * 逃逸路径 pad=2、thr=6——getClientRect 会把 strokeWidth 4 的 halo 描边
+         * 计入（每边膨胀 2px），逃逸按实测口径严格评分。 */
+        function scoreCands(cs, pad, thr) {
+          var best = null, i;
+          cs.forEach(function (c) {
+            var nx = tip.x + c.dx, ny = tip.y + c.dy;
+            var box = { x: nx - pad, y: ny - pad, w: w + pad * 2, h: h + pad * 2 };
+            var score = 0;
+            if (box.x < 2 || box.y < 2 || box.x + box.w > W - 2 || box.y + box.h > H - 2) score += 1e6;
+            for (i = 0; i < placed.length; i++) score += overlapArea(box, placed[i]) * 3;
+            for (i = 0; i < fixedBoxes.length; i++) score += overlapArea(box, fixedBoxes[i]) * 3;
+            var minD = Infinity, minDOther = Infinity;
+            for (i = 0; i < shafts.length; i++) {
+              var d = boxSegDist(box, shafts[i]);
+              if (d < minD) minD = d;
+              if (shafts[i] !== it.ownShaft && d < minDOther) minDOther = d;
+              if (d < thr) score += (thr - d) * 60;
+            }
+            var disp = Math.hypot(c.dx - 6, c.dy + 10);
+            var key = score * 1e6 + disp;
+            if (best === null || key < best.key)
+              best = { nx: nx, ny: ny, box: box, score: score, minD: minD,
+                minDOther: minDOther, key: key, moved: disp > 0.5 };
+          });
+          return best;
+        }
+        var best = scoreCands(cands, 0, 6);
+        /* P-02 返工（2026-10-16 复验打回）：合力标签经常规 6 候选仍与他杆实测 <6px
+         * 时（共线构型：尖端落在他杆上，或如 85°/95° 盒近杆远；8 = 6 + halo 膨胀
+         * 2px，即 node 口径 <8 等价于实测口径 <6），追加逃逸候选网格后按实测口径
+         * 重选：垂直于最近他杆 ±D（D=max(w,h)/2+10，盒居中）× 沿杆向
+         * {0, ±(h/2+6), ±(h+10)}。不触发时布局与复验已验证版本逐像素一致。 */
+        if (it.isResultant && best.minDOther < 8) {
+          var near = null, nd = Infinity, k;
+          for (k = 0; k < shafts.length; k++) {
+            if (shafts[k] === it.ownShaft) continue;
+            var td = pxDistToSeg(tip.x, tip.y, shafts[k].ax, shafts[k].ay,
+              shafts[k].bx, shafts[k].by);
+            if (td < nd) { nd = td; near = shafts[k]; }
+          }
+          if (near) {
+            var evx = near.bx - near.ax, evy = near.by - near.ay;
+            var evl = Math.hypot(evx, evy) || 1, eux = evx / evl, euy = evy / evl;
+            var epx = -euy, epy = eux;
+            var D = Math.max(w, h) / 2 + 10;
+            [-1, 1].forEach(function (s) {
+              [0, h / 2 + 6, -(h / 2 + 6), h + 10, -(h + 10)].forEach(function (a) {
+                var cx = tip.x + epx * s * D + eux * a;
+                var cy = tip.y + epy * s * D + euy * a;
+                cands.push({ dx: cx - tip.x - w / 2, dy: cy - tip.y - h / 2 });
+              });
+            });
+            best = scoreCands(cands, 2, 6); /* 逃逸：按实测口径（含 halo）严格评分 */
+          }
+        }
+        node.position({ x: best.nx, y: best.ny });
+        placed.push(best.box);
+        /* halo：残留碰撞 / 被迫移位 / 与杆紧贴（<8px）时加小底衬 */
+        if (best.score > 0 || best.moved || best.minD < 8) {
+          node.stroke(view.palette.bg);
+          node.strokeWidth(4);
+          node.fillAfterStrokeEnabled(true);
+        } else {
+          node.strokeWidth(0);
+        }
+      });
+      return placed;
+    }
+    function layoutForceNodes() {
       var L2P = function (x, y) { return view.logicalToPixel(x, y); };
-      /* 地面 / 斜面 + 物块：统一布局（构造时 mapper 尺寸未定，不能只摆一次） */
-      if (surface === "incline") {
-        var y0 = 22, gx1 = 5, gx2 = 95;
-        var gy2 = y0 + (gx2 - gx1) * Math.tan(state.inclineDeg * Math.PI / 180);
-        var g1 = L2P(gx1, y0), g2 = L2P(gx2, gy2);
-        refs.ground.points([g1.x, g1.y, g2.x, g2.y]);
-      } else {
-        var h1 = L2P(5, 22), h2 = L2P(95, 22);
-        refs.ground.points([h1.x, h1.y, h2.x, h2.y]);
-      }
+      var scale = view.mapper.params().scale;
+      var W = view.stage.width(), H = view.stage.height();
       var bc = L2P(body.x, body.y);
       var bs = body.size || 15;
-      var bpx = bs * view.mapper.params().scale;
+      var bpx = bs * scale;
       refs.bodyRect.position({ x: bc.x - bpx / 2, y: bc.y - bpx / 2 });
       refs.bodyRect.width(bpx); refs.bodyRect.height(bpx);
       if (refs.bodyLabel) {
@@ -904,6 +1017,11 @@
         refs.bodyLabel.width(bpx);
         refs.bodyLabel.align("center");
       }
+      var shafts = [], fixedBoxes = [], labelItems = [], tipPts = [];
+      fixedBoxes.push({ x: bc.x - bpx / 2, y: bc.y - bpx / 2, w: bpx, h: bpx });
+      if (refs.bodyLabel)
+        fixedBoxes.push({ x: refs.bodyLabel.x(), y: refs.bodyLabel.y(),
+          w: refs.bodyLabel.width(), h: refs.bodyLabel.height() });
       state.forces.forEach(function (f) {
         var rec = refs.forces[f.id];
         var t = tipOf(f);
@@ -916,9 +1034,20 @@
         rec.arrow.setAttr("data-angle", normAng(angleOf(f)).toFixed(2));
         rec.arrow.setAttr("data-mag", f.mag.toFixed(3));
         rec.label.position({ x: p2.x + 6, y: p2.y - 10 });
+        var shaftObj = { ax: p1.x, ay: p1.y, bx: p2.x, by: p2.y };
+        /* P-02 返工（2026-10-16 复验观察项）：零长箭头（mag≈0）隐藏标签——
+         * 合力已用同样 0.05 阈值；避免标签落到物块上与本体标签交叠。断言钉死。 */
+        var zeroMag = (f.mag || 0) < 0.05;
+        rec.label.visible(!zeroMag);
+        if (!zeroMag)
+          labelItems.push({ node: rec.label, tip: { x: p2.x, y: p2.y }, ownShaft: shaftObj });
+        shafts.push(shaftObj);
+        tipPts.push({ x: p2.x, y: p2.y });
+        fixedBoxes.push({ x: p2.x - 10, y: p2.y - 10, w: 20, h: 20 }); /* 箭头头部 */
         if (rec.handle) {
           rec.handle.position({ x: p2.x, y: p2.y });
           rec.shaft.points([p1.x, p1.y, p2.x, p2.y]);
+          fixedBoxes.push({ x: p2.x - 9, y: p2.y - 9, w: 18, h: 18 }); /* 手柄 */
           /* 命中区跟随（程序化移动后保持 ≥44px 可点） */
           if (rec.hitTip) rec.hitTip.position({
             x: p2.x - rec.hitTip.width() / 2, y: p2.y - rec.hitTip.height() / 2 });
@@ -928,10 +1057,11 @@
               x: smx - rec.hitShaft.width() / 2, y: smy - rec.hitShaft.height() / 2 });
           }
         }
-        if (rec.lock) rec.lock.position({ x: p2.x - 18, y: p2.y - 22 });
+        rec._tip = { x: p2.x, y: p2.y };
       });
       var R = resultant();
-      if (showRes && R.mag > 0.05) {
+      var resVisible = showRes && R.mag > 0.05;
+      if (resVisible) {
         var rl = arrowLen(R.mag);
         var ra = Math.atan2(R.y, R.x);
         var rp2 = L2P(body.x + rl * Math.cos(ra), body.y + rl * Math.sin(ra));
@@ -942,8 +1072,100 @@
         refs.res.setAttr("data-mag", R.mag.toFixed(3));
         refs.resLabel.position({ x: rp2.x + 6, y: rp2.y - 10 });
         refs.resLabel.visible(true);
+        /* 合力标签优先避让（派生量，重要性最高） */
+        var resShaft = { ax: rp1.x, ay: rp1.y, bx: rp2.x, by: rp2.y };
+        labelItems.unshift({ node: refs.resLabel, tip: { x: rp2.x, y: rp2.y },
+          ownShaft: resShaft, isResultant: true });
+        shafts.push(resShaft);
+        tipPts.push({ x: rp2.x, y: rp2.y });
+        fixedBoxes.push({ x: rp2.x - 11, y: rp2.y - 11, w: 22, h: 22 });
       } else {
         refs.res.visible(false); refs.resLabel.visible(false);
+      }
+      /* P-02：标签避让（含 🔒 图标错开） */
+      var placedLabels = avoidLabels(labelItems, fixedBoxes, shafts, W, H);
+      state.forces.forEach(function (f) {
+        var rec = refs.forces[f.id];
+        if (!rec.lock || !rec._tip) return;
+        var lw = rec.lock.width(), lh = rec.lock.height();
+        var lcands = [
+          { dx: -18, dy: -22 }, { dx: 10, dy: -22 },
+          { dx: -18, dy: 6 }, { dx: 10, dy: 6 },
+          /* P-02 返工：合力逃逸后可能占据右侧，追加左侧远位候选 */
+          { dx: -28, dy: -22 }, { dx: -28, dy: 6 }
+        ];
+        /* P-02 返工：🔒 也是文字节点，同样适用"与他杆 ≥6px"；
+         * 两档挑选——先找无重叠且杆距≥6 的，找不到退回旧逻辑（无重叠即可），
+         * 旧逻辑能过的态布局逐像素不变。 */
+        function lockTry(c, shaftAware) {
+          var box = { x: rec._tip.x + c.dx, y: rec._tip.y + c.dy, w: lw, h: lh };
+          if (box.x < 2 || box.y < 2 || box.x + lw > W - 2 || box.y + lh > H - 2) return null;
+          var i;
+          for (i = 0; i < placedLabels.length; i++)
+            if (overlapArea(box, placedLabels[i]) > 0) return null;
+          for (i = 0; i < fixedBoxes.length; i++)
+            if (overlapArea(box, fixedBoxes[i]) > 0) return null;
+          if (shaftAware)
+            for (i = 0; i < shafts.length; i++)
+              if (boxSegDist(box, shafts[i]) < 6) return null;
+          return box;
+        }
+        var lok = null, li;
+        for (li = 0; li < lcands.length && !lok; li++) lok = lockTry(lcands[li], true);
+        for (li = 0; li < 4 && !lok; li++) lok = lockTry(lcands[li], false);
+        if (lok) rec.lock.position({ x: lok.x, y: lok.y });
+        else rec.lock.position({ x: rec._tip.x - 18, y: rec._tip.y - 22 });
+      });
+      /* P-01：地面 / 斜面收缩到内容范围 */
+      var gx1 = body.x - forceR + 3, gx2 = body.x + forceR - 3;
+      if (surface === "incline") {
+        var tanI = Math.tan(state.inclineDeg * Math.PI / 180);
+        var yAt = function (x) { return (body.y - bs / 2) + (x - body.x) * tanI; };
+        var g1 = L2P(gx1, yAt(gx1)), g2 = L2P(gx2, yAt(gx2));
+        refs.ground.points([g1.x, g1.y, g2.x, g2.y]);
+      } else {
+        /* 水平面贴住物块底部（原 y=22 悬空） */
+        var gy = body.y - bs / 2;
+        var h1 = L2P(gx1, gy), h2 = L2P(gx2, gy);
+        refs.ground.points([h1.x, h1.y, h2.x, h2.y]);
+      }
+      /* P-01：内容半径（逻辑单位；地面已收缩不计入） */
+      var need = 0, mgn = 14 / scale;
+      function growNeed(lx, ly, half) {
+        var d = Math.hypot(lx - body.x, ly - body.y) + half;
+        if (d > need) need = d;
+      }
+      function pxBoxNeed(b) {
+        var c = view.pixelToLogical(b.x + b.w / 2, b.y + b.h / 2);
+        growNeed(c.x, c.y, Math.hypot(b.w, b.h) / 2 / scale);
+      }
+      pxBoxNeed({ x: bc.x - bpx / 2, y: bc.y - bpx / 2, w: bpx, h: bpx });
+      if (refs.bodyLabel) pxBoxNeed({ x: refs.bodyLabel.x(), y: refs.bodyLabel.y(),
+        w: refs.bodyLabel.width(), h: refs.bodyLabel.height() });
+      placedLabels.forEach(pxBoxNeed);
+      fixedBoxes.forEach(function (b, i) { if (i > 0) pxBoxNeed(b); });
+      state.forces.forEach(function (f) {
+        var rec = refs.forces[f.id];
+        if (rec.lock) pxBoxNeed({ x: rec.lock.x(), y: rec.lock.y(),
+          w: rec.lock.width(), h: rec.lock.height() });
+      });
+      return need + mgn;
+    }
+    function redraw() {
+      if (!view || !refs || forceInLayout) return;
+      forceInLayout = true;
+      try {
+        /* P-01：增长迭代至收敛（每次 setBounds 后 scale 变化，像素偏移量
+         * 换算的逻辑边距跟着变；迭代 3 次收敛，保证最终边距 ≥8px）。 */
+        for (var iter = 0; iter < 3; iter++) {
+          var need = layoutForceNodes();
+          if (need <= forceR * 1.005) break;
+          forceR = need;
+          view.setBounds({ xMin: body.x - forceR, xMax: body.x + forceR,
+            yMin: body.y - forceR, yMax: body.y + forceR });
+        }
+      } finally {
+        forceInLayout = false;
       }
       view.layer.batchDraw();
     }

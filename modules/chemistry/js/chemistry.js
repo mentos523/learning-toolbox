@@ -32,6 +32,19 @@
   var browseRoot = null, appRoot = null;
 
   /* ---------------- 基础工具 ---------------- */
+  /* P-05（2026-10-16）：2D canvas 文字走设计令牌。本模块不加载引擎层，
+   * 故本地从 body 计算样式解析 font-family（设计令牌的运行时真相）；
+   * 与 Eng.canvasFont 同口径，无字面量硬编码字体栈。 */
+  function chmCanvasFont(px) {
+    var stack = null;
+    try {
+      if (window.getComputedStyle && document.body) {
+        var ff = window.getComputedStyle(document.body).fontFamily;
+        if (ff && ff.replace(/["'\s]/g, "").length > 0) stack = ff;
+      }
+    } catch (e) { stack = null; }
+    return Math.round(px) + "px " + (stack || "sans-serif");
+  }
   function esc(s) {
     return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
       return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
@@ -3768,7 +3781,7 @@ function widgetRateEquilibrium(p) {
     /* 坐标轴 */
     ctx.strokeStyle = "#888"; ctx.lineWidth = 1;
     ctx.beginPath(); ctx.moveTo(8, 6); ctx.lineTo(8, ch - 8); ctx.lineTo(cw - 6, ch - 8); ctx.stroke();
-    ctx.fillStyle = "#888"; ctx.font = "9px sans-serif";
+    ctx.fillStyle = "#888"; ctx.font = chmCanvasFont(9);
     ctx.fillText("v", 2, 12); ctx.fillText("t", cw - 12, ch - 2);
     /* vEq 参考线（平衡位置） */
     ctx.strokeStyle = "#AAAAAA"; ctx.setLineDash([3, 3]);
@@ -3793,7 +3806,7 @@ function widgetRateEquilibrium(p) {
     ctx.stroke();
     ctx.setLineDash([]);
     /* 平衡位置标注 */
-    ctx.fillStyle = "#888"; ctx.font = "9px sans-serif";
+    ctx.fillStyle = "#888"; ctx.font = chmCanvasFont(9);
     ctx.fillText("平衡位置 vEq", 10, Y(vEq) - 3);
   }
   var rafId = 0;

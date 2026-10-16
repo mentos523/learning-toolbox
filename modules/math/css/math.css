@@ -99,8 +99,13 @@ body[data-theme="dark"] {
 html, body { height: 100%; overflow: hidden; }
 body {
   margin: 0; background: var(--m-bg); color: var(--m-ink);
-  font-family: -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  font-family: -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
   line-height: 1.7;
+/* P-05 扩大（2026-10-16）：表单元素字体继承设计栈——Chromium UA 样式表
+ * 给无显式字体的 button/input/select/textarea 指定 Arial，致全模块
+ * 按钮/输入框字体与正文脱钩；此处统一继承 body 设计栈。 */
+button, input, select, textarea { font-family: inherit; }
+
 }
 
 /* MathML 不支持提示条（由 mathml-check.js 插入） */
@@ -301,7 +306,7 @@ body[data-theme="dark"] #mathml-warn { background: #4a3a1a; color: #fde68a; }
 .ix-slider { padding: 8px 4px; }
 .ix-expr-line {
   text-align: center; font-size: 1.5rem; margin-bottom: 14px;
-  font-family: Georgia, serif;
+  font-family: -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif; /* P-05 扩大：原 Georgia，与设计栈统一 */
 }
 .ix-expr { color: var(--m-ink); }
 .ix-eq { color: var(--m-ink-soft); margin: 0 6px; }
@@ -339,7 +344,7 @@ body[data-theme="dark"] #mathml-warn { background: #4a3a1a; color: #fde68a; }
 .bl-pan-plate { fill: none; stroke: var(--m-accent-strong); stroke-width: 3; }
 .bl-weight { fill: #f59e0b; stroke: #b45309; stroke-width: 1.5; }
 .bl-box { fill: #3b82f6; stroke: #1d4ed8; stroke-width: 1.5; }
-.bl-label { font-size: 15px; font-weight: bold; fill: #fff; pointer-events: none; font-family: Georgia, serif; }
+.bl-label { font-size: 15px; font-weight: bold; fill: #fff; pointer-events: none; font-family: -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif; /* P-05 扩大：原 Georgia，与设计栈统一 */ }
 .bl-item { cursor: grab; }
 .ix-foot { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 4px; }
 .ix-reset {
@@ -467,7 +472,7 @@ body[data-theme="dark"] #mathml-warn { background: #4a3a1a; color: #fde68a; }
 }
 .ix-morph-expr {
   text-align: center; font-size: 2rem; margin: 8px 0 10px;
-  font-family: Georgia, serif; min-height: 2.6em;
+  font-family: -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif; /* P-05 扩大：原 Georgia，与设计栈统一 */ min-height: 2.6em;
   display: flex; align-items: center; justify-content: center;
 }
 .ix-morph-expr math { font-size: 1em; }

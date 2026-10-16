@@ -60,7 +60,7 @@
     return '<svg viewBox="0 0 48 48" width="44" height="44" aria-hidden="true">' +
       '<rect x="4" y="8" width="40" height="32" rx="6" fill="' + c + '" opacity="0.15"/>' +
       '<text x="24" y="33" text-anchor="middle" font-size="19" font-weight="bold" fill="' + c +
-      '" font-family="sans-serif">' + glyph + "</text></svg>";
+      '">' + glyph + "</text></svg>";
   }
   function renderTracks() {
     var grid = $("track-grid");

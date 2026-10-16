@@ -2746,7 +2746,7 @@
       /* 峰/谷标注（圆点 + "峰"/"谷"文字） */
       if (p.showLabels !== false) {
         ctx.fillStyle = cssVar("--phy-wave-a");
-        ctx.font = "11px sans-serif"; ctx.textAlign = "center";
+        ctx.font = Eng.canvasFont(11); ctx.textAlign = "center";
         var prev = fA(0, t), prevD = 0, marked = 0;
         for (var i = 1; i <= N && marked < 4; i++) {
           var v = fA(i / N * 4, t);
@@ -3665,7 +3665,7 @@
         var px = tx0 + (tv - p.temp.min) / (p.temp.max - p.temp.min) * (tx1 - tx0);
         ctx.strokeStyle = cssVar("--phy-highlight"); ctx.lineWidth = 5;
         ctx.beginPath(); ctx.moveTo(px, ty - 6); ctx.lineTo(px, ty + 6); ctx.stroke();
-        ctx.fillStyle = cssVar("--phy-body"); ctx.font = "10px sans-serif"; ctx.textAlign = "center";
+        ctx.fillStyle = cssVar("--phy-body"); ctx.font = Eng.canvasFont(10); ctx.textAlign = "center";
         ctx.fillText(tv + " ℃", px, ty + 18);
       });
       /* F5–F9：慢放标注常驻（动画速度经缩放示意，非真实分子速率） */
@@ -3685,7 +3685,7 @@
         q.px = px; q.py = py; q.tier = tier;
       });
       /* 图例：颜色+形状+文字三编码 */
-      ctx.font = "10px sans-serif"; ctx.textAlign = "left";
+      ctx.font = Eng.canvasFont(10); ctx.textAlign = "left";
       TIER_ZH.forEach(function (z, i) {
         var lx = 10 + i * 52, ly2 = 14;
         ctx.fillStyle = cssVar(TIER_COL[i]);
@@ -3825,7 +3825,7 @@
           ctx.strokeStyle = cssVar("--phy-target"); ctx.lineWidth = 1;
           ctx.beginPath(); ctx.moveTo(cxp, 4); ctx.lineTo(cxp, H - 4); ctx.stroke();
         }
-        ctx.fillStyle = cssVar("--phy-body"); ctx.font = "10px sans-serif";
+        ctx.fillStyle = cssVar("--phy-body"); ctx.font = Eng.canvasFont(10);
         ctx.fillText("x-t 图像", 8, 12);
       }
       var rm = mmlRead(mi("T"), fmtN(T, 2), "s");

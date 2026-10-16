@@ -64,6 +64,11 @@ body {
   color: var(--ink);
   font-family: -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
   line-height: 1.7;
+/* P-05 扩大（2026-10-16）：表单元素字体继承设计栈——Chromium UA 样式表
+ * 给无显式字体的 button/input/select/textarea 指定 Arial，致全模块
+ * 按钮/输入框字体与正文脱钩；此处统一继承 body 设计栈。 */
+button, input, select, textarea { font-family: inherit; }
+
   transition: background 0.25s, color 0.25s;
 }
 
@@ -105,7 +110,7 @@ body {
   writing-mode: vertical-rl;
   font-size: 0.78rem;
   color: var(--accent-text);
-  font-family: Georgia, serif;
+  font-family: -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif; /* P-05 扩大：原 Georgia */
   max-height: 40dvh;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -147,7 +152,7 @@ body {
 .drawer-head { padding: 16px 16px 10px; border-bottom: 1px solid var(--line); }
 .drawer-head h2 { margin: 0; font-size: 1rem; letter-spacing: 2px; }
 .drawer-sub { font-size: 0.82rem; color: var(--ink-soft); }
-.drawer-sub b { color: var(--accent-text); font-family: Georgia, serif; }
+.drawer-sub b { color: var(--accent-text); font-family: -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif; /* P-05 扩大：原 Georgia */ }
 .drawer-foot { padding: 10px 16px; border-top: 1px solid var(--line); font-size: 0.8rem; color: var(--ink-soft); }
 
 /* ---------- 词根列表 ---------- */
@@ -180,7 +185,7 @@ body {
 .root-list li:hover { background: var(--accent-soft); }
 .root-list li.active { background: var(--accent-strong); color: #fff; }
 .root-list li.active .r-mean { color: #e8f0ff; }
-.r-name { font-weight: bold; font-family: Georgia, serif; font-size: 1.02rem; }
+.r-name { font-weight: bold; font-family: -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif; /* P-05 扩大：原 Georgia */ font-size: 1.02rem; }
 .r-mean { font-size: 0.85rem; color: var(--ink-soft); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex: 1; text-align: right; }
 .r-count { font-size: 0.75rem; color: var(--ink-soft); background: var(--bg); border-radius: 999px; padding: 1px 8px; flex: none; }
 .root-list li.active .r-count { background: rgba(255,255,255,0.25); color: #fff; }
@@ -239,7 +244,7 @@ body {
 /* 焦点大字（保留兼容） */
 .word-hero { text-align: center; flex: none; padding: 6px 0 2px; }
 .word-hero-word {
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif; /* P-05 扩大：原 Georgia/Times */
   font-size: clamp(2.6rem, 7vw, 3.6rem);
   font-weight: bold;
   letter-spacing: 1px;
