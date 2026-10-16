@@ -409,6 +409,7 @@
       "class": "phy-plot", viewBox: "0 0 100 100", role: "img",
       "aria-label": "m–V 图像：三条过原点的直线，斜率不同"
     });
+    phyWatchStage(svg); /* F1 止血：phy-plot 同为 0–100 逻辑坐标舞台，单位幻觉同源 */
     /* 网格 */
     [0, 250, 500, 750, 1000].forEach(function (v) {
       svg.appendChild(svgEl("line", {
@@ -915,8 +916,112 @@
       scrub: scrub, playBtn: bPlay, pauseBtn: bPause };
   }
   function svgStage(cls, label) {
-    return svgEl("svg", { "class": "phy-stage " + (cls || ""), viewBox: "0 0 100 100",
+    var svg = svgEl("svg", { "class": "phy-stage " + (cls || ""), viewBox: "0 0 100 100",
       role: "img", "aria-label": label || "物理交互图" });
+    phyWatchStage(svg);
+    return svg;
+  }
+  /* ---- F1 止血（2026-10-16 波0-4）：旧渲染器 SVG 舞台"单位幻觉"规范化 ----
+   * 舞台 viewBox="0 0 100 100"（游码放大图为 0 0 100 46）被 CSS 拉到约 694px 宽，
+   * 1 用户单位 ≈ 6.94 CSS px：代码按"像素"写的尺寸（手柄 r=6、标签 4.2px）
+   * 视觉放大近 7 倍（手柄直径约 83px、标签约 32px）。
+   * 口径：拖拽手柄视觉半径 → 9px（T4 ≤ 12px）；画布标签视觉字号 → 12–14px（T5 ≤ 18px）。
+   * 做法：舞台挂载后按实测渲染尺寸算换算比 s（CSS px / 用户单位），把手柄 r、
+   * 手柄描边、标签字号、标签 halo 描边重写为"视觉恒定"的用户单位值；
+   * 几何定位（0–100 逻辑坐标）与 toSVG/dragify 换算一律不动。
+   * 动态重绘（拖拽时子树重建）由 MutationObserver 对新增节点补正；
+   * 响应式宽度变化由 ResizeObserver 全量重算。
+   * 注意：透明命中区（.phy-handle-hit / .phy-hot）是功能尺寸，故意不动；
+   * 场景图形（小球/质点/质量块等非手柄圆点）不是拖拽节点，不动。 */
+  var PHY_VIS_HANDLE_R = 9;        /* T4：拖拽手柄视觉半径（px） */
+  var PHY_VIS_HANDLE_D = 20;       /* T4：非圆手柄视觉最大边（px，≈直径口径） */
+  var PHY_VIS_HANDLE_STROKE = 1.5; /* 手柄描边视觉宽度（px） */
+  var PHY_VIS_HALO = 2.5;          /* 标签 halo 描边视觉宽度（px） */
+  var PHY_VIS_LABEL = {            /* T5：画布标签视觉字号（px） */
+    "phy-body-label": 14, "phy-force-label": 14, "phy-res-label": 14,
+    "phy-f-label": 14, "phy-mag-label": 13, "phy-cart-label": 13,
+    "phy-note-text": 13, "phy-slope-tag": 13, "phy-sym-label": 12,
+    "phy-tick-label": 12, "phy-lock-icon": 14, "default": 14
+  };
+  function phyLabelTarget(elm) {
+    var t = PHY_VIS_LABEL["default"];
+    try {
+      var cls = " " + (elm.getAttribute("class") || "") + " ";
+      for (var k in PHY_VIS_LABEL) {
+        if (k !== "default" && cls.indexOf(" " + k + " ") >= 0) { t = PHY_VIS_LABEL[k]; break; }
+      }
+    } catch (e) {}
+    return t;
+  }
+  /* 实测换算比 s：CSS px / 用户单位（默认 preserveAspectRatio=meet，取 min） */
+  function phyStageScale(svg) {
+    try {
+      var vb = (svg.getAttribute("viewBox") || "0 0 100 100").trim().split(/[\s,]+/);
+      var vbw = parseFloat(vb[2]) || 100, vbh = parseFloat(vb[3]) || 100;
+      var r = svg.getBoundingClientRect();
+      if (!r || r.width <= 0 || r.height <= 0) return 0;
+      return Math.min(r.width / vbw, r.height / vbh);
+    } catch (e) { return 0; }
+  }
+  function phyNormEl(elm, s) {
+    if (!elm || elm.nodeType !== 1) return;
+    var tag = (elm.tagName || "").toLowerCase();
+    var cls = " " + (elm.getAttribute("class") || "") + " ";
+    if (tag === "circle" && (cls.indexOf(" phy-handle ") >= 0 || cls.indexOf(" phy-handle-blue ") >= 0)) {
+      elm.setAttribute("r", (PHY_VIS_HANDLE_R / s).toFixed(3));
+      elm.style.strokeWidth = (PHY_VIS_HANDLE_STROKE / s).toFixed(3) + "px";
+    } else if (tag === "rect" && cls.indexOf(" phy-handle ") >= 0) {
+      var hfill = (elm.getAttribute("fill") || "").toLowerCase();
+      if (hfill === "transparent" || hfill === "none") return; /* 透明命中区不动 */
+      var w = parseFloat(elm.getAttribute("width")) || 0, h = parseFloat(elm.getAttribute("height")) || 0;
+      if (w > 0 && h > 0) {
+        var f = (PHY_VIS_HANDLE_D / Math.max(w, h)) / s;
+        var x = parseFloat(elm.getAttribute("x")) || 0, y = parseFloat(elm.getAttribute("y")) || 0;
+        var nw = w * f, nh = h * f;
+        elm.setAttribute("width", nw.toFixed(3));
+        elm.setAttribute("height", nh.toFixed(3));
+        elm.setAttribute("x", x.toFixed(3)); /* 左沿为读数基准（如游码），保持不动 */
+        elm.setAttribute("y", (y + (h - nh) / 2).toFixed(3)); /* 纵向居中 */
+        elm.style.strokeWidth = (PHY_VIS_HANDLE_STROKE / s).toFixed(3) + "px";
+      }
+    } else if (tag === "text") {
+      elm.style.fontSize = (phyLabelTarget(elm) / s).toFixed(3) + "px";
+      if (cls.indexOf(" phy-text-halo ") >= 0)
+        elm.style.strokeWidth = (PHY_VIS_HALO / s).toFixed(3) + "px";
+    }
+  }
+  function phyNormTree(root, s) {
+    if (!root || root.nodeType !== 1) return;
+    phyNormEl(root, s);
+    var all = root.getElementsByTagName("*");
+    for (var i = 0; i < all.length; i++) phyNormEl(all[i], s);
+  }
+  function phyWatchStage(svg) {
+    if (!svg || svg.__phyWatched) return;
+    svg.__phyWatched = true;
+    function renormAll() {
+      var s = phyStageScale(svg);
+      if (s) phyNormTree(svg, s);
+    }
+    if (typeof window.requestAnimationFrame === "function") window.requestAnimationFrame(renormAll);
+    else setTimeout(renormAll, 0);
+    try {
+      if (typeof window.ResizeObserver === "function") {
+        var ro = new ResizeObserver(function () { renormAll(); });
+        ro.observe(svg);
+      }
+      if (typeof window.MutationObserver === "function") {
+        var mo = new MutationObserver(function (muts) {
+          var s = phyStageScale(svg);
+          if (!s) return;
+          for (var i = 0; i < muts.length; i++) {
+            var added = muts[i].addedNodes;
+            for (var j = 0; j < added.length; j++) phyNormTree(added[j], s);
+          }
+        });
+        mo.observe(svg, { childList: true, subtree: true });
+      }
+    } catch (e) {}
   }
   function svgText(x, y, str, cls, anchor) {
     var t = svgEl("text", { x: x, y: y, "class": cls || "", "text-anchor": anchor || "middle" });
@@ -4133,6 +4238,7 @@
           inner.appendChild(el("div", "phy-mag-title", "游码放大 2×（以游码左侧刻线读数）"));
           var zs = svgEl("svg", { "class": "phy-stage", viewBox: "0 0 100 46",
             role: "img", "aria-label": "游码放大图" });
+          phyWatchStage(zs); /* F1 止血：viewBox 0 0 100 46，换算比按 meet 取 min */
           var zc = Math.max(1, Math.min(4, rider));
           function ZX(v) { return (30 + v * 8 - (30 + (zc - 2) * 8)) / 32 * 100; }
           zs.appendChild(svgEl("line", { x1: 0, y1: 30, x2: 100, y2: 30,
