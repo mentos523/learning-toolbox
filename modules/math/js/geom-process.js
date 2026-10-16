@@ -723,8 +723,9 @@
     vBtns[0].addEventListener("click", function () { stop(); renderStep(0); });
     vBtns[1].addEventListener("click", function () { stop(); renderStep(steps.length - 1); });
     wrap.addEventListener("keydown", function (ev) {
-      if (ev.key === "ArrowLeft") { stop(); renderStep(stepIdx - 1); ev.preventDefault(); }
-      else if (ev.key === "ArrowRight") { stop(); renderStep(stepIdx + 1); ev.preventDefault(); }
+      /* 返工 F-04 补漏：discrete 分支 ←/→ 同样 stopPropagation，不冒泡到 math.js 全局翻页（与 tween 分支同口径） */
+      if (ev.key === "ArrowLeft") { stop(); renderStep(stepIdx - 1); ev.preventDefault(); ev.stopPropagation(); }
+      else if (ev.key === "ArrowRight") { stop(); renderStep(stepIdx + 1); ev.preventDefault(); ev.stopPropagation(); }
       else if (ev.key === " ") { if (btnPlay) btnPlay.click(); ev.preventDefault(); }
       else if (ev.key === "r" || ev.key === "R") { stop(); renderStep(0); }
     });
