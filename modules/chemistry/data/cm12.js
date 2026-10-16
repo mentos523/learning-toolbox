@@ -282,9 +282,9 @@ window.CHEM_CH["cm12"] = {
                       { id: "h2o", kind: "molecule", label: "H₂O", charge: null, role: "product", count: 2 }
                     ],
                     keyframes: [
-                      { caption: "加热：H₂ 分子里的 H 各交出 1 个电子（天蓝小点 e⁻，示意），电子从 H 流向 CuO 中的 Cu。" },
-                      { caption: "Cu 得到 2 个电子，变成 Cu 原子；失去电子的 H 与 O 结合成 H₂O。" },
-                      { caption: "数一数：反应前后 H 4 个、O 2 个、Cu 2 个——原子种类、个数都不变 ✓" }
+                      { caption: "加热：H₂ 分子里的 H 各交出 1 个电子（天蓝小点 e⁻，示意），电子从 H 流向 CuO 中的 Cu。", moves: [{ id: "h2", to: [42, 43] }, { id: "cuo", to: [58, 43] }] },
+                      { caption: "Cu 得到 2 个电子，变成 Cu 原子；失去电子的 H 与 O 结合成 H₂O。", moves: [{ id: "h2", to: [50, 43] }], form: [{ ids: ["cuo"], label: "Cu" }, { ids: ["h2"], label: "H₂O" }], fade: [] },
+                      { caption: "数一数：反应前后 H 4 个、O 2 个、Cu 2 个——原子种类、个数都不变 ✓", moves: [] }
                     ],
                     counter: true,
                     spectatorFade: false,

@@ -38,9 +38,9 @@ window.CHEM_CH["cm16"] = {
                       { id: "o2", kind: "molecule", label: "O₂", charge: null, role: "product", count: 3 }
                     ],
                     keyframes: [
-                      { caption: "H₂O₂ 溶液常温分解很慢：几乎看不到气泡。" },
-                      { caption: "加入 MnO₂：迅速产生大量气泡——2H₂O₂ ＝MnO₂＝ 2H₂O + O₂↑。" },
-                      { caption: "催化剂只改变化学反应速率，不改变化学平衡——'一变二不变'，后面细讲。" }
+                      { caption: "H₂O₂ 溶液常温分解很慢：几乎看不到气泡。", moves: [{ id: "h2o2", to: [28, 37] }] },
+                      { caption: "加入 MnO₂：迅速产生大量气泡——2H₂O₂ ＝MnO₂＝ 2H₂O + O₂↑。", moves: [{ id: "h2o2", to: [40, 39] }, { id: "o2", to: [70, 18] }, { id: "h2o", to: [70, 47] }] },
+                      { caption: "催化剂只改变化学反应速率，不改变化学平衡——'一变二不变'，后面细讲。", moves: [] }
                     ],
                     counter: true,
                     spectatorFade: false,
@@ -144,9 +144,9 @@ window.CHEM_CH["cm16"] = {
                       { id: "nh3", kind: "molecule", label: "NH₃", charge: null, role: "product", count: 4 }
                     ],
                     keyframes: [
-                      { caption: "开始：只有 N₂ 和 H₂，正反应速率大。" },
-                      { caption: "进行中：NH₃ 增多，逆反应速率跟上。" },
-                      { caption: "平衡时：正逆反应速率相等，浓度不再变——但反应没停！这就是动态平衡。" }
+                      { caption: "开始：只有 N₂ 和 H₂，正反应速率大。", moves: [{ id: "n2", to: [24, 34] }, { id: "h2", to: [22, 35] }] },
+                      { caption: "进行中：NH₃ 增多，逆反应速率跟上。", moves: [{ id: "n2", to: [41, 34] }, { id: "h2", to: [42, 36] }, { id: "nh3", to: [60, 38] }] },
+                      { caption: "平衡时：正逆反应速率相等，浓度不再变——但反应没停！这就是动态平衡。", moves: [{ id: "n2", to: [47, 34] }, { id: "h2", to: [48, 36] }, { id: "nh3", to: [55, 38] }] }
                     ],
                     counter: true,
                     spectatorFade: false,
@@ -308,9 +308,9 @@ window.CHEM_CH["cm16"] = {
                       { id: "h2o", kind: "molecule", label: "H₂O", charge: null, role: "product", count: 20 }
                     ],
                     keyframes: [
-                      { caption: "Ba(OH)₂·8H₂O 与 NH₄Cl 混合搅拌。" },
-                      { caption: "烧杯外壁结霜、有刺激性气味（NH₃）——反应吸热！" },
-                      { caption: "Ba(OH)₂·8H₂O + 2NH₄Cl ＝ BaCl₂ + 2NH₃↑ + 10H₂O：吸热反应也能自发进行。" }
+                      { caption: "Ba(OH)₂·8H₂O 与 NH₄Cl 混合搅拌。", moves: [{ id: "baoh2", to: [26, 30] }, { id: "nh4cl", to: [28, 46] }] },
+                      { caption: "烧杯外壁结霜、有刺激性气味（NH₃）——反应吸热！", moves: [{ id: "baoh2", to: [28, 34] }, { id: "nh4cl", to: [30, 48] }, { id: "nh3", to: [74, 20] }] },
+                      { caption: "Ba(OH)₂·8H₂O + 2NH₄Cl ＝ BaCl₂ + 2NH₃↑ + 10H₂O：吸热反应也能自发进行。", moves: [{ id: "baoh2", to: [28, 36] }, { id: "nh4cl", to: [30, 48] }], form: [{ ids: ["baoh2", "nh4cl"], label: "BaCl₂" }], fade: [] }
                     ],
                     counter: true,
                     spectatorFade: false,
@@ -391,9 +391,9 @@ window.CHEM_CH["cm16"] = {
                       { id: "h2", kind: "molecule", label: "H₂", charge: null, role: "product", count: 2 }
                     ],
                     keyframes: [
-                      { caption: "Zn 片、Cu 片插入稀硫酸，用导线连接，电流表指针偏转。" },
-                      { caption: "Zn 片溶解（Zn → Zn²⁺ + 2e⁻，负极），Cu 片上有气泡（2H⁺ + 2e⁻ → H₂↑，正极）。" },
-                      { caption: "电子只走导线（Zn → Cu），不走溶液——化学能变成了电能。" }
+                      { caption: "Zn 片、Cu 片插入稀硫酸，用导线连接，电流表指针偏转。", moves: [{ id: "zn", to: [18, 37] }, { id: "h", to: [34, 34] }] },
+                      { caption: "Zn 片溶解（Zn → Zn²⁺ + 2e⁻，负极），Cu 片上有气泡（2H⁺ + 2e⁻ → H₂↑，正极）。", moves: [{ id: "zn", to: [20, 37] }, { id: "h", to: [49, 34] }, { id: "h2", to: [66, 22] }, { id: "zn2", to: [64, 40] }] },
+                      { caption: "电子只走导线（Zn → Cu），不走溶液——化学能变成了电能。", moves: [{ id: "zn", to: [22, 37] }, { id: "h", to: [50, 34] }], form: [{ ids: ["zn"], label: "Zn²⁺" }, { ids: ["h"], label: "H₂" }], fade: [] }
                     ],
                     counter: false,
                     spectatorFade: false,

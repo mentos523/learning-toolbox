@@ -296,10 +296,10 @@ window.CHEM_CH["cm13"] = {
                       { id: "h2", kind: "molecule", label: "H₂", charge: null, role: "product", count: 1 }
                     ],
                     keyframes: [
-                      { caption: "钠块投入水中：浮在水面上（密度比水小）。" },
-                      { caption: "熔成闪亮的小球（熔点低，反应放热）。" },
-                      { caption: "四处游动（H₂ 气体推动），发出嘶嘶的响声。" },
-                      { caption: "滴加酚酞，溶液变红——生成了 NaOH。2Na + 2H₂O ＝ 2NaOH + H₂↑" }
+                      { caption: "钠块投入水中：浮在水面上（密度比水小）。", moves: [{ id: "na", to: [28, 20] }, { id: "h2o", to: [28, 42] }] },
+                      { caption: "熔成闪亮的小球（熔点低，反应放热）。", moves: [{ id: "na", to: [30, 22] }, { id: "h2o", to: [30, 44] }, { id: "h2", to: [64, 22] }] },
+                      { caption: "四处游动（H₂ 气体推动），发出嘶嘶的响声。", moves: [{ id: "na", to: [32, 28] }, { id: "h2", to: [36, 14] }, { id: "h2o", to: [30, 46] }] },
+                      { caption: "滴加酚酞，溶液变红——生成了 NaOH。2Na + 2H₂O ＝ 2NaOH + H₂↑", moves: [{ id: "na", to: [30, 34] }, { id: "h2o", to: [30, 44] }], form: [{ ids: ["na", "h2o"], label: "NaOH" }], fade: [] }
                     ],
                     counter: true,
                     spectatorFade: false,
@@ -379,9 +379,9 @@ window.CHEM_CH["cm13"] = {
                       { id: "hclo", kind: "molecule", label: "HClO", charge: null, role: "product", count: 1 }
                     ],
                     keyframes: [
-                      { caption: "黄绿色 Cl₂ 通入水中，溶液变成黄绿色。" },
-                      { caption: "部分 Cl₂ 与水发生可逆反应：Cl₂ + H₂O ⇌ HCl + HClO。" },
-                      { caption: "数一数氯水里的粒子：Cl₂、HCl、HClO、H₂O——四种！氯水是混合物，不是盐酸。" }
+                      { caption: "黄绿色 Cl₂ 通入水中，溶液变成黄绿色。", moves: [{ id: "cl2", to: [24, 34] }, { id: "h2o", to: [36, 36] }] },
+                      { caption: "部分 Cl₂ 与水发生可逆反应：Cl₂ + H₂O ⇌ HCl + HClO。", moves: [{ id: "cl2", to: [40, 36] }, { id: "h2o", to: [46, 42] }, { id: "hcl", to: [62, 34] }, { id: "hclo", to: [68, 42] }] },
+                      { caption: "数一数氯水里的粒子：Cl₂、HCl、HClO、H₂O——四种！氯水是混合物，不是盐酸。", moves: [] }
                     ],
                     counter: true,
                     spectatorFade: false,
@@ -470,9 +470,9 @@ window.CHEM_CH["cm13"] = {
                       { id: "feoh3", kind: "molecule", label: "Fe(OH)₃", charge: null, role: "product", count: 4 }
                     ],
                     keyframes: [
-                      { caption: "FeSO₄ 溶液中加入 NaOH：生成白色絮状沉淀 Fe(OH)₂。" },
-                      { caption: "在空气中放置：白色 → 灰绿色——Fe(OH)₂ 被 O₂ 氧化。" },
-                      { caption: "最终变成红褐色 Fe(OH)₃：4Fe(OH)₂ + O₂ + 2H₂O ＝ 4Fe(OH)₃。" }
+                      { caption: "FeSO₄ 溶液中加入 NaOH：生成白色絮状沉淀 Fe(OH)₂。", moves: [{ id: "feoh2", to: [20, 35] }, { id: "o2", to: [54, 18] }, { id: "h2o", to: [42, 50] }] },
+                      { caption: "在空气中放置：白色 → 灰绿色——Fe(OH)₂ 被 O₂ 氧化。", moves: [{ id: "feoh2", to: [22, 36] }, { id: "o2", to: [32, 30] }, { id: "h2o", to: [44, 50] }] },
+                      { caption: "最终变成红褐色 Fe(OH)₃：4Fe(OH)₂ + O₂ + 2H₂O ＝ 4Fe(OH)₃。", moves: [{ id: "feoh2", to: [25, 36] }, { id: "o2", to: [36, 36] }], form: [{ ids: ["feoh2"], label: "Fe(OH)₃" }], fade: [] }
                     ],
                     counter: true,
                     spectatorFade: false,

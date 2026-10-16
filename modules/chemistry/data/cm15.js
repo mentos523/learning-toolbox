@@ -36,9 +36,9 @@ window.CHEM_CH["cm15"] = {
                       { id: "dye", kind: "molecule", label: "品红", charge: null, role: "reactant", count: 2 }
                     ],
                     keyframes: [
-                      { caption: "SO₂ 通入品红溶液：红色褪去——SO₂ 有漂白性。" },
-                      { caption: "加热褪色后的溶液：红色恢复！SO₂ 的漂白是'化合'，不稳定。" },
-                      { caption: "对比：氯水的漂白（HClO 氧化）加热不恢复——漂白分两种，机理不同。" }
+                      { caption: "SO₂ 通入品红溶液：红色褪去——SO₂ 有漂白性。", moves: [{ id: "so2", to: [44, 37] }, { id: "dye", to: [58, 41] }] },
+                      { caption: "加热褪色后的溶液：红色恢复！SO₂ 的漂白是'化合'，不稳定。", moves: [{ id: "so2", to: [28, 36] }] },
+                      { caption: "对比：氯水的漂白（HClO 氧化）加热不恢复——漂白分两种，机理不同。", moves: [] }
                     ],
                     counter: false,
                     spectatorFade: false,
@@ -199,9 +199,9 @@ window.CHEM_CH["cm15"] = {
                       { id: "no", kind: "molecule", label: "NO", charge: null, role: "product", count: 1 }
                     ],
                     keyframes: [
-                      { caption: "红棕色 NO₂ 通入水中，颜色变浅。" },
-                      { caption: "3NO₂ + H₂O ＝ 2HNO₃ + NO：NO₂ 既做氧化剂又做还原剂（歧化）。" },
-                      { caption: "NO 无色，遇空气变红棕色：2NO + O₂ ＝ 2NO₂。" }
+                      { caption: "红棕色 NO₂ 通入水中，颜色变浅。", moves: [{ id: "no2", to: [28, 34] }, { id: "h2o", to: [40, 38] }] },
+                      { caption: "3NO₂ + H₂O ＝ 2HNO₃ + NO：NO₂ 既做氧化剂又做还原剂（歧化）。", moves: [{ id: "no2", to: [44, 38] }, { id: "h2o", to: [50, 38] }], form: [{ ids: ["no2", "h2o"], label: "HNO₃" }], fade: [] },
+                      { caption: "NO 无色，遇空气变红棕色：2NO + O₂ ＝ 2NO₂。", moves: [{ id: "no", to: [58, 26] }] }
                     ],
                     counter: true,
                     spectatorFade: false,
@@ -356,9 +356,9 @@ window.CHEM_CH["cm15"] = {
                       { id: "oh", kind: "molecule", label: "OH⁻", charge: null, role: "product", count: 3 }
                     ],
                     keyframes: [
-                      { caption: "烧瓶中充满 NH₃，胶头滴管挤入少量水。" },
-                      { caption: "NH₃ 极易溶于水（1∶700），烧瓶内压强骤降。" },
-                      { caption: "大气压把烧杯里的水压入烧瓶，形成喷泉。NH₃ + H₂O ⇌ NH₄⁺ + OH⁻（氨水显碱性）。" }
+                      { caption: "烧瓶中充满 NH₃，胶头滴管挤入少量水。", moves: [{ id: "nh3", to: [22, 32] }, { id: "h2o", to: [28, 18] }] },
+                      { caption: "NH₃ 极易溶于水（1∶700），烧瓶内压强骤降。", moves: [{ id: "nh3", to: [26, 22] }, { id: "h2o", to: [28, 42] }] },
+                      { caption: "大气压把烧杯里的水压入烧瓶，形成喷泉。NH₃ + H₂O ⇌ NH₄⁺ + OH⁻（氨水显碱性）。", moves: [{ id: "h2o", to: [28, 20] }], form: [{ ids: ["nh3"], label: "NH₄⁺" }], fade: [] }
                     ],
                     counter: false,
                     spectatorFade: false,

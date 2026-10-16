@@ -309,9 +309,9 @@ window.CHEM_CH["cm14"] = {
                       { id: "nacl", kind: "molecule", label: "NaCl", charge: null, role: "product", count: 2 }
                     ],
                     keyframes: [
-                      { caption: "Na 失去 1 个电子变成 Na⁺，Cl 得到 1 个电子变成 Cl⁻。" },
-                      { caption: "Na⁺ 与 Cl⁻ 靠静电吸引结合成 NaCl——这就是离子键。" },
-                      { caption: "注意：NaOH 里也有离子键（Na⁺ 与 OH⁻ 之间），但 O—H 之间是共价键——一种物质可以有两种键。" }
+                      { caption: "Na 失去 1 个电子变成 Na⁺，Cl 得到 1 个电子变成 Cl⁻。", moves: [{ id: "na", to: [40, 43] }, { id: "cl2", to: [60, 43] }] },
+                      { caption: "Na⁺ 与 Cl⁻ 靠静电吸引结合成 NaCl——这就是离子键。", moves: [{ id: "na", to: [46, 43] }, { id: "cl2", to: [54, 43] }], form: [{ ids: ["na", "cl2"], label: "NaCl" }], fade: [] },
+                      { caption: "注意：NaOH 里也有离子键（Na⁺ 与 OH⁻ 之间），但 O—H 之间是共价键——一种物质可以有两种键。", moves: [] }
                     ],
                     counter: false,
                     spectatorFade: false,
