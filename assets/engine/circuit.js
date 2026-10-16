@@ -972,6 +972,8 @@
     this.cell = opt.cellPx || 100;
     this.maxElements = 12; // §8.2-3：上限 8→12（UI 约束）
     this.allowInternalR = !!opt.allowInternalR;
+    // 波 B 课页迁移：示范电路/托盘新增电源的电动势取课页电压（默认 6V）
+    this.sourceVoltageV = (opt.sourceVoltageV > 0) ? opt.sourceVoltageV : 6;
     this.trayTypes = opt.trayTypes || ['source', 'bulb', 'resistor', 'rheostat', 'switch', 'wire', 'ammeter', 'voltmeter'];
     this._uidSeq = 0;
     this._placed = [];   // {uid, type, col, row|null, params:{}}
@@ -1004,12 +1006,15 @@
     this._rebuild();
     this._bindTray();
     var self = this;
-    document.addEventListener('keydown', function (ev) {
+    function onKey(ev) {
+      // 页面已切走（本实例 DOM 不在文档中）时自失效，避免跨页泄漏（波 B 迁移补）
+      if (!document.getElementById(self._ids.stage)) return;
       if ((ev.key === 'Delete' || ev.key === 'Backspace') && self._selected && !/INPUT|SELECT|TEXTAREA/.test(document.activeElement.tagName)) {
         ev.preventDefault();
         self._deleteElement(self._selected);
       }
-    });
+    }
+    document.addEventListener('keydown', onKey);
   };
 
   Eng.CircuitUI.prototype._buildDom = function (opt) {
@@ -1090,6 +1095,7 @@
   };
 
   Eng.CircuitUI.prototype._onDocMove = function (ev) {
+    if (!document.getElementById(this._ids.stage)) return; // 页面已切走：自失效（波 B 迁移补）
     var arm = this._trayArm;
     if (!arm) return;
     if (this._floatUid) {
@@ -1114,6 +1120,7 @@
 
   Eng.CircuitUI.prototype._onDocUp = function (ev) {
     var self = this;
+    if (!document.getElementById(this._ids.stage)) { this._trayArm = null; this._floatUid = null; return; }
     if (this._floatUid) {
       var uid = this._floatUid;
       this._floatUid = null;
@@ -1171,7 +1178,7 @@
   };
 
   Eng.CircuitUI.prototype._defaultParams = function (type) {
-    if (type === 'source') return { emfV: 6, internalROhm: 0 };
+    if (type === 'source') return { emfV: this.sourceVoltageV, internalROhm: 0 };
     if (type === 'resistor') return { resistanceOhm: 20 };
     if (type === 'bulb') return { resistanceOhm: 12 };
     if (type === 'switch') return { closed: false };
@@ -1182,6 +1189,42 @@
   };
 
   Eng.CircuitUI.prototype._nodeOf = function (uid, term) { return uid + ':' + term; };
+
+  /* 公开 API（波 B 课页迁移）：按课页数据预设摆位。
+   * type 为元件类型；col/row 为网格格位（越界钳制）；params 合并默认参数。
+   * 返回新元件 uid。非法类型/格子被占/超上限时抛错（ENG-66）。 */
+  Eng.CircuitUI.prototype.placeElement = function (type, col, row, params) {
+    if (!Eng.CircuitSymbols.NAMES[type]) throw new Error('CircuitUI.placeElement: 未知元件类型 "' + type + '"');
+    col = Math.max(0, Math.min(this.cols - 1, col | 0));
+    row = Math.max(0, Math.min(this.rows - 1, row | 0));
+    if (this._atCell(col, row)) throw new Error('CircuitUI.placeElement: 格子 (' + col + ',' + row + ') 已被占');
+    if (this._placed.length >= this.maxElements) throw new Error('CircuitUI.placeElement: 元件已到 12 个上限');
+    var uid = this._newUid(type);
+    var merged = this._defaultParams(type);
+    if (params) for (var k in params) merged[k] = params[k];
+    this._placed.push({ uid: uid, type: type, col: col, row: row, params: merged });
+    this._rebuild();
+    return uid;
+  };
+
+  /* 公开 API（波 B 课页迁移）：在两个已摆位元件的接线柱之间创建一条导线连接。
+   * 返回 wire 元件 uid；超上限时反馈并返回 null。 */
+  Eng.CircuitUI.prototype.addWire = function (fromUid, fromTerm, toUid, toTerm) {
+    if (this._placed.length >= this.maxElements) {
+      this._say('元件已到 12 个上限');
+      return null;
+    }
+    var wuid = this._newUid('wire');
+    this._placed.push({ uid: wuid, type: 'wire', col: -2, row: -2, params: {} }); // col=-2：不占格
+    this._extraConns = this._extraConns || [];
+    this._extraConns.push({
+      elementId: wuid,
+      from: this._nodeOf(fromUid, fromTerm),
+      to: this._nodeOf(toUid, toTerm)
+    });
+    this._rebuild();
+    return wuid;
+  };
 
   // 求解快照 = render(snapshot()) 的数据源（ENG-64）。
   // 拓扑语义：每个画布元件本身就是其两端点之间的一条边（connection 的 elementId=元件 uid）；
@@ -1265,6 +1308,7 @@
     this.elemLayer.draw();
     this.wireLayer.draw();
     this.topLayer.draw();
+    this._applyDemoPulse(); // 示范开关呼吸脉冲：重渲染后重挂（_demo 流程）
     this._renderStatus();
     this._renderParams();
   };
@@ -1436,6 +1480,7 @@
       self._selected = p.uid;
       if (p.type === 'switch') {
         p.params.closed = !p.params.closed; // 开关点按切换开/合（D1）
+        if (p.params.closed) self._hideDemoBubble(); // 黄队 P3 改法 2：闭合后撤掉"差一步"气泡与脉冲
         self._rebuild();
       } else {
         self._render();
@@ -1487,23 +1532,10 @@
       return;
     }
     // 生成一条导线连接（§8.4）：新建 wire 元件 + connection
-    if (this._placed.length >= this.maxElements) {
-      this._say('元件已到 12 个上限');
-      this._wireArm = null;
-      this._render();
-      return;
-    }
-    var wuid = this._newUid('wire');
-    this._placed.push({ uid: wuid, type: 'wire', col: -2, row: -2, params: {} }); // col=-2：不占格
-    this._extraConns = this._extraConns || [];
-    this._extraConns.push({
-      elementId: wuid,
-      from: this._nodeOf(arm.uid, arm.term),
-      to: this._nodeOf(uid, term)
-    });
+    var wuid = this.addWire(arm.uid, arm.term, uid, term);
     this._wireArm = null;
-    this._say('已连线。');
-    this._rebuild();
+    if (wuid) this._say('已连线。');
+    this._render();
   };
 
   Eng.CircuitUI.prototype._showChip = function (wireId, x, y) {
@@ -1550,6 +1582,7 @@
     this._placed = this._placed.filter(function (p) { return p.uid !== uid && deadWires.indexOf(p.uid) < 0; });
     if (this._selected === uid) this._selected = null;
     this._say('已删除元件。');
+    this._hideDemoBubble(); // 示范电路被改动："差一步"引导不再适用，撤掉
     this._rebuild();
     this._renderToolbar();
   };
@@ -1563,9 +1596,12 @@
     this._rebuild();
   };
 
-  // 一键连好示范电路（§8.4-4）：2×2 回路＋显式 connections，开关断开
+  // 一键连好示范电路（§8.4-4）：2×2 回路＋显式 connections，开关断开；
+  // 黄队 P3 改法 2 保留：开关持续呼吸脉冲 ＋ "差一步"气泡（文案沿用旧版逐字），
+  // 8 秒无操作 exploreTip 高亮闪烁一次；开关闭合后撤掉气泡与脉冲。
   Eng.CircuitUI.prototype._demo = function () {
     var self = this;
+    this._hideDemoBubble();
     this._placed = [];
     this._extraConns = [];
     this._uidSeq = 0;
@@ -1575,7 +1611,7 @@
       self._placed.push(p);
       return uid;
     }
-    var bat = add('source', 1, 1);
+    var bat = add('source', 1, 1); // 电动势取课页电压（_defaultParams ← sourceVoltageV）
     var bulb = add('bulb', 4, 1);
     var sw = add('switch', 4, 2, { closed: false });
     function wire(fu, ft, tu, tt) {
@@ -1586,8 +1622,97 @@
     wire(bat, 'R', bulb, 'L');
     wire(bulb, 'R', sw, 'L');
     wire(sw, 'R', bat, 'L');
-    this._say('差一步：点一下开关闭合电路！');
+    this._say('💡 差一步：把开关闭合，灯才会亮！');
     this._rebuild();
+    this._showDemoBubble(sw);
+    this._startDemoPulse(sw);
+    this._armDemoTipFlash();
+  };
+
+  // "差一步"气泡：定位在开关格附近，点击气泡/开关闭合/重跑示范时撤掉
+  Eng.CircuitUI.prototype._showDemoBubble = function (swUid) {
+    this._hideDemoBubble();
+    var p = this._byUid(swUid);
+    if (!p || p.col < 0) return;
+    var c = this._cellXY(p.col, p.row);
+    var wrap = this.stage.container().parentElement; // .cir-stage-wrap（position:relative）
+    var b = document.createElement('div');
+    b.className = 'cir-bubble';
+    b.textContent = '💡 差一步：把开关闭合，灯才会亮！';
+    b.style.left = Math.max(4, c.x - 120) + 'px';
+    b.style.top = Math.max(4, c.y - 88) + 'px';
+    var self = this;
+    b.addEventListener('click', function () { self._hideDemoBubble(); });
+    wrap.appendChild(b);
+    this._demoBubble = b;
+  };
+
+  Eng.CircuitUI.prototype._hideDemoBubble = function () {
+    if (this._demoBubble && this._demoBubble.parentElement)
+      this._demoBubble.parentElement.removeChild(this._demoBubble);
+    this._demoBubble = null;
+    this._stopDemoPulse();
+    if (this._demoTipT) { clearTimeout(this._demoTipT); this._demoTipT = 0; }
+  };
+
+  // 开关呼吸脉冲（Konva.Tween 往复缩放；每次 _render 后重挂，保证重渲染不丢失）
+  Eng.CircuitUI.prototype._startDemoPulse = function (swUid) {
+    this._stopDemoPulse();
+    this._demoPulseUid = swUid;
+    this._applyDemoPulse();
+  };
+  Eng.CircuitUI.prototype._stopDemoPulse = function () {
+    var self = this;
+    if (this._demoPulseTween) {
+      try { this._demoPulseTween.destroy(); } catch (e) {}
+      this._demoPulseTween = null;
+    }
+    if (this._demoPulseUid) {
+      var node = this.elemLayer.findOne(function (n) { return n.getAttr('uid') === self._demoPulseUid; });
+      if (node) { node.scaleX(1); node.scaleY(1); }
+    }
+    this._demoPulseUid = null;
+  };
+  Eng.CircuitUI.prototype._applyDemoPulse = function () {
+    var self = this;
+    if (!this._demoPulseUid || !window.Konva) return;
+    var node = this.elemLayer.findOne(function (n) { return n.getAttr('uid') === self._demoPulseUid; });
+    if (!node) return;
+    if (this._demoPulseTween) return; // 已在脉冲
+    function beat(up) {
+      var tw = new Konva.Tween({
+        node: node, duration: 0.8, easing: Konva.Easings.EaseInOut,
+        scaleX: up ? 1.14 : 1, scaleY: up ? 1.14 : 1,
+        onFinish: function () { self._demoPulseTween = null; if (self._demoPulseUid) beat(!up); }
+      });
+      self._demoPulseTween = tw;
+      tw.play();
+    }
+    beat(true);
+  };
+
+  // 8 秒无操作：若开关仍断开，课页 exploreTip 高亮闪烁一次（旧 widget 行为保留）
+  Eng.CircuitUI.prototype._armDemoTipFlash = function () {
+    var self = this;
+    if (this._demoTipT) clearTimeout(this._demoTipT);
+    this._demoTipT = setTimeout(function () {
+      self._demoTipT = 0;
+      var stillOpen = false;
+      for (var i = 0; i < self._placed.length; i++) {
+        var p = self._placed[i];
+        if (p.type === 'switch' && p.params && !p.params.closed && self._demoPulseUid) { stillOpen = true; break; }
+      }
+      if (!stillOpen) return;
+      try {
+        var root = document.getElementById(self._ids.stage);
+        var zone = root && root.closest ? root.closest('.phy-zone') : null;
+        var tip = zone ? zone.querySelector('.phy-tip') : document.querySelector('.phy-tip');
+        if (tip) {
+          tip.classList.add('phy-tip-flash');
+          setTimeout(function () { tip.classList.remove('phy-tip-flash'); }, 1100);
+        }
+      } catch (e) {}
+    }, 8000);
   };
 
   /* ---------- 状态行 / 参数面板 / 工具条 ---------- */
@@ -1692,6 +1817,7 @@
         // 量程切换联动 division（§6 表）
         if (key === 'rangeMaxA') p.params.divisionA = (v === 0.6 ? 0.02 : 0.1);
         if (key === 'rangeMaxV') p.params.divisionV = (v === 3 ? 0.1 : 0.5);
+        if (key === 'closed' && v) self._hideDemoBubble(); // 参数面板闭合开关同样撤掉示范气泡
         self._rebuild();
       });
       if (inp.type === 'range') {
