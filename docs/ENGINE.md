@@ -178,6 +178,18 @@
 | `Input(view)` + `bindDrag(node, {onEnd})` + `ensureHitArea(node)` | pointer 统一鼠标/触控；命中区 ≥44px（ENG-56）；拖拽落点=读回位置（ENG-57） | ENG-55~58 |
 | `Eng.prefersReducedMotion()` | reduced-motion 时用分步播放器等效替代连续动画（YP-09） | — |
 
+### 2.7 补间原语（tween.js）
+
+| API | 说明 | 口径 |
+|---|---|---|
+| `Eng.Tween({durationMs, onUpdate, onDone, ease, deterministic, reducedMotion})` | 通用补间；`onUpdate(u)` 签名与 geom-process.js §B 一致；`ease` 默认 easeInOutCubic | ENG-70~72 |
+| `tw.start()` / `cancel()` / `seek(u)` / `replay()` | `start` 前先 `cancel` 旧循环（不许残留双 rAF）；`seek` 精确定位；`replay`=回 0 再播 | ENG-71 |
+| `tw.sample(u)` / `tw.u()` / `tw.isDone()` / `tw.isReduced()` | `sample(u)`：u→状态纯函数（deterministic 断言入口）；`reducedMotion` 可注入供断言 | ENG-70/72 |
+| `Eng.Tween.easeInOutCubic` | 默认缓动纯函数；断言可独立计算期望 | ENG-70 |
+
+> 来源：B 期从 `modules/math/js/geom-process.js` §B 提升（waveA-design.md §6.2）。
+> 不进引擎的（探针反写映射 / petal-strip / complete-square-lab）留数学侧，不许硬塞。
+
 ---
 
 ## 三、真值口径摘要（引用 ENG 编号）
@@ -199,6 +211,8 @@
 - 输入：ENG-55（触控鼠标同一语义）/56（≥44px）/57（落点分毫不差）/58（命中测试）。
 - 播放器：ENG-59（前进/后退）/60（重播）/61（步数读回）/62（帧快照一致）/63（慢放）。
 - 数据驱动：ENG-64（图=render(数据)）/65（数据源声明）/66（非法输入拒绝）。
+- 补间：ENG-70（确定性：同 u 逐位一致）/71（可中断：start 前 cancel 旧循环）
+  /72（reduced-motion 降级为首末两态）。
 - 光路/电路：ENG-67/68（接口文档）；ENG-69（禁半成品实现）。
 - 不可对账：ENG-NC01（多体堆积/非弹性/二维斜碰）/NC02（教学故意反例须配说明）
   /NC03（流体浮力近似力场）/NC04（波动干涉可视化）/NC05（自由数据输入）。
@@ -235,6 +249,9 @@ reset→step(60)→0.5s 精确 / 双环境逐位一致。
    旧渲染器保留为兼容层，直到其章节全部迁移完毕再退役（方案 A 迁移路线）。
 2. **读数/判分走真值 API**：练习判分按容差判定（±1 估读位，YP-15），不许精确字符串匹配；
    课页文案中的数值必须能从 `readValue()` / `claimValue()` 对上（YP-16）。
+   数学探针的"读数走真值 API"口径已在 `modules/math/js/eq-bind.js` 落地：
+   读数行 `readout: function () { return evalR(state.x); }`——读数走解析求值器（真值），
+   不读 DOM 渲染文本；各学科复用此口径。
 3. **引导文案**：沿用原语默认引导（YP-01/02），可覆盖、不可清空（YP-06）；
    文案承诺的"点/拖/试"必须真实可交互（YP-04）。
 4. **图表**：一律经 `DataChart`（数据源声明），不许手绘无源图（YP-17，ENG-64/65）。
@@ -300,6 +317,7 @@ assets/vendor/
 assets/engine/
   core.js  coords.js  driver.js  konva-view.js  input.js
   mech.js  meters.js  plot.js  steps.js  guides.js
+  tween.js  circuit.js
 docs/ENGINE.md（本文件）
 tools/engine-verify/
   verify.css  verify-lib.js  run-verify.cjs
@@ -309,6 +327,7 @@ tools/engine-verify/
   v-meters-electrical.html  v-meters-length-angle.html
   v-meters-thermo-balance.html  v-meters-lab.html
   v-plot.html  v-input.html  v-steps.html  v-data-chart.html  v-konva-view.html
+  v-tween.html
 ```
 
 验证：`node tools/engine-verify/run-verify.cjs`（headless Chromium 真实 file:// 打开；

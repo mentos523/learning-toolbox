@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<!-- V16 · Eng.Tween 补间原语（B 期从 geom-process.js §B 提升；waveA-design.md §6.2） -->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>V16 · Eng.Tween：确定性 / 可中断 / reduced-motion 降级</title>
+<link rel="stylesheet" href="verify.css">
+</head>
+<body>
+<h1>V16 · Eng.Tween：确定性 / 可中断 / reduced-motion 降级</h1>
+<p class="note">覆盖 ENG-70 ~ ENG-72。deterministic 选项：u→状态纯函数，
+同 u 两次 sample 逐位一致；start 前先 cancel 旧循环（不许残留双 rAF）；
+reduced-motion 降级为首末两态。onUpdate(u) 签名与 geom-process.js §B 一致。</p>
+
+<h2>断言结果</h2>
+<div id="verdict" style="display:none"><h2 id="verdict-head"></h2></div>
+<table id="results-table"></table>
+
+<script src="../../assets/engine/core.js?v=2026.10.16.1"></script>
+<script src="../../assets/engine/tween.js?v=2026.10.16.1"></script>
+<script src="verify-lib.js"></script>
+<script>
+(function () {
+'use strict';
+VLib.pageTitle = 'V16 · Eng.Tween';
+var Eng = window.Eng;
+
+function makeRec() {
+  var rec = { us: [], dones: 0 };
+  var tw = Eng.Tween({
+    durationMs: 300,
+    onUpdate: function (u) { rec.us.push(u); },
+    onDone: function () { rec.dones++; }
+  });
+  rec.tw = tw;
+  return rec;
+}
+
+/* ENG-70：deterministic 下 sample(u) 为纯函数——同 u 两次调用逐位一致 */
+var r1 = makeRec();
+var a = r1.tw.sample(0.25), b = r1.tw.sample(0.25);
+VLib.assert('V16-01', 'deterministic sample(0.25) 两次逐位一致', ['ENG-70'],
+  a === b && a === 0.25 && r1.us.length === 2 && r1.us[0] === r1.us[1],
+  'u=0.25 逐位一致', 'u=' + a + '/' + b,
+  'sample 不是纯函数：检查 tween.js sample 是否只依赖 u。下一步查 tween.js。');
+
+/* ENG-70：deterministic start() 不走 wall-clock，直接到末态且 onDone 同步触发 */
+var r2 = makeRec();
+r2.tw = Eng.Tween({ deterministic: true, onUpdate: function (u) { r2.us.push(u); },
+  onDone: function () { r2.dones++; } });
+r2.tw.start();
+VLib.assert('V16-02', 'deterministic start() 同步到末态（无 rAF、无等待）', ['ENG-70'],
+  r2.us.length === 1 && r2.us[0] === 1 && r2.dones === 1 && r2.tw.isDone(),
+  '1 次 onUpdate(1) + onDone', 'onUpdate=' + r2.us.length + '次, dones=' + r2.dones,
+  'deterministic 路径仍走了 rAF：检查 start 的 deterministic 分支。下一步查 tween.js。');
+
+/* ENG-70：seek(u) 后 u() === u（状态是 u 的纯函数） */
+var r3 = makeRec();
+r3.tw.seek(0.6);
+VLib.assert('V16-03', 'seek(0.6) 后 u()===0.6', ['ENG-70'],
+  r3.tw.u() === 0.6, 'u=0.6', 'u=' + r3.tw.u(),
+  'seek 未精确定位：检查 sample 的 clamp01。下一步查 tween.js。');
+
+/* ENG-70：缓动端点正确，中间单调（easeInOutCubic 口径与 geom-process.js §B 一致） */
+var r4 = makeRec();
+var e0 = Eng.Tween.easeInOutCubic(0), e1 = Eng.Tween.easeInOutCubic(1);
+var emid = Eng.Tween.easeInOutCubic(0.5);
+VLib.assert('V16-04', 'easeInOutCubic 端点 0/1、中点 0.5 单调', ['ENG-70'],
+  e0 === 0 && e1 === 1 && emid === 0.5,
+  'e(0)=0,e(0.5)=0.5,e(1)=1', 'e(0)=' + e0 + ',e(0.5)=' + emid + ',e(1)=' + e1,
+  '缓动函数偏离 §B 口径：检查 easeInOutCubic 实现。下一步查 tween.js。');
+
+/* ENG-71：start() 前 cancel 旧循环——任意时刻至多 1 个未完成的 rAF */
+var rafLiveIds = {}, rafLiveN = 0, rafMax = 0;
+var origRAF = window.requestAnimationFrame.bind(window);
+var origCAF = window.cancelAnimationFrame.bind(window);
+function rafNote() { if (rafLiveN > rafMax) rafMax = rafLiveN; }
+/* 用 id 集合精确跟踪未完成 rAF：触发或 cancel 都移除 */
+window.requestAnimationFrame = function (cb) {
+  var id = origRAF(function (t) { delete rafLiveIds[id]; rafLiveN--; cb(t); });
+  rafLiveIds[id] = 1; rafLiveN++; rafNote();
+  return id;
+};
+window.cancelAnimationFrame = function (id) {
+  if (rafLiveIds[id]) { delete rafLiveIds[id]; rafLiveN--; }
+  origCAF(id);
+};
+var r5 = makeRec();
+r5.tw.start();
+r5.tw.start(); /* 中途再 start：旧循环必须被 cancel */
+VLib.assert('V16-05', 'start();start(); 全程未完成 rAF ≤1（无双循环）', ['ENG-71'],
+  rafMax <= 1, 'maxLive≤1', 'maxLive=' + rafMax,
+  'start 未 cancel 旧循环：检查 start 首行 api.cancel()。下一步查 tween.js。');
+window.requestAnimationFrame = origRAF;
+window.cancelAnimationFrame = origCAF;
+r5.tw.cancel();
+
+/* ENG-71：cancel() 后 u 冻结，不再推进 */
+var r6 = makeRec();
+var frozenAt = null;
+r6.tw.start();
+setTimeout(function () {
+  r6.tw.cancel();
+  frozenAt = r6.tw.u();
+}, 80);
+setTimeout(function () {
+  VLib.assert('V16-06', 'cancel() 后 u 冻结（80ms 后无推进）', ['ENG-71'],
+    r6.tw.u() === frozenAt, 'u 冻结于 ' + frozenAt, 'u=' + r6.tw.u(),
+    'cancel 未停住循环：检查 cancel 是否 cancelAnimationFrame。下一步查 tween.js。');
+  runReduced();
+}, 300);
+
+function runReduced() {
+  /* ENG-72：reduced-motion 降级为首末两态——start() 只呈现末态，不发 rAF */
+  var rr = { us: [], dones: 0, raf: 0 };
+  var oR = window.requestAnimationFrame.bind(window);
+  window.requestAnimationFrame = function (cb) { rr.raf++; return oR(cb); };
+  var twR = Eng.Tween({ reducedMotion: true, durationMs: 1200,
+    onUpdate: function (u) { rr.us.push(u); }, onDone: function () { rr.dones++; } });
+  twR.start();
+  VLib.assert('V16-07', 'reduced-motion 下 start() 只 onUpdate(1) 一次、无 rAF', ['ENG-72'],
+    rr.us.length === 1 && rr.us[0] === 1 && rr.dones === 1 && rr.raf === 0 && twR.isReduced(),
+    '1 次 onUpdate(1)，0 rAF', 'onUpdate=' + rr.us.length + '次(' + rr.us.join(',') + '), rAF=' + rr.raf,
+    '降级未生效：检查 reduced 分支。下一步查 tween.js。');
+  window.requestAnimationFrame = oR;
+
+  /* ENG-72：降级下 seek(0)/seek(1) 得首末两态 */
+  var s0 = twR.seek(0).u(), s1 = twR.seek(1).u();
+  VLib.assert('V16-08', 'reduced-motion 下 seek(0)/seek(1) 为首末两态', ['ENG-72'],
+    s0 === 0 && s1 === 1, 'u=0/1', 'u=' + s0 + '/' + s1,
+    '首末两态不可达：检查 seek/sample。下一步查 tween.js。');
+
+  /* onUpdate(u) 签名保留：普通 start 走 rAF，最多 durationMs 内 onDone */
+  var rn = { dones: 0, lastU: -1, mono: true };
+  var twN = Eng.Tween({ durationMs: 120,
+    onUpdate: function (u) { if (u < rn.lastU) rn.mono = false; rn.lastU = u; },
+    onDone: function () { rn.dones++; } });
+  twN.start();
+  setTimeout(function () {
+    VLib.assert('V16-09', '普通 start 经 rAF 到达末态且 u 单调', ['ENG-70', 'ENG-71'],
+      rn.dones === 1 && rn.lastU === 1 && rn.mono,
+      'onDone=1, 末 u=1, 单调', 'onDone=' + rn.dones + ', 末u=' + rn.lastU + ', 单调=' + rn.mono,
+      'rAF 播放异常：检查 tick/paint。下一步查 tween.js。');
+    VLib.summarize();
+  }, 600);
+}
+})();
+</script>
+</body>
+</html>
