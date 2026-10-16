@@ -175,48 +175,130 @@
     return !!(p[lessonId] && p[lessonId].done);
   }
 
-  /* ---------------- 章节浏览器 ---------------- */
-  function renderBrowser() {
+  /* ---------------- 入口选择层（C-01 黄队裁决 2026-10-16，裁决记录见
+   * phy-audit/engine-visual-20261016/FIX-REPORT.md） ----------------
+   * 动线：选择层（默认）→ 学段目录（可返回选择层）→ 课；深链直达课不变。
+   * 学段划分对齐课程标准：cm00–cm11 初中（九年级），cm12–cm21 高中
+   * （必修一第一章起）。化学保留：红线标语、章 done/n 课进度、继续学习。 */
+  var curTrack = null;
+  var CHEM_TRACKS = [
+    { id: "junior", name: "初中化学", tagline: "九年级",
+      desc: "走进化学世界：空气、水、金属、酸碱盐——配平绝不改下标。",
+      chFrom: "cm00", chTo: "cm11" },
+    { id: "senior", name: "高中化学", tagline: "必修＋选择性必修",
+      desc: "物质的量、元素周期律、反应原理、结构与有机化学基础。",
+      chFrom: "cm12", chTo: "cm21" }
+  ];
+  function chmTrackOf(id) {
+    for (var i = 0; i < CHEM_TRACKS.length; i++)
+      if (CHEM_TRACKS[i].id === id) return CHEM_TRACKS[i];
+    return null;
+  }
+  function chmTrackChapters(trackId) {
+    var t = chmTrackOf(trackId);
+    if (!t) return [];
+    return readyChapters().filter(function (c) {
+      return c.id >= t.chFrom && c.id <= t.chTo;
+    });
+  }
+  function chmChapterDone(ch) {
+    var n = 0, done = 0;
+    ((window.CHEM_CH[ch.id] || {}).units || []).forEach(function (u) {
+      ((u.lessons || [])).forEach(function (l) {
+        n++;
+        if (isDone(l.id)) done++;
+      });
+    });
+    return { n: n, done: done };
+  }
+  /* E-03：返回工具箱首页（与数学/英语入口一致） */
+  function chmHomeLink() {
+    var a = el("a", "chm-home-link", "← 返回工具箱首页");
+    a.href = "../../index.html";
+    a.setAttribute("aria-label", "返回工具箱首页");
+    return a;
+  }
+  /* G2：继续学习入口（读 ltb-chm-visited / ltb-chm-page-<课号>，只读不写） */
+  function chmContinueCard() {
+    var visited = load("visited", {});
+    var best = null, bestTs = 0;
+    Object.keys(visited).forEach(function (lid) {
+      var ts = (visited[lid] || {}).ts || 0;
+      if (ts > bestTs && findLesson(lid)) { bestTs = ts; best = lid; }
+    });
+    if (!best) return null;
+    var f = findLesson(best);
+    var pg = loadPage(best) || 0;
+    var card = el("button", "chm-continue", "");
+    card.type = "button";
+    card.innerHTML = '<span class="chm-continue-t">▶ 继续学习</span>' +
+      '<span class="chm-continue-l">' + esc(best) + "《" + esc(f.lesson.title || "") + "》" +
+      "（上次看到第 " + (pg + 1) + " 页）</span>";
+    card.addEventListener("click", function () { goLesson(best); });
+    return card;
+  }
+  /* C-01：选择层（默认入口；保留红线标语） */
+  function renderSelection() {
     browseRoot.innerHTML = "";
-    var wrap = el("div", "chm-browse");
+    curTrack = null;
+    var wrap = el("div", "chm-browse chm-select");
     wrap.appendChild(el("h1", "", "化学"));
     wrap.appendChild(el("p", "chm-browse-sub",
       "下标是身份证，系数是人数——配平绝不改下标。"));
-    /* G2：继续学习入口（读 ltb-chm-visited / ltb-chm-page-<课号>，只读不写） */
-    (function () {
-      var visited = load("visited", {});
-      var best = null, bestTs = 0;
-      Object.keys(visited).forEach(function (lid) {
-        var ts = (visited[lid] || {}).ts || 0;
-        if (ts > bestTs && findLesson(lid)) { bestTs = ts; best = lid; }
+    wrap.appendChild(chmHomeLink());
+    var cc = chmContinueCard();
+    if (cc) wrap.appendChild(cc);
+    var grid = el("div", "chm-track-grid");
+    CHEM_TRACKS.forEach(function (t) {
+      var chs = chmTrackChapters(t.id);
+      var nL = 0, done = 0;
+      chs.forEach(function (c) {
+        var dc = chmChapterDone(c);
+        nL += dc.n; done += dc.done;
       });
-      if (!best) return;
-      var f = findLesson(best);
-      var pg = loadPage(best) || 0;
-      var card = el("button", "chm-continue", "");
+      var card = el("button", "chm-track-card", "");
       card.type = "button";
-      card.innerHTML = '<span class="chm-continue-t">▶ 继续学习</span>' +
-        '<span class="chm-continue-l">' + esc(best) + "《" + esc(f.lesson.title || "") + "》" +
-        "（上次看到第 " + (pg + 1) + " 页）</span>";
-      card.addEventListener("click", function () { goLesson(best); });
-      wrap.appendChild(card);
-    })();
+      card.setAttribute("aria-label", "进入" + t.name);
+      card.innerHTML =
+        '<span class="chm-track-name">' + esc(t.name) +
+        ' <small>· ' + esc(t.tagline) + "</small></span>" +
+        '<span class="chm-track-desc">' + esc(t.desc) + "</span>" +
+        '<span class="chm-track-meta">' + chs.length + " 章 · " + nL + " 课" +
+        (done > 0 ? ' · <span class="chm-track-done">已学完 ' + done + " 课</span>" : "") +
+        "</span>" +
+        '<span class="chm-track-go">进入学习 →</span>';
+      (function (tid) {
+        card.addEventListener("click", function () { showTrackBrowser(tid); });
+      })(t.id);
+      grid.appendChild(card);
+    });
+    wrap.appendChild(grid);
+    browseRoot.appendChild(wrap);
+  }
+  /* C-01：学段目录（由选择层唤出，可返回选择层；保留 done/n 进度） */
+  function renderTrackBrowser(trackId) {
+    var t = chmTrackOf(trackId);
+    if (!t) { renderSelection(); return; }
+    curTrack = trackId;
+    browseRoot.innerHTML = "";
+    var wrap = el("div", "chm-browse");
+    var back = el("button", "chm-back-link", "← 返回选择");
+    back.type = "button";
+    back.addEventListener("click", function () { showSelection(); });
+    wrap.appendChild(back);
+    wrap.appendChild(el("h1", "", "化学 · " + t.name));
+    wrap.appendChild(el("p", "chm-browse-sub",
+      "下标是身份证，系数是人数——配平绝不改下标。"));
     var list = el("ul", "chm-ch-list");
-    readyChapters().forEach(function (c) {
+    chmTrackChapters(trackId).forEach(function (c) {
       var ch = window.CHEM_CH[c.id];
-      var n = 0, done = 0;
-      (ch.units || []).forEach(function (u) {
-        (u.lessons || []).forEach(function (l) {
-          n++;
-          if (isDone(l.id)) done++;
-        });
-      });
+      var dc = chmChapterDone(c);
       var li = el("li", "");
       var btn = el("button", "chm-ch-btn", "");
       btn.type = "button";
       btn.innerHTML = '<span class="chm-ch-id">' + esc(c.id) + "</span>" +
         '<span class="chm-ch-title">' + esc(c.title) + "</span>" +
-        '<span class="chm-ch-count">' + done + "/" + n + " 课</span>";
+        '<span class="chm-ch-count">' + dc.done + "/" + dc.n + " 课</span>";
       (function (cid) {
         btn.addEventListener("click", function () { toggleChapter(li, cid); });
       })(c.id);
@@ -247,6 +329,35 @@
     });
     wrap.appendChild(list);
     browseRoot.appendChild(wrap);
+  }
+  function showSelection() {
+    cur = null;
+    try { document.body.classList.remove("chm-in-lesson"); } catch (e) {}
+    if (appRoot) appRoot.hidden = true;
+    if (browseRoot) {
+      browseRoot.hidden = false;
+      renderSelection();
+    }
+    try {
+      if (parseHash()) history.replaceState(null, "", location.pathname + location.search);
+    } catch (e) {}
+  }
+  function showTrackBrowser(trackId) {
+    cur = null;
+    try { document.body.classList.remove("chm-in-lesson"); } catch (e) {}
+    if (appRoot) appRoot.hidden = true;
+    if (browseRoot) {
+      browseRoot.hidden = false;
+      renderTrackBrowser(trackId);
+    }
+    try {
+      if (parseHash()) history.replaceState(null, "", location.pathname + location.search);
+    } catch (e) {}
+  }
+  /* 课页"← 返回"/抽屉"← 课程首页"/学完回退：回到学段目录（深链进入则回选择层） */
+  function showBrowser() {
+    if (curTrack) showTrackBrowser(curTrack);
+    else showSelection();
   }
   function toggleChapter(li, cid) {
     var body = li.querySelector(".chm-ch-body");
@@ -2492,7 +2603,7 @@ function widgetSolutionMix(p) {
         var v1 = parseFloat(i1.value), v2 = parseFloat(i2.value);
         var ok1 = closeEnough(v1, soluteMass, 0.1), ok2 = closeEnough(v2, waterVol, 0.1);
         if (ok1 && ok2) {
-          say(true, "算对了：" + sigFmt(soluteMass) + "g " + solute.name +
+          say(true, "算对了：" + sigFmt(soluteMass) + " g " + solute.name +
             " + " + sigFmt(waterVol) + "mL 水。");
           record();
           stage.appendChild(nextBtn("下一步：称量 →", function () {
@@ -2529,13 +2640,13 @@ function widgetSolutionMix(p) {
     if (mode === "prepare") {
       stage.appendChild(el("div", "chm-sol-h", "第 2 步 · 称量（托盘天平示意）"));
       stage.appendChild(el("div", "chm-text",
-        "天平读数 = 砝码 + 游码。目标：" + sigFmt(soluteMass) + "g " + solute.name + "。"));
+        "天平读数 = 砝码 + 游码。目标：" + sigFmt(soluteMass) + " g " + solute.name + "。"));
       /* 砝码按钮 + 游码滑块（示意；规范读数练习见仪表读数器） */
       var weights = [10, 5, 2, 1];
       var picked = [];
       var wrow = el("div", "chm-btn-row", "");
       weights.forEach(function (w) {
-        var b = el("button", "", w + "g");
+        var b = el("button", "", w + " g");
         b.type = "button";
         b.setAttribute("aria-pressed", "false");
         b.addEventListener("click", function () {
@@ -2692,24 +2803,212 @@ function widgetReactionParticle(p) {
   box.appendChild(svg);
 
   /* 粒子实例：particles × count 展开 */
-  var insts = [];  /* {pid, def, x, y, hx, hy, g, visible, merged} */
+  var insts = [];  /* {pid, def, x, y, hx, hy, visible, merged, r, fs, side} */
+  /* D-02：标签宽度估算（widget 作用域，供 layout 与箭头标签避让共用） */
+  function rpRad0(pd) { return pd.kind === "molecule" ? 7 : pd.kind === "ion" ? 6.5 : 6; }
+  function rpEstLabelW(pd) {
+    var label = (pd && pd.label) || "", ch = fmtCharge(pd && pd.charge), w = 0;
+    function cw(c) {
+      var code = c.charCodeAt(0);
+      if ((code >= 0x4E00 && code <= 0x9FFF) || code >= 0xFF00) return 5.0;
+      if (code >= 0x2080 && code <= 0x209F) return 1.9;
+      if ((code >= 0x2070 && code <= 0x207F) || code === 0x00B9 || code === 0x00B2 ||
+          code === 0x00B3 || code === 0x207A || code === 0x207B) return 2.2;
+      if (code === 0x00B7 || code === 0x22C5) return 1.6;
+      return 2.9;
+    }
+    var t = label + ch;
+    for (var i = 0; i < t.length; i++) w += cw(t.charAt(i));
+    return w;
+  }
+  /* 文本宽度估算（任意字号；CJK 按 1em，拉丁按 0.55em） */
+  function rpTextW(str, size) {
+    var w = 0;
+    str = String(str || "");
+    for (var i = 0; i < str.length; i++) {
+      var c = str.charCodeAt(i);
+      w += ((c >= 0x4E00 && c <= 0x9FFF) || c >= 0xFF00) ? size : size * 0.55;
+    }
+    return w;
+  }
   (function layout() {
     var left = [], right = [];
     particles.forEach(function (pd) {
       for (var c = 0; c < (pd.count || 1); c++) {
-        var it = { pid: pd.id, def: pd, x: 0, y: 0, hx: 0, hy: 0, visible: true, merged: false };
+        var it = { pid: pd.id, def: pd, x: 0, y: 0, hx: 0, hy: 0, visible: true, merged: false,
+          side: pd.role === "product" ? "R" : "L" };
         (pd.role === "product" ? right : left).push(it);
         insts.push(it);
       }
     });
-    function spread(arr, x0, x1) {
-      arr.forEach(function (it, i) {
-        var n = arr.length;
-        it.x = it.hx = n === 1 ? (x0 + x1) / 2 : x0 + (x1 - x0) * (i / (n - 1));
-        it.y = it.hy = VH / 2 + ((i % 2) ? -9 : 9) + ((i % 3) - 1) * 4;
+    /* D-01/D-02（白队 2026-10-16）：自适应布局，替代旧 spread 固定区间。
+     * 旧 spread 把两侧实例按固定区间 [8,42]/[58,92] 等距排布，n≥4 即重叠。
+     * 新布局三步：① 分区位 split × 半径 r 联合搜索（取"半径最大、行数最少"，
+     * 区间与半径联动）；② 网格排布（末行居中）；③ 碰撞松弛兜底
+     * （确定性迭代、无随机）。半径/字号联动缩放（it.r/it.fs，renderFrame 消费）。 */
+    var Y_TOP = 10, Y_BOT = 54, X_MIN = 6, X_MAX = 94;
+    function rad0(pd) { return rpRad0(pd); }
+    function estLabelW(pd) { return rpEstLabelW(pd); }
+    function sideStats(arr) {
+      var n = arr.length, maxLW = 0, r0 = 0, hasSpec = false;
+      arr.forEach(function (it) {
+        var w = estLabelW(it.def);
+        if (w > maxLW) maxLW = w;
+        var rr = rad0(it.def);
+        if (rr > r0) r0 = rr;
+        if (it.def.role === "spectator" && !spectatorFade) hasSpec = true;
       });
+      return { n: n, maxLW: maxLW, r0: r0 || 7, hasSpec: hasSpec };
     }
-    spread(left, 8, 42); spread(right, 58, 92);
+    /* 给定分区宽度 W 与半径 r，找"行数最少"的可行网格；不可行返回 null */
+    function sideFeasible(n, W, r, maxLW, hasSpec) {
+      if (n <= 0) return { rows: 0, cols: 0, r: r };
+      var s = r / 7;
+      var cellNeedW = Math.max(2 * r + 2.5, maxLW * s + 3.5);
+      var cellNeedH = 2 * r + 3.5 + (hasSpec ? 6 * s : 0);
+      for (var rows = 1; rows <= 10; rows++) {
+        var cols = Math.ceil(n / rows);
+        if (W / cols >= cellNeedW && (Y_BOT - Y_TOP) / rows >= cellNeedH)
+          return { rows: rows, cols: cols, r: r };
+      }
+      return null;
+    }
+    var sL = sideStats(left), sR = sideStats(right);
+    /* keyframe 目标点（各帧 moves 的 to）：首帧即生效（frameState(0)），
+     * 布局时视作障碍——实例起始位与"动作区"保持距离，避免被移入的实例砸中。 */
+    var targets = [];
+    (keyframes || []).forEach(function (kf) {
+      (kf.moves || []).forEach(function (mv) {
+        if (!mv.to) return;
+        var dup = targets.some(function (t) { return t.x === mv.to[0] && t.y === mv.to[1]; });
+        if (dup) return;
+        var rr = 7;
+        insts.forEach(function (it) {
+          if (it.pid === mv.id) { var q = rad0(it.def); if (q > rr) rr = q; }
+        });
+        targets.push({ x: mv.to[0], y: mv.to[1], r: rr });
+      });
+    });
+    var RCAND = [7, 6, 5, 4.5, 4, 3.5, 3, 2.8, 2.5];
+    /* 分区对（左区/右区），按"中间动作区"偏好排序：默认 [6,40]/[60,94]
+     * 留出 [40,60] 给 keyframe 目标；实例过多装不下时才向中间扩张。 */
+    var ZONEPAIRS = [
+      [6, 40, 60, 94], [6, 48, 52, 94], [6, 56, 60, 94],
+      [6, 44, 44, 94], [6, 60, 64, 94], [6, 40, 40, 94]
+    ];
+    function zoneScore(zp) {
+      /* 侵入偏好动作区 [42,58] 的宽度惩罚 */
+      var intr = 0;
+      if (zp[1] > 42) intr += Math.min(zp[1], 58) - 42;
+      if (zp[2] < 58) intr += 58 - Math.max(zp[2], 42);
+      return intr;
+    }
+    var best = null;
+    ZONEPAIRS.forEach(function (zp) {
+      var WL = zp[1] - zp[0], WR = zp[3] - zp[2];
+      var cands = [];
+      RCAND.forEach(function (rL0) {
+        var rL = Math.min(rL0, sL.r0);
+        var fL = sideFeasible(sL.n, WL, rL, sL.maxLW, sL.hasSpec);
+        if (!fL) return;
+        RCAND.forEach(function (rR0) {
+          var rR = Math.min(rR0, sR.r0);
+          var fR = sideFeasible(sR.n, WR, rR, sR.maxLW, sR.hasSpec);
+          if (!fR) return;
+          cands.push({ rL: rL, rR: rR, fL: fL, fR: fR,
+            score: Math.min(rL, rR) * 100 + (rL + rR) - Math.abs(rL - rR) * 0.5 });
+        });
+      });
+      if (!cands.length) return;
+      cands.sort(function (a, b) { return b.score - a.score; });
+      var c0 = cands[0];
+      var score = c0.score - zoneScore(zp) * 2;
+      if (!best || score > best.score)
+        best = { score: score, zp: zp, WL: WL, WR: WR,
+          rL: c0.rL, rR: c0.rR, fL: c0.fL, fR: c0.fR };
+    });
+    if (!best) { /* 兜底：等分 + 最小半径（理论不可达） */
+      best = { score: -1e9, zp: [6, 48, 52, 94], WL: 42, WR: 42, rL: 2.5, rR: 2.5,
+        fL: sideFeasible(sL.n, 42, 2.5, sL.maxLW, sL.hasSpec) || { rows: 8, cols: Math.ceil(sL.n / 8), r: 2.5 },
+        fR: sideFeasible(sR.n, 42, 2.5, sR.maxLW, sR.hasSpec) || { rows: 8, cols: Math.ceil(sR.n / 8), r: 2.5 } };
+    }
+    function place(arr, x0, x1, f, r, xLo, xHi) {
+      var n = arr.length;
+      if (!n || !f.rows) return;
+      var H = Y_BOT - Y_TOP, s = r / 7;
+      for (var i = 0; i < n; i++) {
+        var row = Math.floor(i / f.cols), col = i % f.cols;
+        var inRow = (row === f.rows - 1) ? (n - row * f.cols) : f.cols;
+        var cw = (x1 - x0) / f.cols;
+        var x = x0 + (x1 - x0) / 2 + (col - (inRow - 1) / 2) * cw;
+        var y = Y_TOP + (row + 0.5) * H / f.rows;
+        var it = arr[i];
+        it.x = it.hx = Math.max(xLo, Math.min(xHi, x));
+        it.y = it.hy = y;
+        it.r = r; it.fs = s;
+      }
+    }
+    place(left, best.zp[0], best.zp[1], best.fL, best.rL, best.zp[0] + 1, best.zp[1] - 1);
+    place(right, best.zp[2], best.zp[3], best.fR, best.rR, best.zp[2] + 1, best.zp[3] - 1);
+    /* 碰撞松弛兜底：圆包络 + 标签包络双重约束；keyframe 目标点与 e⁻ 示意区
+     * 作障碍；确定性迭代 */
+    (function relax() {
+      if (!insts.length) return;
+      var obs = [];
+      targets.forEach(function (t) {
+        obs.push({ x: t.x, y: t.y, rx: t.r + 2.5, ry: t.r + 2.5 });
+      });
+      if (reaction.eTransfer) {
+        obs.push({ x: 44, y: 12, rx: 10, ry: 6 });
+        obs.push({ x: 50, y: 8, rx: 14, ry: 5 });
+      }
+      function foot(it) {
+        var s = it.fs || 1, r = it.r || 7;
+        return {
+          rx: Math.max(2 * r, estLabelW(it.def) * s) / 2 + 1.2,
+          ry: r + 1.2 + ((it.def.role === "spectator" && !spectatorFade) ? 5 * s : 0)
+        };
+      }
+      for (var iter = 0; iter < 120; iter++) {
+        var moved = false;
+        for (var i = 0; i < insts.length; i++) {
+          var a = insts[i], fa = foot(a);
+          for (var j = i + 1; j < insts.length; j++) {
+            var b = insts[j], fb = foot(b);
+            var dx = b.x - a.x, dy = b.y - a.y;
+            var ox = fa.rx + fb.rx - Math.abs(dx);
+            var oy = fa.ry + fb.ry - Math.abs(dy);
+            if (ox > 0 && oy > 0) {
+              if (ox < oy) {
+                var px = ox / 2 + 0.05, sx = dx >= 0 ? 1 : -1;
+                a.x -= sx * px; b.x += sx * px;
+              } else {
+                var py = oy / 2 + 0.05, sy = dy >= 0 ? 1 : -1;
+                a.y -= sy * py; b.y += sy * py;
+              }
+              moved = true;
+            }
+          }
+          for (var k = 0; k < obs.length; k++) {
+            var o = obs[k];
+            var ox2 = fa.rx + o.rx - Math.abs(a.x - o.x);
+            var oy2 = fa.ry + o.ry - Math.abs(a.y - o.y);
+            if (ox2 > 0 && oy2 > 0) {
+              if (ox2 < oy2) a.x += (a.x >= o.x ? 1 : -1) * (ox2 + 0.1);
+              else a.y += (a.y >= o.y ? 1 : -1) * (oy2 + 0.1);
+              moved = true;
+            }
+          }
+          /* 分区钳制：左右实例不出各自的分区别 */
+          var xLo = a.side === "L" ? best.zp[0] + 1 : best.zp[2] + 1;
+          var xHi = a.side === "L" ? best.zp[1] - 1 : best.zp[3] - 1;
+          a.x = Math.max(xLo, Math.min(xHi, a.x));
+          a.y = Math.max(6, Math.min(58, a.y));
+          a.hx = a.x; a.hy = a.y;
+        }
+        if (!moved) break;
+      }
+    })();
   })();
 
   function ballLook(def) {
@@ -2800,6 +3099,37 @@ function widgetReactionParticle(p) {
         }
       });
     }
+    /* D-02：同目标点去堆叠。多个实例被 moves 指向同一 to 点时（如 6H⁺→(50,50)），
+     * 按实例序号确定性排成小环（仍"在"目标点处，不改数据坐标语义）；
+     * 淡出（vis=false）的实例仍绘制，也参与去堆叠；已合并（merged）的不参与。 */
+    (function destack() {
+      var groups = {};
+      Object.keys(st).forEach(function (k) {
+        var s = st[k];
+        if (!s || s.merged) return;
+        var gk = s.x.toFixed(2) + "," + s.y.toFixed(2);
+        (groups[gk] = groups[gk] || []).push(k);
+      });
+      Object.keys(groups).forEach(function (gk) {
+        var ks = groups[gk];
+        if (ks.length < 2) return;
+        var parts = gk.split(",");
+        var cx = parseFloat(parts[0]), cy = parseFloat(parts[1]);
+        var rMax = 0, n = ks.length;
+        ks.forEach(function (k) {
+          var it = insts[st[k].k];
+          var r = (it && it.r) || 7;
+          if (r > rMax) rMax = r;
+        });
+        var R = Math.max(rMax + 2.5, rMax / Math.sin(Math.PI / n) + 1);
+        ks.sort();
+        ks.forEach(function (k, idx) {
+          var a = (idx / n) * Math.PI * 2 - Math.PI / 2;
+          st[k].x = Math.max(4, Math.min(96, cx + R * Math.cos(a)));
+          st[k].y = Math.max(8, Math.min(56, cy + R * Math.sin(a)));
+        });
+      });
+    })();
     return st;
   }
   var curFrame = 0, playing = false, timer = null, speed = 1;
@@ -2809,6 +3139,38 @@ function widgetReactionParticle(p) {
 
   function renderFrame(animate) {
     var st = frameState(curFrame);
+    /* D-02：帧位置轻量松弛（去堆叠钳制后残留接触的兜底）。
+     * 只解 gap<0 的严格重叠；确定性、无随机；不改数据坐标语义。 */
+    (function relaxFrame() {
+      var keys = Object.keys(st).filter(function (k) { return st[k] && !st[k].merged; });
+      function radOf(k) {
+        var it = insts[st[k].k];
+        return (it && it.r) || 7;
+      }
+      for (var iter = 0; iter < 60; iter++) {
+        var moved = false;
+        for (var i = 0; i < keys.length; i++) {
+          for (var j = i + 1; j < keys.length; j++) {
+            var a = st[keys[i]], b = st[keys[j]];
+            var minD = radOf(keys[i]) + radOf(keys[j]) + 0.6;
+            var dx = b.x - a.x, dy = b.y - a.y;
+            var d = Math.sqrt(dx * dx + dy * dy);
+            if (d < minD) {
+              var push = (minD - d) / 2 + 0.05;
+              var ux = d > 1e-6 ? dx / d : 1, uy = d > 1e-6 ? dy / d : 0;
+              a.x -= ux * push; b.x += ux * push;
+              a.y -= uy * push; b.y += uy * push;
+              moved = true;
+            }
+          }
+        }
+        keys.forEach(function (k) {
+          st[k].x = Math.max(4, Math.min(96, st[k].x));
+          st[k].y = Math.max(6, Math.min(58, st[k].y));
+        });
+        if (!moved) break;
+      }
+    })();
     svg.innerHTML = "";
     var order = Object.keys(st).sort(function (a, b) {
       return st[a].k - st[b].k;
@@ -2828,19 +3190,21 @@ function widgetReactionParticle(p) {
       var it = insts[s.k];
       if (!it) return;
       var lk = ballLook(it.def);
+      /* D-01/D-02：半径/字号取自适应布局（it.r/it.fs），回退旧固定值 */
+      var rr = it.r || lk.r, fs = it.fs || 1;
       var g2 = svgEl("g", {});
       g2.appendChild(svgEl("circle", {
-        cx: s.x, cy: s.y, r: lk.r, fill: lk.bg,
+        cx: s.x, cy: s.y, r: rr, fill: lk.bg,
         stroke: "#00000055", "stroke-width": 0.6,
         opacity: s.vis ? 1 : (spectatorFade && it.def.role === "spectator" ? 0.14 : 1)
       }));
       if (lk.formula) {
         var gg = svgEl("g", {});
-        svgFormulaText(gg, s.x, s.y + 2.2, lk.txt, 5, lk.fg);
+        svgFormulaText(gg, s.x, s.y + 2.2 * fs, lk.txt, 5 * fs, lk.fg);
         g2.appendChild(gg);
       } else {
         var t = svgEl("text", {
-          x: s.x, y: s.y + 2.4, "text-anchor": "middle", "font-size": 4.8,
+          x: s.x, y: s.y + 2.4 * fs, "text-anchor": "middle", "font-size": 4.8 * fs,
           "font-weight": "700", fill: lk.fg
         });
         t.textContent = lk.txt;
@@ -2848,8 +3212,8 @@ function widgetReactionParticle(p) {
       }
       if (it.def.role === "spectator" && !spectatorFade && s.vis) {
         var sp = svgEl("text", {
-          x: s.x, y: s.y - lk.r - 2, "text-anchor": "middle",
-          "font-size": 3.6, fill: "var(--chm-ink-soft)"
+          x: s.x, y: s.y - rr - 2, "text-anchor": "middle",
+          "font-size": 3.6 * fs, fill: "var(--chm-ink-soft)"
         });
         sp.textContent = "旁观离子";
         g2.appendChild(sp);
@@ -2907,6 +3271,38 @@ function widgetReactionParticle(p) {
           });
           at.textContent = "电子：从" + arrow.from + "（失）→ " + arrow.to + "（得）";
           svg.appendChild(at);
+          /* D-02：箭头标签避让（解析式）。标签宽大，与实例标签/"e⁻（示意）"
+           * 包络碰撞时垂直错开（确定性候选位），不改文案。 */
+          (function avoidArrowLabel() {
+            var mx = (x1 + x2) / 2, my0 = (y1 + y2) / 2 - 3;
+            var label = at.textContent;
+            var lw = rpTextW(label, 4.2) / 2 + 2, lh = 3.2;
+            var blocks = [{ x: 50, y: 8, rx: rpTextW("e⁻（示意）", 4.4) / 2 + 2, ry: 4 }];
+            Object.keys(st).forEach(function (k) {
+              var s = st[k];
+              if (!s || s.merged) return;
+              var it = insts[s.k];
+              if (!it) return;
+              var fs2 = it.fs || 1;
+              blocks.push({ x: s.x, y: s.y + 2.4 * fs2,
+                rx: rpEstLabelW(it.def) * fs2 / 2 + 1.5, ry: 3.5 * fs2 });
+              if (it.def.role === "spectator" && !spectatorFade && s.vis)
+                blocks.push({ x: s.x, y: s.y - (it.r || 7) - 4 * fs2,
+                  rx: rpTextW("旁观离子", 3.6 * fs2) / 2 + 1.5, ry: 2.5 * fs2 });
+            });
+            var tries = [0, -11, 13, -22, 24];
+            for (var ti = 0; ti < tries.length; ti++) {
+              var my = my0 + tries[ti];
+              var hit = false;
+              for (var bi = 0; bi < blocks.length; bi++) {
+                var b = blocks[bi];
+                if (Math.abs(mx - b.x) < lw + b.rx && Math.abs(my - b.y) < lh + b.ry) {
+                  hit = true; break;
+                }
+              }
+              if (!hit) { at.setAttribute("y", my); break; }
+            }
+          })();
         }
       }
     }
@@ -4217,7 +4613,7 @@ function widgetReadGaugeChem(p) {
     var picked = [];
     var wrow = el("div", "chm-btn-row", "");
     weights.forEach(function (w) {
-      var b = el("button", "", w + "g");
+      var b = el("button", "", w + " g");
       b.type = "button";
       b.setAttribute("aria-pressed", "false");
       b.addEventListener("click", function () {
@@ -4901,18 +5297,7 @@ var CHEM_NEW_WIDGETS = {
   function goLesson(lessonId) {
     openLesson(lessonId, undefined, true);
   }
-  function showBrowser() {
-    cur = null;
-    try { document.body.classList.remove("chm-in-lesson"); } catch (e) {}
-    if (appRoot) appRoot.hidden = true;
-    if (browseRoot) {
-      browseRoot.hidden = false;
-      renderBrowser();
-    }
-    try {
-      if (parseHash()) history.replaceState(null, "", location.pathname + location.search);
-    } catch (e) {}
-  }
+  /* showBrowser 已上移为"回学段目录/选择层"分发器（C-01），此处不再重复定义 */
   function route() {
     var h = parseHash();
     if (h && hasLesson(h.lesson)) {

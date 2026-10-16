@@ -67,10 +67,10 @@ VLib.assert('V9-05', '15V 档：7.43V → 7.4V（估读到 0.1）', ['ENG-38', '
 vt15.readText() === '7.4 V', '7.4 V', vt15.readText(),
 '估读位数不对：0.5 首位为 5 → 估读到本位（0.1）。下一步查 meters.js。');
 
-// ENG-39/40：接线柱标注与量程一致
+// ENG-39/40：接线柱标注与量程一致（V-07：数值与单位间半角空格）
 VLib.assert('V9-06', '接线柱标注与启用量程一致', ['ENG-39', 'ENG-40'],
-am.terminalLabel === '0.6A' && am3.terminalLabel === '3A' && vt3.terminalLabel === '3V' && vt15.terminalLabel === '15V',
-'0.6A/3A/3V/15V', [am.terminalLabel, am3.terminalLabel, vt3.terminalLabel, vt15.terminalLabel].join('/'),
+am.terminalLabel === '0.6 A' && am3.terminalLabel === '3 A' && vt3.terminalLabel === '3 V' && vt15.terminalLabel === '15 V',
+'0.6 A/3 A/3 V/15 V', [am.terminalLabel, am3.terminalLabel, vt3.terminalLabel, vt15.terminalLabel].join('/'),
 '接线柱文字与量程矛盾。下一步查 meters.js。');
 
 // ENG-47：指针角度→读数一致 ≤ 0.5 分度

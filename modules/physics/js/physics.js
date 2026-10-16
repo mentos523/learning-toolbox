@@ -147,35 +147,142 @@
     return !!(load("progress", {})[lessonId] || {}).done;
   }
 
-  /* ---------------- 章节浏览器（数据驱动） ---------------- */
-  var browseRoot = null, appRoot = null, cur = null;
-
-  function renderBrowser() {
-    browseRoot.innerHTML = "";
-    var wrap = el("div", "phy-browse");
-    wrap.appendChild(el("h1", "", "物理"));
-    var chs = readyChapters();
+  /* ---------------- 入口选择层（E-01 黄队裁决 2026-10-16，裁决记录见
+   * phy-audit/engine-visual-20261016/FIX-REPORT.md） ----------------
+   * 动线：选择层（默认）→ 学段目录（可返回选择层）→ 课；深链直达课不变。
+   * 学段划分对齐课程标准：p00–p10 初中（八年级起步→九年级），
+   * p11–p17 高中（必修一 Ch1–2 起）。章 id 字符串比较（p09<p10<p11 成立）。 */
+  var browseRoot = null, appRoot = null, cur = null, curTrack = null;
+  var PHY_TRACKS = [
+    { id: "junior", name: "初中物理", tagline: "八年级起步",
+      desc: "声、光、热、力、电——从零开始建立物理直觉。",
+      chFrom: "p00", chTo: "p10" },
+    { id: "senior", name: "高中物理", tagline: "必修＋选择性必修",
+      desc: "牛顿定律、能量动量、电磁场、振动波与近代物理。",
+      chFrom: "p11", chTo: "p17" }
+  ];
+  function phyTrackOf(id) {
+    for (var i = 0; i < PHY_TRACKS.length; i++)
+      if (PHY_TRACKS[i].id === id) return PHY_TRACKS[i];
+    return null;
+  }
+  function trackChapters(trackId) {
+    var t = phyTrackOf(trackId);
+    if (!t) return [];
+    return readyChapters().filter(function (c) {
+      return c.id >= t.chFrom && c.id <= t.chTo;
+    });
+  }
+  function chapterDoneCount(ch) {
+    var n = 0, done = 0;
+    ((window.PHY_CH[ch.id] || {}).units || []).forEach(function (u) {
+      ((u.lessons || [])).forEach(function (l) {
+        n++;
+        if (isDone(l.id)) done++;
+      });
+    });
+    return { n: n, done: done };
+  }
+  function browseCounts() {
     var nLessons = 0, nPages = 0;
-    chs.forEach(function (c) {
-      ((window.PHY_CH[c.id] || {}).units || []).forEach(function (u) {
-        ((u.lessons || [])).forEach(function (l) {
+    readyChapters().forEach(function (c) {
+      (((window.PHY_CH[c.id] || {}).units) || []).forEach(function (u) {
+        (((u.lessons) || [])).forEach(function (l) {
           nLessons++;
           nPages += ((l.pages || []).length);
         });
       });
     });
+    return { ch: readyChapters().length, lessons: nLessons, pages: nPages };
+  }
+  /* E-03：返回工具箱首页（与数学/英语入口一致） */
+  function homeLink(cls) {
+    var a = el("a", cls || "phy-home-link", "← 返回工具箱首页");
+    a.href = "../../index.html";
+    a.setAttribute("aria-label", "返回工具箱首页");
+    return a;
+  }
+  /* E-02：继续学习卡片（对齐化学 G2；键沿用物理既有约定
+   * ltb-phy-visited / phy_page_<课号>，只读不写） */
+  function continueCard() {
+    var visited = load("visited", {});
+    var best = null, bestTs = 0;
+    Object.keys(visited).forEach(function (lid) {
+      var ts = (visited[lid] || {}).ts || 0;
+      if (ts > bestTs && findLesson(lid)) { bestTs = ts; best = lid; }
+    });
+    if (!best) return null;
+    var f = findLesson(best);
+    var pg = loadPage(best) || 0;
+    var card = el("button", "phy-continue", "");
+    card.type = "button";
+    card.innerHTML = '<span class="phy-continue-t">▶ 继续学习</span>' +
+      '<span class="phy-continue-l">' + esc(best) + "《" + esc(f.lesson.title || "") + "》" +
+      "（上次看到第 " + (pg + 1) + " 页）</span>";
+    card.addEventListener("click", function () { goLesson(best); });
+    return card;
+  }
+  /* E-01：选择层（默认入口） */
+  function renderSelection() {
+    browseRoot.innerHTML = "";
+    curTrack = null;
+    var wrap = el("div", "phy-browse phy-select");
+    wrap.appendChild(el("h1", "", "物理"));
+    var bc = browseCounts();
     wrap.appendChild(el("p", "phy-browse-sub",
-      chs.length + " 章 · " + nLessons + " 课 · " + nPages + " 页"));
+      bc.ch + " 章 · " + bc.lessons + " 课 · " + bc.pages + " 页"));
+    wrap.appendChild(homeLink());
+    var cc = continueCard();
+    if (cc) wrap.appendChild(cc);
+    var grid = el("div", "phy-track-grid");
+    PHY_TRACKS.forEach(function (t) {
+      var chs = trackChapters(t.id);
+      var nL = 0, done = 0;
+      chs.forEach(function (c) {
+        var dc = chapterDoneCount(c);
+        nL += dc.n; done += dc.done;
+      });
+      var card = el("button", "phy-track-card", "");
+      card.type = "button";
+      card.setAttribute("aria-label", "进入" + t.name);
+      card.innerHTML =
+        '<span class="phy-track-name">' + esc(t.name) +
+        ' <small>· ' + esc(t.tagline) + "</small></span>" +
+        '<span class="phy-track-desc">' + esc(t.desc) + "</span>" +
+        '<span class="phy-track-meta">' + chs.length + " 章 · " + nL + " 课" +
+        (done > 0 ? ' · <span class="phy-track-done">已学完 ' + done + " 课</span>" : "") +
+        "</span>" +
+        '<span class="phy-track-go">进入学习 →</span>';
+      (function (tid) {
+        card.addEventListener("click", function () { showTrackBrowser(tid); });
+      })(t.id);
+      grid.appendChild(card);
+    });
+    wrap.appendChild(grid);
+    browseRoot.appendChild(wrap);
+  }
+  /* E-01：学段目录（由选择层唤出，可返回选择层） */
+  function renderTrackBrowser(trackId) {
+    var t = phyTrackOf(trackId);
+    if (!t) { renderSelection(); return; }
+    curTrack = trackId;
+    browseRoot.innerHTML = "";
+    var wrap = el("div", "phy-browse");
+    var back = el("button", "phy-back-link", "← 返回选择");
+    back.type = "button";
+    back.addEventListener("click", function () { showSelection(); });
+    wrap.appendChild(back);
+    wrap.appendChild(el("h1", "", "物理 · " + t.name));
+    var chs = trackChapters(trackId);
     var list = el("ul", "phy-ch-list");
     chs.forEach(function (c) {
       var ch = window.PHY_CH[c.id];
+      var dc = chapterDoneCount(c);
       var li = el("li", "");
-      var nL = 0;
-      (ch.units || []).forEach(function (u) { nL += (u.lessons || []).length; });
       var btn = el("button", "phy-ch-btn",
         '<span class="phy-ch-id">' + esc(c.id) + "</span>" +
         '<span class="phy-ch-title">' + esc(c.title) + "</span>" +
-        '<span class="phy-ch-count">' + nL + " 课</span>");
+        '<span class="phy-ch-count">' + dc.done + "/" + dc.n + " 课</span>");
       btn.type = "button";
       btn.setAttribute("aria-expanded", "false");
       var sub = el("div", "");
@@ -208,6 +315,33 @@
     });
     wrap.appendChild(list);
     browseRoot.appendChild(wrap);
+  }
+  function showSelection() {
+    cur = null;
+    if (appRoot) appRoot.hidden = true;
+    if (browseRoot) {
+      browseRoot.hidden = false;
+      renderSelection();
+    }
+    try {
+      if (parseHash()) history.replaceState(null, "", location.pathname + location.search);
+    } catch (e) {}
+  }
+  function showTrackBrowser(trackId) {
+    cur = null;
+    if (appRoot) appRoot.hidden = true;
+    if (browseRoot) {
+      browseRoot.hidden = false;
+      renderTrackBrowser(trackId);
+    }
+    try {
+      if (parseHash()) history.replaceState(null, "", location.pathname + location.search);
+    } catch (e) {}
+  }
+  /* 课页"← 返回"/抽屉"← 课程首页"/学完回退：回到学段目录（深链进入则回选择层） */
+  function showBrowser() {
+    if (curTrack) showTrackBrowser(curTrack);
+    else showSelection();
   }
 
   /* ---------------- 读数徽章（冻结 spec） ---------------- */
@@ -1483,7 +1617,7 @@
           fill: "transparent", "class": "phy-handle-hit", "aria-label": "拖动滑片改变接入电阻" });
         g.appendChild(hd); g.appendChild(hit);
         var rv = svgText(cc.x, cc.y + s * 0.62 + 4.5, "", "phy-rheo-val");
-        rv.textContent = "R=" + fmtN(rheoR(comp), 1) + "Ω";
+        rv.textContent = "R=" + fmtN(rheoR(comp), 1) + " Ω";
         g.appendChild(rv);
         rheoValNodes[comp.id] = rv;
         rheoDrag[comp.id] = { hd: hd, hit: hit, cc: { x: cc.x, y: cc.y }, s: s };
@@ -1610,7 +1744,7 @@
         d.hd.setAttribute("cx", hx); d.hit.setAttribute("cx", hx);
       }
       if (rheoValNodes[c.id])
-        rheoValNodes[c.id].textContent = "R=" + fmtN(rheoR(c), 1) + "Ω";
+        rheoValNodes[c.id].textContent = "R=" + fmtN(rheoR(c), 1) + " Ω";
       var ctl = rheoCtrls[c.id];
       if (ctl) ctl.set(rheoR(c), true);
     }
@@ -1624,7 +1758,7 @@
       }
       comps.forEach(function (c) {
         if (c.kind === "rheostat" && rheoValNodes[c.id])
-          rheoValNodes[c.id].textContent = "R=" + fmtN(rheoR(c), 1) + "Ω";
+          rheoValNodes[c.id].textContent = "R=" + fmtN(rheoR(c), 1) + " Ω";
       });
     }
     /* 滑动变阻器滑块行（W-P9：原生 range ≥44px + −/+ 步进；与 SVG 滑片双向同步） */
@@ -2538,7 +2672,7 @@
             stroke: cssVar("--phy-body"), "stroke-width": 1.4 }));
           svg.appendChild(svgEl("rect", { x: cx - rr - 5, y: ly, width: 10, height: 8,
             "class": "phy-body-box" }));
-          svg.appendChild(svgText(cx - rr, ly + 12, "G=" + G + "N", "phy-sym-label"));
+          svg.appendChild(svgText(cx - rr, ly + 12, "G=" + G + " N", "phy-sym-label"));
           var hd = svgEl("circle", { cx: cx + rr, cy: ry, r: 6, "class": "phy-handle",
             fill: cssVar("--phy-known"), "aria-label": "拖动拉绳" });
           svg.appendChild(hd);
@@ -2561,7 +2695,7 @@
             stroke: cssVar("--phy-body"), "stroke-width": 1.4 }));
           svg.appendChild(svgEl("rect", { x: mx2 - 5, y: my2 + 7, width: 10, height: 8,
             "class": "phy-body-box" }));
-          svg.appendChild(svgText(mx2, my2 + 20, "G=" + G + "N", "phy-sym-label"));
+          svg.appendChild(svgText(mx2, my2 + 20, "G=" + G + " N", "phy-sym-label"));
           var hd2 = svgEl("circle", { cx: mx2 + 7, cy: hy2, r: 6, "class": "phy-handle",
             fill: cssVar("--phy-known"), "aria-label": "拖动拉绳" });
           svg.appendChild(hd2);
@@ -3389,7 +3523,7 @@
         ctx.strokeStyle = cssVar("--phy-highlight"); ctx.lineWidth = 5;
         ctx.beginPath(); ctx.moveTo(px, ty - 6); ctx.lineTo(px, ty + 6); ctx.stroke();
         ctx.fillStyle = cssVar("--phy-body"); ctx.font = "10px sans-serif"; ctx.textAlign = "center";
-        ctx.fillText(tv + "℃", px, ty + 18);
+        ctx.fillText(tv + " ℃", px, ty + 18);
       });
       /* F5–F9：慢放标注常驻（动画速度经缩放示意，非真实分子速率） */
       slowNote.style.display = "";
@@ -4788,8 +4922,8 @@
       svg.appendChild(svgText(94, Y(Tof(cW, t)) + 6, "水", "phy-note-text", "end"));
       var dTw = Tof(cW, t) - 20, dTs = Tof(cS, t) - 20;
       var r = mmlRead(mi("ΔT"), fmtN(dTs, 1), "℃");
-      badge.setReadout(r.mathml, "加热 " + fmtN(t, 0) + "s：水 +" + fmtN(dTw, 1) +
-        "℃，沙子 +" + fmtN(dTs, 1) + "℃");
+      badge.setReadout(r.mathml, "加热 " + fmtN(t, 0) + " s：水 +" + fmtN(dTw, 1) +
+        " ℃，沙子 +" + fmtN(dTs, 1) + " ℃");
       st.textContent = t >= tMax ? "加热结束：沙子升温是水的约 " + fmtN(cW / cS, 1) + " 倍"
         : t > 0 ? "加热中…：沙子线更陡（升温快）" : "按 ▶ 开始加热";
       st.className = "phy-state " + (t > 0 ? "phy-state-ok" : "");
@@ -4834,7 +4968,7 @@
       /* 下压的砝码 */
       svg.appendChild(svgEl("rect", { x: 42, y: 52 + dent - 24, width: 16, height: 24,
         fill: cssVar("--phy-force-a"), opacity: 0.85 }));
-      svg.appendChild(svgText(50, 52 + dent - 28, "压力 " + fmtN(F, 0) + "N", "phy-note-text"));
+      svg.appendChild(svgText(50, 52 + dent - 28, "压力 " + fmtN(F, 0) + " N", "phy-note-text"));
       if (dent > 1) {
         svg.appendChild(svgEl("line", { x1: 83, y1: 52, x2: 83, y2: 52 + dent,
           stroke: cssVar("--phy-target"), "stroke-width": 1.2,
@@ -5598,17 +5732,7 @@
   function goLesson(lessonId) {
     openLesson(lessonId, undefined, true);
   }
-  function showBrowser() {
-    cur = null;
-    if (appRoot) appRoot.hidden = true;
-    if (browseRoot) {
-      browseRoot.hidden = false;
-      renderBrowser();
-    }
-    try {
-      if (parseHash()) history.replaceState(null, "", location.pathname + location.search);
-    } catch (e) {}
-  }
+  /* showBrowser 已上移为"回学段目录/选择层"分发器（E-01），此处不再重复定义 */
   function route() {
     var h = parseHash();
     if (h && hasLesson(h.lesson)) {

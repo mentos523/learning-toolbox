@@ -11,12 +11,37 @@
   if (!Eng || !Eng.ViewportMapper) throw new Error('plot.js 需要 core.js/coords.js');
   if (!window.JXG) throw new Error('plot.js 需要先加载 assets/vendor/jsxgraphcore.js');
 
+  /* V-02（白队 2026-10-16）：JSXGraph 文字统一走设计字体栈。
+   * JXG.Options.text.cssDefaultStyle 是内联样式（覆盖 jsxgraph.css），
+   * 只替换其中的 font-family，其余声明保留。 */
+  (function () {
+    try {
+      var t = JXG.Options && JXG.Options.text;
+      if (t && typeof t.cssDefaultStyle === 'string' &&
+          t.cssDefaultStyle.indexOf('PingFang SC') < 0) {
+        t.cssDefaultStyle = 'font-family: ' + Eng.FONT_STACK + '; ' +
+          t.cssDefaultStyle.replace(/font-family\s*:[^;]+;?/i, '');
+      }
+    } catch (e) {}
+  })();
+
+  // V-04：作图板主题色（与 --phy-* 语义令牌对齐；板背景另由模块 CSS
+  // 覆盖 vendor jsxgraph.css 的 .jxgbox #fff 写死，见 physics.css V-04）
+  var PLOT_THEME = {
+    light: { axis: '#333333', tick: '#333333' },
+    dark: { axis: '#E8E8E8', tick: '#E8E8E8' }
+  };
+
   Eng.PlotBoard = function (opt) {
     opt = opt || {};
     if (!opt.containerId) throw new Error('PlotBoard: 必须传入 containerId');
     this.containerId = opt.containerId;
     var b = opt.bounds || { xMin: -5, xMax: 5, yMin: -5, yMax: 5 };
     this.bounds = { xMin: b.xMin, xMax: b.xMax, yMin: b.yMin, yMax: b.yMax };
+    this.theme = opt.theme === 'dark' ? 'dark' : 'light';
+    // V-05：函数图像场景取数据范围（允许 x/y 不等比，旧 graph-reader 即如此）；
+    // ENG-05 等比换算保留给读回/几何场景（默认 fitData=false 时行为不变）。
+    this.fitData = opt.fitData === true;
     var vw = opt.viewportWPx || 520;
     var vh = opt.viewportHPx || Math.round(vw * 0.75);
     // ENG-05：作图层换算与渲染层同源（同一 ViewportMapper 类）
@@ -25,16 +50,31 @@
     if (!el) throw new Error('PlotBoard: 找不到容器 #' + opt.containerId);
     el.style.width = vw + 'px';
     el.style.height = vh + 'px';
-    // ENG-05 同源换算：JSXGraph 内部按 boundingbox 独立拉伸 x/y（unitX≠unitY 会变形），
-    // 与"等比 sx=sy"的场景要求冲突。此处按 mapper 的等比参数反推"有效逻辑视口"，
-    // 再喂给 JSXGraph，使其内部换算与 mapper 逐位一致（unitX = unitY = s）。
-    var prm = this.mapper.params();
-    var xL = (0 - prm.offset.x) / prm.scale;
-    var xR = (vw - prm.offset.x) / prm.scale;
-    var yTop = (prm.offset.y - 0) / prm.scale;
-    var yBottom = (prm.offset.y - vh) / prm.scale;
+    var bbox;
+    if (this.fitData) {
+      // V-05：板范围 = 数据范围（x/y 可不等比），不再做等比 letterbox 反推。
+      bbox = [this.bounds.xMin, this.bounds.yMax, this.bounds.xMax, this.bounds.yMin];
+    } else {
+      // ENG-05 同源换算：JSXGraph 内部按 boundingbox 独立拉伸 x/y（unitX≠unitY 会变形），
+      // 与"等比 sx=sy"的场景要求冲突。此处按 mapper 的等比参数反推"有效逻辑视口"，
+      // 再喂给 JSXGraph，使其内部换算与 mapper 逐位一致（unitX = unitY = s）。
+      var prm = this.mapper.params();
+      var xL = (0 - prm.offset.x) / prm.scale;
+      var xR = (vw - prm.offset.x) / prm.scale;
+      var yTop = (prm.offset.y - 0) / prm.scale;
+      var yBottom = (prm.offset.y - vh) / prm.scale;
+      bbox = [xL, yTop, xR, yBottom]; // [左, 上, 右, 下]
+    }
+    // V-04：轴线/刻度颜色随主题（JXG.Options 为全局，按本次构造的主题设置）
+    var tc = PLOT_THEME[this.theme];
+    try {
+      if (JXG.Options.axis) {
+        JXG.Options.axis.strokeColor = tc.axis;
+        if (JXG.Options.axis.ticks) JXG.Options.axis.ticks.strokeColor = tc.tick;
+      }
+    } catch (e) {}
     this.board = JXG.JSXGraph.initBoard(opt.containerId, {
-      boundingbox: [xL, yTop, xR, yBottom], // [左, 上, 右, 下]
+      boundingbox: bbox, // [左, 上, 右, 下]
       axis: opt.axis !== false,
       showCopyright: false,
       showNavigation: false,
@@ -47,7 +87,27 @@
     this.errorEstimate = ax.errorEstimate;
   };
 
-  // ENG-05 断言用：JSXGraph 内部换算 vs 同源 mapper，同一逻辑点偏差 ≤0.5px
+  // V-04：主题切换（与 KonvaView.setTheme 同路，由课页层 MutationObserver 驱动）
+  Eng.PlotBoard.prototype.setTheme = function (theme) {
+    this.theme = theme === 'dark' ? 'dark' : 'light';
+    var tc = PLOT_THEME[this.theme];
+    try {
+      var axes = this.board && this.board.defaultAxes;
+      if (axes) {
+        ['x', 'y'].forEach(function (k) {
+          var a = axes[k];
+          if (!a) return;
+          if (a.setAttribute) a.setAttribute({ strokeColor: tc.axis });
+          var ticks = a.defaultTicks || a.ticks;
+          if (ticks && ticks.setAttribute) ticks.setAttribute({ strokeColor: tc.tick });
+        });
+        if (this.board.update) this.board.update();
+      }
+    } catch (e) {}
+  };
+
+  // ENG-05 断言用：JSXGraph 内部换算 vs 同源 mapper，同一逻辑点偏差 ≤0.5px。
+  // 注意：fitData=true 时板内 x/y 不等比，此断言不适用（函数图像场景）。
   Eng.PlotBoard.prototype.jsxPixelOf = function (x, y) {
     // 经由真实 point 的屏幕坐标（JSXGraph 内部换算结果）
     var p = this.board.create('point', [x, y], { visible: false, fixed: true });
@@ -198,7 +258,7 @@
     if (err) {
       this._error = err;
       var w = view.stage.width();
-      this._errNode = new Konva.Text({
+      this._errNode = Eng.konvaText({
         x: 8, y: 8, width: w - 16,
         text: '数据有误，未绘图：' + err, fontSize: 14, fill: pal.error
       });
@@ -240,7 +300,7 @@
         });
         bar.setAttr('data-value', vals[i]); // 数据可追溯到图形
         view.layer.add(bar); this._bars.push(bar);
-        var lab = new Konva.Text({
+        var lab = Eng.konvaText({
           x: padL + i * cw, y: padT + ch + 4, width: cw, align: 'center',
           text: dataset.labels ? dataset.labels[i] : String(i + 1),
           fontSize: 12, fill: pal.subtext
@@ -256,7 +316,7 @@
       view.layer.add(line); this._bars.push(line);
     }
     // 数据源声明（图上可见，ENG-65）
-    var src = new Konva.Text({
+    var src = Eng.konvaText({
       x: padL, y: 4, text: '数据源：' + (this.dataSource ? this.dataSource.kind + ' / ' + this.dataSource.ref : '未声明'),
       fontSize: 11, fill: pal.subtext
     });

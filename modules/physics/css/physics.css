@@ -14,7 +14,9 @@
  * ============================================================ */
 
 /* ---------- --phy-* 语义色板（别名 --geo-*，深色自动跟随） ---------- */
-#physics-app {
+/* E-04（白队 2026-10-16）：token 作用域扩大到 #phy-browser（入口），
+ * 入口深色不再闪白屏。 */
+#physics-app, #phy-browser {
   --geo-bg: #FFFFFF;
   --geo-text: #1A1A1A;
   --geo-known: #0072B2;        /* 已知：蓝 */
@@ -47,7 +49,7 @@
   --phy-on-hl:    #1A1A1A;     /* 黄底上的深色字 */
   --phy-next-bg:  #B44A00;     /* 「下一页」按钮底：待求朱红加深，白字对比度 5.36 ≥ 4.5（R3 2026-10-15） */
 }
-body[data-theme="dark"] #physics-app {
+body[data-theme="dark"] #physics-app, body[data-theme="dark"] #phy-browser {
   --geo-bg: #121212;
   --geo-text: #F5F5F5;
   --geo-known: #56B4E9;
@@ -246,8 +248,25 @@ body[data-theme="dark"] #physics-app {
  * 可滚动；此处 !important 兜底。body margin 清零（本表仅被
  * modules/physics/index.html 引用，即物理 SPA 页作用域）。 */
 #phy-browser[hidden], #phy-app[hidden] { display: none !important; }
-body { margin: 0; }
-#phy-browser.phy-app { display: block; overflow-y: auto; overscroll-behavior-y: contain; }
+/* V-01（白队 2026-10-16）：body 补设计系统字体栈（与 assets/css/style.css 同值）。
+ * 物理/化学 index.html 未引入 style.css，此处直接声明，避免引入整文件
+ * 带来的 .container 等全局样式污染。 */
+body {
+  margin: 0;
+  font-family: -apple-system, "PingFang SC", "Hiragino Sans GB",
+               "Microsoft YaHei", "Noto Sans SC", sans-serif;
+}
+#phy-browser.phy-app {
+  display: block; overflow-y: auto; overscroll-behavior-y: contain;
+  /* E-04：入口底色跟随主题（token 在 #phy-browser 作用域内已定义） */
+  background: var(--phy-bg); color: var(--phy-ink);
+  min-height: 100dvh;
+}
+/* V-04（白队 2026-10-16）：作图板跟随主题。JSXGraph 1.14 的 initBoard 直接渲染进
+ * 传入的容器（不加 .jxgbox 类——该类只在 appBox 路径添加），引擎作图板容器为
+ * .phy-eng-plot；背景与板内文字走 --phy-* 语义令牌，随 data-theme 切换。 */
+#phy-app .phy-eng-plot { background-color: var(--phy-bg); }
+#phy-app .phy-eng-plot svg text { fill: var(--phy-ink); }
 .phy-browse { padding: 12px 0 24px; }
 .phy-browse h1 { font-size: 1.15rem; margin: 6px 0 4px; }
 .phy-browse-sub { color: var(--phy-ink-soft); font-size: 0.85rem; margin: 0 0 12px; }
@@ -298,6 +317,62 @@ body { margin: 0; }
 .phy-lesson-title { flex: 1; }
 .phy-lesson-go { flex: none; color: var(--phy-ink-soft); }
 .phy-done { flex: none; color: var(--phy-force-c); font-size: 0.8rem; }
+
+/* ---------- 入口选择层（E-01/E-02/E-03，白队 2026-10-16） ---------- */
+.phy-home-link {
+  display: inline-block;
+  margin: 2px 0 12px;
+  font-size: 0.85rem;
+  color: var(--phy-known);
+  text-decoration: none;
+  min-height: 44px;
+  line-height: 44px;
+}
+.phy-home-link:active { text-decoration: underline; }
+/* E-02：继续学习卡片（对齐化学 G2 口径） */
+.phy-continue {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 4px;
+  width: 100%; min-height: 44px; text-align: left; cursor: pointer;
+  background: var(--phy-next-bg); color: #fff; border: none; border-radius: 12px;
+  padding: 12px 16px; margin: 0 0 14px; font-size: 0.95rem;
+}
+.phy-continue-t { font-weight: 700; font-size: 1.02rem; }
+.phy-continue-l { opacity: 0.92; font-size: 0.85rem; }
+/* E-01：学段卡片（宽屏双列，对齐 P-04 诉求；窄屏单列） */
+.phy-track-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin: 4px 0 8px;
+}
+@media (min-width: 700px) {
+  .phy-track-grid { grid-template-columns: 1fr 1fr; }
+}
+.phy-track-card {
+  display: flex; flex-direction: column; align-items: stretch; gap: 8px;
+  text-align: left; cursor: pointer;
+  border: 1px solid var(--phy-line); border-radius: 14px;
+  background: var(--phy-panel); color: var(--phy-ink);
+  padding: 16px; font-size: 0.95rem; min-height: 44px;
+}
+.phy-track-card:active { border-color: var(--phy-known); }
+.phy-track-name { font-size: 1.1rem; font-weight: 700; }
+.phy-track-name small { font-weight: 400; font-size: 0.8rem; color: var(--phy-ink-soft); }
+.phy-track-desc { font-size: 0.88rem; color: var(--phy-ink-soft); line-height: 1.6; }
+.phy-track-meta { font-size: 0.82rem; color: var(--phy-ink-soft); }
+.phy-track-done { color: var(--phy-force-c); }
+.phy-track-go {
+  align-self: flex-start;
+  font-size: 0.9rem; font-weight: 700; color: var(--phy-known);
+  border: 1px solid var(--phy-known); border-radius: 999px;
+  padding: 6px 14px; margin-top: 2px;
+}
+.phy-back-link {
+  display: inline-block;
+  background: none; border: none; cursor: pointer;
+  color: var(--phy-known); font-size: 0.88rem;
+  min-height: 44px; padding: 0; margin: 0 0 4px;
+}
 
 /* ---------- 通用内容块 ---------- */
 .phy-tip {
@@ -852,6 +927,14 @@ body[data-theme="dark"] #mathml-warn { background: #4a3a1a; color: #fde68a; }
 .phy-tick-label { font-size: 3.6px; fill: var(--phy-ink-soft); }
 .phy-note-text { font-size: 4px; fill: var(--phy-ink-soft); }
 .phy-slope-tag { font-size: 4.2px; font-weight: 700; }
+/* V-06（白队 2026-10-16）：标签 halo 底——paint-order 让描边衬在文字下方，
+ * 连接线/虚线经过标签时不再穿字（描边色随主题取 --phy-bg）。 */
+.phy-text-halo {
+  paint-order: stroke;
+  stroke: var(--phy-bg);
+  stroke-width: 3.5px;
+  stroke-linejoin: round;
+}
 .phy-f-label { font-size: 4.2px; font-weight: 700; fill: var(--phy-ink); }
 .phy-f-mark { fill: var(--phy-target); }
 .phy-normal { stroke: var(--phy-track); stroke-width: 0.7; stroke-dasharray: 2,1.5; }

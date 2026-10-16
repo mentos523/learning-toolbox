@@ -26,7 +26,9 @@
  * ============================================================ */
 
 /* ---------- --chm-* 语义色板（别名 --geo-*，深色自动跟随） ---------- */
-#chemistry-app {
+/* E-04（白队 2026-10-16）：token 作用域扩大到 #chm-browser（入口），
+ * 入口深色不再闪白屏。 */
+#chemistry-app, #chm-browser {
   --geo-bg: #FFFFFF;
   --geo-text: #1A1A1A;
   --geo-known: #0072B2;        /* 已知：蓝 —— 已知质量、已知浓度、已知 pH */
@@ -70,7 +72,7 @@
   --chm-on-hl:    #1A1A1A;     /* 黄底上的深色字 */
   --chm-next-bg:  #B44A00;     /* 「下一页」按钮底：朱红加深，白字对比度 5.36 ≥ 4.5 */
 }
-body[data-theme="dark"] #chemistry-app {
+body[data-theme="dark"] #chemistry-app, body[data-theme="dark"] #chm-browser {
   --geo-bg: #121212;
   --geo-text: #F5F5F5;
   --geo-known: #56B4E9;
@@ -274,8 +276,20 @@ button.chm-more { background: none; border: none; font: inherit; padding: 20px 0
  * hidden 壳不得占空间：#chm-browser.chm-app 的 display:block 特异性高于
  * UA [hidden]{display:none}，此处 !important 兜底（物理 R1 教训）。 */
 #chm-browser[hidden], #chm-app[hidden] { display: none !important; }
-body { margin: 0; }
-#chm-browser.chm-app { display: block; overflow-y: auto; overscroll-behavior-y: contain; }
+/* V-01（白队 2026-10-16）：body 补设计系统字体栈（与 assets/css/style.css 同值）。
+ * 物理/化学 index.html 未引入 style.css，此处直接声明，避免引入整文件
+ * 带来的 .container 等全局样式污染。 */
+body {
+  margin: 0;
+  font-family: -apple-system, "PingFang SC", "Hiragino Sans GB",
+               "Microsoft YaHei", "Noto Sans SC", sans-serif;
+}
+#chm-browser.chm-app {
+  display: block; overflow-y: auto; overscroll-behavior-y: contain;
+  /* E-04：入口底色跟随主题（token 在 #chm-browser 作用域内已定义） */
+  background: var(--chm-bg); color: var(--chm-ink);
+  min-height: 100dvh;
+}
 .chm-browse { padding: 12px 0 24px; }
 .chm-browse h1 { font-size: 1.15rem; margin: 6px 0 4px; }
 .chm-browse-sub { color: var(--chm-ink-soft); font-size: 0.85rem; margin: 0 0 12px; }
@@ -335,6 +349,53 @@ body { margin: 0; }
 .chm-lesson-title { flex: 1; }
 .chm-lesson-go { flex: none; color: var(--chm-ink-soft); }
 .chm-done { flex: none; color: var(--chm-corr-c, var(--geo-corr-c)); font-size: 0.8rem; }
+
+/* ---------- 入口选择层（C-01/E-03，白队 2026-10-16） ---------- */
+.chm-home-link {
+  display: inline-block;
+  margin: 2px 0 12px;
+  font-size: 0.85rem;
+  color: var(--chm-known);
+  text-decoration: none;
+  min-height: 44px;
+  line-height: 44px;
+}
+.chm-home-link:active { text-decoration: underline; }
+/* C-01：学段卡片（宽屏双列，对齐 P-04 诉求；窄屏单列） */
+.chm-track-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin: 4px 0 8px;
+}
+@media (min-width: 700px) {
+  .chm-track-grid { grid-template-columns: 1fr 1fr; }
+}
+.chm-track-card {
+  display: flex; flex-direction: column; align-items: stretch; gap: 8px;
+  text-align: left; cursor: pointer;
+  border: 1px solid var(--chm-line); border-radius: 14px;
+  background: var(--chm-panel); color: var(--chm-ink);
+  padding: 16px; font-size: 0.95rem; min-height: 44px;
+}
+.chm-track-card:active { border-color: var(--chm-known); }
+.chm-track-name { font-size: 1.1rem; font-weight: 700; }
+.chm-track-name small { font-weight: 400; font-size: 0.8rem; color: var(--chm-ink-soft); }
+.chm-track-desc { font-size: 0.88rem; color: var(--chm-ink-soft); line-height: 1.6; }
+.chm-track-meta { font-size: 0.82rem; color: var(--chm-ink-soft); }
+.chm-track-done { color: var(--chm-corr-c, var(--geo-corr-c)); }
+.chm-track-go {
+  align-self: flex-start;
+  font-size: 0.9rem; font-weight: 700; color: var(--chm-known);
+  border: 1px solid var(--chm-known); border-radius: 999px;
+  padding: 6px 14px; margin-top: 2px;
+}
+.chm-back-link {
+  display: inline-block;
+  background: none; border: none; cursor: pointer;
+  color: var(--chm-known); font-size: 0.88rem;
+  min-height: 44px; padding: 0; margin: 0 0 4px;
+}
 
 /* ---------- 通用内容块（沿用物理六段式，化学微调） ---------- */
 .chm-tip {

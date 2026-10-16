@@ -152,7 +152,7 @@
       errorEstimate: opt.errorEstimate || '估读位 ±1（' + (rangeMaxA === 0.6 ? '0.01' : '0.01') + ' A）；接入不改变电路（理想假设）'
     });
     this.rangeMaxA = rangeMaxA;
-    this.terminalLabel = rangeMaxA + 'A'; // ENG-40：接线柱标注须与量程一致
+    this.terminalLabel = rangeMaxA + ' A'; // ENG-40：接线柱标注须与量程一致
   };
   Eng.Ammeter.prototype = Object.create(Eng.DialMeter.prototype);
   Eng.Ammeter.prototype.constructor = Eng.Ammeter;
@@ -172,7 +172,7 @@
       errorEstimate: opt.errorEstimate || '估读位 ±1（' + (rangeMaxV === 3 ? '0.01' : '0.1') + ' V）；接入不分流（理想假设）'
     });
     this.rangeMaxV = rangeMaxV;
-    this.terminalLabel = rangeMaxV + 'V'; // ENG-39：接线柱标注须与量程一致
+    this.terminalLabel = rangeMaxV + ' V'; // ENG-39：接线柱标注须与量程一致
   };
   Eng.Voltmeter.prototype = Object.create(Eng.DialMeter.prototype);
   Eng.Voltmeter.prototype.constructor = Eng.Voltmeter;
@@ -432,7 +432,7 @@
       if (major) {
         var tr = radiusPx * 0.52;
         var label = Eng.Meter._trimNum(v);
-        g.add(new Konva.Text({
+        g.add(Eng.konvaText({
           x: tr * Math.cos(a) - 14, y: tr * Math.sin(a) - 8,
           width: 28, align: 'center', text: label,
           fontSize: Math.max(11, radiusPx * 0.11), fill: pal.text
@@ -449,13 +449,13 @@
     // 接线柱标注（ENG-39/40：须与量程一致）。表盘扫掠区在中心上方，
     // 下半区空闲：读数在 +0.28r，接线柱标注放在 +0.62r（不许被舞台裁掉）。
     if (meter.terminalLabel) {
-      g.add(new Konva.Text({
+      g.add(Eng.konvaText({
         x: -radiusPx, y: radiusPx * 0.58, width: radiusPx * 2, align: 'center',
         text: '接线柱 ' + meter.terminalLabel, fontSize: Math.max(11, radiusPx * 0.1), fill: pal.text
       }));
     }
     // 数字读数
-    g.add(new Konva.Text({
+    g.add(Eng.konvaText({
       x: -radiusPx, y: radiusPx * 0.28, width: radiusPx * 2, align: 'center',
       text: meter.readText(), fontSize: Math.max(13, radiusPx * 0.14),
       fill: pal.readout, fontStyle: 'bold'

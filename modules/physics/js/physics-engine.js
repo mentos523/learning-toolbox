@@ -458,7 +458,7 @@
           stroke: cssVar("--phy-body"), "stroke-width": 1.4 }));
         svg.appendChild(svgEl("rect", { x: cx - rr - 5, y: ly, width: 10, height: 8,
           "class": "phy-body-box" }));
-        svg.appendChild(svgText(cx - rr, ly + 12, "G=" + G + "N", "phy-sym-label"));
+        svg.appendChild(svgText(cx - rr, ly + 12, "G=" + G + " N", "phy-sym-label"));
         makeHandle(cx + rr, ry);
         stBadge.textContent = "定滑轮：不省力，改变方向";
         stBadge.className = "phy-state";
@@ -477,7 +477,7 @@
           stroke: cssVar("--phy-body"), "stroke-width": 1.4 }));
         svg.appendChild(svgEl("rect", { x: mx - 5, y: my + 7, width: 10, height: 8,
           "class": "phy-body-box" }));
-        svg.appendChild(svgText(mx, my + 20, "G=" + G + "N", "phy-sym-label"));
+        svg.appendChild(svgText(mx, my + 20, "G=" + G + " N", "phy-sym-label"));
         makeHandle(mx + 7, hy);
         stBadge.textContent = "动滑轮：F = G/2（省一半力，但要多拉一倍绳子）";
         stBadge.className = "phy-state phy-state-ok";
@@ -801,7 +801,7 @@
       layer.add(bodyRect);
       refs.bodyRect = bodyRect;
       if (body.label) {
-        var bodyLabel = new Konva.Text({ text: body.label, fontSize: 13,
+        var bodyLabel = Eng.konvaText({ text: body.label, fontSize: 13,
           fill: cssVar("--phy-body"), listening: false });
         layer.add(bodyLabel);
         refs.bodyLabel = bodyLabel;
@@ -818,7 +818,7 @@
         /* data-force 供回归断言：把逻辑几何钉在节点属性上 */
         arrow.setAttr("data-force", f.id);
         layer.add(arrow);
-        var label = new Konva.Text({ text: f.label, fontSize: 14, fill: col,
+        var label = Eng.konvaText({ text: f.label, fontSize: 14, fill: col,
           listening: false });
         layer.add(label);
         var rec = { arrow: arrow, label: label, handle: null, shaft: null, f: f,
@@ -864,7 +864,7 @@
             node.on("dragmove", function () { liveFrom(node, bi === 1); });
           });
         } else {
-          var lock = new Konva.Text({ text: "🔒", fontSize: 13, listening: false });
+          var lock = Eng.konvaText({ text: "🔒", fontSize: 13, listening: false });
           layer.add(lock);
           rec.lock = lock;
         }
@@ -876,7 +876,7 @@
         strokeWidth: 3, pointerLength: 10, pointerWidth: 10, listening: false });
       res.setAttr("data-force", "Fres");
       layer.add(res);
-      var resLabel = new Konva.Text({ text: "F合", fontSize: 14, fill: resCol,
+      var resLabel = Eng.konvaText({ text: "F合", fontSize: 14, fill: resCol,
         listening: false });
       layer.add(resLabel);
       refs.res = res; refs.resLabel = resLabel;
@@ -1138,13 +1138,44 @@
       if (yMax - yMin < 1e-9) { yMin -= 1; yMax += 1; }
       var pad = (yMax - yMin) * 0.15;
       yMin -= pad; yMax += pad;
+      /* V-05：y 轴标签顶部留白（板顶不再裁剪 F/N 这类轴标签） */
+      yMax += (yMax - yMin) * 0.10;
+      /* V-05：板范围 = 数据范围 + 轴标签边距。左侧留 8% x 幅给 y 轴刻度标签
+       *（轴贴边时 JSXGraph 不生成刻度标签）；y 标签放在顶部留白内侧。 */
+      var xPadL = (x1 - x0) * 0.08;
+      var bx0 = x0 - xPadL, bx1 = x1;
+      var yLblY = yMax - (yMax - yMin) * 0.02;
+      /* V-04：主题跟随页面 data-theme（与受力页 Konva 视图同路） */
+      function pageTheme() {
+        try {
+          return document.body && document.body.getAttribute("data-theme") === "dark"
+            ? "dark" : "light";
+        } catch (e) { return "light"; }
+      }
+      /* V-05：板宽随容器自适应（参考受力页 fit()；390 下不再固定 560 横向溢出） */
+      var bw = Math.max(280, Math.min(720, cdiv.clientWidth || box.clientWidth || 560));
       var board = new Eng.PlotBoard({ containerId: cid,
-        bounds: { xMin: x0, xMax: x1, yMin: yMin, yMax: yMax },
-        viewportWPx: 560, viewportHPx: 400,
+        bounds: { xMin: bx0, xMax: bx1, yMin: yMin, yMax: yMax },
+        fitData: true, theme: pageTheme(),
+        viewportWPx: bw, viewportHPx: Math.round(bw * 0.72),
         assumptions: PLOT_AX.assumptions,
         approximations: PLOT_AX.approximations,
         errorEstimate: PLOT_AX.errorEstimate });
       probe.board = board;
+      /* V-04：data-theme 变化即同步作图板主题 */
+      try {
+        if (typeof MutationObserver === "function" && document.body) {
+          var plotThemeObs = new MutationObserver(function (muts) {
+            for (var mi = 0; mi < muts.length; mi++) {
+              if (muts[mi].attributeName === "data-theme" && board && board.setTheme) {
+                board.setTheme(pageTheme());
+                break;
+              }
+            }
+          });
+          plotThemeObs.observe(document.body, { attributes: true, attributeFilter: ["data-theme"] });
+        }
+      } catch (e) {}
       var rec = board.functionGraph({ fn: fn, domain: [x0, x1], name: "f" });
       probe.rec = rec;
       var J = board.board;
@@ -1155,7 +1186,7 @@
       }
       J.create("text", [x1, yMin + (yMax - yMin) * 0.04, src.xLabel || "x"],
         { fixed: true, anchorX: "right", fontSize: 13 });
-      J.create("text", [x0 + (x1 - x0) * 0.02, yMax, src.yLabel || "y"],
+      J.create("text", [bx0 + (bx1 - bx0) * 0.02, yLblY, src.yLabel || "y"],
         { fixed: true, fontSize: 13 });
       if (steps.indexOf("slope") >= 0) {
         var b = el("button", "phy-mini", "读斜率");
@@ -1242,7 +1273,7 @@
       }
       scale(30, true, "甲秤", "A");
       scale(70, false, "乙秤", "B");
-      svg.appendChild(svgText(50, 49, "对拉", "phy-note-text"));
+      svg.appendChild(svgText(50, 49, "对拉", "phy-note-text phy-text-halo"));
       svg.appendChild(svgEl("line", { x1: 41, y1: 49, x2: 59, y2: 49,
         stroke: cssVar("--phy-track"), "stroke-width": 1, "stroke-dasharray": "2.5,2" }));
       badge.setReadout("", "F甲 = F乙 = " + fmtN(F, 1) + " N");

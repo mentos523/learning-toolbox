@@ -9,6 +9,11 @@
   var Eng = (window.Eng = window.Eng || {});
   Eng.VERSION = '2026.10.16.1'; // 目标升版 2026.10.16.1
 
+  /* V-02（白队 2026-10-16）：画布文字统一字体栈。
+   * 与 assets/css/style.css 的 body 字体栈逐字一致；Konva.Text / JSXGraph
+   * 文字一律经此常量设置，不再各自默认（Arial）或继承 body 误伤。 */
+  Eng.FONT_STACK = '-apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif';
+
   /* ---------- 基础工具 ---------- */
 
   Eng.isFiniteNumber = function (v) {
