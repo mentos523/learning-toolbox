@@ -1532,60 +1532,75 @@
     var host = el("div");
     host.id = "cirui-" + (++circuitUiSeq);
     box.appendChild(host);
-    var trayTypes = (p.tray || ["bulb", "wire"]).map(function (k) { return CIRCUIT_KIND2TYPE[k] || k; });
-    var ui = new Eng.CircuitUI({
-      containerId: host.id,
-      title: "搭电路",
-      goalText: p.goal || "",
-      cols: (p.grid && p.grid.cols) || 6,
-      rows: (p.grid && p.grid.rows) || 4,
-      trayTypes: trayTypes,
-      sourceVoltageV: (p.battery && p.battery.voltage) || 3
-    });
-    /* 预设元件：位置/参数语义沿用原 components */
-    var placed = [];
-    (p.components || []).forEach(function (c) {
-      var type = CIRCUIT_KIND2TYPE[c.kind] || c.kind;
-      var params = null;
-      if (c.kind === "battery") params = { emfV: (p.battery && p.battery.voltage) || 3, internalROhm: 0 };
-      else if (c.kind === "switch") params = { closed: false };
-      else if (c.kind === "rheostat") {
-        var mn = c.min != null ? c.min : 0, mx = c.max != null ? c.max : 50;
-        if (!(mx > mn)) mx = mn + 1;
-        var init = c.init != null ? c.init : mx; /* 缺省滑片在阻值最大处（沿用旧 rheoCfg 口径） */
-        params = { minOhm: mn, maxOhm: mx, fraction: Math.max(0, Math.min(1, (init - mn) / (mx - mn))) };
-      }
-      else if (c.kind === "ammeter") params = { rangeMaxA: 3, divisionA: 0.1 };
-      var uid = ui.placeElement(type, c.cell[0], c.cell[1], params);
-      placed.push({ uid: uid, col: c.cell[0], row: c.cell[1] });
-    });
-    /* 相邻预设预连线：复刻旧隐式邻接的初始连通性（p08.2.2-p1 2×2 方阵），转为显式 connections */
-    var CELL = 100; /* 与 CircuitUI 默认 cellPx 一致 */
-    function termXY(col, row, term) {
-      return { x: (col + 0.5) * CELL + (term === "L" ? -0.42 : 0.42) * CELL, y: (row + 0.5) * CELL };
-    }
-    for (var i = 0; i < placed.length; i++) for (var j = i + 1; j < placed.length; j++) {
-      var a = placed[i], b = placed[j];
-      if (Math.abs(a.col - b.col) + Math.abs(a.row - b.row) !== 1) continue;
-      var best = null;
-      ["L", "R"].forEach(function (ta) {
-        ["L", "R"].forEach(function (tb) {
-          var pa = termXY(a.col, a.row, ta), pb = termXY(b.col, b.row, tb);
-          var d = Math.hypot(pa.x - pb.x, pa.y - pb.y);
-          if (!best || d < best.d) best = { d: d, ta: ta, tb: tb };
-        });
+    /* Eng.CircuitUI 要求容器已在文档中；课页渲染为同步建节点后挂载，
+     * 此处等下一帧（host.isConnected）再构造，引擎侧零改动。 */
+    var ui = null;
+    function init() {
+      if (ui) return;
+      if (!host.isConnected) { (window.requestAnimationFrame || function (f) { setTimeout(f, 16); })(init); return; }
+      ui = new Eng.CircuitUI({
+        containerId: host.id,
+        title: "搭电路",
+        goalText: p.goal || "",
+        cols: (p.grid && p.grid.cols) || 6,
+        rows: (p.grid && p.grid.rows) || 4,
+        trayTypes: (p.tray || ["bulb", "wire"]).map(function (k) { return CIRCUIT_KIND2TYPE[k] || k; }),
+        sourceVoltageV: (p.battery && p.battery.voltage) || 3
       });
-      ui.addWire(a.uid, best.ta, b.uid, best.tb);
+      /* 预设元件：位置/参数语义沿用原 components */
+      var placed = [];
+      (p.components || []).forEach(function (c) {
+        var type = CIRCUIT_KIND2TYPE[c.kind] || c.kind;
+        var params = null;
+        if (c.kind === "battery") params = { emfV: (p.battery && p.battery.voltage) || 3, internalROhm: 0 };
+        else if (c.kind === "switch") params = { closed: false };
+        else if (c.kind === "rheostat") {
+          var mn = c.min != null ? c.min : 0, mx = c.max != null ? c.max : 50;
+          if (!(mx > mn)) mx = mn + 1;
+          var initR = c.init != null ? c.init : mx; /* 缺省滑片在阻值最大处（沿用旧 rheoCfg 口径） */
+          params = { minOhm: mn, maxOhm: mx, fraction: Math.max(0, Math.min(1, (initR - mn) / (mx - mn))) };
+        }
+        else if (c.kind === "ammeter") params = { rangeMaxA: 3, divisionA: 0.1 };
+        var uid = ui.placeElement(type, c.cell[0], c.cell[1], params);
+        placed.push({ uid: uid, col: c.cell[0], row: c.cell[1] });
+      });
+      /* 相邻预设预连线：复刻旧隐式邻接的初始连通性（p08.2.2-p1 2×2 方阵），转为显式 connections。
+       * 端点配对规则：几何最近优先；距离打平时优先两端都未被预连线用过的端子
+       *（避免两条线落在同一元件的同一端子上，造成 D3"开关还没连进电路"误判）。 */
+      var CELL = 100; /* 与 CircuitUI 默认 cellPx 一致 */
+      function termXY(col, row, term) {
+        return { x: (col + 0.5) * CELL + (term === "L" ? -0.42 : 0.42) * CELL, y: (row + 0.5) * CELL };
+      }
+      var usedTerms = {};
+      for (var i = 0; i < placed.length; i++) for (var j = i + 1; j < placed.length; j++) {
+        var a = placed[i], b = placed[j];
+        if (Math.abs(a.col - b.col) + Math.abs(a.row - b.row) !== 1) continue;
+        var cands = [];
+        ["L", "R"].forEach(function (ta) {
+          ["L", "R"].forEach(function (tb) {
+            var pa = termXY(a.col, a.row, ta), pb = termXY(b.col, b.row, tb);
+            cands.push({ ta: ta, tb: tb,
+              d: Math.hypot(pa.x - pb.x, pa.y - pb.y),
+              fresh: !usedTerms[a.uid + ":" + ta] && !usedTerms[b.uid + ":" + tb] });
+          });
+        });
+        cands.sort(function (x, y) { return ((y.fresh ? 1 : 0) - (x.fresh ? 1 : 0)) || (x.d - y.d); });
+        var best = cands[0];
+        usedTerms[a.uid + ":" + best.ta] = true;
+        usedTerms[b.uid + ":" + best.tb] = true;
+        ui.addWire(a.uid, best.ta, b.uid, best.tb);
+      }
+      /* badge.invariant（"没变的是"行）：文案冻结，位置沿用旧顺序（目标行之下） */
+      if (p.badge && p.badge.invariant) {
+        var inv = el("div", "phy-invariant", esc(p.badge.invariant));
+        var head = host.querySelector(".cir-head");
+        if (head && head.parentNode) head.parentNode.insertBefore(inv, head.nextSibling);
+        else box.insertBefore(inv, host);
+      }
+      host._cirUI = ui; /* 自测/复验取证用句柄（生产逻辑不依赖） */
+      markHintSeen(curPageId + "-circuit"); /* localStorage 键不变：phy_hint_seen_<页id>-circuit */
     }
-    /* badge.invariant（"没变的是"行）：文案冻结，位置沿用旧顺序（目标行之下） */
-    if (p.badge && p.badge.invariant) {
-      var inv = el("div", "phy-invariant", esc(p.badge.invariant));
-      var head = host.querySelector(".cir-head");
-      if (head && head.parentNode) head.parentNode.insertBefore(inv, head.nextSibling);
-      else box.insertBefore(inv, host);
-    }
-    host._cirUI = ui; /* 自测/复验取证用句柄（生产逻辑不依赖） */
-    markHintSeen(curPageId + "-circuit"); /* localStorage 键不变：phy_hint_seen_<页id>-circuit */
+    init();
     return box;
   }
   /* 波 B 阶段二注册分发：默认新实现；旧实现退役为兼容层，仅经 ?dbgCircuitLegacy=1 可达

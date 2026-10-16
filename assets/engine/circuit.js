@@ -1424,8 +1424,9 @@
         ctx.arc(0, 0, 22, 0, Math.PI * 2);
         ctx.fillStrokeShape(dot);
       });
-      dot.on('click', function (ev) { ev.cancelBubble = true; self._onTerminal(p.uid, term); });
-      dot.on('tap', function (ev) { ev.cancelBubble = true; self._onTerminal(p.uid, term); });
+      function onTermClick(ev) { ev.cancelBubble = true; self._onTerminalResolved(p.uid, term); }
+      dot.on('click', onTermClick);
+      dot.on('tap', onTermClick);
       g.add(dot);
     });
     // 选中高亮
@@ -1512,6 +1513,28 @@
   };
 
   /* ---------- 交互：连线 / 断开 / 删除 / 参数 ---------- */
+  /* 端子点击消歧（波 B 迁移补）：相邻格元件的面对端子仅相距 16px，
+   * 而 44px 命中区（ENG-56）相互重叠；以点击点为圆心 24px 内取最近的
+   * 端子中心，避免"点 A 进 B"。无指针位置时回退为被击中的端子。 */
+  Eng.CircuitUI.prototype._onTerminalResolved = function (uid, term) {
+    var ptr = null;
+    try { ptr = this.stage.getPointerPosition(); } catch (e) {}
+    var best = { uid: uid, term: term, d: 1e9 };
+    if (ptr) {
+      for (var i = 0; i < this._placed.length; i++) {
+        var q = this._placed[i];
+        if (q.col < 0) continue;
+        var terms = ['L', 'R'];
+        for (var k = 0; k < 2; k++) {
+          var tp = this._termXY(q.uid, terms[k]);
+          var d = Math.hypot(ptr.x - tp.x, ptr.y - tp.y);
+          if (d < 24 && d < best.d) best = { uid: q.uid, term: terms[k], d: d };
+        }
+      }
+    }
+    this._onTerminal(best.uid, best.term);
+  };
+
   Eng.CircuitUI.prototype._onTerminal = function (uid, term) {
     var arm = this._wireArm;
     if (!arm) {
