@@ -260,7 +260,7 @@ reset→step(60)→0.5s 精确 / 双环境逐位一致。
 
 ---
 
-## 六、光路 / 电路原语接口规范（本轮只立接口，ENG-67/68/69）
+## 六、光路 / 电路原语接口规范（光路仍只立接口；电路已于 2026.10.16.8 落地实现，ENG-67/68/69）
 
 > 本轮交付物为接口签名与序列化 schema，不含求解代码。
 > `assets/engine/` 中不许出现光路/电路的半成品实现（ENG-69）。
@@ -284,29 +284,63 @@ var scene = Eng.OpticsScene({
 // 读回：scene.rayPaths() → [{pointsM:[{x,y}...], wavelengthNm}]（SI 单位）
 ```
 
-### 6.2 电路（ENG-68）
+### 6.2 电路（ENG-68）——2026.10.16.8 已落地实现（`assets/engine/circuit.js`）
+
+> 实现：`Eng.Circuit`（求解器）+ `Eng.CircuitUI`（Konva 交互层，解耦：UI 只消费
+> `ckt.snapshot()`）。真值口径：`~/workspace/circuit-build/design/circuit-truth-criteria.md`
+>（CIR-01~48，独立复验 56/56 PASS）。physics.js 课页迁移接线待后续版本。
 
 ```js
-// 未来：Eng.Circuit（二期简化求解器：欧姆定律 + 串并联公式直算）
 var ckt = Eng.Circuit({
   elements: [
-    { type: 'source', voltageV: 6 },                    // 电源
+    { type: 'source', voltageV: 6 },                    // 电源（本期仅单电源）
     { type: 'resistor', resistanceOhm: 10 },            // 电阻
-    { type: 'bulb', resistanceOhm: 5 },                 // 灯泡
-    { type: 'switch', closed: true },                   // 开关
+    { type: 'bulb', resistanceOhm: 5 },                // 灯泡（阻值视常量，NC-3）
+    { type: 'switch', closed: true },                  // 开关
     { type: 'wire', from: 'n1', to: 'n2' }             // 导线
   ],
-  topology: { nodes: ['n0','n1','n2'], connections: [...] },
-  assumptions: ['导线电阻视为 0', '电源无内阻', ...],
+  topology: { nodes: ['n0','n1','n2'], connections: [...] },  // 显式拓扑：每元件恰一条 connection
+  assumptions: ['导线电阻视为 0', '电源无内阻', ...],          // AX01 字段，课页直接引用
   approximations: ['集总参数模型', ...],
   errorEstimate: '...' // YP-25 预留
 });
-// 数据契约（读回字段与单位，先行定义）：
-//   ckt.nodeVoltageV(nodeId) → V；ckt.branchCurrentA(branchId) → A；
-//   ckt.ammeterReadA(meterId) → 按 ENG-38 估读；ckt.voltmeterReadV(meterId) → 按 ENG-38 估读
 ```
 
----
+- **求解器范围**：二期简化求解器——欧姆定律 + 串并联公式直算；纯函数
+  `Eng.Circuit.solve(elements, topology, contract) → result`；直流稳态、集总参数、
+  单电源；电流方向以 connection 的 from→to 为正；浮点比对容差 1e-9。
+- **读回 API**：`ckt.nodeVoltageV(nodeId)` → V；`ckt.branchCurrentA(branchId)` → A；
+  `ckt.ammeterReadA(meterId)` / `ckt.voltmeterReadV(meterId)` → 一律走
+  `Eng.estimateReading` 按 ENG-38 估读；`ckt.snapshot()`（深拷贝，ENG-10）；
+  `ckt.reductionLog()`（归约回放，CIR-10 对账用）；`snapshot().prunedEdges`（死边剪枝清单）。
+- **topology 形态**：`{ nodes: [...], connections: [...] }` 显式拓扑；悬空开关/断口
+  按 CIR-11/CIR-14/CIR-40 判 `open`（不许悬空仍显示通路）；死边剪枝不误判 unsupported。
+- **状态全集**：`closed` / `open` / `short` / `burned` / `unsupported` / `no-source`；
+  `open` 时支路电流 0，浮空节点电压 NaN；`unsupported`/`no-source` 时数值读回全 NaN、
+  表计读回 unreadable（不给假数，ENG-69）。
+- **6 类 unsupported 诚实返回**：NC-1 不可串并联归约拓扑（电桥/Δ形）→ `unsupported`；
+  NC-2 多电源（≥2）→ `unsupported`；NC-3 非线性元件（灯丝温度特性，阻值视常量）；
+  NC-4 交流/暂态/电容/电感不建模；NC-5 表计非理想内阻（电流表内阻 0 / 电压表内阻 ∞，
+  assumptions 显性化）；NC-6 导线电阻/接触电阻/电源负载特性（视 0 / 理想恒定）。
+  NC-1/NC-2 为"诚实拒绝"，读回全 NaN，不许给假读数（ENG-69 的具体落实）。
+
+### 6.3 数学侧新原语契约摘要（eq-bind.js / geom-process.js，波 A 落地）
+
+> 数学侧自实现（waveA-design.md §6.3 结论：不扩展 Eng.PlotBoard，引擎只收敛
+> tween/探针口径）。以下 6 原语已随波 A 上线（2026.10.16.6），契约摘要备查；
+> 探针反写映射 / petal-strip / complete-square-lab 留数学侧，不进引擎（§6.2 口径）。
+
+| 原语（注册名） | 位置 | 读回/钩子 | 真值口径 |
+|---|---|---|---|
+| EqGraphLab（`eq-graph-lab`，含 kind=system2x2） | eq-bind.js | `__eqbind.setX/sliderValue/readout/probeCount/probeX/dragProbeTo/solutionMarks`；`sysSolution/sysSetCoeff/sysDragTo/sysDegenerate/sysResiduals` | 解析闭式（求根公式/二分 1e-9）；读数走 `evalR` 真值求值器（YP-16）；拖探针走同一 `setX` 入口 |
+| IneqShadeLab（`ineq-shade-lab`） | eq-bind.js | `__eqbind.ineqSetSource/ineqSolutions/ineqHoldsAt` | 边界开/闭与方向按 (b, 左邻, 右邻) shading 判定 |
+| MorphToggle（`morph-toggle`） | geom-process.js | `__geomproc.seek/u/play/straightness/shapeCount/keyGeom`；tween 层已 promotion 为 `Eng.Tween`（§2.7） | 中间态 = 线性插值期望（容差）；末态与 compare-toggle 旧 view1 截图一致 |
+| SysLab（`sys-lab`） | eq-bind.js | `__eqbind.syslabSet/syslabReadouts/syslabPoint` | 读数走表达式真值求值；点位 = 独立求值逐位一致 |
+| SysSteps（`sys-steps`） | eq-bind.js | 分步播放器语义 | 与 Eng.StepPlayer 同步（ENG-59~63 口径参照） |
+| StaticCompare（`static-compare`） | eq-bind.js | 静态对照渲染 | 基线截图存档，morph 必须"到达"原终态 |
+
+正式复验脚本：`tools/waveA-verify.mjs`（静态门 + headless 抽查）、
+`tools/waveA-sysint-verify.mjs`（SYS-INT 7 钩子正式断言，8/8 PASS）。
 
 ## 七、文件清单
 

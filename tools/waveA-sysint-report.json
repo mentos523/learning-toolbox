@@ -1,0 +1,61 @@
+{
+ "date": "2026-10-16",
+ "results": [
+  {
+   "id": "SYSINT-00",
+   "name": "7 钩子全部存在且为函数",
+   "pass": true,
+   "expected": "7/7 function, 无 pageerror",
+   "actual": "sysSolution:function, sysSetCoeff:function, sysDragTo:function, sysDegenerate:function, sysResiduals:function, syslabSet:function, syslabReadouts:function, syslabPoint:function"
+  },
+  {
+   "id": "SYSINT-01",
+   "name": "默认解 = 克拉默独立复算（逐位）",
+   "pass": true,
+   "expected": "{\"x\":6,\"y\":4}",
+   "actual": "{\"x\":6,\"y\":4}"
+  },
+  {
+   "id": "SYSINT-02",
+   "name": "sysSetCoeff(a1,2) 后解 = (4.5,1)（逐位）",
+   "pass": true,
+   "expected": "{x:4.5,y:1}",
+   "actual": "{\"x\":4.5,\"y\":1}"
+  },
+  {
+   "id": "SYSINT-03",
+   "name": "sysDragTo(2,1) 后解 = (2,1)（逐位，反写 c1=c2=3）",
+   "pass": true,
+   "expected": "{x:2,y:1}",
+   "actual": "{\"x\":2,\"y\":1}"
+  },
+  {
+   "id": "SYSINT-04",
+   "name": "D=0 判平行/重合，a1=b1=0 判非法（解均为 null）",
+   "pass": true,
+   "expected": "parallel/coincident/invalid",
+   "actual": "parallel/coincident/invalid"
+  },
+  {
+   "id": "SYSINT-05",
+   "name": "默认解代入残差 <1e-6",
+   "pass": true,
+   "expected": "|r|<1e-6",
+   "actual": "0.0e+0, 0.0e+0"
+  },
+  {
+   "id": "SYSINT-06",
+   "name": "syslabSet(x=3,y=4) 后读数 = 独立求值 (-3)",
+   "pass": true,
+   "expected": "[-3]",
+   "actual": "[-3]"
+  },
+  {
+   "id": "SYSINT-07",
+   "name": "syslabPoint() = 独立求值 (3,7)（逐位）",
+   "pass": true,
+   "expected": "[3,7]",
+   "actual": "[3,7]"
+  }
+ ]
+}
