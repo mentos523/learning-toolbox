@@ -2,7 +2,7 @@
 /* waveA-verify.mjs —— 波A 复验脚本（静态门 + headless 抽查）
  * 用法：node tools/waveA-verify.mjs [--headless]
  * 静态门（必跑）：无 TBD、id 唯一、页数（代数 289、几何 341）、新类型带 engine
- * headless（--headless）：抽查页打开零报错（需 playwright-core）
+ * headless（--headless）：抽查页打开零报错 + 无 ix-stub 渲染残留（需 playwright-core）
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -184,6 +184,11 @@ async function headlessCheck() {
       const formulaErr = await pg.evaluate(() =>
         document.querySelectorAll(".formula-error, .math-error").length);
       if (formulaErr > 0) errors.push(`公式渲染异常: ${formulaErr} 处`);
+      /* 返工方法论必修：math.js:182 把渲染异常吞成 DOM stub（无 console/pageerror），
+       * 必须断言无 ix-stub，否则坏页漏检（19 个坏页曾因此漏网） */
+      const stubInfo = await pg.evaluate(() =>
+        [...document.querySelectorAll(".ix-stub")].map(e => e.textContent.slice(0, 60)));
+      if (stubInfo.length > 0) errors.push(`渲染 stub: ${stubInfo.length} 处 [${stubInfo.join(" | ")}]`);
       report.headless.push(`${pid}: ${errors.length ? "FAIL" : "PASS"}` +
         (errors.length ? " | " + errors.join("; ") : ""));
       if (errors.length) report.errors.push("HEADLESS " + pid + ": " + errors.join("; "));
