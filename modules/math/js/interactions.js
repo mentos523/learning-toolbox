@@ -2176,6 +2176,46 @@
     });
     var pts = JSON.parse(JSON.stringify(init));
 
+    // —— 波0 S2：轨迹约束与端点锁定（数据驱动，不改数据文件）。
+    // base 中若有圆形参照（t:"circle"/"arcpath"，如 g07 半圆），则：
+    //  ① 初位落在某条 base seg 端点上的顶点 → 锁定（g07 的 A/B：直径端点，
+    //     hint 明确"别拖它们"）；
+    //  ② 其余初位贴着圆（|dist−r| ≤ 2 逻辑单位）的顶点 → 拖拽时投影到圆上
+    //     （g07 的 P：hint 明确"让它在圆上走"）。
+    // 无 base 的页面（g00/g03）行为与旧版完全一致。
+    var circleGuides = [];
+    var lockedVerts = {};
+    if (Array.isArray(params.base)) {
+      params.base.forEach(function (sh) {
+        if ((sh.t === "circle" || sh.t === "arcpath") && Array.isArray(sh.c) &&
+            isFinite(Number(sh.r))) {
+          circleGuides.push({ cx: Number(sh.c[0]), cy: Number(sh.c[1]), r: Number(sh.r) });
+        }
+      });
+      params.base.forEach(function (sh) {
+        if (sh.t === "seg" && Array.isArray(sh.a) && Array.isArray(sh.b)) {
+          init.forEach(function (p, vi) {
+            if (G.dist(p.x, p.y, sh.a[0], sh.a[1]) < 0.5 ||
+                G.dist(p.x, p.y, sh.b[0], sh.b[1]) < 0.5) lockedVerts[vi] = true;
+          });
+        }
+      });
+    }
+    // 顶点 vi 若被约束，返回其参照圆（初位最近的）；否则 null
+    function guideFor(vi) {
+      if (!circleGuides.length) return null;
+      var p = init[vi], best = null, bd = 1e9;
+      circleGuides.forEach(function (gd) {
+        var d = Math.abs(G.dist(p.x, p.y, gd.cx, gd.cy) - gd.r);
+        if (d < bd) { bd = d; best = gd; }
+      });
+      return bd <= 2 ? best : null;
+    }
+    var vertGuide = [0, 1, 2].map(function (vi) {
+      return lockedVerts[vi] ? null : guideFor(vi);   // 锁定的顶点不参与轨迹约束
+    });
+    var hasGuides = circleGuides.length > 0 || Object.keys(lockedVerts).length > 0;
+
     var wrap = el("div", "ix-geo-wrap ix-vertex-drag");
     var readout = el("div", "ix-geo-readout", "");
     wrap.appendChild(readout);
@@ -2211,22 +2251,37 @@
     }
     for (i = 0; i < 3; i++) {
       (function (idx) {
-        var g = G.el("g", { "class": "geo-drag" });
-        var hit = G.el("circle", { r: 18, fill: "transparent" });
-        var dot = G.el("circle", {
-          r: 8, fill: "var(--geo-known)", stroke: "#fff", "stroke-width": 2
-        });
-        g.appendChild(hit); g.appendChild(dot);
+        var isLocked = !!lockedVerts[idx];
+        var g = G.el("g", { "class": isLocked ? "geo-locked" : "geo-drag" });
+        if (isLocked) {
+          // 锁定端点：静态灰点，不可拖
+          g.appendChild(G.el("circle", {
+            r: 6, fill: "var(--geo-line)", opacity: 0.55,
+            stroke: "#fff", "stroke-width": 1.5
+          }));
+          var ti = G.el("title", {});
+          ti.textContent = "固定点（不可拖）";
+          g.appendChild(ti);
+          g.style.cursor = "default";
+        } else {
+          var hit = G.el("circle", { r: 18, fill: "transparent" });
+          var dot = G.el("circle", {
+            r: 8, fill: "var(--geo-known)", stroke: "#fff", "stroke-width": 2
+          });
+          g.appendChild(hit); g.appendChild(dot);
+        }
         svg.appendChild(g);
-        handles.push({ g: g, dot: dot });
+        handles.push({ g: g, locked: isLocked });
         handleLabels.push(G.label(svg, 0, 0, pts[idx].label,
-          { size: 16, bold: true, color: "known" }));
-        bindVertexDrag(g, idx);
+          { size: 16, bold: true, color: isLocked ? "line" : "known" }));
+        if (!isLocked) bindVertexDrag(g, idx);
       })(i);
     }
 
     var status = el("div", "ix-status",
-      '<span class="ix-hint">拖动蓝色顶点，看边长和角度怎么变</span>');
+      hasGuides
+        ? '<span class="ix-hint">拖动蓝色顶点（它只能沿着圆走），灰色端点已锁定</span>'
+        : '<span class="ix-hint">拖动蓝色顶点，看边长和角度怎么变</span>');
     var foot = el("div", "ix-foot");
     var resetBtn = el("button", "ix-reset", "↺ 复原");
     resetBtn.type = "button";
@@ -2335,8 +2390,17 @@
         var p = G.svgPoint(svg, evt);
         var lx = fr0.iX(p.x - dx);
         var ly = fr0.iY(p.y - dy);
-        pts[idx].x = Math.min(98, Math.max(2, lx));
-        pts[idx].y = Math.min(98, Math.max(2, ly));
+        lx = Math.min(98, Math.max(2, lx));
+        ly = Math.min(98, Math.max(2, ly));
+        // 波0 S2：轨迹约束——投影到参照圆上（逻辑坐标 y 向上，直接 atan2）
+        var gd = vertGuide[idx];
+        if (gd) {
+          var ang = Math.atan2(ly - gd.cy, lx - gd.cx);
+          lx = gd.cx + gd.r * Math.cos(ang);
+          ly = gd.cy + gd.r * Math.sin(ang);
+        }
+        pts[idx].x = lx;
+        pts[idx].y = ly;
         redraw();
       });
       function end() {
@@ -2355,17 +2419,34 @@
       redraw();
     });
 
+    // 供 headless 断言读取：顶点逻辑坐标、参照圆、锁定表
+    wrap._readState = function () {
+      return {
+        pts: pts.map(function (p) {
+          return { x: Math.round(p.x * 100) / 100, y: Math.round(p.y * 100) / 100 };
+        }),
+        guides: circleGuides,
+        locked: [0, 1, 2].filter(function (vi) { return lockedVerts[vi]; }),
+        constrained: [0, 1, 2].filter(function (vi) { return !!vertGuide[vi]; })
+      };
+    };
+
     redraw();
   }
 
   /* ============================================================
-   * 13. angle-protractor 量角器（几何 G6）
+   * 13. angle-protractor 量角器（几何 G6）——波0 S1 重构版
    * params: {angle, vertex?, dir1?, rayLabels?, tolerance?, feedback?}
    *
-   * 玩法：拖动量角器旋转，把 0° 刻度线对准一条边，
-   * 读另一条边压住的刻度。松手时读数与真实角度差 ≤ tolerance
-   * 即吸附落定：flash 高亮 + ripple 扩散环（M6 视觉必选）+
-   * 可选 vibrate（能力检测，静默跳过）+ 可选合成音。
+   * 根治口径（2026-10-16 几何盘点 S1）：
+   *  ① 锚点由角定义构造：顶点 V + 两射线上的方向点 P1/P2
+   *     （V + r·dir，落在射线上，dataset.distToRay = 0.00）；
+   *  ② 拖拽语义 = 拖边改角：拖 P1/P2 → 对应边方向改变 → 角实时重算
+   *     （Δθ_target ≠ 0）；拖 V → 整体平移，角度不变；
+   *  ③ 量角器为独立工具层：整体可拖动（平移）把中心对准顶点；
+   *     读数恒由几何角自动计算，工具的移动/姿态永不改变被测角。
+   *     中心贴上顶点（≤14px）即吸附落定：flash + ripple 确认反馈。
+   * 旧"旋转拨盘凑读数"玩法已废止。
    * 逻辑坐标 0–100（y 向上），不写死 px。
    * ============================================================ */
   function renderAngleProtractor(container, params) {
@@ -2374,70 +2455,70 @@
       container.appendChild(el("div", "ix-stub", "几何原语库未加载（js/geom-primitives.js）"));
       return;
     }
-    var A = Number(params.angle);
-    if (!(A > 0 && A < 180)) {
+    var A0 = Number(params.angle);
+    if (!(A0 > 0 && A0 < 180)) {
       container.appendChild(el("div", "ix-stub",
         "参数错误：angle-protractor 需要 angle（0°–180° 之间的度数）"));
       return;
     }
-    var tolRaw = Number(params.tolerance);
-    var tol = isFinite(tolRaw) ? Math.max(0.5, Math.min(10, tolRaw)) : 2;
     var V = params.vertex || {};
-    var vx = isFinite(Number(V.x)) ? Number(V.x) : 50;
-    var vy = isFinite(Number(V.y)) ? Number(V.y) : 56;
+    var initVx = isFinite(Number(V.x)) ? Number(V.x) : 50;
+    var initVy = isFinite(Number(V.y)) ? Number(V.y) : 56;
     var vLabel = V.label || "O";
-    var dir1 = params.dir1 != null && isFinite(Number(params.dir1))
+    var initD1 = params.dir1 != null && isFinite(Number(params.dir1))
       ? G.norm360(Number(params.dir1)) : 180;
-    var dir2 = G.norm360(dir1 - A);   // 角的另一条边
+    var initD2 = G.norm360(initD1 - A0);
     var rayLabels = params.rayLabels || ["A", "B"];
     var fb = params.feedback || {};
 
     var W = 420, H = 380, mL = 44, mR = 44, mT = 30, mB = 56;
     function X(x) { return mL + x / 100 * (W - mL - mR); }
     function Y(y) { return mT + (1 - y / 100) * (H - mT - mB); }
-    var Vx = X(vx), Vy = Y(vy);
+    function iX(px) { return (px - mL) / (W - mL - mR) * 100; }
+    function iY(py) { return (1 - (py - mT) / (H - mT - mB)) * 100; }
     var S = (W - mL - mR) / 100;      // 逻辑单位 → px
     var R = 30 * S;                    // 量角器半径
     var rayLen = 44 * S;
+    var anchorR = 30 * S;              // 射线锚点到顶点的像素距离
+    var SNAP = 14;                     // 工具中心吸附半径（px）
 
-    var wrap = el("div", "ix-geo-wrap ix-angle-protractor");
+    // —— 角状态（逻辑坐标 + 数学惯例方向角）——
+    var vx = initVx, vy = initVy, d1 = initD1, d2 = initD2;
+    function angleDeg() {
+      var dd = Math.abs(G.norm360(d1 - d2));
+      return dd > 180 ? 360 - dd : dd;   // 两射线夹角（劣角），[0,180]
+    }
+
+    var wrap = el("div", "ix-geo-wrap ix-angle-protractor ix-angle");
     var readout = el("div", "ix-geo-readout", "");
     wrap.appendChild(readout);
     var svg = G.svg(W, H, "ix-svg geo-svg");
     wrap.appendChild(svg);
 
-    /* —— 量角器拨盘（可旋转组；刻度 k 画在局部数学角 -k 处，
-     *     世界方向 = θd - k；读数 = 另一条边压住的刻度） —— */
-    var dial = G.el("g", { "class": "geo-drag" });
-    // 半圆盘面（半透明，透出底图）
+    /* —— 量角器工具层（独立可拖动整体；只平移，不旋转） —— */
+    var dial = G.el("g", { "class": "geo-drag protractor-tool" });
     dial.appendChild(G.el("path", {
       d: "M" + R.toFixed(1) + ",0 A" + R.toFixed(1) + "," + R.toFixed(1) +
          " 0 0 1 " + (-R).toFixed(1) + ",0 Z",
       fill: "var(--geo-bg)", opacity: 0.62, stroke: "none"
     }));
-    // 外圈弧
     dial.appendChild(G.el("path", {
       d: "M" + R.toFixed(1) + ",0 A" + R.toFixed(1) + "," + R.toFixed(1) + " 0 0 1 " + (-R).toFixed(1) + ",0",
       fill: "none", stroke: G.colorOf("line"), "stroke-width": 2
     }));
-    // 基线（直径）
     dial.appendChild(G.el("line", {
       x1: -R.toFixed(1), y1: 0, x2: R.toFixed(1), y2: 0,
       stroke: G.colorOf("line"), "stroke-width": 1.5
     }));
-    // 刻度：每 10° 一道，30° 加长；数字每 30°
-    var tickEls = [];
     for (var k = 0; k <= 180; k += 10) {
       var isMajor = k % 30 === 0;
       var p1 = G.polar(0, 0, R, -k);
       var p2 = G.polar(0, 0, R - (isMajor ? 8 : 4.5), -k);
-      var tk = G.el("line", {
+      dial.appendChild(G.el("line", {
         x1: p1[0].toFixed(1), y1: p1[1].toFixed(1),
         x2: p2[0].toFixed(1), y2: p2[1].toFixed(1),
         stroke: G.colorOf("line"), "stroke-width": isMajor ? 2 : 1.2
-      });
-      dial.appendChild(tk);
-      tickEls.push(tk);
+      }));
       if (isMajor) {
         var np = G.polar(0, 0, R - 15, -k);
         var nt = G.el("text", {
@@ -2448,151 +2529,216 @@
         dial.appendChild(nt);
       }
     }
-    // 旋转手柄（刻度中点外圈）
-    var hp = G.polar(0, 0, R, -90);
-    var knob = G.el("circle", {
-      cx: hp[0].toFixed(1), cy: hp[1].toFixed(1), r: 8,
-      fill: G.colorOf("highlight"), stroke: G.colorOf("line"), "stroke-width": 2
-    });
-    dial.appendChild(knob);
-    svg.appendChild(dial);
-
-    /* —— 角：两条射线 + 待测弧线 —— */
-    var r1 = G.ray(svg, Vx, Vy, dir1, rayLen, { color: "known", width: 3 });
-    var r2 = G.ray(svg, Vx, Vy, dir2, rayLen, { color: "line", width: 3 });
-    var e1 = G.polar(Vx, Vy, rayLen + 12, dir1);
-    var e2 = G.polar(Vx, Vy, rayLen + 12, dir2);
-    G.label(svg, e1[0], e1[1], rayLabels[0] || "A", { size: 16, bold: true, color: "known" });
-    G.label(svg, e2[0], e2[1], rayLabels[1] || "B", { size: 16, bold: true });
-    var arcG = G.angleArc(svg, Vx, Vy, dir2, dir2 + A, 15, { color: "target", width: 2.5 });
-    var midA = dir2 + A / 2;
-    var lp = G.polar(Vx, Vy, 26, midA);
-    var arcLabel = G.label(svg, lp[0], lp[1], "？", { size: 17, bold: true, color: "target" });
-    // 中心销
-    svg.appendChild(G.el("circle", {
-      cx: Vx, cy: Vy, r: 3.5, fill: G.colorOf("line")
+    // 中心对准标记（十字 + 小圈）：把这个点拖到顶点 O 上
+    dial.appendChild(G.el("circle", {
+      cx: 0, cy: 0, r: 5, fill: "none",
+      stroke: G.colorOf("highlight"), "stroke-width": 2
     }));
-    G.label(svg, Vx + 12, Vy + 20, vLabel, { size: 15, bold: true });
+    dial.appendChild(G.el("line", {
+      x1: -10, y1: 0, x2: 10, y2: 0,
+      stroke: G.colorOf("highlight"), "stroke-width": 1.5
+    }));
+    dial.appendChild(G.el("line", {
+      x1: 0, y1: -10, x2: 0, y2: 10,
+      stroke: G.colorOf("highlight"), "stroke-width": 1.5
+    }));
+    svg.appendChild(dial);
+    var cx0 = 296, cy0 = 112;   // 工具初始位置（可见、未对准，不压住角弧标注）
+    var cx = cx0, cy = cy0;
+    var locked = false;
 
-    var status = el("div", "ix-status",
-      '<span class="ix-hint">拖动量角器旋转：把 0° 刻度线对准一条边，读另一条边压住的刻度</span>');
+    /* —— 角图形层（随状态重绘） —— */
+    var fig = G.el("g", { "class": "angle-fig" });
+    svg.appendChild(fig);
+    var lastArcG = null;
+
+    /* —— 锚点层：由角定义构造，坐标 = 顶点 / 顶点+r·方向 —— */
+    function mkAnchor(id, role) {
+      var g = G.el("g", {
+        "class": "geo-drag angle-anchor", id: id,
+        "data-dist-to-ray": "0.00"
+      });
+      g.setAttribute("data-role", role);
+      g.appendChild(G.el("circle", { r: 18, fill: "transparent" }));
+      g.appendChild(G.el("circle", {
+        r: 8, fill: "var(--geo-known)", stroke: "#fff", "stroke-width": 2
+      }));
+      var ti = G.el("title", {});
+      ti.textContent = role === "vertex" ? "拖动：整体平移（角度不变）" : "拖动：改变这条边的方向（角的大小变）";
+      g.appendChild(ti);
+      g.dataset.distToRay = "0.00";   // 构造即落在射线上，偏差 0
+      svg.appendChild(g);
+      return g;
+    }
+    var anchorV = mkAnchor("anchor-V", "vertex");
+    var anchorP1 = mkAnchor("anchor-P1", "ray1");
+    var anchorP2 = mkAnchor("anchor-P2", "ray2");
+
+    var HINT_INIT = '<span class="ix-hint">拖动蓝色锚点：拖射线上的点改角的大小，拖顶点平移；再把量角器中心拖到顶点 O 上对准</span>';
+    var status = el("div", "ix-status", HINT_INIT);
     var foot = el("div", "ix-foot");
-    var resetBtn = el("button", "ix-reset", "↺ 重量");
+    var resetBtn = el("button", "ix-reset", "↺ 重来");
     resetBtn.type = "button";
     foot.appendChild(status); foot.appendChild(resetBtn);
     wrap.appendChild(foot);
     container.appendChild(wrap);
 
-    /* —— 旋转状态 —— */
-    var theta = dir1 + 38;   // 拨盘初始偏转（0° 未对准）
-    var locked = false;
-    var nearTick = -1;
-
-    function reading() { return G.norm180(theta - dir2); }
-    function angDist(a, b) {
-      var d = Math.abs(a - b) % 180;
-      return d > 90 ? 180 - d : d;
-    }
-    function paint() {
-      dial.setAttribute("transform",
-        "rotate(" + (-theta).toFixed(2) + " " + Vx.toFixed(1) + " " + Vy.toFixed(1) + ")");
-      var rd = reading();
-      readout.innerHTML = '<span class="ix-expr">量角器读数</span>' +
-        '<span class="ix-eq"> = </span>' +
-        '<span class="ix-val">' + fmt(rd) + "°</span>";
-      // 接近提示：另一条边压住的刻度高亮
-      var near = angDist(rd, A) <= 6;
-      var ti = Math.round(rd / 10);
-      if (near && !locked) {
-        if (nearTick !== ti) {
-          clearTick();
-          nearTick = ti;
-          if (tickEls[ti]) tickEls[ti].setAttribute("stroke", G.colorOf("highlight"));
-        }
-        if (status.dataset.mode !== "near") {
-          status.dataset.mode = "near";
-          status.innerHTML = '<span class="ix-hint">很接近了——对准刻度再松手！</span>';
-        }
-      } else {
-        clearTick();
-        if (!locked && status.dataset.mode === "near") {
-          status.dataset.mode = "";
-          status.innerHTML = '<span class="ix-hint">拖动量角器旋转：把 0° 刻度线对准一条边，读另一条边压住的刻度</span>';
-        }
-      }
-    }
-    function clearTick() {
-      if (nearTick >= 0 && tickEls[nearTick]) {
-        tickEls[nearTick].setAttribute("stroke", G.colorOf("line"));
-      }
-      nearTick = -1;
-    }
     function fmt(n) {
       if (!isFinite(n)) return "—";
       return String(Math.round(n * 10) / 10);
     }
 
+    function paint() {
+      var Vx = X(vx), Vy = Y(vy);
+      var A = angleDeg();
+      // —— 重绘角图形 ——
+      while (fig.firstChild) fig.removeChild(fig.firstChild);
+      G.ray(fig, Vx, Vy, d1, rayLen, { color: "known", width: 3 });
+      G.ray(fig, Vx, Vy, d2, rayLen, { color: "line", width: 3 });
+      var e1 = G.polar(Vx, Vy, rayLen + 12, d1);
+      var e2 = G.polar(Vx, Vy, rayLen + 12, d2);
+      G.label(fig, e1[0], e1[1], rayLabels[0] || "A", { size: 16, bold: true, color: "known" });
+      G.label(fig, e2[0], e2[1], rayLabels[1] || "B", { size: 16, bold: true });
+      var sweep = G.norm360(d1 - d2);
+      var aStart = sweep <= 180 ? d2 : d1;   // 画劣弧
+      var arcG = G.angleArc(fig, Vx, Vy, aStart, aStart + A, 15, { color: "target", width: 2.5 });
+      lastArcG = arcG;
+      var midA = aStart + A / 2;
+      var lp = G.polar(Vx, Vy, 26, midA);
+      G.label(fig, lp[0], lp[1], locked ? fmt(A) + "°" : "？",
+        { size: 17, bold: true, color: "target" });
+      fig.appendChild(G.el("circle", { cx: Vx, cy: Vy, r: 3.5, fill: G.colorOf("line") }));
+      G.label(fig, Vx + 12, Vy + 20, vLabel, { size: 15, bold: true });
+      // —— 锚点就位（构造坐标，必在射线上） ——
+      anchorV.setAttribute("transform", "translate(" + Vx.toFixed(1) + "," + Vy.toFixed(1) + ")");
+      var q1 = G.polar(Vx, Vy, anchorR, d1);
+      var q2 = G.polar(Vx, Vy, anchorR, d2);
+      anchorP1.setAttribute("transform", "translate(" + q1[0].toFixed(1) + "," + q1[1].toFixed(1) + ")");
+      anchorP2.setAttribute("transform", "translate(" + q2[0].toFixed(1) + "," + q2[1].toFixed(1) + ")");
+      // —— 工具层就位（只平移） ——
+      dial.setAttribute("transform", "translate(" + cx.toFixed(1) + "," + cy.toFixed(1) + ")");
+      // —— 读数：恒由几何角自动计算 ——
+      readout.innerHTML = '<span class="ix-expr">角</span>' +
+        '<span class="ix-eq"> = </span>' +
+        '<span class="ix-val">' + fmt(A) + "°</span>" +
+        '<span class="ix-sep">　</span>' +
+        '<span class="ix-expr">量角器</span>' +
+        '<span class="ix-eq">：</span>' +
+        '<span class="ix-val">' + (locked ? "已对准 ✓" : "把中心拖到顶点 O") + "</span>";
+    }
+
     function settle() {
-      // 吸附到真实角度（取最近的等价位置）
-      var rd = reading();
-      var delta = A - rd;
-      if (delta > 90) delta -= 180;
-      if (delta < -90) delta += 180;
-      theta += delta;
+      // 吸附落定：中心精确贴上顶点，只做确认反馈（不改变被测角）
       locked = true;
-      clearTick();
+      cx = X(vx); cy = Y(vy);
       paint();
-      arcLabel.textContent = fmt(A) + "°";
-      // M6：视觉必选（flash + ripple），震动/音效可选加分
-      G.settle(svg, Vx, Vy, arcG, {
+      G.settle(svg, X(vx), Y(vy), lastArcG, {
         vibrate: fb.vibrate === undefined ? [20, 30, 20] : fb.vibrate,
         beep: fb.beep === true
       });
       dial.style.cursor = "default";
       status.dataset.mode = "done";
-      status.innerHTML = '<span class="ix-success">✓ 量角器读数 ' + fmt(A) +
-        "°，这个角就是 " + fmt(A) + "°！</span>";
+      status.innerHTML = '<span class="ix-success">✓ 量角器中心对准顶点 ' + G.esc(vLabel) +
+        "，这个角就是 " + fmt(angleDeg()) + "°！</span>";
     }
 
-    // 拖拽旋转
-    var dragging = false, grabOff = 0;
+    // —— 锚点拖拽：P1/P2 改边方向（Δθ≠0），V 整体平移（角度不变） ——
+    function bindAnchor(g, role) {
+      var dragging = false, ox = 0, oy = 0;
+      g.style.cursor = "grab";
+      g.addEventListener("pointerdown", function (evt) {
+        evt.preventDefault();
+        dragging = true;
+        try { g.setPointerCapture(evt.pointerId); } catch (e) {}
+        var p = G.svgPoint(svg, evt);
+        if (role === "vertex") {
+          ox = p.x - X(vx); oy = p.y - Y(vy);
+        }
+        g.style.cursor = "grabbing";
+      });
+      g.addEventListener("pointermove", function (evt) {
+        if (!dragging) return;
+        var p = G.svgPoint(svg, evt);
+        if (role === "vertex") {
+          vx = Math.min(98, Math.max(2, iX(p.x - ox)));
+          vy = Math.min(98, Math.max(2, iY(p.y - oy)));
+          // 顶点搬家 → 工具不再对准，解除落定
+          if (locked) {
+            locked = false;
+            dial.style.cursor = "grab";
+            status.dataset.mode = "";
+            status.innerHTML = HINT_INIT;
+          }
+        } else {
+          var cand = G.angleOf(X(vx), Y(vy), p.x, p.y);
+          var other = role === "ray1" ? d2 : d1;
+          var dd = Math.abs(G.norm360(cand - other));
+          var na = dd > 180 ? 360 - dd : dd;
+          if (na >= 2 && na <= 178) {   // 钳制在 (0,180) 内，防翻转
+            if (role === "ray1") d1 = cand; else d2 = cand;
+          }
+        }
+        paint();
+      });
+      function end() {
+        if (!dragging) return;
+        dragging = false;
+        g.style.cursor = "grab";
+      }
+      g.addEventListener("pointerup", end);
+      g.addEventListener("pointercancel", end);
+    }
+    bindAnchor(anchorV, "vertex");
+    bindAnchor(anchorP1, "ray1");
+    bindAnchor(anchorP2, "ray2");
+
+    // —— 工具层拖拽：整体平移；贴上顶点即吸附确认 ——
+    var tdrag = false, tox = 0, toy = 0;
     dial.style.cursor = "grab";
     dial.addEventListener("pointerdown", function (evt) {
       if (locked) return;
       evt.preventDefault();
-      dragging = true;
+      tdrag = true;
       try { dial.setPointerCapture(evt.pointerId); } catch (e) {}
       var p = G.svgPoint(svg, evt);
-      grabOff = G.angleOf(Vx, Vy, p.x, p.y) - theta;
+      tox = p.x - cx; toy = p.y - cy;
       dial.style.cursor = "grabbing";
     });
     dial.addEventListener("pointermove", function (evt) {
-      if (!dragging || locked) return;
+      if (!tdrag || locked) return;
       var p = G.svgPoint(svg, evt);
-      theta = G.angleOf(Vx, Vy, p.x, p.y) - grabOff;
+      cx = p.x - tox; cy = p.y - toy;
       paint();
     });
-    function endDrag() {
-      if (!dragging) return;
-      dragging = false;
+    dial.addEventListener("pointerup", function () {
+      if (!tdrag) return;
+      tdrag = false;
       dial.style.cursor = locked ? "default" : "grab";
-      if (!locked && angDist(reading(), A) <= tol) settle();
-    }
-    dial.addEventListener("pointerup", endDrag);
+      if (!locked && G.dist(cx, cy, X(vx), Y(vy)) <= SNAP) settle();
+    });
     dial.addEventListener("pointercancel", function () {
-      dragging = false;
+      tdrag = false;
       dial.style.cursor = locked ? "default" : "grab";
     });
 
     resetBtn.addEventListener("click", function () {
-      theta = dir1 + 38;
-      locked = false;
-      status.dataset.mode = "";
-      arcLabel.textContent = "？";
+      vx = initVx; vy = initVy; d1 = initD1; d2 = initD2;
+      cx = cx0; cy = cy0; locked = false;
       dial.style.cursor = "grab";
-      status.innerHTML = '<span class="ix-hint">拖动量角器旋转：把 0° 刻度线对准一条边，读另一条边压住的刻度</span>';
+      status.dataset.mode = "";
+      status.innerHTML = HINT_INIT;
       paint();
     });
+
+    // 供 headless 断言读取：{thetaTarget, toolPose, toolReading}
+    wrap._readState = function () {
+      var A = angleDeg();
+      return {
+        thetaTarget: Math.round(A * 10) / 10,
+        toolPose: cx.toFixed(1) + "," + cy.toFixed(1),
+        toolReading: Math.round(A * 10) / 10
+      };
+    };
 
     paint();
   }
