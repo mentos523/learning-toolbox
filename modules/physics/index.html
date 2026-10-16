@@ -33,8 +33,23 @@
 </section>
 
 <!-- 框架：MathML 环境检测（复用数学模块已验证实现；缺失时 physics.js
-     本地兜底） → 章注册表 → 章数据 → 主引擎 -->
+     本地兜底） → 基础引擎层（方案 A，加载顺序见 docs/ENGINE.md §一）
+     → 章注册表 → 章数据 → 主引擎 → 引擎试点渲染器（p07/p12） -->
 <script src="../math/js/mathml-check.js"></script>
+<script src="../../assets/vendor/planck.min.js"></script>
+<script src="../../assets/vendor/konva.min.js"></script>
+<script src="../../assets/vendor/jsxgraphcore.js"></script>
+<script src="../../assets/engine/core.js"></script>
+<script src="../../assets/engine/coords.js"></script>
+<script src="../../assets/engine/driver.js"></script>
+<script src="../../assets/engine/konva-view.js"></script>
+<script src="../../assets/engine/input.js"></script>
+<script src="../../assets/engine/mech.js"></script>
+<script src="../../assets/engine/meters.js"></script>
+<script src="../../assets/engine/plot.js"></script>
+<script src="../../assets/engine/steps.js"></script>
+<script src="../../assets/engine/guides.js"></script>
+<link rel="stylesheet" href="../../assets/vendor/jsxgraph.css">
 <script src="data/chapters.js"></script>
 <script src="data/p00.js"></script>
 <script src="data/p01.js"></script>
@@ -55,5 +70,6 @@
 <script src="data/p16.js"></script>
 <script src="data/p17.js"></script>
 <script src="js/physics.js"></script>
+<script src="js/physics-engine.js"></script>
 </body>
 </html>

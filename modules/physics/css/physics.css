@@ -1205,3 +1205,27 @@ body[data-theme="dark"] #physics-app .phy-safety { background: #2b2113; }
 
 /* ---------- Y2 仪表：表头内的滑块行独占一行且不撑破容器 ---------- */
 .phy-gauge-head > .phy-slider-row { flex: 1 1 100%; min-width: 0; max-width: 100%; }
+
+/* ---------- 引擎试点（2026-10-16）：新渲染器容器与旧 stage 视觉对齐 ---------- */
+.phy-eng-stage { width: 100%; }
+.phy-eng-stage canvas {
+  display: block;
+  max-width: 100%;
+  background: var(--phy-bg);
+  border: 1px solid var(--phy-line);
+  border-radius: 10px;
+}
+.phy-eng-plot { width: 100%; }
+.phy-eng-plot > div { max-width: 100%; }
+/* YP-05/YP-15 判分器：锁定提示与口径声明 */
+.phy-q-locknote {
+  font-size: 0.85rem; color: var(--phy-ink-soft);
+  background: var(--phy-panel); border: 1px dashed var(--phy-line);
+  border-radius: 8px; padding: 6px 10px; margin: 6px 0;
+}
+.phy-q-locked .phy-q-opts button:disabled,
+.phy-q-locked .phy-q-check:disabled { opacity: 0.45; }
+.phy-q-tol {
+  font-size: 0.78rem; color: var(--phy-ink-soft); margin-top: 6px;
+}
+.phy-q .phy-retry { margin-left: 4px; }

@@ -220,7 +220,13 @@ window.PHY_CH["p07"] = {
                     v1: { min: 0, max: 8, step: 0.5, init: 4 },
                     v2: { min: 0, max: 0, step: 0.5, init: 0 },
                     restitution: 1, showMomentumBars: true,
-                    badge: { invariant: "没变的是：两车总质量（变的是 m1、v1→m2 被撞飞的速度）" }
+                    badge: { invariant: "没变的是：两车总质量（变的是 m1、v1→m2 被撞飞的速度）" },
+                    /* 引擎试点（2026-10-16）：实现层切 Eng.Collision1D，文案不动 */
+                    engine: {
+                      primitive: "Collision1D", version: "2026.10.16.1",
+                      params: { mass1Kg: 2, mass2Kg: 2, velocity1Mps: 4,
+                        velocity2Mps: 0, restitution: 1, radiusM: 0.15, initialGapM: 2.0 }
+                    }
                   }
                 },
                 {
@@ -353,7 +359,12 @@ window.PHY_CH["p07"] = {
                     fulcrumX: { min: 30, max: 70, step: 1, init: 50 },
                     load: { weight: 10, armInit: 20 },
                     showEquation: true, unit: "N",
-                    badge: { invariant: "没变的是：阻力（钩码重量）（变的是支点位置→F₁ 读数）" }
+                    badge: { invariant: "没变的是：阻力（钩码重量）（变的是支点位置→F₁ 读数）" },
+                    /* 引擎试点（2026-10-16）：实现层切 Eng.Lever，文案不动 */
+                    engine: {
+                      primitive: "Lever", version: "2026.10.16.1",
+                      params: { arm1M: 35, arm2M: 35, force1N: 10, fulcrumInit: 50 }
+                    }
                   }
                 }
               ],
@@ -421,7 +432,12 @@ window.PHY_CH["p07"] = {
                     mode: "pulley", pulleyKind: "fixed",
                     load: { weight: 10, armInit: 0 },
                     showEquation: false, unit: "N",
-                    badge: { invariant: "没变的是：重物重量（定滑轮这轮，变的是拉力读数与绳子长度）" }
+                    badge: { invariant: "没变的是：重物重量（定滑轮这轮，变的是拉力读数与绳子长度）" },
+                    /* 引擎试点（2026-10-16）：实现层切 Eng.Pulley */
+                    engine: {
+                      primitive: "Pulley", version: "2026.10.16.1",
+                      params: { ropeSegmentsN: 1, loadWeightN: 10 }
+                    }
                   }
                 },
                 {
@@ -430,7 +446,12 @@ window.PHY_CH["p07"] = {
                     mode: "pulley", pulleyKind: "movable",
                     load: { weight: 10, armInit: 0 },
                     showEquation: false, unit: "N",
-                    badge: { invariant: "没变的是：重物重量（动滑轮这轮，变的是拉力读数与绳子长度）" }
+                    badge: { invariant: "没变的是：重物重量（动滑轮这轮，变的是拉力读数与绳子长度）" },
+                    /* 引擎试点（2026-10-16）：实现层切 Eng.Pulley */
+                    engine: {
+                      primitive: "Pulley", version: "2026.10.16.1",
+                      params: { ropeSegmentsN: 2, loadWeightN: 10 }
+                    }
                   }
                 }
               ],
@@ -518,6 +539,11 @@ window.PHY_CH["p07"] = {
               id: "p07.3.0-p2",
               kind: "quiz",
               title: "综合习题",
+              /* 引擎试点（2026-10-16）：YP-05 错误反馈三件套 + YP-15 练习判分器 */
+              engine: {
+                grader: "YP-05/YP-15", version: "2026.10.16.1",
+                params: { toleranceDecl: "数值题 ±1 答案末位容差；文字题归一化匹配" }
+              },
               questions: [
                 {
                   type: "choice",

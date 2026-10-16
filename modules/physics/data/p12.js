@@ -51,7 +51,12 @@ window.PHY_CH["p12"] = {
                   params: {
                     source: { kind: "function", expr: "F = 50*t", xLabel: "x/m", yLabel: "F/N" },
                     steps: ["slope"], xRange: [0, 0.2],
-                    badge: { invariant: "没变的是：弹簧的劲度系数（变的是拉力→伸长量→斜率读数）" }
+                    badge: { invariant: "没变的是：弹簧的劲度系数（变的是拉力→伸长量→斜率读数）" },
+                    /* 引擎试点（2026-10-16）：实现层切 Eng.PlotBoard */
+                    engine: {
+                      primitive: "PlotBoard", version: "2026.10.16.1",
+                      params: { slopeAnalytic: 50, slopeUnit: "N/m" }
+                    }
                   }
                 }
               ],
@@ -106,7 +111,12 @@ window.PHY_CH["p12"] = {
                   params: {
                     source: { kind: "points", points: [[0, 0], [2, 2], [4, 4], [5, 5], [5.5, 3], [7, 3], [9, 3]], xLabel: "F/N", yLabel: "f/N" },
                     steps: [],
-                    badge: { invariant: "没变的是：接触面的粗糙程度（变的是拉力 F→摩擦力 f 的跟随与转折）" }
+                    badge: { invariant: "没变的是：接触面的粗糙程度（变的是拉力 F→摩擦力 f 的跟随与转折）" },
+                    /* 引擎试点（2026-10-16）：实现层切 Eng.PlotBoard */
+                    engine: {
+                      primitive: "PlotBoard", version: "2026.10.16.1",
+                      params: { pointCount: 7 }
+                    }
                   }
                 }
               ],
@@ -178,7 +188,12 @@ window.PHY_CH["p12"] = {
                       { id: "f2", kind: "pull", label: "F₂", angleDeg: 150, mag: 8, min: 0, max: 15 }
                     ],
                     showResultant: true, surface: "horizontal", unit: "N",
-                    badge: { invariant: "没变的是：分力的个数（两个）（变的是分力大小与夹角→合力箭头）" }
+                    badge: { invariant: "没变的是：分力的个数（两个）（变的是分力大小与夹角→合力箭头）" },
+                    /* 引擎试点（2026-10-16）：课页层受力状态机（KonvaView+Input.bindDrag） */
+                    engine: {
+                      primitive: "PageForceState", version: "2026.10.16.1",
+                      params: { renderer: "Eng.KonvaView + Eng.Input.bindDrag", resultant: "vector-sum" }
+                    }
                   }
                 }
               ],
@@ -252,7 +267,12 @@ window.PHY_CH["p12"] = {
                       { id: "n", kind: "normal", label: "N", angleDeg: 120, mag: 8.7, fixed: true }
                     ],
                     showResultant: false, surface: "incline", inclineDeg: 30, unit: "N",
-                    badge: { invariant: "没变的是：重力 G（大小方向都不变）（变的是斜面倾角→两个等效分力的大小）" }
+                    badge: { invariant: "没变的是：重力 G（大小方向都不变）（变的是斜面倾角→两个等效分力的大小）" },
+                    /* 引擎试点（2026-10-16）：课页层受力状态机；N 角度=90°+inclineDeg 由状态计算 */
+                    engine: {
+                      primitive: "PageForceState", version: "2026.10.16.1",
+                      params: { renderer: "Eng.KonvaView + Eng.Input.bindDrag", normalAngle: "90 + inclineDeg" }
+                    }
                   }
                 }
               ],
@@ -356,7 +376,12 @@ window.PHY_CH["p12"] = {
                   params: {
                     source: { kind: "function", expr: "a = 2*t", xLabel: "F/N", yLabel: "a/(m/s²)" },
                     steps: ["slope"], xRange: [0, 5],
-                    badge: { invariant: "没变的是：物体的质量（变的是拉力 F→加速度→斜率读数）" }
+                    badge: { invariant: "没变的是：物体的质量（变的是拉力 F→加速度→斜率读数）" },
+                    /* 引擎试点（2026-10-16）：实现层切 Eng.PlotBoard */
+                    engine: {
+                      primitive: "PlotBoard", version: "2026.10.16.1",
+                      params: { slopeAnalytic: 2, slopeUnit: "m/s²/N" }
+                    }
                   }
                 }
               ],
@@ -417,7 +442,12 @@ window.PHY_CH["p12"] = {
                   type: "spring-scale-pull",
                   params: {
                     force: { min: 0, max: 10, step: 0.5, init: 4 },
-                    badge: { invariant: "没变的是：两个秤都没换（变的是拉力→两秤读数一起变、永远相等）" }
+                    badge: { invariant: "没变的是：两个秤都没换（变的是拉力→两秤读数一起变、永远相等）" },
+                    /* 引擎试点（2026-10-16）：课页层状态机，同一 state.forceN 驱动双秤 */
+                    engine: {
+                      primitive: "PageSpringPair", version: "2026.10.16.1",
+                      params: { stateField: "forceN", invariant: "两秤读数恒等" }
+                    }
                   }
                 }
               ],
@@ -465,7 +495,12 @@ window.PHY_CH["p12"] = {
                       { id: "n", kind: "normal", label: "N", angleDeg: 90, mag: 10, min: 5, max: 15 }
                     ],
                     showResultant: true, surface: "horizontal", unit: "N",
-                    badge: { invariant: "没变的是：人的重力 G（变的是支持力 N→超重还是失重）" }
+                    badge: { invariant: "没变的是：人的重力 G（变的是支持力 N→超重还是失重）" },
+                    /* 引擎试点（2026-10-16）：课页层受力状态机；超重/失重由 N−G 计算 */
+                    engine: {
+                      primitive: "PageForceState", version: "2026.10.16.1",
+                      params: { renderer: "Eng.KonvaView + Eng.Input.bindDrag", overweight: "N - G" }
+                    }
                   }
                 }
               ],
@@ -531,6 +566,11 @@ window.PHY_CH["p12"] = {
               id: "p12.2.0-p2",
               kind: "quiz",
               title: "综合习题",
+              /* 引擎试点（2026-10-16）：YP-05 错误反馈三件套 + YP-15 练习判分器 */
+              engine: {
+                grader: "YP-05/YP-15", version: "2026.10.16.1",
+                params: { toleranceDecl: "数值题 ±1 答案末位容差；文字题归一化匹配" }
+              },
               questions: [
                 {
                   type: "choice",

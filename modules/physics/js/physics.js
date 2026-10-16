@@ -5340,6 +5340,21 @@
     "pendulum": widgetPendulum
   };
   function renderWidget(type, params) {
+    /* 引擎试点分支（2026-10-16）：params.engine 字段存在时走新实现
+     *（window.PHY_ENGINE，见 js/physics-engine.js）；其余走旧渲染器（兼容层）。 */
+    var eng = params && params.engine;
+    if (eng && window.PHY_ENGINE && typeof window.PHY_ENGINE.render === "function") {
+      var node = window.PHY_ENGINE.render(type, params, curPageId);
+      if (node) {
+        if (params && params.safety) {
+          var wrap = el("div", "phy-widget");
+          wrap.appendChild(el("div", "phy-safety", "⚠ " + params.safety));
+          wrap.appendChild(node);
+          return wrap;
+        }
+        return node;
+      }
+    }
     var fn = WIDGETS[type];
     if (!fn) {
       if (typeof console !== "undefined" && console.warn)
@@ -5372,7 +5387,13 @@
     } else if (page.kind === "explain") {
       (page.blocks || []).forEach(function (b) { zone.appendChild(renderBlock(b, formulas)); });
     } else if (page.kind === "quiz") {
-      (page.questions || []).forEach(function (q) { zone.appendChild(renderQuestion(q)); });
+      /* 引擎试点：YP-05/YP-15 练习判分器（page.engine.grader 字段） */
+      if (page.engine && page.engine.grader && window.PHY_ENGINE &&
+          typeof window.PHY_ENGINE.renderQuizPage === "function") {
+        zone.appendChild(window.PHY_ENGINE.renderQuizPage(page, curPageId));
+      } else {
+        (page.questions || []).forEach(function (q) { zone.appendChild(renderQuestion(q)); });
+      }
     }
     return zone;
   }
