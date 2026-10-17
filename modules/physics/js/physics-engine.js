@@ -41,8 +41,10 @@
     return t;
   }
   function svgStage(cls, label) {
-    return svgEl("svg", { "class": "phy-stage " + (cls || ""), viewBox: "0 0 100 100",
+    var svg = svgEl("svg", { "class": "phy-stage " + (cls || ""), viewBox: "0 0 100 100",
       role: "img", "aria-label": label || "物理交互图" });
+    phyWatchStage(svg); /* V8：舞台文本归一化（函数声明提升，定义见下方移植段） */
+    return svg;
   }
   function arrowHead(svg, id, color) {
     var defs = svg.querySelector("defs");
@@ -833,7 +835,7 @@
       layer.add(bodyRect);
       refs.bodyRect = bodyRect;
       if (body.label) {
-        var bodyLabel = Eng.konvaText({ text: body.label, fontSize: 13,
+        var bodyLabel = Eng.konvaText({ text: body.label, fontSize: phyV8Snap(13),
           fill: cssVar("--phy-body"), listening: false, halo: true });
         layer.add(bodyLabel);
         refs.bodyLabel = bodyLabel;
@@ -850,7 +852,7 @@
         /* data-force 供回归断言：把逻辑几何钉在节点属性上 */
         arrow.setAttr("data-force", f.id);
         layer.add(arrow);
-        var label = Eng.konvaText({ text: f.label, fontSize: 14, fill: col,
+        var label = Eng.konvaText({ text: f.label, fontSize: phyV8Snap(14), fill: col,
           listening: false });
         /* P-02 返工（2026-10-16 复验）：data-force 标识标签所属箭头（见 resLabel） */
         label.setAttr("data-force", f.id);
@@ -898,7 +900,7 @@
             node.on("dragmove", function () { liveFrom(node, bi === 1); });
           });
         } else {
-          var lock = Eng.konvaText({ text: "🔒", fontSize: 13, listening: false });
+          var lock = Eng.konvaText({ text: "🔒", fontSize: phyV8Snap(13), listening: false });
           layer.add(lock);
           rec.lock = lock;
         }
@@ -910,7 +912,7 @@
         strokeWidth: 3, pointerLength: 10, pointerWidth: 10, listening: false });
       res.setAttr("data-force", "Fres");
       layer.add(res);
-      var resLabel = Eng.konvaText({ text: "F合", fontSize: 14, fill: resCol,
+      var resLabel = Eng.konvaText({ text: "F合", fontSize: phyV8Snap(14), fill: resCol,
         listening: false });
       /* P-02 返工（2026-10-16 复验）：data-force 标识标签所属箭头，供"他杆"断言
        * 排除自身箭头（尖端锚定+halo 是正确做法，不适用 6px 门禁）。 */
@@ -1439,9 +1441,9 @@
         });
       }
       J.create("text", [x1, yMin + (yMax - yMin) * 0.04, src.xLabel || "x"],
-        { fixed: true, anchorX: "right", fontSize: 13 });
+        { fixed: true, anchorX: "right", fontSize: phyV8Snap(13) });
       J.create("text", [bx0 + (bx1 - bx0) * 0.02, yLblY, src.yLabel || "y"],
-        { fixed: true, fontSize: 13 });
+        { fixed: true, fontSize: phyV8Snap(13) });
       if (steps.indexOf("slope") >= 0) {
         var b = el("button", "phy-mini", "读斜率");
         b.type = "button";
@@ -1830,10 +1832,100 @@
         !!window.matchMedia("(max-width:480px)").matches;
     } catch (e) { return false; }
   }
-  /* F1 止血口径：非 100×100 viewBox 的 svg-stage 换算比按 meet 取 min */
-  function phyWatchStage(svg) {
+  /* V8 字号阶梯（2026-10-17，物理补修）：引擎 SVG 舞台文本归一化——
+   * 与 physics.js T5（PHY_VIS_LABEL / phyWatchStage）同口径、独立实现
+   * （本文件铁律：命名空间隔离，只写 window.PHY_ENGINE）。
+   * 背景：批1 迁移时此处只留了 viewBox 兜底桩，引擎舞台的标签按 CSS
+   * px×舞台缩放裸渲染（如 phy-note-text 4px 在 1280 视口下渲染 29px），
+   * 既跨视口不一致、又落不到 V8 设计阶梯（p01/p05/p06/p17 已知项）。
+   * 口径：实测舞台换算比 s（preserveAspectRatio=meet，取 min；用内容盒
+   * 口径与 getScreenCTM 对齐，见 phyStageScale），文本渲染字号恒等于
+   * PHY_VIS_LABEL 目标（12 / 12.48 / 14 均已在 V8 阶梯容差内）；
+   * rAF 初校 + ResizeObserver（布局变化）+ MutationObserver（后加节点），
+   * 仿 math v8fs 经验：创建时 svg 未入 DOM 测不到缩放，字体变化本身不
+   * 触发布局故无循环。作用域：只处理 text 分支；手柄尺寸（T4 口径）
+   * 不在 V8 范围内，不动。 */
+  var PHY_VIS_LABEL = {            /* T5：画布标签视觉字号（px） */
+    "phy-body-label": 14, "phy-force-label": 14, "phy-res-label": 14,
+    "phy-f-label": 14, "phy-mag-label": 12.48, "phy-cart-label": 12.48,
+    "phy-note-text": 12.48, "phy-slope-tag": 12.48, "phy-sym-label": 12,
+    "phy-tick-label": 12, "phy-lock-icon": 14, "default": 14
+  };
+  /* V8 设计阶梯（root 16px）：{12.48,13.6,15.2,16,16.8,20,24}，容差 0.5。
+   * 渲染字号已在容差内则原值返回，否则吸附到最近一档（与固化扫描
+   * tools/v8-fontladder-scan.cjs 的 ok 判定同口径）。 */
+  var V8_LADDER = [12.48, 13.6, 15.2, 16, 16.8, 20, 24];
+  function phyV8Snap(px) {
+    var best = V8_LADDER[0], bd = Math.abs(px - best), i, d;
+    for (i = 1; i < V8_LADDER.length; i++) {
+      d = Math.abs(px - V8_LADDER[i]);
+      if (d < bd) { bd = d; best = V8_LADDER[i]; }
+    }
+    return bd <= 0.5 ? px : best;
+  }
+  function phyLabelTarget(elm) {
+    var t = PHY_VIS_LABEL["default"];
+    try {
+      var cls = " " + (elm.getAttribute("class") || "") + " ";
+      for (var k in PHY_VIS_LABEL) {
+        if (k !== "default" && cls.indexOf(" " + k + " ") >= 0) { t = PHY_VIS_LABEL[k]; break; }
+      }
+    } catch (e) {}
+    return t;
+  }
+  function phyStageScale(svg) {
     try {
       if (!svg.getAttribute("viewBox")) svg.setAttribute("viewBox", "0 0 100 100");
+      var vb = (svg.getAttribute("viewBox") || "0 0 100 100").trim().split(/[\s,]+/);
+      var vbw = parseFloat(vb[2]) || 100, vbh = parseFloat(vb[3]) || 100;
+      var cw = svg.clientWidth, ch = svg.clientHeight;
+      if (!(cw > 0) || !(ch > 0)) {
+        var r = svg.getBoundingClientRect();
+        if (!r || r.width <= 0 || r.height <= 0) return 0;
+        cw = r.width; ch = r.height;
+      }
+      return Math.min(cw / vbw, ch / vbh);
+    } catch (e) { return 0; }
+  }
+  function phyNormEl(elm, s) {
+    if (!elm || elm.nodeType !== 1) return;
+    if ((elm.tagName || "").toLowerCase() !== "text") return;
+    elm.style.fontSize = (phyLabelTarget(elm) / s).toFixed(3) + "px";
+    var cls = " " + (elm.getAttribute("class") || "") + " ";
+    if (cls.indexOf(" phy-text-halo ") >= 0)
+      elm.style.strokeWidth = (2.5 / s).toFixed(3) + "px"; /* halo 描边视觉宽度 2.5px（T5） */
+  }
+  function phyNormTree(root, s) {
+    if (!root || root.nodeType !== 1) return;
+    phyNormEl(root, s);
+    var all = root.getElementsByTagName("*");
+    for (var i = 0; i < all.length; i++) phyNormEl(all[i], s);
+  }
+  function phyWatchStage(svg) {
+    if (!svg || svg.__phyWatched) return;
+    svg.__phyWatched = true;
+    function renormAll() {
+      var s = phyStageScale(svg);
+      if (s) phyNormTree(svg, s);
+    }
+    if (typeof window.requestAnimationFrame === "function") window.requestAnimationFrame(renormAll);
+    else setTimeout(renormAll, 0);
+    try {
+      if (typeof window.ResizeObserver === "function") {
+        var ro = new ResizeObserver(function () { renormAll(); });
+        ro.observe(svg);
+      }
+      if (typeof window.MutationObserver === "function") {
+        var mo = new MutationObserver(function (muts) {
+          var s = phyStageScale(svg);
+          if (!s) return;
+          for (var i = 0; i < muts.length; i++) {
+            var added = muts[i].addedNodes;
+            for (var j = 0; j < added.length; j++) phyNormTree(added[j], s);
+          }
+        });
+        mo.observe(svg, { childList: true, subtree: true });
+      }
     } catch (e) {}
   }
   function pageSeed(pageId) {
@@ -1876,6 +1968,7 @@
     /* 音叉用 100×64 宽幅舞台（默认正方形太高） */
     var svg = svgEl("svg", { "class": "phy-stage", viewBox: "0 0 100 64",
       role: "img", "aria-label": "音叉振动溅水花" });
+    phyWatchStage(svg); /* V8：文本归一化（p01.1.1“水”标签 29px→12.48px） */
     box.appendChild(svg);
     var st = stateBadge("静止：点“敲一下音叉”", "");
     box.appendChild(st);
@@ -2992,10 +3085,10 @@
         recS.curve.setAttribute({ strokeColor: "#E69F00", strokeWidth: 3 });
         recW.curve.setAttribute({ strokeColor: "#0072B2", strokeWidth: 3, dash: 2 });
       } catch (e) {}
-      J.create("text", [tMax * 0.98, Tof(cS, tMax), "沙子"], { fixed: true, fontSize: 13 });
-      J.create("text", [tMax * 0.98, Tof(cW, tMax) + 8, "水"], { fixed: true, fontSize: 13 });
-      J.create("text", [tMax, 4, "t/s"], { fixed: true, anchorX: "right", fontSize: 13 });
-      J.create("text", [2, 192, "T/℃"], { fixed: true, fontSize: 13 });
+      J.create("text", [tMax * 0.98, Tof(cS, tMax), "沙子"], { fixed: true, fontSize: phyV8Snap(13) });
+      J.create("text", [tMax * 0.98, Tof(cW, tMax) + 8, "水"], { fixed: true, fontSize: phyV8Snap(13) });
+      J.create("text", [tMax, 4, "t/s"], { fixed: true, anchorX: "right", fontSize: phyV8Snap(13) });
+      J.create("text", [2, 192, "T/℃"], { fixed: true, fontSize: phyV8Snap(13) });
       cursor = J.create("line", [[0, 0], [0, 200]], { fixed: true, straightFirst: false,
         straightLast: false, strokeColor: "#7A7A7A", dash: 2, strokeWidth: 1 });
       board.board.update();
@@ -3105,13 +3198,13 @@
           J.create("point", [vEnd, mt.rho * vEnd], { fixed: true, visible: false })],
           { fixed: true, strokeColor: roleColor[mt.colorRole] || "#0072B2", strokeWidth: 2.5 });
         var tg = J.create("text", [vEnd, mt.rho * vEnd, "ρ=" + mt.rho],
-          { fixed: true, fontSize: 13 });
+          { fixed: true, fontSize: phyV8Snap(13) });
         tagObjs.push(tg);
       });
       J.create("text", [vMax, mMax * 0.02, "V/" + (p.unitV || "cm³")],
-        { fixed: true, anchorX: "right", fontSize: 13 });
+        { fixed: true, anchorX: "right", fontSize: phyV8Snap(13) });
       J.create("text", [vMax * 0.01, mMax * 0.99, "m/" + (p.unitM || "g")],
-        { fixed: true, fontSize: 13 });
+        { fixed: true, fontSize: phyV8Snap(13) });
       actPt = J.create("point", [Vof(sM.get(), state.mat ? state.mat.rho : 1), sM.get()],
         { name: "", size: 5, strokeColor: "#D55E00", fillColor: "#D55E00" });
       board.board.update();
@@ -3560,7 +3653,7 @@
     var view = null, input = null, layer = null;
     var arrow = null, lbl = null, comp1 = null, comp2 = null, handle = null, endLbl = null;
     function konvaText(text, fontSize, fill) {
-      return new Konva.Text({ text: text, fontSize: fontSize, fill: fill,
+      return new Konva.Text({ text: text, fontSize: phyV8Snap(fontSize), fill: fill,
         fontFamily: (window.Eng && window.Eng.FONT_STACK) || "sans-serif",
         listening: false });
     }

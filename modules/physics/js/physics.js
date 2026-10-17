@@ -939,10 +939,13 @@
   var PHY_VIS_HALO = 2.5;          /* 标签 halo 描边视觉宽度（px） */
   var PHY_VIS_LABEL = {            /* T5：画布标签视觉字号（px） */
     "phy-body-label": 14, "phy-force-label": 14, "phy-res-label": 14,
-    "phy-f-label": 14, "phy-mag-label": 13, "phy-cart-label": 13,
-    "phy-note-text": 13, "phy-slope-tag": 13, "phy-sym-label": 12,
+    "phy-f-label": 14, "phy-mag-label": 12.48, "phy-cart-label": 12.48,
+    "phy-note-text": 12.48, "phy-slope-tag": 12.48, "phy-sym-label": 12,
     "phy-tick-label": 12, "phy-lock-icon": 14, "default": 14
   };
+  /* V8 字号阶梯（2026-10-17，物理补修）：13 距 12.48 档 0.52，超容差 0.5，
+   * 吸附到最近一档 12.48；14（距 13.6 档 0.4）/12（距 12.48 档 0.48）
+   * 本已在阶梯容差内，不动。 */
   function phyLabelTarget(elm) {
     var t = PHY_VIS_LABEL["default"];
     try {
@@ -953,14 +956,22 @@
     } catch (e) {}
     return t;
   }
-  /* 实测换算比 s：CSS px / 用户单位（默认 preserveAspectRatio=meet，取 min） */
+  /* 实测换算比 s：CSS px / 用户单位（默认 preserveAspectRatio=meet，取 min）。
+   * V8 补修（2026-10-17）：用 clientWidth/Height（内容盒）而不用
+   * getBoundingClientRect（含 .phy-stage 的 1px 边框）——边框会让 s 虚高
+   * 约 0.3%，12px 档标签渲染成 11.96px 跌出容差；内容盒口径与
+   * getScreenCTM 严格一致。 */
   function phyStageScale(svg) {
     try {
       var vb = (svg.getAttribute("viewBox") || "0 0 100 100").trim().split(/[\s,]+/);
       var vbw = parseFloat(vb[2]) || 100, vbh = parseFloat(vb[3]) || 100;
-      var r = svg.getBoundingClientRect();
-      if (!r || r.width <= 0 || r.height <= 0) return 0;
-      return Math.min(r.width / vbw, r.height / vbh);
+      var cw = svg.clientWidth, ch = svg.clientHeight;
+      if (!(cw > 0) || !(ch > 0)) {
+        var r = svg.getBoundingClientRect();
+        if (!r || r.width <= 0 || r.height <= 0) return 0;
+        cw = r.width; ch = r.height;
+      }
+      return Math.min(cw / vbw, ch / vbh);
     } catch (e) { return 0; }
   }
   function phyNormEl(elm, s) {
