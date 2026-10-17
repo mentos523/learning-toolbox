@@ -51,6 +51,33 @@
 (function () {
   "use strict";
 
+  /* V8 字号阶梯（2026-10-17）：按舞台实测显示缩放，把 SVG 文本的 css 字号
+   * 换算到最近的设计阶梯。阶梯 px（root=16）：12.48 / 13.6 / 15.2 / 16 / 16.8 / 20 / 24，
+   * 容差 0.5。规则：渲染字号 <12.48 → 12.48；>24 → 24；其余取最近阶梯。
+   * 用于舞台显示宽度随页面而变的位点（plot-points、linked-dashboard 等）；
+   * 舞台一致的位点直接用静态 css_new。测不到缩放时原值返回。 */
+  var V8_LADDER = [12.48, 13.6, 15.2, 16, 16.8, 20, 24];
+  function v8fs(svg, vbW, cssPx) {
+    /* vbW 可省略：自动取 svg viewBox 宽度 */
+    if (vbW == null && svg && svg.viewBox && svg.viewBox.baseVal)
+      vbW = svg.viewBox.baseVal.width;
+    var scale = 0;
+    try {
+      var r = svg.getBoundingClientRect();
+      if (r && r.width > 0 && vbW > 0) scale = r.width / vbW;
+    } catch (e) { scale = 0; }
+    if (!(scale > 0)) return cssPx;
+    var px = cssPx * scale, tgt;
+    if (px < 12.48) tgt = 12.48;
+    else if (px > 24) tgt = 24;
+    else {
+      tgt = V8_LADDER[0];
+      for (var i = 1; i < V8_LADDER.length; i++)
+        if (Math.abs(px - V8_LADDER[i]) < Math.abs(px - tgt)) tgt = V8_LADDER[i];
+    }
+    return tgt / scale;
+  }
+
   /* 表达式 → 数学排版 HTML（MathML / 降级 sup-sub / 回退纯文本） */
   function MX(s) {
     try {
@@ -681,6 +708,14 @@
 
     container.appendChild(wrap);
 
+    /* V8 字号阶梯：坐标标签按舞台实测缩放换算（linked-dashboard 舞台宽度随页面而变：
+     * 0.714/1.261/0.4/0.73；已在阶梯上的 16.39px 按最近阶梯保持 16 不动） */
+    if (coordLabels.length) {
+      var _ldbSvg = coordLabels[0].ownerSVGElement;
+      var _ldbFs = v8fs(_ldbSvg, null, 13);
+      coordLabels.forEach(function (cl) { cl.setAttribute("font-size", _ldbFs); });
+    }
+
     function update() {
       var t = Number(input.value);
       valLab.textContent = fmt(t);
@@ -824,6 +859,12 @@
     foot.appendChild(playBtn); foot.appendChild(resetBtn);
     wrap.appendChild(foot);
     container.appendChild(wrap);
+
+    /* V8 字号阶梯：轴标签/坐标标签按舞台实测缩放换算（plot-points 舞台宽度随页面而变） */
+    (function () {
+      var fs = v8fs(svg, null, 13);
+      [xLab, yLab, coordLab].forEach(function (t) { t.setAttribute("font-size", fs); });
+    })();
 
     var timer = null;
     var speed = Math.max(100, Number(params.speed) || 800);
@@ -1679,7 +1720,7 @@
       "stroke-dasharray": "6 4" });
     svg.appendChild(secant);
     var winLab = svgEl("text", { x: W / 2, y: H - 6, "text-anchor": "middle",
-      "font-size": 12, fill: "var(--m-ink-soft)" });
+      "font-size": 11.43, fill: "var(--m-ink-soft)" });
     svg.appendChild(winLab);
     wrap.appendChild(svg);
 
@@ -1949,13 +1990,13 @@
       svg.appendChild(ball);
       // 轴标签（数学排版经由 SVG text 纯文本即可，无公式）
       var xl = svgEl("text", { x: W - mR - 2, y: H - 8, "text-anchor": "end",
-        fill: "var(--m-ink-soft)", "font-size": 13 });
+        fill: "var(--m-ink-soft)", "font-size": 16 });
       xl.textContent = "x (m)";
       svg.appendChild(xl);
     } else if (kind === "pursuit") {
       var roadY = groundY;
       // 距离刻度
-      var tick0 = svgEl("text", { x: mL, y: roadY + 22, "font-size": 11,
+      var tick0 = svgEl("text", { x: mL, y: roadY + 22, "font-size": 16,
         fill: "var(--m-ink-soft)" });
       tick0.textContent = "0";
       svg.appendChild(tick0);
@@ -1968,7 +2009,7 @@
         gr.appendChild(svgEl("circle", { cx: -12, cy: 6, r: 5, fill: "#333" }));
         gr.appendChild(svgEl("circle", { cx: 12, cy: 6, r: 5, fill: "#333" }));
         var lb = svgEl("text", { "text-anchor": "middle", y: 24,
-          "font-size": 12, fill: "var(--m-ink-soft)" });
+          "font-size": 16, fill: "var(--m-ink-soft)" });
         lb.textContent = label;
         gr.appendChild(lb);
         return gr;
@@ -1977,18 +2018,18 @@
       carF = mkCar("var(--m-accent)", "前车");
       svg.appendChild(carB); svg.appendChild(carF);
       meetMark = svgEl("text", { "text-anchor": "middle",
-        y: roadY - 36, "font-size": 24, visibility: "hidden" });
+        y: roadY - 36, "font-size": 25.64, visibility: "hidden" });
       meetMark.textContent = "💥";
       svg.appendChild(meetMark);
     } else {
       // meet：甲乙相向而行
       var roadYm = groundY;
-      var tick0m = svgEl("text", { x: mL, y: roadYm + 22, "font-size": 11,
+      var tick0m = svgEl("text", { x: mL, y: roadYm + 22, "font-size": 16,
         fill: "var(--m-ink-soft)" });
       tick0m.textContent = "0";
       svg.appendChild(tick0m);
       var tickDm = svgEl("text", { x: X(model.xMax / 1.25), y: roadYm + 22,
-        "font-size": 11, fill: "var(--m-ink-soft)" });
+        "font-size": 16, fill: "var(--m-ink-soft)" });
       tickDm.textContent = fmt(dp.distance || 60) + " m";
       svg.appendChild(tickDm);
       function mkCarM(color, label) {
@@ -2000,7 +2041,7 @@
         gr.appendChild(svgEl("circle", { cx: -12, cy: 6, r: 5, fill: "#333" }));
         gr.appendChild(svgEl("circle", { cx: 12, cy: 6, r: 5, fill: "#333" }));
         var lb = svgEl("text", { "text-anchor": "middle", y: 24,
-          "font-size": 12, fill: "var(--m-ink-soft)" });
+          "font-size": 16, fill: "var(--m-ink-soft)" });
         lb.textContent = label;
         gr.appendChild(lb);
         return gr;
@@ -2009,7 +2050,7 @@
       carB = mkCarM("var(--m-accent)", "乙");
       svg.appendChild(carA); svg.appendChild(carB);
       meetMark = svgEl("text", { "text-anchor": "middle",
-        y: roadYm - 36, "font-size": 24, visibility: "hidden" });
+        y: roadYm - 36, "font-size": 25.64, visibility: "hidden" });
       meetMark.textContent = "💥";
       svg.appendChild(meetMark);
     }
@@ -2244,8 +2285,8 @@
       edges.push(G.segment(svg, 0, 0, 1, 1, { color: "line", width: 3 }));
     }
     for (i = 0; i < 3; i++) {
-      lenLabels.push(G.label(svg, 0, 0, "", { size: 14, bold: true }));
-      angLabels.push(G.label(svg, 0, 0, "", { size: 14, bold: true, color: "corrAngle" }));
+      lenLabels.push(G.label(svg, 0, 0, "", { size: 14.48, bold: true }));
+      angLabels.push(G.label(svg, 0, 0, "", { size: 14.48, bold: true, color: "corrAngle" }));
       rightMarks.push(G.rightAngle(svg, 0, 0, 1, 0, 0, 1, 11, { width: 2 }));
       rightMarks[i].setAttribute("visibility", "hidden");
     }
@@ -2523,7 +2564,7 @@
         var np = G.polar(0, 0, R - 15, -k);
         var nt = G.el("text", {
           x: np[0].toFixed(1), y: (np[1] + 4).toFixed(1),
-          "text-anchor": "middle", "font-size": 11, fill: G.colorOf("text")
+          "text-anchor": "middle", "font-size": 11.89, fill: G.colorOf("text")
         });
         nt.textContent = String(k);
         dial.appendChild(nt);
@@ -2606,7 +2647,7 @@
       var midA = aStart + A / 2;
       var lp = G.polar(Vx, Vy, 26, midA);
       G.label(fig, lp[0], lp[1], locked ? fmt(A) + "°" : "？",
-        { size: 17, bold: true, color: "target" });
+        { size: 16, bold: true, color: "target" });
       fig.appendChild(G.el("circle", { cx: Vx, cy: Vy, r: 3.5, fill: G.colorOf("line") }));
       G.label(fig, Vx + 12, Vy + 20, vLabel, { size: 15, bold: true });
       // —— 锚点就位（构造坐标，必在射线上） ——
@@ -2805,7 +2846,7 @@
       if (sh.ticks) G.ticks(g, a[0], a[1], b[0], b[1],
         { count: Math.min(3, Math.max(1, sh.ticks)), color: col });
       if (sh.label) G.label(g, (a[0] + b[0]) / 2, (a[1] + b[1]) / 2 - 10,
-        sh.label, { size: 14, bold: true });
+        sh.label, { size: 14.48, bold: true });
     } else if (t === "poly") {
       var pts = (sh.pts || []).map(function (p) {
         var q = P(p); return q[0].toFixed(1) + "," + q[1].toFixed(1);
