@@ -6,10 +6,14 @@
  * 页面清单运行时自数据文件生成（不依赖外部清单文件，新增页面自动纳入）：
  *   化学：modules/chemistry/data/cm*.js 中 id:"cmX.Y.Z-pN" → lesson→页数，hash #<lesson>/<n>
  *   数学：modules/math/data/*.js 中 id:"ch../g..-u../ux/ub-l..-p.." → hash #p=<pid>（每页全新 newPage 加载，hash 跳转不重渲染）
- * 物理为抽查口径（V8 范围外，只验零回退）：p12.1.1 Konva 15 节点须全落阶梯。
- * 用法：node tools/v8-fontladder-scan.cjs [--chem] [--math] [--physics-spot] [--smoke] [--out DIR]
+ * 物理为抽查口径（V8 范围外，只验零回退）：p08.2.4/1 与 p09.1.2/1 两页电路
+ * Konva 文本节点须全落阶梯（2026-10-17 物理收尾修复批由 p12.1.1 换入：p12.1.1
+ * 已迁为 JSXGraph，原口径过期）。
+ * 用法：node tools/v8-fontladder-scan.cjs [--chem] [--math] [--physics-spot] [--geo] [--smoke] [--out DIR]
  *   默认跑化学+数学全量；--smoke 只跑 6 页冒烟。未达标节点数 >0 即 exit 1。
+ *   --geo：地理试点模式（只跑地理分支；HTML 文本 computed 字号 + 去重按 class 统计）。
  * 2026-10-17 V8 转正时固化（基线 56 节点 32.1% → 转正复测 2365/2365 100%）。
+ * 2026-10-17 地理试点闸门增补 --geo 分支（白队；只加地理分支，不改既有逻辑）。
  */
 const fs = require("fs");
 const path = require("path");
@@ -21,8 +25,9 @@ const PW = "/home/hatch/workspace/phy-audit/node_modules/playwright-core";
 const args = new Set(process.argv.slice(2));
 const OUT = args.has("--out") ? process.argv[process.argv.indexOf("--out") + 1] : path.join(REPO, "tools", "v8-scan-out");
 const SMOKE = args.has("--smoke");
-const runChem = !args.has("--math") && !args.has("--physics-spot") ? true : args.has("--chem");
-const runMath = !args.has("--chem") && !args.has("--physics-spot") ? true : args.has("--math");
+const runGeo = args.has("--geo");
+const runChem = !args.has("--math") && !args.has("--physics-spot") && !args.has("--geo") ? true : args.has("--chem");
+const runMath = !args.has("--chem") && !args.has("--physics-spot") && !args.has("--geo") ? true : args.has("--math");
 const runPhy = args.has("--physics-spot");
 
 function chemLessons() {
@@ -61,6 +66,48 @@ const MEASURE_JS = `() => {
       txt:(el.textContent||"").slice(0,14) });
   });
   return { rootPx, texts: out };
+}`;
+// 地理分支：HTML 文本节点 computed 字号（地理页为 HTML 文案 + canvas，无 SVG 文本；
+// canvas 注记字号由白队闸门脚本另行抽查代码字面量）。按 tag+class 去重，每类样式只记一次。
+const MEASURE_GEO = `() => {
+  const out = [];
+  const rootPx = parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
+  const ladder = [0.78,0.85,0.95,1,1.05,1.25,1.5].map(r => r * rootPx);
+  const seen = new Set();
+  document.querySelectorAll("body *").forEach(elm => {
+    if (elm.tagName === "SCRIPT" || elm.tagName === "STYLE") return;
+    let hasText = false;
+    for (const nd of elm.childNodes) {
+      if (nd.nodeType === 3 && nd.textContent.trim().length > 0) { hasText = true; break; }
+    }
+    if (!hasText) return;
+    const key = elm.tagName + "|" + String(elm.className || "");
+    if (seen.has(key)) return; seen.add(key);
+    const cssPx = parseFloat(getComputedStyle(elm).fontSize);
+    const dmin = Math.min.apply(null, ladder.map(L => Math.abs(cssPx - L)));
+    out.push({ kind:"geo-html", css:+cssPx.toFixed(2), px:+cssPx.toFixed(2),
+      ok:dmin<=0.5, dmin:+dmin.toFixed(2),
+      cls:String(elm.className||"").split(/\\s+/).slice(0,2).join(" "),
+      txt:(elm.textContent||"").trim().slice(0,14) });
+  });
+  return { rootPx, texts: out };
+}`;
+/* 物理抽查求值体：Konva.Text 取 fontSize() × 绝对缩放 = 实际渲染字号，
+ * 与阶梯 {12.48,…,24}（root 16px）比对，容差 0.5px。 */
+const MEASURE_PHY_SPOT = `() => {
+  const ladder = [0.78,0.85,0.95,1,1.05,1.25,1.5].map(r => r * 16);
+  const out = []; const seen = {};
+  document.querySelectorAll("canvas").forEach(cv => {
+    const st = window.Konva && Konva.stages ? Konva.stages : [];
+    st.forEach(s => s.find("Text").forEach(t => {
+      var px = t.fontSize() * Math.abs(t.getAbsoluteScale().x);
+      var dmin = Math.min.apply(null, ladder.map(L => Math.abs(px - L)));
+      var key = t.text() + "|" + px.toFixed(2); // 同一 stage 被多 canvas 重数时去重
+      if (seen[key]) return; seen[key] = 1;
+      out.push({ kind:"konva", px:+px.toFixed(2), ok:dmin<=0.5, txt:(t.text()||"").slice(0,10) });
+    }));
+  });
+  return out;
 }`;
 
 (async () => {
@@ -119,29 +166,48 @@ const MEASURE_JS = `() => {
   }
 
   if (runPhy) {
-    // 抽查口径：原 56 节点样本页 p12.1.1（Konva）须 15/15；只验零回退
+    // 抽查口径：电路两页（p08.2.4/1、p09.1.2/1）Konva 文本节点须全落阶梯；只验零回退。
+    // 求值体须用 `(${BODY})()` 形式传入（裸字符串在本版 playwright-core 下求值
+    // 失败，见 2026-10-17 物理收尾修复批定位），与 MEASURE_JS/MEASURE_GEO 同式。
+    const rows = []; const errs = [];
+    for (const hash of ["#p08.2.4/1", "#p09.1.2/1"]) {
+      const pg = await b.newPage({ viewport: { width: 1280, height: 900 } });
+      pg.on("pageerror", e => errs.push(hash + ": " + e.message.slice(0, 80)));
+      await pg.goto(`file://${REPO}/modules/physics/index.html${hash}`, { waitUntil: "load", timeout: 25000 });
+      await pg.waitForTimeout(2000);
+      const d = await pg.evaluate(`(${MEASURE_PHY_SPOT})()`);
+      d.forEach(r => rows.push({ page: hash, ...r }));
+      await pg.close();
+    }
+    const on = rows.filter(r => r.ok).length;
+    summary.subjects.physicsSpot = { pages: ["#p08.2.4/1", "#p09.1.2/1"], nodes: rows.length, onLadder: on, bad: rows.length - on, pageerrors: errs.length };
+    bad += rows.length - on;
+    fs.writeFileSync(path.join(OUT, "v8-scan-physpot.json"), JSON.stringify(rows));
+    console.log(`PHYS-SPOT pages=2 nodes=${rows.length} onLadder=${on} bad=${rows.length - on} pageerrors=${errs.length}`);
+    if (rows.length - on) console.log("BAD:", rows.filter(r => !r.ok).map(r => r.page + " " + r.px + "px " + r.txt).join(" || "));
+  }
+
+  if (runGeo) {
+    // 地理试点：dg01.3.3 四页 HTML 文案字号落阶梯检查
+    const pages = ["#dg01.3.3/1", "#dg01.3.3/2", "#dg01.3.3/3", "#dg01.3.3/4"];
+    const list = SMOKE ? pages.slice(0, 2) : pages;
     const pg = await b.newPage({ viewport: { width: 1280, height: 900 } });
-    const errs = []; pg.on("pageerror", e => errs.push(e.message.slice(0, 80)));
-    await pg.goto(`file://${REPO}/modules/physics/index.html#p12.1.1/1`, { waitUntil: "load", timeout: 25000 });
-    await pg.waitForTimeout(2000);
-    const d = await pg.evaluate(`() => {
-      const ladder = [0.78,0.85,0.95,1,1.05,1.25,1.5].map(r => r * 16);
-      const out = [];
-      document.querySelectorAll("canvas").forEach(cv => {
-        const st = window.Konva && Konva.stages ? Konva.stages : [];
-        st.forEach(s => s.find("Text").forEach(t => {
-          var px = t.fontSize() * Math.abs(t.getAbsoluteScale().x);
-          var dmin = Math.min.apply(null, ladder.map(L => Math.abs(px - L)));
-          out.push({ kind:"konva", px:+px.toFixed(2), ok:dmin<=0.5, txt:(t.text()||"").slice(0,10) });
-        }));
-      });
-      return out;
-    }`);
+    const errs = []; pg.on("pageerror", e => errs.push(e.message.slice(0, 100)));
+    const rows = []; let ok = 0, err = 0;
+    for (const hash of list) {
+      try {
+        await pg.goto(`file://${REPO}/modules/geography/index.html${hash}`, { waitUntil: "load", timeout: 25000 });
+        await pg.waitForTimeout(900);
+        const d = await pg.evaluate(`(${MEASURE_GEO})()`);
+        d.texts.forEach(t => rows.push({ page: hash, ...t })); ok++;
+      } catch (e) { err++; }
+    }
     await pg.close();
-    const on = d.filter(r => r.ok).length;
-    summary.subjects.physicsSpot = { page: "p12.1.1/1", nodes: d.length, onLadder: on, bad: d.length - on, pageerrors: errs.length };
-    bad += d.length - on;
-    console.log(`PHYS-SPOT p12.1.1 nodes=${d.length} onLadder=${on} bad=${d.length - on} pageerrors=${errs.length}`);
+    const on = rows.filter(r => r.ok).length;
+    summary.subjects.geography = { pages: list.length, okPages: ok, errPages: err, nodes: rows.length, onLadder: on, bad: rows.length - on, pageerrors: errs.length };
+    bad += rows.length - on;
+    fs.writeFileSync(path.join(OUT, "v8-scan-geo.json"), JSON.stringify(rows));
+    console.log(`GEO pages=${ok}/${list.length} nodes=${rows.length} onLadder=${on} bad=${rows.length - on} pageerrors=${errs.length}`);
   }
 
   await b.close();

@@ -34,6 +34,20 @@
 
   /* ================= 0. 常量与默认数据契约 ================= */
 
+  /* V8 字号阶梯（2026-10-17 物理收尾修复批）：与课页层 phyV8Snap 同口径
+   *（阶梯 {12.48,13.6,15.2,16,16.8,20,24}，容差 0.5px；渲染字号已在容差内
+   * 则原值返回，否则吸附到最近一档）。circuit.js 为引擎层文件，课页层的
+   * phyV8Snap 在物理 IIFE 内不可见，故此处自备同口径 helper，不跨层引用。 */
+  var V8_LADDER = [12.48, 13.6, 15.2, 16, 16.8, 20, 24];
+  function cirV8Snap(px) {
+    var best = V8_LADDER[0], bd = Math.abs(px - best), i, d;
+    for (i = 1; i < V8_LADDER.length; i++) {
+      d = Math.abs(px - V8_LADDER[i]);
+      if (d < bd) { bd = d; best = V8_LADDER[i]; }
+    }
+    return bd <= 0.5 ? px : best;
+  }
+
   // §7 默认文本：构造必填（调用方传入；可增补、不可删除）。UI 层默认传入本对象。
   var AX_DEFAULTS = {
     assumptions: [
@@ -927,7 +941,10 @@
     UI_CSS_DONE = true;
     var st = document.createElement('style');
     st.textContent = [
-      '.cir-root{font-family:' + Eng.FONT_STACK + ';color:#1a1a1a;max-width:1240px;margin:0 auto;padding:4px 12px;}',
+      '.cir-root{font-family:' + Eng.FONT_STACK + ';color:#1a1a1a;max-width:1240px;margin:0 auto;padding:4px 12px;box-sizing:border-box;}',
+      /* 窄屏：column-flex 下 margin:auto 使 root 按 max-content 定宽（390 下 392>370，
+       * 22px 非视觉溢出）；窄屏时把 max-width 收到 100%，桌面端原规则不变。 */
+      '@media (max-width:700px){.cir-root{max-width:100%;}}',
       '.cir-head h2{font-size:16px;margin:0 0 2px;}',
       '.cir-goal{font-size:13px;color:#555;margin-bottom:4px;}',
       '.cir-panel{border:1px solid #d8d8d8;border-radius:8px;padding:6px 10px;background:#fafafa;}',
@@ -1405,7 +1422,7 @@
     if (p.type === 'switch') {
       var t = Eng.konvaText({
         x: -40, y: s * 0.34, width: 80, align: 'center',
-        text: (p.params.closed ? '闭合' : '断开') + '（点我开/合）', fontSize: 11, fill: '#555', listening: false
+        text: (p.params.closed ? '闭合' : '断开') + '（点我开/合）', fontSize: cirV8Snap(11), fill: '#555', listening: false
       });
       g.add(t);
     }
@@ -1505,7 +1522,7 @@
         }));
         var lbl = Eng.konvaText({
           x: (c.x + txy.x) / 2 - 30, y: (c.y + txy.y) / 2 - 18 + i * 14,
-          width: 60, align: 'center', text: '测' + (i + 1), fontSize: 11, fill: '#888', listening: false
+          width: 60, align: 'center', text: '测' + (i + 1), fontSize: cirV8Snap(11), fill: '#888', listening: false
         });
         self2.wireLayer.add(lbl);
       });

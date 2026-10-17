@@ -1549,12 +1549,22 @@
     function init() {
       if (ui) return;
       if (!host.isConnected) { (window.requestAnimationFrame || function (f) { setTimeout(f, 16); })(init); return; }
+      /* 窄屏自适应（2026-10-17 物理收尾修复批 S1）：参照化学 cm09 做法，按可用
+       * 宽度等比收缩 cell（设计 100px/格）。几何语义不变（全按 cell 换算），
+       * 桌面端 availW ≥ 设计宽时 cell 恒为 100，布局逐位不变。 */
+      var cols = (p.grid && p.grid.cols) || 6, rows = (p.grid && p.grid.rows) || 4;
+      var designW = cols * 100, availW = host.clientWidth || designW;
+      /* cir-root 有 12px×2 内边距（见 circuit.js uiCss），舞台是其子元素，
+       * 可用宽须先扣除，否则 366px 舞台会顶出 346px 的内容盒。 */
+      var availStage = Math.max(200, availW - 24);
+      var cellPx = designW > availStage ? Math.max(48, Math.floor(100 * availStage / designW)) : 100;
       ui = new Eng.CircuitUI({
         containerId: host.id,
         title: "搭电路",
         goalText: p.goal || "",
-        cols: (p.grid && p.grid.cols) || 6,
-        rows: (p.grid && p.grid.rows) || 4,
+        cols: cols,
+        rows: rows,
+        cellPx: cellPx,
         trayTypes: (p.tray || ["bulb", "wire"]).map(function (k) { return CIRCUIT_KIND2TYPE[k] || k; }),
         sourceVoltageV: (p.battery && p.battery.voltage) || 3
       });
@@ -1578,7 +1588,7 @@
       /* 相邻预设预连线：复刻旧隐式邻接的初始连通性（p08.2.2-p1 2×2 方阵），转为显式 connections。
        * 端点配对规则：几何最近优先；距离打平时优先两端都未被预连线用过的端子
        *（避免两条线落在同一元件的同一端子上，造成 D3"开关还没连进电路"误判）。 */
-      var CELL = 100; /* 与 CircuitUI 默认 cellPx 一致 */
+      var CELL = (ui && ui.cell) || 100; /* 与本次构造的 cellPx 一致（窄屏可能收缩） */
       function termXY(col, row, term) {
         return { x: (col + 0.5) * CELL + (term === "L" ? -0.42 : 0.42) * CELL, y: (row + 0.5) * CELL };
       }
