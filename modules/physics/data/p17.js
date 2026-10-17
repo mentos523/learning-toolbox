@@ -205,6 +205,8 @@ window.PHY_CH["p17"] = {
                 {
                   type: "wave-tune",
                   params: {
+                    /* 引擎批3（2026-10-17）：波形真值切 Eng.Wave（解析式 y=A·sin(2πft−kx+φ)） */
+                    engine: { primitive: "Wave", version: "2026.10.17.4", params: { axis: "space", NP: 3 } },
                     amp: { min: 1, max: 5, step: 0.5, init: 3 },
                     freq: { min: 20, max: 200, step: 10, init: 60 },
                     playSound: false,
@@ -271,6 +273,8 @@ window.PHY_CH["p17"] = {
                 {
                   type: "wave-tune",
                   params: {
+                    /* 引擎批3（2026-10-17）：波形真值切 Eng.Wave（解析式 y=A·sin(2πft−kx+φ)） */
+                    engine: { primitive: "Wave", version: "2026.10.17.4", params: { axis: "space", NP: 3 } },
                     amp: { min: 1, max: 5, step: 0.5, init: 3 },
                     freq: { min: 100, max: 1000, step: 10, init: 440 },
                     waveB: {
@@ -503,6 +507,8 @@ window.PHY_CH["p17"] = {
                 {
                   type: "wave-tune",
                   params: {
+                    /* 引擎批3（2026-10-17）：波形真值切 Eng.Wave（e–t 图：axis=time，横轴为时间） */
+                    engine: { primitive: "Wave", version: "2026.10.17.4", params: { axis: "time", NP: 3 } },
                     amp: { min: 1, max: 5, step: 0.5, init: 3 },
                     freq: { min: 10, max: 100, step: 10, init: 50 },
                     playSound: false,

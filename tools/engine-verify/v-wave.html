@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<!-- V20 · Eng.Wave 波动原语（物理推广批3，2026-10-17） -->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>V20 · Eng.Wave：波动原语 / 解析真值</title>
+<link rel="stylesheet" href="verify.css">
+</head>
+<body>
+<h1>V20 · Eng.Wave：波动原语</h1>
+<p class="note">覆盖 WV-01…WV-24（纯函数部分；WV-25/26/27 为页级行为，白队 headless 页级实测）+
+  确定性（ENG-70）+ 快照往返（ENG-10）+ AX01 字段就位 + 非法输入拒绝（ENG-66）。
+  全部为解析闭式（y=A·sin(2πft−kx+φ)），无数值积分。
+  真值口径：~/workspace/phy-audit/wave-truth-criteria.md v1.0。
+  期望值均为物理专家队独立手算硬编码（非恒真式）。</p>
+
+<h2>断言结果</h2>
+<div id="verdict" style="display:none"><h2 id="verdict-head"></h2></div>
+<table id="results-table"></table>
+
+<script src="../../assets/engine/core.js?v=2026.10.17.4"></script>
+<script src="../../assets/engine/wave.js?v=2026.10.17.4"></script>
+<script src="verify-lib.js"></script>
+<script>
+(function () {
+'use strict';
+VLib.pageTitle = 'V20 · Eng.Wave';
+var W = window.Eng.Wave;
+function near(a, b, tol) { return Math.abs(a - b) <= tol; }
+
+/* ---------- 一、解析式与全参数化 ---------- */
+var w = new W({ A: 3, f: 440, phiDeg: 0, v: 340 });
+VLib.assert('WV-01', 'λ=v/f 逐位（f=440）', ['ENG-73'],
+  near(w.getState().lambda, 0.77272727, 1e-6), '0.77272727', String(w.getState().lambda),
+  'p01.1.3 初值档。');
+var w60 = new W({ A: 3, f: 60, phiDeg: 0, v: 340 });
+VLib.assert('WV-02', 'λ=v/f 逐位（f=60）', ['ENG-73'],
+  near(w60.getState().lambda, 5.66666667, 1e-6), '5.66666667', String(w60.getState().lambda),
+  'p17.1.3 初值档。');
+VLib.assert('WV-03', 'valueAt 逐点对解析式（x=0.1,t=0.002）', ['ENG-73'],
+  near(w.valueAt(0.1, 0.002), -2.99997951, 1e-6), '-2.99997951', String(w.valueAt(0.1, 0.002)),
+  'phase=4.71608497。');
+VLib.assert('WV-03b', 'valueAt 逐点对解析式（x=0.25,t=0）', ['ENG-73'],
+  near(w.valueAt(0.25, 0), -2.68548987, 1e-6), '-2.68548987', String(w.valueAt(0.25, 0)),
+  '第二点。');
+VLib.assert('WV-04', 'k=2πf/v、ω=2πf 读回', ['ENG-73'],
+  near(w.getState().k, 8.13118099, 1e-6) && near(w.getState().omega, 2764.60153516, 1e-6),
+  'k=8.13118099,ω=2764.60153516', 'k=' + w.getState().k + ',ω=' + w.getState().omega, '');
+w.set({ A: 4.5, phiDeg: 45 });
+VLib.assert('WV-05', 'A/φ 读回', ['ENG-73'],
+  w.getState().A === 4.5 && w.getState().phiDeg === 45, 'A=4.5,φ=45',
+  'A=' + w.getState().A + ',φ=' + w.getState().phiDeg, '');
+var w3 = new W({ A: 3, f: 440, phiDeg: 45, v: 340 });
+VLib.assert('WV-05', 'valueAt(0,0)=3·sin45°', ['ENG-73'],
+  near(w3.valueAt(0, 0), 2.12132034, 1e-6), '2.12132034', String(w3.valueAt(0, 0)), '');
+var w440 = new W({ A: 3, f: 440, phiDeg: 0, v: 340 });
+var w880 = new W({ A: 3, f: 880, phiDeg: 0, v: 340 });
+VLib.assert('WV-06', '频率真参数化（无硬编码）', ['ENG-73'],
+  near(w440.valueAt(0.05, 0.001), 2.11739653, 1e-6) &&
+  near(w880.valueAt(0.05, 0.001), -2.99997951, 1e-6),
+  'y440=2.11739653,y880=-2.99997951',
+  'y440=' + w440.valueAt(0.05, 0.001) + ',y880=' + w880.valueAt(0.05, 0.001),
+  '两档值不同，杜绝 f 硬编码。');
+VLib.assert('WV-06', 'λ1/λ2=f2/f1 精确成立', ['ENG-73'],
+  near(w440.getState().lambda / w880.getState().lambda, 2.0, 1e-12), '2.0',
+  String(w440.getState().lambda / w880.getState().lambda), '');
+
+/* ---------- 二、相位回绕 ---------- */
+VLib.assert('WV-07', 'phaseWrap 归一 [0,360)', ['ENG-73'],
+  W.phaseWrap(360) === 0 && W.phaseWrap(370) === 10 && W.phaseWrap(-15) === 345 && W.phaseWrap(720.5) === 0.5,
+  '0,10,345,0.5', [W.phaseWrap(360), W.phaseWrap(370), W.phaseWrap(-15), W.phaseWrap(720.5)].join(','),
+  '');
+var w0 = new W({ A: 3, f: 440, phiDeg: 0, v: 340 });
+var w360 = new W({ A: 3, f: 440, phiDeg: 360, v: 340 });
+VLib.assert('WV-08', '0°≡360° 波形逐点一致', ['ENG-73'],
+  near(w0.valueAt(0.05, 0.001), w360.valueAt(0.05, 0.001), 1e-12),
+  '逐位一致', 'y0=' + w0.valueAt(0.05, 0.001) + ',y360=' + w360.valueAt(0.05, 0.001), '');
+
+/* ---------- 三、双波合成 ---------- */
+var wA = new W({ A: 3, f: 440, phiDeg: 0, v: 340 });
+var wB = new W({ A: 2, f: 440, phiDeg: 180, v: 340 });
+(function () {
+  var xs = wA.getState().xSpanM, u = 0.05 / xs, dp = 2 * Math.PI * 440 * 0.001;
+  var s = W.superpose([wA, wB], u, dp);
+  VLib.assert('WV-09', '合成波逐点=y_A+y_B（同频反相）', ['ENG-73'],
+    near(s, 0.70579884, 1e-6), '0.70579884', String(s), '');
+})();
+var wA2 = new W({ A: 3, f: 440, phiDeg: 30, v: 340 });
+var wB2 = new W({ A: 2, f: 440, phiDeg: 210, v: 340 });
+(function () {
+  var xs = wA2.getState().xSpanM, u = 0.12 / xs, dp = 2 * Math.PI * 440 * 0.003;
+  var s = W.superpose([wA2, wB2], u, dp);
+  VLib.assert('WV-10', '合成波逐点（异相 30°/210°）', ['ENG-73'],
+    near(s, 0.99992411, 1e-6), '0.99992411', String(s), '');
+})();
+
+/* ---------- 四、发声边界 ---------- */
+VLib.assert('WV-11', '下限 20Hz 边界', ['ENG-69'],
+  W.audible(19.9, 2000).ok === false && W.audible(19.9, 2000).key === 'too-low' && W.audible(20, 2000).ok === true,
+  '19.9→too-low,20→ok', JSON.stringify(W.audible(19.9, 2000)) + ',' + JSON.stringify(W.audible(20, 2000)),
+  '听力保护。');
+VLib.assert('WV-12', '上限 audibleMax 边界', ['ENG-69'],
+  W.audible(2000, 2000).ok === true && W.audible(2000.1, 2000).key === 'too-high',
+  '2000→ok,2000.1→too-high', JSON.stringify(W.audible(2000, 2000)) + ',' + JSON.stringify(W.audible(2000.1, 2000)), '');
+VLib.assert('WV-13', 'audibleMax 可配', ['ENG-69'],
+  W.audible(1500, 1200).key === 'too-high', 'too-high', JSON.stringify(W.audible(1500, 1200)), '');
+
+/* ---------- 五、频闪 ---------- */
+VLib.assert('WV-15', 'driftRateHz 恒 ≤3Hz', ['ENG-73'],
+  W.driftRateHz(440) === 3 && W.driftRateHz(1000) === 3 && W.driftRateHz(2) === 2 && W.driftRateHz(0.5) === 0.5,
+  '3,3,2,0.5', [W.driftRateHz(440), W.driftRateHz(1000), W.driftRateHz(2), W.driftRateHz(0.5)].join(','),
+  '光敏安全 W-P8。');
+VLib.assert('WV-16', '演示相位推进量', ['ENG-73'],
+  near(W.demoPhase(3, 1), 18.84955592, 1e-6), '18.84955592', String(W.demoPhase(3, 1)), '3Hz×1s=3整周期。');
+
+/* ---------- 六、显示映射 ---------- */
+var wsp = new W({ A: 3, f: 440, phiDeg: 0, v: 340, axis: 'space', NP: 3, fRef: 440 });
+VLib.assert('WV-17', 'space 显示窗整周期', ['ENG-73'],
+  near(wsp.getState().xSpanM, 2.31818182, 1e-6) && near(wsp.displayPhase(1), -18.84955592, 1e-6),
+  'xSpan=2.31818182,phase(1)=-18.84955592',
+  'xSpan=' + wsp.getState().xSpanM + ',phase(1)=' + wsp.displayPhase(1),
+  '初值档恰 3 个周期（旧 NP=3 口径）。');
+VLib.assert('WV-18', '像素波长比 λ1/λ2=f2/f1', ['ENG-73'],
+  near(w880.getState().k / w440.getState().k, 2.0, 1e-12), '2.0',
+  String(w880.getState().k / w440.getState().k), 'PHY-G06 口径。');
+var wtm = new W({ A: 3, f: 50, phiDeg: 0, v: 340, axis: 'time', NP: 3, fRef: 50 });
+VLib.assert('WV-19', 'time 显示窗整周期（e–t 页）', ['ENG-73'],
+  near(wtm.getState().tSpanS, 0.06, 1e-12) && near(wtm.displayPhase(1), 18.84955592, 1e-6),
+  'tSpan=0.06,phase(1)=18.84955592',
+  'tSpan=' + wtm.getState().tSpanS + ',phase(1)=' + wtm.displayPhase(1),
+  'p17.2.3 初值档恰 3 个周期。');
+
+/* ---------- 七、契约与鲁棒 ---------- */
+var threw = 0;
+[{ A: 3, f: 0 }, { A: -1, f: 440 }, { A: 3, f: 440, v: 0 }, { A: 3, f: 440, phiDeg: NaN }, { A: 3, f: 440, axis: 'zzz' }]
+  .forEach(function (bad) { try { new W(bad); } catch (e) { threw++; } });
+VLib.assert('WV-20', '非法输入抛错（ENG-66）', ['ENG-66'],
+  threw === 5, '5/5', threw + '/5', '');
+var wsnap = new W({ A: 3, f: 440, phiDeg: 30, v: 340 });
+var snap = wsnap.snapshot();
+wsnap.set({ A: 9, f: 100, phiDeg: 90 });
+wsnap.restore(snap);
+VLib.assert('WV-21', 'snapshot/restore 往返', ['ENG-10'],
+  wsnap.getState().A === 3 && wsnap.getState().f === 440 && wsnap.getState().phiDeg === 30,
+  'A=3,f=440,φ=30', 'A=' + wsnap.getState().A + ',f=' + wsnap.getState().f + ',φ=' + wsnap.getState().phiDeg, '');
+var wdc = new W({ A: 3, f: 440, phiDeg: 0, v: 340 });
+var stc = wdc.getState();
+stc.A = 999; stc.ax.assumptions.push('污染');
+VLib.assert('WV-22', 'state() 防御性拷贝', ['ENG-10'],
+  wdc.getState().A === 3 && wdc.getState().ax.assumptions.length === 4, '不受影响',
+  'A=' + wdc.getState().A + ',assumptions=' + wdc.getState().ax.assumptions.length, '');
+var stx = new W({ A: 3, f: 440 }).getState();
+VLib.assert('WV-23', 'AX01 显性化字段就位', ['AX01'],
+  stx.approxTag === '理想正弦波近似' && Array.isArray(stx.ax.assumptions) && stx.ax.assumptions.length > 0 &&
+  Array.isArray(stx.ax.approximations) && stx.ax.approximations.length > 0 &&
+  typeof stx.ax.errorEstimate === 'string' && stx.ax.errorEstimate.length > 0,
+  '理想正弦波近似+三字段', 'approxTag=' + stx.approxTag, '');
+var wdet = new W({ A: 3, f: 440, phiDeg: 30, v: 340 });
+VLib.assert('WV-24', '确定性（同输入逐位一致）', ['ENG-70'],
+  wdet.valueAt(0.1, 0.002) === wdet.valueAt(0.1, 0.002) &&
+  wdet.displayPhase(0.5) === wdet.displayPhase(0.5), '逐位一致', 'ok', '');
+
+/* ---------- 版本 ---------- */
+VLib.assert('WV-VERSION', 'Eng.Wave.VERSION', ['ENG-73'],
+  W.VERSION === '2026.10.17.4', '2026.10.17.4', W.VERSION, '批3版本号。');
+
+VLib.conclude();
+})();
+</script>
+</body>
+</html>

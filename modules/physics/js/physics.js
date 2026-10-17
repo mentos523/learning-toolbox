@@ -2729,7 +2729,8 @@
     var legend = el("div", "phy-legend", "");
     box.appendChild(legend);
     var cv = el("canvas", "phy-wave-cv");
-    cv.setAttribute("aria-label", "波形图");
+    /* 引擎批3（2026-10-17）：AX01 显性化——画布无障碍标签带"理想正弦波近似" */
+    cv.setAttribute("aria-label", "波形图（理想正弦波近似）");
     box.appendChild(cv);
     var sAmp = uiSlider({ label: "振幅 A", min: p.amp.min, max: p.amp.max,
       step: p.amp.step, init: p.amp.init, unit: "" });
@@ -2797,8 +2798,15 @@
       var f = sFreq.get();
       var aMax = p.audibleMax || 2000;
       if (sounding) { stopSound(); return; }
-      if (f < 20) { sndNote.textContent = "太低听不见，只看波形。"; return; }
-      if (f > aMax) { sndNote.textContent = "超过发声上限（" + aMax + "Hz），只看波形。"; return; }
+      /* 引擎批3（2026-10-17）：发声门走 Eng.Wave.audible（听力保护；
+       * <20Hz 或 >audibleMax 只画不发；提示话术保持旧文案不变） */
+      var gate = ENG_W ? ENG_W.audible(f, aMax)
+        : { ok: !(f < 20 || f > aMax), key: f < 20 ? "too-low" : (f > aMax ? "too-high" : "ok") };
+      if (!gate.ok) {
+        sndNote.textContent = gate.key === "too-low" ? "太低听不见，只看波形。"
+          : "超过发声上限（" + aMax + "Hz），只看波形。";
+        return;
+      }
       AC = AC || audioCtx();
       if (!AC) { sndNote.textContent = "当前环境不支持发声，只看波形。"; return; }
       try {
@@ -2820,20 +2828,40 @@
 
     var t0 = nowMs();
     var driftHz = 1; /* 波形动画频闪 ≤3Hz（光敏安全 W-P8） */
-    function waveVal(A, f, phDeg, x, t) {
-      return A * Math.sin(2 * Math.PI * f * x + phDeg * Math.PI / 180 + 2 * Math.PI * driftHz * t);
+    /* 引擎批3（2026-10-17）：波形真值切 Eng.Wave（解析式 y=A·sin(2πft−kx+φ)，
+     * 频率/波长/振幅/相位全参数化读回；渲染层只消费读回，不重算真值。
+     * Eng.Wave 未加载时走旧内联公式兜底（同一公式族：−kx 方向，与
+     * p17.1.3 文案"波形向右'走'"一致；旧实现 +kx 左移为文案矛盾类 bug，本批修正）。 */
+    var ENG_W = (window.Eng && window.Eng.Wave) ? window.Eng.Wave : null;
+    var fRefW = (p.freq && p.freq.init) || 440;
+    var NP_W = 3;
+    var axisW = (p.engine && p.engine.params && p.engine.params.axis) || "space";
+    var vW = p.v || 340;
+    var waveA = null, waveBEng = null;
+    if (ENG_W) {
+      waveA = new ENG_W({ A: p.amp.init, f: p.freq.init, phiDeg: (p.phase && p.phase.init) || 0,
+        v: vW, axis: axisW, NP: NP_W, fRef: fRefW, audibleMax: p.audibleMax || 2000 });
+    }
+    /* 兜底公式（ENG_W 缺失时）：与原语同公式族，−kx 右行 */
+    function fallbackWave(Aw, fw, phDegw, u, tw) {
+      var phw = axisW === "time"
+        ? 2 * Math.PI * NP_W * fw / fRefW * u + phDegw * Math.PI / 180
+        : -2 * Math.PI * NP_W * fw / fRefW * u + phDegw * Math.PI / 180;
+      return Aw * Math.sin(phw + 2 * Math.PI * driftHz * tw);
     }
     function draw() {
       var W = 340, H = 150;
       var ctx = fitCanvas(cv, W, H);
       var A = sAmp.get(), f = sFreq.get(), phd = sPhase.get();
-      driftHz = Math.min(Math.max(f, 0), 3);
+      driftHz = ENG_W ? ENG_W.driftRateHz(f) : Math.min(Math.max(f, 0), 3);
+      if (ENG_W) waveA.set({ A: A, f: f, phiDeg: phd });
       /* 读数行：λ=v/f
        * 声速备注修复（2026-10-15）：v=340m/s 写死致非声学页（p17.2.3 交流电）读数行出现
        * "声速"误导。数据侧无 v 参数，渲染器层修：p.v 可覆盖波速、p.vNote 可覆盖备注；
        * 缺省时仅声学语境（playSound，可发声演示）保留"声速"注，非声学页只显示 λ 数值。 */
       var vWave = p.v || 340;
-      var lam = vWave / f;
+      /* 引擎批3：λ 读回走原语（λ=v/f），渲染层不重算 */
+      var lam = ENG_W ? waveA.getState().lambda : vWave / f;
       var vNote = p.vNote != null ? p.vNote
         : (p.v ? "（v=" + p.v + "m/s）" : (p.playSound !== false ? "（v=340m/s，声速）" : ""));
       var rm = "<math><mrow><mi>A</mi><mo>=</mo><mn>" + fmtN(A, 1) +
@@ -2852,6 +2880,8 @@
         '<i style="background:' + roleColor("target") + '"></i>合成波'));
       if (!ctx) return;
       var t = drift ? (nowMs() - t0) / 1000 : 0;
+      /* 引擎批3：演示漂移相位走原语 demoPhase（= 2π·driftHz·t；driftHz ≤3Hz） */
+      var driftPhase = ENG_W ? ENG_W.demoPhase(driftHz, t) : 2 * Math.PI * driftHz * t;
       ctx.clearRect(0, 0, W, H);
       ctx.strokeStyle = "#BBBBBB"; ctx.lineWidth = 1;
       ctx.beginPath(); ctx.moveTo(0, H / 2); ctx.lineTo(W, H / 2); ctx.stroke();
@@ -2868,19 +2898,31 @@
         ctx.stroke(); ctx.setLineDash([]);
       }
       /* F1–F4 修复（2026-10-15）：频率滑块必须改变波形。显示域固定为 x∈[0,4]，
-       * 空间相位 = 2π·NP·(f/fInit)·(x/4)，NP=3（初值档显示 3 个周期）：
-       * 两档频率下像素波长比 λ1/λ2 = f2/f1 精确成立（PHY-G06），
-       * 且低频档也有 ≥2 个上升过零点、像素可测。 */
-      var fInit = (p.freq && p.freq.init) || 440;
-      var NP = 3;
-      var fA = function (x, t) { return waveVal(A, NP * f / fInit, phd, x / 4, t); };
+       * 引擎批3：显示映射走原语（space：xSpan=NP·v/fRef；time：tSpan=NP/fRef，
+       * NP=3 初值档显示 3 个周期）；两档频率下像素波长比 λ1/λ2 = f2/f1 精确
+       * 成立（PHY-G06），且低频档也有 ≥2 个上升过零点、像素可测。 */
+      var fA = function (x, tIgnored) {
+        if (ENG_W) return waveA.valueAtDisp(x / 4, driftPhase);
+        return fallbackWave(A, f, phd, x / 4, t);
+      };
       plot(fA, cssVar("--phy-wave-a"));
       readWaveB();
       if (waveB) {
-        var fB = function (x, t) { return waveVal(bAmp, NP * bFreq / fInit, bPh, x / 4, t); };
+        if (ENG_W) {
+          if (!waveBEng) waveBEng = new ENG_W({ A: bAmp, f: bFreq, phiDeg: bPh,
+            v: vW, axis: axisW, NP: NP_W, fRef: fRefW });
+          else waveBEng.set({ A: bAmp, f: bFreq, phiDeg: bPh });
+        }
+        var fB = function (x, tIgnored) {
+          if (ENG_W) return waveBEng.valueAtDisp(x / 4, driftPhase);
+          return fallbackWave(bAmp, bFreq, bPh, x / 4, t);
+        };
         plot(fB, cssVar("--phy-wave-b"), [6, 4]);
-        if (showSum) plot(function (x, t) { return fA(x, t) + fB(x, t); },
-          cssVar("--phy-target"), [], 3);
+        /* 引擎批3：合成波走原语 superpose（逐点相加） */
+        if (showSum) plot(function (x, tIgnored) {
+          if (ENG_W) return ENG_W.superpose([waveA, waveBEng], x / 4, driftPhase);
+          return fA(x, t) + fB(x, t);
+        }, cssVar("--phy-target"), [], 3);
       }
       /* 峰/谷标注（圆点 + "峰"/"谷"文字） */
       if (p.showLabels !== false) {

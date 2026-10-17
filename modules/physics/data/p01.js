@@ -173,6 +173,8 @@ widgets: [
 {
 type: "wave-tune",
 params: {
+/* 引擎批3（2026-10-17）：波形真值切 Eng.Wave（解析式 y=A·sin(2πft−kx+φ)，全参数读回） */
+engine: { primitive: "Wave", version: "2026.10.17.4", params: { axis: "space", NP: 3 } },
 amp: { min: 1, max: 5, step: 0.5, init: 3},
 freq: { min: 100, max: 1000, step: 10, init: 440},
 playSound: true,

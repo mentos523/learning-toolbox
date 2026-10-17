@@ -239,6 +239,52 @@ Eng.StepPlayer（前进/后退/重播/慢放/键盘）+ Eng.Tween（步内连续
 | `Eng.Phenom.OverflowCup({volumeMax, volumeInit})` | `setVolume(v)` | `frac=min(1,v/vMax)`；烧杯水位 `fillH=frac·44`；下压深度 `3+frac·26`；V溢≡V（PH-OC01） | NC01 |
 | `Eng.Phenom.VacuumTube()` | `setMode(vacuum)` / `drop()`（driver 复位） | `coinY=18+54·min(1,t/1.2)²`；羽毛有空气 `d=3.6s+飘摆 xf=43+sin(9t)·3·max(0,1−t/dF)`；真空 d=1.2s（PH-VT01）；`done` 读回 | NC01/NC02 |
 
+### 2.10 波动原语（wave.js，物理推广批3，2026-10-17）
+
+> 定位：波动类交互的**解析真值**（`y = A·sin(2πft − kx + φ)`，`k=2π/λ=2πf/v`），
+> 纯函数 + 渲染分离，确定性可断言。频率/波长/振幅/相位全部参数化读回，
+> 杜绝旧组件 f 硬编码类问题（WV-06）。
+> 真值口径：`~/workspace/phy-audit/wave-truth-criteria.md`（WV-01…WV-27）。
+> 实现 `Eng.PRIMITIVE_IFACE` 子集：`snapshot`/`restore`/`state`；`step`/`reset`/
+> `simTimeSec`/`stepCountN` 为驱动步进概念，解析式原语无积分步进，不实现
+> （ENG-69：不给假数）。
+
+| API | 构造/调用 | 读回/真值（纯函数） | 口径 |
+|---|---|---|---|
+| `new Eng.Wave({A, f, phiDeg, v, axis, NP, fRef, audibleMax, ax})` | `A>0, f>0` 必填；`v` 默认 340；`axis` 'space'/'time' 默认 'space'；`NP` 默认 3；`fRef` 默认 `f`；`audibleMax` 默认 2000；`ax` 缺省用 `AX_DEFAULTS` | 非法输入抛错（`A/f/v≤0`、φ 非数、axis 非法） | ENG-66 |
+| `valueAt(x, t)` | x 米，t 秒 | `A·sin(2πft − kx + φ)`（WV-03/03b 逐点手算对账） | ENG-73 |
+| `displayPhase(u)` | u∈[0,1] 显示分率 | space：`−k·(u·xSpan)+φ`，`xSpan=NP·v/fRef`；time：`2πf·(u·tSpan)+φ`，`tSpan=NP/fRef`（WV-17/19：初值档恰 NP 个周期） | ENG-73 |
+| `valueAtDisp(u, driftPhaseRad)` | 渲染采样 | `A·sin(displayPhase(u) + driftPhaseRad)`；`driftPhaseRad = Wave.demoPhase(driftHz, tDemo)` | ENG-73 |
+| `set({A, f, phiDeg, v})` | 更新参数 | 派生量重算；非法抛错 | ENG-66 |
+| `getState()`/`state()` | 全参数读回（防御性拷贝） | `A, f, phiDeg`（回绕到 [0,360)）, `lambda=v/f`, `k`, `omega=2πf`, `T=1/f`, `v`, `axis`, `NP`, `fRef`, `xSpanM`, `tSpanS`, `audibleMax`, `model='ideal-sinusoid'`, `approxTag='理想正弦波近似'`, `ax`（AX01 三字段） | ENG-10/73 |
+| `snapshot()`/`restore(s)` | 快照往返 | `{A, f, phiDeg, v}` 逐位往返（WV-21） | ENG-10 |
+| `Wave.phaseWrap(deg)` | 静态 | 归一到 [0,360)；360→0（WV-07/08：0°=360°） | ENG-73 |
+| `Wave.driftRateHz(f)` | 静态 | `clamp(f,0,3)`，恒 ≤3Hz（WV-15；光敏安全 W-P8） | ENG-73 |
+| `Wave.demoPhase(driftHz, tSec)` | 静态 | `2π·driftHz·tSec`（WV-16） | ENG-73 |
+| `Wave.audible(f, audibleMax)` | 静态 | `f<20`→`{ok:false,key:'too-low'}`；`f>audibleMax`→`{ok:false,key:'too-high'}`；否则 ok（WV-11/12/13；听力保护） | ENG-69 |
+| `Wave.superpose(waves, u, driftPhaseRad)` | 静态 | 双波逐点相加（WV-09/10；showSum 朱红合成波） | ENG-73 |
+
+- **方向约定**：`−kx` 使相位滑块右拖（φ↑）波形右移、演示漂移右移，与
+  p17.1.3-p1 文案"波形向右'走'"一致；旧实现 `+kx` 左移为文案矛盾类 bug，
+  本批迁移修正（文案不动）。
+- **像素波长比**：两档频率下 `λ₁/λ₂ = f₂/f₁` 精确成立（PHY-G06 口径沿用，WV-18）。
+- **容差**：纯解析闭式，`valueAt`/`displayPhase`/`lambda` 1e-9（手算抄写中间值取 1e-6）；
+  读数行 λ 保留 2 位小数（fmtN 口径）。
+- **AX01 显性化**（`AX_DEFAULTS`，课页可直接引用原文 YP-25/YP-27）：
+  假设：理想正弦波近似 / 均匀介质 / 无衰减 / 一维行波（+x）；
+  近似：演示漂移为慢放 / 显示窗为示意窗口 / e–t 页横轴为时间；
+  误差估计：无数值积分误差，浮点舍入 ~1e-15。
+  课页侧：`wave-tune` 画布 `aria-label` 带"理想正弦波近似"（`physics.js` widgetWaveTune）。
+- **课页接线**（2026-10-17，批3共 4 组件）：`modules/physics/js/physics.js` 的
+  `widgetWaveTune` 真值计算切 `Eng.Wave`（`waveVal`/`driftHz`/`audible` 门/`λ` 读数/
+  合成波），渲染层只消费读回；`data/p01.js`（p01.1.3-p1）与 `data/p17.js`
+  （p17.1.3-p1、p17.1.4-p1、p17.2.3-p1）各 widget params 加
+  `engine: { primitive: "Wave", version: "2026.10.17.4", params: { axis, NP } }` 声明
+  （p17.2.3-p1 为 e–t 图，`axis: "time"`；其余 `axis: "space"`）。
+  引擎脚本未加载时走旧内联公式兜底（同一公式族，`−kx` 右行，行为一致）。
+- **验证**：`tools/qa-wave-truth.mjs`（Node 直测，期望值独立手算硬编码）+
+  `tools/engine-verify/v-wave.html`（V20，浏览器 + 确定性双环境）。
+
 ---
 
 ## 三、真值口径摘要（引用 ENG 编号）
@@ -264,6 +310,9 @@ Eng.StepPlayer（前进/后退/重播/慢放/键盘）+ Eng.Tween（步内连续
   /72（reduced-motion 降级为首末两态）。
 - 光路/电路：ENG-67（已实现，`assets/engine/optics.js`）/68（已实现，`assets/engine/circuit.js`）；
   ENG-69（禁半成品实现）。
+- 波动：ENG-73（已实现，`assets/engine/wave.js`，解析式 `y=A·sin(2πft−kx+φ)`，
+  频率/波长/振幅/相位全参数化读回）；真值口径 WV-01…WV-27
+ （`~/workspace/phy-audit/wave-truth-criteria.md`）。
 - 不可对账：ENG-NC01（多体堆积/非弹性/二维斜碰）/NC02（教学故意反例须配说明）
   /NC03（流体浮力近似力场）/NC04（波动干涉可视化）/NC05（自由数据输入）。
 
@@ -426,7 +475,7 @@ assets/vendor/
 assets/engine/
   core.js  coords.js  driver.js  konva-view.js  input.js
   mech.js  meters.js  plot.js  steps.js  guides.js
-  tween.js  circuit.js  motion.js  phenom.js  optics.js
+  tween.js  circuit.js  motion.js  phenom.js  optics.js  wave.js
 docs/ENGINE.md（本文件）
 tools/engine-verify/
   verify.css  verify-lib.js  run-verify.cjs
@@ -436,8 +485,11 @@ tools/engine-verify/
   v-meters-electrical.html  v-meters-length-angle.html
   v-meters-thermo-balance.html  v-meters-lab.html
   v-plot.html  v-input.html  v-steps.html  v-data-chart.html  v-konva-view.html
-  v-tween.html  v-motion.html  v-phenom.html  v-optics.html
+  v-tween.html  v-motion.html  v-phenom.html  v-optics.html  v-wave.html
 ```
+
+验证页外：`tools/qa-wave-truth.mjs`（波动真值 Node 直测门禁，期望值独立手算硬编码；
+白队独立复验用此脚本放行；实现队自查不计入放行依据）。
 
 验证：`node tools/engine-verify/run-verify.cjs`（headless Chromium 真实 file:// 打开；
 结果与截图见 `~/workspace/engine-build/evidence/`）。
