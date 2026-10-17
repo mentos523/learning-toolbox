@@ -382,6 +382,7 @@
       "几何 g01–g04": "g01-u1-l1-p1",
       "几何 g01": "g01-u1-l1-p1", "几何 g02": "g02-u1-l1-p1",
       "几何 g06": "g06-u1-l1-p1", "几何 g07": "g07-u1-l1-p1",
+      "几何 g09.1.1": "g09-u1-l1-p1", "几何 g09": "g09-u1-l1-p1",
       "几何 g10": "g10-u1-l1-p1", "几何 g13": "g13-u1-l0-p1"
     };
     /* 组合 token（p17.3.1-p2 "代数 6.2/7.2"）：拆成两个锚点，"/" 留原文 */
@@ -391,7 +392,7 @@
         ["7.2", "../math/index.html#p=ch07-u2-l1-p1"]
       ]
     };
-    var XLINK_BIO = { "b18.1.3": 1, "b16.1.1": 1, "b16.1.2": 1, "b16.1.3": 1, "b16.1.4": 1, "b16.1.5": 1 }; /* 本模块课号 → #课号；未生产课号不许入表（门禁⑨） */
+    var XLINK_BIO = { "b18.1.3": 1, "b16.1.1": 1, "b16.1.2": 1, "b16.1.3": 1, "b16.1.4": 1, "b16.1.5": 1, "b17.1.1": 1, "b17.1.2": 1, "b17.1.3": 1, "b17.1.4": 1, "b17.1.5": 1 }; /* 本模块课号 → #课号；未生产课号不许入表（门禁⑨） */
     function xlinkHref(token) {
       if (XLINK_BIO[token]) return "#" + token;
       var pid = XLINK_MATH[token];
@@ -576,7 +577,7 @@
    * 不得回退手搓一次性组件（见 docs/ENGINE.md §五迁移指南）。
    * 未知类型 → 警告占位，不静默吞掉（白队可检）。 */
   var BIOLOGY_INTERACTION_TYPES = [
-    "pedigree-quest", "mitosis-stage"
+    "pedigree-quest", "mitosis-stage", "punnett-lab"
   ];
   function renderWidget(type, params, wid) {
     if (window.BIO_ENGINE && typeof window.BIO_ENGINE.render === "function") {

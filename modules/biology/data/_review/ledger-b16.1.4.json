@@ -1,1 +1,40 @@
-{"announcements":[{"echo_target":"b17（未生产）","id":"b16.1.4-a1","kind":"foretell","note":"b17 生产时，b17.1.1（分离定律）须以减数分裂为前置回链 b16.1.4（同源染色体分离是分离定律的细胞学基础）；届时把本条置 final_passed。","source":"docs/biology-curriculum.md（减数分裂是 b17 前置）","status":"drafted","text":"减数分裂 → b17 遗传规律（前置依赖）"}],"chapter":"b16","frozen_refs":[{"id":"b16.1.4-f1","kind":"frozen_copy","note":"同源染色体/联会/四分体定义逐字上 b16.1.4-p1（首现即定义）：同源染色体（形态大小相同，一条来自父方、一条来自母方）；联会（同源染色体两两配对）；四分体（联会后每对同源染色体含 4 条染色单体）。","ref":"docs/biology-curriculum.md b16.1.4 误区专治","status":"final_passed"}],"gate11_quiz":{"note":"本课无 kind:quiz 页；交互页 meiosis 4 步走完机判，练习覆盖等价。","status":"final_passed"},"gate8_first_definition":{"note":"b16.1.4-p1 定义条当页定义：同源染色体/联会/四分体；误区专治（两条件缺一不可）在 b16.1.4-p3 trap 落实。","status":"final_passed"},"gate9_target_check":{"note":"本课 4 页内无深链引用未生产课号；XLINK_BIO 仅含已生产课号。","status":"final_passed"},"lesson":"b16.1.4","notes":"b16.1.4 预告登记与冻结引用台账。","schema":"biology-review-ledger/1.0","written_at":"2026-10-17","written_by":"生物生产队（蓝队数据工程 + 黄队内容）"}
+{
+  "announcements": [
+    {
+      "echo_target": "b17（未生产）",
+      "id": "b16.1.4-a1",
+      "kind": "foretell",
+      "note": "已兑现（2026-10-17，生物 P2）：b17.1.1-p3 mathlink 深链 b16.1.4——\"减数分裂时它们分开，等位基因就跟着分开了：这就是分离定律的细胞学基础\"。",
+      "source": "docs/biology-curriculum.md（减数分裂是 b17 前置）",
+      "status": "final_passed",
+      "text": "减数分裂 → b17 遗传规律（前置依赖）"
+    }
+  ],
+  "chapter": "b16",
+  "frozen_refs": [
+    {
+      "id": "b16.1.4-f1",
+      "kind": "frozen_copy",
+      "note": "同源染色体/联会/四分体定义逐字上 b16.1.4-p1（首现即定义）：同源染色体（形态大小相同，一条来自父方、一条来自母方）；联会（同源染色体两两配对）；四分体（联会后每对同源染色体含 4 条染色单体）。",
+      "ref": "docs/biology-curriculum.md b16.1.4 误区专治",
+      "status": "final_passed"
+    }
+  ],
+  "gate11_quiz": {
+    "note": "本课无 kind:quiz 页；交互页 meiosis 4 步走完机判，练习覆盖等价。",
+    "status": "final_passed"
+  },
+  "gate8_first_definition": {
+    "note": "b16.1.4-p1 定义条当页定义：同源染色体/联会/四分体；误区专治（两条件缺一不可）在 b16.1.4-p3 trap 落实。",
+    "status": "final_passed"
+  },
+  "gate9_target_check": {
+    "note": "本课 4 页内无深链引用未生产课号；XLINK_BIO 仅含已生产课号。",
+    "status": "final_passed"
+  },
+  "lesson": "b16.1.4",
+  "notes": "b16.1.4 预告登记与冻结引用台账。",
+  "schema": "biology-review-ledger/1.0",
+  "written_at": "2026-10-17",
+  "written_by": "生物生产队（蓝队数据工程 + 黄队内容）"
+}

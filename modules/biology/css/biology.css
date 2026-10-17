@@ -1465,3 +1465,99 @@ body[data-theme="dark"] #biology-app .bio-safety { background: #2b2113; }
 .bio-b11-barfill { width: 100%; max-width: 64px; border-radius: 6px 6px 0 0; background: var(--bio-known); min-height: 8px; }
 .bio-b11-barlab { font-size: 0.85rem; color: var(--bio-ink-soft); }
 .bio-b11-barnum { font-size: 0.95rem; font-weight: 700; color: var(--bio-text); }
+
+/* ============ B5 · punnett-lab（分离比模拟实验室，生物 P2 首立） ============ */
+.bio-b5 { margin: 10px 0 16px; }
+.bio-b5-h { font-size: 1rem; color: var(--bio-text); margin: 10px 0 6px; }
+.bio-b5-desc { font-size: 0.85rem; color: var(--bio-ink-soft); margin: 4px 0 8px; line-height: 1.6; }
+.bio-b5-d3 { font-size: 0.85rem; color: var(--bio-ink-soft); border-left: 3px solid var(--bio-gene); padding: 4px 10px; margin: 6px 0; }
+/* "大量统计的结果"徽章：常驻不可关（B-F5） */
+.bio-b5-statbadge {
+  display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;
+  background: var(--bio-panel); border: 2px solid var(--bio-known);
+  border-radius: 10px; padding: 8px 12px; margin: 0 0 8px;
+}
+.bio-b5-statbadge-t { font-size: 0.95rem; font-weight: 700; color: var(--bio-text); }
+.bio-b5-statbadge-s { font-size: 0.85rem; color: var(--bio-ink-soft); }
+/* 实验三问徽章（W-B5）：对照 → 单一变量 → 重复 */
+.bio-b5-3q { display: flex; align-items: flex-start; gap: 4px; flex-wrap: wrap; margin: 6px 0; }
+.bio-b5-3q-arrow { color: var(--bio-ink-soft); font-size: 0.85rem; padding-top: 12px; }
+.bio-b5-3q-item { display: inline-flex; flex-direction: column; max-width: 100%; }
+.bio-b5-3q-chip {
+  min-height: 44px; font-size: 0.85rem; border-radius: 999px; padding: 8px 14px;
+  border: 1.5px solid var(--bio-gene); background: var(--bio-bg); color: var(--bio-text); cursor: pointer;
+}
+.bio-b5-3q-ans {
+  font-size: 0.85rem; color: var(--bio-ink-soft); background: var(--bio-panel);
+  border-radius: 8px; padding: 6px 10px; margin-top: 4px; max-width: 300px; line-height: 1.6;
+}
+/* 滑块行：原生 range（触摸区 ≥44px）+ −/+ 步进按钮 */
+.bio-b5-sliderow { display: flex; align-items: center; gap: 8px; margin: 8px 0; }
+.bio-b5-range { flex: 1; min-height: 44px; accent-color: var(--bio-gene); }
+.bio-b5-stepbtn {
+  min-width: 44px; min-height: 44px; font-size: 1.25rem; border-radius: 10px;
+  border: 2px solid var(--bio-line); background: var(--bio-panel); color: var(--bio-text); cursor: pointer;
+}
+.bio-b5-n { font-size: 0.95rem; color: var(--bio-text); white-space: nowrap; }
+.bio-b5-run, .bio-b5-submit {
+  min-height: 48px; font-size: 1.05rem; border-radius: 10px; padding: 10px 22px;
+  background: var(--bio-next-bg); color: #fff; border: none; cursor: pointer; margin: 6px 0;
+}
+/* 模拟结果行：分式（MathML）+ 百分比文字（W-B7/W-B16 双编码） */
+.bio-b5-out { margin: 8px 0; }
+.bio-b5-line {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  font-size: 0.95rem; color: var(--bio-text); margin: 4px 0;
+  border: 1px solid var(--bio-line); border-radius: 8px; padding: 6px 10px;
+}
+.bio-b5-tag {
+  display: inline-block; min-width: 1.6em; text-align: center; font-size: 0.85rem; font-weight: 700;
+  border-radius: 6px; padding: 2px 6px; background: var(--bio-panel); color: var(--bio-text);
+}
+.bio-b5-line.is-dom { border-color: var(--bio-gene); }
+.bio-b5-line.is-dom .bio-b5-tag { background: var(--bio-gene); color: #fff; }
+.bio-b5-line.is-rec { border-color: var(--bio-known); }
+.bio-b5-line.is-rec .bio-b5-tag { background: var(--bio-known); color: #fff; }
+.bio-b5-line.is-c0 .bio-b5-tag { background: var(--bio-gene); color: #fff; }
+.bio-b5-line.is-c1 .bio-b5-tag { background: var(--bio-target); color: #fff; }
+.bio-b5-line.is-c2 .bio-b5-tag { background: var(--bio-known); color: #fff; }
+.bio-b5-line.is-c3 .bio-b5-tag { background: var(--bio-aux); color: #fff; }
+.bio-b5-nm { font-weight: 700; }
+.bio-b5-ct { font-size: 0.85rem; color: var(--bio-ink-soft); }
+.bio-b5-pc { font-size: 0.85rem; color: var(--bio-ink-soft); }
+.bio-b5-out math, .bio-b5-verdict math { font-size: 0.95rem; }
+.bio-b5-ratio { font-size: 0.85rem; color: var(--bio-ink-soft); margin: 6px 0; }
+.bio-b5-close { font-size: 0.95rem; font-weight: 700; color: var(--bio-organelle); margin: 6px 0; }
+.bio-b5-far { font-size: 0.85rem; color: var(--bio-ink-soft); margin: 6px 0; }
+/* 方格区 */
+.bio-b5-scope { font-size: 0.85rem; color: var(--bio-target); background: var(--bio-panel); border-radius: 8px; padding: 6px 10px; margin: 6px 0; }
+.bio-b5-chips { display: flex; gap: 8px; flex-wrap: wrap; margin: 8px 0; }
+.bio-b5-chip {
+  min-width: 64px; min-height: 44px; font-size: 1rem; border-radius: 10px; padding: 8px 14px;
+  border: 2px solid var(--bio-known); background: var(--bio-bg); color: var(--bio-text); cursor: pointer;
+}
+.bio-b5-chip[aria-pressed="true"] { background: var(--bio-known); color: #fff; font-weight: 700; }
+.bio-b5-gridwrap { overflow-x: auto; margin: 8px 0; }
+.bio-b5-table { border-collapse: collapse; margin: 0 auto; }
+.bio-b5-table th { font-size: 0.95rem; color: var(--bio-text); padding: 4px 6px; min-width: 44px; }
+.bio-b5-cell {
+  min-width: 56px; min-height: 56px; font-size: 1rem; border-radius: 8px;
+  border: 2px dashed var(--bio-line); background: var(--bio-bg); color: var(--bio-text); cursor: pointer;
+}
+.bio-b5-cell.filled { border-style: solid; border-color: var(--bio-known); font-weight: 700; }
+.bio-b5-cell.ok { border-style: solid; }
+.bio-b5-cell.ok.is-dom { background: var(--bio-gene); color: #fff; border-color: var(--bio-gene); }
+.bio-b5-cell.ok.is-rec { background: var(--bio-known); color: #fff; border-color: var(--bio-known); }
+.bio-b5-cell.ok.is-c0 { background: var(--bio-gene); color: #fff; border-color: var(--bio-gene); }
+.bio-b5-cell.ok.is-c1 { background: var(--bio-target); color: #fff; border-color: var(--bio-target); }
+.bio-b5-cell.ok.is-c2 { background: var(--bio-known); color: #fff; border-color: var(--bio-known); }
+.bio-b5-cell.ok.is-c3 { background: var(--bio-aux); color: #fff; border-color: var(--bio-aux); }
+.bio-b5-cell.bad { border-color: var(--bio-target); border-style: solid; }
+.bio-b5-hint { font-size: 0.85rem; color: var(--bio-target); min-height: 1.5em; margin: 4px 0; }
+.bio-b5-count { font-size: 0.85rem; color: var(--bio-ink-soft); margin: 4px 0; }
+.bio-b5-verdict { margin: 8px 0; font-size: 0.95rem; color: var(--bio-text); }
+.bio-b5-conc { font-size: 0.95rem; font-weight: 700; margin-top: 8px; line-height: 1.6; }
+.bio-b5-err { font-size: 0.95rem; color: var(--bio-target); border: 2px solid var(--bio-target); border-radius: 10px; padding: 10px; margin: 8px 0; }
+/* V8 字号阶梯：MathML 分数内 mn 默认按 ~0.71 缩放（15.2px→10.79px），
+ * 显式钉到阶梯 0.78rem=12.48px，保证读数分式全部落阶梯（W-B16 仍走 MathML）。 */
+.bio-b5 math mn { font-size: 0.78rem; }

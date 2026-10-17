@@ -7,6 +7,14 @@
  * js/biology.js 的 renderWidget 调用。
  *
  * 本文件实现的交互：
+ * - "punnett-lab"（B5 分离比模拟实验室，见
+ *   docs/biology-interactions.md §B5；冻结口径 B-F5；验收 W-B5/W-B7；
+ *   用户拍板⑤不走 PeaLab 路线 + D3 解析推导扩展）：
+ *   次数滑块模拟（10–5000，B-F5 默认）+ Punnett 方格点选填格
+ *   （pairs:1 → 2×2 数格子得 3∶1；pairs:2 → 4×4 棋盘格拼搭得
+ *   9∶3∶3∶1）；"大量统计的结果"徽章常驻不可关；实验三问徽章
+ *   （对照→单一变量→重复）常驻；概率显示分式（MathML）+百分比；
+ *   方格总数 = 4^pairs 程序化校验。纯 DOM 实现。
  * - "pedigree-quest"（B6 系谱判读闯关，见
  *   docs/biology-interactions.md §B6；冻结口径 B-F6；真值口径
  *   BIO-R23/R24/R25/R26/R60/R37/R07、BIO-AX01）：
@@ -465,7 +473,7 @@
       /* 当前步骤：先手算 → 点选提交 */
       panel.appendChild(el("div", "bio-dc3", esc(DC3_WORDING)));
       if (cs === 0) {
-        panel.appendChild(el("p", "bio-ask", "看第Ⅰ代和第Ⅱ代：用口诀定显隐。点“显性”或“隐性”。"));
+        panel.appendChild(el("p", "bio-ask", "看第Ⅰ代和第Ⅱ代：用口诀定显隐。点\"显性\"或\"隐性\"。"));
         var opts0 = el("div", "bio-opts", "");
         DOMINANCE_OPTS.forEach(function (op) {
           var b = el("button", "bio-opt", esc(op));
@@ -581,7 +589,7 @@
       var total = pedigree.members.length, seen = 0;
       pedigree.members.forEach(function (x) { if (state.seenMembers[x.id]) seen++; });
       if (seen >= total && !state.stepDone[2]) {
-        say(true, "所有成员都看过了——点“判读完成”，为这张图收官。");
+        say(true, "所有成员都看过了——点\"判读完成\"，为这张图收官。");
       }
     }
 
@@ -944,10 +952,10 @@
 
     /* ============ 相位：behavior（染色体行为直觉动画） ============ */
     var BEHAVIOR_STEPS = [
-      { t: "复制", cap: "间期：染色体先\"复印\"一份——DNA 复制的直觉版（半保留机制见 b19，纯文本）。" },
+      { t: "复制", cap: "间期：染色体先\"复印\"一份——\"复印\"指染色体数目复制（半保留机制见 b19.1.2，直觉版）。" },
       { t: "排队", cap: "中期：染色体排到细胞中央（赤道板）——最整齐，最适合数数目。" },
       { t: "分开", cap: "后期：姐妹染色单体分开，向两极移动。" },
-      { t: "进两个细胞", cap: "末期：平均分成两个细胞——染色体数目不变！" }
+      { t: "进两个细胞", cap: "末期：把复印好的染色体\"平分\"给两个细胞——\"平分\"指染色体平均分配，所以数目不变！" }
     ];
     function drawBehavior(svg, idx, P) {
       var cx = 150, cy = 95, r = 62;
@@ -1522,6 +1530,355 @@
     return root;
   }
 
+/* ============================================================
+ * B5 · punnett-lab（分离比模拟实验室）—— 生物 P2 首立（2026-10-17）
+ *
+ * 落点：b17.1.2（性状分离比的模拟）、b17.1.3（自由组合定律）。
+ * 依据：docs/biology-interactions.md §B5；验收 W-B5/W-B7；
+ * 冻结 B-F5；用户拍板⑤（不走 PeaLab"配子叙述+大样本计数+
+ * 卡方"路线，保持自研）+ D3 扩展（解析概率推导页：Punnett
+ * 2×2 数格子，不引入概率定义、零数学前置）。
+ *
+ * mode: "sim"（模拟区）/ "grid"（方格区）/ "both"（都渲染）。
+ * pairs: 1 → 2×2（3∶1）；2 → 4×4（9∶3∶3∶1）。
+ * 方格总数 = 4^pairs 程序化校验（W-B7），不一致 → 可见错误态。
+ * statBadge（"大量统计的结果"）常驻不可关（B-F5）；
+ * 实验三问徽章（对照→单一变量→重复）常驻（W-B5）。
+ * 概率显示：分式（MathML）+ 百分比文字（W-B7/W-B16）。
+ * 4×4 在 390px 下横向滚动兜底（W-B7）；全部热区 ≥44px。
+ * 纯 DOM，无 Konva；主题色走 --bio-* CSS 变量（深色自动跟随）。
+ * ============================================================ */
+function parseAllele(label) {
+  var m = String(label || "").match(/[\(\（]([A-Za-z])[\)\）]/);
+  return m ? m[1] : "";
+}
+function shortName(label) {
+  return String(label || "").replace(/[\(\（][A-Za-z][\)\）]/g, "");
+}
+function renderPunnettLab(params, wid) {
+  var pairs = params.pairs === 2 ? 2 : 1;
+  var mode = params.mode === "grid" ? "grid" : params.mode === "both" ? "both" : "sim";
+  var T = params.trials || {};
+  var tmin = T.min != null ? T.min : 10, tmax = T.max != null ? T.max : 5000;
+  var tstep = T.step != null ? T.step : 10, tinit = T.init != null ? T.init : 100;
+  var showRatio = params.showRatio !== false;
+  /* statBadge 冻结常驻（B-F5）：params 传 false 也不关 */
+  var root = el("div", "bio-b5");
+  root.setAttribute("data-qid", params.qid || wid || "bio-b5");
+  root.setAttribute("data-pairs", String(pairs));
+
+  /* ---------- 方格总数 = 4^pairs 程序化校验（W-B7） ---------- */
+  function gridTruth() {
+    if (pairs === 1) {
+      var dL = parseAllele((params.alleles || {}).dom) || "D";
+      var rL = parseAllele((params.alleles || {}).rec) || "d";
+      var gs = [dL, rL], cells = [];
+      for (var r = 0; r < 2; r++) for (var c = 0; c < 2; c++) {
+        var a = gs[r], b = gs[c];
+        var gt = (a === dL || b === dL) ? (a === dL && b === dL ? dL + dL : dL + rL) : rL + rL;
+        cells.push({ row: a, col: b, gt: gt, dom: gt !== rL + rL });
+      }
+      return { gametes: gs, cells: cells, dL: dL, rL: rL };
+    }
+    var tA = params.traitA || params.alleles || {}, tB = params.traitB || params.alleles2 || {};
+    var Ad = parseAllele(tA.dom) || "Y", Ar = parseAllele(tA.rec) || "y";
+    var Bd = parseAllele(tB.dom) || "R", Br = parseAllele(tB.rec) || "r";
+    var gs2 = [Ad + Bd, Ad + Br, Ar + Bd, Ar + Br], cells2 = [];
+    for (var i = 0; i < 4; i++) for (var j = 0; j < 4; j++) {
+      var g1 = gs2[i], g2 = gs2[j];
+      var hasA = g1.charAt(0) === Ad || g2.charAt(0) === Ad;
+      var hasB = g1.charAt(1) === Bd || g2.charAt(1) === Bd;
+      var cls = (hasA ? 0 : 2) + (hasB ? 0 : 1); /* 0 黄圆 1 黄皱 2 绿圆 3 绿皱 */
+      cells2.push({ row: g1, col: g2, cls: cls });
+    }
+    return { gametes: gs2, cells: cells2, clsNames: [
+      shortName(tA.dom) + shortName(tB.dom), shortName(tA.dom) + shortName(tB.rec),
+      shortName(tA.rec) + shortName(tB.dom), shortName(tA.rec) + shortName(tB.rec)] };
+  }
+  var truth = gridTruth();
+  var expectCells = Math.pow(4, pairs);
+  if (truth.cells.length !== expectCells) {
+    return el("div", "bio-b5-err",
+      "⚠ B5 校验失败：方格数 " + truth.cells.length + " ≠ 4^" + pairs + "（W-B7）。");
+  }
+
+  /* ---------- 常驻徽章：大量统计的结果（B-F5，不可关） ---------- */
+  var badge = el("div", "bio-b5-statbadge",
+    "<span class=\"bio-b5-statbadge-t\">📊 大量统计的结果</span>" +
+    "<span class=\"bio-b5-statbadge-s\">次数越多，越接近理论比</span>");
+  root.appendChild(badge);
+
+  /* ---------- 模拟区 ---------- */
+  function fracHTML(num, den) {
+    return "<math><mfrac><mn>" + num + "</mn><mn>" + den + "</mn></mfrac></math>";
+  }
+  function pct(n, N) { return "约 " + Math.round(n / N * 100) + "%"; }
+  function buildSim() {
+    var box = el("section", "bio-b5-sim");
+    box.appendChild(el("h4", "bio-b5-h", "模拟：抓小球"));
+    /* 实验三问徽章（W-B5）：对照 → 单一变量 → 重复 */
+    var q = el("div", "bio-b5-3q");
+    var theory = pairs === 1 ? "3∶1" : "9∶3∶3∶1";
+    var answers = [
+      ["对照", "方格推导的 " + theory + " 就是\"对照尺\"——模拟跑出的比例，要和它比一比。"],
+      ["单一变量", "只改次数（10→100→1000），亲本组合、小球抓法都不变。"],
+      ["重复", "1000 次多跑几轮：轮轮都接近理论比；10 次多跑几轮：轮轮都不一样。"]
+    ];
+    answers.forEach(function (qa, i) {
+      var chip = el("button", "bio-b5-3q-chip", (i + 1) + "·" + qa[0]);
+      chip.setAttribute("type", "button");
+      chip.setAttribute("aria-expanded", "false");
+      var ans = el("div", "bio-b5-3q-ans", esc(qa[1]));
+      ans.hidden = true;
+      chip.addEventListener("click", function () {
+        ans.hidden = !ans.hidden;
+        chip.setAttribute("aria-expanded", String(!ans.hidden));
+      });
+      var wrap = el("span", "bio-b5-3q-item");
+      wrap.appendChild(chip); wrap.appendChild(ans);
+      q.appendChild(wrap);
+      if (i < 2) q.appendChild(el("span", "bio-b5-3q-arrow", "→"));
+    });
+    box.appendChild(q);
+    box.appendChild(el("p", "bio-b5-desc",
+      pairs === 1
+        ? "甲、乙两个袋子，各装一半 D 小球、一半 d 小球；各抓 1 个 = 1 次\"Dd×Dd 杂交\"。"
+        : "甲、乙两个袋子，各装 YR、Yr、yR、yr 四种小球各 1/4；各抓 1 个 = 1 次\"YyRr×YyRr 杂交\"。"));
+
+    var n = tinit;
+    var row = el("div", "bio-b5-sliderow");
+    var minus = el("button", "bio-b5-stepbtn", "−"); minus.setAttribute("type", "button");
+    var plus = el("button", "bio-b5-stepbtn", "+"); plus.setAttribute("type", "button");
+    var range = el("input", "bio-b5-range");
+    range.setAttribute("type", "range");
+    range.setAttribute("min", tmin); range.setAttribute("max", tmax);
+    range.setAttribute("step", tstep); range.value = n;
+    range.setAttribute("aria-label", "模拟次数");
+    var nlab = el("span", "bio-b5-n", "次数 = " + n);
+    function sync() {
+      n = parseInt(range.value, 10);
+      nlab.textContent = "次数 = " + n;
+    }
+    range.addEventListener("input", sync);
+    minus.addEventListener("click", function () {
+      range.value = Math.max(tmin, parseInt(range.value, 10) - tstep); sync();
+    });
+    plus.addEventListener("click", function () {
+      range.value = Math.min(tmax, parseInt(range.value, 10) + tstep); sync();
+    });
+    row.appendChild(minus); row.appendChild(range); row.appendChild(plus); row.appendChild(nlab);
+    box.appendChild(row);
+
+    var run = el("button", "bio-b5-run", "跑 " + n + " 次");
+    run.setAttribute("type", "button");
+    range.addEventListener("input", function () { run.textContent = "跑 " + range.value + " 次"; });
+    minus.addEventListener("click", function () { run.textContent = "跑 " + range.value + " 次"; });
+    plus.addEventListener("click", function () { run.textContent = "跑 " + range.value + " 次"; });
+    box.appendChild(run);
+
+    var out = el("div", "bio-b5-out");
+    box.appendChild(out);
+    function pick2(gs) {
+      return [gs[(Math.random() * gs.length) | 0], gs[(Math.random() * gs.length) | 0]];
+    }
+    run.addEventListener("click", function () {
+      var N = parseInt(range.value, 10), counts;
+      if (pairs === 1) {
+        var dL = truth.dL, rL = truth.rL, dom = 0;
+        for (var i = 0; i < N; i++) {
+          var g = pick2(truth.gametes);
+          if (g[0] === dL || g[1] === dL) dom++;
+        }
+        counts = [dom, N - dom];
+      } else {
+        counts = [0, 0, 0, 0];
+        var Ad2 = parseAllele((params.traitA || {}).dom) || "Y";
+        var Bd2 = parseAllele((params.traitB || {}).dom) || "R";
+        for (var k = 0; k < N; k++) {
+          var gg = pick2(truth.gametes);
+          var hasA = gg[0].charAt(0) === Ad2 || gg[1].charAt(0) === Ad2;
+          var hasB = gg[0].charAt(1) === Bd2 || gg[1].charAt(1) === Bd2;
+          counts[(hasA ? 0 : 2) + (hasB ? 0 : 1)]++;
+        }
+      }
+      out.innerHTML = "";
+      if (showRatio) {
+        var names = pairs === 1
+          ? [shortName((params.alleles || {}).dom), shortName((params.alleles || {}).rec)]
+          : truth.clsNames;
+        counts.forEach(function (c, idx) {
+          var line = el("div", "bio-b5-line" + (pairs === 1 ? (idx === 0 ? " is-dom" : " is-rec") : " is-c" + idx));
+          var tag = pairs === 1 ? (idx === 0 ? "显" : "隐") : String(idx + 1);
+          line.innerHTML = "<span class=\"bio-b5-tag\">" + esc(tag) + "</span>" +
+            "<span class=\"bio-b5-nm\">" + esc(names[idx]) + "</span>" +
+            "<span class=\"bio-b5-ct\">" + c + " / " + N + "</span> " +
+            fracHTML(c, N) + "<span class=\"bio-b5-pc\">" + pct(c, N) + "</span>";
+          out.appendChild(line);
+        });
+        var rb = el("div", "bio-b5-ratio",
+          "理论比 " + theory + "（方格推导） vs 本轮实测——数字自己会说话。");
+        out.appendChild(rb);
+      }
+      if (N >= 1000) {
+        out.appendChild(el("div", "bio-b5-close",
+          "✓ 接近 " + theory + "（大量统计的结果）——再跑一轮，还是这么稳。"));
+      } else {
+        out.appendChild(el("div", "bio-b5-far",
+          "次数还少，比例会乱跳——拖到 1000 再看。"));
+      }
+      flash(out);
+      vib(15);
+    });
+    return box;
+  }
+
+  /* ---------- 方格区（解析推导 / 棋盘格拼搭） ---------- */
+  function buildGrid() {
+    var box = el("section", "bio-b5-grid");
+    box.appendChild(el("h4", "bio-b5-h",
+      pairs === 1 ? "解析：数格子" : "拼搭：9∶3∶3∶1 棋盘格"));
+    box.appendChild(el("p", "bio-b5-desc",
+      pairs === 1
+        ? "行、列都是配子（D / d）。先选手算：点一个基因型（基因型=遗传组成的写法，如 Dd），再点格子填进去；填完点\"提交对照\"。"
+        : "行、列都是配子（YR / Yr / yR / yr）。先选手算：点一类表现型（表现型=看得见的性状，如高茎），再点格子填进去；填完点\"提交对照\"。"));
+    if (pairs === 2) {
+      box.appendChild(el("p", "bio-b5-scope",
+        "边界：9∶3∶3∶1 只在\"独立遗传\"时成立——有例外一来，比例就变（第 3 页辨析）。"));
+    }
+    var chips, chipVal = null;
+    if (pairs === 1) {
+      chips = [truth.dL + truth.dL, truth.dL + truth.rL, truth.rL + truth.rL];
+    } else {
+      chips = truth.clsNames.slice();
+    }
+    var chipRow = el("div", "bio-b5-chips");
+    chips.forEach(function (c) {
+      var b = el("button", "bio-b5-chip", esc(c));
+      b.setAttribute("type", "button");
+      b.addEventListener("click", function () {
+        chipVal = c;
+        var all = chipRow.querySelectorAll(".bio-b5-chip");
+        for (var i = 0; i < all.length; i++) all[i].setAttribute("aria-pressed", "false");
+        b.setAttribute("aria-pressed", "true");
+      });
+      chipRow.appendChild(b);
+    });
+    box.appendChild(chipRow);
+    box.appendChild(el("p", "bio-b5-d3",
+      "先手算（自己按配子组合填）、提交后看自动校验对照。"));
+
+    var wrap = el("div", "bio-b5-gridwrap");
+    var table = el("table", "bio-b5-table");
+    var gs = truth.gametes, size = gs.length;
+    var head = el("tr", null, "<th></th>");
+    for (var c = 0; c < size; c++) head.appendChild(el("th", null, esc(gs[c])));
+    table.appendChild(head);
+    var cellBtns = [];
+    for (var r = 0; r < size; r++) {
+      var tr = el("tr", null);
+      tr.appendChild(el("th", null, esc(gs[r])));
+      for (var cc = 0; cc < size; cc++) {
+        (function (ri, ci) {
+          var td = el("td", null);
+          var b = el("button", "bio-b5-cell", "·");
+          b.setAttribute("type", "button");
+          b.setAttribute("aria-label", "第" + (ri + 1) + "行第" + (ci + 1) + "列");
+          b.addEventListener("click", function () {
+            if (!chipVal) {
+              hint("先点上面的基因型/表现型，再点格子填。");
+              return;
+            }
+            b.textContent = chipVal;
+            b.setAttribute("data-fill", chipVal);
+            b.classList.add("filled");
+            hint("");
+            updateCount();
+          });
+          td.appendChild(b);
+          tr.appendChild(td);
+          cellBtns.push(b);
+        })(r, cc);
+      }
+      table.appendChild(tr);
+    }
+    wrap.appendChild(table);
+    box.appendChild(wrap);
+
+    var hintLine = el("div", "bio-b5-hint");
+    function hint(t) { hintLine.textContent = t || ""; }
+    box.appendChild(hintLine);
+    var cntLine = el("div", "bio-b5-count", "已填 0 / " + expectCells + " 格");
+    box.appendChild(cntLine);
+    function updateCount() {
+      var n = 0;
+      for (var i = 0; i < cellBtns.length; i++) if (cellBtns[i].getAttribute("data-fill")) n++;
+      cntLine.textContent = "已填 " + n + " / " + expectCells + " 格";
+    }
+    var submit = el("button", "bio-b5-submit", "提交对照");
+    submit.setAttribute("type", "button");
+    var verdict = el("div", "bio-b5-verdict");
+    box.appendChild(submit);
+    box.appendChild(verdict);
+    submit.addEventListener("click", function () {
+      var filled = 0, wrong = 0;
+      for (var i = 0; i < cellBtns.length; i++) {
+        var b = cellBtns[i], f = b.getAttribute("data-fill");
+        if (!f) continue;
+        filled++;
+        var t = truth.cells[i];
+        var okFill = pairs === 1 ? (f === t.gt) : (truth.clsNames[t.cls] === f);
+        if (okFill) {
+          b.classList.add("ok");
+          b.classList.remove("bad");
+          if (pairs === 1) {
+            b.classList.add(t.dom ? "is-dom" : "is-rec");
+          } else {
+            b.classList.add("is-c" + t.cls);
+          }
+        } else {
+          wrong++;
+          b.classList.add("bad");
+          b.classList.remove("ok");
+        }
+      }
+      if (filled < expectCells) {
+        hint("还有空格子没填——填满再提交。");
+        return;
+      }
+      if (wrong > 0) {
+        hint("有 " + wrong + " 格不对：再想想配子怎么组合。不扣分，改对为止。");
+        verdict.innerHTML = "";
+        return;
+      }
+      hint("");
+      var html;
+      if (pairs === 1) {
+        var dName = shortName((params.alleles || {}).dom), rName = shortName((params.alleles || {}).rec);
+        html = "<span class=\"bio-b5-tag\">显</span> " + esc(dName) + " 3 格 " + fracHTML(3, 4) +
+          "<span class=\"bio-b5-pc\">约 75%</span>　<span class=\"bio-b5-tag\">隐</span> " +
+          esc(rName) + " 1 格 " + fracHTML(1, 4) + "<span class=\"bio-b5-pc\">约 25%</span>" +
+          "<div class=\"bio-b5-conc\">数格子：显性∶隐性 = 3∶1 —— 方格里的 3∶1，就是模拟器里跑出来的 3∶1。</div>";
+      } else {
+        html = truth.clsNames.map(function (nm, i) {
+          var exp = [9, 3, 3, 1][i];
+          return "<div class=\"bio-b5-line is-c" + i + "\"><span class=\"bio-b5-nm\">" + esc(nm) +
+            "</span><span class=\"bio-b5-ct\">" + exp + " 格</span> " + fracHTML(exp, 16) +
+            "<span class=\"bio-b5-pc\">" + pct(exp, 16) + "</span></div>";
+        }).join("") +
+          "<div class=\"bio-b5-conc\">数格子：9∶3∶3∶1 —— 每对各自 3∶1，合起来就是它。</div>";
+      }
+      verdict.innerHTML = html;
+      flash(verdict);
+      vib(15);
+    });
+    return box;
+  }
+
+  if (mode === "sim" || mode === "both") root.appendChild(buildSim());
+  if (mode === "grid" || mode === "both") root.appendChild(buildGrid());
+  return root;
+}
+
   /* ---------------- 对外 API ---------------- */
   var api = {
     render: function (type, params, wid) {
@@ -1534,6 +1891,9 @@
       }
       if (type === "mitosis-stage") {
         return renderMitosisStage(params || {}, wid || "bio-b11");
+      }
+      if (type === "punnett-lab") {
+        return renderPunnettLab(params || {}, wid || "bio-b5");
       }
       return null;
     },
