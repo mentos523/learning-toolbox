@@ -451,7 +451,8 @@ body[data-theme="dark"] #mathml-warn { background: #4a3a1a; color: #fde68a; }
   fill: var(--m-accent-strong); stroke: #fff; stroke-width: 2.5;
 }
 .sa-handle-hint {
-  font-size: 13px; fill: #fff; pointer-events: none; font-weight: bold;
+  font-size: 14px; fill: #fff; pointer-events: none; font-weight: bold;
+  /* V8 字号阶梯 2026-10-17：原 13px 在 0.87~0.90 舞台渲染 11.3~11.7px，提至 12.48 阶梯 */
 }
 
 /* ---------- placeholder-morph ---------- */
