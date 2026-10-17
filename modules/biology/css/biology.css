@@ -1,0 +1,1467 @@
+/* ============================================================
+ * 生物 SPA 样式（蓝队 2026-10-15，骨架 + 试点 p04.1.2）
+ *
+ * 命名空间隔离铁律：所有类名前缀 bio-（biology），只作用于
+ * #biology-app 容器内；不触碰其他学科的任何样式。
+ * 色板：--bio-* 语义变量，别名 --geo-*（浅色/深色两套，随
+ * body[data-theme] 自动切换；见 docs/biology-interactions.md §0.2）。
+ * 全局约束：每页一屏（100dvh）、触控目标 ≥44px、
+ * 色盲双编码（颜色 + 文字标签）、file:// 可用、零依赖。
+ * 区内滚动口径（白队教训 F1–F3）：.bio-zone 是唯一滚动容器，
+ * overflow-y:auto + overscroll-behavior-y:contain；页面级
+ * #biology-app { overflow:hidden }（一屏不变量）；任何内容容器
+ * 不许「固定高度 + overflow:hidden」静默裁剪。
+ * ============================================================ */
+
+/* ---------- --bio-* 语义色板（别名 --geo-*，深色自动跟随） ---------- */
+/* E-04（白队 2026-10-16）：token 作用域扩大到 #bio-browser（入口），
+ * 入口深色不再闪白屏。 */
+#biology-app, #bio-browser {
+  --geo-bg: #FFFFFF;
+  --geo-text: #1A1A1A;
+  --geo-known: #0072B2;        /* 已知：蓝 */
+  --geo-target: #D55E00;       /* 待求/求证：朱红 */
+  --geo-corr-a: #E69F00;       /* 对应 A：橙 */
+  --geo-corr-b: #56B4E9;       /* 对应 B：天蓝 */
+  --geo-corr-c: #009E73;       /* 对应 C：蓝绿 */
+  --geo-corr-angle: #CC79A7;   /* 对应角：紫红 */
+  --geo-line: #000000;         /* 常规描边 */
+  --geo-aux: #7A7A7A;          /* 辅助线（灰虚线） */
+  --geo-grid: #E5E5E5;         /* 网格线 */
+  --geo-highlight: #F0E442;    /* 高亮：黄（配深色字） */
+
+  --bio-known:     var(--geo-known);    /* 已知/基准：蓝 —— 正常生理值、对照组、已知结构 */
+  --bio-target:    var(--geo-target);   /* 待求/强调：朱红 —— 实验变量、待判读性状、关键结论 */
+  --bio-substrate: var(--geo-corr-a);   /* 反应物/底物：橙 —— 淀粉、葡萄糖、抗原 */
+  --bio-product:   var(--geo-corr-b);   /* 产物：天蓝 —— 麦芽糖、ATP、抗体 */
+  --bio-organelle: var(--geo-corr-c);   /* 细胞器/能量相关：蓝绿 —— 线粒体、叶绿体 */
+  --bio-gene:      var(--geo-corr-angle);/* 基因/遗传：紫红 —— 等位基因、DNA 链、系谱符号 */
+  --bio-membrane:  var(--geo-line);     /* 细胞边界/常规描边 */
+  --bio-grid:      var(--geo-grid);     /* 网格/坐标底（曲线图、显微镜视野网格） */
+  --bio-highlight: var(--geo-highlight);/* 高亮：黄 —— 当前步骤、选中项（配深色字） */
+  --bio-aux:       var(--geo-aux);      /* 辅助线：灰虚线 —— 假设线、进化树分支、模式图示意线 */
+  --bio-bg:        var(--geo-bg);       /* 背景 */
+  --bio-text:      var(--geo-text);     /* 文字（含 MathML 公式渲染） */
+
+  --bio-ink:      var(--geo-text);
+  --bio-ink-soft: var(--geo-aux);
+  --bio-panel:    #F7F7F7;
+  --bio-line:     #DDDDDD;
+  --bio-on-hl:    #1A1A1A;     /* 黄底上的深色字 */
+  --bio-next-bg:  #B44A00;     /* 「下一页」按钮底：待求朱红加深，白字对比度 5.36 ≥ 4.5（R3 2026-10-15） */
+}
+body[data-theme="dark"] #biology-app, body[data-theme="dark"] #bio-browser {
+  --geo-bg: #121212;
+  --geo-text: #F5F5F5;
+  --geo-known: #56B4E9;
+  --geo-target: #FF7043;
+  --geo-corr-a: #FFB020;
+  --geo-corr-b: #7FD4FF;
+  --geo-corr-c: #3DDC97;
+  --geo-corr-angle: #E69BBE;
+  --geo-line: #F5F5F5;
+  --geo-aux: #9E9E9E;
+  --geo-grid: #333333;
+  --geo-highlight: #F0E442;
+
+  --bio-panel:    #1E1E1E;
+  --bio-line:     #3A3A3A;
+  --bio-on-hl:    #1A1A1A;
+  --bio-next-bg:  #C1440E;     /* 深色主题按钮底：待求朱红加深，白字对比度 5.12 ≥ 4.5（R3 2026-10-15） */
+}
+/* 护眼主题沿用浅色值（body[data-theme="soft"] 不覆盖） */
+
+/* ---------- App 骨架：一屏三块 ---------- */
+#biology-app {
+  /* 注意：此处不设 height（旧 100dvh 已删，R1 2026-10-15）——
+   * 高度由子 #bio-app.bio-app 的 100dvh 撑起；浏览器模式下子 div
+   * hidden=display:none 时 section 自动塌为 0 高，body 永不滚动。 */
+  background: var(--bio-bg);
+  color: var(--bio-ink);
+  font-family: inherit;
+  overflow: hidden;              /* 页面级一屏不变量：唯一允许的 overflow:hidden */
+}
+.bio-app {
+  box-sizing: border-box;      /* 100dvh 含 padding：无隐藏裁剪（附带观察 2026-10-15） */
+  height: 100dvh;
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  padding: 0 14px calc(10px + env(safe-area-inset-bottom));
+}
+.bio-head {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0 6px;
+  border-bottom: 1px solid var(--bio-line);
+}
+.bio-head h1 {
+  margin: 0;
+  font-size: 1rem;
+  flex: 1;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.bio-page-tag {
+  flex: none;
+  font-size: 0.78rem;
+  color: var(--bio-ink-soft);
+  border: 1px solid var(--bio-line);
+  border-radius: 999px;
+  padding: 3px 9px;
+  white-space: nowrap;
+}
+.bio-back {
+  flex: none;
+  min-width: 44px;
+  min-height: 44px;
+  border: 1px solid var(--bio-line);
+  border-radius: 10px;
+  background: var(--bio-panel);
+  color: var(--bio-ink);
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+.bio-crumb {
+  flex: none;
+  margin: 6px 0 0;
+  font-size: 0.78rem;
+  color: var(--bio-ink-soft);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.bio-main {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 8px 0;
+  overflow: hidden;
+}
+.bio-title {
+  flex: none;
+  margin: 0 0 8px;
+  font-size: 1.05rem;
+  line-height: 1.45;
+}
+
+/* ---------- 区内滚动（白队 F1–F3 口径） ---------- */
+.bio-zone-wrap {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+.bio-zone {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;              /* 区内纵向滚动，绝不裁剪 */
+  overflow-x: hidden;
+  overscroll-behavior-y: contain;/* 防链式滚动：body 永不滚动 */
+  -webkit-overflow-scrolling: touch;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.bio-zone > * { flex: none; }    /* 直系子项不参与压缩：只滚动、不压扁 */
+/* P-03（2026-10-16 黄队口径：嵌入流内）：pill 不再绝对定位悬浮覆盖内容，
+ * 改为 zone 下方文档流占位；"可滚且未到底" 的 show-more 显示逻辑不变。 */
+.bio-more {
+  flex: none;
+  display: none;
+  justify-content: center;
+  padding: 8px 0 6px;
+  background: none;
+  pointer-events: auto;
+}
+.bio-zone-wrap.show-more .bio-more { display: flex; }
+.bio-more-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  color: var(--bio-ink-soft);
+  background: var(--bio-panel);
+  border: 1px solid var(--bio-line);
+  border-radius: 999px;
+  padding: 6px 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+.bio-more-pill .arr {
+  display: inline-block;
+  animation: bioMoreBounce 1.4s ease-in-out infinite;
+}
+@keyframes bioMoreBounce { 50% { transform: translateY(3px); } }
+@media (prefers-reduced-motion: reduce) {
+  .bio-more-pill .arr { animation: none; }
+}
+
+/* ---------- 点拨区 ---------- */
+.bio-point {
+  flex: none;
+  margin: 8px 0 0;
+  padding: 8px 10px;
+  background: var(--bio-panel);
+  border-left: 4px solid var(--bio-target);
+  border-radius: 0 8px 8px 0;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--bio-ink);
+}
+.bio-point.scroll { max-height: 36vh; overflow-y: auto; }
+
+/* ---------- 翻页器 ---------- */
+.bio-pager {
+  flex: none;
+  display: flex;
+  gap: 10px;
+  padding-top: 8px;
+}
+.bio-pager button {
+  flex: 1;
+  min-height: 44px;
+  border-radius: 10px;
+  border: 1px solid var(--bio-line);
+  background: var(--bio-panel);
+  color: var(--bio-ink);
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+.bio-pager button:disabled { opacity: 0.35; cursor: default; }
+.bio-pager .bio-next { background: var(--bio-next-bg); border-color: var(--bio-next-bg); color: #fff; }
+
+/* ---------- 章节浏览器 ---------- */
+/* 浏览器是导航列表页（非一屏课页）：内容超高时自身滚动，
+ * 与课页 .bio-zone 口径一致，body 永不滚动。 */
+/* 白队闸门 R1（2026-10-15）：hidden 壳不得占空间。
+ * #bio-browser.bio-app 的 display:block 特异性（1-1-0）高于 UA
+ * [hidden]{display:none}（0-1-0），空壳曾撑开 100dvh+10px 致 body
+ * 可滚动；此处 !important 兜底。body margin 清零（本表仅被
+ * modules/biology/index.html 引用，即生物 SPA 页作用域）。 */
+#bio-browser[hidden], #bio-app[hidden] { display: none !important; }
+/* V-01（白队 2026-10-16）：body 补设计系统字体栈（与 assets/css/style.css 同值）。
+ * 生物/化学 index.html 未引入 style.css，此处直接声明，避免引入整文件
+ * 带来的 .container 等全局样式污染。 */
+body {
+  margin: 0;
+  font-family: -apple-system, "PingFang SC", "Hiragino Sans GB",
+               "Microsoft YaHei", "Noto Sans SC", sans-serif;
+}
+/* P-05 扩大（2026-10-16）：表单元素字体继承设计栈——Chromium UA 样式表
+ * 给无显式字体的 button/input/select/textarea 指定 Arial，致全模块
+ * 按钮/输入框字体与正文脱钩；此处统一继承 body 设计栈。 */
+button, input, select, textarea { font-family: inherit; }
+
+#bio-browser.bio-app {
+  display: block; overflow-y: auto; overscroll-behavior-y: contain;
+  /* E-04：入口底色跟随主题（token 在 #bio-browser 作用域内已定义） */
+  background: var(--bio-bg); color: var(--bio-ink);
+  min-height: 100dvh;
+}
+/* V-04（白队 2026-10-16）：作图板跟随主题。JSXGraph 1.14 的 initBoard 直接渲染进
+ * 传入的容器（不加 .jxgbox 类——该类只在 appBox 路径添加），引擎作图板容器为
+ * .bio-eng-plot；背景与板内文字走 --bio-* 语义令牌，随 data-theme 切换。 */
+#bio-app .bio-eng-plot { background-color: var(--bio-bg); }
+#bio-app .bio-eng-plot svg text { fill: var(--bio-ink); }
+.bio-browse { padding: 12px 0 24px; }
+.bio-browse h1 { font-size: 1.25rem; margin: 6px 0 4px; }
+.bio-browse-sub { color: var(--bio-ink-soft); font-size: 0.85rem; margin: 0 0 12px; }
+.bio-ch-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.bio-ch-btn {
+  width: 100%;
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-align: left;
+  border: 1px solid var(--bio-line);
+  border-radius: 12px;
+  background: var(--bio-panel);
+  color: var(--bio-ink);
+  padding: 10px 14px;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+.bio-ch-id {
+  flex: none;
+  font-size: 0.78rem;
+  color: var(--bio-ink-soft);
+  border: 1px solid var(--bio-line);
+  border-radius: 999px;
+  padding: 2px 8px;
+}
+.bio-ch-title { flex: 1; font-weight: 600; }
+.bio-ch-count { flex: none; font-size: 0.78rem; color: var(--bio-ink-soft); }
+.bio-unit { margin: 12px 0 4px; font-size: 0.95rem; color: var(--bio-ink-soft); }
+.bio-lesson-list { list-style: none; margin: 0 0 8px; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.bio-lesson-btn {
+  width: 100%;
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-align: left;
+  border: 1px solid var(--bio-line);
+  border-radius: 10px;
+  background: var(--bio-bg);
+  color: var(--bio-ink);
+  padding: 10px 14px;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+.bio-lesson-id { flex: none; font-size: 0.78rem; color: var(--bio-known); font-weight: 700; }
+.bio-lesson-title { flex: 1; }
+.bio-lesson-go { flex: none; color: var(--bio-ink-soft); }
+.bio-done { flex: none; color: var(--bio-force-c); font-size: 0.78rem; }
+
+/* ---------- 入口选择层（E-01/E-02/E-03，白队 2026-10-16） ---------- */
+.bio-home-link {
+  display: inline-block;
+  margin: 2px 0 12px;
+  font-size: 0.85rem;
+  color: var(--bio-known);
+  text-decoration: none;
+  min-height: 44px;
+  line-height: 44px;
+}
+.bio-home-link:active { text-decoration: underline; }
+/* E-02：继续学习卡片（对齐化学 G2 口径） */
+.bio-continue {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 4px;
+  width: 100%; min-height: 44px; text-align: left; cursor: pointer;
+  background: var(--bio-next-bg); color: #fff; border: none; border-radius: 12px;
+  padding: 12px 16px; margin: 0 0 14px; font-size: 0.95rem;
+}
+.bio-continue-t { font-weight: 700; font-size: 1rem; }
+.bio-continue-l { opacity: 0.92; font-size: 0.85rem; }
+/* E-01：学段卡片（宽屏双列，对齐 P-04 诉求；窄屏单列） */
+.bio-track-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin: 4px 0 8px;
+}
+@media (min-width: 700px) {
+  .bio-track-grid { grid-template-columns: 1fr 1fr; }
+}
+/* P-04（2026-10-16）：宽屏入口补齐。入口壳在 ≥820px 视口放宽到 980
+ *（与数学 .m-main 对齐；课页 .bio-app 保持 720 不变）；卡片 hover 抬起
+ * 与数学卡片视觉语言对齐；学段目录章列表 ≥820px 双列、行高收紧。 */
+@media (min-width: 820px) {
+  #bio-browser.bio-app { max-width: 980px; padding-left: 24px; padding-right: 24px; }
+  .bio-ch-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .bio-ch-btn { min-height: 52px; }
+}
+.bio-track-card { transition: transform 0.15s ease, box-shadow 0.15s ease; }
+.bio-track-card:hover { transform: translateY(-3px); box-shadow: 0 6px 18px rgba(0,0,0,0.10); }
+@media (prefers-reduced-motion: reduce) {
+  .bio-track-card:hover { transform: none; }
+}
+.bio-track-card {
+  display: flex; flex-direction: column; align-items: stretch; gap: 8px;
+  text-align: left; cursor: pointer;
+  border: 1px solid var(--bio-line); border-radius: 14px;
+  background: var(--bio-panel); color: var(--bio-ink);
+  padding: 16px; font-size: 0.95rem; min-height: 44px;
+}
+.bio-track-card:active { border-color: var(--bio-known); }
+.bio-track-name { font-size: 1.05rem; font-weight: 700; }
+.bio-track-name small { font-weight: 400; font-size: 0.78rem; color: var(--bio-ink-soft); }
+.bio-track-desc { font-size: 0.85rem; color: var(--bio-ink-soft); line-height: 1.6; }
+.bio-track-meta { font-size: 0.85rem; color: var(--bio-ink-soft); }
+.bio-track-done { color: var(--bio-organelle); }
+.bio-track-go {
+  align-self: flex-start;
+  font-size: 0.95rem; font-weight: 700; color: var(--bio-known);
+  border: 1px solid var(--bio-known); border-radius: 999px;
+  padding: 6px 14px; margin-top: 2px;
+}
+.bio-back-link {
+  display: inline-block;
+  background: none; border: none; cursor: pointer;
+  color: var(--bio-known); font-size: 0.85rem;
+  min-height: 44px; padding: 0; margin: 0 0 4px;
+}
+
+/* ---------- 通用内容块 ---------- */
+.bio-tip {
+  background: var(--bio-panel);
+  border: 1px dashed var(--bio-line);
+  border-radius: 10px;
+  padding: 8px 10px;
+  font-size: 0.85rem;
+  color: var(--bio-ink-soft);
+  line-height: 1.6;
+}
+.bio-lead { font-size: 0.95rem; line-height: 1.7; margin: 0; }
+.bio-text { font-size: 0.95rem; line-height: 1.75; margin: 0; color: var(--bio-ink); }
+.bio-trap {
+  background: #FFF7E6;
+  border: 1px solid var(--bio-force-a);
+  border-left-width: 4px;
+  border-radius: 0 10px 10px 0;
+  padding: 8px 10px;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+body[data-theme="dark"] #biology-app .bio-trap { background: #2b2113; }
+.bio-oldfriend {
+  background: var(--bio-panel);
+  border: 1px solid var(--bio-line);
+  border-radius: 10px;
+  padding: 8px 10px;
+  font-size: 0.85rem;
+  line-height: 1.7;
+}
+.bio-oldfriend::before { content: "🔗 "; }
+.bio-mathlink {
+  background: var(--bio-panel);
+  border: 1px solid var(--bio-line);
+  border-radius: 10px;
+  padding: 8px 10px;
+  font-size: 0.85rem;
+  line-height: 1.7;
+}
+.bio-mathlink::before { content: "📐 "; }
+/* R-P2（2026-10-15）：跨科深链内联样式——下划线＋可辨色＋加粗，
+ * 与化学模块 .chm-lesson-link 口径一致（全站统一） */
+.bio-xlink { color: var(--bio-target); font-weight: 700; text-decoration: underline; }
+.bio-slogan {
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--bio-target);
+  background: var(--bio-panel);
+  border-radius: 10px;
+  padding: 10px;
+  line-height: 1.6;
+}
+
+/* ---------- Y3 公式身份证卡片（全书统一版式） ---------- */
+.bio-idcard {
+  border: 2px solid var(--bio-body);
+  border-radius: 12px;
+  background: var(--bio-bg);
+  overflow: hidden;
+}
+.bio-idcard-head {
+  background: var(--bio-body);
+  color: var(--bio-bg);
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 6px 12px;
+}
+.bio-idcard-row {
+  display: flex;
+  gap: 8px;
+  padding: 7px 12px;
+  border-top: 1px dashed var(--bio-line);
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+.bio-idcard-row:first-of-type { border-top: none; }
+.bio-idcard-k {
+  flex: none;
+  width: 5.5em;
+  color: var(--bio-ink-soft);
+  font-size: 0.78rem;
+  padding-top: 2px;
+}
+.bio-idcard-v { flex: 1; min-width: 0; }
+.bio-idcard-v ul { margin: 0; padding-left: 1.2em; }
+.bio-idcard .bio-formula { font-size: 1.25rem; }
+.bio-idcard .bio-translation { color: var(--bio-ink-soft); font-size: 0.85rem; margin-top: 2px; }
+.bio-dim-ok { color: var(--bio-force-c); font-weight: 700; }
+
+/* ---------- 读数徽章（冻结 spec：固定预算、无布局抖动） ---------- */
+.bio-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bio-panel);
+  border: 1px solid var(--bio-line);
+  border-radius: 10px;
+  padding: 8px 12px;
+  min-height: 56px;              /* 固定预算：读数变化不引起重排 */
+}
+.bio-badge .bio-readout {
+  flex: none;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--bio-target);
+  white-space: nowrap;
+}
+.bio-badge .bio-readout math { font-size: 1.25rem; }
+.bio-badge .bio-invariant {
+  flex: 1;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--bio-ink-soft);
+  border-left: 2px solid var(--bio-force-c);
+  padding-left: 8px;
+}
+
+/* ---------- m–V 虚拟实验 ---------- */
+.bio-tabs {
+  display: flex;
+  gap: 8px;
+}
+.bio-tabs button {
+  flex: 1;
+  min-height: 44px;
+  border-radius: 10px;
+  border: 2px solid var(--bio-line);
+  background: var(--bio-panel);
+  color: var(--bio-ink);
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+.bio-tabs button[aria-pressed="true"] {
+  border-color: currentColor;
+  font-weight: 700;
+  background: var(--bio-bg);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+/* mv-lab ρ 标签引线（W6/黄队改法 2：引线锚定线端，颜色随线） */
+.bio-tag-leader { stroke-width: 0.8; }
+/* 杠杆力臂标签 L₁/L₂（PHY-M09 双编码：斜体字 + 引线） */
+.bio-arm-tag { font-size: 4.2px; font-style: italic; font-weight: 700; fill: var(--bio-ink); }
+
+/* ---------- 黄队 19 项（2026-10-15）通用 ---------- */
+.bio-widget { position: relative; }
+@keyframes bio-pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.3); } }
+@keyframes bio-breathe { 0%, 100% { opacity: 1; } 50% { opacity: 0.45; } }
+@keyframes bio-kick { 0% { transform: rotate(0); } 40% { transform: rotate(-14deg); } 100% { transform: rotate(0); } }
+@keyframes bio-tip-flash { 0%, 100% { background: transparent; } 50% { background: var(--bio-warn-soft, #fff3cd); } }
+/* SVG 可拖手柄：首次脉冲 + 抓握放大（P1 改法 1/4） */
+.bio-handle-pulse { animation: bio-pulse 0.4s ease-in-out 3; transform-box: fill-box; transform-origin: center; }
+.bio-handle:hover { transform: scale(1.15); transform-box: fill-box; transform-origin: center; }
+.bio-handle:active { transform: scale(1.3); transform-box: fill-box; transform-origin: center; cursor: grabbing; }
+/* 一次性指引气泡（P1/Y4/P3/P8） */
+.bio-hint-bubble {
+  position: relative; margin: 2px 0 6px; padding: 8px 12px;
+  background: var(--bio-panel); border: 1.5px solid var(--bio-warn);
+  border-radius: 10px; font-size: 0.85rem; line-height: 1.5;
+}
+.bio-hint-bubble::after {
+  content: ""; position: absolute; left: 24px; bottom: -7px;
+  width: 12px; height: 12px; background: var(--bio-panel);
+  border-right: 1.5px solid var(--bio-warn); border-bottom: 1.5px solid var(--bio-warn);
+  transform: rotate(45deg);
+}
+/* 按钮脉冲（Y4 三读法按钮依次脉冲） */
+.bio-btn-pulse { animation: bio-pulse 0.6s ease-in-out 1; border-color: var(--bio-warn); }
+.bio-lock-icon { font-size: 5px; }
+/* P3 开关：黄色呼吸发光边（闸刀可点性） */
+.bio-switch { filter: drop-shadow(0 0 1.2px var(--bio-warn)); }
+.bio-switch-first { animation: bio-breathe 1s ease-in-out 3; }
+.bio-switch-pulse { animation: bio-breathe 1.6s ease-in-out infinite; }
+.bio-switch-toggle { animation: bio-kick 0.22s ease-in-out 1; transform-box: fill-box; transform-origin: center; }
+.bio-switch-hint { font-size: 3.4px; fill: var(--bio-ink-soft); }
+.bio-cell { cursor: pointer; }
+.bio-tip-flash { animation: bio-tip-flash 1s ease-in-out 1; border-radius: 8px; }
+/* P3 元件库 */
+.bio-tray-item { min-height: 44px; }
+.bio-tray-hint { display: block; font-size: 0.78rem; color: var(--bio-ink-soft); }
+/* P7 碰撞：方向选择器 + 0 点刻度 */
+.bio-velo { display: flex; align-items: center; gap: 6px; }
+.bio-velo .bio-slider-row { flex: 1; min-width: 0; }
+.bio-dir { min-width: 48px; min-height: 48px; font-size: 1.25rem; flex: none; }
+.bio-dir[aria-pressed="true"] { border-color: var(--bio-target); background: var(--bio-panel); font-weight: 700; }
+.bio-zero-scale { position: relative; height: 1.1em; font-size: 0.78rem; color: var(--bio-ink-soft); margin: 0 0 4px; }
+.bio-zero-mark { position: absolute; top: 0; transform: translateX(-50%); border-left: 2px solid var(--bio-warn); padding-left: 3px; white-space: nowrap; }
+.bio-zero-neg { position: absolute; left: 0; top: 0; }
+.bio-zero-pos { position: absolute; right: 0; top: 0; }
+/* P8 场可视化 */
+.bio-field-tools { display: flex; gap: 8px; margin: 6px 0; }
+.bio-field-tools button { min-height: 44px; flex: 1; }
+.bio-field-tools button[aria-pressed="true"] { border-color: var(--bio-target); font-weight: 700; }
+.bio-stage-wrap { position: relative; }
+.bio-drag-note {
+  position: absolute; right: 6px; bottom: 6px; font-size: 0.78rem;
+  color: var(--bio-ink-soft); background: var(--bio-panel);
+  border: 1px solid var(--bio-line); border-radius: 6px; padding: 2px 8px;
+  display: none;
+}
+.bio-field-dragging path { opacity: 0.4; }
+.bio-placeholder { stroke-dasharray: 3, 2; }
+/* Y1 重选 */
+.bio-guess-change { margin-top: 6px; font-size: 0.85rem; color: var(--bio-ink-soft); }
+/* Y2 量程预览 */
+.bio-range-mask {
+  margin: 4px 0; padding: 8px 12px; text-align: center; font-weight: 700;
+  background: var(--bio-warn-soft, #fff3cd); border: 1.5px dashed var(--bio-warn);
+  border-radius: 10px;
+}
+.bio-range-btns { display: flex; gap: 10px; margin: 8px 0; }
+.bio-range-btn { flex: 1; min-height: 52px; font-size: 1rem; font-weight: 700; }
+.bio-gauge-head { position: sticky; top: 0; z-index: 5; background: var(--bio-bg); padding: 6px 0; }
+.bio-mag-ov {
+  position: fixed; inset: 0; z-index: 60; display: flex; align-items: center; justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+}
+.bio-mag-box { background: var(--bio-bg); border-radius: 12px; padding: 14px; width: min(420px, 92vw); }
+.bio-mag-title { font-weight: 700; margin-bottom: 8px; }
+/* tuning-fork sticky 按钮（首屏规则） */
+.bio-sticky-btn { position: sticky; top: 0; z-index: 5; background: var(--bio-bg); padding: 6px 0; }
+/* em-induction 图例 */
+.bio-legend { border: 1px solid var(--bio-line); border-radius: 8px; padding: 6px 10px; margin: 6px 0; font-size: 0.85rem; }
+.bio-legend summary { cursor: pointer; font-weight: 700; min-height: 44px; display: flex; align-items: center; }
+/* joule-heating / pendulum 顶部提示条 */
+.bio-hint-bar {
+  padding: 8px 12px; border-radius: 10px; font-size: 0.85rem;
+  background: var(--bio-panel); border: 1px solid var(--bio-line);
+}
+.bio-preset-row { display: flex; gap: 8px; flex-wrap: wrap; margin: 6px 0; }
+.bio-preset-btn { min-height: 44px; flex: 1; white-space: nowrap; }
+/* motor-commutator 可点步骤条 */
+.bio-steps { display: flex; gap: 6px; margin: 8px 0; }
+.bio-step { flex: 1; min-height: 48px; font-size: 0.78rem; border: 1.5px solid var(--bio-line); border-radius: 8px; background: var(--bio-bg); }
+.bio-step[aria-current="true"] { border-color: var(--bio-target); font-weight: 700; background: var(--bio-panel); }
+.bio-step-flash { animation: bio-breathe 0.5s ease-in-out 3; }
+/* slope-compare 三重编码 */
+.bio-slope-row { min-height: 52px; }
+.bio-slope-bar { display: inline-block; height: 14px; border-radius: 4px; vertical-align: middle; }
+.bio-slope-thumb { vertical-align: middle; margin: 0 6px; }
+/* ---------- 目录抽屉（ux-review §2 定案，2026-10-15） ---------- */
+.bio-menu-btn {
+  min-width: 44px; min-height: 44px; flex: none;
+  border: 1px solid var(--bio-line); border-radius: 8px;
+  background: var(--bio-bg); color: var(--bio-ink);
+  font-size: 0.95rem; font-weight: 700; padding: 6px 10px;
+}
+.bio-drawer-mask {
+  position: fixed; inset: 0; z-index: 90;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0; visibility: hidden;
+  transition: opacity 0.2s ease-out, visibility 0.2s;
+}
+body[data-theme="dark"] .bio-drawer-mask { background: rgba(0, 0, 0, 0.6); }
+/* R2 2026-10-15 修复队补修2：浅色下抽屉背景不透明兜底。
+ * --bio-* 只定义在 #biology-app 内，抽屉挂在 body 下变量失效，
+ * 基线 .bio-drawer 的 background: var(--bio-bg) 无回退值 → 透明。
+ * 此处用 var 回退值给浅色（及护眼 soft）一个不透明底；
+ * 特异性 (0,1,1) 低于深色兜底 body[data-theme="dark"] .bio-drawer
+ * (0,2,1)，深色已修好的规则不受影响。
+ * R2 2026-10-15 修复队补修3：浅色抽屉变量作用域补齐。抽屉挂在 body 下，
+ * #biology-app 作用域外的 --bio-line/--bio-panel/--bio-target 等变量全部
+ * 失效 → 边框线不可见、当前课三编码中"背景"透明。此处在 body .bio-drawer
+ * 内补一套完整的浅色值（与 #biology-app 浅色定义一致，色值逐项复制，未自创），
+ * 特异性仍为 (0,1,1)，深色兜底规则在其后全量覆盖，深色不受影响。 */
+body .bio-drawer {
+  --bio-bg: #FFFFFF; --bio-ink: #1A1A1A; --bio-ink-soft: #7A7A7A;
+  --bio-panel: #F7F7F7; --bio-line: #DDDDDD; --bio-target: #D55E00;
+  background: var(--bio-bg, #FFFFFF); color: var(--bio-ink, #1A1A1A);
+}
+/* R2 2026-10-15 修复队补修4：浅色抽屉"当前"徽章对比度。徽章基线 color: var(--bio-bg)
+ * 在浅色下是白字 #FFFFFF on 橙底 #D55E00，对比度 3.87:1 < 4.5 不达标。
+ * 注：任务示例 #1A1A1A on #D55E00 实测仅 4.5005:1（≈阈值，无余量），
+ * 此处取纯黑 #000000 on #D55E00 = 5.43:1，留足余量；徽章字号仅 0.7rem，
+ * 纯黑与 #1A1A1A 在橙底上视觉几乎无差。
+ * body[data-theme="light"] 限定只命中浅色抽屉，深色 #121212 on #FF7043 ≈ 6.83:1
+ * 达标不许动（深色作用域无此规则，深色回归对比度不变）。 */
+body[data-theme="light"] .bio-drawer .bio-drawer-cur { color: #000000; }
+/* R2 2026-10-15 修复队补修：抽屉挂在 body 下（#biology-app 作用域外），
+ * --bio-* 变量在深色下全部失效 → 透明底 + 黑字不可读。此处在深色下给
+ * 抽屉作用域内补一套深色值（与 body[data-theme="dark"] #biology-app 一致），
+ * 仿上行 mask 的写法；浅色沿用 body 白底（此前被掩盖，无需改）。 */
+body[data-theme="dark"] .bio-drawer {
+  --bio-bg: #121212; --bio-ink: #F5F5F5; --bio-ink-soft: #9E9E9E;
+  --bio-panel: #1E1E1E; --bio-line: #3A3A3A; --bio-target: #FF7043;
+  background: var(--bio-bg); color: var(--bio-ink);
+}
+.bio-drawer-mask.open { opacity: 1; visibility: visible; }
+.bio-drawer {
+  position: fixed; top: 0; left: 0; bottom: 0; z-index: 91;
+  width: min(320px, 85vw); height: 100dvh;
+  background: var(--bio-bg); color: var(--bio-ink);
+  border-right: 1px solid var(--bio-line);
+  box-shadow: 4px 0 16px rgba(0, 0, 0, 0.15);
+  display: flex; flex-direction: column;
+  transform: translateX(-105%); visibility: hidden;
+}
+.bio-drawer.open { visibility: visible; transform: none; }
+.bio-drawer-anim { transition: transform 0.25s ease-in-out; }
+.bio-drawer:not(.open).bio-drawer-anim { transition: transform 0.2s ease-out; }
+.bio-drawer-head {
+  flex: none; display: flex; align-items: center; gap: 8px;
+  padding: 10px 12px; border-bottom: 1px solid var(--bio-line);
+}
+.bio-drawer-ch { font-weight: 700; flex: 1; min-width: 0; overflow: hidden;
+  text-overflow: ellipsis; white-space: nowrap; }
+.bio-drawer-page { font-size: 0.78rem; color: var(--bio-ink-soft); flex: none; }
+.bio-drawer-close {
+  min-width: 44px; min-height: 44px; flex: none;
+  border: 1px solid var(--bio-line); border-radius: 8px;
+  background: var(--bio-bg); color: var(--bio-ink); font-size: 1rem;
+}
+.bio-drawer-list { flex: 1; overflow-y: auto; padding: 4px 0 12px; }
+.bio-drawer-chbtn {
+  width: 100%; min-height: 48px; display: flex; align-items: center;
+  justify-content: space-between; gap: 8px; padding: 8px 16px;
+  background: none; border: none; border-bottom: 1px solid var(--bio-line);
+  color: var(--bio-ink); font-size: 0.95rem; font-weight: 700; text-align: left;
+}
+.bio-drawer-arrow { color: var(--bio-ink-soft); flex: none; }
+.bio-drawer-lessons { padding: 2px 0 6px; }
+.bio-drawer-lesson {
+  width: 100%; min-height: 44px; display: flex; align-items: center; gap: 8px;
+  padding: 8px 16px 8px 32px; background: none; border: none;
+  color: var(--bio-ink); font-size: 0.85rem; text-align: left;
+  border-left: 4px solid transparent;
+}
+.bio-drawer-lt { flex: 1; min-width: 0; overflow: hidden; display: -webkit-box;
+  -webkit-line-clamp: 2; -webkit-box-orient: vertical; line-height: 1.35; }
+/* 当前课三编码：背景高亮 + 左侧 4px 指示条 + "当前"文字徽章 */
+.bio-drawer-cur-lesson { background: var(--bio-panel); border-left-color: var(--bio-target); font-weight: 700; }
+.bio-drawer-cur {
+  flex: none; font-size: 0.78rem; font-weight: 700; color: var(--bio-bg);
+  background: var(--bio-target); border-radius: 999px; padding: 2px 8px;
+}
+/* 状态点：当前课实心圆 / 已访问空心圆 */
+.bio-dot-cur, .bio-dot-seen {
+  flex: none; width: 10px; height: 10px; border-radius: 50%;
+}
+.bio-dot-cur { background: var(--bio-target); }
+.bio-dot-seen { border: 2px solid var(--bio-ink-soft); }
+.bio-drawer-foot {
+  flex: none; padding: 10px 12px; border-top: 1px solid var(--bio-line);
+}
+.bio-drawer-foot .bio-mini { width: 100%; }
+
+/* ---------- 首屏"↓下面还有"可点（通用规则 §3） ---------- */
+.bio-zone-wrap.show-more .bio-more { pointer-events: auto; }
+.bio-more-pill { cursor: pointer; }
+button.bio-more { background: none; border: none; font: inherit; padding: 8px 0 6px; }
+.bio-plot {
+  width: 100%;
+  height: auto;
+  display: block;
+  background: var(--bio-bg);
+  border: 1px solid var(--bio-line);
+  border-radius: 10px;
+}
+.bio-plot text { fill: var(--bio-ink-soft); font-size: 4.2px; }
+.bio-plot .bio-axis { stroke: var(--bio-body); stroke-width: 0.6; }
+.bio-plot .bio-grid { stroke: var(--bio-line); stroke-width: 0.3; }
+.bio-plot .bio-trace { fill: none; stroke-width: 1.4; }
+.bio-plot .bio-dot { stroke: var(--bio-bg); stroke-width: 0.8; }
+.bio-plot .bio-slope-tag { font-weight: 700; }
+.bio-slider-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bio-panel);
+  border: 1px solid var(--bio-line);
+  border-radius: 10px;
+  padding: 6px 12px;
+  min-height: 56px;
+}
+.bio-slider-row label { flex: none; font-size: 0.95rem; font-weight: 700; }
+.bio-slider-row input[type="range"] {
+  flex: 1;
+  min-width: 0;
+  height: 44px;                  /* 触控目标 ≥44px */
+  accent-color: var(--bio-target);
+}
+.bio-slider-val { flex: none; font-size: 0.95rem; min-width: 6em; text-align: right; }
+
+/* ---------- 斜率直观版 ---------- */
+.bio-slope-list { display: flex; flex-direction: column; gap: 8px; }
+.bio-slope-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 52px;
+  text-align: left;
+  border: 1px solid var(--bio-line);
+  border-radius: 10px;
+  background: var(--bio-panel);
+  color: var(--bio-ink);
+  padding: 8px 12px;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+.bio-slope-rank {
+  flex: none;
+  width: 30px; height: 30px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  background: var(--bio-highlight);
+  color: var(--bio-on-hl);
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+.bio-slope-name { flex: none; font-weight: 700; }
+.bio-slope-line { flex: 1; height: 10px; border-radius: 5px; }
+.bio-slope-rho { flex: none; font-size: 0.85rem; color: var(--bio-ink-soft); white-space: nowrap; }
+.bio-slope-note {
+  font-size: 0.85rem;
+  color: var(--bio-ink-soft);
+  line-height: 1.6;
+  background: var(--bio-panel);
+  border-radius: 10px;
+  padding: 8px 10px;
+}
+
+/* ---------- 练习题（Y3 判分口径） ---------- */
+.bio-q {
+  border: 1px solid var(--bio-line);
+  border-radius: 10px;
+  padding: 10px 12px;
+  background: var(--bio-bg);
+}
+.bio-q-stem { font-size: 0.95rem; line-height: 1.7; margin-bottom: 8px; }
+.bio-q-opts { display: flex; flex-direction: column; gap: 8px; }
+.bio-q-opts button {
+  min-height: 44px;
+  text-align: left;
+  border: 1px solid var(--bio-line);
+  border-radius: 8px;
+  background: var(--bio-panel);
+  color: var(--bio-ink);
+  padding: 8px 12px;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+.bio-q-opts button.judged-ok { border-color: var(--bio-force-c); border-width: 2px; }
+.bio-q-opts button.judged-bad { border-color: var(--bio-target); opacity: 0.55; }
+.bio-q-check {
+  min-height: 44px;
+  min-width: 88px;
+  margin-top: 8px;
+  border-radius: 8px;
+  border: 1px solid var(--bio-line);
+  background: var(--bio-panel);
+  color: var(--bio-ink);
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+.bio-q input[type="text"] {
+  min-height: 44px;
+  font-size: 1rem;
+  border: 1px solid var(--bio-line);
+  border-radius: 8px;
+  background: var(--bio-bg);
+  color: var(--bio-ink);
+  padding: 4px 10px;
+}
+.bio-q-fb { margin-top: 8px; font-size: 0.85rem; line-height: 1.6; min-height: 1.6em; }
+.bio-q-fb .ok { color: var(--bio-force-c); font-weight: 700; }
+.bio-q-fb .bad { color: var(--bio-target); font-weight: 700; }
+.bio-q-fb .tip { color: var(--bio-ink-soft); }
+
+/* ---------- 落定反馈（M6：视觉必选） ---------- */
+.bio-flash { animation: phyFlash 0.35s ease-out; }
+@keyframes phyFlash {
+  0% { box-shadow: 0 0 0 3px var(--bio-highlight); }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bio-flash { animation: none; }
+}
+
+/* ---------- 公式降级文本 ---------- */
+.bio-formula-fallback {
+  font-style: italic;
+  color: var(--bio-ink-soft);
+}
+
+/* ---------- MathML 环境检测提示条 ---------- */
+#mathml-warn {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 50;
+  background: #FEF3C7;
+  color: #92400E;
+  padding: 10px 14px;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+#mathml-warn button {
+  margin-left: auto;
+  min-width: 44px; min-height: 44px;
+  border: none; background: transparent;
+  font-size: 1rem; cursor: pointer; color: inherit;
+}
+body[data-theme="dark"] #mathml-warn { background: #4a3a1a; color: #fde68a; }
+
+/* ---------- 390px 收紧 ---------- */
+@media (max-width: 620px) {
+  .bio-app { padding-left: 10px; padding-right: 10px; }
+  .bio-badge .bio-readout { font-size: 1.05rem; }
+}
+
+/* ============================================================
+ * P1–P10 / Y1–Y5 组件样式（蓝队 2026-10-15）
+ * 只新增，不改现有规则行为；无「固定高度+overflow:hidden」裁剪。
+ * 色板补全 docs/biology-interactions.md §0.2 缺失的 --bio-* 别名
+ * （深色自动跟随 --geo-*）。
+ * ============================================================ */
+#biology-app {
+  --bio-ray:         var(--geo-line);
+  --bio-field:       var(--geo-corr-b);
+  --bio-current:     var(--geo-corr-c);
+  --bio-charge-pos:  var(--geo-target);
+  --bio-charge-neg:  var(--geo-known);
+  --bio-wave-a:      var(--geo-corr-a);
+  --bio-wave-b:      var(--geo-corr-b);
+}
+
+/* ---------- 通用组件壳 ---------- */
+.bio-widget { display: flex; flex-direction: column; gap: 10px; }
+.bio-stage {
+  width: 100%;
+  height: auto;
+  display: block;
+  background: var(--bio-bg);
+  border: 1px solid var(--bio-line);
+  border-radius: 10px;
+  touch-action: none;
+}
+.bio-stage text { font-size: 4.2px; fill: var(--bio-ink-soft); }
+.bio-ground { stroke: var(--bio-body); stroke-width: 1.2; }
+.bio-track-line { stroke: var(--bio-track); stroke-width: 0.8; stroke-dasharray: 2.5,2; }
+.bio-track-circle { fill: none; stroke: var(--bio-track); stroke-width: 0.8; stroke-dasharray: 2.5,2; }
+.bio-body-box { fill: var(--bio-panel); stroke: var(--bio-body); stroke-width: 1.2; }
+.bio-body-label { fill: var(--bio-ink); font-size: 4.5px; font-weight: 700; }
+.bio-force-label { font-size: 4.5px; font-weight: 700; fill: var(--bio-ink); }
+.bio-res-label { fill: var(--bio-target); }
+.bio-sym-label { font-size: 3.8px; fill: var(--bio-ink-soft); }
+.bio-tick-label { font-size: 3.6px; fill: var(--bio-ink-soft); }
+.bio-note-text { font-size: 4px; fill: var(--bio-ink-soft); }
+.bio-slope-tag { font-size: 4.2px; font-weight: 700; }
+/* V-06（白队 2026-10-16）：标签 halo 底——paint-order 让描边衬在文字下方，
+ * 连接线/虚线经过标签时不再穿字（描边色随主题取 --bio-bg）。 */
+.bio-text-halo {
+  paint-order: stroke;
+  stroke: var(--bio-bg);
+  stroke-width: 3.5px;
+  stroke-linejoin: round;
+}
+.bio-f-label { font-size: 4.2px; font-weight: 700; fill: var(--bio-ink); }
+.bio-f-mark { fill: var(--bio-target); }
+.bio-normal { stroke: var(--bio-track); stroke-width: 0.7; stroke-dasharray: 2,1.5; }
+.bio-handle { stroke: var(--bio-bg); stroke-width: 1; cursor: grab; }
+.bio-handle-blue { stroke: var(--bio-bg); stroke-width: 1; cursor: grab; }
+.bio-hot { cursor: grab; }
+.bio-shaft-hot { cursor: grab; }
+.bio-lens-hot { cursor: ew-resize; }
+.bio-ball { fill: var(--bio-target); stroke: var(--bio-bg); stroke-width: 0.8; }
+.bio-dot, .bio-dot-start, .bio-dot-end { fill: var(--bio-target); }
+.bio-trace { fill: none; stroke: var(--bio-track); stroke-width: 1.2; stroke-dasharray: 3,2; }
+.bio-trace-vert { stroke: var(--bio-track); stroke-width: 1.2; stroke-dasharray: 3,2; }
+.bio-charge { stroke: var(--bio-bg); stroke-width: 1; cursor: grab; }
+.bio-charge-label { font-size: 5px; font-weight: 700; fill: #fff; }
+.bio-probe-label { font-size: 3.8px; fill: var(--bio-ink); font-weight: 700; }
+.bio-mag-label { font-size: 4.5px; font-weight: 700; fill: #fff; }
+.bio-fulcrum { fill: var(--bio-panel); stroke: var(--bio-body); stroke-width: 1.2; }
+.bio-beam { transition: transform 0.3s ease; }
+@media (prefers-reduced-motion: reduce) { .bio-beam { transition: none; } }
+.bio-cell { fill: transparent; stroke: var(--bio-line); stroke-width: 0.4; }
+.bio-glow { pointer-events: none; }
+.bio-cart-label { font-size: 4.5px; font-weight: 700; fill: var(--bio-ink); }
+
+/* ---------- 状态徽章 / 备注 / 目标 ---------- */
+.bio-state {
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  background: var(--bio-panel);
+  border: 1px solid var(--bio-line);
+  color: var(--bio-ink);
+}
+.bio-state-ok { border-color: var(--bio-force-c); border-left-width: 4px; }
+.bio-state-warn { border-color: var(--bio-force-a); border-left-width: 4px; }
+.bio-state-bad {
+  border-color: var(--bio-target);
+  border-left-width: 4px;
+  background: #FDECEA;
+  color: #8f1d12;
+  font-weight: 700;
+}
+body[data-theme="dark"] #biology-app .bio-state-bad { background: #3a1d18; color: #ffb4a2; }
+.bio-note { font-size: 0.85rem; color: var(--bio-ink-soft); line-height: 1.6; }
+.bio-goal {
+  background: var(--bio-panel);
+  border: 1px dashed var(--bio-force-a);
+  border-radius: 10px;
+  padding: 8px 10px;
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+.bio-formula-line {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  background: var(--bio-panel);
+  border-radius: 10px;
+  padding: 8px 10px;
+  overflow-x: auto;
+}
+.bio-unknown {
+  border: 1px dashed var(--bio-target);
+  border-radius: 10px;
+  padding: 10px;
+  color: var(--bio-target);
+}
+
+/* ---------- 播放条 / 步进器 / 按钮行 ---------- */
+.bio-playbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bio-panel);
+  border: 1px solid var(--bio-line);
+  border-radius: 10px;
+  padding: 6px 10px;
+}
+.bio-playbar button {
+  flex: none;
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: 8px;
+  border: 1px solid var(--bio-line);
+  background: var(--bio-bg);
+  color: var(--bio-ink);
+  font-size: 1rem;
+  cursor: pointer;
+}
+.bio-playbar button:disabled { opacity: 0.35; cursor: default; }
+.bio-playbar input[type="range"] { flex: 1; min-width: 0; height: 44px; accent-color: var(--bio-target); }
+.bio-stepper {
+  flex: none;
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: 8px;
+  border: 1px solid var(--bio-line);
+  background: var(--bio-bg);
+  color: var(--bio-ink);
+  font-size: 1.05rem;
+  cursor: pointer;
+}
+.bio-btn-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.bio-btn-row button {
+  min-height: 44px;
+  border-radius: 10px;
+  border: 1px solid var(--bio-line);
+  background: var(--bio-panel);
+  color: var(--bio-ink);
+  padding: 8px 16px;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+.bio-mini {
+  min-height: 44px;
+  border-radius: 8px;
+  border: 1px solid var(--bio-line);
+  background: var(--bio-bg);
+  color: var(--bio-ink);
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+.bio-check-row { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; }
+/* P2 审计：checkbox 原生 24×24 且文字不可点 → <label> 包裹整行可点，
+ * 整行 ≥44px 高为触控目标（W-P9） */
+.bio-check-row label.bio-check {
+  display: flex; align-items: center; gap: 10px;
+  min-height: 44px; padding: 4px 0; cursor: pointer;
+}
+.bio-check-row input[type="checkbox"] {
+  width: 28px; height: 28px; flex: none;
+  accent-color: var(--bio-target); cursor: pointer;
+}
+
+/* P2 审计：390px 下滑块轨道过窄（p08.2.2 仅 25px、p14.2.2 仅 37px）。
+ * 小视口纵向排布：滑块独占整行，轨道宽度 ≥300px，触控目标保持 ≥44px。 */
+@media (max-width: 480px) {
+  .bio-slider-row { flex-wrap: wrap; row-gap: 2px; }
+  .bio-slider-row input[type="range"] { flex: 1 1 100%; order: 9; }
+}
+.bio-heat, .bio-cool {
+  flex: 1;
+  min-height: 56px;
+  border-radius: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  border: 1px solid var(--bio-line);
+  background: var(--bio-panel);
+  color: var(--bio-ink);
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* ---------- Canvas ---------- */
+.bio-wave-cv, .bio-thermo-cv, .bio-xt-cv {
+  width: 100%;
+  height: auto;
+  display: block;
+  background: var(--bio-bg);
+  border: 1px solid var(--bio-line);
+  border-radius: 10px;
+  touch-action: none;
+}
+.bio-legend { display: flex; gap: 12px; flex-wrap: wrap; font-size: 0.85rem; color: var(--bio-ink-soft); }
+.bio-lg { display: inline-flex; align-items: center; gap: 6px; }
+.bio-lg i { display: inline-block; width: 22px; height: 4px; border-radius: 2px; }
+.bio-lg i.dash { height: 0; border-top: 3px dashed; border-radius: 0; background: none !important; }
+
+/* ---------- P3 电路 ---------- */
+/* 滑动变阻器滑块行容器：无内容时不占位；电压表读数行 */
+.bio-circuit-ctrls { display: flex; flex-direction: column; gap: 0.4rem; margin: 0.4rem 0; }
+.bio-circuit-ctrls:empty { display: none; }
+.bio-volt-read { margin: 0.3rem 0; font-size: 0.95rem; color: var(--bio-ink); }
+.bio-volt-read:empty { display: none; }
+.bio-volt-line { margin: 0.15rem 0; line-height: 1.6; }
+.bio-warn { color: #b3261e; font-weight: 700; }
+body[data-theme="dark"] #biology-app .bio-warn { color: #ff8a80; }
+/* 滑片拖动手柄热区：透明大圆，只管抓取 */
+.bio-handle-hit { cursor: grab; }
+.bio-rheo-val { font-size: 3.8px; fill: var(--bio-ink-soft); }
+.bio-tray {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  background: var(--bio-panel);
+  border: 1px solid var(--bio-line);
+  border-radius: 10px;
+  padding: 8px;
+}
+.bio-tray-item {
+  min-width: 56px;
+  min-height: 48px;
+  border-radius: 8px;
+  border: 1px solid var(--bio-line);
+  background: var(--bio-bg);
+  color: var(--bio-ink);
+  font-size: 0.85rem;
+  cursor: grab;
+  touch-action: none;
+  padding: 6px 10px;
+}
+.bio-auto {
+  min-height: 44px;
+  border-radius: 10px;
+  border: 1px solid var(--bio-force-c);
+  background: var(--bio-bg);
+  color: var(--bio-ink);
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+.bio-ghost {
+  position: fixed;
+  z-index: 60;
+  pointer-events: none;
+  background: var(--bio-panel);
+  border: 2px dashed var(--bio-target);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 0.85rem;
+  opacity: 0.85;
+}
+
+/* ---------- Y1 先猜后验 ---------- */
+.bio-guess {
+  border: 2px dashed var(--bio-force-a);
+  border-radius: 12px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.bio-guess-q { font-size: 0.95rem; font-weight: 700; line-height: 1.6; }
+.bio-guess-opts { display: flex; gap: 8px; flex-wrap: wrap; }
+.bio-guess-opts button {
+  flex: 1 1 40%;
+  min-height: 48px;
+  border-radius: 10px;
+  border: 1px solid var(--bio-line);
+  background: var(--bio-bg);
+  color: var(--bio-ink);
+  font-size: 0.95rem;
+  cursor: pointer;
+  padding: 8px 10px;
+}
+.bio-guess-opts button[aria-pressed="true"] {
+  border-color: var(--bio-known);
+  border-width: 2px;
+  font-weight: 700;
+}
+
+/* ---------- Y2 仪表 ---------- */
+.bio-gauge-head { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-size: 0.95rem; }
+.bio-gauge-input { display: flex; align-items: center; gap: 8px; }
+.bio-gauge-input input[type="text"] {
+  min-height: 44px;
+  width: 7em;
+  font-size: 1rem;
+  border: 1px solid var(--bio-line);
+  border-radius: 8px;
+  background: var(--bio-bg);
+  color: var(--bio-ink);
+  padding: 4px 10px;
+}
+
+/* ---------- Y4 图像三读法 ---------- */
+.bio-greader-out {
+  font-size: 0.85rem;
+  line-height: 1.7;
+  background: var(--bio-panel);
+  border-radius: 10px;
+  padding: 8px 10px;
+  min-height: 2.6em;
+}
+
+/* ---------- Y5 对照表 ---------- */
+.bio-compare { display: flex; flex-direction: column; gap: 10px; }
+.bio-verdict {
+  order: 2;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.6;
+  background: var(--bio-panel);
+  border: 1px solid var(--bio-force-c);
+  border-left-width: 4px;
+}
+.bio-cols {
+  order: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.bio-col {
+  border: 1px solid var(--bio-line);
+  border-radius: 10px;
+  padding: 10px 12px;
+  background: var(--bio-bg);
+}
+.bio-col-l { border-top: 3px solid var(--bio-force-a); }
+.bio-col-r { border-top: 3px solid var(--bio-force-b); }
+.bio-col-title { font-weight: 700; font-size: 0.95rem; margin-bottom: 6px; }
+.bio-col-rows { margin: 0; padding-left: 1.2em; font-size: 0.85rem; line-height: 1.7; }
+@media (max-width: 620px) {
+  .bio-cols { grid-template-columns: 1fr; }
+  .bio-verdict { order: 0; }  /* 390px 下 verdict 置顶 */
+}
+
+/* ---------- P7 动量条 ---------- */
+.bio-mbars { display: flex; flex-direction: column; gap: 6px; }
+.bio-mbar-row { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; }
+.bio-mbar-tag { flex: none; width: 3em; color: var(--bio-ink-soft); }
+.bio-mbar-cell { flex: 1; display: flex; align-items: center; min-height: 30px; }
+.bio-mbar {
+  display: inline-block;
+  height: 22px;
+  line-height: 22px;
+  border-radius: 4px;
+  color: var(--bio-ink);
+  font-size: 0.78rem;
+  padding: 0 6px;
+  white-space: nowrap;
+  border: 1px solid var(--bio-line);
+}
+.bio-mbar-zero { color: var(--bio-ink-soft); font-size: 0.78rem; }
+
+/* ---------- 章末小结（quiz/review） ---------- */
+.bio-review {
+  border: 1px solid var(--bio-line);
+  border-radius: 10px;
+  padding: 10px 12px;
+  background: var(--bio-panel);
+}
+.bio-review-head { font-weight: 700; font-size: 0.95rem; margin-bottom: 6px; }
+.bio-review-body { font-size: 0.95rem; line-height: 1.75; }
+
+/* ---------- W-P20 安全徽章（交互区顶部常驻） ---------- */
+.bio-safety {
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  line-height: 1.6;
+  background: #FFF7E6;
+  border: 1px solid var(--bio-force-a);
+  border-left-width: 4px;
+  color: var(--bio-ink);
+}
+body[data-theme="dark"] #biology-app .bio-safety { background: #2b2113; }
+
+/* ---------- Y2 仪表：表头内的滑块行独占一行且不撑破容器 ---------- */
+.bio-gauge-head > .bio-slider-row { flex: 1 1 100%; min-width: 0; max-width: 100%; }
+
+/* ---------- 引擎试点（2026-10-16）：新渲染器容器与旧 stage 视觉对齐 ---------- */
+.bio-eng-stage { width: 100%; }
+.bio-eng-stage canvas {
+  display: block;
+  max-width: 100%;
+  background: var(--bio-bg);
+  border: 1px solid var(--bio-line);
+  border-radius: 10px;
+}
+.bio-eng-plot { width: 100%; }
+.bio-eng-plot > div { max-width: 100%; }
+/* YP-05/YP-15 判分器：锁定提示与口径声明 */
+.bio-q-locknote {
+  font-size: 0.85rem; color: var(--bio-ink-soft);
+  background: var(--bio-panel); border: 1px dashed var(--bio-line);
+  border-radius: 8px; padding: 6px 10px; margin: 6px 0;
+}
+.bio-q-locked .bio-q-opts button:disabled,
+.bio-q-locked .bio-q-check:disabled { opacity: 0.45; }
+.bio-q-tol {
+  font-size: 0.78rem; color: var(--bio-ink-soft); margin-top: 6px;
+}
+.bio-q .bio-retry { margin-left: 4px; }
+
+/* ============================================================
+ * B6 pedigree-quest（系谱判读闯关）样式
+ * 字号全部落 V8 阶梯 {0.78,0.85,0.95,1,1.05,1.25,1.5}rem；
+ * 触控目标 ≥44px；双编码（颜色+文字/形状）。
+ * ============================================================ */
+.bio-b6 { margin: 10px 0 16px; }
+.bio-stage { margin: 8px auto; max-width: 560px; }
+.bio-stage canvas { border-radius: 10px; }
+/* 口诀卡：常驻；文字逐字冻结（B-F6）；字号 ≥14px */
+.bio-motto {
+  font-size: 0.95rem; font-weight: 700; text-align: center;
+  background: var(--bio-panel); border: 2px solid var(--bio-gene);
+  border-radius: 10px; padding: 10px 12px; margin: 8px 0 4px;
+  color: var(--bio-text);
+}
+.bio-motto-s { padding: 2px 6px; border-radius: 6px; }
+.bio-motto-s.on { background: var(--bio-highlight); color: var(--bio-on-hl); }
+.bio-motto-tip { font-size: 0.85rem; color: var(--bio-ink-soft); text-align: center; margin: 2px 0 6px; }
+/* 适用边界小字（常驻；BIO-AX01） */
+.bio-scope, .bio-note {
+  font-size: 0.85rem; color: var(--bio-ink-soft); text-align: center;
+  margin: 4px 0;
+}
+.bio-scope-extra { color: var(--bio-target); }
+.bio-scope-inline {
+  font-size: 0.85rem; color: var(--bio-target);
+  background: var(--bio-panel); border-radius: 8px; padding: 6px 10px; margin: 6px 0;
+}
+/* 步骤条：分步不可跳（BIO-R23）；置灰 + 🔒 + "先完成上一步" */
+.bio-steps { display: flex; gap: 8px; margin: 10px 0; }
+.bio-step {
+  flex: 1; min-height: 44px; font-size: 1rem; border-radius: 10px;
+  border: 2px solid var(--bio-line); background: var(--bio-panel);
+  color: var(--bio-text); cursor: pointer; padding: 8px 4px;
+}
+.bio-step-n {
+  display: inline-block; min-width: 1.5em; height: 1.5em; line-height: 1.5em;
+  border-radius: 50%; background: var(--bio-aux); color: #fff;
+  font-size: 0.85rem; margin-right: 4px;
+}
+.bio-step.done { border-color: var(--bio-known); }
+.bio-step.done .bio-step-n { background: var(--bio-known); }
+.bio-step-ok { color: var(--bio-known); font-weight: 700; }
+.bio-step.cur { border-color: var(--bio-highlight); background: var(--bio-highlight); color: var(--bio-on-hl); font-weight: 700; }
+.bio-step.cur .bio-step-n { background: var(--bio-on-hl); }
+.bio-step.locked { opacity: 0.45; cursor: pointer; } /* W2：锁定步骤可点拦截，不再 not-allowed */
+.bio-step-lock { font-size: 0.85rem; }
+.bio-panel { margin: 8px 0; }
+.bio-ask { font-size: 1rem; color: var(--bio-text); margin: 6px 0; }
+.bio-dc3 {
+  font-size: 0.85rem; color: var(--bio-ink-soft);
+  border-left: 3px solid var(--bio-gene); padding: 4px 10px; margin: 6px 0;
+}
+.bio-opts { display: flex; gap: 10px; margin: 8px 0; flex-wrap: wrap; }
+.bio-opt {
+  flex: 1; min-width: 120px; min-height: 48px; font-size: 1rem; border-radius: 10px;
+  border: 2px solid var(--bio-known); background: var(--bio-bg);
+  color: var(--bio-text); cursor: pointer; padding: 10px;
+}
+.bio-opt:active { background: var(--bio-panel); }
+.bio-fb { font-size: 1rem; margin: 8px 0; min-height: 1.5em; color: var(--bio-text); }
+.bio-fb .ok { color: var(--bio-organelle); font-weight: 700; }
+.bio-fb .bad { color: var(--bio-target); font-weight: 700; }
+.bio-panel-done { font-size: 1rem; color: var(--bio-organelle); margin: 6px 0; }
+.bio-progress { font-size: 0.95rem; color: var(--bio-ink-soft); margin: 6px 0; }
+.bio-finish {
+  min-height: 48px; font-size: 1.05rem; border-radius: 10px; padding: 10px 22px;
+  background: var(--bio-next-bg); color: #fff; border: none; cursor: pointer; margin: 6px 0;
+}
+/* 基因型推断卡（携带者标注常开 = 辨析②回填） */
+.bio-gcard { margin: 8px 0; }
+.bio-grow {
+  border: 1px solid var(--bio-line); border-radius: 10px; padding: 8px 12px;
+  margin: 6px 0; background: var(--bio-bg); font-size: 0.95rem; color: var(--bio-text);
+}
+.bio-gid { font-weight: 700; margin-right: 8px; }
+.bio-gsex { color: var(--bio-ink-soft); margin-right: 8px; }
+.bio-gt { display: block; margin-top: 2px; }
+.bio-carrier {
+  display: block; margin-top: 4px; font-size: 0.85rem; color: var(--bio-known);
+  border-top: 1px dashed var(--bio-line); padding-top: 4px;
+}
+.bio-done {
+  font-size: 1.05rem; font-weight: 700; text-align: center; color: var(--bio-organelle);
+  border: 2px solid var(--bio-organelle); border-radius: 10px; padding: 10px; margin: 10px 0;
+}
+.bio-reset {
+  font-size: 0.85rem; color: var(--bio-ink-soft); background: none;
+  border: 1px solid var(--bio-line); border-radius: 8px; padding: 8px 14px;
+  min-height: 44px; cursor: pointer; margin-top: 4px;
+}
+.bio-b6-err {
+  font-size: 0.95rem; color: var(--bio-target);
+  border: 2px solid var(--bio-target); border-radius: 10px; padding: 10px 12px; margin: 8px 0;
+}
+.bio-unknown {
+  font-size: 0.95rem; color: var(--bio-ink-soft);
+  border: 1px dashed var(--bio-line); border-radius: 10px; padding: 10px; margin: 8px 0;
+}
+/* M6 反馈：flash（视觉必选） */
+.bio-flash { animation: bioFlash 0.45s ease; }
+@keyframes bioFlash {
+  0% { box-shadow: 0 0 0 3px var(--bio-highlight); }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+
+/* ---------- B11 mitosis-stage（P1 b16 新增；字号全部取 V8 阶梯 rem 值） ---------- */
+.bio-b11-safe {
+  font-size: 0.85rem; line-height: 1.6; color: var(--bio-text);
+  background: var(--bio-panel); border: 1.5px solid var(--bio-warn, #E69F00);
+  border-radius: 10px; padding: 8px 10px; margin: 6px 0;
+}
+.bio-b11-cap { font-size: 0.95rem; line-height: 1.7; color: var(--bio-text); margin: 6px 0; }
+.bio-b11-note { font-size: 0.78rem; line-height: 1.6; color: var(--bio-ink-soft); margin: 6px 0; }
+.bio-b11-badgerow { margin: 6px 0; }
+.bio-b11-badge {
+  display: inline-block; font-size: 0.78rem; color: var(--bio-ink-soft);
+  border: 1px solid var(--bio-line); border-radius: 6px; padding: 2px 8px;
+  background: var(--bio-panel);
+}
+.bio-b11-def {
+  font-size: 0.85rem; line-height: 1.7; color: var(--bio-text);
+  background: var(--bio-panel); border-radius: 8px; padding: 8px 10px; margin: 6px 0;
+}
+.bio-b11-svgwrap { margin: 6px 0; }
+.bio-b11-svgwrap svg { max-width: 100%; }
+.bio-b11-conc { margin: 6px 0; }
+.bio-b11-countcard {
+  flex: 1; min-width: 140px; border: 1px solid var(--bio-line); border-radius: 10px;
+  padding: 8px; background: var(--bio-bg);
+}
+.bio-b11-bar { display: flex; gap: 8px; align-items: flex-end; margin: 8px 0; min-height: 150px; }
+.bio-b11-barcol { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; justify-content: flex-end; }
+.bio-b11-barfill { width: 100%; max-width: 64px; border-radius: 6px 6px 0 0; background: var(--bio-known); min-height: 8px; }
+.bio-b11-barlab { font-size: 0.85rem; color: var(--bio-ink-soft); }
+.bio-b11-barnum { font-size: 0.95rem; font-weight: 700; color: var(--bio-text); }

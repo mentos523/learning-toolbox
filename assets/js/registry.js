@@ -61,5 +61,15 @@ window.TOOLBOX_MODULES = [
     color: "#0ea5e9",
     path: "modules/geography/index.html",
     status: "soon"                    // 试点课 dg01.3.3 已就位，待黄队/白队闸门后放行
+  },
+  {
+    slug: "biology",
+    name: "生物",
+    tagline: "26 章 · 129 课",
+    description: "从七年级出发：结构—功能对问贯穿始终，遗传、稳态、生态讲透到高中。",
+    icon: "box",                       // ICONS 5 个名额已占满（abc/pi/atom/flask/box），暂与地理共用通用图标；专用图标需改 app.js（共享文件，本次不动）
+    color: "#00b5a5",                  // 青绿；与地理 #0ea5e9 / 物理 #10b981 / 化学 #8b5cf6 区分
+    path: "modules/biology/index.html",
+    status: "ready"                    // 试点 b18.1.3（4 页）+ P1 b16 细胞的生命历程（15 页）已就位
   }
 ];

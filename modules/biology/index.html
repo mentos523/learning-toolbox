@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2300B5A5'/%3E%3Ctext x='32' y='44' font-size='30' text-anchor='middle' fill='white' font-family='sans-serif'%3E%E7%94%9F%3C/text%3E%3C/svg%3E">
+<title>生物 — 学习工具箱</title>
+<meta name="description" content="从七年级出发：结构—功能对问贯穿始终，遗传、稳态、生态讲透到高中。">
+<link rel="stylesheet" href="css/biology.css">
+</head>
+<body data-theme="light">
+<!-- 深色模式入口：跟随系统 prefers-color-scheme，系统切换时实时响应；
+     生物 SVG/CSS 全走 --bio-* 变量（别名 --geo-*），切换主题不重绘 DOM；
+     Konva 画布由 BIO_ENGINE 监听 bio-theme 事件重绘。 -->
+<script>
+(function () {
+  var mq = window.matchMedia("(prefers-color-scheme: dark)");
+  function apply() {
+    var theme = mq.matches ? "dark" : "light";
+    document.body.setAttribute("data-theme", theme);
+    try { document.dispatchEvent(new CustomEvent("bio-theme", { detail: theme })); } catch (e) {}
+  }
+  apply();
+  if (mq.addEventListener) mq.addEventListener("change", apply);
+  else if (mq.addListener) mq.addListener(apply);  // 旧版 Safari
+})();
+</script>
+
+<!-- 章节浏览器（生物生产队 2026-10-17）：26 章 b00–b25 元信息见 data/chapters.js，
+     章节与课数由 data/bNN.js 数据驱动（试点 b18.1.3 已就位）。
+     #课号/页码 深链冷启动直达（如 #b18.1.3/2）。 -->
+<main class="bio-app" id="bio-browser" aria-label="生物章节浏览"></main>
+
+<!-- 生物 SPA 学习页：js/biology.js 引擎渲染；数据见 data/bNN.js；
+     样式见 css/biology.css（bio- 前缀，与其他学科隔离）。 -->
+<section id="biology-app" aria-label="生物学习">
+  <div class="bio-app" id="bio-app" hidden></div>
+</section>
+
+<!-- 框架：MathML 环境检测（复用数学模块已验证实现；缺失时 biology.js
+     本地兜底） → 基础引擎层（方案 A，加载顺序见 docs/ENGINE.md §一）
+     → 章注册表 → 章数据 → 主引擎 → 生物引擎渲染器（B6 系谱闯关） -->
+<script src="../math/js/mathml-check.js"></script>
+<script src="../../assets/vendor/planck.min.js"></script>
+<script src="../../assets/vendor/konva.min.js"></script>
+<script src="../../assets/vendor/jsxgraphcore.js"></script>
+<script src="../../assets/engine/core.js"></script>
+<script src="../../assets/engine/coords.js"></script>
+<script src="../../assets/engine/driver.js"></script>
+<script src="../../assets/engine/konva-view.js"></script>
+<script src="../../assets/engine/input.js"></script>
+<script src="../../assets/engine/mech.js"></script>
+<script src="../../assets/engine/meters.js"></script>
+<script src="../../assets/engine/circuit.js"></script>
+<script src="../../assets/engine/optics.js"></script>
+<script src="../../assets/engine/wave.js"></script>
+<script src="../../assets/engine/em.js"></script>
+<script src="../../assets/engine/plot.js"></script>
+<script src="../../assets/engine/steps.js"></script>
+<script src="../../assets/engine/tween.js"></script>
+<script src="../../assets/engine/motion.js"></script>
+<script src="../../assets/engine/phenom.js"></script>
+<script src="../../assets/engine/guides.js"></script>
+<link rel="stylesheet" href="../../assets/vendor/jsxgraph.css">
+<script src="data/chapters.js"></script>
+<script src="data/b16.js"></script>
+<script src="data/b18.js"></script>
+<script src="js/biology.js"></script>
+<script src="js/biology-engine.js"></script>
+</body>
+</html>
