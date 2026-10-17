@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<!-- V18 · Eng.Phenom 现象演示原语（物理推广批1附带，2026-10-17） -->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>V18 · Eng.Phenom：现象演示 / 确定性 / 状态机真值</title>
+<link rel="stylesheet" href="verify.css">
+</head>
+<body>
+<h1>V18 · Eng.Phenom：现象演示原语</h1>
+<p class="note">覆盖 PH-TF01/02、PH-VC01、PH-SD01、PH-PB01、PH-OC01、PH-VT01/02 +
+  确定性（ENG-09）+ 快照往返（ENG-10）+ AX01 缺失抛错。全部由 Eng.Driver
+  固定步进驱动（dt=1/60），教学随机走 Eng.SeededRNG（禁用 Math.random）。
+  真值 = 状态机读回的纯函数；无解析对账（ENG-NC01/NC02 定性演示口径）。</p>
+
+<h2>断言结果</h2>
+<div id="verdict" style="display:none"><h2 id="verdict-head"></h2></div>
+<table id="results-table"></table>
+
+<script src="../../assets/vendor/planck.min.js?v=2026.10.17.2"></script>
+<script src="../../assets/engine/core.js?v=2026.10.17.2"></script>
+<script src="../../assets/engine/coords.js?v=2026.10.17.2"></script>
+<script src="../../assets/engine/driver.js?v=2026.10.17.2"></script>
+<script src="../../assets/engine/phenom.js?v=2026.10.17.2"></script>
+<script src="verify-lib.js"></script>
+<script>
+(function () {
+'use strict';
+VLib.pageTitle = 'V18 · Eng.Phenom';
+var Eng = window.Eng;
+var AX = {
+  assumptions: ['现象演示：形状/速率/数量均为教学示意，非真实比例'],
+  approximations: ['定性模型，无解析对账；确定性由固定步进 + 播种随机保证'],
+  errorEstimate: '无数值宣称；状态徽章与读数行由 state() 读回驱动'
+};
+function ax(o) {
+  o = o || {};
+  o.assumptions = AX.assumptions; o.approximations = AX.approximations;
+  o.errorEstimate = AX.errorEstimate;
+  return o;
+}
+function near(a, b, tol) { return Math.abs(a - b) <= tol; }
+
+/* ---------- TuningFork ---------- */
+/* PH-TF01：振幅包络纯函数 ampAt(t)=3.4·e^(−1.8t) —— 与旧实现公式逐位 */
+var tf = new Eng.Phenom.TuningFork(ax({ seed: 11 }));
+VLib.assert('PH-TF01', 'ampAt(0.5)=3.4·e^(−0.9)', ['NC01'],
+  near(tf.ampAt(0.5), 3.4 * Math.exp(-0.9), 1e-12),
+  String(3.4 * Math.exp(-0.9)), String(tf.ampAt(0.5)),
+  '检查 phenom.js ampAt 公式。');
+
+/* PH-TF02：strike 后步进 30 步（t=0.5）：active=true，水滴≤16 滴、y<70 */
+var s = tf.strike();
+tf.step(30);
+var st = tf.state();
+VLib.assert('PH-TF02', 'strike+30步：active=true，dropCount≤16，amp=3.4e^(−0.9)',
+  ['NC01', 'ENG-09'],
+  st.active === true && st.dropCount <= 16 && st.dropCount > 0 &&
+    near(st.amp, 3.4 * Math.exp(-0.9), 1e-9) && st.statusKey === 'ringing',
+  'active, 0<滴≤16, amp≈1.3823', JSON.stringify({ active: st.active, n: st.dropCount, amp: st.amp }),
+  '检查 strike/step/state。');
+
+/* PH-TF03：2.5s 截止——step(150) 后水滴清空、active=false */
+tf.step(120); /* 累计 150 步 = 2.5s */
+var st2 = tf.state();
+VLib.assert('PH-TF03', 't=2.5s：水滴清空且 active=false（2.5s 自停）', ['NC01'],
+  st2.dropCount === 0 && st2.active === false && st2.statusKey === 'rest',
+  '滴=0, active=false', JSON.stringify({ n: st2.dropCount, active: st2.active }),
+  '检查 dropsAt 截止条件（y<70 && t<2.5）。');
+
+/* PH-TF04：确定性——同种子两次 strike+step(30) 水滴位置逐位一致 */
+function dropsJSON(seed) {
+  var x = new Eng.Phenom.TuningFork(ax({ seed: seed }));
+  x.strike(); x.step(30);
+  return JSON.stringify(x.dropsAt(0.5));
+}
+var dA = dropsJSON(11), dB = dropsJSON(11);
+VLib.assert('PH-TF04', '同种子(11)两次 strike+30步：dropsAt 逐位一致（禁用 Math.random 的行为证明）',
+  ['ENG-09'], dA === dB, '逐位一致', dA === dB ? '一致' : '不一致',
+  '检查 SeededRNG 使用；若不一致说明混入了 Math.random。');
+
+/* PH-TF05：快照往返——restore 后 state 逐位一致 */
+var tf5 = new Eng.Phenom.TuningFork(ax({ seed: 11 }));
+tf5.strike(); tf5.step(30);
+var snap5 = tf5.snapshot();
+var tf5b = new Eng.Phenom.TuningFork(ax({ seed: 11 }));
+tf5b.restore(snap5);
+var j5a = JSON.stringify(tf5.state()), j5b = JSON.stringify(tf5b.state());
+VLib.assert('PH-TF05', 'snapshot/restore 往返后 state 逐位一致', ['ENG-10'],
+  j5a === j5b, '一致', j5a === j5b ? '一致' : '不一致',
+  '检查 restore 的 driver 步数对齐与 drops 深拷贝。');
+
+/* ---------- VacuumChamber ---------- */
+var vc = new Eng.Phenom.VacuumChamber(ax({ airInit: 100 }));
+/* PH-VC01：三档——0%→vacuum/0波纹0点；30%→low/1波纹12点；100%→clear/4波纹40点 */
+vc.setAir(0);
+var v0 = vc.state();
+vc.setAir(30);
+var v30 = vc.state();
+vc.setAir(100);
+var v100 = vc.state();
+VLib.assert('PH-VC01', '三档状态机：0%→vacuum(0/0)；30%→low(1/12)；100%→clear(4/40)', ['NC01'],
+  v0.statusKey === 'vacuum' && v0.waveCount === 0 && v0.dotCount === 0 &&
+  v30.statusKey === 'low' && v30.waveCount === 1 && v30.dotCount === 12 &&
+  v100.statusKey === 'clear' && v100.waveCount === 4 && v100.dotCount === 40,
+  'vacuum/0/0, low/1/12, clear/4/40',
+  JSON.stringify([v0.statusKey, v0.waveCount, v0.dotCount, v30.statusKey, v30.waveCount, v30.dotCount, v100.statusKey, v100.waveCount, v100.dotCount]),
+  '检查 waves=round(air/100·4)、dots=round(air/100·40) 与三档阈值。');
+
+/* PH-VC02：setAir 钳制 [0,100] */
+vc.setAir(140); var c1 = vc.state().airPct;
+vc.setAir(-5); var c2 = vc.state().airPct;
+VLib.assert('PH-VC02', 'setAir 越界钳制到 [0,100]', ['ENG-66'],
+  c1 === 100 && c2 === 0, '100 / 0', c1 + ' / ' + c2,
+  '检查 setAir 钳制。');
+
+/* ---------- SpongeDent ---------- */
+var sd = new Eng.Phenom.SpongeDent(ax({ pressureMax: 20 }));
+/* PH-SD01：F=8N→dent=4.8、tier=mid、cells=2；F=0→shallow/1；F=20→deep/3 */
+sd.setPressure(8); var s8 = sd.state();
+sd.setPressure(0); var s0 = sd.state();
+sd.setPressure(20); var s20 = sd.state();
+VLib.assert('PH-SD01', 'F=8→dent4.8/mid/2格；F=0→shallow/1格；F=20→deep/3格', ['NC01'],
+  near(s8.dentUnits, 4.8, 1e-12) && s8.tier === 'mid' && s8.cells === 2 &&
+  s0.tier === 'shallow' && s0.cells === 1 &&
+  near(s20.dentUnits, 12, 1e-12) && s20.tier === 'deep' && s20.cells === 3,
+  '4.8/mid/2, shallow/1, 12/deep/3',
+  JSON.stringify([s8.dentUnits, s8.tier, s8.cells, s0.tier, s0.cells, s20.dentUnits, s20.tier, s20.cells]),
+  '检查 dent=F/pMax·12 与档位阈值（<2/<6）。');
+
+/* ---------- PaperBlow ---------- */
+var pb = new Eng.Phenom.PaperBlow(ax({ mode: 'paper', blowMax: 10 }));
+/* PH-PB01：paper 吹气4档→上飘角20°；wing→liftH=7.2 */
+pb.setBlow(4); var pb4 = pb.state();
+var pw = new Eng.Phenom.PaperBlow(ax({ mode: 'wing', blowMax: 10 }));
+pw.setBlow(4); var pw4 = pw.state();
+VLib.assert('PH-PB01', 'paper b=4→angleDeg=20°；wing b=4→liftH=7.2', ['NC01'],
+  near(pb4.angleDeg, 20, 1e-12) && pb4.floating === true &&
+  near(pw4.liftH, 7.2, 1e-12) && pw4.liftVisible === true,
+  '20°, 7.2', JSON.stringify([pb4.angleDeg, pb4.floating, pw4.liftH, pw4.liftVisible]),
+  '检查 angle=b/bMax·50、liftH=b/bMax·18。');
+pb.setBlow(0);
+VLib.assert('PH-PB02', 'paper b=0→angleDeg=0、floating=false（没吹气纸条下垂）', ['NC01'],
+  pb.state().angleDeg === 0 && pb.state().floating === false,
+  '0°, false', JSON.stringify(pb.state()),
+  '检查零点语义。');
+
+/* ---------- OverflowCup ---------- */
+var oc = new Eng.Phenom.OverflowCup(ax({ volumeMax: 200 }));
+/* PH-OC01：V=100→frac0.5、fillH22、depth16；V=0→poured=false */
+oc.setVolume(100); var o100 = oc.state();
+oc.setVolume(0); var o0 = oc.state();
+VLib.assert('PH-OC01', 'V=100→frac0.5/fillH22/depth16；V=0→poured=false', ['NC01'],
+  near(o100.frac, 0.5, 1e-12) && near(o100.fillH, 22, 1e-12) &&
+  near(o100.depth, 16, 1e-12) && o100.poured === true && o0.poured === false,
+  '0.5/22/16, poured', JSON.stringify([o100.frac, o100.fillH, o100.depth, o100.poured, o0.poured]),
+  '检查 frac/fillH/depth 公式。');
+
+/* ---------- VacuumTube ---------- */
+var vt = new Eng.Phenom.VacuumTube(ax({}));
+/* PH-VT01：真空模式 drop+72步（t=1.2s）：硬币=羽毛=72（同时落地）、done=true */
+vt.setMode(true); vt.drop(); vt.step(72);
+var tv = vt.state();
+VLib.assert('PH-VT01', '真空 t=1.2s：coinY=featherY=72（同时落地）、done=true', ['NC01'],
+  near(tv.coinY, 72, 1e-9) && near(tv.featherY, 72, 1e-9) && tv.done === true,
+  '72/72/done', JSON.stringify([tv.coinY, tv.featherY, tv.done]),
+  '检查 y=18+54·min(1,t/d)² 与真空 d=1.2。');
+/* PH-VT02：有空气模式：t=1.2s 时硬币先落地（coinDone=true, featherDone=false） */
+vt.setMode(false); vt.drop(); vt.step(72);
+var ta = vt.state();
+VLib.assert('PH-VT02', '有空气 t=1.2s：硬币先落地（coinDone=true, featherDone=false）', ['NC01'],
+  ta.coinDone === true && ta.featherDone === false && near(ta.coinY, 72, 1e-9) &&
+  ta.featherY < 72,
+  'coin先/feather后', JSON.stringify([ta.coinDone, ta.featherDone, ta.coinY, ta.featherY]),
+  '检查羽毛 d=3.6s。');
+/* PH-VT03：有空气羽毛飘摆——t=0.3s 时 featherX≠43（左右摆） */
+vt.setMode(false); vt.drop(); vt.step(18);
+var tx = vt.state();
+VLib.assert('PH-VT03', '有空气 t=0.3s：羽毛左右飘摆（featherX≠43）', ['NC01'],
+  Math.abs(tx.featherX - 43) > 0.01, 'featherX≠43', String(tx.featherX),
+  '检查 sway=sin(9t)·3·(1−t/dF)。');
+/* PH-VT04：快照往返 */
+var vt4 = new Eng.Phenom.VacuumTube(ax({}));
+vt4.setMode(true); vt4.drop(); vt4.step(30);
+var sn4 = vt4.snapshot();
+var vt4b = new Eng.Phenom.VacuumTube(ax({}));
+vt4b.restore(sn4);
+VLib.assert('PH-VT04', 'snapshot/restore 往返后 tSec 逐位一致', ['ENG-10'],
+  vt4.state().tSec === vt4b.state().tSec && vt4b.state().vacuum === true,
+  'tSec一致', vt4.state().tSec + '/' + vt4b.state().tSec,
+  '检查 restore 步数对齐。');
+
+/* ---------- AX01 缺失抛错 ---------- */
+var axErr = 0;
+try { new Eng.Phenom.TuningFork({}); } catch (e) { axErr++; }
+try { new Eng.Phenom.VacuumChamber({}); } catch (e) { axErr++; }
+try { new Eng.Phenom.SpongeDent({}); } catch (e) { axErr++; }
+try { new Eng.Phenom.PaperBlow({}); } catch (e) { axErr++; }
+try { new Eng.Phenom.OverflowCup({}); } catch (e) { axErr++; }
+try { new Eng.Phenom.VacuumTube({}); } catch (e) { axErr++; }
+VLib.assert('PH-AX01', '6 原语缺 AX01 字段全部抛错（YP-25）', ['YP-25'],
+  axErr === 6, '6/6 抛错', String(axErr) + '/6 抛错',
+  '检查 checkAx01 接线。');
+
+VLib.conclude();
+})();
+</script>
+</body>
+</html>

@@ -46,6 +46,12 @@ widgets: [
 {
 type: "read-gauge",
 params: {
+/* 引擎批1（2026-10-17）：实现层切 Eng.Meter */
+                    engine: {
+                      primitive: "Meter", version: "2026.10.17.2",
+                      params: { gauge: "thermometer", division: 1 }
+                    },
+                    
 gauge: "thermometer",
 range: { min: -20, max: 110, unit: "℃"},
 divisions: 1,
@@ -75,6 +81,12 @@ widgets: [
 {
 type: "thermo-sim",
 params: {
+/* 引擎批1（2026-10-17）：实现层切 Eng.MoleculeMotion */
+                    engine: {
+                      primitive: "MoleculeMotion", version: "2026.10.17.2",
+                      params: { field: "thermal", tempCInit: 20, particleCount: 120, brownian: false }
+                    },
+                    
 temp: { min: -20, max: 120, step: 5, init: 20, unit: "℃"},
 particleCount: 120,
 showStates: true,
@@ -97,6 +109,12 @@ type: "widget",
 widget: {
 type: "graph-reader",
 params: {
+/* 引擎批1（2026-10-17）：实现层切 Eng.PlotBoard */
+                    engine: {
+                      primitive: "PlotBoard", version: "2026.10.17.2",
+                      params: { sourceKind: "points", note: "points-inline" }
+                    },
+                    
 source: {
 kind: "points",
 points: [[0,20],[2,40],[4,48],[6,48],[8,48],[10,60],[12,80]],
@@ -147,6 +165,12 @@ widgets: [
 {
 type: "thermo-sim",
 params: {
+/* 引擎批1（2026-10-17）：实现层切 Eng.MoleculeMotion */
+                    engine: {
+                      primitive: "MoleculeMotion", version: "2026.10.17.2",
+                      params: { field: "thermal", tempCInit: 60, particleCount: 120, brownian: false }
+                    },
+                    
 temp: { min: -20, max: 120, step: 5, init: 60, unit: "℃"},
 particleCount: 120,
 showStates: true,
@@ -202,6 +226,12 @@ widgets: [
 {
 type: "thermo-sim",
 params: {
+/* 引擎批1（2026-10-17）：实现层切 Eng.MoleculeMotion */
+                    engine: {
+                      primitive: "MoleculeMotion", version: "2026.10.17.2",
+                      params: { field: "thermal", tempCInit: 20, particleCount: 120, brownian: false }
+                    },
+                    
 temp: { min: -80, max: 40, step: 5, init: 20, unit: "℃"},
 particleCount: 120,
 showStates: false,
@@ -251,6 +281,12 @@ widgets: [
 {
 type: "thermo-sim",
 params: {
+/* 引擎批1（2026-10-17）：实现层切 Eng.MoleculeMotion */
+                    engine: {
+                      primitive: "MoleculeMotion", version: "2026.10.17.2",
+                      params: { field: "thermal", tempCInit: 20, particleCount: 120, brownian: true }
+                    },
+                    
 temp: { min: 0, max: 100, step: 5, init: 20, unit: "℃"},
 particleCount: 120,
 showStates: false,
@@ -314,6 +350,12 @@ widgets: [
 {
 type: "heat-compare",
 params: {
+/* 引擎批1（2026-10-17）：实现层切 Eng.PlotBoard */
+                    engine: {
+                      primitive: "PlotBoard", version: "2026.10.17.2",
+                      params: { curves: "T(t)=20+P·t/(m·c)", powerW: 500, massKgInit: 1, cWater: 4200, cSand: 920 }
+                    },
+                    
 mass: { min: 0.5, max: 2, step: 0.5, init: 1 }, power: 500,
 badge: { invariant: "没变的是：火力、质量、初温（变的是物质→升温曲线的陡缓）" }
 }

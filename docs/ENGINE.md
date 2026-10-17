@@ -220,6 +220,25 @@ Eng.StepPlayer（前进/后退/重播/慢放/键盘）+ Eng.Tween（步内连续
 > 来源：B 期从 `modules/math/js/geom-process.js` §B 提升（waveA-design.md §6.2）。
 > 不进引擎的（探针反写映射 / petal-strip / complete-square-lab）留数学侧，不许硬塞。
 
+### 2.9 现象演示原语（phenom.js，物理推广批1 附带，2026-10-17）
+
+> 定位：定性/半定量**现象演示**，没有真实测量语义，无解析对账可做。
+> 按"确定性 + 状态机真值"口径：由 Eng.Driver 固定步进驱动（默认
+> dt=1/60，不读墙钟；ENG-06/16）；教学随机走 Eng.SeededRNG；
+> state()/snapshot()/restore() 防御性拷贝；实现 Eng.PRIMITIVE_IFACE。
+> 渲染层（课页）只消费 `state()` 读回，不重算真值。
+> 口径：ENG-NC01（定性演示只验确定性）/NC02（示意须配说明）/
+> YP-26（不宣称精确值）/YP-28（失效边界写不出时声明"仅用于定性理解"）。
+
+| 原语 | 构造 | state() 真值（纯函数/驱动读回） | 口径 |
+|---|---|---|---|
+| `Eng.Phenom.TuningFork({seed, dropCount})` | 种子默认 11 | `strike()` 后：`amp=3.4·e^(−1.8t)`（PH-TF01）；`armDx=amp·sin(2π·5·t)`（5Hz 示意非真实频率，文案显性化）；水滴 `x=x0+vx·t, y=y0+vy0·t+30t²`（PH-TF02；60u/s² 示意）；2.5s 自停；`active`⇔amp>0.15 或仍有水滴；statusKey 'ringing'/'rest' | NC01/NC02 |
+| `Eng.Phenom.VacuumChamber({airInit})` | `setAir(pct)`（0–100） | `waveCount=round(air/100·4)`（PH-VC01）；`dotCount=round(air/100·40)`；statusKey：0%→'vacuum'，<40%→'low'，否则 'clear' | NC01 |
+| `Eng.Phenom.SpongeDent({pressureMax, pressureInit})` | `setPressure(p)` | `dentUnits=p/pMax·12`（示意单位，不当真实长度抄）；tier：<2 'shallow'(1格)，<6 'mid'(2格)，否则 'deep'(3格)（PH-SD01） | NC01/NC02 |
+| `Eng.Phenom.PaperBlow({mode, blowMax, blowInit})` | mode 'paper'/'wing'；`setBlow(b)` | paper：`angleDeg=b/bMax·50°`（PH-PB01）；wing：`liftH=b/bMax·18`、`upperLineWidth=0.8+b·0.14` | NC01/NC02 |
+| `Eng.Phenom.OverflowCup({volumeMax, volumeInit})` | `setVolume(v)` | `frac=min(1,v/vMax)`；烧杯水位 `fillH=frac·44`；下压深度 `3+frac·26`；V溢≡V（PH-OC01） | NC01 |
+| `Eng.Phenom.VacuumTube()` | `setMode(vacuum)` / `drop()`（driver 复位） | `coinY=18+54·min(1,t/1.2)²`；羽毛有空气 `d=3.6s+飘摆 xf=43+sin(9t)·3·max(0,1−t/dF)`；真空 d=1.2s（PH-VT01）；`done` 读回 | NC01/NC02 |
+
 ---
 
 ## 三、真值口径摘要（引用 ENG 编号）
@@ -383,7 +402,7 @@ assets/vendor/
 assets/engine/
   core.js  coords.js  driver.js  konva-view.js  input.js
   mech.js  meters.js  plot.js  steps.js  guides.js
-  tween.js  circuit.js  motion.js
+  tween.js  circuit.js  motion.js  phenom.js
 docs/ENGINE.md（本文件）
 tools/engine-verify/
   verify.css  verify-lib.js  run-verify.cjs
@@ -393,7 +412,7 @@ tools/engine-verify/
   v-meters-electrical.html  v-meters-length-angle.html
   v-meters-thermo-balance.html  v-meters-lab.html
   v-plot.html  v-input.html  v-steps.html  v-data-chart.html  v-konva-view.html
-  v-tween.html  v-motion.html
+  v-tween.html  v-motion.html  v-phenom.html
 ```
 
 验证：`node tools/engine-verify/run-verify.cjs`（headless Chromium 真实 file:// 打开；

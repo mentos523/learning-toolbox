@@ -32,6 +32,12 @@ window.PHY_CH["p05"] = {
                 {
                   type: "force-drag",
                   params: {
+/* 引擎批1（2026-10-17）：实现层切 Eng.PageForceState */
+                    engine: {
+                      primitive: "PageForceState", version: "2026.10.17.2",
+                      params: { renderer: "Eng.KonvaView + Eng.Input.bindDrag", resultant: "vector-sum" }
+                    },
+                    
                     body: { x: 50, y: 45, size: 15, label: "铁钉" },
                     forces: [
                       { id: "g",  kind: "gravity", label: "G",   angleDeg: 270, mag: 10, fixed: true },
@@ -103,6 +109,12 @@ window.PHY_CH["p05"] = {
                 {
                   type: "graph-reader",
                   params: {
+/* 引擎批1（2026-10-17）：实现层切 Eng.PlotBoard */
+                    engine: {
+                      primitive: "PlotBoard", version: "2026.10.17.2",
+                      params: { sourceKind: "points", note: "points-inline" }
+                    },
+                    
                     source: {
                       kind: "points",
                       points: [[0,0],[1,10],[2,20],[3,30],[4,40],[4.5,44],[5,47],[5.5,49],[6,50]],
@@ -174,6 +186,12 @@ window.PHY_CH["p05"] = {
                 {
                   type: "force-drag",
                   params: {
+/* 引擎批1（2026-10-17）：实现层切 Eng.PageForceState */
+                    engine: {
+                      primitive: "PageForceState", version: "2026.10.17.2",
+                      params: { renderer: "Eng.KonvaView + Eng.Input.bindDrag", resultant: "vector-sum" }
+                    },
+                    
                     body: { x: 50, y: 45, size: 15, label: "木块" },
                     forces: [
                       { id: "g", kind: "gravity", label: "G", angleDeg: 270, mag: 10, fixed: true },
@@ -242,6 +260,12 @@ window.PHY_CH["p05"] = {
                 {
                   type: "force-drag",
                   params: {
+/* 引擎批1（2026-10-17）：实现层切 Eng.PageForceState */
+                    engine: {
+                      primitive: "PageForceState", version: "2026.10.17.2",
+                      params: { renderer: "Eng.KonvaView + Eng.Input.bindDrag", resultant: "vector-sum" }
+                    },
+                    
                     body: { x: 50, y: 45, size: 15, label: "小车" },
                     forces: [
                       { id: "t", kind: "pull",     label: "T", angleDeg: 0,   mag: 8, min: 0, max: 20 },
@@ -373,6 +397,12 @@ window.PHY_CH["p05"] = {
                 {
                   type: "force-drag",
                   params: {
+/* 引擎批1（2026-10-17）：实现层切 Eng.PageForceState */
+                    engine: {
+                      primitive: "PageForceState", version: "2026.10.17.2",
+                      params: { renderer: "Eng.KonvaView + Eng.Input.bindDrag", resultant: "vector-sum" }
+                    },
+                    
                     body: { x: 50, y: 45, size: 16, label: "小车" },
                     forces: [
                       { id: "t1", kind: "pull",    label: "T1", angleDeg: 0,   mag: 6, min: 0, max: 20 },
@@ -459,6 +489,12 @@ window.PHY_CH["p05"] = {
                 {
                   type: "force-drag",
                   params: {
+/* 引擎批1（2026-10-17）：实现层切 Eng.PageForceState */
+                    engine: {
+                      primitive: "PageForceState", version: "2026.10.17.2",
+                      params: { renderer: "Eng.KonvaView + Eng.Input.bindDrag", resultant: "vector-sum" }
+                    },
+                    
                     body: { x: 50, y: 45, size: 15, label: "木块" },
                     forces: [
                       { id: "t", kind: "pull",     label: "T", angleDeg: 0,   mag: 4, min: 0, max: 20 },

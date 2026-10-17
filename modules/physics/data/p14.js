@@ -61,6 +61,12 @@ window.PHY_CH["p14"] = {
                 {
                   type: "graph-reader",
                   params: {
+/* 引擎批1（2026-10-17）：实现层切 Eng.PlotBoard */
+                    engine: {
+                      primitive: "PlotBoard", version: "2026.10.17.2",
+                      params: { sourceKind: "function", expr: "F = 10*t*t + 20" }
+                    },
+                    
                     source: { kind: "function", expr: "F = 10*t*t + 20", xLabel: "l/m", yLabel: "F/N" },
                     steps: ["area"],
                     areaSlices: 40,
@@ -268,6 +274,12 @@ window.PHY_CH["p14"] = {
                 {
                   type: "spring-shm",
                   params: {
+/* 引擎批1（2026-10-17）：实现层切 Eng.SpringMass */
+                    engine: {
+                      primitive: "SpringMass", version: "2026.10.17.2",
+                      params: { kInit: 50, mInit: 1, damping: false }
+                    },
+                    
                     k: { min: 10, max: 200, step: 10, init: 50 },
                     m: { min: 0.5, max: 5, step: 0.5, init: 1 },
                     dragAmp: true, showXTGraph: false, showEquation: false,
@@ -341,6 +353,12 @@ window.PHY_CH["p14"] = {
                 {
                   type: "graph-reader",
                   params: {
+/* 引擎批1（2026-10-17）：实现层切 Eng.PlotBoard */
+                    engine: {
+                      primitive: "PlotBoard", version: "2026.10.17.2",
+                      params: { sourceKind: "function", expr: "F = 200*t + 100" }
+                    },
+                    
                     source: { kind: "function", expr: "F = 200*t + 100", xLabel: "t/s", yLabel: "F/N" },
                     steps: ["area"],
                     areaSlices: 40,
@@ -416,6 +434,12 @@ window.PHY_CH["p14"] = {
                 {
                   type: "collision-lab",
                   params: {
+/* 引擎批1（2026-10-17）：实现层切 Eng.Collision1D */
+                    engine: {
+                      primitive: "Collision1D", version: "2026.10.17.2",
+                      params: { restitution: 1 }
+                    },
+                    
                     m1: { min: 1, max: 5, step: 0.5, init: 2 },
                     m2: { min: 1, max: 5, step: 0.5, init: 2 },
                     v1: { min: -5, max: 5, step: 0.5, init: 4 },
@@ -483,6 +507,12 @@ window.PHY_CH["p14"] = {
                 {
                   type: "collision-lab",
                   params: {
+/* 引擎批1（2026-10-17）：实现层切 Eng.Collision1D */
+                    engine: {
+                      primitive: "Collision1D", version: "2026.10.17.2",
+                      params: { restitution: 1 }
+                    },
+                    
                     m1: { min: 1, max: 5, step: 0.5, init: 2 },
                     m2: { min: 1, max: 5, step: 0.5, init: 2 },
                     v1: { min: -5, max: 5, step: 0.5, init: 4 },

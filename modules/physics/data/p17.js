@@ -45,6 +45,12 @@ window.PHY_CH["p17"] = {
                 {
                   type: "spring-shm",
                   params: {
+/* 引擎批1（2026-10-17）：实现层切 Eng.SpringMass */
+                    engine: {
+                      primitive: "SpringMass", version: "2026.10.17.2",
+                      params: { kInit: 50, mInit: 1, damping: false }
+                    },
+                    
                     k: { min: 10, max: 200, step: 10, init: 50 },
                     m: { min: 0.5, max: 5, step: 0.5, init: 1 },
                     dragAmp: true,
@@ -109,6 +115,12 @@ window.PHY_CH["p17"] = {
                 {
                   type: "pendulum",
                   params: {
+/* 引擎批1（2026-10-17）：实现层切 Eng.Pendulum */
+                    engine: {
+                      primitive: "Pendulum", version: "2026.10.17.2",
+                      params: { lengthM: 1, angleDegInit: 15, g: 9.8 }
+                    },
+                    
                     length: { min: 0.2, max: 1.5, step: 0.1, init: 1 },
                     mass: { min: 0.1, max: 1, step: 0.1, init: 0.5 },
                     angle: { min: 5, max: 30, step: 1, init: 15 },
@@ -118,6 +130,12 @@ window.PHY_CH["p17"] = {
                 {
                   type: "graph-reader",
                   params: {
+/* 引擎批1（2026-10-17）：实现层切 Eng.PlotBoard */
+                    engine: {
+                      primitive: "PlotBoard", version: "2026.10.17.2",
+                      params: { sourceKind: "points", note: "points-inline" }
+                    },
+                    
                     source: { kind: "points", points: [[0.25, 1.0], [0.5, 2.0], [0.75, 3.0], [1.0, 4.0]], xLabel: "l/m", yLabel: "T²/s²" },
                     steps: ["slope"],
                     badge: { invariant: "没变的是：g（同一地点）（变的是摆长 l→T² 的点列→直线斜率）" }
@@ -325,6 +343,12 @@ window.PHY_CH["p17"] = {
                 {
                   type: "graph-reader",
                   params: {
+/* 引擎批1（2026-10-17）：实现层切 Eng.PlotBoard */
+                    engine: {
+                      primitive: "PlotBoard", version: "2026.10.17.2",
+                      params: { sourceKind: "points", note: "points-inline" }
+                    },
+                    
                     source: { kind: "points", points: [[0, 0], [10, 13.3], [20, 27.9], [30, 44.4], [40, 79.1], [48.6, 90]], xLabel: "入射角 i/°", yLabel: "折射角 r/°" },
                     steps: ["slope"],
                     badge: { invariant: "没变的是：水的折射率 n=1.33（变的是入射角 i→折射角 r→全反射）" }
@@ -396,6 +420,12 @@ window.PHY_CH["p17"] = {
                 {
                   type: "graph-reader",
                   params: {
+/* 引擎批1（2026-10-17）：实现层切 Eng.PlotBoard */
+                    engine: {
+                      primitive: "PlotBoard", version: "2026.10.17.2",
+                      params: { sourceKind: "function", expr: "x = 2*t" }
+                    },
+                    
                     source: { kind: "function", expr: "x = 2*t", xLabel: "λ", yLabel: "Δx" },
                     xRange: [0, 5],
                     steps: ["slope"],
@@ -566,6 +596,12 @@ window.PHY_CH["p17"] = {
                 {
                   type: "thermo-sim",
                   params: {
+/* 引擎批1（2026-10-17）：实现层切 Eng.MoleculeMotion */
+                    engine: {
+                      primitive: "MoleculeMotion", version: "2026.10.17.2",
+                      params: { field: "thermal", tempCInit: 20, particleCount: 120, brownian: false }
+                    },
+                    
                     temp: { min: -20, max: 120, step: 5, init: 20, unit: "℃" },
                     particleCount: 120,
                     showStates: true,
@@ -599,6 +635,12 @@ window.PHY_CH["p17"] = {
                   widget: {
                     type: "graph-reader",
                     params: {
+/* 引擎批1（2026-10-17）：实现层切 Eng.PlotBoard */
+                    engine: {
+                      primitive: "PlotBoard", version: "2026.10.17.2",
+                      params: { sourceKind: "function", expr: "p = 300/t" }
+                    },
+                    
                       source: { kind: "function", expr: "p = 300/t", xLabel: "V", yLabel: "p" },
                       xRange: [1, 10],
                       steps: ["slope"],
@@ -660,6 +702,12 @@ window.PHY_CH["p17"] = {
                 {
                   type: "graph-reader",
                   params: {
+/* 引擎批1（2026-10-17）：实现层切 Eng.PlotBoard */
+                    engine: {
+                      primitive: "PlotBoard", version: "2026.10.17.2",
+                      params: { sourceKind: "points", note: "points-inline" }
+                    },
+                    
                     source: { kind: "points", points: [[3, -1], [4, 0], [5, 1], [6, 2], [7, 3]], xLabel: "ν（×10¹⁴Hz）", yLabel: "Ek（eV）" },
                     steps: ["intercept"],
                     badge: { invariant: "没变的是：金属的截止频率（材料定）（变的是光频率 ν→光电子动能 Ek）" }

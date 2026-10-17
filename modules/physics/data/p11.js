@@ -86,6 +86,12 @@ window.PHY_CH["p11"] = {
                 {
                   type: "displacement-arrow",
                   params: {
+/* 引擎批1（2026-10-17）：实现层切 Eng.KonvaView+Input */
+                    engine: {
+                      primitive: "KonvaView+Input", version: "2026.10.17.2",
+                      params: { startFixed: [20,70], endInit: [68,34], unit: "格" }
+                    },
+                    
                     badge: { invariant: "没变的是：起点（变的是终点手柄→位移箭头与 Δx 读数）" }
                   }
                 }
@@ -155,6 +161,12 @@ window.PHY_CH["p11"] = {
                 {
                   type: "graph-reader",
                   params: {
+/* 引擎批1（2026-10-17）：实现层切 Eng.PlotBoard */
+                    engine: {
+                      primitive: "PlotBoard", version: "2026.10.17.2",
+                      params: { sourceKind: "points", note: "points-inline" }
+                    },
+                    
                     source: { kind: "points", points: [[0, 0], [1, 2], [2, 4], [3, 7], [4, 11], [5, 16]], xLabel: "t/s", yLabel: "v/(m/s)" },
                     steps: ["slope"],
                     badge: { invariant: "没变的是：坐标轴的物理意义（变的是直线的斜率→加速度读数）" }
@@ -246,6 +258,12 @@ window.PHY_CH["p11"] = {
                 {
                   type: "graph-reader",
                   params: {
+/* 引擎批1（2026-10-17）：实现层切 Eng.PlotBoard */
+                    engine: {
+                      primitive: "PlotBoard", version: "2026.10.17.2",
+                      params: { sourceKind: "function", expr: "v = 2*t + 1" }
+                    },
+                    
                     source: { kind: "function", expr: "v = 2*t + 1", xLabel: "t/s", yLabel: "v/(m/s)" },
                     steps: ["area"], areaSlices: 40, xRange: [0, 5],
                     badge: { invariant: "没变的是：这条直线（匀加速）（变的是时间→面积→位移读数）" }
@@ -296,6 +314,12 @@ window.PHY_CH["p11"] = {
                 {
                   type: "graph-reader",
                   params: {
+/* 引擎批1（2026-10-17）：实现层切 Eng.PlotBoard */
+                    engine: {
+                      primitive: "PlotBoard", version: "2026.10.17.2",
+                      params: { sourceKind: "function", expr: "v = 2*t + 1" }
+                    },
+                    
                     source: { kind: "function", expr: "v = 2*t + 1", xLabel: "t/s", yLabel: "v/(m/s)" },
                     steps: ["slope"], xRange: [0, 5],
                     badge: { invariant: "没变的是：横纵轴的物理意义（变的是线的陡缓→加速度读数）" }
@@ -313,6 +337,12 @@ window.PHY_CH["p11"] = {
                 {
                   type: "graph-reader",
                   params: {
+/* 引擎批1（2026-10-17）：实现层切 Eng.PlotBoard */
+                    engine: {
+                      primitive: "PlotBoard", version: "2026.10.17.2",
+                      params: { sourceKind: "function", expr: "v = 2*t + 1" }
+                    },
+                    
                     source: { kind: "function", expr: "v = 2*t + 1", xLabel: "t/s", yLabel: "v/(m/s)" },
                     steps: ["area"], areaSlices: 40, xRange: [0, 5],
                     badge: { invariant: "没变的是：分割求和的过程（变的是细条个数→面积和的逼近）" }
@@ -384,6 +414,12 @@ window.PHY_CH["p11"] = {
                 {
                   type: "vacuum-tube",
                   params: {
+/* 引擎批1（2026-10-17）：实现层切 Eng.Phenom.VacuumTube */
+                    engine: {
+                      primitive: "Phenom.VacuumTube", version: "2026.10.17.2",
+                      params: { coinDurSec: 1.2, featherAirDurSec: 3.6 }
+                    },
+                    
                     badge: { invariant: "没变的是：管子、羽毛、硬币（变的是抽不抽真空→谁先落地）" }
                   }
                 }

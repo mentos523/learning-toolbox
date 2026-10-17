@@ -35,6 +35,12 @@ window.PHY_CH["p06"] = {
                 {
                   type: "sponge-dent",
                   params: {
+/* 引擎批1（2026-10-17）：实现层切 Eng.Phenom.SpongeDent */
+                    engine: {
+                      primitive: "Phenom.SpongeDent", version: "2026.10.17.2",
+                      params: { pressureMax: 20 }
+                    },
+                    
                     pressure: { min: 0, max: 20, step: 1, init: 8 },
                     badge: { invariant: "没变的是：海绵这块（变的是压力→海绵凹陷的深浅）" }
                   }
@@ -100,6 +106,12 @@ window.PHY_CH["p06"] = {
                 {
                   type: "graph-reader",
                   params: {
+/* 引擎批1（2026-10-17）：实现层切 Eng.PlotBoard */
+                    engine: {
+                      primitive: "PlotBoard", version: "2026.10.17.2",
+                      params: { sourceKind: "function", expr: "p = 9800*t" }
+                    },
+                    
                     source: { kind: "function", expr: "p = 9800*t", xLabel: "h/m", yLabel: "p/Pa", steps: ["slope"] },
                     badge: { invariant: "没变的是：液体密度（水）（变的是深度 h→压强；压强计转方向→读数不变）" }
                   }
@@ -235,6 +247,12 @@ window.PHY_CH["p06"] = {
                 {
                   type: "paper-blow",
                   params: {
+/* 引擎批1（2026-10-17）：实现层切 Eng.Phenom.PaperBlow */
+                    engine: {
+                      primitive: "Phenom.PaperBlow", version: "2026.10.17.2",
+                      params: { mode: "paper" }
+                    },
+                    
                     mode: "paper",
                     blow: { min: 0, max: 10, step: 1, init: 4 },
                     badge: { invariant: "没变的是：纸条（变的是吹气强度→两张纸往中间靠）" }
@@ -285,6 +303,12 @@ window.PHY_CH["p06"] = {
                 {
                   type: "force-drag",
                   params: {
+/* 引擎批1（2026-10-17）：实现层切 Eng.PageForceState */
+                    engine: {
+                      primitive: "PageForceState", version: "2026.10.17.2",
+                      params: { renderer: "Eng.KonvaView + Eng.Input.bindDrag", resultant: "vector-sum" }
+                    },
+                    
                     body: { x: 50, y: 45, size: 15, label: "石块" },
                     forces: [
                       { id: "g",  kind: "gravity", label: "G",   angleDeg: 270, mag: 10, fixed: true },
@@ -334,6 +358,12 @@ window.PHY_CH["p06"] = {
                 {
                   type: "overflow-cup",
                   params: {
+/* 引擎批1（2026-10-17）：实现层切 Eng.Phenom.OverflowCup */
+                    engine: {
+                      primitive: "Phenom.OverflowCup", version: "2026.10.17.2",
+                      params: { volumeMax: 200 }
+                    },
+                    
                     objVolume: { max: 200, step: 10, init: 0 },
                     badge: { invariant: "没变的是：杯里水面高度（与溢水口齐平）（变的是物体下压深度→溢出的水）" }
                   }
@@ -394,6 +424,12 @@ window.PHY_CH["p06"] = {
                 {
                   type: "force-drag",
                   params: {
+/* 引擎批1（2026-10-17）：实现层切 Eng.PageForceState */
+                    engine: {
+                      primitive: "PageForceState", version: "2026.10.17.2",
+                      params: { renderer: "Eng.KonvaView + Eng.Input.bindDrag", resultant: "vector-sum" }
+                    },
+                    
                     body: { x: 50, y: 45, size: 16, label: "潜水艇" },
                     forces: [
                       { id: "g",  kind: "gravity", label: "G",   angleDeg: 270, mag: 8, min: 6, max: 14 },

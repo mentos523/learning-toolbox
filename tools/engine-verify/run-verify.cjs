@@ -34,7 +34,8 @@ const PAGES = [
   'v-steps.html',
   'v-data-chart.html',
   'v-konva-view.html',
-  'v-motion.html'
+  'v-motion.html',
+  'v-phenom.html'
 ];
 // ENG-11 双环境逐位一致：以下页面在 file:// 与 http 下结果 JSON 必须 deep-equal
 const DETERMINISM_PAGES = [

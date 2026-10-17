@@ -51,6 +51,12 @@ window.PHY_CH["p13"] = {
                 {
                   type: "motion-sim",
                   params: {
+/* 引擎批1（2026-10-17）：实现层切 Eng.Tween+Kinematics */
+                    engine: {
+                      primitive: "Tween+Kinematics", version: "2026.10.17.2",
+                      params: { mode: "projectile", v0Init: 15, angleDegInit: 45, g: 9.8 }
+                    },
+                    
                     mode: "projectile",
                     v0: { min: 5, max: 30, step: 1, init: 15 },
                     angle: { min: 0, max: 75, step: 5, init: 45 },
@@ -99,6 +105,12 @@ window.PHY_CH["p13"] = {
                 {
                   type: "motion-sim",
                   params: {
+/* 引擎批1（2026-10-17）：实现层切 Eng.Tween+Kinematics */
+                    engine: {
+                      primitive: "Tween+Kinematics", version: "2026.10.17.2",
+                      params: { mode: "projectile", v0Init: 15, angleDegInit: 45, g: 9.8 }
+                    },
+                    
                     mode: "projectile",
                     v0: { min: 5, max: 30, step: 1, init: 15 },
                     angle: { min: 0, max: 75, step: 5, init: 45 },
@@ -167,6 +179,12 @@ window.PHY_CH["p13"] = {
                 {
                   type: "motion-sim",
                   params: {
+/* 引擎批1（2026-10-17）：实现层切 Eng.Tween+Kinematics */
+                    engine: {
+                      primitive: "Tween+Kinematics", version: "2026.10.17.2",
+                      params: { mode: "projectile", v0Init: 15, angleDegInit: 0, g: 9.8 }
+                    },
+                    
                     mode: "projectile",
                     v0: { min: 5, max: 30, step: 1, init: 15 },
                     angle: { min: 0, max: 60, step: 5, init: 0 },
@@ -248,6 +266,12 @@ window.PHY_CH["p13"] = {
                 {
                   type: "motion-sim",
                   params: {
+/* 引擎批1（2026-10-17）：实现层切 Eng.Tween+Kinematics */
+                    engine: {
+                      primitive: "Tween+Kinematics", version: "2026.10.17.2",
+                      params: { mode: "circle", omegaInit: 1 }
+                    },
+                    
                     mode: "circle",
                     omega: { min: 0.5, max: 3, step: 0.5, init: 1 },
                     g: 9.8, dragHandle: true, timeScale: 1, showReadouts: true,
@@ -314,6 +338,12 @@ window.PHY_CH["p13"] = {
                 {
                   type: "motion-sim",
                   params: {
+/* 引擎批1（2026-10-17）：实现层切 Eng.Tween+Kinematics */
+                    engine: {
+                      primitive: "Tween+Kinematics", version: "2026.10.17.2",
+                      params: { mode: "circle", omegaInit: 1 }
+                    },
+                    
                     mode: "circle",
                     omega: { min: 0.5, max: 3, step: 0.5, init: 1 },
                     g: 9.8, dragHandle: true, timeScale: 1, showReadouts: true,

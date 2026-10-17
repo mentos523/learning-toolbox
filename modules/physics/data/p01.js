@@ -30,6 +30,12 @@ widgets: [
 {
 type: "tuning-fork",
 params: {
+/* 引擎批1（2026-10-17）：实现层切 Eng.Phenom.TuningFork */
+                    engine: {
+                      primitive: "Phenom.TuningFork", version: "2026.10.17.2",
+                      params: { amp0: 3.4, decay: 1.8, freqHz: 5 }
+                    },
+                    
 badge: { invariant: "没变的是：音叉本身（变的是水面的水花）" }
 }
 }
@@ -91,6 +97,12 @@ widgets: [
 {
 type: "vacuum-chamber",
 params: {
+/* 引擎批1（2026-10-17）：实现层切 Eng.Phenom.VacuumChamber */
+                    engine: {
+                      primitive: "Phenom.VacuumChamber", version: "2026.10.17.2",
+                      params: { waves: "round(air/100*4)", dots: "round(air/100*40)" }
+                    },
+                    
 air: { min: 0, max: 100, step: 5, init: 100 },
 badge: { invariant: "没变的是：铃铛还在响（变的是罩内空气：越少，声音越弱）" }
 }

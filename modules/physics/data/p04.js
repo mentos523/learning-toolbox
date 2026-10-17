@@ -117,6 +117,12 @@ window.PHY_CH["p04"] = {
                 {
                   type: "read-gauge",
                   params: {
+/* 引擎批1（2026-10-17）：实现层切 Eng.Meter */
+                    engine: {
+                      primitive: "Meter", version: "2026.10.17.2",
+                      params: { gauge: "balance", division: 0.2 }
+                    },
+                    
                     gauge: "balance",
                     range: { min: 0, max: 200, unit: "g" },
                     divisions: 0.2,
@@ -166,6 +172,12 @@ window.PHY_CH["p04"] = {
                 {
                   type: "mv-lab",
                   params: {
+/* 引擎批1（2026-10-17）：实现层切 Eng.PlotBoard */
+                    engine: {
+                      primitive: "PlotBoard", version: "2026.10.17.2",
+                      params: { sourceKind: "points", materials: "al,iron,water", rhos: "2.7,7.9,1.0" }
+                    },
+                    
                     materials: [
                       { id: "al",    name: "铝块", rho: 2.7, colorRole: "force-a" },
                       { id: "iron",  name: "铁块", rho: 7.9, colorRole: "target" },
@@ -206,6 +218,12 @@ window.PHY_CH["p04"] = {
                   widget: {
                     type: "slope-compare",
                     params: {
+/* 引擎批1（2026-10-17）：实现层切 Eng.SlopeCompareDOM */
+                    engine: {
+                      primitive: "SlopeCompareDOM", version: "2026.10.17.2",
+                      params: { order: ["iron", "al", "water"] }
+                    },
+                    
                       materials: [
                         { id: "al",    name: "铝", rho: 2.7, colorRole: "force-a" },
                         { id: "iron",  name: "铁", rho: 7.9, colorRole: "target" },
@@ -314,6 +332,12 @@ window.PHY_CH["p04"] = {
                 {
                   type: "mv-lab",
                   params: {
+/* 引擎批1（2026-10-17）：实现层切 Eng.PlotBoard */
+                    engine: {
+                      primitive: "PlotBoard", version: "2026.10.17.2",
+                      params: { sourceKind: "points", materials: "stone", rhos: "2.6" }
+                    },
+                    
                     materials: [
                       { id: "stone", name: "石块（待测）", rho: 2.6, colorRole: "force-a" }
                     ],
@@ -380,6 +404,12 @@ window.PHY_CH["p04"] = {
                 {
                   type: "mv-lab",
                   params: {
+/* 引擎批1（2026-10-17）：实现层切 Eng.PlotBoard */
+                    engine: {
+                      primitive: "PlotBoard", version: "2026.10.17.2",
+                      params: { sourceKind: "points", materials: "unknown,iron,al", rhos: "8.9,7.9,2.7" }
+                    },
+                    
                     materials: [
                       { id: "unknown", name: "未知金属块", rho: 8.9, colorRole: "target" },
                       { id: "iron",    name: "铁（参考）", rho: 7.9, colorRole: "force-a" },

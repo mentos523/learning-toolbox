@@ -81,6 +81,12 @@ widgets: [
 {
 type: "pendulum",
 params: {
+/* 引擎批1（2026-10-17）：实现层切 Eng.Pendulum */
+                    engine: {
+                      primitive: "Pendulum", version: "2026.10.17.2",
+                      params: { lengthM: 1, angleDegInit: 15, g: 9.8 }
+                    },
+                    
 length: { min: 0.2, max: 1.5, step: 0.1, init: 1 },
 mass: { min: 0.1, max: 1, step: 0.1, init: 0.5 },
 angle: { min: 5, max: 30, step: 1, init: 15 },
@@ -156,6 +162,12 @@ widgets: [
 {
 type: "read-gauge",
 params: {
+/* 引擎批1（2026-10-17）：实现层切 Eng.Meter */
+                    engine: {
+                      primitive: "Meter", version: "2026.10.17.2",
+                      params: { gauge: "ruler", division: 0.1 }
+                    },
+                    
 gauge: "ruler",
 range: { min: 0, max: 20, unit: "cm"},
 divisions: 0.1,
