@@ -132,6 +132,10 @@ body[data-theme="dark"] #mathml-warn { background: #4a3a1a; color: #fde68a; }
   color: var(--m-accent-strong); text-decoration: none; font-size: 0.9rem;
   border: 1px solid var(--m-line); background: var(--m-panel);
   border-radius: 999px; padding: 6px 14px; white-space: nowrap;
+  /* 触控目标 ≥44px（2026-10-17 窄屏触控微批）：a/button 共用（#tracks-back 也是 button.m-back），
+     inline-flex 让 min-height 对行内 a 生效 */
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 44px; box-sizing: border-box;
 }
 .m-page-ind { font-size: 0.8rem; color: var(--m-ink-soft); white-space: nowrap; }
 
@@ -262,6 +266,8 @@ body[data-theme="dark"] #mathml-warn { background: #4a3a1a; color: #fde68a; }
   .m-menu-btn {
     display: inline-block; border: 1px solid var(--m-line); background: var(--m-panel);
     border-radius: 10px; padding: 6px 12px; font-size: 0.9rem; cursor: pointer; color: var(--m-ink);
+    /* 触控目标 ≥44px（2026-10-17 窄屏触控微批） */
+    min-height: 44px; box-sizing: border-box;
     /* （蓝队 2026-10-11 白队 g00 终查问题 2）"☰ 目录"不许换行竖排、不许被压缩 */
     white-space: nowrap; flex: none;
   }
@@ -299,7 +305,7 @@ body[data-theme="dark"] #mathml-warn { background: #4a3a1a; color: #fde68a; }
   .ix-net-fold .ix-frame svg { max-height: 20vh; }
   .ix-net-fold .ix-step-ctrl { gap: 6px; margin-top: 2px; }
   .ix-net-fold .ix-geo-readout { font-size: 0.9rem; }
-  .ix-net-fold .ix-range { height: 28px; }
+  .ix-net-fold .ix-range { height: 44px; } /* 触控目标 ≥44px（2026-10-17 窄屏触控微批） */
 }
 @media (min-width: 1024px) {
   .m-menu-btn { display: none; }
@@ -325,7 +331,8 @@ body[data-theme="dark"] #mathml-warn { background: #4a3a1a; color: #fde68a; }
 }
 .ix-slider-label { font-size: 1.1rem; font-weight: bold; white-space: nowrap; }
 .ix-slider-val { font-size: 1.1rem; color: var(--m-accent-strong); min-width: 2.5em; font-weight: bold; }
-.ix-range { flex: 1; accent-color: var(--m-accent); height: 32px; cursor: pointer; }
+.ix-range { flex: 1; accent-color: var(--m-accent); height: 44px; cursor: pointer; }
+/* 触控目标 ≥44px（2026-10-17 窄屏触控微批）：滑杆热区由 32px 提到 44px */
 .ix-target-flag {
   text-align: center; font-size: 0.95rem; font-weight: bold;
   color: var(--m-accent-strong); margin-top: 6px;
@@ -357,6 +364,8 @@ body[data-theme="dark"] #mathml-warn { background: #4a3a1a; color: #fde68a; }
 .ix-reset {
   border: 1px solid var(--m-line); background: var(--m-panel); color: var(--m-ink);
   border-radius: 999px; padding: 5px 16px; font-size: 0.9rem; cursor: pointer;
+  /* 触控目标 ≥44px（2026-10-17 窄屏触控微批）：interactions.js 全站共用，一处修复全部渲染器 */
+  min-height: 44px; box-sizing: border-box;
 }
 .ix-reset:hover { background: var(--m-accent-soft); }
 

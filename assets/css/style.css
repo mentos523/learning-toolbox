@@ -138,6 +138,14 @@ a.card:hover {
   padding: 18px;
   border-top: 1px dashed #e5dcc8;
 }
+/* 触控目标 ≥44px（2026-10-17 窄屏触控微批）：页脚文本链接保留视觉样式，
+   用 inline-flex + min-height 把可点热区撑到 44px 高，不改行高布局 */
+.footer p a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 4px 8px;
+}
 
 /* ---------- 学科内页通用 ---------- */
 .topbar {
@@ -229,6 +237,8 @@ a.card:hover {
 .update-btn {
   border: 1px solid var(--line, #e5e0d5); background: #fff; border-radius: 999px;
   padding: 5px 14px; font-size: 0.85rem; cursor: pointer; color: inherit;
+  /* 触控目标 ≥44px（2026-10-17 窄屏触控微批）：padding 不变，只补最小高度 */
+  min-height: 44px;
 }
 .update-btn:hover { background: #f7f4ec; }
 .update-btn-primary { background: #3b82f6; border-color: #3b82f6; color: #fff; }
