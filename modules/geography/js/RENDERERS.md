@@ -119,3 +119,40 @@ SVG 矢量文字随视口缩放（非 px 固定，不适用阶梯）。
   “软流层是塑性固体…”边界句常驻。
 - `state()` → drift `{pieces:{id:{x,y,snapped}}, bothSnapped, evidencesLit[]}` /
   plates `{selectedBoundary, boundaries}`。
+
+## 7. schematic-toggle（批 3 · P1 · 世界政区示意多版着色切换）
+
+| 参数 | 类型 | 必填 | 默认 | 说明 |
+|---|---|---|---|---|
+| `title` | string | — | `"世界政区示意"` | 组件标题 |
+| `blurb` | string | — | — | 说明文字（切换引导） |
+| `views` | array | ✅ | — | `[{id, label}]`；`id` ∈ `"area"`（按面积分档着色）/`"pop"`（按人口分档着色）/`"dev"`（发达/发展中二分着色） |
+| `regions` | array | ✅ | — | `{name, x, y, area?, pop?, dev?, note?, lab?}`；`x/y` 为 0–100 示意坐标；`area` 万 km²（约）；`pop` 亿（约，2024）；`dev` 为 `"developed"`/`"developing"`；`note` 读数补充（允许 `<strong>`）；`lab` 为 `[dx,dy]` 标签防撞偏移 |
+| `valueNote` | string | — | — | 数据年份/来源声明（GEO-R52 常驻） |
+| `mapNote` | string | — | B14 变体 | 示意声明（GEO-R24 常驻） |
+| `recordKey` | string | — | `geog_schematic-toggle_<view>` | 新前缀 `ltb-geo-` 直写 |
+
+- 自绘示意：大洲示意色块（虚线框）＋国家示意圆点，**不画国界线**（GEO-R23/批 5 前审定缺口）；赤道示意线常驻。
+- area 视图三档：`<100` / `100–900` / `≥900`（万 km²）；pop 视图三档：`<1` / `1–10` / `≥10`（亿）；dev 视图：蓝 = 发达、橙 = 发展中。
+- 交互：顶部视图切换按钮（`aria-pressed`）＋圆点点击（透明命中圆 r=6.5）＋下方区域按钮列表（≥44px，键盘可达）；读数面板显示名称＋本视图数值＋`note`。
+- `state()` → `{view, region, regions}`；`_select(i)` / `_setView(id)` 供程序断言。
+- 落点：dg05.1.1-p2（面积/人口两版）、dg05.1.2-p2（发达/发展中南北格局）。
+
+## 8. americas-profile（批 3 · P2 · 美洲西—中—东三段式示意剖面）
+
+| 参数 | 类型 | 必填 | 默认 | 说明 |
+|---|---|---|---|---|
+| `samples` | number | — | `7` | 采样点数（沿西→东等距） |
+| `verticalExaggeration` | number | — | `2` | 垂直夸大倍数（标注常驻，GEO-R28） |
+| `toleranceM` | number | — | `400` | 判分容差（米，示意数故放宽）：\|你的高程−示意真值\| ≤ 容差 |
+| `segments` | array | — | 西/中/东三段 | `{from, to, label, sub}`（x∈0–100 示意距离） |
+| `recordKey` | string | — | `geog_americas-profile_<页id>` | |
+
+- 真值＝`window.GeoBatch3.americasElev(x)`（教学示意高程函数，**非真实美洲 DEM**）：
+  西部高山系示意主峰 ~3200m（x=14）/ 中部平原示意 ~150m / 东部高原山地示意 ~1100m（x=82）——
+  只保证"西高—中低—东中"三段趋势，数值不许当真实高程引用（GEO-R30 类比：渲染与断言共用同一函数）。
+- 学生拖采样点描绘三段起伏 → 提交判分 → 示意真值虚线对照；`truth()`（场层）与 `state()`（UI 可达）分开上报（GEO-RULING-2026-10-17-03）。
+- 三重诚实显性化：徽章"示意｜非精确比例｜示意高程"＋诚实清单（教学示意模型、示意数只看趋势不记数值、横轴示意距离）＋课页文案；`state()` → `{submitted, score, total, toleranceM, points[]}`。
+- 落点：dg06.2.2-p2（西—中—东三段式示意剖面练习，真交互）。
+- 注：批 2 profile-draw 的真值为 dg01.3.3 教学示意高程场，沿西→东线剖面呈随机起伏（实测如 [0,1,11,-169,74,21,15]），与"西高—中低—东中"趋势不符——
+  用其教美洲三段式会歪曲所教规律（GEO-R26），故本渲染器另立示意真值，不复用 profile-draw。

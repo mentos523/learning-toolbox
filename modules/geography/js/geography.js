@@ -42,6 +42,31 @@
     return fb;
   }
 
+  /* 批 3 P1：记录键前缀统一（双读 + 一次性迁移）。
+   * 老键：批 1 guess-verify/contour-quest 经 store("rec-" + recordKey)
+   *   写入，实际键为 "ltb-geo-rec-<recordKey>"；
+   * 新键：直接 "ltb-geo-<recordKey>"。
+   * 启动时一次性把老键搬到新键（新键已有值则保留新键，不覆盖），
+   * 随后删除老键，不丢学习进度。幂等：老键搬完即删，重复运行无操作。 */
+  var _geoMigrated = false;
+  function migrateLegacyRecords() {
+    if (_geoMigrated) return; _geoMigrated = true;
+    var olds = [];
+    try {
+      for (var i = 0; i < localStorage.length; i++) {
+        var k = localStorage.key(i);
+        if (k && k.indexOf("ltb-geo-rec-") === 0) olds.push(k);
+      }
+    } catch (e) { return; }
+    olds.forEach(function (ok) {
+      var nk = "ltb-geo-" + ok.slice("ltb-geo-rec-".length);
+      try {
+        if (localStorage.getItem(nk) == null) localStorage.setItem(nk, localStorage.getItem(ok));
+        localStorage.removeItem(ok);
+      } catch (e) {}
+    });
+  }
+
   /* ---------------- 数据 ---------------- */
   var GEO_TRACKS = [
     { id: "junior", name: "初中", desc: "七年级 → 八年级：地图、气候、中国地理", chapters: ["dg00","dg01","dg02","dg03","dg04","dg05","dg06","dg07","dg08","dg09","dg10","dg11","dg12","dg13"] },
@@ -178,8 +203,26 @@
   }
 
   /* ---------------- 学习页渲染 ---------------- */
+  /* 批 3 P1：physicslink 跨模块深链（GEO-R51 A 案，仿 chemistry.js xlinkify 范式）。
+   * 物理目标用物理模块既有 hash 格式 #<课号>/<页码>（physics.js parseHash
+   * 原生支持 "#p00.1.4/1"；注意是 /1 不是 /p1）。从地理模块 index.html
+   * 用相对路径 ../physics/index.html（与 modules/physics/index.html 同级），
+   * file:// 与 GitHub Pages 子目录均兼容。token 逐个核实存在；
+   * 无匹配的文本保持纯文本（不造死链）。data-xlink-target 供程序断言。 */
+  var XLINK_PHY_GEO = { "物理 p00.1.4": "p00.1.4" };
+  function physicslinkify(text) {
+    var t = esc(String(text == null ? "" : text));
+    Object.keys(XLINK_PHY_GEO).forEach(function (tok) {
+      if (t.indexOf(tok) < 0) return;
+      var href = "../physics/index.html#" + XLINK_PHY_GEO[tok] + "/1";
+      t = t.split(tok).join('<a class="geog-physicslink-a" data-xlink-target="' +
+        XLINK_PHY_GEO[tok] + '" href="' + href + '">' + tok + "</a>");
+    });
+    return t;
+  }
   function renderBlock(b) {
     var d = el("div", "geog-block " + (b.type || "text"));
+    if (b.type === "physicslink") { d.innerHTML = physicslinkify(b.text); return d; }
     if (b.html != null) d.innerHTML = b.html;
     else d.textContent = b.text || "";
     return d;
@@ -414,6 +457,7 @@
 
   /* ---------------- 启动 ---------------- */
   function init() {
+    migrateLegacyRecords(); /* 批3 P1：老前缀记录键一次性迁移 */
     topbar = document.getElementById("geog-topbar");
     browseRoot = document.getElementById("geog-browser");
     appRoot = document.getElementById("geog-app");
@@ -990,7 +1034,7 @@
         fb.className = "geog-quiz-feedback ok";
         fb.textContent = "五种地形部位一次点对——口诀“凸高为谷、凸低为脊”过关。";
         nextBtn.style.display = "none";
-        store("rec-" + (params.recordKey || "geog_quest"), { done: quiz.length, ts: Date.now() });
+        store((params.recordKey || "geog_quest"), { done: quiz.length, ts: Date.now() }); /* 批3 P1：记录键前缀统一，老键 ltb-geo-rec-* 由 migrateLegacyRecords 迁移 */
         return;
       }
       var q = quiz[qi];
@@ -1012,7 +1056,7 @@
           missStreak = 0;
           fb.className = "geog-quiz-feedback ok";
           fb.textContent = "✓ " + KIND_CN[q.kind] + "！" + KIND_WHY[q.kind] + "。";
-          store("rec-" + (params.recordKey || "geog_quest") + "-" + q.id, { ok: true, ts: Date.now() });
+          store((params.recordKey || "geog_quest") + "-" + q.id, { ok: true, ts: Date.now() }); /* 批3 P1：同上 */
           if (qi === quiz.length - 1) { qi++; renderQ(); }
           else nextBtn.style.display = "";
           prog.textContent = "第 " + (qi + 1) + " / " + quiz.length + " 题 · 已答对 " + doneCount + " 题";
@@ -1042,7 +1086,7 @@
         var ok = (i === params.answer);
         fb.className = "fb " + (ok ? "ok" : "no");
         fb.textContent = (ok ? "✓ 答对了。" : "✗ 再想想。") + (params.explain ? params.explain : "");
-        store("rec-" + (params.recordKey || "geog_quiz"), { choice: i, ok: ok, ts: Date.now() });
+        store((params.recordKey || "geog_quiz"), { choice: i, ok: ok, ts: Date.now() }); /* 批3 P1：记录键前缀统一，老键 ltb-geo-rec-* 由 migrateLegacyRecords 迁移 */
       });
       opts.appendChild(b);
     });

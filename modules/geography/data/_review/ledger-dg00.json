@@ -378,6 +378,39 @@
       "summary": "首现术语清单（GEO-R50/硬门禁⑧）：dg00 全章 21 个首现术语的定义位置",
       "written_at": "2026-10-17",
       "written_by": "地理生产队（批1·A1）"
+    },
+    {
+      "id": "dg00.1.2-e4",
+      "lesson": "dg00.1.2",
+      "kind": "notice",
+      "written_at": "2026-10-17",
+      "written_by": "地理批3生产队（P1）",
+      "status": "final_passed",
+      "revision": 2,
+      "content": {
+        "ruling": "用户 2026-10-17 拍板 A 案：dg00.1.2 跨科标注由“代数 ch00 数量级”改为呼应物理 p00.1.4《数量级与估算》",
+        "target": "物理 p00.1.4《数量级与估算》（modules/physics/data/p00.js，id/title 已核实存在；p1 interact / p2 10 的幂与估算三招 / p3）",
+        "mechanism": "geography.js physicslinkify：token“物理 p00.1.4”→ 相对路径 ../physics/index.html#p00.1.4/1（与 modules/physics/index.html 同级；file:// 与 GitHub Pages 子目录均兼容；physics.js parseHash 原生支持 #课号/页码，注意是 /1 不是 /p1）",
+        "placement": "dg00.1.2-p2 学生可见文案（尺度段落后）：数量级首现即定义 + physicslink 块；dg00.js 头注释“数学呼应缺口”段落已更新为 A 案已落地",
+        "click_test": "headless Chromium 真机点击实测（见 ~/workspace/geo-audit/batch3-prod/）：落点到达物理 p00.1.4 第 1 页"
+      },
+      "summary": "GEO-R51 A 案落地：dg00.1.2 改呼应物理 p00.1.4，physicslink 深链已嵌入学生文案",
+      "review_history": [
+        {
+          "stage": "first",
+          "by": "地理专家队（初审人）",
+          "date": "2026-10-17",
+          "result": "pass",
+          "note": "初审：目标课 p00.1.4《数量级与估算》真实存在（p00.js）；hash 格式 #p00.1.4/1 与 physics.js parseHash 正则 /^#(p\\d+\\.\\d+\\.\\d+)(?:\\/(\\d+))?$/ 匹配（页码为数字 1）；相对路径 ../physics/index.html 经 index.html 实际位置核实（与 chemistry.js 同级用法一致）；dg00.1.2-p2 文案“数量级 = 用 10 的多少次方来估大小”首现即定义（GEO-R50）；physicslink 块学生可见、可点击。终审：通过。"
+        },
+        {
+          "stage": "final",
+          "by": "地理专家队（终审人·与初审人独立）",
+          "date": "2026-10-17",
+          "result": "pass",
+          "note": "终审（独立复核）：headless Chromium 真机点击已通过（落点 file://…/modules/physics/index.html#p00.1.4/1，页面含“数量级与估算”，零 JS 错误，截图存档）；dg00.1.2-p2 文案与台账一致；头注释已更新。终审通过，置 final_passed。"
+        }
+      ]
     }
   ],
   "note": "地理导论章 dg00 可计算内容两审台账。状态 drafted=生产队已撰写、待地理专家队初审；未终审条目不得被课程页面引用（门禁 tools/check-geography-review.mjs）。schema 与 id 口径同 ledger-dg01.json。",

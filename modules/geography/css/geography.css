@@ -356,3 +356,31 @@ body[data-theme="dark"] {
 @media (max-width: 480px) {
   .geog-w2-compare { flex-direction: column; }
 }
+
+/* ============ 批 3 · P1：schematic-toggle（dg05.1.1/dg05.1.2）============ */
+.geog-w3-schematic { margin: 12px 0; }
+.geog-w3-title { font-weight: 700; margin-bottom: 4px; }
+.geog-w3-blurb { color: var(--geog-ink-soft); margin-bottom: 8px; }
+.geog-w3-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0; }
+.geog-w3-schematic svg { display: block; border-radius: 10px; }
+.geog-w3-legend { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 8px; color: var(--geog-ink-soft); }
+.geog-w3-sw { display: inline-block; width: 14px; height: 14px; border-radius: 3px; vertical-align: -2px; margin-right: 6px; }
+.geog-w3-readout {
+  margin-top: 10px; padding: 10px 14px; border-radius: 10px;
+  background: var(--geog-bg-soft); border: 1px solid var(--geog-border);
+  min-height: 44px;
+}
+.geog-w3-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.geog-w3-list .geog-btn { min-height: 44px; }
+.geog-w3-note { color: var(--geog-ink-soft); margin-top: 8px; }
+
+/* ============ 批 3 · P1：physicslink 跨模块深链（dg00.1.2）============ */
+.geog-block.physicslink {
+  background: var(--geog-bg-soft); border: 1px solid var(--geog-border);
+  border-left: 4px solid var(--geog-accent); border-radius: 10px;
+  padding: 10px 14px;
+}
+.geog-block.physicslink::before {
+  content: "跨科深链 · "; font-weight: 700; color: var(--geog-accent);
+}
+.geog-block.physicslink a { color: var(--geog-accent); font-weight: 700; }
