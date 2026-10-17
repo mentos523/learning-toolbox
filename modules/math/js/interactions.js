@@ -1362,6 +1362,27 @@
     wrap.appendChild(foot);
     container.appendChild(wrap);
 
+    /* V8 字号阶梯：a/b 刻度标签按舞台实测缩放换算（创建时 svg 未入 DOM 测不到缩放，
+     * 内联 v8fs 只给初值；用 ResizeObserver 在布局稳定后校准，字体变化不触发布局故无循环） */
+    (function v8fixSubdiv() {
+      var texts = [labA, labB];
+      function apply() {
+        var fs = v8fs(svg, null, 13);
+        var cur = parseFloat(texts[0].getAttribute("font-size")) || 0;
+        if (!(cur > 0) || Math.abs(fs - cur) > 0.01)
+          texts.forEach(function (t) { t.setAttribute("font-size", fs); });
+      }
+      apply();
+      try {
+        if (window.ResizeObserver) {
+          var ro = new window.ResizeObserver(function () { apply(); });
+          ro.observe(svg);
+        } else if (window.requestAnimationFrame) {
+          window.requestAnimationFrame(apply);
+        }
+      } catch (e) {}
+    })();
+
     function draw(n) {
       // 重建矩形
       while (gRects.firstChild) gRects.removeChild(gRects.firstChild);
@@ -1486,11 +1507,13 @@
     handle.style.touchAction = "none";
     svg.appendChild(handle);
     var handleHint = svgEl("text", {
-      x: 0, y: 0, "text-anchor": "middle", "class": "sa-handle-hint",
-      /* V8 字号阶梯：内联字号覆盖 CSS 类的静态 14px，按舞台实测缩放换算 */
-      "font-size": v8fs(svg, null, 14)
+      x: 0, y: 0, "text-anchor": "middle", "class": "sa-handle-hint"
     });
     handleHint.textContent = "⇲";
+    /* V8 字号阶梯：用内联 style（优先级高于 CSS 类）按舞台实测缩放换算，
+     * 覆盖 math.css .sa-handle-hint 的静态 14px；创建时 svg 未入 DOM 测不到缩放，
+     * 此处 v8fs 只给初值，见下方 v8fixHint 在布局稳定后校准 */
+    handleHint.style.fontSize = v8fs(svg, null, 14) + "px";
     svg.appendChild(handleHint);
     wrap.appendChild(svg);
 
@@ -1510,6 +1533,27 @@
     var status = el("div", "ix-status", "");
     wrap.appendChild(status);
     container.appendChild(wrap);
+
+    /* V8 字号阶梯：拖拽手柄提示符按舞台实测缩放换算（创建时 svg 未入 DOM 测不到缩放，
+     * 内联 v8fs 只给初值且覆盖 CSS 类静态 14px；用 ResizeObserver 在布局稳定后校准，
+     * 字体变化不触发布局故无循环） */
+    (function v8fixHint() {
+      function apply() {
+        var fs = v8fs(svg, null, 14);
+        var cur = parseFloat(handleHint.style.fontSize) || 0;
+        if (!(cur > 0) || Math.abs(fs - cur) > 0.01)
+          handleHint.style.fontSize = fs + "px";
+      }
+      apply();
+      try {
+        if (window.ResizeObserver) {
+          var ro = new window.ResizeObserver(function () { apply(); });
+          ro.observe(svg);
+        } else if (window.requestAnimationFrame) {
+          window.requestAnimationFrame(apply);
+        }
+      } catch (e) {}
+    })();
 
     function svgPoint(evt) {
       var pt = svg.createSVGPoint();
