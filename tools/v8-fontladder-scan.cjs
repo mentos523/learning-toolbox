@@ -1,0 +1,153 @@
+#!/usr/bin/env node
+/* V8 字号阶梯 · 固化全量扫描（套件常驻项）
+ * 设计阶梯 {0.78,0.85,0.95,1,1.05,1.25,1.5}rem（root 16px → {12.48,13.6,15.2,16,16.8,20,24}px），容差 0.5px。
+ * 测量口径：SVG text 取 computed font-size × getScreenCTM 缩放模（= 实际渲染字号）；
+ *           Konva.Text 取 fontSize() × 绝对缩放。
+ * 页面清单运行时自数据文件生成（不依赖外部清单文件，新增页面自动纳入）：
+ *   化学：modules/chemistry/data/cm*.js 中 id:"cmX.Y.Z-pN" → lesson→页数，hash #<lesson>/<n>
+ *   数学：modules/math/data/*.js 中 id:"ch../g..-u../ux/ub-l..-p.." → hash #p=<pid>（每页全新 newPage 加载，hash 跳转不重渲染）
+ * 物理为抽查口径（V8 范围外，只验零回退）：p12.1.1 Konva 15 节点须全落阶梯。
+ * 用法：node tools/v8-fontladder-scan.cjs [--chem] [--math] [--physics-spot] [--smoke] [--out DIR]
+ *   默认跑化学+数学全量；--smoke 只跑 6 页冒烟。未达标节点数 >0 即 exit 1。
+ * 2026-10-17 V8 转正时固化（基线 56 节点 32.1% → 转正复测 2365/2365 100%）。
+ */
+const fs = require("fs");
+const path = require("path");
+const REPO = path.resolve(__dirname, "..");
+const LADDER_REM = [0.78, 0.85, 0.95, 1, 1.05, 1.25, 1.5];
+const TOL = 0.5;
+const PW = "/home/hatch/workspace/phy-audit/node_modules/playwright-core";
+
+const args = new Set(process.argv.slice(2));
+const OUT = args.has("--out") ? process.argv[process.argv.indexOf("--out") + 1] : path.join(REPO, "tools", "v8-scan-out");
+const SMOKE = args.has("--smoke");
+const runChem = !args.has("--math") && !args.has("--physics-spot") ? true : args.has("--chem");
+const runMath = !args.has("--chem") && !args.has("--physics-spot") ? true : args.has("--math");
+const runPhy = args.has("--physics-spot");
+
+function chemLessons() {
+  const map = new Map();
+  const re = /id: *"(cm\d+\.\d+\.\d+)-p\d+"/g;
+  for (const f of fs.readdirSync(path.join(REPO, "modules/chemistry/data"))) {
+    if (!/^cm\d+\.js$/.test(f)) continue;
+    const src = fs.readFileSync(path.join(REPO, "modules/chemistry/data", f), "utf8");
+    let m; while ((m = re.exec(src))) map.set(m[1], (map.get(m[1]) || 0) + 1);
+  }
+  return [...map.entries()].sort((a, b) => a[0] < b[0] ? -1 : 1);
+}
+function mathPages() {
+  const set = new Set();
+  const re = /id: *"((ch[0-9x]+|g[0-9]+)-(u[0-9]+|ux|ub)-l[0-9]+-p[0-9]+[a-z]*)"/g;
+  for (const f of fs.readdirSync(path.join(REPO, "modules/math/data"))) {
+    if (!f.endsWith(".js")) continue;
+    const src = fs.readFileSync(path.join(REPO, "modules/math/data", f), "utf8");
+    let m; while ((m = re.exec(src))) set.add(m[1]);
+  }
+  return [...set].sort();
+}
+const MEASURE_JS = `() => {
+  const out = [];
+  const rootPx = parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
+  const ladder = [0.78,0.85,0.95,1,1.05,1.25,1.5].map(r => r * rootPx);
+  document.querySelectorAll("svg text").forEach(el => {
+    var cssPx = parseFloat(getComputedStyle(el).fontSize);
+    var scale = 1;
+    try { var m = el.getScreenCTM(); if (m) scale = Math.sqrt(Math.abs(m.a*m.d - m.b*m.c)) || 1; } catch(e) {}
+    var px = cssPx * scale;
+    var dmin = Math.min.apply(null, ladder.map(L => Math.abs(px - L)));
+    out.push({ kind:"svg-text", css:+cssPx.toFixed(2), ctm:+scale.toFixed(3), px:+px.toFixed(2),
+      ok:dmin<=0.5, dmin:+dmin.toFixed(2),
+      cls:(el.getAttribute("class")||"").trim().split(/\\s+/).slice(0,2).join(" "),
+      txt:(el.textContent||"").slice(0,14) });
+  });
+  return { rootPx, texts: out };
+}`;
+
+(async () => {
+  const pw = require(PW);
+  const b = await pw.chromium.launch({ executablePath: "/opt/meta-chromium/chrome",
+    args: ["--no-sandbox", "--disable-dev-shm-usage"] });
+  fs.mkdirSync(OUT, { recursive: true });
+  const summary = { ladderRem: LADDER_REM, tol: TOL, subjects: {} };
+  let bad = 0;
+
+  if (runChem) {
+    const lessons = chemLessons();
+    const pages = [];
+    lessons.forEach(([lid, n]) => { for (let i = 1; i <= n; i++) pages.push(`#${lid}/${i}`); });
+    const list = SMOKE ? pages.filter(h => /cm16\.2\.1\/1|cm13\.3\.1\/1|cm16\.1\.1\/1/.test(h)) : pages;
+    const pg = await b.newPage({ viewport: { width: 1280, height: 900 } });
+    const errs = []; pg.on("pageerror", e => errs.push(e.message.slice(0, 100)));
+    const rows = []; let ok = 0, err = 0;
+    for (const hash of list) {
+      try {
+        await pg.goto(`file://${REPO}/modules/chemistry/index.html${hash}`, { waitUntil: "load", timeout: 25000 });
+        await pg.waitForTimeout(900);
+        const d = await pg.evaluate(`(${MEASURE_JS})()`);
+        d.texts.forEach(t => rows.push({ page: hash, ...t })); ok++;
+      } catch (e) { err++; }
+    }
+    await pg.close();
+    const on = rows.filter(r => r.ok).length;
+    summary.subjects.chemistry = { pages: list.length, okPages: ok, errPages: err, nodes: rows.length, onLadder: on, bad: rows.length - on, pageerrors: errs.length };
+    bad += rows.length - on;
+    fs.writeFileSync(path.join(OUT, "v8-scan-chem.json"), JSON.stringify(rows));
+    console.log(`CHEM pages=${ok}/${list.length} nodes=${rows.length} onLadder=${on} bad=${rows.length - on} pageerrors=${errs.length}`);
+  }
+
+  if (runMath) {
+    let pids = mathPages();
+    if (SMOKE) pids = ["ch12-u1-l1-p1", "ch12-u1-l1-p1b", "ch02-ux-l1-p1", "g08-u1-l3-p1", "ch01-u2-l4-p2", "g02-u2-l5-p2"];
+    const rows = []; const errs = []; let ok = 0, err = 0;
+    for (const pid of pids) {
+      const pg = await b.newPage({ viewport: { width: 1280, height: 900 } });
+      pg.on("pageerror", e => errs.push(pid + ": " + e.message.slice(0, 80)));
+      try {
+        await pg.goto(`file://${REPO}/modules/math/index.html#p=${pid}`, { waitUntil: "load", timeout: 25000 });
+        await pg.waitForTimeout(1200);
+        const d = await pg.evaluate(`(${MEASURE_JS})()`);
+        d.texts.forEach(t => rows.push({ page: pid, ...t })); ok++;
+      } catch (e) { err++; errs.push(pid + " LOAD:" + e.message.slice(0, 60)); }
+      await pg.close();
+    }
+    const on = rows.filter(r => r.ok).length;
+    summary.subjects.math = { pages: pids.length, okPages: ok, errPages: err, nodes: rows.length, onLadder: on, bad: rows.length - on, pageerrors: errs.length };
+    bad += rows.length - on;
+    fs.writeFileSync(path.join(OUT, "v8-scan-math.json"), JSON.stringify(rows));
+    console.log(`MATH pages=${ok}/${pids.length} nodes=${rows.length} onLadder=${on} bad=${rows.length - on} pageerrors=${errs.length}`);
+    if (errs.length) console.log("ERRS:", errs.slice(0, 6).join(" || "));
+  }
+
+  if (runPhy) {
+    // 抽查口径：原 56 节点样本页 p12.1.1（Konva）须 15/15；只验零回退
+    const pg = await b.newPage({ viewport: { width: 1280, height: 900 } });
+    const errs = []; pg.on("pageerror", e => errs.push(e.message.slice(0, 80)));
+    await pg.goto(`file://${REPO}/modules/physics/index.html#p12.1.1/1`, { waitUntil: "load", timeout: 25000 });
+    await pg.waitForTimeout(2000);
+    const d = await pg.evaluate(`() => {
+      const ladder = [0.78,0.85,0.95,1,1.05,1.25,1.5].map(r => r * 16);
+      const out = [];
+      document.querySelectorAll("canvas").forEach(cv => {
+        const st = window.Konva && Konva.stages ? Konva.stages : [];
+        st.forEach(s => s.find("Text").forEach(t => {
+          var px = t.fontSize() * Math.abs(t.getAbsoluteScale().x);
+          var dmin = Math.min.apply(null, ladder.map(L => Math.abs(px - L)));
+          out.push({ kind:"konva", px:+px.toFixed(2), ok:dmin<=0.5, txt:(t.text()||"").slice(0,10) });
+        }));
+      });
+      return out;
+    }`);
+    await pg.close();
+    const on = d.filter(r => r.ok).length;
+    summary.subjects.physicsSpot = { page: "p12.1.1/1", nodes: d.length, onLadder: on, bad: d.length - on, pageerrors: errs.length };
+    bad += d.length - on;
+    console.log(`PHYS-SPOT p12.1.1 nodes=${d.length} onLadder=${on} bad=${d.length - on} pageerrors=${errs.length}`);
+  }
+
+  await b.close();
+  summary.badTotal = bad;
+  summary.pass = bad === 0;
+  fs.writeFileSync(path.join(OUT, "v8-scan-summary.json"), JSON.stringify(summary, null, 1));
+  console.log(bad === 0 ? "V8-SCAN PASS" : `V8-SCAN FAIL bad=${bad}`);
+  process.exit(bad === 0 ? 0 : 1);
+})().catch(e => { console.error("FATAL", e.message); process.exit(2); });
