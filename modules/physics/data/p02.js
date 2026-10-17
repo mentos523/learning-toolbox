@@ -31,6 +31,11 @@ window.PHY_CH["p02"] = {
                 {
                   type: "pinhole-camera",
                   params: {
+/* 引擎批2（2026-10-17）：真值计算切 Eng.Optics */
+                    engine: {
+                      primitive: "Optics", version: "2026.10.17.3",
+                      params: { mode: "pinhole", wallX: 55, scrX: 88 }
+                    },
                     aperture: { min: 1, max: 6, step: 0.5, init: 2 },
                     objDist: { min: 12, max: 38, step: 1, init: 24 },
                     badge: { invariant: "没变的是：光屏位置（变的是孔径→亮度、物距→像大小）" }
@@ -86,6 +91,11 @@ window.PHY_CH["p02"] = {
                   type: "optics-ray",
                   params: {
                     mode: "mirror",
+/* 引擎批2（2026-10-17）：真值计算切 Eng.Optics */
+                    engine: {
+                      primitive: "Optics", version: "2026.10.17.3",
+                      params: { mode: "mirror", mirrorX: 50 }
+                    },
                     mirrorX: 50,
                     source: { x: 25, y: 30 },
                     showImage: false,
@@ -142,6 +152,11 @@ window.PHY_CH["p02"] = {
                   type: "optics-ray",
                   params: {
                     mode: "mirror",
+/* 引擎批2（2026-10-17）：真值计算切 Eng.Optics */
+                    engine: {
+                      primitive: "Optics", version: "2026.10.17.3",
+                      params: { mode: "mirror", mirrorX: 50 }
+                    },
                     mirrorX: 50,
                     source: { x: 30, y: 55 },
                     showImage: true,
@@ -214,6 +229,11 @@ window.PHY_CH["p02"] = {
                   type: "optics-ray",
                   params: {
                     mode: "refraction",
+/* 引擎批2（2026-10-17）：真值计算切 Eng.Optics */
+                    engine: {
+                      primitive: "Optics", version: "2026.10.17.3",
+                      params: { mode: "refraction", n1: 1, n2: 1.33 }
+                    },
                     angle: { min: 0, max: 80, step: 1, init: 30 },
                     n1: 1, n2: 1.33,
                     badge: { invariant: "没变的是：两种介质（变的是入射角→折射光线偏折程度）" }
@@ -274,6 +294,11 @@ window.PHY_CH["p02"] = {
                   type: "optics-ray",
                   params: {
                     mode: "lens",
+/* 引擎批2（2026-10-17）：真值计算切 Eng.Optics */
+                    engine: {
+                      primitive: "Optics", version: "2026.10.17.3",
+                      params: { mode: "lens", lensX: 50 }
+                    },
                     lens: { x: 50, f: 15 },
                     source: { x: 22, y: 62 },
                     rays: ["parallel", "center"],
@@ -331,6 +356,11 @@ window.PHY_CH["p02"] = {
                   type: "optics-ray",
                   params: {
                     mode: "lens",
+/* 引擎批2（2026-10-17）：真值计算切 Eng.Optics */
+                    engine: {
+                      primitive: "Optics", version: "2026.10.17.3",
+                      params: { mode: "lens", lensX: 50 }
+                    },
                     lens: { x: 50, f: 15 },
                     focal: { min: 8, max: 25, step: 1, init: 15 },
                     source: { x: 15, y: 62 },
@@ -390,6 +420,11 @@ window.PHY_CH["p02"] = {
                   type: "optics-ray",
                   params: {
                     mode: "lens",
+/* 引擎批2（2026-10-17）：真值计算切 Eng.Optics */
+                    engine: {
+                      primitive: "Optics", version: "2026.10.17.3",
+                      params: { mode: "lens", lensX: 50 }
+                    },
                     lens: { x: 50, f: 15 },
                     focal: { min: 8, max: 25, step: 1, init: 15 },
                     source: { x: 20, y: 62 },

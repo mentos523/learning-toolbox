@@ -2397,6 +2397,9 @@
     box.appendChild(formulaLine);
     var AX = 52; /* 主光轴 y */
     var rays = p.rays || ["parallel", "center", "focus"];
+    /* 引擎批2（2026-10-17）：光路真值计算切 Eng.Optics（闭式几何），渲染层只消费读回；
+     * 引擎脚本未加载时各分支走旧内联公式兜底（同一公式）。 */
+    var _engO = (window.Eng && window.Eng.Optics) ? window.Eng.Optics : null;
 
     if (p.mode === "mirror") {
       var mx = p.mirrorX == null ? 55 : p.mirrorX;
@@ -2422,29 +2425,35 @@
           src.x = Math.max(8, Math.min(mx - 8, lx)); src.y = Math.max(8, Math.min(96, 100 - ly));
           drawMirror();
         }, onEnd: function () { flash(svg); } });
-        /* 反射：入射角=反射角（构造保证） */
+        /* 反射：入射角=反射角（引擎批2：Eng.Optics.solveMirror 闭式计算，构造保证） */
         var topX = src.x, topY = oy - 12;
         var hx = mx, hy = (topY + AX) / 2 + 6;
-        svg.appendChild(svgEl("line", { x1: topX, y1: topY, x2: hx, y2: hy,
+        var msol = _engO ? _engO.solveMirror({ mirrorX: mx, fromX: topX, fromY: topY,
+          hitX: hx, hitY: hy }) : null;
+        var _in = msol ? msol.incident : { from: { x: topX, y: topY }, to: { x: hx, y: hy } };
+        svg.appendChild(svgEl("line", { x1: _in.from.x, y1: _in.from.y, x2: _in.to.x, y2: _in.to.y,
           stroke: cssVar("--phy-ray"), "stroke-width": 1.2, "marker-end": "url(#fh-ray)" }));
         var dx = hx - topX, dy = hy - topY;
         /* F14–F15 修复（2026-10-15）：反射角必须=入射角（PHY-O01，≤1°）。
          * 旧 ry2=hy+dy*0.9 致 r=atan(0.9·tan i)<i 恒成立。镜面竖直，
-         * 反射即水平分量反向、竖直分量不变：ry2=hy+dy（构造保证，对拖动位形亦然）。 */
-        var rx2 = hx - dx, ry2 = hy + dy;
+         * 反射即水平分量反向、竖直分量不变：ry2=hy+dy（构造保证，对拖动位形亦然）。
+         * 引擎批2：msol 存在时直接消费引擎读回（同一构造）。 */
+        var rx2 = msol ? msol.reflected.to.x : hx - dx,
+            ry2 = msol ? msol.reflected.to.y : hy + dy;
         svg.appendChild(svgEl("line", { x1: hx, y1: hy, x2: rx2, y2: Math.min(95, ry2),
           stroke: cssVar("--phy-ray"), "stroke-width": 1.2, "marker-end": "url(#fh-ray)" }));
         /* 法线（灰虚线） */
         svg.appendChild(svgEl("line", { x1: hx - 6, y1: hy, x2: hx + 6, y2: hy, "class": "phy-normal" }));
         /* 虚像（虚线）：与物关于镜面对称 */
-        var ix = 2 * mx - src.x;
+        var ix = msol ? msol.imageX : 2 * mx - src.x;
         svg.appendChild(svgEl("line", { x1: hx, y1: hy, x2: ix, y2: topY,
           stroke: cssVar("--phy-ray"), "stroke-width": 1, "stroke-dasharray": "2.5,2" }));
         var io = drawArrowObj(svg, ix, oy, null, true);
-        imgBadge.textContent = "正立等大虚像";
+        imgBadge.textContent = msol ? msol.imageNature : "正立等大虚像";
         imgBadge.className = "phy-state phy-state-ok";
-        var r = mmlRead(mi("v"), fmtN(Math.abs(mx - src.x), 1), "");
-        badge.setReadout(r.mathml, "像距 = 物距 = " + fmtN(Math.abs(mx - src.x), 1));
+        var _vd = msol ? msol.imageDist : Math.abs(mx - src.x);
+        var r = mmlRead(mi("v"), fmtN(_vd, 1), "");
+        badge.setReadout(r.mathml, "像距 = 物距 = " + fmtN(_vd, 1));
         formulaLine.innerHTML = "入射角 = 反射角（作图保证）";
       }
       drawMirror();
@@ -2476,13 +2485,18 @@
         svg.appendChild(svgText(54, 14, "法线", "phy-note-text", "start"));
         arrowHead(svg, "fh-refr", cssVar("--phy-target"));
         var L = 34;
-        var sx = 50 - L * Math.sin(i), sy = WY - L * Math.cos(i);
+        /* 引擎批2：折射角走 Eng.Optics.solveRefraction（斯涅尔定律），
+         * 光线段由引擎返回的单位向量 × L 画出；兜底旧内联公式。 */
+        var rsol = _engO ? _engO.solveRefraction({ iDeg: iDeg, n1: n1, n2: n2 }) : null;
+        var iu = rsol ? rsol.incidentUnit : { x: -Math.sin(i), y: -Math.cos(i) };
+        var sx = 50 + L * iu.x, sy = WY + L * iu.y;
         svg.appendChild(svgEl("line", { x1: sx.toFixed(1), y1: sy.toFixed(1), x2: 50, y2: WY,
           stroke: cssVar("--phy-target"), "stroke-width": 1.6, "marker-end": "url(#fh-refr)" }));
         svg.appendChild(svgText(sx - 4, sy - 2, "激光", "phy-note-text", "end"));
-        var rDeg = Math.asin(Math.min(1, n1 * Math.sin(i) / n2)) * 180 / Math.PI;
+        var rDeg = rsol ? rsol.rDeg : Math.asin(Math.min(1, n1 * Math.sin(i) / n2)) * 180 / Math.PI;
         var r = rDeg * Math.PI / 180;
-        var ex = 50 + L * Math.sin(r), ey = WY + L * Math.cos(r);
+        var ru = rsol ? rsol.refractedUnit : { x: Math.sin(r), y: Math.cos(r) };
+        var ex = 50 + L * ru.x, ey = WY + L * ru.y;
         svg.appendChild(svgEl("line", { x1: 50, y1: WY,
           x2: ex.toFixed(1), y2: ey.toFixed(1),
           stroke: cssVar("--phy-target"), "stroke-width": 1.6, "marker-end": "url(#fh-refr)" }));
@@ -2507,7 +2521,7 @@
         }
         var rm = mmlRead(mi("r"), fmtN(rDeg, 1), "°");
         badge.setReadout(rm.mathml, "i = " + fmtN(iDeg, 0) + "°，r = " + fmtN(rDeg, 1) + "°");
-        refrSt.textContent = iDeg === 0 ? "垂直入射：不偏折（i = r = 0）"
+        refrSt.textContent = rsol ? rsol.stateText : iDeg === 0 ? "垂直入射：不偏折（i = r = 0）"
           : "光从空气斜射入水：向法线偏折（r < i）";
         refrSt.className = "phy-state phy-state-ok";
         if (mathmlOK())
@@ -2553,8 +2567,9 @@
         stroke: cssVar("--phy-body"), "stroke-width": 1.2, fill: "none" }));
       svg.appendChild(svgEl("path", { d: "M" + lensX + ",86 l-2.5,-5 M" + lensX + ",86 l2.5,-5",
         stroke: cssVar("--phy-body"), "stroke-width": 1.2, fill: "none" }));
-      /* 焦点 F（只读标记，不可拖） */
-      [lensX - f, lensX + f].forEach(function (fx) {
+      /* 焦点 F（只读标记，不可拖；OPT-L07：只消费引擎读回坐标，不绑 dragify） */
+      (sol ? sol.focusPts : [{ x: lensX - f, y: AX }, { x: lensX + f, y: AX }]).forEach(function (fp) {
+        var fx = fp.x;
         svg.appendChild(svgEl("circle", { cx: fx, cy: AX, r: 1.3, "class": "phy-f-mark" }));
         svg.appendChild(svgText(fx, AX + 5, "F", "phy-f-label"));
       });
@@ -2586,14 +2601,28 @@
           "stroke-dasharray": dashed ? "2.5,2" : "none",
           "marker-end": dashed ? "none" : "url(#fh-ray)" }));
       }
+      /* 引擎批2（2026-10-17）：真值计算切 Eng.Optics.solveLens（闭式几何）；
+       * 渲染层只消费 sol 读回（ENG-64）。引擎脚本未加载时走旧内联公式兜底。 */
+      var sol = _engO ? _engO.solveLens({ lensX: lensX, f: f, objX: src.x,
+        objTopY: topY, axisY: AX, rays: rays, xEnd: 96 }) : null;
       /* 三条特殊光线（解析计算） */
       var v, kind;
-      if (Math.abs(u - f) < 0.5) { v = Infinity; kind = "none"; }
+      if (sol) { v = sol.v; kind = sol.kind; }
+      else if (Math.abs(u - f) < 0.5) { v = Infinity; kind = "none"; }
       else { v = 1 / (1 / f - 1 / u); kind = v > 0 ? "real" : "virtual"; }
-      var ix = lensX + (isFinite(v) ? v : 0);
-      var m = isFinite(v) ? -v / u : 0;
-      var ih = (100 - src.y) * 0.55 * Math.abs(m);
+      var ix = sol ? (sol.imageTip ? sol.imageTip.x : lensX) : lensX + (isFinite(v) ? v : 0);
+      var m = sol ? sol.m : (isFinite(v) ? -v / u : 0);
+      var ih = sol ? (sol.imageTip ? Math.abs(sol.imageTip.y - AX) : 0)
+                   : (100 - src.y) * 0.55 * Math.abs(m);
       function drawRays() {
+        if (sol) {
+          /* 引擎读回：逐段画线；degenerate（u=f 的 focus 光线）跳过，不画脏线 */
+          sol.rays.forEach(function (r) {
+            if (r.degenerate) return;
+            r.segments.forEach(function (s) { ray(s.x1, s.y1, s.x2, s.y2, false); });
+          });
+          return;
+        }
         /* parallel：平行主光轴 → 过远侧焦点 */
         if (rays.indexOf("parallel") >= 0) {
           var fx2 = lensX + f;
@@ -2621,8 +2650,8 @@
       if (kind === "none") {
         badgeText = "不成像（u=f）";
         tone = "";
-        imgBadge.textContent = badgeText;
-        imgHuman.textContent = "物正好在焦点上：折射光线平行，交不到一起";
+        imgBadge.textContent = sol ? sol.badgeText : badgeText;
+        imgHuman.textContent = sol ? sol.humanText : "物正好在焦点上：折射光线平行，交不到一起";
       } else if (p.showImage === false) {
         imgBadge.textContent = "（像已隐藏）";
         imgHuman.textContent = "";
@@ -2632,7 +2661,7 @@
          * 物在轴上方（SVG y2=topY<AX）；实像倒立→像尖应在轴下方（SVG y=AX+ih），
          * 虚像正立→像尖应在轴上方（SVG y=AX−ih）。iy 的计算本就正确，
          * 错的是下面 y2 把实/虚写反了——直接用 iy。 */
-        var iy = AX + (kind === "real" ? ih : -ih);
+        var iy = sol ? sol.imageTip.y : AX + (kind === "real" ? ih : -ih);
         var iln = svgEl("line", { x1: ix, y1: AX, x2: ix, y2: iy,
           stroke: cssVar("--phy-body"), "stroke-width": 1.8,
           "stroke-dasharray": kind === "virtual" ? "2.5,2" : "none",
@@ -2642,13 +2671,14 @@
          * u=2f 时 |m|=1 是"放大/缩小"的分界，必须独立为"倒立等大实像"；
          * ±5% 容差带防拖拽边界抖动（裁决 A）。 */
         var am = Math.abs(m);
-        var prop = kind === "real"
+        var prop = sol ? sol.imageNature : kind === "real"
           ? (am < 0.95 ? "倒立缩小实像" : am <= 1.05 ? "倒立等大实像" : "倒立放大实像")
           : "正立放大虚像";
-        imgBadge.textContent = prop + (kind === "virtual" ? "（虚像用虚线画，因为光线没真交于那）" : "");
+        imgBadge.textContent = sol ? sol.badgeText
+          : prop + (kind === "virtual" ? "（虚像用虚线画，因为光线没真交于那）" : "");
         /* 黄队 P4（直观性）：徽章只报术语不够，加一句人话——放独立 .phy-note 元素，
          * 不进 imgBadge（白队 O13 对徽章做精确匹配，文本必须保持术语原样）。 */
-        imgHuman.textContent = kind === "virtual" ? "像跑到物体这边来了——这就是放大镜的秘密"
+        imgHuman.textContent = sol ? sol.humanText : kind === "virtual" ? "像跑到物体这边来了——这就是放大镜的秘密"
           : am < 0.95 ? "像比物体小、倒过来了"
           : am <= 1.05 ? "像和物体一样大、倒过来了" : "像比物体大、倒过来了";
         badgeText = prop;
@@ -4832,17 +4862,29 @@
       svg.appendChild(svgEl("line", { x1: scrX, y1: 20, x2: scrX, y2: 80,
         stroke: cssVar("--phy-body"), "stroke-width": 1.6 }));
       svg.appendChild(svgText(scrX, 86, "光屏", "phy-note-text"));
-      /* 成像几何：过孔心的两条光线（倒像：顶→底、底→顶） */
-      var v = scrX - wallX, m = v / u, imgH = objH * m;
-      var iTop = HY - imgH / 2, iBot = HY + imgH / 2;
+      /* 成像几何：过孔心的两条光线（倒像：顶→底、底→顶）
+       * 引擎批2：走 Eng.Optics.solvePinhole（相似三角形闭式），渲染只消费读回；兜底旧内联公式。 */
+      var _engO = (window.Eng && window.Eng.Optics) ? window.Eng.Optics : null;
+      var psol = _engO ? _engO.solvePinhole({ objX: objX, objTopY: topY, objBaseY: baseY,
+        holeX: wallX, holeY: HY, scrX: scrX, aperture: holeR }) : null;
+      var v = psol ? psol.v : scrX - wallX, m = psol ? psol.m : v / u;
+      var imgH = psol ? (psol.imgBottomY - psol.imgTopY) : objH * m;
+      var iTop = psol ? psol.imgTopY : HY - imgH / 2,
+          iBot = psol ? psol.imgBottomY : HY + imgH / 2;
       arrowHead(svg, "fh-pin", cssVar("--phy-ray"));
       function ray(x1, y1, x2, y2) {
         svg.appendChild(svgEl("line", { x1: x1, y1: y1, x2: x2, y2: y2,
           stroke: cssVar("--phy-ray"), "stroke-width": 0.7 + holeR * 0.32,
           "marker-end": "url(#fh-pin)" }));
       }
-      ray(objX, topY, scrX, iBot);
-      ray(objX, baseY, scrX, iTop);
+      if (psol) {
+        psol.rays.forEach(function (pr) {
+          pr.segments.forEach(function (s) { ray(s.x1, s.y1, s.x2, s.y2); });
+        });
+      } else {
+        ray(objX, topY, scrX, iBot);
+        ray(objX, baseY, scrX, iTop);
+      }
       /* 像（倒立；孔大 → 亮但模糊：叠一层虚影） */
       svg.appendChild(svgEl("line", { x1: scrX, y1: iTop, x2: scrX, y2: iBot,
         stroke: cssVar("--phy-body"), "stroke-width": 2 }));
@@ -4852,13 +4894,15 @@
         svg.appendChild(svgEl("line", { x1: scrX - 2.5, y1: iTop, x2: scrX - 2.5, y2: iBot,
           stroke: cssVar("--phy-body"), "stroke-width": 2, opacity: 0.35,
           "stroke-dasharray": "2,1.5" }));
-      var blur = holeR > 3.5;
-      st.textContent = "倒立的实像" + (blur ? "（孔太大：变亮但变模糊）" : "（孔小：暗但清晰）");
+      var blur = psol ? psol.blur : holeR > 3.5;
+      st.textContent = psol ? psol.stateText
+        : "倒立的实像" + (blur ? "（孔太大：变亮但变模糊）" : "（孔小：暗但清晰）");
       st.className = "phy-state " + (blur ? "phy-state-warn" : "phy-state-ok");
       var r = mmlRead(mi("m"), fmtN(m, 2), "");
       /* W4 补修（2026-10-15）：setReadout 在 MathML 可用时只渲染 mathml 分支，
        * 缩放词必须写进 MathML 的 DOM 里（<mtext>），否则 Chrome 下永不显示 */
-      var zoomWord = m < 1 ? "（缩小）" : m > 1 ? "（放大）" : "（等大）";
+      var zoomWord = psol ? "（" + psol.zoomWord + "）"
+        : m < 1 ? "（缩小）" : m > 1 ? "（放大）" : "（等大）";
       badge.setReadout(
         r.mathml.replace("</mrow>", "<mtext>" + zoomWord + "</mtext></mrow>"),
         "放大率 m = 像距/物距 = " + fmtN(m, 2) + zoomWord);

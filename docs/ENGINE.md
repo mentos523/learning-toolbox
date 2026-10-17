@@ -262,7 +262,8 @@ Eng.StepPlayer（前进/后退/重播/慢放/键盘）+ Eng.Tween（步内连续
 - 数据驱动：ENG-64（图=render(数据)）/65（数据源声明）/66（非法输入拒绝）。
 - 补间：ENG-70（确定性：同 u 逐位一致）/71（可中断：start 前 cancel 旧循环）
   /72（reduced-motion 降级为首末两态）。
-- 光路/电路：ENG-67/68（接口文档）；ENG-69（禁半成品实现）。
+- 光路/电路：ENG-67（已实现，`assets/engine/optics.js`）/68（已实现，`assets/engine/circuit.js`）；
+  ENG-69（禁半成品实现）。
 - 不可对账：ENG-NC01（多体堆积/非弹性/二维斜碰）/NC02（教学故意反例须配说明）
   /NC03（流体浮力近似力场）/NC04（波动干涉可视化）/NC05（自由数据输入）。
 
@@ -309,29 +310,52 @@ reset→step(60)→0.5s 精确 / 双环境逐位一致。
 
 ---
 
-## 六、光路 / 电路原语接口规范（光路仍只立接口；电路已于 2026.10.16.8 落地实现，ENG-67/68/69）
+## 六、光路 / 电路原语接口规范（均已落地实现：光路 2026.10.17.3，电路 2026.10.16.8，ENG-67/68/69）
 
-> 本轮交付物为接口签名与序列化 schema，不含求解代码。
-> `assets/engine/` 中不许出现光路/电路的半成品实现（ENG-69）。
+### 6.1 光路（ENG-67）——2026.10.17.3 已落地实现（`assets/engine/optics.js`）
 
-### 6.1 光路（ENG-67）
+> 选型裁决：`docs/optics-selection-decision.md`——不吸收 Ray Optics Simulation 内核
+> （Apache-2.0，与 MIT 仓库兼容但工程上否决），自研纯几何实现。原 §6.1 的
+> `Eng.OpticsScene` 接口设想退役（从未有实现代码，无兼容负担）。
 
 ```js
-// 未来：Eng.OpticsScene（封装 Ray Optics Simulation 场景 JSON，Apache-2.0）
-var scene = Eng.OpticsScene({
-  containerId: '...',
-  elements: [
-    { type: 'laser', xM: 0, yM: 0, angleDeg: 0 },       // 激光
-    { type: 'mirror', x1M:.., y1M:.., x2M:.., y2M:.. }, // 反射镜
-    { type: 'lens', xM:.., yM:.., focalLengthM:.. },   // 透镜
-    { type: 'prism', pointsM: [[..],[..],[..]] },      // 棱镜
-    { type: 'screen', x1M:.., y1M:.., x2M:.., y2M:.. } // 光屏
-  ],
-  assumptions: [...], approximations: [...], errorEstimate: '...' // YP-25 预留
-});
-// 序列化（摆位）：scene.toJSON() / Eng.OpticsScene.fromJSON(json)
-// 读回：scene.rayPaths() → [{pointsM:[{x,y}...], wavelengthNm}]（SI 单位）
+// Eng.Optics：薄透镜 / 平面镜 / 折射 / 小孔成像，纯闭式几何（无数值积分）
+var O = window.Eng.Optics; // VERSION '2026.10.17.3'
+O.solveLens({ lensX, f, objX, objTopY, axisY, rays: ['parallel','center','focus'], xEnd })
+// → { u, v（Infinity 表不成像）, kind: 'real'|'virtual'|'none', m,
+//     imageNature（徽章原文）, imageTip: {x,y}|null, focusPts（只读）,
+//     rays: [{ name, segments: [{x1,y1,x2,y2}], degenerate }],
+//     badgeText, humanText }
+O.solveMirror({ mirrorX, fromX, fromY, hitX, hitY })
+// → { iDeg, rDeg（自法线起算，构造保证 i=r）, incident/reflected/virtualExt（{from,to}）,
+//     imageX, imageDist, imageNature: '正立等大虚像' }
+O.solveRefraction({ iDeg, n1, n2, label1, label2 })
+// → { iDeg, rDeg（null 表全反射）, tir, incidentUnit/refractedUnit（{x,y}，SVG y↓）,
+//     bentTowardNormal, stateText }
+O.solvePinhole({ objX, objTopY, objBaseY, holeX, holeY, scrX, aperture })
+// → { u, v, m（=像距/物距）, zoomWord: '缩小'|'等大'|'放大', blur（aperture>3.5）,
+//     stateText, imgTopY, imgBottomY, rays: [{ name: 'top'|'base', segments }] }
+O.ax() // → AX01 三字段（checkAx01 校验）
 ```
+
+- **读回字段**（可被断言逐位核对）：光线各段端点（逻辑单位）、像距 `v`、
+  像性质 `imageNature`（徽章原文）、`iDeg`/`rDeg` 角度、放大率 `m`、模糊态 `blur`、
+  退化标记 `degenerate`（`u=f` 的 focus 光线，防脏线）。
+- **容差**：纯解析，长度/比值 1e-9；角度 ≤1°（SVG 绘制舍入）；`u=f` 判定带 ±0.5
+  （逻辑单位，防拖拽边界抖动）；`|m|` 三态边界 0.95/1.05（专家队裁决 A）。
+- **AX01 显性化**（`AX_DEFAULTS`，课页可直接引用原文 YP-25/YP-27）：
+  假设：薄透镜近似 / 近轴光线 / 光线是模型 / 理想平面镜与折射界面 / n 示意值；
+  近似：小孔成像未计衍射 / 孔径→亮度示意映射 / `u=f` 判定带；
+  误差估计：无数值积分误差，读数误差仅 ENG-38 估读。
+- **不支持的情形诚实返回**（ENG-69）：全反射 → `{ tir: true, rDeg: null }`，不给假数；
+  非法输入抛错（ENG-66）；凹透镜不在本原语范围（`f>0` 校验）。
+- **课页接线**（2026-10-17，p02 共 7 组件）：`modules/physics/js/physics.js` 的
+  `widgetOpticsRay`（透镜/平面镜/折射三分支）与 `widgetPinholeCamera` 真值计算切
+  `Eng.Optics.*`，渲染层只消费读回（ENG-64）；`data/p02.js` 各 widget params 加
+  `engine: { primitive: "Optics", version: "2026.10.17.3", params: {...} }` 声明。
+  引擎脚本未加载时走旧内联公式兜底（同一公式，行为一致）。
+- **验证**：`tools/qa-optics-truth.mjs`（49 条，Node 直测）+
+  `tools/engine-verify/v-optics.html`（V19，浏览器 + 确定性双环境）。
 
 ### 6.2 电路（ENG-68）——2026.10.16.8 已落地实现（`assets/engine/circuit.js`）
 
@@ -402,7 +426,7 @@ assets/vendor/
 assets/engine/
   core.js  coords.js  driver.js  konva-view.js  input.js
   mech.js  meters.js  plot.js  steps.js  guides.js
-  tween.js  circuit.js  motion.js  phenom.js
+  tween.js  circuit.js  motion.js  phenom.js  optics.js
 docs/ENGINE.md（本文件）
 tools/engine-verify/
   verify.css  verify-lib.js  run-verify.cjs
@@ -412,7 +436,7 @@ tools/engine-verify/
   v-meters-electrical.html  v-meters-length-angle.html
   v-meters-thermo-balance.html  v-meters-lab.html
   v-plot.html  v-input.html  v-steps.html  v-data-chart.html  v-konva-view.html
-  v-tween.html  v-motion.html  v-phenom.html
+  v-tween.html  v-motion.html  v-phenom.html  v-optics.html
 ```
 
 验证：`node tools/engine-verify/run-verify.cjs`（headless Chromium 真实 file:// 打开；

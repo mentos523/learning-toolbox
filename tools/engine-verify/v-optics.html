@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<!-- V19 · Eng.Optics 光路原语（物理推广批2，2026-10-17） -->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>V19 · Eng.Optics：光路原语 / 闭式几何真值</title>
+<link rel="stylesheet" href="verify.css">
+</head>
+<body>
+<h1>V19 · Eng.Optics：光路原语</h1>
+<p class="note">覆盖 OPT-L/M/R/P（透镜 / 平面镜 / 折射 / 小孔成像）+
+  确定性（ENG-09）+ 快照往返（ENG-10）+ AX01 缺失抛错 + 非法输入拒绝（ENG-66）。
+  全部为纯闭式几何（薄透镜公式 / 反射定律 / 斯涅尔定律 / 相似三角形），无数值积分。
+  真值口径：~/workspace/phy-audit/optics-truth-criteria.md v1.0。选型裁决：
+  docs/optics-selection-decision.md（自研纯几何，不吸收 Ray Optics Simulation）。</p>
+
+<h2>断言结果</h2>
+<div id="verdict" style="display:none"><h2 id="verdict-head"></h2></div>
+<table id="results-table"></table>
+
+<script src="../../assets/engine/core.js?v=2026.10.17.3"></script>
+<script src="../../assets/engine/optics.js?v=2026.10.17.3"></script>
+<script src="verify-lib.js"></script>
+<script>
+(function () {
+'use strict';
+VLib.pageTitle = 'V19 · Eng.Optics';
+var O = window.Eng.Optics;
+function near(a, b, tol) { return Math.abs(a - b) <= tol; }
+
+/* ---------- 透镜：OPT-L01~L05（手算期望值，见口径文档 §五） ---------- */
+var L = O.solveLens({ lensX: 50, f: 15, objX: 22, objTopY: 40, axisY: 52 });
+VLib.assert('OPT-L01', 'u=28：v=32.3077，倒立放大实像', ['OPT'],
+  near(L.v, 32.3077, 1e-4) && L.kind === 'real' && L.imageNature === '倒立放大实像' && near(L.m, -1.15385, 1e-4),
+  'v=32.3077,real,倒立放大实像', 'v=' + L.v + ',' + L.kind + ',' + L.imageNature,
+  '检查 solveLens 薄透镜公式。');
+L = O.solveLens({ lensX: 50, f: 15, objX: 20, objTopY: 40, axisY: 52 });
+VLib.assert('OPT-L02', 'u=30=2f：v=30，倒立等大实像', ['OPT'],
+  near(L.v, 30, 1e-9) && L.imageNature === '倒立等大实像',
+  'v=30,倒立等大实像', 'v=' + L.v + ',' + L.imageNature, '检查 u=2f 等大。');
+L = O.solveLens({ lensX: 50, f: 15, objX: -10, objTopY: 40, axisY: 52 });
+VLib.assert('OPT-L03', 'u=60：v=20，倒立缩小实像', ['OPT'],
+  near(L.v, 20, 1e-9) && L.imageNature === '倒立缩小实像',
+  'v=20,倒立缩小实像', 'v=' + L.v + ',' + L.imageNature, '检查 u>2f。');
+L = O.solveLens({ lensX: 50, f: 15, objX: 35, objTopY: 40, axisY: 52 });
+VLib.assert('OPT-L04', 'u=f：不成像徽章，focus 光线退化', ['OPT'],
+  L.v === Infinity && L.kind === 'none' && L.imageNature === '不成像（u=f）' && L.imageTip === null,
+  'v=∞,none,不成像（u=f）', 'v=' + L.v + ',' + L.kind + ',' + L.imageNature, '检查 u=f。');
+var fRay = null;
+for (var i = 0; i < L.rays.length; i++) if (L.rays[i].name === 'focus') fRay = L.rays[i];
+var dirty = 0;
+L.rays.forEach(function (r) { r.segments.forEach(function (s) {
+  if (![s.x1, s.y1, s.x2, s.y2].every(isFinite)) dirty++;
+}); });
+VLib.assert('OPT-L08', 'u=f：focus 退化空段、无脏线', ['OPT'],
+  fRay && fRay.degenerate === true && fRay.segments.length === 0 && dirty === 0,
+  '退化,0脏线', 'degenerate=' + (fRay && fRay.degenerate) + ',脏线=' + dirty,
+  '检查 u=f 脏线回归（2026-10-17 发现）。');
+L = O.solveLens({ lensX: 50, f: 15, objX: 42, objTopY: 40, axisY: 52 });
+VLib.assert('OPT-L05', 'u=8<f：v=-17.1429，正立放大虚像', ['OPT'],
+  near(L.v, -17.1429, 1e-4) && L.kind === 'virtual' && L.imageNature === '正立放大虚像',
+  'v=-17.1429,virtual,正立放大虚像', 'v=' + L.v + ',' + L.kind + ',' + L.imageNature, '检查 u<f。');
+VLib.assert('OPT-L07', '焦点只读数据：lensX±f', ['OPT'],
+  L.focusPts.length === 2 && near(L.focusPts[0].x, 35, 1e-9) && near(L.focusPts[1].x, 65, 1e-9),
+  '[35,65]', JSON.stringify(L.focusPts.map(function (p) { return p.x; })),
+  'F 标记只读（课页不得绑拖拽）。');
+
+/* ---------- 平面镜：OPT-M01/M02 ---------- */
+var M = O.solveMirror({ mirrorX: 50, fromX: 25, fromY: 58, hitX: 50, hitY: 61 });
+VLib.assert('OPT-M01', '反射角=入射角=6.8428°', ['OPT'],
+  near(M.iDeg, 6.8428, 1e-3) && near(M.rDeg, M.iDeg, 1e-9),
+  'i=r=6.8428°', 'i=' + M.iDeg + ',r=' + M.rDeg, '角度自法线起算。');
+VLib.assert('OPT-M02', '像距=物距=25，正立等大虚像', ['OPT'],
+  M.imageX === 75 && M.imageDist === 25 && M.imageNature === '正立等大虚像',
+  'imageX=75,dist=25,正立等大虚像', 'imageX=' + M.imageX + ',dist=' + M.imageDist, '检查对称。');
+
+/* ---------- 折射：OPT-R01~R04 ---------- */
+var R = O.solveRefraction({ iDeg: 30, n1: 1, n2: 1.33 });
+VLib.assert('OPT-R01', 'i=30°：r=22.0824°', ['OPT'], near(R.rDeg, 22.0824, 1e-3),
+  'r=22.0824°', 'r=' + R.rDeg, '检查斯涅尔定律。');
+R = O.solveRefraction({ iDeg: 60, n1: 1, n2: 1.33 });
+VLib.assert('OPT-R02', 'i=60°：r=40.6287°', ['OPT'], near(R.rDeg, 40.6287, 1e-3),
+  'r=40.6287°', 'r=' + R.rDeg, '检查斯涅尔定律。');
+R = O.solveRefraction({ iDeg: 0, n1: 1, n2: 1.33 });
+VLib.assert('OPT-R03', 'i=0：不偏折', ['OPT'],
+  R.rDeg === 0 && R.stateText === '垂直入射：不偏折（i = r = 0）',
+  'r=0,不偏折', 'r=' + R.rDeg + ',' + R.stateText, '检查垂直入射。');
+R = O.solveRefraction({ iDeg: 80, n1: 1, n2: 1.33 });
+VLib.assert('OPT-R04', 'i=80°：r=47.7704°', ['OPT'], near(R.rDeg, 47.7704, 1e-3),
+  'r=47.7704°', 'r=' + R.rDeg, '检查大角度。');
+R = O.solveRefraction({ iDeg: 60, n1: 1.33, n2: 1 });
+VLib.assert('OPT-R06', '全反射诚实返回（tir=true，不给假数）', ['ENG-69'],
+  R.tir === true && R.rDeg === null, 'tir=true,r=null', 'tir=' + R.tir + ',r=' + R.rDeg,
+  '检查 ENG-69。');
+
+/* ---------- 小孔成像：OPT-P01~P06 ---------- */
+var P = O.solvePinhole({ objX: 31, objTopY: 39, objBaseY: 61, holeX: 55, holeY: 50, scrX: 88, aperture: 2 });
+VLib.assert('OPT-P01', 'u=24：m=1.375，放大', ['OPT'],
+  near(P.m, 1.375, 1e-9) && P.zoomWord === '放大', 'm=1.375,放大', 'm=' + P.m + ',' + P.zoomWord,
+  '检查 m=像距/物距。');
+VLib.assert('OPT-P05', '两条光线过孔心交叉（x=55 处 y=50）', ['OPT'], (function () {
+  for (var k = 0; k < P.rays.length; k++) {
+    var s = P.rays[k].segments[0];
+    var y = s.y1 + (s.y2 - s.y1) * ((55 - s.x1) / (s.x2 - s.x1));
+    if (!near(y, 50, 1e-9)) return false;
+  }
+  return P.imgBottomY > 50 && 50 > P.imgTopY;
+})(), '过孔心,倒立', '交叉检验', '检查倒像几何。');
+P = O.solvePinhole({ objX: 31, objTopY: 39, objBaseY: 61, holeX: 55, holeY: 50, scrX: 88, aperture: 3.5 });
+VLib.assert('OPT-P06', '孔径=3.5：不警告（边界）', ['OPT'], P.blur === false,
+  'blur=false', 'blur=' + P.blur, '检查 >3.5 阈值。');
+P = O.solvePinhole({ objX: 31, objTopY: 39, objBaseY: 61, holeX: 55, holeY: 50, scrX: 88, aperture: 4 });
+VLib.assert('OPT-P06', '孔径=4：模糊警告', ['OPT'],
+  P.blur === true && P.stateText.indexOf('孔太大：变亮但变模糊') >= 0,
+  'blur=true,警告', P.stateText, '检查模糊态。');
+
+/* ---------- 确定性 / 快照 / AX01 / 非法输入 ---------- */
+var A1 = O.solveLens({ lensX: 50, f: 15, objX: 22, objTopY: 40, axisY: 52 });
+var A2 = O.solveLens({ lensX: 50, f: 15, objX: 22, objTopY: 40, axisY: 52 });
+VLib.assert('ENG-09', '同输入逐位一致（确定性）', ['ENG-09'],
+  JSON.stringify(A1) === JSON.stringify(A2), '逐位一致', '确定性',
+  '检查 ENG-70。');
+var threw = false;
+try { O.solveLens({ lensX: 50, f: -5, objX: 22, objTopY: 40, axisY: 52 }); } catch (e) { threw = true; }
+VLib.assert('ENG-66', '非法输入抛错（f=-5）', ['ENG-66'], threw === true, '抛错', 'threw=' + threw,
+  '检查非法输入拒绝。');
+var ax = O.ax();
+VLib.assert('OPT-AX01', 'AX01 三字段就位（含薄透镜/近轴声明）', ['AX01'],
+  ax.assumptions.length > 0 && ax.approximations.length > 0 && ax.errorEstimate.length > 0 &&
+  ax.assumptions.some(function (t) { return t.indexOf('薄透镜') >= 0; }),
+  '三字段+薄透镜声明', 'assumptions=' + ax.assumptions.length, '检查 YP-25。');
+
+VLib.conclude();
+})();
+</script>
+</body>
+</html>
