@@ -24,6 +24,26 @@
   var SVG_NS = 'http://www.w3.org/2000/svg';
   /* YC-F：SVG 逻辑字号下限（viewBox 宽 100 → 390px 视口下 3.4≈13.3px） */
   var FS_MIN = 3.4;
+  /* V8 字号阶梯（2026-10-17 化学修复队）：bondstep 舞台 width-bound，
+   * scale＝容器宽/100（1280×900 下 10 页实测均为 6.91986；能量小图同容器同 scale）。
+   * bondFs(fs)：逻辑字号 → 吸附到设计阶梯后的逻辑字号。
+   * 口径（化学专家队＋黄队裁决）：超 24px 一律压到 24（顶格，不设例外——24px
+   * 已充分可读，动画帧间字号统一）；低于 12.48 提到 12.48；其余最近正格；
+   * 已合规（±0.5px）的不动；保留 FS_MIN 下限。 */
+  var BOND_PX = 6.91986;
+  var V8_RUNG_B = [12.48, 13.6, 15.2, 16, 16.8, 20, 24];
+  function bondFs(fs) {
+    var f = Math.max(parseFloat(fs) || 0, FS_MIN);
+    var px = f * BOND_PX, dmin = 1e9, near = 24, i;
+    for (i = 0; i < V8_RUNG_B.length; i++) {
+      var dd = Math.abs(px - V8_RUNG_B[i]);
+      if (dd < dmin) { dmin = dd; near = V8_RUNG_B[i]; }
+    }
+    if (dmin <= 0.5) return f;
+    var target = px > 24 ? 24 : near;
+    if (target < 12.48) target = 12.48;
+    return target / BOND_PX;
+  }
 
   function el(tag, cls, text) {
     var d = document.createElement(tag);
@@ -265,13 +285,14 @@
 
   /* ============ 场景绘制 ============ */
   function atomCircle(g, x, y, r, label, fs) {
+    var fs2 = bondFs(fs);  /* V8：字号吸附阶梯，y 偏移同步 */
     g.appendChild(svgEl('circle', {
       cx: x, cy: y, r: r, fill: '#FFFFFF',
       stroke: 'var(--chm-ink, #1A1A1A)', 'stroke-width': 0.7
     }));
     var t = svgEl('text', {
-      x: x, y: y + fs * 0.36, 'text-anchor': 'middle',
-      'font-size': fs, fill: 'var(--chm-ink, #1A1A1A)', 'font-weight': '700'
+      x: x, y: y + fs2 * 0.36, 'text-anchor': 'middle',
+      'font-size': fs2, fill: 'var(--chm-ink, #1A1A1A)', 'font-weight': '700'
     });
     t.textContent = label;
     t.setAttribute('style', 'font-family:' + font(10).replace(/^\d+px\s*/, ''));
@@ -285,7 +306,8 @@
   function noteText(g, x, y, str, fs, anchor) {
     var t = svgEl('text', {
       x: x, y: y, 'text-anchor': anchor || 'middle',
-      'font-size': Math.max(fs || FS_MIN, FS_MIN), fill: 'var(--chm-ink-soft, #555)'
+      'font-size': bondFs(fs),  /* V8：字号吸附阶梯（含原 FS_MIN 下限） */
+      fill: 'var(--chm-ink-soft, #555)'
     });
     t.textContent = str;
     t.setAttribute('style', 'font-family:' + font(10).replace(/^\d+px\s*/, ''));
@@ -383,7 +405,7 @@
     }
     /* 键角大字标注（≥FS_MIN） */
     var at = svgEl('text', {
-      x: 50, y: 58, 'text-anchor': 'middle', 'font-size': 5.2,
+      x: 50, y: 58, 'text-anchor': 'middle', 'font-size': bondFs(5.2),  /* V8：24px 档 */
       fill: 'var(--chm-ink, #1A1A1A)', 'font-weight': '700'
     });
     at.textContent = '键角 ' + ang.toFixed(1) + '°';
@@ -519,7 +541,7 @@
     /* 右：文字能量账（曲线在下方 eSvg） */
     if (st.energyLabel) {
       var t = svgEl('text', {
-        x: 68, y: 30, 'text-anchor': 'middle', 'font-size': 4.6,
+        x: 68, y: 30, 'text-anchor': 'middle', 'font-size': bondFs(4.6),  /* V8 */
         fill: 'var(--chm-ink, #1A1A1A)', 'font-weight': '700'
       });
       t.textContent = st.energyLabel;
@@ -528,7 +550,7 @@
     }
     if (st.settleLabel && u > 0.7) {
       var s2 = svgEl('text', {
-        x: 68, y: 42, 'text-anchor': 'middle', 'font-size': 4,
+        x: 68, y: 42, 'text-anchor': 'middle', 'font-size': bondFs(4),  /* V8 */
         fill: 'var(--chm-ink, #1A1A1A)', 'font-weight': '700'
       });
       s2.textContent = st.settleLabel;

@@ -2319,7 +2319,8 @@ function widgetPeriodicExplore(p) {
     t.textContent = E.z;
     svg.appendChild(t);
     var cap = svgEl("text", {
-      x: 50, y: 70, "text-anchor": "middle", "font-size": 6.5, fill: "var(--chm-ink)"
+      x: 50, y: 70, "text-anchor": "middle", "font-size": 8.32,  /* V8：12.48px 档（1.5×） */
+      fill: "var(--chm-ink)"
     });
     cap.textContent = "质子数";
     svg.appendChild(cap);
@@ -3085,6 +3086,24 @@ function widgetReactionParticle(p) {
   var spectatorFade = p.spectatorFade !== false;
   var slowmo = p.slowmo !== false;
   var VW = 100, VH = 60;
+  /* V8 字号阶梯（2026-10-17 化学修复队）：
+   * .chm-rp-stage 高 200px / viewBox 高 60 → scale = 10/3（精确值，高度约束）。
+   * 三类粒子标签（分子式 5×fs、离子文本、旁观离子注）统一字号系数 5，
+   * fs 经 rpSnapFs 吸附到设计阶梯（渲染 px 口径）：
+   * 低于 12.48px 的提到 13.6（一档，化学专家队拍板）；其余移到最近正格；
+   * 已合规（±0.5px）的不动。布局（sideFeasible/place/relax）统一消费吸附后 fs。 */
+  var RP_SCALE = 10 / 3;
+  var V8_RUNG = [12.48, 13.6, 15.2, 16, 16.8, 20, 24];
+  function rpSnapFs(s) {
+    var px = 5 * s * RP_SCALE, dmin = 1e9, near = V8_RUNG[1], i;
+    for (i = 0; i < V8_RUNG.length; i++) {
+      var dd = Math.abs(px - V8_RUNG[i]);
+      if (dd < dmin) { dmin = dd; near = V8_RUNG[i]; }
+    }
+    if (dmin <= 0.5) return s;
+    var target = px < V8_RUNG[0] ? V8_RUNG[1] : near;
+    return target / (5 * RP_SCALE);
+  }
 
   var box = el("div", "chm-widget chm-rp", "");
   /* 方程式头 */
@@ -3150,6 +3169,9 @@ function widgetReactionParticle(p) {
       var n = arr.length, maxLW = 0, r0 = 0, hasSpec = false;
       arr.forEach(function (it) {
         var w = estLabelW(it.def);
+        /* V8：旁观离子注（系数 5，与渲染一致）宽于标签时，按注宽计入 */
+        if (it.def.role === "spectator" && !spectatorFade)
+          w = Math.max(w, rpTextW("旁观离子", 5));
         if (w > maxLW) maxLW = w;
         var rr = rad0(it.def);
         if (rr > r0) r0 = rr;
@@ -3160,7 +3182,7 @@ function widgetReactionParticle(p) {
     /* 给定分区宽度 W 与半径 r，找"行数最少"的可行网格；不可行返回 null */
     function sideFeasible(n, W, r, maxLW, hasSpec) {
       if (n <= 0) return { rows: 0, cols: 0, r: r };
-      var s = r / 7;
+      var s = rpSnapFs(r / 7);  /* V8：按吸附后字号估算格位 */
       var cellNeedW = Math.max(2 * r + 2.5, maxLW * s + 3.5);
       var cellNeedH = 2 * r + 3.5 + (hasSpec ? 6 * s : 0);
       for (var rows = 1; rows <= 10; rows++) {
@@ -3224,15 +3246,47 @@ function widgetReactionParticle(p) {
         best = { score: score, zp: zp, WL: WL, WR: WR,
           rL: c0.rL, rR: c0.rR, fL: c0.fL, fR: c0.fR };
     });
-    if (!best) { /* 兜底：等分 + 最小半径（理论不可达） */
-      best = { score: -1e9, zp: [6, 48, 52, 94], WL: 42, WR: 42, rL: 2.5, rR: 2.5,
-        fL: sideFeasible(sL.n, 42, 2.5, sL.maxLW, sL.hasSpec) || { rows: 8, cols: Math.ceil(sL.n / 8), r: 2.5 },
-        fR: sideFeasible(sR.n, 42, 2.5, sR.maxLW, sR.hasSpec) || { rows: 8, cols: Math.ceil(sR.n / 8), r: 2.5 } };
+    /* V8 兜底装箱：按标签宽度贪心装箱（宽的先排，行内居中），供 !best 时调用 */
+    function packRows(arr, x0, x1, r) {
+      var s = rpSnapFs(r / 7), W = x1 - x0;
+      var items = arr.map(function (it) {
+        var lw = estLabelW(it.def) * s;
+        if (it.def.role === "spectator" && !spectatorFade)
+          lw = Math.max(lw, rpTextW("旁观离子", 5 * s));
+        return { it: it, hw: Math.max(r, lw / 2) + 1.5 };
+      });
+      items.sort(function (a, b) { return b.hw - a.hw; });
+      var rows = [];
+      items.forEach(function (en) {
+        var need = en.hw * 2 + 2, placed = false;
+        for (var ri = 0; ri < rows.length; ri++) {
+          if (rows[ri].used + need <= W) {
+            rows[ri].items.push(en); rows[ri].used += need; placed = true; break;
+          }
+        }
+        if (!placed) rows.push({ items: [en], used: need });
+      });
+      var H = Y_BOT - Y_TOP, rowH = H / Math.max(1, rows.length);
+      rows.forEach(function (row, ri) {
+        var y = Y_TOP + (ri + 0.5) * rowH;
+        var x = x0 + (W - (row.used - 2)) / 2;
+        row.items.forEach(function (en) {
+          en.it.x = en.it.hx = x + en.hw;
+          en.it.y = en.it.hy = y;
+          en.it.r = r; en.it.fs = s;
+          x += en.hw * 2 + 2;
+        });
+      });
+      return { rows: rows.length, cols: 0, r: r };
+    }
+    if (!best) { /* V8 兜底：半区 + 贪心装箱 */
+      best = { score: -1e9, zp: [4, 50, 50, 96], WL: 46, WR: 46, rL: 2.5, rR: 2.5,
+        fL: null, fR: null, pack: true };
     }
     function place(arr, x0, x1, f, r, xLo, xHi) {
       var n = arr.length;
       if (!n || !f.rows) return;
-      var H = Y_BOT - Y_TOP, s = r / 7;
+      var H = Y_BOT - Y_TOP, s = rpSnapFs(r / 7);  /* V8：it.fs 直接取吸附值 */
       for (var i = 0; i < n; i++) {
         var row = Math.floor(i / f.cols), col = i % f.cols;
         var inRow = (row === f.rows - 1) ? (n - row * f.cols) : f.cols;
@@ -3245,8 +3299,13 @@ function widgetReactionParticle(p) {
         it.r = r; it.fs = s;
       }
     }
-    place(left, best.zp[0], best.zp[1], best.fL, best.rL, best.zp[0] + 1, best.zp[1] - 1);
-    place(right, best.zp[2], best.zp[3], best.fR, best.rR, best.zp[2] + 1, best.zp[3] - 1);
+    if (best.pack) {  /* V8 兜底：贪心装箱 */
+      best.fL = packRows(left, 4, 50, 2.5);
+      best.fR = packRows(right, 50, 96, 2.5);
+    } else {
+      place(left, best.zp[0], best.zp[1], best.fL, best.rL, best.zp[0] + 1, best.zp[1] - 1);
+      place(right, best.zp[2], best.zp[3], best.fR, best.rR, best.zp[2] + 1, best.zp[3] - 1);
+    }
     /* 碰撞松弛兜底：圆包络 + 标签包络双重约束；keyframe 目标点与 e⁻ 示意区
      * 作障碍；确定性迭代 */
     (function relax() {
@@ -3261,12 +3320,16 @@ function widgetReactionParticle(p) {
       }
       function foot(it) {
         var s = it.fs || 1, r = it.r || 7;
+        var labelW = estLabelW(it.def) * s;
+        /* V8：旁观离子注（5×s）宽于粒子标签时，按注宽计入 */
+        if (it.def.role === "spectator" && !spectatorFade)
+          labelW = Math.max(labelW, rpTextW("旁观离子", 5 * s));
         return {
-          rx: Math.max(2 * r, estLabelW(it.def) * s) / 2 + 1.2,
+          rx: Math.max(2 * r, labelW) / 2 + 1.2,
           ry: r + 1.2 + ((it.def.role === "spectator" && !spectatorFade) ? 5 * s : 0)
         };
       }
-      for (var iter = 0; iter < 120; iter++) {
+      for (var iter = 0; iter < 300; iter++) {
         var moved = false;
         for (var i = 0; i < insts.length; i++) {
           var a = insts[i], fa = foot(a);
@@ -3288,17 +3351,22 @@ function widgetReactionParticle(p) {
           }
           for (var k = 0; k < obs.length; k++) {
             var o = obs[k];
-            var ox2 = fa.rx + o.rx - Math.abs(a.x - o.x);
-            var oy2 = fa.ry + o.ry - Math.abs(a.y - o.y);
+            /* V8：目标点障碍按圆半径计（D-01/D-02 原意"避免被移入实例砸中"指圆；
+             * 标签包络过大，无处可排；动画帧标签交叠为既有行为） */
+            var ar2 = a.r || 7;
+            var ox2 = ar2 + o.rx - Math.abs(a.x - o.x);
+            var oy2 = ar2 + o.ry - Math.abs(a.y - o.y);
             if (ox2 > 0 && oy2 > 0) {
-              if (ox2 < oy2) a.x += (a.x >= o.x ? 1 : -1) * (ox2 + 0.1);
-              else a.y += (a.y >= o.y ? 1 : -1) * (oy2 + 0.1);
+              /* V8：渐进推出（半量），避免与两两推挤振荡 */
+              if (ox2 < oy2) a.x += (a.x >= o.x ? 1 : -1) * (ox2 / 2 + 0.05);
+              else a.y += (a.y >= o.y ? 1 : -1) * (oy2 / 2 + 0.05);
               moved = true;
             }
           }
-          /* 分区钳制：左右实例不出各自的分区别 */
-          var xLo = a.side === "L" ? best.zp[0] + 1 : best.zp[2] + 1;
-          var xHi = a.side === "L" ? best.zp[1] - 1 : best.zp[3] - 1;
+          /* V8 分区钳制：放宽到半区（左≤50，右≥50），给大字号标签留横向空间；
+           * keyframe 目标点仍作障碍（obs），左右不互串、反应物/生成物方位不变。 */
+          var xLo = a.side === "L" ? 4 : 50;
+          var xHi = a.side === "L" ? 50 : 96;
           a.x = Math.max(xLo, Math.min(xHi, a.x));
           a.y = Math.max(6, Math.min(58, a.y));
           a.hx = a.x; a.hy = a.y;
@@ -3480,7 +3548,7 @@ function widgetReactionParticle(p) {
           cx: s.x, cy: s.y, r: 7.5, fill: "#CFCFCF",
           stroke: "#00000055", "stroke-width": 0.6
         }));
-        svgFormulaText(g, s.x, s.y + 2.4, s.merged, 5.2, "#1A1A1A");
+        svgFormulaText(g, s.x, s.y + 2.4, s.merged, 5.04, "#1A1A1A");  /* V8：16.8px 档 */
         svg.appendChild(g);
         return;
       }
@@ -3501,7 +3569,7 @@ function widgetReactionParticle(p) {
         g2.appendChild(gg);
       } else {
         var t = svgEl("text", {
-          x: s.x, y: s.y + 2.4 * fs, "text-anchor": "middle", "font-size": 4.8 * fs,
+          x: s.x, y: s.y + 2.4 * fs, "text-anchor": "middle", "font-size": 5 * fs,
           "font-weight": "700", fill: lk.fg
         });
         t.textContent = lk.txt;
@@ -3510,7 +3578,8 @@ function widgetReactionParticle(p) {
       if (it.def.role === "spectator" && !spectatorFade && s.vis) {
         var sp = svgEl("text", {
           x: s.x, y: s.y - rr - 2, "text-anchor": "middle",
-          "font-size": 3.6 * fs, fill: "var(--chm-ink-soft)"
+          /* V8：旁观离子注与粒子标签统一系数 5（可读优先，位置已区分层级） */
+          "font-size": 5 * fs, fill: "var(--chm-ink-soft)"
         });
         sp.textContent = "旁观离子";
         g2.appendChild(sp);
@@ -3527,7 +3596,7 @@ function widgetReactionParticle(p) {
         }));
       }
       var et = svgEl("text", {
-        x: 50, y: 8, "text-anchor": "middle", "font-size": 4.4,
+        x: 50, y: 8, "text-anchor": "middle", "font-size": 4.56,  /* V8：15.2px 档 */
         fill: "var(--chm-ink)"
       });
       et.textContent = "e⁻（示意）";
@@ -3574,7 +3643,7 @@ function widgetReactionParticle(p) {
             var mx = (x1 + x2) / 2, my0 = (y1 + y2) / 2 - 3;
             var label = at.textContent;
             var lw = rpTextW(label, 4.2) / 2 + 2, lh = 3.2;
-            var blocks = [{ x: 50, y: 8, rx: rpTextW("e⁻（示意）", 4.4) / 2 + 2, ry: 4 }];
+            var blocks = [{ x: 50, y: 8, rx: rpTextW("e⁻（示意）", 4.56) / 2 + 2, ry: 4 }];
             Object.keys(st).forEach(function (k) {
               var s = st[k];
               if (!s || s.merged) return;
@@ -3585,7 +3654,7 @@ function widgetReactionParticle(p) {
                 rx: rpEstLabelW(it.def) * fs2 / 2 + 1.5, ry: 3.5 * fs2 });
               if (it.def.role === "spectator" && !spectatorFade && s.vis)
                 blocks.push({ x: s.x, y: s.y - (it.r || 7) - 4 * fs2,
-                  rx: rpTextW("旁观离子", 3.6 * fs2) / 2 + 1.5, ry: 2.5 * fs2 });
+                  rx: rpTextW("旁观离子", 5 * fs2) / 2 + 1.5, ry: 2.5 * fs2 });  /* V8：系数同渲染 */
             });
             var tries = [0, -11, 13, -22, 24];
             for (var ti = 0; ti < tries.length; ti++) {
@@ -4819,7 +4888,7 @@ function widgetReadGaugeChem(p) {
         if (major) {
           var t = svgEl("text", {
             x: x0 - 2, y: y + 2.4, "text-anchor": "end",
-            "font-size": 4.6, fill: "var(--chm-ink)"
+            "font-size": 4.777,  /* V8：15.2px 档（×3.1818） */ fill: "var(--chm-ink)"
           });
           t.textContent = fmtN(v, 0);
           svg.appendChild(t);
@@ -4849,7 +4918,7 @@ function widgetReadGaugeChem(p) {
       svg.appendChild(sl);
       var unit = svgEl("text", {
         x: (x0 + x1) / 2, y: 64, "text-anchor": "middle",
-        "font-size": 4.6, fill: "var(--chm-ink)"
+        "font-size": 4.777,  /* V8：15.2px 档（×3.1818） */ fill: "var(--chm-ink)"
       });
       unit.textContent = "mL（分度值 " + division + "mL）";
       svg.appendChild(unit);
