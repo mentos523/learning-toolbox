@@ -217,6 +217,20 @@ window.GEOGRAPHY_DATA["dg01"] = {
               kind: "explain",
               title: "纬线：横着的圈",
               exploreTip: "先看图：找一找，哪条纬线圈最长？",
+              widgets: [
+                {
+                  type: "globe-spin",
+                  params: {
+                    mode: "explore",
+                    graticuleStep: 30,
+                    showGraticule: true,
+                    showLabels: true,
+                    polarView: false,
+                    spinHint: true,
+                    recordKey: "geog_globe-spin_dg01.2.1-p1"
+                  }
+                }
+              ],
               blocks: [
                 { type: "lead", text: "给地球织“渔网”，先织横线。看地球仪：" },
                 { type: "text", html: "<strong>纬线</strong>：与地轴垂直的圆圈，一圈一圈横着套在地球上。<strong>赤道</strong>是最长的纬线圈（0°）；越往两极，圈越小；到了两极，圈缩成一个点。" },
@@ -302,6 +316,20 @@ window.GEOGRAPHY_DATA["dg01"] = {
               kind: "explain",
               title: "经线：竖着的半圆",
               exploreTip: "对比着看：经线圈和纬线圈，哪个大哪个小？",
+              widgets: [
+                {
+                  type: "globe-spin",
+                  params: {
+                    mode: "explore",
+                    graticuleStep: 30,
+                    showGraticule: true,
+                    showLabels: true,
+                    polarView: true,
+                    spinHint: true,
+                    recordKey: "geog_globe-spin_dg01.2.2-p1"
+                  }
+                }
+              ],
               blocks: [
                 { type: "lead", text: "横线织完，织竖线。看地球仪：" },
                 { type: "text", html: "<strong>经线</strong>：连接南极和北极的半圆，一条条竖着穿过两极。<strong>本初子午线</strong>是 0° 经线（穿过英国伦敦格林尼治天文台旧址——为什么是它当 0°？国际约定的，记住就行）。" },
@@ -387,6 +415,25 @@ window.GEOGRAPHY_DATA["dg01"] = {
               kind: "explain",
               title: "经纬网：地球的“地址本”",
               exploreTip: "先想：没有门牌号，你怎么告诉别人“我在哪”？",
+              widgets: [
+                {
+                  type: "globe-spin",
+                  params: {
+                    mode: "find",
+                    targets: [
+                      { name: "武汉", lat: 30, lon: 114 },
+                      { name: "北京", lat: 40, lon: 116 }
+                    ],
+                    graticuleStep: 30,
+                    showGraticule: true,
+                    showLabels: true,
+                    polarView: false,
+                    tolerance: 5,
+                    spinHint: true,
+                    recordKey: "geog_globe-spin_dg01.2.3-p1"
+                  }
+                }
+              ],
               blocks: [
                 { type: "lead", text: "横线（纬线）+ 竖线（经线），往球上一罩——这张网，叫<strong>经纬网</strong>。" },
                 { type: "text", html: "<strong>经纬网</strong>：经线和纬线交织成的网。网上每个交叉点都有唯一的“地址”——它的经纬度。比如武汉：约 <strong>30°N, 114°E</strong>（北纬 30 度，东经 114 度）。" },
@@ -648,33 +695,36 @@ window.GEOGRAPHY_DATA["dg01"] = {
               exploreTip: "3 道题——换算、三式互换、大详小略。",
               widgets: [
                 {
-                  type: "guess-verify",
+                  type: "scale-calc",
                   params: {
-                    question: "图上 2 厘米，比例尺 1:50000，实地距离是？",
-                    options: ["1 千米", "10 千米"],
-                    answer: 0,
-                    recordKey: "geog_quiz_dg01.3.1a",
-                    explain: "2 × 50000 = 100000 厘米 = 1 千米（1 千米 = 100000 厘米）。"
+                    mode: "calc",
+                    scales: [
+                      { rep: "1:50000", text: "图上 1 厘米代表实地 500 米", bar: { unit: "cm", segments: 4 } }
+                    ],
+                    problem: { mapDistCm: 2 },
+                    tolerance: "1%",
+                    recordKey: "geog_quiz_dg01.3.1a"
                   }
                 },
                 {
-                  type: "guess-verify",
+                  type: "scale-calc",
                   params: {
-                    question: "“1:50000”用文字式怎么说？",
-                    options: ["图上 1 厘米代表实地 500 米", "图上 1 厘米代表实地 50 米"],
-                    answer: 0,
-                    recordKey: "geog_quiz_dg01.3.1b",
-                    explain: "50000 厘米 = 500 米——三式等价。"
+                    mode: "convert",
+                    scales: [
+                      { rep: "1:50000", text: "图上 1 厘米代表实地 500 米", bar: { unit: "cm", segments: 4 } }
+                    ],
+                    recordKey: "geog_quiz_dg01.3.1b"
                   }
                 },
                 {
-                  type: "guess-verify",
+                  type: "scale-calc",
                   params: {
-                    question: "想看清黄鹤楼周边的路，应该选？",
-                    options: ["大比例尺的武汉市地图", "小比例尺的中国地图"],
-                    answer: 0,
-                    recordKey: "geog_quiz_dg01.3.1c",
-                    explain: "大详小略——看得细，用大比例尺。"
+                    mode: "compare",
+                    compareMaps: [
+                      { denom: 50000, label: "大比例尺：武汉市地图——看得细、范围小" },
+                      { denom: 5000000, label: "小比例尺：中国地图——看得全、内容略" }
+                    ],
+                    recordKey: "geog_quiz_dg01.3.1c"
                   }
                 }
               ],
@@ -934,6 +984,18 @@ window.GEOGRAPHY_DATA["dg01"] = {
               kind: "explain",
               title: "地形剖面图：把地形“切开看”",
               exploreTip: "跟着做：沿一条线取点——高点连起来像什么？",
+              widgets: [
+                {
+                  type: "profile-draw",
+                  params: {
+                    line: { from: [8, 52], to: [92, 52] },
+                    samples: 7,
+                    verticalExaggeration: 2,
+                    toleranceM: 40,
+                    recordKey: "geog_profile-draw_dg01.3.4-p2"
+                  }
+                }
+              ],
               blocks: [
                 { type: "lead", text: "把地形沿一条线“切开”，看切面——这就是地形剖面图。" },
                 { type: "text", html: "<strong>地形剖面图</strong>绘制三步：① 在等高线图上画一条<strong>剖面线</strong>；② 沿线取点读海拔；③ 把点按海拔标到坐标纸上连成线。起伏线就是“切开的地形”。" },

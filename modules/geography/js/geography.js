@@ -203,7 +203,16 @@
       var box = el("div", "geog-widget");
       wrap.appendChild(box);
       var fn = WIDGETS[w.type];
-      if (fn) { try { fn(box, w.params || {}, pg); } catch (e) { box.appendChild(el("div", "geog-block trap", "⚠️ 组件加载失败：" + esc(e.message))); } }
+      if (fn) {
+        try {
+          var vw = fn(box, w.params || {}, pg);
+          /* 批 2 扩展：渲染器可返回视图对象（{resize,destroy,state}），
+             挂载到 box._geoView 供白队/QA 程序断言，并纳入 activeViews
+             统一 resize/销毁。返回 undefined 的旧渲染器不受影响。 */
+          box._geoView = vw || null;
+          if (vw && (vw.destroy || vw.resize)) activeViews.push(vw);
+        } catch (e) { box.appendChild(el("div", "geog-block trap", "⚠️ 组件加载失败：" + esc(e.message))); }
+      }
       else box.appendChild(el("div", "geog-block trap", "⚠️ 未知组件类型：" + esc(w.type)));
     });
     ((pg.blocks) || []).forEach(function (b) { wrap.appendChild(renderBlock(b)); });
@@ -426,7 +435,22 @@
   } else {
     init();
   }
-  window.GEO = { hasLesson: hasLesson, open: openLesson };
+  window.GEO = {
+    hasLesson: hasLesson, open: openLesson,
+    /* 批 2 扩展：允许 js/ 下其他文件按同一 WIDGETS 注册表注册新渲染器
+       （模块层惯例；geo-batch2-widgets.js 在本文件之后引入）。 */
+    registerWidget: function (type, fn) { WIDGETS[type] = fn; },
+    getWidget: function (type) { return WIDGETS[type] || null; },
+    widgetTypes: function () { return Object.keys(WIDGETS); },
+    /* 2026-10-17 修复 F2（白队 QA 首轮）：批 2 渲染器 destroy 经此从 activeViews
+       摘除自身——约定同批 1 MapView.prototype.destroy（:611-612）；
+       跨文件无闭包访问，故以接口暴露。缺此摘除时，翻页/主题切换触发的
+       renderPage 包装 while (activeViews.length) 永真 → 主线程死循环卡死。 */
+    unregisterView: function (view) {
+      var i = activeViews.indexOf(view);
+      if (i >= 0) activeViews.splice(i, 1);
+    }
+  };
 
   /* ============================================================
    * 地图组件层：GeoMap（2D 等高线 + 3D 示意山体）

@@ -263,3 +263,96 @@ body[data-theme="dark"] .geog-block.trap { background: #2a2415; border-color: #8
   .geog-map-flex .geog-map-stage { flex: 1 1 0; }
   .geog-map-flex .geog-map-side { flex: 0 0 240px; }
 }
+
+/* ============================================================
+ * 批 2 新增（蓝队）：geo-batch2-widgets.js 六个渲染器样式
+ * 新增 --geog-* 语义变量（浅/深两套，深色走 F1 直接值口径）；
+ * 字号只用 V8 阶梯（.fs-078 … .fs-150 工具类）。
+ * ============================================================ */
+:root {
+  --geog-temp: #C0392B;
+  --geog-precip: var(--geo-known);
+  --geog-graticule: #9AA5B1;
+  --geog-ocean: #DCEFFB;
+  --geog-land: #BFD9A8;
+  --geog-target: var(--geo-target);
+  --geog-plate-asia: #E8C547;
+  --geog-plate-africa: #E69F00;
+  --geog-plate-indian: #D55E00;
+  --geog-plate-pacific: #0072B2;
+  --geog-plate-america: #009E73;
+  --geog-plate-antarctica: #9AA0A6;
+}
+body[data-theme="dark"] {
+  --geog-temp: #FF8A80;
+  --geog-precip: #56B4E9;
+  --geog-graticule: #6B7684;
+  --geog-ocean: #182A3D;
+  --geog-land: #2E4A30;
+  --geog-target: #FF7043;
+  --geog-plate-asia: #F0E442;
+  --geog-plate-africa: #FFB020;
+  --geog-plate-indian: #FF7043;
+  --geog-plate-pacific: #56B4E9;
+  --geog-plate-america: #3DDC97;
+  --geog-plate-antarctica: #B9BEC4;
+}
+
+/* ---------- 批 2 组件通用 ---------- */
+.geog-w2 {
+  border: 1px solid var(--geog-border); border-radius: 14px;
+  background: var(--geog-card); padding: 12px; margin: 12px 0;
+}
+.geog-w2-head { font-weight: 700; margin: 0 0 8px; }
+.geog-w2-stage { position: relative; width: 100%; }
+.geog-w2-stage canvas, .geog-w2-stage svg {
+  display: block; width: 100%; height: auto; border-radius: 8px;
+  background: var(--geog-bg-soft); touch-action: pan-y;
+}
+.geog-w2-badge {
+  position: absolute; left: 10px; top: 8px;
+  background: rgba(0,0,0,0.55); color: #fff;
+  padding: 3px 8px; border-radius: 6px; pointer-events: none;
+  max-width: calc(100% - 20px);
+}
+.geog-w2-readout { color: var(--geog-ink-soft); margin-top: 8px; min-height: 1.6em; }
+.geog-w2-ax { color: var(--geog-ink-soft); margin-top: 8px; }
+.geog-w2-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; align-items: center; }
+.geog-w2 .geog-btn { min-height: 44px; }
+.geog-w2 input[type="text"], .geog-w2 input[type="number"] {
+  min-height: 44px; font-size: 1rem; padding: 6px 10px; border-radius: 8px;
+  border: 1px solid var(--geog-border); background: var(--geog-bg); color: var(--geog-ink);
+  max-width: 100%;
+}
+.geog-w2-step {
+  border: 1px dashed var(--geog-border); border-radius: 10px;
+  padding: 10px 12px; margin-top: 10px;
+}
+.geog-w2-step.locked { opacity: 0.45; }
+.geog-w2-step .st { font-weight: 700; margin-bottom: 6px; }
+.geog-w2-badge2 {
+  display: inline-block; padding: 4px 12px; border-radius: 999px;
+  background: var(--geog-bg-soft); border: 1px solid var(--geog-border);
+  font-weight: 700; margin: 4px 6px 4px 0;
+}
+.geog-w2-badge2.ok { border-color: var(--geog-correct); color: var(--geog-correct); }
+.geog-w2-badge2.warn { border-color: var(--geog-contour-hi); color: var(--geog-contour-hi); }
+.geog-w2-alert {
+  border: 1px solid var(--geog-wrong); border-radius: 10px;
+  background: var(--geog-bg-soft); padding: 10px 12px; margin-top: 10px;
+}
+.geog-w2-legend {
+  display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 8px;
+  color: var(--geog-ink-soft);
+}
+.geog-w2-legend .sw { display: inline-block; width: 26px; height: 0; border-top: 3px solid var(--geog-temp); vertical-align: middle; margin-right: 6px; }
+.geog-w2-legend .sw.blue { border-top-color: var(--geog-precip); }
+.geog-w2-legend .sw.grat { border-top-color: var(--geog-graticule); border-top-style: dashed; }
+.geog-w2-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0; }
+.geog-w2-tabs .geog-btn.on { background: var(--geog-accent); border-color: var(--geog-accent); color: #fff; }
+.geog-w2 input[type="range"] { width: 100%; min-height: 44px; accent-color: var(--geog-accent); }
+.geog-w2 .ok-t { color: var(--geog-correct); font-weight: 700; }
+.geog-w2 .no-t { color: var(--geog-wrong); font-weight: 700; }
+@media (max-width: 480px) {
+  .geog-w2-compare { flex-direction: column; }
+}
