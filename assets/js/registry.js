@@ -51,5 +51,15 @@ window.TOOLBOX_MODULES = [
     color: "#8b5cf6",
     path: "modules/chemistry/index.html",
     status: "ready"
+  },
+  {
+    slug: "geography",
+    name: "地理",
+    tagline: "16 章 · 113 课",
+    description: "从七年级出发：等高线读出地形，时区算出时间，气候两步判定——地图是地理的第二语言。",
+    icon: "box",
+    color: "#0ea5e9",
+    path: "modules/geography/index.html",
+    status: "soon"                    // 试点课 dg01.3.3 已就位，待黄队/白队闸门后放行
   }
 ];

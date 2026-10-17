@@ -1,0 +1,265 @@
+/* ============================================================
+ * 学习工具箱 · 地理 · 样式（geog- 前缀，与其他学科隔离）
+ *
+ * 色板：--geog-* 语义变量，别名本地 --geo-* 基值（浅/深两套，
+ * 取自几何 Okabe-Ito 口径；地理模块独立加载，不依赖数学 CSS）。
+ * 分层设色按 pedagogy 第八章教材约定色（绿/黄/褐）+ 图例文字，
+ * 不套用 --geog-* 抽象（interactions.md §0.2）。
+ * 字号：只用 V8 阶梯 {0.78,0.85,0.95,1,1.05,1.25,1.5}rem。
+ * ============================================================ */
+:root {
+  --geo-known: #0072B2;
+  --geo-target: #D55E00;
+  --geo-corr-a: #E69F00;
+  --geo-corr-b: #56B4E9;
+  --geo-corr-c: #009E73;
+  --geo-line: #1a1a1a;
+  --geo-aux: #7A7A7A;
+  --geo-grid: #E5E5E5;
+  --geo-highlight: #F0E442;
+  --geog-contour: var(--geo-line);
+  --geog-contour-hi: var(--geo-corr-a);
+  --geog-river: var(--geo-known);
+  --geog-correct: var(--geo-corr-c);
+  --geog-wrong: var(--geo-target);
+  --geog-highlight: var(--geo-highlight);
+  --geog-ink: #1a1a1a;
+  --geog-ink-soft: #4a4a4a;
+  --geog-bg: #ffffff;
+  --geog-bg-soft: #f6f4ee;
+  --geog-card: #ffffff;
+  --geog-border: #e2ddd2;
+  --geog-accent: #0e7c66;
+}
+body[data-theme="dark"] {
+  --geo-known: #56B4E9;
+  --geo-target: #FF7043;
+  --geo-corr-a: #FFB020;
+  --geo-corr-b: #7FD4FF;
+  --geo-corr-c: #3DDC97;
+  --geo-line: #F5F5F5;
+  --geo-aux: #9E9E9E;
+  --geo-grid: #333333;
+  --geo-highlight: #F0E442;
+  --geog-ink: #f0ede6;
+  --geog-ink-soft: #c9c4b8;
+  --geog-bg: #14161a;
+  --geog-bg-soft: #1c1f24;
+  --geog-card: #1c1f24;
+  --geog-border: #33383f;
+  --geog-accent: #3DDC97;
+  /* F1 修复：--geog-* 别名在 :root 已解析为浅色计算值，深色覆盖透不过别名，
+     故在此逐个直接写深色值（与上方 --geo-* 深色基值一一对应）。 */
+  --geog-contour: #F5F5F5;
+  --geog-contour-hi: #FFB020;
+  --geog-river: #56B4E9;
+  --geog-correct: #3DDC97;
+  --geog-wrong: #FF7043;
+  --geog-highlight: #F0E442;
+}
+
+/* ---------- V8 字号阶梯（只许用这 7 档） ---------- */
+.fs-078 { font-size: 0.78rem; }  /* 12.48px 标注/角落小字 */
+.fs-085 { font-size: 0.85rem; }  /* 13.6px  图例/徽章 */
+.fs-095 { font-size: 0.95rem; }  /* 15.2px  辅助文本 */
+.fs-100 { font-size: 1rem; }     /* 16px    正文 */
+.fs-105 { font-size: 1.05rem; }  /* 16.8px  小标题 */
+.fs-125 { font-size: 1.25rem; }  /* 20px    页标题 */
+.fs-150 { font-size: 1.5rem; }   /* 24px    章标题 */
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--geog-bg);
+  color: var(--geog-ink);
+  font-family: system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  line-height: 1.7;
+  -webkit-text-size-adjust: 100%;
+}
+.geog-app { max-width: 960px; margin: 0 auto; padding: 0 16px 96px; }
+
+/* ---------- 顶栏 ---------- */
+.geog-topbar {
+  position: sticky; top: 0; z-index: 40;
+  display: flex; align-items: center; gap: 12px;
+  min-height: 56px; padding: 8px 16px;
+  background: var(--geog-bg);
+  border-bottom: 1px solid var(--geog-border);
+  max-width: 960px; margin: 0 auto;
+}
+.geog-topbar h1 { font-size: 1.05rem; margin: 0; flex: 1; min-width: 0;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.geog-btn {
+  min-height: 44px; min-width: 44px;
+  padding: 10px 16px; border-radius: 10px;
+  border: 1px solid var(--geog-border);
+  background: var(--geog-card); color: var(--geog-ink);
+  font-size: 1rem; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+}
+.geog-btn:active { transform: translateY(1px); }
+.geog-btn-primary {
+  background: var(--geog-accent); border-color: var(--geog-accent); color: #fff;
+}
+body[data-theme="dark"] .geog-btn-primary { color: #10201a; }
+.geog-btn[disabled] { opacity: 0.45; cursor: default; }
+.geog-page-ind { font-size: 0.85rem; color: var(--geog-ink-soft); white-space: nowrap; }
+
+/* ---------- 概览 ---------- */
+.geog-hero { padding: 28px 0 8px; }
+.geog-hero h2 { font-size: 1.5rem; margin: 0 0 8px; }
+.geog-hero p { font-size: 1rem; color: var(--geog-ink-soft); margin: 0 0 16px; }
+.geog-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+.geog-card {
+  display: block; padding: 16px; border-radius: 14px;
+  background: var(--geog-card); border: 1px solid var(--geog-border);
+  color: inherit; text-decoration: none; min-height: 44px;
+}
+.geog-card h3 { font-size: 1.05rem; margin: 0 0 6px; }
+.geog-card p { font-size: 0.95rem; color: var(--geog-ink-soft); margin: 0; }
+.geog-card .go { font-size: 0.95rem; color: var(--geog-accent); }
+.geog-sec-title { font-size: 1.05rem; margin: 24px 0 10px; }
+.geog-lesson-row {
+  display: flex; align-items: center; gap: 10px;
+  width: 100%; text-align: left;
+  padding: 12px 14px; margin-bottom: 8px; border-radius: 12px;
+  background: var(--geog-card); border: 1px solid var(--geog-border);
+  color: inherit; font-size: 1rem; cursor: pointer; min-height: 56px;
+}
+.geog-lesson-row .t { flex: 1; min-width: 0; }
+.geog-lesson-row .sub { font-size: 0.85rem; color: var(--geog-ink-soft); }
+.geog-done-mark { color: var(--geog-correct); font-size: 1.05rem; }
+
+/* ---------- 学习页 ---------- */
+.geog-crumb { font-size: 0.85rem; color: var(--geog-ink-soft); margin: 16px 0 4px; }
+.geog-lesson-title { font-size: 1.25rem; margin: 0 0 4px; }
+.geog-page-title { font-size: 1.05rem; margin: 14px 0 8px; color: var(--geog-accent); }
+.geog-explore {
+  border-left: 4px solid var(--geog-accent);
+  background: var(--geog-bg-soft);
+  padding: 10px 14px; border-radius: 0 10px 10px 0;
+  font-size: 0.95rem; margin: 10px 0 16px;
+}
+.geog-block { margin: 12px 0; font-size: 1rem; }
+.geog-block.lead { font-size: 1.05rem; }
+.geog-block.trap {
+  background: #fff8e6; border: 1px solid #e8c547; border-radius: 10px;
+  padding: 10px 14px;
+}
+body[data-theme="dark"] .geog-block.trap { background: #2a2415; border-color: #8a6d1f; }
+.geog-block.slogan {
+  text-align: center; font-size: 1.05rem; font-weight: 700;
+  padding: 10px; border-top: 1px dashed var(--geog-border);
+  border-bottom: 1px dashed var(--geog-border); margin: 18px 0;
+}
+.geog-point {
+  margin: 20px 0 8px; padding: 12px 14px; border-radius: 10px;
+  background: var(--geog-bg-soft); border: 1px solid var(--geog-border);
+  font-size: 0.95rem;
+}
+.geog-point::before { content: "本页要点："; font-weight: 700; color: var(--geog-accent); }
+.geog-pager {
+  display: flex; justify-content: space-between; gap: 12px; margin: 28px 0 8px;
+}
+.geog-pager .geog-btn { flex: 1; }
+
+/* ---------- 地图组件 ---------- */
+.geog-map-wrap {
+  border: 1px solid var(--geog-border); border-radius: 14px;
+  background: var(--geog-card); padding: 12px; margin: 12px 0;
+}
+.geog-map-stage { position: relative; width: 100%; }
+.geog-map-stage canvas {
+  display: block; width: 100%; height: auto; aspect-ratio: 1 / 1;
+  border-radius: 8px; background: var(--geog-bg-soft);
+  touch-action: pan-y;
+  /* W-b 修复：2D/3D 翻转交叉淡入淡出（GEO-RULING-2026-10-17-02 裁决三） */
+  transition: opacity 400ms ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  /* 可访问性：减少动态偏好下翻转瞬时切换（JS 同步跳过动画等待） */
+  .geog-map-stage canvas { transition: none; }
+}
+.geog-map-badge {
+  position: absolute; left: 10px; top: 8px;
+  font-size: 0.78rem; background: rgba(0,0,0,0.55); color: #fff;
+  padding: 3px 8px; border-radius: 6px; pointer-events: none;
+  max-width: calc(100% - 20px);
+}
+.geog-map-tools { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+.geog-slider-row { flex: 1 1 220px; min-width: 200px; }
+.geog-slider-row label { font-size: 0.85rem; display: block; margin-bottom: 2px; }
+.geog-slider-row output { font-size: 0.85rem; color: var(--geog-accent); font-weight: 700; }
+.geog-slider-row input[type="range"] {
+  width: 100%; min-height: 44px; accent-color: var(--geog-accent);
+}
+.geog-readout {
+  font-size: 0.85rem; color: var(--geog-ink-soft); margin-top: 6px;
+  min-height: 1.7em;
+}
+.geog-legend {
+  display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 8px;
+  font-size: 0.85rem; color: var(--geog-ink-soft);
+}
+.geog-legend .sw { display: inline-block; width: 26px; height: 0; border-top: 3px solid var(--geog-contour); vertical-align: middle; margin-right: 6px; }
+.geog-legend .sw.river { border-top-color: var(--geog-river); }
+.geog-ax-note { font-size: 0.78rem; color: var(--geog-ink-soft); margin-top: 8px; }
+
+/* ---------- 闯关 ---------- */
+.geog-quiz-panel { margin-top: 12px; border-top: 1px dashed var(--geog-border); padding-top: 10px; }
+.geog-quiz-q { font-size: 1rem; font-weight: 700; margin: 8px 0; }
+.geog-quiz-progress { font-size: 0.85rem; color: var(--geog-ink-soft); }
+.geog-quiz-feedback { font-size: 0.95rem; margin: 8px 0; min-height: 1.7em; }
+.geog-quiz-feedback.ok { color: var(--geog-correct); font-weight: 700; }
+.geog-quiz-feedback.no { color: var(--geog-wrong); font-weight: 700; }
+.geog-gv { border: 1px solid var(--geog-border); border-radius: 12px; padding: 12px 14px; margin: 12px 0; background: var(--geog-card); }
+.geog-gv .q { font-size: 1rem; font-weight: 700; margin: 0 0 8px; }
+.geog-gv .opts { display: flex; flex-wrap: wrap; gap: 10px; }
+.geog-gv .fb { font-size: 0.95rem; margin-top: 8px; min-height: 1.5em; }
+.geog-gv .fb.ok { color: var(--geog-correct); }
+.geog-gv .fb.no { color: var(--geog-wrong); }
+
+/* ---------- 抽屉 ---------- */
+.geog-drawer-mask {
+  position: fixed; inset: 0; z-index: 90;
+  background: rgba(0,0,0,0.45);
+  opacity: 0; pointer-events: none; transition: opacity 0.22s;
+}
+.geog-drawer-mask.open { opacity: 1; pointer-events: auto; }
+.geog-drawer {
+  position: fixed; top: 0; left: 0; bottom: 0; z-index: 95;
+  width: min(320px, 84vw);
+  background: var(--geog-bg); color: var(--geog-ink);
+  border-right: 1px solid var(--geog-border);
+  transform: translateX(-105%); transition: transform 0.25s ease;
+  display: flex; flex-direction: column;
+}
+.geog-drawer.open { transform: translateX(0); }
+.geog-drawer-head {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 12px; border-bottom: 1px solid var(--geog-border);
+  min-height: 56px;
+}
+.geog-drawer-head .t { flex: 1; font-size: 1.05rem; font-weight: 700; }
+.geog-drawer-list { flex: 1; overflow-y: auto; padding: 8px 0 24px; }
+.geog-drawer-ch { padding: 6px 16px; font-size: 0.85rem; color: var(--geog-ink-soft); font-weight: 700; }
+.geog-drawer-lesson {
+  display: flex; align-items: center; gap: 8px; width: 100%;
+  padding: 12px 16px; min-height: 48px;
+  background: none; border: none; color: inherit;
+  font-size: 0.95rem; text-align: left; cursor: pointer;
+}
+.geog-drawer-lesson.cur { background: var(--geog-bg-soft); font-weight: 700; }
+.geog-drawer-lesson .id { color: var(--geog-ink-soft); font-size: 0.78rem; }
+
+/* ---------- 三视口 ---------- */
+@media (max-width: 480px) {
+  .geog-app { padding: 0 12px 96px; }
+  .geog-topbar { padding: 8px 12px; }
+  .geog-pager { flex-direction: column; }
+}
+@media (min-width: 821px) {
+  .geog-map-flex { display: flex; gap: 16px; align-items: flex-start; }
+  .geog-map-flex .geog-map-stage { flex: 1 1 0; }
+  .geog-map-flex .geog-map-side { flex: 0 0 240px; }
+}

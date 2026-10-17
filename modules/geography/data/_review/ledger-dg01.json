@@ -1,0 +1,618 @@
+{
+  "chapter": "dg01",
+  "entries": [
+    {
+      "content": {
+        "computed_checks": {
+          "z(30,53)": "≈420.000（鞍部）",
+          "z(30,78)": "≈680.000（脊上北峰）",
+          "z(52,55)": "≈-300.000（谷底）",
+          "z(70,52)": "≈380.000（主峰；与 F1 期望 ≈380m 一致）"
+        },
+        "contour_interval_m": 50,
+        "formula": "z(x,y) = 420·exp(-((x-30)^2)/10) + 380·exp(-((x-70)^2+(y-52)^2)/22) + 260·exp(-((x-30)^2+(y-78)^2)/14) + 260·exp(-((x-30)^2+(y-28)^2)/14) - 300·exp(-((x-52)^2)/7) + 420·exp(-((x-90)^2)/1.2)",
+        "known_issue": "口径 §13.1 正文'主峰约 560m'与公式计算值 380m 不一致；以公式与 F1（≈380m）为准，已上报地理专家队裁决（不属生产队可自行改口径事项）。已裁决：GEO-RULING-2026-10-17-01（主峰 380m，以公式为准）",
+        "terms": [
+          {
+            "amp": 420,
+            "cx": 30,
+            "cy": 0,
+            "note": "南北走向山脊（脊线 x=30）",
+            "sx": 10,
+            "sy": "Inf"
+          },
+          {
+            "amp": 380,
+            "cx": 70,
+            "cy": 52,
+            "note": "主峰（峰顶 (70,52)）",
+            "sx": 22,
+            "sy": 22
+          },
+          {
+            "amp": 260,
+            "cx": 30,
+            "cy": 78,
+            "note": "脊上北峰（峰顶 (30,78)）",
+            "sx": 14,
+            "sy": 14
+          },
+          {
+            "amp": 260,
+            "cx": 30,
+            "cy": 28,
+            "note": "脊上南峰（峰顶 (30,28)）",
+            "sx": 14,
+            "sy": 14
+          },
+          {
+            "amp": -300,
+            "cx": 52,
+            "cy": 0,
+            "note": "南北走向山谷（谷线 x=52）",
+            "sx": 7,
+            "sy": "Inf"
+          },
+          {
+            "amp": 420,
+            "cx": 90,
+            "cy": 0,
+            "note": "东缘陡崖（x≈90 近垂直壁）",
+            "sx": 1.2,
+            "sy": "Inf"
+          }
+        ]
+      },
+      "id": "dg01.3.3-e1",
+      "kind": "field",
+      "lesson": "dg01.3.3",
+      "review_history": [],
+      "revision": 1,
+      "status": "final_passed",
+      "summary": "标准测试高程场（真值口径 §13.1）：6 高斯叠加解析函数，逻辑坐标 0–100（y 向上），单位米；等高距 50m",
+      "written_at": "2026-10-17",
+      "written_by": "地理试点生产队"
+    },
+    {
+      "content": {
+        "F1": {
+          "at": [
+            70,
+            52
+          ],
+          "expect": "闭合等高线同心圆，标高点 ≈380m，判“山顶”",
+          "feature": "主峰"
+        },
+        "F2": {
+          "at": [
+            30,
+            55
+          ],
+          "expect": "等高线向低处（远离脊线）凸出，判“山脊”",
+          "feature": "山脊（凸低为脊正例）"
+        },
+        "F3": {
+          "at": [
+            52,
+            55
+          ],
+          "expect": "等高线向高处（朝脊线/主峰）凸出，判“山谷”",
+          "feature": "山谷（凸高为谷正例）"
+        },
+        "F4": {
+          "at": [
+            30,
+            53
+          ],
+          "expect": "两组闭合圈之间的马鞍形过渡带，判“鞍部”（GEO-R01 例外）",
+          "feature": "鞍部"
+        },
+        "F5": {
+          "at": [
+            90,
+            52
+          ],
+          "expect": "等高线重合/密集（50m 等高距下 3 逻辑单位内 ≥4 条线），判“陡崖”+边界句“楼层叠在一起”",
+          "feature": "陡崖"
+        },
+        "F6": {
+          "at": "F2 vs F3",
+          "expect": "同一课必须同时呈现凸低与凸高两例（GEO-R02）",
+          "feature": "凸向反例对"
+        },
+        "F7": {
+          "at": "(90,52) vs (15,20)",
+          "expect": "密段视坡度角 > 稀段，“密陡稀缓”（GEO-R05）",
+          "feature": "坡度对比"
+        },
+        "F8": {
+          "at": "沿谷线 x=52，南北走向",
+          "expect": "河流线落在山谷包络带内（谷线两侧各 1 条等高距宽度）；流向与等高线凸向相反（GEO-R03）",
+          "feature": "河流"
+        }
+      },
+      "id": "dg01.3.3-e2",
+      "kind": "judgment",
+      "lesson": "dg01.3.3",
+      "review_history": [],
+      "revision": 1,
+      "status": "final_passed",
+      "summary": "已知特征判读答案（真值口径 §13.2 F1–F8）",
+      "written_at": "2026-10-17",
+      "written_by": "地理试点生产队"
+    },
+    {
+      "content": {
+        "q1": {
+          "answer_cn": "山谷",
+          "at": [
+            52,
+            55
+          ],
+          "kind": "valley"
+        },
+        "q2": {
+          "answer_cn": "山脊",
+          "at": [
+            30,
+            55
+          ],
+          "kind": "ridge"
+        },
+        "q3": {
+          "answer_cn": "山顶",
+          "at": [
+            70,
+            52
+          ],
+          "kind": "peak"
+        },
+        "q4": {
+          "answer_cn": "鞍部",
+          "at": [
+            30,
+            53
+          ],
+          "kind": "saddle"
+        },
+        "q5": {
+          "answer_cn": "陡崖",
+          "at": [
+            90,
+            52
+          ],
+          "kind": "cliff"
+        },
+        "tolerance": "点选命中以屏幕距离 ≤44px 为准（G3 触控要求）"
+      },
+      "id": "dg01.3.3-e3",
+      "kind": "quiz",
+      "lesson": "dg01.3.3",
+      "review_history": [],
+      "revision": 1,
+      "status": "final_passed",
+      "summary": "闯关题答案（p3 contour-quest，5 题）",
+      "written_at": "2026-10-17",
+      "written_by": "地理试点生产队"
+    },
+    {
+      "content": {
+        "a": {
+          "answer": "山谷",
+          "q": "等高线朝着海拔变大的方向凸出，是山谷还是山脊？"
+        },
+        "b": {
+          "answer": "更陡",
+          "q": "同一张图上，等高线密集的地方，坡度更陡还是更缓？"
+        },
+        "c": {
+          "answer": "海拔较低的平原",
+          "q": "分层设色地形图上，绿色表示什么？"
+        }
+      },
+      "id": "dg01.3.3-e4",
+      "kind": "quiz",
+      "lesson": "dg01.3.3",
+      "review_history": [],
+      "revision": 1,
+      "status": "final_passed",
+      "summary": "收官三问答案（p4 guess-verify，3 题）",
+      "written_at": "2026-10-17",
+      "written_by": "地理试点生产队"
+    },
+    {
+      "content": {
+        "note": "兑现页建成时须回链本预告（关键词“凸高为谷、凸低为脊”一致）；未兑现视为缺陷。",
+        "promise": "dg01.3.3 p4 文案承诺：口诀“凸高为谷、凸低为脊”将在 dg09.3.2 长江、dg13.2.1 黄土高原、dg14.4.2 地貌三课回填（“认旧友”）",
+        "redeem_pages": [
+          "dg09.3.2",
+          "dg13.2.1",
+          "dg14.4.2"
+        ],
+        "status": "planned"
+      },
+      "id": "dg01.3.3-e5",
+      "kind": "notice",
+      "lesson": "dg01.3.3",
+      "review_history": [],
+      "revision": 1,
+      "status": "final_passed",
+      "summary": "预告登记（硬门禁⑩）：口诀“凸高为谷、凸低为脊”回填链",
+      "written_at": "2026-10-17",
+      "written_by": "地理试点生产队"
+    },
+    {
+      "id": "dg01.1.1-e1",
+      "lesson": "dg01.1.1",
+      "kind": "quiz",
+      "summary": "形状口径与四证据（p1/p3 guess-verify答案）",
+      "content": {
+        "motto": "两极稍扁、赤道略鼓的不规则球体（“正圆球体”仅为简化模型）",
+        "evidences": [
+          "站得高看得远（海面弯曲）",
+          "月食地影永远是圆弧",
+          "麦哲伦船队1519–1522一直向西回到起点",
+          "卫星照片"
+        ],
+        "flattening": "约1/298（示意夸张对比图：只看“两极扁、赤道鼓”方向，不量数值）",
+        "quiz": {
+          "a": "两极稍扁、赤道略鼓的不规则球体",
+          "b": "地球是球体，可以绕一圈",
+          "c": "“两极扁、赤道鼓”的方向"
+        }
+      },
+      "written_at": "2026-10-17",
+      "written_by": "地理批1生产队",
+      "revision": 1,
+      "review_history": [
+        {
+          "stage": "first",
+          "by": "地理专家队（两审）",
+          "date": "2026-10-17",
+          "result": "pass",
+          "note": "初审：形状口径/四证据/扁率与 dg01.js p1 文案一致；“两极稍扁、赤道略鼓”符合 GEO-R55（“正圆球体”无条件表述=FAIL，已规避）；麦哲伦 1519–1522 事实正确；扁率约 1/298 事实正确，夸张图“只看方向不量数”符合 GEO-AX01。终审：通过。"
+        },
+        {
+          "stage": "final",
+          "by": "地理专家队（两审）",
+          "date": "2026-10-17",
+          "result": "pass",
+          "note": "终审通过，置 final_passed。"
+        }
+      ],
+      "status": "final_passed"
+    },
+    {
+      "id": "dg01.1.2-e1",
+      "lesson": "dg01.1.2",
+      "kind": "quiz",
+      "summary": "地球大小三常量与量级估算（p1/p3答案；GEO-R54/R55）",
+      "content": {
+        "mean_radius_km": 6371,
+        "equator_km": "约40000（精确值约40075）",
+        "surface_km2": "约5.1亿",
+        "scale_ladder": "人约10^0m → 城市约10^4m → 地球约10^7m",
+        "walk_estimate": "40000÷40=1000天≈将近3年（步行5km/h、日行8h）",
+        "quiz": {
+          "a": "6371千米",
+          "b": "将近3年",
+          "c": "不能，测量取整后的数要诚实"
+        }
+      },
+      "written_at": "2026-10-17",
+      "written_by": "地理批1生产队",
+      "revision": 1,
+      "review_history": [
+        {
+          "stage": "first",
+          "by": "地理专家队（两审）",
+          "date": "2026-10-17",
+          "result": "pass",
+          "note": "初审：6371km/约40075/约5.1亿均在 GEO-R55 容差内；“约”字诚实符合 GEO-R54；估算 40000÷40=1000 天≈将近 3 年计算正确（1000/365≈2.74 年）。终审：通过。"
+        },
+        {
+          "stage": "final",
+          "by": "地理专家队（两审）",
+          "date": "2026-10-17",
+          "result": "pass",
+          "note": "终审通过，置 final_passed。"
+        }
+      ],
+      "status": "final_passed"
+    },
+    {
+      "id": "dg01.2.1-e1",
+      "lesson": "dg01.2.1",
+      "kind": "quiz",
+      "summary": "纬线/纬度口径（GEO-R35/R55；p1–p3答案）",
+      "content": {
+        "lat_line": "与地轴垂直的圆；赤道最长、向两极缩短；指示东西方向（写反=FAIL）",
+        "latitude": "0°–90°（最大90°，非180°）；N北/S南",
+        "zones": "0°–30°低纬，30°–60°中纬，60°–90°高纬；武汉约30°N（低中纬分界）",
+        "five_zones": "回归线23.5°、极圈66.5°",
+        "quiz": {
+          "a": "东西方向",
+          "b": "90°",
+          "c": "低纬与中纬的分界处"
+        }
+      },
+      "written_at": "2026-10-17",
+      "written_by": "地理批1生产队",
+      "revision": 1,
+      "review_history": [
+        {
+          "stage": "first",
+          "by": "地理专家队（两审）",
+          "date": "2026-10-17",
+          "result": "pass",
+          "note": "初审：纬线指示东西方向符合 GEO-R35（写反=FAIL，已规避）；高低纬 0–30/30–60/60–90 划分正确；回归线 23.5°/极圈 66.5°符合 GEO-R55；武汉约 30°N“低纬与中纬分界处”表述正确。终审：通过。"
+        },
+        {
+          "stage": "final",
+          "by": "地理专家队（两审）",
+          "date": "2026-10-17",
+          "result": "pass",
+          "note": "终审通过，置 final_passed。"
+        }
+      ],
+      "status": "final_passed"
+    },
+    {
+      "id": "dg01.2.2-e1",
+      "lesson": "dg01.2.2",
+      "kind": "quiz",
+      "summary": "经线/经度/东西半球口径（GEO-R35/R36；p1–p3答案）",
+      "content": {
+        "meridian": "连接两极的半圆；所有经线圈一样大；指示南北方向（写反=FAIL）",
+        "longitude": "0°–180°；E东/W西；本初子午线0°",
+        "hemisphere": "20°W–160°E（东半球：20°W向东至160°E）；不用0°/180°（会拆开欧洲非洲）；分界走大西洋/太平洋",
+        "quiz": {
+          "a": "南北方向",
+          "b": "20°W和160°E",
+          "c": "东半球"
+        }
+      },
+      "written_at": "2026-10-17",
+      "written_by": "地理批1生产队",
+      "revision": 1,
+      "review_history": [
+        {
+          "stage": "first",
+          "by": "地理专家队（两审）",
+          "date": "2026-10-17",
+          "result": "pass",
+          "note": "初审：经线指示南北方向符合 GEO-R35；20°W–160°E 符合 GEO-R36（“分界走大洋、不拆大陆”与口径一致，0°/180° 误项已列为干扰项）。终审：通过。"
+        },
+        {
+          "stage": "final",
+          "by": "地理专家队（两审）",
+          "date": "2026-10-17",
+          "result": "pass",
+          "note": "终审通过，置 final_passed。"
+        }
+      ],
+      "status": "final_passed"
+    },
+    {
+      "id": "dg01.2.3-e1",
+      "lesson": "dg01.2.3",
+      "kind": "quiz",
+      "summary": "经纬网定位答案（GEO-R38；先纬后经；p1–p3）",
+      "content": {
+        "order": "先纬后经（如30°N,114°E）；N/S/E/W缺一不可（缺=无法定位）",
+        "wuhan": "约30°N,114°E",
+        "beijing": "约40°N,116°E",
+        "mnemonic": "横纬竖经（横的是纬线、竖的是经线）",
+        "quiz": {
+          "a": "30°N,114°E",
+          "b": "北京",
+          "c": "不能，缺N/S/E/W",
+          "d": "北边"
+        }
+      },
+      "written_at": "2026-10-17",
+      "written_by": "地理批1生产队",
+      "revision": 1,
+      "review_history": [
+        {
+          "stage": "first",
+          "by": "地理专家队（两审）",
+          "date": "2026-10-17",
+          "result": "pass",
+          "note": "初审：先纬后经符合 GEO-R38；武汉约 30°N,114°E、北京约 40°N,116°E 坐标正确（与 GEO-R38 例 40°N,116°E 一致）；“横纬竖经”表述正确。终审：通过。"
+        },
+        {
+          "stage": "final",
+          "by": "地理专家队（两审）",
+          "date": "2026-10-17",
+          "result": "pass",
+          "note": "终审通过，置 final_passed。"
+        }
+      ],
+      "status": "final_passed"
+    },
+    {
+      "id": "dg01.2.3-e2",
+      "lesson": "dg01.2.3",
+      "kind": "notice",
+      "summary": "预告登记（硬门禁⑩）：经纬网=球面坐标系，几何g13.1.1学完回填认旧友",
+      "content": {
+        "promise": "dg01.2.3 p4文案承诺：经纬网是球面坐标系的现实用例；几何g13.1.1坐标系学完后回填“认旧友”（关键词：球面坐标系、认旧友）",
+        "redeem_pages": [
+          "g13.1.1"
+        ],
+        "note": "兑现页建成时须回链本预告（关键词一致）；未兑现视为缺陷。g13.1.1在数学模块已存在（modules/math/data/g13.js），跨模块引用已核验。",
+        "status": "planned"
+      },
+      "written_at": "2026-10-17",
+      "written_by": "地理批1生产队",
+      "revision": 1,
+      "review_history": [
+        {
+          "stage": "first",
+          "by": "地理专家队（两审）",
+          "date": "2026-10-17",
+          "result": "pass",
+          "note": "初审：承诺文案“球面坐标系/认旧友”真实存在于 dg01.2.3-p4；g13.1.1 在数学模块 modules/math/data/g13.js 已核验存在；跨模块引用符合 GEO-R51（无虚假奠基）。终审：通过。"
+        },
+        {
+          "stage": "final",
+          "by": "地理专家队（两审）",
+          "date": "2026-10-17",
+          "result": "pass",
+          "note": "终审通过，置 final_passed。"
+        }
+      ],
+      "status": "final_passed"
+    },
+    {
+      "id": "dg01.2.4-e1",
+      "lesson": "dg01.2.4",
+      "kind": "quiz",
+      "summary": "方向判读口径（GEO-R35/R37/R39；p1–p4答案）",
+      "content": {
+        "graticule": "经线定南北、纬线定东西；方向永远相对",
+        "three_methods": "有指向标看指向标 > 有经纬网看经纬网 > 都没有默认上北下南左西右东（混用无说明=FAIL）",
+        "polar": "北逆南顺（北极俯视逆时针、南极俯视顺时针）；东西按自转方向判，不许“右边即东”",
+        "quiz": {
+          "a": "看指向标",
+          "b": "南边偏西",
+          "c": "逆时针",
+          "d": "不一定，要按自转方向判"
+        }
+      },
+      "written_at": "2026-10-17",
+      "written_by": "地理批1生产队",
+      "revision": 1,
+      "review_history": [
+        {
+          "stage": "first",
+          "by": "地理专家队（两审）",
+          "date": "2026-10-17",
+          "result": "pass",
+          "note": "初审：三法优先级（指向标>经纬网>默认上北下南）符合 GEO-R39；“北逆南顺”符合 GEO-R37；“不一定，要按自转方向判”符合 GEO-R08/GEO-R37（不许“地图右边=东”）。终审：通过。"
+        },
+        {
+          "stage": "final",
+          "by": "地理专家队（两审）",
+          "date": "2026-10-17",
+          "result": "pass",
+          "note": "终审通过，置 final_passed。"
+        }
+      ],
+      "status": "final_passed"
+    },
+    {
+      "id": "dg01.3.1-e1",
+      "lesson": "dg01.3.1",
+      "kind": "quiz",
+      "summary": "比例尺口径（GEO-R18–R21；红线④立靶；p1–p3答案）",
+      "content": {
+        "definition": "图上距离:实地距离（比值，非纸面大小）",
+        "three_forms": "1:50000 = 图上1厘米代表实地500米 = 线段式（50000cm=500m；三式等价，误差≤1%）",
+        "calc": "图上2cm×1:50000=100000cm=1km（桥梁句：1km=100000cm；单位必写）",
+        "motto": "大详小略（大比例尺→小范围→内容详）；分母越小、比例尺越大（逐字）",
+        "quiz": {
+          "a": "1千米",
+          "b": "图上1厘米代表实地500米",
+          "c": "大比例尺的武汉市地图"
+        }
+      },
+      "written_at": "2026-10-17",
+      "written_by": "地理批1生产队",
+      "revision": 1,
+      "review_history": [
+        {
+          "stage": "first",
+          "by": "地理专家队（两审）",
+          "date": "2026-10-17",
+          "result": "pass",
+          "note": "初审：“图上距离:实地距离”比值定义符合 GEO-R18（纸面大小混淆=FAIL，已规避）；三式互换 1:50000=1cm 代表 500m 等价（误差 0）符合 GEO-R20；2cm×1:50000=1km 计算正确（桥梁句 1km=100000cm）符合 GEO-R21；“大详小略”口诀逐字+换算句“分母越小、比例尺越大”逐字符合 §0.7 冻结口诀。终审：通过。"
+        },
+        {
+          "stage": "final",
+          "by": "地理专家队（两审）",
+          "date": "2026-10-17",
+          "result": "pass",
+          "note": "终审通过，置 final_passed。"
+        }
+      ],
+      "status": "final_passed"
+    },
+    {
+      "id": "dg01.3.2-e1",
+      "lesson": "dg01.3.2",
+      "kind": "quiz",
+      "summary": "地图三件套与找茬答案（GEO-R27；p1–p2）",
+      "content": {
+        "three": "比例尺（多远）+指向标（方向，一般指北N）+图例（符号字典，不许猜）",
+        "find": {
+          "q1": "缺指向标且无经纬网→方向件缺失，无法判定（“上北下南”不能无条件用）",
+          "q2": "缺图例→符号不许猜，补图例再读"
+        },
+        "quiz": {
+          "a": "无法判定，这张图缺方向件",
+          "b": "查不到，不能猜——这张图缺图例"
+        }
+      },
+      "written_at": "2026-10-17",
+      "written_by": "地理批1生产队",
+      "revision": 1,
+      "review_history": [
+        {
+          "stage": "first",
+          "by": "地理专家队（两审）",
+          "date": "2026-10-17",
+          "result": "pass",
+          "note": "初审：三要素（比例尺+指向标+图例）符合 GEO-R27；找茬答案与课页一致（缺方向件→无法判定；缺图例→符号不许猜）。终审：通过。"
+        },
+        {
+          "stage": "final",
+          "by": "地理专家队（两审）",
+          "date": "2026-10-17",
+          "result": "pass",
+          "note": "终审通过，置 final_passed。"
+        }
+      ],
+      "status": "final_passed"
+    },
+    {
+      "id": "dg01.3.4-e1",
+      "lesson": "dg01.3.4",
+      "kind": "quiz",
+      "summary": "分层设色/剖面口径（GEO-R07/R28/AX01；p1–p3答案）",
+      "content": {
+        "relief": "绿=海拔较低的平原（写绿色=森林=FAIL）；黄=高原丘陵；棕褐=山地；蓝=海洋；必配海拔密码图例（颜色条+海拔分级）",
+        "profile": "三步：画剖面线→沿线取点读海拔→按海拔连线；与等高线图对照（俯视图vs切面图）",
+        "exaggeration": "垂直夸大×2（示意）：看趋势不量高度；不表示真实行政界线",
+        "quiz": {
+          "a": "海拔较低的平原",
+          "b": "海拔密码图例（颜色+海拔分级）",
+          "c": "高度被放大了，只看趋势不量高度"
+        }
+      },
+      "written_at": "2026-10-17",
+      "written_by": "地理批1生产队",
+      "revision": 1,
+      "review_history": [
+        {
+          "stage": "first",
+          "by": "地理专家队（两审）",
+          "date": "2026-10-17",
+          "result": "pass",
+          "note": "初审：绿=海拔较低的平原符合 GEO-R07（“绿色=森林”=FAIL，已规避）；垂直夸大×2（示意）+“看趋势不量高度”符合 GEO-R28/GEO-AX01。终审：通过。"
+        },
+        {
+          "stage": "final",
+          "by": "地理专家队（两审）",
+          "date": "2026-10-17",
+          "result": "pass",
+          "note": "终审通过，置 final_passed。"
+        }
+      ],
+      "status": "final_passed"
+    }
+  ],
+  "note": "地理dg01可计算内容两审台账（试点dg01.3.3 e1–e5已final_passed；批1九课新增10条，状态drafted，待地理专家队初审→终审）。状态 drafted=生产队已撰写、待地理专家队初审；未终审条目不得被课程页面引用（门禁 tools/check-geography-review.mjs）。",
+  "schema": "geography-review-ledger/1.0"
+}

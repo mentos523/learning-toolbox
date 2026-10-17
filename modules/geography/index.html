@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230ea5e9'/%3E%3Ctext x='32' y='44' font-size='30' text-anchor='middle' fill='white' font-family='sans-serif'%3E%E5%9C%B0%3C/text%3E%3C/svg%3E">
+<title>地理 — 学习工具箱</title>
+<meta name="description" content="地图是地理的第二语言：先学会“读”，再学“说”。从七年级出发，一路到高中。">
+<link rel="stylesheet" href="css/geography.css">
+</head>
+<body data-theme="light">
+<!-- 深色模式入口：跟随系统 prefers-color-scheme，系统切换时实时响应；
+     地理 SVG/CSS 全走 --geog-* 变量，切换主题重绘 canvas。 -->
+<script>
+(function () {
+  var mq = window.matchMedia("(prefers-color-scheme: dark)");
+  function apply() { document.body.setAttribute("data-theme", mq.matches ? "dark" : "light"); }
+  apply();
+  if (mq.addEventListener) mq.addEventListener("change", apply);
+  else if (mq.addListener) mq.addListener(apply);
+})();
+</script>
+
+<!-- 顶栏：目录按钮（抽屉双开之一）+ 标题 + 页码 -->
+<header class="geog-topbar" id="geog-topbar" aria-label="地理顶栏"></header>
+
+<!-- 章节浏览器（16 章 dg00–dg15 元信息见 data/chapters.js，
+     章节与课数由 data/dgNN.js 数据驱动；本阶段只有 dg01 数据，
+     故浏览器只显示 dg01。每就位一个 data/dgNN.js，对应章自动出现。
+     #dg01.3.3/2 深链冷启动直达。 -->
+<main class="geog-app" id="geog-browser" aria-label="地理章节浏览"></main>
+
+<!-- 地理 SPA 学习页：js/geography.js 引擎渲染；数据见 data/dgNN.js；
+     样式见 css/geography.css（geog- 前缀，与其他学科隔离）。 -->
+<section id="geography-app" aria-label="地理学习">
+  <div class="geog-app" id="geog-app" hidden></div>
+</section>
+
+<!-- 框架：基础引擎层（方案 A，加载顺序见 docs/ENGINE.md §一；
+     地理试点仅需 core + contour） → 章注册表 → 章数据 → 主引擎 -->
+<script src="../../assets/engine/core.js"></script>
+<script src="../../assets/engine/contour.js"></script>
+<script src="data/chapters.js"></script>
+<script src="data/dg00.js"></script>
+<script src="data/dg01.js"></script>
+<script src="data/geo-climate-types.js"></script>
+<script src="data/geo-climate-stations.js"></script>
+<script src="data/geo-timezone-cities.js"></script>
+<script src="data/geo-layer-schema.js"></script>
+<script src="js/geography.js"></script>
+</body>
+</html>
