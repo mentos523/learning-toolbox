@@ -244,10 +244,10 @@ caption: "把大矩形看成一个整体：宽是 a，长是 b+c——面积 = a
 shapes: [
 { t: "poly", pts: [[20,30],[80,30],[80,70],[20,70]], color: "line", width: 3},
 { t: "seg", a: [50,30], b: [50,70], color: "aux", width: 1.5, dash: "5,4"},
-{ t: "txt", p: [12,50], text: "a", size: 14},
-{ t: "txt", p: [35,22], text: "b", size: 14},
-{ t: "txt", p: [65,22], text: "c", size: 14},
-{ t: "txt", p: [50,82], text: "面积 = a(b+c)", size: 14, bold: true}
+{ t: "txt", p: [12,50], text: "a", size: 14.48},
+{ t: "txt", p: [35,22], text: "b", size: 14.48},
+{ t: "txt", p: [65,22], text: "c", size: 14.48},
+{ t: "txt", p: [50,82], text: "面积 = a(b+c)", size: 14.48, bold: true}
 ]
 },
 {
@@ -256,9 +256,9 @@ caption: "把大矩形看成左右两块：面积 = ab + ac——同一张图，
 shapes: [
 { t: "poly", pts: [[20,30],[50,30],[50,70],[20,70]], color: "corrA", width: 2.5, fill: "corrA", opacity: 0.25},
 { t: "poly", pts: [[50,30],[80,30],[80,70],[50,70]], color: "corrB", width: 2.5, fill: "corrB", opacity: 0.25},
-{ t: "txt", p: [35,50], text: "ab", size: 14, bold: true, color: "corrA"},
-{ t: "txt", p: [65,50], text: "ac", size: 14, bold: true, color: "corrB"},
-{ t: "txt", p: [50,82], text: "面积 = ab + ac", size: 14, bold: true}
+{ t: "txt", p: [35,50], text: "ab", size: 14.48, bold: true, color: "corrA"},
+{ t: "txt", p: [65,50], text: "ac", size: 14.48, bold: true, color: "corrB"},
+{ t: "txt", p: [50,82], text: "面积 = ab + ac", size: 14.48, bold: true}
 ]
 }
 ]
@@ -350,7 +350,7 @@ shapes: [
 { t: "seg", a: [50,30], b: [50,70], color: "aux", width: 2, dash: "5,4"},
 { t: "txt", p: [50,22], text: "底 a", size: 13},
 { t: "txt", p: [56,50], text: "高 h", size: 13},
-{ t: "txt", p: [50,82], text: "S = ah", size: 14, bold: true, color: "corrA"}
+{ t: "txt", p: [50,82], text: "S = ah", size: 14.48, bold: true, color: "corrA"}
 ]
 },
 {
@@ -361,7 +361,7 @@ shapes: [
 { t: "seg", a: [40,30], b: [40,70], color: "aux", width: 2, dash: "5,4"},
 { t: "txt", p: [40,22], text: "底 a", size: 13},
 { t: "txt", p: [46,50], text: "高 h", size: 13},
-{ t: "txt", p: [50,82], text: "S = ah", size: 14, bold: true, color: "corrB"}
+{ t: "txt", p: [50,82], text: "S = ah", size: 14.48, bold: true, color: "corrB"}
 ]
 }
 ]
@@ -405,7 +405,7 @@ shapes: [
 { t: "seg", a: [50,25], b: [50,75], color: "aux", width: 2, dash: "5,4"},
 { t: "txt", p: [50,17], text: "底 a", size: 13},
 { t: "txt", p: [56,50], text: "高 h", size: 13},
-{ t: "txt", p: [50,87], text: "S = ah", size: 14, bold: true}
+{ t: "txt", p: [50,87], text: "S = ah", size: 14.48, bold: true}
 ]
 },
 {
@@ -415,7 +415,7 @@ shapes: [
 { t: "seg", a: [50,40], b: [50,60], color: "aux", width: 2, dash: "5,4"},
 { t: "txt", p: [40,34], text: "底 a", size: 13},
 { t: "txt", p: [56,50], text: "高变小", size: 13, color: "target"},
-{ t: "txt", p: [50,72], text: "面积变小", size: 14, bold: true, color: "target"}
+{ t: "txt", p: [50,72], text: "面积变小", size: 14.48, bold: true, color: "target"}
 ]
 }
 ]
@@ -514,7 +514,7 @@ shapes: [
 { t: "seg", a: [60,55], b: [88,55], color: "aux", width: 2, dash: "5,4"},
 { t: "seg", a: [80,25], b: [80,55], color: "target", width: 2.5, dash: "5,4"},
 { t: "right", v: [80,55], p: [60,55], q: [80,25], size: 5, color: "corrAngle"},
-{ t: "txt", p: [74,63], text: "底边延长线", size: 11, color: "aux"},
+{ t: "txt", p: [74,63], text: "底边延长线", size: 11.89, color: "aux"},
 { t: "txt", p: [50,80], text: "高在形外：延长底边来接", size: 13, color: "target"}
 ]
 }
@@ -556,7 +556,7 @@ caption: "第 1 个：底是 a，高是 h——面积 = ah/2。",
 shapes: [
 { t: "poly", pts: [[20,30],[60,30],[40,65]], color: "corrA", width: 2.5},
 { t: "seg", a: [40,30], b: [40,65], color: "aux", width: 2, dash: "5,4"},
-{ t: "txt", p: [50,78], text: "S = ah/2", size: 14, bold: true, color: "corrA"}
+{ t: "txt", p: [50,78], text: "S = ah/2", size: 14.48, bold: true, color: "corrA"}
 ]
 },
 {
@@ -565,7 +565,7 @@ shapes: [
 { t: "poly", pts: [[20,30],[60,30],[68,65]], color: "corrB", width: 2.5},
 { t: "seg", a: [60,30], b: [72,30], color: "aux", width: 1.5, dash: "5,4"},
 { t: "seg", a: [68,30], b: [68,65], color: "aux", width: 2, dash: "5,4"},
-{ t: "txt", p: [50,78], text: "S = ah/2", size: 14, bold: true, color: "corrB"}
+{ t: "txt", p: [50,78], text: "S = ah/2", size: 14.48, bold: true, color: "corrB"}
 ]
 },
 {
@@ -573,7 +573,7 @@ caption: "第 3 个：顶点再挪，底高不变——面积永远是 ah/2。�
 shapes: [
 { t: "poly", pts: [[20,30],[60,30],[28,65]], color: "corrC", width: 2.5},
 { t: "seg", a: [28,30], b: [28,65], color: "aux", width: 2, dash: "5,4"},
-{ t: "txt", p: [50,78], text: "S = ah/2", size: 14, bold: true, color: "corrC"}
+{ t: "txt", p: [50,78], text: "S = ah/2", size: 14.48, bold: true, color: "corrC"}
 ]
 }
 ]
@@ -799,7 +799,7 @@ next: "g11-u1-l5-p1"
                         { t: "ray", p: [50,55], ang: 225, len: 25, color: "aux", width: 1.5 },
                         { t: "ray", p: [50,55], ang: 270, len: 25, color: "aux", width: 1.5 },
                         { t: "ray", p: [50,55], ang: 315, len: 25, color: "aux", width: 1.5 },
-                        { t: "txt", p: [50,90], text: "8 瓣", size: 14, bold: true }
+                        { t: "txt", p: [50,90], text: "8 瓣", size: 14.48, bold: true }
                       ]
                     },
                     {
@@ -858,7 +858,7 @@ next: "g11-u1-l5-p1"
                         { t: "poly", pts: [[14,30],[87,30],[87,52],[14,52]], color: "target", width: 2.5 },
                         { t: "txt", p: [50,64], text: "长 ≈ πr（圆周长的一半）", size: 13 },
                         { t: "txt", p: [93,41], text: "宽=r", size: 13 },
-                        { t: "txt", p: [50,78], text: "128 瓣：几乎长方形", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [50,78], text: "128 瓣：几乎长方形", size: 14.48, bold: true, color: "target" }
                       ]
                     }
                   ]
@@ -1014,7 +1014,7 @@ next: "g11-u1-l5-p1"
                           t: "txt",
                           p: [ 50, 41 ],
                           text: "≈ 长方形",
-                          size: 14,
+                          size: 14.48,
                           bold: true
                         },
                         {
@@ -1379,7 +1379,7 @@ next: "g11-u1-l5-p1"
                         { t: "poly", pts: [[40,60],[60,60],[60,75],[40,75]], color: "corrA", width: 1.5 },
                         { t: "poly", pts: [[25,45],[40,45],[40,60],[25,60]], color: "corrB", width: 1.5 },
                         { t: "poly", pts: [[60,45],[75,45],[75,60],[60,60]], color: "corrC", width: 1.5 },
-                        { t: "txt", p: [50,88], text: "表面积 = 展开图面积", size: 14, bold: true, color: "known" }
+                        { t: "txt", p: [50,88], text: "表面积 = 展开图面积", size: 14.48, bold: true, color: "known" }
                       ]
                     }
                   ]
@@ -1486,7 +1486,7 @@ next: "g11-u1-l5-p1"
                       caption: "第 3 步：侧面“剥”下来摊平——是个矩形！",
                       shapes: [
                         { t: "poly", pts: [[20,35],[80,35],[80,65],[20,65]], color: "known", width: 2.5 },
-                        { t: "txt", p: [50,80], text: "侧面摊平：矩形！", size: 14, bold: true, color: "known" }
+                        { t: "txt", p: [50,80], text: "侧面摊平：矩形！", size: 14.48, bold: true, color: "known" }
                       ]
                     },
                     {
@@ -1538,7 +1538,7 @@ next: "g11-u1-l5-p1"
                         { t: "txt", p: [28,68], text: "πr²", size: 12, color: "corrA" },
                         { t: "txt", p: [52,68], text: "πr²", size: 12, color: "corrA" },
                         { t: "txt", p: [81,68], text: "2πrh", size: 12, color: "corrB" },
-                        { t: "txt", p: [55,84], text: "S = 2πr² + 2πrh", size: 14, bold: true }
+                        { t: "txt", p: [55,84], text: "S = 2πr² + 2πrh", size: 14.48, bold: true }
                       ]
                     }
                   ]
@@ -1662,7 +1662,7 @@ next: "g11-u1-l5-p1"
                       shapes: [
                         { t: "poly", pts: [[30,30],[70,30],[70,70],[30,70]], color: "line", width: 2.5 },
                         { t: "poly", pts: [[30,56.7],[70,56.7],[70,70],[30,70]], color: "corrA", width: 1.5, fill: "corrA", opacity: 0.5 },
-                        { t: "txt", p: [50,82], text: "1/3", size: 14, math: true }
+                        { t: "txt", p: [50,82], text: "1/3", size: 14.48, math: true }
                       ]
                     },
                     {
@@ -1670,14 +1670,14 @@ next: "g11-u1-l5-p1"
                       shapes: [
                         { t: "poly", pts: [[30,30],[70,30],[70,70],[30,70]], color: "line", width: 2.5 },
                         { t: "poly", pts: [[30,43.3],[70,43.3],[70,70],[30,70]], color: "corrA", width: 1.5, fill: "corrA", opacity: 0.5 },
-                        { t: "txt", p: [50,82], text: "2/3", size: 14, math: true }
+                        { t: "txt", p: [50,82], text: "2/3", size: 14.48, math: true }
                       ]
                     },
                     {
                       caption: "第 4 步：第三杯沙——圆柱恰好装满！V锥 = V柱÷3。",
                       shapes: [
                         { t: "poly", pts: [[30,30],[70,30],[70,70],[30,70]], color: "target", width: 2.5, fill: "target", opacity: 0.3 },
-                        { t: "txt", p: [50,82], text: "第 3 杯：满了！V锥=V柱÷3", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [50,82], text: "第 3 杯：满了！V锥=V柱÷3", size: 14.48, bold: true, color: "target" }
                       ]
                     }
                   ]
@@ -1977,10 +1977,10 @@ next: "g11-u1-l5-p1"
                       shapes: [
                         { t: "poly", pts: [[12,40],[28,40],[28,56],[12,56]], color: "corrA", width: 2 },
                         { t: "txt", p: [20,66], text: "ab", size: 12, color: "corrA" },
-                        { t: "txt", p: [34,48], text: "→", size: 14 },
+                        { t: "txt", p: [34,48], text: "→", size: 14.48 },
                         { t: "poly", pts: [[38,40],[54,40],[58,56],[42,56]], color: "corrB", width: 2 },
                         { t: "txt", p: [48,66], text: "ah", size: 12, color: "corrB" },
-                        { t: "txt", p: [62,48], text: "→", size: 14 },
+                        { t: "txt", p: [62,48], text: "→", size: 14.48 },
                         { t: "poly", pts: [[66,40],[86,40],[76,56]], color: "corrC", width: 2 },
                         { t: "txt", p: [76,66], text: "ah/2", size: 12, color: "corrC" },
                         { t: "txt", p: [50,80], text: "割补 + 对半", size: 13 }
@@ -1990,7 +1990,7 @@ next: "g11-u1-l5-p1"
                       caption: "梯形（(a+b)h/2）：两个拼成平行四边形再对半——还是割补。",
                       shapes: [
                         { t: "poly", pts: [[30,40],[70,40],[60,58],[40,58]], color: "known", width: 2.5 },
-                        { t: "txt", p: [50,68], text: "(a+b)h/2", size: 14, bold: true, color: "known" },
+                        { t: "txt", p: [50,68], text: "(a+b)h/2", size: 14.48, bold: true, color: "known" },
                         { t: "txt", p: [50,80], text: "两个拼一拼，再对半", size: 13 }
                       ]
                     },
@@ -2047,7 +2047,7 @@ next: "g11-u1-l5-p1"
                 type: "tap-highlight",
                 params: {
                   base: [
-                    { t: "txt", p: [50,90], text: "点一点，分进三篮", size: 14 }
+                    { t: "txt", p: [50,90], text: "点一点，分进三篮", size: 14.48 }
                   ],
                   groups: [
                     { name: "柱体", color: "corrA" },

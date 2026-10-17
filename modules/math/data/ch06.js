@@ -257,7 +257,7 @@ window.MATH_CH["ch06"] = {
                         { t: "seg", a: [25,30], b: [65,30], color: "aux", width: 2, dash: "4,3" },
                         { t: "seg", a: [65,30], b: [65,60], color: "aux", width: 2, dash: "4,3" },
                         { t: "pt", p: [65,60], label: "P", color: "target", r: 5 },
-                        { t: "txt", p: [65,70], text: "(4, 3)", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [65,70], text: "(4, 3)", size: 14.48, bold: true, color: "target" }
                       ] },
                     { caption: "第 3 步：反过来也行——点到哪里，坐标就报到哪里，这叫一一对应。",
                       shapes: [
@@ -266,7 +266,7 @@ window.MATH_CH["ch06"] = {
                         { t: "txt", p: [94,30], text: "x", size: 13 },
                         { t: "txt", p: [25,95], text: "y", size: 13 },
                         { t: "pt", p: [45,20], label: "Q", color: "target", r: 5 },
-                        { t: "txt", p: [45,11], text: "(2, −1)", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [45,11], text: "(2, −1)", size: 14.48, bold: true, color: "target" }
                       ] }
                   ]
                 }

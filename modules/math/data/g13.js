@@ -162,7 +162,7 @@ window.MATH_CH["g13"] = {
                         { t: "txt", p: [25,95], text: "y", size: 13 },
                         { t: "txt", p: [21,26], text: "O", size: 12 },
                         { t: "pt", p: [55,52], label: "P", color: "target", r: 5 },
-                        { t: "txt", p: [55,64], text: "(3, 2)", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [55,64], text: "(3, 2)", size: 14.48, bold: true, color: "target" }
                       ]
                     },
                     {
@@ -173,7 +173,7 @@ window.MATH_CH["g13"] = {
                         { t: "txt", p: [94,30], text: "x", size: 13 },
                         { t: "txt", p: [25,95], text: "y", size: 13 },
                         { t: "pt", p: [70,72], label: "P", color: "target", r: 5 },
-                        { t: "txt", p: [70,84], text: "(5, 5)", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [70,84], text: "(5, 5)", size: 14.48, bold: true, color: "target" }
                       ]
                     },
                     {
@@ -184,7 +184,7 @@ window.MATH_CH["g13"] = {
                         { t: "txt", p: [94,30], text: "x", size: 13 },
                         { t: "txt", p: [25,95], text: "y", size: 13 },
                         { t: "pt", p: [70,30], label: "P", color: "corrA", r: 5 },
-                        { t: "txt", p: [70,42], text: "(4, 0)", size: 14, bold: true, color: "corrA" }
+                        { t: "txt", p: [70,42], text: "(4, 0)", size: 14.48, bold: true, color: "corrA" }
                       ]
                     },
                     {
@@ -195,7 +195,7 @@ window.MATH_CH["g13"] = {
                         { t: "txt", p: [94,30], text: "x", size: 13 },
                         { t: "txt", p: [25,95], text: "y", size: 13 },
                         { t: "pt", p: [25,70], label: "P", color: "corrA", r: 5 },
-                        { t: "txt", p: [38,70], text: "(0, 3)", size: 14, bold: true, color: "corrA" }
+                        { t: "txt", p: [38,70], text: "(0, 3)", size: 14.48, bold: true, color: "corrA" }
                       ]
                     },
                     {
@@ -206,7 +206,7 @@ window.MATH_CH["g13"] = {
                         { t: "txt", p: [94,30], text: "x", size: 13 },
                         { t: "txt", p: [25,95], text: "y", size: 13 },
                         { t: "pt", p: [25,30], label: "P", color: "known", r: 5 },
-                        { t: "txt", p: [40,24], text: "(0, 0) 原点", size: 14, bold: true, color: "known" }
+                        { t: "txt", p: [40,24], text: "(0, 0) 原点", size: 14.48, bold: true, color: "known" }
                       ]
                     }
                   ]
@@ -250,7 +250,7 @@ window.MATH_CH["g13"] = {
                         { t: "seg", a: [25,30], b: [62,30], color: "aux", width: 1.5, dash: "4,3" },
                         { t: "seg", a: [62,30], b: [62,62], color: "aux", width: 1.5, dash: "4,3" },
                         { t: "pt", p: [62,62], label: "P", color: "target", r: 5 },
-                        { t: "txt", p: [62,74], text: "P(4, 3)", size: 14, bold: true, color: "target" },
+                        { t: "txt", p: [62,74], text: "P(4, 3)", size: 14.48, bold: true, color: "target" },
                         { t: "txt", p: [44,24], text: "向右 4", size: 12 },
                         { t: "txt", p: [72,48], text: "向上 3", size: 12 }
                       ]
@@ -299,7 +299,7 @@ window.MATH_CH["g13"] = {
                         { t: "seg", a: [25,30], b: [45,30], color: "known", width: 2.5 },
                         { t: "seg", a: [45,30], b: [45,75], color: "known", width: 2.5 },
                         { t: "pt", p: [45,75], label: "A", color: "target", r: 5 },
-                        { t: "txt", p: [45,87], text: "A(2, 5)", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [45,87], text: "A(2, 5)", size: 14.48, bold: true, color: "target" }
                       ]
                     },
                     {
@@ -312,7 +312,7 @@ window.MATH_CH["g13"] = {
                         { t: "seg", a: [25,30], b: [73,30], color: "aux", width: 1.5, dash: "4,3" },
                         { t: "seg", a: [73,30], b: [73,54], color: "aux", width: 1.5, dash: "4,3" },
                         { t: "pt", p: [73,54], label: "B", color: "target", r: 5 },
-                        { t: "txt", p: [73,66], text: "B(6, 3)", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [73,66], text: "B(6, 3)", size: 14.48, bold: true, color: "target" }
                       ]
                     },
                     {
@@ -386,7 +386,7 @@ window.MATH_CH["g13"] = {
                         { t: "pt", p: [33,46], label: "A", color: "known", r: 5 },
                         { t: "pt", p: [81,70], label: "B", color: "known", r: 5 },
                         { t: "seg", a: [33,46], b: [81,70], color: "target", width: 3.5 },
-                        { t: "txt", p: [57,66], text: "AB = ?", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [57,66], text: "AB = ?", size: 14.48, bold: true, color: "target" }
                       ]
                     },
                     {
@@ -459,8 +459,8 @@ window.MATH_CH["g13"] = {
                         { t: "seg", a: [33,46], b: [81,46], color: "corrA", width: 3 },
                         { t: "seg", a: [81,46], b: [81,70], color: "corrB", width: 3 },
                         { t: "right", v: [81,46], p: [33,46], q: [81,70], size: 6 },
-                        { t: "txt", p: [57,36], text: "Δx", size: 14, bold: true, color: "corrA" },
-                        { t: "txt", p: [90,58], text: "Δy", size: 14, bold: true, color: "corrB" },
+                        { t: "txt", p: [57,36], text: "Δx", size: 14.48, bold: true, color: "corrA" },
+                        { t: "txt", p: [90,58], text: "Δy", size: 14.48, bold: true, color: "corrB" },
                         { t: "txt", p: [57,64], text: "d", size: 16, bold: true, color: "target" },
                         { t: "txt", p: [50,88], text: "d² = Δx² + Δy²", size: 15, bold: true }
                       ]
@@ -530,7 +530,7 @@ window.MATH_CH["g13"] = {
                         { t: "seg", a: [25,18], b: [25,92], color: "line", width: 2 },
                         { t: "seg", a: [41,46], b: [89,78], color: "line", width: 2.5 },
                         { t: "pt", p: [65,62], label: "M", color: "target", r: 5 },
-                        { t: "txt", p: [65,74], text: "M(5, 4)", size: 14, bold: true, color: "target" },
+                        { t: "txt", p: [65,74], text: "M(5, 4)", size: 14.48, bold: true, color: "target" },
                         { t: "txt", p: [50,90], text: "(2+8)÷2=5，(2+6)÷2=4", size: 13 }
                       ]
                     },
@@ -545,7 +545,7 @@ window.MATH_CH["g13"] = {
                         { t: "pt", p: [81,70], color: "known", r: 4 },
                         { t: "txt", p: [88,76], text: "(7, 5)", size: 12 },
                         { t: "pt", p: [65,62], label: "M", color: "target", r: 5 },
-                        { t: "txt", p: [65,74], text: "M(5, 4)", size: 14, bold: true, color: "target" },
+                        { t: "txt", p: [65,74], text: "M(5, 4)", size: 14.48, bold: true, color: "target" },
                         { t: "txt", p: [50,90], text: "端点动，中点永远在正中间", size: 13 }
                       ]
                     }
@@ -593,7 +593,7 @@ window.MATH_CH["g13"] = {
                         { t: "pt", p: [65,62], label: "M", color: "target", r: 5 },
                         { t: "txt", p: [53,40], text: "横走一半", size: 12, color: "corrA" },
                         { t: "txt", p: [74,54], text: "竖走一半", size: 12, color: "corrB" },
-                        { t: "txt", p: [65,74], text: "M(5, 4)", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [65,74], text: "M(5, 4)", size: 14.48, bold: true, color: "target" }
                       ]
                     }
                   ]
@@ -640,7 +640,7 @@ window.MATH_CH["g13"] = {
                       shapes: [
                         { t: "seg", a: [12,30], b: [92,30], color: "aux", width: 1.5, dash: "4,3" },
                         { t: "seg", a: [25,30], b: [85,60], color: "known", width: 3.5 },
-                        { t: "txt", p: [55,72], text: "k = 0.5 缓坡", size: 14, bold: true, color: "known" }
+                        { t: "txt", p: [55,72], text: "k = 0.5 缓坡", size: 14.48, bold: true, color: "known" }
                       ]
                     },
                     {
@@ -648,14 +648,14 @@ window.MATH_CH["g13"] = {
                       shapes: [
                         { t: "seg", a: [12,30], b: [92,30], color: "aux", width: 1.5, dash: "4,3" },
                         { t: "seg", a: [25,30], b: [55,90], color: "target", width: 3.5 },
-                        { t: "txt", p: [55,72], text: "k = 2 陡坡", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [55,72], text: "k = 2 陡坡", size: 14.48, bold: true, color: "target" }
                       ]
                     },
                     {
                       caption: "第 3 步：k=0——平路，不费力。",
                       shapes: [
                         { t: "seg", a: [15,30], b: [90,30], color: "corrA", width: 3.5 },
-                        { t: "txt", p: [52,44], text: "k = 0 平路", size: 14, bold: true, color: "corrA" }
+                        { t: "txt", p: [52,44], text: "k = 0 平路", size: 14.48, bold: true, color: "corrA" }
                       ]
                     },
                     {
@@ -663,7 +663,7 @@ window.MATH_CH["g13"] = {
                       shapes: [
                         { t: "seg", a: [12,30], b: [92,30], color: "aux", width: 1.5, dash: "4,3" },
                         { t: "seg", a: [25,90], b: [65,30], color: "corrB", width: 3.5 },
-                        { t: "txt", p: [55,72], text: "k = −1.5 下坡", size: 14, bold: true, color: "corrB" }
+                        { t: "txt", p: [55,72], text: "k = −1.5 下坡", size: 14.48, bold: true, color: "corrB" }
                       ]
                     }
                   ]
@@ -714,7 +714,7 @@ window.MATH_CH["g13"] = {
                         { t: "seg", a: [57,46], b: [57,82], color: "corrB", width: 3 },
                         { t: "txt", p: [45,40], text: "横走 3", size: 12, color: "corrA" },
                         { t: "txt", p: [66,64], text: "竖走 6", size: 12, color: "corrB" },
-                        { t: "txt", p: [40,90], text: "k = 6÷3 = 2", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [40,90], text: "k = 6÷3 = 2", size: 14.48, bold: true, color: "target" }
                       ]
                     }
                   ]
@@ -803,7 +803,7 @@ window.MATH_CH["g13"] = {
                         { t: "txt", p: [70,88], text: "k=1", size: 12, color: "known" },
                         { t: "seg", a: [25,30], b: [45,90], color: "target", width: 3 },
                         { t: "txt", p: [38,92], text: "k=3", size: 12, color: "target" },
-                        { t: "txt", p: [50,18], text: "|k| 越大越陡", size: 14, bold: true }
+                        { t: "txt", p: [50,18], text: "|k| 越大越陡", size: 14.48, bold: true }
                       ]
                     }
                   ]
@@ -849,7 +849,7 @@ window.MATH_CH["g13"] = {
                       caption: "第 1 步：基准 y=x——k=1，b=0。",
                       shapes: [
                         { t: "seg", a: [25,30], b: [75,80], color: "line", width: 3 },
-                        { t: "txt", p: [50,90], text: "y = x（k=1, b=0）", size: 14, bold: true }
+                        { t: "txt", p: [50,90], text: "y = x（k=1, b=0）", size: 14.48, bold: true }
                       ]
                     },
                     {
@@ -857,7 +857,7 @@ window.MATH_CH["g13"] = {
                       shapes: [
                         { t: "seg", a: [25,30], b: [75,80], color: "aux", width: 2, dash: "5,4" },
                         { t: "seg", a: [25,30], b: [50,80], color: "target", width: 3.5 },
-                        { t: "txt", p: [50,90], text: "y = 2x（k 变大，更陡）", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [50,90], text: "y = 2x（k 变大，更陡）", size: 14.48, bold: true, color: "target" }
                       ]
                     },
                     {
@@ -873,7 +873,7 @@ window.MATH_CH["g13"] = {
                       shapes: [
                         { t: "seg", a: [25,30], b: [75,80], color: "target", width: 3.5 },
                         { t: "pt", p: [25,30], color: "target", r: 5 },
-                        { t: "txt", p: [50,90], text: "b = 0：过原点", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [50,90], text: "b = 0：过原点", size: 14.48, bold: true, color: "target" }
                       ]
                     }
                   ]
@@ -1020,7 +1020,7 @@ window.MATH_CH["g13"] = {
                         { t: "pt", p: [35,50], label: "A", color: "known", r: 5 },
                         { t: "pt", p: [65,86], label: "B", color: "known", r: 5 },
                         { t: "seg", a: [35,50], b: [65,86], color: "line", width: 2.5 },
-                        { t: "txt", p: [50,32], text: "k = (9−3)/(4−1) = 2", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [50,32], text: "k = (9−3)/(4−1) = 2", size: 14.48, bold: true, color: "target" }
                       ]
                     },
                     {
@@ -1028,7 +1028,7 @@ window.MATH_CH["g13"] = {
                       shapes: [
                         { t: "seg", a: [25,40], b: [75,90], color: "target", width: 3 },
                         { t: "pt", p: [35,50], label: "A", color: "target", r: 5 },
-                        { t: "txt", p: [50,28], text: "y − 3 = 2(x − 1)", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [50,28], text: "y − 3 = 2(x − 1)", size: 14.48, bold: true, color: "target" }
                       ]
                     },
                     {
@@ -1084,14 +1084,14 @@ window.MATH_CH["g13"] = {
                         { t: "txt", p: [68,92], text: "l₁", size: 13, color: "known" },
                         { t: "seg", a: [25,14], b: [75,64], color: "corrA", width: 3 },
                         { t: "txt", p: [68,68], text: "l₂", size: 13, color: "corrA" },
-                        { t: "txt", p: [50,28], text: "k₁ = k₂ = 1：平行", size: 14, bold: true }
+                        { t: "txt", p: [50,28], text: "k₁ = k₂ = 1：平行", size: 14.48, bold: true }
                       ]
                     },
                     {
                       caption: "第 2 步：如果 b 也相等——两条线重合成一条。",
                       shapes: [
                         { t: "seg", a: [25,38], b: [75,88], color: "target", width: 4 },
-                        { t: "txt", p: [50,92], text: "k、b 都相等：同一条直线", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [50,92], text: "k、b 都相等：同一条直线", size: 14.48, bold: true, color: "target" }
                       ]
                     },
                     {
@@ -1110,7 +1110,7 @@ window.MATH_CH["g13"] = {
                         { t: "seg", a: [25,30], b: [50,80], color: "known", width: 3 },
                         { t: "seg", a: [25,30], b: [75,5], color: "corrA", width: 3 },
                         { t: "right", v: [25,30], p: [50,80], q: [75,5], size: 7 },
-                        { t: "txt", p: [50,92], text: "垂直：交角 90°", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [50,92], text: "垂直：交角 90°", size: 14.48, bold: true, color: "target" }
                       ]
                     }
                   ]
@@ -1149,14 +1149,14 @@ window.MATH_CH["g13"] = {
                       shapes: [
                         { t: "seg", a: [25,40], b: [75,90], color: "known", width: 3 },
                         { t: "seg", a: [25,24], b: [75,74], color: "known", width: 3 },
-                        { t: "txt", p: [50,92], text: "k₁ = k₂：平行", size: 14, bold: true, color: "known" }
+                        { t: "txt", p: [50,92], text: "k₁ = k₂：平行", size: 14.48, bold: true, color: "known" }
                       ] },
                     { label: "相交：k 不同",
                       caption: "k₁=1、k₂=2：坡度不一样，迟早碰头——相交。",
                       shapes: [
                         { t: "seg", a: [25,40], b: [75,90], color: "known", width: 3 },
                         { t: "seg", a: [25,40], b: [50,90], color: "target", width: 3 },
-                        { t: "txt", p: [50,92], text: "k₁ ≠ k₂：相交", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [50,92], text: "k₁ ≠ k₂：相交", size: 14.48, bold: true, color: "target" }
                       ] }
                   ]
                 }
@@ -1242,7 +1242,7 @@ window.MATH_CH["g13"] = {
                         { t: "seg", a: [50,30], b: [62,24], color: "line", width: 2.5 },
                         { t: "seg", a: [62,54], b: [62,24], color: "line", width: 2.5 },
                         { t: "right", v: [50,30], p: [62,54], q: [62,24], size: 7 },
-                        { t: "txt", p: [50,72], text: "OA² + OB² = AB²", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [50,72], text: "OA² + OB² = AB²", size: 14.48, bold: true, color: "target" }
                       ]
                     },
                     {
@@ -1252,8 +1252,8 @@ window.MATH_CH["g13"] = {
                         { t: "seg", a: [50,30], b: [62,54], color: "line", width: 2 },
                         { t: "seg", a: [50,30], b: [62,24], color: "line", width: 2 },
                         { t: "seg", a: [62,54], b: [62,24], color: "line", width: 2 },
-                        { t: "txt", p: [50,60], text: "2 = −2k₁k₂", size: 14, bold: true },
-                        { t: "txt", p: [50,78], text: "k₁k₂ = −1", size: 17, bold: true, color: "target" }
+                        { t: "txt", p: [50,60], text: "2 = −2k₁k₂", size: 14.48, bold: true },
+                        { t: "txt", p: [50,78], text: "k₁k₂ = −1", size: 16, bold: true, color: "target" }
                       ]
                     }
                   ],
@@ -1619,7 +1619,7 @@ window.MATH_CH["g13"] = {
                         { t: "txt", p: [86,30], text: "y=−2", size: 12 },
                         { t: "pt", p: [50,70], label: "F", color: "known", r: 5 },
                         { t: "txt", p: [58,70], text: "F(0, 2)", size: 12, color: "known" },
-                        { t: "txt", p: [50,90], text: "p = 2", size: 14, bold: true }
+                        { t: "txt", p: [50,90], text: "p = 2", size: 14.48, bold: true }
                       ]
                     },
                     {
@@ -1699,7 +1699,7 @@ window.MATH_CH["g13"] = {
                         { t: "circle", c: [62,58], r: 24, color: "target", width: 3 },
                         { t: "pt", p: [62,58], label: "C", color: "target", r: 5 },
                         { t: "txt", p: [70,58], text: "C(3, 1)", size: 12, color: "target" },
-                        { t: "txt", p: [50,90], text: "(x−3)² + (y−1)² = 4", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [50,90], text: "(x−3)² + (y−1)² = 4", size: 14.48, bold: true, color: "target" }
                       ]
                     },
                     {
@@ -1708,7 +1708,7 @@ window.MATH_CH["g13"] = {
                         { t: "circle", c: [42,66], r: 16, color: "corrA", width: 3 },
                         { t: "pt", p: [42,66], label: "C", color: "corrA", r: 5 },
                         { t: "txt", p: [52,66], text: "C(−2, 3)", size: 12, color: "corrA" },
-                        { t: "txt", p: [50,90], text: "(x+2)² + (y−3)² = 1", size: 14, bold: true, color: "corrA" }
+                        { t: "txt", p: [50,90], text: "(x+2)² + (y−3)² = 1", size: 14.48, bold: true, color: "corrA" }
                       ]
                     }
                   ]
@@ -1796,7 +1796,7 @@ window.MATH_CH["g13"] = {
                           t: "txt",
                           p: [ 50, 90 ],
                           text: "(x−a)² + (y−b)² = r²",
-                          size: 14,
+                          size: 14.48,
                           bold: true,
                           color: "target"
                         }
@@ -1870,14 +1870,14 @@ window.MATH_CH["g13"] = {
                         { t: "circle", c: [56,44], r: 27, color: "line", width: 3 },
                         { t: "pt", p: [56,44], label: "C", color: "known", r: 5 },
                         { t: "txt", p: [66,44], text: "C(2, −1)", size: 12 },
-                        { t: "txt", p: [50,90], text: "r = 3", size: 14, bold: true }
+                        { t: "txt", p: [50,90], text: "r = 3", size: 14.48, bold: true }
                       ]
                     },
                     {
                       caption: "第 2 步：写方程 (x−2)²+(y+1)²=9——注意 y−(−1)=y+1。",
                       shapes: [
                         { t: "circle", c: [56,44], r: 27, color: "target", width: 3 },
-                        { t: "txt", p: [50,90], text: "(x−2)² + (y+1)² = 9", size: 14, bold: true, color: "target" },
+                        { t: "txt", p: [50,90], text: "(x−2)² + (y+1)² = 9", size: 14.48, bold: true, color: "target" },
                         { t: "txt", p: [50,78], text: "y−(−1) = y+1，符号别抄错", size: 12 }
                       ]
                     },
@@ -1955,7 +1955,7 @@ window.MATH_CH["g13"] = {
                         { t: "poly", pts: [[30,88],[40,66],[50,52],[60,44],[70,40]], close: false, color: "line", width: 2.5 },
                         { t: "pt", p: [50,52], label: "P", color: "target", r: 5 },
                         { t: "pt", p: [55,48], label: "Q", color: "known", r: 5 },
-                        { t: "txt", p: [63,48], text: "Q(1.5, 2.25)", size: 11, color: "known" },
+                        { t: "txt", p: [63,48], text: "Q(1.5, 2.25)", size: 11.89, color: "known" },
                         { t: "seg", a: [50,52], b: [55,48], color: "known", width: 3 }
                       ]
                     },
@@ -1965,7 +1965,7 @@ window.MATH_CH["g13"] = {
                         { t: "poly", pts: [[30,88],[40,66],[50,52],[60,44],[70,40]], close: false, color: "line", width: 2.5 },
                         { t: "pt", p: [50,52], label: "P", color: "target", r: 6 },
                         { t: "seg", a: [30,72], b: [70,32], color: "target", width: 3.5 },
-                        { t: "txt", p: [50,88], text: "切线：割线的极限位置", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [50,88], text: "切线：割线的极限位置", size: 14.48, bold: true, color: "target" }
                       ]
                     },
                     {
@@ -2015,7 +2015,7 @@ window.MATH_CH["g13"] = {
                         { t: "poly", pts: [[30,88],[40,66],[50,52],[60,44],[70,40]], close: false, color: "line", width: 2.5 },
                         { t: "seg", a: [30,72], b: [70,32], color: "target", width: 3.5 },
                         { t: "pt", p: [50,52], label: "P", color: "target", r: 6 },
-                        { t: "txt", p: [50,88], text: "切线斜率 = 该点的变化率", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [50,88], text: "切线斜率 = 该点的变化率", size: 14.48, bold: true, color: "target" }
                       ]
                     }
                   ]
@@ -2071,7 +2071,7 @@ window.MATH_CH["g13"] = {
                       shapes: [
                         { t: "pt", p: [50,52], label: "P", color: "target", r: 5 },
                         { t: "pt", p: [55,48], color: "known", r: 4 },
-                        { t: "txt", p: [63,48], text: "Q(1.5, 2.25)", size: 11 },
+                        { t: "txt", p: [63,48], text: "Q(1.5, 2.25)", size: 11.89 },
                         { t: "txt", p: [50,88], text: "k = 2.5", size: 15, bold: true }
                       ]
                     },
@@ -2140,7 +2140,7 @@ window.MATH_CH["g13"] = {
                       shapes: [
                         { t: "circle", c: [42,52], r: 20, color: "known", width: 3 },
                         { t: "circle", c: [62,52], r: 20, color: "corrA", width: 3 },
-                        { t: "txt", p: [50,88], text: "几何：两圆相交？", size: 14, bold: true }
+                        { t: "txt", p: [50,88], text: "几何：两圆相交？", size: 14.48, bold: true }
                       ]
                     },
                     {
@@ -2148,7 +2148,7 @@ window.MATH_CH["g13"] = {
                       shapes: [
                         { t: "txt", p: [50,66], text: "x² + y² = 4", size: 15, bold: true },
                         { t: "txt", p: [50,50], text: "(x−2)² + y² = 4", size: 15, bold: true },
-                        { t: "txt", p: [50,32], text: "解方程组", size: 14, color: "target" }
+                        { t: "txt", p: [50,32], text: "解方程组", size: 14.48, color: "target" }
                       ]
                     },
                     {
@@ -2158,7 +2158,7 @@ window.MATH_CH["g13"] = {
                         { t: "circle", c: [62,52], r: 20, color: "corrA", width: 2.5 },
                         { t: "pt", p: [52,69], color: "target", r: 5 },
                         { t: "pt", p: [52,35], color: "target", r: 5 },
-                        { t: "txt", p: [50,88], text: "解 = 交点 (1, ±√3)", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [50,88], text: "解 = 交点 (1, ±√3)", size: 14.48, bold: true, color: "target" }
                       ]
                     }
                   ]

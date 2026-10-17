@@ -61,10 +61,10 @@ window.MATH_CH["g02"] = {
                         { t: "arc", v: [50,50], a1: -34, a2: 34, r: 11, group: 1, color: "corrAngle" },
                         { t: "arc", v: [50,50], a1: 214, a2: 326, r: 11, group: 1, color: "corrAngle" },
                         { t: "arc", v: [50,50], a1: 146, a2: 214, r: 11, group: 1, color: "corrAngle" },
-                        { t: "txt", p: [50,67], text: "∠1", size: 14, bold: true },
-                        { t: "txt", p: [67,50], text: "∠2", size: 14, bold: true },
-                        { t: "txt", p: [50,33], text: "∠3", size: 14, bold: true },
-                        { t: "txt", p: [33,50], text: "∠4", size: 14, bold: true }
+                        { t: "txt", p: [50,67], text: "∠1", size: 14.48, bold: true },
+                        { t: "txt", p: [67,50], text: "∠2", size: 14.48, bold: true },
+                        { t: "txt", p: [50,33], text: "∠3", size: 14.48, bold: true },
+                        { t: "txt", p: [33,50], text: "∠4", size: 14.48, bold: true }
                       ]
                     },
                     {
@@ -72,10 +72,10 @@ window.MATH_CH["g02"] = {
                       shapes: [
                         { t: "seg", a: [20,76], b: [80,24], color: "line", width: 3 },
                         { t: "seg", a: [20,24], b: [80,76], color: "line", width: 3 },
-                        { t: "txt", p: [50,67], text: "∠1", size: 14, bold: true },
-                        { t: "txt", p: [67,50], text: "∠2", size: 14, bold: true },
-                        { t: "txt", p: [50,33], text: "∠3", size: 14, bold: true },
-                        { t: "txt", p: [33,50], text: "∠4", size: 14, bold: true },
+                        { t: "txt", p: [50,67], text: "∠1", size: 14.48, bold: true },
+                        { t: "txt", p: [67,50], text: "∠2", size: 14.48, bold: true },
+                        { t: "txt", p: [50,33], text: "∠3", size: 14.48, bold: true },
+                        { t: "txt", p: [33,50], text: "∠4", size: 14.48, bold: true },
                         { t: "txt", p: [50,85], text: "张开", size: 13 }
                       ]
                     },
@@ -84,10 +84,10 @@ window.MATH_CH["g02"] = {
                       shapes: [
                         { t: "seg", a: [14,58], b: [86,42], color: "line", width: 3 },
                         { t: "seg", a: [14,42], b: [86,58], color: "line", width: 3 },
-                        { t: "txt", p: [50,67], text: "∠1", size: 14, bold: true },
-                        { t: "txt", p: [67,50], text: "∠2", size: 14, bold: true },
-                        { t: "txt", p: [50,33], text: "∠3", size: 14, bold: true },
-                        { t: "txt", p: [33,50], text: "∠4", size: 14, bold: true },
+                        { t: "txt", p: [50,67], text: "∠1", size: 14.48, bold: true },
+                        { t: "txt", p: [67,50], text: "∠2", size: 14.48, bold: true },
+                        { t: "txt", p: [50,33], text: "∠3", size: 14.48, bold: true },
+                        { t: "txt", p: [33,50], text: "∠4", size: 14.48, bold: true },
                         { t: "txt", p: [50,85], text: "此消彼长", size: 13, bold: true }
                       ]
                     }
@@ -141,7 +141,7 @@ window.MATH_CH["g02"] = {
                         { t: "seg", a: [20,30], b: [80,70], color: "line", width: 2 },
                         { t: "arc", v: [50,50], a1: 214, a2: 326, r: 13, group: 1, color: "corrA" },
                         { t: "arc", v: [50,50], a1: -34, a2: 34, r: 13, group: 1, color: "corrB" },
-                        { t: "txt", p: [50,80], text: "∠3 + ∠2 = 180°，所以 ∠1 = ∠3", size: 14, bold: true }
+                        { t: "txt", p: [50,80], text: "∠3 + ∠2 = 180°，所以 ∠1 = ∠3", size: 14.48, bold: true }
                       ]
                     }
                   ]
@@ -185,10 +185,10 @@ window.MATH_CH["g02"] = {
                         { t: "arc", v: [50,50], a1: 214, a2: 326, r: 12, group: 1, color: "corrA" },
                         { t: "arc", v: [50,50], a1: -34, a2: 34, r: 12, group: 2, color: "corrB" },
                         { t: "arc", v: [50,50], a1: 146, a2: 214, r: 12, group: 2, color: "corrB" },
-                        { t: "txt", p: [50,67], text: "∠1", size: 14, bold: true, color: "corrA" },
-                        { t: "txt", p: [50,33], text: "∠3", size: 14, bold: true, color: "corrA" },
-                        { t: "txt", p: [67,50], text: "∠2", size: 14, bold: true, color: "corrB" },
-                        { t: "txt", p: [33,50], text: "∠4", size: 14, bold: true, color: "corrB" }
+                        { t: "txt", p: [50,67], text: "∠1", size: 14.48, bold: true, color: "corrA" },
+                        { t: "txt", p: [50,33], text: "∠3", size: 14.48, bold: true, color: "corrA" },
+                        { t: "txt", p: [67,50], text: "∠2", size: 14.48, bold: true, color: "corrB" },
+                        { t: "txt", p: [33,50], text: "∠4", size: 14.48, bold: true, color: "corrB" }
                       ]
                     }
                   ]
@@ -235,31 +235,31 @@ window.MATH_CH["g02"] = {
                       caption: "第 1 步：直线 l，和直线外一点 A。",
                       shapes: [
                         { t: "seg", a: [12,42], b: [88,42], color: "line", width: 3 },
-                        { t: "txt", p: [90,42], text: "l", size: 14 },
+                        { t: "txt", p: [90,42], text: "l", size: 14.48 },
                         { t: "pt", p: [50,72], r: 3.5, color: "target" },
-                        { t: "txt", p: [56,74], text: "A", size: 14, bold: true }
+                        { t: "txt", p: [56,74], text: "A", size: 14.48, bold: true }
                       ]
                     },
                     {
                       caption: "第 2 步：三角板的一条直角边靠紧直线 l。",
                       shapes: [
                         { t: "seg", a: [12,42], b: [88,42], color: "line", width: 3 },
-                        { t: "txt", p: [90,42], text: "l", size: 14 },
+                        { t: "txt", p: [90,42], text: "l", size: 14.48 },
                         { t: "poly", pts: [[28,42],[60,42],[60,72]], color: "aux", width: 2.5 },
                         { t: "right", v: [60,42], p: [28,42], q: [60,72], size: 6, color: "aux" },
                         { t: "pt", p: [50,72], r: 3.5, color: "target" },
-                        { t: "txt", p: [56,74], text: "A", size: 14, bold: true }
+                        { t: "txt", p: [56,74], text: "A", size: 14.48, bold: true }
                       ]
                     },
                     {
                       caption: "第 3 步：沿着直线推三角板，直到另一条直角边经过点 A。",
                       shapes: [
                         { t: "seg", a: [12,42], b: [88,42], color: "line", width: 3 },
-                        { t: "txt", p: [90,42], text: "l", size: 14 },
+                        { t: "txt", p: [90,42], text: "l", size: 14.48 },
                         { t: "poly", pts: [[18,42],[50,42],[50,72]], color: "aux", width: 2.5 },
                         { t: "right", v: [50,42], p: [18,42], q: [50,72], size: 6, color: "aux" },
                         { t: "pt", p: [50,72], r: 3.5, color: "target" },
-                        { t: "txt", p: [56,74], text: "A", size: 14, bold: true },
+                        { t: "txt", p: [56,74], text: "A", size: 14.48, bold: true },
                         { t: "txt", p: [50,28], text: "推到这里", size: 13, color: "aux" }
                       ]
                     },
@@ -267,11 +267,11 @@ window.MATH_CH["g02"] = {
                       caption: "第 4 步：沿这条直角边画线——过 A 的垂线画好了，交点处是直角。",
                       shapes: [
                         { t: "seg", a: [12,42], b: [88,42], color: "line", width: 3 },
-                        { t: "txt", p: [90,42], text: "l", size: 14 },
+                        { t: "txt", p: [90,42], text: "l", size: 14.48 },
                         { t: "seg", a: [50,72], b: [50,42], color: "target", width: 3.5 },
                         { t: "right", v: [50,42], p: [12,42], q: [50,72], size: 7, color: "target" },
                         { t: "pt", p: [50,72], r: 3.5, color: "target" },
-                        { t: "txt", p: [56,74], text: "A", size: 14, bold: true },
+                        { t: "txt", p: [56,74], text: "A", size: 14.48, bold: true },
                         { t: "txt", p: [50,28], text: "垂足", size: 13, color: "target" }
                       ]
                     }
@@ -311,12 +311,12 @@ window.MATH_CH["g02"] = {
                       caption: "定格：过 A 的垂线只有这一条——转到别的位置，就不是 90° 了。",
                       shapes: [
                         { t: "seg", a: [12,42], b: [88,42], color: "line", width: 3 },
-                        { t: "txt", p: [90,42], text: "l", size: 14 },
+                        { t: "txt", p: [90,42], text: "l", size: 14.48 },
                         { t: "seg", a: [50,72], b: [50,42], color: "target", width: 3.5 },
                         { t: "seg", a: [34,64], b: [66,56], color: "aux", width: 2, dash: "5,4" },
                         { t: "right", v: [50,42], p: [12,42], q: [50,72], size: 7, color: "target" },
                         { t: "pt", p: [50,72], r: 3.5, color: "target" },
-                        { t: "txt", p: [56,74], text: "A", size: 14, bold: true },
+                        { t: "txt", p: [56,74], text: "A", size: 14.48, bold: true },
                         { t: "txt", p: [50,28], text: "转到这里就不是 90° 了", size: 12, color: "aux" }
                       ]
                     }
@@ -364,36 +364,36 @@ window.MATH_CH["g02"] = {
                       caption: "第 1 步：点 A，直线 l。A 想“跳”到 l 上。",
                       shapes: [
                         { t: "seg", a: [12,30], b: [88,30], color: "line", width: 3 },
-                        { t: "txt", p: [90,30], text: "l", size: 14 },
+                        { t: "txt", p: [90,30], text: "l", size: 14.48 },
                         { t: "pt", p: [50,78], r: 4, color: "target" },
-                        { t: "txt", p: [56,80], text: "A", size: 14, bold: true }
+                        { t: "txt", p: [56,80], text: "A", size: 14.48, bold: true }
                       ]
                     },
                     {
                       caption: "第 2 步：三条路都能到——中间那条是垂直的。",
                       shapes: [
                         { t: "seg", a: [12,30], b: [88,30], color: "line", width: 3 },
-                        { t: "txt", p: [90,30], text: "l", size: 14 },
+                        { t: "txt", p: [90,30], text: "l", size: 14.48 },
                         { t: "seg", a: [50,78], b: [50,30], color: "target", width: 3 },
                         { t: "seg", a: [50,78], b: [30,30], color: "known", width: 2 },
                         { t: "seg", a: [50,78], b: [70,30], color: "known", width: 2 },
                         { t: "right", v: [50,30], p: [12,30], q: [50,78], size: 6, color: "target" },
                         { t: "pt", p: [50,78], r: 4, color: "target" },
-                        { t: "txt", p: [56,80], text: "A", size: 14, bold: true }
+                        { t: "txt", p: [56,80], text: "A", size: 14.48, bold: true }
                       ]
                     },
                     {
                       caption: "第 3 步：量一量——垂直的那条最短，斜的路都更长。",
                       shapes: [
                         { t: "seg", a: [12,30], b: [88,30], color: "line", width: 3 },
-                        { t: "txt", p: [90,30], text: "l", size: 14 },
+                        { t: "txt", p: [90,30], text: "l", size: 14.48 },
                         { t: "seg", a: [50,78], b: [30,30], color: "known", width: 2, dash: "5,4" },
                         { t: "seg", a: [50,78], b: [70,30], color: "known", width: 2, dash: "5,4" },
                         { t: "seg", a: [50,78], b: [50,30], color: "target", width: 4 },
                         { t: "right", v: [50,30], p: [12,30], q: [50,78], size: 6, color: "target" },
                         { t: "txt", p: [58,54], text: "最短", size: 15, bold: true, color: "target" },
                         { t: "pt", p: [50,78], r: 4, color: "target" },
-                        { t: "txt", p: [56,80], text: "A", size: 14, bold: true }
+                        { t: "txt", p: [56,80], text: "A", size: 14.48, bold: true }
                       ]
                     }
                   ]
@@ -432,12 +432,12 @@ window.MATH_CH["g02"] = {
                       caption: "定格：A 到 l 的距离，就是垂线段的长度——只认垂直那条。",
                       shapes: [
                         { t: "seg", a: [12,30], b: [88,30], color: "line", width: 3 },
-                        { t: "txt", p: [90,30], text: "l", size: 14 },
+                        { t: "txt", p: [90,30], text: "l", size: 14.48 },
                         { t: "seg", a: [50,78], b: [50,30], color: "target", width: 4 },
                         { t: "right", v: [50,30], p: [12,30], q: [50,78], size: 6, color: "target" },
                         { t: "txt", p: [58,54], text: "距离", size: 15, bold: true, color: "target" },
                         { t: "pt", p: [50,78], r: 4, color: "target" },
-                        { t: "txt", p: [56,80], text: "A", size: 14, bold: true }
+                        { t: "txt", p: [56,80], text: "A", size: 14.48, bold: true }
                       ]
                     }
                   ]
@@ -485,8 +485,8 @@ window.MATH_CH["g02"] = {
                       shapes: [
                         { t: "seg", a: [15,72], b: [85,72], color: "line", width: 3 },
                         { t: "seg", a: [15,40], b: [85,40], color: "line", width: 3 },
-                        { t: "txt", p: [88,72], text: "a", size: 14 },
-                        { t: "txt", p: [88,40], text: "b", size: 14 }
+                        { t: "txt", p: [88,72], text: "a", size: 14.48 },
+                        { t: "txt", p: [88,40], text: "b", size: 14.48 }
                       ]
                     },
                     {
@@ -495,8 +495,8 @@ window.MATH_CH["g02"] = {
                         { t: "seg", a: [15,72], b: [85,72], color: "line", width: 3 },
                         { t: "seg", a: [15,40], b: [85,40], color: "line", width: 3 },
                         { t: "seg", a: [38,20], b: [62,85], color: "aux", width: 2.5 },
-                        { t: "txt", p: [88,72], text: "a", size: 14 },
-                        { t: "txt", p: [88,40], text: "b", size: 14 },
+                        { t: "txt", p: [88,72], text: "a", size: 14.48 },
+                        { t: "txt", p: [88,40], text: "b", size: 14.48 },
                         { t: "txt", p: [64,87], text: "c（截线）", size: 13, color: "aux" }
                       ]
                     },
@@ -1079,7 +1079,7 @@ window.MATH_CH["g02"] = {
                         { t: "seg", a: [10,38], b: [70,48], color: "line", width: 3 },
                         { t: "seg", a: [70,52], b: [95,48], color: "aux", width: 2, dash: "5,4" },
                         { t: "seg", a: [70,48], b: [95,52], color: "aux", width: 2, dash: "5,4" },
-                        { t: "txt", p: [50,78], text: "延长后会相交", size: 14, color: "aux" }
+                        { t: "txt", p: [50,78], text: "延长后会相交", size: 14.48, color: "aux" }
                       ]
                     },
                     {
@@ -1087,7 +1087,7 @@ window.MATH_CH["g02"] = {
                       shapes: [
                         { t: "seg", a: [10,60], b: [90,60], color: "known", width: 3, arrows: 2 },
                         { t: "seg", a: [10,40], b: [90,40], color: "known", width: 3, arrows: 2 },
-                        { t: "txt", p: [50,78], text: "延长也不相交", size: 14, bold: true, color: "known" }
+                        { t: "txt", p: [50,78], text: "延长也不相交", size: 14.48, bold: true, color: "known" }
                       ]
                     },
                     {
@@ -1096,7 +1096,7 @@ window.MATH_CH["g02"] = {
                         { t: "seg", a: [10,60], b: [90,60], color: "known", width: 3, arrows: 2 },
                         { t: "seg", a: [10,40], b: [90,40], color: "known", width: 3, arrows: 2 },
                         { t: "txt", p: [50,24], text: "a ∥ b", size: 18, bold: true, color: "known" },
-                        { t: "txt", p: [50,78], text: "铁轨：两条永不相交", size: 14 }
+                        { t: "txt", p: [50,78], text: "铁轨：两条永不相交", size: 14.48 }
                       ]
                     }
                   ]
@@ -1135,11 +1135,11 @@ window.MATH_CH["g02"] = {
                       caption: "定格：过 A 作 l 的平行线——只有这一条是平行的，歪一点就会撞上 l。",
                       shapes: [
                         { t: "seg", a: [10,35], b: [90,35], color: "line", width: 3 },
-                        { t: "txt", p: [92,35], text: "l", size: 14 },
+                        { t: "txt", p: [92,35], text: "l", size: 14.48 },
                         { t: "seg", a: [10,70], b: [90,70], color: "target", width: 3, arrows: 2 },
                         { t: "seg", a: [30,82], b: [70,58], color: "aux", width: 2, dash: "5,4" },
                         { t: "pt", p: [50,70], r: 3.5, color: "target" },
-                        { t: "txt", p: [56,74], text: "A", size: 14, bold: true },
+                        { t: "txt", p: [56,74], text: "A", size: 14.48, bold: true },
                         { t: "txt", p: [50,52], text: "这条延长后会撞上 l", size: 12, color: "aux" }
                       ]
                     }
@@ -1398,7 +1398,7 @@ window.MATH_CH["g02"] = {
                         { t: "arc", v: [45.4,40], a1: 70, a2: 180, r: 10, group: 1, color: "corrC" },
                         { t: "txt", p: [47,65], text: "∠3=70°", size: 13, bold: true, color: "corrC" },
                         { t: "txt", p: [38,51], text: "∠6=110°", size: 13, bold: true, color: "corrC" },
-                        { t: "txt", p: [50,22], text: "70° + 110° = 180°", size: 14, bold: true }
+                        { t: "txt", p: [50,22], text: "70° + 110° = 180°", size: 14.48, bold: true }
                       ]
                     }
                   ]
@@ -1442,7 +1442,7 @@ window.MATH_CH["g02"] = {
                         { t: "arc", v: [45.4,40], a1: 0, a2: 70, r: 10, group: 1, color: "corrA" },
                         { t: "txt", p: [68,80], text: "∠1=70°", size: 13, bold: true, color: "corrA" },
                         { t: "txt", p: [56,48], text: "∠5=70°", size: 13, bold: true, color: "corrA" },
-                        { t: "txt", p: [50,24], text: "因为 a ∥ b", size: 14, bold: true }
+                        { t: "txt", p: [50,24], text: "因为 a ∥ b", size: 14.48, bold: true }
                       ]
                     }
                   ]
@@ -1488,7 +1488,7 @@ window.MATH_CH["g02"] = {
                         { t: "arc", v: [45.4,40], a1: 0, a2: 70, r: 10, group: 1, color: "corrB" },
                         { t: "txt", p: [47,65], text: "∠3=70°", size: 13, bold: true, color: "corrB" },
                         { t: "txt", p: [56,48], text: "∠5=70°", size: 13, bold: true, color: "corrB" },
-                        { t: "txt", p: [50,24], text: "因为 a ∥ b", size: 14, bold: true }
+                        { t: "txt", p: [50,24], text: "因为 a ∥ b", size: 14.48, bold: true }
                       ]
                     }
                   ]
@@ -1534,7 +1534,7 @@ window.MATH_CH["g02"] = {
                         { t: "arc", v: [45.4,40], a1: 70, a2: 180, r: 10, group: 1, color: "corrC" },
                         { t: "txt", p: [47,65], text: "∠3=70°", size: 13, bold: true, color: "corrC" },
                         { t: "txt", p: [38,51], text: "∠6=110°", size: 13, bold: true, color: "corrC" },
-                        { t: "txt", p: [50,22], text: "70° + 110° = 180°", size: 14, bold: true }
+                        { t: "txt", p: [50,22], text: "70° + 110° = 180°", size: 14.48, bold: true }
                       ]
                     }
                   ]
@@ -1611,7 +1611,7 @@ window.MATH_CH["g02"] = {
                         { t: "seg", a: [20,60], b: [52,60], color: "corrA", width: 3, arrows: 1 },
                         { t: "seg", a: [38,60], b: [70,60], color: "corrA", width: 3, arrows: 1 },
                         { t: "seg", a: [29,74], b: [61,74], color: "corrA", width: 3, arrows: 1 },
-                        { t: "txt", p: [36,66], text: "平行且相等", size: 14, bold: true, color: "corrA" }
+                        { t: "txt", p: [36,66], text: "平行且相等", size: 14.48, bold: true, color: "corrA" }
                       ]
                     }
                   ]
@@ -1654,7 +1654,7 @@ window.MATH_CH["g02"] = {
                         { t: "seg", a: [20,60], b: [52,60], color: "corrA", width: 3, arrows: 1 },
                         { t: "seg", a: [38,60], b: [70,60], color: "corrA", width: 3, arrows: 1 },
                         { t: "seg", a: [29,74], b: [61,74], color: "corrA", width: 3, arrows: 1 },
-                        { t: "txt", p: [36,50], text: "形状大小不变", size: 14, bold: true }
+                        { t: "txt", p: [36,50], text: "形状大小不变", size: 14.48, bold: true }
                       ]
                     }
                   ]
@@ -1889,13 +1889,13 @@ window.MATH_CH["g02"] = {
                   ],
                   items: [
                     { id: "q1", label: "① ∠1=∠5=60°，能推出 a∥b 吗？", group: 0, anchor: [25,72],
-                      shape: { t: "txt", p: [25,72], text: "①", size: 24, bold: true } },
+                      shape: { t: "txt", p: [25,72], text: "①", size: 22.86, bold: true } },
                     { id: "q2", label: "② 已知 a∥b，∠1=60°，求∠5", group: 1, anchor: [75,72],
-                      shape: { t: "txt", p: [75,72], text: "②", size: 24, bold: true } },
+                      shape: { t: "txt", p: [75,72], text: "②", size: 22.86, bold: true } },
                     { id: "q3", label: "③ ∠3+∠6=180°，能推出 a∥b 吗？", group: 0, anchor: [25,32],
-                      shape: { t: "txt", p: [25,32], text: "③", size: 24, bold: true } },
+                      shape: { t: "txt", p: [25,32], text: "③", size: 22.86, bold: true } },
                     { id: "q4", label: "④ 已知 a∥b，∠4=100°，求∠6", group: 1, anchor: [75,32],
-                      shape: { t: "txt", p: [75,32], text: "④", size: 24, bold: true } }
+                      shape: { t: "txt", p: [75,32], text: "④", size: 22.86, bold: true } }
                   ]
                 }
               },

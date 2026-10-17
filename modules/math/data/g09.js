@@ -264,7 +264,7 @@ window.MATH_CH["g09"] = {
                       shapes: [
                         { t: "poly", pts: [[20,35],[60,35],[40,65]], color: "line", width: 3 },
                         { t: "poly", pts: [[20,35],[60,35],[40,65]], color: "known", width: 2.5, dash: "5,4" },
-                        { t: "txt", p: [50,80], text: "严丝合缝", size: 14, bold: true, color: "known" }
+                        { t: "txt", p: [50,80], text: "严丝合缝", size: 14.48, bold: true, color: "known" }
                       ]
                     },
                     {
@@ -273,7 +273,7 @@ window.MATH_CH["g09"] = {
                       shapes: [
                         { t: "poly", pts: [[15,30],[75,30],[45,75]], color: "line", width: 3 },
                         { t: "poly", pts: [[35,42],[55,42],[45,57]], color: "target", width: 2.5 },
-                        { t: "txt", p: [50,86], text: "轮廓贴合，盖不住", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [50,86], text: "轮廓贴合，盖不住", size: 14.48, bold: true, color: "target" }
                       ]
                     }
                   ]
@@ -312,7 +312,7 @@ window.MATH_CH["g09"] = {
                       shapes: [
                         { t: "poly", pts: [[35,40],[65,40],[65,70],[35,70]], color: "line", width: 3 },
                         { t: "circle", c: [50,58], r: 6, color: "line", width: 2 },
-                        { t: "txt", p: [50,80], text: "1×", size: 14, bold: true }
+                        { t: "txt", p: [50,80], text: "1×", size: 14.48, bold: true }
                       ]
                     },
                     {
@@ -320,7 +320,7 @@ window.MATH_CH["g09"] = {
                       shapes: [
                         { t: "poly", pts: [[20,30],[80,30],[80,80],[20,80]], color: "known", width: 3 },
                         { t: "circle", c: [50,58], r: 12, color: "known", width: 2 },
-                        { t: "txt", p: [50,88], text: "2×：没变的是形状", size: 14, bold: true, color: "known" }
+                        { t: "txt", p: [50,88], text: "2×：没变的是形状", size: 14.48, bold: true, color: "known" }
                       ]
                     },
                     {
@@ -328,7 +328,7 @@ window.MATH_CH["g09"] = {
                       shapes: [
                         { t: "poly", pts: [[8,22],[92,22],[92,82],[8,82]], color: "target", width: 3 },
                         { t: "circle", c: [50,55], r: 16, color: "target", width: 2 },
-                        { t: "txt", p: [50,90], text: "3×：形状一直没变", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [50,90], text: "3×：形状一直没变", size: 14.48, bold: true, color: "target" }
                       ]
                     }
                   ]
@@ -500,7 +500,7 @@ window.MATH_CH["g09"] = {
                       shapes: [
                         { t: "poly", pts: [[58,64],[92,64],[78.1,40]], color: "corrB", width: 3 },
                         { t: "poly", pts: [[58,64],[92,64],[78.1,40]], color: "corrA", width: 2, dash: "5,4" },
-                        { t: "txt", p: [50,84], text: "两角相等，形状锁死", size: 14, bold: true, color: "known" }
+                        { t: "txt", p: [50,84], text: "两角相等，形状锁死", size: 14.48, bold: true, color: "known" }
                       ]
                     }
                   ]
@@ -663,7 +663,7 @@ window.MATH_CH["g09"] = {
                         { t: "arc", v: [12,60], a1: 300, a2: 0, r: 12, group: 1, color: "target" },
                         { t: "poly", pts: [[55,62],[90,62],[74.6,28.1]], color: "corrB", width: 3 },
                         { t: "arc", v: [55,62], a1: 300, a2: 0, r: 12, group: 1, color: "target" },
-                        { t: "txt", p: [50,84], text: "2:4 = 3:6，夹角 60°", size: 14, bold: true, color: "known" }
+                        { t: "txt", p: [50,84], text: "2:4 = 3:6，夹角 60°", size: 14.48, bold: true, color: "known" }
                       ]
                     },
                     {
@@ -767,7 +767,7 @@ window.MATH_CH["g09"] = {
                         { t: "txt", p: [74,72], text: "4", size: 12, bold: true },
                         { t: "txt", p: [64,50], text: "6", size: 12, bold: true },
                         { t: "txt", p: [83,50], text: "8", size: 12, bold: true },
-                        { t: "txt", p: [50,84], text: "2:4 = 3:6 = 4:8", size: 14, bold: true, color: "known" }
+                        { t: "txt", p: [50,84], text: "2:4 = 3:6 = 4:8", size: 14.48, bold: true, color: "known" }
                       ]
                     },
                     {
@@ -775,7 +775,7 @@ window.MATH_CH["g09"] = {
                       shapes: [
                         { t: "poly", pts: [[58,64],[90,64],[74,36]], color: "corrB", width: 3 },
                         { t: "poly", pts: [[58,64],[90,64],[74,36]], color: "corrA", width: 2, dash: "5,4" },
-                        { t: "txt", p: [50,84], text: "SSS：三边成比例 → 相似", size: 14, bold: true, color: "known" }
+                        { t: "txt", p: [50,84], text: "SSS：三边成比例 → 相似", size: 14.48, bold: true, color: "known" }
                       ]
                     }
                   ]
@@ -923,7 +923,7 @@ window.MATH_CH["g09"] = {
                         { t: "txt", p: [34,70], text: "2", size: 12 },
                         { t: "txt", p: [26,50], text: "3", size: 12 },
                         { t: "txt", p: [43,50], text: "4", size: 12 },
-                        { t: "txt", p: [50,82], text: "周长 = 9", size: 14, bold: true }
+                        { t: "txt", p: [50,82], text: "周长 = 9", size: 14.48, bold: true }
                       ]
                     },
                     {
@@ -933,7 +933,7 @@ window.MATH_CH["g09"] = {
                         { t: "txt", p: [35,72], text: "4", size: 12 },
                         { t: "txt", p: [24,48], text: "6", size: 12 },
                         { t: "txt", p: [47,48], text: "8", size: 12 },
-                        { t: "txt", p: [50,84], text: "周长 = 18 = 9 × 2", size: 14, bold: true, color: "known" }
+                        { t: "txt", p: [50,84], text: "周长 = 18 = 9 × 2", size: 14.48, bold: true, color: "known" }
                       ]
                     },
                     {
@@ -943,7 +943,7 @@ window.MATH_CH["g09"] = {
                         { t: "txt", p: [37,74], text: "6", size: 12 },
                         { t: "txt", p: [24,46], text: "9", size: 12 },
                         { t: "txt", p: [52,46], text: "12", size: 12 },
-                        { t: "txt", p: [50,86], text: "周长 = 27 = 9 × 3", size: 14, bold: true, color: "known" }
+                        { t: "txt", p: [50,86], text: "周长 = 27 = 9 × 3", size: 14.48, bold: true, color: "known" }
                       ]
                     }
                   ]
@@ -1079,7 +1079,7 @@ window.MATH_CH["g09"] = {
                         { t: "seg", a: [72,58], b: [72,28], color: "aux", width: 2, dash: "5,4" },
                         { t: "txt", p: [72,68], text: "ka", size: 12 },
                         { t: "txt", p: [79,44], text: "kh", size: 12 },
-                        { t: "txt", p: [50,82], text: "S₁ : S₂ = 1 : k²", size: 14, bold: true, color: "known" }
+                        { t: "txt", p: [50,82], text: "S₁ : S₂ = 1 : k²", size: 14.48, bold: true, color: "known" }
                       ]
                     }
                   ]
@@ -1127,7 +1127,7 @@ window.MATH_CH["g09"] = {
                       shapes: [
                         { t: "poly", pts: [[15,60],[45,60],[30,32]], color: "corrA", width: 2.5 },
                         { t: "poly", pts: [[58,62],[90,62],[74,34]], color: "corrB", width: 2.5 },
-                        { t: "txt", p: [50,80], text: "边 ×k → 面积 ×k²", size: 14, bold: true, color: "known" },
+                        { t: "txt", p: [50,80], text: "边 ×k → 面积 ×k²", size: 14.48, bold: true, color: "known" },
                         { t: "txt", p: [50,90], text: "x ×k → y ×k²（y=x²）", size: 13, color: "target" }
                       ]
                     }
@@ -1180,13 +1180,13 @@ window.MATH_CH["g09"] = {
                       shapes: [
                         { t: "seg", a: [8,25], b: [92,25], color: "line", width: 2.5 },
                         { t: "seg", a: [30,25], b: [30,45], color: "known", width: 3.5 },
-                        { t: "txt", p: [26,36], text: "1.6米", size: 11 },
+                        { t: "txt", p: [26,36], text: "1.6米", size: 11.89 },
                         { t: "seg", a: [30,25], b: [41.5,25], color: "aux", width: 2, dash: "5,4" },
-                        { t: "txt", p: [36,20], text: "影2米", size: 11 },
+                        { t: "txt", p: [36,20], text: "影2米", size: 11.89 },
                         { t: "seg", a: [65,25], b: [65,70], color: "target", width: 3.5 },
                         { t: "txt", p: [72,50], text: "h=?", size: 12, bold: true, color: "target" },
                         { t: "seg", a: [65,25], b: [91,25], color: "aux", width: 2, dash: "5,4" },
-                        { t: "txt", p: [78,20], text: "影10米", size: 11 },
+                        { t: "txt", p: [78,20], text: "影10米", size: 11.89 },
                         { t: "seg", a: [22,58], b: [34,37.2], color: "aux", width: 2, arrows: 1 },
                         { t: "seg", a: [53,88], b: [65,67.2], color: "aux", width: 2, arrows: 1 }
                       ]
@@ -1304,11 +1304,11 @@ window.MATH_CH["g09"] = {
                         { t: "seg", a: [10,20], b: [90,20], color: "line", width: 2 },
                         { t: "pt", p: [20,20], label: "眼", color: "known" },
                         { t: "seg", a: [35,20], b: [35,32], color: "known", width: 3 },
-                        { t: "txt", p: [30,28], text: "1米", size: 11 },
-                        { t: "txt", p: [28,14], text: "2米", size: 11 },
+                        { t: "txt", p: [30,28], text: "1米", size: 11.89 },
+                        { t: "txt", p: [28,14], text: "2米", size: 11.89 },
                         { t: "seg", a: [80,20], b: [80,68], color: "target", width: 3 },
                         { t: "txt", p: [86,46], text: "h", size: 12, bold: true, color: "target" },
-                        { t: "txt", p: [52,12], text: "32米", size: 11 },
+                        { t: "txt", p: [52,12], text: "32米", size: 11.89 },
                         { t: "seg", a: [20,20], b: [35,32], color: "aux", width: 2 },
                         { t: "seg", a: [20,20], b: [80,68], color: "aux", width: 2 }
                       ]
@@ -1480,7 +1480,7 @@ window.MATH_CH["g09"] = {
                         { t: "ray", p: [20,30], ang: 45, len: 75, color: "aux", width: 1.5 },
                         { t: "pt", p: [40,50], label: "A(1,2)", color: "corrA" },
                         { t: "pt", p: [60,70], label: "A′(2,4)", color: "corrB" },
-                        { t: "txt", p: [55,88], text: "(x,y) → (kx,ky)", size: 14, bold: true, color: "known" }
+                        { t: "txt", p: [55,88], text: "(x,y) → (kx,ky)", size: 14.48, bold: true, color: "known" }
                       ]
                     }
                   ]
@@ -1520,9 +1520,9 @@ window.MATH_CH["g09"] = {
                       shapes: [
                         { t: "pt", p: [20,30], label: "O", color: "target" },
                         { t: "poly", pts: [[40,50],[60,50],[50,65]], color: "corrA", width: 2.5 },
-                        { t: "txt", p: [50,72], text: "A(1,1) B(3,1) C(2,3)", size: 11 },
+                        { t: "txt", p: [50,72], text: "A(1,1) B(3,1) C(2,3)", size: 11.89 },
                         { t: "poly", pts: [[60,70],[90,70],[75,95]], color: "corrB", width: 2.5 },
-                        { t: "txt", p: [72,60], text: "A′(2,2) B′(6,2) C′(4,6)", size: 11, color: "corrB" },
+                        { t: "txt", p: [72,60], text: "A′(2,2) B′(6,2) C′(4,6)", size: 11.89, color: "corrB" },
                         { t: "txt", p: [50,88], text: "①定中心 ②坐标×2 ③连新点", size: 13, bold: true, color: "known" }
                       ]
                     }
@@ -1593,7 +1593,7 @@ window.MATH_CH["g09"] = {
                     {
                       caption: "性质与应用：周长比=k，面积比=k²（H4）；影子测高；位似 (x,y)→(kx,ky)（H18）。",
                       shapes: [
-                        { t: "txt", p: [50,68], text: "周长比 = k，面积比 = k²", size: 14, bold: true, color: "known" },
+                        { t: "txt", p: [50,68], text: "周长比 = k，面积比 = k²", size: 14.48, bold: true, color: "known" },
                         { t: "txt", p: [50,50], text: "应用：影子测高、标杆测距", size: 13 },
                         { t: "txt", p: [50,32], text: "位似：有中心的相似", size: 13 }
                       ]
@@ -1629,7 +1629,7 @@ window.MATH_CH["g09"] = {
                 type: "tap-highlight",
                 params: {
                   base: [
-                    { t: "txt", p: [50,90], text: "点三角形，分进两篮", size: 14 }
+                    { t: "txt", p: [50,90], text: "点三角形，分进两篮", size: 14.48 }
                   ],
                   groups: [
                     { name: "相似", color: "corrA" },

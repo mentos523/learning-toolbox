@@ -80,7 +80,7 @@ window.MATH_CH["g12"] = {
                         { t: "seg", a: [28,38], b: [38,48], color: "line", width: 2 },
                         { t: "seg", a: [54,38], b: [64,48], color: "line", width: 2 },
                         { t: "seg", a: [41,58], b: [51,68], color: "line", width: 2 },
-                        { t: "txt", p: [50,84], text: "棱柱：上下底面一模一样", size: 14, bold: true }
+                        { t: "txt", p: [50,84], text: "棱柱：上下底面一模一样", size: 14.48, bold: true }
                       ]
                     },
                     {
@@ -92,7 +92,7 @@ window.MATH_CH["g12"] = {
                         { t: "seg", a: [45,34], b: [60,72], color: "line", width: 2 },
                         { t: "seg", a: [45,34], b: [30,72], color: "line", width: 2, dash: "5,4" },
                         { t: "pt", p: [45,34], label: "顶", color: "target" },
-                        { t: "txt", p: [50,84], text: "棱锥：底面多边形，顶上一个尖", size: 14, bold: true }
+                        { t: "txt", p: [50,84], text: "棱锥：底面多边形，顶上一个尖", size: 14.48, bold: true }
                       ]
                     },
                     {
@@ -102,7 +102,7 @@ window.MATH_CH["g12"] = {
                         { t: "seg", a: [30,62], b: [30,32], color: "line", width: 3 },
                         { t: "seg", a: [60,62], b: [60,32], color: "line", width: 3 },
                         { t: "seg", a: [30,32], b: [60,32], color: "line", width: 2, dash: "5,4" },
-                        { t: "txt", p: [50,84], text: "圆柱：两个圆一样大，侧面是曲面", size: 14, bold: true }
+                        { t: "txt", p: [50,84], text: "圆柱：两个圆一样大，侧面是曲面", size: 14.48, bold: true }
                       ]
                     },
                     {
@@ -112,14 +112,14 @@ window.MATH_CH["g12"] = {
                         { t: "seg", a: [45,32], b: [30,60], color: "line", width: 2.5 },
                         { t: "seg", a: [45,32], b: [60,60], color: "line", width: 2.5 },
                         { t: "pt", p: [45,32], label: "顶", color: "target" },
-                        { t: "txt", p: [50,84], text: "圆锥：底面是圆，顶上一个尖", size: 14, bold: true }
+                        { t: "txt", p: [50,84], text: "圆锥：底面是圆，顶上一个尖", size: 14.48, bold: true }
                       ]
                     },
                     {
                       caption: "第 5 种：球——浑身是曲面，没有棱也没有顶点，像篮球。",
                       shapes: [
                         { t: "circle", c: [45,52], r: 18, color: "line", width: 3 },
-                        { t: "txt", p: [50,84], text: "球：浑身曲面，没有棱也没有顶点", size: 14, bold: true }
+                        { t: "txt", p: [50,84], text: "球：浑身曲面，没有棱也没有顶点", size: 14.48, bold: true }
                       ]
                     }
                   ]
@@ -174,7 +174,7 @@ window.MATH_CH["g12"] = {
                         { t: "seg", a: [62,62], b: [74,74], color: "line", width: 1.5 },
                         { t: "seg", a: [28,62], b: [40,74], color: "line", width: 1.5 },
                         { t: "poly", pts: [[28,40],[62,40],[62,62],[28,62]], color: "target", width: 2, fill: "target", opacity: 0.25 },
-                        { t: "txt", p: [45,51], text: "1 个面", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [45,51], text: "1 个面", size: 14.48, bold: true, color: "target" }
                       ]
                     },
                     {
@@ -183,7 +183,7 @@ window.MATH_CH["g12"] = {
                         { t: "poly", pts: [[28,40],[62,40],[62,62],[28,62]], color: "line", width: 2 },
                         { t: "poly", pts: [[40,52],[74,52],[74,74],[40,74]], color: "line", width: 1.5, dash: "5,4" },
                         { t: "seg", a: [28,40], b: [62,40], color: "target", width: 5 },
-                        { t: "txt", p: [45,30], text: "1 条棱", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [45,30], text: "1 条棱", size: 14.48, bold: true, color: "target" }
                       ]
                     },
                     {
@@ -192,7 +192,7 @@ window.MATH_CH["g12"] = {
                         { t: "poly", pts: [[28,40],[62,40],[62,62],[28,62]], color: "line", width: 2 },
                         { t: "poly", pts: [[40,52],[74,52],[74,74],[40,74]], color: "line", width: 1.5, dash: "5,4" },
                         { t: "pt", p: [28,40], label: "顶点", color: "target", r: 6 },
-                        { t: "txt", p: [55,30], text: "1 个顶点", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [55,30], text: "1 个顶点", size: 14.48, bold: true, color: "target" }
                       ]
                     }
                   ]
@@ -290,7 +290,7 @@ window.MATH_CH["g12"] = {
                         { t: "seg", a: [28,38], b: [38,48], color: "line", width: 2 },
                         { t: "seg", a: [54,38], b: [64,48], color: "line", width: 2 },
                         { t: "seg", a: [41,58], b: [51,68], color: "line", width: 2 },
-                        { t: "txt", p: [50,22], text: "三棱柱：6 − 9 + 5 = 2", size: 14, bold: true }
+                        { t: "txt", p: [50,22], text: "三棱柱：6 − 9 + 5 = 2", size: 14.48, bold: true }
                       ]
                     }
                   ]
@@ -337,7 +337,7 @@ window.MATH_CH["g12"] = {
                         { t: "seg", a: [42,72], b: [72,72], color: "line", width: 2 },
                         { t: "seg", a: [60,60], b: [72,72], color: "line", width: 2 },
                         { t: "seg", a: [30,60], b: [42,72], color: "line", width: 2 },
-                        { t: "txt", p: [50,88], text: "V − E + F = 8 − 12 + 6 = 2", size: 14, bold: true }
+                        { t: "txt", p: [50,88], text: "V − E + F = 8 − 12 + 6 = 2", size: 14.48, bold: true }
                       ]
                     },
                     {
@@ -348,7 +348,7 @@ window.MATH_CH["g12"] = {
                         { t: "seg", a: [28,38], b: [38,48], color: "line", width: 2 },
                         { t: "seg", a: [54,38], b: [64,48], color: "line", width: 2 },
                         { t: "seg", a: [41,58], b: [51,68], color: "line", width: 2 },
-                        { t: "txt", p: [50,88], text: "V − E + F = 6 − 9 + 5 = 2", size: 14, bold: true }
+                        { t: "txt", p: [50,88], text: "V − E + F = 6 − 9 + 5 = 2", size: 14.48, bold: true }
                       ]
                     }
                   ]
@@ -474,7 +474,7 @@ window.MATH_CH["g12"] = {
                         { t: "seg", a: [65,30], b: [65,55], color: "line", width: 1.5 },
                         { t: "seg", a: [25,30], b: [39,44], color: "line", width: 1.5 },
                         { t: "seg", a: [65,30], b: [79,44], color: "line", width: 1.5 },
-                        { t: "txt", p: [50,88], text: "4 条棱互相平行", size: 14, bold: true, color: "corrA" }
+                        { t: "txt", p: [50,88], text: "4 条棱互相平行", size: 14.48, bold: true, color: "corrA" }
                       ]
                     },
                     {
@@ -486,7 +486,7 @@ window.MATH_CH["g12"] = {
                         { t: "seg", a: [65,30], b: [65,55], color: "corrB", width: 4 },
                         { t: "seg", a: [65,30], b: [79,44], color: "corrB", width: 4 },
                         { t: "right", v: [25,30], p: [65,30], q: [25,55], size: 5, color: "corrB" },
-                        { t: "txt", p: [50,88], text: "交于一点，夹角 90°", size: 14, bold: true, color: "corrB" }
+                        { t: "txt", p: [50,88], text: "交于一点，夹角 90°", size: 14.48, bold: true, color: "corrB" }
                       ]
                     }
                   ]
@@ -548,7 +548,7 @@ window.MATH_CH["g12"] = {
                         { t: "seg", a: [38,50], b: [58,50], color: "aux", width: 2, dash: "5,4" },
                         { t: "seg", a: [38,56], b: [58,56], color: "aux", width: 2, dash: "5,4" },
                         { t: "poly", pts: [[62,38],[86,38],[86,62],[62,62]], color: "target", width: 2.5, fill: "target", opacity: 0.2 },
-                        { t: "txt", p: [74,72], text: "主视图", size: 14, bold: true, color: "target" },
+                        { t: "txt", p: [74,72], text: "主视图", size: 14.48, bold: true, color: "target" },
                         { t: "txt", p: [50,88], text: "光从前面来，直直照过去", size: 13 }
                       ]
                     },
@@ -560,7 +560,7 @@ window.MATH_CH["g12"] = {
                         { t: "seg", a: [62,50], b: [42,50], color: "aux", width: 2, dash: "5,4" },
                         { t: "seg", a: [62,56], b: [42,56], color: "aux", width: 2, dash: "5,4" },
                         { t: "poly", pts: [[18,38],[38,38],[38,62],[18,62]], color: "target", width: 2.5, fill: "target", opacity: 0.2 },
-                        { t: "txt", p: [28,72], text: "左视图", size: 14, bold: true, color: "target" },
+                        { t: "txt", p: [28,72], text: "左视图", size: 14.48, bold: true, color: "target" },
                         { t: "txt", p: [50,88], text: "光从左面来，直直照过去", size: 13 }
                       ]
                     },
@@ -572,7 +572,7 @@ window.MATH_CH["g12"] = {
                         { t: "seg", a: [50,48], b: [50,28], color: "aux", width: 2, dash: "5,4" },
                         { t: "seg", a: [58,48], b: [58,28], color: "aux", width: 2, dash: "5,4" },
                         { t: "poly", pts: [[36,12],[64,12],[64,24],[36,24]], color: "target", width: 2.5, fill: "target", opacity: 0.2 },
-                        { t: "txt", p: [50,36], text: "俯视图", size: 14, bold: true, color: "target" },
+                        { t: "txt", p: [50,36], text: "俯视图", size: 14.48, bold: true, color: "target" },
                         { t: "txt", p: [50,88], text: "光从上面来，直直照过去", size: 13 }
                       ]
                     }
@@ -613,7 +613,7 @@ window.MATH_CH["g12"] = {
                       shapes: [
                         { t: "poly", pts: [[30,40],[54,40],[54,52],[42,52],[42,64],[30,64]], color: "target", width: 2.5 },
                         { t: "seg", a: [42,52], b: [54,52], color: "target", width: 1.5 },
-                        { t: "txt", p: [50,80], text: "主视图：左 2 层、右 1 层", size: 14, bold: true }
+                        { t: "txt", p: [50,80], text: "主视图：左 2 层、右 1 层", size: 14.48, bold: true }
                       ]
                     },
                     {
@@ -621,7 +621,7 @@ window.MATH_CH["g12"] = {
                       shapes: [
                         { t: "poly", pts: [[38,40],[50,40],[50,64],[38,64]], color: "target", width: 2.5 },
                         { t: "seg", a: [38,52], b: [50,52], color: "target", width: 1.5 },
-                        { t: "txt", p: [50,80], text: "左视图：一列 2 层", size: 14, bold: true }
+                        { t: "txt", p: [50,80], text: "左视图：一列 2 层", size: 14.48, bold: true }
                       ]
                     },
                     {
@@ -629,7 +629,7 @@ window.MATH_CH["g12"] = {
                       shapes: [
                         { t: "poly", pts: [[30,44],[54,44],[54,56],[30,56]], color: "target", width: 2.5 },
                         { t: "seg", a: [42,44], b: [42,56], color: "target", width: 1.5 },
-                        { t: "txt", p: [50,80], text: "俯视图：横着 2 格", size: 14, bold: true }
+                        { t: "txt", p: [50,80], text: "俯视图：横着 2 格", size: 14.48, bold: true }
                       ]
                     }
                   ]
@@ -686,7 +686,7 @@ window.MATH_CH["g12"] = {
                         { t: "seg", a: [56,18], b: [56,74], color: "aux", width: 1.5, dash: "5,4" },
                         { t: "txt", p: [42,44], text: "主", size: 13 },
                         { t: "txt", p: [42,28], text: "俯", size: 13 },
-                        { t: "txt", p: [50,88], text: "长对正：主俯", size: 14, bold: true }
+                        { t: "txt", p: [50,88], text: "长对正：主俯", size: 14.48, bold: true }
                       ]
                     },
                     {
@@ -698,7 +698,7 @@ window.MATH_CH["g12"] = {
                         { t: "seg", a: [18,64], b: [78,64], color: "aux", width: 1.5, dash: "5,4" },
                         { t: "txt", p: [32,53], text: "主", size: 13 },
                         { t: "txt", p: [66,53], text: "左", size: 13 },
-                        { t: "txt", p: [50,88], text: "高平齐：主左", size: 14, bold: true }
+                        { t: "txt", p: [50,88], text: "高平齐：主左", size: 14.48, bold: true }
                       ]
                     },
                     {
@@ -708,7 +708,7 @@ window.MATH_CH["g12"] = {
                         { t: "poly", pts: [[58,44],[78,44],[78,64],[58,64]], color: "known", width: 2.5 },
                         { t: "txt", p: [38,55], text: "左", size: 13 },
                         { t: "txt", p: [68,55], text: "俯", size: 13 },
-                        { t: "txt", p: [50,80], text: "宽相等：左俯", size: 14, bold: true },
+                        { t: "txt", p: [50,80], text: "宽相等：左俯", size: 14.48, bold: true },
                         { t: "txt", p: [50,88], text: "（前后方向的宽一样）", size: 12 }
                       ]
                     }
@@ -865,7 +865,7 @@ window.MATH_CH["g12"] = {
                         { t: "poly", pts: [[64,50],[74,50],[74,60],[64,60]], color: "target", width: 2 },
                         { t: "poly", pts: [[74,50],[84,50],[84,60],[74,60]], color: "target", width: 2 },
                         { t: "poly", pts: [[84,50],[94,50],[94,60],[84,60]], color: "target", width: 2 },
-                        { t: "txt", p: [50,84], text: "沿着棱剪开 → 摊平", size: 14, bold: true }
+                        { t: "txt", p: [50,84], text: "沿着棱剪开 → 摊平", size: 14.48, bold: true }
                       ]
                     }
                   ]
@@ -911,7 +911,7 @@ window.MATH_CH["g12"] = {
                         { t: "poly", pts: [[54,46],[62,46],[62,54],[54,54]], color: "line", width: 2 },
                         { t: "poly", pts: [[30,54],[38,54],[38,62],[30,62]], color: "target", width: 2.5 },
                         { t: "poly", pts: [[30,38],[38,38],[38,46],[30,46]], color: "target", width: 2.5 },
-                        { t: "txt", p: [50,80], text: "上 1、下 1", size: 14, bold: true }
+                        { t: "txt", p: [50,80], text: "上 1、下 1", size: 14.48, bold: true }
                       ]
                     },
                     {
@@ -923,7 +923,7 @@ window.MATH_CH["g12"] = {
                         { t: "poly", pts: [[54,46],[62,46],[62,54],[54,54]], color: "line", width: 2 },
                         { t: "poly", pts: [[30,54],[38,54],[38,62],[30,62]], color: "target", width: 2.5 },
                         { t: "poly", pts: [[38,38],[46,38],[46,46],[38,46]], color: "target", width: 2.5 },
-                        { t: "txt", p: [50,80], text: "上 1、下 2", size: 14, bold: true }
+                        { t: "txt", p: [50,80], text: "上 1、下 2", size: 14.48, bold: true }
                       ]
                     },
                     {
@@ -935,7 +935,7 @@ window.MATH_CH["g12"] = {
                         { t: "poly", pts: [[54,46],[62,46],[62,54],[54,54]], color: "line", width: 2 },
                         { t: "poly", pts: [[30,54],[38,54],[38,62],[30,62]], color: "target", width: 2.5 },
                         { t: "poly", pts: [[46,38],[54,38],[54,46],[46,46]], color: "target", width: 2.5 },
-                        { t: "txt", p: [50,80], text: "上 1、下 3", size: 14, bold: true }
+                        { t: "txt", p: [50,80], text: "上 1、下 3", size: 14.48, bold: true }
                       ]
                     },
                     {
@@ -947,7 +947,7 @@ window.MATH_CH["g12"] = {
                         { t: "poly", pts: [[54,46],[62,46],[62,54],[54,54]], color: "line", width: 2 },
                         { t: "poly", pts: [[30,54],[38,54],[38,62],[30,62]], color: "target", width: 2.5 },
                         { t: "poly", pts: [[54,38],[62,38],[62,46],[54,46]], color: "target", width: 2.5 },
-                        { t: "txt", p: [50,80], text: "上 1、下 4", size: 14, bold: true }
+                        { t: "txt", p: [50,80], text: "上 1、下 4", size: 14.48, bold: true }
                       ]
                     },
                     {
@@ -959,7 +959,7 @@ window.MATH_CH["g12"] = {
                         { t: "poly", pts: [[54,46],[62,46],[62,54],[54,54]], color: "line", width: 2 },
                         { t: "poly", pts: [[38,54],[46,54],[46,62],[38,62]], color: "target", width: 2.5 },
                         { t: "poly", pts: [[38,38],[46,38],[46,46],[38,46]], color: "target", width: 2.5 },
-                        { t: "txt", p: [50,80], text: "上 2、下 2", size: 14, bold: true }
+                        { t: "txt", p: [50,80], text: "上 2、下 2", size: 14.48, bold: true }
                       ]
                     },
                     {
@@ -971,7 +971,7 @@ window.MATH_CH["g12"] = {
                         { t: "poly", pts: [[54,46],[62,46],[62,54],[54,54]], color: "line", width: 2 },
                         { t: "poly", pts: [[38,54],[46,54],[46,62],[38,62]], color: "target", width: 2.5 },
                         { t: "poly", pts: [[46,38],[54,38],[54,46],[46,46]], color: "target", width: 2.5 },
-                        { t: "txt", p: [50,80], text: "上 2、下 3", size: 14, bold: true }
+                        { t: "txt", p: [50,80], text: "上 2、下 3", size: 14.48, bold: true }
                       ]
                     }
                   ]
@@ -1014,7 +1014,7 @@ window.MATH_CH["g12"] = {
                         { t: "poly", pts: [[26,38],[34,38],[34,46],[26,46]], color: "target", width: 2.5 },
                         { t: "poly", pts: [[34,38],[42,38],[42,46],[34,46]], color: "target", width: 2.5 },
                         { t: "poly", pts: [[34,54],[42,54],[42,62],[34,62]], color: "target", width: 2.5 },
-                        { t: "txt", p: [50,80], text: "1 在第 1 列（正对 2）", size: 14, bold: true }
+                        { t: "txt", p: [50,80], text: "1 在第 1 列（正对 2）", size: 14.48, bold: true }
                       ]
                     },
                     {
@@ -1026,7 +1026,7 @@ window.MATH_CH["g12"] = {
                         { t: "poly", pts: [[26,38],[34,38],[34,46],[26,46]], color: "target", width: 2.5 },
                         { t: "poly", pts: [[34,38],[42,38],[42,46],[34,46]], color: "target", width: 2.5 },
                         { t: "poly", pts: [[42,54],[50,54],[50,62],[42,62]], color: "target", width: 2.5 },
-                        { t: "txt", p: [50,80], text: "1 在第 2 列（中间）", size: 14, bold: true }
+                        { t: "txt", p: [50,80], text: "1 在第 2 列（中间）", size: 14.48, bold: true }
                       ]
                     },
                     {
@@ -1038,7 +1038,7 @@ window.MATH_CH["g12"] = {
                         { t: "poly", pts: [[26,38],[34,38],[34,46],[26,46]], color: "target", width: 2.5 },
                         { t: "poly", pts: [[34,38],[42,38],[42,46],[34,46]], color: "target", width: 2.5 },
                         { t: "poly", pts: [[50,54],[58,54],[58,62],[50,62]], color: "target", width: 2.5 },
-                        { t: "txt", p: [50,80], text: "1 在第 3 列（另一端）", size: 14, bold: true }
+                        { t: "txt", p: [50,80], text: "1 在第 3 列（另一端）", size: 14.48, bold: true }
                       ]
                     },
                     {
@@ -1050,7 +1050,7 @@ window.MATH_CH["g12"] = {
                         { t: "poly", pts: [[50,42],[58,42],[58,50],[50,50]], color: "line", width: 2 },
                         { t: "poly", pts: [[50,34],[58,34],[58,42],[50,42]], color: "line", width: 2 },
                         { t: "poly", pts: [[58,34],[66,34],[66,42],[58,42]], color: "line", width: 2 },
-                        { t: "txt", p: [50,80], text: "二二二：1 种", size: 14, bold: true }
+                        { t: "txt", p: [50,80], text: "二二二：1 种", size: 14.48, bold: true }
                       ]
                     },
                     {
@@ -1062,7 +1062,7 @@ window.MATH_CH["g12"] = {
                         { t: "poly", pts: [[28,58],[36,58],[36,66],[28,66]], color: "line", width: 2 },
                         { t: "poly", pts: [[36,58],[44,58],[44,66],[36,66]], color: "line", width: 2 },
                         { t: "poly", pts: [[44,58],[52,58],[52,66],[44,66]], color: "line", width: 2 },
-                        { t: "txt", p: [50,80], text: "三三：1 种（Z 形）", size: 14, bold: true }
+                        { t: "txt", p: [50,80], text: "三三：1 种（Z 形）", size: 14.48, bold: true }
                       ]
                     }
                   ]
@@ -1107,7 +1107,7 @@ window.MATH_CH["g12"] = {
                         { t: "poly", pts: [[32,52],[44,52],[44,64],[32,64]], color: "line", width: 2 },
                         { t: "poly", pts: [[44,52],[56,52],[56,64],[44,64]], color: "line", width: 2 },
                         { t: "poly", pts: [[56,52],[68,52],[68,64],[56,64]], color: "line", width: 2 },
-                        { t: "txt", p: [50,80], text: "“田”字形：6 个正方形", size: 14, bold: true }
+                        { t: "txt", p: [50,80], text: "“田”字形：6 个正方形", size: 14.48, bold: true }
                       ]
                     },
                     {
@@ -1120,7 +1120,7 @@ window.MATH_CH["g12"] = {
                         { t: "poly", pts: [[44,52],[56,52],[56,64],[44,64]], color: "line", width: 1.5, dash: "5,4" },
                         { t: "poly", pts: [[56,52],[68,52],[68,64],[56,64]], color: "line", width: 1.5, dash: "5,4" },
                         { t: "seg", a: [32,52], b: [68,52], color: "target", width: 2.5, dash: "6,4" },
-                        { t: "txt", p: [50,80], text: "沿中间这条线对折", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [50,80], text: "沿中间这条线对折", size: 14.48, bold: true, color: "target" }
                       ]
                     },
                     {
@@ -1129,7 +1129,7 @@ window.MATH_CH["g12"] = {
                         { t: "poly", pts: [[32,40],[44,40],[44,52],[32,52]], color: "target", width: 2.5, fill: "target", opacity: 0.35 },
                         { t: "poly", pts: [[32,40],[44,40],[44,52],[32,52]], color: "corrB", width: 2.5, fill: "corrB", opacity: 0.35 },
                         { t: "txt", p: [50,66], text: "❌ 两块重叠了", size: 16, bold: true, color: "target" },
-                        { t: "txt", p: [50,80], text: "“田”字形不是展开图", size: 14, bold: true }
+                        { t: "txt", p: [50,80], text: "“田”字形不是展开图", size: 14.48, bold: true }
                       ]
                     }
                   ]
@@ -1266,7 +1266,7 @@ window.MATH_CH["g12"] = {
                         { t: "seg", a: [60,60], b: [72,72], color: "line", width: 1.5 },
                         { t: "seg", a: [30,60], b: [42,72], color: "line", width: 1.5 },
                         { t: "poly", pts: [[60,38],[52,30],[60,30]], color: "target", width: 2.5, fill: "target", opacity: 0.4 },
-                        { t: "txt", p: [50,88], text: "切 3 个面 → 三角形", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [50,88], text: "切 3 个面 → 三角形", size: 14.48, bold: true, color: "target" }
                       ]
                     },
                     {
@@ -1281,7 +1281,7 @@ window.MATH_CH["g12"] = {
                         { t: "seg", a: [60,60], b: [72,72], color: "line", width: 1.5 },
                         { t: "seg", a: [30,60], b: [42,72], color: "line", width: 1.5 },
                         { t: "poly", pts: [[44,30],[56,30],[68,42],[56,42]], color: "target", width: 2.5, fill: "target", opacity: 0.4 },
-                        { t: "txt", p: [50,88], text: "切 4 个面 → 四边形", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [50,88], text: "切 4 个面 → 四边形", size: 14.48, bold: true, color: "target" }
                       ]
                     },
                     {
@@ -1296,7 +1296,7 @@ window.MATH_CH["g12"] = {
                         { t: "seg", a: [60,60], b: [72,72], color: "line", width: 1.5 },
                         { t: "seg", a: [30,60], b: [42,72], color: "line", width: 1.5 },
                         { t: "poly", pts: [[52,30],[68,36],[72,54],[60,68],[44,62]], color: "target", width: 2.5, fill: "target", opacity: 0.4 },
-                        { t: "txt", p: [50,88], text: "切 5 个面 → 五边形", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [50,88], text: "切 5 个面 → 五边形", size: 14.48, bold: true, color: "target" }
                       ]
                     },
                     {
@@ -1311,7 +1311,7 @@ window.MATH_CH["g12"] = {
                         { t: "seg", a: [60,60], b: [72,72], color: "line", width: 1.5 },
                         { t: "seg", a: [30,60], b: [42,72], color: "line", width: 1.5 },
                         { t: "poly", pts: [[48,30],[66,34],[74,50],[66,66],[48,70],[40,54]], color: "target", width: 2.5, fill: "target", opacity: 0.4 },
-                        { t: "txt", p: [50,88], text: "切 6 个面 → 六边形", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [50,88], text: "切 6 个面 → 六边形", size: 14.48, bold: true, color: "target" }
                       ]
                     }
                   ]
@@ -1355,14 +1355,14 @@ window.MATH_CH["g12"] = {
                       caption: "三角形截面：斜切掉一个角，刀切过 3 个面。",
                       shapes: [
                         { t: "poly", pts: [[30,34],[52,34],[41,54]], color: "target", width: 3, fill: "target", opacity: 0.3 },
-                        { t: "txt", p: [50,80], text: "切 3 个面 → 三角形", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [50,80], text: "切 3 个面 → 三角形", size: 14.48, bold: true, color: "target" }
                       ]
                     },
                     {
                       caption: "四边形截面：竖着切，刀切过 4 个面（长方形）。",
                       shapes: [
                         { t: "poly", pts: [[34,34],[54,34],[54,62],[34,62]], color: "target", width: 3, fill: "target", opacity: 0.3 },
-                        { t: "txt", p: [50,80], text: "切 4 个面 → 四边形", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [50,80], text: "切 4 个面 → 四边形", size: 14.48, bold: true, color: "target" }
                       ]
                     }
                   ]
@@ -1409,14 +1409,14 @@ window.MATH_CH["g12"] = {
                       caption: "五边形截面：刀斜一点，切过 5 个面。",
                       shapes: [
                         { t: "poly", pts: [[50,32],[66,38],[70,54],[58,68],[42,62]], color: "target", width: 3, fill: "target", opacity: 0.3 },
-                        { t: "txt", p: [50,82], text: "切 5 个面 → 五边形", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [50,82], text: "切 5 个面 → 五边形", size: 14.48, bold: true, color: "target" }
                       ]
                     },
                     {
                       caption: "六边形截面：6 个面全切到——这是正方体截面的“天花板”。",
                       shapes: [
                         { t: "poly", pts: [[46,32],[64,36],[72,52],[64,68],[46,72],[38,56]], color: "target", width: 3, fill: "target", opacity: 0.3 },
-                        { t: "txt", p: [50,84], text: "切 6 个面 → 六边形", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [50,84], text: "切 6 个面 → 六边形", size: 14.48, bold: true, color: "target" }
                       ]
                     }
                   ]
@@ -1470,7 +1470,7 @@ window.MATH_CH["g12"] = {
                         { t: "txt", p: [60,62], text: "5 边", size: 12, bold: true },
                         { t: "poly", pts: [[76,40],[86,44],[86,54],[76,58],[70,52]], color: "target", width: 2.5 },
                         { t: "txt", p: [78,62], text: "6 边", size: 12, bold: true },
-                        { t: "txt", p: [50,80], text: "边数 = 切到的面数", size: 14, bold: true }
+                        { t: "txt", p: [50,80], text: "边数 = 切到的面数", size: 14.48, bold: true }
                       ]
                     }
                   ]
@@ -1520,7 +1520,7 @@ window.MATH_CH["g12"] = {
                       shapes: [
                         { t: "circle", c: [30,50], r: 10, color: "known", width: 2.5 },
                         { t: "poly", pts: [[48,40],[62,40],[55,54]], color: "known", width: 2.5 },
-                        { t: "txt", p: [50,80], text: "5 种立体 + 欧拉公式", size: 14, bold: true }
+                        { t: "txt", p: [50,80], text: "5 种立体 + 欧拉公式", size: 14.48, bold: true }
                       ]
                     },
                     {
@@ -1530,7 +1530,7 @@ window.MATH_CH["g12"] = {
                         { t: "txt", p: [38,52], text: "主", size: 13 },
                         { t: "poly", pts: [[56,44],[72,44],[72,60],[56,60]], color: "known", width: 2.5 },
                         { t: "txt", p: [64,52], text: "左", size: 13 },
-                        { t: "txt", p: [50,80], text: "三视图：三个影子", size: 14, bold: true }
+                        { t: "txt", p: [50,80], text: "三视图：三个影子", size: 14.48, bold: true }
                       ]
                     },
                     {
@@ -1542,14 +1542,14 @@ window.MATH_CH["g12"] = {
                         { t: "poly", pts: [[54,46],[62,46],[62,54],[54,54]], color: "known", width: 2 },
                         { t: "poly", pts: [[38,54],[46,54],[46,62],[38,62]], color: "known", width: 2 },
                         { t: "poly", pts: [[38,38],[46,38],[46,46],[38,46]], color: "known", width: 2 },
-                        { t: "txt", p: [50,80], text: "展开图：11 种", size: 14, bold: true }
+                        { t: "txt", p: [50,80], text: "展开图：11 种", size: 14.48, bold: true }
                       ]
                     },
                     {
                       caption: "截面：切几个面，得几边形——正方体最多 6 条边。",
                       shapes: [
                         { t: "poly", pts: [[46,36],[64,40],[72,56],[64,72],[46,76],[38,60]], color: "target", width: 2.5, fill: "target", opacity: 0.3 },
-                        { t: "txt", p: [50,86], text: "截面：切几面得几边形", size: 14, bold: true }
+                        { t: "txt", p: [50,86], text: "截面：切几面得几边形", size: 14.48, bold: true }
                       ]
                     }
                   ]
@@ -1583,7 +1583,7 @@ window.MATH_CH["g12"] = {
                 type: "tap-highlight",
                 params: {
                   base: [
-                    { t: "txt", p: [50,88], text: "点名字，分进两篮", size: 14 }
+                    { t: "txt", p: [50,88], text: "点名字，分进两篮", size: 14.48 }
                   ],
                   groups: [
                     { name: "能折成正方体", color: "corrA" },
@@ -1591,13 +1591,13 @@ window.MATH_CH["g12"] = {
                   ],
                   items: [
                     { id: "n1", label: "一四一", group: 0, anchor: [25,68],
-                      shape: { t: "txt", p: [25,68], text: "“一四一”", size: 17, bold: true, color: "corrA" } },
+                      shape: { t: "txt", p: [25,68], text: "“一四一”", size: 16, bold: true, color: "corrA" } },
                     { id: "n2", label: "二三一", group: 0, anchor: [75,68],
-                      shape: { t: "txt", p: [75,68], text: "“二三一”", size: 17, bold: true, color: "corrA" } },
+                      shape: { t: "txt", p: [75,68], text: "“二三一”", size: 16, bold: true, color: "corrA" } },
                     { id: "n3", label: "田字形", group: 1, anchor: [25,44],
-                      shape: { t: "txt", p: [25,44], text: "“田”字形", size: 17, bold: true, color: "corrB" } },
+                      shape: { t: "txt", p: [25,44], text: "“田”字形", size: 16, bold: true, color: "corrB" } },
                     { id: "n4", label: "凹字形", group: 1, anchor: [75,44],
-                      shape: { t: "txt", p: [75,44], text: "“凹”字形", size: 17, bold: true, color: "corrB" } }
+                      shape: { t: "txt", p: [75,44], text: "“凹”字形", size: 16, bold: true, color: "corrB" } }
                   ]
                 }
               },

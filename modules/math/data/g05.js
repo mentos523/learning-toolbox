@@ -252,10 +252,10 @@ window.MATH_CH["g05"] = {
                         { t: "poly", pts: [[20,20],[80,20],[80,80],[20,80]], color: "line", width: 2.5 },
                         { t: "seg", a: [55,20], b: [55,80], color: "line", width: 2 },
                         { t: "seg", a: [20,55], b: [80,55], color: "line", width: 2 },
-                        { t: "txt", p: [37,37], text: "a²", size: 14, bold: true },
-                        { t: "txt", p: [67,37], text: "ab", size: 14, bold: true },
-                        { t: "txt", p: [37,67], text: "ab", size: 14, bold: true },
-                        { t: "txt", p: [67,67], text: "b²", size: 14, bold: true }
+                        { t: "txt", p: [37,37], text: "a²", size: 14.48, bold: true },
+                        { t: "txt", p: [67,37], text: "ab", size: 14.48, bold: true },
+                        { t: "txt", p: [37,67], text: "ab", size: 14.48, bold: true },
+                        { t: "txt", p: [67,67], text: "b²", size: 14.48, bold: true }
                       ] }
                   ]
                 }
@@ -374,7 +374,7 @@ window.MATH_CH["g05"] = {
                         { t: "poly", pts: [[55.6,89.2],[70,70],[30,70]], color: "corrC", width: 2, fill: "corrC", opacity: 0.4 },
                         { t: "poly", pts: [[10.8,55.6],[30,70],[30,30]], color: "known", width: 2, fill: "known", opacity: 0.4 },
                         { t: "poly", pts: [[30,30],[70,30],[70,70],[30,70]], color: "target", width: 2.5, fill: "target", opacity: 0.3 },
-                        { t: "txt", p: [50,88], text: "4×ab/2 + c²", size: 14, bold: true, math: true }
+                        { t: "txt", p: [50,88], text: "4×ab/2 + c²", size: 14.48, bold: true, math: true }
                       ]
                     },
                     {
@@ -467,7 +467,7 @@ window.MATH_CH["g05"] = {
                       reason: "梯形面积 = (上底+下底)×高÷2；三个三角形面积相加。",
                       shapes: [
                         { t: "poly", pts: [[20,20],[62,20],[62,38],[20,44]], color: "known", width: 2, fill: "known", opacity: 0.2 },
-                        { t: "txt", p: [41,58], text: "(a+b)²/2", size: 14, bold: true, math: true },
+                        { t: "txt", p: [41,58], text: "(a+b)²/2", size: 14.48, bold: true, math: true },
                         { t: "txt", p: [41,44], text: "= ab/2+ab/2+c²/2", size: 13, bold: true, math: true }
                       ]
                     }
@@ -523,7 +523,7 @@ window.MATH_CH["g05"] = {
                       card: "两边 ×2：(a+b)² = 2ab + c²；展开：a²+b²=c²。",
                       reason: "等式两边同乘 2；(a+b)²=a²+2ab+b²（代数 2.2.2）。",
                       shapes: [
-                        { t: "txt", p: [50,62], text: "(a+b)² = 2ab + c²", size: 14, bold: true, math: true },
+                        { t: "txt", p: [50,62], text: "(a+b)² = 2ab + c²", size: 14.48, bold: true, math: true },
                         { t: "txt", p: [50,44], text: "→ a² + b² = c²", size: 15, bold: true, math: true, color: "target" }
                       ]
                     }
@@ -745,7 +745,7 @@ window.MATH_CH["g05"] = {
                       caption: "b²=15²−9²=225−81=144，所以 b=12。",
                       shapes: [
                         { t: "poly", pts: [[30,30],[66,30],[30,78]], color: "line", width: 2 },
-                        { t: "txt", p: [50,88], text: "b²=225−81=144，b=12", size: 14, bold: true }
+                        { t: "txt", p: [50,88], text: "b²=225−81=144，b=12", size: 14.48, bold: true }
                       ]
                     }
                   ]
@@ -814,8 +814,8 @@ window.MATH_CH["g05"] = {
                       shapes: [
                         { t: "poly", pts: [[30,30],[58,30],[30,51]], color: "known", width: 3.5 },
                         { t: "right", v: [30,30], p: [58,30], q: [30,51], size: 7, color: "corrAngle" },
-                        { t: "txt", p: [50,68], text: "3²+4²=5²", size: 14, bold: true, math: true },
-                        { t: "txt", p: [50,80], text: "是直角！", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [50,68], text: "3²+4²=5²", size: 14.48, bold: true, math: true },
+                        { t: "txt", p: [50,80], text: "是直角！", size: 14.48, bold: true, color: "target" }
                       ]
                     }
                   ]
@@ -872,11 +872,11 @@ window.MATH_CH["g05"] = {
                       reason: "已知条件代入：√(a²+b²) = √c² = c。",
                       shapes: [
                         { t: "poly", pts: [[8,45],[26,45],[8,63]], color: "line", width: 2.5 },
-                        { t: "txt", p: [17,70], text: "原三角形", size: 11 },
-                        { t: "txt", p: [17,36], text: "a,b,c", size: 11 },
+                        { t: "txt", p: [17,70], text: "原三角形", size: 11.89 },
+                        { t: "txt", p: [17,36], text: "a,b,c", size: 11.89 },
                         { t: "poly", pts: [[45,45],[63,45],[45,63]], color: "known", width: 2.5 },
-                        { t: "txt", p: [54,70], text: "'替身'", size: 11 },
-                        { t: "txt", p: [54,36], text: "a,b,c", size: 11, color: "known" }
+                        { t: "txt", p: [54,70], text: "'替身'", size: 11.89 },
+                        { t: "txt", p: [54,36], text: "a,b,c", size: 11.89, color: "known" }
                       ]
                     },
                     {
@@ -1142,7 +1142,7 @@ window.MATH_CH["g05"] = {
                         { t: "right", v: [55,42], p: [85,42], q: [55,72], size: 6, color: "corrAngle" },
                         { t: "seg", a: [85,42], b: [55,72], ticks: 1, color: "corrA" },
                         { t: "seg", a: [55,72], b: [55,42], ticks: 2, color: "corrB" },
-                        { t: "txt", p: [50,82], text: "HL → 全等 ✓", size: 14, bold: true, color: "known" }
+                        { t: "txt", p: [50,82], text: "HL → 全等 ✓", size: 14.48, bold: true, color: "known" }
                       ]
                     },
                     {
@@ -1156,7 +1156,7 @@ window.MATH_CH["g05"] = {
                         { t: "right", v: [55,42], p: [85,42], q: [55,72], size: 6, color: "corrAngle" },
                         { t: "seg", a: [55,42], b: [85,42], ticks: 1, color: "corrA" },
                         { t: "seg", a: [55,72], b: [55,42], ticks: 2, color: "corrB" },
-                        { t: "txt", p: [50,82], text: "这是 SAS，不是 HL", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [50,82], text: "这是 SAS，不是 HL", size: 14.48, bold: true, color: "target" }
                       ]
                     }
                   ]
@@ -1232,7 +1232,7 @@ window.MATH_CH["g05"] = {
                         { t: "right", v: [55,35], p: [25,35], q: [55,75], size: 6, color: "corrAngle" },
                         { t: "txt", p: [40,30], text: "AC=|4−1|=3", size: 12 },
                         { t: "txt", p: [62,55], text: "BC=|6−2|=4", size: 12 },
-                        { t: "txt", p: [50,88], text: "AB=√(3²+4²)=5", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [50,88], text: "AB=√(3²+4²)=5", size: 14.48, bold: true, color: "target" }
                       ]
                     }
                   ]
@@ -1280,7 +1280,7 @@ window.MATH_CH["g05"] = {
                         { t: "right", v: [60,60], p: [30,60], q: [60,20], size: 6, color: "corrAngle" },
                         { t: "txt", p: [45,65], text: "横差 3", size: 12 },
                         { t: "txt", p: [66,40], text: "纵差 4", size: 12 },
-                        { t: "txt", p: [50,82], text: "d=√(3²+4²)=5", size: 14, bold: true }
+                        { t: "txt", p: [50,82], text: "d=√(3²+4²)=5", size: 14.48, bold: true }
                       ]
                     },
                     {
@@ -1334,7 +1334,7 @@ window.MATH_CH["g05"] = {
                 type: "tap-highlight",
                 params: {
                   base: [
-                    { t: "txt", p: [50,90], text: "点成员，看它属于哪个家族", size: 14 }
+                    { t: "txt", p: [50,90], text: "点成员，看它属于哪个家族", size: 14.48 }
                   ],
                   groups: [
                     { name: "3-4-5 家族", color: "corrA" },
@@ -1400,8 +1400,8 @@ window.MATH_CH["g05"] = {
                       shapes: [
                         { t: "poly", pts: [[30,30],[70,30],[70,70],[30,70]], color: "line", width: 2.5 },
                         { t: "seg", a: [30,30], b: [70,70], color: "target", width: 3 },
-                        { t: "txt", p: [56,56], text: "c", size: 14, bold: true, color: "target" },
-                        { t: "txt", p: [50,82], text: "c²=1²+1²=2，c=√2", size: 14, bold: true }
+                        { t: "txt", p: [56,56], text: "c", size: 14.48, bold: true, color: "target" },
+                        { t: "txt", p: [50,82], text: "c²=1²+1²=2，c=√2", size: 14.48, bold: true }
                       ]
                     },
                     {
@@ -1409,7 +1409,7 @@ window.MATH_CH["g05"] = {
                       shapes: [
                         { t: "poly", pts: [[30,30],[70,30],[70,70],[30,70]], color: "line", width: 2.5 },
                         { t: "seg", a: [30,30], b: [70,70], color: "target", width: 3.5 },
-                        { t: "txt", p: [50,88], text: "√2 就住在正方形的对角线上", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [50,88], text: "√2 就住在正方形的对角线上", size: 14.48, bold: true, color: "target" }
                       ]
                     }
                   ]
@@ -1515,7 +1515,7 @@ window.MATH_CH["g05"] = {
                       shapes: [
                         { t: "poly", pts: [[30,30],[58,30],[30,51]], color: "known", width: 3 },
                         { t: "right", v: [30,30], p: [58,30], q: [30,51], size: 6, color: "corrAngle" },
-                        { t: "txt", p: [50,68], text: "9 + 16 = 25", size: 14, bold: true }
+                        { t: "txt", p: [50,68], text: "9 + 16 = 25", size: 14.48, bold: true }
                       ]
                     },
                     {
@@ -1575,7 +1575,7 @@ window.MATH_CH["g05"] = {
                 type: "tap-highlight",
                 params: {
                   base: [
-                    { t: "txt", p: [50,88], text: "点三元组，分进两篮", size: 14 }
+                    { t: "txt", p: [50,88], text: "点三元组，分进两篮", size: 14.48 }
                   ],
                   groups: [
                     { name: "是直角三角形", color: "corrA" },

@@ -177,7 +177,7 @@ window.MATH_CH["g00"] = {
                       shapes: [
                         { t: "seg", a: [15,50], b: [85,50], color: "line", width: 3 },
                         { t: "pt", p: [15,50], r: 4, color: "known" },
-                        { t: "txt", p: [50,64], text: "点动成线", size: 14, bold: true }
+                        { t: "txt", p: [50,64], text: "点动成线", size: 14.48, bold: true }
                       ]
                     },
                     {
@@ -185,7 +185,7 @@ window.MATH_CH["g00"] = {
                       shapes: [
                         { t: "poly", pts: [[15,50],[85,50],[85,30],[15,30]], color: "corrA", width: 2, fill: "corrA", opacity: 0.35 },
                         { t: "seg", a: [15,50], b: [85,50], color: "line", width: 3 },
-                        { t: "txt", p: [50,64], text: "线动成面", size: 14, bold: true }
+                        { t: "txt", p: [50,64], text: "线动成面", size: 14.48, bold: true }
                       ]
                     },
                     {
@@ -194,7 +194,7 @@ window.MATH_CH["g00"] = {
                         { t: "poly", pts: [[25,44],[75,44],[75,51],[25,51]], color: "line", width: 2 },
                         { t: "poly", pts: [[25,51],[75,51],[75,58],[25,58]], color: "line", width: 2 },
                         { t: "poly", pts: [[25,58],[75,58],[75,65],[25,65]], color: "line", width: 2 },
-                        { t: "txt", p: [50,78], text: "面动成体", size: 14, bold: true }
+                        { t: "txt", p: [50,78], text: "面动成体", size: 14.48, bold: true }
                       ]
                     }
                   ]
@@ -369,7 +369,7 @@ window.MATH_CH["g00"] = {
                           t: "txt",
                           p: [ 50, 28 ],
                           text: "180°",
-                          size: 14,
+                          size: 14.48,
                           bold: true
                         }
                       ]
@@ -547,8 +547,8 @@ window.MATH_CH["g00"] = {
                       label: "代数的样子",
                       caption: "代数说：x² 就是 x 乘以自己——这是“数”的语言。",
                       shapes: [
-                        { t: "txt", p: [50,56], text: "x²", size: 30, bold: true },
-                        { t: "txt", p: [50,34], text: "x 乘以自己", size: 14 }
+                        { t: "txt", p: [50,56], text: "x²", size: 22.86, bold: true },
+                        { t: "txt", p: [50,34], text: "x 乘以自己", size: 14.48 }
                       ]
                     },
                     {
@@ -556,9 +556,9 @@ window.MATH_CH["g00"] = {
                       caption: "几何说：x² 是边长为 x 的正方形的面积——这是“形”的语言。",
                       shapes: [
                         { t: "poly", pts: [[35,35],[65,35],[65,65],[35,65]], color: "known", width: 3 },
-                        { t: "txt", p: [50,27], text: "x", size: 14, color: "known" },
-                        { t: "txt", p: [27,50], text: "x", size: 14, color: "known" },
-                        { t: "txt", p: [50,78], text: "面积 = x²", size: 14, bold: true }
+                        { t: "txt", p: [50,27], text: "x", size: 14.48, color: "known" },
+                        { t: "txt", p: [27,50], text: "x", size: 14.48, color: "known" },
+                        { t: "txt", p: [50,78], text: "面积 = x²", size: 14.48, bold: true }
                       ]
                     }
                   ]
@@ -625,7 +625,7 @@ window.MATH_CH["g00"] = {
                       caption: "第 4 步：未知数 x，就是这条线段的长度——数，变成了形。",
                       shapes: [
                         { t: "txt", p: [50,56], text: "x = 7", size: 26, bold: true },
-                        { t: "txt", p: [50,36], text: "未知数是一条线段的长度", size: 14 }
+                        { t: "txt", p: [50,36], text: "未知数是一条线段的长度", size: 14.48 }
                       ]
                     }
                   ]

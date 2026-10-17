@@ -65,7 +65,7 @@ window.MATH_CH["g04"] = {
                         { t: "seg", a: [18,64], b: [54,64], ticks: 1, color: "known" },
                         { t: "seg", a: [54,64], b: [36,30], ticks: 2, color: "known" },
                         { t: "arc", v: [18,64], a1: 297.9, a2: 0, r: 9, group: 1, color: "corrAngle" },
-                        { t: "txt", p: [50,76], text: "完全重合", size: 14, bold: true }
+                        { t: "txt", p: [50,76], text: "完全重合", size: 14.48, bold: true }
                       ]
                     },
                     {
@@ -74,7 +74,7 @@ window.MATH_CH["g04"] = {
                       shapes: [
                         { t: "poly", pts: [[18,64],[58,64],[38,30]], color: "line", width: 3 },
                         { t: "poly", pts: [[30,58],[50,58],[40,42]], color: "aux", width: 2, dash: "5,4" },
-                        { t: "txt", p: [50,76], text: "轮廓贴合，盖不满", size: 14, bold: true }
+                        { t: "txt", p: [50,76], text: "轮廓贴合，盖不满", size: 14.48, bold: true }
                       ]
                     }
                   ]
@@ -379,7 +379,7 @@ window.MATH_CH["g04"] = {
                       shapes: [
                         { t: "poly", pts: [[40,60],[24,36],[66,42]], color: "known", width: 3.5 },
                         { t: "arc", v: [40,60], a1: 236.3, a2: 325.3, r: 11, group: 1, color: "corrAngle" },
-                        { t: "txt", p: [40,76], text: "角一定，形一定", size: 14, bold: true }
+                        { t: "txt", p: [40,76], text: "角一定，形一定", size: 14.48, bold: true }
                       ]
                     }
                   ]
@@ -496,7 +496,7 @@ window.MATH_CH["g04"] = {
                         { t: "arc", v: [25,40], a1: 0, a2: 50, r: 10, group: 1, color: "corrAngle" },
                         { t: "arc", v: [65,40], a1: 120, a2: 180, r: 10, group: 2, color: "corrAngle" },
                         { t: "pt", p: [49,68], label: "A", color: "known" },
-                        { t: "txt", p: [45,82], text: "只能长这一个样", size: 14, bold: true }
+                        { t: "txt", p: [45,82], text: "只能长这一个样", size: 14.48, bold: true }
                       ]
                     }
                   ]
@@ -735,7 +735,7 @@ window.MATH_CH["g04"] = {
                         { t: "arc", v: [76,34], a1: 125, a2: 180, r: 10, group: 1, color: "corrAngle" },
                         { t: "arc", v: [50,34], a1: 0, a2: 90, r: 10, group: 1, color: "corrAngle" },
                         { t: "seg", a: [50,74], b: [76,34], ticks: 1, color: "corrA" },
-                        { t: "txt", p: [50,86], text: "∠B 与 ∠C 重合", size: 14, bold: true }
+                        { t: "txt", p: [50,86], text: "∠B 与 ∠C 重合", size: 14.48, bold: true }
                       ]
                     }
                   ]
@@ -1085,7 +1085,7 @@ window.MATH_CH["g04"] = {
                         { t: "arc", v: [76,34], a1: 125, a2: 180, r: 10, group: 1, color: "corrAngle" },
                         { t: "seg", a: [50,74], b: [24,34], ticks: 1, color: "corrA" },
                         { t: "seg", a: [50,74], b: [76,34], ticks: 1, color: "corrA" },
-                        { t: "txt", p: [50,20], text: "性质 ⇆ 判定：互逆", size: 14, bold: true }
+                        { t: "txt", p: [50,20], text: "性质 ⇆ 判定：互逆", size: 14.48, bold: true }
                       ]
                     }
                   ]
@@ -1132,7 +1132,7 @@ window.MATH_CH["g04"] = {
                         { t: "arc", v: [28,35], a1: 0, a2: 60, r: 9, group: 1, color: "corrAngle" },
                         { t: "arc", v: [72,35], a1: 120, a2: 180, r: 9, group: 1, color: "corrAngle" },
                         { t: "arc", v: [50,73], a1: 240, a2: 300, r: 9, group: 1, color: "corrAngle" },
-                        { t: "txt", p: [50,20], text: "60° × 3 = 180°", size: 14, bold: true }
+                        { t: "txt", p: [50,20], text: "60° × 3 = 180°", size: 14.48, bold: true }
                       ]
                     }
                   ]
@@ -1438,7 +1438,7 @@ window.MATH_CH["g04"] = {
                         { t: "seg", a: [15,40], b: [85,40], color: "known", width: 3 },
                         { t: "seg", a: [50,66], b: [50,16.5], color: "target", width: 4 },
                         { t: "right", v: [50,40], p: [15,40], q: [50,66], size: 7, color: "target" },
-                        { t: "txt", p: [50,82], text: "PQ ⊥ 直线", size: 14, bold: true }
+                        { t: "txt", p: [50,82], text: "PQ ⊥ 直线", size: 14.48, bold: true }
                       ]
                     }
                   ]
@@ -1479,7 +1479,7 @@ window.MATH_CH["g04"] = {
                         { t: "txt", p: [50,66], text: "作角 → SSS 造全等", size: 13 },
                         { t: "txt", p: [50,52], text: "作角平分线 → SSS 造全等", size: 13 },
                         { t: "txt", p: [50,38], text: "作垂线 → SSS 造全等", size: 13 },
-                        { t: "txt", p: [50,22], text: "作图 = 全等判定的施工图", size: 14, bold: true }
+                        { t: "txt", p: [50,22], text: "作图 = 全等判定的施工图", size: 14.48, bold: true }
                       ]
                     }
                   ]
@@ -1532,7 +1532,7 @@ window.MATH_CH["g04"] = {
                         { t: "seg", a: [30,62], b: [70,62], ticks: 1, color: "corrA" },
                         { t: "seg", a: [70,62], b: [50,32], ticks: 2, color: "corrB" },
                         { t: "seg", a: [50,32], b: [30,62], ticks: 3, color: "corrC" },
-                        { t: "txt", p: [50,78], text: "SSS：边边边", size: 14, bold: true }
+                        { t: "txt", p: [50,78], text: "SSS：边边边", size: 14.48, bold: true }
                       ]
                     },
                     {
@@ -1542,7 +1542,7 @@ window.MATH_CH["g04"] = {
                         { t: "seg", a: [30,62], b: [70,62], ticks: 1, color: "corrA" },
                         { t: "seg", a: [70,62], b: [50,32], ticks: 2, color: "corrB" },
                         { t: "arc", v: [70,62], a1: 180, a2: 236.3, r: 10, group: 1, color: "corrAngle" },
-                        { t: "txt", p: [50,78], text: "SAS：边角边", size: 14, bold: true }
+                        { t: "txt", p: [50,78], text: "SAS：边角边", size: 14.48, bold: true }
                       ]
                     },
                     {
@@ -1552,7 +1552,7 @@ window.MATH_CH["g04"] = {
                         { t: "arc", v: [30,62], a1: 303.7, a2: 0, r: 10, group: 1, color: "corrAngle" },
                         { t: "arc", v: [70,62], a1: 180, a2: 236.3, r: 10, group: 2, color: "corrAngle" },
                         { t: "seg", a: [30,62], b: [70,62], ticks: 1, color: "corrA" },
-                        { t: "txt", p: [50,78], text: "ASA：角边角", size: 14, bold: true }
+                        { t: "txt", p: [50,78], text: "ASA：角边角", size: 14.48, bold: true }
                       ]
                     },
                     {
@@ -1562,7 +1562,7 @@ window.MATH_CH["g04"] = {
                         { t: "arc", v: [30,62], a1: 303.7, a2: 0, r: 10, group: 1, color: "corrAngle" },
                         { t: "arc", v: [70,62], a1: 180, a2: 236.3, r: 10, group: 2, color: "corrAngle" },
                         { t: "seg", a: [70,62], b: [50,32], ticks: 1, color: "corrA" },
-                        { t: "txt", p: [50,78], text: "AAS：角角边", size: 14, bold: true }
+                        { t: "txt", p: [50,78], text: "AAS：角角边", size: 14.48, bold: true }
                       ]
                     }
                   ]

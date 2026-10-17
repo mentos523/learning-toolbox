@@ -233,7 +233,7 @@ window.MATH_CH["g01"] = {
                         { t: "seg", a: [15,66], b: [85,34], color: "line", width: 3.5 },
                         { t: "pt", p: [35,58], r: 4, color: "known", label: "A" },
                         { t: "pt", p: [65,42], r: 4, color: "known", label: "B" },
-                        { t: "txt", p: [50,78], text: "两点确定一条直线", size: 14, bold: true }
+                        { t: "txt", p: [50,78], text: "两点确定一条直线", size: 14.48, bold: true }
                       ]
                     }
                   ]
@@ -366,9 +366,9 @@ window.MATH_CH["g01"] = {
                       caption: "第 1 步：两条线段 AB、CD，谁长？",
                       shapes: [
                         { t: "seg", a: [20,62], b: [60,62], color: "line", width: 3.5 },
-                        { t: "txt", p: [40,74], text: "AB", size: 14, bold: true },
+                        { t: "txt", p: [40,74], text: "AB", size: 14.48, bold: true },
                         { t: "seg", a: [20,38], b: [50,38], color: "target", width: 3.5 },
-                        { t: "txt", p: [35,50], text: "CD", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [35,50], text: "CD", size: 14.48, bold: true, color: "target" }
                       ]
                     },
                     {
@@ -428,7 +428,7 @@ window.MATH_CH["g01"] = {
                         { t: "pt", p: [50,50], r: 3.5, color: "known", label: "M" },
                         { t: "txt", p: [15,62], text: "A", size: 13 },
                         { t: "txt", p: [85,62], text: "B", size: 13 },
-                        { t: "txt", p: [50,68], text: "AM = MB", size: 14, bold: true }
+                        { t: "txt", p: [50,68], text: "AM = MB", size: 14.48, bold: true }
                       ]
                     }
                   ]
@@ -501,7 +501,7 @@ window.MATH_CH["g01"] = {
                         { t: "seg", a: [50,50], b: [80,50], color: "line", width: 3 },
                         { t: "arc", v: [50,50], a1: 0, a2: 90, r: 12, color: "corrAngle" },
                         { t: "pt", p: [50,50], r: 4, color: "known", label: "O" },
-                        { t: "txt", p: [63,68], text: "∠AOB", size: 14, bold: true },
+                        { t: "txt", p: [63,68], text: "∠AOB", size: 14.48, bold: true },
                         { t: "txt", p: [50,24], text: "顶点 O，两条边 OA、OB", size: 13 }
                       ]
                     }
@@ -543,7 +543,7 @@ window.MATH_CH["g01"] = {
                         { t: "seg", a: [45,62], b: [20,80], color: "line", width: 3 },
                         { t: "seg", a: [45,62], b: [70,80], color: "line", width: 3 },
                         { t: "arc", v: [45,62], a1: 35.8, a2: 144.2, r: 12, color: "corrAngle" },
-                        { t: "txt", p: [45,90], text: "∠AOB", size: 14, bold: true },
+                        { t: "txt", p: [45,90], text: "∠AOB", size: 14.48, bold: true },
                         { t: "txt", p: [18,58], text: "∠O", size: 13 },
                         { t: "txt", p: [72,58], text: "∠1", size: 13 },
                         { t: "txt", p: [86,74], text: "∠α", size: 13 }
@@ -737,7 +737,7 @@ window.MATH_CH["g01"] = {
                         { t: "arc", v: [50,30], a1: 47.4, a2: 90, r: 12, color: "corrAngle", group: 2 },
                         { t: "txt", p: [38,58], text: "∠1", size: 13 },
                         { t: "txt", p: [62,58], text: "∠2", size: 13 },
-                        { t: "txt", p: [50,90], text: "∠AOC = ∠1 + ∠2", size: 14, bold: true }
+                        { t: "txt", p: [50,90], text: "∠AOC = ∠1 + ∠2", size: 14.48, bold: true }
                       ]
                     }
                   ]
@@ -780,7 +780,7 @@ window.MATH_CH["g01"] = {
                         { t: "arc", v: [50,32], a1: 51.3, a2: 90, r: 12, color: "corrAngle", group: 2 },
                         { t: "txt", p: [38,60], text: "∠1", size: 13 },
                         { t: "txt", p: [62,60], text: "∠2", size: 13 },
-                        { t: "txt", p: [50,88], text: "∠1 = ∠2", size: 14, bold: true }
+                        { t: "txt", p: [50,88], text: "∠1 = ∠2", size: 14.48, bold: true }
                       ]
                     }
                   ]
@@ -849,7 +849,7 @@ window.MATH_CH["g01"] = {
                       caption: "第 3 步：∠1+∠2=90°——∠1 和∠2 互为余角。",
                       shapes: [
                         { t: "txt", p: [50,55], text: "∠1 + ∠2 = 90°", size: 18, bold: true },
-                        { t: "txt", p: [50,36], text: "∠1 和∠2 互为余角", size: 14, bold: true }
+                        { t: "txt", p: [50,36], text: "∠1 和∠2 互为余角", size: 14.48, bold: true }
                       ]
                     }
                   ]
@@ -906,7 +906,7 @@ window.MATH_CH["g01"] = {
                         { t: "txt", p: [42,68], text: "∠1", size: 13 },
                         { t: "txt", p: [36,72], text: "∠3", size: 13 },
                         { t: "txt", p: [50,32], text: "∠1+∠3=90°", size: 13, bold: true },
-                        { t: "txt", p: [68,42], text: "∠2 = ∠3", size: 14, bold: true }
+                        { t: "txt", p: [68,42], text: "∠2 = ∠3", size: 14.48, bold: true }
                       ]
                     }
                   ]
@@ -957,7 +957,7 @@ window.MATH_CH["g01"] = {
                       caption: "第 2 步：∠1+∠2=180°——∠1 和∠2 互为补角。",
                       shapes: [
                         { t: "txt", p: [50,58], text: "∠1 + ∠2 = 180°", size: 18, bold: true },
-                        { t: "txt", p: [50,38], text: "∠1 和∠2 互为补角", size: 14, bold: true }
+                        { t: "txt", p: [50,38], text: "∠1 和∠2 互为补角", size: 14.48, bold: true }
                       ]
                     }
                   ]
@@ -1012,7 +1012,7 @@ window.MATH_CH["g01"] = {
                         { t: "txt", p: [60,64], text: "∠1", size: 13 },
                         { t: "txt", p: [40,64], text: "∠3", size: 13 },
                         { t: "txt", p: [50,32], text: "∠1+∠3=180°", size: 13, bold: true },
-                        { t: "txt", p: [70,40], text: "∠2 = ∠3", size: 14, bold: true }
+                        { t: "txt", p: [70,40], text: "∠2 = ∠3", size: 14.48, bold: true }
                       ]
                     }
                   ]
@@ -1055,11 +1055,11 @@ window.MATH_CH["g01"] = {
                     {
                       caption: "定格：本章的三步——语言、三种线、角。",
                       shapes: [
-                        { t: "txt", p: [50,78], text: "点、线、面（几何的语言）", size: 14, bold: true },
-                        { t: "txt", p: [50,66], text: "↓", size: 14 },
-                        { t: "txt", p: [50,56], text: "直线、射线、线段（三种线）", size: 14, bold: true },
-                        { t: "txt", p: [50,44], text: "↓", size: 14 },
-                        { t: "txt", p: [50,34], text: "角：定义 → 度量 → 余角补角", size: 14, bold: true }
+                        { t: "txt", p: [50,78], text: "点、线、面（几何的语言）", size: 14.48, bold: true },
+                        { t: "txt", p: [50,66], text: "↓", size: 14.48 },
+                        { t: "txt", p: [50,56], text: "直线、射线、线段（三种线）", size: 14.48, bold: true },
+                        { t: "txt", p: [50,44], text: "↓", size: 14.48 },
+                        { t: "txt", p: [50,34], text: "角：定义 → 度量 → 余角补角", size: 14.48, bold: true }
                       ]
                     }
                   ]

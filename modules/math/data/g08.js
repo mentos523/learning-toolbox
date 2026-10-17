@@ -317,7 +317,7 @@ window.MATH_CH["g08"] = {
                         { t: "circle", c: [50,52], r: 28, color: "known", width: 3 },
                         { t: "pt", p: [50,52], label: "O", color: "known", r: 4 },
                         { t: "seg", a: [14,70], b: [86,70], color: "line", width: 3 },
-                        { t: "txt", p: [50,88], text: "3 < 5：d < r", size: 14, bold: true }
+                        { t: "txt", p: [50,88], text: "3 < 5：d < r", size: 14.48, bold: true }
                       ]
                     },
                     {
@@ -327,7 +327,7 @@ window.MATH_CH["g08"] = {
                         { t: "seg", a: [14,70], b: [86,70], color: "target", width: 3 },
                         { t: "pt", p: [27.6,70], color: "target", r: 4 },
                         { t: "pt", p: [72.4,70], color: "target", r: 4 },
-                        { t: "txt", p: [50,88], text: "d < r：相交", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [50,88], text: "d < r：相交", size: 14.48, bold: true, color: "target" }
                       ]
                     },
                     {
@@ -337,7 +337,7 @@ window.MATH_CH["g08"] = {
                         { t: "pt", p: [50,52], label: "O", color: "known", r: 4 },
                         { t: "pt", p: [78,52], label: "P", color: "target", r: 4 },
                         { t: "seg", a: [50,52], b: [78,52], color: "corrA", width: 2.5, ticks: 1 },
-                        { t: "txt", p: [50,88], text: "d=r：P 在圆上", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [50,88], text: "d=r：P 在圆上", size: 14.48, bold: true, color: "target" }
                       ]
                     }
                   ]
@@ -870,7 +870,7 @@ window.MATH_CH["g08"] = {
                         { t: "circle", c: [50,55], r: 24, color: "line", width: 2 },
                         { t: "seg", a: [86,32], b: [72,64.5], color: "target", width: 3.5, ticks: 1 },
                         { t: "seg", a: [86,32], b: [50.7,31], color: "target", width: 3.5, ticks: 1 },
-                        { t: "txt", p: [68,52], text: "PA = PB", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [68,52], text: "PA = PB", size: 14.48, bold: true, color: "target" }
                       ]
                     }
                   ],
@@ -917,7 +917,7 @@ window.MATH_CH["g08"] = {
                         { t: "seg", a: [88,30], b: [63.4,67.2], color: "target", width: 3, ticks: 1 },
                         { t: "seg", a: [88,30], b: [43.5,33], color: "target", width: 3, ticks: 1 },
                         { t: "seg", a: [45,55], b: [88,30], color: "aux", width: 2, dash: "6,4" },
-                        { t: "txt", p: [70,56], text: "PA = PB", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [70,56], text: "PA = PB", size: 14.48, bold: true, color: "target" }
                       ]
                     }
                   ]
@@ -976,7 +976,7 @@ window.MATH_CH["g08"] = {
                         { t: "pt", p: [88,30], label: "P", color: "known", r: 4 },
                         { t: "seg", a: [88,30], b: [66.6,67.4], color: "target", width: 3, ticks: 1 },
                         { t: "seg", a: [88,30], b: [44.9,30.1], color: "target", width: 3, ticks: 1 },
-                        { t: "txt", p: [70,56], text: "PB=PA=6", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [70,56], text: "PB=PA=6", size: 14.48, bold: true, color: "target" }
                       ]
                     },
                     {
@@ -1066,7 +1066,7 @@ window.MATH_CH["g08"] = {
                         { t: "seg", a: [50,47.75], b: [75,30], color: "corrA", width: 2.5, ticks: 1 },
                         { t: "seg", a: [50,47.75], b: [55,78], color: "corrA", width: 2.5, ticks: 1 },
                         { t: "pt", p: [50,47.75], label: "O", color: "known", r: 4 },
-                        { t: "txt", p: [50,90], text: "OA=OB=OC", size: 14, bold: true, color: "corrA" }
+                        { t: "txt", p: [50,90], text: "OA=OB=OC", size: 14.48, bold: true, color: "corrA" }
                       ]
                     }
                   ]
@@ -1353,7 +1353,7 @@ window.MATH_CH["g08"] = {
                         { t: "circle", c: [50,50], r: 30, color: "known", width: 3 },
                         { t: "seg", a: [50,50], b: [50,80], color: "target", width: 2.5 },
                         { t: "pt", p: [50,80], label: "P", color: "target", r: 4 },
-                        { t: "txt", p: [50,14], text: "x²+y² 永远 = 25", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [50,14], text: "x²+y² 永远 = 25", size: 14.48, bold: true, color: "target" }
                       ]
                     }
                   ]
@@ -1557,7 +1557,7 @@ window.MATH_CH["g08"] = {
                         { t: "circle", c: [68,72], r: 14, color: "target", width: 3 },
                         { t: "txt", p: [26,48], text: "一次", size: 12, color: "known" },
                         { t: "txt", p: [68,48], text: "二次", size: 12, color: "target" },
-                        { t: "txt", p: [50,20], text: "方程升级，图形升级", size: 14, bold: true }
+                        { t: "txt", p: [50,20], text: "方程升级，图形升级", size: 14.48, bold: true }
                       ]
                     }
                   ]
@@ -1604,7 +1604,7 @@ window.MATH_CH["g08"] = {
                       shapes: [
                         { t: "circle", c: [50,52], r: 26, color: "known", width: 3 },
                         { t: "seg", a: [14,78], b: [86,78], color: "line", width: 3 },
-                        { t: "txt", p: [50,14], text: "d>r 离、d=r 切、d<r 交", size: 14, bold: true }
+                        { t: "txt", p: [50,14], text: "d>r 离、d=r 切、d<r 交", size: 14.48, bold: true }
                       ]
                     },
                     {

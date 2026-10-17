@@ -107,9 +107,9 @@ window.MATH_CH["g03"] = {
                       caption: "定格：三角形 △ABC——顶点 A、B、C，边 a、b、c。",
                       shapes: [
                         { t: "poly", pts: [[20,32],[80,32],[50,70]], color: "line", width: 3 },
-                        { t: "txt", p: [15,24], text: "A", size: 14, bold: true },
-                        { t: "txt", p: [85,24], text: "B", size: 14, bold: true },
-                        { t: "txt", p: [50,78], text: "C", size: 14, bold: true },
+                        { t: "txt", p: [15,24], text: "A", size: 14.48, bold: true },
+                        { t: "txt", p: [85,24], text: "B", size: 14.48, bold: true },
+                        { t: "txt", p: [50,78], text: "C", size: 14.48, bold: true },
                         { t: "txt", p: [50,24], text: "边 c", size: 12, color: "known" },
                         { t: "txt", p: [74,58], text: "边 a", size: 12, color: "known" },
                         { t: "txt", p: [26,58], text: "边 b", size: 12, color: "known" }
@@ -168,7 +168,7 @@ window.MATH_CH["g03"] = {
                         { t: "seg", a: [12,40], b: [88,40], color: "line", width: 4 },
                         { t: "seg", a: [12,40], b: [30,62], color: "target", width: 4 },
                         { t: "seg", a: [88,40], b: [62,62], color: "target", width: 4 },
-                        { t: "txt", p: [50,55], text: "够不着！", size: 14, bold: true, color: "target" },
+                        { t: "txt", p: [50,55], text: "够不着！", size: 14.48, bold: true, color: "target" },
                         { t: "txt", p: [30,72], text: "3+4=7 < 8", size: 13, color: "target" }
                       ]
                     }
@@ -271,9 +271,9 @@ window.MATH_CH["g03"] = {
                 params: {
                   base: [
                     { t: "poly", pts: [[14,30],[84,30],[30,72]], color: "line", width: 3 },
-                    { t: "txt", p: [9,24], text: "B", size: 14, bold: true },
-                    { t: "txt", p: [89,24], text: "C", size: 14, bold: true },
-                    { t: "txt", p: [30,80], text: "A", size: 14, bold: true },
+                    { t: "txt", p: [9,24], text: "B", size: 14.48, bold: true },
+                    { t: "txt", p: [89,24], text: "C", size: 14.48, bold: true },
+                    { t: "txt", p: [30,80], text: "A", size: 14.48, bold: true },
                     { t: "pt", p: [30,30], r: 3, color: "line" },
                     { t: "txt", p: [23,20], text: "D", size: 12 },
                     { t: "pt", p: [49,30], r: 3, color: "line" },
@@ -391,7 +391,7 @@ window.MATH_CH["g03"] = {
                         { t: "seg", a: [96,30], b: [30,30], color: "aux", width: 2, dash: "5,4" },
                         { t: "seg", a: [40,62], b: [40,30], color: "corrA", width: 3 },
                         { t: "right", v: [40,30], p: [40,62], q: [96,30], size: 5, color: "corrA" },
-                        { t: "txt", p: [50,80], text: "高在形外！", size: 14, bold: true, color: "corrA" }
+                        { t: "txt", p: [50,80], text: "高在形外！", size: 14.48, bold: true, color: "corrA" }
                       ]
                     }
                   ]
@@ -493,7 +493,7 @@ window.MATH_CH["g03"] = {
                       caption: "第 3 步：量 100 个也是“量”，不是“证”——第 101 个呢？",
                       shapes: [
                         { t: "txt", p: [50,58], text: "量，永远量不完", size: 18, bold: true, color: "target" },
-                        { t: "txt", p: [50,40], text: "我们要一次说清所有三角形", size: 14 },
+                        { t: "txt", p: [50,40], text: "我们要一次说清所有三角形", size: 14.48 },
                         { t: "txt", p: [50,24], text: "下页：撕角拼图", size: 13, color: "known" }
                       ]
                     }
@@ -770,7 +770,7 @@ window.MATH_CH["g03"] = {
                         { t: "seg", a: [80,32], b: [91,16], color: "aux", width: 2.5, dash: "6,4" },
                         { t: "arc", v: [80,32], a1: 180, a2: 304.8, r: 13, group: 1, color: "corrA" },
                         { t: "txt", p: [71,14], text: "∠ABD", size: 13, bold: true, color: "corrA" },
-                        { t: "txt", p: [50,80], text: "外角：∠ABD", size: 14, bold: true }
+                        { t: "txt", p: [50,80], text: "外角：∠ABD", size: 14.48, bold: true }
                       ]
                     }
                   ]
@@ -909,7 +909,7 @@ window.MATH_CH["g03"] = {
                         { t: "txt", p: [55,74], text: "C", size: 13, bold: true },
                         { t: "txt", p: [95,7], text: "D", size: 13 },
                         { t: "txt", p: [70,11], text: "∠ABD", size: 13, bold: true, color: "corrA" },
-                        { t: "txt", p: [50,84], text: "∠ABD = ∠A + ∠C", size: 14, bold: true, math: true }
+                        { t: "txt", p: [50,84], text: "∠ABD = ∠A + ∠C", size: 14.48, bold: true, math: true }
                       ]
                     }
                   ]
@@ -958,7 +958,7 @@ window.MATH_CH["g03"] = {
                       shapes: [
                         { t: "poly", pts: [[30,30],[70,30],[82,58],[50,80],[18,58]], color: "line", width: 3 },
                         { t: "pt", p: [30,30], r: 3.5, color: "known" },
-                        { t: "txt", p: [50,92], text: "五边形", size: 14 }
+                        { t: "txt", p: [50,92], text: "五边形", size: 14.48 }
                       ]
                     },
                     {
@@ -975,7 +975,7 @@ window.MATH_CH["g03"] = {
                         { t: "poly", pts: [[30,30],[70,30],[82,58]], color: "corrA", width: 2.5, fill: "corrA", opacity: 0.3 },
                         { t: "poly", pts: [[30,30],[82,58],[50,80]], color: "corrB", width: 2.5, fill: "corrB", opacity: 0.3 },
                         { t: "poly", pts: [[30,30],[50,80],[18,58]], color: "corrC", width: 2.5, fill: "corrC", opacity: 0.3 },
-                        { t: "txt", p: [50,92], text: "3 个三角形 × 180° = 540°", size: 14, bold: true }
+                        { t: "txt", p: [50,92], text: "3 个三角形 × 180° = 540°", size: 14.48, bold: true }
                       ]
                     }
                   ]
@@ -1014,7 +1014,7 @@ window.MATH_CH["g03"] = {
                       caption: "n=3：1 个三角形——1×180°=180°。",
                       shapes: [
                         { t: "poly", pts: [[20,35],[80,35],[50,72]], color: "corrA", width: 3, fill: "corrA", opacity: 0.25 },
-                        { t: "txt", p: [50,86], text: "n=3：1×180°=180°", size: 14, bold: true }
+                        { t: "txt", p: [50,86], text: "n=3：1×180°=180°", size: 14.48, bold: true }
                       ]
                     },
                     {
@@ -1022,7 +1022,7 @@ window.MATH_CH["g03"] = {
                       shapes: [
                         { t: "poly", pts: [[25,35],[75,35],[80,65],[20,65]], color: "line", width: 2.5 },
                         { t: "seg", a: [25,35], b: [80,65], color: "aux", width: 2, dash: "6,4" },
-                        { t: "txt", p: [50,86], text: "n=4：2×180°=360°", size: 14, bold: true }
+                        { t: "txt", p: [50,86], text: "n=4：2×180°=360°", size: 14.48, bold: true }
                       ]
                     },
                     {
@@ -1031,7 +1031,7 @@ window.MATH_CH["g03"] = {
                         { t: "poly", pts: [[30,30],[70,30],[82,58],[50,80],[18,58]], color: "line", width: 2.5 },
                         { t: "seg", a: [30,30], b: [82,58], color: "aux", width: 2, dash: "6,4" },
                         { t: "seg", a: [30,30], b: [50,80], color: "aux", width: 2, dash: "6,4" },
-                        { t: "txt", p: [50,92], text: "n=5：3×180°=540°", size: 14, bold: true }
+                        { t: "txt", p: [50,92], text: "n=5：3×180°=540°", size: 14.48, bold: true }
                       ]
                     },
                     {
@@ -1041,7 +1041,7 @@ window.MATH_CH["g03"] = {
                         { t: "seg", a: [35,30], b: [82,55], color: "aux", width: 2, dash: "6,4" },
                         { t: "seg", a: [35,30], b: [65,80], color: "aux", width: 2, dash: "6,4" },
                         { t: "seg", a: [35,30], b: [35,80], color: "aux", width: 2, dash: "6,4" },
-                        { t: "txt", p: [50,92], text: "n=6：4×180°=720°", size: 14, bold: true }
+                        { t: "txt", p: [50,92], text: "n=6：4×180°=720°", size: 14.48, bold: true }
                       ]
                     }
                   ]
@@ -1082,7 +1082,7 @@ window.MATH_CH["g03"] = {
                         { t: "poly", pts: [[30,30],[70,30],[82,58],[50,80],[18,58]], color: "line", width: 2.5 },
                         { t: "seg", a: [30,30], b: [82,58], color: "aux", width: 2, dash: "6,4" },
                         { t: "seg", a: [30,30], b: [50,80], color: "aux", width: 2, dash: "6,4" },
-                        { t: "txt", p: [50,92], text: "(n−2) 个三角形", size: 14, bold: true }
+                        { t: "txt", p: [50,92], text: "(n−2) 个三角形", size: 14.48, bold: true }
                       ]
                     }
                   ]
@@ -1130,7 +1130,7 @@ window.MATH_CH["g03"] = {
                       caption: "第 1 步：拼——三边关系（两边之和大于第三边）。",
                       shapes: [
                         { t: "poly", pts: [[18,62],[82,62],[50,28]], color: "known", width: 3 },
-                        { t: "txt", p: [50,74], text: "a + b > c", size: 14, bold: true, math: true }
+                        { t: "txt", p: [50,74], text: "a + b > c", size: 14.48, bold: true, math: true }
                       ]
                     },
                     {
@@ -1139,7 +1139,7 @@ window.MATH_CH["g03"] = {
                         { t: "poly", pts: [[14,62],[42,62],[28,32]], color: "corrA", width: 2.5 },
                         { t: "poly", pts: [[54,62],[86,62],[70,32]], color: "corrB", width: 2.5 },
                         { t: "seg", a: [70,32], b: [70,62], color: "corrC", width: 2.5 },
-                        { t: "txt", p: [50,78], text: "分类 + 三线", size: 14, bold: true }
+                        { t: "txt", p: [50,78], text: "分类 + 三线", size: 14.48, bold: true }
                       ]
                     },
                     {

@@ -79,7 +79,7 @@ window.MATH_CH["g06"] = {
                         { t: "poly", pts: [[24,28],[84,28],[72,68],[12,68]], color: "aux", width: 1.5, dash: "5,4" },
                         { t: "poly", pts: [[68,24],[68,84],[28,72],[28,12]], color: "target", width: 3 },
                         { t: "pt", p: [48,48], label: "O", color: "target" },
-                        { t: "txt", p: [50,90], text: "转 90°", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [50,90], text: "转 90°", size: 14.48, bold: true, color: "target" }
                       ]
                     },
                     {
@@ -99,7 +99,7 @@ window.MATH_CH["g06"] = {
                         { t: "seg", a: [24,28], b: [72,68], color: "aux", width: 2, dash: "5,4" },
                         { t: "seg", a: [84,28], b: [12,68], color: "aux", width: 2, dash: "5,4" },
                         { t: "pt", p: [48,48], label: "O", color: "target" },
-                        { t: "txt", p: [50,12], text: "A 和 C 互换，B 和 D 互换", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [50,12], text: "A 和 C 互换，B 和 D 互换", size: 14.48, bold: true, color: "target" }
                       ]
                     }
                   ]
@@ -193,7 +193,7 @@ window.MATH_CH["g06"] = {
                         { t: "arc", v: [12,68], a1: 287, a2: 360, r: 10, group: 2, color: "corrAngle" },
                         { t: "txt", p: [20,22], text: "A", size: 13 },
                         { t: "txt", p: [76,74], text: "C", size: 13 },
-                        { t: "txt", p: [50,90], text: "∠A = ∠C，∠B = ∠D", size: 14, bold: true }
+                        { t: "txt", p: [50,90], text: "∠A = ∠C，∠B = ∠D", size: 14.48, bold: true }
                       ]
                     }
                   ]
@@ -241,7 +241,7 @@ window.MATH_CH["g06"] = {
                         { t: "seg", a: [84,28], b: [48,48], ticks: 2, color: "corrB" },
                         { t: "seg", a: [48,48], b: [12,68], ticks: 2, color: "corrB" },
                         { t: "pt", p: [48,48], label: "O", color: "target" },
-                        { t: "txt", p: [50,90], text: "O 是两条对角线的中点", size: 14, bold: true }
+                        { t: "txt", p: [50,90], text: "O 是两条对角线的中点", size: 14.48, bold: true }
                       ]
                     }
                   ]
@@ -289,7 +289,7 @@ window.MATH_CH["g06"] = {
                         { t: "seg", a: [24,28], b: [84,28], arrows: 1, color: "known" },
                         { t: "seg", a: [72,68], b: [12,68], arrows: 1, color: "known" },
                         { t: "pt", p: [48,48], label: "O", color: "target" },
-                        { t: "txt", p: [50,90], text: "第 1 步：连对角线", size: 14, bold: true }
+                        { t: "txt", p: [50,90], text: "第 1 步：连对角线", size: 14.48, bold: true }
                       ]
                     },
                     {
@@ -302,7 +302,7 @@ window.MATH_CH["g06"] = {
                         { t: "arc", v: [72,68], a1: 180, a2: 220, r: 9, group: 1, color: "corrAngle" },
                         { t: "txt", p: [16,20], text: "∠1", size: 13, color: "corrAngle" },
                         { t: "txt", p: [80,76], text: "∠2", size: 13, color: "corrAngle" },
-                        { t: "txt", p: [50,90], text: "第 2 步：∠1 = ∠2（内错角）", size: 14, bold: true }
+                        { t: "txt", p: [50,90], text: "第 2 步：∠1 = ∠2（内错角）", size: 14.48, bold: true }
                       ]
                     },
                     {
@@ -316,7 +316,7 @@ window.MATH_CH["g06"] = {
                         { t: "seg", a: [72,68], b: [12,68], ticks: 1, color: "corrB" },
                         { t: "arc", v: [48,48], a1: 220, a2: 331, r: 10, group: 1, color: "corrAngle" },
                         { t: "arc", v: [48,48], a1: 40, a2: 151, r: 10, group: 1, color: "corrAngle" },
-                        { t: "txt", p: [50,90], text: "第 3 步：△AOB ≌ △COD（ASA）", size: 14, bold: true }
+                        { t: "txt", p: [50,90], text: "第 3 步：△AOB ≌ △COD（ASA）", size: 14.48, bold: true }
                       ]
                     },
                     {
@@ -328,7 +328,7 @@ window.MATH_CH["g06"] = {
                         { t: "seg", a: [48,48], b: [72,68], ticks: 1, color: "corrA", width: 3 },
                         { t: "seg", a: [84,28], b: [48,48], ticks: 2, color: "corrB", width: 3 },
                         { t: "seg", a: [48,48], b: [12,68], ticks: 2, color: "corrB", width: 3 },
-                        { t: "txt", p: [50,90], text: "第 4 步：OA=OC，OB=OD", size: 14, bold: true, color: "known" }
+                        { t: "txt", p: [50,90], text: "第 4 步：OA=OC，OB=OD", size: 14.48, bold: true, color: "known" }
                       ]
                     }
                   ],
@@ -380,7 +380,7 @@ window.MATH_CH["g06"] = {
                         { t: "seg", a: [25,70], b: [75,70], color: "corrA", width: 3, arrows: 1 },
                         { t: "seg", a: [20,20], b: [30,80], color: "corrB", width: 3, arrows: 2 },
                         { t: "seg", a: [70,20], b: [80,80], color: "corrB", width: 3, arrows: 2 },
-                        { t: "txt", p: [50,90], text: "Q1：两组对边分别平行", size: 14, bold: true }
+                        { t: "txt", p: [50,90], text: "Q1：两组对边分别平行", size: 14.48, bold: true }
                       ]
                     },
                     {
@@ -391,7 +391,7 @@ window.MATH_CH["g06"] = {
                         { t: "seg", a: [72,68], b: [12,68], ticks: 1, color: "corrA" },
                         { t: "seg", a: [84,28], b: [72,68], ticks: 2, color: "corrB" },
                         { t: "seg", a: [12,68], b: [24,28], ticks: 2, color: "corrB" },
-                        { t: "txt", p: [50,90], text: "Q2：两组对边分别相等", size: 14, bold: true }
+                        { t: "txt", p: [50,90], text: "Q2：两组对边分别相等", size: 14.48, bold: true }
                       ]
                     },
                     {
@@ -400,7 +400,7 @@ window.MATH_CH["g06"] = {
                         { t: "poly", pts: [[24,28],[84,28],[72,68],[12,68]], color: "known", width: 3 },
                         { t: "seg", a: [24,28], b: [84,28], arrows: 1, ticks: 1, color: "target", width: 3.5 },
                         { t: "seg", a: [72,68], b: [12,68], arrows: 1, ticks: 1, color: "target", width: 3.5 },
-                        { t: "txt", p: [50,90], text: "Q3：一组对边平行且相等", size: 14, bold: true }
+                        { t: "txt", p: [50,90], text: "Q3：一组对边平行且相等", size: 14.48, bold: true }
                       ]
                     },
                     {
@@ -413,7 +413,7 @@ window.MATH_CH["g06"] = {
                         { t: "seg", a: [84,28], b: [48,48], ticks: 2, color: "corrB" },
                         { t: "seg", a: [48,48], b: [12,68], ticks: 2, color: "corrB" },
                         { t: "poly", pts: [[24,28],[84,28],[72,68],[12,68]], color: "target", width: 3, dash: "6,4" },
-                        { t: "txt", p: [50,90], text: "Q4：对角线互相平分", size: 14, bold: true }
+                        { t: "txt", p: [50,90], text: "Q4：对角线互相平分", size: 14.48, bold: true }
                       ]
                     }
                   ]
@@ -455,7 +455,7 @@ window.MATH_CH["g06"] = {
                         { t: "seg", a: [72,68], b: [12,68], arrows: 1, color: "corrA", width: 3 },
                         { t: "seg", a: [84,28], b: [72,68], arrows: 2, color: "corrB", width: 3 },
                         { t: "seg", a: [12,68], b: [24,28], arrows: 2, color: "corrB", width: 3 },
-                        { t: "txt", p: [50,90], text: "定义反过来用", size: 14, bold: true }
+                        { t: "txt", p: [50,90], text: "定义反过来用", size: 14.48, bold: true }
                       ]
                     }
                   ]
@@ -500,7 +500,7 @@ window.MATH_CH["g06"] = {
                         { t: "seg", a: [84,28], b: [72,68], ticks: 2, color: "corrB", width: 3 },
                         { t: "seg", a: [12,68], b: [24,28], ticks: 2, color: "corrB", width: 3 },
                         { t: "seg", a: [24,28], b: [72,68], color: "aux", width: 2, dash: "5,4" },
-                        { t: "txt", p: [50,90], text: "只看边相等，不看角", size: 14, bold: true }
+                        { t: "txt", p: [50,90], text: "只看边相等，不看角", size: 14.48, bold: true }
                       ]
                     }
                   ]
@@ -545,7 +545,7 @@ window.MATH_CH["g06"] = {
                         { t: "seg", a: [24,28], b: [84,28], arrows: 1, ticks: 1, color: "target", width: 3.5 },
                         { t: "seg", a: [72,68], b: [12,68], arrows: 1, ticks: 1, color: "target", width: 3.5 },
                         { t: "seg", a: [24,28], b: [72,68], color: "aux", width: 2, dash: "5,4" },
-                        { t: "txt", p: [50,90], text: "同一组对边：又平行又相等", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [50,90], text: "同一组对边：又平行又相等", size: 14.48, bold: true, color: "target" }
                       ]
                     }
                   ]
@@ -594,7 +594,7 @@ window.MATH_CH["g06"] = {
                         { t: "seg", a: [48,48], b: [12,68], ticks: 2, color: "corrB" },
                         { t: "poly", pts: [[24,28],[84,28],[72,68],[12,68]], color: "target", width: 3 },
                         { t: "pt", p: [48,48], label: "O", color: "target" },
-                        { t: "txt", p: [50,90], text: "端点连线，必是平行四边形", size: 14, bold: true }
+                        { t: "txt", p: [50,90], text: "端点连线，必是平行四边形", size: 14.48, bold: true }
                       ]
                     }
                   ]
@@ -643,14 +643,14 @@ window.MATH_CH["g06"] = {
                       caption: "第 1 帧：一个普通的平行四边形——角是斜的。",
                       shapes: [
                         { t: "poly", pts: [[12,30],[76,30],[88,66],[24,66]], color: "line", width: 3 },
-                        { t: "txt", p: [50,90], text: "角是斜的", size: 14, bold: true }
+                        { t: "txt", p: [50,90], text: "角是斜的", size: 14.48, bold: true }
                       ]
                     },
                     {
                       caption: "第 2 帧：捏住它慢慢“拉直”——对边还平行，只是角在变大。",
                       shapes: [
                         { t: "poly", pts: [[16,28],[84,28],[80,68],[20,68]], color: "target", width: 3 },
-                        { t: "txt", p: [50,90], text: "拉直中……", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [50,90], text: "拉直中……", size: 14.48, bold: true, color: "target" }
                       ]
                     },
                     {
@@ -708,7 +708,7 @@ window.MATH_CH["g06"] = {
                         { t: "right", v: [80,28], p: [20,28], q: [80,68], color: "known" },
                         { t: "right", v: [80,68], p: [80,28], q: [20,68], color: "known" },
                         { t: "right", v: [20,68], p: [20,28], q: [80,68], color: "known" },
-                        { t: "txt", p: [50,90], text: "一个直角 → 四个直角", size: 14, bold: true }
+                        { t: "txt", p: [50,90], text: "一个直角 → 四个直角", size: 14.48, bold: true }
                       ]
                     }
                   ]
@@ -754,7 +754,7 @@ window.MATH_CH["g06"] = {
                         { t: "seg", a: [80,28], b: [20,68], color: "known", width: 2.5 },
                         { t: "seg", a: [20,28], b: [80,68], ticks: 1, color: "corrA" },
                         { t: "seg", a: [80,28], b: [20,68], ticks: 1, color: "corrA" },
-                        { t: "txt", p: [50,90], text: "AC = BD", size: 14, bold: true, color: "corrA" }
+                        { t: "txt", p: [50,90], text: "AC = BD", size: 14.48, bold: true, color: "corrA" }
                       ]
                     }
                   ]
@@ -801,7 +801,7 @@ window.MATH_CH["g06"] = {
                         { t: "seg", a: [80,68], b: [20,68], ticks: 1, color: "corrA" },
                         { t: "right", v: [80,28], p: [20,28], q: [80,68], color: "target" },
                         { t: "right", v: [80,68], p: [80,28], q: [20,68], color: "target" },
-                        { t: "txt", p: [50,90], text: "第 1 步：摆好已知", size: 14, bold: true }
+                        { t: "txt", p: [50,90], text: "第 1 步：摆好已知", size: 14.48, bold: true }
                       ]
                     },
                     {
@@ -811,7 +811,7 @@ window.MATH_CH["g06"] = {
                         { t: "poly", pts: [[20,28],[80,28],[80,68],[20,68]], color: "aux", width: 1.5, dash: "5,4" },
                         { t: "poly", pts: [[20,28],[80,28],[80,68]], color: "corrA", width: 3 },
                         { t: "poly", pts: [[80,68],[20,68],[80,28]], color: "corrB", width: 3 },
-                        { t: "txt", p: [50,90], text: "第 2 步：找出两个三角形", size: 14, bold: true }
+                        { t: "txt", p: [50,90], text: "第 2 步：找出两个三角形", size: 14.48, bold: true }
                       ]
                     },
                     {
@@ -822,7 +822,7 @@ window.MATH_CH["g06"] = {
                         { t: "poly", pts: [[20,28],[80,28],[80,68]], color: "corrA", width: 3 },
                         { t: "poly", pts: [[80,68],[20,68],[80,28]], color: "corrB", width: 3 },
                         { t: "txt", p: [50,50], text: "≅", size: 22, bold: true, color: "target" },
-                        { t: "txt", p: [50,90], text: "第 3 步：SAS 全等", size: 14, bold: true }
+                        { t: "txt", p: [50,90], text: "第 3 步：SAS 全等", size: 14.48, bold: true }
                       ]
                     },
                     {
@@ -832,7 +832,7 @@ window.MATH_CH["g06"] = {
                         { t: "poly", pts: [[20,28],[80,28],[80,68],[20,68]], color: "line", width: 1.5 },
                         { t: "seg", a: [20,28], b: [80,68], ticks: 1, color: "corrA", width: 3 },
                         { t: "seg", a: [80,28], b: [20,68], ticks: 1, color: "corrA", width: 3 },
-                        { t: "txt", p: [50,90], text: "第 4 步：AC = BD", size: 14, bold: true, color: "known" }
+                        { t: "txt", p: [50,90], text: "第 4 步：AC = BD", size: 14.48, bold: true, color: "known" }
                       ]
                     }
                   ],
@@ -883,14 +883,14 @@ window.MATH_CH["g06"] = {
                       caption: "第 1 帧：一个普通的平行四边形——四条边长短不一。",
                       shapes: [
                         { t: "poly", pts: [[14,30],[70,30],[82,66],[26,66]], color: "line", width: 3 },
-                        { t: "txt", p: [50,90], text: "边长短不一", size: 14, bold: true }
+                        { t: "txt", p: [50,90], text: "边长短不一", size: 14.48, bold: true }
                       ]
                     },
                     {
                       caption: "第 2 帧：捏住两端往中间“压”——边长没变，只是形状在变。",
                       shapes: [
                         { t: "poly", pts: [[20,32],[64,32],[76,68],[32,68]], color: "target", width: 3 },
-                        { t: "txt", p: [50,90], text: "压扁中……", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [50,90], text: "压扁中……", size: 14.48, bold: true, color: "target" }
                       ]
                     },
                     {
@@ -949,7 +949,7 @@ window.MATH_CH["g06"] = {
                         { t: "seg", a: [50,30], b: [82,48], ticks: 1, color: "known" },
                         { t: "seg", a: [82,48], b: [50,66], ticks: 1, color: "known" },
                         { t: "seg", a: [50,66], b: [18,48], ticks: 1, color: "known" },
-                        { t: "txt", p: [50,90], text: "一组邻边相等 → 四边相等", size: 14, bold: true }
+                        { t: "txt", p: [50,90], text: "一组邻边相等 → 四边相等", size: 14.48, bold: true }
                       ]
                     }
                   ]
@@ -1002,7 +1002,7 @@ window.MATH_CH["g06"] = {
                         { t: "seg", a: [50,48], b: [82,48], ticks: 1, color: "corrA" },
                         { t: "seg", a: [50,30], b: [50,48], ticks: 2, color: "corrB" },
                         { t: "seg", a: [50,48], b: [50,66], ticks: 2, color: "corrB" },
-                        { t: "txt", p: [50,90], text: "垂直 + 平分", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [50,90], text: "垂直 + 平分", size: 14.48, bold: true, color: "target" }
                       ]
                     }
                   ]
@@ -1051,7 +1051,7 @@ window.MATH_CH["g06"] = {
                         { t: "seg", a: [18,48], b: [50,66], ticks: 1, color: "corrA", width: 3 },
                         { t: "seg", a: [50,30], b: [50,48], ticks: 2, color: "corrB" },
                         { t: "seg", a: [50,48], b: [50,66], ticks: 2, color: "corrB" },
-                        { t: "txt", p: [50,90], text: "第 1 步：摆好已知", size: 14, bold: true }
+                        { t: "txt", p: [50,90], text: "第 1 步：摆好已知", size: 14.48, bold: true }
                       ]
                     },
                     {
@@ -1061,7 +1061,7 @@ window.MATH_CH["g06"] = {
                         { t: "poly", pts: [[18,48],[50,30],[82,48],[50,66]], color: "aux", width: 1.5, dash: "5,4" },
                         { t: "poly", pts: [[18,48],[50,30],[50,48]], color: "corrA", width: 3 },
                         { t: "poly", pts: [[18,48],[50,66],[50,48]], color: "corrB", width: 3 },
-                        { t: "txt", p: [50,90], text: "第 2 步：△ABO ≌ △ADO（SSS）", size: 14, bold: true }
+                        { t: "txt", p: [50,90], text: "第 2 步：△ABO ≌ △ADO（SSS）", size: 14.48, bold: true }
                       ]
                     },
                     {
@@ -1072,7 +1072,7 @@ window.MATH_CH["g06"] = {
                         { t: "seg", a: [18,48], b: [82,48], color: "target", width: 2.5 },
                         { t: "arc", v: [50,48], a1: 180, a2: 270, r: 10, group: 1, color: "corrAngle" },
                         { t: "arc", v: [50,48], a1: 90, a2: 180, r: 10, group: 1, color: "corrAngle" },
-                        { t: "txt", p: [50,90], text: "第 3 步：∠AOB = ∠AOD = 90°", size: 14, bold: true }
+                        { t: "txt", p: [50,90], text: "第 3 步：∠AOB = ∠AOD = 90°", size: 14.48, bold: true }
                       ]
                     },
                     {
@@ -1085,7 +1085,7 @@ window.MATH_CH["g06"] = {
                         { t: "right", v: [50,48], p: [82,48], q: [50,66], color: "target" },
                         { t: "seg", a: [18,48], b: [50,48], ticks: 1, color: "corrA" },
                         { t: "seg", a: [50,48], b: [82,48], ticks: 1, color: "corrA" },
-                        { t: "txt", p: [50,90], text: "第 4 步：AC ⊥ BD", size: 14, bold: true, color: "known" }
+                        { t: "txt", p: [50,90], text: "第 4 步：AC ⊥ BD", size: 14.48, bold: true, color: "known" }
                       ]
                     }
                   ],
@@ -1144,13 +1144,13 @@ window.MATH_CH["g06"] = {
                   ],
                   items: [
                     { id: "n1", label: "平行四边形：多了“两组对边平行”", group: 0, anchor: [50,64],
-                      shape: { t: "txt", p: [50,64], text: "平行四边形", size: 14, bold: true } },
+                      shape: { t: "txt", p: [50,64], text: "平行四边形", size: 14.48, bold: true } },
                     { id: "n2", label: "矩形：多了“一个角是直角”", group: 1, anchor: [24,44],
-                      shape: { t: "txt", p: [24,44], text: "矩形", size: 14, bold: true } },
+                      shape: { t: "txt", p: [24,44], text: "矩形", size: 14.48, bold: true } },
                     { id: "n3", label: "菱形：多了“一组邻边相等”", group: 1, anchor: [76,44],
-                      shape: { t: "txt", p: [76,44], text: "菱形", size: 14, bold: true } },
+                      shape: { t: "txt", p: [76,44], text: "菱形", size: 14.48, bold: true } },
                     { id: "n4", label: "正方形：直角和等边兼得", group: 2, anchor: [50,24],
-                      shape: { t: "txt", p: [50,24], text: "正方形", size: 14, bold: true } }
+                      shape: { t: "txt", p: [50,24], text: "正方形", size: 14.48, bold: true } }
                   ]
                 }
               },
@@ -1191,7 +1191,7 @@ window.MATH_CH["g06"] = {
                         { t: "seg", a: [30,32], b: [70,72], ticks: 1, color: "corrA" },
                         { t: "seg", a: [70,32], b: [30,72], ticks: 1, color: "corrA" },
                         { t: "right", v: [50,52], p: [70,72], q: [70,32], color: "target" },
-                        { t: "txt", p: [50,90], text: "相等 + 垂直平分", size: 14, bold: true }
+                        { t: "txt", p: [50,90], text: "相等 + 垂直平分", size: 14.48, bold: true }
                       ]
                     }
                   ]
@@ -1243,7 +1243,7 @@ window.MATH_CH["g06"] = {
                         { t: "pt", p: [50,30], label: "D", color: "known" },
                         { t: "pt", p: [38,52], label: "E", color: "known" },
                         { t: "seg", a: [50,30], b: [38,52], color: "target", width: 3.5 },
-                        { t: "txt", p: [50,90], text: "DE：中位线", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [50,90], text: "DE：中位线", size: 14.48, bold: true, color: "target" }
                       ]
                     },
                     {
@@ -1252,7 +1252,7 @@ window.MATH_CH["g06"] = {
                         { t: "poly", pts: [[20,30],[80,30],[56,74]], color: "aux", width: 1.5, dash: "5,4" },
                         { t: "poly", pts: [[20,30],[50,30],[38,52]], color: "target", width: 3 },
                         { t: "seg", a: [50,30], b: [38,52], color: "target", width: 3.5 },
-                        { t: "txt", p: [50,90], text: "剪下 △ADE", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [50,90], text: "剪下 △ADE", size: 14.48, bold: true, color: "target" }
                       ]
                     },
                     {
@@ -1263,7 +1263,7 @@ window.MATH_CH["g06"] = {
                         { t: "seg", a: [50,30], b: [26,74], color: "target", width: 3.5 },
                         { t: "seg", a: [50,30], b: [38,52], ticks: 1, color: "corrA" },
                         { t: "seg", a: [38,52], b: [26,74], ticks: 1, color: "corrA" },
-                        { t: "txt", p: [50,90], text: "拼成平行四边形 DBCF", size: 14, bold: true },
+                        { t: "txt", p: [50,90], text: "拼成平行四边形 DBCF", size: 14.48, bold: true },
                         { t: "txt", p: [50,14], text: "DF = 2×DE，DF ∥ BC", size: 13, color: "target" }
                       ]
                     }
@@ -1310,7 +1310,7 @@ window.MATH_CH["g06"] = {
                         { t: "seg", a: [38,52], b: [26,74], color: "target", width: 3, dash: "6,4" },
                         { t: "seg", a: [56,74], b: [26,74], color: "aux", width: 2, dash: "5,4" },
                         { t: "pt", p: [26,74], label: "F", color: "target" },
-                        { t: "txt", p: [50,90], text: "第 1 步：延长 DE 到 F", size: 14, bold: true }
+                        { t: "txt", p: [50,90], text: "第 1 步：延长 DE 到 F", size: 14.48, bold: true }
                       ]
                     },
                     {
@@ -1322,7 +1322,7 @@ window.MATH_CH["g06"] = {
                         { t: "poly", pts: [[56,74],[26,74],[38,52]], color: "corrB", width: 3 },
                         { t: "seg", a: [50,30], b: [38,52], ticks: 1, color: "corrA" },
                         { t: "seg", a: [38,52], b: [26,74], ticks: 1, color: "corrA" },
-                        { t: "txt", p: [50,90], text: "第 2 步：△ADE ≌ △CFE（SAS）", size: 14, bold: true }
+                        { t: "txt", p: [50,90], text: "第 2 步：△ADE ≌ △CFE（SAS）", size: 14.48, bold: true }
                       ]
                     },
                     {
@@ -1334,7 +1334,7 @@ window.MATH_CH["g06"] = {
                         { t: "seg", a: [56,74], b: [26,74], ticks: 1, color: "corrA", width: 3 },
                         { t: "arc", v: [20,30], a1: 0, a2: 51, r: 9, group: 1, color: "corrAngle" },
                         { t: "arc", v: [56,74], a1: 180, a2: 231, r: 9, group: 1, color: "corrAngle" },
-                        { t: "txt", p: [50,90], text: "第 3 步：AD=CF，AD ∥ CF", size: 14, bold: true }
+                        { t: "txt", p: [50,90], text: "第 3 步：AD=CF，AD ∥ CF", size: 14.48, bold: true }
                       ]
                     },
                     {
@@ -1344,7 +1344,7 @@ window.MATH_CH["g06"] = {
                         { t: "poly", pts: [[50,30],[80,30],[56,74],[26,74]], color: "target", width: 3.5 },
                         { t: "seg", a: [50,30], b: [80,30], ticks: 1, color: "corrA" },
                         { t: "seg", a: [56,74], b: [26,74], ticks: 1, color: "corrA" },
-                        { t: "txt", p: [50,90], text: "第 4 步：DBCF 是平行四边形", size: 14, bold: true }
+                        { t: "txt", p: [50,90], text: "第 4 步：DBCF 是平行四边形", size: 14.48, bold: true }
                       ]
                     },
                     {
@@ -1356,7 +1356,7 @@ window.MATH_CH["g06"] = {
                         { t: "seg", a: [80,30], b: [56,74], color: "target", width: 3.5 },
                         { t: "seg", a: [50,30], b: [38,52], ticks: 1, color: "corrA" },
                         { t: "seg", a: [38,52], b: [26,74], ticks: 1, color: "corrA" },
-                        { t: "txt", p: [50,90], text: "第 5 步：DE ∥ BC，DE = 一半 BC", size: 14, bold: true, color: "known" }
+                        { t: "txt", p: [50,90], text: "第 5 步：DE ∥ BC，DE = 一半 BC", size: 14.48, bold: true, color: "known" }
                       ]
                     }
                   ],
@@ -1409,7 +1409,7 @@ window.MATH_CH["g06"] = {
                         { t: "seg", a: [66,66], b: [34,66], arrows: 1, color: "corrA" },
                         { t: "txt", p: [50,16], text: "梯形：只有一组对边平行", size: 13, bold: true },
                         { t: "poly", pts: [[24,30],[84,30],[72,66],[12,66]], color: "aux", width: 2, dash: "5,4" },
-                        { t: "txt", p: [50,78], text: "❌ 平行四边形不是梯形", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [50,78], text: "❌ 平行四边形不是梯形", size: 14.48, bold: true, color: "target" }
                       ]
                     }
                   ]
@@ -1512,17 +1512,17 @@ window.MATH_CH["g06"] = {
                   ],
                   items: [
                     { id: "q1", label: "① ▱ABCD 中 AB=6cm，求 CD", group: 0, anchor: [25,74],
-                      shape: { t: "txt", p: [25,74], text: "①", size: 24, bold: true } },
+                      shape: { t: "txt", p: [25,74], text: "①", size: 22.86, bold: true } },
                     { id: "q2", label: "② AB=CD=5、AD=BC=4，是平行四边形吗", group: 1, anchor: [75,74],
-                      shape: { t: "txt", p: [75,74], text: "②", size: 24, bold: true } },
+                      shape: { t: "txt", p: [75,74], text: "②", size: 22.86, bold: true } },
                     { id: "q3", label: "③ 矩形 ABCD 对角线交于 O，AC=8cm，求 OA", group: 0, anchor: [25,52],
-                      shape: { t: "txt", p: [25,52], text: "③", size: 24, bold: true } },
+                      shape: { t: "txt", p: [25,52], text: "③", size: 22.86, bold: true } },
                     { id: "q4", label: "④ 对角线互相平分的四边形，是平行四边形吗", group: 1, anchor: [75,52],
-                      shape: { t: "txt", p: [75,52], text: "④", size: 24, bold: true } },
+                      shape: { t: "txt", p: [75,52], text: "④", size: 22.86, bold: true } },
                     { id: "q5", label: "⑤ “对角线相等的四边形一定是矩形”对吗？举反例", group: 1, anchor: [25,30],
-                      shape: { t: "txt", p: [25,30], text: "⑤", size: 24, bold: true } },
+                      shape: { t: "txt", p: [25,30], text: "⑤", size: 22.86, bold: true } },
                     { id: "q6", label: "⑥ ▱ABCD 中 ∠A=70°，求 ∠B、∠C", group: 0, anchor: [75,30],
-                      shape: { t: "txt", p: [75,30], text: "⑥", size: 24, bold: true } }
+                      shape: { t: "txt", p: [75,30], text: "⑥", size: 22.86, bold: true } }
                   ]
                 }
               },

@@ -62,7 +62,7 @@ window.MATH_CH["g07"] = {
                       caption: "第 1 步：定一个点 O——圆心。",
                       shapes: [
                         { t: "pt", p: [50,52], label: "O", color: "known", r: 5 },
-                        { t: "txt", p: [50,40], text: "圆心 O", size: 14, bold: true }
+                        { t: "txt", p: [50,40], text: "圆心 O", size: 14.48, bold: true }
                       ]
                     },
                     {
@@ -71,7 +71,7 @@ window.MATH_CH["g07"] = {
                         { t: "pt", p: [50,52], label: "O", color: "known", r: 5 },
                         { t: "seg", a: [50,52], b: [80,52], color: "target", width: 3.5, ticks: 1 },
                         { t: "pt", p: [80,52], color: "target", r: 4 },
-                        { t: "txt", p: [65,61], text: "半径 r", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [65,61], text: "半径 r", size: 14.48, bold: true, color: "target" }
                       ]
                     },
                     {
@@ -91,7 +91,7 @@ window.MATH_CH["g07"] = {
                         { t: "seg", a: [50,52], b: [80,52], color: "corrA", width: 2.5, ticks: 1 },
                         { t: "seg", a: [50,52], b: [35,78], color: "corrA", width: 2.5, ticks: 1 },
                         { t: "seg", a: [50,52], b: [50,22], color: "corrA", width: 2.5, ticks: 1 },
-                        { t: "txt", p: [50,90], text: "都等于 r", size: 14, bold: true, color: "corrA" }
+                        { t: "txt", p: [50,90], text: "都等于 r", size: 14.48, bold: true, color: "corrA" }
                       ]
                     }
                   ]
@@ -270,7 +270,7 @@ window.MATH_CH["g07"] = {
                         { t: "seg", a: [50,82], b: [50,22], color: "target", width: 3.5 },
                         { t: "seg", a: [22.5,64], b: [50,64], color: "known", width: 3.5 },
                         { t: "seg", a: [50,64], b: [77.5,64], color: "aux", width: 2.5, dash: "5,4" },
-                        { t: "txt", p: [50,40], text: "沿 CD 对折 →", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [50,40], text: "沿 CD 对折 →", size: 14.48, bold: true, color: "target" }
                       ]
                     },
                     {
@@ -339,7 +339,7 @@ window.MATH_CH["g07"] = {
                         { t: "poly", pts: [[50,52],[22.5,64],[77.5,64]], color: "target", width: 3 },
                         { t: "seg", a: [50,52], b: [22.5,64], color: "target", width: 3, ticks: 1 },
                         { t: "seg", a: [50,52], b: [77.5,64], color: "target", width: 3, ticks: 1 },
-                        { t: "txt", p: [50,44], text: "等腰", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [50,44], text: "等腰", size: 14.48, bold: true, color: "target" }
                       ]
                     },
                     {
@@ -352,7 +352,7 @@ window.MATH_CH["g07"] = {
                         { t: "right", v: [50,64], p: [50,52], q: [77.5,64], size: 6 },
                         { t: "seg", a: [22.5,64], b: [50,64], color: "corrA", width: 3, ticks: 1 },
                         { t: "seg", a: [50,64], b: [77.5,64], color: "corrA", width: 3, ticks: 1 },
-                        { t: "txt", p: [50,74], text: "AE = EB", size: 14, bold: true, color: "corrA" }
+                        { t: "txt", p: [50,74], text: "AE = EB", size: 14.48, bold: true, color: "corrA" }
                       ]
                     },
                     {
@@ -363,7 +363,7 @@ window.MATH_CH["g07"] = {
                         { t: "seg", a: [50,82], b: [50,22], color: "aux", width: 2, dash: "5,4" },
                         { t: "arc", v: [50,52], a1: 90, a2: 156.4, r: 35, color: "corrA", width: 4 },
                         { t: "arc", v: [50,52], a1: 23.6, a2: 90, r: 35, color: "corrA", width: 4 },
-                        { t: "txt", p: [50,90], text: "弧 AC = 弧 BC", size: 14, bold: true, color: "corrA" }
+                        { t: "txt", p: [50,90], text: "弧 AC = 弧 BC", size: 14.48, bold: true, color: "corrA" }
                       ]
                     }
                   ],
@@ -549,7 +549,7 @@ window.MATH_CH["g07"] = {
                         { t: "seg", a: [44.8,81.5], b: [27,71.3], color: "corrA", width: 3.5, ticks: 2 },
                         { t: "seg", a: [27,32.7], b: [44.8,22.5], color: "corrA", width: 3.5, ticks: 2 },
                         { t: "pt", p: [50,52], label: "O", color: "known", r: 4 },
-                        { t: "txt", p: [50,13], text: "弧相等 → 弦相等", size: 14, bold: true, color: "corrA" }
+                        { t: "txt", p: [50,13], text: "弧相等 → 弦相等", size: 14.48, bold: true, color: "corrA" }
                       ]
                     },
                     {
@@ -566,7 +566,7 @@ window.MATH_CH["g07"] = {
                         { t: "arc", v: [50,52], a1: 100, a2: 140, r: 12, group: 1, color: "corrAngle" },
                         { t: "arc", v: [50,52], a1: 220, a2: 260, r: 12, group: 1, color: "corrAngle" },
                         { t: "pt", p: [50,52], label: "O", color: "known", r: 4 },
-                        { t: "txt", p: [50,13], text: "弦相等 → 圆心角相等", size: 14, bold: true, color: "corrAngle" }
+                        { t: "txt", p: [50,13], text: "弦相等 → 圆心角相等", size: 14.48, bold: true, color: "corrAngle" }
                       ]
                     }
                   ]
@@ -618,7 +618,7 @@ window.MATH_CH["g07"] = {
                         { t: "arc", v: [50,22], a1: 60, a2: 120, r: 10, group: 1, color: "corrAngle" },
                         { t: "pt", p: [50,22], label: "P", color: "known", r: 5 },
                         { t: "pt", p: [50,52], label: "O", color: "known", r: 4 },
-                        { t: "txt", p: [50,90], text: "顶点在圆上，两边交圆 ✓", size: 14, bold: true, color: "known" }
+                        { t: "txt", p: [50,90], text: "顶点在圆上，两边交圆 ✓", size: 14.48, bold: true, color: "known" }
                       ]
                     },
                     {
@@ -628,18 +628,18 @@ window.MATH_CH["g07"] = {
                         { t: "circle", c: [20,60], r: 14, color: "line", width: 2.5 },
                         { t: "seg", a: [20,60], b: [13,72.1], color: "aux", width: 2.5 },
                         { t: "seg", a: [20,60], b: [27,72.1], color: "aux", width: 2.5 },
-                        { t: "txt", p: [20,82], text: "❌", size: 14, color: "target" },
-                        { t: "txt", p: [20,40], text: "顶点在圆内", size: 11 },
+                        { t: "txt", p: [20,82], text: "❌", size: 14.48, color: "target" },
+                        { t: "txt", p: [20,40], text: "顶点在圆内", size: 11.89 },
                         { t: "circle", c: [50,60], r: 14, color: "line", width: 2.5 },
                         { t: "seg", a: [50,84], b: [43,72.1], color: "aux", width: 2.5 },
                         { t: "seg", a: [50,84], b: [57,72.1], color: "aux", width: 2.5 },
-                        { t: "txt", p: [50,92], text: "❌", size: 14, color: "target" },
-                        { t: "txt", p: [50,40], text: "顶点在圆外", size: 11 },
+                        { t: "txt", p: [50,92], text: "❌", size: 14.48, color: "target" },
+                        { t: "txt", p: [50,40], text: "顶点在圆外", size: 11.89 },
                         { t: "circle", c: [80,60], r: 14, color: "line", width: 2.5 },
                         { t: "seg", a: [80,46], b: [73,72.1], color: "aux", width: 2.5 },
                         { t: "seg", a: [80,46], b: [94,46], color: "aux", width: 2.5 },
-                        { t: "txt", p: [80,82], text: "❌", size: 14, color: "target" },
-                        { t: "txt", p: [80,40], text: "一边没交圆", size: 11 }
+                        { t: "txt", p: [80,82], text: "❌", size: 14.48, color: "target" },
+                        { t: "txt", p: [80,40], text: "一边没交圆", size: 11.89 }
                       ]
                     }
                   ]
@@ -726,7 +726,7 @@ window.MATH_CH["g07"] = {
                         { t: "seg", a: [50,52], b: [50,82], color: "known", width: 2.5 },
                         { t: "arc", v: [20,52], a1: 0, a2: 45, r: 10, group: 1, color: "target" },
                         { t: "arc", v: [50,52], a1: 0, a2: 90, r: 12, group: 2, color: "target" },
-                        { t: "txt", p: [50,93], text: "∠APB = ½∠AOB", size: 14, bold: true, color: "target" }
+                        { t: "txt", p: [50,93], text: "∠APB = ½∠AOB", size: 14.48, bold: true, color: "target" }
                       ]
                     }
                   ],
