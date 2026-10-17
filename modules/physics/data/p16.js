@@ -134,6 +134,8 @@ window.PHY_CH["p16"] = {
                 {
                   type: "graph-reader",
                   params: {
+/* 引擎批4（2026-10-17）：实现层切 Eng.PlotBoard（含读截距步骤） */
+                    engine: { primitive: "PlotBoard", version: "2026.10.17.6", params: { sourceKind: "points" } },
                     source: { kind: "points", points: [[0, 3.0], [0.1, 2.9], [0.2, 2.8], [0.3, 2.7], [0.4, 2.6], [0.5, 2.5]], xLabel: "I/A", yLabel: "U/V" },
                     steps: ["slope", "intercept"],
                     badge: { invariant: "没变的是：E、r（电源的脾气）（变的是电流 I→路端电压 U→斜率与截距读数）" }
@@ -210,6 +212,8 @@ window.PHY_CH["p16"] = {
                 {
                   type: "field-viz",
                   params: {
+/* 引擎批4（2026-10-17）：实现层切 Eng.EM（偶极子解析式·静磁场示意） */
+                    engine: { primitive: "EM", version: "2026.10.17.6", params: { mode: "bfield" } },
                     mode: "bfield",
                     magnet: { x: 50, y: 50, angle: 0 },
                     needleCount: 8,
@@ -285,6 +289,8 @@ window.PHY_CH["p16"] = {
                 {
                   type: "motion-sim",
                   params: {
+/* 引擎批4（2026-10-17）：实现层切 Eng.Tween+Kinematics（圆周解析运动学，批1口径） */
+                    engine: { primitive: "Tween+Kinematics", version: "2026.10.17.6", params: { mode: "circle" } },
                     mode: "circle",
                     omega: { min: 1, max: 10, step: 1, init: 4 },
                     showReadouts: true,
@@ -347,6 +353,8 @@ window.PHY_CH["p16"] = {
                 {
                   type: "graph-reader",
                   params: {
+/* 引擎批4（2026-10-17）：实现层切 Eng.PlotBoard */
+                    engine: { primitive: "PlotBoard", version: "2026.10.17.6", params: { sourceKind: "function" } },
                     source: { kind: "function", expr: "r = 2*t", xLabel: "v", yLabel: "r" },
                     xRange: [0, 5],
                     steps: ["slope"],
@@ -422,6 +430,8 @@ window.PHY_CH["p16"] = {
                 {
                   type: "field-viz",
                   params: {
+/* 引擎批4（2026-10-17）：实现层切 Eng.EM（偶极子解析式·静磁场示意） */
+                    engine: { primitive: "EM", version: "2026.10.17.6", params: { mode: "bfield" } },
                     mode: "bfield",
                     magnet: { x: 50, y: 70, angle: 0 },
                     needleCount: 8,
@@ -432,6 +442,8 @@ window.PHY_CH["p16"] = {
                 {
                   type: "em-induction",
                   params: {
+/* 引擎批4（2026-10-17）：实现层切 Eng.EM（楞次定律判向·Φ∝1/距离示意） */
+                    engine: { primitive: "EM", version: "2026.10.17.6", params: { kind: "induction", pole: "N" } },
                     pole: "N",
                     badge: { invariant: "没变的是：线圈匝数/面积（变的是磁通量 Φ→电流'增反减同'）" }
                   }
@@ -496,6 +508,8 @@ window.PHY_CH["p16"] = {
                 {
                   type: "graph-reader",
                   params: {
+/* 引擎批4（2026-10-17）：实现层切 Eng.PlotBoard */
+                    engine: { primitive: "PlotBoard", version: "2026.10.17.6", params: { sourceKind: "function" } },
                     source: { kind: "function", expr: "E = 2*t", xLabel: "ΔΦ/Δt", yLabel: "E" },
                     xRange: [0, 5],
                     steps: ["slope"],

@@ -38,6 +38,8 @@ window.PHY_CH["p10"] = {
                 {
                   type: "field-viz",
                   params: {
+/* 引擎批4（2026-10-17）：实现层切 Eng.EM（偶极子解析式·静磁场示意） */
+                    engine: { primitive: "EM", version: "2026.10.17.6", params: { mode: "bfield" } },
                     mode: "bfield",
                     magnet: { x: 50, y: 50, angle: 0 },
                     needleCount: 8, showFieldLines: true, ironFilings: true, probeDrag: true,
@@ -78,6 +80,8 @@ window.PHY_CH["p10"] = {
                 {
                   type: "field-viz",
                   params: {
+/* 引擎批4（2026-10-17）：实现层切 Eng.EM（偶极子解析式·静磁场示意） */
+                    engine: { primitive: "EM", version: "2026.10.17.6", params: { mode: "bfield" } },
                     mode: "bfield",
                     magnet: { x: 50, y: 50, angle: 0 },
                     needleCount: 8, showFieldLines: true, ironFilings: false, probeDrag: true,
@@ -138,6 +142,8 @@ window.PHY_CH["p10"] = {
                 {
                   type: "motor-commutator",
                   params: {
+/* 引擎批4（2026-10-17）：实现层切 Eng.EM（换向器状态机·慢放示意） */
+                    engine: { primitive: "EM", version: "2026.10.17.6", params: { kind: "commutator" } },
                     badge: { invariant: "没变的是：磁铁、电源（变的是换向器→电流方向每半圈切换）" }
                   }
                 }
@@ -196,6 +202,8 @@ window.PHY_CH["p10"] = {
                 {
                   type: "em-induction",
                   params: {
+/* 引擎批4（2026-10-17）：实现层切 Eng.EM（楞次定律判向·Φ∝1/距离示意） */
+                    engine: { primitive: "EM", version: "2026.10.17.6", params: { kind: "induction", pole: "N" } },
                     pole: "N",
                     badge: { invariant: "没变的是：线圈匝数/面积（变的是磁通量）" }
                   }

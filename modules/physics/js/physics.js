@@ -3417,6 +3417,10 @@
     var badge = readoutBadge(p);
     box.appendChild(badge.box);
     var svg = svgStage("", p.mode === "bfield" ? "磁场可视化" : "电场可视化");
+    /* 引擎批4（2026-10-17）：真值计算切 Eng.EM（静电场叠加 / 偶极子解析式 /
+     * 场线追踪 / 探测判向），渲染层只消费读回；Eng.EM 未加载时走旧内联
+     * 公式兜底（同一公式族，行为一致）。AX01 显性化：aria-label 带 approxTag。 */
+    var ENG_EM = (window.Eng && window.Eng.EM) ? window.Eng.EM : null;
     /* 黄队 P8 改法 3：拖动中场线半透明 + 角落小字（画布包一层相对定位容器） */
     var stageWrap = el("div", "phy-stage-wrap");
     stageWrap.appendChild(svg);
@@ -3458,6 +3462,11 @@
     if (p.mode === "bfield") {
       var mag = { x: (p.magnet && p.magnet.x) || 50, y: (p.magnet && p.magnet.y) || 50,
         a: (p.magnet && p.magnet.angle) || 0 };
+      /* 引擎批4：静磁场真值走 Eng.EM.DipoleField（偶极子解析式，静磁场示意） */
+      var dip = ENG_EM ? new ENG_EM.DipoleField({
+        magnet: { x: mag.x, y: mag.y, angleDeg: mag.a } }) : null;
+      if (dip) svg.setAttribute("aria-label",
+        "磁场可视化（" + dip.getState().approxTag + "）");
       var nN = Math.min(p.needleCount || 8, 12);
       var filings = el("div", "phy-check-row");
       var fLb = el("label", "phy-check");
@@ -3469,6 +3478,7 @@
       box.appendChild(filings);
       fCk.addEventListener("change", drawB);
       function Bdip(x, y) {
+        if (dip) return dip.fieldAt(x, y);
         /* 条形磁铁偶极子场（静磁场示意） */
         var dx = x - mag.x, dy = -(y - mag.y), r2 = dx * dx + dy * dy;
         if (r2 < 4) return { x: 0, y: 0 };
@@ -3497,6 +3507,7 @@
         svg.appendChild(body);
         dragify(body, { svg: svg, onMove: function (lx, ly) {
           mag.x = Math.max(16, Math.min(84, lx)); mag.y = Math.max(16, Math.min(84, 100 - ly));
+          if (dip) dip.setMagnet({ x: mag.x, y: mag.y });
           drawB();
         }, onEnd: function () { flash(svg); } });
         var rot = svgEl("circle", { cx: mag.x + L + 8, cy: cy, r: 6, "class": "phy-handle",
@@ -3506,6 +3517,7 @@
         svg.appendChild(rot);
         dragify(rot, { svg: svg, onMove: function (lx, ly) {
           mag.a = Math.atan2(-(ly - cy), lx - mag.x) * 180 / Math.PI;
+          if (dip) dip.setMagnet({ angleDeg: mag.a });
           drawB();
         }, onEnd: function () { markHintSeen(curPageId + "-field"); } });
         /* 小磁针：N 极指向该点磁感应方向 */
@@ -3524,12 +3536,12 @@
             stroke: cssVar("--phy-charge-pos"), "stroke-width": 2, "marker-end": "url(#fh-f)" }));
           svg.appendChild(svgText(x2 + 1.5, y2 - 1, "N", "phy-sym-label", "start"));
         }
-        /* 磁感线（N 出发环回 S） */
+        /* 磁感线（N 出发环回 S）；引擎批4：中点法追踪走引擎读回 */
         if (p.showFieldLines !== false) {
           for (var k = 0; k < 10; k++) {
             var sa = mag.a * Math.PI / 180 + (k / 10 - 0.5) * 2.4;
             var sx = mag.x + Math.cos(sa) * (L + 2), sy = mag.y + Math.sin(sa) * (L + 2);
-            var pts = traceField(sx, sy, Bdip, 160);
+            var pts = dip ? dip.traceLine(sx, sy, 160) : traceField(sx, sy, Bdip, 160);
             if (pts.length > 4) {
               var d = "M" + pts.map(function (q) {
                 return q.x.toFixed(1) + "," + (100 - q.y).toFixed(1);
@@ -3540,9 +3552,17 @@
             }
           }
         }
-        /* 撒铁屑：沿磁感线排布的静态纹理（非真实随机模拟） */
+        /* 撒铁屑：沿磁感线排布的静态纹理（非真实随机模拟）；
+         * 引擎批4：确定性纹理走引擎读回（旧分支同口径） */
         if (fCk.checked) {
           var dots = svgEl("g", { "class": "phy-filings" });
+          if (dip) {
+            var dArr = dip.filingsDots();
+            for (var fd = 0; fd < dArr.length; fd++) {
+              dots.appendChild(svgEl("circle", { cx: dArr[fd].x, cy: 100 - dArr[fd].y,
+                r: 0.55, fill: cssVar("--phy-track") }));
+            }
+          } else {
           for (var j = 0; j < 10; j++) {
             var sa2 = mag.a * Math.PI / 180 + (j / 10 - 0.5) * 2.4;
             var pts2 = traceField(mag.x + Math.cos(sa2) * (L + 2),
@@ -3551,6 +3571,7 @@
               dots.appendChild(svgEl("circle", { cx: pts2[m2].x, cy: 100 - pts2[m2].y,
                 r: 0.55, fill: cssVar("--phy-track") }));
             }
+          }
           }
           svg.appendChild(dots);
         }
@@ -3565,8 +3586,15 @@
     charges = (p.charges || []).map(function (c, i) {
       return { id: "q" + i, x: c.x, y: c.y, q: c.q >= 0 ? 1 : -1 };
     });
+    /* 引擎批4：静电场真值走 Eng.EM.ElectricField（叠加+q=±1示意单位）；
+     * 渲染器 charges 为交互态，每次 drawE 同步进引擎 */
+    var ef = ENG_EM ? new ENG_EM.ElectricField({
+      charges: charges, lineBudget: lineCount }) : null;
+    if (ef) svg.setAttribute("aria-label",
+      "电场可视化（" + ef.getState().approxTag + "）");
     var probe = { x: 50, y: 72 };
     function Efield(x, y) {
+      if (ef) return ef.fieldAt(x, y);
       var ex = 0, ey = 0;
       charges.forEach(function (c) {
         var dx = x - c.x, dy = y - c.y, r2 = dx * dx + dy * dy;
@@ -3593,6 +3621,7 @@
       return pts;
     }
     function drawE() {
+      if (ef) ef.setCharges(charges);
       svg.innerHTML = "";
       arrowHead(svg, "fh-f", cssVar("--phy-field"));
       /* 黄队 P8 改法 1：首次进入电场模式页，空白画布显示 3 个虚线圆圈占位；
@@ -3665,7 +3694,8 @@
           drawE();
         });
       });
-      /* 探测手柄（probeDrag=false 时不显示） */
+      /* 探测手柄（probeDrag=false 时不显示）；
+       * 引擎批4：方向文字+强弱走引擎读回（不给 E 绝对数值，§P8 坑） */
       if (p.probeDrag !== false) {
       var E = Efield(probe.x, probe.y);
       var em = Math.hypot(E.x, E.y);
@@ -3675,8 +3705,9 @@
         svg.appendChild(svgEl("line", { x1: probe.x, y1: 100 - probe.y,
           x2: probe.x + Math.cos(pa) * pl, y2: 100 - probe.y - Math.sin(pa) * pl,
           stroke: cssVar("--phy-target"), "stroke-width": 2, "marker-end": "url(#fh-f)" }));
+        var prb = ef ? ef.probe(probe.x, probe.y) : null;
         svg.appendChild(svgText(probe.x, 100 - probe.y - pl - 2,
-          dirText(pa) + " · " + strengthText(em), "phy-probe-label"));
+          (prb ? prb.dirText : dirText(pa)) + " · " + (prb ? prb.strength : strengthText(em)), "phy-probe-label"));
       }
       var pr = svgEl("circle", { cx: probe.x, cy: 100 - probe.y, r: 6,
         fill: "none", stroke: cssVar("--phy-known"), "stroke-width": 2,
@@ -3711,6 +3742,7 @@
       badge.setReadout("", "电荷 " + charges.length + " 个（+ / − 示意单位）");
     }
     function traceFieldDir(sx, sy, dir) {
+      if (ef) return ef.traceLine(sx, sy, dir);
       var pts = [{ x: sx, y: sy }], h = 1.1;
       for (var i = 0; i < 200; i++) {
         var q = pts[pts.length - 1];
@@ -5035,6 +5067,12 @@
     box.appendChild(legend);
     var pole = p.pole === "S" ? "S" : "N";
     var mx = 28, prevPhi = null;
+    /* 引擎批4（2026-10-17）：Φ/dPhi/楞次判向真值切 Eng.EM.Induction；
+     * 渲染层只消费读回；未加载时走旧内联公式兜底（同一公式族）。 */
+    var ENG_EMI = (window.Eng && window.Eng.EM) ? window.Eng.EM : null;
+    var indu = ENG_EMI ? new ENG_EMI.Induction({ pole: pole }) : null;
+    if (indu) svg.setAttribute("aria-label",
+      "电磁感应：磁铁插入线圈（" + indu.getState().approxTag + "）");
     var st = stateBadge("拖动磁铁靠近 / 插入线圈", "");
     box.appendChild(st);
     function draw() {
@@ -5061,17 +5099,20 @@
       dragify(hd, { svg: svg, onMove: function (lx) {
         mx = Math.max(14, Math.min(50, lx)); draw();
       }, onEnd: function () { flash(svg); } });
-      /* Φ ∝ 1/距离 */
+      /* Φ ∝ 1/距离；引擎批4：Φ/dPhi/楞次判向走引擎读回 */
+      var ur = indu ? indu.update(mx) : null;
       var d = Math.max(4, 60 - (mx + 9));
-      var phi = 100 / d, dPhi = prevPhi == null ? 0 : phi - prevPhi;
-      prevPhi = phi;
+      var phi = indu ? indu.phi() : 100 / d,
+        dPhi = ur ? ur.dPhi : (prevPhi == null ? 0 : phi - prevPhi);
+      if (!indu) prevPhi = phi;
       /* 方向口径（楞次定律）：N 极插入 ≡ S 极拔出 → 上⊗下⊙（从左看逆时针）；
        * S 极插入 ≡ N 极拔出 → 反向 */
       var nPoleIn = (pole === "N") === (dPhi > 0);
-      var cur = Math.abs(dPhi) > 0.02 ? (nPoleIn ? "in" : "out") : "none";
+      var cur = ur ? ur.dir : (Math.abs(dPhi) > 0.02 ? (nPoleIn ? "in" : "out") : "none");
       /* 感应电流方向标注（双编码：⊙/⊗ 符号 + 文字说明） */
       if (cur !== "none") {
-        var topS = cur === "in" ? "⊗" : "⊙", botS = cur === "in" ? "⊙" : "⊗";
+        var topS = ur ? ur.top : (cur === "in" ? "⊗" : "⊙"),
+          botS = ur ? ur.bot : (cur === "in" ? "⊙" : "⊗");
         var tTop = svgText(65, 36, topS, "phy-f-label");
         tTop.style.fill = cssVar("--phy-current");
         var tBot = svgText(65, 66, botS, "phy-f-label");
@@ -5087,21 +5128,21 @@
           fill: cssVar("--phy-force-a") }));
       svg.appendChild(svgText(42, 90.5, "Φ（磁通量）", "phy-note-text", "start"));
       if (cur === "in") {
-        st.textContent = (dPhi > 0 ? "插入" : "拔出") + "：Φ " + (dPhi > 0 ? "增大" : "减小") +
+        st.textContent = ur ? ur.statusText : (dPhi > 0 ? "插入" : "拔出") + "：Φ " + (dPhi > 0 ? "增大" : "减小") +
           " → 感应电流（从左看逆时针），磁场阻碍" + (dPhi > 0 ? "增大" : "减小");
         st.className = "phy-state phy-state-ok";
-        badge.setReadout("", "Φ " + (dPhi > 0 ? "增大" : "减小") +
+        badge.setReadout("", ur ? ur.readoutText : "Φ " + (dPhi > 0 ? "增大" : "减小") +
           " → 感应电流：上 ⊗ 下 ⊙（从磁铁一侧看：逆时针）");
       } else if (cur === "out") {
-        st.textContent = (dPhi > 0 ? "插入" : "拔出") + "：Φ " + (dPhi > 0 ? "增大" : "减小") +
+        st.textContent = ur ? ur.statusText : (dPhi > 0 ? "插入" : "拔出") + "：Φ " + (dPhi > 0 ? "增大" : "减小") +
           " → 感应电流反向（从左看顺时针），磁场阻碍" + (dPhi > 0 ? "增大" : "减小");
         st.className = "phy-state phy-state-ok";
-        badge.setReadout("", "Φ " + (dPhi > 0 ? "增大" : "减小") +
+        badge.setReadout("", ur ? ur.readoutText : "Φ " + (dPhi > 0 ? "增大" : "减小") +
           " → 感应电流：上 ⊙ 下 ⊗（从磁铁一侧看：顺时针）");
       } else {
-        st.textContent = "磁铁不动：Φ 不变 → 无感应电流";
+        st.textContent = ur ? ur.statusText : "磁铁不动：Φ 不变 → 无感应电流";
         st.className = "phy-state";
-        badge.setReadout("", "Φ 不变 → 无感应电流（“变”才是条件）");
+        badge.setReadout("", ur ? ur.readoutText : "Φ 不变 → 无感应电流（“变”才是条件）");
       }
     }
     draw();
@@ -5479,6 +5520,12 @@
     box.appendChild(svg);
     box.appendChild(noteLine("慢放 ×0.2（非真实转速）：看清换向器什么时候换向。"));
     var ang = 0, playing = false, rafId = 0, lastT = 0;
+    /* 引擎批4（2026-10-17）：换向相位/电流真值切 Eng.EM.Commutator；
+     * 渲染层只消费读回；未加载时走旧内联公式兜底（同一公式族）。 */
+    var ENG_EMC = (window.Eng && window.Eng.EM) ? window.Eng.EM : null;
+    var comm = ENG_EMC ? new ENG_EMC.Commutator({}) : null;
+    if (comm) svg.setAttribute("aria-label",
+      "电动机换向器慢动作（" + comm.getState().approxTag + "）");
     var bar = uiPlaybar({
       onPlay: function () { playing = true; lastT = nowMs(); loop(); },
       onPause: function () { playing = false; if (rafId) cafFn(rafId); rafId = 0; },
@@ -5519,6 +5566,7 @@
     box.appendChild(stepsBar);
     function draw() {
       svg.innerHTML = "";
+      if (comm) comm.setAngle(ang);
       var cx = 50, cy = 46, R = 20, a = ang * Math.PI / 180;
       /* 磁铁 N / S */
       svg.appendChild(svgEl("rect", { x: 8, y: 28, width: 10, height: 36,
@@ -5538,8 +5586,8 @@
       svg.appendChild(svgEl("polygon", { points: poly, fill: "none",
         stroke: cssVar("--phy-body"), "stroke-width": 1.8 }));
       svg.appendChild(svgText(cx, cy - 13, "线圈", "phy-note-text"));
-      /* 电流方向（每半圈翻转；双编码：箭头 + 文字） */
-      var half = Math.floor(ang / 180) % 2;
+      /* 电流方向（每半圈翻转；双编码：箭头 + 文字）；引擎批4：走引擎读回 */
+      var half = comm ? comm.half() : Math.floor(ang / 180) % 2;
       arrowHead(svg, "fh-mot", cssVar("--phy-current"));
       function edgeArrow(q1, q2, fwd) {
         var mx = (q1.x + q2.x) / 2, my = (q1.y + q2.y) / 2;
@@ -5553,7 +5601,8 @@
       }
       edgeArrow(p1, p2, half === 0);
       edgeArrow(p3, p4, half !== 0);
-      svg.appendChild(svgText(cx, cy + 15, half === 0 ? "电流：上→右" : "电流：上→左", "phy-note-text"));
+      svg.appendChild(svgText(cx, cy + 15,
+        comm ? comm.currentLabel() : (half === 0 ? "电流：上→右" : "电流：上→左"), "phy-note-text"));
       /* 换向器：两半环（随线圈转）+ 固定电刷 */
       var hr = 5.5;
       function arcPath(a0, a1) {
@@ -5572,18 +5621,21 @@
         fill: cssVar("--phy-body") }));
       svg.appendChild(svgText(cx - hr - 8, cy + 8, "+刷", "phy-note-text", "end"));
       svg.appendChild(svgText(cx + hr + 8, cy + 8, "−刷", "phy-note-text", "start"));
-      var phase = Math.floor(ang / 90) % 4;
+      var phase = comm ? comm.phase() : Math.floor(ang / 90) % 4;
       stepBtns.forEach(function (b, i) {
         b.setAttribute("aria-current", i === phase ? "true" : "false");
       });
-      st.textContent = PHASES[phase];
+      st.textContent = comm ? comm.phaseText() : PHASES[phase];
       st.className = "phy-state " + (phase === 2 ? "phy-state-warn" : "phy-state-ok");
-      badge.setReadout("", "已转 " + fmtN(ang / 360, 1) + " 圈（慢放示意）");
+      badge.setReadout("", "已转 " + fmtN(comm ? comm.getState().turns : ang / 360, 1) + " 圈（慢放示意）");
     }
     function loop() {
       if (!playing) return;
       var now = nowMs(), dt = Math.min(0.1, (now - lastT) / 1000 || 0.016);
-      lastT = now; ang = (ang + dt * 72) % 3600; /* 慢放 */
+      lastT = now;
+      /* 引擎批4：慢放推进走引擎（72°/s ↔ ×0.2） */
+      if (comm) { comm.advance(dt); ang = comm.getState().angleDeg % 3600; }
+      else ang = (ang + dt * 72) % 3600; /* 慢放 */
       draw();
       rafId = rafFn(loop);
     }

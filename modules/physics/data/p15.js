@@ -42,6 +42,8 @@ window.PHY_CH["p15"] = {
                 {
                   type: "field-viz",
                   params: {
+/* 引擎批4（2026-10-17）：实现层切 Eng.EM（静电场叠加·q=±1示意单位） */
+                    engine: { primitive: "EM", version: "2026.10.17.6", params: { mode: "efield" } },
                     mode: "efield",
                     charges: [ { x: 30, y: 50, q: 1 } ],
                     lineCount: 24,
@@ -106,6 +108,8 @@ window.PHY_CH["p15"] = {
                 {
                   type: "graph-reader",
                   params: {
+/* 引擎批4（2026-10-17）：实现层切 Eng.PlotBoard */
+                    engine: { primitive: "PlotBoard", version: "2026.10.17.6", params: { sourceKind: "function" } },
                     source: { kind: "function", expr: "F = 900/(t*t)", xLabel: "r", yLabel: "F" },
                     xRange: [1, 6],
                     steps: ["slope"],
@@ -178,6 +182,8 @@ window.PHY_CH["p15"] = {
                 {
                   type: "field-viz",
                   params: {
+/* 引擎批4（2026-10-17）：实现层切 Eng.EM（静电场叠加·q=±1示意单位） */
+                    engine: { primitive: "EM", version: "2026.10.17.6", params: { mode: "efield" } },
                     mode: "efield",
                     charges: [ { x: 50, y: 50, q: 1 } ],
                     lineCount: 32,
@@ -256,6 +262,8 @@ window.PHY_CH["p15"] = {
                 {
                   type: "graph-reader",
                   params: {
+/* 引擎批4（2026-10-17）：实现层切 Eng.PlotBoard */
+                    engine: { primitive: "PlotBoard", version: "2026.10.17.6", params: { sourceKind: "function" } },
                     source: { kind: "function", expr: "V = 100 - 20*t", xLabel: "x（沿场强方向）", yLabel: "φ/V" },
                     xRange: [0, 5],
                     steps: ["slope"],
@@ -327,6 +335,8 @@ window.PHY_CH["p15"] = {
                 {
                   type: "graph-reader",
                   params: {
+/* 引擎批4（2026-10-17）：实现层切 Eng.PlotBoard */
+                    engine: { primitive: "PlotBoard", version: "2026.10.17.6", params: { sourceKind: "points" } },
                     source: { kind: "points", points: [[0, 0], [1, 2], [2, 4], [3, 6]], xLabel: "U/V", yLabel: "Q/C" },
                     steps: ["slope"],
                     badge: { invariant: "没变的是：电容 C（器件的脾气）（变的是电压 U→电荷量 Q）" }
@@ -401,6 +411,8 @@ window.PHY_CH["p15"] = {
                 {
                   type: "graph-reader",
                   params: {
+/* 引擎批4（2026-10-17）：实现层切 Eng.PlotBoard */
+                    engine: { primitive: "PlotBoard", version: "2026.10.17.6", params: { sourceKind: "function" } },
                     source: { kind: "function", expr: "y = 2*t", xLabel: "U₂/V", yLabel: "y/mm" },
                     xRange: [0, 5],
                     steps: ["slope"],

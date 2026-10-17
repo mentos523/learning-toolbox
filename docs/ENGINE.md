@@ -287,6 +287,71 @@ Eng.StepPlayer（前进/后退/重播/慢放/键盘）+ Eng.Tween（步内连续
 
 ---
 
+### 2.11 电磁原语（em.js，物理推广批4，2026-10-17）
+
+> 定位：电磁类交互的**解析真值**（静电场叠加 / 静磁场偶极子解析式 /
+> 换向器状态机 / 楞次定律判向），纯函数 + 渲染分离，确定性可断言。
+> 真值口径：`~/workspace/phy-audit/em-truth-criteria.md`（EM-01…EM-30）。
+> 实现 `Eng.PRIMITIVE_IFACE` 子集：`snapshot`/`restore`/`state`；解析/状态机
+> 原语无积分步进，不实现 `step`/`reset`/`simTimeSec`（ENG-69：不给假数；
+> `Commutator.advance` 为墙钟驱动的慢放推进，非物理积分）。
+
+| API | 构造/调用 | 读回/真值（纯函数） | 口径 |
+|---|---|---|---|
+| `new Eng.EM.ElectricField({charges, lineBudget, maxCharges, minDist, ax})` | `charges=[{x,y,q}]`，q 只许 ±1（示意单位）；lineBudget 默认 32；maxCharges 默认 4；minDist 默认 8 | 非法输入抛错（q 非 ±1、坐标非数） | ENG-66/74 |
+| `fieldAt(x, y)` | 逻辑坐标 | Σ q·dr/r³（r²<0.5 奇点跳过；EM-01/02 逐点手算对账） | ENG-74 |
+| `addCharge({x,y,q})` / `removeCharge(id)` / `setCharges(cs)` | 放置 | ≤4 超限→`{ok:false,key:'limit'}`；中心距<8→`{ok:false,key:'overlap'}`（EM-05） | ENG-74 |
+| `traceLine(sx, sy, dir)` | dir=±1 | 欧拉步进 h=1.1（旧 traceFieldDir 同口径；终止于异号电荷<3/边界，不穿电荷；EM-06/07 端点手算） | ENG-74 |
+| `fieldLines()` | 全部场线 | 每电荷 n=max(4,round(lineBudget·\|q\|/Σ\|q\|))，种子距 3.2；负电荷点列反转（EM-25） | ENG-74 |
+| `probe(x, y)` | 探测手柄 | `{angleDeg, dirText, strength}`：8 宫格方向文字 + 强/中/弱（ref=max(1/25,0.02)，>8ref 强、>2ref 中；EM-03/04）；**不给 E 绝对数值** | ENG-74 |
+| `new Eng.EM.DipoleField({magnet:{x,y,angleDeg}, strengthK, minR2, magLen, ax})` | strengthK 默认 2000；minR2 默认 4；magLen 默认 13 | 非法输入抛错 | ENG-66/74 |
+| `fieldAt(x, y)` | 逻辑坐标（物理帧 y 向上） | 偶极子解析式 k(3·dot·n̂−m)，k=2000/(r2·r)；r2<4→0（EM-08/09/10/11 手算） | ENG-74 |
+| `needleAngle(x, y)` | 小磁针 N 极指向角 | 屏帧角 `atan2(−B.y,B.x)` 归一 [0,360)（EM-08/09/10） | ENG-74 |
+| `setMagnet({x,y,angleDeg})` | 磁铁位姿 | 磁针跟随（EM-10） | ENG-74 |
+| `traceLine(sx, sy, maxPts)` / `fieldLines()` | 磁感线 | 中点法（旧 traceField 同口径），10 种子 N 端出发 | ENG-74 |
+| `filingsDots()` | 铁屑静态纹理 | 10 种子 × 每 6 点取 1；确定性逐位一致（EM-12） | ENG-74 |
+| `new Eng.EM.Commutator({angleDeg, slowFactor, rateDegPerSec, ax})` | slowFactor 默认 0.2；rate 默认 72°/s | 非法输入抛错 | ENG-66/74 |
+| `setAngle(deg)` / `advance(dtSec)` | 状态推进 | 慢放推进 angle+=dt·72（EM-17） | ENG-74 |
+| `phase()` / `half()` | 相位 | floor(ang/90)%4 → ①②③④；floor(ang/180)%2 → 半圈（EM-13…16） | ENG-74 |
+| `currentLabel()` | 电流方向 | half=0→"电流：上→右"，1→"电流：上→左"；**每半圈翻转**（EM-15/16） | ENG-74 |
+| `phaseText()` | 四步文字 | 与旧 PHASES 逐字一致（EM-18） | ENG-74 |
+| `new Eng.EM.Induction({pole, coilX, magnetX, magnetMin, magnetMax, phiK, ax})` | pole 只许 N/S；mx 钳制 [14,50] | 非法输入抛错 | ENG-66/74 |
+| `phi()` | 磁通量（示意） | Φ=100/max(4,coilX−(mx+9))（EM-19/24 手算） | ENG-74 |
+| `update(x)` | 判向 | `{dPhi, dir, top, bot, statusText, readoutText}`；N 极插入≡S 极拔出→"in"（上⊗下⊙，逆时针）；S 极插入≡N 极拔出→"out"（上⊙下⊗，顺时针）；\|dPhi\|≤0.02→"none"（EM-19…24） | ENG-74 |
+| `getState()`/`state()`（四原语） | 全参数读回（防御性拷贝） | charges/magnet/angle/phase/half/currentLabel/phi/dir + `model` + `approxTag` + `ax`（AX01 三字段） | ENG-10/74 |
+| `snapshot()`/`restore(s)`（四原语） | 快照往返 | 逐位往返（EM-30） | ENG-10 |
+| `EM.dirText(angleRad)` / `EM.strengthTier(em, ref)` | 静态 | 8 宫格 / 强中弱三档（旧 dirText/strengthText 同口径） | ENG-74 |
+
+- **容差**：纯解析闭式 + 代数叠加，`fieldAt`/`phi`/`needleAngle` 1e-9（手算抄写中间值取 1e-6）；
+  场线追踪为数值步进（欧拉一阶/中点法二阶），端点断言按旧实现**同算法重算**对账，
+  不宣称解析精度。
+- **AX01 显性化**（`EM.AX`，课页可直接引用原文）：
+  假设：点电荷模型 / q=±1 示意单位 / 真空静电场叠加；静磁场示意（偶极子近似）；
+  通电线圈匀强磁场定性模型；闭合线圈匝数/面积不变；
+  近似：场线为追踪采样 / 铁屑为静态纹理（非真实随机模拟）/ 慢放 ×0.2 非真实转速 /
+  Φ∝1/距离示意模型 / 探测只给方向文字+相对强弱；
+  误差估计：解析闭式浮点 ~1e-15；场线步进误差按算法阶数。
+  课页侧：`field-viz` 画布 `aria-label` 带 approxTag（"点电荷模型·q=±1示意单位" /
+  "静磁场示意·偶极子近似"）（`physics.js` widgetFieldViz 引擎分支）。
+- **课页接线**（2026-10-17，批4共 19 组件）：
+  `modules/physics/js/physics.js` 的 `widgetFieldViz`（电场/磁场双分支）、
+  `widgetMotorCommutator`、`widgetEmInduction` 真值计算切 `Eng.EM`
+  （`Efield`/`Bdip`/`traceFieldDir`/`traceField`/`dirText`/`strengthText`/
+  换向相位/电流文字/`Φ`/`dPhi`/楞次判向），渲染层只消费读回；
+  引擎脚本未加载时走旧内联公式兜底（同一公式族，行为一致）。
+  `data/p10.js`（field-viz×2、motor-commutator、em-induction）、
+  `data/p15.js`（field-viz×2 efield、graph-reader×4→PlotBoard）、
+  `data/p16.js`（field-viz×2 bfield、em-induction、graph-reader×3→PlotBoard、
+  motion-sim×1→Tween+Kinematics 圆周）各 widget params 加
+  `engine: { primitive: "EM"|"PlotBoard"|"Tween+Kinematics", version: "2026.10.17.6", params: {...} }` 声明。
+  graph-reader 引擎渲染器（`physics-engine.js` renderGraphEngine）补"读截距"步骤
+  （p16.1.1-p1 旧口径：变号内插 + 端点零点检查，去重容差一个采样步长）。
+- **验证**：`tools/qa-em-truth.mjs`（Node 直测，期望值独立手算硬编码）+
+  `tools/engine-verify/v-em.html`（V21，浏览器 + 确定性双环境）+
+  `tools/qa-em-pages.mjs`（白队 headless 页级，16 页 × 三视口 × 深浅色）。
+
+---
+
 ## 三、真值口径摘要（引用 ENG 编号）
 
 - 坐标：ENG-01（y 向上）/02（换算公式）/03（往返 ≤0.5px / ≤1e-9）/04（三视口）/05（双层同源 ≤0.5px）。
@@ -313,6 +378,9 @@ Eng.StepPlayer（前进/后退/重播/慢放/键盘）+ Eng.Tween（步内连续
 - 波动：ENG-73（已实现，`assets/engine/wave.js`，解析式 `y=A·sin(2πft−kx+φ)`，
   频率/波长/振幅/相位全参数化读回）；真值口径 WV-01…WV-27
  （`~/workspace/phy-audit/wave-truth-criteria.md`）。
+- 电磁：ENG-74（已实现，`assets/engine/em.js`，静电场叠加 / 静磁场偶极子解析式 /
+  换向器状态机 / 楞次定律判向，纯函数 + 渲染分离）；真值口径 EM-01…EM-30
+ （`~/workspace/phy-audit/em-truth-criteria.md`）。
 - 不可对账：ENG-NC01（多体堆积/非弹性/二维斜碰）/NC02（教学故意反例须配说明）
   /NC03（流体浮力近似力场）/NC04（波动干涉可视化）/NC05（自由数据输入）。
 
@@ -475,7 +543,7 @@ assets/vendor/
 assets/engine/
   core.js  coords.js  driver.js  konva-view.js  input.js
   mech.js  meters.js  plot.js  steps.js  guides.js
-  tween.js  circuit.js  motion.js  phenom.js  optics.js  wave.js
+  tween.js  circuit.js  motion.js  phenom.js  optics.js  wave.js  em.js
 docs/ENGINE.md（本文件）
 tools/engine-verify/
   verify.css  verify-lib.js  run-verify.cjs
@@ -485,11 +553,14 @@ tools/engine-verify/
   v-meters-electrical.html  v-meters-length-angle.html
   v-meters-thermo-balance.html  v-meters-lab.html
   v-plot.html  v-input.html  v-steps.html  v-data-chart.html  v-konva-view.html
-  v-tween.html  v-motion.html  v-phenom.html  v-optics.html  v-wave.html
+  v-tween.html  v-motion.html  v-phenom.html  v-optics.html  v-wave.html  v-em.html
 ```
 
 验证页外：`tools/qa-wave-truth.mjs`（波动真值 Node 直测门禁，期望值独立手算硬编码；
 白队独立复验用此脚本放行；实现队自查不计入放行依据）。
+`tools/qa-em-truth.mjs`（电磁真值 Node 直测门禁，EM-01…EM-30，期望值独立手算硬编码；
+白队独立复验用此脚本放行；实现队自查不计入放行依据）。
+`tools/qa-em-pages.mjs`（白队 headless 页级独立复验：16 页 × 三视口 × 深浅色）。
 
 验证：`node tools/engine-verify/run-verify.cjs`（headless Chromium 真实 file:// 打开；
 结果与截图见 `~/workspace/engine-build/evidence/`）。

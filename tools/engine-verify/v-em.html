@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<!-- V21 · Eng.EM 电磁原语（物理推广批4，2026-10-17） -->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>V21 · Eng.EM：电磁原语 / 解析真值</title>
+<link rel="stylesheet" href="verify.css">
+</head>
+<body>
+<h1>V21 · Eng.EM：电磁原语</h1>
+<p class="note">覆盖 EM-01…EM-30（纯函数部分；页级行为见口径 §六，白队 headless 页级实测
+  tools/qa-em-pages.mjs）+ 确定性（ENG-74）+ 快照往返（ENG-10）+ AX01 字段就位 +
+  非法输入拒绝（ENG-66）。静电场叠加 / 偶极子解析式 / 换向器状态机 / 楞次判向。
+  真值口径：~/workspace/phy-audit/em-truth-criteria.md v1.0。
+  期望值均为物理专家队独立手算硬编码（非恒真式）。</p>
+
+<h2>断言结果</h2>
+<div id="verdict" style="display:none"><h2 id="verdict-head"></h2></div>
+<table id="results-table"></table>
+
+<script src="../../assets/engine/core.js?v=2026.10.17.6"></script>
+<script src="../../assets/engine/em.js?v=2026.10.17.6"></script>
+<script src="verify-lib.js"></script>
+<script>
+(function () {
+'use strict';
+VLib.pageTitle = 'V21 · Eng.EM';
+var EM = window.Eng.EM;
+function near(a, b, tol) { return Math.abs(a - b) <= tol; }
+
+/* ---------- 一、静电场 ---------- */
+var e1 = new EM.ElectricField({ charges: [{ x: 30, y: 50, q: 1 }] });
+var f1 = e1.fieldAt(50, 50);
+VLib.assert('EM-01', '单点电荷场叠加', ['ENG-74'],
+  near(f1.x, 0.0025, 1e-9) && near(f1.y, 0, 1e-12),
+  '(0.0025,0)', '(' + f1.x + ',' + f1.y + ')', '20/8000。');
+var e2 = new EM.ElectricField({ charges: [{ x: 30, y: 50, q: 1 }, { x: 70, y: 50, q: -1 }] });
+var f2 = e2.fieldAt(50, 50), pr2 = e2.probe(50, 50);
+VLib.assert('EM-02', '正负电荷对中点场 + 探测', ['ENG-74'],
+  near(f2.x, 0.005, 1e-9) && pr2.dirText === '向右' && pr2.strength === '弱',
+  'E=(0.005,0),向右·弱', 'E=(' + f2.x + ',' + f2.y + '),' + pr2.dirText + '·' + pr2.strength, '');
+var e3 = new EM.ElectricField({ charges: [{ x: 50, y: 50, q: 1 }] });
+var pr3 = e3.probe(50, 60);
+VLib.assert('EM-03', '探测方向文字（90°→向上）', ['ENG-74'],
+  pr3.angleDeg === 90 && pr3.dirText === '向上' && pr3.strength === '弱',
+  '90°,向上·弱', pr3.angleDeg + '°,' + pr3.dirText + '·' + pr3.strength, '');
+VLib.assert('EM-04', '强/中/弱三档', ['ENG-74'],
+  e3.probe(50, 51).strength === '强' && e3.probe(50, 52.5).strength === '中' &&
+  e3.probe(50, 55).strength === '弱',
+  '强/中/弱', [e3.probe(50, 51).strength, e3.probe(50, 52.5).strength, e3.probe(50, 55).strength].join('/'),
+  'ref=0.04：1>0.32/0.16∈(0.08,0.32]/0.04<0.08。');
+var e5 = new EM.ElectricField({ charges: [{ x: 10, y: 10, q: 1 }, { x: 20, y: 10, q: 1 }, { x: 30, y: 10, q: -1 }, { x: 40, y: 10, q: 1 }] });
+var e5b = new EM.ElectricField({ charges: [{ x: 50, y: 55, q: 1 }] });
+VLib.assert('EM-05', '放置规则（≤4、<8 拒）', ['ENG-74'],
+  e5.addCharge({ x: 50, y: 50, q: 1 }).key === 'limit' &&
+  e5b.addCharge({ x: 50, y: 50, q: 1 }).key === 'overlap' &&
+  (function () { var id = e5b.getState().charges[0].id; return e5b.removeCharge(id) && e5b.addCharge({ x: 50, y: 50, q: -1 }).ok; })(),
+  'limit/overlap 拒，删后可放', 'ok', '');
+var t6 = e3.traceLine(50, 53.2, 1), l6 = t6[t6.length - 1];
+VLib.assert('EM-06', '场线追踪端点（边界终止）', ['ENG-74'],
+  t6.length === 41 && near(l6.x, 50, 1e-9) && near(l6.y, 97.2, 1e-6),
+  '41 点，末点 (50,97.2)', 'n=' + t6.length + ',last=(' + l6.x + ',' + l6.y + ')', '');
+var t7 = e2.traceLine(33.2, 50, 1), l7 = t7[t7.length - 1];
+VLib.assert('EM-07', '场线终止于异号电荷', ['ENG-74'],
+  t7.length === 31 && near(l7.x, 66.2, 1e-6) && near(l7.y, 50, 1e-9),
+  '31 点，末点 (66.2,50)', 'n=' + t7.length + ',last=(' + l7.x + ',' + l7.y + ')', '不穿电荷。');
+(function () {
+  var fl = e2.fieldLines();
+  var pos = fl.filter(function (l) { return l.q > 0; }), neg = fl.filter(function (l) { return l.q < 0; });
+  var nl = neg[0].pts, nlF = nl[0], nlL = nl[nl.length - 1];
+  VLib.assert('EM-25', '场线条数 + 负电荷反转', ['ENG-74'],
+    pos.length === 16 && neg.length === 16 &&
+    near(pos[0].pts[0].x, 33.2, 1e-9) &&
+    Math.hypot(nlF.x - 70, nlF.y - 50) > 25 && near(Math.hypot(nlL.x - 70, nlL.y - 50), 3.2, 1e-6),
+    '各 16 条；负末点=种子 3.2', '正' + pos.length + '/负' + neg.length, '箭头指向电荷。');
+})();
+
+/* ---------- 二、静磁场 ---------- */
+var d = new EM.DipoleField({ magnet: { x: 50, y: 50, angleDeg: 0 } });
+var b8 = d.fieldAt(76, 50);
+VLib.assert('EM-08', '偶极子轴上场 + 磁针指向', ['ENG-74'],
+  near(b8.x, 0.22758307, 1e-6) && near(b8.y, 0, 1e-12) && d.needleAngle(76, 50) === 0,
+  'B=(0.22758307,0),0°', 'B=(' + b8.x + ',' + b8.y + '),' + d.needleAngle(76, 50) + '°', '');
+var b9 = d.fieldAt(50, 76);
+VLib.assert('EM-09', '赤道面场反向（180°）', ['ENG-74'],
+  near(b9.x, -0.11379153, 1e-6) && d.needleAngle(50, 76) === 180,
+  'B=(-0.11379153,0),180°', 'B=(' + b9.x + ',' + b9.y + '),' + d.needleAngle(50, 76) + '°', '');
+var d2 = new EM.DipoleField({ magnet: { x: 50, y: 50, angleDeg: 90 } });
+var b10 = d2.fieldAt(76, 50);
+VLib.assert('EM-10', '磁铁转 90° 磁针跟随', ['ENG-74'],
+  near(b10.y, -0.11379153, 1e-6) && d2.needleAngle(76, 50) === 90,
+  'B.y=-0.11379153,90°', 'B=(' + b10.x + ',' + b10.y + '),' + d2.needleAngle(76, 50) + '°', '');
+var b11 = d.fieldAt(51, 50);
+VLib.assert('EM-11', '近场 r²<4 置零', ['ENG-74'],
+  b11.x === 0 && b11.y === 0, '(0,0)', '(' + b11.x + ',' + b11.y + ')', '');
+(function () {
+  var a = JSON.stringify(d.filingsDots()), b = JSON.stringify(d.filingsDots());
+  var pts = d.filingsDots();
+  VLib.assert('EM-12', '铁屑静态纹理确定性', ['ENG-74'],
+    a === b && pts.length > 0 && pts.every(function (p) { return p.x >= 2 && p.x <= 98 && p.y >= 2 && p.y <= 98; }),
+    '两次逐位一致', '点数=' + pts.length, '非真实随机模拟。');
+})();
+
+/* ---------- 三、换向器 ---------- */
+var c = new EM.Commutator({});
+var s13 = c.getState();
+VLib.assert('EM-13', '初态 ① + 电流上→右', ['ENG-74'],
+  s13.phase === 0 && s13.half === 0 && s13.currentLabel === '电流：上→右' && s13.phaseText.charAt(0) === '①',
+  'phase0,电流：上→右,①', 'phase=' + s13.phase + ',' + s13.currentLabel, '');
+c.setAngle(90);
+VLib.assert('EM-14', '90°→②，电流不变', ['ENG-74'],
+  c.phase() === 1 && c.half() === 0 && c.currentLabel() === '电流：上→右',
+  'phase1,电流不变', 'phase=' + c.phase() + ',' + c.currentLabel(), '');
+c.setAngle(180);
+VLib.assert('EM-15', '180°→③，电流翻转', ['ENG-74'],
+  c.phase() === 2 && c.half() === 1 && c.currentLabel() === '电流：上→左',
+  'phase2,电流：上→左', 'phase=' + c.phase() + ',' + c.currentLabel(), '每半圈翻转。');
+c.setAngle(270);
+var p3 = c.phase() === 3;
+c.setAngle(360);
+VLib.assert('EM-16', '270°→④；360°回位', ['ENG-74'],
+  p3 && c.phase() === 0 && c.half() === 0 && c.currentLabel() === '电流：上→右',
+  'phase3→0,电流回位', 'ok', '');
+var c2 = new EM.Commutator({});
+c2.advance(1.0);
+var s17 = c2.getState();
+VLib.assert('EM-17', '慢放推进 72°/s（×0.2）', ['ENG-74'],
+  near(s17.angleDeg, 72, 1e-9) && near(s17.turns, 0.2, 1e-9) && s17.slowFactor === 0.2,
+  '72°,0.2 圈,×0.2', 'ang=' + s17.angleDeg + ',turns=' + s17.turns, '非真实转速。');
+VLib.assert('EM-18', '四步文字', ['ENG-74'],
+  EM.Commutator.PHASES.length === 4 && EM.Commutator.PHASES[2].indexOf('换向器切换') >= 0,
+  '四步', 'ok', '');
+
+/* ---------- 四、电磁感应 ---------- */
+var ind = new EM.Induction({ pole: 'N' });
+ind.update(28);
+var r19 = ind.update(38);
+VLib.assert('EM-19', 'N 极插入→in（上⊗下⊙）', ['ENG-74'],
+  r19.dir === 'in' && r19.top === '⊗' && r19.bot === '⊙' && near(r19.dPhi, 3.344482, 1e-5) &&
+  r19.statusText.indexOf('逆时针') >= 0,
+  'in,⊗/⊙,dPhi=3.344482', 'dir=' + r19.dir + ',' + r19.top + '/' + r19.bot, '');
+var r20 = ind.update(28);
+VLib.assert('EM-20', 'N 极拔出→out（上⊙下⊗）', ['ENG-74'],
+  r20.dir === 'out' && r20.top === '⊙' && r20.bot === '⊗' && r20.statusText.indexOf('顺时针') >= 0,
+  'out,⊙/⊗', 'dir=' + r20.dir + ',' + r20.top + '/' + r20.bot, '');
+var indS = new EM.Induction({ pole: 'S' });
+indS.update(28);
+VLib.assert('EM-21', 'S 极插入→out（镜像）', ['ENG-74'],
+  indS.update(38).dir === 'out', 'out', 'dir=' + indS.update(38).dir, 'N 极插入的镜像。');
+var r22 = ind.update(28);
+VLib.assert('EM-22', '不动→无感应电流', ['ENG-74'],
+  r22.dir === 'none' && r22.statusText === '磁铁不动：Φ 不变 → 无感应电流',
+  'none', r22.statusText, '"变"才是条件。');
+var indW = new EM.Induction({ pole: 'N' });
+indW.update(28);
+var r23 = indW.update(28.1);
+VLib.assert('EM-23', '阈下位移无电流', ['ENG-74'],
+  r23.dir === 'none' && near(r23.dPhi, 0.018986, 1e-5),
+  'none,dPhi=0.018986', 'dir=' + r23.dir + ',dPhi=' + r23.dPhi, '');
+var indC = new EM.Induction({});
+indC.setMagnetX(10);
+VLib.assert('EM-24', '磁铁位置钳制', ['ENG-74'],
+  indC.getState().magnetX === 14 && near(indC.phi(), 2.702703, 1e-6),
+  '钳制 14,φ=2.702703', 'x=' + indC.getState().magnetX + ',φ=' + indC.phi(), '');
+
+/* ---------- 五、AX01 与工程口径 ---------- */
+var axE = e1.getState().ax;
+VLib.assert('EM-26', 'AX01：q=±1 示意单位显性化', ['AX01'],
+  axE.assumptions.join('').indexOf('q=±1') >= 0 && e1.getState().approxTag === '点电荷模型·q=±1示意单位',
+  '点电荷模型·q=±1示意单位', e1.getState().approxTag, '');
+var axB = d.getState().ax;
+VLib.assert('EM-27', 'AX01：静磁场示意显性化', ['AX01'],
+  (axB.assumptions.join('') + axB.approximations.join('')).indexOf('静磁场示意') >= 0 &&
+  d.getState().approxTag === '静磁场示意·偶极子近似',
+  '静磁场示意·偶极子近似', d.getState().approxTag, '');
+var threw = 0;
+try { new EM.ElectricField({ charges: [{ x: 1, y: 2 }] }); } catch (e) { threw++; }
+try { e1.addCharge({ x: 'a', y: 1, q: 1 }); } catch (e) { threw++; }
+try { new EM.Induction({ pole: 'X' }); } catch (e) { threw++; }
+try { c.advance('x'); } catch (e) { threw++; }
+try { d.needleAngle(NaN, 1); } catch (e) { threw++; }
+try { e1.traceLine(1, 1, 0); } catch (e) { threw++; }
+VLib.assert('EM-28', '非法输入抛错（ENG-66）', ['ENG-66'],
+  threw === 6, '6/6', threw + '/6', '');
+var stCopy = e3.getState();
+stCopy.charges[0].x = 999;
+VLib.assert('EM-29', 'state() 防御性拷贝', ['ENG-10'],
+  e3.getState().charges[0].x === 50, '内部不受影响', 'x=' + e3.getState().charges[0].x, '');
+var snap = e3.snapshot();
+e3.setCharges([{ x: 1, y: 1, q: -1 }]);
+e3.restore(snap);
+VLib.assert('EM-30', 'snapshot/restore 往返', ['ENG-10'],
+  e3.getState().count === 1 && e3.getState().charges[0].x === 50,
+  '逐位往返', 'count=' + e3.getState().count, '');
+(function () {
+  var eA = new EM.ElectricField({ charges: [{ x: 30, y: 50, q: 1 }] });
+  var eB = new EM.ElectricField({ charges: [{ x: 30, y: 50, q: 1 }] });
+  var dA = new EM.DipoleField({ magnet: { x: 50, y: 50, angleDeg: 33 } });
+  VLib.assert('EM-DET', '确定性（同输入逐位一致）', ['ENG-74'],
+    eA.fieldAt(50, 50).x === eB.fieldAt(50, 50).x &&
+    JSON.stringify(eA.traceLine(50, 53.2, 1)) === JSON.stringify(eB.traceLine(50, 53.2, 1)) &&
+    dA.needleAngle(76, 50) === dA.needleAngle(76, 50), '逐位一致', 'ok', '');
+})();
+
+/* ---------- 版本 ---------- */
+VLib.assert('EM-VERSION', 'Eng.EM.VERSION', ['ENG-74'],
+  EM.VERSION === '2026.10.17.6', '2026.10.17.6', EM.VERSION, '批4版本号。');
+
+VLib.conclude();
+})();
+</script>
+</body>
+</html>

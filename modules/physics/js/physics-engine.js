@@ -1477,6 +1477,55 @@
         });
         btnRow.appendChild(b);
       }
+      /* 引擎批4（2026-10-17）：补"读截距"步骤（旧 widgetGraphReader 同口径：
+       * 变号内插 + 端点零点检查 + 数据点零点兜底，相邻重复去重容差一个采样步长；
+       * p16.1.1-p1 steps=["slope","intercept"] 迁移需要） */
+      if (steps.indexOf("intercept") >= 0) {
+        var bi = el("button", "phy-mini", "读截距");
+        bi.type = "button";
+        bi.addEventListener("click", function () {
+          var found = [];
+          var epsX = (x1 - x0) / 120;
+          function addZero(zx) {
+            for (var k = 0; k < found.length; k++)
+              if (Math.abs(found[k] - zx) <= epsX) return;
+            found.push(zx);
+          }
+          var prevZero = false;
+          for (var zi = 0; zi < 120; zi++) {
+            var xa = x0 + (x1 - x0) * zi / 120, xb = x0 + (x1 - x0) * (zi + 1) / 120;
+            var ya = sampleY(xa), yb = sampleY(xb);
+            if (!isFinite(ya) || !isFinite(yb)) { prevZero = false; continue; }
+            if (ya * yb < 0) { found.push(xa - ya * (xb - xa) / (yb - ya)); prevZero = false; }
+            else if (ya === 0 && !prevZero) { addZero(xa); prevZero = true; }
+            else prevZero = (ya === 0);
+          }
+          var yEnd = sampleY(x1);
+          if (yEnd === 0) addZero(x1);
+          if (pts) for (var pi = 0; pi < pts.length; pi++) {
+            if (pts[pi].y === 0 && pts[pi].x >= x0 && pts[pi].x <= x1) addZero(pts[pi].x);
+          }
+          found.sort(function (m, n) { return m - n; });
+          found.slice(0, 4).forEach(function (zx) {
+            J.create("point", [zx, 0], { fixed: true, name: "", size: 3,
+              strokeColor: "#D55E00", fillColor: "#D55E00" });
+            J.create("text", [zx, 0, fmtN(zx, 2)], { fixed: true, fontSize: 12 });
+          });
+          var yb0 = sampleY(0);
+          var msg = "x 截距：" + (found.length
+            ? found.slice(0, 4).map(function (z) { return fmtN(z, 2); }).join("、")
+            : "无（图像不跨横轴）");
+          if (isFinite(yb0) && x0 <= 0 && x1 >= 0) {
+            J.create("point", [0, yb0], { fixed: true, name: "", size: 3,
+              strokeColor: "#D55E00", fillColor: "#D55E00" });
+            msg += "；y 截距：" + fmtN(yb0, 2);
+          }
+          probe.intercept = { x: found.slice(0, 4), y: (isFinite(yb0) && x0 <= 0 && x1 >= 0) ? yb0 : null };
+          out.textContent = msg;
+          badge.setReadout("", msg);
+        });
+        btnRow.appendChild(bi);
+      }
     }
     later(init, 0);
     debugFor(pageId).widgets.push(probe);

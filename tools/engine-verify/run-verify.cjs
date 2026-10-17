@@ -37,7 +37,8 @@ const PAGES = [
   'v-motion.html',
   'v-phenom.html',
   'v-optics.html',
-  'v-wave.html'
+  'v-wave.html',
+  'v-em.html'
 ];
 // ENG-11 双环境逐位一致：以下页面在 file:// 与 http 下结果 JSON 必须 deep-equal
 const DETERMINISM_PAGES = [
@@ -49,7 +50,8 @@ const DETERMINISM_PAGES = [
   'v-mech-pulley-lever.html',
   'v-mech-collision.html',
   'v-optics.html',
-  'v-wave.html'
+  'v-wave.html',
+  'v-em.html'
 ];
 // 三视口截图留证的代表页
 const SHOT_PAGES = ['v-coords.html', 'v-meters-electrical.html', 'v-plot.html', 'v-input.html'];
