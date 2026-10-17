@@ -1,5 +1,5 @@
 {
   "date": "2026-10-17",
   "note": "发布流程：每次推送前，先把 version 升一位（如 2026.10.13.2），并同步以下三处（V=新版本号）：① index.html 里的 window.TOOLBOX_VERSION；② index.html 与 modules/chemistry/index.html 里全部 ?v= 缓存指纹及 window.CHEM_BUILD。仓库根目录一键同步（无反向引用，不会误删版本号）：V=<新版>; sed -i \"s|window.TOOLBOX_VERSION = \\\"[0-9][0-9.]*\\\"|window.TOOLBOX_VERSION = \\\"$V\\\"|; s|window.CHEM_BUILD = \\\"[0-9][0-9.]*\\\"|window.CHEM_BUILD = \\\"$V\\\"|; s|?v=[0-9][0-9.]*|?v=$V|g\" index.html modules/chemistry/index.html",
-  "version": "2026.10.17.18"
+  "version": "2026.10.17.19"
 }

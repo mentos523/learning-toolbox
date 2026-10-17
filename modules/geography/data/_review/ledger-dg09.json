@@ -1,0 +1,294 @@
+{
+  "schema": "geography-review-ledger/1.0",
+  "chapter": "dg09",
+  "entries": [
+    {
+      "id": "dg09.1.1-e1",
+      "lesson": "dg09.1.1",
+      "kind": "field",
+      "summary": "地形：三级阶梯/界线/山脉走向",
+      "content": {
+        "steps": "西高东低三级阶梯；一级4000m+/青藏高原柴达木，二级1000–2000m/三大高原三大盆地，三级500m以下/三大平原丘陵",
+        "bounds": "一二阶梯：昆仑—祁连—横断；二三阶梯：大兴安岭—太行—巫山—雪峰（精确到山脉）",
+        "mountains": "18条按走向分类（东西5/东北—西南7/南北3/西北—东南2/弧形1）",
+        "field_truth": "GeoBatch5.TERRAIN_STEPS/TERRAIN_BOUNDS/MOUNTAINS冻结常量",
+        "grade": "terrain-3d解析为cn-terrain（B级）：B级底图+西—东剖面"
+      },
+      "revision": 2,
+      "status": "final_passed",
+      "written_at": "2026-10-17",
+      "written_by": "地理专家队（批5两审）",
+      "review_history": [
+        {
+          "stage": "first",
+          "by": "地理专家队（初审人）",
+          "date": "2026-10-17",
+          "result": "fail_fixed",
+          "note": "初审：阶梯分级/界线山脉/走向分类逐项核对（人教版口径）无误。FAIL两处：①MOUNTAINS缺贺兰山/六盘山/喜马拉雅山脉（课页列18条，widget仅15条）——已补齐18条；②文案称“C级剖面示意，不涉政区轮廓”，与实际渲染（B级底图含省界+剖面）不符，属规则二文错——已修正为B级描述并补“剖面高程只看趋势不记数值”。"
+        },
+        {
+          "stage": "final",
+          "by": "地理专家队（终审人·与初审人独立）",
+          "date": "2026-10-17",
+          "result": "pass",
+          "note": "终审人独立复核：MOUNTAINS 18条齐全；B级描述与渲染一致；剖面声明含AX01显性化。终审通过，置final_passed。"
+        }
+      ]
+    },
+    {
+      "id": "dg09.1.2-e1",
+      "lesson": "dg09.1.2",
+      "kind": "judgment",
+      "summary": "地形→生产→生活因果链+山区一分为二",
+      "content": {
+        "chain": "地形→农业（青藏畜牧/江南水田/黄土窑洞）→交通聚落；自然→人文方向不颠倒（GEO-R40）",
+        "both_sides": "山区劣势（交通/耕地）vs优势（旅游/矿产/水能），一分为二（审计清单第8条）",
+        "field_truth": "GeoBatch4.chainScore纯函数（场层）vs点选配对判分（UI可达），两类分写合GEO-RULING-2026-10-17-03"
+      },
+      "revision": 1,
+      "status": "final_passed",
+      "written_at": "2026-10-17",
+      "written_by": "地理专家队（批5两审）",
+      "review_history": [
+        {
+          "stage": "first",
+          "by": "地理专家队（初审人）",
+          "date": "2026-10-17",
+          "result": "pass",
+          "note": "初审：因果方向（自然→人文）三处抽查无倒置；单因论抽查通过；trap（山区只有劣势）显性化。通过。"
+        },
+        {
+          "stage": "final",
+          "by": "地理专家队（终审人·与初审人独立）",
+          "date": "2026-10-17",
+          "result": "pass",
+          "note": "终审人独立复核：配对答案（青藏→畜牧/江南→水田/黄土→窑洞）与文案一致。终审通过，置final_passed。"
+        }
+      ]
+    },
+    {
+      "id": "dg09.2.1-e1",
+      "lesson": "dg09.2.1",
+      "kind": "field",
+      "summary": "季风：成因/两季风/两步法判读武汉",
+      "content": {
+        "monsoon": "成因海陆热力差异；冬季风西北寒冷干燥/夏季风东南温暖湿润；季风气候仅东部（西北温带大陆性/青藏高原山地）",
+        "wuhan": "最冷月约4℃→亚热带（0–15℃，GEO-R14）；年降水约1260mm、夏季多雨→亚热带季风气候（类型库冻结名）",
+        "field_truth": "GeoBatch2.judgeClimate纯函数（场层）；冻结表武汉站：temp最冷4℃、precip合计1260mm、year 2020、无needsRuling字段",
+        "needsRuling": "专项核对：冻结表武汉站无needsRuling字段（非口诀例外），本页未写该字段——正确（写了才是错）"
+      },
+      "revision": 1,
+      "status": "final_passed",
+      "written_at": "2026-10-17",
+      "written_by": "地理专家队（批5两审）",
+      "review_history": [
+        {
+          "stage": "first",
+          "by": "地理专家队（初审人）",
+          "date": "2026-10-17",
+          "result": "pass",
+          "note": "初审：两步顺序（GEO-R13）/阈值（GEO-R14）/年份（GEO-R16）逐项核对；独立重算最冷月4℃→亚热带、降水1260mm夏季多雨→亚热带季风气候，与页结论一致；needsRuling未写正确。通过。"
+        },
+        {
+          "stage": "final",
+          "by": "地理专家队（终审人·与初审人独立）",
+          "date": "2026-10-17",
+          "result": "pass",
+          "note": "终审人独立复核：武汉站数据与冻结表逐字一致；trap双坑（季风=夏季风/季风气候全国都有）显性化。终审通过，置final_passed。"
+        }
+      ]
+    },
+    {
+      "id": "dg09.2.2-e1",
+      "lesson": "dg09.2.2",
+      "kind": "field",
+      "summary": "降水时空分布：规律/800mm线/干湿区",
+      "content": {
+        "law": "空间东南多西北少（海陆位置主因）；时间夏秋多冬春少",
+        "line800": "800mm线≈秦岭—淮河；干湿四区800/400/200mm界线；400mm线走向注记合教材口径",
+        "field_truth": "GeoBatch5.PRECIP_STATIONS冻结常量（广州1600mm+/吐鲁番50mm以下等6站）+widget内等值线",
+        "grade": "precip解析为cn-precip（B级）"
+      },
+      "revision": 2,
+      "status": "final_passed",
+      "written_at": "2026-10-17",
+      "written_by": "地理专家队（批5两审）",
+      "review_history": [
+        {
+          "stage": "first",
+          "by": "地理专家队（初审人）",
+          "date": "2026-10-17",
+          "result": "fail_fixed",
+          "note": "初审：降水规律/800mm线/干湿分区逐项核对无误；站点band值（1600mm+/50mm以下）与lead文案一致。FAIL：文案称“C级等值线示意（无省界叠加），不画国界线”，与实际渲染（B级含省界+国界线/十段线）不符，属规则二文错——已修正为B级描述。"
+        },
+        {
+          "stage": "final",
+          "by": "地理专家队（终审人·与初审人独立）",
+          "date": "2026-10-17",
+          "result": "pass",
+          "note": "终审人独立复核：B级描述与渲染一致；等值线注记无GEO-R30类问题（示意线已声明）。终审通过，置final_passed。"
+        }
+      ]
+    },
+    {
+      "id": "dg09.2.3-e1",
+      "lesson": "dg09.2.3",
+      "kind": "field",
+      "summary": "气象灾害：寒潮/台风/洪涝干旱+路径",
+      "content": {
+        "disaster": "寒潮冬半年（蒙古—西伯利亚南下）；台风夏秋东南沿海（一分为二：害+降水之利）；洪涝/干旱源于降水不均",
+        "field_truth": "GeoBatch5.DISASTERS冻结常量（台风/寒潮路径时段走向与课页一致）",
+        "grade": "disaster-path解析为cn-silhouette（C级），台湾岛不可缺"
+      },
+      "revision": 1,
+      "status": "final_passed",
+      "written_at": "2026-10-17",
+      "written_by": "地理专家队（批5两审）",
+      "review_history": [
+        {
+          "stage": "first",
+          "by": "地理专家队（初审人）",
+          "date": "2026-10-17",
+          "result": "pass",
+          "note": "初审：灾害时空口径/路径走向逐项核对无误；trap（台风只有害）显性化；C级剪影合规。通过。"
+        },
+        {
+          "stage": "final",
+          "by": "地理专家队（终审人·与初审人独立）",
+          "date": "2026-10-17",
+          "result": "pass",
+          "note": "终审人独立复核：路径动画注记与DISASTERS一致。终审通过，置final_passed。"
+        }
+      ]
+    },
+    {
+      "id": "dg09.3.1-e1",
+      "lesson": "dg09.3.1",
+      "kind": "judgment",
+      "summary": "河流分类：外流/内流+水文四要素",
+      "content": {
+        "classify": "外流河（入海）/内流河（不入海）（首现即定义，GEO-R50）；外流区约占全国面积2/3；分水岭秦岭/南岭",
+        "hydro": "水文四要素：流量/汛期/含沙量/结冰期（首现即定义）",
+        "tarim": "塔里木河约2179千米，我国最长内流河，滋养南疆绿洲农业",
+        "quiz": "5题：长江外流/塔里木内流/额尔齐斯外流（注北冰洋陷阱）/黄河外流/口诀看归宿"
+      },
+      "revision": 1,
+      "status": "final_passed",
+      "written_at": "2026-10-17",
+      "written_by": "地理专家队（批5两审）",
+      "review_history": [
+        {
+          "stage": "first",
+          "by": "地理专家队（初审人）",
+          "date": "2026-10-17",
+          "result": "pass",
+          "note": "初审：分类标准/四要素/塔里木河数据/额尔齐斯河判读逐项核对无误；trap（内流河无用）显性化。通过。"
+        },
+        {
+          "stage": "final",
+          "by": "地理专家队（终审人·与初审人独立）",
+          "date": "2026-10-17",
+          "result": "pass",
+          "note": "终审人独立复核：5题答案与讲解一致；无因果倒置。终审通过，置final_passed。"
+        }
+      ]
+    },
+    {
+      "id": "dg09.3.2-e1",
+      "lesson": "dg09.3.2",
+      "kind": "field",
+      "summary": "长江：长度/分段/黄金水道+红线①回填",
+      "content": {
+        "yangtze": "约6300千米（人教版口径，我国第一、世界第三，注口径GEO-R56）；源唐古拉山格拉丹东峰；注入东海",
+        "segs": "宜昌/湖口分上中下游；上游水能/中下游黄金水道；三峡防洪+发电；治理重防洪",
+        "redline1": "红线①回填：河流发育在山谷（凸高为谷GEO-R01），流向与等高线凸向相反（GEO-R03）",
+        "field_truth": "GeoBatch5.YANGTZE冻结常量（6300余千米/宜昌/湖口分段与课页一致）",
+        "grade": "river-profile解析为cn-silhouette（C级）"
+      },
+      "revision": 1,
+      "status": "final_passed",
+      "written_at": "2026-10-17",
+      "written_by": "地理专家队（批5两审）",
+      "review_history": [
+        {
+          "stage": "first",
+          "by": "地理专家队（初审人）",
+          "date": "2026-10-17",
+          "result": "pass",
+          "note": "初审：长度口径注人教版/分段锚点/红线①表述逐项核对无误；trap双坑（全程通航/河流上山脊）显性化。通过。"
+        },
+        {
+          "stage": "final",
+          "by": "地理专家队（终审人·与初审人独立）",
+          "date": "2026-10-17",
+          "result": "pass",
+          "note": "终审人独立复核：YANGTZE.length“6300余千米”与课页“约6300千米”一致；C级剖面合规。终审通过，置final_passed。"
+        }
+      ]
+    },
+    {
+      "id": "dg09.3.3-e1",
+      "lesson": "dg09.3.3",
+      "kind": "field",
+      "summary": "黄河：长度/几字形/地上河/治理",
+      "content": {
+        "yellow": "5464千米（我国第二长河）；“几”字形；源巴颜喀拉山；注入渤海",
+        "sediment": "水少沙多：水量不大、含沙量世界之最（水量vs含沙量分清）",
+        "above_ground": "地上河（首现即定义，GEO-R50）：下游华北平原泥沙淤积→河床抬高→开封段地上悬河",
+        "control": "黄土高原治沙+小浪底治水+下游加固大堤",
+        "field_truth": "GeoBatch5.YELLOW_RIVER冻结常量；四阶段动画为widget硬编码示意",
+        "grade": "yellow-river解析为cn-silhouette（C级）"
+      },
+      "revision": 2,
+      "status": "final_passed",
+      "written_at": "2026-10-17",
+      "written_by": "地理专家队（批5两审）",
+      "review_history": [
+        {
+          "stage": "first",
+          "by": "地理专家队（初审人）",
+          "date": "2026-10-17",
+          "result": "fail_fixed",
+          "note": "初审：长度/源头/入海/水沙特征/地上河定义/治理三招逐项核对。FAIL：widget冻结常量length为“5400余千米”，与课页文案“5464千米”及课程表口径不一致，属规则一图错——已按文案真值修正widget常量为“5464千米”。trap（黄河水量大）显性化到位。"
+        },
+        {
+          "stage": "final",
+          "by": "地理专家队（终审人·与初审人独立）",
+          "date": "2026-10-17",
+          "result": "pass",
+          "note": "终审人独立复核：widget常量已为5464千米，与课页/课程表一致；say()输出“全长5464千米”实测一致。终审通过，置final_passed。"
+        }
+      ]
+    },
+    {
+      "id": "dg09.3.4-e1",
+      "lesson": "dg09.3.4",
+      "kind": "quiz",
+      "summary": "小结4道综合题判分+红线回填登记",
+      "content": {
+        "quiz": "地形（三级阶梯/昆仑—祁连—横断）/气候（武汉两步法）/河流（黄金水道/水少沙多）/红线①（河流在山谷，流向与凸向反）",
+        "redline_log": "红线① dg09.3.2回填、红线③ dg09.2.1回填，本章登记"
+      },
+      "revision": 1,
+      "status": "final_passed",
+      "written_at": "2026-10-17",
+      "written_by": "地理专家队（批5两审）",
+      "review_history": [
+        {
+          "stage": "first",
+          "by": "地理专家队（初审人）",
+          "date": "2026-10-17",
+          "result": "pass",
+          "note": "初审：4题答案逐题核对无误；红线回填登记与实际落点一致。通过。"
+        },
+        {
+          "stage": "final",
+          "by": "地理专家队（终审人·与初审人独立）",
+          "date": "2026-10-17",
+          "result": "pass",
+          "note": "终审人独立复核：题面口径与讲解页一致。终审通过，置final_passed。"
+        }
+      ]
+    }
+  ]
+}

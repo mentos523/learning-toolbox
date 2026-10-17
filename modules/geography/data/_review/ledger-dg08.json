@@ -1,0 +1,195 @@
+{
+  "schema": "geography-review-ledger/1.0",
+  "chapter": "dg08",
+  "entries": [
+    {
+      "id": "dg08.1.1-e1",
+      "lesson": "dg08.1.1",
+      "kind": "field",
+      "summary": "中国的位置三层定位+位置优越性",
+      "content": {
+        "position": "东半球/北半球（20°W–160°E划分，dg01.2.2回填）；约4°N–53°N；北回归线穿滇桂粤台；亚欧大陆东部/太平洋西岸，海陆兼备",
+        "field_truth": "widget内冻结TRUTH三段位置说明文字（与params.tabNotes同值）；UI可达：标签切换三图",
+        "grade": "position-switch解析为cn-territory（A级），角落E.2声明"
+      },
+      "revision": 2,
+      "status": "final_passed",
+      "written_at": "2026-10-17",
+      "written_by": "地理专家队（批5两审）",
+      "review_history": [
+        {
+          "stage": "first",
+          "by": "地理专家队（初审人）",
+          "date": "2026-10-17",
+          "result": "fail_fixed",
+          "note": "初审：三层位置口径逐项核对——20°W–160°E划分（GEO-R36）、北回归线四省区、trap显性化到位。FAIL：lead与point称“这是C级背景示意，不画国界线”，与实际渲染（A级，国界线/十段线按审定书绘制）不符，属规则二文错——已修正为A级描述。trap/首现定义/slogan均合规。"
+        },
+        {
+          "stage": "final",
+          "by": "地理专家队（终审人·与初审人独立）",
+          "date": "2026-10-17",
+          "result": "pass",
+          "note": "终审人独立复核：A级描述与渲染一致；位置口径无误；text零HTML复查通过。终审通过，置final_passed。"
+        }
+      ]
+    },
+    {
+      "id": "dg08.1.2-e1",
+      "lesson": "dg08.1.2",
+      "kind": "field",
+      "summary": "疆域：面积/四至/邻国/内海+GEO-R51物理深链",
+      "content": {
+        "territory": "陆地约960万km²（世界第三，人教版口径）；四至约53°N/4°N/135°E/73°E；南北跨约49°、东西跨约62°",
+        "neighbors": "陆上14国（朝俄蒙哈吉塔阿巴印尼不缅老越）+隔海相望6国（韩日菲马文莱印尼），现行教材口径，trap注明非永恒",
+        "sea": "渤海/琼州海峡为内海（首现即定义）；三沙市2012年设，辖西沙/中沙/南沙",
+        "xlink": "physicslink→物理p00.1.4《数量级与估算》：目标课存在，physicslinkify转../physics/index.html#p00.1.4/1（GEO-R51 A案）",
+        "field_truth": "GeoBatch5.FOUR_POINTS冻结常量（53°N以北/4°N附近/135°E以东/73°E以西，人教版口径）"
+      },
+      "revision": 2,
+      "status": "final_passed",
+      "written_at": "2026-10-17",
+      "written_by": "地理专家队（批5两审）",
+      "review_history": [
+        {
+          "stage": "first",
+          "by": "地理专家队（初审人）",
+          "date": "2026-10-17",
+          "result": "fail_fixed",
+          "note": "初审：面积/四至/邻国名录/内海定义逐项核对无误；GEO-R51落点实测存在。WARN：four-points页params误用键名lon承载纬度值（渲染器未读该params，无学生侧影响）——已改名为coord。trap（邻国数非永恒）显性化到位。"
+        },
+        {
+          "stage": "final",
+          "by": "地理专家队（终审人·与初审人独立）",
+          "date": "2026-10-17",
+          "result": "pass",
+          "note": "终审人独立复核：coord键名修正；physicslink目标课存在；邻国名录14+6无误。终审通过，置final_passed。"
+        }
+      ]
+    },
+    {
+      "id": "dg08.1.3-e1",
+      "lesson": "dg08.1.3",
+      "kind": "field",
+      "summary": "34省级行政区：构成/简称/行政中心",
+      "content": {
+        "units": "34=23省+5自治区+4直辖市+2特别行政区；台湾省为34之一；港澳为34之二（符号点+注记）",
+        "field_truth": "schematicPathsMeta.provinces冻结表（CN-PROV-v1）：34单元程序化校验通过；简称/行政中心逐省核对（陕/秦、甘/陇、川/蜀、云/滇、贵/黔双简称合人教版口径）",
+        "adjacency": "相邻关系表对称且与已知真实相邻关系逐省比对一致（34/34）"
+      },
+      "revision": 1,
+      "status": "final_passed",
+      "written_at": "2026-10-17",
+      "written_by": "地理专家队（批5两审）",
+      "review_history": [
+        {
+          "stage": "first",
+          "by": "地理专家队（初审人）",
+          "date": "2026-10-17",
+          "result": "pass",
+          "note": "初审：34单元数量/简称/行政中心/相邻关系逐项核对——内蒙古简称“内蒙古”正确；trap（省级≠23个）显性化；GEO-R49合规。通过。"
+        },
+        {
+          "stage": "final",
+          "by": "地理专家队（终审人·与初审人独立）",
+          "date": "2026-10-17",
+          "result": "pass",
+          "note": "终审人独立复核：34单元齐全；拼图页AX01“形状经简化，相邻关系不变”当页显性化。终审通过，置final_passed。"
+        }
+      ]
+    },
+    {
+      "id": "dg08.2.1-e1",
+      "lesson": "dg08.2.1",
+      "kind": "field",
+      "summary": "人口：七普数据/政策/胡焕庸线",
+      "content": {
+        "pop": "七普（2020年）约14.12亿（141178万人），注年份（GEO-R52）",
+        "policy": "一孩→二孩（2016全面实施）→三孩（2021），动态调整",
+        "hhy": "黑河—腾冲线（胡焕庸线，1935年提出）；线东南约占94%（1935年原统计，教材沿用量级表述）；东多西少；一果多因（自然+人文）",
+        "xlink": "无mathlink：dg04.1.1《翻倍的感觉》回填真实存在（GEO-R51：不挂虚假奠基）",
+        "field_truth": "GeoBatch5.HU_HUAN_YONG冻结常量（东南36%面积/94%人口）"
+      },
+      "revision": 1,
+      "status": "final_passed",
+      "written_at": "2026-10-17",
+      "written_by": "地理专家队（批5两审）",
+      "review_history": [
+        {
+          "stage": "first",
+          "by": "地理专家队（初审人）",
+          "date": "2026-10-17",
+          "result": "pass",
+          "note": "初审：人口数注年份、政策年份、胡焕庸线表述逐项核对无误；trap（政策不变/先看年份口径）显性化。通过。"
+        },
+        {
+          "stage": "final",
+          "by": "地理专家队（终审人·与初审人独立）",
+          "date": "2026-10-17",
+          "result": "pass",
+          "note": "终审人独立复核：94%注1935年原统计口径诚实；无mathlink决定正确。终审通过，置final_passed。"
+        }
+      ]
+    },
+    {
+      "id": "dg08.2.2-e1",
+      "lesson": "dg08.2.2",
+      "kind": "field",
+      "summary": "民族：56个/分布/政策/五大自治区",
+      "content": {
+        "ethnic": "56个民族；汉族约91.11%（七普，约12.86亿）；其余55个约1.25亿",
+        "dist": "大杂居、小聚居、交错杂居（首现即定义，GEO-R50）",
+        "regions": "5自治区：内蒙古/新疆/西藏/宁夏/广西；民族区域自治",
+        "field_truth": "GeoBatch5.FIVE_AUTONOMOUS冻结常量（名录/行政中心/主要民族与课页一致）"
+      },
+      "revision": 1,
+      "status": "final_passed",
+      "written_at": "2026-10-17",
+      "written_by": "地理专家队（批5两审）",
+      "review_history": [
+        {
+          "stage": "first",
+          "by": "地理专家队（初审人）",
+          "date": "2026-10-17",
+          "result": "pass",
+          "note": "初审：民族数/汉族占比/分布八字/五区名录逐项核对无误；trap（只在边疆）显性化。通过。"
+        },
+        {
+          "stage": "final",
+          "by": "地理专家队（终审人·与初审人独立）",
+          "date": "2026-10-17",
+          "result": "pass",
+          "note": "终审人独立复核：FIVE_AUTONOMOUS与课页params.regions一致；A级底图合规。终审通过，置final_passed。"
+        }
+      ]
+    },
+    {
+      "id": "dg08.2.3-e1",
+      "lesson": "dg08.2.3",
+      "kind": "quiz",
+      "summary": "小结4道综合题判分",
+      "content": {
+        "quiz": "位置/疆域/人口/民族行政区划各一题；答案与讲解页一致；易错五项回顾；方法沉淀（看数量先问年份/口径/比较对象）"
+      },
+      "revision": 1,
+      "status": "final_passed",
+      "written_at": "2026-10-17",
+      "written_by": "地理专家队（批5两审）",
+      "review_history": [
+        {
+          "stage": "first",
+          "by": "地理专家队（初审人）",
+          "date": "2026-10-17",
+          "result": "pass",
+          "note": "初审：4题答案（东半北半；960万km²世界第三/曾母暗沙；14.12亿2020/94%1935口径；34省级/91.11%）逐题核对无误。通过。"
+        },
+        {
+          "stage": "final",
+          "by": "地理专家队（终审人·与初审人独立）",
+          "date": "2026-10-17",
+          "result": "pass",
+          "note": "终审人独立复核：题面与讲解页口径一致，无矛盾。终审通过，置final_passed。"
+        }
+      ]
+    }
+  ]
+}

@@ -200,3 +200,41 @@ SVG 矢量文字随视口缩放（非 px 固定，不适用阶梯）。
 - 因果方向徽章"因果方向：自然→人文，不许颠倒（GEO-R40）"常驻；sequence 未排满禁止提交；
   match 配对前须先选"因"；提交后逐位置/逐对 ✓/✗ 反馈＋正解（双编码）。
 - 落点：dg07.1.1-p2（日本临海型布局 sequence）、dg07.2.3-p2（美国自然条件→农业带 match）。
+
+## 11. geo-map（批 5 · 中国疆域/政区/专题示意图，13 modes）
+
+| 参数 | 类型 | 必填 | 默认 | 说明 |
+|---|---|---|---|---|
+| `assetId` | string | — | 按 mode 取默认映射（见下） | `geo-schematic-paths.js` 中的资产 id：`cn-territory`(A)/`cn-admin`(A)/`cn-silhouette`(C)/`cn-terrain`(B)/`cn-precip`(B)/`cn-landuse`(B)/`cn-watertransfer`(B)/`cn-marine`(A) |
+| `mode` | string | ✅ | — | 13 种之一（下表）；未知 mode 渲染 trap 提示 |
+| `declare` | string | — | — | 课页附加声明，与 grade 冻结文案合并渲染为角落小字（不可关闭）；`admin-puzzle` 缺省「形状经简化，相邻关系不变」 |
+| `recordKey` | string | — | `geog_<mode>` | 记录键（运行时加 `ltb-geo-` 前缀） |
+
+- 审定口径（GEO-RULING-2026-10-17-08）：底图几何全部来自 `data/geo-schematic-paths.js`
+ （省界审定版本号 `CN-PROV-v1`，状态 `pending-expert-signoff`）；每个 mode 按资产 grade 定级渲染；
+  角落小字不可关闭——A/B 级冻结文案「示意｜非精确比例｜界线画法依据人教版地理教材插图，非标准地图」，
+  C 级冻结文案「示意｜非精确比例｜方向仅供参考」；严禁虚构审图号、严禁自称「标准地图」。
+- 真值＝`window.GeoBatch5.*`（场层：四至点/胡焕庸线/五大自治区/阶梯/山脉/降水站点/灾害路径/
+  长江/黄河/土地利用/南水北调/海域带，人教版八上口径）；`truth()` → `{assetId, grade, mapTitle, mode, declare, signoff, ruling}`（场层）；
+  `state()` → 各 mode 的 UI 可达值（见下表）——两类分开上报（GEO-RULING-2026-10-17-03）。
+- SVG 文本元素字号 ≥12.5px（≈V8 fs-078），豁免口径见 `~/workspace/geo-audit/batch5-maps/` 卷宗；
+  HTML 文字只用 V8 阶梯类；触摸热区 ≥44px；零外部请求，file:// 可跑。
+
+| mode | 落点 | 默认资产(grade) | 交互 | `state()` |
+|---|---|---|---|---|
+| `position-switch` | dg08.1.1 | cn-territory(A) | 半球/纬度/海陆三按钮切换叠加层 | `{mode, tab}` |
+| `four-points` | dg08.1.2 | cn-territory(A) | 点四至点标记，读经纬度+邻国方位+跨度 | `{mode, selected}` |
+| `admin-puzzle` | dg08.1.3 | cn-admin(A) | 8 轮三配对闯关（简称/行政中心/省名点选），答错不推进 | `{mode, round, score, total}` |
+| `huhuan-yong` | dg08.2.1 | cn-silhouette(C) | 点线两侧，读面积/人口占比对比 | `{mode}` |
+| `ethnic-match` | dg08.2.2 | cn-admin(A) | 5 大自治区对号入座（名+主要少数民族+行政中心点选） | `{mode, round, score, total}` |
+| `terrain-3d` | dg09.1.1 | cn-terrain(B) | 三级阶梯剖面描画动画＋山脉点读走向＋走向速查 | `{mode, played, mountain}` |
+| `precip` | dg09.2.2 | cn-precip(B) | 800/400/200mm 等降水量线＋6 站点点读 | `{mode, station}` |
+| `disaster-path` | dg09.2.3 | cn-silhouette(C) | 台风/寒潮路径切换＋流动虚线动画 | `{mode, disaster, played}` |
+| `river-profile` | dg09.3.2 | cn-silhouette(C) | 长江干流示意剖面，上/中/下游分段点读（宜昌/湖口分界） | `{mode, seg}` |
+| `yellow-river` | dg09.3.3 | cn-silhouette(C) | 地上河横剖面泥沙淤积动画＋上/中/下游点读 | `{mode, seg}` |
+| `landuse` | dg10.1.2 | cn-landuse(B) | 耕地/林地/草地/荒漠分区点读 | `{mode, type}` |
+| `water-transfer` | dg10.2.1 | cn-watertransfer(B) | 东/中/西三线点读（西线虚线=规划中）＋水流向动画 | `{mode, line}` |
+| `marine` | dg10.2.2 | cn-marine(A) | 领海/毗连区/专属经济区示意带＋大陆架点读（示意带不表达实际划界） | `{mode, zone}` |
+
+- 引入顺序：`data/geo-schematic-paths.js` → `js/geography.js` → `js/geo-batch5-widgets.js`
+ （在 `modules/geography/index.html` 中按此顺序加两行 `<script>`；批 5 装配时由内容/装配方加入）。
