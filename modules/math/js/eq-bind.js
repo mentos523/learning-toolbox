@@ -40,6 +40,33 @@
     return e;
   }
 
+  /* V8 字号阶梯（2026-10-17）：按舞台实测显示缩放，把 SVG 文本的 css 字号
+   * 换算到最近的设计阶梯。阶梯 px（root=16）：12.48 / 13.6 / 15.2 / 16 / 16.8 / 20 / 24，
+   * 容差 0.5。规则：渲染字号 <12.48 → 12.48；>24 → 24；其余取最近阶梯。
+   * 用于舞台显示宽度随页面而变的位点（如数轴 isNL 分支、ineq-shade-lab）；
+   * 舞台一致的位点直接用静态 css_new。测不到缩放时原值返回。 */
+  var V8_LADDER = [12.48, 13.6, 15.2, 16, 16.8, 20, 24];
+  function v8fs(svg, vbW, cssPx) {
+    /* vbW 可省略：自动取 svg viewBox 宽度 */
+    if (vbW == null && svg && svg.viewBox && svg.viewBox.baseVal)
+      vbW = svg.viewBox.baseVal.width;
+    var scale = 0;
+    try {
+      var r = svg.getBoundingClientRect();
+      if (r && r.width > 0 && vbW > 0) scale = r.width / vbW;
+    } catch (e) { scale = 0; }
+    if (!(scale > 0)) return cssPx;
+    var px = cssPx * scale, tgt;
+    if (px < 12.48) tgt = 12.48;
+    else if (px > 24) tgt = 24;
+    else {
+      tgt = V8_LADDER[0];
+      for (var i = 1; i < V8_LADDER.length; i++)
+        if (Math.abs(px - V8_LADDER[i]) < Math.abs(px - tgt)) tgt = V8_LADDER[i];
+    }
+    return tgt / scale;
+  }
+
   /* 安全表达式求值器（单变量；与 slider-lab 语义逐项一致） */
   function evalExpr(expr, varName, varValue) {
     return evalVars(expr, [[varName, varValue]]);
@@ -391,7 +418,7 @@
         gStatic.appendChild(tl);
         var tlab = svgEl("text", {
           x: fr.X(fr.xMax) - 4, y: fr.Y(tLineY) - 6,
-          "text-anchor": "end", "font-size": "12.5",
+          "text-anchor": "end", "font-size": "17.58",
           fill: "var(--geo-corr-a)"
         });
         tlab.textContent = (kind === "zero") ? "y = 0" : ("y = " + fmt(target));
@@ -403,13 +430,13 @@
         var cx = fr.X(fx), cy = fr.Y(0);
         var yy = Math.min(Math.max(cy, 20), fr.H - 20);
         var mk = svgEl("text", {
-          x: cx, y: yy, "text-anchor": "middle", "font-size": "15.2",
+          x: cx, y: yy, "text-anchor": "middle", "font-size": "17.58",
           "font-weight": "bold", fill: "var(--geo-target)"
         });
         mk.textContent = "✕";
         gStatic.appendChild(mk);
         var cap = svgEl("text", {
-          x: cx, y: yy + 15, "text-anchor": "middle", "font-size": "12.5",
+          x: cx, y: yy + 15, "text-anchor": "middle", "font-size": "17.58",
           fill: "var(--geo-target)"
         });
         cap.textContent = "分母为零，无意义";
@@ -420,13 +447,13 @@
         if (fx < fr.xMin || fx > fr.xMax) return;
         var mkx = svgEl("text", {
           x: fr.X(fx), y: fr.Y(0) - 10, "text-anchor": "middle",
-          "font-size": "15.2", "font-weight": "bold", fill: "var(--geo-target)"
+          "font-size": "17.58", "font-weight": "bold", fill: "var(--geo-target)"
         });
         mkx.textContent = "✕";
         gStatic.appendChild(mkx);
         var cl = svgEl("text", {
           x: fr.X(fx), y: fr.Y(0) + 14, "text-anchor": "middle",
-          "font-size": "12.5", fill: "var(--geo-target)"
+          "font-size": "17.58", fill: "var(--geo-target)"
         });
         cl.textContent = "增根";
         gStatic.appendChild(cl);
@@ -438,7 +465,7 @@
         if (hv >= fr.xMin && hv <= fr.xMax) drawStar(gStatic, fr.X(hv), fr.Y(kv), 9, "var(--geo-highlight)");
         var vl = svgEl("text", {
           x: fr.X(hv), y: fr.Y(kv) - 14, "text-anchor": "middle",
-          "font-size": "12.5", fill: "var(--geo-text)"
+          "font-size": "17.58", fill: "var(--geo-text)"
         });
         vl.textContent = "顶点 (" + fmt(hv) + ", " + fmt(kv) + ")";
         gStatic.appendChild(vl);
@@ -455,7 +482,7 @@
         gStatic.appendChild(dm);
         var dl = svgEl("text", {
           x: fr.X(solX), y: fr.Y(0) - 32, "text-anchor": "middle",
-          "font-size": "12.5", fill: "var(--geo-corr-a)"
+          "font-size": v8fs(svg, VW, 12.5), fill: "var(--geo-corr-a)"
         });
         dl.textContent = "解";
         gStatic.appendChild(dl);
@@ -592,7 +619,7 @@
     /* 注：探针旁标注"拖动解点 = 换一个 x 试试"（§2.1 诚实语义） */
     if (!isNL) {
       var honest = svgEl("text", {
-        x: 8, y: 14, "font-size": "12.5", fill: "var(--geo-aux)"
+        x: 8, y: 14, "font-size": "17.58", fill: "var(--geo-aux)"
       });
       honest.textContent = "拖动解点 = 换一个 x 试试";
       svg.appendChild(honest);
@@ -642,7 +669,7 @@
         var tx = document.createElementNS(NS, "text");
         tx.setAttribute("x", fr.X(t)); tx.setAttribute("y", y0 + 20);
         tx.setAttribute("text-anchor", "middle");
-        tx.setAttribute("font-size", "12.5");
+        tx.setAttribute("font-size", v8fs(g.ownerSVGElement, null, 12.5));
         tx.setAttribute("fill", "var(--geo-text)");
         tx.textContent = fmt(t);
         g.appendChild(tx);
@@ -955,7 +982,7 @@
         /* 直线标签 */
         var lab = svgEl("text", {
           x: fr.X(fr.xMax) - 6, y: 18 + idx * 18,
-          "text-anchor": "end", "font-size": "13.6", fill: col, "font-weight": "bold"
+          "text-anchor": "end", "font-size": "10.86", fill: col, "font-weight": "bold"
         });
         lab.textContent = idx === 0 ? "直线①" : "直线②";
         gLines.appendChild(lab);
@@ -977,7 +1004,7 @@
         attachSysDrag(pad, false, -1);
         var sl = svgEl("text", {
           x: fr.X(sol.x) + 12, y: fr.Y(sol.y) - 10,
-          "font-size": "12.5", fill: "var(--geo-target)",
+          "font-size": "10.86", fill: "var(--geo-target)",
           style: "cursor:grab"
         });
         sl.textContent = "交点（拖我）";
@@ -1300,7 +1327,7 @@
       var yA = yTop + 40;  /* 轴线 y（viewBox 坐标） */
       /* 标签 */
       var lb = svgEl("text", {
-        x: 4, y: yTop + 24, "font-size": "12.5", fill: "var(--geo-text)"
+        x: 4, y: yTop + 24, "font-size": v8fs(svg, VW, 12.5), fill: "var(--geo-text)"
       });
       lb.textContent = rowLabel.length > 14 ? rowLabel.slice(0, 14) + "…" : rowLabel;
       g.appendChild(lb);
@@ -1318,7 +1345,7 @@
         }));
         var tx = svgEl("text", {
           x: fr.X(t), y: yA + 17, "text-anchor": "middle",
-          "font-size": "12.5", fill: "var(--geo-text)"
+          "font-size": v8fs(svg, VW, 12.5), fill: "var(--geo-text)"
         });
         tx.textContent = fmt(t);
         g.appendChild(tx);
@@ -1712,7 +1739,7 @@
         svg.appendChild(dotEl);
         var cl = svgEl("text", {
           x: frP.X(cx) + 12, y: frP.Y(cy) - 8,
-          "font-size": "12.5", fill: "var(--geo-text)"
+          "font-size": "17.58", fill: "var(--geo-text)"
         });
         cl.textContent = "(" + fmt(cx) + ", " + fmt(cy) + ")";
         svg.appendChild(cl);
