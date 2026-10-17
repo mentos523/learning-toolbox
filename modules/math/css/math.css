@@ -188,6 +188,13 @@ body[data-theme="dark"] #mathml-warn { background: #4a3a1a; color: #fde68a; }
 .m-hints { flex: none; max-height: 6.5em; overflow-y: auto; -webkit-overflow-scrolling: touch; font-size: 0.95rem; color: var(--m-ink-soft); }
 .m-hints p { margin: 4px 0; }
 .m-hints .point { color: var(--m-ink); font-weight: bold; }
+/* ---------- 跨科回链（2026-10-17 微批）：地理 dg04.1.1 指数预告回填 ----------
+ * page.geolink = { href, label }，学生端可见可点击的"认旧友"卡片。 */
+.m-geolink { display: block; margin: 8px 0 2px; padding: 8px 10px;
+  border: 1px solid var(--m-line); border-left: 4px solid var(--m-accent-strong, #2b7cd3); border-radius: 6px;
+  color: inherit; text-decoration: none; font-size: 0.92rem; background: var(--m-panel); }
+.m-geolink:hover { text-decoration: underline; }
+.m-geolink .m-geolink-tag { font-weight: bold; margin-right: 6px; }
 /* ---------- 习题页：题目区可内滚动 + 核对答案折叠（蓝队 2026-10-10 缺陷A修复）
  * 习题页有 6–7 道题，旧的 max-height:6.5em/overflow:hidden 会截断；
  * exercise 类改为区内滚动（页面本身仍一屏无滚动），答案放 <details> 折叠。 */

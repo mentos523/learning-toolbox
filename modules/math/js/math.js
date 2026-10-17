@@ -276,6 +276,20 @@
     var hintsBox = $("p-hints");
     hintsBox.className = "m-hints" + (isExercise ? " exercise" : "") + (isExplain ? " explain" : "");
     hintsBox.innerHTML = hh;
+    /* （2026-10-17 跨科微批）跨科回链：page.geolink = { href, label }。
+     * 地理 dg04.1.1 指数预告回填首例：代数 ch08 8.1/8.2 落"认旧友"卡片，
+     * 学生可见可点击。href 用相对路径跨模块跳转（地理 hash 格式 #课号/页码）。 */
+    if (page.geolink && page.geolink.href) {
+      var gl = document.createElement("a");
+      gl.className = "m-geolink";
+      gl.href = page.geolink.href;
+      var tag = document.createElement("span");
+      tag.className = "m-geolink-tag";
+      tag.textContent = "🔗 认旧友";
+      gl.appendChild(tag);
+      gl.appendChild(document.createTextNode(page.geolink.label || "相关课程"));
+      hintsBox.appendChild(gl);
+    }
     if (isExercise) {
       (page.examples || []).forEach(function (ex) {
         if (!ex || !ex.text) return;

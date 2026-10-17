@@ -51,6 +51,7 @@ window.MATH_CH["ch08"] = {
             {
               id: "ch08-u1-l1-p1",
               title: "幂的倒退：2⁻³=1/8",
+              geolink: { href: "../geography/index.html#dg04.1.1/2", label: "地理 dg04.1.1《翻倍的感觉》——人口增长的指数直觉，学完指数回来认一遍" },
               concept: "负整数指数幂是倒数",
               formulas: [
                 {
@@ -329,6 +330,7 @@ window.MATH_CH["ch08"] = {
             {
               id: "ch08-u2-l1-p1",
               title: "指数函数：y=aˣ（a>0 且 a≠1）",
+              geolink: { href: "../geography/index.html#dg04.1.1/2", label: "地理 dg04.1.1《翻倍的感觉》——人口增长的指数直觉，现在回去认一遍" },
               concept: "指数函数的定义（底数条件）",
               formulas: [
                 {

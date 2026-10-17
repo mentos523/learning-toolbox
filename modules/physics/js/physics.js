@@ -619,14 +619,14 @@
 
   /* ---------------- 讲解页块渲染 ---------------- */
   function renderBlock(b, formulas) {
-    if (b.type === "lead") return el("p", "phy-lead", esc(b.text));
+    if (b.type === "lead") { var ld = el("p", "phy-lead", b.html || esc(b.text)); hydrateFormulas(ld, formulas); return ld; }
     if (b.type === "text") {
       var t = el("p", "phy-text", b.html || "");
       hydrateFormulas(t, formulas);
       return t;
     }
     if (b.type === "formula-id") return renderFormulaId(b);
-    if (b.type === "trap") return el("div", "phy-trap", esc(b.text));
+    if (b.type === "trap") { var tp = el("div", "phy-trap", b.html || esc(b.text)); hydrateFormulas(tp, formulas); return tp; }
     if (b.type === "oldfriend") {
       var o = el("div", "phy-oldfriend", b.text || "");
       hydrateFormulas(o, formulas);

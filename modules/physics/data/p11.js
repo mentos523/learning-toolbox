@@ -277,7 +277,7 @@ window.PHY_CH["p11"] = {
               kind: "explain",
               title: "三个公式，先定正方向",
               blocks: [
-                { type: "lead", text: "匀变速直线运动：加速度不变的直线运动。三个公式，一个比一个“省时间”：<span class=\"phy-f\" data-f=\"vv\"></span>；<span class=\"phy-f\" data-f=\"xx\"></span>；<span class=\"phy-f\" data-f=\"v2\"></span>（消去 t，刹车专用）。" },
+                { type: "lead", html: "匀变速直线运动：加速度不变的直线运动。三个公式，一个比一个“省时间”：<span class=\"phy-f\" data-f=\"vv\"></span>；<span class=\"phy-f\" data-f=\"xx\"></span>；<span class=\"phy-f\" data-f=\"v2\"></span>（消去 t，刹车专用）。" },
                 { type: "text", html: "三个全是矢量式！用法：先定正方向（一般取初速度方向为正），与正方向相反的量取负——a 取负，x 取负，都要先有“正方向”这个约定。" },
                 { type: "trap", text: "⚠️ 别搞混：代入公式不看正负——禁令。先定正方向，反向取负。不先定方向就代数，等于闭眼开车（审计清单第 2 条）。" },
                 { type: "mathlink", text: "数学呼应：代数 ch01/ch04 方程（奠基）——公式即方程组，已知三求二，列方程解。" },
@@ -290,7 +290,7 @@ window.PHY_CH["p11"] = {
               kind: "explain",
               title: "刹车距离估算",
               blocks: [
-                { type: "lead", text: "汽车 20m/s（72km/h）刹车，加速度 −5m/s²，多远停下？用 <span class=\"phy-f\" data-f=\"v2\"></span>：0 − 20² = 2×(−5)×x，x = 40m。" },
+                { type: "lead", html: "汽车 20m/s（72km/h）刹车，加速度 −5m/s²，多远停下？用 <span class=\"phy-f\" data-f=\"v2\"></span>：0 − 20² = 2×(−5)×x，x = 40m。" },
                 { type: "text", html: "估算锚点：40m ≈ 10 辆车的长度——这就是“限速”的物理依据：速度翻倍，刹车距离翻 4 倍（x ∝ v²）。" },
                 { type: "text", html: "选公式技巧：题目没给 t、也不求 t，用 v²−v₀²=2ax；给了 t，用 v=v₀+at 或 x=v₀t+½at²——“缺谁消谁”。" },
                 { type: "slogan", text: "缺谁消谁，刹车用 v²。" }

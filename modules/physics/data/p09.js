@@ -68,7 +68,7 @@ window.PHY_CH["p09"] = {
                     translation: "电功 = 电压 × 电流 × 时间"
                   },
                   conditions: ["普遍成立：电功的定义式"],
-                  counterexample: "它不等于“产生的热”——电动机里 <span class=\"phy-f\" data-f=\"w\"></span> 是总耗电，发热只是其中一部分",
+                  counterexample: "它不等于“产生的热”——电动机里电功 W 是总耗电，发热只是其中一部分",
                   dimension: "J = V·A·s ✓",
                   units: { si: "J（焦耳）", common: "kW·h（度）", note: "1 kW·h = 3.6×10⁶ J" }
                 },

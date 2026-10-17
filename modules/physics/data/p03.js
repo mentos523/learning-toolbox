@@ -30,7 +30,7 @@ blocks: [
 { type: "lead", text: "温度计伸进热水，示数慢慢爬——它在等“自己”跟水一样热。"},
 { type: "text", html: "<strong>温度</strong>（标量，<strong>℃</strong>）：表示物体冷热程度。摄氏温标：标准大气压下冰水混合物 0℃、沸水 100℃，中间 100 等份。日常用 ℃，热力学计算用开尔文 K（T=t+273.15），p17.3.1 细讲。"},
 { type: "text", html: "液体温度计靠<strong>热胀冷缩</strong>工作。使用三步：① 看<strong>量程</strong>（别超）；② 认<strong>分度值</strong>；③ <strong>视线跟液柱上表面相平</strong>（俯视偏大、仰视偏小），不碰容器底和壁。"},
-{ type: "trap", text: "⚠️ 别搞混：“测的是物体的冷热”——错！测的是温度计<strong>自己</strong>的温度（热平衡：一样热，读数才准）。"},
+{ type: "trap", html: "⚠️ 别搞混：“测的是物体的冷热”——错！测的是温度计<strong>自己</strong>的温度（热平衡：一样热，读数才准）。"},
 { type: "mathlink", text: "数学呼应：代数 ch00 负数（奠基）——零下读数先认“−”号。"},
 { type: "slogan", text: "量程分度视线平，测的是自己。"}
 ],

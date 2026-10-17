@@ -513,7 +513,7 @@ window.PHY_CH["p13"] = {
               kind: "explain",
               title: "越高越慢",
               blocks: [
-                { type: "lead", text: "卫星：引力提供向心力，GMm/r²=mv²/r，解出 <span class=\"phy-f\" data-f=\"vsat\"></span>。" },
+                { type: "lead", html: "卫星：引力提供向心力，GMm/r²=mv²/r，解出 <span class=\"phy-f\" data-f=\"vsat\"></span>。" },
                 { type: "text", html: "越高越慢：r 越大，v 越小——高轨卫星跑得慢，低轨跑得快。同步卫星：周期 24h，相对地面静止——但它仍在绕地心转，不是真“静止”。" },
                 { type: "trap", text: "⚠️ 别搞混：卫星越高飞得越快——错！v=√(GM/r)，越高越慢。同步卫星“静止”只是相对地面。" },
                 { type: "slogan", text: "越高越慢，同步仍在转。" }
