@@ -70,6 +70,8 @@ SVG 矢量文字随视口缩放（非 px 固定，不适用阶梯）。
 |---|---|---|---|---|
 | `stations` | array | — | 气候站点表 12 站 | `{name, temp[12], precip[12], year}`（`year` 必填，GEO-R16） |
 | `mode` | string | — | `"guided"` | `"guided"`（第②步完成第①步前锁定）/`"free"`（可跳步，顺序反提示） |
+| `stepOrder` | string | — | `"temp-first"` | 判读步序（`"temp-first"`：先温后水，GEO-R13） |
+| `axisNote` | string | — | — | 坐标轴/图例诚实注记（GEO-R16/17 常驻文案） |
 | `compareMode` | boolean | — | `false` | 三地对比（纵向排布，自动判读徽章） |
 | `climateLib` | string | — | `"内置"` | 类型库引用名（只传引用，不内嵌规则） |
 | `recordKey` | string | — | `geog_climate-chart_<页id>` | |
@@ -156,3 +158,45 @@ SVG 矢量文字随视口缩放（非 px 固定，不适用阶梯）。
 - 落点：dg06.2.2-p2（西—中—东三段式示意剖面练习，真交互）。
 - 注：批 2 profile-draw 的真值为 dg01.3.3 教学示意高程场，沿西→东线剖面呈随机起伏（实测如 [0,1,11,-169,74,21,15]），与"西高—中低—东中"趋势不符——
   用其教美洲三段式会歪曲所教规律（GEO-R26），故本渲染器另立示意真值，不复用 profile-draw。
+
+## 9. factor-scale（批 4 · 单因子滑块 → 分档读数）
+
+| 参数 | 类型 | 必填 | 默认 | 说明 |
+|---|---|---|---|---|
+| `title` | string | — | `"单因子实验"` | 组件标题 |
+| `intro` | string | — | — | 操作引导 |
+| `glyph` | string | — | `"none"` | 示意配图：`"monsoon"`（西南季风箭头，粗细随值）/`"latitude"`（纵向温度梯度条＋纬度标记）/`"forest"`（树冠随破坏消退）/`"none"`（无配图） |
+| `factor` | object | ✅ | — | `{name, min, max, init, unit, lowLabel, highLabel}`（滑块定义；`init` 越界自动钳制） |
+| `bands` | array | ✅ | — | `[{max, label, outcome, note?}]`（按 `max` 升序；值落首个 `v<=max` 档） |
+| `modelNote` | string | — | — | 模型诚实声明（GEO-AX01 必填项：只看一个因子＋多因边界） |
+| `recordKey` | string | — | `geog_factor-scale` | 记录键（运行时加 `ltb-geo-` 前缀） |
+
+- 真值＝`window.GeoBatch4.bandOf(params, value)` 纯函数（场层，任意值可算，含非滑块步进值）；
+  `truth()` → `{bands, bandOf}`；`state()` → `{value, bandIndex, bandLabel}`（UI 可达）——
+  两类分开上报（GEO-RULING-2026-10-17-03）。
+- 徽章"示意｜非精确比例｜只看一个因子"常驻（GEO-R24）；glyph 为 SVG 矢量示意（随视口缩放）；
+  滑块 `input` 事件实时重算＋落盘（`ltb-geo-`＋recordKey）。
+- 落点：dg07.1.3-p2（西南季风强度→旱涝）、dg07.1.4-p2（纬度→寒冷→人口）、dg07.2.4-p2（雨林破坏程度→生态后果）。
+
+## 10. cause-chain（批 4 · 因果链拼装）
+
+| 参数 | 类型 | 必填 | 默认 | 说明 |
+|---|---|---|---|---|
+| `title` | string | — | `"因果链拼装"` | 组件标题 |
+| `intro` | string | — | — | 操作引导 |
+| `mode` | string | — | `"sequence"` | `"sequence"`（点卡片排序）/`"match"`（左因右果配对） |
+| `cards` | array | sequence 必填 | — | `{id, text}`（展示顺序由作者打乱，`answer` 给正确顺序） |
+| `answer` | array | sequence 必填 | — | 正确卡片 id 序列 |
+| `causes` / `effects` | array | match 必填 | — | `{id, text}`（左栏因／右栏果） |
+| `causeLabel` / `effectLabel` | string | — | `"因"`/`"果"` | match 模式左右栏标题 |
+| `pairs` | array | match 必填 | — | `[[causeId, effectId]]`（正确配对，顺序无关） |
+| `chainNote` | string | — | — | 因果检查口诀（如 G13"先问这个产业最怕缺什么"） |
+| `recordKey` | string | — | `geog_cause-chain` | 记录键（运行时加 `ltb-geo-` 前缀） |
+
+- 真值＝`window.GeoBatch4.chainScore(params, picked)` 纯函数：sequence 逐位置比对、
+  match 逐对集合比对（顺序无关）；`truth()` → `{mode, answer}`/`{mode, pairs}`（场层）；
+  `state()` → `{mode, chain/pairs, submitted, score, total}`（UI 可达）——
+  两类分开上报（GEO-RULING-2026-10-17-03）。
+- 因果方向徽章"因果方向：自然→人文，不许颠倒（GEO-R40）"常驻；sequence 未排满禁止提交；
+  match 配对前须先选"因"；提交后逐位置/逐对 ✓/✗ 反馈＋正解（双编码）。
+- 落点：dg07.1.1-p2（日本临海型布局 sequence）、dg07.2.3-p2（美国自然条件→农业带 match）。
