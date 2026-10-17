@@ -936,6 +936,14 @@ body[data-theme="dark"] #mathml-warn { background: #4a3a1a; color: #fde68a; }
 @media (max-width: 620px) {
   .chm-app { padding-left: 10px; padding-right: 10px; }
   .chm-eq-line { font-size: 0.98rem; }
+  /* 窄屏修复批 N2（2026-10-17）：播放条允许换行，scrub 滑杆移到最后独占一行。
+   * 根因：input[type=range] 的 UA min-content 约 129px，在 flex 单行下
+   * 把 .chm-playbar 撑到 441px（按钮 flex:none 不收缩），右缘"0.5× 慢放"
+   * 被裁。order:99 把 scrub 排到视觉末尾：第一行 4 按钮 + 0.5×（322px
+   * ≤ 368px 可放下），第二行 scrub 全宽更易拖拽。仅 ≤620px 生效，
+   * 桌面端（≥768px）布局与 DOM 顺序都不变。 */
+  #chemistry-app .chm-playbar { flex-wrap: wrap; row-gap: 6px; }
+  #chemistry-app .chm-playbar .chm-scrub { order: 99; flex: 1 1 100%; min-width: 0; }
 }
 
 /* ============================================================

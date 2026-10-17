@@ -1629,7 +1629,7 @@ function widgetMoleculeMotion(p) {
       repaint: function () {
         if (!sc.inited) return;
         var s = motion.state(), bounds = motion.bounds;
-        var scale = vw / (bounds.xMax - bounds.xMin);
+        var scale = (sc.vw || vw) / (bounds.xMax - bounds.xMin);
         for (var i = 0; i < s.particles.length; i++) {
           var pt = s.particles[i], nd = sc.id2node[pt.id];
           if (!nd) continue;
@@ -1665,10 +1665,18 @@ function widgetMoleculeMotion(p) {
     sc.inited = true;
     var motion = sc.motion, mopt = sc.mopt, c = sc.cfg;
     var bounds = motion.bounds;
+    /* 窄屏修复批 N2（2026-10-17）：舞台按容器可用宽度等比收缩。
+     * 根因：Eng.KonvaView 把内联 width 设为设计宽（默认 620px），390px
+     * 视口下把整列撑出横向裁剪。initView 在 box 入树后才执行，此时
+     * box.clientWidth 即布局可用宽；桌面端（可用宽 ≥ 设计宽）Math.min
+     * 保持设计尺寸，逻辑映射/粒子半径/图例位置全部随 vw2 等比，行为不变。 */
+    var availW = (box && box.clientWidth) || 0;
+    sc.vw = availW > 0 ? Math.min(vw, availW) : vw;
+    sc.vh = Math.round(sc.vw * vh / vw);
     var view = new Eng.KonvaView({
       containerId: sc.cid,
       bounds: { xMin: bounds.xMin, xMax: bounds.xMax, yMin: bounds.yMin, yMax: bounds.yMax },
-      viewportWPx: vw, viewportHPx: vh, theme: theme,
+      viewportWPx: sc.vw, viewportHPx: sc.vh, theme: theme,
       assumptions: mopt.assumptions, approximations: mopt.approximations,
       errorEstimate: mopt.errorEstimate
     });
@@ -1681,7 +1689,7 @@ function widgetMoleculeMotion(p) {
       kindStyle[kd.kind] = { color: kd.color || '#0072B2', r: kd.r || 1.7 };
     });
     var layer = view.layer;
-    var scale = vw / (bounds.xMax - bounds.xMin);
+    var scale = sc.vw / (bounds.xMax - bounds.xMin);
     motion.state().particles.forEach(function (pt) {
       var ks = kindStyle[pt.type] || { color: '#0072B2', r: 1.7 };
       var q = view.logicalToPixel(pt.pos.x, pt.pos.y);
@@ -1699,7 +1707,7 @@ function widgetMoleculeMotion(p) {
     });
     if (p.legend) {
       layer.add(Eng.konvaText({
-        x: 8, y: vh - 24, fontSize: 13, fill: view.palette.subtext,
+        x: 8, y: sc.vh - 24, fontSize: 13, fill: view.palette.subtext,
         text: p.legend, listening: false
       }));
     }
