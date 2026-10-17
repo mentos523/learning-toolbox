@@ -129,7 +129,7 @@
       g.appendChild(ln); parts.ln = ln;
       if (sh.label) {
         var lt = svgEl("text", {
-          "text-anchor": "middle", "font-size": "13.6",
+          "text-anchor": "middle", "font-size": "12.95",
           "font-weight": "bold", fill: colOf(sh.color)
         });
         lt.textContent = sh.label; g.appendChild(lt); parts.label = lt;
@@ -168,7 +168,7 @@
       });
       g.appendChild(dot); parts.dot = dot;
       var pl = svgEl("text", {
-        "text-anchor": "start", "font-size": "13.6",
+        "text-anchor": "start", "font-size": "12.95",
         "font-weight": "bold", fill: colOf(sh.color || "line")
       });
       pl.textContent = sh.label || "";
