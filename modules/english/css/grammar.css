@@ -445,6 +445,19 @@ body[data-theme="dark"] #grammar-app {
   background: var(--eng-bg);
   box-shadow: 0 -6px 14px rgba(0, 0, 0, 0.08);
 }
+/* M1 根因修复（2026-10-17 白队窄屏扫描）：窄屏下猜测条选项按钮换行后
+ * 卡片变高，sticky bottom:0 会把它整体上移、压住上方例句
+ * （如 gr00.1.1-p1 第三条例句下半部被遮；全量 111 个猜测页中 101 个中招）。
+ * 窄屏改为文档流：卡片紧随例句之后自然排布，不再浮动压住正文。
+ * Y1 先猜后验的教学功能、选项、记录逻辑一字不动；
+ * 桌面端（>480px）保持贴底不变。
+ * 注意：本条必须位于上方 sticky 规则之后（同选择器、后者胜）。 */
+@media (max-width: 480px) {
+  .g-zone > .g-guess:last-child {
+    position: static;
+    box-shadow: none;
+  }
+}
 
 /* ---------- 朗读（Y2） ---------- */
 .g-speak {
