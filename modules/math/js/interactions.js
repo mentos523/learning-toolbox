@@ -860,10 +860,25 @@
     wrap.appendChild(foot);
     container.appendChild(wrap);
 
-    /* V8 字号阶梯：轴标签/坐标标签按舞台实测缩放换算（plot-points 舞台宽度随页面而变） */
-    (function () {
-      var fs = v8fs(svg, null, 13);
-      [xLab, yLab, coordLab].forEach(function (t) { t.setAttribute("font-size", fs); });
+    /* V8 字号阶梯：轴标签/坐标标签按舞台实测缩放换算（plot-points 舞台宽度随页面/
+     * 内嵌/加载时序而变；用 ResizeObserver 在布局稳定后校准，字体变化不触发布局故无循环） */
+    (function v8fixPlot() {
+      var texts = [xLab, yLab, coordLab];
+      function apply() {
+        var fs = v8fs(svg, null, 13);
+        var cur = parseFloat(texts[0].getAttribute("font-size")) || 0;
+        if (!(cur > 0) || Math.abs(fs - cur) > 0.01)
+          texts.forEach(function (t) { t.setAttribute("font-size", fs); });
+      }
+      apply();
+      try {
+        if (window.ResizeObserver) {
+          var ro = new window.ResizeObserver(function () { apply(); });
+          ro.observe(svg);
+        } else if (window.requestAnimationFrame) {
+          window.requestAnimationFrame(apply);
+        }
+      } catch (e) {}
     })();
 
     var timer = null;
