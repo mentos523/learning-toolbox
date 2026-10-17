@@ -852,7 +852,7 @@
       /* 标注 */
       var t1 = svgEl("text", {
         x: fr.X(L.ox + L.side / 2), y: fr.Y(L.oy) + 16,
-        "text-anchor": "middle", "font-size": "12.5", fill: "var(--geo-text)"
+        "text-anchor": "middle", "font-size": "13.28", fill: "var(--geo-text)"
       });
       t1.textContent = "边长 x+" + half;
       gBase.appendChild(t1);
