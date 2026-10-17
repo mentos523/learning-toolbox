@@ -1313,13 +1313,13 @@
     }
     svg.appendChild(svgEl("polyline", { points: pts.join(" "), fill: "none",
       stroke: "var(--m-accent-strong)", "stroke-width": 2.5 }));
-    // a/b 刻度
+    // a/b 刻度（V8 字号阶梯：按舞台实测缩放换算 css 13px）
     var labA = svgEl("text", { x: X(a), y: H - 10, "text-anchor": "middle",
-      fill: "var(--m-ink-soft)", "font-size": 13 });
+      fill: "var(--m-ink-soft)", "font-size": v8fs(svg, null, 13) });
     labA.textContent = fmtS(a);
     svg.appendChild(labA);
     var labB = svgEl("text", { x: X(b), y: H - 10, "text-anchor": "middle",
-      fill: "var(--m-ink-soft)", "font-size": 13 });
+      fill: "var(--m-ink-soft)", "font-size": v8fs(svg, null, 13) });
     labB.textContent = fmtS(b);
     svg.appendChild(labB);
     wrap.appendChild(svg);
@@ -1486,7 +1486,9 @@
     handle.style.touchAction = "none";
     svg.appendChild(handle);
     var handleHint = svgEl("text", {
-      x: 0, y: 0, "text-anchor": "middle", "class": "sa-handle-hint"
+      x: 0, y: 0, "text-anchor": "middle", "class": "sa-handle-hint",
+      /* V8 字号阶梯：内联字号覆盖 CSS 类的静态 14px，按舞台实测缩放换算 */
+      "font-size": v8fs(svg, null, 14)
     });
     handleHint.textContent = "⇲";
     svg.appendChild(handleHint);
