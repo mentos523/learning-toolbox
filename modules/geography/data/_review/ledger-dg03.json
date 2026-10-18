@@ -257,15 +257,21 @@
      "note": "终审人独立重算三站min/max/sum与初审一致；核验dg03.js中G4 params stations数组与冻结表数值完全一致；伦敦4落点逐项定位确认（params.exceptionNotes.london、p2 trap、p3整页、p4考题explain）。终审通过，置 final_passed。",
      "result": "pass",
      "stage": "final"
-    },
-    {
+    }
+   ],
+   "expert_cosign": {
+    "cosigned_by": "地理专家队",
+    "cosigned_at": "2026-10-19",
+    "scope": "会签补正：review_history 中非专家署名的一笔（playbook ⑭）",
+    "preserved_record": {
      "by": "协调者（批2修复轮后）",
      "date": "2026-10-17",
      "note": "修正落点①：exceptionNotes.london 为渲染器不读的死参数，已从 dg03.js 删除；真实机制为内联站点 needsRuling/climateTypeId。初审/终审的判读结论与数字不受影响。",
      "result": "pass",
      "stage": "amend"
-    }
-   ],
+    },
+    "note": "补正：专家队复核实物证据后会签。原记录（stage=amend，by=协调者（批2修复轮后））完整保留于 preserved_record，未改动。实物复核：modules/geography/data/dg03.js 全文件 grep「exceptionNotes.london」=0 命中（死参数确已删除）；「needsRuling」「climateTypeId」各 1 处在场——真实机制确为内联站点字段（needsRuling/climateTypeId），与原记录一致；初审/终审判读结论与数字不受影响的判断如实。会签通过。"
+   },
    "revision": 2,
    "status": "final_passed",
    "summary": "G4两步判读链：武汉/北京/伦敦（伦敦走裁决-04例外路径；4学生可见落点）",

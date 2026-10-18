@@ -149,15 +149,21 @@
           "date": "2026-10-17",
           "result": "pass",
           "note": "终审通过，置 final_passed。"
-        },
-        {
+        }
+      ],
+      "expert_cosign": {
+        "cosigned_by": "地理专家队",
+        "cosigned_at": "2026-10-19",
+        "scope": "会签补正：review_history 中非专家署名的一笔（playbook ⑭）",
+        "preserved_record": {
           "stage": "revision",
           "by": "地理生产队（批1·裁决落实）",
           "date": "2026-10-17",
           "result": "pass",
           "note": "落实两审附注的文字精度修订：summary 明确标注 p2 预告方向/图例、比例尺，p3 预告等高线/等值线；未改动课页数据与承诺原文（content.promise 保留），状态维持 final_passed。"
-        }
-      ],
+        },
+        "note": "补正：专家队复核实物证据后会签。原记录（stage=revision，by=地理生产队（批1·裁决落实））完整保留于 preserved_record，未改动。实物复核：台账 summary 修订后为「预告登记（硬门禁⑩）：地图三要素与等值线预告链（p2 预告方向·图例/比例尺，p3 预告等高线/等值线）」——对照课页实物 dg00.1.3（modules/geography/data/dg00.js）：p2（id=dg00.1.3-p2）blocks 含「方向…整套定向方法，见 dg01.3.2」「比例尺…三种表示与换算，见 dg01.3.1」「图例…常见符号认读，见 dg01.3.2」；p3（id=dg00.1.3-p3）含「预告：…等高线…这类线统称等值线。整套讲法，见 dg01.3.3」；与 content.promise 逐项对齐，课页数据与承诺原文确未改动。文字精度修订如实，会签通过。"
+      },
       "revision": 2,
       "status": "final_passed",
       "summary": "预告登记（硬门禁⑩）：地图三要素与等值线预告链（p2 预告方向·图例/比例尺，p3 预告等高线/等值线）",

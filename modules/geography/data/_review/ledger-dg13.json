@@ -65,13 +65,6 @@
           "stage": "final"
         },
         {
-          "by": "地理批6独立复核人",
-          "date": "2026-10-18",
-          "note": "独立复核（返工转正）：逐项核实生产队返工——F1「转口贸易（首现即定义：从一地购进货物、再转卖到另一地的贸易方式）」逐字落位dg13.js L172（dg13.1.2-p1），当页可见；W2「博彩旅游业（以博彩业为特色的旅游业）」同行落位；W4 geo-batch6-widgets.js L422-427隐藏底图「台湾岛」注记的逻辑包裹在hmt主题分支内，其他主题（agri/industry/railway/qinling）底图注记不受影响；widget读数文本保持原样（F1书面裁决允许）；独立扫描首现术语一致性：dg11/dg13头注清单与文案全部对应，梁/峁/世界遗产/转口贸易/博彩五项新补定义均当页可见，widget内后现均晚于定义页（课序）；纯文本字段（lead/caption/modelNote）零HTML。本条目转正final_passed。",
-          "result": "pass",
-          "stage": "reverify"
-        },
-        {
           "by": "地理专家队（独立复审人·2026-10-18）",
           "stage": "reverify",
           "result": "pass",
@@ -79,6 +72,19 @@
           "note": "独立复审 FAIL-5a 返工：生产队自记 review_history 一笔（stage=rework-r1）为形式违规（记录者与被审查者混为一体），已删除并由本队重述：文案为「澳门：博彩即以财物赌输赢的游戏；博彩旅游业（以博彩业为特色的旅游业）是重要经济支柱；位于珠江口西侧。」（逐字引 dg13.js L172）；转口贸易括号定义逐字保留原裁决；博彩根定义补上原裁决内在缺口，改进方向与裁决意图一致，表述中性无价值判断。审理结论：转正通过。条目维持 final_passed。"
         }
       ],
+      "expert_cosign": {
+        "cosigned_by": "地理专家队",
+        "cosigned_at": "2026-10-19",
+        "scope": "会签补正：review_history 中非专家署名的一笔（playbook ⑭）",
+        "preserved_record": {
+          "by": "地理批6独立复核人",
+          "date": "2026-10-18",
+          "note": "独立复核（返工转正）：逐项核实生产队返工——F1「转口贸易（首现即定义：从一地购进货物、再转卖到另一地的贸易方式）」逐字落位dg13.js L172（dg13.1.2-p1），当页可见；W2「博彩旅游业（以博彩业为特色的旅游业）」同行落位；W4 geo-batch6-widgets.js L422-427隐藏底图「台湾岛」注记的逻辑包裹在hmt主题分支内，其他主题（agri/industry/railway/qinling）底图注记不受影响；widget读数文本保持原样（F1书面裁决允许）；独立扫描首现术语一致性：dg11/dg13头注清单与文案全部对应，梁/峁/世界遗产/转口贸易/博彩五项新补定义均当页可见，widget内后现均晚于定义页（课序）；纯文本字段（lead/caption/modelNote）零HTML。本条目转正final_passed。",
+          "result": "pass",
+          "stage": "reverify"
+        },
+        "note": "补正：专家队复核实物证据后会签。原记录（stage=reverify，by=地理批6独立复核人）完整保留于 preserved_record，未改动。实物复核：modules/geography/data/dg13.js L172 起逐字——「转口贸易（首现即定义：从一地购进货物、再转卖到另一地的贸易方式）」当页落位（F1 关闭）、「博彩即以财物赌输赢的游戏；博彩旅游业（以博彩业为特色的旅游业）」同行在场（W2 关闭）；modules/geography/js/geo-batch6-widgets.js L492–497：if (theme === \"hmt\") 分支内隐藏底图 textContent===\"台湾岛\" 的注记（W4 关闭），其他主题分支不受影响。返工三项均如实，会签通过。"
+      },
       "revision": 3,
       "status": "final_passed",
       "summary": "香港、澳门与台湾：表述红线课",

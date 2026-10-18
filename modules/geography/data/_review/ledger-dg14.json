@@ -209,8 +209,8 @@
     "landing": "dg14.2.4-p2（算一算：区时四步走，跃升 5 页）",
     "pre_announce": "P2：dg14.2.4-p2（方法）/p4（显性预告句'东加西减算航班时刻'）立靶→兑现页 dg15.2.2（批8）→回音关键词'东加西减/跨日界线'（登记）；P3：→dg07 时差常识回音（日本比中国早1小时，dg07.1.1 在场；登记，不改已上线页）"
    },
-   "id": "dg14.2.4-i1",
-   "kind": "interaction",
+   "id": "dg14.2.4-e2",
+   "kind": "judgment",
    "lesson": "dg14.2.4",
    "review_history": [
     {
@@ -228,7 +228,7 @@
      "note": "终审（独立复核）：提取 calcTimezone 对14城182有序对做UTC独立验算，timeStr/dayOffset/crossed180/东西判定 182/182 全对（生产报告所称 GeoBatch2._G6_ASSERTS 代码对象实际不存在，报告措辞已在本条正为实际验证口径，见专家报告 WARN-1）。终审通过，置 final_passed。"
     }
    ],
-   "revision": 1,
+   "revision": 2,
    "status": "final_passed",
    "summary": "G6 timezone-calc 真交互（落点 dg14.2.4-p2，跃升 5 页）",
    "written_at": "2026-10-18",
