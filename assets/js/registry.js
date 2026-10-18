@@ -70,6 +70,6 @@ window.TOOLBOX_MODULES = [
     icon: "box",                       // ICONS 5 个名额已占满（abc/pi/atom/flask/box），暂与地理共用通用图标；专用图标需改 app.js（共享文件，本次不动）
     color: "#00b5a5",                  // 青绿；与地理 #0ea5e9 / 物理 #10b981 / 化学 #8b5cf6 区分
     path: "modules/biology/index.html",
-    status: "ready"                    // 试点 b18.1.3（4 页）+ P1 b16 细胞的生命历程（15 页）+ P2 b17 遗传规律（15 页）+ P3 b18 整章（14 页）+ P4 b19 DNA 复制与基因表达（15 页）已就位 + P5 b20 变异与育种（11 页）已就位
+    status: "ready"                    // 试点 b18.1.3（4 页）+ P1 b16 细胞的生命历程（15 页）+ P2 b17 遗传规律（15 页）+ P3 b18 整章（14 页）+ P4 b19 DNA 复制与基因表达（15 页）已就位 + P5 b20 变异与育种（11 页）已就位 + P6 b21 生物的进化（13 页）已就位
   }
 ];
