@@ -156,6 +156,10 @@ body[data-theme="dark"] .geog-block.trap { background: #2a2415; border-color: #8
   margin: 20px 0 8px; padding: 12px 14px; border-radius: 10px;
   background: var(--geog-bg-soft); border: 1px solid var(--geog-border);
   font-size: 0.95rem;
+  /* F1 返工（2026-10-18）：场层真值里的拉丁 token（如 GeoBatch6.QINLING_MEANINGS/QINLING_NOTE）
+  * 在 CJK 断行规则下不断行，390px 下曾横向溢出 13px（scrollWidth=403）；anywhere 允许其内断行。
+  * 本文件只被地理模块 index.html 引入（geog- 前缀隔离），不影响已上线章节。 */
+  overflow-wrap: anywhere;
 }
 .geog-point::before { content: "本页要点："; font-weight: 700; color: var(--geog-accent); }
 .geog-pager {

@@ -238,3 +238,84 @@ SVG 矢量文字随视口缩放（非 px 固定，不适用阶梯）。
 
 - 引入顺序：`data/geo-schematic-paths.js` → `js/geography.js` → `js/geo-batch5-widgets.js`
  （在 `modules/geography/index.html` 中按此顺序加两行 `<script>`；批 5 装配时由内容/装配方加入）。
+
+## 12. thematic-map（批 6 · C 级剪影底图专题示意）
+
+| 参数 | 类型 | 必填 | 默认 | 说明 |
+|---|---|---|---|---|
+| `theme` | string | ✅ | — | `"agri"`（农业类型分区）/`"industry"`（四大工业基地）/`"railway"`（五纵三横连线闯关）/`"qinling"`（秦岭—淮河一线六义）/`"hmt"`（港澳台位置） |
+| `intro` | string | — | — | 操作引导 |
+| `recordKey` | string | — | `geog_thematic-map_<theme>` | 记录键（运行时加 `ltb-geo-` 前缀） |
+
+- 底图复用 `data/geo-schematic-paths.js` 已签发 C 级剪影几何（CN-PROV-v1，expert-signed）：
+  中国全境轮廓，不叠加省界/国界线/十段线；台湾岛、海南岛单独绘制不可缺；
+  角落冻结文案 E.3「示意｜非精确比例｜方向仅供参考」不可关闭。
+  本渲染器不新增任何涉国界/省界矢量几何，不触发 -08 审定签发流程。
+- 真值＝`window.GeoBatch6.*`（场层：AGRI_ZONES/INDUSTRY_BASES/RAILWAYS/
+  QINLING_LINE+QINLING_MEANINGS/HMT，人教版八下口径）；`truth()` → `{theme, assetId:"cn-silhouette", grade:"C", declare, signoff, ruling}`（场层）；
+  `state()` → 各 theme 的 UI 可达值（agri/industry/hmt `{selected}`；railway `{round,score,total,done}`；qinling `{selected, meaningVisible}`）——
+  两类分开上报（GEO-RULING-2026-10-17-03）。
+- agri：5 分区示意多边形（虚线边）＋点读「自然条件→农业类型」因果（GEO-R40）；
+  industry：4 基地点位（≥44px 命中圆）＋点读特点/主导区位因素；
+  railway：8 条干线示意折线（固定伪随机出题顺序，见 truth.quizOrder），点选判分、8 条全对过关；
+  qinling：基线＋6 条示意分界线（开关按钮 ≥44px，`aria-pressed`），配过渡带徽章
+  「分界线是渐变带的中心线」（GEO-AX01；pedagogy T10）；
+  hmt：香港/澳门符号点＋台湾岛高亮（与大陆同色，只加轮廓与「台湾省」注记，审定书 B.4 精神），
+  配表述红线条（HMT_REDLINE）。
+- 落点：dg11.1.1-p2（agri）、dg11.1.2-p2（industry）、dg11.2.1-p2（railway）、
+  dg12.1.1-p2（qinling）、dg13.1.2-p2（hmt）。
+
+## 13. region-compare（批 6 · 地区对照表）
+
+| 参数 | 类型 | 必填 | 默认 | 说明 |
+|---|---|---|---|---|
+| `title` | string | — | — | 表标题 |
+| `intro` | string | — | — | 操作引导 |
+| `columns` | array | ✅ | — | 列头（如 `["北方地区"]` 或 `["北方地区","南方地区"]`） |
+| `rowHead` | string | — | `"方面"` | 行头列标题 |
+| `rows` | array | ✅ | — | `{label, cells[], detail}`（`cells` 与 `columns` 等长；`detail` 为点行详解） |
+| `recordKey` | string | — | `geog_region-compare` | 记录键（运行时加 `ltb-geo-` 前缀） |
+
+- 表格横向可滚（窄屏不溢出）；行可点选（键盘可达），下方详解条显示 `detail`；
+  HTML 文字只用 V8 阶梯类。
+- `state()` → `{selectedRow}`；`truth()` → `{columns, rows}`（场层）。
+- 落点：dg12.1.2-p2（北方对照表）、dg12.1.3-p2（南北双栏表）、dg13.2.3-p1（深圳河两岸对照）。
+
+## 14. geo-schematic（批 6 · 城市/区域职能示意）
+
+| 参数 | 类型 | 必填 | 默认 | 说明 |
+|---|---|---|---|---|
+| `board` | string | ✅ | — | `"beijing"`（北京城市职能）/`"yrd"`（长三角城市群格局）/`"prd"`（珠三角与港澳合作）/`"sjy"`（三江源水系） |
+| `recordKey` | string | — | `geog_geo-schematic_<board>` | 记录键（运行时加 `ltb-geo-` 前缀） |
+
+- 板子几何冻结于 `window.GeoBatch6.BOARDS`（`{title, intro, vb, declare, axis?, areas[], nodes[], links[], foot?}`）；
+  城市/区域内部职能示意（非政区图），不涉国界/省界绘制；角落示意声明不可关闭（GEO-R24）。
+- 区域（rect）/节点（circle，问题节点用警示色）/连线（动画虚线，河流带箭头）均可点读
+  （透明命中区 ≥44px，键盘可达）；`state()` → `{selected}`（场层/UI 分开上报）。
+- 落点：dg13.1.1-p2（beijing）、dg13.1.3-p2（yrd）、dg13.1.4-p2（prd）、dg13.2.2-p2（sjy）。
+
+## 15. process-stages（批 6 · 分阶段过程动画）
+
+| 参数 | 类型 | 必填 | 默认 | 说明 |
+|---|---|---|---|---|
+| `process` | string | ✅ | — | `"loess"`（黄土高原沟壑演变；唯一取值） |
+| `recordKey` | string | — | `geog_process-stages` | 记录键（运行时加 `ltb-geo-` 前缀） |
+
+- 四阶段冻结于 `window.GeoBatch6.LOESS_STAGES`（①平坦黄土塬 ②暴雨＋植被破坏
+  ③沟壑下切加深 ④支离破碎＋治理）；上一步/下一步/播放（2.2s 自动步进）；
+  第③阶段含等高线密集示意（沟壑＝密集山谷、等高线密集＝坡陡，红线辨析①回填）。
+- 阶段场景为教学示意分期（GEO-AX01 当页显性化）；`state()` → `{stage, playing}`；
+  `truth()` → `{process, stages}`（场层）。
+- 落点：dg13.2.1-p2。
+
+## 16. scale-switcher（批 6 · 多尺度地图切换）
+
+| 参数 | 类型 | 必填 | 默认 | 说明 |
+|---|---|---|---|---|
+| `recordKey` | string | — | `geog_scale-switcher` | 记录键（运行时加 `ltb-geo-` 前缀） |
+
+- 三档冻结于 `window.GeoBatch6.SCALE_LEVELS`（街区 1:10000/城市 1:500000/
+  城市群 1:2000000，均为示意值）；按钮切换（≥44px，`aria-pressed`）→
+  示意场景＋比例尺读数＋「分母越小、比例尺越大、越详细（大详小略，GEO-R18/19）」。
+- `state()` → `{level}`；`truth()` → `{levels}`（场层）。
+- 落点：dg13.2.3-p1（红线辨析④回填：多尺度地图切换）。
