@@ -1,0 +1,43 @@
+{
+  "schema": "biology-review-ledger/1.0",
+  "chapter": "b03",
+  "lesson": "b03.1.3",
+  "written_at": "2026-10-19",
+  "written_by": "生物 P7 生产队（蓝队数据工程 + 内容撰写）",
+  "notes": "p1 种子呼吸作用三演示（萌发种子 vs 煮熟的种子对照：石灰水变浑浊/温度计上升/蜡烛熄灭；角落常驻虚拟实验声明；共同对照=煮熟的种子，BIO-R13）/p2 实质（分解有机物、释放能量；呼吸作用先认词；光合/呼吸对比一合一分一存一放；专治植物只光合不呼吸）/p3 “呼吸”vs“呼吸作用”一次分清（BIO-R01：呼吸=肺通气/喘气，呼吸作用=细胞内氧化分解/缓慢氧化；T8 直觉比喻配边界句）+植物时刻都在进行呼吸作用观念页+p3 增术语医院（2 个典型错句＋<details> 答案折叠）与定义配图（呼吸/呼吸作用定义并排＋内联 SVG 配图）。",
+  "announcements": [],
+  "frozen_refs": [
+    {
+      "id": "b03.1.3-f1",
+      "kind": "frozen_copy",
+      "ref": "BIO-R01（呼吸/呼吸作用）",
+      "status": "drafted",
+      "note": "全课“呼吸”仅用于肺通气语境，“呼吸作用”用于细胞内氧化分解；无混用（static-b03.cjs T6 全文扫描 PASS）。"
+    },
+    {
+      "id": "b03.1.3-f2",
+      "kind": "frozen_copy",
+      "ref": "T8 边界句",
+      "status": "drafted",
+      "note": "p3 直觉比喻配边界句“呼吸作用是缓慢氧化，不是有火苗的烧”（static-b03.cjs T6 PASS）。"
+    }
+  ],
+  "gate8_first_definition": {
+    "status": "drafted",
+    "note": "本课新术语首现即定义：呼吸作用@b03.1.3-p1（先认词；p2 展开实质；static-b03.cjs T3 PASS）。"
+  },
+  "gate9_target_check": {
+    "status": "drafted",
+    "note": "深链 0 处（static-b03.cjs T4 PASS）。"
+  },
+  "gate11_quiz": {
+    "status": "drafted",
+    "note": "本课无 kind:quiz 页；“呼吸”vs“呼吸作用”辨析在 b03.1.6-p2 Q4 机判覆盖。"
+  },
+  "expert_review": {
+    "reviewer": "生物学科专家队",
+    "reviewed_at": "2026-10-19",
+    "report": "~/workspace/bio-audit/batch-p7-expert/REVIEW-REPORT.md",
+    "verdict": "final_passed"
+  }
+}

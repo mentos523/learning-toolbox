@@ -1,0 +1,42 @@
+{
+  "schema": "biology-review-ledger/1.0",
+  "chapter": "b03",
+  "lesson": "b03.1.2",
+  "written_at": "2026-10-19",
+  "written_by": "生物 P7 生产队（蓝队数据工程 + 内容撰写）",
+  "notes": "p1 四要素（原料二氧化碳+水/条件光/场所叶绿体/产物有机物+氧气；光合作用/叶绿体先认词）+误区专治（只在白天→有光即可；产物只有氧气→有机物+氧气）/p2 文字表达式拼搭（内联点选拼搭：8 选项含线粒体/叶绿素干扰项，6 空格；检查/重置；化学符号版预告化学 cm05 回填）/p3 实质（合成有机物、储存能量；能量口径光能→化学能，不说阳光进入食物链 BIO-R29）+认旧友 b03.1.1。",
+  "announcements": [],
+  "frozen_refs": [
+    {
+      "id": "b03.1.2-f1",
+      "kind": "frozen_copy",
+      "ref": "BIO-R29（能量输入起点）",
+      "status": "drafted",
+      "note": "p3 只说“光能→化学能，储存在有机物中”，无“阳光直接进入食物链”表述（static-b03.cjs T6 PASS）。"
+    }
+  ],
+  "gate8_first_definition": {
+    "status": "drafted",
+    "note": "本课新术语首现即定义：光合作用/叶绿体@b03.1.2-p1（先认词行内定义；static-b03.cjs T3 PASS）。"
+  },
+  "gate9_target_check": {
+    "status": "drafted",
+    "note": "深链 0 处；“化学 cm05”为纯文本跨模块引用（目标未生产，不挂深链，门禁⑨；static-b03.cjs T4 PASS）。"
+  },
+  "gate11_quiz": {
+    "status": "drafted",
+    "note": "本课无 kind:quiz 页；拼搭作答由页内检查按钮即时反馈（browser-b03.cjs 真点选走查）。"
+  },
+  "expert_review": {
+    "reviewer": "生物学科专家队",
+    "reviewed_at": "2026-10-19",
+    "report": "~/workspace/bio-audit/batch-p7-expert/REVIEW-REPORT.md",
+    "verdict": "final_passed",
+    "resigned_at": "2026-10-19",
+    "resign_report": "~/workspace/bio-audit/batch-p7-expert/RESIGN-NOTE.md",
+    "resign_note": "复签核验（2026-10-19，生物学科专家队亲手核验）：W-03 已落地——ledger notes 已为\"8 选项含线粒体/叶绿素干扰项\"；实物 b03.js b03.1.2-p2 拼搭 8 chips 干扰项为线粒体（c-mit）/叶绿素（c-chlp），该页区\"呼吸作用\"0 命中，实物 note 块明示\"选项里混进了两个捣乱的：线粒体、叶绿素\"。实物与台账一致，复签 final_passed。",
+    "rework_items": [
+      "W-03：台账 notes 写'8 选项含线粒体/呼吸作用干扰项'，与实物不符——实物（b03.js b03.1.2-p2）干扰项已为线粒体/叶绿素（生产自查 FAIL#2 整改后）。整改：更正 notes 为'8 选项含线粒体/叶绿素干扰项'（初稿内容字段，生产队可改；不得触碰 expert_review）。"
+    ]
+  }
+}

@@ -29,6 +29,20 @@
  * 校验（BIO-R25），不一致 → 可见错误态，不静默放行。
  * 基因型期望仅展示（渲染器不机判，B6 schema 无基因型答案字段）。
  *
+ * - "experiment-3q"（B3 实验三问设计器，P7 首立 b03.1.1，见
+ *   docs/biology-interactions.md §B3；冻结口径 B-F3；真值口径
+ *   BIO-R12/R13/R14/R15）：对照→单一变量→重复三问点选（顺序冻结），
+ *   答对出 ✓ 徽章、答错回放 thoughtExp 思想实验（不判错不扣分）；
+ *   三问徽章常驻点展；answer 三索引渲染前程序化校验越界；
+ *   记录走 localStorage（key 即 recordKey=bio_3q_<课号>）。纯 DOM 实现。
+ * - "photosyn-sandbox"（B4 光合速率调控沙盘，P7 首立 b03.1.5，见
+ *   docs/biology-interactions.md §B4；冻结口径 B-F4；真值口径
+ *   BIO-R42/BIO-R70）：光/CO2/温度三滑块（±步进，轨道 ≥44px），
+ *   速率 = f×g×h 三段饱和示意函数；纵轴一律相对值，常驻
+ *   "相对值（非实测数据）"（删=FAIL）；"当前×是短板"徽章
+ *   （不许写"唯一原因"）；Canvas 曲线描点（≤101 点），深色经
+ *   liveViews 重绘（--bio-* 取色）。
+ *
  * 命名空间隔离：只写 window.BIO_ENGINE；CSS 类名前缀 bio-；
  * localStorage 键 ltb-bio-b6-<qid>（file:// 禁用降级为内存）。
  * 不改 assets/engine/**；params 里不出现具体色值（Canvas 取色
@@ -1879,6 +1893,390 @@ function renderPunnettLab(params, wid) {
   return root;
 }
 
+
+  /* ============================================================
+   * P7 首立（2026-10-19）：B3 experiment-3q / B4 photosyn-sandbox
+   * 规格见 docs/biology-interactions.md §B3（行285起）/§B4（行366起）；
+   * 冻结口径 B-F3（三问顺序/记录键）/B-F4（相对值口径）；
+   * 真值口径 BIO-R12/R13/R14/R15（B3）、BIO-R42/BIO-R70（B4）。
+   * 点选 + 即时反馈复用 tap-highlight 范式（bio-tap 瞬时高亮 +
+   * flash/vib）；记录走 localStorage（key 即 recordKey）。
+   * ============================================================ */
+
+  /* ---------- B3：params 程序化校验（BIO-R15：answer 索引不越界） ---------- */
+  function check3QParams(params) {
+    function opts(a, name) {
+      if (!Array.isArray(a) || a.length < 2 || a.length > 4)
+        return name + " 须为 2–4 个字符串数组";
+      for (var i = 0; i < a.length; i++)
+        if (typeof a[i] !== "string" || !a[i]) return name + "[" + i + "] 非法";
+      return null;
+    }
+    var e = opts(params.controlOptions, "controlOptions") ||
+            opts(params.variableOptions, "variableOptions") ||
+            opts(params.repeatOptions, "repeatOptions");
+    if (e) return e;
+    var a = params.answer || {};
+    var spec = [["control", params.controlOptions], ["variable", params.variableOptions], ["repeat", params.repeatOptions]];
+    for (var k = 0; k < spec.length; k++) {
+      var v = spec[k][1], idx = a[spec[k][0]];
+      if (!Number.isInteger(idx) || idx < 0 || idx >= v.length)
+        return "answer." + spec[k][0] + "=" + idx + " 越界（0–" + (v.length - 1) + "）";
+    }
+    if (typeof params.purpose !== "string" || !params.purpose) return "purpose 缺失";
+    if (typeof params.thoughtExp !== "string" || !params.thoughtExp) return "thoughtExp 缺失";
+    return null;
+  }
+
+  /* B3 三问：顺序冻结 对照→单一变量→重复（BIO-R12/B-F3），页内不得调换 */
+  var B3_QNAMES = ["对照", "单一变量", "重复"];
+  var B3_QTITLES = ["第 1 问 · 对照组怎么设？", "第 2 问 · \"只变的一个量\"是？", "第 3 问 · 重复做几次？"];
+  var B3_BADGE_ANSWERS = [
+    "对照组是\"参照物\"：没它，不知道变没变。",
+    "\"只变一个量\"：其他条件都一样，差别才能算到它头上。",
+    "\"多做几次\"：一次的结果可能是巧合，重复验证才站得住。"
+  ];
+  var B3_PASS_TEXT = "实验设计通过：对照、单一变量、重复——全书每个实验都要过这三问。";
+
+  /* localStorage：key 即 recordKey（B-F3）；file:// 降级为内存 */
+  function b3load(key) {
+    try { var v = localStorage.getItem(key); return v ? JSON.parse(v) : null; }
+    catch (e) { return memStore[key] || null; }
+  }
+  function b3save(key, obj) {
+    try { localStorage.setItem(key, JSON.stringify(obj)); }
+    catch (e) { memStore[key] = obj; }
+  }
+
+  function renderExperiment3Q(params, wid) {
+    var perr = check3QParams(params || {});
+    if (perr) return el("div", "bio-b3-err", "⚠ B3 参数校验失败：" + perr + "（BIO-R15）。");
+    var m = String(wid || "").match(/^b\d+\.\d+\.\d+/);
+    var recordKey = params.recordKey || ("bio_3q_" + (m ? m[0] : "unknown"));
+    var optArr = [params.controlOptions, params.variableOptions, params.repeatOptions];
+    var ansArr = [params.answer.control, params.answer.variable, params.answer.repeat];
+    /* thoughtExp 按空行分段，答错回放"对应段落" */
+    var paras = String(params.thoughtExp).split(/\n\s*\n/);
+
+    var root = el("section", "bio-b3");
+    root.setAttribute("data-record-key", recordKey);
+    root.setAttribute("aria-label", "实验三问设计器");
+
+    var hp = el("div", "bio-b3-purpose", "🔬 实验目的：" + esc(params.purpose));
+    root.appendChild(hp);
+
+    /* ---------- 三问徽章常驻（点展一句话答案；热区 ≥44px） ---------- */
+    var badgeRow, badgeBtns = [], badgeBodies = [];
+    if (params.showBadge !== false) {
+      badgeRow = el("div", "bio-b3-badges");
+      for (var b = 0; b < 3; b++) {
+        (function (qi) {
+          var btn = el("button", "bio-b3-badge");
+          btn.type = "button";
+          btn.setAttribute("aria-expanded", "false");
+          btn.innerHTML = "<span class=\"bio-b3-badge-q\">" + esc(B3_QNAMES[qi]) + "</span>" +
+            "<span class=\"bio-b3-badge-st\">待作答</span>";
+          var body = el("div", "bio-b3-badge-a", esc(B3_BADGE_ANSWERS[qi]));
+          body.style.display = "none";
+          btn.addEventListener("click", function () {
+            var open = body.style.display !== "none";
+            body.style.display = open ? "none" : "";
+            btn.setAttribute("aria-expanded", open ? "false" : "true");
+            vib(10);
+          });
+          badgeRow.appendChild(btn);
+          badgeRow.appendChild(body);
+          badgeBtns.push(btn); badgeBodies.push(body);
+        })(b);
+      }
+      root.appendChild(badgeRow);
+    }
+
+    /* ---------- 三问点选（冻结顺序渲染） ---------- */
+    var fbEls = [], optBtns = [];
+    var done = [false, false, false];
+    var passBox = el("div", "bio-b3-pass", "🏅 " + esc(B3_PASS_TEXT));
+    passBox.style.display = "none";
+
+    function refreshPass() {
+      if (done[0] && done[1] && done[2]) {
+        passBox.style.display = "";
+        flash(passBox);
+        b3save(recordKey, { done: true, ts: Date.now() });
+      }
+    }
+    /* 恢复已通过态 */
+    var saved = b3load(recordKey);
+    var restored = !!(saved && saved.done);
+
+    for (var q = 0; q < 3; q++) {
+      (function (qi) {
+        var sec = el("section", "bio-b3-q");
+        sec.appendChild(el("div", "bio-b3-qtitle", esc(B3_QTITLES[qi])));
+        var opts = el("div", "bio-b3-opts");
+        var btns = [];
+        optArr[qi].forEach(function (label, oi) {
+          var b = el("button", "bio-b3-opt");
+          b.type = "button";
+          b.textContent = label;
+          if (qi === 0) {
+            /* 对照组选项配"参照物"小标签：答对后亮出（双编码，不只靠颜色） */
+            var tag = el("span", "bio-b3-tag", "参照物");
+            tag.style.display = "none";
+            tag.setAttribute("data-tag", "1");
+            b.appendChild(tag);
+          }
+          b.addEventListener("click", function () {
+            if (done[qi]) return;
+            /* tap-highlight：瞬时高亮 + 即时反馈 */
+            b.classList.remove("bio-tap"); void b.offsetWidth; b.classList.add("bio-tap");
+            if (oi === ansArr[qi]) {
+              done[qi] = true;
+              b.classList.add("is-ok");
+              b.insertAdjacentHTML("afterbegin", "<span class=\"bio-b3-tick\" aria-hidden=\"true\">✓ </span>");
+              var tagOn = b.querySelector("[data-tag]");
+              if (tagOn) tagOn.style.display = "";
+              var fb = fbEls[qi];
+              fb.className = "bio-b3-fb is-ok";
+              fb.textContent = "✓ 答对了。" + B3_BADGE_ANSWERS[qi];
+              if (badgeBtns[qi]) {
+                badgeBtns[qi].classList.add("is-done");
+                badgeBtns[qi].querySelector(".bio-b3-badge-st").textContent = "✓";
+              }
+              flash(fb); vib(15);
+              refreshPass();
+            } else {
+              var fb2 = fbEls[qi];
+              fb2.className = "bio-b3-fb is-think";
+              var para = paras[Math.min(qi, paras.length - 1)];
+              fb2.textContent = "💭 思想实验：如果不这样做会怎样？" + para + "（不判错、不扣分，再想想。）";
+              flash(fb2); vib(10);
+            }
+          });
+          opts.appendChild(b); btns.push(b);
+        });
+        sec.appendChild(opts);
+        var fb = el("div", "bio-b3-fb");
+        fb.setAttribute("aria-live", "polite");
+        sec.appendChild(fb);
+        fbEls.push(fb); optBtns.push(btns);
+        root.appendChild(sec);
+      })(q);
+    }
+    root.appendChild(passBox);
+
+    /* 全流程回放入口（首立页配；后续课按需传 replayHref/replayText） */
+    if (params.replayHref) {
+      var rp = el("div", "bio-b3-replay");
+      var a = document.createElement("a");
+      a.href = params.replayHref;
+      a.textContent = params.replayText || "回看实验全流程";
+      rp.appendChild(a);
+      root.appendChild(rp);
+    }
+
+    /* 恢复：三问全对态直接点亮 */
+    if (restored) {
+      for (var r = 0; r < 3; r++) {
+        done[r] = true;
+        if (optBtns[r][ansArr[r]]) {
+          optBtns[r][ansArr[r]].classList.add("is-ok");
+          optBtns[r][ansArr[r]].insertAdjacentHTML("afterbegin", "<span class=\"bio-b3-tick\" aria-hidden=\"true\">✓ </span>");
+          var tagRe = optBtns[r][ansArr[r]].querySelector("[data-tag]");
+          if (tagRe) tagRe.style.display = "";
+        }
+        if (badgeBtns[r]) {
+          badgeBtns[r].classList.add("is-done");
+          badgeBtns[r].querySelector(".bio-b3-badge-st").textContent = "✓";
+        }
+      }
+      passBox.style.display = "";
+    }
+    return root;
+  }
+
+  /* ============================================================
+   * B4 photosyn-sandbox（光合速率调控沙盘）
+   * 速率模型（示意）：rate = f(light)×g(co2)×h(temp)，三段饱和型
+   * 示意函数；纵轴一律相对值，常驻 relativeNote（B-F4，删=FAIL）；
+   * "主要限制因素"提示写"当前短板"，不许写"唯一原因"。
+   * ============================================================ */
+  var B4_REL_NOTE = "相对值（非实测数据）";
+
+  function checkSandboxParams(params) {
+    function slider(o, name) {
+      if (!o || typeof o.min !== "number" || typeof o.max !== "number" ||
+          typeof o.step !== "number" || typeof o.init !== "number" || !(o.min < o.max))
+        return name + " 滑块参数非法（min/max/step/init）";
+      if (o.init < o.min || o.init > o.max) return name + " init 越界";
+      return null;
+    }
+    return slider(params.light, "light") || slider(params.co2, "co2") || slider(params.temp, "temp");
+  }
+
+  /* 三段饱和型示意函数（教学示意，非真实光合动力学模型） */
+  function b4fL(L) { return L / (L + 30); }
+  function b4fC(C) { return C / (C + 25); }
+  function b4fT(T) { var d = (T - 25) / 18; var h = 1 - d * d; return h > 0 ? h : 0; }
+  function b4Rate(L, C, T) {
+    var max = b4fL(100) * b4fC(100); /* h(25)=1 为峰值 */
+    return Math.round(100 * b4fL(L) * b4fC(C) * b4fT(T) / max);
+  }
+
+  function renderPhotosynSandbox(params, wid) {
+    var perr = checkSandboxParams(params || {});
+    if (perr) return el("div", "bio-b4-err", "⚠ B4 参数校验失败：" + perr + "。");
+    var relNote = params.relativeNote || B4_REL_NOTE;
+    var showCurve = params.showCurve !== false;
+    var limitHint = params.limitHint !== false;
+
+    var root = el("section", "bio-b4");
+    root.setAttribute("aria-label", "光合速率调控沙盘");
+
+    /* 常驻：相对值（非实测数据）——删=FAIL（BIO-R42/B-F4） */
+    root.appendChild(el("div", "bio-b4-rel", "📏 " + esc(relNote)));
+
+    var sliders = [
+      { key: "light", name: "光照强度", o: params.light },
+      { key: "co2", name: "CO₂ 浓度", o: params.co2 },
+      { key: "temp", name: "温度", o: params.temp }
+    ];
+    var state = {};
+    var valEls = {}, rangeEls = {};
+    var box = el("div", "bio-b4-sliders");
+
+    sliders.forEach(function (s) {
+      state[s.key] = s.o.init;
+      var wrap = el("div", "bio-b4-slider");
+      var lab = el("div", "bio-b4-lab");
+      var nm = el("span", "bio-b4-name", esc(s.name));
+      var vv = el("span", "bio-b4-val", "");
+      vv.setAttribute("aria-live", "polite");
+      lab.appendChild(nm); lab.appendChild(vv);
+      wrap.appendChild(lab);
+      var ctl = el("div", "bio-b4-ctl");
+      var minus = el("button", "bio-b4-step", "−");
+      minus.type = "button";
+      minus.setAttribute("aria-label", s.name + "减小");
+      var rg = document.createElement("input");
+      rg.type = "range";
+      rg.min = s.o.min; rg.max = s.o.max; rg.step = s.o.step; rg.value = s.o.init;
+      rg.setAttribute("aria-label", s.name + "滑块");
+      rg.className = "bio-b4-range";
+      var plus = el("button", "bio-b4-step", "+");
+      plus.type = "button";
+      plus.setAttribute("aria-label", s.name + "增大");
+      function setVal(v, fromRange) {
+        v = Math.min(s.o.max, Math.max(s.o.min, v));
+        /* 对齐步长 */
+        v = Math.round(v / s.o.step) * s.o.step;
+        v = Math.round(v * 100) / 100;
+        state[s.key] = v;
+        if (!fromRange) rg.value = v;
+        vv.textContent = v + " " + (s.o.unit || "");
+        update();
+      }
+      minus.addEventListener("click", function () { setVal(state[s.key] - s.o.step); vib(8); });
+      plus.addEventListener("click", function () { setVal(state[s.key] + s.o.step); vib(8); });
+      rg.addEventListener("input", function () { setVal(parseFloat(rg.value), true); });
+      ctl.appendChild(minus); ctl.appendChild(rg); ctl.appendChild(plus);
+      wrap.appendChild(ctl);
+      if (s.key === "temp") {
+        wrap.appendChild(el("div", "bio-b4-tempnote", "🌡 温度过高，酶活性下降——曲线不会一直涨。"));
+      }
+      box.appendChild(wrap);
+      valEls[s.key] = vv; rangeEls[s.key] = rg;
+      vv.textContent = state[s.key] + ' ' + (s.o.unit || '');
+    });
+    root.appendChild(box);
+
+    /* 读数行（MathML）+ 当前短板徽章 */
+    var read = el("div", "bio-b4-read");
+    var mathBox = el("span", "bio-b4-math");
+    var limitBadge = el("span", "bio-b4-limit", "");
+    read.appendChild(mathBox); read.appendChild(limitBadge);
+    root.appendChild(read);
+
+    /* 曲线画布 */
+    var cv = document.createElement("canvas");
+    cv.className = "bio-b4-curve";
+    cv.width = 600; cv.height = 340;
+    cv.setAttribute("role", "img");
+    cv.setAttribute("aria-label", "光合速率随光照强度变化的示意曲线（相对值）");
+    if (showCurve) root.appendChild(cv);
+    root.appendChild(el("div", "bio-b4-axnote", "纵轴：" + esc(relNote) + "；横轴：光照强度（相对值）。示意曲线，非实测数据。"));
+
+    function limitOf() {
+      var cands = [
+        ["光照", b4fL(state.light)],
+        ["CO₂", b4fC(state.co2)],
+        ["温度", b4fT(state.temp)]
+      ];
+      var mi = 0;
+      for (var i = 1; i < 3; i++) if (cands[i][1] < cands[mi][1]) mi = i;
+      return cands[mi][0];
+    }
+
+    function draw() {
+      var L = state.light, C = state.co2, T = state.temp;
+      var rate = b4Rate(L, C, T);
+      /* 读数（MathML） */
+      mathBox.innerHTML = "<math><mtext>光合速率（相对值）</mtext><mo>=</mo><mn>" + rate + "</mn></math>";
+      /* 短板徽章：写"当前短板"，不许写"唯一原因" */
+      if (limitHint) {
+        limitBadge.textContent = "当前" + limitOf() + "是短板——生产上先补短板";
+        limitBadge.style.display = "";
+      } else { limitBadge.style.display = "none"; }
+      if (!showCurve) return;
+      var ctx = cv.getContext("2d");
+      if (!ctx) return;
+      var W = cv.width, H = cv.height;
+      var padL = 52, padR = 14, padT = 30, padB = 40;
+      var pw = W - padL - padR, ph = H - padT - padB;
+      ctx.clearRect(0, 0, W, H);
+      var colGrid = cssVar("--bio-grid"), colText = cssVar("--bio-text"),
+          colCurve = cssVar("--bio-organelle"), colMark = cssVar("--bio-target");
+      /* 网格 + 纵轴（相对值） */
+      ctx.font = "13px sans-serif"; ctx.textAlign = "right"; ctx.textBaseline = "middle";
+      for (var g = 0; g <= 4; g++) {
+        var yv = g * 25, y = padT + ph - (yv / 100) * ph;
+        ctx.strokeStyle = colGrid; ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(padL, y); ctx.lineTo(W - padR, y); ctx.stroke();
+        ctx.fillStyle = colText; ctx.fillText(String(yv), padL - 6, y);
+      }
+      ctx.textAlign = "center"; ctx.textBaseline = "top";
+      ctx.fillStyle = colText;
+      ctx.fillText("相对值", 26, padT - 4);
+      /* 常驻标注（B-F4） */
+      ctx.textAlign = "right";
+      ctx.fillText(relNote, W - padR, 8);
+      /* 曲线：rate(x, C, T)，x=光照 0–100 */
+      ctx.strokeStyle = colCurve; ctx.lineWidth = 3;
+      ctx.beginPath();
+      for (var x = 0; x <= 100; x += 2) {
+        var r = b4Rate(x, C, T);
+        var cx = padL + (x / 100) * pw, cy = padT + ph - (r / 100) * ph;
+        if (x === 0) ctx.moveTo(cx, cy); else ctx.lineTo(cx, cy);
+      }
+      ctx.stroke();
+      /* 当前点 */
+      var px = padL + (L / 100) * pw, py = padT + ph - (rate / 100) * ph;
+      ctx.fillStyle = colMark;
+      ctx.beginPath(); ctx.arc(px, py, 7, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = colText; ctx.textBaseline = "bottom";
+      ctx.fillText("当前", px, py - 10);
+      /* 横轴标注 */
+      ctx.textBaseline = "top";
+      ctx.fillText("光照强度（相对值）", padL + pw / 2, padT + ph + 12);
+    }
+
+    function update() { draw(); }
+    draw();
+    /* 深色切换重绘（走 liveViews） */
+    liveViews.push({ redraw: function () { draw(); } });
+    return root;
+  }
+
   /* ---------------- 对外 API ---------------- */
   var api = {
     render: function (type, params, wid) {
@@ -1894,6 +2292,12 @@ function renderPunnettLab(params, wid) {
       }
       if (type === "punnett-lab") {
         return renderPunnettLab(params || {}, wid || "bio-b5");
+      }
+      if (type === "experiment-3q") {
+        return renderExperiment3Q(params || {}, wid || "bio-b3");
+      }
+      if (type === "photosyn-sandbox") {
+        return renderPhotosynSandbox(params || {}, wid || "bio-b4");
       }
       return null;
     },

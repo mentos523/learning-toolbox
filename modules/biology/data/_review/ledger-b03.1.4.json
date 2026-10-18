@@ -1,0 +1,36 @@
+{
+  "schema": "biology-review-ledger/1.0",
+  "chapter": "b03",
+  "lesson": "b03.1.4",
+  "written_at": "2026-10-19",
+  "written_by": "生物 P7 生产队（蓝队数据工程 + 内容撰写）",
+  "notes": "p1 花的结构拆解（内联 SVG 纵切面：7 部位点选看名称功能；角落常驻模式图声明 BIO-R32；子房/胚珠先认词）/p2 传粉与受精（自花/异花；虫媒/风媒；传粉/受精/花粉管先认词；双受精点到为止；专治传粉≠受精）/p3 果实与种子（子房壁→果皮、胚珠→种子、子房→果实一一对应；发育示意 SVG 配模式图声明）。",
+  "announcements": [],
+  "frozen_refs": [
+    {
+      "id": "b03.1.4-f1",
+      "kind": "frozen_copy",
+      "ref": "BIO-R32（模式图声明）",
+      "status": "drafted",
+      "note": "p1 花结构 SVG、p3 发育示意 SVG 角落均常驻“模式图：非等比、非实物”（static-b03.cjs T6 PASS）。"
+    }
+  ],
+  "gate8_first_definition": {
+    "status": "drafted",
+    "note": "本课新术语首现即定义：子房/胚珠@b03.1.4-p1，传粉/受精/花粉管@b03.1.4-p2（先认词行内定义；static-b03.cjs T3 PASS）。"
+  },
+  "gate9_target_check": {
+    "status": "drafted",
+    "note": "深链 0 处（static-b03.cjs T4 PASS）。"
+  },
+  "gate11_quiz": {
+    "status": "drafted",
+    "note": "本课无 kind:quiz 页；子房壁→果皮/胚珠→种子对应在 b03.1.6-p2 Q5 机判覆盖。"
+  },
+  "expert_review": {
+    "reviewer": "生物学科专家队",
+    "reviewed_at": "2026-10-19",
+    "report": "~/workspace/bio-audit/batch-p7-expert/REVIEW-REPORT.md",
+    "verdict": "final_passed"
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "schema": "biology-review-ledger/1.0",
+  "chapter": "b03",
+  "lesson": "b03.1.5",
+  "written_at": "2026-10-19",
+  "written_by": "生物 P7 生产队（蓝队数据工程 + 内容撰写）",
+  "notes": "p1 白天/夜晚关系（白天光合+呼吸同时进行且光合更强；夜晚只进行呼吸作用；专治夜间停止一切活动）+B4 温室调控沙盘首立（光/CO2/温度三滑块；纵轴一律相对值，常驻“相对值（非实测数据）”BIO-R42；“当前短板”徽章不许写“唯一原因”；温度 40℃ 配“酶活性下降”小字）+农业应用（合理密植/温室补光增 CO2/夜间降温）/p2 碳—氧平衡纯文本预告（b24.3.3 细讲；辨析③“能量单向物循环”立靶，本章不展开能量流动）。",
+  "announcements": [
+    {
+      "id": "b03.1.5-a1",
+      "kind": "foretell",
+      "status": "drafted",
+      "text": "碳在生物群落和无机环境之间怎样循环往复——b24.3.3 细讲。",
+      "source": "b03.1.5-p2 纯文本预告",
+      "echo_target": "b24.3.3（未生产）",
+      "echo_text": "",
+      "note": "门禁⑩：碳—氧平衡/碳循环纯文本预告，兑现点 b24.3.3；辨析③能量流动本章不展开（static-b03.cjs T6 BIO-R27–R31 关键词扫描 PASS）。"
+    }
+  ],
+  "frozen_refs": [
+    {
+      "id": "b03.1.5-f1",
+      "kind": "frozen_copy",
+      "ref": "BIO-R42/B-F4（相对值口径）",
+      "status": "drafted",
+      "note": "B4 纵轴一律相对值，常驻“相对值（非实测数据）”（组件头+纵轴+画布内三处；static-b03.cjs T6 PASS，browser-b03.cjs 真机断言）。"
+    },
+    {
+      "id": "b03.1.5-f2",
+      "kind": "frozen_copy",
+      "ref": "辨析③口诀",
+      "status": "drafted",
+      "note": "p2 立靶“能量单向物循环”逐字（BIO-R61）；无“能量循环利用”/“阳光直接进入食物链”/碳循环开环反向表述（static-b03.cjs T6 PASS）。"
+    }
+  ],
+  "gate8_first_definition": {
+    "status": "drafted",
+    "note": "本课无门禁⑧清单新术语首现（static-b03.cjs T3 全表 PASS）。"
+  },
+  "gate9_target_check": {
+    "status": "drafted",
+    "note": "深链 0 处；b24.3.2/b24.3.3 为纯文本预告（未生产，不挂深链，门禁⑨；static-b03.cjs T4 PASS）。"
+  },
+  "gate11_quiz": {
+    "status": "drafted",
+    "note": "本课 2 页为任务书课页分工的设计意图（讲解+沙盘），台账留痕，非缺页；沙盘作答由 B4 即时反馈（browser-b03.cjs 三滑块全走查）。"
+  },
+  "expert_review": {
+    "reviewer": "生物学科专家队",
+    "reviewed_at": "2026-10-19",
+    "report": "~/workspace/bio-audit/batch-p7-expert/REVIEW-REPORT.md",
+    "verdict": "final_passed"
+  }
+}

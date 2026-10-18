@@ -1,0 +1,28 @@
+{
+  "schema": "biology-review-ledger/1.0",
+  "chapter": "b03",
+  "lesson": "b03.1.6",
+  "written_at": "2026-10-19",
+  "written_by": "生物 P7 生产队（蓝队数据工程 + 内容撰写）",
+  "notes": "p1 5 分课小卡片＋3 choice（b03.1.1–1.5 回查：Q1 遮光对照作用/Q2 结论不超范围/Q3 夜间生命活动）/p2 4 choice（Q4 呼吸vs呼吸作用/Q5 子房壁→果皮/Q6 温室短板/Q7 碳—氧平衡）。梯度：识记→理解→应用；tip 均带 b03 章内依据页码。",
+  "announcements": [],
+  "frozen_refs": [],
+  "gate8_first_definition": {
+    "status": "drafted",
+    "note": "本课无新术语（static-b03.cjs T3 PASS）。"
+  },
+  "gate9_target_check": {
+    "status": "drafted",
+    "note": "深链 0 处；choice tip 均为章内纯文本页码引用（static-b03.cjs T4 PASS）。"
+  },
+  "gate11_quiz": {
+    "status": "drafted",
+    "note": "本课 2 页为任务书课页分工的设计意图（小结与习题），台账留痕；quiz 页题目数>0（p1 3 题+p2 4 题；static-b03.cjs T7 PASS，browser-b03.cjs 逐题真点判分走查）。"
+  },
+  "expert_review": {
+    "reviewer": "生物学科专家队",
+    "reviewed_at": "2026-10-19",
+    "report": "~/workspace/bio-audit/batch-p7-expert/REVIEW-REPORT.md",
+    "verdict": "final_passed"
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "schema": "biology-review-ledger/1.0",
+  "chapter": "b03",
+  "lesson": "b03.1.1",
+  "written_at": "2026-10-19",
+  "written_by": "生物 P7 生产队（蓝队数据工程 + 内容撰写）",
+  "notes": "p1 实验原理+步骤（暗处理→一半遮光→光照→酒精脱色→碘液检验）+B3 实验三问设计器首立（recordKey=bio_3q_b03.1.1；三问顺序对照→单一变量→重复冻结；answer={0,0,1}逐项程序化校验不越界；thoughtExp 针对本题写；首立页配第2页全流程回放入口 #b03.1.1/2）/p2 虚拟实验五步全流程观察页（角落常驻虚拟实验声明；结论留白到p3）/p3 结果与结论（BIO-R45 只说两句；注明多片叶多做几次重复验证 BIO-R14）+跃升4三原则定型回望。",
+  "announcements": [],
+  "frozen_refs": [
+    {
+      "id": "b03.1.1-f1",
+      "kind": "frozen_copy",
+      "ref": "BIO-R45（结论不超范围）",
+      "status": "drafted",
+      "note": "p3 结论逐字限定“光是条件、产物含淀粉”，不许推出原料/场所（static-b03.cjs T6 关键词扫描 PASS）。"
+    },
+    {
+      "id": "b03.1.1-f2",
+      "kind": "frozen_copy",
+      "ref": "B-F3（recordKey/三问顺序）",
+      "status": "drafted",
+      "note": "recordKey=bio_3q_b03.1.1；页内三问顺序对照→单一变量→重复（static-b03.cjs T8 渲染顺序断言 PASS）。"
+    },
+    {
+      "id": "b03.1.1-f3",
+      "kind": "frozen_copy",
+      "ref": "BIO-R35（虚拟实验声明）",
+      "status": "drafted",
+      "note": "p2 角落常驻虚拟实验声明（水浴加热酒精/碘液不接触皮肤，逐页写实；static-b03.cjs T6 PASS）。"
+    }
+  ],
+  "gate8_first_definition": {
+    "status": "drafted",
+    "note": "本课新术语首现即定义：暗处理/对照组/单一变量/碘液检验@b03.1.1-p1（先认词行内定义；static-b03.cjs T3 PASS）。注：本课刻意回避“光合作用”术语（正式定义在 b03.1.2-p1），B3 purpose 用“绿叶制造有机物”表述。"
+  },
+  "gate9_target_check": {
+    "status": "drafted",
+    "note": "深链 0 处外部课号；章内回放入口 #b03.1.1/2 为同课页码链（路由 #课号/页码，真机点击验证见 browser-b03）；b02 小结未生产，prereq 只做纯文本前链（static-b03.cjs T4 PASS）。"
+  },
+  "gate11_quiz": {
+    "status": "drafted",
+    "note": "本课无 kind:quiz 页；三问作答由 B3 组件内判分（browser-b03.cjs 真点选走查）。"
+  },
+  "expert_review": {
+    "reviewer": "生物学科专家队",
+    "reviewed_at": "2026-10-19",
+    "report": "~/workspace/bio-audit/batch-p7-expert/REVIEW-REPORT.md",
+    "verdict": "final_passed",
+    "resigned_at": "2026-10-19",
+    "resign_report": "~/workspace/bio-audit/batch-p7-expert/RESIGN-NOTE.md",
+    "resign_note": "复签核验（2026-10-19，生物学科专家队亲手核验）：W-01 五步统一已落地——b03.js b03.1.1-p2 步骤按钮 5 个①–⑤（无⑥按钮/步骤 div/圆点），\"第 1 步 / 共 5 步\"，note\"走完五步再想\"，⑤碘液检验步内含\"先只看现象\"小字，point\"五步走完只看现象\"；全文件\"六步\"0 命中；台账 notes 已同步为\"五步全流程观察页\"。W-02 直引号已落地——b03.js 与 biology-engine.js 全文件 0 弯引号（UTF-8 程序化确认），B3_QTITLES[1]/B3_BADGE_ANSWERS 4 处均为转义直引号；独立复验队另做渲染级双重验证通过。两处整改实物与台账更正均到位，复签 final_passed。",
+    "rework_items": [
+      "W-01：b03.1.1-p2 虚拟实验步骤数前后不一致——p1 已定五步流程，p2 标题/lead/point 写五步但实际 6 个步骤按钮（多出⑥观察）、note 写'走完六步'。整改：以 p1 五步为准统一 p2（删去/合并⑥观察，'走完六步'→'走完五步'）；同时更正台账 notes 中'六步'→'五步'。",
+      "W-02：biology-engine.js B3 新增字符串 4 处用弯引号（B3_QTITLES 第 2 问、B3_BADGE_ANSWERS 3 条），违反本批'直引号'冻结。整改：4 处改为直引号。"
+    ]
+  }
+}
