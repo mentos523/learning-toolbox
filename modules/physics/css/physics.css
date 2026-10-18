@@ -135,6 +135,33 @@ body[data-theme="dark"] #physics-app, body[data-theme="dark"] #phy-browser {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+/* ---------- 学习路径提示（S3 前置关系层试点，2026-10-18） ---------- */
+.phy-prereq-hint {
+  flex: none;
+  margin: 8px 0 0;
+  padding: 7px 10px;
+  background: var(--phy-panel);
+  border: 1px dashed var(--phy-target);
+  border-radius: 8px;
+  font-size: 0.8rem;
+  line-height: 1.7;
+  color: var(--phy-ink-soft);
+}
+.phy-prereq-hint-head { color: var(--phy-ink); font-weight: 600; margin-right: 4px; }
+.phy-prereq-hint-sep { margin: 0 6px; color: var(--phy-ink-soft); }
+.phy-prereq-hint-item { display: inline; }
+a.phy-prereq-hint-link { color: var(--phy-link, #0b6bcb); text-decoration: underline; }
+.phy-prereq-hint-ext { color: var(--phy-ink-soft); }
+/* 黄队 B2：reason 触屏可见化——hard 小字灰字直接可见，soft 默认收起可展开 */
+.phy-prereq-hint-why { display: block; font-size: 0.72rem; color: var(--phy-ink-soft); line-height: 1.5; margin: 2px 0 2px 1.2em; }
+.phy-prereq-hint-why.hidden { display: none; }
+.phy-prereq-hint-toggle, .phy-prereq-hint-more {
+  margin-left: 6px; padding: 2px 8px; font-size: 0.72rem; line-height: 1.4;
+  color: var(--phy-ink-soft); background: transparent;
+  border: 1px solid var(--phy-line, #ccc); border-radius: 999px; cursor: pointer;
+}
+.phy-prereq-hint-toggle { min-height: 28px; }
+.phy-prereq-hint-morewrap.hidden { display: none; }
 .phy-main {
   flex: 1;
   min-height: 0;

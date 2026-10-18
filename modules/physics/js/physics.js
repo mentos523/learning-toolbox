@@ -6033,6 +6033,13 @@
     appRoot.appendChild(el("div", "phy-crumb",
       esc(found.chapter.id) + " · " + esc(found.unit.title) + " · " + esc(found.lesson.id)));
 
+    /* S3 前置关系层试点（2026-10-18）：学习路径提示（用户裁决 C2）。
+     * 无数据/课不在试点范围时 render 返回 null，渲染层无感。 */
+    if (window.PHY_PREREQ_HINT && typeof window.PHY_PREREQ_HINT.render === "function") {
+      var prereqHint = window.PHY_PREREQ_HINT.render(found.lesson.id);
+      if (prereqHint) appRoot.appendChild(prereqHint);
+    }
+
     var main = el("main", "phy-main");
     main.appendChild(el("h2", "phy-title", esc(page.title)));
     curPageId = found.lesson.id + "-p" + (cur.pageIdx + 1);
