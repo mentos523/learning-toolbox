@@ -32,9 +32,9 @@
       "echo_target": "b19.1.4（未生产）",
       "id": "b18.1.3-a4",
       "kind": "backfill_point",
-      "note": "b19.1.4 立靶页生产时，须回链 b18.1.3 的携带者回填；届时把本条置 final_passed。",
+      "note": "2026-10-18 P4 兑现：b19.1.4-p1 立靶页回填卡片 mathlink 深链回链 b18.1.3（\"回填：b18.1.3 第 4 页——携带致病基因≠注定发病：携带者表型正常，但能传递致病基因\"），真点击实测 hash 落到 #b18.1.3/1、落点页标题\"判读三步走：口诀开道\"（browser-b19.cjs E-click-b1813/E-land-b1813 PASS）。证据：~/workspace/bio-audit/batch-p4-prod/。",
       "source": "docs/biology-pedagogy.md 跃升 10（辨析②立靶 b19.1.4）",
-      "status": "drafted",
+      "status": "final_passed",
       "text": "辨析②回填点之一：b18.1.3（系谱：携带者表型正常）"
     },
     {
