@@ -1,1 +1,55 @@
-{"announcements":[],"chapter":"b19","frozen_refs":[{"id":"b19.1.5-f1","kind":"frozen_copy","note":"5 档梯度：Q1 记忆（双链关系）→Q2 理解（配对应用）→Q3 应用（2ⁿ 计算）→Q4 辨析（携带≠发病）→Q5 生活中的生物（转基因）→Q6 实验设计（半保留验证思路）；每题 tip 带\"b19.1.x 第 x 页\"依据（static-b19.cjs T7 PASS）。","ref":"docs/biology-pedagogy.md 2.6（每章必有一道\"生活中的生物\"题+一道实验设计题）","status":"final_passed"}],"gate11_quiz":{"note":"review 1 + choice 6，无 0 题页；answer 索引合法；答错即时诊断 tip（browser-b19.cjs G-wrong-tip/G-right-ok PASS：首次答错即给 tip，不只\"再想想\"）。","status":"final_passed"},"gate8_first_definition":{"note":"习题页无新术语首现（\"同位素标记\"复用 b19.1.2-p1 定义，题干+tip 均有页码指引）。","status":"final_passed"},"gate9_target_check":{"note":"本课无深链；tip 引用的 b19.1.1–1.4 页码均为本章已生产页。","status":"final_passed"},"lesson":"b19.1.5","notes":"本章小结 review 逐课回指（b19.1.1–1.4）。","schema":"biology-review-ledger/1.0","written_at":"2026-10-18","written_by":"生物生产队（蓝队数据工程 + 黄队内容）","expert_review":{"reviewer":"生物学科专家队+黄队教学口径（P4 独立评审代理，未参与 P4 生产）","reviewed_at":"2026-10-18","report":"~/workspace/bio-audit/batch-p4-expert/REVIEW-REPORT.md","verdict":"PASS","rulings":["BIO-RULING-2026-10-18-13"],"summary":"PASS：review 1 + choice 6，5 档梯度完整；tip 均带页码依据。 本课不受 R13 影响（R13 仅涉 b19.1.4-p3 point）；WARN R13 已随本批关闭（改动见 ledger-b19.1.4.json 返工记录）。","rework_reverify":{"reverified_at":"2026-10-18","reverified_by":"生物 P4 返工执行人（执行返工并登记关闭；报告 §七建议的协调者返工复核另行）","verdict":"PASS","method":"按裁决书整改 A：b19.js b19.1.4-p3 point「基因组」→「你的 DNA」；ledger-b19.1.4.json gate8 注记按实际改写订正；browser-b19.cjs headless 冒烟（b19.1.4 改动页真实渲染，pageerror 0）。","items_reverified":["R13"],"summary":"WARN R13 已关闭：point 现为\"消化成小分子：吃进去的基因到不了你的 DNA。\"；gate8 注记已如实订正。独立复验（白队 QA + 内容复验）按报告 §七另行，不在本轮。"}}}
+{
+  "announcements": [],
+  "chapter": "b19",
+  "frozen_refs": [
+    {
+      "id": "b19.1.5-f1",
+      "kind": "frozen_copy",
+      "note": "5 档梯度：Q1 记忆（双链关系）→Q2 理解（配对应用）→Q3 应用（2ⁿ 计算）→Q4 辨析（携带≠发病）→Q5 生活中的生物（转基因）→Q6 实验设计（半保留验证思路）；每题 tip 带\"b19.1.x 第 x 页\"依据（static-b19.cjs T7 PASS）。",
+      "ref": "docs/biology-pedagogy.md 2.6（每章必有一道\"生活中的生物\"题+一道实验设计题）",
+      "status": "final_passed"
+    }
+  ],
+  "gate11_quiz": {
+    "note": "review 1 + choice 6，无 0 题页；answer 索引合法；答错即时诊断 tip（browser-b19.cjs G-wrong-tip/G-right-ok PASS：首次答错即给 tip，不只\"再想想\"）。",
+    "status": "final_passed"
+  },
+  "gate8_first_definition": {
+    "note": "习题页无新术语首现（\"同位素标记\"复用 b19.1.2-p1 定义，题干+tip 均有页码指引）。",
+    "status": "final_passed"
+  },
+  "gate9_target_check": {
+    "note": "本课无深链；tip 引用的 b19.1.1–1.4 页码均为本章已生产页。",
+    "status": "final_passed"
+  },
+  "lesson": "b19.1.5",
+  "notes": "本章小结 review 逐课回指（b19.1.1–1.4）。",
+  "schema": "biology-review-ledger/1.0",
+  "written_at": "2026-10-18",
+  "written_by": "生物生产队（蓝队数据工程 + 黄队内容）",
+  "expert_review": {
+    "reviewer": "生物学科专家队+黄队教学口径（P4 独立评审代理，未参与 P4 生产）",
+    "reviewed_at": "2026-10-18",
+    "report": "~/workspace/bio-audit/batch-p4-expert/REVIEW-REPORT.md",
+    "verdict": "PASS",
+    "rulings": [
+      "BIO-RULING-2026-10-18-13"
+    ],
+    "summary": "PASS：review 1 + choice 6，5 档梯度完整；tip 均带页码依据。 本课不受 R13 影响（R13 仅涉 b19.1.4-p3 point）；WARN R13 已随本批关闭（改动见 ledger-b19.1.4.json 返工记录）。",
+    "rework_reverify": {
+      "reverified_at": "2026-10-18",
+      "reverified_by": "生物 P4 返工执行人（执行返工并登记关闭；报告 §七建议的协调者返工复核另行）",
+      "verdict": "PASS",
+      "method": "按裁决书整改 A：b19.js b19.1.4-p3 point「基因组」→「你的 DNA」；ledger-b19.1.4.json gate8 注记按实际改写订正；browser-b19.cjs headless 冒烟（b19.1.4 改动页真实渲染，pageerror 0）。",
+      "items_reverified": [
+        "R13"
+      ],
+      "summary": "WARN R13 已关闭：point 现为\"消化成小分子：吃进去的基因到不了你的 DNA。\"；gate8 注记已如实订正。独立复验（白队 QA + 内容复验）按报告 §七另行，不在本轮。"
+    },
+    "expert_cosign": {
+      "cosigned_by": "生物学科专家队",
+      "cosigned_at": "2026-10-18",
+      "note": "补正：专家队复核实物证据后会签。原生产侧自签记录（reverified_by/reverified_at/method/items_reverified/summary）完整保留，未改动。本台账所载 rework_reverify（R13：b19.1.4-p3 point「基因组」→「你的 DNA」+ ledger-b19.1.4.json gate8 注记订正；本课为同批台账，记录同一返工项）实物证据：独立复验 ~/workspace/bio-audit/batch-p4-reverify/REV-REPORT.md §三①（rev-r13.cjs/rev-r13.json，R13 5/5 PASS）——b19.1.4-p3 point 逐字「消化成小分子：吃进去的基因到不了你的 DNA。」、渲染页「基因组」零命中、gate8 注记「\"基因组\"一词未用，改用\"人的 DNA\"。」如实；本人另用 grep 独立复核 b19.js point 文本与台账 gate8 注记一致。实物无疑，会签通过；REV-REPORT §五 OBS-⑭ 程序瑕疵就此关闭。"
+    }
+  }
+}

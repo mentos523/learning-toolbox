@@ -1,0 +1,62 @@
+{
+  "announcements": [],
+  "chapter": "b20",
+  "frozen_refs": [
+    {
+      "id": "b20.1.4-f1",
+      "kind": "frozen_copy",
+      "note": "quiz×2：review 1 + choice 6；p1 识记（来源/特点/原理）→p2 应用（情景辨析/纠错/实例归类），梯度 2 档（static-b20.cjs T7 PASS）。【补遗 2026-10-19·生物学科专家队】补遗：WARN-4 返工在 p2 新增第 2 道实验设计辨析题，实物 choice 共 7（p1 3 + p2 4）；证据句同步；产品本身经独立复验核实无误。",
+      "ref": "b19.1.5 范式（习题梯度）",
+      "status": "final_passed",
+      "expert_evidence": "独立核实：quiz×2（review 1 + choice 6）；p1 识记（来源/特点/原理）→p2 应用（情景辨析/纠错/实例归类）梯度成立。【补遗 2026-10-19·生物学科专家队】实物复核：choice 共 7（p1 Q1 三来源/Q2 突变特点/Q3 杂交水稻原理；p2 Q1 花生情景/Q2 实验设计·WARN-4 新增/Q3 抗药性纠错/Q4 无籽西瓜归类），梯度成立。"
+    },
+    {
+      "id": "b20.1.4-f2",
+      "kind": "frozen_copy",
+      "note": "b20.1.4-p1 题数 4（含 review）、p2 题数 3；每题有 answer 索引合法、tip 回指课页（static-b20.cjs T7 PASS）。【补遗 2026-10-19·生物学科专家队】补遗：WARN-4 返工后实物 p2 题数 4（新增 Q2 实验设计题，answer=1、tip 回指 b20.1.1 第 1 页）；证据句同步；产品本身经独立复验核实无误。",
+      "ref": "门禁⑪（quiz 页题目数>0）",
+      "status": "final_passed",
+      "expert_evidence": "独立核实：p1 4 题（含 review）、p2 3 题；每题 4 选项、answer 索引合法、tip 回指课页。【补遗 2026-10-19·生物学科专家队】实物复核：p1 4 题（含 review）、p2 4 题；每题 4 选项、answer 索引合法、tip 回指课页。"
+    }
+  ],
+  "gate11_quiz": {
+    "note": "本课 kind:quiz×2：p1 review 1 + choice 3、p2 choice 3；梯度：p1 识记→p2 应用（static-b20.cjs T7 全 PASS）。【补遗 2026-10-19·生物学科专家队】补遗：WARN-4 返工后实物 p2 choice 4；证据句同步；产品本身经独立复验核实无误。",
+    "status": "final_passed",
+    "expert_evidence": "quiz×2：review 1 + choice 6；每题 4 选项、answer 合法、tip 回指课页；p1 识记→p2 应用梯度；6 题答案独立复核全对（Q1 三来源/Q2 突变特点/Q3 杂交水稻原理/p2Q1 花生情景/p2Q2 抗药性纠错/p2Q3 无籽西瓜归类）。【补遗 2026-10-19·生物学科专家队】补遗：WARN-4 返工后实物 choice 共 7，p2 题号顺延为 p2Q1 花生情景辨析/p2Q2 实验设计（新增，answer=1）/p2Q3 抗药性纠错/p2Q4 无籽西瓜归类；7 题答案独立复核全对；产品本身经独立复验核实无误。"
+  },
+  "gate8_first_definition": {
+    "note": "本课无新术语首现（小结课）；Q 选项中的「用进废退」仅作错误选项出现，未作正确理论讲（BIO-R18 合规）。",
+    "status": "final_passed",
+    "expert_evidence": "本课无新术语首现（小结课）；Q1 选项“用进废退”仅作错误选项出现，未作正确理论讲（BIO-R18 合规）；Q2 选项“突变都是有害的”为错误选项，配正确选项“低频、随机、多害少利、不定向”与 tip 纠正。"
+  },
+  "gate9_target_check": {
+    "note": "本课无深链（mathlink 0 处）；tip 回指均为本章已生产课页（b20.1.1–1.3 纯文本页号，无深链）。",
+    "status": "final_passed",
+    "expert_evidence": "本课无 mathlink 深链；tip 回指均为本章已生产课页号纯文本（如 b20.1.1 第 2 页），无虚假指向。"
+  },
+  "lesson": "b20.1.4",
+  "notes": "按 b19.1.5 范式：p1 小结 review + 3 识记题，p2 3 应用题（花生情景辨析/抗药性纠错/无籽西瓜归类）。每题 tip 均回指课页。",
+  "schema": "biology-review-ledger/1.0",
+  "written_at": "2026-10-18",
+  "written_by": "生物生产队（蓝队数据工程 + 黄队内容）",
+  "expert_review": {
+    "reviewer": "生物学科专家队（P5 独立评审代理，未参与 P5 生产）",
+    "reviewed_at": "2026-10-18",
+    "report": "~/workspace/bio-audit/batch-p5-expert/REVIEW-REPORT.md",
+    "verdict": "PASS",
+    "engine_diff_empty": true,
+    "engine_diff_note": "git diff -- modules/biology/js/biology-engine.js 为空（0 字节），零新组件，独立核实。",
+    "gates": {
+      "gate8_first_definition": "final_passed",
+      "gate9_target_check": "final_passed",
+      "gate11_quiz": "final_passed",
+      "frozen_refs": "final_passed（2 条）",
+      "announcements": "final_passed（无预告事项，门禁⑩无待办）"
+    },
+    "warnings": [],
+    "observations": [
+      "讲解字数按生产队冻结口径（static-b20.cjs T2-exp300）11 页全部≤300，独立抽查实质无超限。"
+    ],
+    "final_passed": true
+  }
+}

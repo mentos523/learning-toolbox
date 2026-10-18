@@ -1,0 +1,93 @@
+{
+  "announcements": [
+    {
+      "echo_target": "b21（未生产）",
+      "echo_text": "",
+      "id": "b20.1.2-a1",
+      "kind": "foretell",
+      "note": "门禁⑩：未生产课号纯文本预告，无深链（static-b20.cjs T4-b21-plaintext PASS）。",
+      "source": "b20.1.2-p1 纯文本（纠正话术第二条）",
+      "status": "drafted",
+      "text": "有利突变是进化的原材料（b21 细讲）。",
+      "expert_evidence": "独立核实：“有利突变是进化的原材料（b21 细讲）”为纯文本预告，b21 未生产、无深链；drafted 为正确追踪态，待 b21 生产时兑现（届时转 final_passed）。"
+    }
+  ],
+  "chapter": "b20",
+  "frozen_refs": [
+    {
+      "id": "b20.1.2-f1",
+      "kind": "frozen_copy",
+      "note": "p1 基因突变特点「低频/随机/多害少利/不定向」逐字；未出现「抗生素诱导细菌变异」「突变都是有害的」类表述（static-b20.cjs T6 PASS）。",
+      "ref": "拉马克专治口径（课程图纸红线）",
+      "status": "final_passed",
+      "expert_evidence": "独立核实：p1“低频——…；随机——…；多害少利——…；不定向——…”四条齐全；无“抗生素诱导变异”断言式表述；“突变都是有害的”仅以纠错语境出现。"
+    },
+    {
+      "id": "b20.1.2-f2",
+      "kind": "frozen_copy",
+      "note": "p1 纯文本「有利突变是进化的原材料（b21 细讲）」逐字；b21 未生产，无深链。",
+      "ref": "门禁⑩预告措辞",
+      "status": "final_passed",
+      "expert_evidence": "独立核实：p1 纯文本“有利突变是进化的原材料（b21 细讲）”逐字，无 mathlink、无进化机制展开（T6 合规）。"
+    },
+    {
+      "id": "b20.1.2-f3",
+      "kind": "frozen_copy",
+      "note": "p3「突变发生在个体，频率改变在种群」「变异先存在，选择才作用」逐字；口径「进化是种群的事」未改字、未提前立靶（立靶在 b21.1.2）。",
+      "ref": "辨析④回填（课程图纸红线）",
+      "status": "final_passed",
+      "expert_evidence": "独立核实：p3“辨析④回填：突变发生在个体，频率改变在种群。变异先存在，选择才作用”逐字；全页未提前立靶“进化是种群的事”（立靶在 b21.1.2）。"
+    },
+    {
+      "id": "b20.1.2-f4",
+      "kind": "echo",
+      "note": "兑现：b20.1.2-p1 mathlink 回链 #b19.1.2，关键词「偶尔的\"写错\"就是基因突变（b20 细讲）」可识别；browser-b20.cjs E-foretell 真点击实测 PASS。",
+      "ref": "ledger-b19.1.2.json b19.1.2-a1",
+      "status": "final_passed",
+      "expert_evidence": "独立核实：ledger-b19.1.2.json b19.1.2-a1 status=final_passed，其 note 所载实测（browser-b20.cjs E-foretell-click→#b19.1.2/1、E-foretell-land 落点标题“半保留复制”）与 browser-b20.json 原始记录一致，兑现真实。"
+    }
+  ],
+  "gate11_quiz": {
+    "note": "本课无 kind:quiz 页；基因突变特点在 b20.1.4-p1 Q2 机判覆盖；抗药性纠错在 b20.1.4-p2 Q2 覆盖。【补遗 2026-10-19·生物学科专家队】补遗：WARN-4 返工题号顺延，实物抗药性纠错在 b20.1.4-p2 Q3；证据句同步；产品本身经独立复验核实无误。",
+    "status": "final_passed",
+    "expert_evidence": "本课无 kind:quiz 页；基因突变特点由 b20.1.4-p1 Q2、抗药性纠错由 b20.1.4-p2 Q2 机判覆盖（答案/提示正确）。【补遗 2026-10-19·生物学科专家队】实物复核：抗药性纠错由 b20.1.4-p2 Q3 机判覆盖（答案/提示正确）。"
+  },
+  "gate8_first_definition": {
+    "note": "本课新术语无首现（基因突变/染色体变异首现于 b20.1.1-p2）；替换/增添/缺失/阅读框移位行内即定义。21 三体综合征/镰刀型细胞贫血症表述克制：只讲机制事实，不制造焦虑、不做诊疗暗示（static-b20.cjs T3 全 PASS）。【补遗 2026-10-19·生物学科专家队】补遗：WARN-3 返工已删除「不制造焦虑/不做诊疗暗示」元注释，实物现为纯机制事实陈述（镰刀型例子句 + 边界句「携带者不一定发病——'携带致病基因≠注定发病'」，R14 返工落地）；证据句同步；产品本身经独立复验核实无误。",
+    "status": "final_passed",
+    "expert_evidence": "本课新术语：替换/增添/缺失配“先认词——X：…”行内定义；“阅读框移位”配括号内释义（后面的密码子全错位）；镰刀型细胞贫血症/21 三体综合征为专名举例，配机制说明与克制声明（只讲机制事实，不制造焦虑、不做诊疗暗示）。【补遗 2026-10-19·生物学科专家队】实物复核：b20.1.2-p1 全页无「不制造焦虑/不做诊疗暗示」字样；镰刀型例子为机制事实陈述 + 边界句「携带者不一定发病——'携带致病基因≠注定发病'」。"
+  },
+  "gate9_target_check": {
+    "note": "深链 1 处（p1 兑现 mathlink→b19.1.2，已生产，XLINK_BIO 在表；static-b20.cjs T4 白名单 PASS）。",
+    "status": "final_passed",
+    "expert_evidence": "深链 1 处（p1 兑现 mathlink→b19.1.2）；browser-b20.json E-foretell-click PASS（点击→#b19.1.2/1）、E-foretell-land PASS（落点标题“半保留复制”）；ledger-b19.1.2.json b19.1.2-a1 note 与实测证据一致，兑现链真实。"
+  },
+  "lesson": "b20.1.2",
+  "notes": "零新组件：碱基替换/阅读框移位示意用内联 SVG（V8 字号 13.6，--bio-* 语义色）。p2 为「突变类型配对」讲解页（先自己配→point 给答案，零新组件口径）。",
+  "schema": "biology-review-ledger/1.0",
+  "written_at": "2026-10-18",
+  "written_by": "生物生产队（蓝队数据工程 + 黄队内容）",
+  "expert_review": {
+    "reviewer": "生物学科专家队（P5 独立评审代理，未参与 P5 生产）",
+    "reviewed_at": "2026-10-18",
+    "report": "~/workspace/bio-audit/batch-p5-expert/REVIEW-REPORT.md",
+    "verdict": "PASS",
+    "engine_diff_empty": true,
+    "engine_diff_note": "git diff -- modules/biology/js/biology-engine.js 为空（0 字节），零新组件，独立核实。",
+    "gates": {
+      "gate8_first_definition": "final_passed",
+      "gate9_target_check": "final_passed",
+      "gate11_quiz": "final_passed",
+      "frozen_refs": "final_passed（4 条）",
+      "announcements": "drafted（正确追踪态：b20.1.2-a1 待 b21 兑现）"
+    },
+    "warnings": [
+      "BIO-RULING-2026-10-18-14（WARN）：b20.1.2-p1 镰刀型细胞贫血症例子页未配 BIO-R37 边界句“携带致病基因≠注定发病”。书面裁决：WARN 按口径字面成立；该页只讲突变机制、未涉及携带者/发病概率论述，无误读抓手，且已落实黄队“表述克制”策略，故不升级 FAIL。整改：例子句后加边界半句（裁决书§四），返工后复验关闭；不 blocking 本批结论（本批不推送）。"
+    ],
+    "observations": [
+      "p2 mathlink“基因重组…就是自由组合定律在配子中的样子”为课程范围内简化（本课不讲交叉互换），主文定义“减数分裂形成配子时，不同基因重新组合”完整准确，未教错结论；后续若讲交叉互换需回填澄清。",
+      "p2“减数分裂在时刻发生”配“每个配子都在用”限定，教学夸张无误读后果。【补遗 2026-10-19·生物学科专家队】补遗：WARN-5 返工后实物主语已为「基因重组」（b20.1.1-p2：“形成配子时，减数分裂中的基因重组时刻都在发生——它不是稀有事件，是每个配子都在用的“洗牌”。”），旧措辞「减数分裂在时刻发生」全文件零命中；证据句同步；产品本身经独立复验核实无误。"
+    ],
+    "final_passed": true
+  }
+}
