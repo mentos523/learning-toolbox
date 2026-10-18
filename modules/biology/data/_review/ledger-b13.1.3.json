@@ -1,0 +1,44 @@
+{
+  "schema": "biology-review-ledger/1.0",
+  "chapter": "b13",
+  "lesson": "b13.1.3",
+  "written_at": "2026-10-19",
+  "written_by": "生物 P8 生产队（蓝队数据工程 + 内容撰写）",
+  "notes": "p1 腺苷三磷酸首现即定义（A—P～P～P；～为高能磷酸键；模式图声明）/p2 ATP⇌ADP+Pi+能量（MathML）+ATP/ADP循环内联动画（window.BIO_B13.cyc两步演示；未新增B组件；模式图声明）/p3 能量货币边界（T4逐字）+误区专治ATP储存大量能量→含量少转化快+吸能反应/放能反应首现即定义。",
+  "announcements": [],
+  "frozen_refs": [
+    {
+      "id": "b13.1.3-f1",
+      "kind": "frozen_copy",
+      "note": "p3 T4边界句逐字：含量少、转化快，货币流通不是金库囤积（static-b05b13.cjs T6 PASS）。",
+      "ref": "T4",
+      "status": "drafted"
+    },
+    {
+      "id": "b13.1.3-f2",
+      "kind": "frozen_copy",
+      "note": "p1/p2 结构/循环示意图配模式图声明逐字（static-b05b13.cjs T6 PASS）。",
+      "ref": "BIO-R32",
+      "status": "drafted"
+    }
+  ],
+  "gate8_first_definition": {
+    "status": "drafted",
+    "note": "本课新术语首现即定义：腺苷三磷酸@b13.1.3-p1、吸能反应/放能反应@b13.1.3-p3（先认词行内定义；static-b05b13.cjs T3 PASS）。"
+  },
+  "gate9_target_check": {
+    "status": "drafted",
+    "note": "深链 0 处（static-b05b13.cjs T4 白名单 PASS）。"
+  },
+  "gate11_quiz": {
+    "status": "drafted",
+    "note": "本课无 kind:quiz 页；ATP结构/货币边界/吸能放在 b13.1.4-p2 Q1/Q3 机判覆盖。"
+  },
+  "expert_review": {
+    "reviewer": "生物学科专家队",
+    "reviewed_at": "2026-10-19",
+    "report": "~/workspace/bio-audit/batch-p8-expert/RESIGN-NOTE.md",
+    "verdict": "final_passed",
+    "conclusion": "返工复核 PASS：W1–W11 逐项在场"
+  }
+}

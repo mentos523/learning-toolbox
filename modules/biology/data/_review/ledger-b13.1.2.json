@@ -1,0 +1,76 @@
+{
+  "schema": "biology-review-ledger/1.0",
+  "chapter": "b13",
+  "lesson": "b13.1.2",
+  "written_at": "2026-10-19",
+  "written_by": "生物 P8 生产队（蓝队数据工程 + 内容撰写）",
+  "notes": "p1 高效性/专一性/作用条件温和（首现即定义）+B10酶条件实验室首立（recordKey=bio_enzyme_b13.1.2；温度0-70init37/pH0-14step0.5init7冻结默认；示意曲线常驻；烫坏真锁死/冻住可恢复；锁钥3对+专一性徽章+T3边界小字；mathlink认旧友b05.1.2）/p2 酶活性曲线读图直观版（只读最适/上升下降；误区专治高温不可恢复vs低温可恢复）/p3 代数6.1 XLINK（直观版一页）+纯文本预告drafted+mathlink认旧友回链b05.1.2。",
+  "announcements": [
+    {
+      "id": "b13.1.2-a1",
+      "kind": "foretell",
+      "status": "drafted",
+      "text": "学完 6.1 后回填认旧友——到时候回来看看，这条小山包就是函数图像。",
+      "source": "b13.1.2-p3 纯文本预告",
+      "echo_target": "代数 6.1（math 模块；XLINK_MATH 代数 6.1→ch06-u1-l1-p1 在表）",
+      "echo_text": "",
+      "note": "门禁⑩：酶活性曲线即函数图像（直观版）；预告措辞学完6.1后回填认旧友与兑现关键词一致；任务书指定6.1形式（门禁⑫ch06形式与任务书冲突处以任务书唯一指令源为准，已在PROD-REPORT诚实缺口声明）。"
+    }
+  ],
+  "frozen_refs": [
+    {
+      "id": "b13.1.2-f1",
+      "kind": "frozen_copy",
+      "note": "B10 曲线常驻示意曲线（非实测数据）（static-b05b13.cjs T6/T8 PASS；删=FAIL）。",
+      "ref": "BIO-R42类推",
+      "status": "drafted"
+    },
+    {
+      "id": "b13.1.2-f2",
+      "kind": "frozen_copy",
+      "note": "B10 锁钥成功出结合时会微调（诱导契合）逐字（static-b05b13.cjs T8 PASS；缺=FAIL）。",
+      "ref": "T3",
+      "status": "drafted"
+    },
+    {
+      "id": "b13.1.2-f3",
+      "kind": "frozen_copy",
+      "note": "B10 滑块默认值37℃/7.0冻结（static-b05b13.cjs T8 PASS）。",
+      "ref": "B-F10",
+      "status": "drafted"
+    },
+    {
+      "id": "b13.1.2-f4",
+      "kind": "frozen_copy",
+      "note": "p2 高温/低温口径逐字：不可恢复/可恢复（static-b05b13.cjs T6 PASS）。",
+      "ref": "课程图纸",
+      "status": "drafted"
+    },
+    {
+      "id": "b13.1.2-f5",
+      "kind": "frozen_copy",
+      "note": "p2 曲线纵轴相对值注明+模式图声明逐字（static-b05b13.cjs T6 PASS）。",
+      "ref": "BIO-R42类推/BIO-R32",
+      "status": "drafted"
+    }
+  ],
+  "gate8_first_definition": {
+    "status": "drafted",
+    "note": "本课新术语首现即定义：高效性/专一性/作用条件温和@b13.1.2-p1（先认词行内定义；static-b05b13.cjs T3 PASS）。"
+  },
+  "gate9_target_check": {
+    "status": "drafted",
+    "note": "深链 3 处（p1 mathlink→b05.1.2、p3 mathlink→代数 6.1、p3 mathlink→b05.1.2；目标均已生产/XLINK在表；static-b05b13.cjs T4 白名单 PASS）。"
+  },
+  "gate11_quiz": {
+    "status": "drafted",
+    "note": "本课无 kind:quiz 页；高效性/专一性/烫坏口径在 b13.1.4-p1 Q2/Q3/p2 Q2 机判覆盖。"
+  },
+  "expert_review": {
+    "reviewer": "生物学科专家队",
+    "reviewed_at": "2026-10-19",
+    "report": "~/workspace/bio-audit/batch-p8-expert/RESIGN-NOTE.md",
+    "verdict": "final_passed",
+    "conclusion": "返工复核 PASS：W1–W11 逐项在场"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "schema": "biology-review-ledger/1.0",
+  "chapter": "b05",
+  "lesson": "b05.1.4",
+  "written_at": "2026-10-19",
+  "written_by": "生物 P8 生产队（蓝队数据工程 + 内容撰写）",
+  "notes": "p1 小结review+3 choice（胆汁/小肠相适应/唾液实验；先错后对：Q1误区题在前）/p2 4 choice（消化vs吸收/平衡膳食/缺铁食补/形配其用理解；梯度：识记→理解→应用）。",
+  "announcements": [],
+  "frozen_refs": [
+    {
+      "id": "b05.1.4-f1",
+      "kind": "frozen_copy",
+      "note": "p1 review 复述胆汁口径逐字胆汁不含消化酶、形配其用口诀逐字（static-b05b13.cjs T6 PASS）。",
+      "ref": "BIO-R06/BIO-R11",
+      "status": "drafted"
+    }
+  ],
+  "gate8_first_definition": {
+    "status": "drafted",
+    "note": "本课无新术语（小结课）。"
+  },
+  "gate9_target_check": {
+    "status": "drafted",
+    "note": "深链 0 处（static-b05b13.cjs T4 白名单 PASS）。"
+  },
+  "gate11_quiz": {
+    "status": "drafted",
+    "note": "quiz 页题目数>0：p1 review+3 choice、p2 4 choice（门禁⑪）；梯度：p1 Q1误区（胆汁）→Q2理解（小肠）→Q3实验（唾液）；p2 应用（食补/膳食）收尾。"
+  },
+  "expert_review": {
+    "reviewer": "生物学科专家队",
+    "reviewed_at": "2026-10-19",
+    "report": "~/workspace/bio-audit/batch-p8-expert/REVIEW-REPORT.md",
+    "verdict": "final_passed"
+  }
+}

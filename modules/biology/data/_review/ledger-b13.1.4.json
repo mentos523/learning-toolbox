@@ -1,0 +1,36 @@
+{
+  "schema": "biology-review-ledger/1.0",
+  "chapter": "b13",
+  "lesson": "b13.1.4",
+  "written_at": "2026-10-19",
+  "written_by": "生物 P8 生产队（蓝队数据工程 + 内容撰写）",
+  "notes": "p1 小结review+3 choice（酶能量口径/特性辨析/烫坏锁死；先错后对：Q1误区题在前）/p2 4 choice（ATP货币/专一性应用/吸能反应/过氧化氢酶；梯度：识记→理解→应用）。",
+  "announcements": [],
+  "frozen_refs": [
+    {
+      "id": "b13.1.4-f1",
+      "kind": "frozen_copy",
+      "note": "p1 review 复述酶能量口径（只降低活化能）、烫坏不可恢复口径（static-b05b13.cjs T6 PASS）。",
+      "ref": "BIO-R41",
+      "status": "drafted"
+    }
+  ],
+  "gate8_first_definition": {
+    "status": "drafted",
+    "note": "本课无新术语（小结课）。"
+  },
+  "gate9_target_check": {
+    "status": "drafted",
+    "note": "深链 0 处（static-b05b13.cjs T4 白名单 PASS）。"
+  },
+  "gate11_quiz": {
+    "status": "drafted",
+    "note": "quiz 页题目数>0：p1 review+3 choice、p2 4 choice（门禁⑪）；梯度：p1 Q1误区（酶供能）→Q2辨析（特性）→Q3应用（烫坏）；p2 Q1货币→Q2专一性应用→Q3吸能→Q4实验回扣。"
+  },
+  "expert_review": {
+    "reviewer": "生物学科专家队",
+    "reviewed_at": "2026-10-19",
+    "report": "~/workspace/bio-audit/batch-p8-expert/REVIEW-REPORT.md",
+    "verdict": "final_passed"
+  }
+}

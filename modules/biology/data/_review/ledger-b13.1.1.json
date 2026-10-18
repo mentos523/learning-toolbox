@@ -1,0 +1,51 @@
+{
+  "schema": "biology-review-ledger/1.0",
+  "chapter": "b13",
+  "lesson": "b13.1.1",
+  "written_at": "2026-10-19",
+  "written_by": "生物 P8 生产队（蓝队数据工程 + 内容撰写）",
+  "notes": "p1 活化能（加热给能量vs酶降门槛）+误区专治酶提供能量→只降低活化能（缺=FAIL；BIO-R41）/p2 酶首现即定义（活细胞产生的催化作用有机物；多为蛋白质少数RNA）/p3 过氧化氢三组对照虚拟实验（复用B3 experiment-3q，recordKey=bio_3q_b13.1.1；BIO-R41变量交代；BIO-R35）。",
+  "announcements": [],
+  "frozen_refs": [
+    {
+      "id": "b13.1.1-f1",
+      "kind": "frozen_copy",
+      "note": "p1 酶能量口径逐字：酶只降低活化能，不提供能量；全文无酶提供能量表述（static-b05b13.cjs T6 PASS；=FAIL口径）。",
+      "ref": "BIO-R41",
+      "status": "drafted"
+    },
+    {
+      "id": "b13.1.1-f2",
+      "kind": "frozen_copy",
+      "note": "p3 虚拟实验声明逐字：虚拟实验：现实中须注意过氧化氢安全、规范取用药品，肝脏研磨液现配现用（static-b05b13.cjs T6 PASS）。",
+      "ref": "BIO-R35",
+      "status": "drafted"
+    },
+    {
+      "id": "b13.1.1-f3",
+      "kind": "frozen_copy",
+      "note": "p3 B3 recordKey=bio_3q_b13.1.1（B-F3格式）；三问顺序对照→单一变量→重复（static-b05b13.cjs T8 PASS）。",
+      "ref": "B-F3/BIO-R12",
+      "status": "drafted"
+    }
+  ],
+  "gate8_first_definition": {
+    "status": "drafted",
+    "note": "本课新术语首现即定义：活化能@b13.1.1-p1、酶@b13.1.1-p2（先认词行内定义；static-b05b13.cjs T3 PASS）。"
+  },
+  "gate9_target_check": {
+    "status": "drafted",
+    "note": "深链 0 处（static-b05b13.cjs T4 白名单 PASS）。"
+  },
+  "gate11_quiz": {
+    "status": "drafted",
+    "note": "本课无 kind:quiz 页；酶定义/活化能口径在 b13.1.4-p1 Q1 机判覆盖。"
+  },
+  "expert_review": {
+    "reviewer": "生物学科专家队",
+    "reviewed_at": "2026-10-19",
+    "report": "~/workspace/bio-audit/batch-p8-expert/RESIGN-NOTE.md",
+    "verdict": "final_passed",
+    "conclusion": "返工复核 PASS：W1–W11 逐项在场"
+  }
+}

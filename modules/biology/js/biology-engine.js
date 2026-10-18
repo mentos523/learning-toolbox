@@ -43,6 +43,18 @@
  *   （不许写"唯一原因"）；Canvas 曲线描点（≤101 点），深色经
  *   liveViews 重绘（--bio-* 取色）。
  *
+ * - "enzyme-lab"（B10 酶条件实验室，P8 首立 b13.1.2，见
+ *   docs/biology-interactions.md §B10；冻结口径 B-F10；真值口径
+ *   BIO-R42 类推/BIO-R41）：温度/pH 双滑块（±步进，轨道 ≥44px）
+ *   + 双钟形示意曲线（常驻"示意曲线（非实测数据）"，删=FAIL）
+ *   + MathML 读数（相对活性=%）；"烫坏"态真锁死（temp≥60，
+ *   调回 37℃ 不恢复）、"冻住"态可恢复（temp≤5/≥15）；锁钥
+ *   配对小游戏（3 对，配错温和回弹，成功出专一性徽章 +
+ *   T3 边界小字"结合时会微调（诱导契合）"）；双落点
+ *   b13.1.2-p1（全开）/ b05.1.2-p3（锁钥段复用，tempLab:false）；
+ *   记录走 localStorage（key 即 recordKey=bio_enzyme_<课号>）。
+ *   纯 DOM + Canvas 实现，样式全内联（--bio-* 变量）。
+ *
  * 命名空间隔离：只写 window.BIO_ENGINE；CSS 类名前缀 bio-；
  * localStorage 键 ltb-bio-b6-<qid>（file:// 禁用降级为内存）。
  * 不改 assets/engine/**；params 里不出现具体色值（Canvas 取色
@@ -2277,6 +2289,360 @@ function renderPunnettLab(params, wid) {
     return root;
   }
 
+  /* ---------------- B10 酶条件实验室（P8 首立） ----------------
+   * 见 docs/biology-interactions.md §B10；冻结口径 B-F10
+   * （温度 {min:0,max:70,step:1,init:37} / pH {min:0,max:14,
+   * step:0.5,init:7}；\"烫坏\"态真锁死；T3 边界句必配）；
+   * 真值口径 BIO-R42 类推（曲线纵轴一律相对值，常驻
+   * \"示意曲线（非实测数据）\"，删=FAIL）/ BIO-R41（页内变量
+   * 交代由课页文案承担）；BIO-R35 虚拟声明常驻。
+   * 落点：b13.1.2-p1（首立，recordKey=bio_enzyme_b13.1.2，
+   * tempLab 全开）/ b05.1.2-p3（锁钥段复用，
+   * recordKey=bio_enzyme_b05.1.2，tempLab:false）。
+   * 状态机（irreversDemo）：正常 → 烫坏（temp≥60，真锁死，
+   * 调回 37℃ 不恢复）/ 正常 → 冻住（temp≤5，temp≥15 恢复）。
+   * 锁钥配错温和回弹；配对成功出专一性徽章 + T3 边界小字
+   * \"结合时会微调（诱导契合）\"。
+   * 记录走 localStorage（key 即 recordKey，file:// 降级内存）；
+   * 锁钥完成态持久化，烫坏态为当次实验会话态（\"换一份新酶"
+   * 重置=新实验）。
+   * 纯 DOM + Canvas；样式全内联（--bio-* 变量），无新增
+   * css 依赖；滑块/卡片热区 ≥44px；双编码（图标+文字）。
+   * ------------------------------------------------------------ */
+  var B10_DEFAULT_PAIRS = [
+    { enzyme: "淀粉酶", substrate: "淀粉" },
+    { enzyme: "蛋白酶", substrate: "蛋白质" },
+    { enzyme: "脂肪酶", substrate: "脂肪" }
+  ];
+  var B10_TEMP_DENATURE = 60;   /* ≥60℃ 进入烫坏（真锁死） */
+  var B10_TEMP_FREEZE = 5;      /* ≤5℃ 进入冻住 */
+  var B10_TEMP_THAW = 15;       /* ≥15℃ 解冻恢复 */
+  function checkEnzymeParams(params) {
+    function rng(o, name) {
+      if (o == null) return null;
+      if (typeof o.min !== "number" || typeof o.max !== "number" ||
+          typeof o.step !== "number" || typeof o.init !== "number")
+        return name + " 须含 min/max/step/init 数字";
+      return null;
+    }
+    return rng(params.temp, "temp") || rng(params.ph, "ph");
+  }
+  function b10load(key) {
+    try { var v = localStorage.getItem(key); return v ? JSON.parse(v) : null; }
+    catch (e) { return memStore[key] || null; }
+  }
+  function b10save(key, obj) {
+    try { localStorage.setItem(key, JSON.stringify(obj)); }
+    catch (e) { memStore[key] = obj; }
+  }
+  function b10TempAct(t) { return 100 * Math.exp(-Math.pow(t - 37, 2) / (2 * 20 * 20)); }
+  function b10PhAct(p) { return 100 * Math.exp(-Math.pow(p - 7, 2) / (2 * 2.0 * 2.0)); }
+
+  function renderEnzymeLab(params, wid) {
+    params = params || {};
+    var perr = checkEnzymeParams(params);
+    if (perr) return el("div", "bio-b10-err", "⚠ B10 参数校验失败：" + perr + "。");
+    var m = String(wid || "").match(/^b\d+\.\d+\.\d+/);
+    var recordKey = params.recordKey || ("bio_enzyme_" + (m ? m[0] : "unknown"));
+    var tempCfg = params.temp || { min: 0, max: 70, step: 1, init: 37, unit: "℃" };
+    var phCfg = params.ph || { min: 0, max: 14, step: 0.5, init: 7 };
+    var showTempLab = params.tempLab !== false;
+    var showLockKey = params.lockKey !== false;
+    var showIrrevers = params.irreversDemo !== false;
+    var pairs = Array.isArray(params.pairs) && params.pairs.length >= 2 ? params.pairs : B10_DEFAULT_PAIRS;
+    if (pairs.length > 4) pairs = pairs.slice(0, 4);
+    var curveNote = params.curveNote || "示意曲线（非实测数据）";
+
+    var root = el("section", "bio-b10");
+    root.setAttribute("data-record-key", recordKey);
+    root.setAttribute("aria-label", "酶条件实验室");
+    root.style.cssText = "margin:10px 0 16px;border:1px solid var(--bio-line);border-radius:12px;padding:12px;background:var(--bio-panel);";
+    root.appendChild(el("div", null, "🧪 <b>B10 · 酶条件实验室</b>"));
+    var st = { temp: tempCfg.init, ph: (phCfg.init == null ? 7 : phCfg.init), denatured: false, frozen: false };
+
+    /* ============ A. 温度/pH 双滑块 + 曲线 ============ */
+    var tempSlider, phSlider, tempVal, phVal, readOut, badgeBox, canvas;
+    function fmtAct() {
+      if (st.denatured) return 0;
+      if (st.frozen) return 0;
+      return Math.round(b10TempAct(st.temp) * b10PhAct(st.ph) / 100);
+    }
+    function refreshBadge() {
+      badgeBox.innerHTML = "";
+      var b = el("div", null);
+      b.style.cssText = "display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:700;border:1.5px solid var(--bio-line);border-radius:20px;padding:8px 14px;min-height:44px;";
+      if (st.denatured) {
+        b.innerHTML = "<svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" aria-hidden=\"true\"><rect x=\"5\" y=\"10\" width=\"14\" height=\"10\" rx=\"2\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><path d=\"M8 10 V7 a4 4 0 0 1 7.6-1.8\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><path d=\"M12 10 L9.5 20 M12 10 L14.5 20\" stroke=\"currentColor\" stroke-width=\"1.6\"/></svg>" +
+          "<span>🔥 烫坏了：不可恢复</span>";
+        b.style.borderColor = "var(--bio-target)"; b.style.color = "var(--bio-target)";
+      } else if (st.frozen) {
+        b.innerHTML = "<span style=\"font-size:18px\" aria-hidden=\"true\">❄</span><span>冻住了：可恢复（调回 37℃ 恢复）</span>";
+        b.style.borderColor = "var(--bio-product)"; b.style.color = "var(--bio-product)";
+      } else {
+        b.innerHTML = "<span style=\"font-size:16px\" aria-hidden=\"true\">●</span><span>正常</span>";
+        b.style.color = "var(--bio-organelle)";
+      }
+      badgeBox.appendChild(b);
+    }
+    function drawCurves() {
+      if (!canvas) return;
+      var ctx = canvas.getContext("2d");
+      var W = canvas.width, H = canvas.height;
+      var colCurve = cssVar("--bio-target"), colMark = cssVar("--bio-highlight"),
+          colText = cssVar("--bio-text"), colSoft = cssVar("--bio-ink-soft"),
+          colGrid = cssVar("--bio-grid"), colAux = cssVar("--bio-aux");
+      ctx.clearRect(0, 0, W, H);
+      ctx.font = "13.6px sans-serif";
+      function panel(y0, h, xLabel, yLabel, fn, xMin, xMax, cur, optAt) {
+        var padL = 44, padR = 10, padT = 22, padB = 30;
+        var pw = W - padL - padR, ph = h - padT - padB;
+        /* 网格 */
+        ctx.strokeStyle = colGrid; ctx.lineWidth = 1;
+        for (var g = 0; g <= 4; g++) {
+          var gy = y0 + padT + (g / 4) * ph;
+          ctx.beginPath(); ctx.moveTo(padL, gy); ctx.lineTo(padL + pw, gy); ctx.stroke();
+        }
+        /* 坐标轴 */
+        ctx.strokeStyle = colAux; ctx.lineWidth = 1.5;
+        ctx.beginPath(); ctx.moveTo(padL, y0 + padT + ph); ctx.lineTo(padL + pw, y0 + padT + ph); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(padL, y0 + padT); ctx.lineTo(padL, y0 + padT + ph); ctx.stroke();
+        /* 曲线 */
+        ctx.strokeStyle = colCurve; ctx.lineWidth = 3;
+        ctx.beginPath();
+        for (var x = xMin; x <= xMax; x += (xMax - xMin) / 100) {
+          var r = fn(x);
+          var cx = padL + ((x - xMin) / (xMax - xMin)) * pw;
+          var cy = y0 + padT + ph - (r / 100) * ph;
+          if (x === xMin) ctx.moveTo(cx, cy); else ctx.lineTo(cx, cy);
+        }
+        ctx.stroke();
+        /* 最适点 */
+        var ox = padL + ((optAt - xMin) / (xMax - xMin)) * pw;
+        ctx.fillStyle = colMark;
+        ctx.beginPath(); ctx.arc(ox, y0 + padT + ph - ph, 6, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = colText; ctx.textAlign = "center";
+        ctx.fillText("最适", ox, y0 + padT - 8);
+        /* 当前值游标 */
+        var ux = padL + ((cur - xMin) / (xMax - xMin)) * pw;
+        var uy = y0 + padT + ph - (fn(cur) / 100) * ph;
+        ctx.fillStyle = colText;
+        ctx.beginPath(); ctx.arc(ux, uy, 7, 0, Math.PI * 2); ctx.fill();
+        ctx.strokeStyle = colAux; ctx.setLineDash([4, 3]);
+        ctx.beginPath(); ctx.moveTo(ux, y0 + padT); ctx.lineTo(ux, y0 + padT + ph); ctx.stroke();
+        ctx.setLineDash([]);
+        /* 轴标注 */
+        ctx.fillStyle = colSoft; ctx.textAlign = "center";
+        ctx.fillText(xLabel, padL + pw / 2, y0 + h - 8);
+        ctx.save();
+        ctx.translate(12, y0 + padT + ph / 2); ctx.rotate(-Math.PI / 2);
+        ctx.fillText(yLabel, 0, 0);
+        ctx.restore();
+        /* curveNote 改由 DOM 标注（可测+无障碍），画布内不再重复绘制 */
+      }
+      panel(0, H / 2, "温度（℃）", "相对活性", b10TempAct, tempCfg.min, tempCfg.max, st.temp, 37);
+      panel(H / 2, H / 2, "pH", "相对活性", b10PhAct, phCfg.min, phCfg.max, st.ph, 7);
+    }
+    function update() {
+      /* 状态机 */
+      if (showIrrevers && !st.denatured && st.temp >= B10_TEMP_DENATURE) {
+        st.denatured = true; vib(40);
+      }
+      if (showIrrevers && !st.denatured) {
+        if (st.temp <= B10_TEMP_FREEZE) st.frozen = true;
+        else if (st.temp >= B10_TEMP_THAW) st.frozen = false;
+      } else if (st.denatured) {
+        st.frozen = false;
+      }
+      tempVal.textContent = st.temp + (tempCfg.unit || "℃");
+      phVal.textContent = "pH " + st.ph;
+      readOut.innerHTML = "<math xmlns=\"http://www.w3.org/1998/MathML\" style=\"font-size:16px\"><mrow><mi>相对活性</mi><mo>=</mo><mn>" +
+        fmtAct() + "</mn><mo>%</mo></mrow></math>";
+      refreshBadge();
+      drawCurves();
+    }
+    if (showTempLab) {
+      var lab = el("div", null);
+      /* 温度滑块行 */
+      var tRow = el("div", null);
+      tRow.style.cssText = "margin:10px 0;";
+      tRow.appendChild(el("div", null, "<b>温度</b>（变量交代：pH 固定 7.0、底物量相同）"));
+      var tCtl = el("div", null);
+      tCtl.style.cssText = "display:flex;align-items:center;gap:6px;flex-wrap:wrap;";
+      var tMinus = el("button", null, "−");
+      tMinus.type = "button"; tMinus.className = "tb-btn-secondary"; tMinus.setAttribute("aria-label", "温度减");
+      tMinus.style.cssText = "min-width:44px;min-height:44px;";
+      tMinus.addEventListener("click", function () {
+        st.temp = Math.max(tempCfg.min, st.temp - tempCfg.step); tempSlider.value = st.temp; update(); vib(10);
+      });
+      tempSlider = el("input", null);
+      tempSlider.type = "range"; tempSlider.min = tempCfg.min; tempSlider.max = tempCfg.max;
+      tempSlider.step = tempCfg.step; tempSlider.value = st.temp;
+      tempSlider.setAttribute("aria-label", "温度滑块");
+      tempSlider.style.cssText = "flex:1;min-width:160px;min-height:44px;";
+      tempSlider.addEventListener("input", function () { st.temp = Number(tempSlider.value); update(); });
+      var tPlus = el("button", null, "+");
+      tPlus.type = "button"; tPlus.className = "tb-btn-secondary"; tPlus.setAttribute("aria-label", "温度加");
+      tPlus.style.cssText = "min-width:44px;min-height:44px;";
+      tPlus.addEventListener("click", function () {
+        st.temp = Math.min(tempCfg.max, st.temp + tempCfg.step); tempSlider.value = st.temp; update(); vib(10);
+      });
+      tempVal = el("b", null, st.temp + (tempCfg.unit || "℃"));
+      tCtl.appendChild(tMinus); tCtl.appendChild(tempSlider); tCtl.appendChild(tPlus); tCtl.appendChild(tempVal);
+      tRow.appendChild(tCtl);
+      lab.appendChild(tRow);
+      /* pH 滑块行 */
+      var pRow = el("div", null);
+      pRow.style.cssText = "margin:10px 0;";
+      pRow.appendChild(el("div", null, "<b>pH</b>（变量交代：温度以当前滑块值为准、底物量相同）"));
+      var pCtl = el("div", null);
+      pCtl.style.cssText = "display:flex;align-items:center;gap:6px;flex-wrap:wrap;";
+      var pMinus = el("button", null, "−");
+      pMinus.type = "button"; pMinus.className = "tb-btn-secondary"; pMinus.setAttribute("aria-label", "pH减");
+      pMinus.style.cssText = "min-width:44px;min-height:44px;";
+      pMinus.addEventListener("click", function () {
+        st.ph = Math.max(phCfg.min, Math.round((st.ph - phCfg.step) * 10) / 10); phSlider.value = st.ph; update(); vib(10);
+      });
+      phSlider = el("input", null);
+      phSlider.type = "range"; phSlider.min = phCfg.min; phSlider.max = phCfg.max;
+      phSlider.step = phCfg.step; phSlider.value = st.ph;
+      phSlider.setAttribute("aria-label", "pH滑块");
+      phSlider.style.cssText = "flex:1;min-width:160px;min-height:44px;";
+      phSlider.addEventListener("input", function () { st.ph = Number(phSlider.value); update(); });
+      var pPlus = el("button", null, "+");
+      pPlus.type = "button"; pPlus.className = "tb-btn-secondary"; pPlus.setAttribute("aria-label", "pH加");
+      pPlus.style.cssText = "min-width:44px;min-height:44px;";
+      pPlus.addEventListener("click", function () {
+        st.ph = Math.min(phCfg.max, Math.round((st.ph + phCfg.step) * 10) / 10); phSlider.value = st.ph; update(); vib(10);
+      });
+      phVal = el("b", null, "pH " + st.ph);
+      pCtl.appendChild(pMinus); pCtl.appendChild(phSlider); pCtl.appendChild(pPlus); pCtl.appendChild(phVal);
+      pRow.appendChild(pCtl);
+      lab.appendChild(pRow);
+      /* 曲线画布 */
+      canvas = el("canvas", null);
+      canvas.width = 640; canvas.height = 380;
+      canvas.style.cssText = "width:100%;max-width:640px;display:block;margin:6px auto;";
+      canvas.setAttribute("role", "img");
+      canvas.setAttribute("aria-label", "温度与pH影响酶活性的示意曲线");
+      lab.appendChild(canvas);
+      var capNote = el("div", null, curveNote);
+      capNote.setAttribute("data-b10-curvenote", "1");
+      capNote.style.cssText = "font-size:12.48px;color:var(--bio-ink-soft);text-align:right;max-width:640px;margin:0 auto;";
+      lab.appendChild(capNote);
+      liveViews.push({ redraw: function () { drawCurves(); } });
+      /* 读数 + 徽章 + 重置 */
+      var rRow = el("div", null);
+      rRow.style.cssText = "display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:8px 0;";
+      readOut = el("div", null);
+      readOut.setAttribute("data-b10-readout", "1");
+      rRow.appendChild(readOut);
+      badgeBox = el("div", null);
+      badgeBox.setAttribute("data-b10-badge", "1");
+      rRow.appendChild(badgeBox);
+      var resetBtn = el("button", null, "换一份新酶（重置）");
+      resetBtn.type = "button"; resetBtn.className = "tb-btn-secondary";
+      resetBtn.style.cssText = "min-height:44px;";
+      resetBtn.addEventListener("click", function () {
+        st.temp = tempCfg.init; st.ph = (phCfg.init == null ? 7 : phCfg.init);
+        st.denatured = false; st.frozen = false;
+        tempSlider.value = st.temp; phSlider.value = st.ph;
+        update(); flash(rRow); vib(10);
+      });
+      rRow.appendChild(resetBtn);
+      lab.appendChild(rRow);
+      lab.appendChild(el("div", null, "虚拟实验：现实中须用恒温设备控制变量，并注意高温烫伤安全。")).style.cssText =
+        "font-size:12.48px;color:var(--bio-ink-soft);text-align:right;";
+      root.appendChild(lab);
+    }
+
+    /* ============ B. 锁钥配对小游戏 ============ */
+    if (showLockKey) {
+      var lk = el("div", null);
+      lk.style.cssText = "margin:12px 0 4px;border-top:1px dashed var(--bio-line);padding-top:10px;";
+      lk.appendChild(el("div", null, "🔐 <b>锁钥配对</b>：点一把\"钥匙\"，再点它能开的\"锁\"（酶—底物专一性）"));
+      var keyRow = el("div", null), lockRow = el("div", null);
+      keyRow.style.cssText = "display:flex;gap:8px;flex-wrap:wrap;margin:8px 0;";
+      lockRow.style.cssText = "display:flex;gap:8px;flex-wrap:wrap;margin:8px 0;";
+      keyRow.setAttribute("data-b10-keys", "1"); lockRow.setAttribute("data-b10-locks", "1");
+      var order = pairs.map(function (_, i) { return i; });
+      for (var si = order.length - 1; si > 0; si--) { var sj = Math.floor(Math.random() * (si + 1)); var tt = order[si]; order[si] = order[sj]; order[sj] = tt; }
+      var selKey = -1, donePairs = 0;
+      var keyBtns = [], lockBtns = [];
+      var badge = el("div", null);
+      badge.setAttribute("data-b10-lockbadge", "1");
+      badge.style.cssText = "margin:8px 0;min-height:24px;";
+      function lkDone() {
+        badge.innerHTML = "🏅 <b>专一性徽章</b>：每把锁只认自己的钥匙——一把锁只开一把钥匙。" +
+          "<div style=\"font-size:12.48px;color:var(--bio-ink-soft);margin-top:4px\">结合时会微调（诱导契合）</div>";
+        badge.style.cssText += "border:1.5px solid var(--bio-organelle);border-radius:10px;padding:10px;background:var(--bio-panel);";
+        b10save(recordKey, { lockKeyDone: true, ts: Date.now() });
+        flash(badge); vib(30);
+      }
+      order.forEach(function (pi) {
+        var kb = el("button", null, "🗝 " + pairs[pi].substrate);
+        kb.type = "button";
+        kb.setAttribute("data-pair", pi);
+        kb.style.cssText = "min-width:44px;min-height:44px;padding:8px 14px;font-size:15px;border:1.5px solid var(--bio-line);border-radius:10px;background:var(--bio-bg);color:var(--bio-text);cursor:pointer;";
+        kb.addEventListener("click", function () {
+          if (kb.disabled) return;
+          keyBtns.forEach(function (x) { x.style.borderColor = "var(--bio-line)"; });
+          selKey = pi; kb.style.borderColor = "var(--bio-highlight)"; kb.style.borderWidth = "2.5px";
+          vib(10);
+        });
+        keyRow.appendChild(kb); keyBtns.push(kb);
+      });
+      pairs.forEach(function (pr, pi) {
+        var lb = el("button", null, "🔒 " + pr.enzyme);
+        lb.type = "button";
+        lb.setAttribute("data-pair", pi);
+        lb.style.cssText = "min-width:44px;min-height:44px;padding:8px 14px;font-size:15px;border:1.5px solid var(--bio-line);border-radius:10px;background:var(--bio-bg);color:var(--bio-text);cursor:pointer;";
+        lb.addEventListener("click", function () {
+          if (lb.disabled) return;
+          if (selKey < 0) {
+            lb.animate([{ transform: "translateX(0)" }, { transform: "translateX(-5px)" }, { transform: "translateX(0)" }], { duration: 180 });
+            return;
+          }
+          if (selKey === pi) {
+            lb.disabled = true; keyBtns[order.indexOf(pi)].disabled = true;
+            lb.style.borderColor = "var(--bio-organelle)"; lb.style.opacity = "0.8";
+            keyBtns[order.indexOf(pi)].style.borderColor = "var(--bio-organelle)";
+            keyBtns[order.indexOf(pi)].style.opacity = "0.6";
+            lb.innerHTML = "🔓 " + esc(pairs[pi].enzyme) + " ✓";
+            selKey = -1; donePairs++;
+            vib(20);
+            if (donePairs === pairs.length) lkDone();
+          } else {
+            /* 配错温和回弹 */
+            lb.animate(
+              [{ transform: "translateX(0)" }, { transform: "translateX(-7px)" }, { transform: "translateX(7px)" }, { transform: "translateX(0)" }],
+              { duration: 260 });
+            keyBtns.forEach(function (x) { if (!x.disabled) x.style.borderColor = "var(--bio-line)"; });
+            selKey = -1;
+            vib(15);
+          }
+        });
+        lockRow.appendChild(lb); lockBtns.push(lb);
+      });
+      lk.appendChild(el("div", null, "钥匙（底物）：")).style.cssText = "font-size:13.6px;color:var(--bio-ink-soft);";
+      lk.appendChild(keyRow);
+      lk.appendChild(el("div", null, "锁（酶）：")).style.cssText = "font-size:13.6px;color:var(--bio-ink-soft);";
+      lk.appendChild(lockRow);
+      lk.appendChild(badge);
+      /* 恢复已完成态 */
+      var saved = b10load(recordKey);
+      if (saved && saved.lockKeyDone) {
+        keyBtns.forEach(function (x) { x.disabled = true; x.style.opacity = "0.6"; });
+        lockBtns.forEach(function (x, xi) { x.disabled = true; x.style.opacity = "0.8"; x.innerHTML = "🔓 " + esc(pairs[xi].enzyme) + " ✓"; });
+        donePairs = pairs.length;
+        lkDone();
+      }
+      root.appendChild(lk);
+    }
+
+    if (showTempLab) update();
+    return root;
+  }
+
   /* ---------------- 对外 API ---------------- */
   var api = {
     render: function (type, params, wid) {
@@ -2298,6 +2664,9 @@ function renderPunnettLab(params, wid) {
       }
       if (type === "photosyn-sandbox") {
         return renderPhotosynSandbox(params || {}, wid || "bio-b4");
+      }
+      if (type === "enzyme-lab") {
+        return renderEnzymeLab(params || {}, wid || "bio-b10");
       }
       return null;
     },

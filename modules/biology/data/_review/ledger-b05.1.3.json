@@ -1,0 +1,92 @@
+{
+  "schema": "biology-review-ledger/1.0",
+  "chapter": "b05",
+  "lesson": "b05.1.3",
+  "written_at": "2026-10-19",
+  "written_by": "生物 P8 生产队（蓝队数据工程 + 内容撰写）",
+  "notes": "p1 小肠结构与功能相适应（长/皱襞/绒毛/壁薄/毛细血管网）+形配其用口诀逐字立靶（BIO-R11；对问连线交互；只许相适应不许结构决定一切BIO-R09）/p2 皱襞→绒毛三级放大交互+误区专治吸收≠消化（分解vs入血）/p3 平衡膳食宝塔+辨析①回填链4条纯文本预告drafted。",
+  "announcements": [
+    {
+      "id": "b05.1.3-a1",
+      "kind": "foretell",
+      "status": "drafted",
+      "text": "形配其用还会回来——肺泡（b06.1.1 细讲），到时候认旧友。",
+      "source": "b05.1.3-p3 纯文本预告（辨析①回填链）",
+      "echo_target": "b06.1.1（未生产）",
+      "echo_text": "",
+      "note": "门禁⑩：辨析①回填链4条之一；立靶页不展开回填内容（static-b05b13.cjs T6 PASS）。"
+    },
+    {
+      "id": "b05.1.3-a2",
+      "kind": "foretell",
+      "status": "drafted",
+      "text": "形配其用还会回来——鱼鳃（b09.2.1 细讲），到时候认旧友。",
+      "source": "b05.1.3-p3 纯文本预告（辨析①回填链）",
+      "echo_target": "b09.2.1（未生产）",
+      "echo_text": "",
+      "note": "门禁⑩：辨析①回填链4条之一。"
+    },
+    {
+      "id": "b05.1.3-a3",
+      "kind": "foretell",
+      "status": "drafted",
+      "text": "形配其用还会回来——蛋白质的结构与功能（b11.1.3 细讲），到时候认旧友。",
+      "source": "b05.1.3-p3 纯文本预告（辨析①回填链）",
+      "echo_target": "b11.1.3（未生产）",
+      "echo_text": "",
+      "note": "门禁⑩：辨析①回填链4条之一。"
+    },
+    {
+      "id": "b05.1.3-a4",
+      "kind": "foretell",
+      "status": "drafted",
+      "text": "形配其用还会回来——线粒体嵴·叶绿体基粒（b12.1.3 细讲），到时候认旧友。",
+      "source": "b05.1.3-p3 纯文本预告（辨析①回填链）",
+      "echo_target": "b12.1.3（未生产）",
+      "echo_text": "",
+      "note": "门禁⑩：辨析①回填链4条之一。"
+    }
+  ],
+  "frozen_refs": [
+    {
+      "id": "b05.1.3-f1",
+      "kind": "frozen_copy",
+      "note": "p1 形配其用四字口诀逐字出现（static-b05b13.cjs T6 PASS；缺=FAIL）。",
+      "ref": "BIO-R10/BIO-R11",
+      "status": "drafted"
+    },
+    {
+      "id": "b05.1.3-f2",
+      "kind": "frozen_copy",
+      "note": "p2/p3 示意图配模式图声明逐字（static-b05b13.cjs T6 PASS）。",
+      "ref": "BIO-R32",
+      "status": "drafted"
+    },
+    {
+      "id": "b05.1.3-f3",
+      "kind": "frozen_copy",
+      "note": "p1 未出现结构决定一切式表述（static-b05b13.cjs T6 PASS）。",
+      "ref": "BIO-R09",
+      "status": "drafted"
+    }
+  ],
+  "gate8_first_definition": {
+    "status": "drafted",
+    "note": "本课新术语首现即定义：吸收@b05.1.3-p1（先认词行内定义）、平衡膳食@b05.1.3-p3（先认词行内定义）；static-b05b13.cjs T3 PASS。"
+  },
+  "gate9_target_check": {
+    "status": "drafted",
+    "note": "深链 0 处（回填链4条均为纯文本预告，未生产课号不挂深链；static-b05b13.cjs T4 白名单 PASS）。"
+  },
+  "gate11_quiz": {
+    "status": "drafted",
+    "note": "本课无 kind:quiz 页；形配其用/吸收≠消化在 b05.1.4-p1 Q2/p2 Q1 机判覆盖。"
+  },
+  "expert_review": {
+    "reviewer": "生物学科专家队",
+    "reviewed_at": "2026-10-19",
+    "report": "~/workspace/bio-audit/batch-p8-expert/RESIGN-NOTE.md",
+    "verdict": "final_passed",
+    "conclusion": "返工复核 PASS：W1–W11 逐项在场"
+  }
+}

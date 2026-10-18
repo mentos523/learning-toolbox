@@ -1,0 +1,44 @@
+{
+  "schema": "biology-review-ledger/1.0",
+  "chapter": "b05",
+  "lesson": "b05.1.1",
+  "written_at": "2026-10-19",
+  "written_by": "生物 P8 生产队（蓝队数据工程 + 内容撰写）",
+  "notes": "p1 六大营养物质+缺钙/缺铁/缺维生素C生活对照+胆汁口径（胆汁不含消化酶逐字）/p2 消化道7站+消化腺5腺+消化系统拼图交互（归位点选，SVG配模式图声明）/p3 肝脏最大消化腺+胆汁误区专治（乳化非消化）/p4 b04纯文本前链+本章预告。",
+  "announcements": [],
+  "frozen_refs": [
+    {
+      "id": "b05.1.1-f1",
+      "kind": "frozen_copy",
+      "note": "p1/p2/p3 胆汁口径逐字：胆汁不含消化酶；凡涉脂肪一律乳化脂肪，未出现消化脂肪（static-b05b13.cjs T6 PASS）。",
+      "ref": "BIO-R06",
+      "status": "drafted"
+    },
+    {
+      "id": "b05.1.1-f2",
+      "kind": "frozen_copy",
+      "note": "p2 消化系统示意图配模式图声明逐字（static-b05b13.cjs T6 PASS）。",
+      "ref": "BIO-R32",
+      "status": "drafted"
+    }
+  ],
+  "gate8_first_definition": {
+    "status": "drafted",
+    "note": "本课新术语首现即定义：胆汁/乳化@b05.1.1-p1（先认词行内定义）、消化腺@b05.1.1-p2（先认词行内定义）；static-b05b13.cjs T3 PASS。"
+  },
+  "gate9_target_check": {
+    "status": "drafted",
+    "note": "深链 0 处（本课无 mathlink；p4 b04 前链为纯文本，b04 未生产不挂深链；static-b05b13.cjs T4 白名单 PASS）。"
+  },
+  "gate11_quiz": {
+    "status": "drafted",
+    "note": "本课无 kind:quiz 页；六大营养物质/胆汁口径识记在 b05.1.4-p1 Q1/Q3 机判覆盖。"
+  },
+  "expert_review": {
+    "reviewer": "生物学科专家队",
+    "reviewed_at": "2026-10-19",
+    "report": "~/workspace/bio-audit/batch-p8-expert/RESIGN-NOTE.md",
+    "verdict": "final_passed",
+    "conclusion": "返工复核 PASS：W1–W11 逐项在场"
+  }
+}

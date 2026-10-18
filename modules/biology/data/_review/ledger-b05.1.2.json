@@ -1,0 +1,55 @@
+{
+  "schema": "biology-review-ledger/1.0",
+  "chapter": "b05",
+  "lesson": "b05.1.2",
+  "written_at": "2026-10-19",
+  "written_by": "生物 P8 生产队（蓝队数据工程 + 内容撰写）",
+  "notes": "p1 唾液淀粉酶实验（馒头碎屑+唾液vs清水；37℃；碘液检验；三原则对照/单一变量/重复；BIO-R41变量交代；结论不超范围BIO-R45；BIO-R35）/p2 虚拟温度滑块（0/37/100℃；BIO-R35；结论只到37℃最适；mathlink→b13.1.2本批互链）/p3 专一性现象预告同批兑现：B10锁钥小游戏段挂载（tempLab:false，recordKey=bio_enzyme_b05.1.2，三对：唾液淀粉酶-淀粉/胃蛋白酶-蛋白质/胰脂肪酶-脂肪）+mathlink深链b13.1.2。",
+  "announcements": [
+    {
+      "id": "b05.1.2-a1",
+      "kind": "foretell",
+      "status": "echoed_in_batch",
+      "text": "唾液只初步消化淀粉——专一性预告，b13.1.2 见分晓。",
+      "source": "b05.1.2-p1 误区专治（唾液消化一切→只初步消化淀粉）",
+      "echo_target": "b13.1.2-p1（B10首立：高效性/专一性/作用条件温和）+ b05.1.2-p3（B10锁钥段挂载）",
+      "echo_text": "唾液只初步消化淀粉，这是酶的专一性——B10 认旧友（b05.1.2-p3）；认旧友：b05.1.2 第3页——唾液只初步消化淀粉，专一性早就见过（b13.1.2-p1 mathlink）。",
+      "note": "门禁⑩同批互链兑现：预告与兑现同属 P8 批，不记 drafted；关键词专一性/唾液只初步消化淀粉互相可识别（static-b05b13.cjs T4 PASS）。"
+    }
+  ],
+  "frozen_refs": [
+    {
+      "id": "b05.1.2-f1",
+      "kind": "frozen_copy",
+      "note": "p1/p2 虚拟实验声明逐字：虚拟实验：现实中须规范采集唾液、注意碘液安全、重复多次（p1）/虚拟实验：现实中须用恒温水浴控制温度，注意高温烫伤安全（p2）（static-b05b13.cjs T6 PASS）。",
+      "ref": "BIO-R35",
+      "status": "drafted"
+    },
+    {
+      "id": "b05.1.2-f2",
+      "kind": "frozen_copy",
+      "note": "p1 结论不超范围：只证明唾液初步消化淀粉、37℃最适，不涉及酶的本质（static-b05b13.cjs T6 PASS）。",
+      "ref": "BIO-R45",
+      "status": "drafted"
+    }
+  ],
+  "gate8_first_definition": {
+    "status": "drafted",
+    "note": "本课无门禁⑧新术语（唾液淀粉酶/消化酶仅为物质名称出现、非术语定义，b21先例；酶正式定义首现仍在b13.1.1-p2；专一性本页仅为现象预告，正式定义首现在b13.1.2-p1；static-b05b13.cjs T3 PASS）。"
+  },
+  "gate9_target_check": {
+    "status": "drafted",
+    "note": "深链 2 处（p2 mathlink→b13.1.2、p3 mathlink→b13.1.2；均为本批互链，XLINK_BIO P8 hunk 在表；static-b05b13.cjs T4 白名单 PASS）。"
+  },
+  "gate11_quiz": {
+    "status": "drafted",
+    "note": "本课无 kind:quiz 页；三原则/专一性现象在 b05.1.4-p1 Q3 机判覆盖。"
+  },
+  "expert_review": {
+    "reviewer": "生物学科专家队",
+    "reviewed_at": "2026-10-19",
+    "report": "~/workspace/bio-audit/batch-p8-expert/RESIGN-NOTE.md",
+    "verdict": "final_passed",
+    "conclusion": "返工复核 PASS：W1–W11 逐项在场"
+  }
+}
