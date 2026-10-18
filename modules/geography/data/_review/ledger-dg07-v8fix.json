@@ -1,0 +1,199 @@
+{
+ "chapter": "dg07-v8fix",
+ "schema": "geography-review-ledger/1.0",
+ "note": "地理专家队两审签署（2026-10-18）：dg07 遗留 V8 4 BAD 真正修复＋旧豁免口径作废书面处置；独立复测确认。",
+ "entries": [
+  {
+   "content": {
+    "badge": "原 3.4px → 现 12.5px（落阶梯 12.48±0.5）",
+    "before_after": "BAD#1（扫描 2026-10-18）：#dg07.1.2/2 3.4px '赤道（示意）'（schematic-toggle，geo-batch3-widgets.js）",
+    "fix": "viewBox 0 0 100 100 → 0 0 800 800（内部坐标 ×8，S 常量），文字 3.4 → 12.5；data 文件（dg05.js/dg07.js）0–100 逻辑单位不动，widget 内统一 ×S 换算",
+    "impact": "schematic-toggle 改动影响已上线的 dg05.1.1/2、dg05.1.2/2 页面视觉（同 widget）：图形比例不变，文字按比例放大至合规字号；待白队视觉确认（见生产报告诚实缺口）",
+    "verify": "node tools/v8-fontladder-scan.cjs --geo 复测（证据 evidence/v8-scan-dg07fixed-*.log）"
+   },
+   "id": "dg07.1.2-v8-1",
+   "kind": "v8fix",
+   "lesson": "dg07.1.2",
+   "review_history": [
+    {
+     "stage": "first",
+     "by": "地理专家队（内容审）",
+     "date": "2026-10-18",
+     "result": "pass",
+     "note": "初审：BAD#1 '赤道（示意）'3.4px，schematic-toggle viewBox 0 0 100 100→0 0 800 800（×8），文字3.4→12.5px 落阶梯（12.48±0.5）；data 文件未动。终审：通过。"
+    },
+    {
+     "stage": "final",
+     "by": "地理专家队（数据审·独立复核）",
+     "date": "2026-10-18",
+     "result": "pass",
+     "note": "终审（独立复核）：官方脚本独立复测 bad=0；该节点已落阶梯。终审通过，置 final_passed。"
+    }
+   ],
+   "revision": 1,
+   "status": "final_passed",
+   "summary": "schematic-toggle'赤道（示意）'3.4px→12.5px",
+   "written_at": "2026-10-18",
+   "written_by": "地理批7生产队"
+  },
+  {
+   "content": {
+    "badge": "原 3.6px → 现 16px（1rem 阶梯，dmin=0）",
+    "before_after": "同类问题（扫描按 tag+class 去重漏报）：schematic-toggle 区域标签 3.6px",
+    "fix": "同上 ×8 重缩放；区域标签 font-size 3.6 → 16（正文阶梯）；lab 偏移（0–100 单位）×S 换算",
+    "verify": "node tools/v8-fontladder-scan.cjs --geo 复测（证据 evidence/v8-scan-dg07fixed-*.log）"
+   },
+   "id": "dg07.1.2-v8-2",
+   "kind": "v8fix",
+   "lesson": "dg07.1.2",
+   "review_history": [
+    {
+     "stage": "first",
+     "by": "地理专家队（内容审）",
+     "date": "2026-10-18",
+     "result": "pass",
+     "note": "初审：同类漏报 3.6px 区域标签→16px（1rem 阶梯）；×8 重缩放，图形比例不变。终审：通过。"
+    },
+    {
+     "stage": "final",
+     "by": "地理专家队（数据审·独立复核）",
+     "date": "2026-10-18",
+     "result": "pass",
+     "note": "终审（独立复核）：复测无同类残留。终审通过，置 final_passed。"
+    }
+   ],
+   "revision": 1,
+   "status": "final_passed",
+   "summary": "schematic-toggle 区域标签 3.6px→16px（同类）",
+   "written_at": "2026-10-18",
+   "written_by": "地理批7生产队"
+  },
+  {
+   "content": {
+    "badge": "原 7px ×4 → 现 12.5px（落阶梯 12.48±0.5）",
+    "before_after": "BAD#2（扫描 2026-10-18）：#dg07.1.3/2 7px '印度洋（示意）'（factor-scale monsoon，geo-batch4-widgets.js）",
+    "fix": "viewBox 0 0 100 62 → 0 0 800 496（坐标 ×8），4 个 SVG 文本（印度洋/印度半岛/西南季风/箭头说明）font-size 7 → 12.5；箭头粗细/箭头/色块按 ×8 等比",
+    "verify": "node tools/v8-fontladder-scan.cjs --geo 复测（证据 evidence/v8-scan-dg07fixed-*.log）"
+   },
+   "id": "dg07.1.3-v8-1",
+   "kind": "v8fix",
+   "lesson": "dg07.1.3",
+   "review_history": [
+    {
+     "stage": "first",
+     "by": "地理专家队（内容审）",
+     "date": "2026-10-18",
+     "result": "pass",
+     "note": "初审：BAD#2 factor-scale monsoon 4 文本 7→12.5px；viewBox 0 0 100 62→0 0 800 496；箭头/色块等比×8。终审：通过。"
+    },
+    {
+     "stage": "final",
+     "by": "地理专家队（数据审·独立复核）",
+     "date": "2026-10-18",
+     "result": "pass",
+     "note": "终审（独立复核）：复测通过。终审通过，置 final_passed。"
+    }
+   ],
+   "revision": 1,
+   "status": "final_passed",
+   "summary": "factor-scale monsoon 4 文本 7px→12.5px",
+   "written_at": "2026-10-18",
+   "written_by": "地理批7生产队"
+  },
+  {
+   "content": {
+    "badge": "原 7px ×3 → 现 12.5px（落阶梯 12.48±0.5）",
+    "before_after": "BAD#3（扫描 2026-10-18）：#dg07.1.4/2 7px '70°N 严寒'（factor-scale latitude）；同类另 2 文本（'50°N 相对温暖'、'约 N°N'读数）同修",
+    "fix": "同上 ×8 重缩放；3 个 SVG 文本 font-size 7 → 12.5；温度条/标记线 ×8 等比",
+    "verify": "node tools/v8-fontladder-scan.cjs --geo 复测（证据 evidence/v8-scan-dg07fixed-*.log）"
+   },
+   "id": "dg07.1.4-v8-1",
+   "kind": "v8fix",
+   "lesson": "dg07.1.4",
+   "review_history": [
+    {
+     "stage": "first",
+     "by": "地理专家队（内容审）",
+     "date": "2026-10-18",
+     "result": "pass",
+     "note": "初审：BAD#3 factor-scale latitude 3 文本 7→12.5px；温度条/标记线等比×8。终审：通过。"
+    },
+    {
+     "stage": "final",
+     "by": "地理专家队（数据审·独立复核）",
+     "date": "2026-10-18",
+     "result": "pass",
+     "note": "终审（独立复核）：复测通过。终审通过，置 final_passed。"
+    }
+   ],
+   "revision": 1,
+   "status": "final_passed",
+   "summary": "factor-scale latitude 3 文本 7px→12.5px",
+   "written_at": "2026-10-18",
+   "written_by": "地理批7生产队"
+  },
+  {
+   "content": {
+    "badge": "原 7px → 现 12.5px（落阶梯 12.48±0.5）",
+    "before_after": "BAD#4（扫描 2026-10-18）：#dg07.2.4/2 7px '雨林覆盖（示意，随滑块消退）'（factor-scale forest）",
+    "fix": "同上 ×8 重缩放；文本 font-size 7 → 12.5；树冠圆 ×8 等比",
+    "verify": "node tools/v8-fontladder-scan.cjs --geo 复测（证据 evidence/v8-scan-dg07fixed-*.log）"
+   },
+   "id": "dg07.2.4-v8-1",
+   "kind": "v8fix",
+   "lesson": "dg07.2.4",
+   "review_history": [
+    {
+     "stage": "first",
+     "by": "地理专家队（内容审）",
+     "date": "2026-10-18",
+     "result": "pass",
+     "note": "初审：BAD#4 factor-scale forest 7→12.5px；树冠圆等比×8。终审：通过。"
+    },
+    {
+     "stage": "final",
+     "by": "地理专家队（数据审·独立复核）",
+     "date": "2026-10-18",
+     "result": "pass",
+     "note": "终审（独立复核）：复测通过。终审通过，置 final_passed。"
+    }
+   ],
+   "revision": 1,
+   "status": "final_passed",
+   "summary": "factor-scale forest 文本 7px→12.5px",
+   "written_at": "2026-10-18",
+   "written_by": "地理批7生产队"
+  },
+  {
+   "content": {
+    "decision": "批 4 曾记录'SVG 矢量文字豁免'，但 rulings/ 只有 01–09，无任何书面裁决文件；按新硬门禁⑲（无书面裁决=无效豁免），不沿用旧口径，本批改为真正修复（字号落阶梯），官方脚本复测清零，证据留档",
+    "old_claim": "'SVG 矢量文字豁免'（批 4 自查记录，无书面裁决）",
+    "verify": "rulings/ 目录清单（evidence/rulings-list.txt）；本台账 5 项修复＋复测日志"
+   },
+   "id": "dg07-v8-ruling",
+   "kind": "v8fix",
+   "lesson": "dg07（批 4 域）",
+   "review_history": [
+    {
+     "stage": "first",
+     "by": "地理专家队（内容审）",
+     "date": "2026-10-18",
+     "result": "pass",
+     "note": "初审：旧'SVG矢量文字豁免'无任何书面裁决文件（rulings/ 仅01–09，rulings-list.txt 取证），按硬门禁⑲无效；本批改为真正修复（字号落阶梯），官方脚本复测清零。本队以专家队署名签署本条，书面处置成立。终审：通过。"
+    },
+    {
+     "stage": "final",
+     "by": "地理专家队（数据审·独立复核）",
+     "date": "2026-10-18",
+     "result": "pass",
+     "note": "终审（独立复核）：4 BAD 清零经本队独立复测确认（294/294页，bad=0）；dg05 的同 widget 页面视觉变更待白队确认（生产报告诚实缺口已登记）。书面处置成立，置 final_passed。"
+    }
+   ],
+   "revision": 1,
+   "status": "final_passed",
+   "summary": "旧'豁免'口径作废（⑲）：无书面裁决",
+   "written_at": "2026-10-18",
+   "written_by": "地理批7生产队"
+  }
+ ]
+}

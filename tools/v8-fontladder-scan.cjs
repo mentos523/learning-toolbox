@@ -40,15 +40,14 @@ const runChem = !args.has("--math") && !args.has("--physics-spot") && !args.has(
 const runMath = !args.has("--chem") && !args.has("--physics-spot") && !args.has("--physics") && !args.has("--geo") ? true : args.has("--math");
 const runPhy = args.has("--physics-spot");   // 电路两页快速回归门（语义不变）
 const runPhyFull = args.has("--physics");    // 物理全量 18 章画布双通道
-// 书面口径豁免（仅收录有冻结依据的项；新违规不得加）：
-// W3（地理批 3 白队 QA）：2 个「赤道（示意）」SVG 逻辑单位字，css 3.4，按 RENDERERS.md
-// 冻结口径「SVG 矢量文字随视口缩放（非 px 固定，不适用阶梯）」豁免。
+// 书面口径豁免（仅收录有冻结依据的项；新违规不得加；dg05「赤道（示意）」2 条已于
+// 2026-10-18 白队 QA 批 7 删除——schematic-toggle ×8 重缩放后已合规落阶梯，不再触发）：
 const GEO_EXEMPTIONS = [
-  { page: "#dg05.1.1/2", txt: "赤道（示意）", reason: "W3: SVG 逻辑单位字，随视口缩放非 px 固定（RENDERERS.md 冻结口径）" },
-  { page: "#dg05.1.2/2", txt: "赤道（示意）", reason: "W3: SVG 逻辑单位字，随视口缩放非 px 固定（RENDERERS.md 冻结口径）" },
   { page: "#dg02.2.2/2", txt: "南美洲", reason: "批 2 白队 QA（832 节点 0 bad）：G9 板块拼图 SVG 逻辑单位字，按 RENDERERS.md 冻结口径豁免" },
   { page: "#dg02.2.2/3", txt: "亚欧板块", reason: "批 2 白队 QA（832 节点 0 bad）：G9 板块拼图 SVG 逻辑单位字，按 RENDERERS.md 冻结口径豁免" },
 ];
+// 注（2026-10-18 白队 QA 批 7）：原 dg05 两条「赤道（示意）」已于 schematic-toggle ×8 重缩放后
+// 不再触发 V8 门禁（WARN-5 残留），此处删除。批 2 两条为书面裁决豁免，保留。
 function isGeoExempt(page, txt) {
   return GEO_EXEMPTIONS.some(e => e.page === page && txt.startsWith(e.txt));
 }

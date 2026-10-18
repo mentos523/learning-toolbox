@@ -91,6 +91,20 @@
     var i = _live.indexOf(v); if (i >= 0) _live.splice(i, 1);
     try { if (window.GEO && window.GEO.unregisterView) window.GEO.unregisterView(v); } catch (e) {}
   }
+  /* 2026-10-18 批 7 FAIL-1 修复（白队 QA）：深色切换 canvas 不重绘。
+     body[data-theme] 变化时对挂载视图执行 resize()（即重排＋draw 重绘；
+     try/catch 保护单视图异常不影响其余）。 */
+  if (window.MutationObserver && document.body) {
+    var _themeObserver = new MutationObserver(function (muts) {
+      for (var i = 0; i < muts.length; i++) {
+        if (muts[i].type === "attributes" && muts[i].attributeName === "data-theme") {
+          _live.forEach(function (v) { try { v.resize(); } catch (e) {} });
+          break;
+        }
+      }
+    });
+    _themeObserver.observe(document.body, { attributes: true, attributeFilter: ["data-theme"] });
+  }
 
   /* ============================================================
    * americas-profile · 美洲西—中—东三段式示意剖面
@@ -362,7 +376,8 @@
    * 真值 = params（区域数据见 ledger-dg05.json）；无场层函数，
    * GEO-RULING-2026-10-17-03（truth/state 分报）不适用。
    * 零外部请求；触摸热区 ≥44px（透明命中圆 + 按钮列表）；
-   * HTML 文字只用 .fs-078… 工具类；SVG 矢量文字随视口缩放；
+   * HTML 文字只用 .fs-078… 工具类；SVG 文字 12.5/16px 落 V8 阶梯
+   *（2026-10-18 批 7 修复：内部坐标 ×8，旧 3.4/3.6 逻辑单位字无书面豁免）；
    * 示意声明常驻（mapNote + valueNote）。
    * ============================================================ */
   var P1_CONTINENTS = [
@@ -410,39 +425,43 @@
       return n;
     }
     var svg = sEl("svg", {
-      viewBox: "0 0 100 100", width: "100%",
+      viewBox: "0 0 800 800", width: "100%",
       role: "img", "aria-label": (P.title || "世界政区示意图") + "（示意，无国界线）"
     });
-    svg.appendChild(sEl("rect", { x: 0, y: 0, width: 100, height: 100, rx: 4, fill: cssVar("--geog-bg-soft") || "#f6f4ee" }));
+    /* V8 字号阶梯修复（2026-10-18 批 7）：内部坐标 ×8（S），SVG 文字取
+     * 阶梯字号（12.5/16px），替代旧“3.4/3.6 逻辑单位字豁免”（无书面裁决，
+     * 按门禁⑲无效）。data 仍用 0–100 逻辑单位，此处统一换算，data 文件不动。 */
+    var S = 8;
+    svg.appendChild(sEl("rect", { x: 0, y: 0, width: 800, height: 800, rx: 32, fill: cssVar("--geog-bg-soft") || "#f6f4ee" }));
     P1_CONTINENTS.forEach(function (c) {
       svg.appendChild(sEl("rect", {
-        x: c.x, y: c.y, width: c.w, height: c.h, rx: 3,
+        x: c.x * S, y: c.y * S, width: c.w * S, height: c.h * S, rx: 24,
         fill: "none", stroke: cssVar("--geog-border") || "#e2ddd2",
-        "stroke-width": 0.8, "stroke-dasharray": "2,1.2"
+        "stroke-width": 6.4, "stroke-dasharray": "16,9.6"
       }));
     });
     svg.appendChild(sEl("line", {
-      x1: 0, y1: 50, x2: 100, y2: 50,
-      stroke: cssVar("--geog-border") || "#e2ddd2", "stroke-width": 0.5, "stroke-dasharray": "3,2"
+      x1: 0, y1: 400, x2: 800, y2: 400,
+      stroke: cssVar("--geog-border") || "#e2ddd2", "stroke-width": 4, "stroke-dasharray": "24,16"
     }));
-    var eqT = sEl("text", { x: 3, y: 97, "font-size": 3.4, "text-anchor": "start", fill: cssVar("--geog-ink-soft") || "#4a4a4a" });
+    var eqT = sEl("text", { x: 24, y: 776, "font-size": 12.5, "text-anchor": "start", fill: cssVar("--geog-ink-soft") || "#4a4a4a" });
     eqT.textContent = "赤道（示意）";
     svg.appendChild(eqT);
 
     var dots = [];
     regions.forEach(function (r, i) {
       var g = sEl("g", {});
-      var dot = sEl("circle", { cx: r.x, cy: r.y, r: 2.6, stroke: "#fff", "stroke-width": 0.8 });
+      var dot = sEl("circle", { cx: r.x * S, cy: r.y * S, r: 20.8, stroke: "#fff", "stroke-width": 6.4 });
       g.appendChild(dot);
-      /* 标签防撞：region 可带 lab:[dx,dy] 偏移（如南亚三国扎堆） */
+      /* 标签防撞：region 可带 lab:[dx,dy] 偏移（如南亚三国扎堆）；0–100 单位，×S 换算 */
       var lab = r.lab || [0, -4.4];
       var lb = sEl("text", {
-        x: r.x + lab[0], y: r.y + lab[1], "font-size": 3.6, "text-anchor": "middle",
+        x: (r.x + lab[0]) * S, y: (r.y + lab[1]) * S, "font-size": 16, "text-anchor": "middle",
         fill: cssVar("--geog-ink") || "#1a1a1a"
       });
       lb.textContent = r.name;
       g.appendChild(lb);
-      var hit = sEl("circle", { cx: r.x, cy: r.y, r: 6.5, fill: "transparent" });
+      var hit = sEl("circle", { cx: r.x * S, cy: r.y * S, r: 52, fill: "transparent" });
       hit.style.cursor = "pointer";
       (function (idx) { hit.addEventListener("click", function () { p1Select(idx); }); })(i);
       g.appendChild(hit);
@@ -474,7 +493,7 @@
         var fill = (curView === "dev") ? (P1_DEV_FILL[r.dev] || "#b9c2d0") : P1_TIER_FILL[p1Tier(curView, r)];
         dots[i].dot.setAttribute("fill", fill);
         dots[i].dot.setAttribute("stroke", i === sel ? (cssVar("--geog-accent") || "#0e7c66") : "#fff");
-        dots[i].dot.setAttribute("stroke-width", i === sel ? 1.6 : 0.8);
+        dots[i].dot.setAttribute("stroke-width", i === sel ? 12.8 : 6.4);
       });
       legend.innerHTML = "";
       function sw(color, text) {

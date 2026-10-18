@@ -45,6 +45,20 @@
     var i = _live.indexOf(v); if (i >= 0) _live.splice(i, 1);
     try { if (window.GEO && window.GEO.unregisterView) window.GEO.unregisterView(v); } catch (e) {}
   }
+  /* 2026-10-18 批 7 FAIL-1 修复（白队 QA）：深色切换 canvas 不重绘。
+     body[data-theme] 变化时对挂载视图执行 resize()（即重排＋draw 重绘；
+     try/catch 保护单视图异常不影响其余）。 */
+  if (window.MutationObserver && document.body) {
+    var _themeObserver = new MutationObserver(function (muts) {
+      for (var i = 0; i < muts.length; i++) {
+        if (muts[i].type === "attributes" && muts[i].attributeName === "data-theme") {
+          _live.forEach(function (v) { try { v.resize(); } catch (e) {} });
+          break;
+        }
+      }
+    });
+    _themeObserver.observe(document.body, { attributes: true, attributeFilter: ["data-theme"] });
+  }
 
   /* ============================================================
    * 纯函数真值层（渲染与白队断言共用，GEO-R30 类比）
@@ -102,7 +116,7 @@
     var badge = el("div", "geog-w2-badge fs-078", "示意｜非精确比例｜只看一个因子");
     wrap.appendChild(badge);
 
-    /* glyph 示意画布（SVG 矢量，随视口缩放） */
+    /* glyph 示意画布（SVG 矢量；2026-10-18 批 7 起 SVG 文字 12.5px 落 V8 阶梯，见 drawGlyph） */
     var stage = el("div", "geog-w2-stage");
     wrap.appendChild(stage);
 
@@ -146,24 +160,27 @@
       stage.innerHTML = "";
       var glyph = P.glyph || "none";
       if (glyph === "none") return;
-      var svg = svgEl("svg", { viewBox: "0 0 100 62", width: "100%", role: "img" });
+      /* V8 字号阶梯修复（2026-10-18 批 7）：viewBox 0 0 100 62 → 0 0 800 496
+       *（坐标 ×8），SVG 文字 font-size 7 → 12.5（落阶梯 12.48±0.5），
+       * 替代旧“SVG 矢量文字豁免”（无书面裁决，按门禁⑲无效）。图形比例不变。 */
+      var svg = svgEl("svg", { viewBox: "0 0 800 496", width: "100%", role: "img" });
       var t = (v - min) / Math.max(1e-9, (max - min)); /* 0..1 */
       if (glyph === "monsoon") {
         /* 下：印度洋（海）→ 上：印度半岛（陆）；箭头粗细随强度 */
-        svg.appendChild(svgEl("rect", { x: 0, y: 38, width: 100, height: 24, fill: "#bcd8f5", opacity: 0.8 }));
-        svg.appendChild(svgEl("rect", { x: 0, y: 0, width: 100, height: 38, fill: "#cfe6c0", opacity: 0.8 }));
-        var sea = svgEl("text", { x: 50, y: 56, "text-anchor": "middle", fill: soft, "font-size": 7 });
+        svg.appendChild(svgEl("rect", { x: 0, y: 304, width: 800, height: 192, fill: "#bcd8f5", opacity: 0.8 }));
+        svg.appendChild(svgEl("rect", { x: 0, y: 0, width: 800, height: 304, fill: "#cfe6c0", opacity: 0.8 }));
+        var sea = svgEl("text", { x: 400, y: 448, "text-anchor": "middle", fill: soft, "font-size": 12.5 });
         sea.textContent = "印度洋（示意）"; svg.appendChild(sea);
-        var land = svgEl("text", { x: 50, y: 10, "text-anchor": "middle", fill: soft, "font-size": 7 });
+        var land = svgEl("text", { x: 400, y: 80, "text-anchor": "middle", fill: soft, "font-size": 12.5 });
         land.textContent = "印度半岛（示意）"; svg.appendChild(land);
-        var w = 2 + t * 7;
-        [22, 50, 78].forEach(function (x) {
-          var ln = svgEl("line", { x1: x, y1: 52, x2: x, y2: 20, stroke: accent, "stroke-width": w.toFixed(1), "stroke-linecap": "round" });
+        var w = 16 + t * 56;
+        [176, 400, 624].forEach(function (x) {
+          var ln = svgEl("line", { x1: x, y1: 416, x2: x, y2: 160, stroke: accent, "stroke-width": w.toFixed(1), "stroke-linecap": "round" });
           svg.appendChild(ln);
-          var hd = svgEl("polygon", { points: (x - 4) + ",24 " + (x + 4) + ",24 " + x + ",14", fill: accent });
+          var hd = svgEl("polygon", { points: (x - 32) + ",192 " + (x + 32) + ",192 " + x + ",112", fill: accent });
           svg.appendChild(hd);
         });
-        var lb = svgEl("text", { x: 50, y: 34, "text-anchor": "middle", fill: ink, "font-size": 7 });
+        var lb = svgEl("text", { x: 400, y: 272, "text-anchor": "middle", fill: ink, "font-size": 12.5 });
         lb.textContent = "西南季风（箭头越粗越强）"; svg.appendChild(lb);
       } else if (glyph === "latitude") {
         /* 纵向温度梯度条：下暖上冷；标记当前位置 */
@@ -173,28 +190,28 @@
           lg.appendChild(svgEl("stop", { offset: s[0], "stop-color": s[1] }));
         });
         grad.appendChild(lg); svg.appendChild(grad);
-        svg.appendChild(svgEl("rect", { x: 38, y: 4, width: 24, height: 50, fill: "url(#geog4-latg)", stroke: soft }));
-        var y = 54 - t * 50;
-        svg.appendChild(svgEl("line", { x1: 32, y1: y, x2: 68, y2: y, stroke: "#d23c3c", "stroke-width": 2 }));
-        var top = svgEl("text", { x: 30, y: 10, "text-anchor": "end", fill: soft, "font-size": 7 });
+        svg.appendChild(svgEl("rect", { x: 304, y: 32, width: 192, height: 400, fill: "url(#geog4-latg)", stroke: soft }));
+        var y = 432 - t * 400;
+        svg.appendChild(svgEl("line", { x1: 256, y1: y, x2: 544, y2: y, stroke: "#d23c3c", "stroke-width": 16 }));
+        var top = svgEl("text", { x: 240, y: 80, "text-anchor": "end", fill: soft, "font-size": 12.5 });
         top.textContent = "70°N 严寒"; svg.appendChild(top);
-        var bot = svgEl("text", { x: 30, y: 56, "text-anchor": "end", fill: soft, "font-size": 7 });
+        var bot = svgEl("text", { x: 240, y: 448, "text-anchor": "end", fill: soft, "font-size": 12.5 });
         bot.textContent = "50°N 相对温暖"; svg.appendChild(bot);
-        var cur = svgEl("text", { x: 74, y: y + 2.5, fill: "#d23c3c", "font-size": 7 });
+        var cur = svgEl("text", { x: 592, y: y + 20, fill: "#d23c3c", "font-size": 12.5 });
         cur.textContent = "约 " + Math.round(v) + "°N"; svg.appendChild(cur);
       } else if (glyph === "forest") {
         /* 树冠随破坏程度消退 */
         var keep = 1 - t;
-        svg.appendChild(svgEl("rect", { x: 0, y: 0, width: 100, height: 62, fill: "#e8f0e0", opacity: 0.6 }));
+        svg.appendChild(svgEl("rect", { x: 0, y: 0, width: 800, height: 496, fill: "#e8f0e0", opacity: 0.6 }));
         for (var i = 0; i < 9; i++) {
-          var cx = 10 + (i % 3) * 40, cy = 14 + Math.floor(i / 3) * 16;
+          var cx = 80 + (i % 3) * 320, cy = 112 + Math.floor(i / 3) * 128;
           var alive = (i / 9) < keep;
           svg.appendChild(svgEl("circle", {
-            cx: cx, cy: cy, r: alive ? 9 : 4,
+            cx: cx, cy: cy, r: alive ? 72 : 32,
             fill: alive ? "#3f8f4f" : "#b09a7a", opacity: alive ? 0.95 : 0.7
           }));
         }
-        var fl = svgEl("text", { x: 50, y: 60, "text-anchor": "middle", fill: soft, "font-size": 7 });
+        var fl = svgEl("text", { x: 400, y: 480, "text-anchor": "middle", fill: soft, "font-size": 12.5 });
         fl.textContent = "雨林覆盖（示意，随滑块消退）"; svg.appendChild(fl);
       }
       stage.appendChild(svg);

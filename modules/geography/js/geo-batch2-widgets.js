@@ -144,6 +144,20 @@
   if (window.addEventListener) window.addEventListener("resize", function () {
     _live.forEach(function (v) { try { v.resize(); } catch (e) {} });
   });
+  /* 2026-10-18 批 7 FAIL-1 修复（白队 QA）：深色切换 canvas 不重绘。
+     body[data-theme] 变化时对挂载视图执行 resize()（即重排＋draw 重绘，
+     与 window.resize 监听同机制；try/catch 保护单视图异常不影响其余）。 */
+  if (window.MutationObserver && document.body) {
+    var _themeObserver = new MutationObserver(function (muts) {
+      for (var i = 0; i < muts.length; i++) {
+        if (muts[i].type === "attributes" && muts[i].attributeName === "data-theme") {
+          _live.forEach(function (v) { try { v.resize(); } catch (e) {} });
+          break;
+        }
+      }
+    });
+    _themeObserver.observe(document.body, { attributes: true, attributeFilter: ["data-theme"] });
+  }
 
   /* ============================================================
    * 纯函数真值层（渲染与断言共用；window.GeoBatch2 暴露给白队）
@@ -1358,18 +1372,41 @@
     var dial = makeStage(wrap, 1, "时区盘：24 个时区，方向箭头按经度增大方向");
     var cityRow = el("div", "geog-w2-tabs");
     var target = null;
+    function znorm(v) { return v === 12 ? -12 : v; }  /* ＋12 与 −12 为同一时区 */
+    function pickCity(name) {
+      target = name;
+      Array.prototype.forEach.call(cityRow.querySelectorAll("button"), function (x) {
+        x.classList.toggle("on", x.textContent === name);
+      });
+      resetSteps(); dial.draw();
+    }
     cities.forEach(function (c) {
       if (c.name === P.knownCity) return;
       var b = el("button", "geog-btn fs-085", esc(c.name));
-      b.addEventListener("click", function () {
-        target = c.name;
-        Array.prototype.forEach.call(cityRow.querySelectorAll("button"), function (x) { x.classList.remove("on"); });
-        b.classList.add("on");
-        resetSteps(); dial.draw();
-      });
+      b.addEventListener("click", function () { pickCity(c.name); });
       cityRow.appendChild(b);
     });
     wrap.appendChild(cityRow);
+    /* 时区盘扇形点选（G6 spec：24 时区盘可点选；城市列表为备选）：
+     * 点某扇形 → 选中该时区城市（多城则轮选）；命中圈 R*0.15–R*1.3。 */
+    dial.cv.addEventListener("click", function (e) {
+      var r = dial.cv.getBoundingClientRect();
+      if (!r.width) return;
+      var px = e.clientX - r.left, py = e.clientY - r.top;
+      var c0 = r.width / 2, R = r.width * 0.42;
+      var dx = px - c0, dy = py - c0;
+      var dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < R * 0.15 || dist > R * 1.3) return;
+      var ang = Math.atan2(dy, dx);  /* canvas 坐标系（y 向下），与绘制一致 */
+      var t = (ang + Math.PI / 2) / (Math.PI * 2) * 24;
+      var z = Math.floor(t) - 12;
+      z = ((z + 12) % 24 + 24) % 24 - 12;
+      var cands = cities.filter(function (c) { return c.name !== P.knownCity && znorm(c.zone) === z; });
+      if (!cands.length) return;
+      var idx = 0;
+      for (var i = 0; i < cands.length; i++) if (cands[i].name === target) { idx = (i + 1) % cands.length; break; }
+      pickCity(cands[idx].name);
+    });
     var ro = readout(wrap);
 
     function knownMin() {
@@ -1469,6 +1506,12 @@
       var h = Math.floor(min / 60), m = min % 60;
       return (h < 10 ? "0" + h : "" + h) + ":" + (m < 10 ? "0" + m : "" + m);
     }
+    /* 目标时间读数 MathML（G6 任务书要求）：20:00 + 1h = 21:00 */
+    function mathMLReadout(knownHM, east, dh, resultHM) {
+      return '<math xmlns="http://www.w3.org/1998/Math/MathML" style="font-size:1.05rem">' +
+        '<mrow><mtext>' + esc(knownHM) + '</mtext><mo>' + (east ? "+" : "\u2212") + '</mo>' +
+        '<mtext>' + Math.abs(dh) + 'h</mtext><mo>=</mo><mtext>' + esc(resultHM) + '</mtext></mrow></math>';
+    }
     function buildS1() {
       var known = cityOf(P.knownCity), tgt = cityOf(target);
       if (!known || !tgt) return;
@@ -1522,7 +1565,7 @@
       btn.addEventListener("click", function () {
         var ok = String(inp.value).replace(/\s/g, "") === calc.timeStr;
         ro.innerHTML = ok
-          ? '<span class="ok-t">✓ </span>' + esc(fmtHM(knownMin())) + " " + op + " " + Math.abs(calc.diffHours) + "h = " + esc(calc.timeStr) + "。进第④步看日期。"
+          ? '<span class="ok-t">✓ </span>' + mathMLReadout(fmtHM(knownMin()), calc.east, calc.diffHours, calc.timeStr) + "。进第④步看日期。"
           : '<span class="no-t">✗ 再算算：</span>“东加”还是“西减”，看第②步的结论。';
         if (ok) { s4.unlock(); buildS4(); }
       });
@@ -1537,8 +1580,9 @@
       } else {
         dateStr = calc.dayOffset > 0 ? "次日" : (calc.dayOffset < 0 ? "前日" : "当日");
       }
-      s4.body.innerHTML = "答案：<strong>" + esc(dateStr) + " " + esc(calc.timeStr) + "</strong>（" +
-        esc(target) + " 区时）。";
+      s4.body.innerHTML = "答案：<strong>" + esc(dateStr) + "</strong> " +
+        mathMLReadout(fmtHM(knownMin()), calc.east, calc.diffHours, calc.timeStr) +
+        "（" + esc(target) + " 区时）。";
       if (calc.crossed180) {
         /* GEO-R10：警示不可关 */
         var al = el("div", "geog-w2-alert fs-095");
