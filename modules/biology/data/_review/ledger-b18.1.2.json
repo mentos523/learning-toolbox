@@ -1,0 +1,115 @@
+{
+ "announcements": [
+  {
+   "echo_target": "ledger-b17.1.3.json b17.1.3-a1",
+   "id": "b18.1.2-ful1",
+   "kind": "fulfilled",
+   "note": "b18.1.2-p3 mathlink 深链回链 b17.1.3（\"认旧友：b17.1.3 第 3 页讲过——两对基因住在同一对同源染色体上（连锁）\"）；browser-b18.cjs A 段断言 p3 深链含 #b17.1.3 PASS。",
+   "source": "b18.1.2-p3 mathlink",
+   "status": "final_passed",
+   "text": "兑现：连锁与互换的完整故事在 b18 讲（b17.1.3-a1）"
+  },
+  {
+   "echo_target": "ledger-b17.1.4.json b17.1.4-a1",
+   "id": "b18.1.2-ful2",
+   "kind": "fulfilled",
+   "note": "b18.1.2-p3 mathlink 深链回链 b17.1.4（\"这就是 b17.1.4 第四问的答案：…连锁的基因对，不适用自由组合定律\"）；真点击 hash 落到 #b17.1.4/1（E-click-b1714 PASS）。",
+   "source": "b18.1.2-p3 mathlink",
+   "status": "final_passed",
+   "text": "兑现：连锁与互换的完整机制在 b18 细讲（b17.1.4-a1），并回链适用条件"
+  },
+  {
+   "echo_target": "ledger-b17.1.5.json b17.1.5-a1",
+   "id": "b18.1.2-ful3",
+   "kind": "fulfilled",
+   "note": "b18.1.2-p3 同一 mathlink 块内深链回链 b17.1.5（\"b17.1.5 也预告过，今天讲完完整故事\"）；browser-b18.cjs A 段断言 p3 深链含 #b17.1.5 PASS。",
+   "source": "b18.1.2-p3 mathlink",
+   "status": "final_passed",
+   "text": "兑现：b18 连锁与互换见（b17.1.5-a1）"
+  },
+  {
+   "echo_target": "ledger-b18.1.3.json b18.1.3-a2",
+   "id": "b18.1.2-ful4",
+   "kind": "fulfilled",
+   "note": "b18.1.2-p2（交叉遗传页）mathlink 深链回链 b18.1.3（\"学完规律，去 b18.1.3 实战：第 3 题就是 X 隐性家系…\"）；真点击 hash 落到 #b18.1.3/1（E-click-b1813 PASS）。",
+   "source": "b18.1.2-p2 mathlink",
+   "status": "final_passed",
+   "text": "兑现：交叉遗传页回链 b18.1.3 系谱判读实战（b18.1.3-a2）"
+  }
+ ],
+ "chapter": "b18",
+ "frozen_refs": [
+  {
+   "id": "b18.1.2-f1",
+   "kind": "frozen_copy",
+   "note": "b18.1.2-p2 逐字：\"交叉遗传：男患者的致病基因来自母亲、传给女儿。\"trap 逐字含 \"\"色盲传男不传女\"是错的！\"（命名+反驳体例，BIO-R26 合规；裸\"传男不传女\"零命中）。",
+   "ref": "BIO-R26（生物真值口径 §五）",
+   "status": "final_passed"
+  },
+  {
+   "id": "b18.1.2-f2",
+   "kind": "frozen_copy",
+   "note": "b18.1.2-p3 逐字：\"严格说连锁：同一条染色体上的基因，在减数分裂时倾向于一起进入同一个配子——这就是连锁（b17.1.3 的\"绑在一起\"，这里是严格版）。\"（复用 b17.1.3-p3 行内定义，非新定义。）",
+   "ref": "docs/biology-curriculum.md b18.1.2；连锁首现 b17.1.3-p3（R05）",
+   "status": "final_passed"
+  },
+  {
+   "id": "b18.1.2-f3",
+   "kind": "frozen_copy",
+   "note": "b18.1.2-p3 逐字：\"再说互换：减数分裂时，同源染色体的非姐妹染色单体（同一对同源染色体上、分别来自父方和母方的两条染色单体）偶尔交换片段——这叫互换。\"（互换全模块首现 b16.1.4-p1 B11 caption；本页为连锁语境严格化复用，配行内重述。）",
+   "ref": "docs/biology-curriculum.md b18.1.2；互换首现 b16.1.4-p1",
+   "status": "final_passed"
+  },
+  {
+   "id": "b18.1.2-f4",
+   "kind": "frozen_copy",
+   "note": "b18.1.2-p3 逐字：\"所以 9∶3∶3∶1 只在独立遗传时成立——连锁互换是例外。\"（回填 b17.1.3 辨析③；BIO-R21/AX01 当页显性化。）",
+   "ref": "docs/biology-curriculum.md b17.1.3 常见误区",
+   "status": "final_passed"
+  }
+ ],
+ "gate11_quiz": {
+  "note": "本课无 kind:quiz 页（讲解×3）；X 隐性计算判读在 b18.1.5 Q2/Q3 回填覆盖。",
+  "status": "final_passed"
+ },
+ "gate8_first_definition": {
+  "note": "本课首现：性染色体（b18.1.2-p1 行内定义\"性染色体：决定性别的染色体\"）、携带者（b18.1.2-p2 首现处行内解释\"携带者——带致病基因但本人不发病\"；R06 返工 2026-10-18，旧\"复用：携带者（b18.1.3-p1）\"表述作废）。复用：常染色体/X 染色体（b18.1.3-p1）、等位基因（b17.1.1-p3）、减数分裂/配子（b16.1.4）、连锁（首现 b17.1.3-p3，本课严格化复用）、互换（首现 b16.1.4-p1 B11 caption，本课连锁语境严格化复用）、非姐妹染色单体（b16.1.1 姐妹染色单体 + 本课行内 gloss）。b18 范围内无未定义先用（static-b18.cjs T3 94 项全绿）。",
+  "status": "final_passed"
+ },
+ "gate9_target_check": {
+  "note": "深链 5 处：p1 mathlink→b16.1.4；p2 mathlink→b18.1.3；p3 mathlink→b17.1.3/b17.1.5（同一块）+ mathlink→b17.1.4。目标 11/11 已生产（XLINK_BIO 白名单，static T4 PASS）；真点击实测 E-click-b1714/E-click-b1813 PASS。门禁⑨ PASS。",
+  "status": "final_passed"
+ },
+ "lesson": "b18.1.2",
+ "notes": "b18.1.2 伴性遗传（3 页：直觉 p1 性染色体 / 严格 p2 X 隐性+交叉遗传 / 严格 p3 连锁与互换）。本课兑现 b17 三个 drafted 预告 + b18.1.3-a2。色盲推演走图文步骤（B5 经评估不适用，见生产报告 §三；诚实缺口登记）。",
+ "schema": "biology-review-ledger/1.0",
+ "written_at": "2026-10-18",
+ "written_by": "生物生产队（蓝队数据工程 + 黄队内容）",
+ "expert_review": {
+  "reviewer": "生物学科专家队+黄队教学口径（P3 独立评审代理，未参与 P3 生产）",
+  "reviewed_at": "2026-10-18",
+  "report": "~/workspace/bio-audit/batch-p3-expert/REVIEW-REPORT.md",
+  "verdict": "FAIL",
+  "rulings": [
+   "BIO-RULING-2026-10-18-06",
+   "BIO-RULING-2026-10-18-08",
+   "BIO-RULING-2026-10-18-10",
+   "BIO-RULING-2026-10-18-12"
+  ],
+  "summary": "FAIL：p2'携带者'首现无定义（定义在 b18.1.3-p1，门禁⑧；台账明知前指仍标 final_passed，R06）。内容 PASS：色盲两例推演逐例验算正确；交叉遗传表述逐字符合 BIO-R26；'传男不传女'仅 trap 反驳；连锁严格定义↔'绑在一起'桥接顺滑；回链 b17.1.4 第四问逐字一致。WARN：生男生女缺'理论上'（R08）、血友病着墨（R10）、分层角标缺失（R12）。",
+  "rework_reverify": {
+   "reverified_at": "2026-10-18",
+   "reverified_by": "生物学科专家队+黄队教学口径（返工复核代理，独立于生产队）",
+   "verdict": "PASS",
+   "method": "亲手读代码+读台账；static-b18.cjs 独立重跑 94/94 exit 0；playwright file:// 四页真实渲染抽查（改动文案全可见，pageerror 0）",
+   "report": "~/workspace/bio-audit/batch-p3-expert/REVIEW-REPORT.md §七",
+   "items_reverified": [
+    "R06",
+    "R08",
+    "R10",
+    "R12"
+   ],
+   "summary": "R06 携带者首现行内解释（逐字与裁决建议一致），gate8 改记首现即定义；R08 正文+point'理论上'就位；R10 血友病一句在记法段后；R12 角标+认旧友就位。字数精简 4 处确属真冗余，frozen f1/f2（BIO-R26 逐字）完好。"
+  }
+ }
+}

@@ -1,0 +1,69 @@
+{
+ "announcements": [],
+ "chapter": "b18",
+ "frozen_refs": [
+  {
+   "id": "b18.1.1-f1",
+   "kind": "frozen_data",
+   "note": "F1：红眼雌 × 白眼雄 → 子一代 1237 只全红眼；F2：红眼雌 2459、红眼雄 1011、白眼雄 782。页内结论只取定性关键证据\"白眼全为雄性\"，不算 3∶1（实测 3470∶782≈4.4∶1，页内 note 已声明\"比例不必细算\"，规避 BIO-RULING-2026-10-17-01 式精度风险）。",
+   "ref": "摩尔根 1910 年原始计数（2026-10-18 联网核验：slideshare 性连锁课件、embibe 问答、Campbell Ch.15 讲纲三源一致；P3 独立评审交叉确证：F1 1237 只 / F2 2459/1011/782 与公开文献 White (mutation) 条记载一致，引 Morgan 1910 Science 32:120–122，逐数一致属实；R11 数据保留，页内未用于推导）",
+   "status": "final_passed"
+  },
+  {
+   "id": "b18.1.1-f2",
+   "kind": "frozen_copy",
+   "note": "b18.1.1-p3 trap 逐字：\"⚠️ 别搞混：\"类比=证明\"是错的！类比只提假说，实验才是证明。\"（\"类比只提假说，需实验证实\"明示，缺则 FAIL）。",
+   "ref": "BIO-R38（生物真值口径 §八）",
+   "status": "final_passed"
+  },
+  {
+   "id": "b18.1.1-f3",
+   "kind": "frozen_copy",
+   "note": "萨顿五项对照逐字上 b18.1.1-p1：①都成对 ②配子中都单个 ③受精恢复成对 ④都分离 ⑤都自由组合。",
+   "ref": "docs/biology-curriculum.md b18.1.1 核心演示",
+   "status": "final_passed"
+  }
+ ],
+ "gate11_quiz": {
+  "note": "本课无 kind:quiz 页（讲解×3）；实验设计思想在 b18.1.5 Q4 回填覆盖。",
+  "status": "final_passed"
+ },
+ "gate8_first_definition": {
+  "note": "本课首现：\"正反交\"（b18.1.1-p2 三问自查行内解释\"正反两组互为对照\"）、X 染色体（b18.1.1-p2 首现处前指\"X 是决定性别的染色体之一，下一课细讲\"，正式定义在 b18.1.2-p1；R07 返工 2026-10-18）。萨顿/摩尔根为人名非术语。复用：同源染色体（b16.1.4）、减数分裂（b16.1.4）、等位基因（b17.1.1-p3）、非同源染色体（b17.1.3-p2）。b18 范围内无未定义先用。",
+  "status": "final_passed"
+ },
+ "gate9_target_check": {
+  "note": "本课 3 页内无深链；p1 oldfriend 为第 3 页预告纯文本。门禁⑨ PASS。",
+  "status": "final_passed"
+ },
+ "lesson": "b18.1.1",
+ "notes": "b18.1.1 减数分裂与遗传的染色体学说（3 页：直觉 p1 萨顿类比 / 严格 p2 摩尔根证据 / 辨析 p3 类比边界）。先直觉后严格分层。零新组件（B5/B11/B3 均经评估不适用，见生产报告 §三）。",
+ "schema": "biology-review-ledger/1.0",
+ "written_at": "2026-10-18",
+ "written_by": "生物生产队（蓝队数据工程 + 黄队内容）",
+ "expert_review": {
+  "reviewer": "生物学科专家队+黄队教学口径（P3 独立评审代理，未参与 P3 生产）",
+  "reviewed_at": "2026-10-18",
+  "report": "~/workspace/bio-audit/batch-p3-expert/REVIEW-REPORT.md",
+  "verdict": "WARN",
+  "rulings": [
+   "BIO-RULING-2026-10-18-07",
+   "BIO-RULING-2026-10-18-11",
+   "BIO-RULING-2026-10-18-12"
+  ],
+  "summary": "内容 PASS：萨顿类比五项逐项成立；摩尔根 F2 2459/1011/782 与 F1 1237 只经独立确证为原始记录（R11 保留，台账补来源）；三问顺序合 BIO-R12；类比边界 trap 逐字合 BIO-R38。WARN：p2 X 染色体首现无前指（R07）、分层角标缺失（R12）、台账 gate8 漏记 X 染色体且未登记数据来源（R07/R11）。",
+  "rework_reverify": {
+   "reverified_at": "2026-10-18",
+   "reverified_by": "生物学科专家队+黄队教学口径（返工复核代理，独立于生产队）",
+   "verdict": "PASS",
+   "method": "亲手读代码+读台账；static-b18.cjs 独立重跑 94/94 exit 0；playwright file:// 四页真实渲染抽查（改动文案全可见，pageerror 0）",
+   "report": "~/workspace/bio-audit/batch-p3-expert/REVIEW-REPORT.md §七",
+   "items_reverified": [
+    "R07",
+    "R11",
+    "R12"
+   ],
+   "summary": "R07 X 染色体前指句在 b18.1.1-p2 首现处（逐字与裁决一致），gate8 补记；R11 f1 ref 补 Morgan 1910 Science 32:120–122，文案零改动；R12 直觉/严格角标+过渡句就位。冻文案 f2/f3 逐字在页。"
+  }
+ }
+}

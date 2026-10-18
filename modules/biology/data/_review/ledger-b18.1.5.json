@@ -1,0 +1,51 @@
+{
+ "announcements": [],
+ "chapter": "b18",
+ "frozen_refs": [
+  {
+   "id": "b18.1.5-f1",
+   "kind": "frozen_data",
+   "note": "8 题项（review + 7 choice），5 档梯度全覆盖：①认概念 Q1（性染色体组成）Q5（21 三体分类）②实验设计 Q4（正反交验证，强制）③对问应用 Q2（女儿基因型）Q6（连锁配子）④读图/计算判读 Q3（儿子色盲概率 1/2）⑤生活题 Q7（遗传咨询做法，强制）。每题 tip 带依据页码（\"b18.1.X 第 X 页\"）；无 0 题页。门禁⑪ PASS。",
+   "ref": "docs/biology-pedagogy.md 2.6 习题页规范",
+   "status": "final_passed"
+  }
+ ],
+ "gate11_quiz": {
+  "note": "kind:quiz×2：p1（review + 3 choice）+ p2（4 choice），共 8 题项（review + 7 choice）；5 档梯度全覆盖；强制实验设计题（Q4）、强制生活题（Q7）齐备；每题 tip 带依据页码；无 0 题页。门禁⑪ PASS。",
+  "status": "final_passed"
+ },
+ "gate8_first_definition": {
+  "note": "本课无新术语；小结 review 逐项回链 b18.1.1–1.4（本批/试点已生产）。",
+  "status": "final_passed"
+ },
+ "gate9_target_check": {
+  "note": "本课 2 页内无深链；review 内课号为纯文本。门禁⑨ PASS。",
+  "status": "final_passed"
+ },
+ "lesson": "b18.1.5",
+ "notes": "b18.1.5 本章小结与习题（2 页）。Q6 连锁配子题默认亲本组合 AB/ab（题干已声明\"在同一条染色体上\"且\"不考虑互换\"）；Q7 生活题正确选项为中性表述（相信科学评估、按医嘱），错误选项含\"有风险就一定不能生育\"（与咨询\"不替人做决定\"红线呼应）。",
+ "schema": "biology-review-ledger/1.0",
+ "written_at": "2026-10-18",
+ "written_by": "生物生产队（蓝队数据工程 + 黄队内容）",
+ "expert_review": {
+  "reviewer": "生物学科专家队+黄队教学口径（P3 独立评审代理，未参与 P3 生产）",
+  "reviewed_at": "2026-10-18",
+  "report": "~/workspace/bio-audit/batch-p3-expert/REVIEW-REPORT.md",
+  "verdict": "WARN",
+  "rulings": [
+   "BIO-RULING-2026-10-18-09"
+  ],
+  "summary": "内容 PASS：8 题项（review+7 choice），5 档梯度全覆盖，强制实验设计题（p2-Q1）与强制生活题（p2-Q4）齐备，每题 tip 带依据页码；Q7 正确选项为中性表述。WARN：Q6 题干顺式未声明（R09），选项倒逼下 reading 唯一，教学点无损。",
+  "rework_reverify": {
+   "reverified_at": "2026-10-18",
+   "reverified_by": "生物学科专家队+黄队教学口径（返工复核代理，独立于生产队）",
+   "verdict": "PASS",
+   "method": "亲手读代码+读台账；static-b18.cjs 独立重跑 94/94 exit 0；playwright file:// 四页真实渲染抽查（改动文案全可见，pageerror 0）",
+   "report": "~/workspace/bio-audit/batch-p3-expert/REVIEW-REPORT.md §七",
+   "items_reverified": [
+    "R09"
+   ],
+   "summary": "R09 Q6 题干补顺式声明（A 与 B 同一条染色体，a 与 b 在另一条上），选项/答案/tip 未动，答案逻辑正确无变。"
+  }
+ }
+}

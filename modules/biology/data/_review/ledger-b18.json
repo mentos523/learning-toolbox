@@ -1,0 +1,74 @@
+{
+ "announcements_summary": {
+  "drafted_remaining": [
+   "b18.1.3-a4（回填点：b19.1.4 立靶页须回链 b18.1.3 携带者回填；目标未生产，保持 drafted）"
+  ],
+  "fulfilled_this_batch": [
+   "b17.1.3-a1 → b18.1.2-p3 回链 b17.1.3",
+   "b17.1.4-a1 → b18.1.2-p3 回链 b17.1.4（适用条件）",
+   "b17.1.5-a1 → b18.1.2-p3 回链 b17.1.5",
+   "b18.1.3-a2 → b18.1.2-p2（交叉遗传页）回链 b18.1.3",
+   "b18.1.3-a3 → b18.1.4-p1（携带≠发病处）回链 b18.1.3",
+   "b18.1.3-a5（新增）→ b18.1.3-p1 认旧友回指 b17.1.2（R02 建议 + 图纸概率直观版回填）"
+  ]
+ },
+ "chapter": "b18",
+ "consistency_check": {
+  "chapter_nav": "lessons 顺序 b18.1.1→b18.1.2→b18.1.3→b18.1.4→b18.1.5，无断链（static T0-order PASS；browser 全页可达）",
+  "oldfriend_b1712": "b18.1.3-p1 新增 oldfriend 回指 b17.1.2（基因型/表现型定义处），图纸\"概率直观版回填（b17.1.2 认旧友）\"标注现已兑现、有效",
+  "page_ids": "14 页 id 全局唯一，`b18.1.X-pN` 与课内页序一一对应（static T1-unique PASS）",
+  "record_keys": "b18 数据文件无 recordKey（grep 零命中），唯一性平凡成立"
+ },
+ "gate8_chapter": "首现清单整章：性染色体（b18.1.2-p1 行内定义）、携带者（b18.1.2-p2 行内解释；R06 返工 2026-10-18）、正反交（b18.1.1-p2 行内解释）；X 染色体首现于 b18.1.1-p2（前指 b18.1.2-p1；R07 返工 2026-10-18）。复用：连锁（首现 b17.1.3-p3，R05）、互换（首现 b16.1.4-p1 B11 caption，本课严格化复用）、同源/非同源染色体、减数分裂、配子、等位基因、基因型/表现型。b18 范围内无未定义先用（static T3 全绿；全模块 grep 扫查见生产报告 §五）。",
+ "gate9_chapter": "深链 6 处：b18.1.2-p1→b16.1.4；b18.1.2-p2→b18.1.3；b18.1.2-p3→b17.1.3/b17.1.5/b17.1.4；b18.1.4-p1→b18.1.3。目标 11/11 已生产（XLINK_BIO 白名单）；真点击实测 3/3 落点正确（E-click-b1714/b1813/b1813b）。门禁⑨ PASS；未挂 b19/b25。",
+ "lessons": {
+  "b18.1.1": "减数分裂与遗传的染色体学说（3 页，本批新建）",
+  "b18.1.2": "伴性遗传（3 页，本批新建）",
+  "b18.1.3": "系谱图判读实战（4 页，试点已上线；本批仅加 oldfriend 一块，页结构未动）",
+  "b18.1.4": "人类遗传病与遗传咨询（2 页，本批新建）",
+  "b18.1.5": "本章小结与习题（2 页，本批新建）"
+ },
+ "notes": "b18 整章汇总（P3）。本批新生产 10 页 + b18.1.3 小改；整章 14 页。生产队不参与后续评审；未碰版本文件、未推送。",
+ "schema": "biology-review-ledger/1.0",
+ "self_check": {
+  "browser_b18": "223/223 PASS（file:// 三视口×14 页 + 深链真点击 + 深色 + quiz）",
+  "http_regression_b18": "8/8 PASS",
+  "static_b18": "94/94 PASS",
+  "v8_b18_scan": "400/400 节点落阶梯"
+ },
+ "written_at": "2026-10-18",
+ "written_by": "生物生产队（蓝队数据工程 + 黄队内容）",
+ "expert_review": {
+  "reviewer": "生物学科专家队+黄队教学口径（P3 独立评审代理，未参与 P3 生产）",
+  "reviewed_at": "2026-10-18",
+  "report": "~/workspace/bio-audit/batch-p3-expert/REVIEW-REPORT.md",
+  "verdict": "FAIL",
+  "rulings": [
+   "BIO-RULING-2026-10-18-06",
+   "BIO-RULING-2026-10-18-07",
+   "BIO-RULING-2026-10-18-08",
+   "BIO-RULING-2026-10-18-09",
+   "BIO-RULING-2026-10-18-10",
+   "BIO-RULING-2026-10-18-11",
+   "BIO-RULING-2026-10-18-12"
+  ],
+  "summary": "整章 FAIL 1 / WARN 6（见各课 expert_review）。独立核实：连锁首现 b17.1.3-p3、互换首现 b16.1.4-p1（B11 meiosis caption）成立；全模块无未定义先用残留（除 R06/R07）；3 drafted（b17.1.3-a1/b17.1.4-a1/b17.1.5-a1）+a2/a3/a5 兑现位置/目标/语义一致，a4 保持 drafted。返工复验通过前不得推送。",
+  "rework_reverify": {
+   "reverified_at": "2026-10-18",
+   "reverified_by": "生物学科专家队+黄队教学口径（返工复核代理，独立于生产队）",
+   "verdict": "PASS",
+   "method": "亲手读代码+读台账；static-b18.cjs 独立重跑 94/94 exit 0；playwright file:// 四页真实渲染抽查（改动文案全可见，pageerror 0）",
+   "report": "~/workspace/bio-audit/batch-p3-expert/REVIEW-REPORT.md §七",
+   "items_reverified": [
+    "R06",
+    "R07",
+    "R08",
+    "R09",
+    "R10",
+    "R11",
+    "R12"
+   ],
+   "summary": "R06–R12 七项全部 PASS；14 页结构、深链映射无变化；static 独立重跑 94/94 exit 0；四页真实渲染抽查通过。结论：b18 可进入 QA（QA 全绿后方可推送）。"
+  }
+ }
+}
