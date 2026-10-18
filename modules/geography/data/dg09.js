@@ -432,14 +432,19 @@ window.GEOGRAPHY_DATA["dg09"] = {
                     keyLine: "800mm 等降水量线大体沿秦岭—淮河一线",
                     recordKey: "geog_geomap_dg09.2.2-p2"
                   }
+                },
+                {
+                  type: "monsoon-timeline",
+                  params: { recordKey: "geog_monsoon-timeline_dg09.2.2-p2" }
                 }
               ],
               blocks: [
                 { type: "lead", text: "点等降水量线，看数值：从东南沿海的 1600mm 向西北，一路降到 50mm 以下。找到 800mm 线——它大体沿秦岭—淮河走，这就是湿润区和半湿润区的分界。" },
                 { type: "text", html: "<strong>场层真值</strong>：等降水量线数值序列与 800mm 线走向（GeoBatch5.PRECIP_STATIONS 冻结常量 + widget 内等值线）。<strong>UI 可达</strong>：点等值线 → 数值读数；找 800mm 线 → 干湿分区判分。本图为 B 级降水分布底图（含省界），国界线/十段线按审定书绘制。" },
-                { type: "slogan", text: "数等值线，看递减，找八百。" }
+                { type: "text", html: "<strong>时间轴</strong>：降水不光看空间，还要看时间——拖月份滑块，看雨带怎么走：6 月中下旬–7 月上旬江淮准静止锋 → <strong>梅雨</strong>；7 月中下旬–8 月副高控制 → <strong>伏旱</strong>。记住：梅雨、伏旱都是季风“<strong>掉头</strong>”闹的（dg14.3.2 认旧友；预告台账 P7，批 8 补交互落点）。" },
+                { type: "slogan", text: "数等值线，看递减，找八百；拖时间轴，看梅雨伏旱。" }
               ],
-              point: "dg09.2.2-p2：年降水量分布判读（geo-map precip，B 级）。场层真值见 GeoBatch5.PRECIP_STATIONS；UI 可达为点线读数 + 800mm 线判分。"
+              point: "dg09.2.2-p2：年降水量分布判读（geo-map precip，B 级）。场层真值见 GeoBatch5.PRECIP_STATIONS；UI 可达为点线读数 + 800mm 线判分。批 8 追加 monsoon-timeline（§33）：梅雨/伏旱时间轴（P7 交互落点）。"
             },
             /* ================= p3：收官页 ================= */
             {

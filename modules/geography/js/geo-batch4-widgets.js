@@ -152,12 +152,14 @@
       try { var v = getComputedStyle(document.body).getPropertyValue(name).trim(); return v || fb; }
       catch (e) { return fb; }
     }
-    var ink = cssVar("--geog-ink", "#1a1a1a");
-    var soft = cssVar("--geog-ink-soft", "#5a5a5a");
-    var accent = cssVar("--geog-accent", "#2a7de1");
-
+    /* 主题色实时读取（2026-10-18 批 8 小手术）：ink/soft/accent 改为
+     * drawGlyph 内实时读 CSS 变量，主题切换后 resize 即跟随
+     * （原闭包一次性读取，深色切换后 glyph 颜色不跟随）。 */
     function drawGlyph(v) {
       stage.innerHTML = "";
+      var ink = cssVar("--geog-ink", "#1a1a1a");
+      var soft = cssVar("--geog-ink-soft", "#5a5a5a");
+      var accent = cssVar("--geog-accent", "#2a7de1");
       var glyph = P.glyph || "none";
       if (glyph === "none") return;
       /* V8 字号阶梯修复（2026-10-18 批 7）：viewBox 0 0 100 62 → 0 0 800 496
