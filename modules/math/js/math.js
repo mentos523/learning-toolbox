@@ -82,14 +82,14 @@
     try { last = localStorage.getItem(TRACK_KEY); } catch (e) {}
     grid.innerHTML = (window.MATH_TRACKS || []).map(function (t) {
       var badge = (t.id === last) ? '<span class="m-track-last">上次进入</span>' : "";
-      return '<a class="m-track-card" style="--track-color:' + esc(t.color || "#f59e0b") + '"' +
+      return '<a class="m-track-card tb-card" style="--track-color:' + esc(t.color || "#f59e0b") + '"' +
         ' href="#track=' + esc(t.id) + '" data-track="' + esc(t.id) + '"' +
         ' aria-label="进入' + esc(t.name) + '板块">' +
         '<div class="m-track-icon">' + trackIcon(t) + "</div>" +
         "<h2>" + esc(t.name) + " <small>· " + esc(t.tagline || "") + "</small>" + badge + "</h2>" +
         "<p>" + esc(t.description || "") + "</p>" +
         '<div class="m-track-meta">' + (t.pages ? "约 " + t.pages + " 页" : "") + "</div>" +
-        '<span class="m-track-btn">进入学习 →</span></a>';
+        '<span class="tb-btn-primary">进入学习 →</span></a>';
     }).join("");
     Array.prototype.forEach.call(grid.querySelectorAll(".m-track-card"), function (a) {
       a.addEventListener("click", function (e) {

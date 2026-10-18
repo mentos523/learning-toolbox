@@ -3,14 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231d4ed8'/%3E%3Ctext x='32' y='44' font-size='36' text-anchor='middle' fill='white' font-family='sans-serif'%3EAa%3C/text%3E%3C/svg%3E">
-<title>英语 · 讲词根 / 语法 — 学习工具箱</title>
+<!-- 旧 favicon 备查（UI 统一批 2026-10-18 冻结，不再引用）：<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231d4ed8'/%3E%3Ctext x='32' y='44' font-size='36' text-anchor='middle' fill='white' font-family='sans-serif'%3EAa%3C/text%3E%3C/svg%3E"> -->
+<link rel="icon" href="../../assets/img/logo-32.png?v=2026.10.18.8" type="image/png">
+<title>英语 · 选择子卡 — 学习工具箱</title>
 <meta name="description" content="拨一拨词根，单词自己长出来。">
-<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="../../assets/css/style.css?v=2026.10.18.8">
 <link rel="stylesheet" href="css/english.css">
 <link rel="stylesheet" href="css/grammar.css">
 </head>
 <body data-theme="light" data-font="sys" data-size="normal">
+
+<!-- TB:brand-head -->
+<div class="tb-brand-head">
+  <img class="tb-brand-logo" src="../../assets/img/logo-64.png?v=2026.10.18.8" width="32" height="32" alt="学习工具箱">
+  <span class="tb-brand-name">学习工具箱</span>
+  <span class="tb-brand-sep" aria-hidden="true">·</span>
+  <span class="tb-brand-subject">英语</span>
+</div>
+<!-- /TB:brand-head -->
 
 <!-- 子卡选择（蓝队 2026-10-14）：讲词根 / 语法双卡片，无深链接时先到这里；
      设计语言复用数学板块卡（m-track-*），取色走本模块 CSS 变量 -->
@@ -19,7 +29,7 @@
     <h2 class="e-tracks-title">英语 · 选择子卡</h2>
     <p class="e-tracks-sub">先选一块，慢慢学。</p>
     <div class="e-track-grid" id="track-grid"></div>
-    <p class="e-tracks-foot"><a class="back-btn" href="../../index.html">← 返回工具箱首页</a></p>
+    <p class="e-tracks-foot"><a class="tb-back" href="../../index.html">← 返回工具箱首页</a></p>
   </div>
 </section>
 
@@ -29,8 +39,8 @@
 <section class="e-grammar" id="grammar" hidden aria-label="语法">
   <div class="e-grammar-inner">
     <header class="e-grammar-head">
-      <a class="back-btn" href="../../index.html" aria-label="返回工具箱首页">← 返回</a>
-      <button class="back-btn" data-card-back aria-label="返回子卡选择">子卡</button>
+      <a class="tb-back" href="../../index.html" aria-label="返回工具箱首页">← 返回</a>
+      <button class="tb-back" data-card-back aria-label="返回子卡选择">子卡</button>
       <h1>英语 · 语法</h1>
     </header>
     <div class="e-grammar-body">
@@ -178,6 +188,10 @@
 </div>
 
 <div class="toast" id="toast" role="status"></div>
+
+<!-- TB:footer -->
+<div class="tb-footer tb-footer-fixed">学习工具箱 · 英语 · 版本 2026.10.18.8</div>
+<!-- /TB:footer -->
 
 <script src="data/roots.js"></script>
   <script src="data/standalone.js"></script>

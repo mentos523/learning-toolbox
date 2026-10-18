@@ -3,9 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230ea5e9'/%3E%3Ctext x='32' y='44' font-size='30' text-anchor='middle' fill='white' font-family='sans-serif'%3E%E5%9C%B0%3C/text%3E%3C/svg%3E">
-<title>地理 — 学习工具箱</title>
+<!-- 旧 favicon 备查（UI 统一批 2026-10-18 冻结，不再引用）：<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230ea5e9'/%3E%3Ctext x='32' y='44' font-size='30' text-anchor='middle' fill='white' font-family='sans-serif'%3E%E5%9C%B0%3C/text%3E%3C/svg%3E"> -->
+<link rel="icon" href="../../assets/img/logo-32.png?v=2026.10.18.8" type="image/png">
+<title>地理 · 选择板块 — 学习工具箱</title>
 <meta name="description" content="地图是地理的第二语言：先学会“读”，再学“说”。从七年级出发，一路到高中。">
+<link rel="stylesheet" href="../../assets/css/style.css?v=2026.10.18.8">
 <link rel="stylesheet" href="css/geography.css">
 </head>
 <body data-theme="light">
@@ -21,6 +23,15 @@
 })();
 </script>
 
+<!-- TB:brand-head -->
+<div class="tb-brand-head">
+  <img class="tb-brand-logo" src="../../assets/img/logo-64.png?v=2026.10.18.8" width="32" height="32" alt="学习工具箱">
+  <span class="tb-brand-name">学习工具箱</span>
+  <span class="tb-brand-sep" aria-hidden="true">·</span>
+  <span class="tb-brand-subject">地理</span>
+</div>
+<!-- /TB:brand-head -->
+
 <!-- 顶栏：目录按钮（抽屉双开之一）+ 标题 + 页码 -->
 <header class="geog-topbar" id="geog-topbar" aria-label="地理顶栏"></header>
 
@@ -35,6 +46,10 @@
 <section id="geography-app" aria-label="地理学习">
   <div class="geog-app" id="geog-app" hidden></div>
 </section>
+
+<!-- TB:footer -->
+<div class="tb-footer">学习工具箱 · 地理 · 版本 2026.10.18.8</div>
+<!-- /TB:footer -->
 
 <!-- 框架：基础引擎层（方案 A，加载顺序见 docs/ENGINE.md §一；
      地理试点仅需 core + contour） → 章注册表 → 章数据 → 主引擎 -->

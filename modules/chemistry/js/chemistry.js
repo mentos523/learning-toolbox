@@ -256,7 +256,7 @@
     browseRoot.innerHTML = "";
     curTrack = null;
     var wrap = el("div", "chm-browse chm-select");
-    wrap.appendChild(el("h1", "", "化学"));
+    wrap.appendChild(el("h1", "", "化学 · 选择板块"));
     wrap.appendChild(el("p", "chm-browse-sub",
       "下标是身份证，系数是人数——配平绝不改下标。"));
     wrap.appendChild(chmHomeLink());
@@ -270,7 +270,7 @@
         var dc = chmChapterDone(c);
         nL += dc.n; done += dc.done;
       });
-      var card = el("button", "chm-track-card", "");
+      var card = el("button", "chm-track-card tb-card", "");
       card.type = "button";
       card.setAttribute("aria-label", "进入" + t.name);
       card.innerHTML =
@@ -280,7 +280,7 @@
         '<span class="chm-track-meta">' + chs.length + " 章 · " + nL + " 课" +
         (done > 0 ? ' · <span class="chm-track-done">已学完 ' + done + " 课</span>" : "") +
         "</span>" +
-        '<span class="chm-track-go">进入学习 →</span>';
+        '<span class="tb-btn-primary" style="align-self:flex-start">进入学习 →</span>';
       (function (tid) {
         card.addEventListener("click", function () { showTrackBrowser(tid); });
       })(t.id);
@@ -296,7 +296,7 @@
     curTrack = trackId;
     browseRoot.innerHTML = "";
     var wrap = el("div", "chm-browse");
-    var back = el("button", "chm-back-link", "← 返回选择");
+    var back = el("button", "tb-back", "← 返回选择");
     back.type = "button";
     back.addEventListener("click", function () { showSelection(); });
     wrap.appendChild(back);

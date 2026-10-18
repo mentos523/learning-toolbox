@@ -114,7 +114,7 @@
     });
     drawerBtn = btn;
     topbar.appendChild(btn);
-    var h = el("h1", "", cur && cur.found ? esc(cur.found.lesson.title) : "地理 · 学习工具箱");
+    var h = el("h1", "", cur && cur.found ? esc(cur.found.lesson.title) : "地理 · 选择板块");
     topbar.appendChild(h);
     if (cur && cur.found) {
       var pages = cur.found.lesson.pages || [];
@@ -130,7 +130,7 @@
     appRoot.hidden = true;
     browseRoot.innerHTML = "";
     var hero = el("div", "geog-hero",
-      "<h2>地理 · 学习工具箱</h2>" +
+      "<h2>地理 · 选择板块</h2>" +
       "<p>地图是地理的第二语言：先学会“读”，再学“说”。从七年级出发，一路到高中。</p>");
     browseRoot.appendChild(hero);
     // 继续学习
@@ -142,7 +142,7 @@
     });
     if (best) {
       var f = findLesson(best);
-      var card = el("button", "geog-card",
+      var card = el("button", "geog-card tb-card",
         "<h3>继续学习</h3><p>" + esc(f.lesson.id + " " + f.lesson.title) + "</p>" +
         '<span class="go">接着上次的页码进入 →</span>');
       card.addEventListener("click", function () { goLesson(best); });
@@ -160,7 +160,7 @@
           n += ((u.lessons) || []).length;
         });
       });
-      var c = el("button", "geog-card",
+      var c = el("button", "geog-card tb-card",
         "<h3>" + esc(t.name) + "</h3><p>" + esc(t.desc) + "</p>" +
         '<p class="go">' + ready.length + " 章 · " + n + " 课已就位 →</p>");
       (function (tid) {

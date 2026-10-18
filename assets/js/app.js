@@ -37,7 +37,7 @@
       ? '<span class="badge badge-ready">可用</span>'
       : '<span class="badge badge-soon">筹备中</span>';
     var action = ready
-      ? '<span class="card-btn">进入学习 →</span>'
+      ? '<span class="tb-btn-primary">进入学习 →</span>'
       : '<span class="card-btn card-btn-disabled">敬请期待</span>';
 
     var inner =
@@ -49,9 +49,9 @@
       badge + action;
 
     if (ready) {
-      return '<a class="card" style="--card-color:' + m.color + '" href="' + m.path + '">' + inner + "</a>";
+      return '<a class="card tb-card" style="--card-color:' + m.color + '" href="' + m.path + '">' + inner + "</a>";
     }
-    return '<div class="card card-soon" style="--card-color:' + m.color + '">' + inner + "</div>";
+    return '<div class="card card-soon tb-card" style="--card-color:' + m.color + '">' + inner + "</div>";
   }
 
   function render() {

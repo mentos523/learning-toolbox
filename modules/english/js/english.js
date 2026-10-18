@@ -681,13 +681,13 @@
     try { last = localStorage.getItem(TRACK_KEY); } catch (e) {}
     grid.innerHTML = EN_TRACKS.map(function (t) {
       var badge = (t.id === last) ? '<span class="e-track-last">上次进入</span>' : "";
-      return '<a class="e-track-card" style="--track-color:' + esc(t.color || "#1d4ed8") + '"' +
+      return '<a class="e-track-card tb-card" style="--track-color:' + esc(t.color || "#1d4ed8") + '"' +
         ' href="#card=' + esc(t.id) + '" data-track="' + esc(t.id) + '"' +
         ' aria-label="进入' + esc(t.name) + '子卡">' +
         '<div class="e-track-icon">' + trackIcon(t) + "</div>" +
         "<h2>" + esc(t.name) + " <small>· " + esc(t.tagline || "") + "</small>" + badge + "</h2>" +
         "<p>" + esc(t.description || "") + "</p>" +
-        '<span class="e-track-btn">' + esc(t.cta || "进入学习 →") + "</span></a>";
+        '<span class="tb-btn-primary">' + esc(t.cta || "进入学习 →") + "</span></a>";
     }).join("");
     Array.prototype.forEach.call(grid.querySelectorAll(".e-track-card"), function (a) {
       a.addEventListener("click", function (e) {

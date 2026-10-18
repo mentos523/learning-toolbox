@@ -3,10 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23f59e0b'/%3E%3Ctext x='32' y='44' font-size='36' text-anchor='middle' fill='white' font-family='sans-serif'%3Eπ%3C/text%3E%3C/svg%3E">
-<title>数学 · 代数与几何 — 学习工具箱</title>
+<!-- 旧 favicon 备查（UI 统一批 2026-10-18 冻结，不再引用）：<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23f59e0b'/%3E%3Ctext x='32' y='44' font-size='36' text-anchor='middle' fill='white' font-family='sans-serif'%3Eπ%3C/text%3E%3C/svg%3E"> -->
+<link rel="icon" href="../../assets/img/logo-32.png?v=2026.10.18.8" type="image/png">
+<title>数学 · 选择板块 — 学习工具箱</title>
 <meta name="description" content="从方程一路到微积分：数形结合，一页一屏，动手看到数学。">
-<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="../../assets/css/style.css?v=2026.10.18.8">
 <link rel="stylesheet" href="css/math.css">
 </head>
 <body data-theme="light">
@@ -22,6 +23,15 @@
   else if (mq.addListener) mq.addListener(apply);  // 旧版 Safari
 })();
 </script>
+
+<!-- TB:brand-head -->
+<div class="tb-brand-head tb-brand-overlay">
+  <img class="tb-brand-logo" src="../../assets/img/logo-64.png?v=2026.10.18.8" width="32" height="32" alt="学习工具箱">
+  <span class="tb-brand-name">学习工具箱</span>
+  <span class="tb-brand-sep" aria-hidden="true">·</span>
+  <span class="tb-brand-subject">数学</span>
+</div>
+<!-- /TB:brand-head -->
 
 <div class="m-app" id="app">
   <!-- 板块选择（蓝队 2026-10-13）：代数 / 几何双卡片，无深链接时先到这里 -->
@@ -63,6 +73,10 @@
     </nav>
   </main>
 </div>
+
+<!-- TB:footer -->
+<div class="tb-footer tb-footer-fixed">学习工具箱 · 数学 · 版本 2026.10.18.8</div>
+<!-- /TB:footer -->
 
 <!-- 数据：章注册表（章数据文件按需动态加载） -->
 <script src="data/chapters.js"></script>

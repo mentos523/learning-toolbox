@@ -256,3 +256,180 @@ a.card:hover {
 }
 .update-banner[hidden] { display: none; }
 .update-banner a { color: #1d4ed8; }
+/* ============================================================
+ * UI 统一批 v1（蓝队 2026-10-18）· 共享样式增量
+ * 依据：docs/ui-spec-v1.md §2–§3、§7.1
+ * 落盘方式：原样追加到 assets/css/style.css 文件末尾。
+ * 只增不删：以下均为新增定义；既有变量、既有类一律不动（冻结）。
+ * ============================================================ */
+
+/* ---------- §2.2 品牌色阶 + §2.3 语义 token + §2.4 悬空补全（浅色默认值） ---------- */
+:root {
+  /* 品牌蓝取自 forum logo 源图中心像素 RGB(56,159,254) ≈ #3899ff */
+  --brand-50: #eef6ff;
+  --brand-100: #d9ebff;
+  --brand-500: #3899ff;
+  --brand-600: #1f7fe6;   /* 主按钮背景：配白字，对比度 ≥ 4.5:1 */
+  --brand-700: #1668c4;   /* 主按钮 hover / 激活 */
+
+  --btn-primary-bg: var(--brand-600);
+  --btn-primary-ink: #ffffff;              /* 裁决1：深色下为深字 #0b1622 以保对比 */
+  --btn-secondary-border: var(--brand-500);
+  --btn-secondary-ink: var(--brand-700);
+  --card-border: #e7e0cf;                  /* 入口卡片描边（白卡风收敛用） */
+  --topbar-bg: #ffffff;                    /* 品牌顶栏背景 */
+  --footer-border: #e5dcc8;                /* 页脚分隔线 */
+
+  /* §2.4 悬空补全：曾在 :root 未定义而被引用的变量，在此补上定义 */
+  --accent: #b45309;       /* 与 .badge-soon 色系一致的强调色（.version-note 用） */
+  --accent-soft: #fef3c7;  /* 强调浅底（.version-note 用） */
+  --line: #e5e0d5;         /* 与 .update-btn 现有回退值一致，视觉无变化 */
+}
+
+/* ---------- §2.5 深色配对值（body[data-theme="dark"]；深色机制本身不动） ---------- */
+body[data-theme="dark"] {
+  --brand-50: #12263a;
+  --brand-100: #1b3a5c;
+  --brand-500: #5aa8ff;
+  --brand-600: #7ab8ff;
+  --brand-700: #9ccbff;
+
+  --btn-primary-bg: var(--brand-600);
+  --btn-primary-ink: #0b1622;              /* 裁决1：深色下深字保对比 */
+  --btn-secondary-border: var(--brand-500);
+  --btn-secondary-ink: var(--brand-500);
+  --card-border: #3a3730;
+  --topbar-bg: #1f1c17;
+  --footer-border: #3a3730;
+
+  --accent: #d6a05a;
+  --accent-soft: #3a2f18;
+  --line: #3a3730;
+}
+
+/* ---------- §3.1 .tb-brand-head 品牌头插槽容器 ---------- */
+.tb-brand-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  background: var(--topbar-bg);
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: 0;
+  z-index: 80;  /* 2026-10-18 UI批修复：高于数学/英语全视口选择层 .m-tracks/.e-tracks(z-index:70)，品牌头可见；不触及冻结旧类层级 */
+}
+.tb-brand-logo { display: block; }  /* 源图自带圆角透明，不再额外裁剪 */
+.tb-brand-name { font-size: 1.05rem; font-weight: bold; color: var(--ink); }
+.tb-brand-sep { color: var(--ink-soft); }
+.tb-brand-subject { font-size: 1.05rem; font-weight: bold; color: var(--brand-600); }
+/* 2026-10-19 UI批修复 FAIL-3：数学课页品牌头改绝对定位，脱离文档流不再把
+   .m-app(height:100dvh) 下压 52px；z-index 沿用上面 80 不动。仅数学入口页使用。 */
+.tb-brand-overlay { position: absolute; top: 0; left: 0; right: 0; }
+
+/* ---------- §3.2 .tb-btn-primary / .tb-btn-secondary 按钮 ---------- */
+.tb-btn-primary,
+.tb-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;            /* 窄屏触控纪律：可点目标 ≥ 44px */
+  padding: 10px 26px;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-family: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+.tb-btn-primary {
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-ink);
+  border: none;
+}
+.tb-btn-secondary {
+  background: transparent;
+  border: 1.5px solid var(--btn-secondary-border);
+  color: var(--btn-secondary-ink);
+}
+
+/* ---------- §3.3 .tb-back 返回控件 ---------- */
+.tb-back {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 6px 18px;
+  border-radius: 999px;
+  border: 1.5px solid var(--btn-secondary-border);
+  color: var(--btn-secondary-ink);
+  text-decoration: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+/* ---------- §3.4 .tb-card 入口卡片 ---------- */
+.tb-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border-top: 6px solid var(--card-color, var(--brand-500));  /* 沿用学科主题色顶边机制 */
+}
+
+/* ---------- §3.5 .tb-progress 进度条（数学范式） ---------- */
+.tb-progress {
+  height: 8px;
+  border-radius: 999px;
+  background: var(--brand-100);
+  overflow: hidden;
+}
+.tb-progress > i {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--brand-500), var(--brand-600));
+}
+
+/* ---------- §3.6 .tb-footer 页脚 ---------- */
+.tb-footer {
+  text-align: center;
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+  padding: 18px;
+  border-top: 1px solid var(--footer-border);
+}
+/* ---------- §3.6a .tb-footer-fixed 固定页脚（仅数学/英语入口页） ---------- */
+/* 2026-10-18 UI批修复 FAIL-2：数学页 body{overflow:hidden} 裁掉 in-flow 页脚、
+   英语页页脚被 .e-tracks 全视口层遮挡，故两页页脚改 fixed 置底；
+   其余 5 页 .tb-footer 保持 in-flow 不动。 */
+.tb-footer-fixed {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 80;
+}
+/* 2026-10-19 UI批修复 FAIL-3：课页视图隐藏固定页脚（math.js 切课页时
+   main#main 的 hidden 被置 false，纯 CSS 响应，不动 JS）；
+   选择视图（main hidden）页脚保持现状。 */
+.m-app:has(main#main:not([hidden])) ~ .tb-footer-fixed { display: none; }
+
+/* 2026-10-19 UI批修复 FAIL-5：课页视图隐藏品牌头浮层（白队复测：
+   .tb-brand-overlay{position:absolute} 浮在数学课页自有头栏（y 0-52）之上，
+   #menu-btn/#tracks-back/←返回 中心被拦截；math.js 切课页时 main.hidden=false，
+   纯 CSS 响应，不动 JS、不动任何冻结旧类）。选择视图（main hidden）品牌头
+   恢复显示。仅命中 math 页（其余 6 页品牌头无 tb-brand-overlay 类）。 */
+body:has(.m-app main#main:not([hidden])) .tb-brand-overlay { display: none; }
+
+/* 2026-10-19 UI批修复 FAIL-4：英语移动端 (<1024px) 两抽屉开关条避开顶部
+   52px 品牌栏与底部页脚（实测 60px）；桌面端不动。
+   备注 1：选择器多带一层 body（0,2,1）——modules/english/css/english.css 在同级
+   媒体查询里的 .drawer-left/right .edge-tab（0,2,0）后载入，必须靠特异性
+   取胜；english.css 的 .edge-tab 旧定义本身未动。
+   备注 2：开关条保持 52px 细条（左上/右下各一条，不重叠）；白队报告 §五候选
+   方向即此口径。 */
+@media (max-width: 1023px) {
+  body .drawer-left .edge-tab { top: 52px; }
+  body .drawer-right .edge-tab { top: auto; bottom: 60px; }
+}

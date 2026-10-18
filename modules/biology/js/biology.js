@@ -234,7 +234,7 @@
     browseRoot.innerHTML = "";
     curTrack = null;
     var wrap = el("div", "bio-browse bio-select");
-    wrap.appendChild(el("h1", "", "生物"));
+    wrap.appendChild(el("h1", "", "生物 · 选择板块"));
     var bc = browseCounts();
     wrap.appendChild(el("p", "bio-browse-sub",
       bc.ch + " 章 · " + bc.lessons + " 课 · " + bc.pages + " 页"));
@@ -249,17 +249,17 @@
         var dc = chapterDoneCount(c);
         nL += dc.n; done += dc.done;
       });
-      var card = el("button", "bio-track-card", "");
+      var card = el("button", "bio-track-card tb-card", "");
       card.type = "button";
       card.setAttribute("aria-label", "进入" + t.name);
       card.innerHTML =
         '<span class="bio-track-name">' + esc(t.name) +
         ' <small>· ' + esc(t.tagline) + "</small></span>" +
         '<span class="bio-track-desc">' + esc(t.desc) + "</span>" +
-        '<span class="bio-track-meta">' + chs.length + " 章 · " + nL + " 课" +
-        (done > 0 ? ' · <span class="bio-track-done">已学完 ' + done + " 课</span>" : "") +
+        '<span class="bio-track-meta">' + (chs.length ? chs.length + " 章 · " + nL + " 课" +
+        (done > 0 ? ' · <span class="bio-track-done">已学完 ' + done + " 课</span>" : "") : "敬请期待") +
         "</span>" +
-        '<span class="bio-track-go">进入学习 →</span>';
+        '<span class="tb-btn-primary" style="align-self:flex-start">进入学习 →</span>';
       (function (tid) {
         card.addEventListener("click", function () { showTrackBrowser(tid); });
       })(t.id);
@@ -275,7 +275,7 @@
     curTrack = trackId;
     browseRoot.innerHTML = "";
     var wrap = el("div", "bio-browse");
-    var back = el("button", "bio-back-link", "← 返回选择");
+    var back = el("button", "tb-back", "← 返回选择");
     back.type = "button";
     back.addEventListener("click", function () { showSelection(); });
     wrap.appendChild(back);

@@ -227,7 +227,7 @@
     browseRoot.innerHTML = "";
     curTrack = null;
     var wrap = el("div", "phy-browse phy-select");
-    wrap.appendChild(el("h1", "", "物理"));
+    wrap.appendChild(el("h1", "", "物理 · 选择板块"));
     var bc = browseCounts();
     wrap.appendChild(el("p", "phy-browse-sub",
       bc.ch + " 章 · " + bc.lessons + " 课 · " + bc.pages + " 页"));
@@ -242,7 +242,7 @@
         var dc = chapterDoneCount(c);
         nL += dc.n; done += dc.done;
       });
-      var card = el("button", "phy-track-card", "");
+      var card = el("button", "phy-track-card tb-card", "");
       card.type = "button";
       card.setAttribute("aria-label", "进入" + t.name);
       card.innerHTML =
@@ -252,7 +252,7 @@
         '<span class="phy-track-meta">' + chs.length + " 章 · " + nL + " 课" +
         (done > 0 ? ' · <span class="phy-track-done">已学完 ' + done + " 课</span>" : "") +
         "</span>" +
-        '<span class="phy-track-go">进入学习 →</span>';
+        '<span class="tb-btn-primary" style="align-self:flex-start">进入学习 →</span>';
       (function (tid) {
         card.addEventListener("click", function () { showTrackBrowser(tid); });
       })(t.id);
@@ -268,7 +268,7 @@
     curTrack = trackId;
     browseRoot.innerHTML = "";
     var wrap = el("div", "phy-browse");
-    var back = el("button", "phy-back-link", "← 返回选择");
+    var back = el("button", "tb-back", "← 返回选择");
     back.type = "button";
     back.addEventListener("click", function () { showSelection(); });
     wrap.appendChild(back);
