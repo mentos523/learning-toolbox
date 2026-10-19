@@ -1026,7 +1026,8 @@ window.ROOTS_DATA = [
 ]},
 {r:"voc",v:["voc","voic"],d:"voc-",m:["声音；呼叫"],w:[
   ["voice","n.","声音",0],
-  ["advocate","v./n.","提倡",0],
+  ["advocate","v.","提倡",0],
+  ["advocate","n.","提倡者",0],
   ["vocal","adj.","声音的",0],
   ["vocabulary","n.","词汇",0],
   ["vocalist","n.","歌手",0],
@@ -1736,8 +1737,7 @@ window.ROOTS_DATA = [
 ]},
 {r:"err",v:["err"],d:"err-",m:["错；谬误"],w:[
   ["error","n.","错误",0],
-  ["erroneous","adj.","错误的",0],
-  ["errand","n.","差事",0]
+  ["erroneous","adj.","错误的",0]
 ]},
 {r:"sol",v:["sol"],d:"sol-",m:["日；太阳"],w:[
   ["solar","adj.","太阳的",0]

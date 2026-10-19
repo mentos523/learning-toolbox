@@ -21,7 +21,17 @@
  *      6 主 JS 均有 TB_crumb.update 调用、全部 crumb href 静态可解——
  *      相对路径指向真实文件、hash 前缀被本模块路由实际处理且值在真实 track id 集合内；
  *      防假链接）
+ * ⑧ student-text-tokens：学生文案内部 token 检查（自研，文字内容修复批 2026-10-19：
+ *    block/warn 两级词表；定级依据见 WORDLIST.md）。
+ * ⑨ explain-has-text：kind=explain 的页必须含 text 正文块（告警级）。
+ * ⑩ hint-length：hint/tip 单条 >60 字列出（告警级）。
+ * ⑪ explain-thin：explain 页正文 <150 字列出（告警级）。
+ * ⑫ first-term-crosscheck：首现即定义/先认词标注清单（尽力而为，
+ *    仓库内无独立术语追踪表，只产清单供人工比对）。
  *
+ * 【版本】本文件为 push-1 版：⑧ 的 block 词表全部降级为 warn（TOKEN_STRICT=false），
+ * 因为远端 main 上泄漏尚未修复，阻断会让 main 变红。
+ * 铁律：不许让远端 main 处于"新阻断断言会 FAIL"的状态。
  * file:// 可跑红线：本脚本只读文件、不起服务；数据文件用 <script> 载入式
  * `window.X = {...}` 格式，Node 侧用沙箱求值读取，不走 fetch。
  *
@@ -450,6 +460,290 @@ function checkBreadcrumb() {
   else ok(tag, `6 壳引用齐${warns.length ? "；" + warns.join("；") : ""}；href 契约全过`);
 }
 
+/* ============================================================
+ * ⑧⑨⑩⑪⑫ 学生文案断言组（自研，第 0 批 2026-10-19）
+ *
+ * 背景：2026-10-19 文字内容审计发现"生产黑话泄漏进学生正文"为跨科
+ * 通病（审计报告 audit-report.md）。本组把"学生文案内部 token"写成
+ * 程序断言，做学生文案的程序化防线。
+ *
+ * 扫描口径（与审计口径对齐）：
+ * - 范围：modules 下各学科 data/ 内全部 .js（课程数据、公式翻译、
+ *   章节目录等），沿用本工具既有的 Node vm 沙箱求值读取（不走 fetch，
+ *   file:// 可跑红线不破）；
+ * - 排除：各 _review/ 台账目录；字段名为 note/notes/review/audit/ledger
+ *   （及 review_history/audit_log）的内部字段整棵跳过；
+ * - JS 注释天然不进入求值结果（与"注释不算泄漏"口径一致）。
+ * "页"判定：对象有字符串 id，且有 kind 字段或 blocks 数组
+ * （lesson 只有 lessons/pages、无 kind/blocks，不会被误判为页；
+ * 数学页无 kind/blocks，本组 explain-* 断言对其跳过，见覆盖边界）。
+ * ============================================================ */
+const STUDENT_SKIP_KEYS = new Set(
+  ["note", "notes", "review", "audit", "ledger", "review_history", "audit_log"]);
+
+function stripHtml(s) {
+  return String(s).replace(/<[^>]*>/g, "");
+}
+
+function collectStudentStrings(node, ctx, depth, out) {
+  if (depth > 40 || node == null) return;
+  if (typeof node === "string") {
+    if (node.length > 0) out.push({ file: ctx.file, pageId: ctx.pageId, path: ctx.path, value: node });
+    return;
+  }
+  if (Array.isArray(node)) {
+    node.forEach((v, i) => collectStudentStrings(
+      v, { file: ctx.file, pageId: ctx.pageId, path: `${ctx.path}[${i}]` }, depth + 1, out));
+    return;
+  }
+  if (typeof node === "object") {
+    let pageId = ctx.pageId;
+    if (typeof node.id === "string" && node.id) pageId = node.id;
+    for (const k of Object.keys(node)) {
+      if (STUDENT_SKIP_KEYS.has(k.toLowerCase())) continue;
+      collectStudentStrings(node[k],
+        { file: ctx.file, pageId, path: ctx.path ? `${ctx.path}.${k}` : k }, depth + 1, out);
+    }
+  }
+}
+
+function collectPages(node, ctx, depth, out, seen) {
+  if (depth > 40 || node == null || typeof node !== "object") return;
+  if (Array.isArray(node)) {
+    for (const v of node) collectPages(v, ctx, depth + 1, out, seen);
+    return;
+  }
+  if (typeof node.id === "string" && node.id &&
+      (typeof node.kind === "string" || Array.isArray(node.blocks))) {
+    const key = `${ctx.file}::${node.id}`;
+    if (!seen.has(key)) { seen.add(key); out.push({ file: ctx.file, pageId: node.id, node }); }
+    return;
+  }
+  for (const k of Object.keys(node)) {
+    if (STUDENT_SKIP_KEYS.has(k.toLowerCase())) continue;
+    collectPages(node[k], ctx, depth + 1, out, seen);
+  }
+}
+
+function loadStudentCorpus() {
+  const texts = [], pages = [];
+  const seen = new Set();
+  const mods = join(ROOT, "modules");
+  for (const mod of readdirSync(mods).sort()) {
+    const d = join(mods, mod, "data");
+    if (!existsSync(d)) continue;
+    const walk = (dir) => {
+      for (const ent of readdirSync(dir, { withFileTypes: true })) {
+        const p = join(dir, ent.name);
+        if (ent.isDirectory()) { if (ent.name !== "_review") walk(p); continue; }
+        if (!ent.name.endsWith(".js")) continue;
+        let src;
+        try { src = readFileSync(p, "utf8"); } catch { continue; }
+        const sandbox = { window: {} };
+        try {
+          vm.createContext(sandbox);
+          vm.runInContext(src, sandbox, { filename: p, timeout: 15000 });
+        } catch { continue; } /* 求值失败的文件跳过；结构门禁另有覆盖 */
+        const rel = p.slice(ROOT.length + 1).replace(/\\/g, "/");
+        for (const k of Object.keys(sandbox.window)) {
+          collectStudentStrings(sandbox.window[k], { file: rel, pageId: "", path: k }, 0, texts);
+          collectPages(sandbox.window[k], { file: rel }, 0, pages, seen);
+        }
+      }
+    };
+    walk(d);
+  }
+  return { texts, pages };
+}
+
+let _corpus = null;
+function getCorpus() {
+  if (!_corpus) _corpus = loadStudentCorpus();
+  return _corpus;
+}
+
+/* ---------- ⑧ student-text-tokens：学生文案内部 token 检查 ---------- */
+/* 两级词表。定级依据见 WORDLIST.md（第 0 批交付物）：
+ * - block：只有"修复后全库命中=0"可验证的模式才进
+ *   （SYS-INT/断言钩子：第 1 批 S1 修；审计清单括号注记：
+ *   物理分队实测 10 处+生物/地理同类已机械删除）；
+ * - warn：有合法用法的（首现即定义/认旧友/立靶/人话版/边界句…）、
+ *   或命中超出第 1/2 批施工范围、修复后不能归零的，一律降 warn。
+ *   审计清单裸形态是句子主干（物理 5 处 S3 遗留已确认），只能 warn。
+ * TOKEN_STRICT=false → push-1 版（全 warn，远端 main 泄漏未修时不爆红）；
+ * TOKEN_STRICT=true  → push-2 版（block 恢复阻断）。
+ * 铁律：不许让远端 main 处于"新阻断断言会 FAIL"的状态。 */
+const TOKEN_STRICT = false; /* push-2 版改为 true */
+
+const TOKEN_RULES = [
+  /* [展示名, 正则, push-2 级别] */
+  ["SYS-INT", /SYS-INT/i, "block"],
+  ["断言钩子", /断言钩子/, "block"],
+  ["审计清单括号注记", /（[^）]*审计清单[^）]*）/, "block"],
+  ["审计清单", /审计清单/, "warn"],
+  ["BIO-R编号", /BIO-R\d+/i, "warn"],
+  ["GEO-R编号", /GEO-R\d+/i, "warn"],
+  ["GEO-AX编号", /GEO-AX\d+/i, "warn"],
+  ["全库grep", /全库\s*grep/i, "warn"],
+  ["grep证伪", /grep\s*证伪/i, "warn"],
+  ["合规声明", /合规声明/, "warn"],
+  ["立靶", /立靶/, "warn"],
+  ["#r=", /#r=/, "warn"],
+  ["R编号审计通过", /R\d+\s*审计通过/, "warn"],
+  ["脚手架编号", /脚手架[③\d]/, "warn"],
+  ["点拨预埋", /点拨预埋/, "warn"],
+  ["硬门禁", /硬门禁/, "warn"],
+  ["T编号", /\bT\d{2,3}\b/, "warn"],
+  ["人话版", /人话版/, "warn"],
+  ["边界句", /边界句/, "warn"],
+  ["预告台账", /预告台账/, "warn"],
+  ["场层真值", /场层真值/, "warn"],
+  ["UI可达", /UI\s*可达/i, "warn"],
+  ["首现即定义标注", /[（(]首现即定义/, "warn"],
+  ["认旧友", /认旧友/, "warn"],
+];
+
+function checkStudentTokens() {
+  const tag = "student-text-tokens";
+  const corpus = getCorpus();
+  const hits = [];
+  for (const [name, re, lvl2] of TOKEN_RULES) {
+    const level = TOKEN_STRICT ? lvl2 : "warn";
+    const matched = [];
+    for (const t of corpus.texts) {
+      re.lastIndex = 0;
+      if (re.test(t.value)) matched.push(t);
+    }
+    if (matched.length) hits.push({ name, level, count: matched.length, samples: matched.slice(0, 3) });
+  }
+  const total = corpus.texts.length;
+  if (hits.length === 0) {
+    ok(tag, `扫描 ${total} 条学生字符串，${TOKEN_RULES.length} 个模式零命中`);
+    return;
+  }
+  const fmt = (h) => `${h.name}×${h.count}（如 ${h.samples.map((s) => s.pageId || s.file).join("、")}）`;
+  const blocks = hits.filter((h) => h.level === "block");
+  const warns = hits.filter((h) => h.level === "warn");
+  let detail = `扫描 ${total} 条学生字符串；` +
+    (blocks.length ? `阻断级 ${blocks.length} 类：${blocks.map(fmt).join("；")}；` : "") +
+    (warns.length ? `告警级 ${warns.length} 类：${warns.slice(0, 12).map(fmt).join("；")}${warns.length > 12 ? `…等 ${warns.length} 类` : ""}` : "");
+  if (!TOKEN_STRICT) detail += "（push-1 全 warn 口径；push-2 恢复阻断）";
+  if (blocks.length) fail(tag, detail);
+  else warn(tag, detail);
+}
+
+/* ---------- ⑨ explain-has-text（告警级） ---------- */
+/* 口径：kind=explain 的页必须含 ≥1 个 type=text 的正文块（text 或 html 非空）。
+ * 不阻断。无 kind 学科（如数学）的页不在此列。 */
+function checkExplainHasText() {
+  const tag = "explain-has-text";
+  const corpus = getCorpus();
+  const bad = [];
+  let n = 0;
+  for (const p of corpus.pages) {
+    if (p.node.kind !== "explain") continue;
+    n++;
+    const hasText = (p.node.blocks || []).some((b) =>
+      b && b.type === "text" && ((b.text || "").trim() || (b.html || "").trim()));
+    if (!hasText) bad.push(`${p.file}::${p.pageId}`);
+  }
+  if (n === 0) { skip(tag, "无 kind=explain 的页"); return; }
+  if (bad.length) warn(tag, `explain 页 ${n}，缺 text 正文块 ${bad.length} 页：${bad.slice(0, 10).join("、")}${bad.length > 10 ? `…等 ${bad.length} 页` : ""}`);
+  else ok(tag, `explain 页 ${n}，均含 text 正文块`);
+}
+
+/* ---------- ⑩ hint-length（告警级） ---------- */
+/* 口径：字段路径含 hint/tip 的单条文案，去 HTML 标签后 >60 字即列出。
+ * 不阻断。 */
+function checkHintLength() {
+  const tag = "hint-length";
+  const corpus = getCorpus();
+  const bad = [];
+  for (const t of corpus.texts) {
+    if (!/(hint|tip)/i.test(t.path)) continue;
+    const len = stripHtml(t.value).length;
+    if (len > 60) bad.push({ id: t.pageId || t.file, path: t.path, len });
+  }
+  if (bad.length === 0) { ok(tag, "hint/tip 字段无超 60 字条目"); return; }
+  warn(tag, `超 60 字 ${bad.length} 条：` +
+    bad.slice(0, 15).map((b) => `${b.id}(${b.len}字)`).join("、") +
+    (bad.length > 15 ? `…等 ${bad.length} 条` : ""));
+}
+
+/* ---------- ⑪ explain-thin（告警级） ---------- */
+/* 口径：kind=explain 的页，正文（type=text/lead 块，去标签后字符数，
+ * 含中文标点）总字数 <150 字即列出。不阻断。 */
+function checkExplainThin() {
+  const tag = "explain-thin";
+  const corpus = getCorpus();
+  const bad = [];
+  let n = 0;
+  for (const p of corpus.pages) {
+    if (p.node.kind !== "explain") continue;
+    n++;
+    let chars = 0;
+    for (const b of (p.node.blocks || [])) {
+      if (b && (b.type === "text" || b.type === "lead"))
+        chars += stripHtml(b.text || b.html || "").length;
+    }
+    if (chars < 150) bad.push(`${p.pageId}(${chars}字)`);
+  }
+  if (n === 0) { skip(tag, "无 kind=explain 的页"); return; }
+  if (bad.length) warn(tag, `explain 页 ${n}，正文<150 字 ${bad.length} 页：${bad.slice(0, 10).join("、")}${bad.length > 10 ? `…等 ${bad.length} 页` : ""}`);
+  else ok(tag, `explain 页 ${n}，正文均 ≥150 字`);
+}
+
+/* ---------- ⑫ first-term-crosscheck（尽力而为） ---------- */
+/* 口径：提取"（首现即定义"/"先认词"标注点，输出术语清单供人工比对。
+ * 覆盖边界（已实测）：
+ * - 仓库内不存在独立的"术语追踪表"（仅英语 roots.js 有词根表，与
+ *   生物/地理的术语标注不是同一体系），全自动交叉比对做不到；
+ * - "（首现即定义"的术语一般在标注前的 <strong> 内，少数非 <strong>
+ *   包裹的只能给上下文、标待人工确认；
+ * - 本断言只产清单、不阻断（warn），清单全文见 --json 输出的 extras。 */
+const EXTRA = {};
+function checkFirstTerm() {
+  const tag = "first-term-crosscheck";
+  const corpus = getCorpus();
+  const marks = [];
+  for (const t of corpus.texts) {
+    const v = t.value;
+    const re1 = /[（(]首现即定义/g;
+    let m;
+    while ((m = re1.exec(v)) !== null) {
+      const before = v.slice(Math.max(0, m.index - 160), m.index);
+      const sm = before.match(/<strong>([^<]{1,24})<\/strong>\s*$/);
+      marks.push({
+        file: t.file, pageId: t.pageId || "",
+        mark: "首现即定义", term: sm ? sm[1] : "（术语不在<strong>内，待人工确认）",
+      });
+    }
+    const re2 = /先认词/g;
+    while ((m = re2.exec(v)) !== null) {
+      const after = v.slice(m.index, m.index + 60);
+      const tm = after.match(/先认词[———:：\s]*([^，。；：:）)———\s]{1,16})/);
+      marks.push({
+        file: t.file, pageId: t.pageId || "",
+        mark: "先认词", term: tm ? tm[1].trim() : "（解析失败）",
+      });
+    }
+  }
+  EXTRA[tag] = marks;
+  const c1 = marks.filter((x) => x.mark === "首现即定义").length;
+  const c2 = marks.filter((x) => x.mark === "先认词").length;
+  const sample = marks.slice(0, 5).map((x) => `${x.pageId}「${x.term}」`).join("、");
+  warn(tag, `术语标注点 ${marks.length}（首现即定义 ${c1} / 先认词 ${c2}）；仓库内无独立术语追踪表，清单供人工比对（--json extras 全量）。如：${sample}`);
+}
+
+function runStudentTextGroups() {
+  checkStudentTokens();
+  checkExplainHasText();
+  checkHintLength();
+  checkExplainThin();
+  checkFirstTerm();
+}
+
+
 /* ---------- 自检：合成坏图谱验证断言有效 ---------- */
 function selftest() {
   const cases = [
@@ -522,6 +816,11 @@ if (SELFTEST) {
     ["version-sync", checkVersionSync],
     ["registry-status", checkRegistryStatus],
     ["breadcrumb", checkBreadcrumb],
+    ["student-tokens", () => checkStudentTokens()],
+    ["explain-text", () => checkExplainHasText()],
+    ["hint-length", () => checkHintLength()],
+    ["explain-thin", () => checkExplainThin()],
+    ["first-term", () => checkFirstTerm()],
     ["v8", runV8],
   ];
   for (const [name, fn] of groups) {
