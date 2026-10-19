@@ -1,0 +1,47 @@
+{
+  "schema": "biology-review-ledger/1.0",
+  "chapter": "b15",
+  "lesson": "b15.1.1",
+  "written_at": "2026-10-19",
+  "written_by": "生物 P10 生产队（蓝队数据工程 + 内容撰写）",
+  "notes": "p1 有氧呼吸首现即定义+三阶段（细胞质基质：葡萄糖→丙酮酸；线粒体基质：→CO₂；线粒体内膜：→水+大量能量）+认旧友mathlink→b03.1.3（\"呼吸\"vs\"呼吸作用\"初中版分清）/p2 三阶段接力动画（BIO_B15.relay：场所/产物/能量三栏对照；氧是第三棒接棒员）/p3 误区专治\"有氧呼吸只在线粒体\"→第一阶段在细胞质基质+\"一浆二质三膜\"记忆钩。",
+  "announcements": [],
+  "frozen_refs": [
+    {
+      "id": "b15.1.1-f1",
+      "kind": "frozen_copy",
+      "note": "有氧呼吸第一阶段在细胞质基质（\"只在线粒体\"=FAIL；b15.1.1-p3专治）。",
+      "ref": "curriculum b15.1.1",
+      "status": "drafted"
+    },
+    {
+      "id": "b15.1.1-f2",
+      "kind": "frozen_copy",
+      "note": "BIO-R01：本章\"呼吸作用\"=细胞内氧化分解，\"呼吸\"只用于肺通气语境（认旧友 b03.1.3 第3页）。",
+      "ref": "BIO-R01",
+      "status": "drafted"
+    }
+  ],
+  "gate8_first_definition": {
+    "status": "drafted",
+    "note": "本课新术语首现即定义：有氧呼吸@b15.1.1-p1（先认词行内定义；static自查 T-门禁⑧ PASS）。"
+  },
+  "gate9_target_check": {
+    "status": "drafted",
+    "note": "深链：mathlink认旧友→b03.1.3（已生产；XLINK_BIO补丁已纳b15课号；static自查 T-门禁⑨ PASS）。"
+  },
+  "gate11_quiz": {
+    "status": "drafted",
+    "note": "本课无 kind:quiz 页；三阶段场所在 b15.1.4-p1 Q1/Q2 机判覆盖。"
+  },
+  "expert_review": {
+    "reviewer": "生物学科专家队",
+    "reviewed_at": "2026-10-19 09:15:00 CST",
+    "report": "batch-p10-expert/REVIEW-REPORT.md + YELLOW-REVIEW.md（初审）+ batch-p10-prod/REWORK-REPORT.md（返工报告）+ 本次复签亲手抽查实物",
+    "verdict": "final_passed",
+    "conclusion": "返工复核 PASS：W1–W5+WARN-E1/E2 逐项在场",
+    "resign": true,
+    "reverify_standard": "返工项逐项在场（源码亲手 grep/逐块读取核验）+ 字数 binding 口径全 ≤300 + 专家队复签",
+    "reverify_evidence": "见 batch-p10-expert/RESIGN-NOTE.md"
+  }
+}

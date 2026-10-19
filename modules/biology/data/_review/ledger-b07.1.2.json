@@ -1,0 +1,44 @@
+{
+  "schema": "biology-review-ledger/1.0",
+  "chapter": "b07",
+  "lesson": "b07.1.2",
+  "written_at": "2026-10-19",
+  "written_by": "生物 P10 生产队（蓝队数据工程 + 内容撰写）",
+  "notes": "p1 反射/反射弧/感受器/效应器首现即定义+反射弧五部分（感受器→传入神经→神经中枢→传出神经→效应器，顺序固定）+五部分拼搭闯关（BIO_B07.arc/arcReset，B14不立，b06双循环闯关内联先例）/p2 膝跳反射分步演示（BIO_B07.knee；中枢在脊髓不经大脑）+膝跳反射模式图/p3 简单反射/复杂反射（望梅止渴/谈虎色变需大脑皮层）+误区专治\"顺序可乱\"→顺序固定。",
+  "announcements": [],
+  "frozen_refs": [
+    {
+      "id": "b07.1.2-f1",
+      "kind": "frozen_copy",
+      "note": "反射弧五部分顺序固定：感受器→传入神经→神经中枢→传出神经→效应器（传入在前传出在后；闯关错序阻塞提示）。",
+      "ref": "curriculum b07.1.2",
+      "status": "drafted"
+    },
+    {
+      "id": "b07.1.2-f2",
+      "kind": "frozen_copy",
+      "note": "反射弧/膝跳反射模式图角落常驻\"模式图：非等比、非实物\"（BIO-R32；static自查 PASS）。",
+      "ref": "BIO-R32",
+      "status": "drafted"
+    }
+  ],
+  "gate8_first_definition": {
+    "status": "drafted",
+    "note": "本课新术语首现即定义：反射/反射弧/感受器/效应器@b07.1.2-p1（先认词行内定义；static自查 T-门禁⑧ PASS）。"
+  },
+  "gate9_target_check": {
+    "status": "drafted",
+    "note": "本课无 mathlink 深链块；b22 高中回填未生产只纯文本提及不挂链（门禁⑨⑩；static自查 T-门禁⑨ PASS）。"
+  },
+  "gate11_quiz": {
+    "status": "drafted",
+    "note": "本课无 kind:quiz 页；反射弧顺序/膝跳反射在 b07.1.5-p1 Q2/Q3 机判覆盖。"
+  },
+  "expert_review": {
+    "reviewer": "生物学科专家队",
+    "reviewed_at": "2026-10-19",
+    "report": "batch-p10-expert/REVIEW-REPORT.md（专家审）+ YELLOW-REVIEW.md（黄队审）",
+    "verdict": "final_passed",
+    "conclusion": "初审 PASS：BIO-R 适用条目全通过、门禁⑧⑨⑩⑪全通过、字数 binding 口径全 ≤300、无 FAIL、无须返工项。"
+  }
+}

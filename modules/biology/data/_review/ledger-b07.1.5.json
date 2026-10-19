@@ -1,0 +1,40 @@
+{
+  "schema": "biology-review-ledger/1.0",
+  "chapter": "b07",
+  "lesson": "b07.1.5",
+  "written_at": "2026-10-19",
+  "written_by": "生物 P10 生产队（蓝队数据工程 + 内容撰写）",
+  "notes": "p1 本章小结review+3 choice（梯度：神经系统组成→反射弧顺序→膝跳反射中枢）/p2 4 choice（神经vs神经元/近视透镜/胰岛素口服/简单vs复杂反射）。两页课设计意图：章末小结+习题（门禁⑪）。",
+  "announcements": [],
+  "frozen_refs": [
+    {
+      "id": "b07.1.5-f1",
+      "kind": "frozen_copy",
+      "note": "quiz页题目数>0：p1=3题、p2=4题（门禁⑪；static自查 PASS）。",
+      "ref": "门禁⑪",
+      "status": "drafted"
+    }
+  ],
+  "gate8_first_definition": {
+    "status": "drafted",
+    "note": "本课无新术语（小结课）。"
+  },
+  "gate9_target_check": {
+    "status": "drafted",
+    "note": "本课无 mathlink 深链块（门禁⑨）。"
+  },
+  "gate11_quiz": {
+    "status": "drafted",
+    "note": "门禁⑪：b07.1.5-p1 choice=3、b07.1.5-p2 choice=4，均>0（static自查 PASS）。"
+  },
+  "expert_review": {
+    "reviewer": "生物学科专家队",
+    "reviewed_at": "2026-10-19 09:15:00 CST",
+    "report": "batch-p10-expert/REVIEW-REPORT.md + YELLOW-REVIEW.md（初审）+ batch-p10-prod/REWORK-REPORT.md（返工报告）+ 本次复签亲手抽查实物",
+    "verdict": "final_passed",
+    "conclusion": "返工复核 PASS：W1–W5+WARN-E1/E2 逐项在场",
+    "resign": true,
+    "reverify_standard": "返工项逐项在场（源码亲手 grep/逐块读取核验）+ 字数 binding 口径全 ≤300 + 专家队复签",
+    "reverify_evidence": "见 batch-p10-expert/RESIGN-NOTE.md"
+  }
+}

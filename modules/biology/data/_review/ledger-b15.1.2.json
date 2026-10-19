@@ -1,0 +1,44 @@
+{
+  "schema": "biology-review-ledger/1.0",
+  "chapter": "b15",
+  "lesson": "b15.1.2",
+  "written_at": "2026-10-19",
+  "written_by": "生物 P10 生产队（蓝队数据工程 + 内容撰写）",
+  "notes": "p1 无氧呼吸/发酵首现即定义+酒精发酵（酵母菌→酒精+CO₂）/乳酸发酵（乳酸菌→乳酸；剧烈运动肌肉酸痛）+两种发酵对比（BIO_B15.ferm）/p2 酸奶案例辨析：酸奶=乳酸发酵不是酒精发酵（判据：无酒味、不冒泡）/p3 场所=细胞质基质+能量少（不彻底分解）+误区专治\"无氧呼吸不产生能量\"→产生少量。",
+  "announcements": [],
+  "frozen_refs": [
+    {
+      "id": "b15.1.2-f1",
+      "kind": "frozen_copy",
+      "note": "无氧呼吸产生少量能量（\"不产生能量\"=FAIL；大部分能量存于酒精/乳酸中；b15.1.2-p3专治）。",
+      "ref": "curriculum b15.1.2",
+      "status": "drafted"
+    },
+    {
+      "id": "b15.1.2-f2",
+      "kind": "frozen_copy",
+      "note": "酸奶=乳酸发酵，不是酒精发酵（b15.1.2-p2辨析；判据：无酒味、不冒泡）。",
+      "ref": "curriculum b15.1.2",
+      "status": "drafted"
+    }
+  ],
+  "gate8_first_definition": {
+    "status": "drafted",
+    "note": "本课新术语首现即定义：无氧呼吸/发酵@b15.1.2-p1（先认词行内定义；static自查 T-门禁⑧ PASS）。"
+  },
+  "gate9_target_check": {
+    "status": "drafted",
+    "note": "本课无 mathlink 深链块；b10.1.3 酸奶制作未生产只纯文本提及不挂链（门禁⑨；static自查 T-门禁⑨ PASS）。"
+  },
+  "gate11_quiz": {
+    "status": "drafted",
+    "note": "本课无 kind:quiz 页；酸奶辨析/无氧呼吸能量在 b15.1.4-p1 Q3/p2 Q1 机判覆盖。"
+  },
+  "expert_review": {
+    "reviewer": "生物学科专家队",
+    "reviewed_at": "2026-10-19",
+    "report": "batch-p10-expert/REVIEW-REPORT.md（专家审）+ YELLOW-REVIEW.md（黄队审）",
+    "verdict": "final_passed",
+    "conclusion": "初审 PASS：BIO-R 适用条目全通过、门禁⑧⑨⑩⑪全通过、字数 binding 口径全 ≤300、无 FAIL、无须返工项。"
+  }
+}

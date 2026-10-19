@@ -1,0 +1,47 @@
+{
+  "schema": "biology-review-ledger/1.0",
+  "chapter": "b07",
+  "lesson": "b07.1.4",
+  "written_at": "2026-10-19",
+  "written_by": "生物 P10 生产队（蓝队数据工程 + 内容撰写）",
+  "notes": "p1 内分泌腺/激素首现即定义+三对主角（垂体—生长激素/甲状腺—甲状腺激素/胰岛—胰岛素）+激素—腺体—作用配对（BIO_B07.hormone）/p2 胰岛素首现即定义+糖尿病机制（胰岛素分泌不足→血糖长期偏高；表述克制：只讲机制不讲诊疗）+神经调节vs体液调节（快而准/慢而广）+误区专治\"胰岛素口服有效\"→蛋白质口服被消化必须注射。",
+  "announcements": [],
+  "frozen_refs": [
+    {
+      "id": "b07.1.4-f1",
+      "kind": "frozen_copy",
+      "note": "\"胰岛素是蛋白质，口服会被消化掉，必须注射\"逐字（\"口服有效\"=FAIL；b07.1.4-p2专治）。",
+      "ref": "curriculum b07.1.4",
+      "status": "drafted"
+    },
+    {
+      "id": "b07.1.4-f2",
+      "kind": "frozen_copy",
+      "note": "糖尿病表述克制：只讲机制（胰岛素分泌不足），不讲诊疗建议、不制造焦虑（审计清单第8、12条）。",
+      "ref": "BIO-R53/R54类推",
+      "status": "drafted"
+    }
+  ],
+  "gate8_first_definition": {
+    "status": "drafted",
+    "note": "本课新术语首现即定义：内分泌腺/激素@b07.1.4-p1、胰岛素@b07.1.4-p2（先认词行内定义；static自查 T-门禁⑧ PASS）。"
+  },
+  "gate9_target_check": {
+    "status": "drafted",
+    "note": "本课无 mathlink 深链块；b22血糖调节回填未生产只纯文本提及不挂链（门禁⑨⑩；static自查 T-门禁⑨ PASS）。"
+  },
+  "gate11_quiz": {
+    "status": "drafted",
+    "note": "本课无 kind:quiz 页；胰岛素口服在 b07.1.5-p2 Q3 机判覆盖。"
+  },
+  "expert_review": {
+    "reviewer": "生物学科专家队",
+    "reviewed_at": "2026-10-19 09:15:00 CST",
+    "report": "batch-p10-expert/REVIEW-REPORT.md + YELLOW-REVIEW.md（初审）+ batch-p10-prod/REWORK-REPORT.md（返工报告）+ 本次复签亲手抽查实物",
+    "verdict": "final_passed",
+    "conclusion": "返工复核 PASS：W1–W5+WARN-E1/E2 逐项在场",
+    "resign": true,
+    "reverify_standard": "返工项逐项在场（源码亲手 grep/逐块读取核验）+ 字数 binding 口径全 ≤300 + 专家队复签",
+    "reverify_evidence": "见 batch-p10-expert/RESIGN-NOTE.md"
+  }
+}

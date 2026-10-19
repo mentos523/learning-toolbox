@@ -1,0 +1,44 @@
+{
+  "schema": "biology-review-ledger/1.0",
+  "chapter": "b07",
+  "lesson": "b07.1.1",
+  "written_at": "2026-10-19",
+  "written_by": "生物 P10 生产队（蓝队数据工程 + 内容撰写）",
+  "notes": "p1 中枢（脑/脊髓）+周围（脑神经/脊神经），神经系统首现即定义/p2 神经元首现即定义（胞体+树突/轴突）+神经元结构点选交互（BIO_B07.neuron）/p3 误区专治\"神经=神经元\"→神经是神经纤维的集合（BIO-R05），神经元是单个细胞。",
+  "announcements": [],
+  "frozen_refs": [
+    {
+      "id": "b07.1.1-f1",
+      "kind": "frozen_copy",
+      "note": "神经元模式图角落常驻\"模式图：非等比、非实物\"（BIO-R32；static自查 PASS）。",
+      "ref": "BIO-R32",
+      "status": "drafted"
+    },
+    {
+      "id": "b07.1.1-f2",
+      "kind": "frozen_copy",
+      "note": "\"神经是神经纤维的集合，神经元是单个细胞\"逐字（BIO-R05；b07.1.1-p3专治）。",
+      "ref": "BIO-R05",
+      "status": "drafted"
+    }
+  ],
+  "gate8_first_definition": {
+    "status": "drafted",
+    "note": "本课新术语首现即定义：神经元@b07.1.1-p2（先认词行内定义；static自查 T-门禁⑧ PASS）。"
+  },
+  "gate9_target_check": {
+    "status": "drafted",
+    "note": "本课无 mathlink 深链块；b08/b12 未生产不挂链（门禁⑨；static自查 T-门禁⑨ PASS）。"
+  },
+  "gate11_quiz": {
+    "status": "drafted",
+    "note": "本课无 kind:quiz 页；神经元/神经辨析在 b07.1.5-p1 Q1/p2 Q1 机判覆盖。"
+  },
+  "expert_review": {
+    "reviewer": "生物学科专家队",
+    "reviewed_at": "2026-10-19",
+    "report": "batch-p10-expert/REVIEW-REPORT.md（专家审）+ YELLOW-REVIEW.md（黄队审）",
+    "verdict": "final_passed",
+    "conclusion": "初审 PASS：BIO-R 适用条目全通过、门禁⑧⑨⑩⑪全通过、字数 binding 口径全 ≤300、无 FAIL、无须返工项。"
+  }
+}
