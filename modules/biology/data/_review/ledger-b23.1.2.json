@@ -1,0 +1,48 @@
+{
+  "schema": "biology-review-ledger/1.0",
+  "chapter": "b23",
+  "lesson": "b23.1.2",
+  "written_at": "2026-10-19",
+  "written_by": "生物 P16 生产队",
+  "notes": "p1 两重性+浓度效应曲线交互（BIO_B23.auxin 滑块→游标+促进/抑制徽章；示意曲线声明+教学示意数据声明；直观版读图三问；预告代数 6.1，mathlink 深链由引擎 XLINK_MATH 自动转链）/p2 顶端优势（摘心生活证据）+误区专治\"生长素越多越好\"→两重性，除草剂=高浓度抑制/p3 激素名片点选（BIO_B23.hormoneTap：赤霉素/细胞分裂素/脱落酸/乙烯合成部位+作用）+协同/拮抗先认词+例子。",
+  "announcements": [
+    {
+      "id": "b23.1.2-a1",
+      "kind": "foretell",
+      "status": "drafted",
+      "text": "预告：两重性曲线→代数 6.1 函数图像（b23.1.2-p1 纯文本预告+mathlink；直观版一页，预告措辞，非兑现）。",
+      "source": "b23.1.2-p1 纯文本预告（跨数学链预告）",
+      "echo_target": "代数 6.1（已上线；回填页待数学链排期）",
+      "echo_text": "",
+      "note": "门禁⑩：预告措辞，非认旧友；兑现时回链本预告。"
+    }
+  ],
+  "frozen_refs": [
+    {
+      "id": "b23.1.2-f1",
+      "kind": "frozen_copy",
+      "note": "示意曲线声明\"示意曲线（非实测数据）\"+纵轴相对值+\"教学示意数据\"声明常驻（b23.1.2-p1；BIO-R69/R70；static自查 P16-S04 PASS）。",
+      "ref": "BIO-R70",
+      "status": "drafted"
+    }
+  ],
+  "gate8_first_definition": {
+    "status": "drafted",
+    "note": "本课新术语首现即定义：两重性@b23.1.2-p1、顶端优势@b23.1.2-p2、植物激素/协同/拮抗/赤霉素/细胞分裂素/脱落酸/乙烯@b23.1.2-p3（先认词行内定义；static自查 P16-S08 PASS）。"
+  },
+  "gate9_target_check": {
+    "status": "drafted",
+    "note": "深链 1 处（b23.1.2-p1 mathlink→代数 6.1，引擎 XLINK_MATH 自动转深链；生物内部深链 0；static自查 P16-S09 PASS）。"
+  },
+  "gate11_quiz": {
+    "status": "drafted",
+    "note": "本课无 kind:quiz 页；两重性/顶端优势在 b23.1.4-p1 Q2/Q3、p2 Q4 机判覆盖。"
+  },
+  "expert_review": {
+    "status": "final_passed",
+    "verdict": "final_passed",
+    "reviewed_by": "生物学科专家队（含黄队教学审）",
+    "reviewed_at": "2026-10-19",
+    "note": "生产队未写、未改任何评审结论（门禁⑭合规，评审前expert_review为drafted占位）。专家审 FAIL=0：两重性定义与曲线（先升后降、最适浓度）与人教版一致；示意曲线声明+纵轴相对值+教学示意数据声明三重在位（BIO-R69/R70）；除草剂2,4-D表述与教材一致；mathlink→代数6.1 href经browser渲染核对（../math/index.html#p=ch06-u1-l1-p1），真点击留待白队；b23.1.2-a1 drafted（预告措辞非兑现）。 黄队教学硬伤=0，返工项=0。详见 batch-p16-expert/REVIEW-REPORT.md 与 YELLOW-REPORT.md。"
+  }
+}

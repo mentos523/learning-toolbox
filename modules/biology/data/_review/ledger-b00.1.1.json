@@ -1,0 +1,29 @@
+{
+  "schema": "biology-review-ledger/1.0",
+  "chapter": "b00",
+  "lesson": "b00.1.1",
+  "written_at": "2026-10-19",
+  "written_by": "生物 P16 生产队",
+  "notes": "p1 生活现象拼图归类（BIO_B00.sortSel/sortJudge：含羞草→生物/钟乳石→非生物/机器人→非生物/病毒→边界案例；配错提示\"对照六特征再想想\"，无红叉）+生物先认词/p2 六特征逐条先认词+新陈代谢先认词+病毒边界案例+误区专治\"机器人是生物\"→逐项对照六特征。",
+  "announcements": [],
+  "frozen_refs": [],
+  "gate8_first_definition": {
+    "status": "drafted",
+    "note": "本课新术语首现即定义：生物@b00.1.1-p1、新陈代谢@b00.1.1-p2（先认词行内定义；static自查 P16-S08 PASS）。"
+  },
+  "gate9_target_check": {
+    "status": "drafted",
+    "note": "本课无深链（static自查 P16-S09 PASS）。"
+  },
+  "gate11_quiz": {
+    "status": "drafted",
+    "note": "本课无 kind:quiz 页；归类判据在 b00.1.4-p1 Q1、病毒边界在 p2 Q4 机判覆盖。"
+  },
+  "expert_review": {
+    "status": "final_passed",
+    "verdict": "final_passed",
+    "reviewed_by": "生物学科专家队（含黄队教学审）",
+    "reviewed_at": "2026-10-19",
+    "note": "生产队未写、未改任何评审结论（门禁⑭合规，评审前expert_review为drafted占位）。专家审 FAIL=0：六特征逐条与人教版七上一致；病毒边界案例'无细胞结构但可复制繁殖'专治'非黑即白'；归类交互答案映射（m1→bio/m2→non/m3→non/m4→edge）亲手核对无误。'能进行呼吸'为教材六特征原文，保留（BIO-R01口径下记观察项，不构成混用）。 黄队教学硬伤=0，返工项=0。详见 batch-p16-expert/REVIEW-REPORT.md 与 YELLOW-REPORT.md。"
+  }
+}

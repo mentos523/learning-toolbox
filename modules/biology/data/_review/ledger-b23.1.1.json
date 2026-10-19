@@ -1,0 +1,44 @@
+{
+  "schema": "biology-review-ledger/1.0",
+  "chapter": "b23",
+  "lesson": "b23.1.1",
+  "written_at": "2026-10-19",
+  "written_by": "生物 P16 生产队",
+  "notes": "p1 达尔文向光性实验四步回放（BIO_B23.go('dar')；模式图/示意声明）+误区专治\"尖端被光照到才弯曲\"→感光在尖端、弯曲在伸长区+三原则（切除/罩尖端=对照）/p2 温特实验虚拟重演（BIO_B23.go('went')；琼脂块A/B两组对照；虚拟实验声明；示意声明）+B3 experiment-3q（recordKey=bio_3q_b23.1.1；answer=0/0/1；thoughtExp针对本题）+生长素先认词/p3 极性运输（形态学上端→下端）+横向不均=向光弯曲+误区专治\"生长素由尖端产生所以只在尖端起作用\"→极性运输到作用部位。",
+  "announcements": [],
+  "frozen_refs": [
+    {
+      "id": "b23.1.1-f1",
+      "kind": "frozen_copy",
+      "note": "模式图声明\"模式图：非等比、非实物\"常驻（b23.1.1-p1/p2；BIO-R32；static自查 P16-S04 PASS）。",
+      "ref": "BIO-R32",
+      "status": "drafted"
+    },
+    {
+      "id": "b23.1.1-f2",
+      "kind": "frozen_copy",
+      "note": "虚拟实验声明\"虚拟实验：现实中须用真实胚芽鞘与琼脂块操作，刀片锋利、注意安全\"（b23.1.1-p2；BIO-R35；static自查 P16-S04 PASS）。",
+      "ref": "BIO-R35",
+      "status": "drafted"
+    }
+  ],
+  "gate8_first_definition": {
+    "status": "drafted",
+    "note": "本课新术语首现即定义：胚芽鞘@b23.1.1-p1、生长素@b23.1.1-p2、极性运输@b23.1.1-p3（先认词行内定义；static自查 P16-S08 PASS）。"
+  },
+  "gate9_target_check": {
+    "status": "drafted",
+    "note": "本课无深链（static自查 P16-S09 PASS）。"
+  },
+  "gate11_quiz": {
+    "status": "drafted",
+    "note": "本课无 kind:quiz 页；温特实验对照设计在 b23.1.4-p1 Q1 机判覆盖。"
+  },
+  "expert_review": {
+    "status": "final_passed",
+    "verdict": "final_passed",
+    "reviewed_by": "生物学科专家队（含黄队教学审）",
+    "reviewed_at": "2026-10-19",
+    "note": "生产队未写、未改任何评审结论（门禁⑭合规，评审前expert_review为drafted占位）。专家审 FAIL=0：达尔文四步/温特A/B对照三原则落点准确，极性运输与横向运输表述与人教版选择性必修一一致；B3参数（answer=0/0/1，recordKey=bio_3q_b23.1.1，replayHref=#b23.1.1/2）亲手核对无误，thoughtExp针对本题；史实'1934年郭葛等从植物中分离出吲哚乙酸'与教材口径一致（web复核：原'1928年'确为温特年份，修正正确）。 黄队教学硬伤=0，返工项=0。详见 batch-p16-expert/REVIEW-REPORT.md 与 YELLOW-REPORT.md。"
+  }
+}

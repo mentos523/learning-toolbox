@@ -1,0 +1,29 @@
+{
+  "schema": "biology-review-ledger/1.0",
+  "chapter": "b23",
+  "lesson": "b23.1.4",
+  "written_at": "2026-10-19",
+  "written_by": "生物 P16 生产队",
+  "notes": "p1 小结（一）review+3 choice（温特对照/两重性/打顶生活题）/p2 小结（二）易错专治review+3 choice（极性运输实验设计题/赤霉素促萌发/顶端优势原因）。题型梯度 review+choice；含生活题1道+实验设计题1道。",
+  "announcements": [],
+  "frozen_refs": [],
+  "gate8_first_definition": {
+    "status": "drafted",
+    "note": "本课无新术语（static自查 P16-S08 PASS）。"
+  },
+  "gate9_target_check": {
+    "status": "drafted",
+    "note": "本课无深链（static自查 P16-S09 PASS）。"
+  },
+  "gate11_quiz": {
+    "status": "drafted",
+    "note": "quiz 页题目数>0（两页各 review+3 choice；static自查 P16-S11/S14 PASS）。"
+  },
+  "expert_review": {
+    "status": "final_passed",
+    "verdict": "final_passed",
+    "reviewed_by": "生物学科专家队（含黄队教学审）",
+    "reviewed_at": "2026-10-19",
+    "note": "生产队未写、未改任何评审结论（门禁⑭合规，评审前expert_review为drafted占位）。专家审 FAIL=0：6道习题答案逐一亲手核对全对（Q1=1/Q2=1/Q3=1/Q4=0/Q5=1/Q6=0），tip引用页号准确；生活题1道（棉花打顶）+实验设计题1道（极性运输对照设计）符合门禁⑪。 黄队教学硬伤=0，返工项=0。详见 batch-p16-expert/REVIEW-REPORT.md 与 YELLOW-REPORT.md。"
+  }
+}
