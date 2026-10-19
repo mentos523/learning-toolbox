@@ -491,6 +491,8 @@
     try { history.replaceState(null, "", "#r=" + rt.r); } catch (e) {}
     // 选完词根后收起抽屉：仅手机端自动收起，桌面端由用户手动控制（避免抽屉被锁死）
     if (!(opts && opts.keepOpen) && window.innerWidth < 1024) setDrawer("left", false);
+    tbCrumb([CRUMB_HOME, { label: "英语", href: "index.html" },
+      { label: "讲词根", href: "#card=roots" }, { label: rt.d, href: null }]);
   }
 
   function currentWord() {
@@ -697,6 +699,26 @@
     });
   }
   /* 回子卡选择页：清 hash（类比数学 showTracks），下次进入重新选 */
+  /* 面包屑（全局导航批 2026-10-19）：TB_crumb 未加载时静默跳过 */
+  var CRUMB_HOME = { label: "学习工具箱", href: "../../index.html" };
+  function tbCrumb(items) {
+    try { if (window.TB_crumb) window.TB_crumb.update(items); } catch (e) {}
+  }
+  /* 课 id → {ch, lesson}（数据驱动，不硬编码映射） */
+  function gramFindLesson(lessonId) {
+    var CH = window.ENG_CH || {};
+    for (var i = 0; i < 20; i++) {
+      var id = "gr" + (i < 10 ? "0" + i : String(i));
+      var ch = CH[id];
+      if (!ch) continue;
+      var out = null;
+      (ch.units || []).forEach(function (u) {
+        (u.lessons || []).forEach(function (l) { if (l.id === lessonId) out = { ch: ch, lesson: l }; });
+      });
+      if (out) return out;
+    }
+    return null;
+  }
   function showTracks() {
     state.card = null;
     renderTracks();
@@ -707,6 +729,7 @@
     if (gapp) gapp.hidden = true;
     if (window.ENG_GRAMMAR) window.ENG_GRAMMAR.close();
     try { history.replaceState(null, "", location.pathname); } catch (e) {}
+    tbCrumb([CRUMB_HOME, { label: "英语", href: null }]);
   }
   function enterRoots() {
     state.card = "roots";
@@ -725,6 +748,8 @@
     // 深链路由（init 深链 / hashchange / 语法外壳入口）全部经 enterRoots，是唯一 unhide 点。
     if (rootWheel) rootWheel.fit();
     if (wordWheel) wordWheel.fit();
+    /* selectRoot 已设置四段 trail 时不再覆盖；无词根数据时兜底三段 */
+    if (!state.root) tbCrumb([CRUMB_HOME, { label: "英语", href: "index.html" }, { label: "讲词根", href: null }]);
   }
     /* ---------------- 语法章节浏览器（蓝队 2026-10-15）：gr00-gr19 已上线，
    * 替换原"筹备中"外壳。从 window.ENG_CH 动态生成三级导航：
@@ -829,6 +854,13 @@
     if (gapp) gapp.hidden = false;
     window.ENG_GRAMMAR.open(lessonId);
     try { history.replaceState(null, "", "#card=grammar&test=" + lessonId); } catch (e) {}
+    (function () {
+      var f = gramFindLesson(lessonId);
+      var items = [CRUMB_HOME, { label: "英语", href: "index.html" }, { label: "语法", href: "#card=grammar" }];
+      if (f) items.push({ label: f.ch.id + " · " + f.ch.title, href: null });
+      items.push({ label: (f && f.lesson.title) || lessonId, href: null });
+      tbCrumb(items);
+    })();
   }
   function enterGrammar() {
     state.card = "grammar";
@@ -850,6 +882,7 @@
     if (gapp) gapp.hidden = true;
     if (window.ENG_GRAMMAR) window.ENG_GRAMMAR.close();
     try { history.replaceState(null, "", "#card=grammar"); } catch (e) {}
+    tbCrumb([CRUMB_HOME, { label: "英语", href: "index.html" }, { label: "语法", href: null }]);
   }
   function enterCard(id) {
     if (id === "grammar") enterGrammar();
@@ -932,7 +965,10 @@
       if (m && findRoot(m[1])) {
         if (state.card !== "roots") enterCard("roots");
         else if (!state.root || state.root.r !== m[1]) selectRoot(m[1]);
+        return;
       }
+      // 空 hash（如点面包屑「英语」回 index.html）→ 回子卡选择视图（面包屑导航批新增）
+      if (!h) showTracks();
     });
     // 设置
     document.querySelectorAll("[data-set]").forEach(function (el) {

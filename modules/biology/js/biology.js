@@ -160,6 +160,23 @@
    * 学段划分对齐课程标准：p00–p10 初中（八年级起步→九年级），
    * p11–p17 高中（必修一 Ch1–2 起）。章 id 字符串比较（p09<p10<p11 成立）。 */
   var browseRoot = null, appRoot = null, cur = null, curTrack = null;
+  /* 面包屑（全局导航批 2026-10-19）：TB_crumb 未加载时静默跳过 */
+  var CRUMB_HOME = { label: "学习工具箱", href: "../../index.html" };
+  function tbCrumb(items) {
+    try { if (window.TB_crumb) window.TB_crumb.update(items); } catch (e) {}
+  }
+  function crumbTrackOfChapter(chId) {
+    for (var i = 0; i < BIO_TRACKS.length; i++) {
+      var t = BIO_TRACKS[i];
+      if (chId >= t.chFrom && chId <= t.chTo) return t;
+    }
+    return null;
+  }
+  function crumbChapterTitle(chId) {
+    var meta = (window.BIO_META && window.BIO_META.chapters) || [];
+    for (var j = 0; j < meta.length; j++) if (meta[j].id === chId) return meta[j].title;
+    return "";
+  }
   var BIO_TRACKS = [
     { id: "junior", name: "初中生物", tagline: "七年级起步",
       desc: "从身边的生物看起：细胞、植物、人体、动物、微生物——结构—功能对问贯穿始终。",
@@ -266,6 +283,7 @@
       grid.appendChild(card);
     });
     wrap.appendChild(grid);
+    tbCrumb([CRUMB_HOME, { label: "生物", href: null }]);
     browseRoot.appendChild(wrap);
   }
   /* E-01：学段目录（由选择层唤出，可返回选择层） */
@@ -321,6 +339,8 @@
       list.appendChild(li);
     });
     wrap.appendChild(list);
+    tbCrumb([CRUMB_HOME, { label: "生物", href: "index.html" },
+      { label: t.name, href: null }]);
     browseRoot.appendChild(wrap);
   }
   function showSelection() {
@@ -342,7 +362,8 @@
       renderTrackBrowser(trackId);
     }
     try {
-      if (parseHash()) history.replaceState(null, "", location.pathname + location.search);
+      var _ph = parseHash();
+      if (_ph && _ph.lesson) history.replaceState(null, "", location.pathname + location.search);
     } catch (e) {}
   }
   /* 课页"← 返回"/抽屉"← 课程首页"/学完回退：回到学段目录（深链进入则回选择层） */
@@ -754,7 +775,9 @@
     var m = h.match(/^#(b\d+\.\d+\.\d+)(?:\/(\d+))?$/);
     if (m) return { lesson: m[1], page: m[2] ? parseInt(m[2], 10) - 1 : 0 };
     var m2 = h.match(/[#&?]bio=([a-z0-9.]+)/i);
-    if (m2) return { lesson: m2[1], page: 0, legacy: true }; /* 旧 hash 兼容：进第 1 页 */
+    if (m2) return { lesson: m2[1], page: 0, legacy: true };
+    var m3 = h.match(/^#track=([a-z]+)$/);
+    if (m3 && bioTrackOf(m3[1])) return { track: m3[1] }; /* 学段直达（面包屑导航批新增） */ /* 旧 hash 兼容：进第 1 页 */
     return null;
   }
   /* 每课页码持久化 `ltb-bio-page_<课号>`；file:// 下降级为内存（不报错） */
@@ -812,6 +835,15 @@
     browseRoot.hidden = true;
     appRoot.hidden = false;
     render();
+    (function () {
+      var t = crumbTrackOfChapter(found.chapter.id);
+      var items = [CRUMB_HOME, { label: "生物", href: "index.html" }];
+      if (t) items.push({ label: t.name, href: "#track=" + t.id });
+      var ct = crumbChapterTitle(found.chapter.id);
+      items.push({ label: found.chapter.id + (ct ? " · " + ct : ""), href: null });
+      items.push({ label: found.lesson.title, href: null });
+      tbCrumb(items);
+    })();
     syncHash(!push);
     return true;
   }
@@ -822,6 +854,7 @@
   /* showBrowser 已上移为"回学段目录/选择层"分发器（E-01），此处不再重复定义 */
   function route() {
     var h = parseHash();
+    if (h && h.track) { showTrackBrowser(h.track); return; }
     if (h && hasLesson(h.lesson)) {
       var pages = (findLesson(h.lesson).lesson.pages || []).length;
       var idx = Math.max(0, Math.min(pages - 1, h.page || 0));

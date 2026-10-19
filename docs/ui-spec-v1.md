@@ -1,6 +1,7 @@
 # 学习工具箱 · UI 统一规范 v1
 
-> 状态：v1.0 已批准生效（总负责 2026-10-18）。迁移执行完毕，待发布。
+> 状态：v1.0 已批准生效（总负责 2026-10-18）。v1.1 修订：新增 §3.7 `.tb-crumb`
+> 面包屑导航（全局导航批 2026-10-19，用户亲批），旧节一字未动。
 > 决策依据：`~/workspace/ceo-team/ui-unification-plan.md`（CEO 队 2026-10-18 决策文件）
 > 生效范围：首页 + 六模块（数学 / 英语 / 物理 / 化学 / 地理 / 生物）**入口层**
 > （课页内部教学组件、引擎层样式不在本规范范围内，红线见 §8）
@@ -166,6 +167,27 @@ RGB(56,159,254) ≈ `#3899ff`，以此为基准色：
 
 内容：`学习工具箱 · <学科名> · 版本 <version>` + 已有页脚链接（如有）原样保留。
 
+### 3.7 `.tb-crumb`（面包屑导航，全局导航批 2026-10-19 新增）
+
+```html
+<nav class="tb-crumb" aria-label="面包屑导航"><ol>
+  <li><a href="../../index.html">学习工具箱</a></li>
+  <li><a href="index.html">生物</a></li>
+  <li><a href="#track=junior">初中生物</a></li>
+  <li><span class="tb-crumb-text">b19 · 章名</span></li>
+  <li><span aria-current="page">课名</span></li>
+</ol></nav>
+```
+
+- 层级口径：`学习工具箱 / 学科 /（学段｜子卡｜板块）/ 章 / 课`，按模块实际结构裁剪；
+  入口层名称照搬模块内真实名（初中物理/讲词根/代数…），章段文本与本模块章列表叫法一字不差。
+- 每段（除当前页）可点直达真实目标；无真实目标的段渲染为 `span.tb-crumb-text`
+  纯文本，**不许造假链接**；当前页为 `span[aria-current="page"]`，视觉彻底无按钮态。
+- 组件：`assets/js/breadcrumb.js`（`window.TB_crumb.update(items)`），样式见
+  `assets/css/style.css` §3.7；分隔符 `›` 纯 CSS 绘制；390px 允许换行+超长省略；
+  触控命中区 ≥40px；深色主题配对。
+- `.tb-back` 保留（单级返回仍有用），面包屑是新增层级导航，不替换旧控件。
+
 ---
 
 ## 四、logo 与 favicon 资源规格
@@ -266,6 +288,8 @@ UI 批改动的共享资源引用（css/img）沿用化学 `?v=` 惯例，
   `.tb-card`、`.tb-progress`、`.tb-footer`（§3）
 - 资源：`assets/img/logo-32.png`、`logo-48.png`、`logo-64.png`（§4）
 - 插槽注释：`<!-- TB:brand-head -->`、`<!-- TB:footer -->`（§6.1）
+- 组件类：`.tb-crumb`、`.tb-crumb-text`（§3.7，全局导航批 2026-10-19 新增）；
+  共享脚本 `assets/js/breadcrumb.js`（`window.TB_crumb`）
 
 ### 7.2 冻结项（原样保留，不再新增引用）
 

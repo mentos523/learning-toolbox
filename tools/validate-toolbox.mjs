@@ -17,6 +17,10 @@
  *   ⑥ registry status 清单与"soon 却有内容"检查（自研，hotfix-20261019：
  *      status="soon" 的模块若 data/ 下已有课程数据 → FAIL；
  *      曾导致地理 16 章上线后首页仍显示"筹备中"）
+ *   ⑦ 面包屑导航一致性（自研，全局导航批 2026-10-19：6 壳引用共享组件、
+ *      6 主 JS 均有 TB_crumb.update 调用、全部 crumb href 静态可解——
+ *      相对路径指向真实文件、hash 前缀被本模块路由实际处理且值在真实 track id 集合内；
+ *      防假链接）
  *
  * file:// 可跑红线：本脚本只读文件、不起服务；数据文件用 <script> 载入式
  * `window.X = {...}` 格式，Node 侧用沙箱求值读取，不走 fetch。
@@ -360,6 +364,92 @@ function checkRegistryStatus() {
   else ok(tag, `清单：${list.join(" / ")}`);
 }
 
+/* ---------- ⑦ 面包屑导航一致性（自研，全局导航批 2026-10-19） ---------- */
+const CRUMB_TRACK_IDS = {
+  english: ["roots", "grammar"],
+  math: ["algebra", "geometry"],
+  biology: ["junior", "senior"],
+  physics: ["junior", "senior"],
+  chemistry: ["junior", "senior"],
+  geography: ["junior", "senior"],
+};
+const CRUMB_HASH_PREFIX = {
+  english: "#card=", math: "#track=",
+  biology: "#track=", physics: "#track=", chemistry: "#track=", geography: "#track=",
+};
+const CRUMB_MODULES = {
+  english: "modules/english/js/english.js",
+  math: "modules/math/js/math.js",
+  physics: "modules/physics/js/physics.js",
+  chemistry: "modules/chemistry/js/chemistry.js",
+  geography: "modules/geography/js/geography.js",
+  biology: "modules/biology/js/biology.js",
+};
+function checkBreadcrumb() {
+  const tag = "breadcrumb";
+  const errs = [];
+  const warns = [];
+  let ver = "";
+  try { ver = JSON.parse(readFileSync(join(ROOT, "version.json"), "utf8")).version || ""; }
+  catch (e) { fail(tag, "version.json 读取失败"); return; }
+  // ① 6 壳引用共享组件 + ?v=
+  for (const slug of Object.keys(CRUMB_MODULES)) {
+    const shell = join(ROOT, "modules", slug, "index.html");
+    let src = "";
+    try { src = readFileSync(shell, "utf8"); }
+    catch (e) { errs.push(`${slug} 壳文件缺失`); continue; }
+    const m = src.match(/<script[^>]+src="([^"]*assets\/js\/breadcrumb\.js)(\?v=([^"]*))?"/);
+    if (!m) { errs.push(`${slug} 壳未引用 assets/js/breadcrumb.js`); continue; }
+    const v = m[3] || "";
+    if (!v) errs.push(`${slug} 壳 breadcrumb.js 引用缺 ?v=`);
+    else if (v === "__VERSION__") warns.push(`${slug} ?v=__VERSION__ 待发版同步`);
+    else if (v !== ver) errs.push(`${slug} 壳 breadcrumb.js ?v=${v} ≠ ${ver}`);
+  }
+  // ② 共享组件与样式、规范
+  const bcPath = join(ROOT, "assets", "js", "breadcrumb.js");
+  if (!existsSync(bcPath)) errs.push("assets/js/breadcrumb.js 缺失");
+  else {
+    const bc = readFileSync(bcPath, "utf8");
+    if (!bc.includes("window.TB_crumb")) errs.push("breadcrumb.js 未暴露 window.TB_crumb");
+    if (!bc.includes("textContent")) warns.push("breadcrumb.js 未使用 textContent（建议全 textContent 防注入）");
+  }
+  const css = readFileSync(join(ROOT, "assets", "css", "style.css"), "utf8");
+  if (!/\.tb-crumb(?![\w-])/.test(css)) errs.push("style.css 无 .tb-crumb 定义");
+  const spec = readFileSync(join(ROOT, "docs", "ui-spec-v1.md"), "utf8");
+  if (!spec.includes("3.7") || !/\.tb-crumb(?![\w-])/.test(spec)) errs.push("ui-spec-v1.md 缺 §3.7 .tb-crumb");
+  // ③ 6 主 JS 调用点 + ④ href 契约
+  for (const [slug, rel] of Object.entries(CRUMB_MODULES)) {
+    let js = "";
+    try { js = readFileSync(join(ROOT, rel), "utf8"); }
+    catch (e) { errs.push(`${slug} 主 JS 缺失`); continue; }
+    if (!js.includes("TB_crumb.update")) { errs.push(`${slug} 主 JS 无 TB_crumb.update 调用`); continue; }
+    const hrefs = new Set([...js.matchAll(/href:\s*"([^"]+)"/g)].map((m) => m[1]));
+    const prefix = CRUMB_HASH_PREFIX[slug];
+    const routeOK =
+      (slug === "english" && /#card=\(\[a-z\]\+\)/.test(js)) ||
+      (slug === "math" && /#track=\(algebra\|geometry\)/.test(js)) ||
+      (["biology", "physics", "chemistry", "geography"].includes(slug) && /#track=\(\[a-z\]\+\)/.test(js));
+    for (const h of hrefs) {
+      if (h.startsWith("#")) {
+        // ① 前缀精确 ② 路由源码实际处理该族 ③ 值在真实 track id 集合内；
+        // "#track=" + t.id 这类拼接式按"族"验证（字面量恰为前缀本身）
+        let handled = false;
+        if (h === prefix) handled = routeOK;
+        else if (h.startsWith(prefix)) handled = CRUMB_TRACK_IDS[slug].includes(h.slice(prefix.length)) && routeOK;
+        if (!handled) errs.push(`${slug} crumb href "${h}" 无路由处理或值非法（假链接嫌疑）`);
+      } else if (h.includes("..")) {
+        const target = join(ROOT, "modules", slug, h.split("#")[0].split("?")[0]);
+        if (!existsSync(target)) errs.push(`${slug} crumb href "${h}" 目标文件不存在`);
+      } else {
+        const target = join(ROOT, "modules", slug, h.split("#")[0].split("?")[0] || "index.html");
+        if (!existsSync(target)) errs.push(`${slug} crumb href "${h}" 目标文件不存在`);
+      }
+    }
+  }
+  if (errs.length) fail(tag, errs.join("；"));
+  else ok(tag, `6 壳引用齐${warns.length ? "；" + warns.join("；") : ""}；href 契约全过`);
+}
+
 /* ---------- 自检：合成坏图谱验证断言有效 ---------- */
 function selftest() {
   const cases = [
@@ -431,6 +521,7 @@ if (SELFTEST) {
     ["prereq", runPrereqChecks],
     ["version-sync", checkVersionSync],
     ["registry-status", checkRegistryStatus],
+    ["breadcrumb", checkBreadcrumb],
     ["v8", runV8],
   ];
   for (const [name, fn] of groups) {

@@ -1317,4 +1317,7 @@ body[data-theme="dark"] #chemistry-app .chm-tri-symbol { background: #1A4A22; co
   body.chm-in-lesson #chemistry-app .chm-menu-btn { display: none; }
   body.chm-in-lesson .chm-drawer-close { display: none; }
   body.chm-in-lesson #chemistry-app { margin-left: 300px; }
+  /* 面包屑导航批 2026-10-19：面包屑与 #chemistry-app 同样避开常驻侧边栏，
+   * 否则其左侧段落被侧边栏（z-index 40）盖住不可点。 */
+  body.chm-in-lesson .tb-crumb { margin-left: 300px; }
 }

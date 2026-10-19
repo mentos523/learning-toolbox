@@ -103,6 +103,17 @@
 
   /* ---------------- 顶栏 / 视图根 ---------------- */
   var browseRoot = null, appRoot = null, topbar = null, cur = null;
+  /* 面包屑（全局导航批 2026-10-19）：TB_crumb 未加载时静默跳过 */
+  var CRUMB_HOME = { label: "学习工具箱", href: "../../index.html" };
+  function tbCrumb(items) {
+    try { if (window.TB_crumb) window.TB_crumb.update(items); } catch (e) {}
+  }
+  function crumbTrackOfChapter(chId) {
+    for (var i = 0; i < GEO_TRACKS.length; i++) {
+      if (GEO_TRACKS[i].chapters.indexOf(chId) >= 0) return GEO_TRACKS[i];
+    }
+    return null;
+  }
 
   function renderTopbar() {
     topbar.innerHTML = "";
@@ -169,6 +180,7 @@
       cards.appendChild(c);
     });
     browseRoot.appendChild(cards);
+    tbCrumb([CRUMB_HOME, { label: "地理", href: null }]);
   }
 
   function showTrackBrowser(trackId) {
@@ -179,6 +191,8 @@
     browseRoot.hidden = false;
     appRoot.hidden = true;
     browseRoot.innerHTML = "";
+    tbCrumb([CRUMB_HOME, { label: "地理", href: "index.html" },
+      { label: t.name, href: null }]);
     var back = el("button", "geog-btn", "← 学段");
     back.addEventListener("click", showBrowser);
     browseRoot.appendChild(back);
@@ -281,6 +295,11 @@
     var h = location.hash || "";
     var m = h.match(/^#(dg\d+\.\d+\.\d+)(?:\/(\d+))?$/);
     if (m) return { lesson: m[1], page: m[2] ? parseInt(m[2], 10) - 1 : 0 };
+    var mt = h.match(/^#track=([a-z]+)$/);
+    if (mt) {
+      for (var gi = 0; gi < GEO_TRACKS.length; gi++)
+        if (GEO_TRACKS[gi].id === mt[1]) return { track: mt[1] };
+    }
     return null;
   }
   var pageMem = {};
@@ -329,6 +348,14 @@
     browseRoot.hidden = true;
     appRoot.hidden = false;
     renderPage();
+    (function () {
+      var t = crumbTrackOfChapter(found.chapter.id);
+      var items = [CRUMB_HOME, { label: "地理", href: "index.html" }];
+      if (t) items.push({ label: t.name, href: "#track=" + t.id });
+      items.push({ label: found.chapter.id + " " + found.chapter.title, href: null });
+      items.push({ label: found.lesson.title, href: null });
+      tbCrumb(items);
+    })();
     try { window.scrollTo(0, 0); } catch (e) {}
     syncHash(!push);
     return true;
@@ -336,6 +363,7 @@
   function goLesson(lessonId) { openLesson(lessonId, undefined, true); }
   function route() {
     var h = parseHash();
+    if (h && h.track) { showTrackBrowser(h.track); return; }
     if (h && hasLesson(h.lesson)) {
       var pages = (findLesson(h.lesson).lesson.pages || []).length;
       var idx = Math.max(0, Math.min(pages - 1, h.page || 0));

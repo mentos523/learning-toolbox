@@ -98,6 +98,11 @@
       });
     });
   }
+  /* 面包屑（全局导航批 2026-10-19）：TB_crumb 未加载时静默跳过 */
+  var CRUMB_HOME = { label: "学习工具箱", href: "../../index.html" };
+  function tbCrumb(items) {
+    try { if (window.TB_crumb) window.TB_crumb.update(items); } catch (e) {}
+  }
   function showTracks() {
     state.track = null;
     state.chapterId = null; state.pageId = null; state.flat = []; state.index = -1;
@@ -105,6 +110,7 @@
     $("tracks").hidden = false;
     $("main").hidden = true;
     try { history.replaceState(null, "", location.pathname); } catch (e) {}
+    tbCrumb([CRUMB_HOME, { label: "数学", href: null }]);
   }
   function enterTrack(trackId, opts) {
     var meta = trackMeta(trackId);
@@ -114,6 +120,8 @@
     $("tracks").hidden = true;
     $("main").hidden = false;
     $("m-title").textContent = "数学 · " + meta.name;
+    tbCrumb([CRUMB_HOME, { label: "数学", href: "index.html" },
+      { label: meta.name, href: null }]);
     renderSidebar();
     if (!(opts && opts.keepPage)) {
       $("p-title").textContent = "从左侧目录选择一课开始";
@@ -381,6 +389,18 @@
       state.index = idx;
       state.pageId = state.flat[idx] ? state.flat[idx].page.id : null;
       renderPage();
+      (function () {
+        var chs = window.MATH_CHAPTERS || [];
+        var chTitle = "";
+        for (var i = 0; i < chs.length; i++) if (chs[i].id === chId) chTitle = chs[i].title;
+        var tm = trackMeta(state.track);
+        var items = [CRUMB_HOME, { label: "数学", href: "index.html" }];
+        if (tm) items.push({ label: tm.name, href: "#track=" + tm.id });
+        items.push({ label: chTitle || chId, href: null });
+        var cf = state.flat[state.index];
+        items.push({ label: (cf && cf.lessonTitle) || "", href: null });
+        tbCrumb(items);
+      })();
       if (window.innerWidth < 1024) $("drawer").classList.remove("open");
     }).catch(function (e) {
       $("p-title").textContent = "章节加载失败";
@@ -491,6 +511,14 @@
       // 无深链接：先选板块卡片
       showTracks();
     }
+    // 面包屑直达：#track=<id> → 进入对应板块；空 hash（如点面包屑「数学」回 index.html）
+    // → 回板块选择视图（全局导航批 2026-10-19 新增，与卡片 href 口径一致）
+    window.addEventListener("hashchange", function () {
+      var hh = location.hash || "";
+      var tm = hh.match(/^#track=(algebra|geometry)$/);
+      if (tm) { if (tm[1] !== state.track) enterTrack(tm[1]); return; }
+      if (!hh) showTracks();
+    });
     $("tracks-back").addEventListener("click", showTracks);
   }
 
