@@ -1,0 +1,43 @@
+{
+  "schema": "biology-review-ledger/1.0",
+  "chapter": "b09",
+  "lesson": "b09.2.3",
+  "written_at": "2026-10-19",
+  "written_by": "生物 P12 生产队（蓝队数据工程 + 内容撰写）",
+  "notes": "p1 运动（骨=杠杆/关节=支点/骨骼肌=动力；骨骼肌两端附着不同骨）+屈肘伸肘骨骼肌协作动画（BIO_B09.muscle；SVG 双态切换；角落常驻\"模式图：非等比、非实物\"BIO-R32 +\"示意，非真实速度/比例\"BIO-R35）+误区专治\"骨骼肌牵拉骨单向用力\"→两组肌肉协作：屈肘时肱二头肌收缩、肱三头肌舒张/p2 先天性行为/学习行为/社会行为首现即定义+行为对号入座（BIO_B09.behav；蜘蛛结网/小狗学握手/蜜蜂分工）+动物在生物圈中的作用（食物链一环；传粉；传播种子）。",
+  "announcements": [],
+  "frozen_refs": [
+    {
+      "id": "b09.2.3-f1",
+      "kind": "frozen_copy",
+      "note": "\"两组肌肉协作：屈肘时肱二头肌收缩、肱三头肌舒张\"逐字（b09.2.3-p1 专治；static自查 T9 PASS）。",
+      "ref": "curriculum-b09.2.3",
+      "status": "drafted"
+    },
+    {
+      "id": "b09.2.3-f2",
+      "kind": "frozen_copy",
+      "note": "协作动画页常驻\"示意，非真实速度/比例\"（BIO-R35；static自查 PASS）。",
+      "ref": "BIO-R35",
+      "status": "drafted"
+    }
+  ],
+  "gate8_first_definition": {
+    "status": "drafted",
+    "note": "本课新术语首现即定义：先天性行为/学习行为/社会行为@b09.2.3-p2（先认词行内定义；static自查 T-门禁⑧ PASS）。"
+  },
+  "gate9_target_check": {
+    "status": "drafted",
+    "note": "本课无 mathlink 深链块；b10/b11/b12/b22 正文零引用（门禁⑨；static自查 T5 PASS）。"
+  },
+  "gate11_quiz": {
+    "status": "drafted",
+    "note": "本课无 kind:quiz 页；骨骼肌协作在 b09.2.4-p2 Q4 机判覆盖；行为分类在 b09.2.4-p1 小结 review 回放。"
+  },
+  "expert_review": {
+    "reviewer": "生物学科专家队",
+    "date": "2026-10-19",
+    "verdict": "passed",
+    "note": "专家审定（2026-10-19）：p1–p2 内容与 curriculum-b09.2.3 一致；红线骨骼肌口径逐字（b09.2.3-p1 trap，b09.js L361）；BIO-R32（L353）+ BIO-R35（L354）双声明在位，BIO-R35 全批仅此 1 处（有协作动画的页，合规）；肌肉 SVG 双态标签（屈肘：二头肌收缩/三头肌舒张；伸肘反之）与 BIO_B09.muscle 切换逻辑、初始提示语一致；行为三分类（先天性/学习/社会）定义准确，蜜蜂分工归社会行为正确；note“骨骼肌只能收缩牵拉骨”生理准确。V8 等效盲区沿用 P3–P11 口径（生产报告诚实缺口#1，非本批新增，不另记）。结论：passed，无 WARN。"
+  }
+}

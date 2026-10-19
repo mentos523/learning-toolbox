@@ -1,0 +1,43 @@
+{
+  "schema": "biology-review-ledger/1.0",
+  "chapter": "b09",
+  "lesson": "b09.1.2",
+  "written_at": "2026-10-19",
+  "written_by": "生物 P12 生产队（蓝队数据工程 + 内容撰写）",
+  "notes": "p1 软体动物（河蚌：外套膜首现即定义；贝壳由外套膜分泌形成；蜗牛/乌贼同类）/p2 节肢动物（外骨骼首现即定义；身体分节/附肢分节；动物界种类最多的一门）+昆虫特征（身体分头胸腹；胸部 3 对足、大多 2 对翅）+昆虫判据闯关（BIO_B09.insect；6 动物是/不是判定；会话内；触控≥44px）/p3 蝗虫结构拆解 SVG（外骨骼/气门/足三热点点选；角落常驻\"模式图：非等比、非实物\"BIO-R32；结构—功能对问 BIO-R08）+误区专治\"蜘蛛/蜈蚣是昆虫\"→节肢动物非昆虫！昆虫=3 对足 2 对翅。",
+  "announcements": [],
+  "frozen_refs": [
+    {
+      "id": "b09.1.2-f1",
+      "kind": "frozen_copy",
+      "note": "\"节肢动物非昆虫！昆虫=3 对足 2 对翅\"逐字（b09.1.2-p3 专治；static自查 T9 PASS）。",
+      "ref": "curriculum-b09.1.2",
+      "status": "drafted"
+    },
+    {
+      "id": "b09.1.2-f2",
+      "kind": "frozen_copy",
+      "note": "蝗虫结构示意图角落常驻\"模式图：非等比、非实物\"逐字（BIO-R32；static自查 T7a PASS；缺=FAIL）。",
+      "ref": "BIO-R32",
+      "status": "drafted"
+    }
+  ],
+  "gate8_first_definition": {
+    "status": "drafted",
+    "note": "本课新术语首现即定义：外套膜@b09.1.2-p1、外骨骼@b09.1.2-p2（先认词行内定义；static自查 T-门禁⑧ PASS）。"
+  },
+  "gate9_target_check": {
+    "status": "drafted",
+    "note": "本课无 mathlink 深链块；b10/b11/b12/b22 正文零引用（门禁⑨；static自查 T5 PASS）。"
+  },
+  "gate11_quiz": {
+    "status": "drafted",
+    "note": "本课无 kind:quiz 页；昆虫判据/蜘蛛蜈蚣在 b09.2.4-p1 Q2/p2 Q1 机判覆盖。"
+  },
+  "expert_review": {
+    "reviewer": "生物学科专家队",
+    "date": "2026-10-19",
+    "verdict": "passed",
+    "note": "专家审定（2026-10-19）：p1–p3 内容与 curriculum-b09.1.2 一致；红线昆虫口径逐字（b09.1.2-p3 trap，b09.js L183），无“审计清单”括注（P11 CEO 急件教训已落实）；BIO-R51 昆虫判据（3 对足、2 对翅）一次讲对；BIO-R32 蝗虫结构 SVG 角落声明在位（L175）；昆虫判据闯关 6 动物“是/不是”判定与 INSECT_WHY 映射一致（蜘蛛 4 对足/蜈蚣足多/河蚌软体动物），按钮 id 映射与 handler 一致；结构—功能对问（BIO-R08）在位。结论：passed，无 WARN。"
+  }
+}

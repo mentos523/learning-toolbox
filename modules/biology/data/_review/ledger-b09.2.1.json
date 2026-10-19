@@ -1,0 +1,49 @@
+{
+  "schema": "biology-review-ledger/1.0",
+  "chapter": "b09",
+  "lesson": "b09.2.1",
+  "written_at": "2026-10-19",
+  "written_by": "生物 P12 生产队（蓝队数据工程 + 内容撰写）",
+  "notes": "p1 鱼（鲫鱼：鳃呼吸/鳍游泳/鳞片；侧线首现即定义：感知水流、测定方向；四大家鱼：青/草/鲢/鳙）+鱼鳃观察（放大鳃丝 SVG：鳃丝又多又细、密布毛细血管；模式图声明 BIO-R32；BIO_B09.gillZoom）+辨析①回填（认旧友：形配其用→b05.1.3 深链；兑现 b05.1.3-a2；BIO-R11）/p2 两栖（青蛙：蝌蚪水生用鳃、成体水陆两栖用肺+皮肤辅助）+爬行（蜥蜴：羊膜卵首现即定义；肺+羊膜卵=真正的陆生脊椎动物）+误区专治\"青蛙能在陆地生活一辈子\"→生殖离不开水：体外受精、水中发育+认旧友 b04.1.5 深链（变态发育）。",
+  "announcements": [],
+  "frozen_refs": [
+    {
+      "id": "b09.2.1-f1",
+      "kind": "frozen_copy",
+      "note": "\"生殖离不开水：体外受精、水中发育\"逐字（b09.2.1-p2 专治；static自查 T9 PASS）。",
+      "ref": "curriculum-b09.2.1",
+      "status": "drafted"
+    },
+    {
+      "id": "b09.2.1-f2",
+      "kind": "frozen_copy",
+      "note": "\"认旧友：形配其用\"回填句（b09.2.1-p1 辨析①回填；BIO-R11；static自查 PASS）。",
+      "ref": "BIO-R11",
+      "status": "drafted"
+    }
+  ],
+  "gate8_first_definition": {
+    "status": "drafted",
+    "note": "本课新术语首现即定义：侧线@b09.2.1-p1、羊膜卵@b09.2.1-p2（先认词行内定义；static自查 T-门禁⑧ PASS）。"
+  },
+  "gate9_target_check": {
+    "status": "drafted",
+    "note": "深链 2 处（p1 mathlink→b05.1.3 辨析①回填兑现；p2 mathlink→b04.1.5 变态发育认旧友）；均已生产；XLINK_BIO P12 补丁纳 b09 课号；static自查 T-门禁⑨ PASS；浏览器 C 真点击。"
+  },
+  "gate11_quiz": {
+    "status": "drafted",
+    "note": "本课无 kind:quiz 页；鱼鳃/青蛙生殖/羊膜卵在 b09.2.4-p2 Q2 机判覆盖。"
+  },
+  "expert_review": {
+    "reviewer": "生物学科专家队",
+    "date": "2026-10-19",
+    "verdict": "passed",
+    "note": "专家审定（2026-10-19）：p1–p2 内容与 curriculum-b09.2.1 一致；红线两栖口径逐字（b09.2.1-p2 trap，b09.js L247）；b05.1.3-a2 兑现实物核验通过：预告（b05.js b05.1.3-p3“「形配其用」还会回来——鱼鳃（b09.2.1 细讲），到时候认旧友”）↔回填（b09.2.1-p1 L232“辨析①回填：…认旧友：形配其用”+ mathlink 深链 b05.1.3）关键词互认；深链 b04.1.5 课内实物存在（变态发育/青蛙/体外受精）；BIO-R32 鳃丝 SVG 声明在位（L228）。观察 O1（非 WARN）：L232“辨析①回填：”为课程内部编号进学生文本，不在 CEO 禁语清单内，建议后续批统一“认旧友”口径。结论：passed。"
+  },
+  "foretell": {
+    "announcement_id": "b05.1.3-a2",
+    "status": "fulfilled",
+    "note": "b05.1.3-p3 纯文本预告（辨析①回填链：\"形配其用\"还会回来——鱼鳃 b09.2.1 细讲，到时候认旧友）→本批 b09.2.1-p1 鱼鳃观察页以\"认旧友：形配其用\"回填句 + mathlink 深链 b05.1.3 兑现；预告与兑现关键词互相可识别（形配其用/认旧友/鱼鳃/b05.1.3）。",
+    "evidence": "modules/biology/data/b09.js#b09.2.1-p1：鱼鳃观察交互（BIO_B09.gillZoom 放大鳃丝 SVG；鳃丝密布毛细血管；模式图声明）+ mathlink 块「认旧友：b05.1.3——小肠 5 处结构\"形配其用\"（立靶页）；鱼鳃鳃丝密布毛细血管，同样\"形配其用\"。」"
+  }
+}

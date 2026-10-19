@@ -1,0 +1,36 @@
+{
+  "schema": "biology-review-ledger/1.0",
+  "chapter": "b09",
+  "lesson": "b09.2.2",
+  "written_at": "2026-10-19",
+  "written_by": "生物 P12 生产队（蓝队数据工程 + 内容撰写）",
+  "notes": "p1 鸟（双重呼吸首现即定义：吸气呼气肺都能气体交换；羽毛/翼；恒温；卵生）/p2 哺乳动物（胎生/膈首现即定义；哺乳；体表被毛；恒温；膈为哺乳动物特有）/p3 本地案例长江江豚（水生但用肺呼吸、胎生；长得像鱼不是鱼）+三证据配对闯关（BIO_B09.pair：用肺呼吸/胎生/恒温↔三表现；会话内；触控≥44px）+误区专治\"鲸/江豚是鱼\"→哺乳动物（恒温+胎生+哺乳三判据）。",
+  "announcements": [],
+  "frozen_refs": [
+    {
+      "id": "b09.2.2-f1",
+      "kind": "frozen_copy",
+      "note": "\"哺乳动物（恒温+胎生+哺乳三判据）\"逐字（b09.2.2-p3 专治；static自查 T9 PASS）。",
+      "ref": "curriculum-b09.2.2",
+      "status": "drafted"
+    }
+  ],
+  "gate8_first_definition": {
+    "status": "drafted",
+    "note": "本课新术语首现即定义：双重呼吸@b09.2.2-p1、膈/胎生@b09.2.2-p2（先认词行内定义；static自查 T-门禁⑧ PASS）。"
+  },
+  "gate9_target_check": {
+    "status": "drafted",
+    "note": "本课无 mathlink 深链块；b10/b11/b12/b22 正文零引用（门禁⑨；static自查 T5 PASS）。"
+  },
+  "gate11_quiz": {
+    "status": "drafted",
+    "note": "本课无 kind:quiz 页；双重呼吸/江豚判据在 b09.2.4-p1 Q3/p2 Q3 机判覆盖。"
+  },
+  "expert_review": {
+    "reviewer": "生物学科专家队",
+    "date": "2026-10-19",
+    "verdict": "passed",
+    "note": "专家审定（2026-10-19）：p1–p3 内容与 curriculum-b09.2.2 一致；红线哺乳口径逐字（b09.2.2-p3 trap，b09.js L314）；双重呼吸/膈/胎生定义准确（膈为哺乳动物特有表述正确）；江豚三证据配对闯关逻辑核对一致：证据按钮 id（bioB09E-lung/born/warm）↔表现按钮（bioB09E-p2/p1/p3）↔ PF_IDS 映射无错位，PF_EX 三条解释（肺呼吸/胎生/恒温）科学准确（“鱼大多产卵”“鱼是变温的”有“大多”限定，无绝对化）。结论：passed，无 WARN。"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "schema": "biology-review-ledger/1.0",
+  "chapter": "b09",
+  "lesson": "b09.1.1",
+  "written_at": "2026-10-19",
+  "written_by": "生物 P12 生产队（蓝队数据工程 + 内容撰写）",
+  "notes": "p1 腔肠动物（水螅：辐射对称/刺细胞首现即定义；有口无肛门；水母/海葵同类）/p2 扁形动物（涡虫：两侧对称首现即定义；背腹扁平）+线形动物（蛔虫：身体细长、寄生）/p3 环节动物（蚯蚓：体节/刚毛首现即定义）+误区专治\"蚯蚓走路靠刚毛\"→肌肉收缩+刚毛协助，缺一不可+各类群代表动物特征速查卡（BIO_B09.card；会话内记分，不写 localStorage；触控≥44px）。",
+  "announcements": [],
+  "frozen_refs": [
+    {
+      "id": "b09.1.1-f1",
+      "kind": "frozen_copy",
+      "note": "\"肌肉收缩+刚毛协助，缺一不可\"逐字（b09.1.1-p3 专治；static自查 T9 PASS）。",
+      "ref": "curriculum-b09.1.1",
+      "status": "drafted"
+    }
+  ],
+  "gate8_first_definition": {
+    "status": "drafted",
+    "note": "本课新术语首现即定义：辐射对称/刺细胞@b09.1.1-p1、两侧对称@b09.1.1-p2、体节/刚毛@b09.1.1-p3（先认词行内定义；static自查 T-门禁⑧ PASS）。"
+  },
+  "gate9_target_check": {
+    "status": "drafted",
+    "note": "本课无 mathlink 深链块；b10/b11/b12/b22 正文零引用（门禁⑨；static自查 T5 PASS）。"
+  },
+  "gate11_quiz": {
+    "status": "drafted",
+    "note": "本课无 kind:quiz 页；蚯蚓运动/各类群特征在 b09.2.4-p1 Q1/小结 review 机判覆盖。"
+  },
+  "expert_review": {
+    "reviewer": "生物学科专家队",
+    "date": "2026-10-19",
+    "verdict": "passed",
+    "note": "专家审定（2026-10-19）：p1–p3 内容与 curriculum-b09.1.1 一致；红线蚯蚓口径逐字（b09.1.1-p3 trap，b09.js L92）；门禁⑧ 5 术语首现即定义在位；速查卡 4 卡文案与正文口径一致。WARN-1（非阻塞）：b09.1.1-p2 两侧对称定义“身体只有左右两个对称面”（L70）表述不精确——双侧对称实为一个矢状对称面；核心概念未教错，建议微批改法为“身体只有一个对称面（从背腹方向的纵切面），把身体分成左右相等的两半”。结论：passed，WARN-1 记入跨批遗留待修。",
+    "resign": {
+      "reviewer": "生物学科专家队",
+      "date": "2026-10-19",
+      "verdict": "final_passed",
+      "note": "复签（2026-10-19）：WARN-1 返工点已实物核验通过。b09.js L70 b09.1.1-p2 定义文本现为“先认词——两侧对称：身体只有一个对称面（像一辆车，分出前/后、左/右、背/腹）。涡虫：生活在清澈溪流中，身体背腹扁平、左右对称。”；旧措辞“身体只有左右两个对称面”经全文件 grep 确认已清零；类比句（汽车/前-后、左-右、背-腹三轴）按微批意见保留。字数 binding 口径 192（协调者复算）≤300，node --check 通过。原 passed 结论维持，WARN-1 关闭。"
+    }
+  }
+}

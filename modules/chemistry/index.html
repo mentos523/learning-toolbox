@@ -2,149 +2,56 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<!-- 旧 favicon 备查（UI 统一批 2026-10-18 冻结，不再引用）：<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230072B2'/%3E%3Ctext x='32' y='44' font-size='30' text-anchor='middle' fill='white' font-family='sans-serif'%3E%E5%8C%96%3C/text%3E%3C/svg%3E"> -->
-<link rel="icon" href="../../assets/img/logo-32.png?v=2026.10.19.10" type="image/png">
-<title>化学 · 选择板块 — 学习工具箱</title>
-<meta name="description" content="下标是身份证，系数是人数：从质量守恒到化学方程式，配平绝不改下标。">
-<!-- 缓存指纹（蓝队 2026-10-15）：本页所有 css/js 引用带 ?v=<版本号> 查询串，
-     每次发版更换 URL，浏览器/中间缓存无法沿用旧文件。
-     发版同步清单（与 version.json / 首页 window.TOOLBOX_VERSION 同值）：
-     ① 本行下方的 window.CHEM_BUILD；② 本页全部 ?v= 指纹。
-     一键同步（仓库根目录执行，V 为新版本号；无反向引用，不会误删版本号）：
-     V=2026.10.16.1; sed -i "s|window.TOOLBOX_VERSION = \"[0-9][0-9.]*\"|window.TOOLBOX_VERSION = \"$V\"|; s|window.CHEM_BUILD = \"[0-9][0-9.]*\"|window.CHEM_BUILD = \"$V\"|; s|?v=[0-9][0-9.]*|?v=$V|g" \
-       index.html modules/chemistry/index.html -->
-<script>window.CHEM_BUILD = "2026.10.19.10";</script>
-<link rel="stylesheet" href="../../assets/css/style.css?v=2026.10.19.10">
-<link rel="stylesheet" href="css/chemistry.css?v=2026.10.19.10">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>学习工具箱</title>
+<meta name="description" content="给孩子的学习工具箱：英语、数学，一个个学科慢慢装进来。">
+<!-- 缓存指纹（蓝队 2026-10-15）：本地 css/js 引用带 ?v=<版本号> 查询串，
+     每次发版更换 URL，杜绝浏览器/中间缓存沿用旧文件（含 registry.js，
+     否则新学科注册可能对老用户不可见）。发版时与 window.TOOLBOX_VERSION
+     同值同步，见 modules/chemistry/index.html 头部注释的一键同步命令。 -->
+<link rel="stylesheet" href="assets/css/style.css?v=2026.10.19.11">
+<link rel="icon" href="assets/img/logo-32.png?v=2026.10.19.11" type="image/png">
 </head>
-<body data-theme="light">
-<!-- 深色模式入口：跟随系统 prefers-color-scheme，系统切换时实时响应；
-     化学 SVG/CSS 全走 --chm-* 变量（别名 --geo-*），切换主题不重绘画布。 -->
-<script>
-(function () {
-  var mq = window.matchMedia("(prefers-color-scheme: dark)");
-  function apply() { document.body.setAttribute("data-theme", mq.matches ? "dark" : "light"); }
-  apply();
-  if (mq.addEventListener) mq.addEventListener("change", apply);
-  else if (mq.addListener) mq.addListener(apply);  // 旧版 Safari
-})();
-</script>
-
+<body>
 <!-- TB:brand-head -->
 <div class="tb-brand-head">
-  <img class="tb-brand-logo" src="../../assets/img/logo-64.png?v=2026.10.19.10" width="32" height="32" alt="学习工具箱">
+  <img class="tb-brand-logo" src="assets/img/logo-64.png?v=2026.10.19.11" width="32" height="32" alt="学习工具箱">
   <span class="tb-brand-name">学习工具箱</span>
   <span class="tb-brand-sep" aria-hidden="true">·</span>
-  <span class="tb-brand-subject">化学</span>
+  <span class="tb-brand-subject">首页</span>
 </div>
 <!-- /TB:brand-head -->
+  <header class="hero">
+    <div class="hero-inner">
+      <h1><img src="assets/img/logo-48.png?v=2026.10.19.11" width="48" height="48" alt="学习工具箱"> 学习工具箱</h1>
+      <p class="subtitle">一个学科一个工具，慢慢把箱子装满。</p>
+    </div>
+  </header>
 
-<!-- 章节浏览器（蓝队 2026-10-15）：22 章 cm00–cm21 元信息见 data/chapters.js，
-     章节与课数由 data/cmNN.js 数据驱动（试点只有 cm05 已就位）。
-     #chm=<课号> 深链冷启动直达（旧 hash 兼容）。 -->
-<main class="chm-app" id="chm-browser" aria-label="化学章节浏览"></main>
+  <main class="container">
+    <div id="module-grid" class="card-grid" aria-live="polite"></div>
+    <p class="hint">更多学科正在路上……</p>
+  </main>
 
-<!-- 化学 SPA 学习页：js/chemistry.js 引擎渲染；数据见 data/cmNN.js；
-     样式见 css/chemistry.css（chm- 前缀，与其他学科隔离）。 -->
-<section id="chemistry-app" aria-label="化学学习">
-  <div class="chm-app" id="chm-app" hidden></div>
-</section>
+  <footer class="footer">
+    <p>学习工具箱 · 纯静态页面，无需安装，放在任何网站下都能跑</p>
+    <p class="update-row">
+      <button id="check-update-btn" class="update-btn" aria-label="检查更新">⟳ 检查更新</button>
+      <span id="update-dot" class="update-dot" hidden aria-hidden="true"></span>
+      <span id="version-label" class="version-label"></span>
+    </p>
+    <div id="update-banner" class="update-banner" hidden></div>
+    <p><a href="https://github.com/mentos523/learning-toolbox#打赏">☕ 请我喝杯咖啡</a></p>
+  </footer>
 
 <!-- TB:footer -->
-<div class="tb-footer">学习工具箱 · 化学 · 版本 2026.10.18.8</div>
+<div class="tb-footer">学习工具箱 · 首页 · 版本 2026.10.18.8</div>
 <!-- /TB:footer -->
 
-<!-- 框架：MathML 环境检测（复用数学模块已验证实现；缺失时 chemistry.js
-     本地兜底） → 章注册表 → 章数据 → 主引擎 -->
-<!-- 波 C（2026.10.16.9）：基础引擎层（MoleculeMotion/BondStep 依赖）。
-     顺序按 docs/ENGINE.md；vendor/engine 不加 ?v= 指纹（沿用物理模块惯例） -->
-<script src="../../assets/vendor/planck.min.js"></script>
-<script src="../../assets/vendor/konva.min.js"></script>
-<script src="../../assets/engine/core.js"></script>
-<script src="../../assets/engine/coords.js"></script>
-<script src="../../assets/engine/driver.js"></script>
-<script src="../../assets/engine/konva-view.js"></script>
-<script src="../../assets/engine/steps.js"></script>
-<script src="../../assets/engine/tween.js"></script>
-<script src="../../assets/engine/motion.js"></script>
-<script src="../math/js/mathml-check.js?v=2026.10.19.10"></script>
-<script src="data/chapters.js?v=2026.10.19.10"></script>
-<script src="data/cm00.js?v=2026.10.19.10"></script>
-<script src="data/cm01.js?v=2026.10.19.10"></script>
-<script src="data/cm02.js?v=2026.10.19.10"></script>
-<script src="data/cm03.js?v=2026.10.19.10"></script>
-<script src="data/cm04.js?v=2026.10.19.10"></script>
-<script src="data/cm05.js?v=2026.10.19.10"></script>
-<script src="data/cm06.js?v=2026.10.19.10"></script>
-<script src="data/cm07.js?v=2026.10.19.10"></script>
-<script src="data/cm08.js?v=2026.10.19.10"></script>
-<script src="data/cm09.js?v=2026.10.19.10"></script>
-<script src="data/cm10.js?v=2026.10.19.10"></script>
-<script src="data/cm11.js?v=2026.10.19.10"></script>
-<script src="data/cm12.js?v=2026.10.19.10"></script>
-<script src="data/cm13.js?v=2026.10.19.10"></script>
-<script src="data/cm14.js?v=2026.10.19.10"></script>
-<script src="data/cm15.js?v=2026.10.19.10"></script>
-<script src="data/cm16.js?v=2026.10.19.10"></script>
-<script src="data/cm17.js?v=2026.10.19.10"></script>
-<script src="data/cm18.js?v=2026.10.19.10"></script>
-<script src="data/cm19.js?v=2026.10.19.10"></script>
-<script src="data/cm20.js?v=2026.10.19.10"></script>
-<script src="data/cm21.js?v=2026.10.19.10"></script>
-<script src="js/chem-bond.js?v=2026.10.19.10"></script>
-<script src="js/chemistry.js?v=2026.10.19.10"></script>
-
-<!-- 模块级版本自检（蓝队 2026-10-15）：首页的更新检查只在首页生效，
-     直达本页（收藏夹/历史记录）的用户走这里。
-     - file:// / 断网：fetch 失败即静默返回，零副作用，不碰 localStorage（ltb-* 学习数据不动）。
-     - 发现远端 version.json 更新：顶部出现横幅，点按钮即带缓存破坏参数硬重载本页。 -->
-<script>
-(function () {
-  "use strict";
-  if (location.protocol === "file:") return;  // 本地文件模式：静默，不检查
-  function cmpVer(a, b) {
-    var pa = String(a || "0").split("."), pb = String(b || "0").split(".");
-    var n = Math.max(pa.length, pb.length), i, d;
-    for (i = 0; i < n; i++) {
-      d = (parseInt(pa[i], 10) || 0) - (parseInt(pb[i], 10) || 0);
-      if (d) return d;
-    }
-    return 0;
-  }
-  function esc(s) {
-    return String(s == null ? "" : s)
-      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-  }
-  fetch("../../version.json", { cache: "no-store" }).then(function (r) {
-    if (!r.ok) throw new Error("http " + r.status);
-    return r.json();
-  }).then(function (j) {
-    var remote = j && j.version ? String(j.version) : "";
-    var local = window.CHEM_BUILD || "0";
-    if (!remote || cmpVer(remote, local) <= 0) return;  // 已是最新或取不到：静默
-    var bar = document.createElement("div");
-    bar.id = "chem-update-banner";
-    bar.setAttribute("role", "alert");
-    bar.style.cssText = "position:fixed;top:0;left:0;right:0;z-index:9999;" +
-      "background:#fff8e1;color:#5d4037;font-size:14px;line-height:1.6;" +
-      "padding:10px 16px;text-align:center;border-bottom:2px solid #ffb300;" +
-      "box-shadow:0 2px 8px rgba(0,0,0,.15);";
-    bar.innerHTML = "🎉 化学模块发现新版本 <b>v" + esc(remote) + "</b>（当前 v" + esc(local) + "），" +
-      "点此加载最新文件（学习进度不受影响）：" +
-      "<button id=\"chem-update-go\" style=\"margin-left:8px;padding:4px 14px;cursor:pointer;" +
-      "background:#0072B2;color:#fff;border:none;border-radius:4px;font-size:14px;\">立即更新</button>";
-    document.body.insertBefore(bar, document.body.firstChild);
-    document.getElementById("chem-update-go").addEventListener("click", function () {
-      // 带缓存破坏参数硬重载：新 HTML 引用新 ?v= 指纹，旧模块文件不可能被沿用
-      var u = location.pathname + (location.search ? location.search + "&" : "?") +
-        "ub=" + Date.now() + location.hash;
-      location.href = u;
-    });
-  }).catch(function () { /* 断网等：静默 */ });
-})();
-</script>
-<!-- TB:crumb（全局导航批 2026-10-19：面包屑导航共享组件） -->
-<script src="../../assets/js/breadcrumb.js?v=2026.10.19.10"></script>
+  <!-- 内嵌版本号：发布时与根目录 version.json 同步更新 -->
+  <script>window.TOOLBOX_VERSION = "2026.10.19.11";</script>
+  <script src="assets/js/registry.js?v=2026.10.19.11"></script>
+  <script src="assets/js/app.js?v=2026.10.19.11"></script>
+  <script src="assets/js/update.js?v=2026.10.19.11"></script>
 </body>
 </html>
