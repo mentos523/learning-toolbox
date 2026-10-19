@@ -475,7 +475,7 @@ window.PHY_CH["p08"] = {
                     translation: "电流 = 电压 ÷ 电阻"
                   },
                   conditions: ["金属导体", "纯电阻", "温度不变"],
-                  counterexample: "小灯泡：灯丝热了电阻变了，I–U 图像弯了，不成立（审计清单第 3 条）",
+                  counterexample: "小灯泡：灯丝热了电阻变了，I–U 图像弯了，不成立",
                   dimension: "A = V/Ω ✓",
                   units: { si: "A（安培）", common: "mA", note: "1A = 1000mA" }
                 },

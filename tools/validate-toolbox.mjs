@@ -29,9 +29,9 @@
  * ⑫ first-term-crosscheck：首现即定义/先认词标注清单（尽力而为，
  *    仓库内无独立术语追踪表，只产清单供人工比对）。
  *
- * 【版本】本文件为 push-1 版：⑧ 的 block 词表全部降级为 warn（TOKEN_STRICT=false），
- * 因为远端 main 上泄漏尚未修复，阻断会让 main 变红。
- * 铁律：不许让远端 main 处于"新阻断断言会 FAIL"的状态。
+ * 【版本】本文件为 push-2 版：⑧ 的 block 词表恢复阻断级（TOKEN_STRICT=true）。
+ * 上线前提：第 1 批 S1 修复 + 第 2 批内容修复与两处机械清理全部落地，
+ * 且绿测试（block 模式零命中）通过。
  * file:// 可跑红线：本脚本只读文件、不起服务；数据文件用 <script> 载入式
  * `window.X = {...}` 格式，Node 侧用沙箱求值读取，不走 fetch。
  *
@@ -563,7 +563,7 @@ function getCorpus() {
 }
 
 /* ---------- ⑧ student-text-tokens：学生文案内部 token 检查 ---------- */
-/* 两级词表。定级依据见 WORDLIST.md（第 0 批交付物）：
+/* 两级词表。定级依据见 WORDLIST.md（第 0 批交付物）+ 装配期绿测试实测：
  * - block：只有"修复后全库命中=0"可验证的模式才进
  *   （SYS-INT/断言钩子：第 1 批 S1 修；审计清单括号注记：
  *   物理分队实测 10 处+生物/地理同类已机械删除）；
@@ -573,7 +573,7 @@ function getCorpus() {
  * TOKEN_STRICT=false → push-1 版（全 warn，远端 main 泄漏未修时不爆红）；
  * TOKEN_STRICT=true  → push-2 版（block 恢复阻断）。
  * 铁律：不许让远端 main 处于"新阻断断言会 FAIL"的状态。 */
-const TOKEN_STRICT = false; /* push-2 版改为 true */
+const TOKEN_STRICT = true; /* push-2 版：block 恢复阻断 */
 
 const TOKEN_RULES = [
   /* [展示名, 正则, push-2 级别] */
@@ -584,16 +584,16 @@ const TOKEN_RULES = [
   ["BIO-R编号", /BIO-R\d+/i, "warn"],
   ["GEO-R编号", /GEO-R\d+/i, "warn"],
   ["GEO-AX编号", /GEO-AX\d+/i, "warn"],
-  ["全库grep", /全库\s*grep/i, "warn"],
+  ["全库grep", /全库\s*grep/i, "block"],
   ["grep证伪", /grep\s*证伪/i, "warn"],
-  ["合规声明", /合规声明/, "warn"],
+  ["合规声明", /合规声明/, "block"],
   ["立靶", /立靶/, "warn"],
-  ["#r=", /#r=/, "warn"],
-  ["R编号审计通过", /R\d+\s*审计通过/, "warn"],
-  ["脚手架编号", /脚手架[③\d]/, "warn"],
+  ["#r=", /#r=/, "block"],
+  ["R编号审计通过", /R\d+\s*审计通过/, "block"],
+  ["脚手架编号", /脚手架[③\d]/, "block"],
   ["点拨预埋", /点拨预埋/, "warn"],
-  ["硬门禁", /硬门禁/, "warn"],
-  ["T编号", /\bT\d{2,3}\b/, "warn"],
+  ["硬门禁", /硬门禁/, "block"],
+  ["T编号", /\bT\d{2,3}\b/, "block"],
   ["人话版", /人话版/, "warn"],
   ["边界句", /边界句/, "warn"],
   ["预告台账", /预告台账/, "warn"],

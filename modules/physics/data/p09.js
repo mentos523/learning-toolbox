@@ -238,7 +238,7 @@ window.PHY_CH["p09"] = {
               blocks: [
                 { type: "lead", text: "电动机转起来也发热——那它消耗的电能，是不是就等于 I²Rt？" },
                 { type: "text", html: "纯电阻（电炉、白炽灯）：电能全部变热，<span class=\"phy-f\" data-f=\"w\"></span> = <span class=\"phy-f\" data-f=\"q\"></span>。非纯电阻（电动机）：电能→机械能 + 内能，W=UIt 是总耗电，Q=I²Rt 只是发热部分，W > Q。" },
-                { type: "trap", text: "⚠️ 别搞混：电动机也用 Q=I²Rt 算“消耗的电能”——错。W=UIt 才是消耗的电能，Q=I²Rt 只是发热——条件！（审计清单第 3 条）" },
+                { type: "trap", text: "⚠️ 别搞混：电动机也用 Q=I²Rt 算“消耗的电能”——错。W=UIt 才是消耗的电能，Q=I²Rt 只是发热——条件！" },
                 { type: "text", html: "条件对照表：P=UI、W=UIt——普遍成立；P=I²R=U²/R、W=Q——限纯电阻。用错条件，算出来的是另一个物理量。" },
                 { type: "slogan", text: "W 是总账，Q 是热账。" }
               ],

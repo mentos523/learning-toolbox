@@ -162,7 +162,7 @@ window.ENG_CH["gr03"] = {
               kind: "explain",
               title: "形容词的位置：定语前置，表语跟系动词",
               lead: "还记得吗？上一页 interesting 站在 is 后面当表语——形容词的第二个岗位。",
-              point: "这就是形容词的位置：定语前置、表语跟系动词；形容词不修饰动词。（呼应讲词根 #r=inter，R3 审计通过）",
+              point: "这就是形容词的位置：定语前置、表语跟系动词；形容词不修饰动词。",
               blocks: [
                 {
                   type: "examples",

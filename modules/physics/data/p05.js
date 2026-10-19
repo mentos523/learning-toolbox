@@ -144,7 +144,7 @@ window.PHY_CH["p05"] = {
                   units: { si: "N", note: "k 的单位是 N/m；x 用 m，读数时注意 cm→m 换算" }
                 },
                 { type: "text", html: "弹性形变：撤去外力能完全恢复的形变。超过弹性限度，弹簧就“记仇”了——回不去，<span class=\"phy-f\" data-f=\"hook\"></span> 作废。" },
-                { type: "trap", text: "⚠️ 别搞混：“弹性限度外仍成正比”——错！成正比是有条件的（审计清单第 3 条）：弹性限度内。" },
+                { type: "trap", text: "⚠️ 别搞混：“弹性限度外仍成正比”——错！成正比是有条件的：弹性限度内。" },
                 { type: "mathlink", text: "数学呼应：代数 6.2 一次函数（奠基）——F–x 图像是过原点的直线，斜率就是 k。" },
                 { type: "slogan", text: "过头不认账。" }
               ],

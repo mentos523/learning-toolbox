@@ -196,7 +196,7 @@ window.GEOGRAPHY_DATA["dg09"] = {
                 { type: "text", html: "<strong>地形 → 农业</strong>：青藏高原（高寒）→ <strong>畜牧业</strong>（牦牛）；江南丘陵平原（水热充足）→ <strong>水田农业</strong>（水稻）；黄土高原（土质疏松、降水少）→ <strong>旱作农业</strong> + <strong>窑洞</strong>聚落。" },
                 { type: "text", html: "<strong>地形 → 交通、聚落</strong>：山区交通不便、聚落分散；平原交通便利、聚落密集。自然 → 人文，因果方向不许颠倒（GEO-R40）。" },
                 { type: "text", html: "<strong>山区开发一分为二</strong>：劣势—交通不便、耕地少；优势—<strong>旅游</strong>（名山大川）、<strong>矿产</strong>、<strong>水能</strong>（河流落差大）。" },
-                { type: "trap", text: "⚠️ 误区：“山区只有劣势”——错！旅游、矿产、水能都是优势。一分为二看山区（审计清单第 8 条）：劣势是交通和耕地，优势是资源和风景。" },
+                { type: "trap", text: "⚠️ 误区：“山区只有劣势”——错！旅游、矿产、水能都是优势。一分为二看山区：劣势是交通和耕地，优势是资源和风景。" },
                 { type: "slogan", text: "地形定生产，山区两面看。" }
               ],
               point: "地形→生产生活：青藏畜牧、江南水田、黄土窑洞；山区交通不便聚落分散；山区开发一分为二（劣势交通耕地/优势旅游矿产水能）。"
@@ -263,7 +263,7 @@ window.GEOGRAPHY_DATA["dg09"] = {
                     options: ["只有优势，没有任何劣势", "只有劣势，没有任何优势", "一分为二：劣势是交通不便、耕地少，优势是旅游、矿产、水能"],
                     answer: 2,
                     recordKey: "geog_quiz_dg09.1.2-p3b",
-                    explain: "一分为二看山区（审计清单第 8 条）：“只有劣势”是单面论。"
+                    explain: "一分为二看山区：“只有劣势”是单面论。"
                   }
                 },
                 {
