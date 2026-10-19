@@ -1,0 +1,45 @@
+{
+  "schema": "biology-review-ledger/1.0",
+  "chapter": "b10",
+  "lesson": "b10.1.2",
+  "written_at": "2026-10-19",
+  "written_by": "生物 P14 生产队（蓝队数据工程 + 内容撰写）",
+  "notes": "p1 酵母菌（出芽生殖；发酵：馒头/酒）+霉菌（孢子生殖；青霉产青霉素）+酵母菌发酵演示（气球胀大 CO₂；虚拟实验声明 BIO-R35；BIO_B10.ferment）/p2 蘑菇（食用菌；菌褶/孢子）+误区专治\"蘑菇是植物\"→真菌（无叶绿体，异养；BIO-R50）+安全口径\"不采食野生菌\"（BIO-R68；不做野外辨认指导）。",
+  "announcements": [],
+  "frozen_refs": [
+    {
+      "id": "b10.1.2-f1",
+      "kind": "frozen_copy",
+      "note": "\"虚拟实验：现实中须无菌操作、恒温约 25–30℃、等待数小时\"+\"示意，非真实速度/比例。\"逐字（b10.1.2-p1 发酵演示；BIO-R35；static自查 P14-S10 PASS）。",
+      "ref": "BIO-R35",
+      "status": "drafted"
+    }
+  ],
+  "gate8_first_definition": {
+    "status": "drafted",
+    "note": "本课新术语首现即定义：孢子@b10.1.2-p1（先认词行内定义；static自查 P14-S13 PASS）。"
+  },
+  "gate9_target_check": {
+    "status": "drafted",
+    "note": "本课无深链；无未生产课号（static自查 P14-S12 PASS）。"
+  },
+  "gate11_quiz": {
+    "status": "drafted",
+    "note": "本课无 kind:quiz 页；酵母菌/霉菌/蘑菇在 b10.1.4-p1 Q3、p2 机判覆盖。"
+  },
+  "expert_review": {
+    "status": "final_passed",
+    "verdict": "final_passed",
+    "signed_by": "生物学科专家队",
+    "signed_at": "2026-10-19",
+    "fails": 0,
+    "warns_disposed": [
+      "S07→W2 书面确认通过"
+    ],
+    "pending_rework": [],
+    "note": "红线②蘑菇口径逐字在位（b10.1.2-p2 trap）；BIO-R68 只讲不采食野生菌、零野外辨认指导；BIO-R35 虚拟实验声明仅本页类实验页。S07→W2 书面确认通过。FAIL 0。",
+    "report": "~/workspace/bio-audit/batch-p14-expert/REVIEW-REPORT.md",
+    "resign_at": "2026-10-19",
+    "resign_note": "R1 关闭：专家队实物复查 b11.js 第 204 行，note 文本为\"回填链：小肠（b05.1.3）→肺泡（b06.1.1）→鱼鳃（b09.2.1）→蛋白质（本页）。\"，四站齐全（预告源小肠→a1 肺泡→a2 鱼鳃→a3 本页蛋白质）。node --check 通过；b11.1.3-p2 字数 binding 口径复算 234 ≤300。"
+  }
+}

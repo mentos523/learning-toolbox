@@ -1,0 +1,35 @@
+{
+  "schema": "biology-review-ledger/1.0",
+  "chapter": "b11",
+  "lesson": "b11.1.6",
+  "written_at": "2026-10-19",
+  "written_by": "生物 P14 生产队（蓝队数据工程 + 内容撰写）",
+  "notes": "p1/p2 小结与习题：review+3 choice / review+3 choice；题型梯度（review+choice，非 100% 单选；static自查 P14-S15）；题目覆盖元素/糖脂/蛋白/核酸/鉴定；tips 全 ≤60 字（static自查 P14-S06）。",
+  "announcements": [],
+  "frozen_refs": [],
+  "gate8_first_definition": {
+    "status": "drafted",
+    "note": "本课无新术语。"
+  },
+  "gate9_target_check": {
+    "status": "drafted",
+    "note": "本课无深链；小结 review 块课号自引 b11（已生产；static自查 P14-S12 PASS）。"
+  },
+  "gate11_quiz": {
+    "status": "drafted",
+    "note": "quiz 页题目数 >0（p1：1 review+3 choice；p2：1 review+3 choice；static自查 P14-S16 数据合法性 PASS）。"
+  },
+  "expert_review": {
+    "status": "final_passed",
+    "verdict": "final_passed",
+    "signed_by": "生物学科专家队",
+    "signed_at": "2026-10-19",
+    "fails": 0,
+    "warns_disposed": [],
+    "pending_rework": [],
+    "note": "门禁⑪ review+3 choice/页；题目覆盖元素/糖脂/蛋白/核酸/鉴定。FAIL 0。",
+    "report": "~/workspace/bio-audit/batch-p14-expert/REVIEW-REPORT.md",
+    "resign_at": "2026-10-19",
+    "resign_note": "R1 关闭：专家队实物复查 b11.js 第 204 行，note 文本为\"回填链：小肠（b05.1.3）→肺泡（b06.1.1）→鱼鳃（b09.2.1）→蛋白质（本页）。\"，四站齐全（预告源小肠→a1 肺泡→a2 鱼鳃→a3 本页蛋白质）。node --check 通过；b11.1.3-p2 字数 binding 口径复算 234 ≤300。"
+  }
+}

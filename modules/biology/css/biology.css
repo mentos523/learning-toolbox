@@ -1561,3 +1561,9 @@ body[data-theme="dark"] #biology-app .bio-safety { background: #2b2113; }
 /* V8 字号阶梯：MathML 分数内 mn 默认按 ~0.71 缩放（15.2px→10.79px），
  * 显式钉到阶梯 0.78rem=12.48px，保证读数分式全部落阶梯（W-B16 仍走 MathML）。 */
 .bio-b5 math mn { font-size: 0.78rem; }
+
+/* P14 (2026-10-19): B3 触控热区补齐 —— spec(docs/biology-interactions.md §B3 触控要求)明文"选项按钮 ≥ 44px 高、徽章点展热区 ≥ 44px"，
+ * 灰队实测 B3 按钮仅 25px（浏览器默认值，无显式高度规则），为引擎级存量缺陷（已上线 b03.1.1/b05.1.2 同款 B3 同样违规）。
+ * 纯增量 min-height，不改布局逻辑；自动惠及所有 B3 实例（b03.1.1/b05.1.2/b11.1.5）。 */
+.bio-b3-opt { min-height: 44px; }
+.bio-b3-badge { min-height: 44px; }

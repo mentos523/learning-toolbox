@@ -1,0 +1,43 @@
+{
+  "schema": "biology-review-ledger/1.0",
+  "chapter": "b11",
+  "lesson": "b11.1.1",
+  "written_at": "2026-10-19",
+  "written_by": "生物 P14 生产队（蓝队数据工程 + 内容撰写）",
+  "notes": "p1 大量/微量元素（C/H/O/N/P/S；Fe/Mn/Zn 等；\"碳氢氧氮磷硫\"口诀）+元素含量柱状图（鲜重/干重切换 BIO_B11.chart；教学示意数据声明 BIO-R69/R70）/p2 水（结合水/自由水）+无机盐（缺铁性贫血/缺钙抽搐）/p3 误区专治\"微量元素不重要\"→缺了就病（缺铁贫血、缺碘大脖子病）+数学奠基（小学学过的百分比，学生文本不写课号）。",
+  "announcements": [],
+  "frozen_refs": [
+    {
+      "id": "b11.1.1-f1",
+      "kind": "frozen_copy",
+      "note": "\"柱状图为教学示意数据（非实测）。\"逐字（b11.1.1-p1；BIO-R69/R70；static自查 P14-S10 PASS）。",
+      "ref": "BIO-R69",
+      "status": "drafted"
+    }
+  ],
+  "gate8_first_definition": {
+    "status": "drafted",
+    "note": "本课新术语首现即定义：大量元素/微量元素@b11.1.1-p1、结合水/自由水@b11.1.1-p2（先认词行内定义；static自查 P14-S13 PASS）。"
+  },
+  "gate9_target_check": {
+    "status": "drafted",
+    "note": "本课无深链；无未生产课号（static自查 P14-S12 PASS）。"
+  },
+  "gate11_quiz": {
+    "status": "drafted",
+    "note": "本课无 kind:quiz 页；元素/水/无机盐在 b11.1.6-p1 Q1 机判覆盖。"
+  },
+  "expert_review": {
+    "status": "final_passed",
+    "verdict": "final_passed",
+    "signed_by": "生物学科专家队",
+    "signed_at": "2026-10-19",
+    "fails": 0,
+    "warns_disposed": [],
+    "pending_rework": [],
+    "note": "红线④微量元素口径逐字在位（b11.1.1-p3 trap）；门禁⑧大量元素/微量元素/结合水/自由水先认词；百分比\"小学学过的\"奠基写法合规；\"教学示意数据（非实测）\"声明在位。FAIL 0。",
+    "report": "~/workspace/bio-audit/batch-p14-expert/REVIEW-REPORT.md",
+    "resign_at": "2026-10-19",
+    "resign_note": "R1 关闭：专家队实物复查 b11.js 第 204 行，note 文本为\"回填链：小肠（b05.1.3）→肺泡（b06.1.1）→鱼鳃（b09.2.1）→蛋白质（本页）。\"，四站齐全（预告源小肠→a1 肺泡→a2 鱼鳃→a3 本页蛋白质）。node --check 通过；b11.1.3-p2 字数 binding 口径复算 234 ≤300。"
+  }
+}
