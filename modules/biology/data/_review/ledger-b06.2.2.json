@@ -1,0 +1,37 @@
+{
+  "schema": "biology-review-ledger/1.0",
+  "chapter": "b06",
+  "lesson": "b06.2.2",
+  "written_at": "2026-10-19",
+  "written_by": "生物 P9 生产队（蓝队数据工程 + 内容撰写）",
+  "notes": "p1 体循环/肺循环路径+双循环路径闯关（window.BIO_B06 内联实现：从右心室出发按序点选10站；不立B13，任务书上限1个、优先复用现有原语；闯关记录会话内有效、不写localStorage；BIO-R32声明常驻）/p2 收缩压/舒张压首现即定义+正常范围意识（不做诊断暗示）+心率+mathlink代数ch00数量级奠基/p3 误区专治\"体循环肺循环先后进行\"→同时进行。",
+  "announcements": [],
+  "frozen_refs": [
+    {
+      "id": "b06.2.2-f1",
+      "kind": "frozen_copy",
+      "note": "p1 闯关图常驻\"模式图：非等比、非实物\"逐字（static自查 T-BIO-R32 PASS；缺=FAIL）。",
+      "ref": "BIO-R32",
+      "status": "drafted"
+    }
+  ],
+  "gate8_first_definition": {
+    "status": "drafted",
+    "note": "本课新术语首现即定义：收缩压/舒张压@b06.2.2-p2（先认词行内定义；static自查 T-门禁⑧ PASS）。"
+  },
+  "gate9_target_check": {
+    "status": "drafted",
+    "note": "深链 1 处（p2 mathlink→代数 ch00；XLINK_MATH\"代数 ch00\"→ch00-u1-l1-p1 在表；奠基非虚假奠基；static自查 T-门禁⑨ PASS）。"
+  },
+  "gate11_quiz": {
+    "status": "drafted",
+    "note": "本课无 kind:quiz 页；双循环同时进行在 b06.2.4-p2 Q2 机判覆盖。"
+  },
+  "expert_review": {
+    "reviewer": "生物学科专家队",
+    "reviewed_at": "2026-10-19",
+    "report": "~/workspace/bio-audit/batch-p9-expert/RESIGN-NOTE.md",
+    "verdict": "final_passed",
+    "conclusion": "返工复核 PASS：W1–W12+WARN-E1 逐项在场"
+  }
+}

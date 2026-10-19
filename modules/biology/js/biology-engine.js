@@ -2112,6 +2112,12 @@ function renderPunnettLab(params, wid) {
    * 速率模型（示意）：rate = f(light)×g(co2)×h(temp)，三段饱和型
    * 示意函数；纵轴一律相对值，常驻 relativeNote（B-F4，删=FAIL）；
    * "主要限制因素"提示写"当前短板"，不许写"唯一原因"。
+   * P9 回填升级（2026-10-19）：新增可选 params.insights（教学
+   * 提示条数组；不传则无提示条，b03.1.5 落点行为与 P7 一致）。
+   * insights 项：{type:"tempHigh",at:35,text:"…",href:"#b13.1.2",
+   * linkText:"…"} / {type:"lightHighCo2Low",lightAt:80,co2At:30,
+   * text:"…"}。样式全内联（--bio-* 变量），无新增 css 依赖
+   * （B10 先例）；落点 b14.1.4-p1。
    * ============================================================ */
   var B4_REL_NOTE = "相对值（非实测数据）";
 
@@ -2123,7 +2129,17 @@ function renderPunnettLab(params, wid) {
       if (o.init < o.min || o.init > o.max) return name + " init 越界";
       return null;
     }
-    return slider(params.light, "light") || slider(params.co2, "co2") || slider(params.temp, "temp");
+    var serr = slider(params.light, "light") || slider(params.co2, "co2") || slider(params.temp, "temp");
+    if (serr) return serr;
+    /* P9：insights 可选；传了必须为数组，项必须有 type 字符串 */
+    if (params.insights != null) {
+      if (!Array.isArray(params.insights)) return "insights 须为数组";
+      for (var i = 0; i < params.insights.length; i++) {
+        if (!params.insights[i] || typeof params.insights[i].type !== "string")
+          return "insights[" + i + "] 缺 type";
+      }
+    }
+    return null;
   }
 
   /* 三段饱和型示意函数（教学示意，非真实光合动力学模型） */
@@ -2141,6 +2157,8 @@ function renderPunnettLab(params, wid) {
     var relNote = params.relativeNote || B4_REL_NOTE;
     var showCurve = params.showCurve !== false;
     var limitHint = params.limitHint !== false;
+    /* P9 回填升级：可选教学提示条（不传则无，b03.1.5 行为不变） */
+    var insights = Array.isArray(params.insights) ? params.insights : [];
 
     var root = el("section", "bio-b4");
     root.setAttribute("aria-label", "光合速率调控沙盘");
@@ -2209,6 +2227,11 @@ function renderPunnettLab(params, wid) {
     read.appendChild(mathBox); read.appendChild(limitBadge);
     root.appendChild(read);
 
+    /* P9 回填升级：教学提示条容器（样式全内联，无新增 css 依赖） */
+    var insightBox = document.createElement("div");
+    insightBox.style.display = "none";
+    root.appendChild(insightBox);
+
     /* 曲线画布 */
     var cv = document.createElement("canvas");
     cv.className = "bio-b4-curve";
@@ -2229,9 +2252,45 @@ function renderPunnettLab(params, wid) {
       return cands[mi][0];
     }
 
+    /* P9 回填升级：按当前滑块状态评估 insights 提示条 */
+    function renderInsights() {
+      insightBox.innerHTML = "";
+      var shown = false;
+      insights.forEach(function (ins) {
+        var hit = false;
+        if (ins.type === "tempHigh" && typeof ins.at === "number") {
+          hit = state.temp >= ins.at;
+        } else if (ins.type === "lightHighCo2Low") {
+          var la = (typeof ins.lightAt === "number") ? ins.lightAt : 80;
+          var ca = (typeof ins.co2At === "number") ? ins.co2At : 30;
+          hit = state.light >= la && state.co2 <= ca;
+        }
+        if (!hit) return;
+        shown = true;
+        var d = document.createElement("div");
+        d.setAttribute("style", "font-size:0.95rem;line-height:1.6;border:2px solid var(--bio-target);" +
+          "border-radius:10px;padding:8px 12px;margin:8px 0;background:var(--bio-panel);color:var(--bio-text)");
+        var t = document.createElement("div");
+        t.textContent = "💡 " + (ins.text || "");
+        d.appendChild(t);
+        if (ins.href) {
+          var wrap = document.createElement("div");
+          var a = document.createElement("a");
+          a.href = ins.href;
+          a.textContent = ins.linkText || ins.href;
+          a.setAttribute("style", "color:var(--bio-known)");
+          wrap.appendChild(a);
+          d.appendChild(wrap);
+        }
+        insightBox.appendChild(d);
+      });
+      insightBox.style.display = shown ? "" : "none";
+    }
+
     function draw() {
       var L = state.light, C = state.co2, T = state.temp;
       var rate = b4Rate(L, C, T);
+      renderInsights();
       /* 读数（MathML） */
       mathBox.innerHTML = "<math><mtext>光合速率（相对值）</mtext><mo>=</mo><mn>" + rate + "</mn></math>";
       /* 短板徽章：写"当前短板"，不许写"唯一原因" */

@@ -1,0 +1,37 @@
+{
+  "schema": "biology-review-ledger/1.0",
+  "chapter": "b06",
+  "lesson": "b06.2.1",
+  "written_at": "2026-10-19",
+  "written_by": "生物 P9 生产队（蓝队数据工程 + 内容撰写）",
+  "notes": "p1 血液组成（血浆+红细胞/白细胞/血小板；血红蛋白首现即定义负责运氧；哺乳动物成熟红细胞无核）/p2 三种血管对比表（动脉/静脉/毛细血管：管壁/管腔/血流方向/功能；毛细血管形配其用再认）/p3 心脏四腔+剖面点选交互（左心室壁最厚；点腔室看壁厚/血流方向；BIO-R32声明常驻）/p4 瓣膜首现即定义（房室瓣/动脉瓣防倒流）+误区专治（肺静脉流动脉血按含氧量定义；左心室壁最厚）。",
+  "announcements": [],
+  "frozen_refs": [
+    {
+      "id": "b06.2.1-f1",
+      "kind": "frozen_copy",
+      "note": "p3 心脏剖面图常驻\"模式图：非等比、非实物\"逐字（static自查 T-BIO-R32 PASS；缺=FAIL）。",
+      "ref": "BIO-R32",
+      "status": "drafted"
+    }
+  ],
+  "gate8_first_definition": {
+    "status": "drafted",
+    "note": "本课新术语首现即定义：血红蛋白@b06.2.1-p1、瓣膜@b06.2.1-p4（先认词行内定义；static自查 T-门禁⑧ PASS）。"
+  },
+  "gate9_target_check": {
+    "status": "drafted",
+    "note": "本课无深链（b07/b08 未生产只纯文本前链；static自查 T-门禁⑨ PASS：零深链）。"
+  },
+  "gate11_quiz": {
+    "status": "drafted",
+    "note": "本课无 kind:quiz 页；血管/心脏/瓣膜/肺静脉在 b06.2.4-p1 Q3、p2 Q1 机判覆盖。"
+  },
+  "expert_review": {
+    "reviewer": "生物学科专家队",
+    "reviewed_at": "2026-10-19",
+    "report": "~/workspace/bio-audit/batch-p9-expert/RESIGN-NOTE.md",
+    "verdict": "final_passed",
+    "conclusion": "返工复核 PASS：W1–W12+WARN-E1 逐项在场"
+  }
+}

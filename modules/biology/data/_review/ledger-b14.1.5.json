@@ -1,0 +1,29 @@
+{
+  "schema": "biology-review-ledger/1.0",
+  "chapter": "b14",
+  "lesson": "b14.1.5",
+  "written_at": "2026-10-19",
+  "written_by": "生物 P9 生产队（蓝队数据工程 + 内容撰写）",
+  "notes": "p1 小结review+3 choice（梯度：色素带识记→O₂来源辨析→暗反应供能辨析）/p2 4 choice（吸收光谱→限制因素应用→化能合成作用→卡尔文循环步骤；综合/应用梯度）。",
+  "announcements": [],
+  "frozen_refs": [],
+  "gate8_first_definition": {
+    "status": "drafted",
+    "note": "本课无新术语（static自查 T-门禁⑧ PASS）。"
+  },
+  "gate9_target_check": {
+    "status": "drafted",
+    "note": "本课无深链（static自查 T-门禁⑨ PASS：零深链）。"
+  },
+  "gate11_quiz": {
+    "status": "drafted",
+    "note": "quiz 页题目数>0：p1 3 题、p2 4 题（门禁⑪ PASS；static自查 T-门禁⑪ PASS）。"
+  },
+  "expert_review": {
+    "reviewer": "生物学科专家队",
+    "reviewed_at": "2026-10-19",
+    "report": "~/workspace/bio-audit/batch-p9-expert/RESIGN-NOTE.md",
+    "verdict": "final_passed",
+    "conclusion": "返工复核 PASS：W1–W12+WARN-E1 逐项在场"
+  }
+}

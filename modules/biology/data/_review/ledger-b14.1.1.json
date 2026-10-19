@@ -1,0 +1,44 @@
+{
+  "schema": "biology-review-ledger/1.0",
+  "chapter": "b14",
+  "lesson": "b14.1.1",
+  "written_at": "2026-10-19",
+  "written_by": "生物 P9 生产队（蓝队数据工程 + 内容撰写）",
+  "notes": "p1 纸层析实验（四条色素带：胡萝卜素/叶黄素/叶绿素a/b；三原则落点：对照/单一变量/重复；BIO-R45结论不超范围：只证明四条带、不许推出能量转换机制）/p2 色素分离虚拟实验（滤纸条展开三步动画；BIO-R35\"虚拟实验：现实中须××\"逐页写实：层析液有机溶剂注意通风远离明火）/p3 吸收光谱（叶绿素主吸红光和蓝紫光；绿光吸收最少；误区专治\"只吸收绿光\"）。",
+  "announcements": [],
+  "frozen_refs": [
+    {
+      "id": "b14.1.1-f1",
+      "kind": "frozen_copy",
+      "note": "p2 常驻\"虚拟实验：现实中须用层析液（有机溶剂，注意通风、远离明火），规范取用药品\"（BIO-R35；××逐页写实；static自查 PASS）。",
+      "ref": "BIO-R35",
+      "status": "drafted"
+    },
+    {
+      "id": "b14.1.1-f2",
+      "kind": "frozen_copy",
+      "note": "p1 BIO-R45 结论边界：\"这个实验只证明绿叶里有四种色素…不许推出它们怎么把光能变成化学能\"（static自查 PASS）。",
+      "ref": "BIO-R45类推",
+      "status": "drafted"
+    }
+  ],
+  "gate8_first_definition": {
+    "status": "drafted",
+    "note": "本课无门禁⑧清单新术语（色素名非⑧清单项；页内均配颜色/位置说明；static自查 T-门禁⑧ PASS）。"
+  },
+  "gate9_target_check": {
+    "status": "drafted",
+    "note": "本课无深链（static自查 T-门禁⑨ PASS：零深链）。"
+  },
+  "gate11_quiz": {
+    "status": "drafted",
+    "note": "本课无 kind:quiz 页；色素带/吸收光谱在 b14.1.5-p1 Q1、p2 Q1 机判覆盖。"
+  },
+  "expert_review": {
+    "reviewer": "生物学科专家队",
+    "reviewed_at": "2026-10-19",
+    "report": "~/workspace/bio-audit/batch-p9-expert/RESIGN-NOTE.md",
+    "verdict": "final_passed",
+    "conclusion": "返工复核 PASS：W1–W12+WARN-E1 逐项在场"
+  }
+}

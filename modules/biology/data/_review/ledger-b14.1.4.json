@@ -1,0 +1,55 @@
+{
+  "schema": "biology-review-ledger/1.0",
+  "chapter": "b14",
+  "lesson": "b14.1.4",
+  "written_at": "2026-10-19",
+  "written_by": "生物 P9 生产队（蓝队数据工程 + 内容撰写）",
+  "notes": "p1 三因素+B4回填升级（photosyn-sandbox传insights：tempHigh≥35℃提示\"温度太高，酶活性下降——不是越高越好\"+认旧友#b13.1.2；lightHighCo2Low提示综合作用抓短板；曲线读图直观版不讲函数定义；纯文本预告\"学完 6.1 后回填认旧友\"）/p2 温室三招（补光/增施CO₂/昼夜温差）+相对值注明/p3 化能合成作用首现即定义（能量来源化学能非光能；硝化细菌）+误区专治\"单因论\"→综合作用抓主要限制因素。",
+  "announcements": [
+    {
+      "id": "b14.1.4-a1",
+      "kind": "foretell",
+      "status": "drafted",
+      "text": "学完 6.1 后回填认旧友——到时候回来看看，这条\"先升后平\"的曲线就是函数图像。",
+      "source": "b14.1.4-p1 纯文本预告",
+      "echo_target": "代数 6.1（math 模块）",
+      "echo_text": "",
+      "note": "门禁⑩：预告措辞\"学完6.1后回填认旧友\"与兑现关键词一致；门禁⑫\"代数6.1\"vs\"代数ch06\"冲突沿用任务书口径，已转CEO裁决（PROD-REPORT诚实缺口）。"
+    }
+  ],
+  "frozen_refs": [
+    {
+      "id": "b14.1.4-f1",
+      "kind": "frozen_copy",
+      "note": "B4 纵轴一律相对值，常驻\"示意曲线（非实测数据）\"（BIO-R42/BIO-R70；删=FAIL；static自查 PASS）。",
+      "ref": "BIO-R42/BIO-R70",
+      "status": "drafted"
+    },
+    {
+      "id": "b14.1.4-f2",
+      "kind": "frozen_copy",
+      "note": "限制因素提示逐字\"当前××是短板——生产上先补短板\"（B4引擎短板徽章；static自查 PASS）。",
+      "ref": "interactions§B4",
+      "status": "drafted"
+    }
+  ],
+  "gate8_first_definition": {
+    "status": "drafted",
+    "note": "本课新术语首现即定义：化能合成作用@b14.1.4-p3（先认词行内定义；static自查 T-门禁⑧ PASS）。"
+  },
+  "gate9_target_check": {
+    "status": "drafted",
+    "note": "深链：B4 insights内认旧友→b13.1.2（目标已生产；引擎内<a href=\"#b13.1.2\">深链；static自查 T-门禁⑨ PASS）。纯文本预告\"代数 6.1\"不挂深链（门禁⑩：预告不挂载；门禁⑫口径待裁决）。"
+  },
+  "gate11_quiz": {
+    "status": "drafted",
+    "note": "本课无 kind:quiz 页；限制因素/化能合成作用在 b14.1.5-p2 Q2/Q3 机判覆盖。"
+  },
+  "expert_review": {
+    "reviewer": "生物学科专家队",
+    "reviewed_at": "2026-10-19",
+    "report": "~/workspace/bio-audit/batch-p9-expert/RESIGN-NOTE.md",
+    "verdict": "final_passed",
+    "conclusion": "返工复核 PASS：W1–W12+WARN-E1 逐项在场"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "schema": "biology-review-ledger/1.0",
+  "chapter": "b14",
+  "lesson": "b14.1.2",
+  "written_at": "2026-10-19",
+  "written_by": "生物 P9 生产队（蓝队数据工程 + 内容撰写）",
+  "notes": "p1 类囊体/光反应首现即定义（类囊体薄膜：色素所在地、光反应场所；叶绿体模式图+BIO-R32声明）/p2 水的光解（O₂\"来自水\"逐字口径；同位素标记证据；光能→ATP/NADPH能量快递员）/p3 光反应三步动画（电子传递链直觉版）+误区专治\"O₂来自CO₂\"+mathlink认旧友回b03.1.2（初中版结论的严格化）。",
+  "announcements": [],
+  "frozen_refs": [
+    {
+      "id": "b14.1.2-f1",
+      "kind": "frozen_copy",
+      "note": "p2/p3 O₂来源只许写\"来自水\"（\"来自CO₂\"=FAIL；static自查 PASS）。",
+      "ref": "课程图纸",
+      "status": "drafted"
+    },
+    {
+      "id": "b14.1.2-f2",
+      "kind": "frozen_copy",
+      "note": "p1 叶绿体图常驻\"模式图：非等比、非实物\"逐字（static自查 T-BIO-R32 PASS）。",
+      "ref": "BIO-R32",
+      "status": "drafted"
+    }
+  ],
+  "gate8_first_definition": {
+    "status": "drafted",
+    "note": "本课新术语首现即定义：类囊体/光反应@b14.1.2-p1（先认词行内定义；static自查 T-门禁⑧ PASS）。"
+  },
+  "gate9_target_check": {
+    "status": "drafted",
+    "note": "深链 1 处（p3 mathlink→b03.1.2；目标已生产；static自查 T-门禁⑨ PASS）。"
+  },
+  "gate11_quiz": {
+    "status": "drafted",
+    "note": "本课无 kind:quiz 页；O₂来源/光反应供能在 b14.1.5-p1 Q2/Q3 机判覆盖。"
+  },
+  "expert_review": {
+    "reviewer": "生物学科专家队",
+    "reviewed_at": "2026-10-19",
+    "report": "~/workspace/bio-audit/batch-p9-expert/RESIGN-NOTE.md",
+    "verdict": "final_passed",
+    "conclusion": "返工复核 PASS：W1–W12+WARN-E1 逐项在场"
+  }
+}

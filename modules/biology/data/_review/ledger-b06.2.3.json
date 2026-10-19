@@ -1,0 +1,37 @@
+{
+  "schema": "biology-review-ledger/1.0",
+  "chapter": "b06",
+  "lesson": "b06.2.3",
+  "written_at": "2026-10-19",
+  "written_by": "生物 P9 生产队（蓝队数据工程 + 内容撰写）",
+  "notes": "p1 肾单位/原尿/重吸收首现即定义+尿形成两步演示（肾小球滤过→原尿；肾小管重吸收→尿液；肾单位模式图+BIO-R32声明）/p2 血浆vs原尿vs尿液成分对比表+误区专治\"尿液=原尿浓缩版\"→重吸收有选择（全部葡萄糖、大部分水被重吸收）/p3 排尿的意义（排出废物+调节水盐平衡；排泄三条途径）。",
+  "announcements": [],
+  "frozen_refs": [
+    {
+      "id": "b06.2.3-f1",
+      "kind": "frozen_copy",
+      "note": "p1 肾单位图常驻\"模式图：非等比、非实物\"逐字（static自查 T-BIO-R32 PASS；缺=FAIL）。",
+      "ref": "BIO-R32",
+      "status": "drafted"
+    }
+  ],
+  "gate8_first_definition": {
+    "status": "drafted",
+    "note": "本课新术语首现即定义：肾单位/原尿/重吸收@b06.2.3-p1（先认词行内定义；static自查 T-门禁⑧ PASS）。"
+  },
+  "gate9_target_check": {
+    "status": "drafted",
+    "note": "本课无深链（static自查 T-门禁⑨ PASS：零深链）。"
+  },
+  "gate11_quiz": {
+    "status": "drafted",
+    "note": "本课无 kind:quiz 页；重吸收选择性在 b06.2.4-p2 Q3 机判覆盖。"
+  },
+  "expert_review": {
+    "reviewer": "生物学科专家队",
+    "reviewed_at": "2026-10-19",
+    "report": "~/workspace/bio-audit/batch-p9-expert/RESIGN-NOTE.md",
+    "verdict": "final_passed",
+    "conclusion": "返工复核 PASS：W1–W12+WARN-E1 逐项在场"
+  }
+}

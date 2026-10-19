@@ -1,0 +1,55 @@
+{
+  "schema": "biology-review-ledger/1.0",
+  "chapter": "b06",
+  "lesson": "b06.1.1",
+  "written_at": "2026-10-19",
+  "written_by": "生物 P9 生产队（蓝队数据工程 + 内容撰写）",
+  "notes": "p1 呼吸道（鼻/咽/喉/气管/支气管；温暖/湿润/清洁三暖分工；呼吸道模式图+BIO-R32声明）/p2 肺泡形配其用三条（壁薄一层细胞/弹性/毛细血管网；肺泡首现即定义；辨析①回填兑现b05.1.3-a1；mathlink认旧友b05.1.3第1页；肺泡模式图+BIO-R32声明）/p3 肺通气首现即定义+呼吸运动因果链三步演示（呼吸肌→胸廓→肺；专治\"吸气时肺自己胀大\"因果别反）/p4 肺泡内/组织内气体交换切换演示+专治\"呼吸=呼吸作用\"（BIO-R01：呼吸=肺通气，呼吸作用=细胞内氧化分解）。",
+  "announcements": [
+    {
+      "id": "b05.1.3-a1",
+      "kind": "fulfilled",
+      "status": "fulfilled",
+      "text": "形配其用还会回来——肺泡（b06.1.1 细讲），到时候认旧友。",
+      "source": "b05.1.3-p3 纯文本预告（foretell）",
+      "echo_target": "b06.1.1-p2 实物定位：mathlink\"认旧友：b05.1.3 第 1 页——小肠形配其用（辨析①立靶）…肺泡是辨析①回填链第一站\"",
+      "echo_text": "",
+      "note": "跨批回填兑现：预告关键词\"形配其用/认旧友\"与兑现页措辞互相可识别（门禁⑩）；b06.1.1为兑现不记drafted。"
+    }
+  ],
+  "frozen_refs": [
+    {
+      "id": "b06.1.1-f1",
+      "kind": "frozen_copy",
+      "note": "p1/p2 结构示意图角落常驻\"模式图：非等比、非实物\"逐字（static自查 T-BIO-R32 PASS；缺=FAIL）。",
+      "ref": "BIO-R32",
+      "status": "drafted"
+    },
+    {
+      "id": "b06.1.1-f2",
+      "kind": "frozen_copy",
+      "note": "p4 BIO-R01 口径：\"呼吸\"只用于肺通气语境，\"呼吸作用\"=细胞内氧化分解（static自查 PASS）。",
+      "ref": "BIO-R01",
+      "status": "drafted"
+    }
+  ],
+  "gate8_first_definition": {
+    "status": "drafted",
+    "note": "本课新术语首现即定义：肺泡@b06.1.1-p2、肺通气@b06.1.1-p3（先认词行内定义；static自查 T-门禁⑧ PASS）。"
+  },
+  "gate9_target_check": {
+    "status": "drafted",
+    "note": "深链 1 处（p2 mathlink→b05.1.3；目标已生产；XLINK_BIO P9 补丁纳 b06 后可点；static自查 T-门禁⑨ PASS）。"
+  },
+  "gate11_quiz": {
+    "status": "drafted",
+    "note": "本课无 kind:quiz 页；肺泡/因果链/气体交换/BIO-R01 在 b06.2.4-p1 Q1/Q2、p2 Q4 机判覆盖。"
+  },
+  "expert_review": {
+    "reviewer": "生物学科专家队",
+    "reviewed_at": "2026-10-19",
+    "report": "~/workspace/bio-audit/batch-p9-expert/RESIGN-NOTE.md",
+    "verdict": "final_passed",
+    "conclusion": "返工复核 PASS：W1–W12+WARN-E1 逐项在场"
+  }
+}
