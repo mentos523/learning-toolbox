@@ -1,0 +1,38 @@
+{
+  "schema": "biology-review-ledger/1.0",
+  "chapter": "b12",
+  "lesson": "b12.1.4",
+  "written_at": "2026-10-19",
+  "written_by": "生物 P15 生产队",
+  "notes": "p1 核膜/核仁/染色质+染色质↔染色体形态切换（BIO_B12.chromToggle；模式图/示意声明）+误区专治\"染色质和染色体是两种物质\"→同一物质两种形态/p2 细胞核是遗传信息库+生物膜系统（膜的联系，见分泌蛋白旅程）/p3 模式图 vs 电镜实物图声明（审计清单第 7 条：模式图声明常驻+实物图注明\"实物图\"；无真实电镜照片，不伪造实物图）。",
+  "announcements": [],
+  "frozen_refs": [
+    {
+      "id": "b12.1.4-f1",
+      "kind": "frozen_copy",
+      "note": "模式图声明\"模式图：非等比、非实物\"（b12.1.4-p1/p3；BIO-R32；static自查 P15-S04 PASS）。",
+      "ref": "BIO-R32",
+      "status": "drafted"
+    }
+  ],
+  "gate8_first_definition": {
+    "status": "drafted",
+    "note": "本课新术语首现即定义：核膜/核仁/染色质@b12.1.4-p1；生物膜系统@b12.1.4-p2（先认词行内定义；static自查 P15-S08 PASS）。"
+  },
+  "gate9_target_check": {
+    "status": "drafted",
+    "note": "本课无深链（static自查 P15-S09 PASS）。"
+  },
+  "gate11_quiz": {
+    "status": "drafted",
+    "note": "本课无 kind:quiz 页；染色质/染色体关系在 b12.1.6-p2 Q1 机判覆盖。"
+  },
+  "expert_review": {
+    "status": "final_passed",
+    "reviewer": "生物学科专家队",
+    "reviewed_at": "2026-10-19",
+    "verdict": "final_passed",
+    "note": "染色质口径正确（同一物质两种形态；trap@b12.1.4-p1；B-M1）；b12.1.4-p3模式图vs电镜实物图声明在位（审计清单第7条；无真实照片不伪造）；模式图声明p1/p3在位（BIO-R32）；门禁⑧核膜/核仁/染色质@p1、生物膜系统@p2首现即定义。专家FAIL 0。"
+  },
+  "foretell": null
+}

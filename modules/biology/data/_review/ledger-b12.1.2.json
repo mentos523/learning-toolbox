@@ -1,0 +1,38 @@
+{
+  "schema": "biology-review-ledger/1.0",
+  "chapter": "b12",
+  "lesson": "b12.1.2",
+  "written_at": "2026-10-19",
+  "written_by": "生物 P15 生产队",
+  "notes": "p1 直觉页：磷脂三明治拖拽（BIO_B12.membraneDemo/pointer 拖拽；模式图声明；示意声明）+T1 边界句\"\"三明治\"只讲排布样子、不讲\"静止\"——膜是流动的\"/p2 脚手架：荧光标记小鼠—人细胞融合实验三步（BIO_B12.go('fus')；模式图/示意声明）+误区专治\"静态三明治\"→流动的/p3 严格页：蛋白质镶嵌/嵌入/贯穿三种方式+选择透过性（模式图声明；边界明示）。",
+  "announcements": [],
+  "frozen_refs": [
+    {
+      "id": "b12.1.2-f1",
+      "kind": "frozen_copy",
+      "note": "T1 边界句逐字（b12.1.2-p1；BIO-R09；缺=FAIL；static自查 P15-S04 PASS）。",
+      "ref": "BIO-R09",
+      "status": "drafted"
+    }
+  ],
+  "gate8_first_definition": {
+    "status": "drafted",
+    "note": "本课新术语首现即定义：流动镶嵌模型@b12.1.2-p1、选择透过性@b12.1.2-p3（先认词行内定义；static自查 P15-S08 PASS）。"
+  },
+  "gate9_target_check": {
+    "status": "drafted",
+    "note": "本课无深链（static自查 P15-S09 PASS）。"
+  },
+  "gate11_quiz": {
+    "status": "drafted",
+    "note": "本课无 kind:quiz 页；膜相关辨析在 b12.1.6-p2 易错小结复述。"
+  },
+  "expert_review": {
+    "status": "final_passed",
+    "reviewer": "生物学科专家队",
+    "reviewed_at": "2026-10-19",
+    "verdict": "final_passed",
+    "note": "T1边界句逐字在位@b12.1.2-p1（BIO-R09）；结构口径全批合规；模式图声明p1/p2/p3在位（BIO-R32）；示意声明仅动画页；门禁⑧流动镶嵌模型@p1、选择透过性@p3首现即定义；分层（直觉p1→脚手架p2→严格p3）+边界明示双保险落实。专家FAIL 0。"
+  },
+  "foretell": null
+}

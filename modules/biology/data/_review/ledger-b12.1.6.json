@@ -1,0 +1,30 @@
+{
+  "schema": "biology-review-ledger/1.0",
+  "chapter": "b12",
+  "lesson": "b12.1.6",
+  "written_at": "2026-10-19",
+  "written_by": "生物 P15 生产队",
+  "notes": "p1 review（全章小结）+3 choice（Q1 细胞学说建立者/Q2 叶绿体部位/Q3 水分子进出方式）/p2 review（易错专治小结）+3 choice（Q1 染色质染色体关系/Q2 质壁分离原生质层/Q3 嵴与基粒形配其用）；题型梯度 review+choice（static自查 P15-S11 PASS）。",
+  "announcements": [],
+  "frozen_refs": [],
+  "gate8_first_definition": {
+    "status": "drafted",
+    "note": "本课无新术语（小结页复用已有术语；static自查 P15-S08 PASS）。"
+  },
+  "gate9_target_check": {
+    "status": "drafted",
+    "note": "本课无 mathlink 深链；review 纯文本复述课号（b05.1.3/b12.1.x，均为已产或本章；static自查 P15-S09 PASS）。"
+  },
+  "gate11_quiz": {
+    "status": "drafted",
+    "note": "本课 2 quiz 页：p1 review+3 choice / p2 review+3 choice；题目数>0；题型梯度符合（门禁⑪）。"
+  },
+  "expert_review": {
+    "status": "final_passed",
+    "reviewer": "生物学科专家队",
+    "reviewed_at": "2026-10-19",
+    "verdict": "final_passed",
+    "note": "两quiz页均为review+3 choice（题型梯度符合门禁⑪）；6道choice答案索引亲手核对全部正确（Q1=1学说建立者/Q2=1叶绿体部位/Q3=1水进出方式/Q4=1染色质染色体关系/Q5=1质壁分离/Q6=1形配其用），tip页号准确；误区句只在纠错语境；门禁⑫无数学引用。专家FAIL 0。"
+  },
+  "foretell": null
+}

@@ -1,0 +1,71 @@
+{
+  "schema": "biology-review-ledger/1.0",
+  "chapter": "b12",
+  "lesson": "b12.1.3",
+  "written_at": "2026-10-19",
+  "written_by": "生物 P15 生产队",
+  "notes": "p1 线粒体（内膜嵴→有氧呼吸）+叶绿体（基粒→光合）+辨析①回填兑现 b05.1.3-a4（\"认旧友：形配其用——结构与功能相适应\"回填句+mathlink 深链#b05.1.3；回填链四站闭环）/p2 内质网/高尔基体/核糖体/溶酶体/液泡/中心体+共有 vs 特有+分泌蛋白旅程动画（BIO_B12.go('sec')；模式图/示意声明）/p3 B1 cell-builder 内联实现（§B1 行为契约：11 结构卡 func 一句话写全/5 zone/动植物模式切换/diagramNote 冻结；biology-engine.js 零改动；B1 渲染器在远端基线不存在，见 PROD-REPORT 诚实缺口）+误区专治\"叶绿体所有植物细胞都有\"→只在绿色部分+后续预告 2 条（→b15.1.1/→b14.1.1，mathlink 深链，预告措辞）。",
+  "announcements": [
+    {
+      "id": "b12.1.3-a1",
+      "kind": "foretell",
+      "status": "drafted",
+      "text": "预告：线粒体→b15.1.1 有氧呼吸细讲（b12.1.3-p3 纯文本预告+mathlink 深链）。",
+      "source": "b12.1.3-p3 纯文本预告（后续预告）",
+      "echo_target": "b15.1.1（已产）",
+      "echo_text": "",
+      "note": "门禁⑩：方向铁律，预告措辞，非认旧友。"
+    },
+    {
+      "id": "b12.1.3-a2",
+      "kind": "foretell",
+      "status": "drafted",
+      "text": "预告：叶绿体→b14.1.1 捕获光能的色素细讲（b12.1.3-p3 纯文本预告+mathlink 深链）。",
+      "source": "b12.1.3-p3 纯文本预告（后续预告）",
+      "echo_target": "b14.1.1（已产）",
+      "echo_text": "",
+      "note": "门禁⑩：方向铁律，预告措辞，非认旧友。"
+    }
+  ],
+  "frozen_refs": [
+    {
+      "id": "b12.1.3-f1",
+      "kind": "frozen_copy",
+      "note": "\"认旧友：形配其用——结构与功能相适应\"回填句逐字（b12.1.3-p1；BIO-R11；兑现 b05.1.3-a4；static自查 P15-S05 PASS）。",
+      "ref": "BIO-R11",
+      "status": "drafted"
+    },
+    {
+      "id": "b12.1.3-f2",
+      "kind": "frozen_copy",
+      "note": "cell-builder diagramNote 冻结文案\"模式图：非等比、非实物\"常驻（b12.1.3-p3；B-F1/BIO-R32；static自查 P15-S04/S07 PASS）。",
+      "ref": "BIO-R32",
+      "status": "drafted"
+    }
+  ],
+  "gate8_first_definition": {
+    "status": "drafted",
+    "note": "本课新术语首现即定义：线粒体/嵴/叶绿体/基粒@b12.1.3-p1；内质网/高尔基体/核糖体/溶酶体/液泡/中心体@b12.1.3-p2（先认词行内定义；static自查 P15-S08 PASS）。"
+  },
+  "gate9_target_check": {
+    "status": "drafted",
+    "note": "深链 3 处（p1 mathlink→b05.1.3 辨析①回填认旧友；p3 mathlink→b15.1.1/b14.1.1 后续预告；课号均已生产；static自查 P15-S09 PASS）。"
+  },
+  "gate11_quiz": {
+    "status": "drafted",
+    "note": "本课无 kind:quiz 页；叶绿体口径在 b12.1.6-p1 Q2 机判覆盖。"
+  },
+  "expert_review": {
+    "status": "final_passed",
+    "reviewer": "生物学科专家队",
+    "reviewed_at": "2026-10-19",
+    "verdict": "final_passed",
+    "note": "a4五向互认全部亲手核实：预告原文经GitHub raw核对ledger-b05.1.3（a4仍drafted、未改动）；回填句\"认旧友：形配其用\"逐字@b12.1.3-p1（BIO-R11）；mathlink#b05.1.3在位；foretell=fulfilled证据与实物一致；\"形配其用\"9处逐字零改字（BIO-R10）；B1 11卡func全、5 zone、置灰/二次确认/徽章/diagramNote冻结与§B1契约一致（书面接受）；预告a1→b15.1.1、a2→b14.1.1 drafted（预告措辞）。专家FAIL 0。"
+  },
+  "foretell": {
+    "announcement_id": "b05.1.3-a4",
+    "status": "fulfilled",
+    "note": "b05.1.3-p3 纯文本预告（辨析①回填链：\"形配其用还会回来——线粒体嵴·叶绿体基粒（b12.1.3 细讲），到时候认旧友。\"）→本批 b12.1.3-p1 以\"辨析①回填：线粒体内膜折叠成嵴、叶绿体类囊体堆叠成基粒——增大膜面积，适合大量进行有氧呼吸、光合作用。认旧友：形配其用——结构与功能相适应\"回填句 + mathlink 深链 b05.1.3 兑现；预告与兑现关键词互相可识别（形配其用/认旧友/线粒体/叶绿体/嵴/基粒/b05.1.3/b12.1.3）。ledger-b05.1.3 未改动（台账只读）。",
+    "evidence": "modules/biology/data/b12.js#b12.1.3-p1：text 块「辨析①回填：线粒体内膜折叠成嵴、叶绿体类囊体堆叠成基粒——增大膜面积，适合大量进行有氧呼吸、光合作用。认旧友：形配其用——结构与功能相适应（还记得小肠吗？小肠绒毛增大吸收面积，适合吸收）」+ mathlink 块「认旧友：b05.1.3——小肠 5 处结构\"形配其用\"（立靶页）；线粒体嵴、叶绿体基粒增大膜面积，同样\"形配其用\"。」"
+  }
+}

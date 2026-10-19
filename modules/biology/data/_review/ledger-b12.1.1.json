@@ -1,0 +1,30 @@
+{
+  "schema": "biology-review-ledger/1.0",
+  "chapter": "b12",
+  "lesson": "b12.1.1",
+  "written_at": "2026-10-19",
+  "written_by": "生物 P15 生产队",
+  "notes": "p1 施莱登+施旺共同建立+内容三点+误区专治\"施莱登一人提出\"→共同建立、后人修正补充/p2 细胞学说建立时间轴（BIO_B12.go('tl')四步：虎克1665/施莱登1838/施旺1839/魏尔肖1858\"一切细胞来自细胞\"）+意义与发展。",
+  "announcements": [],
+  "frozen_refs": [],
+  "gate8_first_definition": {
+    "status": "drafted",
+    "note": "本课新术语首现即定义：细胞学说@b12.1.1-p1（先认词行内定义；static自查 P15-S08 PASS）。"
+  },
+  "gate9_target_check": {
+    "status": "drafted",
+    "note": "本课无深链（static自查 P15-S09 PASS）。"
+  },
+  "gate11_quiz": {
+    "status": "drafted",
+    "note": "本课无 kind:quiz 页；细胞学说建立者在 b12.1.6-p1 Q1 机判覆盖。"
+  },
+  "expert_review": {
+    "status": "final_passed",
+    "reviewer": "生物学科专家队",
+    "reviewed_at": "2026-10-19",
+    "verdict": "final_passed",
+    "note": "细胞学说口径正确（施莱登+施旺共同建立，后人修正补充；trap@b12.1.1-p1）；时间轴四步准确（虎克1665/施莱登1838/施旺1839/魏尔肖1858\"一切细胞来自细胞\"）；门禁⑧细胞学说首现即定义；无深链；无quiz页（b12.1.6-p1 Q1覆盖）。专家FAIL 0。"
+  },
+  "foretell": null
+}
