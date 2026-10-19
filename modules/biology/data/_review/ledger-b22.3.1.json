@@ -1,0 +1,28 @@
+{
+  "lesson": "b22.3.1",
+  "title": "特异性免疫",
+  "verdict": "passed",
+  "fail_count": 0,
+  "warns": [],
+  "author": "P13 协调者（专家视角草稿——非生物专家队署名）",
+  "final_passed": true,
+  "note": "生物学科专家队终审署名（2026-10-19）：7 份台账逐课独立复核通过，结论 pass，可放行推送队列（仍须 S1 全绿+发布稽核签字，见 STAGE-README）。原草稿文件 ledger-*.draft.json 保留不动。",
+  "date": "2026-10-19",
+  "status": "final_passed",
+  "review_history": [
+    {
+      "by": "生物学科专家队（终审人·独立评审）",
+      "date": "2026-10-19",
+      "result": "pass",
+      "stage": "final",
+      "basis": "门禁⑧ 抗原/抗体/记忆细胞@p2、靶细胞/效应T细胞/淋巴因子@p3 ✓；BIO-R07 抗体结合完整句（p2 正文+note 逐字）✓；T11 抱住仅直觉页（p1+note 边界）✓；B12 params branch=humoral/bindNote/vaccineLink ✓；引擎纠错卡在位 ✓；R32/R35 ✓",
+      "method": "程序化核验（22/22 SVG 声明；16 术语首现定义；深链/红线词/参考值逐字 grep）+ 全 25 页人工精读 + 真值口径 BIO-R01–R71/BIO-AX01 逐条比对 + 图纸 b22 对齐",
+      "corrections": 0,
+      "observations": [
+        "O1（建议·非阻断）：b22.3.1-p2 流程引入\"T 细胞/B 细胞/浆细胞\"标签，章内未显式定义（b08.1.3 仅定义淋巴细胞）。建议后续微批加一句桥接\"（B/T 细胞是两种淋巴细胞）\"。",
+        "O2（建议·非阻断）：\"处决\"用于 b22.3.1-p1 故事页与 B12 cellularCards.c3 why 提示；故事语域有边界注，建议 why 提示后续统一为严格词\"裂解\"。"
+      ],
+      "warn_disposition": "W1 explain-thin（回填/直觉页设计精简）书面接受；W2 肾小管+集合管已返工实物核验；W3/W4（B12 schema 扩展、新题型渲染器）为向后兼容扩展，已在 b22.js 头注释备案，转交互文档增补流程，不阻断"
+    }
+  ]
+}

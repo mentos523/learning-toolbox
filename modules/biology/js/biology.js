@@ -417,7 +417,7 @@
         ["7.2", "../math/index.html#p=ch07-u2-l1-p1"]
       ]
     };
-    var XLINK_BIO = { "b18.1.1": 1, "b18.1.2": 1, "b18.1.3": 1, "b18.1.4": 1, "b18.1.5": 1, "b16.1.1": 1, "b16.1.2": 1, "b16.1.3": 1, "b16.1.4": 1, "b16.1.5": 1, "b17.1.1": 1, "b17.1.2": 1, "b17.1.3": 1, "b17.1.4": 1, "b17.1.5": 1, "b19.1.1": 1, "b19.1.2": 1, "b19.1.3": 1, "b19.1.4": 1, "b19.1.5": 1, "b20.1.1": 1, "b20.1.2": 1, "b20.1.3": 1, "b20.1.4": 1, "b21.1.1": 1, "b21.1.2": 1, "b21.1.3": 1, "b21.1.4": 1, "b21.1.5": 1, "b03.1.1": 1, "b03.1.2": 1, "b03.1.3": 1, "b03.1.4": 1, "b03.1.5": 1, "b03.1.6": 1, "b05.1.1": 1, "b05.1.2": 1, "b05.1.3": 1, "b05.1.4": 1, "b13.1.1": 1, "b13.1.2": 1, "b13.1.3": 1, "b13.1.4": 1, "b06.1.1": 1, "b06.2.1": 1, "b06.2.2": 1, "b06.2.3": 1, "b06.2.4": 1, "b14.1.1": 1, "b14.1.2": 1, "b14.1.3": 1, "b14.1.4": 1, "b14.1.5": 1, "b07.1.1": 1, "b07.1.2": 1, "b07.1.3": 1, "b07.1.4": 1, "b07.1.5": 1, "b15.1.1": 1, "b15.1.2": 1, "b15.1.3": 1, "b15.1.4": 1, "b04.1.1": 1, "b04.1.2": 1, "b04.1.3": 1, "b04.1.4": 1, "b04.1.5": 1, "b04.1.6": 1, "b08.1.1": 1, "b08.1.2": 1, "b08.1.3": 1, "b08.1.4": 1, "b09.1.1": 1, "b09.1.2": 1, "b09.2.1": 1, "b09.2.2": 1, "b09.2.3": 1, "b09.2.4": 1 }; /* 本模块课号 → #课号；未生产课号不许入表（门禁⑨；P3 新增 b18.1.1/1.2/1.4/1.5；P4 新增 b19.1.1–1.5；P5 新增 b20.1.1–1.4；P6 新增 b21.1.1–1.5；P7 新增 b03.1.1–1.6；P8 新增 b05.1.1–1.4/b13.1.1–1.4；P9 新增 b06.1.1/b06.2.1–2.4/b14.1.1–1.5；P10 新增 b07.1.1–1.5/b15.1.1–1.4；P11 新增 b04.1.1–1.6/b08.1.1–1.4；P12 新增 b09.1.1–1.2/b09.2.1–2.4） */
+    var XLINK_BIO = { "b18.1.1": 1, "b18.1.2": 1, "b18.1.3": 1, "b18.1.4": 1, "b18.1.5": 1, "b16.1.1": 1, "b16.1.2": 1, "b16.1.3": 1, "b16.1.4": 1, "b16.1.5": 1, "b17.1.1": 1, "b17.1.2": 1, "b17.1.3": 1, "b17.1.4": 1, "b17.1.5": 1, "b19.1.1": 1, "b19.1.2": 1, "b19.1.3": 1, "b19.1.4": 1, "b19.1.5": 1, "b20.1.1": 1, "b20.1.2": 1, "b20.1.3": 1, "b20.1.4": 1, "b21.1.1": 1, "b21.1.2": 1, "b21.1.3": 1, "b21.1.4": 1, "b21.1.5": 1, "b03.1.1": 1, "b03.1.2": 1, "b03.1.3": 1, "b03.1.4": 1, "b03.1.5": 1, "b03.1.6": 1, "b05.1.1": 1, "b05.1.2": 1, "b05.1.3": 1, "b05.1.4": 1, "b13.1.1": 1, "b13.1.2": 1, "b13.1.3": 1, "b13.1.4": 1, "b06.1.1": 1, "b06.2.1": 1, "b06.2.2": 1, "b06.2.3": 1, "b06.2.4": 1, "b14.1.1": 1, "b14.1.2": 1, "b14.1.3": 1, "b14.1.4": 1, "b14.1.5": 1, "b07.1.1": 1, "b07.1.2": 1, "b07.1.3": 1, "b07.1.4": 1, "b07.1.5": 1, "b15.1.1": 1, "b15.1.2": 1, "b15.1.3": 1, "b15.1.4": 1, "b04.1.1": 1, "b04.1.2": 1, "b04.1.3": 1, "b04.1.4": 1, "b04.1.5": 1, "b04.1.6": 1, "b08.1.1": 1, "b08.1.2": 1, "b08.1.3": 1, "b08.1.4": 1, "b09.1.1": 1, "b09.1.2": 1, "b09.2.1": 1, "b09.2.2": 1, "b09.2.3": 1, "b09.2.4": 1, "b22.1.1": 1, "b22.1.2": 1, "b22.2.1": 1, "b22.2.2": 1, "b22.3.1": 1, "b22.3.2": 1, "b22.3.3": 1 }; /* 本模块课号 → #课号；未生产课号不许入表（门禁⑨；P3 新增 b18.1.1/1.2/1.4/1.5；P4 新增 b19.1.1–1.5；P5 新增 b20.1.1–1.4；P6 新增 b21.1.1–1.5；P7 新增 b03.1.1–1.6；P8 新增 b05.1.1–1.4/b13.1.1–1.4；P9 新增 b06.1.1/b06.2.1–2.4/b14.1.1–1.5；P10 新增 b07.1.1–1.5/b15.1.1–1.4；P11 新增 b04.1.1–1.6/b08.1.1–1.4；P12 新增 b09.1.1–1.2/b09.2.1–2.4；P13 新增 b22.1.1–b22.3.3） */
     function xlinkHref(token) {
       if (XLINK_BIO[token]) return "#" + token;
       var pid = XLINK_MATH[token];
@@ -539,6 +539,112 @@
         });
       }
       box.appendChild(btn);
+    }
+    else if (q.type === "judge") {
+      /* P13 新增：判断题（题型梯度）。answer: true=对 / false=错 */
+      box.appendChild(el("div", "bio-q-stem", esc(q.stem)));
+      var jopts = el("div", "bio-q-opts");
+      [["对", true], ["错", false]].forEach(function (pr) {
+        var b = el("button", "", pr[0]);
+        b.type = "button";
+        b.addEventListener("click", function () {
+          if (b.classList.contains("judged-ok")) return;
+          if (pr[1] === !!q.answer) {
+            b.classList.add("judged-ok");
+            say(true, "判断正确。", true);
+          } else {
+            wrong++;
+            b.classList.add("judged-bad");
+            say(false, "再想想。", true);
+          }
+        });
+        jopts.appendChild(b);
+      });
+      box.appendChild(jopts);
+    } else if (q.type === "match") {
+      /* P13 新增：配对题。pairs=[[左,右]...]（正确配对）；options=打乱的右项 */
+      box.appendChild(el("div", "bio-q-stem", esc(q.stem)));
+      var mrows = el("div", "bio-q-match");
+      var sels = [];
+      (q.pairs || []).forEach(function (pr) {
+        var row = el("div", "bio-q-matchrow", null);
+        row.appendChild(el("span", "bio-q-matchleft", esc(pr[0])));
+        var selHtml = '<select aria-label="为「' + esc(pr[0]) + '」选择配对项" style="min-height:44px;max-width:100%">' +
+          (q.options || []).map(function (op) {
+            return '<option value="' + esc(op) + '">' + esc(op) + "</option>";
+          }).join("") + "</select>";
+        var selWrap = el("span", "bio-q-matchsel", selHtml);
+        row.appendChild(selWrap);
+        mrows.appendChild(row);
+        sels.push(selWrap.querySelector("select"));
+      });
+      box.appendChild(mrows);
+      var mbtn = el("button", "bio-q-check", "检查配对");
+      mbtn.type = "button";
+      mbtn.addEventListener("click", function () {
+        var okAll = true;
+        (q.pairs || []).forEach(function (pr, i) {
+          var good = sels[i] && sels[i].value === pr[1];
+          if (sels[i]) sels[i].style.borderColor = good ? "" : "#D55E00";
+          if (!good) okAll = false;
+        });
+        if (okAll) say(true, "全部配对正确。", true);
+        else { wrong++; say(false, "有配对错了，错的已标出，再想想。", true); }
+      });
+      box.appendChild(mbtn);
+    } else if (q.type === "order") {
+      /* P13 新增：排序题。items=正确顺序；scrambled=初始展示（缺省取逆序） */
+      box.appendChild(el("div", "bio-q-stem", esc(q.stem)));
+      var olist = el("div", "bio-q-order");
+      var oitems = q.items || [];
+      var ocur = (q.scrambled || oitems.slice().reverse()).slice();
+      (function () {
+        var a = oitems.slice().sort().join("|"), b = ocur.slice().sort().join("|");
+        if (a !== b || !oitems.length) ocur = oitems.slice().reverse();
+      })();
+      var drawOrder = function () {
+        olist.innerHTML = "";
+        ocur.forEach(function (txt, i) {
+          var row = el("div", "bio-q-orderrow", null);
+          row.style.cssText = "display:flex;align-items:center;gap:8px;margin:6px 0";
+          row.appendChild(el("span", "bio-q-ordernum", String(i + 1)));
+          var t = el("span", "bio-q-ordertxt", esc(txt));
+          t.style.cssText = "flex:1";
+          row.appendChild(t);
+          var up = el("button", "tb-btn-secondary", "↑");
+          var dn = el("button", "tb-btn-secondary", "↓");
+          up.type = "button"; dn.type = "button";
+          up.style.minHeight = "44px"; dn.style.minHeight = "44px";
+          up.setAttribute("aria-label", "上移「" + txt + "」");
+          dn.setAttribute("aria-label", "下移「" + txt + "」");
+          if (i === 0) up.disabled = true;
+          if (i === ocur.length - 1) dn.disabled = true;
+          (function (idx) {
+            up.addEventListener("click", function () {
+              if (idx <= 0) return;
+              var tmp = ocur[idx - 1]; ocur[idx - 1] = ocur[idx]; ocur[idx] = tmp;
+              drawOrder();
+            });
+            dn.addEventListener("click", function () {
+              if (idx >= ocur.length - 1) return;
+              var tmp = ocur[idx + 1]; ocur[idx + 1] = ocur[idx]; ocur[idx] = tmp;
+              drawOrder();
+            });
+          })(i);
+          row.appendChild(up); row.appendChild(dn);
+          olist.appendChild(row);
+        });
+      };
+      drawOrder();
+      box.appendChild(olist);
+      var obtn = el("button", "bio-q-check", "检查排序");
+      obtn.type = "button";
+      obtn.addEventListener("click", function () {
+        var okAll = ocur.join("|") === oitems.join("|");
+        if (okAll) say(true, "顺序正确。", true);
+        else { wrong++; say(false, "顺序不对，用 ↑↓ 调整后再检查。", true); }
+      });
+      box.appendChild(obtn);
     }
     box.appendChild(fb);
     return box;

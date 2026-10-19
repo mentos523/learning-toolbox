@@ -2702,6 +2702,200 @@ function renderPunnettLab(params, wid) {
     return root;
   }
 
+/* ---------------- B12 immuno-flow（免疫流程推演）· P13 首立 ----------------
+* spec: docs/biology-interactions.md §B12；冻结口径 B-F12。
+* params: branch("humoral" 默认，B-F12 体液线在前）, roleCards[],
+* cellularCards[]（P13 扩展：细胞线角色卡，未传则复用 roleCards）,
+* orderQuiz(true), bindNote(true，冻结必配，不许关）,
+* vaccineLink(true，默认开，挂 #b08.1.3),
+* diagramNote("模式图：非等比、非实物" 冻结文案）。
+* roleCards[] 项：{id,label,desc,why?}；卡片池展示 = 正确序的逆序
+* （确定性打乱，无随机）。
+* 交互：点卡片选中 → 点槽位放置；放错给因果提示
+* "××应该在第×步，因为××"；抗体放对 → 纠错卡（T11）；
+* 记忆细胞放对 → 疫苗回填链接；全对 → 两线对比总结；
+* 分支切换二次确认后清空（B-F12）。
+*/
+function renderImmunoFlow(params, wid) {
+params = params || {};
+var branch = params.branch === "cellular"? "cellular": "humoral";
+var cardsH = params.roleCards || [];
+var cardsC = params.cellularCards || [];
+var bindNote = params.bindNote!== false;
+var vaccineLink = params.vaccineLink!== false;
+var orderQuiz = params.orderQuiz!== false;
+var diagramNote = params.diagramNote || "模式图：非等比、非实物";
+
+var root = el("div", "bio-b12");
+root.setAttribute("data-wid", wid || "bio-b12");
+if (!cardsH.length) {
+root.appendChild(el("div", "bio-b6-err", "⚠ immuno-flow 缺少 roleCards，无法渲染。"));
+return root;
+}
+root.appendChild(el("div", "bio-note", esc(diagramNote)));
+root.appendChild(el("div", "bio-note",
+"简化声明：这里只画体液 / 细胞两条主线，真实过程还有更多配角参与。"));
+
+var lines = {
+humoral: { name: "体液免疫线", cards: cardsH},
+cellular: { name: "细胞免疫线", cards: cardsC.length? cardsC: cardsH}
+};
+
+/* orderQuiz 关 → 静态流程展示（仍配纠错卡与疫苗回填） */
+if (!orderQuiz) {
+["humoral", "cellular"].forEach(function (key) {
+var cards = lines[key].cards;
+var t = el("div", "bio-note", "" +
+cards.map(function (c, i) { return (i + 1) + "." + c.label;}).join(" → "));
+root.appendChild(t);
+});
+if (bindNote) root.appendChild(el("div", "bio-trap",
+"⚠ 纠错：抗体是“抱住”抗原，不是“杀死”——结合后由吞噬细胞清除。"));
+if (vaccineLink) {
+var vl0 = el("div", "bio-b12-vaccine", null);
+vl0.innerHTML = '还记得 <a href="#b08.1.3">b08.1.3</a> 的疫苗吗？——疫苗就是一次“演习”，留下记忆细胞。';
+root.appendChild(vl0);
+}
+return root;
+}
+
+var bar = el("div", "bio-b12-branch", null);
+bar.style.cssText = "display:flex;gap:8px;justify-content:center;margin:6px 0;flex-wrap:wrap";
+var btnH = el("button", "tb-btn-secondary", "体液免疫线");
+var btnC = el("button", "tb-btn-secondary", "细胞免疫线");
+[btnH, btnC].forEach(function (b) { b.type = "button"; b.style.minHeight = "44px";});
+bar.appendChild(btnH); bar.appendChild(btnC);
+root.appendChild(bar);
+
+var flowBox = el("div", "bio-b12-flow", null);
+root.appendChild(flowBox);
+var msgBox = el("div", "bio-b12-msg", null);
+msgBox.style.cssText = "min-height:2em;text-align:center;font-size:0.9rem;margin-top:6px";
+root.appendChild(msgBox);
+
+function cardById(cards, id) {
+for (var i = 0; i < cards.length; i++) if (cards[i].id === id) return cards[i];
+return null;
+}
+function imsg(t) { msgBox.textContent = t;}
+
+function renderBranch(key) {
+flowBox.innerHTML = "";
+imsg("");
+var cards = lines[key].cards;
+var n = cards.length;
+var placed = [];
+var pool = [];
+var pi, qi;
+for (pi = 0; pi < n; pi++) placed.push(null);
+for (qi = n - 1; qi >= 0; qi--) pool.push(cards[qi].id); /* 逆序展示 */
+var selected = null;
+var doneShown = false, bindShown = false, vacShown = false;
+
+var slotsEl = el("div", "bio-b12-slots", null);
+slotsEl.style.cssText = "display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:8px 0";
+var slotBtns = [];
+for (var s = 0; s < n; s++) {
+(function (si) {
+var b = el("button", "tb-btn-secondary", "第" + (si + 1) + "步：待放置");
+b.type = "button"; b.style.minHeight = "44px"; b.style.minWidth = "96px";
+b.addEventListener("click", function () {
+var k, card, correctIdx;
+if (placed[si]) {
+pool.push(placed[si]); placed[si] = null; selected = null; draw(); return;
+}
+if (!selected) { imsg("先点一张角色卡，再点槽位。"); return;}
+card = cardById(cards, selected);
+correctIdx = -1;
+for (k = 0; k < n; k++) if (cards[k].id === selected) correctIdx = k;
+if (correctIdx === si) {
+placed[si] = selected;
+pool.splice(pool.indexOf(selected), 1);
+selected = null;
+if (bindNote &&!bindShown && /抗体/.test(card.label)) {
+bindShown = true;
+imsg("⚠ 纠错：抗体是“抱住”抗原，不是“杀死”——结合后由吞噬细胞清除。");
+}
+if (vaccineLink &&!vacShown && /记忆细胞/.test(card.label)) {
+vacShown = true;
+var vl = el("div", "bio-b12-vaccine", null);
+vl.style.cssText = "margin-top:6px;text-align:center";
+vl.innerHTML = '还记得 <a href="#b08.1.3">b08.1.3</a> 的疫苗吗？——疫苗就是一次“演习”，留下记忆细胞。';
+flowBox.appendChild(vl);
+}
+var allDone = true;
+for (var q = 0; q < n; q++) if (!placed[q]) allDone = false;
+if (allDone &&!doneShown) {
+doneShown = true;
+flowBox.appendChild(el("div", "bio-note",
+"✓ 两线对比：体液免疫管“液体里”的敌人（靠抗体结合），细胞免疫管“藏进细胞”的敌人（靠效应 T 细胞）。"));
+}
+if (!bindShown) imsg("");
+} else {
+var why = card.why? "，因为" + card.why: "";
+imsg("“" + card.label + "”应该在第" + (correctIdx + 1) + "步" + why + "。");
+}
+draw();
+});
+slotsEl.appendChild(b); slotBtns.push(b);
+})(s);
+}
+flowBox.appendChild(slotsEl);
+
+var poolEl = el("div", "bio-b12-pool", null);
+poolEl.style.cssText = "display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:6px 0";
+flowBox.appendChild(poolEl);
+
+function draw() {
+var si2, id2, c2, b2;
+for (si2 = 0; si2 < n; si2++) {
+b2 = slotBtns[si2];
+if (placed[si2]) {
+c2 = cardById(cards, placed[si2]);
+b2.textContent = "第" + (si2 + 1) + "步：" + c2.label;
+b2.style.borderColor = "#009E73";
+} else {
+b2.textContent = "第" + (si2 + 1) + "步：待放置";
+b2.style.borderColor = "";
+}
+}
+poolEl.innerHTML = "";
+pool.forEach(function (id) {
+var c = cardById(cards, id);
+var b = el("button", "tb-btn-secondary", c.label + "（" + c.desc + "）");
+b.type = "button"; b.style.minHeight = "44px";
+if (id === selected) b.style.borderWidth = "3px";
+b.addEventListener("click", function () {
+selected = (selected === id)? null: id;
+draw();
+});
+poolEl.appendChild(b);
+});
+if (!pool.length) {
+poolEl.appendChild(el("div", "bio-note", "点已放置的槽位可把卡片退回重排。"));
+}
+}
+draw();
+}
+
+function switchBranch(key, btn) {
+if (key === branch) return;
+try {
+if (typeof window.confirm === "function" &&
+!window.confirm("切换到" + lines[key].name + "会清空已放的卡片，继续吗？")) return;
+} catch (e) {}
+branch = key;
+btnH.style.borderWidth = ""; btnC.style.borderWidth = "";
+btn.style.borderWidth = "3px";
+renderBranch(key);
+}
+btnH.addEventListener("click", function () { switchBranch("humoral", btnH);});
+btnC.addEventListener("click", function () { switchBranch("cellular", btnC);});
+btnH.style.borderWidth = "3px";
+renderBranch(branch);
+return root;
+}
+
   /* ---------------- 对外 API ---------------- */
   var api = {
     render: function (type, params, wid) {
@@ -2717,6 +2911,9 @@ function renderPunnettLab(params, wid) {
       }
       if (type === "punnett-lab") {
         return renderPunnettLab(params || {}, wid || "bio-b5");
+      }
+      if (type === "immuno-flow") {
+        return renderImmunoFlow(params || {}, wid || "bio-b12");
       }
       if (type === "experiment-3q") {
         return renderExperiment3Q(params || {}, wid || "bio-b3");
