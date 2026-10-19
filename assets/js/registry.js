@@ -60,7 +60,7 @@ window.TOOLBOX_MODULES = [
     icon: "box",
     color: "#0ea5e9",
     path: "modules/geography/index.html",
-    status: "soon"                    // 试点课 dg01.3.3 已就位，待黄队/白队闸门后放行
+    status: "ready"                   // 批 1–8 全量上线（16 章 · 113 课 · 322 页），hotfix-20261019 由 soon 翻为 ready
   },
   {
     slug: "biology",

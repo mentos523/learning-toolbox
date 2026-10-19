@@ -11,6 +11,12 @@
  *      ——DFS 三色环检测、根节点规则、孤立节点报错、双向引用检查；
  *      代码全部自研，未复制对方任何代码/数据/文本，对方 CC BY-NC 4.0）
  *   ④ V8 字号阶梯扫描（调用编排：tools/v8-fontladder-scan.cjs）
+ *   ⑤ 版本四线一致性（自研，hotfix-20261019：version.json ≡ 首页 TOOLBOX_VERSION
+ *      ≡ 化学 CHEM_BUILD，且两 index.html 内全部数值型 ?v= 与版本号全等；
+ *      曾导致化学页"永远有新版本"误报）
+ *   ⑥ registry status 清单与"soon 却有内容"检查（自研，hotfix-20261019：
+ *      status="soon" 的模块若 data/ 下已有课程数据 → FAIL；
+ *      曾导致地理 16 章上线后首页仍显示"筹备中"）
  *
  * file:// 可跑红线：本脚本只读文件、不起服务；数据文件用 <script> 载入式
  * `window.X = {...}` 格式，Node 侧用沙箱求值读取，不走 fetch。
@@ -21,6 +27,8 @@
  *   node tools/validate-toolbox.mjs --v8=skip      # 跳过 V8（结构校验仍跑）
  *   node tools/validate-toolbox.mjs --selftest     # 自检：用合成坏图谱验证断言有效
  *   node tools/validate-toolbox.mjs --json         # 机器可读输出
+ *   node tools/validate-toolbox.mjs --v8=skip --only=version-sync,registry-status
+ *                                             # 只跑 ⑤⑥（基线红/绿对照用）
  *
  * 退出码：0=全部通过；1=任一 FAIL。
  * ============================================================ */
@@ -282,6 +290,76 @@ function runV8() {
   }
 }
 
+/* ---------- ⑤ 版本四线一致性（自研，hotfix-20261019） ---------- */
+/* 口径：version.json.version ≡ 首页 window.TOOLBOX_VERSION ≡ 化学页 window.CHEM_BUILD，
+ * 且 index.html 与 modules/chemistry/index.html 内全部数值型 ?v= 指纹与版本号全等。
+ * 任一不等 → FAIL。曾导致：CHEM_BUILD 陈旧时化学页永远误报"发现新版本"，
+ * "立即更新"硬重载后服务器文件仍旧版、横幅复现（用户以为按钮没反应）。 */
+const VER_RE = /^[0-9]+\.[0-9]+\.[0-9]+(\.[0-9]+)?$/;
+function checkVersionSync() {
+  const tag = "version-sync";
+  const errs = [];
+  let ver = "";
+  try { ver = JSON.parse(readFileSync(join(ROOT, "version.json"), "utf8")).version || ""; }
+  catch (e) { fail(tag, "version.json 读取失败"); return; }
+  if (!VER_RE.test(ver)) { fail(tag, `version.json.version 非法：${ver}`); return; }
+  const home = readFileSync(join(ROOT, "index.html"), "utf8");
+  const chem = readFileSync(join(ROOT, "modules", "chemistry", "index.html"), "utf8");
+  const tb = (home.match(/window\.TOOLBOX_VERSION\s*=\s*"([^"]+)"/) || [])[1] || "";
+  if (tb !== ver) errs.push(`首页 TOOLBOX_VERSION=${tb || "缺失"} ≠ ${ver}`);
+  const cb = (chem.match(/window\.CHEM_BUILD\s*=\s*"([^"]+)"/) || [])[1] || "";
+  if (cb !== ver) errs.push(`化学 CHEM_BUILD=${cb || "缺失"} ≠ ${ver}`);
+  const checkFp = (name, src) => {
+    const set = new Set([...src.matchAll(/\?v=([0-9][0-9.]*)/g)].map((m) => m[1]));
+    const bad = [...set].filter((v) => v !== ver);
+    if (bad.length) errs.push(`${name} ?v= 含非当前版本：${bad.join(",")}（应为 ${ver}）`);
+    return set;
+  };
+  const hs = checkFp("index.html", home);
+  const cs = checkFp("modules/chemistry/index.html", chem);
+  if (errs.length) fail(tag, errs.join("；"));
+  else ok(tag, `四线全等 ${ver}（首页 ?v= ${hs.size} 种指纹值、化学 ?v= ${cs.size} 种指纹值）`);
+}
+
+/* ---------- ⑥ registry status 清单与"soon 却有内容"检查（自研，hotfix-20261019） ---------- */
+/* 口径：输出各条目 status 清单；status="soon" 的模块，若其 data/ 下已有课程数据
+ * （章节数据文件非空且命中语义课号）→ FAIL。曾导致：地理 16 章 322 页全量上线后，
+ * 首页卡片仍显示"筹备中"且不可点击（8 批无人翻 registry）。 */
+function loadRegistryMods() {
+  const src = readFileSync(join(ROOT, "assets", "js", "registry.js"), "utf8");
+  const sandbox = {}; sandbox.window = sandbox;
+  vm.createContext(sandbox);
+  vm.runInContext(src, sandbox, { filename: "registry.js" });
+  const mods = sandbox.window.TOOLBOX_MODULES;
+  if (!Array.isArray(mods)) return { error: "TOOLBOX_MODULES 非数组" };
+  return { mods };
+}
+const LESSON_ANY_RE = /"(?:[a-z]{1,2}\d{2})\.\d+\.\d+"/;
+function moduleHasContent(slug) {
+  const d = join(ROOT, "modules", slug, "data");
+  if (!existsSync(d)) return false;
+  for (const f of readdirSync(d)) {
+    if (!/^[a-z]{1,2}\d{2}\.js$/.test(f)) continue;
+    let src = "";
+    try { src = readFileSync(join(d, f), "utf8"); } catch { continue; }
+    if (src.length > 0 && LESSON_ANY_RE.test(src)) return true;
+  }
+  return false;
+}
+function checkRegistryStatus() {
+  const tag = "registry-status";
+  const loaded = loadRegistryMods();
+  if (loaded.error) { fail(tag, loaded.error); return; }
+  const list = loaded.mods.map((m) => `${m.slug}:${m.status}${m.tagline ? `「${m.tagline}」` : ""}`);
+  const bad = [];
+  for (const m of loaded.mods) {
+    if (m.status === "soon" && moduleHasContent(m.slug))
+      bad.push(`${m.name}（${m.slug}）status=soon 但 data/ 下已有课程数据`);
+  }
+  if (bad.length) fail(tag, `${bad.join("；")}；清单：${list.join(" / ")}`);
+  else ok(tag, `清单：${list.join(" / ")}`);
+}
+
 /* ---------- 自检：合成坏图谱验证断言有效 ---------- */
 function selftest() {
   const cases = [
@@ -340,13 +418,25 @@ function selftest() {
 }
 
 /* ---------- 主流程 ---------- */
+const ONLY = new Set(
+  (([...args].find((a) => a.startsWith("--only=")) || "").slice("--only=".length) || "")
+    .split(",").map((s) => s.trim()).filter(Boolean)
+);
 if (SELFTEST) {
   selftest();
 } else {
-  runLedgerGates();
-  checkLedgerAuthors();
-  runPrereqChecks();
-  runV8();
+  const groups = [
+    ["ledger-gate", runLedgerGates],
+    ["ledger-author", () => checkLedgerAuthors()],
+    ["prereq", runPrereqChecks],
+    ["version-sync", checkVersionSync],
+    ["registry-status", checkRegistryStatus],
+    ["v8", runV8],
+  ];
+  for (const [name, fn] of groups) {
+    if (ONLY.size && !ONLY.has(name)) continue;
+    fn();
+  }
 }
 
 /* ---------- 输出 ---------- */
