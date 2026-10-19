@@ -1,0 +1,88 @@
+{
+  "schema": "biology-review-ledger/1.0",
+  "chapter": "b25",
+  "lesson": "b25.1.5",
+  "title": "生物技术伦理与本章小结",
+  "written_by": "生物 P19 生产队（蓝队数据工程 + 内容撰写）",
+  "written_at": "2026-10-19",
+  "announcements": [
+    {
+      "id": "b25.1.5-a1",
+      "kind": "foretell",
+      "status": "drafted",
+      "text": "基因编辑与相关伦理规范还在发展中——新规范出现时，回填本页（后续维护承接）。",
+      "source": "b25.1.5-p1 oldfriend 纯文本；本批无深链；承接方：后续维护（任务书§三未兑现预告总清单口径）。"
+    }
+  ],
+  "frozen_refs": [
+    {
+      "id": "b25.1.5-f1",
+      "kind": "frozen_copy",
+      "status": "final_passed",
+      "ref": "基因编辑技术事实与现行规范共识（b25.1.5-p1，BIO-R36/R39）",
+      "text": "基因编辑（只讲技术事实）：CRISPR/Cas9——向导 RNA 把 Cas9 蛋白带到 DNA 特定位点切开，可以敲除或替换基因。现行规范与共识（只呈现，不审判）：可遗传的人类生殖系基因编辑，多国法律严格限制或禁止；人类胚胎体外研究通行“14 天规则”（点到为止）。",
+      "source": "b25.1.5-p1 text"
+    }
+  ],
+  "gate8_first_definition": {
+    "status": "final_passed",
+    "note": "基因编辑/CRISPR/Cas9（p1 技术事实行内定义）；14 天规则（R39 点到为止口径：命名＋定位为'人类胚胎体外研究的明确时限规范'，不展开细则）；全书 b00–b24 grep 零更早出现。"
+  },
+  "gate9_target_check": {
+    "status": "final_passed",
+    "note": "本课无深链引用。"
+  },
+  "gate11_quiz": {
+    "status": "final_passed",
+    "note": "quiz 页仅 b25.1.5-p2，为图纸'本章总复习'既定意图（门禁⑪）；4 题（1 review＋2 choice＋2 judge）答案逐题亲手核对全部正确：Q2 果醋条件 answer=1'有氧、30–35℃'；Q3 组织培养变异 judge=false；Q4 基因工程顺序 answer=1'获取—构建—导入—检测'；Q5 转基因监管 judge=false；choice 索引程序化复核 OK；tip 页号引用（b25.1.1-p2/b25.1.2-p2/b25.1.3-p2）准确。"
+  },
+  "expert_review": {
+    "reviewer": "生物学科专家队",
+    "reviewed_at": "2026-10-19",
+    "verdict": "final_passed",
+    "report": "~/workspace/bio-audit/batch-p19-expert/REVIEW-REPORT.md"
+  },
+  "reviewed_artifact": {
+    "file": "~/workspace/bio-audit/batch-p19-prod/b25.js",
+    "sha256": "e948a270ac93db5961bcbc49109df7bbd5eb2e79e20cf9e96609fae76b972b57",
+    "bytes": 37407,
+    "note": "专家审定稿：生产初版 sha256 9913c306… 经 RW-01/RW-02 两处返工后重算（static 208/0、wordcount 0 超限、verify-echo 2/2 全部重跑通过）"
+  },
+  "review_history": [
+    {
+      "item": "BIO-R36/R39 伦理只呈现规范共识",
+      "verdict": "PASS",
+      "evidence": "p1：基因编辑只讲技术事实；生殖系编辑'多国法律严格限制或禁止'为现行规范事实陈述；14 天规则点到为止；trap 明确'只呈现规范共识，不做价值审判'。WARN-1：'应该'字样仅出现于任务书 mandated trap（'技术能做=应该做'）的被纠错误区引文与 lead 设问内，页内明示不做价值审判——接受不返工。",
+      "reviewer": "生物学科专家队",
+      "reviewed_at": "2026-10-19"
+    },
+    {
+      "item": "门禁⑧ 新术语首现即定义",
+      "verdict": "PASS",
+      "evidence": "见 gate8_first_definition；全书 grep 零更早出现。",
+      "reviewer": "生物学科专家队",
+      "reviewed_at": "2026-10-19"
+    },
+    {
+      "item": "门禁⑩ b25.1.5-a1（drafted）",
+      "verdict": "PASS",
+      "evidence": "基因编辑与伦理新发展预告：oldfriend 纯文本、无深链、status=drafted、后续维护承接；生产队 review_history 留空（门禁⑭合规）。",
+      "reviewer": "生物学科专家队",
+      "reviewed_at": "2026-10-19"
+    },
+    {
+      "item": "门禁⑪ quiz 页",
+      "verdict": "PASS",
+      "evidence": "见 gate11_quiz；4 题答案逐题亲手核对全部正确。",
+      "reviewer": "生物学科专家队",
+      "reviewed_at": "2026-10-19"
+    },
+    {
+      "item": "门禁⑫ 数学课号",
+      "verdict": "N/A",
+      "evidence": "本章无数学引用。",
+      "reviewer": "生物学科专家队",
+      "reviewed_at": "2026-10-19"
+    }
+  ]
+}

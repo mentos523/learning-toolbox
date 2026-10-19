@@ -1,0 +1,116 @@
+{
+  "schema": "biology-review-ledger/1.0",
+  "chapter": "b25",
+  "lesson": "b25.1.1",
+  "title": "发酵工程",
+  "written_by": "生物 P19 生产队（蓝队数据工程 + 内容撰写）",
+  "written_at": "2026-10-19",
+  "announcements": [],
+  "announcements_note": "ledger-b10.1.3（远端与本地一致）无 foretell 指向 b25（b10.1.3 仅 frozen_copy 条目）→ 按任务书§〇只写'认旧友'回填句＋mathlink 深链（纯文本先行），不造台账项。",
+  "frozen_refs": [
+    {
+      "id": "b25.1.1-f1",
+      "kind": "frozen_copy",
+      "status": "final_passed",
+      "ref": "四种传统发酵（b25.1.1-p2）",
+      "text": "果酒：酵母菌在缺氧条件下把葡萄汁里的糖变成酒精——温度 18–25℃、密闭，约 10 天。果醋：醋酸菌在有氧条件下把糖或酒精变成醋酸——要通气、30–35℃，比果酒快。腐乳：毛霉先在豆腐上长出白毛，分泌蛋白酶、脂肪酶分解蛋白质，再加盐卤制。泡菜：乳酸菌在缺氧条件下把菜里的糖变成乳酸——水封坛隔绝空气，常温下几天可食。",
+      "source": "b25.1.1-p2 text（人教版选择性必修三发酵条件口径）"
+    }
+  ],
+  "gate8_first_definition": {
+    "status": "final_passed",
+    "note": "发酵工程（p1 lead 行内定义）/无菌操作（p1 功能定义：防止杂菌污染）/醋酸菌/毛霉（p2 角色定义）；全书 b00–b24 grep 零更早出现。"
+  },
+  "gate9_target_check": {
+    "status": "final_passed",
+    "note": "b25.1.1-p1 mathlink→b10.1.3：b10.1.3 已上线但本地 XLINK_BIO 未在表（biology.js 全文件 grep 零命中）→ 纯文本先行，不造死链，合规；staging 动作（协调者确认远端 XLINK_BIO 是否已含 b10.1.3，未入则补 token）已在 PROD-REPORT §三登记。RW-02：学生 mathlink 内的内部 staging 注记已移除。"
+  },
+  "gate11_quiz": {
+    "status": "not_applicable",
+    "note": "本课无 quiz 页。"
+  },
+  "expert_review": {
+    "reviewer": "生物学科专家队",
+    "reviewed_at": "2026-10-19",
+    "verdict": "final_passed",
+    "report": "~/workspace/bio-audit/batch-p19-expert/REVIEW-REPORT.md"
+  },
+  "reviewed_artifact": {
+    "file": "~/workspace/bio-audit/batch-p19-prod/b25.js",
+    "sha256": "e948a270ac93db5961bcbc49109df7bbd5eb2e79e20cf9e96609fae76b972b57",
+    "bytes": 37407,
+    "note": "专家审定稿：生产初版 sha256 9913c306… 经 RW-01/RW-02 两处返工后重算（static 208/0、wordcount 0 超限、verify-echo 2/2 全部重跑通过）"
+  },
+  "review_history": [
+    {
+      "item": "BIO-R08/R09 结构—功能对问/禁倒置",
+      "verdict": "PASS",
+      "evidence": "本课无结构教学页；发酵表述均为'菌→产物＋条件'，无'结构决定'倒置（全文件 grep'决定'零命中）。",
+      "reviewer": "生物学科专家队",
+      "reviewed_at": "2026-10-19"
+    },
+    {
+      "item": "BIO-R10/R57 口诀'形配其用'",
+      "verdict": "N/A",
+      "evidence": "本课未引用口诀；R11 回填链不含 b25。",
+      "reviewer": "生物学科专家队",
+      "reviewed_at": "2026-10-19"
+    },
+    {
+      "item": "BIO-R12/R13 实验三原则",
+      "verdict": "N/A",
+      "evidence": "本课无 B3 实验页；发酵诊所为条件配对练习，不产出实验结论。",
+      "reviewer": "生物学科专家队",
+      "reviewed_at": "2026-10-19"
+    },
+    {
+      "item": "BIO-R32/R35 模式图/示意声明",
+      "verdict": "PASS",
+      "evidence": "p3 诊所页常驻'天数为相对口径（非实测数据）；示意，非真实速度/比例'（BIO-R42/R35 合规）。",
+      "reviewer": "生物学科专家队",
+      "reviewed_at": "2026-10-19"
+    },
+    {
+      "item": "B-M1 trap 专治：果醋'由果酒自然变酸'",
+      "verdict": "PASS",
+      "evidence": "p2 trap 逐字纠错：'变酸的是醋酸菌发酵——它需要氧气'（任务书 trap 口径逐字一致）。",
+      "reviewer": "生物学科专家队",
+      "reviewed_at": "2026-10-19"
+    },
+    {
+      "item": "门禁⑧ 新术语首现即定义",
+      "verdict": "PASS",
+      "evidence": "4 词全部行内定义（见 gate8_first_definition）；全书 grep 零更早出现。",
+      "reviewer": "生物学科专家队",
+      "reviewed_at": "2026-10-19"
+    },
+    {
+      "item": "门禁⑨ 深链只挂已上线课号",
+      "verdict": "PASS",
+      "evidence": "b10.1.3 纯文本先行合规（见 gate9_target_check）；深链方向为回填页→原课号，正确。",
+      "reviewer": "生物学科专家队",
+      "reviewed_at": "2026-10-19"
+    },
+    {
+      "item": "门禁⑩ 预告台账",
+      "verdict": "N/A",
+      "evidence": "无 foretell 指向 b25，未造台账项（任务书§〇）。",
+      "reviewer": "生物学科专家队",
+      "reviewed_at": "2026-10-19"
+    },
+    {
+      "item": "门禁⑫ 数学课号",
+      "verdict": "N/A",
+      "evidence": "本章无数学引用（全文件 grep'数学/代数'零命中）。",
+      "reviewer": "生物学科专家队",
+      "reviewed_at": "2026-10-19"
+    },
+    {
+      "item": "返工单 RW-02（学生文本混入内部 staging 注记）",
+      "verdict": "CLOSED",
+      "evidence": "b25.1.1-p1 mathlink 内的'（b10.1.3 已上线：深链 staging 确认后补挂，此处纯文本不造死链）'已从学生文本移除；staging 动作保留在文件头注释；static 脚手架同名断言同步修复；重跑 static 208/0、wordcount 0 超限。",
+      "reviewer": "生物学科专家队",
+      "reviewed_at": "2026-10-19"
+    }
+  ]
+}

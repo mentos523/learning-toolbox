@@ -1,0 +1,97 @@
+{
+  "schema": "biology-review-ledger/1.0",
+  "chapter": "b25",
+  "lesson": "b25.1.4",
+  "title": "胚胎工程与生态工程",
+  "written_by": "生物 P19 生产队（蓝队数据工程 + 内容撰写）",
+  "written_at": "2026-10-19",
+  "announcements": [],
+  "announcements_note": "本课无预告/回填登记项。",
+  "frozen_refs": [
+    {
+      "id": "b25.1.4-f1",
+      "kind": "frozen_copy",
+      "status": "final_passed",
+      "ref": "试管动物与胚胎移植（b25.1.4-p1）",
+      "text": "试管动物=体外受精→早期胚胎体外培养→胚胎移植→母体发育分娩。依然是有性生殖——精子和卵子只是在体外相遇。胚胎移植是关键一步：把早期胚胎送进发情状态一致的母体子宫，让它继续发育。",
+      "source": "b25.1.4-p1 text"
+    },
+    {
+      "id": "b25.1.4-f2",
+      "kind": "frozen_copy",
+      "status": "final_passed",
+      "ref": "胚胎分割与人类胚胎研究边界（b25.1.4-p2，BIO-R39）",
+      "text": "胚胎分割：用机械方法把早期胚胎切成 2 等份或 4 等份，再分别移植——得到同卵双胎或多胎（点到为止）。人类胚胎研究边界（只讲现行规范）：人类胚胎体外研究有明确时限规范（“14 天规则”，见 b25.1.5）；生殖性克隆人在多国被法律禁止——本页只陈述规范，不展开技术细节（BIO-R39）。",
+      "source": "b25.1.4-p2 text/note"
+    },
+    {
+      "id": "b25.1.4-f3",
+      "kind": "frozen_copy",
+      "status": "final_passed",
+      "ref": "生态工程定义与四原理（b25.1.4-p3）",
+      "text": "生态工程=应用生态学和系统学原理，对受损的生态系统进行修复重建的系统设计。四条基本原理：物质循环再生（废物变资源）、物种多样性（种类多、结构才稳定）、协调与平衡（别超过环境承载力）、整体性（自然、经济、社会一起看）。",
+      "source": "b25.1.4-p3 text（人教版选择性必修三四原理口径）"
+    }
+  ],
+  "gate8_first_definition": {
+    "status": "final_passed",
+    "note": "试管动物/胚胎移植（p1 行内定义；'试管'此前仅实验器皿义）/胚胎分割（p2 行内定义）/生态工程（p3 行内定义）；全书 b00–b24 grep 零更早出现。"
+  },
+  "gate9_target_check": {
+    "status": "final_passed",
+    "note": "本课深链引用均为课内（b25.1.2/b25.1.5 纯文本回指），无跨课深链。"
+  },
+  "gate11_quiz": {
+    "status": "not_applicable",
+    "note": "本课无 quiz 页。"
+  },
+  "expert_review": {
+    "reviewer": "生物学科专家队",
+    "reviewed_at": "2026-10-19",
+    "verdict": "final_passed",
+    "report": "~/workspace/bio-audit/batch-p19-expert/REVIEW-REPORT.md"
+  },
+  "reviewed_artifact": {
+    "file": "~/workspace/bio-audit/batch-p19-prod/b25.js",
+    "sha256": "e948a270ac93db5961bcbc49109df7bbd5eb2e79e20cf9e96609fae76b972b57",
+    "bytes": 37407,
+    "note": "专家审定稿：生产初版 sha256 9913c306… 经 RW-01/RW-02 两处返工后重算（static 208/0、wordcount 0 超限、verify-echo 2/2 全部重跑通过）"
+  },
+  "review_history": [
+    {
+      "item": "BIO-R36/R39 人类胚胎研究只讲现行规范",
+      "verdict": "PASS",
+      "evidence": "p2 note：'人类胚胎体外研究有明确时限规范（14 天规则）；生殖性克隆人在多国被法律禁止——本页只陈述规范，不展开技术细节（BIO-R39）'；点到为止，无技术细节展开、无价值审判。'生殖性克隆人多国法律禁止'为现行规范事实陈述，非价值审判。",
+      "reviewer": "生物学科专家队",
+      "reviewed_at": "2026-10-19"
+    },
+    {
+      "item": "B-M1 trap 专治：生态工程='种树'",
+      "verdict": "PASS",
+      "evidence": "p3 trap 逐字纠错：'生态工程是原理指导下的系统设计，种什么、种多少、和谁搭配，都要按原理来'（任务书 trap 口径逐字一致）。",
+      "reviewer": "生物学科专家队",
+      "reviewed_at": "2026-10-19"
+    },
+    {
+      "item": "门禁⑧ 新术语首现即定义",
+      "verdict": "PASS",
+      "evidence": "4 词全部行内定义（见 gate8_first_definition）；全书 grep 零更早出现。",
+      "reviewer": "生物学科专家队",
+      "reviewed_at": "2026-10-19"
+    },
+    {
+      "item": "概念核对：试管动物≠克隆动物",
+      "verdict": "PASS",
+      "evidence": "p1 note 明确区分：'前者精卵结合（有性生殖），后者核移植（无性生殖）——别搞混'。",
+      "reviewer": "生物学科专家队",
+      "reviewed_at": "2026-10-19"
+    },
+    {
+      "item": "门禁⑫ 数学课号",
+      "verdict": "N/A",
+      "evidence": "本章无数学引用。",
+      "reviewer": "生物学科专家队",
+      "reviewed_at": "2026-10-19"
+    }
+  ]
+}

@@ -1,0 +1,115 @@
+{
+  "schema": "biology-review-ledger/1.0",
+  "chapter": "b25",
+  "lesson": "b25.1.2",
+  "title": "细胞工程",
+  "written_by": "生物 P19 生产队（蓝队数据工程 + 内容撰写）",
+  "written_at": "2026-10-19",
+  "announcements": [
+    {
+      "id": "b25.1.2-e1",
+      "kind": "echo",
+      "status": "fulfilled",
+      "echo_of": "b16.1.3-a2",
+      "foretell_text": "全能性回填点：受精卵全能性最高；植物组织培养见 b25.1.2（纯文本）。",
+      "foretell_source": "远端 ledger-b16.1.3.json（raw.githubusercontent.com/mentos523/learning-toolbox/main，2026-10-19 拉取；与本地工作树逐字节一致，原预告台账本体未动，a2 仍为 drafted）",
+      "evidence": "兑现：b16.1.3-a2 问过——“植物组织培养见 b25.1.2”——答案：组织培养的理论基础正是细胞全能性：受精卵全能性最高，分化程度越高、全能性一般越低。",
+      "evidence_source": "b25.1.2-p1 mathlink 实物逐字（verify-echo-p19.cjs PASS 2/2）",
+      "deep_link": "mathlink→b16.1.3（方向：兑现页→预告页；b16.1.3 在本地 XLINK_BIO 表内 → 渲染 #b16.1.3 真链接）",
+      "five_way_note": "五向互认：①预告原文（远端台账）②回填句（实物）③深链（兑现页→预告页）④本台账草案 fulfilled（evidence 与实物逐字一致）⑤远端 ledger-b16.1.3 未改动——五向一致，兑现成立。"
+    }
+  ],
+  "frozen_refs": [
+    {
+      "id": "b25.1.2-f1",
+      "kind": "frozen_copy",
+      "status": "final_passed",
+      "ref": "植物组织培养定义与两步（b25.1.2-p1）",
+      "text": "植物组织培养=把离体的植物组织、器官或细胞，放在无菌的人工培养基上，培养成完整植株。两步关键：脱分化——已分化的细胞变回没有特定结构功能的愈伤组织；再分化——愈伤组织重新长出根和芽。",
+      "source": "b25.1.2-p1 text"
+    },
+    {
+      "id": "b25.1.2-f2",
+      "kind": "frozen_copy",
+      "status": "final_passed",
+      "ref": "动物细胞培养条件与克隆技术事实（b25.1.2-p2）",
+      "text": "动物细胞培养=把动物组织分散成单个细胞进行培养。条件：无菌无毒、营养充足、温度 pH 适宜、气体环境（95% 空气+5% CO₂）。克隆（只讲技术事实）：核移植——把体细胞核移入去核卵母细胞，建成重组细胞，激活后发育成胚胎，再移植到代孕母体。1997 年克隆羊“多莉”就是这么来的。",
+      "source": "b25.1.2-p2 text（BIO-R36 口径）"
+    }
+  ],
+  "gate8_first_definition": {
+    "status": "final_passed",
+    "note": "脱分化/再分化/愈伤组织（p1 行内定义）/动物细胞培养/传代培养/接触抑制/核移植/克隆（p2 行内定义，克隆为操作型定义）；全书 b00–b24 grep 零更早出现。"
+  },
+  "gate9_target_check": {
+    "status": "final_passed",
+    "note": "b25.1.2-p1 mathlink→b16.1.3：b16.1.3 在本地 XLINK_BIO 表内（biology.js XLINK_BIO 含 \"b16.1.3\": 1）→ 渲染 #b16.1.3 真链接；方向为兑现页→预告页，正确。"
+  },
+  "gate11_quiz": {
+    "status": "not_applicable",
+    "note": "本课无 quiz 页。"
+  },
+  "expert_review": {
+    "reviewer": "生物学科专家队",
+    "reviewed_at": "2026-10-19",
+    "verdict": "final_passed",
+    "report": "~/workspace/bio-audit/batch-p19-expert/REVIEW-REPORT.md"
+  },
+  "reviewed_artifact": {
+    "file": "~/workspace/bio-audit/batch-p19-prod/b25.js",
+    "sha256": "e948a270ac93db5961bcbc49109df7bbd5eb2e79e20cf9e96609fae76b972b57",
+    "bytes": 37407,
+    "note": "专家审定稿：生产初版 sha256 9913c306… 经 RW-01/RW-02 两处返工后重算（static 208/0、wordcount 0 超限、verify-echo 2/2 全部重跑通过）"
+  },
+  "review_history": [
+    {
+      "item": "BIO-R08/R09 结构—功能对问/禁倒置",
+      "verdict": "PASS",
+      "evidence": "组织培养两步定义含功能（脱分化'变回愈伤组织'→再分化'长出根和芽'）；无倒置表述。",
+      "reviewer": "生物学科专家队",
+      "reviewed_at": "2026-10-19"
+    },
+    {
+      "item": "BIO-R36 只讲事实与规范",
+      "verdict": "PASS",
+      "evidence": "克隆只讲核移植技术事实（步骤＋多莉 1997）；页内 note 明确'克隆只讲技术事实（BIO-R36）；伦理讨论见 b25.1.5'；全文件 grep'应该/不应该/好/坏'本课零命中。",
+      "reviewer": "生物学科专家队",
+      "reviewed_at": "2026-10-19"
+    },
+    {
+      "item": "B-M1 trap 专治：组织培养'变异很大'",
+      "verdict": "PASS",
+      "evidence": "p2 trap 逐字纠错：'它是无性繁殖——后代和亲本几乎一样，保持优良性状正是它的优点'（任务书 trap 口径逐字一致）。",
+      "reviewer": "生物学科专家队",
+      "reviewed_at": "2026-10-19"
+    },
+    {
+      "item": "门禁⑧ 新术语首现即定义",
+      "verdict": "PASS",
+      "evidence": "8 词全部行内定义（见 gate8_first_definition）；全书 grep 零更早出现。WARN-2：克隆为操作型定义（核移植语境），未给通用定义——章内'只讲技术事实、点到为止'口径，且 b25.1.4-p1 note 配套区分试管动物≠克隆动物，接受不返工。",
+      "reviewer": "生物学科专家队",
+      "reviewed_at": "2026-10-19"
+    },
+    {
+      "item": "门禁⑩ b25.1.2-e1 echo b16.1.3-a2（fulfilled）",
+      "verdict": "PASS",
+      "evidence": "五向互认成立（见 announcements[0] five_way_note）；远端台账本体未动（remote==local diff）。",
+      "reviewer": "生物学科专家队",
+      "reviewed_at": "2026-10-19"
+    },
+    {
+      "item": "内联交互：组织培养流程动画（5 步按序点亮）",
+      "verdict": "PASS",
+      "evidence": "行为契约逐项一致：首帧全节点 0.35 未点亮态（审计基线=第一帧）；flowPlay 顺序强制（点错重置全部）；5 步=离体组织→脱分化→愈伤组织→再分化→试管苗，与 p1 文案一致；按钮 min-height:44px；SVG 文本 13px≥12px；常驻'模式图：非等比、非实物；示意流程，非真实速度/比例'（BIO-R32/R35）。",
+      "reviewer": "生物学科专家队",
+      "reviewed_at": "2026-10-19"
+    },
+    {
+      "item": "门禁⑫ 数学课号",
+      "verdict": "N/A",
+      "evidence": "本章无数学引用。",
+      "reviewer": "生物学科专家队",
+      "reviewed_at": "2026-10-19"
+    }
+  ]
+}
