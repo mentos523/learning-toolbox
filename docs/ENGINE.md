@@ -58,7 +58,7 @@
 加载顺序（缺一不可）：
   planck.min.js → konva.min.js → jsxgraphcore.js →
   core.js → coords.js → driver.js → konva-view.js → input.js →
-  mech.js → meters.js → plot.js → steps.js → guides.js
+  mech.js → meters.js → plot.js → steps.js → guides.js → cell-builder.js
 ```
 
 ### 设计铁律（playbook 落地）
@@ -544,6 +544,7 @@ assets/engine/
   core.js  coords.js  driver.js  konva-view.js  input.js
   mech.js  meters.js  plot.js  steps.js  guides.js
   tween.js  circuit.js  motion.js  phenom.js  optics.js  wave.js  em.js
+  cell-builder.js（B1 细胞结构拼搭，Eng.CellBuilder，P18 装配上线；生物壳 index.html 在 guides.js 之后加载）
 docs/ENGINE.md（本文件）
 tools/engine-verify/
   verify.css  verify-lib.js  run-verify.cjs

@@ -42,6 +42,13 @@
  *   "相对值（非实测数据）"（删=FAIL）；"当前×是短板"徽章
  *   （不许写"唯一原因"）；Canvas 曲线描点（≤101 点），深色经
  *   liveViews 重绘（--bio-* 取色）。
+ * - "cell-builder"（B1 细胞结构拼搭，P16 并行工作流交付，见
+ *   docs/biology-interactions.md §B1；真值实现 assets/engine/
+ *   cell-builder.js 的 Eng.CellBuilder，纯 DOM、零依赖）：
+ *   本文件只做分发（引擎未加载时走可见错误态，不静默放行；
+ *   params 非法时抛出的校验错误也转为可见错误态，ENG-66）。
+ *   P15 的 window.BIO_B12 内联实现为行为基准（专家逐项核对一致），
+ *   引擎版与之行为契约一致。
  *
  * - "enzyme-lab"（B10 酶条件实验室，P8 首立 b13.1.2，见
  *   docs/biology-interactions.md §B10；冻结口径 B-F10；真值口径
@@ -2920,6 +2927,20 @@ return root;
       }
       if (type === "photosyn-sandbox") {
         return renderPhotosynSandbox(params || {}, wid || "bio-b4");
+      }
+      if (type === "cell-builder") {
+        if (!(window.Eng && window.Eng.CellBuilder)) {
+          return el("div", "bio-b6-err", "⚠ 基础引擎 cell-builder 渲染器未就绪（Eng.CellBuilder 缺失），拼搭交互无法渲染。");
+        }
+        var cbroot = el("div", "bio-b1");
+        cbroot.setAttribute("data-wid", wid || "bio-b1");
+        try {
+          cbroot._cb = new window.Eng.CellBuilder(cbroot, params || {});
+        } catch (e) {
+          cbroot.appendChild(el("div", "bio-b6-err", "⚠ cell-builder 参数校验未通过：" + esc(String((e && e.message) || e))));
+          return cbroot;
+        }
+        return cbroot;
       }
       if (type === "enzyme-lab") {
         return renderEnzymeLab(params || {}, wid || "bio-b10");
