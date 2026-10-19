@@ -1,0 +1,29 @@
+{
+  "schema": "biology-review-ledger/1.0",
+  "chapter": "b08",
+  "lesson": "b08.1.4",
+  "written_at": "2026-10-19",
+  "written_by": "生物 P11 生产队（蓝队数据工程 + 内容撰写）",
+  "notes": "p1 本章小结（review：b08.1.1–1.3 全课要点回放）+习题（一）3 题/p2 习题（二）4 题；梯度覆盖红线专治点（三环节/三措施配对/终身免疫/三道防线/抗体/疫苗原理/急救）。",
+  "announcements": [],
+  "frozen_refs": [],
+  "gate8_first_definition": {
+    "status": "drafted",
+    "note": "本课无新术语（小结页；门禁⑧不适用）。"
+  },
+  "gate9_target_check": {
+    "status": "drafted",
+    "note": "本课无 mathlink 深链块（门禁⑨；static自查 T5 PASS）。"
+  },
+  "gate11_quiz": {
+    "status": "drafted",
+    "note": "quiz 页 2 个：b08.1.4-p1=3 题、b08.1.4-p2=4 题，均 >0（门禁⑪；static自查 T6 PASS；浏览器 E 抽查）。"
+  },
+  "expert_review": {
+    "reviewer": "生物学科专家队",
+    "date": "2026-10-19",
+    "verdict": "final_passed",
+    "note": "专家审定 2026-10-19：b08.1.4-p1/p2 小结与习题核验完成。小结复述全课要点无误（含 BIO-R07 抗体\"结合\"口径回放）；习题 3+4 题，梯度覆盖红线专治点（三环节/三措施配对/终身免疫/三道防线/抗体/疫苗原理/急救120）；错误选项（\"终身免疫\"\"免疫=不得病\"\"直接杀死病原体\"\"过敏是免疫力低下\"\"打了就100%不得病\"）均在纠错语境配 tip 纠错，合规；答案索引与题面一致。门禁⑪：quiz 页题目数>0。无 FAIL。结论：通过。\n【专家复签 2026-10-19】返工点复核：W1 实物已落实——b08.1.4-p1 review 小结（b08.js:211）\"心肺复苏官方指南口径；\"→\"心肺复苏；\"，现为\"急救（拨打120说清情况；心肺复苏；止血用直接压迫）\"。全文件 grep 学生可见区零残留。复验结论：final_passed。",
+    "status": "signed"
+  }
+}

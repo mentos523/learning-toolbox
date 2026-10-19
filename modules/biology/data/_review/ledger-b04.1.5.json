@@ -1,0 +1,44 @@
+{
+  "schema": "biology-review-ledger/1.0",
+  "chapter": "b04",
+  "lesson": "b04.1.5",
+  "written_at": "2026-10-19",
+  "written_by": "生物 P11 生产队（蓝队数据工程 + 内容撰写）",
+  "notes": "p1 植物生殖（有性/无性；营养生殖；扦插/嫁接首现即定义）+误区专治\"嫁接后性状混合\"→接穗性状保持，砧木只供营养（BIO-R52；审计清单第 11 条）/p2 昆虫变态发育（完全/不完全；变态发育首现即定义）+两栖类（体外受精、变态发育）/p3 鸟类（卵生；早成雏/晚成雏）+变态发育对比动画（BIO_B04.metam；家蚕/蝗虫/青蛙/家燕；示意声明 BIO-R35）。",
+  "announcements": [],
+  "frozen_refs": [
+    {
+      "id": "b04.1.5-f1",
+      "kind": "frozen_copy",
+      "note": "\"接穗性状保持，砧木只供营养\"逐字（b04.1.5-p1 专治；BIO-R52；static自查 T9 PASS）。",
+      "ref": "BIO-R52",
+      "status": "drafted"
+    },
+    {
+      "id": "b04.1.5-f2",
+      "kind": "frozen_copy",
+      "note": "对比动画页常驻\"示意，非真实速度/比例\"（BIO-R35；static自查 PASS）。",
+      "ref": "BIO-R35",
+      "status": "drafted"
+    }
+  ],
+  "gate8_first_definition": {
+    "status": "drafted",
+    "note": "本课新术语首现即定义：扦插/嫁接@b04.1.5-p1、变态发育@b04.1.5-p2（先认词行内定义；static自查 T-门禁⑧ PASS）。"
+  },
+  "gate9_target_check": {
+    "status": "drafted",
+    "note": "本课无 mathlink 深链块；b09/b10/b12/b22 正文零引用（门禁⑨；static自查 T5 PASS）。"
+  },
+  "gate11_quiz": {
+    "status": "drafted",
+    "note": "本课无 kind:quiz 页；嫁接/变态发育在 b04.1.6-p2 Q2/Q3 机判覆盖。"
+  },
+  "expert_review": {
+    "reviewer": "生物学科专家队",
+    "date": "2026-10-19",
+    "verdict": "passed",
+    "note": "专家审定 2026-10-19：逐页核验完成。b04.1.5-p1 嫁接口径落实：只讲\"接穗性状保持，砧木只供营养\"逐字（BIO-R52），误区专治\"嫁接后性状混合\"配纠错文案；扦插/嫁接首现即定义；有性/无性/营养生殖定义无误。b04.1.5-p2：变态发育首现即定义；完全变态（有蛹期判据）/不完全变态表述无误；两栖类体外受精、变态发育表述无误。b04.1.5-p3：\"示意，非真实速度/比例\"常驻（BIO-R35）；鸟类卵生、早成雏/晚成雏表述无误。门禁⑧：扦插/嫁接@p1、变态发育@p2。门禁⑨⑩合规。无 FAIL。结论：通过。",
+    "status": "signed"
+  }
+}

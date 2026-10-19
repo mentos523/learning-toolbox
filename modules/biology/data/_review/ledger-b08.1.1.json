@@ -1,0 +1,37 @@
+{
+  "schema": "biology-review-ledger/1.0",
+  "chapter": "b08",
+  "lesson": "b08.1.1",
+  "written_at": "2026-10-19",
+  "written_by": "生物 P11 生产队（蓝队数据工程 + 内容撰写）",
+  "notes": "p1 病原体/传染源首现即定义+传染病定义+流行三环节（传染源/传播途径/易感人群；缺一不可）/p2 预防三措施+三环节—三措施配对闯关（BIO_B08.pair；会话内记分，不写 localStorage；触控≥44px）/p3 误区专治\"得过一次就终身免疫\"→因病而异（流感会反复得）+近视/龋齿不是传染病+认旧友 b07.1.3 深链。",
+  "announcements": [],
+  "frozen_refs": [
+    {
+      "id": "b08.1.1-f1",
+      "kind": "frozen_copy",
+      "note": "\"因病而异\"逐字（b08.1.1-p3 专治；static自查 T9 PASS）。",
+      "ref": "curriculum-b08.1.1",
+      "status": "drafted"
+    }
+  ],
+  "gate8_first_definition": {
+    "status": "drafted",
+    "note": "本课新术语首现即定义：病原体/传染源@b08.1.1-p1（先认词行内定义；static自查 T-门禁⑧ PASS）。"
+  },
+  "gate9_target_check": {
+    "status": "drafted",
+    "note": "深链 1 处（p3 mathlink→b07.1.3；已生产；static自查 T-门禁⑨ PASS；浏览器 C 真点击）。"
+  },
+  "gate11_quiz": {
+    "status": "drafted",
+    "note": "本课无 kind:quiz 页；三环节/三措施/终身免疫在 b08.1.4-p1 Q1/Q2/Q3 机判覆盖。"
+  },
+  "expert_review": {
+    "reviewer": "生物学科专家队",
+    "date": "2026-10-19",
+    "verdict": "passed",
+    "note": "专家审定 2026-10-19：逐页核验完成。b08.1.1-p1：病原体/传染源首现即定义；流行三环节表述无误。b08.1.1-p2：三环节—三措施配对闯关，配对关系正确（传染源↔控制传染源/传播途径↔切断传播途径/易感人群↔保护易感人群），无新 recordKey（会话内记分）。b08.1.1-p3 免疫口径落实：只讲\"因病而异\"（流感会反复得），误区专治\"得过一次就终身免疫\"配纠错文案；近视/龋齿不是传染病表述无误；认旧友 b07.1.3 深链已生产。无诊疗建议、无焦虑渲染。门禁⑧⑨⑩合规。无 FAIL。结论：通过。",
+    "status": "signed"
+  }
+}

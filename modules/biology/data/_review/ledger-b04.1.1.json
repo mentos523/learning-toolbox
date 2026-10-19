@@ -1,0 +1,44 @@
+{
+  "schema": "biology-review-ledger/1.0",
+  "chapter": "b04",
+  "lesson": "b04.1.1",
+  "written_at": "2026-10-19",
+  "written_by": "生物 P11 生产队（蓝队数据工程 + 内容撰写）",
+  "notes": "p1 森林古猿首现即定义（人类与现代类人猿的共同祖先）+化石证据时间轴交互（BIO_B04.fossil；时间均为\"约\"，示意非等比）+历程三步（直立行走→制造工具→大脑发达）+认旧友 b21.1.4 深链/p2 化石/胚胎学两条证据线+误区专治\"人类由现代类人猿进化来\"→共同祖先是森林古猿（现代类人猿是\"表亲\"不是\"祖先\"）。",
+  "announcements": [],
+  "frozen_refs": [
+    {
+      "id": "b04.1.1-f1",
+      "kind": "frozen_copy",
+      "note": "\"共同祖先是森林古猿\"逐字（b04.1.1-p1/p2 专治；static自查 T9 PASS）。",
+      "ref": "curriculum-b04.1.1",
+      "status": "drafted"
+    },
+    {
+      "id": "b04.1.1-f2",
+      "kind": "frozen_copy",
+      "note": "演化时间均为\"约\"+时间轴示意非等比（BIO-AX01 显性化；static自查 PASS）。",
+      "ref": "BIO-AX01",
+      "status": "drafted"
+    }
+  ],
+  "gate8_first_definition": {
+    "status": "drafted",
+    "note": "本课新术语首现即定义：森林古猿@b04.1.1-p1（先认词行内定义；static自查 T-门禁⑧ PASS）。"
+  },
+  "gate9_target_check": {
+    "status": "drafted",
+    "note": "深链 1 处（p1 mathlink→b21.1.4；已生产；XLINK_BIO P11 补丁纳 b04/b08 课号；static自查 T-门禁⑨ PASS）。"
+  },
+  "gate11_quiz": {
+    "status": "drafted",
+    "note": "本课无 kind:quiz 页；人类起源/化石证据在 b04.1.6-p1 Q1 机判覆盖。"
+  },
+  "expert_review": {
+    "reviewer": "生物学科专家队",
+    "date": "2026-10-19",
+    "verdict": "passed",
+    "note": "专家审定 2026-10-19：逐页核验完成。b04.1.1-p1/p2 人类起源口径落实：只讲\"共同祖先是森林古猿\"，误区专治\"人类由现代类人猿进化来\"配纠错文案（现代类人猿是\"表亲\"不是\"祖先\"），未出现红线禁语；化石/胚胎学两条证据线表述无误（鳃裂/尾为教材惯用表述）；化石时间轴时间均标注\"约\"+示意非等比（BIO-AX01 显性化）。门禁⑧：森林古猿@p1 首现即定义。门禁⑨：深链 p1→b21.1.4（已生产），b09/b10/b12/b22 正文零引用。门禁⑩：无新预告。科学准确性：无 FAIL。结论：通过。",
+    "status": "signed"
+  }
+}

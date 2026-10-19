@@ -1,0 +1,29 @@
+{
+  "schema": "biology-review-ledger/1.0",
+  "chapter": "b04",
+  "lesson": "b04.1.6",
+  "written_at": "2026-10-19",
+  "written_by": "生物 P11 生产队（蓝队数据工程 + 内容撰写）",
+  "notes": "p1 本章小结（review：b04.1.1–1.5 全课要点回放）+习题（一）3 题/p2 习题（二）4 题；梯度覆盖红线专治点（共同祖先/睾丸产精子/胎盘/受精场所/嫁接/完全变态/青春期态度）。",
+  "announcements": [],
+  "frozen_refs": [],
+  "gate8_first_definition": {
+    "status": "drafted",
+    "note": "本课无新术语（小结页；门禁⑧不适用）。"
+  },
+  "gate9_target_check": {
+    "status": "drafted",
+    "note": "本课无 mathlink 深链块（门禁⑨；static自查 T5 PASS）。"
+  },
+  "gate11_quiz": {
+    "status": "drafted",
+    "note": "quiz 页 2 个：b04.1.6-p1=3 题、b04.1.6-p2=4 题，均 >0（门禁⑪；static自查 T6 PASS；浏览器 E 抽查）。"
+  },
+  "expert_review": {
+    "reviewer": "生物学科专家队",
+    "date": "2026-10-19",
+    "verdict": "passed",
+    "note": "专家审定 2026-10-19：b04.1.6-p1/p2 小结与习题核验完成。小结复述全课要点无误（含胎盘口径、嫁接口径逐字回放）；习题 3+4 题，梯度覆盖红线专治点（共同祖先/睾丸产精子/胎盘/受精场所/嫁接/完全变态/青春期态度）；错误选项（胎盘\"血液相通\"）均在纠错语境配 tip（BIO 本类 WARN 口径合规）；判分口径与题面一致。门禁⑪：quiz 页题目数>0。无 FAIL。结论：通过。",
+    "status": "signed"
+  }
+}
