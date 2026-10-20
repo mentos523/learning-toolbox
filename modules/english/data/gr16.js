@@ -664,7 +664,7 @@ window.ENG_CH["gr16"] = {
             {
               id: "gr16.2.1-p3",
               kind: "explain",
-              title: "“ 钉死 ”在原形",
+              title: "（should）+ 动词原形：建议/命令/要求句",
               lead: "suggest 后 leave 是原形（should 省了）；insist 看意思是“ 要求 ”还是“ 认为 ”。",
               blocks: [
                 {

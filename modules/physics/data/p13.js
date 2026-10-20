@@ -147,8 +147,9 @@ window.PHY_CH["p13"] = {
               kind: "explain",
               title: "矢量合成，不看数字",
               blocks: [
+                { type: "lead", text: "小船斜着过河：船往对岸开，水把船往下游冲——两个速度能直接把数字加起来吗？" },
                 { type: "text", html: "合速度是矢量合成：用平行四边形定则（或正交分解），不是把速度数值相加。方向不同，结果完全不同。" },
-                { type: "trap", text: "⚠️ 别搞混：合运动 = 分运动速度代数相加——错！速度是矢量，合成看方向。审计清单第 2 条：矢量当标量代公式，红线。" },
+                { type: "trap", text: "⚠️ 别搞混：合运动 = 分运动速度代数相加——错！速度是矢量，合成看方向。矢量当标量代公式，是红线。" },
                 { type: "slogan", text: "矢量合成，不看数字看方向。" }
               ],
               point: "数值相加是标量的玩法；矢量合成，先看方向。"
@@ -300,7 +301,7 @@ window.PHY_CH["p13"] = {
               title: "转得多快，怎么量",
               blocks: [
                 { type: "lead", text: "转盘上一点：线速度 v（走多快），角速度 ω（转多快），周期 T（转一圈多久）。" },
-                { type: "text", html: "<span class=\"phy-f\" data-f=\"vr\"></span>（θ 用弧度），<span class=\"phy-f\" data-f=\"tt\"></span>。向心加速度 <span class=\"phy-f\" data-f=\"an\"></span>=ω²r，方向时刻指向圆心。" },
+                { type: "text", html: "<span class=\"phy-f\" data-f=\"vr\"></span> 是线速度：转得越快、半径越大，跑得越快（θ 用弧度——弧度把角度写成弧长，这个公式才这么干净）；<span class=\"phy-f\" data-f=\"tt\"></span> 是周期：转一圈（2π 弧度）要花的时间。向心加速度 <span class=\"phy-f\" data-f=\"an\"></span>=ω²r，方向时刻指向圆心。" },
                 {
                   type: "formula-id",
                   formula: {

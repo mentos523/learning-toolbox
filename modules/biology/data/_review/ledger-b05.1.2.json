@@ -15,6 +15,18 @@
       "echo_target": "b13.1.2-p1（B10首立：高效性/专一性/作用条件温和）+ b05.1.2-p3（B10锁钥段挂载）",
       "echo_text": "唾液只初步消化淀粉，这是酶的专一性——B10 认旧友（b05.1.2-p3）；认旧友：b05.1.2 第3页——唾液只初步消化淀粉，专一性早就见过（b13.1.2-p1 mathlink）。",
       "note": "门禁⑩同批互链兑现：预告与兑现同属 P8 批，不记 drafted；关键词专一性/唾液只初步消化淀粉互相可识别（static-b05b13.cjs T4 PASS）。"
+    },
+    {
+      "id": "b05.1.2-e1",
+      "kind": "echo",
+      "status": "fulfilled",
+      "echo_of": "b05.1.2-a1",
+      "foretell_text": "唾液只初步消化淀粉——专一性预告，b13.1.2 见分晓。",
+      "foretell_source": "本台账 ledger-b05.1.2.json（基线 0d0f7781 / 2026.10.20.1；预告侧条目未回写，b05.1.2-a1 status=echoed_in_batch 保持原值）",
+      "evidence": "认旧友：b05.1.2 第 3 页——唾液只初步消化淀粉，专一性早就见过（同批互链）。",
+      "evidence_source": "基线 b13.1.2-p1 mathlink 实物逐字（P8 同批兑现；收尾批 2 漏兑现核验补记兑现侧条目）",
+      "deep_link": "mathlink 在兑现页 b13.1.2-p1 → 预告页 b05.1.2（XLINK_BIO 在表 → #b05.1.2 真链接；另 b13.1.2-p3 有认旧友回链同指 b05.1.2）",
+      "five_way_note": "五向互认：①预告原文（本台账 a1）②回填句（b13.1.2-p1 mathlink 实物，evidence 逐字一致）③深链（兑现页→预告页，真链接）④本台账兑现侧条目 fulfilled（本条目）⑤预告侧条目 a1 未改动——五向一致，兑现成立。"
     }
   ],
   "frozen_refs": [

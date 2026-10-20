@@ -174,7 +174,7 @@ window.ENG_CH["gr08"] = {
                 {
                   type: "idcard",
                   rule: "can 表能力 / 许可；may 表许可（更客气）/ 可能；must 表必须 / 肯定推测；情态后只跟动词原形。",
-                  condition: "情态后不加 to、不加 -s；must 表推测只用于肯定句（否定推测用 can't）。"
+                  condition: "情态后不加 to、不加 -s；must 表推测只用于肯定句（否定推测用 can't）。补正导论页的说法：助动词、情态动词不是“不抢谓语的位”——Does she like…? 里，Does 和 like 一起构成谓语。"
                 },
                 {
                   type: "bridge",

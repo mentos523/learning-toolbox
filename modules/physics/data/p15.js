@@ -59,7 +59,7 @@ window.PHY_CH["p15"] = {
               kind: "explain",
               title: "三种起电，一种守恒",
               blocks: [
-                { type: "lead", text: "负电荷放下，场线“弯腰”——电荷搬家，场跟着变。" },
+                { type: "lead", text: "负电荷放下，场线（把看不见的电场画成的线）跟着“弯腰”——电荷搬家，场跟着变。" },
                 {
                   type: "widget",
                   widget: {

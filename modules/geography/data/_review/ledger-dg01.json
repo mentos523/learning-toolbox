@@ -611,6 +611,37 @@
         }
       ],
       "status": "final_passed"
+    },
+    {
+      "id": "dg01.2.3-e3",
+      "lesson": "dg01.2.3",
+      "kind": "notice",
+      "summary": "mathlink 深链登记（收尾批2 C②，门禁⑨）：dg01.2.3-p4「几何 13.1.1」已挂真链接",
+      "content": {
+        "gate9_target_check": "mathlink 1 处（dg01.2.3-p4 正文）：学生可见 token「几何 13.1.1」（playbook v1.1 门禁⑫式样）→ 内部注册键「几何 g13.1.1」（XLINK_MATH_GEO，学生不可见）→ 数学模块 pageId g13-u1-l1-p1；2026-10-20 施工队在 modules/math/data 全量实测该 pageId 存在，未命中 token 渲染器降级纯文本（不造死链）。",
+        "note": "本条由收尾批2地理C项施工队登记，待地理专家队两审（黄队教学审＋GEO 口径复核）后置 final_passed；施工队不自审自签。式样冲突处理（门禁⑫覆盖 GEO-R51 的 ch06 式冻结）见收尾批2报告，供专家复核。",
+        "status": "pending"
+      },
+      "written_at": "2026-10-20",
+      "written_by": "收尾批2地理C项施工队",
+      "revision": 2,
+      "review_history": [
+        {
+          "stage": "first",
+          "by": "地理专家队（收尾批2学科专家联合审·初审人）",
+          "date": "2026-10-20",
+          "result": "pass",
+          "note": "初审：mathlink 目标 pageId 在数学数据实证存在、未命中降级纯文本不造死链、学生可见课号式样按 playbook ⑫（内部键 ch 式学生不可见），见 review/EXPERT-REVIEW.md。教学侧评审由黄队另行完成并通过（见 review/YELLOW-REVIEW.md），其结论为本条目支持证据；台账两审署名按 S1 署名身份口径由专家队落笔。"
+        },
+        {
+          "stage": "final",
+          "by": "地理专家队（收尾批2学科专家联合审·终审，与初审独立）",
+          "date": "2026-10-20",
+          "result": "pass",
+          "note": "终审：目标 pageId 实证存在、未命中降级纯文本不造死链；口径冲突裁决接受 playbook 门禁⑫（学生可见「代数 6.1」式、内部键 ch 式学生不可见）。见 review/EXPERT-REVIEW.md。终审通过，置 final_passed。"
+        }
+      ],
+      "status": "final_passed"
     }
   ],
   "note": "地理dg01可计算内容两审台账（试点dg01.3.3 e1–e5已final_passed；批1九课新增10条，状态drafted，待地理专家队初审→终审）。状态 drafted=生产队已撰写、待地理专家队初审；未终审条目不得被课程页面引用（门禁 tools/check-geography-review.mjs）。",

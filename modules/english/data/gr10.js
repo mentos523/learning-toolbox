@@ -506,7 +506,7 @@ window.ENG_CH["gr10"] = {
                 {
                   type: "idcard",
                   rule: "分词短语作状语时，它的逻辑主语必须和主句主语一致；不一致就是悬垂分词（dangling），必须改。",
-                  condition: "Seen from the hill, the town…（看的主体泛指“ 人 ”，被看的是 the town，逻辑自洽）。"
+                  condition: "Seen from the hill, the town…（看的人泛指，说话的人都明白；被看的是 the town，逻辑自洽）。"
                 },
                 {
                   type: "bridge",

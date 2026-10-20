@@ -45,6 +45,42 @@
       "echo_target": "b12.1.3（未生产）",
       "echo_text": "",
       "note": "门禁⑩：辨析①回填链4条之一。"
+    },
+    {
+      "id": "b05.1.3-e1",
+      "kind": "echo",
+      "status": "fulfilled",
+      "echo_of": "b05.1.3-a2",
+      "foretell_text": "形配其用还会回来——鱼鳃（b09.2.1 细讲），到时候认旧友。",
+      "foretell_source": "本台账 ledger-b05.1.3.json（基线 0d0f7781 / 2026.10.20.1；预告侧条目未回写，b05.1.3-a2 status=drafted 保持原值）",
+      "evidence": "认旧友：b05.1.3——小肠 5 处结构\"形配其用\"（立靶页）；鱼鳃鳃丝密布毛细血管，同样\"形配其用\"。",
+      "evidence_source": "基线 b09.2.1-p1 mathlink 实物逐字（P12 兑现；落点台账 ledger-b09.2.1.json 顶层 foretell 已记 b05.1.3-a2 fulfilled）",
+      "deep_link": "mathlink 在兑现页 b09.2.1-p1 → 预告页 b05.1.3（XLINK_BIO 在表 → #b05.1.3 真链接）",
+      "five_way_note": "五向互认：①预告原文（本台账 a2）②回填句（b09.2.1-p1 mathlink 实物，evidence 逐字一致；同页 text 块有辨析①回填句）③深链（兑现页→预告页，真链接）④本台账兑现侧条目 fulfilled（本条目）⑤预告侧条目 a2 未改动——五向一致，兑现成立。"
+    },
+    {
+      "id": "b05.1.3-e2",
+      "kind": "echo",
+      "status": "fulfilled",
+      "echo_of": "b05.1.3-a3",
+      "foretell_text": "形配其用还会回来——蛋白质的结构与功能（b11.1.3 细讲），到时候认旧友。",
+      "foretell_source": "本台账 ledger-b05.1.3.json（基线 0d0f7781 / 2026.10.20.1；预告侧条目未回写，b05.1.3-a3 status=drafted 保持原值）",
+      "evidence": "认旧友：b05.1.3——小肠 5 处结构\"形配其用\"；蛋白质结构多样→功能多样，同样\"形配其用\"。",
+      "evidence_source": "基线 b11.1.3-p2 mathlink 实物逐字（P14 兑现；落点台账 ledger-b11.1.3.json 顶层 foretell 已记 b05.1.3-a3 fulfilled）",
+      "deep_link": "mathlink 在兑现页 b11.1.3-p2 → 预告页 b05.1.3（XLINK_BIO 在表 → #b05.1.3 真链接）",
+      "five_way_note": "五向互认：①预告原文（本台账 a3）②回填句（b11.1.3-p2 mathlink 实物，evidence 逐字一致；同页 text 块有辨析①回填句）③深链（兑现页→预告页，真链接）④本台账兑现侧条目 fulfilled（本条目）⑤预告侧条目 a3 未改动——五向一致，兑现成立。"
+    },
+    {
+      "id": "b05.1.3-e3",
+      "kind": "echo",
+      "status": "fulfilled",
+      "echo_of": "b05.1.3-a4",
+      "foretell_text": "形配其用还会回来——线粒体嵴·叶绿体基粒（b12.1.3 细讲），到时候认旧友。",
+      "foretell_source": "本台账 ledger-b05.1.3.json（基线 0d0f7781 / 2026.10.20.1；预告侧条目未回写，b05.1.3-a4 status=drafted 保持原值）",
+      "evidence": "认旧友：b05.1.3——小肠 5 处结构\"形配其用\"（立靶页）；线粒体嵴、叶绿体基粒增大膜面积，同样\"形配其用\"。",
+      "evidence_source": "基线 b12.1.3-p1 mathlink 实物逐字（P15 兑现；落点台账 ledger-b12.1.3.json 顶层 foretell 已记 b05.1.3-a4 fulfilled）",
+      "deep_link": "mathlink 在兑现页 b12.1.3-p1 → 预告页 b05.1.3（XLINK_BIO 在表 → #b05.1.3 真链接）",
+      "five_way_note": "五向互认：①预告原文（本台账 a4）②回填句（b12.1.3-p1 mathlink 实物，evidence 逐字一致；同页 text 块有辨析①回填句）③深链（兑现页→预告页，真链接）④本台账兑现侧条目 fulfilled（本条目）⑤预告侧条目 a4 未改动——五向一致，兑现成立。"
     }
   ],
   "frozen_refs": [

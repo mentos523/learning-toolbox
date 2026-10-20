@@ -124,7 +124,7 @@ window.BIO_CH["b24"] = {
                 { type: "trap", text: "⚠️ 别搞混：K 值不是固定死的——K 值由环境决定！环境改善（食物变多），K 值可以升高。" },
                 { type: "note", text: "示意曲线（非实测数据）。" },
                 { type: "mathlink", text: "代数 6.1：S 型曲线的读图——横轴时间、纵轴数量，拐点与平台怎么认，数学课的读图方法直接用。" },
-                { type: "mathlink", text: "兑现：b24.1.1-a2 问过——“代数 6.1：S 型曲线的读图——横轴时间、纵轴数量，拐点与平台怎么认，数学课的读图方法直接用”——答案：用代数 6.1 的读图语言重说：横轴时间是自变量，纵轴数量是因变量；曲线先慢、后快（拐点处涨得最快）、再慢，最后停在平台上——平台对应的数量就是 K 值，读 S 型图和读任何函数图像是同一套方法。" }
+                { type: "mathlink", text: "兑现：b24.1.1-a2 问过——“代数 6.1：S 型曲线的读图——横轴时间、纵轴数量，拐点与平台怎么认，数学课的读图方法直接用”——答案：用代数 6.1 的读图语言重说：横轴时间是自变量，纵轴数量是因变量；曲线全程看先慢、后快（拐点处涨得最快）、再慢，最后停在平台上——平台对应的数量就是 K 值，读 S 型图和读任何函数图像是同一套方法。" }
               ],
               point: "S 型：先快后慢；K 值由环境决定。"
             },
@@ -376,9 +376,9 @@ window.BIO_CH["b24"] = {
                   "<text x=\"170\" y=\"196\" style=\"fill:var(--bio-substrate)\">消费者</text>" +
                   "<text x=\"40\" y=\"112\" style=\"fill:var(--bio-aux)\">分解者</text>" +
                   "<path d=\"M205,40 C250,55 275,80 288,100\" style=\"fill:none;stroke:var(--bio-aux)\" stroke-width=\"2.5\" stroke-dasharray=\"7 5\" marker-end=\"url(#bioB24Cm)\"/>" +
-                  "<path d=\"M288,124 C270,150 220,175 195,186\" style=\"fill:none;stroke:var(--bio-aux)\" stroke-width=\"2.5\" stroke-dasharray=\"7 5\"/>" +
-                  "<path d=\"M145,186 C120,175 70,150 52,124\" style=\"fill:none;stroke:var(--bio-aux)\" stroke-width=\"2.5\" stroke-dasharray=\"7 5\"/>" +
-                  "<path d=\"M52,100 C70,80 90,55 135,40\" style=\"fill:none;stroke:var(--bio-aux)\" stroke-width=\"2.5\" stroke-dasharray=\"7 5\"/>" +
+                  "<path d=\"M288,124 C270,150 220,175 195,186\" style=\"fill:none;stroke:var(--bio-aux)\" stroke-width=\"2.5\" stroke-dasharray=\"7 5\" marker-end=\"url(#bioB24Cm)\"/>" +
+                  "<path d=\"M145,186 C120,175 70,150 52,124\" style=\"fill:none;stroke:var(--bio-aux)\" stroke-width=\"2.5\" stroke-dasharray=\"7 5\" marker-end=\"url(#bioB24Cm)\"/>" +
+                  "<path d=\"M52,100 C70,80 90,55 135,40\" style=\"fill:none;stroke:var(--bio-aux)\" stroke-width=\"2.5\" stroke-dasharray=\"7 5\" marker-end=\"url(#bioB24Cm)\"/>" +
                   "<text x=\"170\" y=\"112\" style=\"fill:var(--bio-aux)\" font-size=\"15\">循环</text>" +
                   "<defs><marker id=\"bioB24Cm\" markerWidth=\"8\" markerHeight=\"8\" refX=\"6\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 Z\" style=\"fill:var(--bio-aux)\"/></marker></defs>" +
                   "<text x=\"70\" y=\"248\" style=\"fill:var(--bio-ink-soft)\">化石燃料</text>" +

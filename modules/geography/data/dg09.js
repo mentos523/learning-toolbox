@@ -129,7 +129,7 @@ window.GEOGRAPHY_DATA["dg09"] = {
                 { type: "text", html: "<strong>场层真值</strong>：三级阶梯组成与海拔分级（GeoBatch5.TERRAIN_STEPS 冻结常量，人教版口径）。<strong>UI 可达</strong>：剖面动画播放 + 山脉点选描画。本图为 B 级地形底图（含省界）+ 西—东剖面示意；剖面高程只看趋势不记数值。" },
                 { type: "slogan", text: "一刀切开看台阶，山脉走向描出来。" }
               ],
-              point: "dg09.1.1-p2：三级阶梯剖面（geo-map terrain-3d，B 级）。场层真值见 GeoBatch5.TERRAIN_STEPS；UI 可达为剖面动画 + 山脉描画。"
+              point: "三级阶梯剖面（geo-map terrain-3d，B 级）。场层真值见 GeoBatch5.TERRAIN_STEPS；UI 可达为剖面动画 + 山脉描画。"
             },
             /* ================= p3：收官页 ================= */
             {
@@ -237,7 +237,7 @@ window.GEOGRAPHY_DATA["dg09"] = {
                 { type: "text", html: "<strong>场层真值</strong>（GeoBatch4.chainScore 纯函数，与 UI 无关）：正确配对 = 青藏高原→畜牧业、江南→水田、黄土高原→窑洞。<strong>UI 可达</strong>：点选配对 → 提交 → 逐对 ✓/✗ 判分。答案不在学生可见文案中，真值只在 params。" },
                 { type: "slogan", text: "因果不倒：地形→生产→生活。" }
               ],
-              point: "dg09.1.2-p2：地形—生产配对（cause-chain match）。场层真值：GeoBatch4.chainScore 纯函数直算（与 UI 无关）；UI 可达为点选配对判分。"
+              point: "地形—生产配对（cause-chain match）。场层真值：GeoBatch4.chainScore 纯函数直算（与 UI 无关）；UI 可达为点选配对判分。"
             },
             /* ================= p3：收官页 ================= */
             {
@@ -344,7 +344,7 @@ window.GEOGRAPHY_DATA["dg09"] = {
                 { type: "text", html: "<strong>场层真值</strong>（GeoBatch2.judgeClimate 纯函数，与 UI 无关）：武汉 → 最冷月约 4℃ → 亚热带 → 年降水约 1260mm、夏季多雨 → 亚热带季风气候。<strong>UI 可达</strong>：guided 两步——点曲线最低点 → 温度带徽章；点降水柱 → 年降水读数 → 五选一 → 类型徽章。站点温/降水数组逐字引 geo-climate-stations.js 冻结表（武汉站）；本页无 needsRuling（非口诀例外，冻结表亦无该字段，逐页核对无漏写）。" },
                 { type: "slogan", text: "以温定带，以水定型，两步走完。" }
               ],
-              point: "dg09.2.1-p2：武汉气候判读（climate-chart guided，红线③回填）。场层真值见 GeoBatch2.judgeClimate；UI 可达为 guided 两步判读。"
+              point: "武汉气候判读（climate-chart guided，红线③回填）。场层真值见 GeoBatch2.judgeClimate；UI 可达为 guided 两步判读。"
             },
             /* ================= p3：收官页 ================= */
             {
@@ -441,10 +441,10 @@ window.GEOGRAPHY_DATA["dg09"] = {
               blocks: [
                 { type: "lead", text: "点等降水量线，看数值：从东南沿海的 1600mm 向西北，一路降到 50mm 以下。找到 800mm 线——它大体沿秦岭—淮河走，这就是湿润区和半湿润区的分界。" },
                 { type: "text", html: "<strong>场层真值</strong>：等降水量线数值序列与 800mm 线走向（GeoBatch5.PRECIP_STATIONS 冻结常量 + widget 内等值线）。<strong>UI 可达</strong>：点等值线 → 数值读数；找 800mm 线 → 干湿分区判分。本图为 B 级降水分布底图（含省界），国界线/十段线按审定书绘制。" },
-                { type: "text", html: "<strong>时间轴</strong>：降水不光看空间，还要看时间——拖月份滑块，看雨带怎么走：6 月中下旬–7 月上旬江淮准静止锋 → <strong>梅雨</strong>；7 月中下旬–8 月副高控制 → <strong>伏旱</strong>。记住：梅雨、伏旱都是季风“<strong>掉头</strong>”闹的（dg14.3.2 认旧友；预告台账 P7，批 8 补交互落点）。" },
+                { type: "text", html: "<strong>时间轴</strong>：降水不光看空间，还要看时间——拖月份滑块，看雨带怎么走：6 月中下旬–7 月上旬江淮准静止锋 → <strong>梅雨</strong>；7 月中下旬–8 月副高控制 → <strong>伏旱</strong>。记住：梅雨、伏旱都是季风“<strong>掉头</strong>”闹的（dg14.3.2 会细讲；预告台账 P7，批 8 补交互落点）。" },
                 { type: "slogan", text: "数等值线，看递减，找八百；拖时间轴，看梅雨伏旱。" }
               ],
-              point: "dg09.2.2-p2：年降水量分布判读（geo-map precip，B 级）。场层真值见 GeoBatch5.PRECIP_STATIONS；UI 可达为点线读数 + 800mm 线判分。批 8 追加 monsoon-timeline（§33）：梅雨/伏旱时间轴（P7 交互落点）。"
+              point: "年降水量分布判读（geo-map precip，B 级）。场层真值见 GeoBatch5.PRECIP_STATIONS；UI 可达为点线读数 + 800mm 线判分。批 8 追加 monsoon-timeline（§33）：梅雨/伏旱时间轴（P7 交互落点）。"
             },
             /* ================= p3：收官页 ================= */
             {
@@ -562,7 +562,7 @@ window.GEOGRAPHY_DATA["dg09"] = {
                 { type: "text", html: "<strong>场层真值</strong>：两条灾害路径的时段与走向（GeoBatch5.DISASTERS 冻结常量）。<strong>UI 可达</strong>：播放路径动画 → 路径判读。本图为 C 级路径示意，不画国界线。" },
                 { type: "slogan", text: "看清路径，防线在前。" }
               ],
-              point: "dg09.2.3-p2：灾害路径（geo-map disaster-path，C 级）+ 收官两问。本课完成，下一单元：中国的河流。"
+              point: "灾害路径（geo-map disaster-path，C 级）+ 收官两问。本课完成，下一单元：中国的河流。"
             }
           ]
         }
@@ -587,8 +587,8 @@ window.GEOGRAPHY_DATA["dg09"] = {
               exploreTip: "河水最后流到哪？流入海洋的是外流河，流不进海洋的是内流河——先分类，再看特征。",
               blocks: [
                 { type: "lead", text: "按最终归宿，河流分两类：外流河与内流河。分类之后，看水文特征四要素。" },
-                { type: "text", html: "<strong>外流河 / 内流河</strong>（首现即定义）：最终流入海洋的叫<strong>外流河</strong>（长江、黄河、珠江）；未能流入海洋、中途消失或注入内陆湖泊的叫<strong>内流河</strong>（塔里木河）。外流区约占全国面积 2/3。<strong>分水岭</strong>：秦岭、南岭是重要的分水岭。" },
-                { type: "text", html: "<strong>水文特征四要素</strong>（首现即定义）：<strong>流量</strong>（水量大小）、<strong>汛期</strong>（水位上涨的季节）、<strong>含沙量</strong>（泥沙多少）、<strong>结冰期</strong>（冬季是否结冰）。" },
+                { type: "text", html: "<strong>外流河 / 内流河</strong>：最终流入海洋的叫<strong>外流河</strong>（长江、黄河、珠江）；未能流入海洋、中途消失或注入内陆湖泊的叫<strong>内流河</strong>（塔里木河）。外流区约占全国面积 2/3。<strong>分水岭</strong>：秦岭、南岭是重要的分水岭。" },
+                { type: "text", html: "<strong>水文特征四要素</strong>：<strong>流量</strong>（水量大小）、<strong>汛期</strong>（水位上涨的季节）、<strong>含沙量</strong>（泥沙多少）、<strong>结冰期</strong>（冬季是否结冰）。" },
                 { type: "text", html: "<strong>塔里木河</strong>：我国最长内流河（约 2179 千米），滋养着南疆的绿洲农业。" },
                 { type: "trap", text: "⚠️ 误区：“内流河不入海所以无用”——错！内流河滋养绿洲农业：塔里木河养育了南疆大片绿洲。河流的价值不只看入不入海。" },
                 { type: "slogan", text: "入海不入海，先分类；四要素，看水文。" }
@@ -658,7 +658,7 @@ window.GEOGRAPHY_DATA["dg09"] = {
                 { type: "text", html: "<strong>场层真值</strong>：5 条河流的内外流判定（答案见各题 params.answer）。<strong>UI 可达</strong>：逐题点选 → 即时判分 + 讲解。" },
                 { type: "slogan", text: "看归宿，不看长短。" }
               ],
-              point: "dg09.3.1-p2：内外流河判读 5 题（guess-verify）。场层真值见各题 answer；UI 可达为逐题判分。"
+              point: "内外流河判读 5 题（guess-verify）。场层真值见各题 answer；UI 可达为逐题判分。"
             },
             /* ================= p3：收官页 ================= */
             {
@@ -757,7 +757,7 @@ window.GEOGRAPHY_DATA["dg09"] = {
                 { type: "text", html: "<strong>场层真值</strong>：上中下游分段与特征（GeoBatch5.YANGTZE 冻结常量）。<strong>UI 可达</strong>：拖游标 → 分段特征读数。本图为 C 级剖面示意，不涉政区轮廓。" },
                 { type: "slogan", text: "一剖面，三段情：落差—水能，平缓—航运。" }
               ],
-              point: "dg09.3.2-p2：长江干流剖面（geo-map river-profile，C 级）。场层真值见 GeoBatch5.YANGTZE；UI 可达为拖游标看分段特征。"
+              point: "长江干流剖面（geo-map river-profile，C 级）。场层真值见 GeoBatch5.YANGTZE；UI 可达为拖游标看分段特征。"
             },
             /* ================= p3：收官页 ================= */
             {
@@ -822,7 +822,7 @@ window.GEOGRAPHY_DATA["dg09"] = {
               blocks: [
                 { type: "lead", text: "黄河 5464 千米，我国第二长河，呈巨大的“几”字形。发源于青藏高原巴颜喀拉山，注入渤海。" },
                 { type: "text", html: "<strong>水土流失</strong>：黄河泥沙主要来自<strong>黄土高原</strong>——土质疏松 + 植被破坏 + 暴雨集中，水土流失严重。黄河<strong>含沙量世界之最</strong>，但<strong>水量不大</strong>——水量和含沙量是两回事。" },
-                { type: "text", html: "<strong>地上河</strong>（首现即定义：河床高出两岸地面的河）：下游流经华北平原，水流平缓，泥沙淤积 → 河床不断抬高 → 在开封一带形成“地上悬河”。" },
+                { type: "text", html: "<strong>地上河</strong>（河床高出两岸地面的河）：下游流经华北平原，水流平缓，泥沙淤积 → 河床不断抬高 → 在开封一带形成“地上悬河”。" },
                 { type: "text", html: "<strong>治理</strong>：黄土高原<strong>治沙</strong>（植树种草、打坝淤地）+ 干流<strong>治水</strong>（小浪底水利枢纽调水调沙）+ 下游<strong>加固大堤</strong>。" },
                 { type: "trap", text: "⚠️ 误区：“黄河水量大”——错！黄河水量不大，含沙量才是世界之最。记住这对反差：水少沙多，这就是黄河的脾气。" },
                 { type: "slogan", text: "水少沙多，“几”字地上河；治沙治水加固堤。" }
@@ -857,7 +857,7 @@ window.GEOGRAPHY_DATA["dg09"] = {
                 { type: "text", html: "<strong>场层真值</strong>：地上河形成四阶段（本页文案四阶段；动画为 widget 硬编码示意，数据源 GeoBatch5.YELLOW_RIVER）。<strong>UI 可达</strong>：播放/拖进度 → 分阶段读数。本图为 C 级剖面示意，不涉政区轮廓。" },
                 { type: "slogan", text: "泥沙淤积河床高，地上悬河开封段。" }
               ],
-              point: "dg09.3.3-p2：地上河剖面动画（geo-map yellow-river，C 级）。场层真值见 GeoBatch5.YELLOW_RIVER；UI 可达为播放/拖进度看四阶段。"
+              point: "地上河剖面动画（geo-map yellow-river，C 级）。场层真值见 GeoBatch5.YELLOW_RIVER；UI 可达为播放/拖进度看四阶段。"
             },
             /* ================= p3：收官页 ================= */
             {

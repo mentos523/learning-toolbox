@@ -199,7 +199,7 @@ var ROUTE_SCENARIO = {
 var SUSTAIN_CASES = [
   { id: "weihu", name: "围湖造田（历史）",
     story: "上世纪，为多种粮食，湖区大规模围湖造田：耕地一时增加了。",
-    hint: "想一想：湖泊的调蓄洪水、净化水质功能被谁接管了？（认旧友 dg09.2.2）" },
+    hint: "想一想：湖泊的调蓄洪水、净化水质功能被谁接管了？（呼应 dg09.2.2）" },
   { id: "tuitian", name: "退田还湖（今)",
     story: "退田还湖、退耕还林：把湖还给湖，洪水有了“缓冲垫”。",
     hint: "发展没停：生态旅游、绿色农业接上了——“既发展又保护”。" },
@@ -837,7 +837,7 @@ function MonsoonTimelineView(box, params) {
       esc(ph.name) + "｜" + esc(ph.rain));
     stage.appendChild(badge);
     ro.innerHTML = "<strong>" + esc(ph.name) + "</strong>：" + esc(ph.note) +
-      "<br>记住：梅雨、伏旱都是季风“<strong>掉头</strong>”闹的（dg14.3.2 认旧友）——夏季风进退，雨带跟着走。";
+      "<br>记住：梅雨、伏旱都是季风“<strong>掉头</strong>”闹的（dg14.3.2 讲过）——夏季风进退，雨带跟着走。";
     cornerNote(svg, "示意｜月份为示意分期", 800, 420);
     store(recordKey, { month: m, phase: ph.key, ts: Date.now() });
   }

@@ -1031,7 +1031,7 @@ window.ENG_CH["gr09"] = {
                   why: "“习惯于”是 be used to doing——to 后面是 doing，不是原形。"
                 }
               ],
-              point: "三兄弟身份证：to 后原形（过去）/ doing（习惯）/ 被动（被用来）。",
+              point: "三兄弟的身份证就看 to 后面跟什么：used to 后跟动词原形，表过去常常；be used to 后跟 doing，表习惯于；be used to 后跟动词原形是被动，表被用来做。",
               pointScroll: true
             },
             {

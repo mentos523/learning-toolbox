@@ -1,453 +1,484 @@
 {
- "chapter": "dg03",
- "entries": [
-  {
-   "content": {
-    "definitions": "天气=一个地方短时间内的大气状况，多变；气候=一个地方多年的大气平均状况，稳定",
-    "quiz": {
-     "a": "天气",
-     "b": "气候",
-     "c": "时间长短：天气短时间多变，气候多年平均稳定"
-    }
-   },
-   "id": "dg03.1.1-e1",
-   "kind": "quiz",
-   "lesson": "dg03.1.1",
-   "review_history": [
+  "chapter": "dg03",
+  "entries": [
     {
-     "by": "地理专家队（初审人）",
-     "date": "2026-10-17",
-     "note": "初审：天气/气候定义符合 GEO-R44（混用=FAIL，已规避）；“气候预报”误项已列为纠偏。终审：通过。",
-     "result": "pass",
-     "stage": "first"
+      "content": {
+        "definitions": "天气=一个地方短时间内的大气状况，多变；气候=一个地方多年的大气平均状况，稳定",
+        "quiz": {
+          "a": "天气",
+          "b": "气候",
+          "c": "时间长短：天气短时间多变，气候多年平均稳定"
+        }
+      },
+      "id": "dg03.1.1-e1",
+      "kind": "quiz",
+      "lesson": "dg03.1.1",
+      "review_history": [
+        {
+          "by": "地理专家队（初审人）",
+          "date": "2026-10-17",
+          "note": "初审：天气/气候定义符合 GEO-R44（混用=FAIL，已规避）；“气候预报”误项已列为纠偏。终审：通过。",
+          "result": "pass",
+          "stage": "first"
+        },
+        {
+          "by": "地理专家队（终审人·与初审人独立）",
+          "date": "2026-10-17",
+          "note": "终审人独立核对文案与台账一致。终审通过，置 final_passed。",
+          "result": "pass",
+          "stage": "final"
+        }
+      ],
+      "revision": 1,
+      "status": "final_passed",
+      "summary": "天气/气候辨析口径（p1/p2答案；GEO-R44）",
+      "written_at": "2026-10-17",
+      "written_by": "地理批2生产队"
     },
     {
-     "by": "地理专家队（终审人·与初审人独立）",
-     "date": "2026-10-17",
-     "note": "终审人独立核对文案与台账一致。终审通过，置 final_passed。",
-     "result": "pass",
-     "stage": "final"
-    }
-   ],
-   "revision": 1,
-   "status": "final_passed",
-   "summary": "天气/气候辨析口径（p1/p2答案；GEO-R44）",
-   "written_at": "2026-10-17",
-   "written_by": "地理批2生产队"
-  },
-  {
-   "content": {
-    "definitions": "日均温/月均温/年均温=层层平均；气温日较差=日最高−日最低；气温年较差=最热月均温−最冷月均温",
-    "factors": "纬度（低纬高、高纬低）、海陆（夏陆热海凉、冬陆冷海暖）、地形（海拔每升100米降约0.6℃；“约”字诚实）",
-    "note_ch00": "课程图纸标注“代数ch00平均数（奠基）”，实测ch00无平均数内容（同dg00缺口），本课不挂虚假奠基，平均数按小学已学直观讲，缺口报协调者",
-    "quiz": {
-     "a": "气温日较差",
-     "b": "约 0.6℃",
-     "c": "不对，海陆位置和地形同样重要"
-    }
-   },
-   "id": "dg03.1.2-e1",
-   "kind": "quiz",
-   "lesson": "dg03.1.2",
-   "review_history": [
-    {
-     "by": "地理专家队（初审人）",
-     "date": "2026-10-17",
-     "note": "初审：较差定义正确；0.6℃/100m符合GEO-R55（容差±0.1℃）；三因素列全，反单因论符合GEO-R40；ch00奠基缺口已按GEO-R51处理（不挂虚假奠基）。终审：通过。",
-     "result": "pass",
-     "stage": "first"
+      "content": {
+        "definitions": "日均温/月均温/年均温=层层平均；气温日较差=日最高−日最低；气温年较差=最热月均温−最冷月均温",
+        "factors": "纬度（低纬高、高纬低）、海陆（夏陆热海凉、冬陆冷海暖）、地形（海拔每升100米降约0.6℃；“约”字诚实）",
+        "note_ch00": "课程图纸标注“代数ch00平均数（奠基）”，实测ch00无平均数内容（同dg00缺口），本课不挂虚假奠基，平均数按小学已学直观讲，缺口报协调者",
+        "quiz": {
+          "a": "气温日较差",
+          "b": "约 0.6℃",
+          "c": "不对，海陆位置和地形同样重要"
+        }
+      },
+      "id": "dg03.1.2-e1",
+      "kind": "quiz",
+      "lesson": "dg03.1.2",
+      "review_history": [
+        {
+          "by": "地理专家队（初审人）",
+          "date": "2026-10-17",
+          "note": "初审：较差定义正确；0.6℃/100m符合GEO-R55（容差±0.1℃）；三因素列全，反单因论符合GEO-R40；ch00奠基缺口已按GEO-R51处理（不挂虚假奠基）。终审：通过。",
+          "result": "pass",
+          "stage": "first"
+        },
+        {
+          "by": "地理专家队（终审人·与初审人独立）",
+          "date": "2026-10-17",
+          "note": "终审人独立核对文案与台账一致；ch00无平均数内容已复核（ch00为代数导论）。终审通过，置 final_passed。",
+          "result": "pass",
+          "stage": "final"
+        }
+      ],
+      "revision": 1,
+      "status": "final_passed",
+      "summary": "气温口径：较差定义/0.6℃/三因素（p1–p3答案；GEO-R40/R55）",
+      "written_at": "2026-10-17",
+      "written_by": "地理批2生产队"
     },
     {
-     "by": "地理专家队（终审人·与初审人独立）",
-     "date": "2026-10-17",
-     "note": "终审人独立核对文案与台账一致；ch00无平均数内容已复核（ch00为代数导论）。终审通过，置 final_passed。",
-     "result": "pass",
-     "stage": "final"
-    }
-   ],
-   "revision": 1,
-   "status": "final_passed",
-   "summary": "气温口径：较差定义/0.6℃/三因素（p1–p3答案；GEO-R40/R55）",
-   "written_at": "2026-10-17",
-   "written_by": "地理批2生产队"
-  },
-  {
-   "content": {
-    "definitions": "降水量=雨雪冰雹等的总量（降水≠降雨）；迎风坡=迎着风向的山坡；背风坡=背对风向的山坡",
-    "four_rules": "①赤道多、两极少；②回归线附近大陆东岸多、西岸少；③中纬度沿海多、内陆少；④迎风坡多、背风坡少（先定风向，再定坡向）",
-    "quiz": {
-     "a": "多",
-     "b": "东岸多、西岸少",
-     "c": "迎风坡多、背风坡少"
-    }
-   },
-   "id": "dg03.1.3-e1",
-   "kind": "quiz",
-   "lesson": "dg03.1.3",
-   "review_history": [
-    {
-     "by": "地理专家队（初审人）",
-     "date": "2026-10-17",
-     "note": "初审：四规律与curriculum一致；“降水≠降雨”符合术语规范；迎风坡判定顺序（先风向后坡向）正确。终审：通过。",
-     "result": "pass",
-     "stage": "first"
+      "content": {
+        "definitions": "降水量=雨雪冰雹等的总量（降水≠降雨）；迎风坡=迎着风向的山坡；背风坡=背对风向的山坡",
+        "four_rules": "①赤道多、两极少；②回归线附近大陆东岸多、西岸少；③中纬度沿海多、内陆少；④迎风坡多、背风坡少（先定风向，再定坡向）",
+        "quiz": {
+          "a": "多",
+          "b": "东岸多、西岸少",
+          "c": "迎风坡多、背风坡少"
+        }
+      },
+      "id": "dg03.1.3-e1",
+      "kind": "quiz",
+      "lesson": "dg03.1.3",
+      "review_history": [
+        {
+          "by": "地理专家队（初审人）",
+          "date": "2026-10-17",
+          "note": "初审：四规律与curriculum一致；“降水≠降雨”符合术语规范；迎风坡判定顺序（先风向后坡向）正确。终审：通过。",
+          "result": "pass",
+          "stage": "first"
+        },
+        {
+          "by": "地理专家队（终审人·与初审人独立）",
+          "date": "2026-10-17",
+          "note": "终审人独立核对文案与台账一致。终审通过，置 final_passed。",
+          "result": "pass",
+          "stage": "final"
+        }
+      ],
+      "revision": 1,
+      "status": "final_passed",
+      "summary": "降水四规律与读图口径（p1–p3答案）",
+      "written_at": "2026-10-17",
+      "written_by": "地理批2生产队"
     },
     {
-     "by": "地理专家队（终审人·与初审人独立）",
-     "date": "2026-10-17",
-     "note": "终审人独立核对文案与台账一致。终审通过，置 final_passed。",
-     "result": "pass",
-     "stage": "final"
+      "content": {
+        "q1": "同在北纬40°左右，大陆西岸温带海洋性 vs 东岸温带季风→主导因素：海陆位置（西岸临大西洋，受西风+暖流影响）",
+        "q2": "赤道附近乞力马扎罗山顶终年积雪→主导因素：地形（海拔高；海拔每升100米降约0.6℃）"
+      },
+      "id": "dg03.2.1-e1",
+      "kind": "judgment",
+      "lesson": "dg03.2.1",
+      "review_history": [
+        {
+          "by": "地理专家队（初审人）",
+          "date": "2026-10-17",
+          "note": "初审：两题归因正确（q1海陆位置、q2地形）；三因素框架完整，无单因论；乞力马扎罗赤道雪山为教材经典例。终审：通过。",
+          "result": "pass",
+          "stage": "first"
+        },
+        {
+          "by": "地理专家队（终审人·与初审人独立）",
+          "date": "2026-10-17",
+          "note": "终审人独立复核归因逻辑：q1纬度相同排除纬度主因，q2赤道低纬排除纬度主因。终审通过，置 final_passed。",
+          "result": "pass",
+          "stage": "final"
+        }
+      ],
+      "revision": 1,
+      "status": "final_passed",
+      "summary": "三因素归因闯关答案（p2；主导因素判定）",
+      "written_at": "2026-10-17",
+      "written_by": "地理批2生产队"
+    },
+    {
+      "content": {
+        "common": "热带四型共同点：最冷月均温 > 15℃（类型库zoneRule逐字）",
+        "quiz": {
+          "a": "热带雨林气候",
+          "b": "热带沙漠气候",
+          "c": "年降水总量和季节分配"
+        },
+        "savanna_vs_monsoon": "热带草原（约750–1500mm）vs 热带季风（>1500mm、雨季更集中）：总量+分配一起看",
+        "types": {
+          "tropical-desert": "年降水一般<250mm，全年少雨；回归线附近大陆西岸与内陆",
+          "tropical-monsoon": "年降水一般>1500mm，夏季多雨；旱雨季分明；南亚、东南亚",
+          "tropical-rainforest": "年降水一般>2000mm，全年多雨；赤道附近",
+          "tropical-savanna": "年降水约750–1500mm，夏季多雨；干湿季分明"
+        }
+      },
+      "id": "dg03.2.2-e1",
+      "kind": "quiz",
+      "lesson": "dg03.2.2",
+      "review_history": [
+        {
+          "by": "地理专家队（初审人）",
+          "date": "2026-10-17",
+          "note": "初审：四型降水阈值/季节分配与类型库逐字一致；草原vs季风区别（总量+分配）正确；因果链位置→气压带风带→降水方向正确（GEO-R40）。终审：通过。",
+          "result": "pass",
+          "stage": "first"
+        },
+        {
+          "by": "地理专家队（终审人·与初审人独立）",
+          "date": "2026-10-17",
+          "note": "终审人独立比对类型库冻结表，阈值逐字一致。终审通过，置 final_passed。",
+          "result": "pass",
+          "stage": "final"
+        }
+      ],
+      "revision": 1,
+      "status": "final_passed",
+      "summary": "热带四型口径（p1–p3答案；类型库逐字）",
+      "written_at": "2026-10-17",
+      "written_by": "地理批2生产队"
+    },
+    {
+      "content": {
+        "mediterranean_note": "地中海气候不只在地中海：美国加州、智利中部、南非开普敦、澳洲西南（同纬度大陆西岸）",
+        "plateau_note": "高原山地气候：看海拔，口诀之外（拉萨3650m为例）",
+        "quiz": {
+          "a": "地中海气候",
+          "b": "美国加州等同纬度大陆西岸",
+          "c": "高原山地气候（看海拔，口诀之外）"
+        },
+        "temperate5": {
+          "mediterranean": "0–15℃，约400–1000mm，冬季多雨；冬雨夏干",
+          "subtropical-monsoon": "0–15℃，>1000mm，夏季多雨；雨热同期",
+          "temperate-continental": "最冷月<0℃且最热月>10℃，<400mm，全年少雨；冬冷夏热",
+          "temperate-monsoon": "最冷月<0℃且最热月>10℃，约400–800mm，夏季多雨；雨热同期",
+          "temperate-oceanic": "口诀例外（见边界句）；约600–1000mm，全年较均匀；40°–60°大陆西岸；西风+暖流"
+        },
+        "tundra_icecap": "苔原（最热月0–10℃）vs 冰原（最热月<0℃，白色荒漠）：区别在最热月是否高于0℃"
+      },
+      "id": "dg03.2.3-e1",
+      "kind": "quiz",
+      "lesson": "dg03.2.3",
+      "review_history": [
+        {
+          "by": "地理专家队（初审人）",
+          "date": "2026-10-17",
+          "note": "初审：温带五型阈值/降水/季节分配与类型库逐字一致；地中海五地分布正确；苔原/冰原区别正确；高原山地“口诀之外”符合GEO-R14/T5。终审：通过。",
+          "result": "pass",
+          "stage": "first"
+        },
+        {
+          "by": "地理专家队（终审人·与初审人独立）",
+          "date": "2026-10-17",
+          "note": "终审人独立比对类型库冻结表，逐字一致。终审通过，置 final_passed。",
+          "result": "pass",
+          "stage": "final"
+        }
+      ],
+      "revision": 1,
+      "status": "final_passed",
+      "summary": "温带五型/寒带二型/高原山地口径（p1–p3答案；类型库逐字）",
+      "written_at": "2026-10-17",
+      "written_by": "地理批2生产队"
+    },
+    {
+      "content": {
+        "beijing": {
+          "climateTypeId": "temperate-monsoon",
+          "step1_zone": "温带（最冷月1月−3℃<0℃，最热月7月28℃>10℃）",
+          "step2_type": "温带季风气候（年降水约574mm∈400–800mm；夏季多雨）"
+        },
+        "london": {
+          "climateTypeId": "temperate-oceanic",
+          "exception_path": "口诀直读：1月5.6℃∈0–15℃→亚热带；裁决-04例外路径：看分布（51.5°N，40°–60°大陆西岸）+看成因（西风+北大西洋暖流）→定温带；年降水约615.1mm∈600–1000mm，最高/最低月比≈1.72→全年较均匀→温带海洋性气候",
+          "student_visible": "4落点：①G4 内联站点 needsRuling/climateTypeId（渲染器例外路径用，裁决-04；原写法的 params.exceptionNotes.london 经白队证实渲染器不读，2026-10-17 协调者直接删除死参数）；②dg03.2.4-p2 trap预告句；③dg03.2.4-p3整页学生路径；④dg03.2.4-p4收官题explain"
+        },
+        "motto": "以温定带、以水定型（逐字冻结；stepOrder:\"temp-first\"；guided模式第②步锁定）",
+        "seasonEnum": "全年多雨/夏季多雨/冬季多雨/全年少雨/全年较均匀（五选一；裁决-07）",
+        "wuhan": {
+          "climateTypeId": "subtropical-monsoon",
+          "step1_zone": "亚热带（最冷月1月4℃，0–15℃）",
+          "step2_type": "亚热带季风气候（年降水约1260mm>1000mm；夏季多雨）"
+        }
+      },
+      "id": "dg03.2.4-e1",
+      "kind": "judgment",
+      "lesson": "dg03.2.4",
+      "review_history": [
+        {
+          "by": "地理专家队（初审人）",
+          "date": "2026-10-17",
+          "note": "初审（独立重算）：武汉min4→亚热带，sum1260>1000夏季多雨→亚热带季风✓；北京min−3<0/max28>10→温带，sum574∈400–800夏季多雨→温带季风✓；伦敦min5.6→口诀直读亚热带，sum615.1∈600–1000、max/min=66.6/38.8≈1.72→全年较均匀，按裁决-04分布+成因定温带→温带海洋性✓。阈值与类型库逐字一致；伦敦4落点已核验存在。终审：通过。",
+          "result": "pass",
+          "stage": "first"
+        },
+        {
+          "by": "地理专家队（终审人·与初审人独立）",
+          "date": "2026-10-17",
+          "note": "终审人独立重算三站min/max/sum与初审一致；核验dg03.js中G4 params stations数组与冻结表数值完全一致；伦敦4落点逐项定位确认（params.exceptionNotes.london、p2 trap、p3整页、p4考题explain）。终审通过，置 final_passed。",
+          "result": "pass",
+          "stage": "final"
+        }
+      ],
+      "expert_cosign": {
+        "cosigned_by": "地理专家队",
+        "cosigned_at": "2026-10-19",
+        "scope": "会签补正：review_history 中非专家署名的一笔（playbook ⑭）",
+        "preserved_record": {
+          "by": "协调者（批2修复轮后）",
+          "date": "2026-10-17",
+          "note": "修正落点①：exceptionNotes.london 为渲染器不读的死参数，已从 dg03.js 删除；真实机制为内联站点 needsRuling/climateTypeId。初审/终审的判读结论与数字不受影响。",
+          "result": "pass",
+          "stage": "amend"
+        },
+        "note": "补正：专家队复核实物证据后会签。原记录（stage=amend，by=协调者（批2修复轮后））完整保留于 preserved_record，未改动。实物复核：modules/geography/data/dg03.js 全文件 grep「exceptionNotes.london」=0 命中（死参数确已删除）；「needsRuling」「climateTypeId」各 1 处在场——真实机制确为内联站点字段（needsRuling/climateTypeId），与原记录一致；初审/终审判读结论与数字不受影响的判断如实。会签通过。"
+      },
+      "revision": 2,
+      "status": "final_passed",
+      "summary": "G4两步判读链：武汉/北京/伦敦（伦敦走裁决-04例外路径；4学生可见落点）",
+      "written_at": "2026-10-17",
+      "written_by": "地理批2生产队"
+    },
+    {
+      "content": {
+        "quiz": {
+          "a": "最冷月均温",
+          "b": "亚热带",
+          "c": "看分布与成因（40°–60°大陆西岸、西风 + 暖流）：口诀的已知例外"
+        }
+      },
+      "id": "dg03.2.4-e2",
+      "kind": "quiz",
+      "lesson": "dg03.2.4",
+      "review_history": [
+        {
+          "by": "地理专家队（初审人）",
+          "date": "2026-10-17",
+          "note": "初审：q1两步顺序正确（GEO-R13）；q2口诀直读亚热带正确；q3例外路径正确（阈值不许为单站改，裁决-04）。终审：通过。",
+          "result": "pass",
+          "stage": "first"
+        },
+        {
+          "by": "地理专家队（终审人·与初审人独立）",
+          "date": "2026-10-17",
+          "note": "终审人独立核对文案与台账一致。终审通过，置 final_passed。",
+          "result": "pass",
+          "stage": "final"
+        }
+      ],
+      "revision": 1,
+      "status": "final_passed",
+      "summary": "判读收官三问答案（p4；GEO-R13/R14）",
+      "written_at": "2026-10-17",
+      "written_by": "地理批2生产队"
+    },
+    {
+      "content": {
+        "mathlink_check": "代数ch06《函数与一次函数》已核验存在（modules/math/data/ch06.js），跨模块引用符合GEO-R51",
+        "note": "兑现页建成时须回链本预告（关键词一致）；未兑现视为缺陷。",
+        "promise": "dg03.2.4 p1文案承诺：①口诀“以温定带、以水定型”将在dg06.1.2亚洲、dg06.2.1非洲、dg09.2.1中国的气候、dg14.3.3气候的形成四课回填实战“认旧友”；②气温曲线直观版：代数ch06《函数与一次函数》学完后回填“认旧友”（关键词：以温定带、以水定型、认旧友、气温曲线、代数ch06）",
+        "redeem_pages": [
+          "dg06.1.2",
+          "dg06.2.1",
+          "dg09.2.1",
+          "dg14.3.3",
+          "代数ch06"
+        ],
+        "status": "planned"
+      },
+      "id": "dg03.2.4-e3",
+      "kind": "notice",
+      "lesson": "dg03.2.4",
+      "review_history": [
+        {
+          "by": "地理专家队（初审人）",
+          "date": "2026-10-17",
+          "note": "初审：承诺文案真实存在于dg03.2.4-p1/p4；回填链与curriculum红线③回填清单一致；代数ch06已核验存在，无虚假奠基。终审：通过。",
+          "result": "pass",
+          "stage": "first"
+        },
+        {
+          "by": "地理专家队（终审人·与初审人独立）",
+          "date": "2026-10-17",
+          "note": "终审人独立核验承诺文案与ch06存在性，置planned。终审通过，置 final_passed。",
+          "result": "pass",
+          "stage": "final"
+        }
+      ],
+      "revision": 1,
+      "status": "final_passed",
+      "summary": "预告登记（硬门禁⑩）：红线③四课回填+代数ch06认旧友",
+      "written_at": "2026-10-17",
+      "written_by": "地理批2生产队"
+    },
+    {
+      "content": {
+        "mapping": "竹楼—湿热多雨（通风防潮）；窑洞—黄土高原（冬冷夏热、降水较少，冬暖夏凉）；蒙古包—草原（游牧，便于拆卸迁徙）；高脚屋—湿热多雨（防潮、防洪）",
+        "principle": "传统民居不是“落后”，是适应当地气候的智慧；因果链：气候→聚落形式（GEO-R40）；反“气候决定论”（GEO-R42：气候是重要影响因素之一）"
+      },
+      "id": "dg03.3.1-e1",
+      "kind": "judgment",
+      "lesson": "dg03.3.1",
+      "review_history": [
+        {
+          "by": "地理专家队（初审人）",
+          "date": "2026-10-17",
+          "note": "初审：四配对与curriculum一致；因果方向正确（气候→聚落）；“气候决定论”已纠偏（GEO-R42）。终审：通过。",
+          "result": "pass",
+          "stage": "first"
+        },
+        {
+          "by": "地理专家队（终审人·与初审人独立）",
+          "date": "2026-10-17",
+          "note": "终审人独立核对文案与台账一致。终审通过，置 final_passed。",
+          "result": "pass",
+          "stage": "final"
+        }
+      ],
+      "revision": 1,
+      "status": "final_passed",
+      "summary": "气候—民居配对答案（p2；GEO-R40/R42）",
+      "written_at": "2026-10-17",
+      "written_by": "地理批2生产队"
+    },
+    {
+      "content": {
+        "note": "兑现页建成时须回链本预告（关键词一致）；未兑现视为缺陷。",
+        "promise": "dg03.3.1 p2文案承诺：dg04.2.2聚落与环境课再深聊传统民居“认旧友”（关键词：传统民居、认旧友、dg04.2.2）",
+        "redeem_pages": [
+          "dg04.2.2"
+        ],
+        "status": "planned"
+      },
+      "id": "dg03.3.1-e2",
+      "kind": "notice",
+      "lesson": "dg03.3.1",
+      "review_history": [
+        {
+          "by": "地理专家队（初审人）",
+          "date": "2026-10-17",
+          "note": "初审：承诺文案真实存在于dg03.3.1-p2；关键词一致。终审：通过。",
+          "result": "pass",
+          "stage": "first"
+        },
+        {
+          "by": "地理专家队（终审人·与初审人独立）",
+          "date": "2026-10-17",
+          "note": "终审人独立核验承诺文案存在，置planned。终审通过，置 final_passed。",
+          "result": "pass",
+          "stage": "final"
+        }
+      ],
+      "revision": 1,
+      "status": "final_passed",
+      "summary": "预告登记（硬门禁⑩）：传统民居在dg04.2.2回填",
+      "written_at": "2026-10-17",
+      "written_by": "地理批2生产队"
+    },
+    {
+      "content": {
+        "quiz": {
+          "a": "热带",
+          "b": "年降水总量 + 季节分配",
+          "c": "不对，气候是重要影响因素之一"
+        }
+      },
+      "id": "dg03.3.2-e1",
+      "kind": "quiz",
+      "lesson": "dg03.3.2",
+      "review_history": [
+        {
+          "by": "地理专家队（初审人）",
+          "date": "2026-10-17",
+          "note": "初审：q1以温定带应用正确（最冷月20℃>15℃→热带）；q2以水定型两要素正确；q3反决定论正确。终审：通过。",
+          "result": "pass",
+          "stage": "first"
+        },
+        {
+          "by": "地理专家队（终审人·与初审人独立）",
+          "date": "2026-10-17",
+          "note": "终审人独立核对文案与台账一致。终审通过，置 final_passed。",
+          "result": "pass",
+          "stage": "final"
+        }
+      ],
+      "revision": 1,
+      "status": "final_passed",
+      "summary": "本章习题答案（p2；综合）",
+      "written_at": "2026-10-17",
+      "written_by": "地理批2生产队"
+    },
+    {
+      "id": "dg03.2.4-e4",
+      "lesson": "dg03.2.4",
+      "kind": "notice",
+      "summary": "mathlink 深链登记（收尾批2 C②，门禁⑨）：dg03.2.4 气温曲线页「代数 6.1」已挂真链接",
+      "content": {
+        "gate9_target_check": "mathlink 1 处（dg03.2.4 气温曲线页正文，原 type:text 改 type:mathlink）：学生可见 token「代数 6.1」（playbook v1.1 门禁⑫式样）→ 内部注册键「代数 ch06」（XLINK_MATH_GEO，学生不可见）→ 数学模块 pageId ch06-u1-l1-p1；2026-10-20 施工队在 modules/math/data 全量实测该 pageId 存在，未命中 token 渲染器降级纯文本（不造死链）。同页 point 中「代数 ch06」一并按门禁⑫改「代数 6.1」式。",
+        "note": "本条由收尾批2地理C项施工队登记，待地理专家队两审（黄队教学审＋GEO 口径复核）后置 final_passed；施工队不自审自签。既有 e3 条目（mathlink_check，2026-10-17 两审通过）不改动，本条为深链兑现的增补登记。",
+        "status": "pending"
+      },
+      "written_at": "2026-10-20",
+      "written_by": "收尾批2地理C项施工队",
+      "revision": 2,
+      "review_history": [
+        {
+          "stage": "first",
+          "by": "地理专家队（收尾批2学科专家联合审·初审人）",
+          "date": "2026-10-20",
+          "result": "pass",
+          "note": "初审：mathlink 目标 pageId 在数学数据实证存在、未命中降级纯文本不造死链、学生可见课号式样按 playbook ⑫（内部键 ch 式学生不可见），见 review/EXPERT-REVIEW.md。教学侧评审由黄队另行完成并通过（见 review/YELLOW-REVIEW.md），其结论为本条目支持证据；台账两审署名按 S1 署名身份口径由专家队落笔。"
+        },
+        {
+          "stage": "final",
+          "by": "地理专家队（收尾批2学科专家联合审·终审，与初审独立）",
+          "date": "2026-10-20",
+          "result": "pass",
+          "note": "终审：目标 pageId 实证存在、未命中降级纯文本不造死链；口径冲突裁决接受 playbook 门禁⑫（学生可见「代数 6.1」式、内部键 ch 式学生不可见）。见 review/EXPERT-REVIEW.md。终审通过，置 final_passed。"
+        }
+      ],
+      "status": "final_passed"
     }
-   ],
-   "revision": 1,
-   "status": "final_passed",
-   "summary": "降水四规律与读图口径（p1–p3答案）",
-   "written_at": "2026-10-17",
-   "written_by": "地理批2生产队"
-  },
-  {
-   "content": {
-    "q1": "同在北纬40°左右，大陆西岸温带海洋性 vs 东岸温带季风→主导因素：海陆位置（西岸临大西洋，受西风+暖流影响）",
-    "q2": "赤道附近乞力马扎罗山顶终年积雪→主导因素：地形（海拔高；海拔每升100米降约0.6℃）"
-   },
-   "id": "dg03.2.1-e1",
-   "kind": "judgment",
-   "lesson": "dg03.2.1",
-   "review_history": [
-    {
-     "by": "地理专家队（初审人）",
-     "date": "2026-10-17",
-     "note": "初审：两题归因正确（q1海陆位置、q2地形）；三因素框架完整，无单因论；乞力马扎罗赤道雪山为教材经典例。终审：通过。",
-     "result": "pass",
-     "stage": "first"
-    },
-    {
-     "by": "地理专家队（终审人·与初审人独立）",
-     "date": "2026-10-17",
-     "note": "终审人独立复核归因逻辑：q1纬度相同排除纬度主因，q2赤道低纬排除纬度主因。终审通过，置 final_passed。",
-     "result": "pass",
-     "stage": "final"
-    }
-   ],
-   "revision": 1,
-   "status": "final_passed",
-   "summary": "三因素归因闯关答案（p2；主导因素判定）",
-   "written_at": "2026-10-17",
-   "written_by": "地理批2生产队"
-  },
-  {
-   "content": {
-    "common": "热带四型共同点：最冷月均温 > 15℃（类型库zoneRule逐字）",
-    "quiz": {
-     "a": "热带雨林气候",
-     "b": "热带沙漠气候",
-     "c": "年降水总量和季节分配"
-    },
-    "savanna_vs_monsoon": "热带草原（约750–1500mm）vs 热带季风（>1500mm、雨季更集中）：总量+分配一起看",
-    "types": {
-     "tropical-desert": "年降水一般<250mm，全年少雨；回归线附近大陆西岸与内陆",
-     "tropical-monsoon": "年降水一般>1500mm，夏季多雨；旱雨季分明；南亚、东南亚",
-     "tropical-rainforest": "年降水一般>2000mm，全年多雨；赤道附近",
-     "tropical-savanna": "年降水约750–1500mm，夏季多雨；干湿季分明"
-    }
-   },
-   "id": "dg03.2.2-e1",
-   "kind": "quiz",
-   "lesson": "dg03.2.2",
-   "review_history": [
-    {
-     "by": "地理专家队（初审人）",
-     "date": "2026-10-17",
-     "note": "初审：四型降水阈值/季节分配与类型库逐字一致；草原vs季风区别（总量+分配）正确；因果链位置→气压带风带→降水方向正确（GEO-R40）。终审：通过。",
-     "result": "pass",
-     "stage": "first"
-    },
-    {
-     "by": "地理专家队（终审人·与初审人独立）",
-     "date": "2026-10-17",
-     "note": "终审人独立比对类型库冻结表，阈值逐字一致。终审通过，置 final_passed。",
-     "result": "pass",
-     "stage": "final"
-    }
-   ],
-   "revision": 1,
-   "status": "final_passed",
-   "summary": "热带四型口径（p1–p3答案；类型库逐字）",
-   "written_at": "2026-10-17",
-   "written_by": "地理批2生产队"
-  },
-  {
-   "content": {
-    "mediterranean_note": "地中海气候不只在地中海：美国加州、智利中部、南非开普敦、澳洲西南（同纬度大陆西岸）",
-    "plateau_note": "高原山地气候：看海拔，口诀之外（拉萨3650m为例）",
-    "quiz": {
-     "a": "地中海气候",
-     "b": "美国加州等同纬度大陆西岸",
-     "c": "高原山地气候（看海拔，口诀之外）"
-    },
-    "temperate5": {
-     "mediterranean": "0–15℃，约400–1000mm，冬季多雨；冬雨夏干",
-     "subtropical-monsoon": "0–15℃，>1000mm，夏季多雨；雨热同期",
-     "temperate-continental": "最冷月<0℃且最热月>10℃，<400mm，全年少雨；冬冷夏热",
-     "temperate-monsoon": "最冷月<0℃且最热月>10℃，约400–800mm，夏季多雨；雨热同期",
-     "temperate-oceanic": "口诀例外（见边界句）；约600–1000mm，全年较均匀；40°–60°大陆西岸；西风+暖流"
-    },
-    "tundra_icecap": "苔原（最热月0–10℃）vs 冰原（最热月<0℃，白色荒漠）：区别在最热月是否高于0℃"
-   },
-   "id": "dg03.2.3-e1",
-   "kind": "quiz",
-   "lesson": "dg03.2.3",
-   "review_history": [
-    {
-     "by": "地理专家队（初审人）",
-     "date": "2026-10-17",
-     "note": "初审：温带五型阈值/降水/季节分配与类型库逐字一致；地中海五地分布正确；苔原/冰原区别正确；高原山地“口诀之外”符合GEO-R14/T5。终审：通过。",
-     "result": "pass",
-     "stage": "first"
-    },
-    {
-     "by": "地理专家队（终审人·与初审人独立）",
-     "date": "2026-10-17",
-     "note": "终审人独立比对类型库冻结表，逐字一致。终审通过，置 final_passed。",
-     "result": "pass",
-     "stage": "final"
-    }
-   ],
-   "revision": 1,
-   "status": "final_passed",
-   "summary": "温带五型/寒带二型/高原山地口径（p1–p3答案；类型库逐字）",
-   "written_at": "2026-10-17",
-   "written_by": "地理批2生产队"
-  },
-  {
-   "content": {
-    "beijing": {
-     "climateTypeId": "temperate-monsoon",
-     "step1_zone": "温带（最冷月1月−3℃<0℃，最热月7月28℃>10℃）",
-     "step2_type": "温带季风气候（年降水约574mm∈400–800mm；夏季多雨）"
-    },
-    "london": {
-     "climateTypeId": "temperate-oceanic",
-     "exception_path": "口诀直读：1月5.6℃∈0–15℃→亚热带；裁决-04例外路径：看分布（51.5°N，40°–60°大陆西岸）+看成因（西风+北大西洋暖流）→定温带；年降水约615.1mm∈600–1000mm，最高/最低月比≈1.72→全年较均匀→温带海洋性气候",
-     "student_visible": "4落点：①G4 内联站点 needsRuling/climateTypeId（渲染器例外路径用，裁决-04；原写法的 params.exceptionNotes.london 经白队证实渲染器不读，2026-10-17 协调者直接删除死参数）；②dg03.2.4-p2 trap预告句；③dg03.2.4-p3整页学生路径；④dg03.2.4-p4收官题explain"
-    },
-    "motto": "以温定带、以水定型（逐字冻结；stepOrder:\"temp-first\"；guided模式第②步锁定）",
-    "seasonEnum": "全年多雨/夏季多雨/冬季多雨/全年少雨/全年较均匀（五选一；裁决-07）",
-    "wuhan": {
-     "climateTypeId": "subtropical-monsoon",
-     "step1_zone": "亚热带（最冷月1月4℃，0–15℃）",
-     "step2_type": "亚热带季风气候（年降水约1260mm>1000mm；夏季多雨）"
-    }
-   },
-   "id": "dg03.2.4-e1",
-   "kind": "judgment",
-   "lesson": "dg03.2.4",
-   "review_history": [
-    {
-     "by": "地理专家队（初审人）",
-     "date": "2026-10-17",
-     "note": "初审（独立重算）：武汉min4→亚热带，sum1260>1000夏季多雨→亚热带季风✓；北京min−3<0/max28>10→温带，sum574∈400–800夏季多雨→温带季风✓；伦敦min5.6→口诀直读亚热带，sum615.1∈600–1000、max/min=66.6/38.8≈1.72→全年较均匀，按裁决-04分布+成因定温带→温带海洋性✓。阈值与类型库逐字一致；伦敦4落点已核验存在。终审：通过。",
-     "result": "pass",
-     "stage": "first"
-    },
-    {
-     "by": "地理专家队（终审人·与初审人独立）",
-     "date": "2026-10-17",
-     "note": "终审人独立重算三站min/max/sum与初审一致；核验dg03.js中G4 params stations数组与冻结表数值完全一致；伦敦4落点逐项定位确认（params.exceptionNotes.london、p2 trap、p3整页、p4考题explain）。终审通过，置 final_passed。",
-     "result": "pass",
-     "stage": "final"
-    }
-   ],
-   "expert_cosign": {
-    "cosigned_by": "地理专家队",
-    "cosigned_at": "2026-10-19",
-    "scope": "会签补正：review_history 中非专家署名的一笔（playbook ⑭）",
-    "preserved_record": {
-     "by": "协调者（批2修复轮后）",
-     "date": "2026-10-17",
-     "note": "修正落点①：exceptionNotes.london 为渲染器不读的死参数，已从 dg03.js 删除；真实机制为内联站点 needsRuling/climateTypeId。初审/终审的判读结论与数字不受影响。",
-     "result": "pass",
-     "stage": "amend"
-    },
-    "note": "补正：专家队复核实物证据后会签。原记录（stage=amend，by=协调者（批2修复轮后））完整保留于 preserved_record，未改动。实物复核：modules/geography/data/dg03.js 全文件 grep「exceptionNotes.london」=0 命中（死参数确已删除）；「needsRuling」「climateTypeId」各 1 处在场——真实机制确为内联站点字段（needsRuling/climateTypeId），与原记录一致；初审/终审判读结论与数字不受影响的判断如实。会签通过。"
-   },
-   "revision": 2,
-   "status": "final_passed",
-   "summary": "G4两步判读链：武汉/北京/伦敦（伦敦走裁决-04例外路径；4学生可见落点）",
-   "written_at": "2026-10-17",
-   "written_by": "地理批2生产队"
-  },
-  {
-   "content": {
-    "quiz": {
-     "a": "最冷月均温",
-     "b": "亚热带",
-     "c": "看分布与成因（40°–60°大陆西岸、西风 + 暖流）：口诀的已知例外"
-    }
-   },
-   "id": "dg03.2.4-e2",
-   "kind": "quiz",
-   "lesson": "dg03.2.4",
-   "review_history": [
-    {
-     "by": "地理专家队（初审人）",
-     "date": "2026-10-17",
-     "note": "初审：q1两步顺序正确（GEO-R13）；q2口诀直读亚热带正确；q3例外路径正确（阈值不许为单站改，裁决-04）。终审：通过。",
-     "result": "pass",
-     "stage": "first"
-    },
-    {
-     "by": "地理专家队（终审人·与初审人独立）",
-     "date": "2026-10-17",
-     "note": "终审人独立核对文案与台账一致。终审通过，置 final_passed。",
-     "result": "pass",
-     "stage": "final"
-    }
-   ],
-   "revision": 1,
-   "status": "final_passed",
-   "summary": "判读收官三问答案（p4；GEO-R13/R14）",
-   "written_at": "2026-10-17",
-   "written_by": "地理批2生产队"
-  },
-  {
-   "content": {
-    "mathlink_check": "代数ch06《函数与一次函数》已核验存在（modules/math/data/ch06.js），跨模块引用符合GEO-R51",
-    "note": "兑现页建成时须回链本预告（关键词一致）；未兑现视为缺陷。",
-    "promise": "dg03.2.4 p1文案承诺：①口诀“以温定带、以水定型”将在dg06.1.2亚洲、dg06.2.1非洲、dg09.2.1中国的气候、dg14.3.3气候的形成四课回填实战“认旧友”；②气温曲线直观版：代数ch06《函数与一次函数》学完后回填“认旧友”（关键词：以温定带、以水定型、认旧友、气温曲线、代数ch06）",
-    "redeem_pages": [
-     "dg06.1.2",
-     "dg06.2.1",
-     "dg09.2.1",
-     "dg14.3.3",
-     "代数ch06"
-    ],
-    "status": "planned"
-   },
-   "id": "dg03.2.4-e3",
-   "kind": "notice",
-   "lesson": "dg03.2.4",
-   "review_history": [
-    {
-     "by": "地理专家队（初审人）",
-     "date": "2026-10-17",
-     "note": "初审：承诺文案真实存在于dg03.2.4-p1/p4；回填链与curriculum红线③回填清单一致；代数ch06已核验存在，无虚假奠基。终审：通过。",
-     "result": "pass",
-     "stage": "first"
-    },
-    {
-     "by": "地理专家队（终审人·与初审人独立）",
-     "date": "2026-10-17",
-     "note": "终审人独立核验承诺文案与ch06存在性，置planned。终审通过，置 final_passed。",
-     "result": "pass",
-     "stage": "final"
-    }
-   ],
-   "revision": 1,
-   "status": "final_passed",
-   "summary": "预告登记（硬门禁⑩）：红线③四课回填+代数ch06认旧友",
-   "written_at": "2026-10-17",
-   "written_by": "地理批2生产队"
-  },
-  {
-   "content": {
-    "mapping": "竹楼—湿热多雨（通风防潮）；窑洞—黄土高原（冬冷夏热、降水较少，冬暖夏凉）；蒙古包—草原（游牧，便于拆卸迁徙）；高脚屋—湿热多雨（防潮、防洪）",
-    "principle": "传统民居不是“落后”，是适应当地气候的智慧；因果链：气候→聚落形式（GEO-R40）；反“气候决定论”（GEO-R42：气候是重要影响因素之一）"
-   },
-   "id": "dg03.3.1-e1",
-   "kind": "judgment",
-   "lesson": "dg03.3.1",
-   "review_history": [
-    {
-     "by": "地理专家队（初审人）",
-     "date": "2026-10-17",
-     "note": "初审：四配对与curriculum一致；因果方向正确（气候→聚落）；“气候决定论”已纠偏（GEO-R42）。终审：通过。",
-     "result": "pass",
-     "stage": "first"
-    },
-    {
-     "by": "地理专家队（终审人·与初审人独立）",
-     "date": "2026-10-17",
-     "note": "终审人独立核对文案与台账一致。终审通过，置 final_passed。",
-     "result": "pass",
-     "stage": "final"
-    }
-   ],
-   "revision": 1,
-   "status": "final_passed",
-   "summary": "气候—民居配对答案（p2；GEO-R40/R42）",
-   "written_at": "2026-10-17",
-   "written_by": "地理批2生产队"
-  },
-  {
-   "content": {
-    "note": "兑现页建成时须回链本预告（关键词一致）；未兑现视为缺陷。",
-    "promise": "dg03.3.1 p2文案承诺：dg04.2.2聚落与环境课再深聊传统民居“认旧友”（关键词：传统民居、认旧友、dg04.2.2）",
-    "redeem_pages": [
-     "dg04.2.2"
-    ],
-    "status": "planned"
-   },
-   "id": "dg03.3.1-e2",
-   "kind": "notice",
-   "lesson": "dg03.3.1",
-   "review_history": [
-    {
-     "by": "地理专家队（初审人）",
-     "date": "2026-10-17",
-     "note": "初审：承诺文案真实存在于dg03.3.1-p2；关键词一致。终审：通过。",
-     "result": "pass",
-     "stage": "first"
-    },
-    {
-     "by": "地理专家队（终审人·与初审人独立）",
-     "date": "2026-10-17",
-     "note": "终审人独立核验承诺文案存在，置planned。终审通过，置 final_passed。",
-     "result": "pass",
-     "stage": "final"
-    }
-   ],
-   "revision": 1,
-   "status": "final_passed",
-   "summary": "预告登记（硬门禁⑩）：传统民居在dg04.2.2回填",
-   "written_at": "2026-10-17",
-   "written_by": "地理批2生产队"
-  },
-  {
-   "content": {
-    "quiz": {
-     "a": "热带",
-     "b": "年降水总量 + 季节分配",
-     "c": "不对，气候是重要影响因素之一"
-    }
-   },
-   "id": "dg03.3.2-e1",
-   "kind": "quiz",
-   "lesson": "dg03.3.2",
-   "review_history": [
-    {
-     "by": "地理专家队（初审人）",
-     "date": "2026-10-17",
-     "note": "初审：q1以温定带应用正确（最冷月20℃>15℃→热带）；q2以水定型两要素正确；q3反决定论正确。终审：通过。",
-     "result": "pass",
-     "stage": "first"
-    },
-    {
-     "by": "地理专家队（终审人·与初审人独立）",
-     "date": "2026-10-17",
-     "note": "终审人独立核对文案与台账一致。终审通过，置 final_passed。",
-     "result": "pass",
-     "stage": "final"
-    }
-   ],
-   "revision": 1,
-   "status": "final_passed",
-   "summary": "本章习题答案（p2；综合）",
-   "written_at": "2026-10-17",
-   "written_by": "地理批2生产队"
-  }
- ],
- "note": "地理dg03可计算内容两审台账（批2：9课24页；条目dg03.1.1-e1~dg03.3.2-e1共12条，初审/终审人独立）。未终审条目不得被课程页面引用（门禁 tools/check-geography-review.mjs）。",
- "schema": "geography-review-ledger/1.0"
+  ],
+  "note": "地理dg03可计算内容两审台账（批2：9课24页；条目dg03.1.1-e1~dg03.3.2-e1共12条，初审/终审人独立）。未终审条目不得被课程页面引用（门禁 tools/check-geography-review.mjs）。",
+  "schema": "geography-review-ledger/1.0"
 }

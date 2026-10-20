@@ -427,6 +427,7 @@
     "代数 ch08 对数": "ch08-u2-l2-p1",
     "代数 ch03 分式": "ch03-u1-l1-p1",
     "代数 ch02 整式": "ch02-u1-l3-p1",
+    "代数 2.1 整式": "ch02-u1-l3-p1",   /* S3#11：学生可见文本用 2.1 式课号，与 ch02 键同目标 */
     "代数 ch01 方程": "ch01-u2-l3-p1",
     "代数 ch00": "ch00-u1-l1-p1",
     "代数 8.2": "ch08-u2-l2-p1",   /* 兜底：R-C4 已全量统一为 chXX，数据应无残留 */
@@ -566,8 +567,16 @@
    * ============================================================ */
 
   /* 化学式解析："H₂O" → [{t:"el",v:"H"},{t:"sub",v:"2"},{t:"el",v:"O"}]
-   * 下标用 Unicode 下标数字 ₀₁₂₃₄₅₆₇₈₉；暂不支持括号（试点无此需求）。 */
+   * 下标用 Unicode 下标数字 ₀₁₂₃₄₅₆₇₈₉ → sub（v 为 ASCII 数字，渲染器排下标）；
+   * 上标（离子电荷）⁰¹²³⁴⁵⁶⁷⁸⁹⁺⁻ → sup（v 为 ASCII，如 "2+"，渲染器排上标）；
+   * 括号/方括号/结晶水点/沉淀气体符号/系数数字等结构字符 → txt（原样输出）。
+   * 修复（收尾批 2）：旧实现把上标与括号一律跳过——Ca(OH)₂ 渲染成 CaOH₂、
+   * Fe³⁺ 渲染成 Fe，电荷与原子团边界静默丢失；现三类字符全部保留，
+   * el/sub 的 token 形状与既有结果不变（回归口径见复现脚本 --compare）。 */
   var SUB_CHARS = "₀₁₂₃₄₅₆₇₈₉";
+  var SUP_CHARS = "⁰¹²³⁴⁵⁶⁷⁸⁹⁺⁻";
+  var SUP_ASCII = "0123456789+-";
+  var TXT_CHARS = "()[]·.↓↑";
   function parseFormula(f) {
     var toks = [], i = 0, s = String(f || "");
     while (i < s.length) {
@@ -578,21 +587,42 @@
           sub += String(SUB_CHARS.indexOf(s[i])); i++;
         }
         toks.push({ t: "sub", v: sub });
+      } else if (SUP_CHARS.indexOf(c) >= 0) {
+        var sup = "";
+        while (i < s.length && SUP_CHARS.indexOf(s[i]) >= 0) {
+          sup += SUP_ASCII.charAt(SUP_CHARS.indexOf(s[i])); i++;
+        }
+        toks.push({ t: "sup", v: sup });
       } else if (/[A-Z]/.test(c)) {
         var elem = c; i++;
         if (i < s.length && /[a-z]/.test(s[i])) { elem += s[i]; i++; }
         toks.push({ t: "el", v: elem });
-      } else { i++; } /* 其他字符跳过（试点数据无） */
+      } else if (TXT_CHARS.indexOf(c) >= 0 || /[0-9+\-]/.test(c)) {
+        /* 结构字符与 ASCII 数字（结晶水系数如 ·8H₂O 的 8、离子串中的 + 连接符）：
+         * 不是元素/上下标，原样保留为普通文本 token，不再丢弃 */
+        toks.push({ t: "txt", v: c }); i++;
+      } else { i++; } /* 空格等其余字符仍跳过（与旧行为一致） */
     }
     return toks;
   }
   function renderFormulaToks(formula, trapSubscript, onTrap) {
     var wrap = el("span", "chm-formula", "");
-    wrap.setAttribute("aria-label", String(formula).replace(/[₀₁₂₃₄₅₆₇₈₉]/g, function (d) {
-      return String(SUB_CHARS.indexOf(d));
-    }));
+    /* 上下标 Unicode 一律转 ASCII 朗读（收尾批 2：sup 新增后补上上标分支） */
+    wrap.setAttribute("aria-label", String(formula)
+      .replace(/[₀₁₂₃₄₅₆₇₈₉]/g, function (d) { return String(SUB_CHARS.indexOf(d)); })
+      .replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹]/g, function (d) { return String(SUP_CHARS.indexOf(d)); })
+      .replace(/⁺/g, "+").replace(/⁻/g, "-"));
     parseFormula(formula).forEach(function (tk) {
       if (tk.t === "el") {
+        wrap.appendChild(el("span", "chm-base", esc(tk.v)));
+      } else if (tk.t === "sup") {
+        /* 上标（电荷等）：CSS 无 .chm-sup 类，用内联 vertical-align；
+         * 陷阱只针对下标——上标/结构字符从不触发陷阱（旧 else 分支行为不变的仅 sub） */
+        var sp = el("span", "chm-sub-plain", esc(tk.v));
+        sp.style.verticalAlign = "super";
+        sp.setAttribute("aria-label", "上标 " + tk.v);
+        wrap.appendChild(sp);
+      } else if (tk.t === "txt") {
         wrap.appendChild(el("span", "chm-base", esc(tk.v)));
       } else {
         if (trapSubscript) {
@@ -1288,7 +1318,13 @@ function svgFormulaText(svg, x, y, label, size, fill, anchor) {
     if (tk.t === "sub") {
       ts.setAttribute("font-size", Math.round(size * 0.68));
       ts.setAttribute("dy", size * 0.22);
+    } else if (tk.t === "sup") {
+      /* 上标（电荷等）：小字号 + 上抬，与 sub 的下沉对称（数据中上标均位于串尾，
+       * dy 的后续累积不影响既有 el/sub 排版） */
+      ts.setAttribute("font-size", Math.round(size * 0.68));
+      ts.setAttribute("dy", -size * 0.35);
     }
+    /* el / txt（括号等结构字符）：基线大小原样输出（新分支，未改旧排版） */
     t.appendChild(ts);
   });
   svg.appendChild(t);
@@ -4258,6 +4294,14 @@ function widgetRedoxTrack(p) {
          * 画箭头模式点击只记 tap（不开选择器）。 */
         b.addEventListener("click", function () { if (rxMode === "mark") openPicker(key, b); });
         fwrap.appendChild(b);
+      } else if (tk.t === "sup") {
+        /* 上标（电荷）：小字上抬，不可点（与 sub 分支同级，旧 sub 路径不变） */
+        var supSp = el("span", "chm-sub-plain", esc(tk.v));
+        supSp.style.verticalAlign = "super";
+        fwrap.appendChild(supSp);
+      } else if (tk.t === "txt") {
+        /* 括号等结构字符：基线大小原样输出，不可点 */
+        fwrap.appendChild(el("span", "", esc(tk.v)));
       } else {
         fwrap.appendChild(el("span", "chm-sub-plain", esc(tk.v)));
       }

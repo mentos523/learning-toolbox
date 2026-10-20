@@ -22,11 +22,11 @@
  *     geography.js physicslinkify 转 ../physics/index.html#p00.1.4/1）。
  *  2. dg08.2.1 课表"代数 8.1 指数"——已查实：代数 ch08-u1《指数的推广》
  *     确为指数教学（ch08-u1-l1-p1=8.1.1 负整数指数幂、u1-l2-p1=8.1.2
- *     分数指数幂）。但地理模块渲染器无 mathlink 深链机制（geography.js
- *     仅有 physicslinkify；mathlink 类型只会渲染为不可跳转纯文本 =
- *     硬门禁⑨缺陷），故本课**不挂 mathlink**，课内保留地理本学科回填
- *     dg04.1.1《翻倍的感觉》（人口增长的指数直觉，批 3 已上线 .13，
- *     真实存在）。机制缺口登记于文件尾"待协调者"清单。
+ *     分数指数幂）。收尾批 2 · C②已补齐 geography.js 的 mathlink 深链机制
+ *     （mathlinkify，仿 physicslinkify；课号式样按 playbook v1.1 门禁⑫，
+ *     学生可见「代数 8.1」式、内部注册键 ch06 式学生不可见），故本课现已
+ *     挂 mathlink 深链（目标 ch08-u1-l1-p1，已核实存在），课内仍保留地理本
+ *     学科回填 dg04.1.1《翻倍的感觉》。文件尾"待协调者"清单相应销账。
  *  3. dg10.1.1 课表"代数 ch00 比值（奠基）"——批 3 已证伪 ch00 无"比值"
  *     概念奠基，不得挂虚假奠基引用；本批课内直观定义"人均 = 总量 ÷
  *     人口"，不挂任何跨科链（见 dg10.js 头注）。
@@ -67,9 +67,10 @@
  * 注明人教版口径（GEO-R56），不确定的数写"约"（GEO-R54）。
  *
  * 待协调者清单：
- *  - 地理模块 mathlink 深链机制缺失（dg08.2.1 登记）：代数 ch08-u1 确为
- *    指数教学，待 geography.js 补 mathlinkify（仿 physicslinkify 范式）
- *    后再挂"代数 ch08"深链；当前课内仅做 dg04.1.1 本学科回填。
+ *  - 【2026-10-20 收尾批 2 · C②已销账】地理模块 mathlink 深链机制已补齐
+ *    （geography.js mathlinkify；XLINK_MATH_GEO 注册"代数 ch06/几何 g13.1.1/
+ *    代数 ch08.1"，目标 pageId 逐个核实存在，未命中降级纯文本不造死链）；
+ *    dg08.2.1-p1 已挂"代数 8.1 指数"深链（学生可见式样按门禁⑫）。
  * ============================================================ */
 window.GEOGRAPHY_DATA = window.GEOGRAPHY_DATA || {};
 window.GEOGRAPHY_DATA["dg08"] = {
@@ -129,7 +130,7 @@ window.GEOGRAPHY_DATA["dg08"] = {
                 { type: "text", html: "<strong>场层真值</strong>：三幅示意底图分别承载半球/纬度/海陆一种位置信息。<strong>UI 可达</strong>：点标签切换三图，每图配位置说明文字。" },
                 { type: "slogan", text: "一图一视角，位置分层看。" }
               ],
-              point: "dg08.1.1-p2：中国位置三图切换（geo-map position-switch，A 级）。场层真值见 widget 内冻结 TRUTH（与 params.tabNotes 同值）；UI 可达为标签切换。"
+              point: "中国位置三图切换（geo-map position-switch，A 级）。场层真值见 widget 内冻结 TRUTH（与 params.tabNotes 同值）；UI 可达为标签切换。"
             },
             /* ================= p3：收官页 ================= */
             {
@@ -196,7 +197,7 @@ window.GEOGRAPHY_DATA["dg08"] = {
                 { type: "physicslink", text: "跨科呼应：物理 p00.1.4《数量级与估算》专门讲“数量级”——10 的幂、估算三招（测多算少、身体当尺、拆成小步），点击可跳转到物理模块查看。" },
                 { type: "text", html: "<strong>四至点</strong>（人教版口径，均为“约”数）：<strong>最北</strong>—漠河以北黑龙江主航道中心线（约 53°N）；<strong>最南</strong>—南海南沙群岛曾母暗沙（约 4°N）；<strong>最东</strong>—黑龙江与乌苏里江主航道中心线交汇处（约 135°E）；<strong>最西</strong>—新疆帕米尔高原（约 73°E）。南北跨纬度约 49°，东西跨经度约 62°。" },
                 { type: "text", html: "<strong>邻国</strong>：陆上邻国 <strong>14 个</strong>（朝鲜、俄罗斯、蒙古、哈萨克斯坦、吉尔吉斯斯坦、塔吉克斯坦、阿富汗、巴基斯坦、印度、尼泊尔、不丹、缅甸、老挝、越南），隔海相望 <strong>6 国</strong>（韩国、日本、菲律宾、马来西亚、文莱、印度尼西亚）——本课用现行教材统计口径。" },
-                { type: "text", html: "<strong>海域</strong>：<strong>渤海、琼州海峡</strong>是我国的<strong>内海</strong>（首现即定义：领海基线向陆一侧的水域）。<strong>三沙市</strong>一瞥：2012 年设立的地级市，管辖西沙群岛、中沙群岛、南沙群岛的岛礁及其海域。" },
+                { type: "text", html: "<strong>海域</strong>：<strong>渤海、琼州海峡</strong>是我国的<strong>内海</strong>（领海基线向陆一侧的水域）。<strong>三沙市</strong>一瞥：2012 年设立的地级市，管辖西沙群岛、中沙群岛、南沙群岛的岛礁及其海域。" },
                 { type: "trap", text: "⚠️ 误区：“邻国数量固定不变”——国界与建交是历史形成的，本课 14+6 用的是现行教材统计口径；学的是“怎么看疆域”的方法，不是背一个永恒不变的数字。" },
                 { type: "slogan", text: "960 万世界三，四至邻国记心间。" }
               ],
@@ -232,7 +233,7 @@ window.GEOGRAPHY_DATA["dg08"] = {
                 { type: "text", html: "<strong>场层真值</strong>：四至点经纬度与地名（GeoBatch5.FOUR_POINTS 冻结常量，人教版口径）；14 陆上邻国 + 6 隔海相望国名录。<strong>UI 可达</strong>：点至点 → 经纬度弹窗；点邻国 → 方位高亮。本图为 A 级疆域要素图，国界线/十段线/南海四群岛/台湾同色/钓鱼岛/港澳注记按审定书 B–E 由地图队绘制，地理队逐页人工核对。" },
                 { type: "slogan", text: "点四至，看经纬；数邻国，辨方位。" }
               ],
-              point: "dg08.1.2-p2：疆域四至交互（geo-map four-points，A 级）。场层真值见 GeoBatch5.FOUR_POINTS；UI 可达为点选弹窗。"
+              point: "疆域四至交互（geo-map four-points，A 级）。场层真值见 GeoBatch5.FOUR_POINTS；UI 可达为点选弹窗。"
             },
             /* ================= p3：收官页 ================= */
             {
@@ -362,7 +363,7 @@ window.GEOGRAPHY_DATA["dg08"] = {
                 { type: "text", html: "<strong>场层真值</strong>：34 省级名录与简称、行政中心（schematicPathsMeta.provinces 冻结表，人教版口径）。<strong>UI 可达</strong>：点形状 → 配简称 → 配中心，逐项判分。各省形状经教学简化，相邻关系不变（GEO-AX01 当页显性化）。A 级政区图，省界/国界/十段线等按审定书由地图队绘制，地理队逐页人工核对。" },
                 { type: "slogan", text: "形简称中心，三配对过关。" }
               ],
-              point: "dg08.1.3-p2：34 省拼图三配对（geo-map admin-puzzle，A 级）。场层真值见 schematicPathsMeta.provinces；UI 可达为形状→简称→中心三配对判分。"
+              point: "34 省拼图三配对（geo-map admin-puzzle，A 级）。场层真值见 schematicPathsMeta.provinces；UI 可达为形状→简称→中心三配对判分。"
             },
             /* ================= p3：收官页 ================= */
             {
@@ -435,6 +436,10 @@ window.GEOGRAPHY_DATA["dg08"] = {
                 { type: "text", html: "<strong>增长与政策</strong>：新中国成立以来人口快速增长；人口政策<strong>动态调整</strong>：一孩 → 二孩（2016 年全面实施）→ 三孩（2021 年）。政策跟着国情走，不是一成不变。" },
                 { type: "text", html: "<strong>分布</strong>：<strong>黑河—腾冲线</strong>（<strong>胡焕庸线</strong>，1935 年地理学家胡焕庸提出）：线东南人口约占全国 <strong>94%</strong>（胡焕庸 1935 年原文统计为 96%，此处“约 94%”沿用人教版现行教材表述，量级格局未变）——<strong>东多西少</strong>。原因：自然（地形、气候）+ 人文（经济、历史），一果多因。" },
                 { type: "text", html: "人口增长曲线是指数增长的直观例子（dg04.1.1《翻倍的感觉》回填：翻倍的威力）。" },
+                /* 收尾批 2 · C②：mathlink 深链机制已补齐（geography.js mathlinkify），
+                 * 故补挂「代数 8.1 指数」预告深链（课号式样按 playbook v1.1 门禁⑫：
+                 * 学生可见一律「代数 8.1」式；文案黄队教学审＋地理专家队复核待定）。 */
+                { type: "mathlink", text: "预告：代数 8.1《指数的推广》学完后，回来再看这条曲线——人口翻倍的曲线，就是指数函数的样子（先记直觉：越长越快）。" },
                 { type: "trap", text: "⚠️ 误区：“人口政策一直不变”——错！从一孩到二孩再到三孩，政策随国情动态调整。看人口问题，第一个动作永远是：看年份、看口径。" },
                 { type: "slogan", text: "十四亿人口，东多西少；政策动态，数据看年。" }
               ],
@@ -463,7 +468,7 @@ window.GEOGRAPHY_DATA["dg08"] = {
                 { type: "text", html: "<strong>场层真值</strong>：胡焕庸线走向与两侧人口占比（GeoBatch5.HU_HUAN_YONG 冻结常量）。<strong>UI 可达</strong>：点两侧 → 密度对比读数。本图为 C 级背景示意（无省界叠加），不画国界线，台湾岛不可缺。" },
                 { type: "slogan", text: "一线两边，东密西疏。" }
               ],
-              point: "dg08.2.1-p2：胡焕庸线两侧对比（geo-map huhuan-yong，C 级）。场层真值见 GeoBatch5.HU_HUAN_YONG；UI 可达为点两侧看密度对比。"
+              point: "胡焕庸线两侧对比（geo-map huhuan-yong，C 级）。场层真值见 GeoBatch5.HU_HUAN_YONG；UI 可达为点两侧看密度对比。"
             },
             /* ================= p3：收官页 ================= */
             {
@@ -527,7 +532,7 @@ window.GEOGRAPHY_DATA["dg08"] = {
               exploreTip: "56 个民族怎么分布？记住八个字：大杂居、小聚居、交错杂居。",
               blocks: [
                 { type: "lead", text: "我国有 56 个民族：汉族人口最多（七普约 91.11%，约 12.86 亿），其余 55 个为少数民族（约 1.25 亿）。" },
-                { type: "text", html: "<strong>分布特点</strong>：<strong>大杂居、小聚居、交错杂居</strong>（首现即定义：各民族大范围混居、局部小范围集中）。少数民族主要分布在西南、西北、东北边疆地区，但内地城市也有许多少数民族同胞——不是“只在边疆”。" },
+                { type: "text", html: "<strong>分布特点</strong>：<strong>大杂居、小聚居、交错杂居</strong>（各民族大范围混居、局部小范围集中）。少数民族主要分布在西南、西北、东北边疆地区，但内地城市也有许多少数民族同胞——不是“只在边疆”。" },
                 { type: "text", html: "<strong>民族政策</strong>：民族平等、民族区域自治。5 个自治区实行区域自治：内蒙古、新疆、西藏、宁夏、广西——下一页对号入座。" },
                 { type: "trap", text: "⚠️ 误区：“少数民族都聚居在边疆”——错！大杂居、小聚居：边疆有聚居区，内地城市也有分布。记住八个字，就不会说错。" },
                 { type: "slogan", text: "五十六民族，大杂居小聚居。" }
@@ -583,7 +588,7 @@ window.GEOGRAPHY_DATA["dg08"] = {
                 { type: "text", html: "<strong>场层真值</strong>：五大自治区名录与行政中心、主要民族（GeoBatch5.FIVE_AUTONOMOUS 冻结常量）。<strong>UI 可达</strong>：点名 → 落位 → 判分。本图为 A 级（省级单元配对），国界/省界/十段线等按审定书由地图队绘制，地理队逐页人工核对。" },
                 { type: "slogan", text: "五区对号，大杂居小聚居。" }
               ],
-              point: "dg08.2.2-p2：五大自治区对号入座（geo-map ethnic-match，A 级）+ 收官两问。本课完成，下一课：本章小结。"
+              point: "五大自治区对号入座（geo-map ethnic-match，A 级）+ 收官两问。本课完成，下一课：本章小结。"
             }
           ]
         },

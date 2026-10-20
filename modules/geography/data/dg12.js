@@ -63,12 +63,12 @@ window.GEOGRAPHY_DATA["dg12"] = {
               blocks: [
                 { type: "lead", text: "秦岭—淮河一线（大致沿青藏高原东南边缘→秦岭→淮河→苏北一线），是中国东部最重要的地理分界线。它有六大地理意义，简称“一线六义”——六条逐字记：" },
                 { type: "text", html: "<strong>一、1月0℃等温线</strong>经过的地方；<strong>二、800毫米年等降水量线</strong>经过的地方；<strong>三、暖温带与亚热带的分界线</strong>；<strong>四、湿润地区与半湿润地区的分界线</strong>；<strong>五、旱地与水田的分界线</strong>；<strong>六、小麦与水稻集中产区的分界线</strong>。" },
-                { type: "text", html: "<strong>过渡带</strong>（首现即定义：分界线两侧自然要素逐渐变化的过渡地带）：这六条“线”<strong>大致</strong>吻合，但分界线是<strong>渐变带的中心线</strong>——南北两侧存在过渡带，不是一刀切（GEO-AX01）。说“一线”时，心里要装着“带”。" },
-                { type: "text", html: "<strong>专题图比例尺按需选择</strong>（课内直观定义；GEO-R51：课表“代数 ch00 比例”标注经 grep 证伪，ch00 全章无比例内容，不挂虚假奠基）：研究“秦岭—淮河一线”用<strong>较大比例尺</strong>（分母小）看细节；研究全国温度带/干湿区格局用<strong>较小比例尺</strong>（分母大）看全貌——大详小略（GEO-R18/19）。" },
+                { type: "text", html: "<strong>过渡带</strong>（分界线两侧自然要素逐渐变化的过渡地带）：这六条“线”<strong>大致</strong>吻合，但分界线是<strong>渐变带的中心线</strong>——南北两侧存在过渡带，不是一刀切（GEO-AX01）。说“一线”时，心里要装着“带”。" },
+                { type: "text", html: "<strong>专题图比例尺按需选择</strong>：用哪种比例尺，先看研究对象。研究“秦岭—淮河一线”，用<strong>较大比例尺</strong>（分母小），看细节。研究全国温度带、干湿区的格局，用<strong>较小比例尺</strong>（分母大），看全貌。这就是<strong>大详小略</strong>：比例尺大，范围小、内容详细；比例尺小，范围大、内容简略。" },
                 { type: "trap", text: "⚠️ 大坑：“一线 = 绝对分界”——错！六条线是大致吻合，分界线是渐变带的中心线（尺度！）。把过渡带画成铁丝网，是本课第一大错。" },
                 { type: "slogan", text: "一线六义记六条，分界是带不是线。" }
               ],
-              point: "秦岭—淮河线：一线六义（1月0℃等温线/800mm年等降水量线/暖温带亚热带分界/湿润半湿润分界/旱地水田分界/小麦水稻分界，人教版八下口径）；过渡带（分界线是渐变带中心线）；专题图比例尺按需选择（大详小略，课内直观定义，GEO-R51证伪回填）。"
+              point: "秦岭—淮河线：一线六义（1月0℃等温线/800mm年等降水量线/暖温带亚热带分界/湿润半湿润分界/旱地水田分界/小麦水稻分界，人教版八下口径）；过渡带（分界线是渐变带中心线）；专题图比例尺按需选择（大详小略，课内直观定义）。"
             },
             /* ================= p2：交互页（一线六义叠加图） ================= */
             {
@@ -91,7 +91,7 @@ window.GEOGRAPHY_DATA["dg12"] = {
                 { type: "text", html: "<strong>场层真值</strong>：六义文本（GeoBatch6.QINLING_MEANINGS，人教版八下口径）+ 过渡带声明（QINLING_NOTE）。<strong>UI 可达</strong>：开关六线 → 含义读数。本图为 C 级（中国全境轮廓、无省界叠加，台湾岛不可缺），角落 E.3 声明由渲染器自动渲染；六线为教学示意线（GEO-AX01 当页显性化）。" },
                 { type: "slogan", text: "逐条看含义，全开看吻合。" }
               ],
-              point: "dg12.1.1-p2：一线六义叠加图（thematic-map qinling，C 级）。场层真值见 GeoBatch6.QINLING_MEANINGS/QINLING_NOTE；UI 可达为六线开关+含义读数。"
+              point: "一线六义叠加图（thematic-map qinling，C 级）。场层真值见 GeoBatch6.QINLING_MEANINGS/QINLING_NOTE；UI 可达为六线开关+含义读数。"
             },
             /* ================= p3：交互页（专题图比例尺选择） ================= */
             {
@@ -127,7 +127,7 @@ window.GEOGRAPHY_DATA["dg12"] = {
                 { type: "text", html: "<strong>场层真值</strong>：两档比例尺分母（2000000/6000000，示意值）与大详小略联动（GeoBatch2.calcScale 纯函数）。<strong>UI 可达</strong>：拨滑块 → 范围/详细程度双读数。示意声明常驻（GEO-R24）。" },
                 { type: "slogan", text: "大详小略：按需选比例尺。" }
               ],
-              point: "dg12.1.1-p3：专题图比例尺选择（scale-calc compare）。场层真值见 GeoBatch2 纯函数；UI 可达为滑块联动双读数+选图一问。"
+              point: "专题图比例尺选择（scale-calc compare）。场层真值见 GeoBatch2 纯函数；UI 可达为滑块联动双读数+选图一问。"
             },
             /* ================= p4：收官页 ================= */
             {
@@ -248,7 +248,7 @@ window.GEOGRAPHY_DATA["dg12"] = {
                 { type: "text", html: "<strong>场层真值</strong>：对照表行列内容（人教版八下口径）。<strong>UI 可达</strong>：点行 → 详解读数。" },
                 { type: "slogan", text: "一表看北方，行行有解读。" }
               ],
-              point: "dg12.1.2-p2：北方地区自然人文对照表（region-compare）+ 两问。场层真值见 params.rows（人教版八下口径）；UI 可达为点行看详解。"
+              point: "北方地区自然人文对照表（region-compare）+ 两问。场层真值见 params.rows（人教版八下口径）；UI 可达为点行看详解。"
             },
             /* ================= p3：收官页 ================= */
             {
@@ -369,7 +369,7 @@ window.GEOGRAPHY_DATA["dg12"] = {
                 { type: "text", html: "<strong>场层真值</strong>：南北对比行列内容（人教版八下口径）。<strong>UI 可达</strong>：点行 → 对比解读。" },
                 { type: "slogan", text: "南北对比，一线六义处处现。" }
               ],
-              point: "dg12.1.3-p2：南北对比双栏表（region-compare）+ 两问。场层真值见 params.rows（人教版八下口径）；UI 可达为点行看对比解读。"
+              point: "南北对比双栏表（region-compare）+ 两问。场层真值见 params.rows（人教版八下口径）；UI 可达为点行看对比解读。"
             },
             /* ================= p3：收官页 ================= */
             {
@@ -433,8 +433,8 @@ window.GEOGRAPHY_DATA["dg12"] = {
               exploreTip: "一个干、一个寒：中国西部的两个极端，生态都脆弱。",
               blocks: [
                 { type: "lead", text: "中国西部两个极端：西北——干旱；青藏——高寒。一个缺水，一个缺温，生态都脆弱。" },
-                { type: "text", html: "<strong>西北地区</strong>：深居内陆、远离海洋 → <strong>干旱</strong>。降水自东向西递减：森林草原→草原→荒漠草原→荒漠。<strong>绿洲农业</strong>（首现即定义：干旱区依托高山冰雪融水与地下水，在绿洲上发展的农业，如新疆）＋畜牧业（内蒙古、新疆牧区）。" },
-                { type: "text", html: "<strong>青藏地区</strong>：海拔高 → <strong>高寒</strong>。高原山地气候，空气稀薄、太阳辐射强。<strong>河谷农业</strong>（首现即定义：高原上利用热量相对充足的河谷地带发展的农业，如雅鲁藏布江谷地、湟水谷地种青稞、小麦）＋牦牛（“高原之舟”）。" },
+                { type: "text", html: "<strong>西北地区</strong>：深居内陆、远离海洋 → <strong>干旱</strong>。降水自东向西递减：森林草原→草原→荒漠草原→荒漠。<strong>绿洲农业</strong>（干旱区依托高山冰雪融水与地下水，在绿洲上发展的农业，如新疆）＋畜牧业（内蒙古、新疆牧区）。" },
+                { type: "text", html: "<strong>青藏地区</strong>：海拔高 → <strong>高寒</strong>。高原山地气候，空气稀薄、太阳辐射强。<strong>河谷农业</strong>（高原上利用热量相对充足的河谷地带发展的农业，如雅鲁藏布江谷地、湟水谷地种青稞、小麦）＋牦牛（“高原之舟”）。" },
                 { type: "text", html: "<strong>生态脆弱</strong>：西北防荒漠化、青藏护三江源——开发要适度（dg15.3.3 可持续发展预告）。" },
                 { type: "trap", text: "⚠️ 大坑：“青藏只有高寒”——错！雅鲁藏布江谷地、湟水谷地能种青稞、小麦（河谷农业）——高原内部有垂直差异，别把高原说成一片荒寒。" },
                 { type: "slogan", text: "西北干旱降水减，青藏高寒河谷甜。" }
@@ -480,7 +480,7 @@ window.GEOGRAPHY_DATA["dg12"] = {
                 { type: "text", html: "<strong>场层真值</strong>：分档函数（GeoBatch4.bandOf 纯函数）+ 河谷农业解读。<strong>UI 可达</strong>：拨滑块 → 分档读数。模型诚实声明常驻（GEO-AX01）。" },
                 { type: "slogan", text: "拨降水，看植被：东草原西荒漠。" }
               ],
-              point: "dg12.1.4-p2：西北降水递减三段式（factor-scale）+ 河谷农业一问。场层真值见 GeoBatch4.bandOf；UI 可达为滑块分档读数。"
+              point: "西北降水递减三段式（factor-scale）+ 河谷农业一问。场层真值见 GeoBatch4.bandOf；UI 可达为滑块分档读数。"
             },
             /* ================= p3：收官页 ================= */
             {

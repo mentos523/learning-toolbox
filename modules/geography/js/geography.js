@@ -234,9 +234,55 @@
     });
     return t;
   }
+  /* 收尾批 2 · C②：mathlink 跨模块深链（GEO-ASSESS-2026-10-20-C2 最小施工清单第 1 项，
+   * 仿上方 physicslinkify 与化学 xlinkify 范式）。数学目标用数学模块既有 hash
+   * 格式 #p=<pageId>（math.js 原生支持），相对路径 ../math/index.html 与物理链同范式。
+   * 课号式样口径（playbook v1.1 门禁⑫，收尾批 2 施工指令覆盖 GEO-R51 式样冻结）：
+   * 学生可见展示一律「代数 6.1」式（学科 + 章.节，见 XLINK_MATH_GEO_DISP）；
+   * 内部注册键用 ch06 式、学生不可见（化学 xlinkify 内部键先例）。
+   * 注册表纪律（门禁⑨）：只登记已生产、已核实存在的目标课——下表 3 个 pageId
+   * 已于 2026-10-20 在 modules/math/data 全量实测存在；未命中 token 一律保持
+   * 纯文本，不造死链。锚点带 data-xlink-target（=目标 pageId）供目标存在性断言。 */
+  var XLINK_MATH_GEO = {
+    "代数 ch06": "ch06-u1-l1-p1",
+    "几何 g13.1.1": "g13-u1-l1-p1",
+    "代数 ch08.1": "ch08-u1-l1-p1"
+  };
+  var XLINK_MATH_GEO_DISP = {
+    "代数 ch06": "代数 6.1",
+    "几何 g13.1.1": "几何 13.1.1",
+    "代数 ch08.1": "代数 8.1"
+  };
+  function mathlinkify(html) {
+    var segs = [{ t: String(html == null ? "" : html), link: null, page: null }];
+    Object.keys(XLINK_MATH_GEO).sort(function (a, b) {
+      return XLINK_MATH_GEO_DISP[b].length - XLINK_MATH_GEO_DISP[a].length; /* 长 token 先行，防短吞长 */
+    }).forEach(function (key) {
+      var disp = XLINK_MATH_GEO_DISP[key], page = XLINK_MATH_GEO[key];
+      var next = [];
+      segs.forEach(function (s) {
+        if (s.link || s.t.indexOf(disp) < 0) { next.push(s); return; }
+        var parts = s.t.split(disp);
+        for (var i = 0; i < parts.length; i++) {
+          if (i > 0) next.push({ t: disp, link: "../math/index.html#p=" + page, page: page });
+          if (parts[i]) next.push({ t: parts[i], link: null, page: null });
+        }
+      });
+      segs = next;
+    });
+    return segs.map(function (s) {
+      return s.link ? '<a class="geog-mathlink-a" data-xlink-target="' + s.page +
+        '" href="' + s.link + '">' + s.t + "</a>" : s.t;
+    }).join("");
+  }
   function renderBlock(b) {
     var d = el("div", "geog-block " + (b.type || "text"));
     if (b.type === "physicslink") { d.innerHTML = physicslinkify(b.text); return d; }
+    if (b.type === "mathlink") {
+      /* 数据块可用 html（保留 <strong> 等既有标记）或 text（转义后匹配） */
+      d.innerHTML = mathlinkify(b.html != null ? b.html : esc(b.text || ""));
+      return d;
+    }
     if (b.html != null) d.innerHTML = b.html;
     else d.textContent = b.text || "";
     return d;

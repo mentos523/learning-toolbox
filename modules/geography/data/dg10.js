@@ -67,8 +67,8 @@ window.GEOGRAPHY_DATA["dg10"] = {
               title: "自然资源：可再生与非可再生",
               exploreTip: "阳光用不完，煤炭用一点少一点：先分类，再看我国“总量丰富、人均不足”的国情。",
               blocks: [
-                { type: "lead", text: "自然资源（首现即定义）：自然界中对人类有利用价值的物质和能量。先分类，再看国情。" },
-                { type: "text", html: "<strong>两类</strong>（首现即定义）：<strong>可再生资源</strong>—在短时间内能再生或循环利用的（阳光、水、森林、草地）；<strong>非可再生资源</strong>—形成极慢、用一点少一点的（煤炭、石油、天然气、矿产）。" },
+                { type: "lead", text: "自然资源：自然界中对人类有利用价值的物质和能量。先分类，再看国情。" },
+                { type: "text", html: "<strong>两类</strong>：<strong>可再生资源</strong>—在短时间内能再生或循环利用的（阳光、水、森林、草地）；<strong>非可再生资源</strong>—形成极慢、用一点少一点的（煤炭、石油、天然气、矿产）。" },
                 { type: "text", html: "<strong>我国资源国情</strong>：<strong>总量丰富、人均不足</strong>。人均 = 总量 ÷ 人口：总量大，但 14 亿人一分，人均就少了。直观理解，不挂公式奠基。" },
                 { type: "trap", text: "⚠️ 大坑：“可再生 = 用不完”——错！只有合理利用才是可再生：超载利用，森林会退化、草地会沙化、水会被污染。可再生是有条件的。" },
                 { type: "slogan", text: "分类看再生，国情总量人均。" }
@@ -138,7 +138,7 @@ window.GEOGRAPHY_DATA["dg10"] = {
                 { type: "text", html: "<strong>场层真值</strong>：5 题答案（见各题 params.answer）。<strong>UI 可达</strong>：逐题点选 → 即时判分 + 讲解。本课完成，下一课：土地资源。" },
                 { type: "slogan", text: "分类看条件，国情看人均。" }
               ],
-              point: "dg10.1.1-p2：资源分类闯关 5 题（guess-verify）+ 收官。本课完成，下一课：土地资源。"
+              point: "资源分类闯关 5 题（guess-verify）+ 收官。本课完成，下一课：土地资源。"
             }
           ]
         },
@@ -191,7 +191,7 @@ window.GEOGRAPHY_DATA["dg10"] = {
                 { type: "text", html: "<strong>场层真值</strong>：四类土地利用的分布（GeoBatch5.LANDUSE 冻结常量）。<strong>UI 可达</strong>：点类型 → 分布高亮 + 说明。本图为 B 级土地利用底图（含省界），国界线/十段线按审定书绘制。" },
                 { type: "slogan", text: "看分布，想地形，守红线。" }
               ],
-              point: "dg10.1.2-p2：土地利用类型图（geo-map landuse，B 级）。场层真值见 GeoBatch5.LANDUSE；UI 可达为点类型看分布。"
+              point: "土地利用类型图（geo-map landuse，B 级）。场层真值见 GeoBatch5.LANDUSE；UI 可达为点类型看分布。"
             },
             /* ================= p3：收官页 ================= */
             {
@@ -294,7 +294,7 @@ window.GEOGRAPHY_DATA["dg10"] = {
                 { type: "text", html: "<strong>场层真值</strong>：三线走向、供水区与通水状态（GeoBatch5.WATER_TRANSFER 冻结常量，通水年份见本页文案）。<strong>UI 可达</strong>：点线 → 走向 + 供水区读数。本图为 B 级南水北调底图（含省界），国界线/十段线按审定书绘制。" },
                 { type: "slogan", text: "三线各有分工，调水优化配置。" }
               ],
-              point: "dg10.2.1-p2：南水北调三线示意（geo-map water-transfer，B 级）。场层真值见 GeoBatch5.WATER_TRANSFER；UI 可达为点线看走向供水区。"
+              point: "南水北调三线示意（geo-map water-transfer，B 级）。场层真值见 GeoBatch5.WATER_TRANSFER；UI 可达为点线看走向供水区。"
             },
             /* ================= p3：收官页 ================= */
             {
@@ -358,8 +358,8 @@ window.GEOGRAPHY_DATA["dg10"] = {
               exploreTip: "300 万平方千米的海洋国土：领海、专属经济区，宽度不同，权利不同——概念别混。",
               blocks: [
                 { type: "lead", text: "我国主张管辖的海域面积约 300 万平方千米（教材口径）——蓝色国土。海洋资源：渔业、油气、旅游、港口。" },
-                { type: "text", html: "<strong>海洋权益</strong>（首现即定义）：<strong>领海</strong>—12 海里，沿海国享有<strong>主权</strong>；<strong>毗连区</strong>—24 海里；<strong>专属经济区</strong>—200 海里，沿海国享有<strong>主权权利</strong>（勘探开发自然资源）；还有<strong>大陆架</strong>。宽度与权利配套记。" },
-                { type: "text", html: "<strong>休渔期</strong>（首现即定义）：为保护渔业资源，每年规定一段禁止捕捞的时期——合理利用海洋渔业资源的制度。" },
+                { type: "text", html: "<strong>海洋权益</strong>：<strong>领海</strong>—12 海里，沿海国享有<strong>主权</strong>；<strong>毗连区</strong>—24 海里；<strong>专属经济区</strong>—200 海里，沿海国享有<strong>主权权利</strong>（勘探开发自然资源）；还有<strong>大陆架</strong>。宽度与权利配套记。" },
+                { type: "text", html: "<strong>休渔期</strong>：为保护渔业资源，每年规定一段禁止捕捞的时期——合理利用海洋渔业资源的制度。" },
                 { type: "trap", text: "⚠️ 大坑：“专属经济区 = 领海”——错！领海是主权（12 海里），专属经济区是主权权利（200 海里）。概念不同，权利不同。" },
                 { type: "slogan", text: "十二领海二百专属，主权权利要分清。" }
               ],
@@ -411,7 +411,7 @@ window.GEOGRAPHY_DATA["dg10"] = {
                 { type: "text", html: "<strong>场层真值</strong>：三圈宽度与权利（GeoBatch5.MARINE 冻结常量，《联合国海洋法公约》口径）。<strong>UI 可达</strong>：点圈 → 宽度 + 权利读数。本图为 A 级海域要素图，国界线/十段线/南海四群岛按审定书绘制；海域带为示意带，不表达实际划界。" },
                 { type: "slogan", text: "三圈三权利，宽度配套记。" }
               ],
-              point: "dg10.2.2-p2：海洋权益示意（geo-map marine，A 级）+ 收官两问。本课完成，下一课：本章小结。"
+              point: "海洋权益示意（geo-map marine，A 级）+ 收官两问。本课完成，下一课：本章小结。"
             }
           ]
         },

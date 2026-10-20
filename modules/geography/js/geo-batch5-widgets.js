@@ -404,8 +404,29 @@
     g.appendChild(svgEl("line", { x1: dy.point[0] - 3, y1: dy.point[1] - 3,
       x2: dy.labelPt[0] + 34, y2: dy.labelPt[1] + 4, stroke: soft, "stroke-width": 1 }));
     var dyt = svgEl("text", { x: dy.labelPt[0], y: dy.labelPt[1], "text-anchor": "end",
-      fill: ink, "font-size": "12.5" });
+      fill: ink, "font-size": "12.5", "data-diaoyu-label": "1" });
     dyt.textContent = dy.label; g.appendChild(dyt);
+    /* GEO-RULING-2026-10-20-10 裁定 3 S2：钓鱼岛注记字号按实测 CTM 自适应——
+       cssPx = clamp(12.5, 12.48 / ctmScale, 32)，使 390px 下实际渲染字号
+       ≥12px（目标 12.48px）；桌面（ctm≈1.087）取 max 后仍为 12.5，与现状一致。
+       只改本注记，其余注记不动（裁定 3 S6 不在本裁定强制范围）。
+       时机：SVG 构造时未入 DOM，getScreenCTM() 为 null → 保持回退值 12.5；
+       入 DOM 后经 rAF 校准，window resize 时重算（仿数学 v8fs 入 DOM 后校准，
+       禁止只在创建时取一次）。SVG 脱离文档后 resize 监听自解绑，防监听泄漏。 */
+    (function () {
+      function fitDiaoyu() {
+        if (!dyt.isConnected) { window.removeEventListener("resize", fitDiaoyu); return; }
+        var ctm = null;
+        try { ctm = svg.getScreenCTM(); } catch (e) { ctm = null; }
+        var s = ctm && ctm.a > 0 ? ctm.a : 0;
+        if (!(s > 0)) return; /* 尚未入 DOM：保持回退值，待 rAF/resize 重算 */
+        var cssPx = Math.max(12.5, Math.min(32, 12.48 / s));
+        dyt.setAttribute("font-size", String(Math.round(cssPx * 100) / 100));
+      }
+      fitDiaoyu();
+      if (typeof requestAnimationFrame === "function") requestAnimationFrame(fitDiaoyu);
+      window.addEventListener("resize", fitDiaoyu);
+    })();
 
     /* 港澳符号点 + 注记（B.7） */
     paths.hkmo.forEach(function (o) {

@@ -5,7 +5,20 @@
   "written_at": "2026-10-19",
   "written_by": "生物 P8 生产队（蓝队数据工程 + 内容撰写）",
   "notes": "p1 活化能（加热给能量vs酶降门槛）+误区专治酶提供能量→只降低活化能（缺=FAIL；BIO-R41）/p2 酶首现即定义（活细胞产生的催化作用有机物；多为蛋白质少数RNA）/p3 过氧化氢三组对照虚拟实验（复用B3 experiment-3q，recordKey=bio_3q_b13.1.1；BIO-R41变量交代；BIO-R35）。",
-  "announcements": [],
+  "announcements": [
+    {
+      "id": "b13.1.1-e1",
+      "kind": "echo",
+      "status": "fulfilled",
+      "echo_of": "b12.1.5-a1",
+      "foretell_text": "预告：载体是蛋白质→b13.1.1 酶的作用与本质细讲（b12.1.5-p3 纯文本预告+mathlink 深链）。",
+      "foretell_source": "基线 ledger-b12.1.5.json（0d0f7781；预告侧条目 b12.1.5-a1 仍为 drafted，未回写）",
+      "evidence": "兑现：b12.1.5-a1 问过——\"载体是蛋白质→b13.1.1 酶的作用与本质\"——答案：酶和载体蛋白一样，多为蛋白质——蛋白质种类多、本领也多，酶的本领是只降低活化能、不提供能量。",
+      "evidence_source": "b13.1.1-p2 mathlink 实物逐字（收尾批 2 新增回填句）",
+      "deep_link": "mathlink→b12.1.5（XLINK_BIO 在表 → #b12.1.5 真链接；方向：兑现页 b13.1.1→预告页 b12.1.5）",
+      "five_way_note": "五向互认：①预告原文（基线 ledger-b12.1.5 foretell_text）②回填句（实物 mathlink，evidence 逐字一致）③深链（兑现页→预告页，真链接，不造死链）④本台账兑现侧条目 fulfilled（本条目）⑤预告侧条目未改动（仍 drafted）——五向一致，兑现成立。"
+    }
+  ],
   "frozen_refs": [
     {
       "id": "b13.1.1-f1",

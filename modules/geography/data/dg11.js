@@ -60,7 +60,7 @@ window.GEOGRAPHY_DATA["dg11"] = {
               exploreTip: "一方水土养一方人：为什么南方种水稻、北方种小麦、西部搞畜牧？先看自然条件。",
               blocks: [
                 { type: "lead", text: "农业是国民经济的基础。我国农业分四大型：种植业、畜牧业、林业、渔业——它们长在哪里，全由自然条件说了算，这叫“因地制宜”。" },
-                { type: "text", html: "<strong>种植业</strong>：东部季风区。<strong>耕地类型</strong>（首现即定义：水田是长期人工灌溉的水耕地，旱地是靠天然降水种植的耕地）——<strong>秦岭—淮河以南</strong>水田（水稻、油菜）、<strong>以北</strong>旱地（小麦、玉米、大豆）。注意：南北之间有<strong>过渡带</strong>，不是一刀切（尺度！）。" },
+                { type: "text", html: "<strong>种植业</strong>：东部季风区。<strong>耕地类型</strong>（水田是长期人工灌溉的水耕地，旱地是靠天然降水种植的耕地）——<strong>秦岭—淮河以南</strong>水田（水稻、油菜）、<strong>以北</strong>旱地（小麦、玉米、大豆）。注意：南北之间有<strong>过渡带</strong>，不是一刀切（尺度！）。" },
                 { type: "text", html: "<strong>畜牧业</strong>：西部、北部降水少、草原广布 → <strong>四大牧区</strong>：内蒙古牧区、新疆牧区、青海牧区、西藏牧区。" },
                 { type: "text", html: "<strong>林业</strong>：东北林区（大兴安岭、小兴安岭、长白山）、西南林区（横断山区）——山地气候湿润，宜林；另有东南人工林区。<strong>渔业</strong>：东部沿海海洋渔业（<strong>舟山渔场是我国最大的渔场</strong>，人教版口径）＋长江中下游、珠江三角洲淡水渔业。" },
                 { type: "trap", text: "⚠️ 大坑：“南方水田/北方旱地是绝对分界”——错！秦岭—淮河是渐变带的中心线，两侧有过渡带（GEO-AX01）。因果链别颠倒：是自然条件决定农业类型（地形→气候→农业，GEO-R40），不是反过来。" },
@@ -89,7 +89,7 @@ window.GEOGRAPHY_DATA["dg11"] = {
                 { type: "text", html: "<strong>场层真值</strong>：五分区名录与因果解读（GeoBatch6.AGRI_ZONES，人教版八下口径）。<strong>UI 可达</strong>：点分区 → 因果读数。本图为 C 级剪影底图（不画国界线/省界/十段线，台湾岛不可缺），角落 E.3 声明由渲染器自动渲染。" },
                 { type: "slogan", text: "点分区，看因果：自然条件说了算。" }
               ],
-              point: "dg11.1.1-p2：农业类型分布（thematic-map agri，C 级）。场层真值见 GeoBatch6.AGRI_ZONES；UI 可达为点分区看因果读数。"
+              point: "农业类型分布（thematic-map agri，C 级）。场层真值见 GeoBatch6.AGRI_ZONES；UI 可达为点分区看因果读数。"
             },
             /* ================= p3：收官页 ================= */
             {
@@ -153,7 +153,7 @@ window.GEOGRAPHY_DATA["dg11"] = {
               exploreTip: "工业为什么不均匀分布？四个基地、四套区位因素——工业布局是算过账的。",
               blocks: [
                 { type: "lead", text: "工业是国民经济的主导。我国工业有个明显特点：爱扎堆——沿海、沿江、沿交通线。扎堆不是随意，是区位因素综合算账的结果。" },
-                { type: "text", html: "<strong>工业基地</strong>（首现即定义：工业高度集中的地区）：<strong>辽中南</strong>（重工业：钢铁、机械）、<strong>京津唐</strong>（北方最大的综合性工业基地，人教版口径）、<strong>沪宁杭</strong>（全国最大的综合性工业基地，人教版口径）、<strong>珠江三角洲</strong>（轻工业、外向型）。" },
+                { type: "text", html: "<strong>工业基地</strong>（工业高度集中的地区）：<strong>辽中南</strong>（重工业：钢铁、机械）、<strong>京津唐</strong>（北方最大的综合性工业基地，人教版口径）、<strong>沪宁杭</strong>（全国最大的综合性工业基地，人教版口径）、<strong>珠江三角洲</strong>（轻工业、外向型）。" },
                 { type: "text", html: "<strong>区位因素</strong>（影响区位选择的自然与社会经济条件）：原料、市场、交通、技术、政策、劳动力……分析时先问“这个产业最怕缺什么”（G13 口诀，GEO-R43）：辽中南最怕缺煤铁 → 靠鞍山铁矿、抚顺煤矿；沪宁杭最怕缺市场 → 靠长江三角洲的广阔市场。" },
                 { type: "text", html: "<strong>高新技术产业</strong>：技术密集型，如北京中关村、深圳。特点：从业人员知识水平高、产品更新快。<strong>工业与环境</strong>：发展工业要防治污染，不能先污染后治理。" },
                 { type: "trap", text: "⚠️ 大坑：“工业布局是随意的”——错！每个基地都是一套区位因素的账：原料/市场/交通/技术综合。分析时把因素清单并列、无主次 = 抓不住主导因素（GEO-R43）。" },
@@ -207,7 +207,7 @@ window.GEOGRAPHY_DATA["dg11"] = {
                 { type: "text", html: "<strong>场层真值</strong>：基地名录与主导因素（GeoBatch6.INDUSTRY_BASES）；配对正解见 cause-chain truth。<strong>UI 可达</strong>：点基地 → 特点读数；配对 → 逐对判分。本图为 C 级剪影底图，角落 E.3 声明由渲染器自动渲染。" },
                 { type: "slogan", text: "看基地，配因素：最怕缺什么？" }
               ],
-              point: "dg11.1.2-p2：四大工业基地分布（thematic-map industry，C 级）+ 主导区位因素配对（cause-chain match）。场层真值见 GeoBatch6.INDUSTRY_BASES；UI 可达为点读+配对判分。"
+              point: "四大工业基地分布（thematic-map industry，C 级）+ 主导区位因素配对（cause-chain match）。场层真值见 GeoBatch6.INDUSTRY_BASES；UI 可达为点读+配对判分。"
             },
             /* ================= p3：收官页 ================= */
             {
@@ -278,7 +278,7 @@ window.GEOGRAPHY_DATA["dg11"] = {
               blocks: [
                 { type: "lead", text: "交通运输是经济发展的“先行官”。五种方式，各有所长：铁路——陆上长距离运输的主力；公路——短途灵活、门到门；水运——大宗货物、运量大、运费低、速度慢；航空——速度快、运费高；管道——运送气体、液体，连续性强。" },
                 { type: "text", html: "<strong>铁路干线五纵三横</strong>（人教版八下口径，走向为示意）：五纵——京哈—京广线、京沪线、京九线、太焦—焦柳线、宝成—成昆线；三横——京包—包兰线、陇海—兰新线、沪杭—浙赣—湘黔—贵昆线。" },
-                { type: "text", html: "<strong>高铁</strong>（首现即定义：高速铁路）：不是“火车提速”，而是<strong>客运专线</strong>新体系——客货分流，高速客运走专线，既有线腾出来跑货运（概念精确）。" },
+                { type: "text", html: "<strong>高铁</strong>（高速铁路）：不是“火车提速”，而是<strong>客运专线</strong>新体系——客货分流，高速客运走专线，既有线腾出来跑货运（概念精确）。" },
                 { type: "text", html: "<strong>交通与经济发展</strong>：交通线通到哪里，经济活力就带到哪里——“要想富，先修路”。" },
                 { type: "trap", text: "⚠️ 大坑：“高铁 = 火车跑快了”——错！高铁是客运专线新体系，与既有线分工（客货分流）。概念错了，后面全错（职能表述精确）。" },
                 { type: "slogan", text: "五纵三横织成网，高铁专线客货分。" }
@@ -306,7 +306,7 @@ window.GEOGRAPHY_DATA["dg11"] = {
                 { type: "text", html: "<strong>场层真值</strong>：8 条干线名录、走向城市序列（GeoBatch6.RAILWAYS，人教版八下口径）。<strong>UI 可达</strong>：点线路 → 即时判分 → 全对过关。本图为 C 级剪影底图，角落 E.3 声明由渲染器自动渲染；线路走向为示意折线（GEO-AX01 当页显性化）。" },
                 { type: "slogan", text: "报线名，点线路：五纵三横记心中。" }
               ],
-              point: "dg11.2.1-p2：铁路干线五纵三横连线闯关（thematic-map railway，C 级）。场层真值见 GeoBatch6.RAILWAYS；UI 可达为点选判分、8 条全对过关。"
+              point: "铁路干线五纵三横连线闯关（thematic-map railway，C 级）。场层真值见 GeoBatch6.RAILWAYS；UI 可达为点选判分、8 条全对过关。"
             },
             /* ================= p3：收官页 ================= */
             {
@@ -424,7 +424,7 @@ window.GEOGRAPHY_DATA["dg11"] = {
                 { type: "text", html: "<strong>场层真值</strong>：8 对戏曲—地域（人教版八下口径）。<strong>UI 可达</strong>：配对 → 逐对判分 → 八对全对过关。" },
                 { type: "slogan", text: "听腔调，辨地域：八戏归位。" }
               ],
-              point: "dg11.2.2-p2：戏曲地域配对（cause-chain match）。场层真值见 params.pairs（8 对，人教版八下口径）；UI 可达为配对判分、八对全对过关。"
+              point: "戏曲地域配对（cause-chain match）。场层真值见 params.pairs（8 对，人教版八下口径）；UI 可达为配对判分、八对全对过关。"
             },
             /* ================= p3：收官页 ================= */
             {

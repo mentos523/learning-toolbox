@@ -13,7 +13,7 @@ window.ROOTS_DATA = [
   ["forecast","n./v.","预报；预测",0],
   ["forehead","n.","前额",0],
   ["foremost","adj.","最重要的",0],
-  ["forensic","adj.","法医的",0],
+  ["forensic","adj.","法医的（只是形近，不是 fore- 家族，别硬拆）",0],
   ["foreman","n.","工头",0],
   ["forearm","n.","前臂",0],
   ["foreground","n.","前景",0],
@@ -1847,11 +1847,11 @@ window.ROOTS_DATA = [
   ["reflect","v.","反射；反映",0],
   ["reflection","n.","反射；反思",0],
   ["flexible","adj.","灵活的",0],
-  ["flex","v.","弯曲；炫耀",0],
+  ["flex","v.","弯曲；炫耀（俚语，慎用）",0],
   ["reflex","n.","反射",0],
   ["deflect","v.","偏转",0],
   ["inflexible","adj.","不灵活的",0],
-  ["inflect","v.","屈折",0]
+  ["inflect","v.","词形变化",0]
 ]},
 {r:"liqu",v:["liqu"],d:"liqu-",m:["液；液体"],w:[
   ["liquid","n./adj.","液体；液态的",0],

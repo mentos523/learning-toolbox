@@ -246,7 +246,7 @@ window.PHY_CH["p04"] = {
               kind: "explain",
               title: "比值定义 ≠ 正反比",
               blocks: [
-                { type: "lead", text: "m 翻倍、V 翻倍，ρ 不动——办“身份证”。" },
+                { type: "lead", text: "m 翻倍、V 翻倍，ρ 不动——办“身份证”（公式身份证 = 公式 + 适用条件）。" },
                 {
                   type: "formula-id",
                   formula: {
@@ -293,7 +293,7 @@ window.PHY_CH["p04"] = {
                   answer: "kg/m³",
                   accept: ["kg/m3", "kg/m^3"],
                   hint: "（千克每立方米）",
-                  tip: "列式永远带单位——审计清单第 1 条。"
+                  tip: "列式永远带单位——全书第一条规矩。"
                 },
                 {
                   type: "fill",
