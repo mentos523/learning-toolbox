@@ -15,6 +15,18 @@
       "echo_target": "代数 6.1（已上线；回填页待数学链排期）",
       "echo_text": "",
       "note": "门禁⑩：预告措辞，非认旧友；兑现时回链本预告。"
+    },
+    {
+      "id": "b23.1.2-e1",
+      "kind": "echo",
+      "status": "fulfilled",
+      "echo_of": "b23.1.2-a1",
+      "foretell_text": "预告：两重性曲线→代数 6.1 函数图像（b23.1.2-p1 纯文本预告+mathlink；直观版一页，预告措辞，非兑现）。",
+      "foretell_source": "远端 ledger-b23.1.2.json（基线 6dcf9856…，2026-10-20 经 GitHub API 拉取；预告侧条目 b23.1.2-a1 仍为 drafted，未回写）",
+      "evidence": "兑现：b23.1.2-a1 问过——“学完代数 6.1 后回填认旧友——到时候回来，用函数语言重新说这条‘小山包’曲线”——答案：用代数 6.1 的函数语言重说：横轴生长素浓度是自变量，纵轴促进程度是因变量；曲线先升后降，最高点是最适浓度，降到零线以下就是抑制——两重性曲线就是一张先升后降的函数图像，读法和数学课完全一样。",
+      "evidence_source": "b23.1.2-p1 mathlink 实物逐字（数学微批收尾批 1 · B 项兑现新增）",
+      "deep_link": "mathlink→代数 6.1（XLINK_MATH 在表 → ../math/index.html#p=ch06-u1-l1-p1 真链接；渲染实测有链；方向：生物兑现页→数学落点页）；本页已有一条直观版数学呼应 mathlink，本次兑现为新增独立回填句",
+      "five_way_note": "五向互认：①预告原文（远端台账 foretell_text）②回填句（实物 mathlink，evidence 逐字一致）③深链（兑现页→数学落点，真链接，不造死链）④本台账兑现侧条目 fulfilled（本条目）⑤远端预告侧条目未改动（仍 drafted）——五向一致，兑现成立。"
     }
   ],
   "frozen_refs": [

@@ -105,7 +105,8 @@ window.BIO_CH["b10"] = {
                   "<button type=\"button\" class=\"tb-btn-secondary\" style=\"min-height:44px\" onclick=\"BIO_B10.expReset()\">重来</button></div>" +
                   "<div id=\"bioB10ExpMsg\" style=\"text-align:center;min-height:3em;font-size:1rem;line-height:1.7\">第 0 次分裂：1 个细菌。按按钮开始。</div>" },
                 { type: "mathlink", text: "认旧友：代数 8.1/8.2.1——\"指数爆炸\"的数学名字叫\"幂\"，学完这两课，这张图就是一道数学题。" },
-                { type: "note", text: "预告：学完代数 8.1/8.2.1 后回填——用指数算一算：1 个细菌 24 小时能变成多少个？" }
+                { type: "note", text: "预告：学完代数 8.1/8.2.1 后回填——用指数算一算：1 个细菌 24 小时能变成多少个？" },
+                { type: "mathlink", text: "兑现：b10.1.1-a1 问过——“学完代数 8.1/8.2.1 后回填——用指数算一算：1 个细菌 24 小时能变成多少个？”——答案：按 20 分钟分裂一次算，24 小时分裂 72 次，就是 2 的 72 次方，约 4.7×10²¹ 个——用代数 8.1/8.2.1 的话说：细菌数=2 的（分裂次数）次方，这正是底数大于 1 的指数函数：指数每加 1，数量翻一番，所以越往后涨得越猛。" }
               ],
               point: "多数细菌无害；二分裂带来指数爆炸（预告：学完代数 8.1/8.2.1 回填）。"
             }

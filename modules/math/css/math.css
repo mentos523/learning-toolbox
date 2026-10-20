@@ -118,6 +118,9 @@ body[data-theme="dark"] #mathml-warn { background: #4a3a1a; color: #fde68a; }
 #mathml-warn button {
   border: 1px solid currentColor; background: none; color: inherit;
   border-radius: 8px; padding: 2px 10px; cursor: pointer; font-size: 0.85rem;
+  /* （收尾批 F2）静态估算约 27px（Chrome 原生支持 MathML，提示条不渲染；
+     仅在不支持 MathML 的浏览器出现），触控目标提到 40px 下限 */
+  min-height: 40px; box-sizing: border-box;
 }
 
 /* ---------- 整体布局 ---------- */
@@ -211,10 +214,13 @@ body[data-theme="dark"] #mathml-warn { background: #4a3a1a; color: #fde68a; }
 }
 .m-answers { margin: 8px 0 2px; }
 .m-answers > summary {
-  display: inline-block; cursor: pointer; font-weight: bold;
+  display: inline-flex; align-items: center; justify-content: center;
+  cursor: pointer; font-weight: bold;
   color: var(--m-accent-strong); border: 1px solid var(--m-line);
   background: var(--m-accent-soft); border-radius: 999px; padding: 4px 16px;
   font-size: 0.92rem; list-style: none;
+  /* （收尾批 F2）实测 35px（390px/1280px），触控目标提到设计标准 44px */
+  min-height: 44px; box-sizing: border-box;
 }
 .m-answers > summary::-webkit-details-marker { display: none; }
 .m-answers > p { margin: 6px 0 0; color: var(--m-ink); }
@@ -240,9 +246,12 @@ body[data-theme="dark"] #mathml-warn { background: #4a3a1a; color: #fde68a; }
 .m-ch.open .m-units { display: block; }
 .m-unit-title { font-size: 0.88rem; color: var(--m-ink-soft); padding: 6px 10px; }
 .m-lesson {
-  display: block; width: 100%; text-align: left; border: none; background: none;
+  display: flex; align-items: center; width: 100%; text-align: left; border: none; background: none;
   padding: 7px 10px 7px 22px; border-radius: 8px; cursor: pointer;
   font-size: 0.92rem; color: var(--m-ink);
+  /* （收尾批 F2）实测 35px（桌面展开章实测），触控目标提到设计标准 44px；
+     目录树本身可滚动（.m-tree overflow-y:auto），行高增加不挤压页面区 */
+  min-height: 44px; box-sizing: border-box;
 }
 .m-lesson:hover { background: var(--m-accent-soft); }
 .m-lesson.active { background: var(--m-accent-strong); color: #fff; }
@@ -270,6 +279,18 @@ body[data-theme="dark"] #mathml-warn { background: #4a3a1a; color: #fde68a; }
     min-height: 44px; box-sizing: border-box;
     /* （蓝队 2026-10-11 白队 g00 终查问题 2）"☰ 目录"不许换行竖排、不许被压缩 */
     white-space: nowrap; flex: none;
+  }
+  /* （收尾批 A1）抽屉 .m-drawer{position:fixed;z-index:60} 会盖住无定位的
+     .m-menu-btn：开抽屉后 ☰ 不可见不可点（390px 实测 elementFromPoint
+     落到抽屉、Playwright 真实点击被拦截）。按钮提定位 + z-index:70
+     压过抽屉；桌面端 display:none 不受影响 */
+  .m-menu-btn { position: relative; z-index: 70; }
+  /* （收尾批 F4）页码指示 "N / M · 课程名" nowrap 且无收缩上限，
+     课程名长时在 390px 下溢出视口右缘被裁（g00-u1-l4-p3 实测
+     #page-ind right=440 > vw=390）。与 h1 同口径：允许收缩 + 省略号，
+     不挤换行、不溢出；桌面端头部空间充足不受影响 */
+  .m-page-ind {
+    min-width: 0; overflow: hidden; text-overflow: ellipsis;
   }
   /* （蓝队 2026-10-11 白队 g00 终查问题 1）step-play 帧 SVG 移动端限高：
      SVG 带 viewBox，按比例缩小；讲解页（单步、无控制条）一屏放下 */
@@ -402,7 +423,10 @@ body[data-theme="dark"] #mathml-warn { background: #4a3a1a; color: #fde68a; }
 .ix-group-btn {
   border: 1px solid var(--m-line); background: var(--m-panel); color: var(--m-ink);
   border-radius: 999px; padding: 4px 14px; font-size: 0.9rem; cursor: pointer;
-  display: inline-flex; align-items: center; gap: 6px;
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  /* （收尾批 F2）tap-highlight 组按钮实测 31px（390px/1280px），
+     触控目标提到设计标准 44px（移动端收紧 padding 保留，min-height 兜底） */
+  min-height: 44px; box-sizing: border-box;
 }
 .ix-group-btn:hover { background: var(--m-accent-soft); }
 .ix-group-btn.on {
@@ -419,6 +443,10 @@ body[data-theme="dark"] #mathml-warn { background: #4a3a1a; color: #fde68a; }
 .ix-seg button {
   border: none; background: var(--m-panel); color: var(--m-ink);
   padding: 6px 20px; font-size: 0.95rem; cursor: pointer;
+  /* （收尾批 F2）compare-toggle / morph-toggle 分段按钮实测 34px，
+     触控目标提到设计标准 44px（父容器 inline-flex 默认 stretch，
+     各段等高拉伸） */
+  min-height: 44px; box-sizing: border-box;
 }
 .ix-seg button + button { border-left: 1px solid var(--m-line); }
 .ix-seg button.on {
@@ -538,7 +566,12 @@ body[data-theme="dark"] #mathml-warn { background: #4a3a1a; color: #fde68a; }
   border-radius: 8px; padding: 4px 10px; font-size: 0.9rem;
   color: var(--m-ink-soft); text-align: left;
 }
-.ix-why > summary { cursor: pointer; font-weight: bold; color: var(--m-accent-strong); }
+.ix-why > summary { cursor: pointer; font-weight: bold; color: var(--m-accent-strong);
+  /* （收尾批 F2）实测 24.5px。折叠触发区提到 40px 下限（书面理由：
+     proof-replay / construction-step 有严格一屏预算（B1/B2 曾省 80px），
+     44px 会明显挤压画布；40px 为任务书允许下限） */
+  display: flex; align-items: center; min-height: 40px; box-sizing: border-box;
+}
 .ix-why > div { padding: 4px 0 2px; }
 /* ============================================================
  * proof-replay 一屏预算收紧（蓝队 2026-10-11 白队一屏终查 B1/B2）
@@ -563,7 +596,10 @@ body[data-theme="dark"] #mathml-warn { background: #4a3a1a; color: #fde68a; }
   border-radius: 8px; padding: 4px 10px; text-align: left;
   overflow-x: auto;
 }
-.ix-proof-cert > summary { cursor: pointer; font-weight: bold; color: var(--m-ink); }
+.ix-proof-cert > summary { cursor: pointer; font-weight: bold; color: var(--m-ink);
+  /* （收尾批 F2）证明书折叠触发区约 27px，同上 40px 下限（proof 一屏预算理由） */
+  display: flex; align-items: center; min-height: 40px; box-sizing: border-box;
+}
 .ix-proof-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; margin-top: 6px; }
 .ix-proof-table th, .ix-proof-table td {
   border: 1px solid var(--m-line); padding: 5px 8px;
@@ -635,3 +671,24 @@ body[data-theme="dark"] #mathml-warn { background: #4a3a1a; color: #fde68a; }
 /* （蓝队 2026-10-13）hidden 属性必须压过 .m-main 的 display:flex（类选择器
    优先级高于 UA 的 [hidden]），否则板块选择时学习区仍占位 */
 .m-main[hidden] { display: none; }
+
+/* ============================================================
+ * 深色模式手动开关（收尾批 F3）
+ * 机制不动（ui-spec 口径）：主题仍写 document.body[data-theme]，
+ * 默认跟随系统 prefers-color-scheme；按钮只做"手动模式"覆盖，
+ * 颜色全部走 --m-* 变量（已有 body[data-theme="dark"] 配对值）。
+ * 放置两处（math.js 注入）：学习区翻页行中段 + 板块选择页右下；
+ * 不进 .m-head（390px 头部已拥挤，见 index.html F3 前注释）。
+ * ============================================================ */
+.m-theme-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 1px solid var(--m-line); background: var(--m-panel); color: var(--m-ink);
+  border-radius: 999px; padding: 6px 14px; font-size: 0.85rem; cursor: pointer;
+  white-space: nowrap; flex: none; user-select: none; -webkit-user-select: none;
+  /* 触控目标 ≥44px（模块窄屏纪律） */
+  min-height: 44px; box-sizing: border-box;
+}
+.m-theme-btn:hover { background: var(--m-accent-soft); }
+/* 板块选择页：右上角悬浮（#tracks 无 transform，fixed 定位稳定；
+   top 留出品牌头高度，避开正文卡片区） */
+.m-tracks .m-theme-btn { position: fixed; top: 72px; right: 16px; z-index: 2; }

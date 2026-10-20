@@ -15,6 +15,18 @@
       "echo_target": "代数 6.1（math 模块）",
       "echo_text": "",
       "note": "门禁⑩：预告措辞\"学完6.1后回填认旧友\"与兑现关键词一致；门禁⑫\"代数6.1\"vs\"代数ch06\"冲突沿用任务书口径，已转CEO裁决（PROD-REPORT诚实缺口）。"
+    },
+    {
+      "id": "b14.1.4-e1",
+      "kind": "echo",
+      "status": "fulfilled",
+      "echo_of": "b14.1.4-a1",
+      "foretell_text": "学完 6.1 后回填认旧友——到时候回来看看，这条\"先升后平\"的曲线就是函数图像。",
+      "foretell_source": "远端 ledger-b14.1.4.json（基线 6dcf9856…，2026-10-20 经 GitHub API 拉取；预告侧条目 b14.1.4-a1 仍为 drafted，未回写）",
+      "evidence": "兑现：b14.1.4-a1 问过——“学完 6.1 后回填认旧友——到时候回来看看，这条‘先升后平’的曲线就是函数图像”——答案：用代数 6.1 的函数语言重说：横轴光照强度是自变量，纵轴光合速率是因变量；光照增强，速率先随之增大（上升段），涨到平台后不再增大（水平段）——‘先升后平’就是这张函数图像的形状，平台说明光照已不是限制因素。",
+      "evidence_source": "b14.1.4-p1 mathlink 实物逐字（数学微批收尾批 1 · B 项兑现新增）",
+      "deep_link": "mathlink→代数 6.1（XLINK_MATH 在表 → ../math/index.html#p=ch06-u1-l1-p1 真链接；渲染实测有链；方向：生物兑现页→数学落点页）",
+      "five_way_note": "五向互认：①预告原文（远端台账 foretell_text）②回填句（实物 mathlink，evidence 逐字一致）③深链（兑现页→数学落点，真链接，不造死链）④本台账兑现侧条目 fulfilled（本条目）⑤远端预告侧条目未改动（仍 drafted）——五向一致，兑现成立。"
     }
   ],
   "frozen_refs": [

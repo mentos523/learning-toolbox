@@ -1101,7 +1101,7 @@ window.MATH_CH["g13"] = {
                         { t: "txt", p: [44,84], text: "l₁", size: 13, color: "known" },
                         { t: "seg", a: [25,30], b: [75,5], color: "corrA", width: 3 },
                         { t: "txt", p: [70,12], text: "l₂", size: 13, color: "corrA" },
-                        { t: "txt", p: [50,92], text: "k₁=2, k₂=−½：k₁k₂=−1", size: 13, bold: true }
+                        { t: "txt", p: [50,92], text: "k₁=2, k₂=−1/2：k₁k₂=−1", size: 13, bold: true }
                       ]
                     },
                     {
@@ -1306,7 +1306,7 @@ window.MATH_CH["g13"] = {
                         { t: "seg", a: [25,44], b: [75,19], color: "target", width: 3 },
                         { t: "txt", p: [68,16], text: "y=−x/2+3", size: 12, color: "target" },
                         { t: "right", v: [25,44], p: [50,94], q: [75,19], size: 6 },
-                        { t: "txt", p: [50,60], text: "2 × (−½) = −1", size: 13, bold: true }
+                        { t: "txt", p: [50,60], text: "2 × (−1/2) = −1", size: 13, bold: true }
                       ]
                     }
                   ]
@@ -1462,14 +1462,14 @@ window.MATH_CH["g13"] = {
                 {
                   id: "f1",
                   latex: "x^2 = 4py \\Rightarrow y = ax^2",
-                  translation: "化简得 x² = 4py，记 a = ¼p，就得到 y = ax²"
+                  translation: "化简得 x² = 4py，记 a = 1/(4p)，就得到 y = ax²"
                 }
               ],
               interaction: {
                 type: "proof-replay",
                 params: {
                   given: "焦点 F(0, p)，准线 l：y = −p",
-                  goal: "y = ax²，a = ¼p",
+                  goal: "y = ax²，a = 1/(4p)",
                   steps: [
                     {
                       card: "设轨迹上任意一点 P(x, y)——“任意”就是“每一”。",
@@ -1523,7 +1523,7 @@ window.MATH_CH["g13"] = {
                       shapes: [
                         { t: "poly", pts: [[30,88],[40,68],[50,60],[60,68],[70,88]], close: false, color: "line", width: 2.5 },
                         { t: "txt", p: [50,40], text: "x² = 4py", size: 15, bold: true },
-                        { t: "txt", p: [50,24], text: "y = ax²（a = ¼p）", size: 16, bold: true, color: "target" }
+                        { t: "txt", p: [50,24], text: "y = ax²（a = 1/(4p)）", size: 16, bold: true, color: "target" }
                       ]
                     }
                   ],
@@ -1532,7 +1532,7 @@ window.MATH_CH["g13"] = {
                     { statement: "PF=√[x²+(y−p)²]，到准线距离 |y+p|", reason: "距离公式（本课 1.2）" },
                     { statement: "列等式：√[x²+(y−p)²]=|y+p|", reason: "抛物线定义（本课 P2）" },
                     { statement: "平方展开：x²+y²−2py+p²=y²+2py+p²", reason: "去根号；完全平方" },
-                    { statement: "化简得 y=ax²（a=¼p）", reason: "合并同类项" }
+                    { statement: "化简得 y=ax²（a=1/(4p)）", reason: "合并同类项" }
                   ]
                 }
               },
@@ -1569,7 +1569,7 @@ window.MATH_CH["g13"] = {
                 params: {
                   steps: [
                     {
-                      caption: "关键帧：p=0.5/1/2——a=0.5/0.25/0.125，开口越来越宽。",
+                      caption: "关键帧：p=0.5、1、2——a=0.5、0.25、0.125，开口越来越宽。",
                       shapes: [
                         { t: "poly", pts: [[40,88],[47,68],[50,64],[53,68],[60,88]], close: false, color: "corrA", width: 3 },
                         { t: "txt", p: [68,88], text: "p=0.5", size: 12, color: "corrA" },
@@ -1625,7 +1625,7 @@ window.MATH_CH["g13"] = {
                     {
                       caption: "第 2 步：a=1/(4×2)=1/8。",
                       shapes: [
-                        { t: "txt", p: [50,60], text: "a = 1/(4p) = ⅛", size: 16, bold: true, color: "target" },
+                        { t: "txt", p: [50,60], text: "a = 1/(4p) = 1/8", size: 16, bold: true, color: "target" },
                         { t: "txt", p: [50,44], text: "p=2 代入", size: 13 }
                       ]
                     },
@@ -2216,9 +2216,9 @@ window.MATH_CH["g13"] = {
                 "6．想一想：为什么“形→数→形”走一圈，问题反而变简单了？（开放题，说说你的理解）"
               ],
               examples: [
-                { figure: "核对答案", text: "1．A。2．距离 10，中点 (4,6)。3．平行；y=−x/2。4．(0,⅛)：a=2=1/(4p) 得 p=⅛。5．10 km：横差 6、竖差 8。6．开放：代数擅长算，几何擅长看，互译取长补短。" }
+                { figure: "核对答案", text: "1．A。2．距离 10，中点 (4,6)。3．平行；y=−x/2。4．(0,1/8)：a=2=1/(4p) 得 p=1/8。5．10 km：横差 6、竖差 8。6．开放：代数擅长算，几何擅长看，互译取长补短。" }
               ,
-                { figure: "错因解析", text: "1．圆心 (2,3) 对应 (x−2)²、(y−3)²，半径 4 对应 =16——选 A；B 的圆心是 (−2,−3)。2．距离=√((7−1)²+(10−2)²)=10；中点=((1+7)/2,(2+10)/2)=(4,6)——6-8-10 再现。3．k 都是 2：平行；垂直则 k₁k₂=−1——过原点：y=−x/2。4．y=ax² 焦点 (0,1/(4a))：a=2，p=1/8——焦点 (0,⅛)。5．横差 6、竖差 8：距离=√(36+64)=10 km——又是 6-8-10。6．开放：代数把形翻译成数来算，几何把数翻译成形来看——互译取长补短。" }],
+                { figure: "错因解析", text: "1．圆心 (2,3) 对应 (x−2)²、(y−3)²，半径 4 对应 =16——选 A；B 的圆心是 (−2,−3)。2．距离=√((7−1)²+(10−2)²)=10；中点=((1+7)/2,(2+10)/2)=(4,6)——6-8-10 再现。3．k 都是 2：平行；垂直则 k₁k₂=−1——过原点：y=−x/2。4．y=ax² 焦点 (0,1/(4a))：a=2，p=1/8——焦点 (0,1/8)。5．横差 6、竖差 8：距离=√(36+64)=10 km——又是 6-8-10。6．开放：代数把形翻译成数来算，几何把数翻译成形来看——互译取长补短。" }],
               prev: "g13-u1-l9-p1",
               next: null
             }

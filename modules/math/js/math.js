@@ -57,6 +57,63 @@
     try { localStorage.setItem(PROG_KEY, JSON.stringify(progress)); } catch (e) {}
   }
 
+  /* ---------------- 深色模式手动开关（收尾批 F3） ----------------
+   * 机制不动（ui-spec 口径）：主题仍写 document.body[data-theme]，
+   * 默认跟随系统 prefers-color-scheme；手工选择持久化到 localStorage。
+   * index.html 内联脚本在解析期先按系统应用一次，本脚本在 body 末尾
+   * 执行、紧随其后覆盖手工值；系统变更监听注册在内联脚本之后，
+   * 手工模式下自动模式让位（监听顺序保证后注册的先生效）。 */
+  var THEME_KEY = "ltb-math-theme";  // 取值：auto（默认）| light | dark
+  var themeMode = "auto";
+  try {
+    var themeStored = localStorage.getItem(THEME_KEY);
+    if (themeStored === "light" || themeStored === "dark") themeMode = themeStored;
+  } catch (e) {}
+  var sysMq = (window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null);
+  function themeLabel(m) {
+    return m === "dark" ? "🌙 深色" : (m === "light" ? "☀️ 浅色" : "🌗 跟随系统");
+  }
+  function applyTheme() {
+    var eff = themeMode === "auto" ? ((sysMq && sysMq.matches) ? "dark" : "light") : themeMode;
+    document.body.setAttribute("data-theme", eff);
+    Array.prototype.forEach.call(document.querySelectorAll(".m-theme-btn"), function (b) {
+      b.textContent = themeLabel(themeMode);
+      b.setAttribute("aria-label", "主题模式：当前" + themeLabel(themeMode) + "，点击切换");
+      b.title = "点击切换主题（跟随系统 / 浅色 / 深色）";
+    });
+  }
+  applyTheme();  // 首屏覆盖（body 已存在）：减少内联脚本系统值与手工值的闪烁差
+  if (sysMq) {
+    var onSysTheme = function () { if (themeMode === "auto") applyTheme(); };
+    if (sysMq.addEventListener) sysMq.addEventListener("change", onSysTheme);
+    else if (sysMq.addListener) sysMq.addListener(onSysTheme);  // 旧版 Safari
+  }
+  function cycleTheme() {
+    themeMode = themeMode === "auto" ? "light" : (themeMode === "light" ? "dark" : "auto");
+    try { localStorage.setItem(THEME_KEY, themeMode); } catch (e) {}
+    applyTheme();
+  }
+  function injectThemeButtons() {
+    // 学习区：翻页行中段（space-between 下自然居中，不挤 .m-head）
+    var nav = document.querySelector(".m-nav");
+    if (nav && !nav.querySelector(".m-theme-btn")) {
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "m-theme-btn";
+      b.addEventListener("click", cycleTheme);
+      var prev = $("btn-prev");
+      nav.insertBefore(b, prev && prev.nextSibling);
+    }
+    // 板块选择页：右上角悬浮（CSS .m-tracks .m-theme-btn 定位）
+    var tracks = $("tracks");
+    if (tracks && !tracks.querySelector(".m-theme-btn")) {
+      var c = document.createElement("button");
+      c.type = "button"; c.className = "m-theme-btn";
+      c.addEventListener("click", cycleTheme);
+      tracks.appendChild(c);
+    }
+    applyTheme();  // 补上按钮文案与无障碍标签
+  }
+
   /* ---------------- 板块（蓝队 2026-10-13）：代数 / 几何 ----------------
    * 进入数学板块先选板块卡片；深链接 #p=xxx 直接进对应板块。
    * 上次板块记 localStorage，下次在卡片上标"上次进入"。 */
@@ -466,6 +523,7 @@
   /* ---------------- 启动 ---------------- */
   function init() {
     renderSidebar();
+    injectThemeButtons();  // 收尾批 F3：深色模式手动开关注入
 
     $("btn-prev").addEventListener("click", function () { go(-1); });
     $("btn-next").addEventListener("click", function () { go(1); });
@@ -501,15 +559,23 @@
     }, true);
 
     // 深链接：#p=<pageId>（兼容旧链接）→ 按章节前缀判定板块直接进入
-    var m = (location.hash || "").match(/#p=([\w-]+)/);
-    if (m) {
-      // 从 pageId 反查章节：ch00-u1-l1-p1 → ch00
-      var chId = m[1].split("-")[0];
-      enterTrack(trackOfChapter(chId), { keepPage: true });
-      openLesson(chId, null, m[1]);
+    // （收尾批 A5）#track=<id>：以前只在 hashchange 里处理，首屏载入
+    // （中键新标签/书签/分享链接）直接走 showTracks() 并把 hash 抹掉，
+    // 板块路由失效；现在首屏先解析 #track=，再 #p=，最后回板块选择。
+    var tm0 = (location.hash || "").match(/^#track=(algebra|geometry)$/);
+    if (tm0) {
+      enterTrack(tm0[1]);
     } else {
-      // 无深链接：先选板块卡片
-      showTracks();
+      var m = (location.hash || "").match(/#p=([\w-]+)/);
+      if (m) {
+        // 从 pageId 反查章节：ch00-u1-l1-p1 → ch00
+        var chId = m[1].split("-")[0];
+        enterTrack(trackOfChapter(chId), { keepPage: true });
+        openLesson(chId, null, m[1]);
+      } else {
+        // 无深链接：先选板块卡片
+        showTracks();
+      }
     }
     // 面包屑直达：#track=<id> → 进入对应板块；空 hash（如点面包屑「数学」回 index.html）
     // → 回板块选择视图（全局导航批 2026-10-19 新增，与卡片 href 口径一致）
