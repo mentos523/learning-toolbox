@@ -95,13 +95,13 @@ window.BIO_CH["b22"] = {
               kind: "explain",
               title: "神经中枢分级",
               blocks: [
-                { type: "lead", text: "膝跳反射快得来不及想，憋尿却能\"忍住\"——同一个神经系统，为什么有的听使唤、有的不听？" },
+                { type: "lead", text: "膝跳反射快得来不及想，憋尿能\"忍住\"——为何同系统有的听使唤、有的不听？" },
                 { type: "text", html: "中枢分级：大脑皮层最高级，往下是下丘脑、小脑、脑干，最低脊髓；低级中枢管\"本能活\"（如排尿反射）。" },
-                { type: "text", html: "低级中枢受高级中枢调控——憋尿是大脑调控脊髓；聚精会神能抑制膝跳反射。" },
-                { type: "text", html: "结构—功能对问：大脑皮层神经元最多、联系最复杂——适合最高级决策；脊髓离效应器最近——适合快速本能应答。形配其用。" },
+                { type: "text", html: "低级中枢受高级调控——憋尿是大脑调控脊髓；专注能抑制膝跳反射。" },
+                { type: "text", html: "结构—功能对问：大脑皮层神经元最多、联系最复杂——宜最高级决策；脊髓离效应器近——宜快速本能应答。形配其用。" },
                 { type: "text", html: "<svg viewBox=\"0 0 340 128\" width=\"100%\" role=\"img\" aria-label=\"神经中枢分级阶梯示意\" style=\"max-width:380px;display:block;margin:6px auto\">" + "<g font-size=\"13.6\" text-anchor=\"middle\">" + "<rect x=\"90\" y=\"6\" width=\"160\" height=\"30\" rx=\"8\" style=\"fill:none;stroke:var(--bio-gene)\" stroke-width=\"2\"/>" + "<text x=\"170\" y=\"26\" style=\"fill:var(--bio-gene)\">大脑皮层（最高级）</text>" + "<rect x=\"90\" y=\"44\" width=\"160\" height=\"30\" rx=\"8\" style=\"fill:none;stroke:var(--bio-product)\" stroke-width=\"2\"/>" + "<text x=\"170\" y=\"64\" style=\"fill:var(--bio-product)\">下丘脑/小脑/脑干</text>" + "<rect x=\"90\" y=\"82\" width=\"160\" height=\"30\" rx=\"8\" style=\"fill:none;stroke:var(--bio-substrate)\" stroke-width=\"2\"/>" + "<text x=\"170\" y=\"102\" style=\"fill:var(--bio-substrate)\">脊髓（低级）</text>" + "<text x=\"285\" y=\"64\" font-size=\"12.8\" style=\"fill:var(--bio-ink-soft)\">上管下</text>" + "</g>" + "<text x=\"170\" y=\"126\" font-size=\"12\" text-anchor=\"middle\" style=\"fill:var(--bio-ink-soft)\">模式图：非等比、非实物</text>" + "</svg>" },
                 { type: "trap", text: "⚠️ 别搞混：反射弧完整≠想反射就反射——低级中枢受大脑调控，意识可以抑制膝跳反射。" },
-                { type: "note", text: "分级（示意排序，非严格等级）：大脑皮层 ＞ 下丘脑 / 小脑 / 脑干 ＞ 脊髓。" }
+                { type: "note", text: "分级（示意，非严格等级）：大脑皮层 ＞ 下丘脑/小脑/脑干 ＞ 脊髓。" }
               ],
               point: "中枢分级：低级管本能，高级可调控。"
             },
@@ -501,10 +501,10 @@ window.BIO_CH["b22"] = {
               kind: "explain",
               title: "严格版：体液免疫",
               blocks: [
-                { type: "lead", text: "认旧友：还记得上一页的\"边防军\"故事吗？现在说严格——先看体液免疫这条线。" },
+                { type: "lead", text: "认旧友：记得上一页的\"边防军\"故事吗？现在说严格——先看体液免疫。" },
                 { type: "text", html: "先认词——抗原：能引起免疫反应的物质；抗体：浆细胞产生的、能与相应抗原特异性结合的蛋白质；记忆细胞：记住抗原、再次应答更快更强的细胞。" },
                 { type: "text", html: "流程：抗原→吞噬细胞呈递→T 细胞→B 细胞→浆细胞产生抗体→抗体结合抗原形成沉淀→吞噬细胞清除；记忆细胞留下。" },
-                { type: "text", html: "表述精确：抗体是\"结合\"抗原，不是\"杀死\"——结合后由吞噬细胞清除。方向错了就是教学事故。" },
+                { type: "text", html: "表述精确：抗体是\"结合\"抗原，不是\"杀死\"——结合后由吞噬细胞清除。" },
                 { type: "text", html: "<svg viewBox=\"0 0 340 100\" width=\"100%\" role=\"img\" aria-label=\"体液免疫流程示意\" style=\"max-width:430px;display:block;margin:6px auto\">" +
                   "<g font-size=\"12.4\" text-anchor=\"middle\">" +
                   "<text x=\"40\" y=\"30\" style=\"fill:var(--bio-substrate)\">抗原</text><text x=\"40\" y=\"50\" style=\"fill:var(--bio-ink-soft)\">↓</text>" +
@@ -515,7 +515,7 @@ window.BIO_CH["b22"] = {
                   "</g>" +
                   "<text x=\"170\" y=\"96\" font-size=\"12\" text-anchor=\"middle\" style=\"fill:var(--bio-ink-soft)\">模式图：非等比、非实物</text>" +
                   "</svg>" },
-                { type: "note", text: "📌 本页是严格版。\"抱住\"是直觉页的口语；严格页一律用\"结合\"，配完整句\"结合后由吞噬细胞清除\"。" }
+                { type: "note", text: "📌 严格版：\"抱住\"是直觉页口语；严格页一律用\"结合\"，配完整句\"结合后由吞噬细胞清除\"。" }
               ],
               point: "体液免疫：抗体结合抗原，吞噬细胞清除。"
             },

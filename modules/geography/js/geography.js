@@ -722,7 +722,7 @@
     this._legendIv = lg.querySelector(".geog-iv");
     wrap.appendChild(el("div", "geog-ax-note",
       "诚实清单：地形为教学示意模型（非真实 DEM）；3D 山体“垂直夸大 ×2（示意）”，看趋势不量高度；" +
-      (P.river ? "河流为示意水系，只看“河流在山谷里”；" : "") + "等高线由高程函数生成（GEO-R30）。"));
+      (P.river ? "河流为示意水系，只看“河流在山谷里”；" : "") + "等高线由高程计算生成。"));
     box.appendChild(wrap);
     // 3D 旋转（拖拽）+ 2D 点选
     this._bindPointer();

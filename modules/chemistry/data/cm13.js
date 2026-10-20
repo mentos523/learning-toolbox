@@ -56,7 +56,7 @@ window.CHEM_CH["cm13"] = {
               kind: "explain",
               title: "mol：一堆的学名",
               blocks: [
-                { type: "lead", text: "一打 = 12 个（如一打鸡蛋）。化学里也有'一堆'，学名叫 mol。" },
+                { type: "lead", text: "一打 = 12 个。化学里也有'一堆'，学名叫 mol。" },
                 { type: "text", html: "'一打'是生活约定 12 个；'1 mol'是 6.02×10²³ 个，'一堆有多大'跟 12 克碳-12 挂钩。mol 是'数'的单位，不是'称'的单位——看到 mol，先问'多少个粒子'，别问'多重'。" },
                 { type: "text", html: "6.02×10²³ 有多大？一滴水约 0.05g，含 1.67×10²¹ 个水分子——才 0.0028 mol。如果每秒数 1 个，数完 1 mol 要 1.9×10¹⁶ 年。" },
                 { type: "trap", text: "⚠ 别搞混：摩尔是'质量单位'？mol 是物质的量的单位！阿伏加德罗常数是 6.02×10²³ mol⁻¹——单位不能丢。" }
@@ -398,11 +398,11 @@ window.CHEM_CH["cm13"] = {
               kind: "explain",
               title: "氯：黄绿色的'双面手'",
               blocks: [
-                { type: "lead", text: "Cl₂ 黄绿色，有毒，但用处极大：自来水消毒、制漂白粉，都靠它。" },
-                { type: "text", html: "<b>可逆符号 ⇌</b>：反应可向两方进行（正向、逆向同时发生）——详细 cm16.1.3 讲。" },
-                { type: "text", html: "Cl₂ 的化学性质：与金属（2Na + Cl₂ ＝点燃＝ 2NaCl）、与非金属（H₂ + Cl₂ ＝点燃＝ 2HCl）、与水（Cl₂ + H₂O ⇌ HCl + HClO，可逆）。HClO 不稳定：2HClO ＝光照＝ 2HCl + O₂↑——有漂白性。" },
-                { type: "text", html: "实验室制法：MnO₂ + 4HCl(浓) ＝△＝ MnCl₂ + Cl₂↑ + 2H₂O，尾气用 NaOH 溶液吸收。漂白粉的有效成分是 Ca(ClO)₂。" },
-                { type: "trap", text: "⚠ 别搞混：氯水 = 盐酸？氯水是混合物！新制氯水久置不变？HClO 见光分解，变成盐酸！" }
+                { type: "lead", text: "Cl₂ 黄绿色、有毒，用处极大：自来水消毒、制漂白粉都靠它。" },
+                { type: "text", html: "<b>可逆符号 ⇌</b>：反应可向两方进行（正、逆同时发生）——详见 cm16.1.3。" },
+                { type: "text", html: "Cl₂ 化学性质：与金属（2Na + Cl₂ ＝点燃＝ 2NaCl）、与非金属（H₂ + Cl₂ ＝点燃＝ 2HCl）、与水（Cl₂ + H₂O ⇌ HCl + HClO）。HClO 不稳定、能漂白：2HClO ＝光照＝ 2HCl + O₂↑。" },
+                { type: "text", html: "实验室制法：MnO₂ + 4HCl(浓) ＝△＝ MnCl₂ + Cl₂↑ + 2H₂O，尾气用 NaOH 吸收。漂白粉有效成分 Ca(ClO)₂。" },
+                { type: "trap", text: "⚠ 别搞混：氯水 = 盐酸？氯水是混合物！久置不变？HClO 见光分解成盐酸！" }
               ],
               point: "Cl₂ 有毒但有用：消毒、漂白都靠它——用它的'毒'，防它的'毒'。"
             },

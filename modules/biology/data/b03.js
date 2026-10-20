@@ -170,9 +170,9 @@ window.BIO_CH["b03"] = {
               kind: "explain",
               title: "实验：绿叶制造有机物",
               blocks: [
-                { type: "lead", text: "一片叶子，一半遮光、一半见光——几天后，淀粉藏在哪一半？" },
-                { type: "text", html: "先认词——暗处理：把天竺葵放在黑暗处一昼夜，耗尽叶片中原有的淀粉。对照组：实验里不做特殊处理的那一组，是\"参照物\"——没它，不知道变没变（此处的\"参照物\"指\"比较的基准\"，不是物理运动学中的参照系）。单一变量：一次实验只改变一个量，本实验只变\"光照\"，其他条件都一样。" },
-                { type: "text", html: "五步流程：暗处理→一半遮光（对照！）→光照几小时→酒精脱色（水浴加热）→碘液检验（变蓝=有淀粉）。" },
+                { type: "lead", text: "一叶半遮光、半见光，几天后淀粉藏在哪半？" },
+                { type: "text", html: "先认词——暗处理：天竺葵在黑暗处放一昼夜，耗尽叶片原有淀粉。对照组：实验里不做特殊处理的一组，是\"参照物\"——没它不知变没变（此\"参照物\"指比较基准，非物理运动学参照系）。单一变量：一次实验只改变一个量，本实验只变\"光照\"，其他条件都一样。（物理、化学称控制变量法，是同一条原则：一次只改一个条件，其余条件相同。）" },
+                { type: "text", html: "五步：暗处理→半遮光（对照！）→光照几小时→酒精脱色（水浴加热）→碘液检验（变蓝=有淀粉）。" },
                 { type: "widget", widget: { type: "experiment-3q", params: {
                   purpose: "证明光是绿叶制造有机物的条件",
                   controlOptions: ["一半遮光、一半见光", "两片叶子都见光", "两片叶子都遮光"],
@@ -184,9 +184,9 @@ window.BIO_CH["b03"] = {
                   replayHref: "#b03.1.1/2",
                   replayText: "回看第 2 页：虚拟实验全流程"
                 } } },
-                { type: "note", text: "三问自查——对照组是\"参照物\"，参照什么？单一变量\"只变\"的是哪个量？（答案在本页）" }
+                { type: "note", text: "三问自查——对照组参照什么？单一变量只变哪个量？（答案在本页）" }
               ],
-              point: "三原则落点：对照（遮光 vs 见光）、单一变量（光）、重复（多片叶）。"
+              point: "三原则：对照（遮光 vs 见光）、单一变量（光）、重复（多片叶）。"
             },
             /* ============ p2：虚拟实验全流程观察页 ============ */
             {
@@ -194,7 +194,7 @@ window.BIO_CH["b03"] = {
               kind: "explain",
               title: "虚拟实验：五步全流程",
               blocks: [
-                { type: "lead", text: "进虚拟实验室，把五步亲手走一遍——注意每一步\"为什么\"。" },
+                { type: "lead", text: "把五步亲手走一遍——注意每一步\"为什么\"。" },
                 { type: "text", html: "<div style=\"border:1px solid var(--bio-line);border-radius:10px;padding:12px;margin:6px 0;background:var(--bio-panel)\">" +
                   "<div style=\"display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px\">" +
                   "<button type=\"button\" class=\"tb-btn-secondary\" style=\"min-height:44px\" onclick=\"BIO_B03.go('gexp',0)\">①</button>" +
@@ -203,11 +203,11 @@ window.BIO_CH["b03"] = {
                   "<button type=\"button\" class=\"tb-btn-secondary\" style=\"min-height:44px\" onclick=\"BIO_B03.go('gexp',3)\">④</button>" +
                   "<button type=\"button\" class=\"tb-btn-secondary\" style=\"min-height:44px\" onclick=\"BIO_B03.go('gexp',4)\">⑤</button>" +
                   "</div>" +
-                  "<div id=\"bioB03Steps-gexp-0\"><b>① 暗处理</b>：天竺葵在黑暗处放一昼夜——耗尽叶片中原有的淀粉。为什么：排除旧淀粉干扰。</div>" +
-                  "<div id=\"bioB03Steps-gexp-1\" style=\"display:none\"><b>② 一半遮光</b>：用黑纸片/铝箔遮住叶片的一半，另一半见光——对照组设置！只差\"光照\"这一个量。</div>" +
-                  "<div id=\"bioB03Steps-gexp-2\" style=\"display:none\"><b>③ 光照</b>：阳光下照射几小时，让见光的一半充分\"工作\"。</div>" +
-                  "<div id=\"bioB03Steps-gexp-3\" style=\"display:none\"><b>④ 酒精脱色</b>：摘下叶片，放入酒精中水浴加热——绿色褪去，叶片变成黄白色。<b>误区纠正：</b>叶片不能直接滴碘液——先酒精脱色！否则绿色掩盖蓝色，什么都看不见。</div>" +
-                  "<div id=\"bioB03Steps-gexp-4\" style=\"display:none\"><b>⑤ 碘液检验</b>：清水漂洗后，向叶片滴加碘液。<span style=\"color:var(--bio-ink-soft);font-size:13.6px\">先只看现象：见光部分变蓝，遮光部分不变蓝——结论下一页再说。</span></div>" +
+                  "<div id=\"bioB03Steps-gexp-0\"><b>① 暗处理</b>：天竺葵暗放一昼夜，耗尽原有淀粉，排除干扰。</div>" +
+                  "<div id=\"bioB03Steps-gexp-1\" style=\"display:none\"><b>② 一半遮光</b>：黑纸片/铝箔遮一半，另一半见光——设对照，只差\"光照\"一个量。</div>" +
+                  "<div id=\"bioB03Steps-gexp-2\" style=\"display:none\"><b>③ 光照</b>：阳光下照几小时，让见光一半\"工作\"。</div>" +
+                  "<div id=\"bioB03Steps-gexp-3\" style=\"display:none\"><b>④ 酒精脱色</b>：叶片入酒精水浴加热，褪绿变黄白。<b>误区纠正：</b>不能直接滴碘液——先脱色！否则绿色掩盖蓝色。</div>" +
+                  "<div id=\"bioB03Steps-gexp-4\" style=\"display:none\"><b>⑤ 碘液检验</b>：漂洗后滴碘液。<span style=\"color:var(--bio-ink-soft);font-size:13.6px\">先看现象：见光变蓝、遮光不变——结论下页再说。</span></div>" +
                   "<div style=\"display:flex;gap:6px;margin-top:10px;align-items:center;flex-wrap:wrap\">" +
                   "<span id=\"bioB03Dot-gexp-0\" style=\"width:10px;height:10px;border-radius:50%;background:var(--bio-organelle);display:inline-block\"></span>" +
                   "<span id=\"bioB03Dot-gexp-1\" style=\"width:10px;height:10px;border-radius:50%;background:var(--bio-line);display:inline-block\"></span>" +
@@ -216,10 +216,10 @@ window.BIO_CH["b03"] = {
                   "<span id=\"bioB03Dot-gexp-4\" style=\"width:10px;height:10px;border-radius:50%;background:var(--bio-line);display:inline-block\"></span>" +
                   "<span id=\"bioB03Msg-gexp\" style=\"font-size:12.48px;color:var(--bio-ink-soft);margin-left:6px\">第 1 步 / 共 5 步</span>" +
                   "</div></div>" },
-                { type: "note", text: "虚拟实验：现实中须水浴加热酒精（酒精易燃，严禁用明火直热）；碘液不接触皮肤，实验后洗手。" },
-                { type: "note", text: "走完五步再想：哪一步在设对照？哪一步在\"只变一个量\"？（对照 b03.1.1 第 1 页三问）" }
+                { type: "note", text: "虚拟实验：现实中须水浴加热酒精（易燃，严禁明火直热）；碘液勿触皮肤，实验后洗手。" },
+                { type: "note", text: "走完再想：哪一步设对照？哪一步\"只变一个量\"？（对照 b03.1.1 第 1 页三问）" }
               ],
-              point: "五步走完只看现象：见光部分变蓝，遮光部分不变。"
+              point: "只看现象：见光变蓝，遮光不变蓝。"
             },
             /* ============ p3：结果、结论与三原则定型 ============ */
             {
@@ -330,17 +330,17 @@ window.BIO_CH["b03"] = {
               kind: "explain",
               title: "三组演示看呼吸作用",
               blocks: [
-                { type: "lead", text: "萌发的种子 vs 煮熟的种子——三组演示，找呼吸作用的证据。" },
-                { type: "text", html: "先认词——呼吸作用：细胞内分解有机物、释放能量的过程。三组演示找的，就是它的三条证据。" },
+                { type: "lead", text: "萌发种子 vs 煮熟种子——三组演示，找呼吸作用证据。" },
+                { type: "text", html: "先认词——呼吸作用：细胞内分解有机物、释放能量的过程。三组演示找其三条证据。" },
                 { type: "text", html: "<div style=\"border:1px solid var(--bio-line);border-radius:10px;padding:12px;margin:6px 0;background:var(--bio-panel)\">" +
                   "<div style=\"display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px\">" +
                   "<button type=\"button\" class=\"tb-btn-secondary\" style=\"min-height:44px\" onclick=\"BIO_B03.demo('resp',0)\">① 放出二氧化碳</button>" +
                   "<button type=\"button\" class=\"tb-btn-secondary\" style=\"min-height:44px\" onclick=\"BIO_B03.demo('resp',1)\">② 放出热量</button>" +
                   "<button type=\"button\" class=\"tb-btn-secondary\" style=\"min-height:44px\" onclick=\"BIO_B03.demo('resp',2)\">③ 消耗氧气</button>" +
                   "</div>" +
-                  "<div id=\"bioB03Steps-resp-0\"><b>① 释放二氧化碳</b>：甲瓶（萌发的种子）通入澄清石灰水变浑浊，乙瓶（煮熟的种子）不变。对照：煮熟的种子（灭活）。</div>" +
-                  "<div id=\"bioB03Steps-resp-1\" style=\"display:none\"><b>② 释放热量</b>：甲瓶温度计上升，乙瓶不变——呼吸作用释放能量，一部分变成热。</div>" +
-                  "<div id=\"bioB03Steps-resp-2\" style=\"display:none\"><b>③ 消耗氧气</b>：燃烧的蜡烛放入甲瓶熄灭（氧气被消耗），乙瓶继续燃烧。</div>" +
+                  "<div id=\"bioB03Steps-resp-0\"><b>① 释放二氧化碳</b>：甲瓶（萌发种子）通入澄清石灰水变浑浊，乙瓶（煮熟种子）不变。对照：煮熟种子（灭活）。</div>" +
+                  "<div id=\"bioB03Steps-resp-1\" style=\"display:none\"><b>② 释放热量</b>：甲瓶温度计上升，乙瓶不变——呼吸作用放能，一部分变热。</div>" +
+                  "<div id=\"bioB03Steps-resp-2\" style=\"display:none\"><b>③ 消耗氧气</b>：蜡烛放入甲瓶熄灭（氧气被消耗），乙瓶仍燃烧。</div>" +
                   "<div style=\"display:flex;gap:6px;margin-top:10px;align-items:center\">" +
                   "<span id=\"bioB03Dot-resp-0\" style=\"width:10px;height:10px;border-radius:50%;background:var(--bio-organelle);display:inline-block\"></span>" +
                   "<span id=\"bioB03Dot-resp-1\" style=\"width:10px;height:10px;border-radius:50%;background:var(--bio-line);display:inline-block\"></span>" +
@@ -348,7 +348,7 @@ window.BIO_CH["b03"] = {
                   "<span id=\"bioB03Msg-resp\" style=\"font-size:12.48px;color:var(--bio-ink-soft);margin-left:6px\">第 1 组 / 共 3 组</span>" +
                   "</div></div>" },
                 { type: "note", text: "虚拟实验：现实中须把种子彻底煮熟灭活作对照；澄清石灰水不接触皮肤。" },
-                { type: "note", text: "想一想：为什么三组演示都要用煮熟的种子作对照？（对照组是\"参照物\"：没它，不知道变没变）" }
+                { type: "note", text: "想一想：三组演示为何都用煮熟种子作对照？（对照组是\"参照物\"：没它不知变没变）" }
               ],
               point: "三证据：放出二氧化碳、放出热量、消耗氧气。"
             },
@@ -371,15 +371,15 @@ window.BIO_CH["b03"] = {
               kind: "explain",
               title: "\"呼吸\"vs\"呼吸作用\"",
               blocks: [
-                { type: "lead", text: "两个词，一字之差，意思差十万八千里——一次分清。" },
-                { type: "text", html: "严格版：呼吸——肺与外界的气体交换（\"喘气\"）；呼吸作用——细胞内分解有机物、释放能量（缓慢氧化）。" },
-                { type: "text", html: "直觉版：呼吸是\"喘气\"，呼吸作用是细胞里\"烧\"有机物。边界句：呼吸作用是缓慢氧化，不是有火苗的烧。" },
+                { type: "lead", text: "两词一字之差——一次分清。" },
+                { type: "text", html: "严格版：呼吸——肺与外界气体交换（\"喘气\"）；呼吸作用——细胞内分解有机物、放能（缓慢氧化）。" },
+                { type: "text", html: "直觉：呼吸是\"喘气\"，呼吸作用是细胞里\"烧\"有机物——缓慢氧化，没火苗。" },
                 { type: "text", html: "<div style=\"display:flex;gap:10px;margin:6px 0\">" +
                   "<div style=\"flex:1;text-align:center\"><svg viewBox=\"0 0 120 96\" width=\"100%\" role=\"img\" aria-label=\"跑步喘气示意\" style=\"max-width:180px;display:block;margin:0 auto\">" +
                   "<circle cx=\"80\" cy=\"16\" r=\"9\" style=\"fill:none;stroke:var(--bio-ink);stroke-width:3\"/>" +
                   "<path d=\"M74,28 L62,52 M68,38 L86,46 L94,60 M68,38 L54,48 L46,42 M62,52 L78,66 L76,88 M62,52 L48,64 L30,72\" style=\"fill:none;stroke:var(--bio-ink);stroke-width:3;stroke-linecap:round\"/>" +
                   "<path d=\"M22,30 q8,-8 16,-2 M16,46 q8,-8 16,-2\" style=\"fill:none;stroke:var(--bio-ink-soft);stroke-width:2;stroke-linecap:round\"/>" +
-                  "</svg><div style=\"font-size:12.48px;color:var(--bio-ink-soft)\">呼吸：喘气（肺通气）</div></div>" +
+                  "</svg><div style=\"font-size:12.48px;color:var(--bio-ink-soft)\">呼吸：喘气</div></div>" +
                   "<div style=\"flex:1;text-align:center\"><svg viewBox=\"0 0 120 96\" width=\"100%\" role=\"img\" aria-label=\"澄清石灰水变浑浊示意\" style=\"max-width:180px;display:block;margin:0 auto\">" +
                   "<rect x=\"32\" y=\"34\" width=\"44\" height=\"50\" rx=\"6\" style=\"fill:none;stroke:var(--bio-ink);stroke-width:3\"/>" +
                   "<rect x=\"46\" y=\"22\" width=\"16\" height=\"14\" style=\"fill:var(--bio-panel);stroke:var(--bio-ink);stroke-width:2\"/>" +
@@ -390,9 +390,9 @@ window.BIO_CH["b03"] = {
                   "<circle cx=\"93\" cy=\"74\" r=\"7\" style=\"fill:var(--bio-target)\"/>" +
                   "</svg><div style=\"font-size:12.48px;color:var(--bio-ink-soft)\">呼吸作用：细胞内氧化分解</div></div>" +
                   "</div>" },
-                { type: "text", html: "观念页：植物时刻都在进行呼吸作用；光合作用只在有光时进行。" },
-                { type: "text", html: "<b>术语医院</b>——给错句看病（练手，不扣分）：①\"跑步后喘气是呼吸作用加快了\"<details style=\"margin:4px 0\"><summary style=\"cursor:pointer\">看诊断</summary>错：\"喘气\"是呼吸（肺通气）加快，不是呼吸作用（细胞内氧化分解）。改对：\"喘气加快是呼吸加快。\"</details>②\"植物晚上不进行呼吸作用了\"<details style=\"margin:4px 0\"><summary style=\"cursor:pointer\">看诊断</summary>错：植物时刻都在进行呼吸作用；晚上停的是光合作用。改对：\"植物晚上仍在进行呼吸作用。\"</details>" },
-                { type: "note", text: "三问自查——\"呼吸\"和\"呼吸作用\"各指什么？（答案在本页）" }
+                { type: "text", html: "光合作用只在有光时进行，呼吸作用则时刻进行。" },
+                { type: "text", html: "<b>术语医院</b>——看病：①\"跑步后喘气是呼吸作用加快了\"<details style=\"margin:4px 0\"><summary style=\"cursor:pointer\">看诊断</summary>错：\"喘气\"是呼吸（肺通气）加快，非呼吸作用。改对：\"喘气加快是呼吸加快。\"</details>②\"植物晚上不进行呼吸作用了\"<details style=\"margin:4px 0\"><summary style=\"cursor:pointer\">看诊断</summary>错：呼吸作用时刻进行；停的是光合作用。改对：\"植物晚上仍在进行呼吸作用。\"</details>" },
+                { type: "note", text: "\"呼吸\"和\"呼吸作用\"各指什么？（答案在本页）" }
               ],
               point: "呼吸=肺通气；呼吸作用=细胞内氧化分解。"
             }

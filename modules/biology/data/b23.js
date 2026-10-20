@@ -198,7 +198,7 @@ window.BIO_CH["b23"] = {
                   "</div>" },
                 { type: "text", html: "结论：尖端感受单侧光，产生某种\"影响\"传到下方，引起弯曲。" },
                 { type: "trap", text: "⚠️ \"尖端被光照到才弯曲\"错——感光的是尖端，弯曲的是尖端下方（伸长区）。" },
-                { type: "note", text: "三原则：切除/罩尖端=对照；单变量（尖端完整否）；多株重复。" }
+                { type: "note", text: "三原则：切除/罩尖端=对照；单一变量（尖端完整否）；多株重复。" }
               ],
               point: "向光性：尖端感光、下方弯曲；切除/罩尖端是对照。"
             },
@@ -225,7 +225,7 @@ window.BIO_CH["b23"] = {
                   "<div id=\"bioB23Msg-went\" style=\"font-size:12px;color:var(--bio-ink-soft);margin-top:6px\">第 1 步 / 共 4 步</div>" +
                   "<div style=\"font-size:12px;color:var(--bio-ink-soft);margin-top:4px\">示意，非真实速度/比例。</div>" +
                   "</div>" },
-                { type: "text", html: "结论：尖端产生了某种化学物质，进入琼脂块、向下运输促生长。" },
+                { type: "text", html: "结论：尖端产生化学物质，进入琼脂块、向下运输促生长。" },
                 { type: "text", html: "虚拟实验：现实中须用真实胚芽鞘与琼脂块操作，刀片锋利、注意安全。" },
                 { type: "widget", widget: { type: "experiment-3q", params: {
                   purpose: "证明胚芽鞘尖端产生了某种促进生长的化学物质",
@@ -238,8 +238,8 @@ window.BIO_CH["b23"] = {
                   replayHref: "#b23.1.1/2",
                   replayText: "回看第 2 页：温特实验虚拟重演"
                 } } },
-                { type: "text", html: "先认词——生长素：植物体内产生的、能促进生长的化学物质（1934年郭葛等从植物中分离出，化学本质是吲哚乙酸）。" },
-                { type: "note", text: "三原则：A/B琼脂块对照；单变量=接触尖端否；重复。" }
+                { type: "text", html: "先认词——生长素：植物体内产生的、能促进生长的化学物质（1934年郭葛等从植物分离出，化学本质是吲哚乙酸）。" },
+                { type: "note", text: "三原则：A/B琼脂块对照；单一变量=接触尖端否；重复。" }
               ],
               point: "温特实验：A/B琼脂块对照→尖端产生生长素。"
             },

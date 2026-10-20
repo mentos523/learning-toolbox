@@ -343,7 +343,7 @@ window.ENG_CH["gr10"] = {
               id: "gr10.1.2-p3",
               kind: "explain",
               title: "过去分词：被动、完成、感到",
-              lead: "还记得吗？上一页 broken 站在名词后，worried 站在 was 后面。",
+              lead: "先看一眼上一页的结论：名词后是定语，be 后是表语。这一页把它用在分清被动、完成、感到。",
               blocks: [
                 {
                   type: "examples",

@@ -358,7 +358,7 @@ window.ENG_CH["gr01"] = {
               id: "gr01.1.2-p3",
               kind: "explain",
               title: "复数与所有格：-s 管'几个'，-'s 管'谁的'",
-              lead: "还记得吗？上一页 boys'（谁的）和 bikes（几个）长得像，身份不同——一撇定身份。",
+              lead: "children 没加 -s，boxes 老老实实加了 -es——同是'变多个'，为什么一个换词、一个加尾巴？",
               point: "这就是复数与所有格：-s 管'几个'，-'s 管'谁的'，不规则的单记。",
               blocks: [
                 {
@@ -667,7 +667,7 @@ window.ENG_CH["gr01"] = {
               id: "gr01.2.1-p3",
               kind: "explain",
               title: "冠词总论：a 泛指，the 特指",
-              lead: "还记得吗？上一页第一只狗用 a，第二只狗用 the——因为第二只我们已经认识了。",
+              lead: "第一句 a dog，第二句 the dog——同一只狗，冠词为什么变了？",
               point: "这就是冠词四分法：a/an 泛指一个，the 特指那个，复数/不可数泛指零冠词。",
               blocks: [
                 {
@@ -969,7 +969,7 @@ window.ENG_CH["gr01"] = {
               id: "gr01.2.3-p3",
               kind: "explain",
               title: "some/any 与 much/many：看句式，看可数性",
-              lead: "还记得吗？上一页否定句里 some 被换成了 any——some 在否定句里待不住，是'黑户'。",
+              lead: "肯定句用 some，否定句用 any——'一些'为什么要换词？",
               point: "这就是 some/any 与 much/many：some 肯定 any 否定疑问；much 不可数，many 可数。",
               blocks: [
                 {

@@ -225,7 +225,7 @@ window.ENG_CH["gr11"] = {
                   type: "bridge",
                   zh: "汉语说“不开心”，在“开心”前加个“不”；英语也一样，在 happy 前加个 un-。",
                   en: "不一样的是：unhappy 是一个词，前缀“粘”在词上；in- 碰到 b/m/p/l/r 会变脸，汉语的“不”不会变。这些前缀在“讲词根”都有词条。",
-                  unbridge: "这是英语的规矩：前缀改义不改性，拼写还要看邻居脸色。"
+                  unbridge: "英语就认这个理：前缀改义不改性，拼写还要看邻居脸色。"
                 },
                 {
                   type: "spell",
@@ -379,7 +379,7 @@ window.ENG_CH["gr11"] = {
               id: "gr11.1.2-p3",
               kind: "explain",
               title: "后缀：改性",
-              lead: "还记得吗？上一页 happy 穿 -ness 外套变成了名词。",
+              lead: "happiness 是名词，friendly 却是形容词——-ly 为何不算数？",
               blocks: [
                 {
                   type: "examples",
@@ -395,7 +395,7 @@ window.ENG_CH["gr11"] = {
                   type: "bridge",
                   zh: "汉语“快乐”变“快乐地”，加个“地”字；英语 happy 变 happily，加个 -ly。",
                   en: "不一样的是：英语后缀能变出好几种词性（-ness 变名词、-ful 变形容词），像换装；-ly 有卧底（friendly 是形容词），不能见 -ly 就喊副词。后缀的讲法是本章新讲的。",
-                  unbridge: "这是英语的规矩：后缀管词性，认后缀先看它到底变出了什么词性。"
+                  unbridge: "不是汉语的讲法，是英语的规矩：后缀管词性，认后缀先看它到底变出了什么词性。"
                 },
                 {
                   type: "spell",
@@ -560,7 +560,7 @@ window.ENG_CH["gr11"] = {
               id: "gr11.1.3-p3",
               kind: "explain",
               title: "复合词",
-              lead: "还记得吗？你上一页把 blackboard 拆成了 black + board。",
+              lead: "先看一眼上一页的结论：复合词是小词拼大词。这一页把它用在拼写和复数上：s 加在关键部分。",
               blocks: [
                 {
                   type: "examples",
@@ -576,7 +576,7 @@ window.ENG_CH["gr11"] = {
                   type: "bridge",
                   zh: "汉语也有复合词：“教室”= 教 + 室，“黑板”= 黑 + 板。",
                   en: "英语一样：classroom = class + room。不一样的是：passer-by 的复数是 passers-by，s 加在“人”那个部分。passport = pass + port，这里的 port 是“港口”（portus），不是“运送”（portare）——它是“过港口/关口的通行证”。port 有两个家族，别搞混。",
-                  unbridge: "这是英语的规矩：复合词先看它是几部分拼的，复数找“关键部分”加 s。"
+                  unbridge: "规矩就这一条：复合词先看它是几部分拼的，复数找“关键部分”加 s。"
                 },
                 {
                   type: "spell",
@@ -732,7 +732,7 @@ window.ENG_CH["gr11"] = {
               id: "gr11.2.1-p3",
               kind: "explain",
               title: "词性转换一条链",
-              lead: "还记得吗？你上一页给 success 穿 -ful 外套，它变成了形容词 successful。",
+              lead: "succeed 是动词，successful 是形容词——同根词为何词形不同？",
               blocks: [
                 {
                   type: "examples",
@@ -915,7 +915,7 @@ window.ENG_CH["gr11"] = {
                   type: "bridge",
                   zh: "汉语猜生词靠上下文；英语多一个帮手：后缀。",
                   en: "英语的后缀像“制服”：看到 -tion 就知道是名词，看到 -ize 就知道是动词——先认制服（词性），再猜长相（词义），阅读速度翻倍。这是讲词根“猜词义”技能的升级版。",
-                  unbridge: "这是英语的规矩：词性是猜词义的脚手架，先判性再猜义。"
+                  unbridge: "英语就认这个理：词性是猜词义的脚手架，先判性再猜义。"
                 },
                 {
                   type: "spell",
@@ -1082,7 +1082,7 @@ window.ENG_CH["gr11"] = {
               id: "gr11.2.3-p3",
               kind: "explain",
               title: "本章小结：三表合一",
-              lead: "还记得吗？前缀改义、后缀改性、一词四形——三张表收网。",
+              lead: "本章小结——前缀改义、后缀改性、一词四形，三张表收网。",
               blocks: [
                 {
                   type: "examples",

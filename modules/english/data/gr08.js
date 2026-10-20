@@ -303,7 +303,7 @@ window.ENG_CH["gr08"] = {
               id: "gr08.1.2-p3",
               kind: "explain",
               title: "mustn't（不许）vs don't have to（不必）",
-              lead: "还记得吗？上一页 mustn't 是红灯，don't have to 是绿灯。",
+              lead: "mustn't 是不许，don't have to 是不必——看着像'必须不'，为何全反？",
               blocks: [
                 {
                   type: "examples",
@@ -603,7 +603,7 @@ window.ENG_CH["gr08"] = {
               id: "gr08.1.4-p3",
               kind: "explain",
               title: "should / had better / need：应该、最好、需要",
-              lead: "还记得吗？上一页 had better 后面直接跟了原形，to 没让进。",
+              lead: "had better hurry up，后面没 to——'最好'为何直接跟原形？",
               blocks: [
                 {
                   type: "examples",

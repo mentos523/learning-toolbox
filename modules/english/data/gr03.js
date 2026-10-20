@@ -314,7 +314,7 @@ window.ENG_CH["gr03"] = {
               id: "gr03.1.2-p3",
               kind: "explain",
               title: "副词：-ly 常装，特例与卧底单记",
-              lead: "还记得吗？上一页 well 装修的是 speaks（动词）——副词的第一个岗位。",
+              lead: "He works hard. 里 hard 无 -ly；hardly 却是'几乎不'——谁是卧底？",
               point: "这就是副词：-ly 常装，fast/hard/late 免穿，hardly 是卧底（几乎不）。",
               blocks: [
                 {
@@ -471,7 +471,7 @@ window.ENG_CH["gr03"] = {
               id: "gr03.1.3-p3",
               kind: "explain",
               title: "比较级与最高级：'更'一次，'最'加 the",
-              lead: "还记得吗？上一页 taller 是'更'，than Jim 是'比的对象'——比较级+than 是固定搭档。",
+              lead: "先看一眼上一页的结论：比较级+than，一个不能少。这一页把它用在最高级上：-est/most 表'最'，前面加 the。",
               point: "这就是比较级与最高级：-er/more 表'更'，-est/most+the 表'最'；不规则单记。",
               blocks: [
                 {
@@ -642,7 +642,7 @@ window.ENG_CH["gr03"] = {
               id: "gr03.2.1-p3",
               kind: "explain",
               title: "比较句型全家福：一样、更、越…越…、倍数",
-              lead: "还记得吗？上一页 as tall as 中间是原级 tall——'一样'不用比较级。",
+              lead: "比较句型全家福：as…as、比较级+than、the…the…、倍数。'一样'中间是原级。",
               point: "这就是比较句型全家福：as…as 一样，than 更，the…the… 越…越…，twice as…as 两倍。",
               blocks: [
                 {

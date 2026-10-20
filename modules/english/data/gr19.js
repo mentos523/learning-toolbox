@@ -215,7 +215,7 @@ window.ENG_CH["gr19"] = {
                   type: "bridge",
                   zh: "汉语做完形也看上下文；英语多看三样：时态、代词、连接词。",
                   en: "英语是“形合”语言：时态、代词、连接词像钉子，把句子钉在一起——完形挖掉词，钉子还在，顺着钉子找答案。",
-                  unbridge: "这是英语的规矩：做题先看篇章线索，再看空前后。"
+                  unbridge: "规矩就这一条：做题先看篇章线索，再看空前后。"
                 },
                 {
                   type: "contrast",
@@ -360,7 +360,7 @@ window.ENG_CH["gr19"] = {
               id: "gr19.1.2-p3",
               kind: "explain",
               title: "短文改错十看",
-              lead: "还记得吗？你上一页用“十看之主谓”抓到了 go 少 s。",
+              lead: "He go to school. 少个 s 就是错——改错十看，第一看什么？",
               blocks: [
                 {
                   type: "examples",
@@ -554,7 +554,7 @@ window.ENG_CH["gr19"] = {
                   type: "bridge",
                   zh: "汉语写作用词升级；英语写作用“句式”升级。",
                   en: "英语阅卷看两样：意思对不对，句式多不多——同一个意思，用定语从句、非谓语、强调句说出来就是高分句式。但升级不能硬堆，错一句不如对一句简单句。",
-                  unbridge: "这是英语的规矩：先保证对，再谈高级；高级句式是调料，不是主菜。"
+                  unbridge: "英语就认这个理：先保证对，再谈高级；高级句式是调料，不是主菜。"
                 },
                 {
                   type: "contrast",
@@ -706,7 +706,7 @@ window.ENG_CH["gr19"] = {
               id: "gr19.2.1-p3",
               kind: "explain",
               title: "时态语态总复习",
-              lead: "还记得吗？你上一页给 was written 贴上了“一般过去时被动语态”。",
+              lead: "时态语态总复习：8 大时态、被动 be + done、不及物无被动。",
               blocks: [
                 {
                   type: "examples",
@@ -864,7 +864,7 @@ window.ENG_CH["gr19"] = {
               id: "gr19.2.2-p3",
               kind: "explain",
               title: "从句总复习",
-              lead: "还记得吗？上一页 that I bought 进定语槽，拼出 The book that I bought is interesting.",
+              lead: "从句总复习：三大从句看成分、that 看身份、主将从现。",
               blocks: [
                 {
                   type: "examples",
@@ -1026,7 +1026,7 @@ window.ENG_CH["gr19"] = {
               id: "gr19.2.3-p3",
               kind: "explain",
               title: "全书诊断与学习路径",
-              lead: "还记得吗？你上一页给 He go 贴上了“gr05：三单 -s”——诊断完成，回填开始。",
+              lead: "全书总复习：诊断三问自查，错哪回哪章，词汇与语法两条腿一起走。",
               blocks: [
                 {
                   type: "examples",

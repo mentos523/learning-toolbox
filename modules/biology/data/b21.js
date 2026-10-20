@@ -56,7 +56,7 @@ window.BIO_CH["b21"] = {
               title: "达尔文与自然选择",
               blocks: [
                 { type: "lead", text: "\"小猎犬号\"五年环球考察——达尔文带回一个大问题：物种从哪来？" },
-                { type: "text", html: "先认词——自然选择：自然界中，生物通过激烈的生存斗争，适应者生存下来、不适应者被淘汰的现象。学说四点：过度繁殖、生存斗争、遗传变异、适者生存。" },
+                { type: "text", html: "先认词——自然选择：生物经激烈的生存斗争，适应者存活、不适应者被淘汰的现象。学说四点：过度繁殖、生存斗争、遗传变异、适者生存。" },
                 { type: "text", html: "第一点——过度繁殖：生物都有繁殖过剩的倾向。一对家蝇一个夏天能繁殖出上亿后代——但天并没有被苍蝇铺满。" },
                 { type: "text", html: "第二点——生存斗争：资源有限，生物为食物、空间、配偶展开竞争——同种个体之间、不同物种之间、生物与无机环境之间。" },
                 { type: "text", html: "<svg viewBox=\"0 0 340 130\" width=\"100%\" role=\"img\" aria-label=\"过度繁殖与有限资源示意\" style=\"max-width:400px;display:block;margin:6px auto\">" +
@@ -170,9 +170,9 @@ window.BIO_CH["b21"] = {
                   "<input type=\"range\" min=\"5\" max=\"95\" step=\"5\" value=\"5\" aria-label=\"选择压力滑块\" style=\"width:100%;min-height:44px\" oninput=\"var v=this.value;document.getElementById('gfbA').style.width=v+'%';document.getElementById('gfba').style.width=(100-v)+'%';document.getElementById('gflA').textContent='A：'+v+'%';document.getElementById('gfla').textContent='a：'+(100-v)+'%';\">" +
                   "<div style=\"display:flex;height:28px;border-radius:6px;overflow:hidden;margin:8px 0 4px\"><div id=\"gfbA\" style=\"width:5%;background:var(--bio-gene)\"></div><div id=\"gfba\" style=\"width:95%;background:var(--bio-product)\"></div></div>" +
                   "<div><span id=\"gflA\">A：5%</span>　<span id=\"gfla\">a：95%</span></div>" +
-                  "<div style=\"font-size:12.48px;color:var(--bio-ink-soft)\">有利基因 A 的频率随选择压力定向上升——这就是进化的样子。示意值（非实测数据）</div>" +
+                  "<div style=\"font-size:12.48px;color:var(--bio-ink-soft)\">有利基因 A 的基因频率随选择压力定向上升——这就是进化的样子。示意值（非实测数据）</div>" +
                   "</div>" },
-                { type: "text", html: "读模拟：滑块=选择压力。A 基因有利，压力越大 A 的频率越高——定向改变。自然选择不创造变异，它只决定方向。" }
+                { type: "text", html: "读模拟：滑块=选择压力。A 基因有利，压力越大 A 的基因频率越高——定向改变。自然选择不创造变异，它只决定方向。" }
               ],
               point: "立靶：进化=种群基因频率的定向改变。"
             },

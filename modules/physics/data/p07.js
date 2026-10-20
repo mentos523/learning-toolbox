@@ -359,7 +359,7 @@ window.PHY_CH["p07"] = {
                     fulcrumX: { min: 30, max: 70, step: 1, init: 50 },
                     load: { weight: 10, armInit: 20 },
                     showEquation: true, unit: "N",
-                    badge: { invariant: "没变的是：阻力（钩码重量）（变的是支点位置→F₁ 读数）" },
+                    badge: { invariant: "没变的是：阻力（钩码重力）（变的是支点位置→F₁ 读数）" },
                     /* 引擎试点（2026-10-16）：实现层切 Eng.Lever，文案不动 */
                     engine: {
                       primitive: "Lever", version: "2026.10.16.1",
@@ -432,7 +432,7 @@ window.PHY_CH["p07"] = {
                     mode: "pulley", pulleyKind: "fixed",
                     load: { weight: 10, armInit: 0 },
                     showEquation: false, unit: "N",
-                    badge: { invariant: "没变的是：重物重量（定滑轮这轮，变的是拉力读数与绳子长度）" },
+                    badge: { invariant: "没变的是：重物重力（定滑轮这轮，变的是拉力读数与绳子长度）" },
                     /* 引擎试点（2026-10-16）：实现层切 Eng.Pulley */
                     engine: {
                       primitive: "Pulley", version: "2026.10.16.1",
@@ -446,7 +446,7 @@ window.PHY_CH["p07"] = {
                     mode: "pulley", pulleyKind: "movable",
                     load: { weight: 10, armInit: 0 },
                     showEquation: false, unit: "N",
-                    badge: { invariant: "没变的是：重物重量（动滑轮这轮，变的是拉力读数与绳子长度）" },
+                    badge: { invariant: "没变的是：重物重力（动滑轮这轮，变的是拉力读数与绳子长度）" },
                     /* 引擎试点（2026-10-16）：实现层切 Eng.Pulley */
                     engine: {
                       primitive: "Pulley", version: "2026.10.16.1",
@@ -488,7 +488,7 @@ window.PHY_CH["p07"] = {
                   units: { si: "无单位（常用百分数）" }
                 },
                 { type: "trap", text: "⚠️ 别搞混：“机械效率>1”——错！有用功永远小于总功，η 恒<1；η>1 就是永动机。" },
-                { type: "mathlink", text: "数学呼应：代数 ch03 分式（奠基）——η 是分式，恒<1：分子永远小于分母。" },
+                { type: "mathlink", text: "数学呼应：代数 ch03 分式（奠基）——η 是分式，恒<1：分子永远小于分母（此处的分子是分式义）。" },
                 { type: "slogan", text: "有用小于总，效率恒小一。" }
               ],
               point: "提高 η 的思路：减小额外功（轻动滑轮、加润滑）——分子做大，分母做小。"

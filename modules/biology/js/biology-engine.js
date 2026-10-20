@@ -331,7 +331,7 @@
     /* BIO-R25：渲染前程序化校验冻结答案与图的一致性 */
     var chk = checkPedigree(pedigree);
     if (!chk.ok) {
-      var err = el("div", "bio-b6-err", "⚠ 系谱数据校验未通过（" + esc(chk.reason) + "）——已阻断渲染，请联系生物队。");
+      var err = el("div", "bio-b6-err", "⚠ 这道题的系谱数据有问题（" + esc(chk.reason) + "）——这道题暂时打不开。");
       root.appendChild(err);
       return root;
     }
@@ -421,7 +421,7 @@
         stepsPerFrame: 1,
         totalFrames: 3,
         stepSummaries: STEP_SUMMARIES,
-        assumptions: ["分步判读状态机：状态变更只由学生判读动作触发", "冻结答案与图已过 BIO-R25 程序化校验"],
+        assumptions: ["分步判读状态机：状态变更只由学生判读动作触发", "判读的正确答案已先与图逐一核对一致"],
         approximations: ["无数值计算"],
         errorEstimate: "离散状态机，无数值误差",
         onFrame: function () { paintAll(); }
@@ -851,7 +851,7 @@
     root.setAttribute("data-qid", qid);
 
     if (!prepOK) {
-      root.appendChild(el("div", "bio-b6-err", "⚠ 制片步序与冻结口径不一致（须为 解离→漂洗→染色→制片）——已阻断渲染。"));
+      root.appendChild(el("div", "bio-b6-err", "⚠ 制片步序不对（须为 解离→漂洗→染色→制片）——这道题暂时打不开。"));
       return root;
     }
 
@@ -1632,7 +1632,7 @@ function renderPunnettLab(params, wid) {
   var expectCells = Math.pow(4, pairs);
   if (truth.cells.length !== expectCells) {
     return el("div", "bio-b5-err",
-      "⚠ B5 校验失败：方格数 " + truth.cells.length + " ≠ 4^" + pairs + "（W-B7）。");
+      "⚠ 这道题的数据有问题：方格数 " + truth.cells.length + " ≠ 4^" + pairs + "，暂时打不开。");
   }
 
   /* ---------- 常驻徽章：大量统计的结果（B-F5，不可关） ---------- */
@@ -1969,7 +1969,7 @@ function renderPunnettLab(params, wid) {
 
   function renderExperiment3Q(params, wid) {
     var perr = check3QParams(params || {});
-    if (perr) return el("div", "bio-b3-err", "⚠ B3 参数校验失败：" + perr + "（BIO-R15）。");
+    if (perr) return el("div", "bio-b3-err", "⚠ 这道题的数据有问题，暂时打不开（" + perr + "）。");
     var m = String(wid || "").match(/^b\d+\.\d+\.\d+/);
     var recordKey = params.recordKey || ("bio_3q_" + (m ? m[0] : "unknown"));
     var optArr = [params.controlOptions, params.variableOptions, params.repeatOptions];
@@ -2160,7 +2160,7 @@ function renderPunnettLab(params, wid) {
 
   function renderPhotosynSandbox(params, wid) {
     var perr = checkSandboxParams(params || {});
-    if (perr) return el("div", "bio-b4-err", "⚠ B4 参数校验失败：" + perr + "。");
+    if (perr) return el("div", "bio-b4-err", "⚠ 这道题的数据有问题，暂时打不开（" + perr + "）。");
     var relNote = params.relativeNote || B4_REL_NOTE;
     var showCurve = params.showCurve !== false;
     var limitHint = params.limitHint !== false;
@@ -2407,7 +2407,7 @@ function renderPunnettLab(params, wid) {
   function renderEnzymeLab(params, wid) {
     params = params || {};
     var perr = checkEnzymeParams(params);
-    if (perr) return el("div", "bio-b10-err", "⚠ B10 参数校验失败：" + perr + "。");
+    if (perr) return el("div", "bio-b10-err", "⚠ 这道题的数据有问题，暂时打不开（" + perr + "）。");
     var m = String(wid || "").match(/^b\d+\.\d+\.\d+/);
     var recordKey = params.recordKey || ("bio_enzyme_" + (m ? m[0] : "unknown"));
     var tempCfg = params.temp || { min: 0, max: 70, step: 1, init: 37, unit: "℃" };

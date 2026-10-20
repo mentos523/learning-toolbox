@@ -48,7 +48,7 @@
       "鞍部歧义格按格心均值消歧（确定性规则，文档化）",
       "3D 示意山体为 2.5D 斜投影，非真实三维测量"
     ],
-    errorEstimate: "等高线点位误差 ≤ 0.5 逻辑单位（网格半格）；白队独立重算容差 1 逻辑单位（GEO-R30）"
+    errorEstimate: "等高线点位误差 ≤ 0.5 逻辑单位（网格半格）；换一种算法重新计算，差别不超过 1 逻辑单位"
   };
 
   function deepCopy(o) { return JSON.parse(JSON.stringify(o)); }

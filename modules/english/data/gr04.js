@@ -326,7 +326,7 @@ window.ENG_CH["gr04"] = {
               id: "gr04.1.2-p3",
               kind: "explain",
               title: "地点介词：in 里面、on 上面、at 点上",
-              lead: "还记得吗？上一页书在桌'上面'用 on——表面是 on 的地盘。",
+              lead: "on the desk 是桌上，in the desk 是抽屉里——一词之差，为何全变？",
               point: "这就是地点介词：in 里面、on 上面、at 点上；交通工具 on 特例单记。",
               blocks: [
                 {

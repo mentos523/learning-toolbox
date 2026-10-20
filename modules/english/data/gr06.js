@@ -214,7 +214,7 @@ window.ENG_CH["gr06"] = {
               id: "gr06.1.1-p3",
               kind: "explain",
               title: "现在进行时：be + doing",
-              lead: "还记得吗？上一页 is 和 running 两个零件缺一不可，I am leaving 讲的却是明天。",
+              lead: "先看一眼上一页的结论：be + doing 缺一不可。这一页把它用在位移动词上：进行时还能表将来的安排。",
               blocks: [
                 {
                   type: "examples",
@@ -372,7 +372,7 @@ window.ENG_CH["gr06"] = {
               id: "gr06.1.2-p3",
               kind: "explain",
               title: "过去进行时：was / were + doing",
-              lead: "还记得吗？上一页 was 把“正在睡觉”钉在了昨晚十点。",
+              lead: "was sleeping 在昨晚十点——过去的'正在'，be 为何是 was？",
               blocks: [
                 {
                   type: "examples",
@@ -614,7 +614,7 @@ window.ENG_CH["gr06"] = {
               id: "gr06.1.4-p3",
               kind: "explain",
               title: "进行时时间轴：be 报时，doing 不变",
-              lead: "还记得吗？上一页 was 报告了“过去”，reading 没变——be 报时，doing 不变。",
+              lead: "am reading、was reading、will be reading——reading 没变，变的是谁？",
               blocks: [
                 {
                   type: "examples",
@@ -738,7 +738,7 @@ window.ENG_CH["gr06"] = {
               id: "gr06.2.1-p3",
               kind: "explain",
               title: "现在完成时：have / has + 过去分词",
-              lead: "还记得吗？have 和 lost 两个零件，讲“丢了”和“现在没钥匙”两件事。",
+              lead: "先看一眼上一页的结论：过去动作把结果留在现在。这一页把它用在 have + 过去分词上。",
               blocks: [
                 {
                   type: "examples",
@@ -899,7 +899,7 @@ window.ENG_CH["gr06"] = {
               id: "gr06.2.2-p3",
               kind: "explain",
               title: "完成时的时间状语：since / for / yet",
-              lead: "还记得吗？上一页 since 2019 是“点”，for three years 是“段”。",
+              lead: "since 2019 是'点'，for three years 是'段'——点段为何分家？",
               blocks: [
                 {
                   type: "examples",

@@ -396,7 +396,7 @@ window.ENG_CH["gr02"] = {
               id: "gr02.1.2-p3",
               kind: "explain",
               title: "物主代词：my+名词，mine 独立",
-              lead: "还记得吗？上一页 my 后面跟着 book，mine 自己站——of 后面也是 mine。",
+              lead: "先看一眼上一页的结论：my 是半成品，mine 是成品。这一页把它用在两类物主代词分工上。",
               point: "这就是物主代词：my+名词，mine 独立，of+mine。",
               blocks: [
                 {
@@ -749,7 +749,7 @@ window.ENG_CH["gr02"] = {
               id: "gr02.2.1-p3",
               kind: "explain",
               title: "疑问代词：who 作主语不倒装",
-              lead: "还记得吗？上一页 who 作主语，后面直接跟谓语——did 没有出场机会。",
+              lead: "Who broke…? 无 did；Who did you meet? 有 did——为何一有一无？",
               point: "这就是疑问代词：who 作主语不倒装；which 有范围，what 无范围；whom 口语少用。",
               blocks: [
                 {

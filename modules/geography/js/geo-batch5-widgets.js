@@ -311,6 +311,74 @@
     var g = svgEl("g", { "class": "geog-base" });
     svg.appendChild(g);
 
+    /* GEO-RULING-2026-10-20-11 裁定 3 S2/S4/S5 + -12 返工 R1/R2/R5：受裁注记共用校准函数
+       （由基线钓鱼岛单注记 IIFE 泛化，钓鱼岛行为逐项等价）：
+       cssPx = Math.max(12.5, Math.min(36, 12.48/s))，s=svg.getScreenCTM().a，
+       结果保留两位小数，回退 12.5；rAF + resize 重算，CTM 无效保持回退，
+       节点脱离文档后监听自解绑。S4：下方注记 dy=max(0, 1.0*cssPx-净空)
+       （k=1.0；桌面 cssPx=12.5 时 dy 为中沙/南沙/曾母 +1.5、海南省 +0.5、
+       台湾省 0，即 -12 裁决 5 接受的桌面回归基线）。曾母一注 dy 另封顶 12.4
+       （-12 裁决 2 定点例外）。S5：簇避让落点偏移 dx/dy5 随
+       f=(cssPx-12.5)/19.09 同步伸缩（桌面 f=0 落点与基线一致、引线隐形）。 */
+    var adaptiveEntries = [], adaptiveLeaders = [];
+    function regAdaptive(el, baseX, baseY, dx, dy5, clearance, dyCap) {
+      var en = { el: el, baseX: baseX, baseY: baseY, dx: dx, dy5: dy5,
+        clearance: (clearance == null ? null : clearance),
+        dyCap: (dyCap == null ? null : dyCap), curX: baseX, curY: baseY };
+      adaptiveEntries.push(en); return en;
+    }
+    function regLeader(x1, y1, entry, relX, relY, bends) {
+      /* bends（可选，逻辑坐标折点列）：仅西沙引线按 GEO-RULING-2026-10-20-12c
+         改多折点折线时传入，元素改用 polyline；其余引线行为不变。 */
+      var ln;
+      if (bends && bends.length) {
+        ln = svgEl("polyline", { points: "", fill: "none",
+          stroke: soft, "stroke-width": 1, opacity: 0 });
+      } else {
+        ln = svgEl("line", { x1: x1, y1: y1, x2: x1, y2: y1,
+          stroke: soft, "stroke-width": 1, opacity: 0 });
+      }
+      g.insertBefore(ln, entry.el);
+      adaptiveLeaders.push({ line: ln, x1: x1, y1: y1, entry: entry, relX: relX, relY: relY,
+        bends: (bends && bends.length) ? bends : null });
+    }
+    function calibrateAdaptive() {
+      if (!svg.isConnected) { window.removeEventListener("resize", calibrateAdaptive); return; }
+      var ctm = null;
+      try { ctm = svg.getScreenCTM(); } catch (e) { ctm = null; }
+      var s = ctm && ctm.a > 0 ? ctm.a : 0;
+      if (!(s > 0)) return; /* 尚未入 DOM：保持回退值，待 rAF/resize 重算 */
+      var cssPx = Math.max(12.5, Math.min(36, 12.48 / s));
+      var fs = String(Math.round(cssPx * 100) / 100);
+      var f = Math.max(0, Math.min(1, (cssPx - 12.5) / 19.09));
+      adaptiveEntries.forEach(function (en) {
+        en.el.setAttribute("font-size", fs);
+        var dy4 = en.clearance != null ? Math.max(0, cssPx - en.clearance) : 0;
+        if (en.dyCap != null) dy4 = Math.min(dy4, en.dyCap);
+        en.curX = en.baseX + en.dx * f;
+        en.curY = en.baseY + dy4 + en.dy5 * f;
+        en.el.setAttribute("x", String(Math.round(en.curX * 100) / 100));
+        en.el.setAttribute("y", String(Math.round(en.curY * 100) / 100));
+      });
+      adaptiveLeaders.forEach(function (L) {
+        var ex = Math.round((L.entry.curX + L.relX) * 100) / 100;
+        var ey = Math.round((L.entry.curY + L.relY) * 100) / 100;
+        if (L.bends) {
+          var pts = [[L.x1, L.y1]].concat(L.bends, [[ex, ey]]);
+          L.line.setAttribute("points", pts.map(function (p) { return p[0] + "," + p[1]; }).join(" "));
+        } else {
+          L.line.setAttribute("x2", String(ex));
+          L.line.setAttribute("y2", String(ey));
+        }
+        L.line.setAttribute("opacity", f > 0.02 ? "1" : "0");
+      });
+    }
+    function armAdaptive() {
+      calibrateAdaptive();
+      if (typeof requestAnimationFrame === "function") requestAnimationFrame(calibrateAdaptive);
+      window.addEventListener("resize", calibrateAdaptive);
+    }
+
     if (isC) {
       /* C 级剪影：装饰性轮廓，不画国界线/省界/十段线；台湾岛不可缺。
        * 剪影 = 陆上边境线（丹东→东兴） + 海岸线（顺序：东兴→丹东）
@@ -327,8 +395,10 @@
       g.appendChild(svgEl("path", { d: tw.path, fill: landFill, stroke: soft, "stroke-width": 1.2 }));
       g.appendChild(svgEl("path", { d: hi.path, fill: landFill, stroke: soft, "stroke-width": 1.2 }));
       var twt = svgEl("text", { x: tw.labelPt[0], y: tw.labelPt[1], "text-anchor": "middle",
-        fill: soft, "font-size": "12.5" });
+        fill: soft, "font-size": "12.5", "data-adaptive-label": "tw-island" });
       twt.textContent = "台湾岛"; g.appendChild(twt);
+      regAdaptive(twt, tw.labelPt[0], tw.labelPt[1], 0, 0, null);
+      armAdaptive();
       return { g: g, ink: ink, soft: soft, accent: accent, landFill: landFill, seaFill: seaFill };
     }
 
@@ -382,21 +452,40 @@
 
     /* 南海四群岛符号（缺一不可，B.2） */
     var isl = paths.islands;
+    /* -12 R3/R4：东沙北移脱固线；西沙/中沙/南沙扇出至东侧空水面列（x=720）
+       整体北移退出声明框覆盖带（390px 最严页 dg08.1.3 声明顶边 y≈448.5）。 */
+    var ISL_ADAPT = {
+      dongsha:  { dx: -130.4, dy5: -105,   clr: null, leader: [532, 413, 0.4, 10.1] },
+      /* 西沙引线按 GEO-RULING-2026-10-20-12c 改两折点折线（中通道）：
+         (493,461)→(588,424)→(620,304)→注记端，两端点不变。 */
+      xisha:    { dx: 222,    dy5: -152,   clr: null, leader: [493, 461, -71, 10.1],
+                  leaderBends: [[588, 424], [620, 304]] },
+      zhongsha: { dx: 208,    dy5: -280.6, clr: 11,   leader: [515, 487, -71, 10.1] },
+      nansha:   { dx: 218,    dy5: -228.6, clr: 11,   leader: [502, 535, -71, 10.1] }
+    };
     ["dongsha", "xisha", "zhongsha", "nansha"].forEach(function (k) {
-      var o = isl[k];
+      var o = isl[k], ad = ISL_ADAPT[k];
       g.appendChild(svgEl("circle", { cx: o.point[0], cy: o.point[1], r: 5,
         fill: "#ffffff", stroke: "#c0392b", "stroke-width": 1.8 }));
       var t = svgEl("text", { x: o.labelPt[0], y: o.labelPt[1], "text-anchor": "middle",
-        fill: ink, "font-size": "12.5" });
+        fill: ink, "font-size": "12.5", "data-adaptive-label": k });
       t.textContent = o.label; g.appendChild(t);
+      var en = regAdaptive(t, o.labelPt[0], o.labelPt[1], ad.dx, ad.dy5, ad.clr);
+      if (ad.leader) regLeader(ad.leader[0], ad.leader[1], en, ad.leader[2], ad.leader[3], ad.leaderBends);
     });
     /* 曾母暗沙（环礁符号） */
     var zm = isl.zengmu;
     g.appendChild(svgEl("circle", { cx: zm.point[0], cy: zm.point[1], r: 7,
       fill: "none", stroke: "#c0392b", "stroke-width": 1.8, "stroke-dasharray": "3,2" }));
-    var zmt = svgEl("text", { x: zm.labelPt[0], y: zm.labelPt[1], "text-anchor": "middle",
-      fill: ink, "font-size": "12.5" });
+    /* -12 裁决 4 桌面定点例外（S7 例外仅此一处）：曾母基线落点北移 16
+       （labelPt y 616→600），使桌面渲染框与声明框交叠归零；390px 再经
+       dx/dy5 扇出至东侧水面列，dy 封顶 12.4（-12 裁决 2）。 */
+    var zmBaseY = zm.labelPt[1] - 16;
+    var zmt = svgEl("text", { x: zm.labelPt[0], y: zmBaseY, "text-anchor": "middle",
+      fill: ink, "font-size": "12.5", "data-adaptive-label": "zengmu" });
     zmt.textContent = zm.label; g.appendChild(zmt);
+    var zmen = regAdaptive(zmt, zm.labelPt[0], zmBaseY, 222, -222.4, 11, 12.4);
+    regLeader(505, 598, zmen, 0, 10);
 
     /* 钓鱼岛点位 + 注记（B.5，小比例尺圆点+引线注记） */
     var dy = paths.diaoyu;
@@ -406,27 +495,8 @@
     var dyt = svgEl("text", { x: dy.labelPt[0], y: dy.labelPt[1], "text-anchor": "end",
       fill: ink, "font-size": "12.5", "data-diaoyu-label": "1" });
     dyt.textContent = dy.label; g.appendChild(dyt);
-    /* GEO-RULING-2026-10-20-10 裁定 3 S2：钓鱼岛注记字号按实测 CTM 自适应——
-       cssPx = clamp(12.5, 12.48 / ctmScale, 32)，使 390px 下实际渲染字号
-       ≥12px（目标 12.48px）；桌面（ctm≈1.087）取 max 后仍为 12.5，与现状一致。
-       只改本注记，其余注记不动（裁定 3 S6 不在本裁定强制范围）。
-       时机：SVG 构造时未入 DOM，getScreenCTM() 为 null → 保持回退值 12.5；
-       入 DOM 后经 rAF 校准，window resize 时重算（仿数学 v8fs 入 DOM 后校准，
-       禁止只在创建时取一次）。SVG 脱离文档后 resize 监听自解绑，防监听泄漏。 */
-    (function () {
-      function fitDiaoyu() {
-        if (!dyt.isConnected) { window.removeEventListener("resize", fitDiaoyu); return; }
-        var ctm = null;
-        try { ctm = svg.getScreenCTM(); } catch (e) { ctm = null; }
-        var s = ctm && ctm.a > 0 ? ctm.a : 0;
-        if (!(s > 0)) return; /* 尚未入 DOM：保持回退值，待 rAF/resize 重算 */
-        var cssPx = Math.max(12.5, Math.min(32, 12.48 / s));
-        dyt.setAttribute("font-size", String(Math.round(cssPx * 100) / 100));
-      }
-      fitDiaoyu();
-      if (typeof requestAnimationFrame === "function") requestAnimationFrame(fitDiaoyu);
-      window.addEventListener("resize", fitDiaoyu);
-    })();
+    regAdaptive(dyt, dy.labelPt[0], dy.labelPt[1], 0, 0, null);
+    /* 钓鱼岛校准已并入上方共用校准函数（GEO-RULING-2026-10-20-11 裁定 3 S2 泛化，行为等价）。 */
 
     /* 港澳符号点 + 注记（B.7） */
     paths.hkmo.forEach(function (o) {
@@ -436,17 +506,35 @@
        * 派生表文件不在本批修改范围内，故偏移落在渲染器 */
       var lx = o.labelPt[0], ly = o.labelPt[1];
       if (o.label === "澳门") { lx -= 20; ly += 6; }
+      var isHK = (o.label === "香港");
       var t = svgEl("text", { x: lx, y: ly,
-        "text-anchor": o.label === "香港" ? "start" : "end", fill: ink, "font-size": "12.5" });
+        "text-anchor": isHK ? "start" : "end", fill: ink, "font-size": "12.5",
+        "data-adaptive-label": isHK ? "hk" : "mo" });
       t.textContent = o.label; g.appendChild(t);
+      if (isHK) {
+        var hken = regAdaptive(t, lx, ly, -247, -4, null);
+        regLeader(507, 396, hken, 64.5, -5);
+      } else {
+        var moen = regAdaptive(t, lx, ly, -173, -36, null);
+        regLeader(502, 402, moen, 2, 9);
+      }
     });
 
     /* 台湾省 / 海南省注记：A/B 级常驻（B.4 台湾岛注记不可缺） */
     [["tw", "台湾省"], ["hi", "海南省"]].forEach(function (ll) {
       var pp = meta.provinceById(ll[0]);
+      var isTW = (ll[0] === "tw");
       var t = svgEl("text", { x: pp.labelPt[0], y: pp.labelPt[1], "text-anchor": "middle",
-        fill: ink, "font-size": "12.5", "font-weight": "bold" });
+        fill: ink, "font-size": "12.5", "font-weight": "bold",
+        "data-adaptive-label": isTW ? "tw-province" : "hi-province" });
       t.textContent = ll[1]; g.appendChild(t);
+      if (isTW) {
+        var twen = regAdaptive(t, pp.labelPt[0], pp.labelPt[1], -182, 0, 14);
+        regLeader(461, 432, twen, 49.5, -5.59);
+      } else {
+        var hien = regAdaptive(t, pp.labelPt[0], pp.labelPt[1], -218, -36.6, 12);
+        regLeader(460, 449, hien, 47.4, 13.6);
+      }
     });
 
     /* 省名注记 */
@@ -463,6 +551,7 @@
         g.appendChild(t);
       });
     }
+    armAdaptive();
     return { g: g, ink: ink, soft: soft, accent: accent, landFill: landFill, seaFill: seaFill };
   }
 

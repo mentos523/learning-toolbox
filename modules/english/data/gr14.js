@@ -366,7 +366,7 @@ window.ENG_CH["gr14"] = {
               id: "gr14.1.2-p3",
               kind: "explain",
               title: "关系副词：时间地点原因钩子",
-              lead: "还记得吗？上一页 when 认领了 the day（时间），where 认领了 the house（地点）。",
+              lead: "the day 用 when，the house 用 where——先行词不同，钩子为何不同？",
               blocks: [
                 {
                   type: "examples",
@@ -509,7 +509,7 @@ window.ENG_CH["gr14"] = {
               id: "gr14.1.3-p3",
               kind: "explain",
               title: "逗号：要不要的信号",
-              lead: "还记得吗？上一页无逗号的从句在“ 识别 ”，有逗号的从句在“ 补充说明 ”。",
+              lead: "先看一眼上一页的结论：无逗号识别，有逗号补充。这一页把它用在限制与非限制的判定上。",
               blocks: [
                 {
                   type: "examples",
@@ -652,7 +652,7 @@ window.ENG_CH["gr14"] = {
               id: "gr14.1.4-p3",
               kind: "explain",
               title: "省略规则：宾语可省，主语不可省",
-              lead: "还记得吗？上一页 that 作主语省不得，whose 永远省不得。",
+              lead: "The book I bought 省了 that，The car that… 没省——为何？",
               blocks: [
                 {
                   type: "examples",
@@ -940,7 +940,7 @@ window.ENG_CH["gr14"] = {
               id: "gr14.2.2-p3",
               kind: "explain",
               title: "介词现身：前置正式，后置口语",
-              lead: "还记得吗？上一页 in which（正式）和 he lived in（口语）意思一样，站位不同。",
+              lead: "the house in which… 介词在前，the house…in 介词在后——同义为何站位不同？",
               blocks: [
                 {
                   type: "examples",
@@ -1083,7 +1083,7 @@ window.ENG_CH["gr14"] = {
               id: "gr14.2.3-p3",
               kind: "explain",
               title: "定语从句压缩成分词",
-              lead: "还记得吗？上一页 who is playing 压成 playing，which were written 压成 written。",
+              lead: "先看一眼上一页的结论：分词作定语，主动用 doing，被动用 done。这一页把它用在压缩定语从句上：关系代词 + be 一起省。",
               blocks: [
                 {
                   type: "examples",

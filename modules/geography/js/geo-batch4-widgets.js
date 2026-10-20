@@ -263,7 +263,7 @@
     var wrap = el("div", "geog-w2");
     wrap.appendChild(el("div", "geog-w2-head fs-105", esc(P.title || "因果链拼装")));
     if (P.intro) wrap.appendChild(el("div", "geog-w2-readout fs-095", esc(P.intro)));
-    wrap.appendChild(el("div", "geog-w2-badge fs-078", "因果方向：自然→人文，不许颠倒（GEO-R40）"));
+    wrap.appendChild(el("div", "geog-w2-badge fs-078", "因果方向：自然→人文，不许颠倒"));
 
     var work = el("div"); wrap.appendChild(work);
     var feedback = el("div", "geog-w2-readout fs-095"); wrap.appendChild(feedback);

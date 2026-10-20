@@ -324,12 +324,12 @@ window.CHEM_CH["cm17"] = {
               kind: "explain",
               title: "官能团决定性质",
               blocks: [
-                { type: "lead", text: "乙醇 C₂H₅OH 能与 Na 反应、能催化氧化；乙酸 CH₃COOH 能发生酯化。性质不同，因为官能团不同：–OH（羟基）、–COOH（羧基）。" },
-                { type: "text", html: "乙醇（–OH）：与 Na 放 H₂：2CH₃CH₂OH + 2Na = 2CH₃CH₂ONa + H₂↑；催化氧化成乙醛：2CH₃CH₂OH + O₂ ＝Cu,加热＝ 2CH₃CHO + 2H₂O。–OH ≠ OH⁻：乙醇不显碱性！" },
-                { type: "text", html: "乙酸（–COOH，弱酸）：酯化 CH₃COOH + C₂H₅OH ⇌浓硫酸,加热⇌ CH₃COOC₂H₅ + H₂O（可逆！）。饱和 Na₂CO₃ 吸收：溶乙醇、除乙酸、降酯溶解度。" },
-                { type: "trap", text: "⚠ 别搞混：–OH（羟基）≠ OH⁻（氢氧根）；酯化：浓硫酸催化、加热、可逆，条件一个不能少！" }
+                { type: "lead", text: "乙醇（俗称酒精）（–OH，羟基）能与 Na 反应、催化氧化；乙酸（–COOH，羧基）能酯化。" },
+                { type: "text", html: "乙醇（–OH）：与 Na 放 H₂：2CH₃CH₂OH + 2Na = 2CH₃CH₂ONa + H₂↑；催化氧化成乙醛：2CH₃CH₂OH + O₂ ＝Cu,加热＝ 2CH₃CHO + 2H₂O。–OH ≠ OH⁻，不显碱性！" },
+                { type: "text", html: "乙酸（–COOH，弱酸）：酯化 CH₃COOH + C₂H₅OH ⇌浓硫酸,加热⇌ CH₃COOC₂H₅ + H₂O（可逆）。饱和 Na₂CO₃ 吸收：溶乙醇、除乙酸、降酯溶解度。" },
+                { type: "trap", text: "⚠ 别搞混：–OH（羟基）≠ OH⁻（氢氧根）；酯化：浓硫酸催化、加热、可逆，条件不能少！" }
               ],
-              point: "官能团决定性质：–OH vs –COOH。下一页看酯化反应的微观过程。"
+              point: "官能团决定性质：–OH vs –COOH。下页看酯化微观过程。"
             },
             {
               id: "cm17.2.1-p2",

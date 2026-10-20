@@ -302,7 +302,7 @@ window.ENG_CH["gr07"] = {
               id: "gr07.1.2-p3",
               kind: "explain",
               title: "主动改被动：调座位 + to 回来",
-              lead: "还记得吗？上一页 by my friend 没有槽可放——被动句里它常常省略。",
+              lead: "was made to work 里 to 回来了——主动时没有的 to，被动时为何回归？",
               blocks: [
                 {
                   type: "examples",
@@ -453,7 +453,7 @@ window.ENG_CH["gr07"] = {
               id: "gr07.1.3-p3",
               kind: "explain",
               title: "含情态与完成时的被动：be 当二传",
-              lead: "还记得吗？上一页 can 和 has 站在 be 前面，done 永远站在最后。",
+              lead: "先看一眼上一页的结论：be 当二传，done 收尾。这一页把它用在情态与完成时被动。",
               blocks: [
                 {
                   type: "examples",
@@ -610,7 +610,7 @@ window.ENG_CH["gr07"] = {
               id: "gr07.1.4-p3",
               kind: "explain",
               title: "不及物无被动；be + 形容词不是被动",
-              lead: "还记得吗？上一页 happened 没穿被动的衣服，interested 站在 be 后面当表语。",
+              lead: "The accident happened. 无 was；is interested 也非被动——为什么？",
               blocks: [
                 {
                   type: "examples",

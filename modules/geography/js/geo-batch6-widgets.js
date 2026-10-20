@@ -175,7 +175,7 @@ var QINLING_MEANINGS = [
 { id: "m5", name: "旱地与水田的分界线", text: "旱地与水田的分界线：以南水田（水稻）、以北旱地（小麦）——但两侧有过渡带，不是一刀切。", dy: 11},
 { id: "m6", name: "小麦与水稻集中产区的分界线", text: "小麦与水稻集中产区的分界线：以北小麦集中产区，以南水稻集中产区（因地制宜，dg11.1.1回填）。", dy: 18}
 ];
-var QINLING_NOTE = "一线六义：六条线大致吻合。注意——分界线是渐变带的中心线，南北两侧存在过渡带（GEO-AX01；pedagogy T10）。";
+var QINLING_NOTE = "一线六义：六条线大致吻合。注意——分界线是渐变带的中心线，南北两侧存在过渡带。";
 /* 港澳台（点位取自已签发资产；台湾岛高亮与大陆同色，只加轮廓与注记） */
 var HMT = [
 { id: "hk", name: "香港", pt: [516, 392], lab: [554, 378],
@@ -322,7 +322,7 @@ var lp = labelPtOf(z);
 svg.appendChild(svgText(lp[0], lp[1], z.name, base.ink));
 });
 var note = el("div", "fs-078"); note.style.cssText = "margin-top:6px;color:var(--geog-ink-soft)";
-note.textContent = "分区为教学示意分区，界线非精确；点击分区看“自然条件→农业类型”因果解读（GEO-R40）。";
+note.textContent = "分区为教学示意分区，界线非精确；点击分区看“自然条件→农业类型”因果解读。";
 wrap.appendChild(note);
 say("点一个农业类型分区，看它“为什么在这里”（自然条件→农业类型）。");
 }
@@ -720,7 +720,7 @@ links: [
 { id: "c3", from: [440, 450], to: [380, 390], label: "港珠澳大桥", desc: "港珠澳大桥：连接香港、珠海、澳门的跨海通道（示意）。"},
 { id: "c4", from: [400, 120], to: [330, 200], label: "广佛同城", desc: "广佛同城：交通与产业一体化。"}
 ],
-foot: "珠江三角洲：外向型经济起家，“前店后厂”与港澳深度合作；现处产业升级进行中（本课表述截至2024年，数据看年份，GEO-R52）。"
+foot: "珠江三角洲：外向型经济起家，“前店后厂”与港澳深度合作；现处产业升级进行中（本课表述截至2024年，读数据要看年份）。"
 },
 sjy: {
 title: "三江源水系示意", vb: "0 0 800 560",
@@ -1099,7 +1099,7 @@ svg.appendChild(svgText(400, 30, "城市群：只见城市点位与网络", ink)
 }
 cornerDeclare(svg, "示意｜非精确比例｜三档均为示意", 400);
 info.textContent = L.label + " · 比例尺" + L.scaleRep + "——" + L.blurb +
-"口诀：分母越小、比例尺越大、越详细（大详小略，GEO-R18/19）。";
+"口诀：分母越小、比例尺越大、越详细（大详小略）。";
 try { localStorage.setItem("ltb-geo-" + recordKey, JSON.stringify(state));} catch (e) {}
 }
 SCALE_LEVELS.forEach(function (L, i) {

@@ -358,7 +358,7 @@ window.ENG_CH["gr15"] = {
               id: "gr15.1.2-p3",
               kind: "explain",
               title: "unless = if not",
-              lead: "还记得吗？上一页 Unless you hurry = If you don't hurry——unless 已经否定了。",
+              lead: "Unless you hurry, you will be late. 里 unless 后不再加 not——它已否定，再加会怎样？",
               blocks: [
                 {
                   type: "examples",
@@ -656,7 +656,7 @@ window.ENG_CH["gr15"] = {
               id: "gr15.1.4-p3",
               kind: "explain",
               title: "目的：so that + 情态",
-              lead: "还记得吗？上一页 so that he could（有情态）是目的，so dark that（含 could）是结果——结果从句也可带情态。",
+              lead: "so that he could… 是目的，in order to… 也是目的——'以便'为何两说？",
               blocks: [
                 {
                   type: "examples",
@@ -795,7 +795,7 @@ window.ENG_CH["gr15"] = {
               id: "gr15.1.5-p3",
               kind: "explain",
               title: "so…that / such…that",
-              lead: "还记得吗？上一页 so tired（so + 形容词），such a big dog（such + 名词）。",
+              lead: "先看一眼上一页的结论：so 跟形容词，such 跟名词。这一页把它用在结果句上。",
               blocks: [
                 {
                   type: "examples",
@@ -943,7 +943,7 @@ window.ENG_CH["gr15"] = {
               id: "gr15.2.1-p3",
               kind: "explain",
               title: "although 和 but 是仇人",
-              lead: "还记得吗？上一页 Although it rained 站句首，Child as he is 把表语提前了。",
+              lead: "Although… 无 but，Child as he is 表语提前——'虽然'为何不能配 but？",
               blocks: [
                 {
                   type: "examples",
@@ -1222,7 +1222,7 @@ window.ENG_CH["gr15"] = {
               id: "gr15.2.3-p3",
               kind: "explain",
               title: "状语从句简化：主语一致才能省",
-              lead: "还记得吗？上一页 When he was young 压成 When young——主语一致才能省。",
+              lead: "When young, he… 省掉主语 + be——这样的省略，前提是什么？",
               blocks: [
                 {
                   type: "examples",

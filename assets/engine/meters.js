@@ -193,9 +193,9 @@
       name: opt.name || 'ruler', kind: 'ruler', unit: 'mm',
       division: divisionMm, getValue: opt.getValue,
       dataSource: opt.dataSource, dataDock: opt.dataDock, guide: opt.guide,
-      assumptions: opt.assumptions || ['被测物边缘与刻度线对齐', '刻度均匀（ENG-46）'],
-      approximations: opt.approximations || ['估读按 ENG-38 口径'],
-      errorEstimate: opt.errorEstimate || '估读位 ±1（0.1 mm）；磨损尺用两端读数法（PHY-R05）'
+      assumptions: opt.assumptions || ['被测物边缘与刻度线对齐', '刻度均匀'],
+      approximations: opt.approximations || ['估读规则：分度值首位为 1，估读到下一位；首位为 2 或 5，估读到本位'],
+      errorEstimate: opt.errorEstimate || '估读位 ±1（0.1 mm）；磨损尺用两端读数法'
     });
     this.divisionMm = divisionMm;
     this.lengthMm = opt.lengthMm || 150;
@@ -297,9 +297,9 @@
       name: opt.name || 'balance', kind: 'balance', unit: 'g',
       division: 0.1, getValue: opt.getValue || function () { return 0; },
       dataSource: opt.dataSource, dataDock: opt.dataDock, guide: opt.guide,
-      assumptions: opt.assumptions || ['天平已调平（横梁水平）', '砝码质量准确', '游码以左侧刻线为准（PHY-R07）'],
+      assumptions: opt.assumptions || ['天平已调平（横梁水平）', '砝码质量准确', '游码以左侧刻线为准'],
       approximations: opt.approximations || ['无'],
-      errorEstimate: opt.errorEstimate || '读到 0.1 g，不估读（ENG-38 特例，与中考一致）'
+      errorEstimate: opt.errorEstimate || '读到 0.1 g，不估读（与中考口径一致）'
     });
     this.noEstimate = true; // ENG-38 特例：0.1 g 不估读
     this.weightsG = (opt.weightsG || []).slice(); // 砝码组
@@ -362,8 +362,8 @@
       name: opt.name || 'cylinder', kind: 'cylinder', unit: 'mL',
       division: 1, getValue: opt.getValue,
       dataSource: opt.dataSource, dataDock: opt.dataDock, guide: opt.guide,
-      assumptions: opt.assumptions || ['视线与凹液面最低处保持水平（PHY-R04）', '量筒竖直放置'],
-      approximations: opt.approximations || ['估读按 ENG-38 口径（分度值首位为 1 → 估读到下一位）'],
+      assumptions: opt.assumptions || ['视线与凹液面最低处保持水平', '量筒竖直放置'],
+      approximations: opt.approximations || ['估读规则：分度值首位为 1，估读到下一位'],
       errorEstimate: opt.errorEstimate || '估读位 ±1（0.1 mL）'
     });
     this.sight = 'level';

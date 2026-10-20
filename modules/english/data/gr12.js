@@ -312,7 +312,7 @@ window.ENG_CH["gr12"] = {
               id: "gr12.1.2-p3",
               kind: "explain",
               title: "祈使句与感叹句：Don't / Let's / What / How",
-              lead: "还记得吗？上一页 What 后面的 a 保住了，Don't 打头表禁止。",
+              lead: "What a nice day! 有 a；How nice! 没 a——为何？",
               blocks: [
                 {
                   type: "examples",
@@ -439,7 +439,7 @@ window.ENG_CH["gr12"] = {
               id: "gr12.1.3-p3",
               kind: "explain",
               title: "并列句：逗号 + 连词",
-              lead: "还记得吗？上一页 so / or 左右各站着一个完整的简单句。",
+              lead: "先看一眼上一页的结论：左右各一句，逗号不能省。这一页把它用在四连词上。",
               blocks: [
                 {
                   type: "examples",
@@ -596,7 +596,7 @@ window.ENG_CH["gr12"] = {
               id: "gr12.1.4-p3",
               kind: "explain",
               title: "反意疑问句：镜像取反",
-              lead: "还记得吗？上一页 aren't you 和 does he 都是陈述部分的“镜像”。",
+              lead: "aren't you 前肯后否，does he 前否后肯——反意为何总取反？",
               blocks: [
                 {
                   type: "examples",

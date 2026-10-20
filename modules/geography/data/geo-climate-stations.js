@@ -115,7 +115,7 @@ window.GEOGRAPHY_DATA.climateStations = {
       computedZone: "亚热带（口诀直读；1 月均温 5.6℃ 落在 0–15℃ 区间）",
       expectedType: "温带海洋性气候",
       climateTypeId: "temperate-oceanic",
-      boundaryNote: "口诀已知例外：本类型按分布（40°–60° 大陆西岸）与成因（西风 + 暖流）定为温带，G4 判定时看分布与成因，不以单月均温为据。待地理专家队书面裁决（B8）。",
+      boundaryNote: "口诀已知例外：本类型按分布（40°–60° 大陆西岸）与成因（西风 + 暖流）定为温带，判读时看分布与成因，不以单月均温为据。",
       needsRuling: true
     },
     {
@@ -187,7 +187,7 @@ window.GEOGRAPHY_DATA.climateStations = {
       expectedType: "高原山地气候",
       climateTypeId: "plateau-mountain",
       isPlateau: true,
-      boundaryNote: "高原山地气候看海拔，口诀之外（T5 / GEO-R14）。本例供 G4 讲「口诀的例外：看分布、看成因、看海拔」用。"
+      boundaryNote: "高原山地气候看海拔，口诀之外。记住这个例外：判读时看分布、看成因、看海拔。"
     }
   ]
 };

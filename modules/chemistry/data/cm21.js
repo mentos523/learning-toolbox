@@ -369,12 +369,12 @@ window.CHEM_CH["cm21"] = {
               kind: "explain",
               title: "官能团接力",
               blocks: [
-                { type: "lead", text: "乙醇 → 乙醛 → 乙酸 → 乙酸乙酯：官能团一步一步“升级”，每步都有特征反应认路。" },
-                { type: "text", html: "乙醛 CH₃CHO：银镜反应（CH₃CHO + 2[Ag(NH₃)₂]OH ＝水浴加热＝ CH₃COONH₄ + 2Ag↓ + 3NH₃ + H₂O）——乙醛被氧化，银氨溶液被还原；新制 Cu(OH)₂：砖红色 Cu₂O 沉淀。" },
-                { type: "text", html: "乙酸：酸性 + 酯化（CH₃COOH + C₂H₅OH ⇌ CH₃COOC₂H₅ + H₂O）。酯的水解：酸性条件下可逆，碱性条件下不可逆（CH₃COOC₂H₅ + NaOH = CH₃COONa + C₂H₅OH）。" },
-                { type: "trap", text: "⚠ 别搞混：银镜的“银”是还原产物——乙醛被氧化了！酯水解有条件：酸性可逆、碱性不可逆。" }
+                { type: "lead", text: "乙醇 → 乙醛 → 乙酸 → 乙酸乙酯：官能团逐步“升级”，每步都有特征反应认路。" },
+                { type: "text", html: "乙醛 CH₃CHO：银镜反应（CH₃CHO + 2[Ag(NH₃)₂]OH ＝水浴加热＝ CH₃COONH₄ + 2Ag↓ + 3NH₃ + H₂O）——乙醛被氧化，银氨溶液被还原；与新制 Cu(OH)₂ 得砖红色 Cu₂O 沉淀。" },
+                { type: "text", html: "乙酸：酸性 + 酯化（CH₃COOH + C₂H₅OH ⇌ CH₃COOC₂H₅ + H₂O）。酯的水解：酸性下可逆，碱性下不可逆（CH₃COOC₂H₅ + NaOH = CH₃COONa + C₂H₅OH）。" },
+                { type: "trap", text: "⚠ 别搞混：银镜的“银”是还原产物——乙醛被氧化了！" }
               ],
-              point: "–OH → –CHO → –COOH → –COO–：官能团接力。下一页看银镜反应。"
+              point: "–OH → –CHO → –COOH → –COO–：官能团接力，下页看银镜反应。"
             },
             {
               id: "cm21.2.3-p2",
@@ -459,10 +459,10 @@ window.CHEM_CH["cm21"] = {
               kind: "explain",
               title: "合成：官能团接力赛",
               blocks: [
-                { type: "lead", text: "乙烯 → 乙酸乙酯：四步，每步只变一个官能团。有机合成就是设计这场“接力赛”。" },
+                { type: "lead", text: "乙烯 → 乙酸乙酯四步，每步只变一个官能团：有机合成就是这场“接力赛”。" },
                 { type: "text", html: "路线：① 加成 CH₂=CH₂ + H₂O ＝ CH₃CH₂OH；② 催化氧化 2CH₃CH₂OH + O₂ ＝Cu,加热＝ 2CH₃CHO + 2H₂O；③ 氧化 2CH₃CHO + O₂ ＝催化剂,加热＝ 2CH₃COOH；④ 酯化 CH₃COOH + C₂H₅OH ⇌浓硫酸,加热⇌ CH₃COOC₂H₅ + H₂O。" },
-                { type: "text", html: "合成策略：引入官能团、转化官能团、保护官能团（如 –OH 易被氧化时先保护）。路线不是越短越好——产率、条件、成本综合算账。" },
-                { type: "trap", text: "⚠ 别搞混：“一步到位”多半不现实——官能团转化常常要“绕路”（保护策略）；选路线要算综合账。" }
+                { type: "text", html: "合成策略：引入、转化、保护官能团（如 –OH 易被氧化时先保护）。路线不是越短越好——产率、条件、成本综合算账。" },
+                { type: "trap", text: "⚠ 别搞混：“一步到位”多半不现实——官能团转化常要“绕路”（保护策略）。" }
               ],
               point: "每步只变一个官能团：C=C → –OH → –CHO → –COOH → –COO–。"
             },

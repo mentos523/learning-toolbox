@@ -187,7 +187,7 @@ window.ENG_CH["gr18"] = {
                   type: "bridge",
                   zh: "汉语“是”不分单复数；英语 is/are、was/were 处处要配对。",
                   en: "英语的谓语像“应声虫”：主语单数它用单数，主语是“许多人”它用复数，两个主语抢它跟离得近的那个。",
-                  unbridge: "这是英语的规矩：谓语看主语脸色，主语是谁，谓语就穿什么衣服。"
+                  unbridge: "规矩就这一条：谓语看主语脸色，主语是谁，谓语就穿什么衣服。"
                 },
                 {
                   type: "contrast",
@@ -331,7 +331,7 @@ window.ENG_CH["gr18"] = {
               id: "gr18.1.2-p3",
               kind: "explain",
               title: "there be 与倒装句一致",
-              lead: "还记得吗？你上一页找出真正的主语是 the bell，goes 跟它配对。",
+              lead: "There goes the bell. 主语在后，goes 仍加 -s——谓语跟谁配对？",
               blocks: [
                 {
                   type: "examples",
@@ -506,7 +506,7 @@ window.ENG_CH["gr18"] = {
               id: "gr18.1.3-p3",
               kind: "explain",
               title: "易错主语表",
-              lead: "还记得吗？你上一页标出 Swimming 作主语，谓语用了单数 is。",
+              lead: "先看一眼上一页的结论：主语算'一个整体'，谓语用单数。这一页把它用在易错主语表。",
               blocks: [
                 {
                   type: "examples",
@@ -522,7 +522,7 @@ window.ENG_CH["gr18"] = {
                   type: "bridge",
                   zh: "汉语“游泳很有趣”“三年很长”，“是”都不变；英语 is 也“不变”——但原因是主语算单数。",
                   en: "英语把这些主语都当“一个整体”：Swimming 是一件事，Three years 是一个时间段，what 从句是一个整体——整体就是单数，谓语用单数。",
-                  unbridge: "这是英语的规矩：主语是“一件事/一个量/一个整体”，谓语就用单数。"
+                  unbridge: "英语就认这个理：主语是“一件事/一个量/一个整体”，谓语就用单数。"
                 },
                 {
                   type: "contrast",
@@ -665,7 +665,7 @@ window.ENG_CH["gr18"] = {
               id: "gr18.1.4-p3",
               kind: "explain",
               title: "特殊句式收尾",
-              lead: "还记得吗？上一页 not 爬到了 think 前面——它本该在从句里。",
+              lead: "not 爬到 think 前，not uncommon 又表肯定——否定词为何换座位？",
               blocks: [
                 {
                   type: "examples",
@@ -681,7 +681,7 @@ window.ENG_CH["gr18"] = {
                   type: "bridge",
                   zh: "汉语“我认为他不对”，否定在“不对”上；英语把 not 提前到 think 前。",
                   en: "英语口语把 not 从从句“爬”到主句动词前，听着更顺——意思没变，只是换了座位。双重否定 not uncommon 是“否定之否定”，表强烈肯定。",
-                  unbridge: "这是英语的规矩：观点动词 + 否定，not 爬到主句；not + 否定词 = 很肯定。"
+                  unbridge: "不是汉语的讲法，是英语的规矩：观点动词 + 否定，not 爬到主句；not + 否定词 = 很肯定。"
                 },
                 {
                   type: "contrast",
@@ -826,7 +826,7 @@ window.ENG_CH["gr18"] = {
               id: "gr18.1.5-p3",
               kind: "explain",
               title: "本章小结：总表",
-              lead: "还记得吗？三原则、there be、易错主语、否定转移——一张总表收网。",
+              lead: "本章总表：三原则、there be、易错主语、否定转移。一张总表收网。",
               blocks: [
                 {
                   type: "examples",

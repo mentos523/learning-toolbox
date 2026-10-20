@@ -338,7 +338,7 @@ function SolarInputView(box, params, pg) {
     svg.appendChild(svgText(420, baseY + 18, "太阳活动约 11 年一个周期（示意曲线）", soft, "middle"));
     cornerNote(svg, "示意｜曲线为教学示意", 800, 420);
     ro.innerHTML = "<strong>黑子</strong>（光球上的暗斑）、<strong>耀斑</strong>（突然增亮的爆发）、" +
-      "<strong>日珥</strong>（边缘喷出的火焰状物质）——太阳活动有<strong>约 11 年</strong>的周期（GEO-R55）。" +
+      "<strong>日珥</strong>（边缘喷出的火焰状物质）——太阳活动有<strong>约 11 年</strong>的周期。" +
       "剧烈时扰动电离层（影响无线电通信）、产生磁暴（影响卫星、电力系统），还与地球气候变化有关。";
   }
   drawLat();
@@ -346,7 +346,7 @@ function SolarInputView(box, params, pg) {
     mode = i; if (i === 0) drawLat(); else drawAct();
     store(params.recordKey || "geog_solar-input", { tab: i, ts: Date.now() });
   });
-  axNote(wrap, "太阳常数：日地平均距离处，垂直于太阳光的单位面积、单位时间获得的太阳辐射能，约 1361 瓦/平方米（“约”，GEO-R54）。");
+  axNote(wrap, "太阳常数：日地平均距离处，垂直于太阳光的单位面积、单位时间获得的太阳辐射能，约 1361 瓦/平方米（数值前要写“约”）。");
   var view = {
     resize: function () {}, destroy: function () { untrack(view); },
     state: function () { return { tab: mode }; },
@@ -480,7 +480,7 @@ function EarthRotationView(box, params, pg) {
       prow.appendChild(b);
     });
     wrap.appendChild(prow);
-    axNote(wrap, "周期辨析：<strong>太阳日 24 小时</strong>（日常用的“一天”）vs <strong>恒星日 23 小时 56 分 4 秒</strong>（地球自转 360° 的真正周期）——差的约 4 分钟，是因为地球在自转的同时还在公转（GEO-R47）。");
+    axNote(wrap, "周期辨析：<strong>太阳日 24 小时</strong>（日常用的“一天”）vs <strong>恒星日 23 小时 56 分 4 秒</strong>（地球自转 360° 的真正周期）——差的约 4 分钟，是因为地球在自转的同时还在公转。");
   } else {
     drawTerminator();
     var srow = el("div", "geog-w2-row");
@@ -584,7 +584,7 @@ function OrbitSeasonsView(box, params, pg) {
     trow.appendChild(b);
   });
   wrap.appendChild(trow);
-  axNote(wrap, "黄赤交角 <strong>23.5°</strong>（GEO-R55）；五带界线：回归线 23.5°、极圈 66.5°。地轴倾斜＋地球公转＝太阳直射点在南北回归线之间来回移动＝四季。");
+  axNote(wrap, "黄赤交角 <strong>23.5°</strong>；五带界线：回归线 23.5°、极圈 66.5°。地轴倾斜＋地球公转＝太阳直射点在南北回归线之间来回移动＝四季。");
   var view = {
     resize: function () {}, destroy: function () { untrack(view); },
     state: function () { return { term: pos[sel].t.name }; },
@@ -671,7 +671,7 @@ function DaylengthCurveView(box, params, pg) {
   window.addEventListener("pointerup", function () { dragging = false; });
   cornerNote(svg, "示意｜公式计算值", 800, 460);
   moveProbe(172);
-  axNote(wrap, "直观版（GEO-R51 合规）：只看形状——<strong>一年一周期、对称</strong>，不讲正弦定义、不挂“奠基”。预告：学完代数 8.3（正弦周期）后，会回来认出这条曲线（预告台账已登记）。");
+  axNote(wrap, "先看形状：这条曲线<strong>一年一周期、对称</strong>，这里不讲正弦的定义。预告：学完代数 8.3（正弦的周期）后，会回来认出这条曲线。");
   var view = {
     resize: function () {}, destroy: function () { untrack(view); },
     state: function () { return { day: curD, hours: +dayLengthHours(30.6, curD).toFixed(2) }; },
@@ -754,7 +754,7 @@ function Circulation3DView(box, params, pg) {
     cornerNote(svg, "示意｜纬向平均｜非真实比例", 800, 500);
     ro.innerHTML = "三圈环流：<strong>低纬环流圈</strong>（0°–30°）、<strong>中纬环流圈</strong>（30°–60°）、" +
       "<strong>高纬环流圈</strong>（60°–90°），南北半球各三圈。近地面形成<strong>七个气压带</strong>（H 高/L 低）。" +
-      "这是“理想化”的纬向平均——真实大陆上海陆分布会打乱它（GEO-AX01：适用条件当页显性化）。";
+      "这是“理想化”的纬向平均——真实大陆上海陆分布会打乱它（注意：这说的是理想情况，真实大陆上并不完全这样）。";
   }
   function drawBelts() {
     svg.innerHTML = "";
@@ -796,7 +796,7 @@ function Circulation3DView(box, params, pg) {
           sel = idx; var rr = rows[idx];
           ro.innerHTML = "<strong>" + esc(rr.t) + "</strong>" +
             (rr.sub ? "——" + esc(rr.sub) : "（气压带：空气下沉/上升形成）") +
-            "<br>图例：<strong>红色 H＝高气压，蓝色 L＝低气压——颜色表气压高低，不表冷暖</strong>（冻结口径）。";
+            "<br>图例：<strong>红色 H＝高气压，蓝色 L＝低气压——颜色表气压高低，不表冷暖</strong>。";
           store(params.recordKey || "geog_circulation-3d", { row: rr.t, ts: Date.now() });
         });
       })(i);
@@ -1115,7 +1115,7 @@ function OceanCurrentView(box, params, pg) {
     grow.appendChild(b);
   });
   wrap.appendChild(grow);
-  axNote(wrap, "<strong>暖流是相对概念</strong>：暖流指比流经海区水温<strong>高</strong>的洋流，不是“热水”（GEO-R48）。对气候：暖流增温增湿、寒流降温减湿。");
+  axNote(wrap, "<strong>暖流是相对概念</strong>：暖流指比流经海区水温<strong>高</strong>的洋流，不是“热水”。对气候：暖流增温增湿、寒流降温减湿。");
   var view = {
     resize: function () {}, destroy: function () { untrack(view); },
     state: function () { return { monsoonWinter: monsoonWinter }; },
@@ -1463,7 +1463,7 @@ function VegetationZonesView(box, params, pg) {
     svg.appendChild(svgText(400, 330, "北：较干冷 →", ink, "middle"));
     cornerNote(svg, "示意", 800, 480);
     ro.innerHTML = "<strong>秦岭—淮河线</strong>是我国重要的地理分界线：以南亚热带（常绿阔叶林）、" +
-      "以北暖温带（落叶阔叶林）。记住：<strong>分界线是渐变带的中心线</strong>，不是刀切的（GEO-AX01；dg12.1.1 回填）。";
+      "以北暖温带（落叶阔叶林）。记住：<strong>分界线是渐变带的中心线</strong>，不是刀切的。";
   }
   function drawV() {
     svg.innerHTML = "";
@@ -1481,7 +1481,7 @@ function VegetationZonesView(box, params, pg) {
     });
     svg.appendChild(svgText(400, 452, "海拔升高≈纬度升高：山脚到山顶，植被像从赤道走到极地", soft, "middle"));
     cornerNote(svg, "示意", 800, 480);
-    ro.innerHTML = "<strong>垂直地带性</strong>：海拔每升高，气温下降（约 0.6℃/100m，GEO-R55），" +
+    ro.innerHTML = "<strong>垂直地带性</strong>：海拔每升高，气温下降（约 0.6℃/100m），" +
       "植被随之成带变化——山脚到山顶，仿佛从低纬走到了高纬。";
   }
   function drawSoil() {
@@ -1502,7 +1502,7 @@ function VegetationZonesView(box, params, pg) {
     });
     cornerNote(svg, "示意", 800, 480);
     ro.innerHTML = "<strong>黑土</strong>（东北）：腐殖质层厚，最肥沃——冷湿＋草原＋时间；" +
-      "<strong>红壤</strong>（南方）：高温多雨淋溶，偏酸性。土壤是成土母质、气候、生物、地形、时间五因素的孩子（缺一不可，不许单因论，GEO-R40）。";
+      "<strong>红壤</strong>（南方）：高温多雨淋溶，偏酸性。土壤是成土母质、气候、生物、地形、时间五因素的孩子（缺一不可，不能只归因于一个因素）。";
   }
   drawH();
   tabRow(wrap, ["水平地带性", "秦岭南北对比", "垂直地带性", "土壤"], function (i) {

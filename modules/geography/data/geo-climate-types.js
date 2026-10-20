@@ -96,7 +96,7 @@ window.GEOGRAPHY_DATA.climateTypes = {
       zoneRule: "口诀例外（见边界句）",
       precipRule: "年降水约 600–1000mm",
       season: "全年较均匀",
-      boundaryNote: "口诀已知例外：温带海洋性气候最冷月均温常落在 0–15℃（如伦敦 1 月约 5.6℃），按 GEO-R14 口诀直读为「亚热带」；本类型按分布（南北纬 40°–60° 大陆西岸）与成因（西风 + 暖流）定为温带。待地理专家队书面裁决（B8）。",
+      boundaryNote: "口诀已知例外：温带海洋性气候最冷月均温常落在 0–15℃（如伦敦 1 月约 5.6℃），按口诀直读为「亚热带」；本类型按分布（南北纬 40°–60° 大陆西岸）与成因（西风 + 暖流）定为温带。",
       distribution: "欧洲西部、南美南部、澳大利亚东南、新西兰"
     },
     {
@@ -146,7 +146,7 @@ window.GEOGRAPHY_DATA.climateTypes = {
       zoneRule: "看海拔，口诀之外",
       precipRule: "降水随海拔与坡向变化大",
       season: null,
-      boundaryNote: "高原山地气候看海拔，口诀之外（T5 / GEO-R14）。海拔显著站点（如青藏高原）不走口诀，直接定型。",
+      boundaryNote: "高原山地气候看海拔，口诀之外。海拔显著站点（如青藏高原）不走口诀，直接定型。",
       distribution: "青藏高原、安第斯山脉"
     }
   ]

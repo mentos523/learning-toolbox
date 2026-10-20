@@ -196,7 +196,7 @@
     if (st.isPlateau) {
       return { zone: "高原山地", season: null, typeId: "plateau-mountain",
         typeName: "高原山地气候", via: "plateau",
-        note: "高原山地气候看海拔，口诀之外（T5 / GEO-R14）。" };
+        note: "高原山地气候看海拔，口诀之外。" };
     }
     var zr = judgeZone(st.temp);
     var sc = classifySeason(st.precip);
@@ -691,7 +691,7 @@
       var r3 = el("div", "geog-w2-row"); r3.appendChild(in3); r3.appendChild(b3);
       r3.appendChild(el("span", "fs-095", unit === "km" ? "千米" : "米"));
       s3.body.appendChild(r3);
-      axNote(wrap, "口诀：" + MOTTO + "换算容差 ±1%（GEO-R21）。");
+      axNote(wrap, "口诀：" + MOTTO + "换算时允许 ±1% 的误差。");
       view = {
         root: wrap, resize: function () {}, destroy: function () { untrack(view); },
         state: function () {
@@ -762,7 +762,7 @@
       rb.appendChild(inb); rb.appendChild(el("span", "fs-095", "米")); rb.appendChild(bb);
       st3.appendChild(rb);
       wrap.appendChild(st3);
-      axNote(wrap, "三种表示等价（GEO-R20）：数字式 / 线段式 / 文字式说的是同一个比。");
+      axNote(wrap, "三种表示等价：数字式 / 线段式 / 文字式说的是同一个比。");
       view = {
         root: wrap, resize: function () { stage.resize(); }, destroy: function () { untrack(view); },
         state: function () { return { mode: mode, denom: d0, expectText: expectText }; },
@@ -1043,7 +1043,7 @@
     row.appendChild(subBtn); row.appendChild(resetBtn);
     wrap.appendChild(row);
     legend(wrap, [{ text: "等高线（等高距 50m）" }, { text: "剖面线 A→B" }]);
-    axNote(wrap, "诚实清单：地形为教学示意模型（非真实 DEM）；剖面图<strong>垂直夸大 ×" + VEX + "（示意）</strong>——只看起伏趋势，不量高度；等高线与剖面高程由同一场函数生成（GEO-R30）。");
+    axNote(wrap, "诚实清单：地形为教学示意模型（非真实 DEM）；剖面图<strong>垂直夸大 ×" + VEX + "（示意）</strong>——只看起伏趋势，不量高度；等高线与剖面高程由同一套高程计算生成。");
     var view = {
       root: wrap,
       resize: function () { mapStage.resize(); proStage.resize(); },
@@ -1170,7 +1170,7 @@
         (view._stages = view._stages || []).push(stage);
       });
       legend(wrap, [{ text: "红=气温" }, { text: "蓝=降水", cls: "blue" }]);
-      axNote(wrap, "多年平均数据读数写“约”（GEO-R54）；站点年份见图题（GEO-R16）。");
+      axNote(wrap, "图上是多年平均数据，读数时写“约”；数据是哪几年的，看图题。");
       view = {
         root: wrap,
         resize: function () { (view._stages || []).forEach(function (s) { s.resize(); }); },
@@ -1214,7 +1214,7 @@
     });
     step2.appendChild(seasonRow);
     wrap.appendChild(step1); wrap.appendChild(step2);
-    axNote(wrap, "口诀「<strong>以温定带、以水定型</strong>」逐字；顺序不可反（GEO-R13）；年降水读数写“约”（GEO-R54）；站点年份见图题（GEO-R16）。");
+    axNote(wrap, "口诀「<strong>以温定带、以水定型</strong>」要记牢；顺序不可反；年降水读数写“约”；数据是哪几年的，看图题。");
 
     var done1 = null, done2 = null; /* {month,temp,zone} / {annual,season,typeId} */
     function st() { return stations[cur]; }
@@ -1595,7 +1595,7 @@
       ro.innerHTML = '<span class="ok-t">✓ 四步走完。</span>';
       store(P.recordKey, { target: target, result: dateStr + " " + calc.timeStr, ts: Date.now() });
     }
-    axNote(wrap, "北京时间 = <strong>东八区区时</strong>，不是北京的地方时（GEO-R11）。初中默认只算区时（整小时）；地方时精确到分是高中扩展（GEO-R12）。");
+    axNote(wrap, "北京时间 = <strong>东八区区时</strong>，不是北京的地方时。初中默认只算区时（整小时）；地方时精确到分是高中扩展。");
     dial.resize();
     var view = {
       root: wrap,

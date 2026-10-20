@@ -379,7 +379,7 @@ window.ENG_CH["gr17"] = {
               id: "gr17.1.2-p3",
               kind: "explain",
               title: "否定词开头倒装",
-              lead: "还记得吗？你上一页标出 Hardly 是触发词，had 提前到了 he 前面。",
+              lead: "Never have I…、Hardly had he…——否定词开头，助动词为何提前？",
               blocks: [
                 {
                   type: "examples",
@@ -395,7 +395,7 @@ window.ENG_CH["gr17"] = {
                   type: "bridge",
                   zh: "汉语“他刚到，天就下雨了”语序正常；英语 Hardly had he arrived when… 把 had 提前，像按了快进键。",
                   en: "英语用倒装给否定词“加音量”：Never have I seen（我从没见过）比 I have never seen 更有力——否定词站 C 位，句子就要倒装让路。",
-                  unbridge: "这是英语的规矩：否定词开头，后面必须倒装。"
+                  unbridge: "不是汉语的讲法，是英语的规矩：否定词开头，后面必须倒装。"
                 },
                 {
                   type: "contrast",
@@ -554,7 +554,7 @@ window.ENG_CH["gr17"] = {
               id: "gr17.1.3-p3",
               kind: "explain",
               title: "强调句",
-              lead: "还记得吗？你上一页把 yesterday 框进了 It was…that…。",
+              lead: "先看一眼上一页的结论：想强调谁就框谁。这一页把它用在强调句上：框时间，也框人。",
               blocks: [
                 {
                   type: "examples",
@@ -570,7 +570,7 @@ window.ENG_CH["gr17"] = {
                   type: "bridge",
                   zh: "汉语用重音强调：“是昨天见的面”；英语用句式强调：It was yesterday that…",
                   en: "英语把要强调的部分放进 It is…that… 的框里：It was yesterday that we met（强调昨天）vs It is my mother who…（强调妈妈，that 可换 who）——框里放谁，谁就是重点。",
-                  unbridge: "这是英语的规矩：强调不用喊，用 It is…that… 框起来。"
+                  unbridge: "规矩就这一条：强调不用喊，用 It is…that… 框起来。"
                 },
                 {
                   type: "contrast",
@@ -723,7 +723,7 @@ window.ENG_CH["gr17"] = {
               id: "gr17.2.1-p3",
               kind: "explain",
               title: "省略",
-              lead: "还记得吗？上一页 tired 前面省了 he was。",
+              lead: "Although tired, he… 里省了 he was——省掉的是谁？",
               blocks: [
                 {
                   type: "examples",
@@ -739,7 +739,7 @@ window.ENG_CH["gr17"] = {
                   type: "bridge",
                   zh: "汉语“吃了吗？”“吃了。”也省略；英语 Yes, I have. 也一样。",
                   en: "不一样的是：英语省略后助动词不能乱配——问 Have you finished? 答用 have；问 Did you finish? 答用 did。汉语“吃了”一个顶俩，英语不行。",
-                  unbridge: "这是英语的规矩：省略是省重复，不是省规则；助动词要和问句配对。"
+                  unbridge: "英语就认这个理：省略是省重复，不是省规则；助动词要和问句配对。"
                 },
                 {
                   type: "contrast",
@@ -1059,7 +1059,7 @@ window.ENG_CH["gr17"] = {
               id: "gr17.2.3-p3",
               kind: "explain",
               title: "特殊句式综合辨析",
-              lead: "还记得吗？It was in 2020 that… 和 The year that… 长得像，身份完全不同。",
+              lead: "先看一眼上一页的结论：that 看成分定身份。这一页把它用在综合辨析上：分清强调句与定语从句。",
               blocks: [
                 {
                   type: "examples",
@@ -1085,7 +1085,7 @@ window.ENG_CH["gr17"] = {
                   type: "bridge",
                   zh: "汉语“是 2020 年搬的”和“搬的那一年是 2020”意思接近，英语却是两种句式。",
                   en: "英语看 that 的“身份证”：It was in 2020 that… 里 that 前没有名词，是强调框的一部分；The year that… 里 that 前有 the year，是定语从句的连接词——同一个 that，两种身份。",
-                  unbridge: "这是英语的规矩：that 一词多能，看它在句中当什么成分。"
+                  unbridge: "不是汉语的讲法，是英语的规矩：that 一词多能，看它在句中当什么成分。"
                 },
                 {
                   type: "contrast",
@@ -1234,7 +1234,7 @@ window.ENG_CH["gr17"] = {
               id: "gr17.2.4-p3",
               kind: "explain",
               title: "本章小结：总表",
-              lead: "还记得吗？倒装、强调、省略、it——四个话题，其实讲一件事：英语用“句式”表达意思。",
+              lead: "本章小结——倒装、强调、省略、it 四个话题讲一件事：英语用'句式'表达意思。",
               blocks: [
                 {
                   type: "examples",

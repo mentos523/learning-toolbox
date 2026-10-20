@@ -125,7 +125,7 @@ window.BIO_CH["b10"] = {
               title: "酵母菌与霉菌",
               blocks: [
                 { type: "lead", text: "馒头为什么松软？——都是酵母菌呼出的\"气\"。" },
-                { type: "text", html: "酵母菌：单细胞真菌。先认词——出芽生殖：母细胞长出小芽，芽长大后脱离成新个体。发酵：酵母菌把糖变成酒精+二氧化碳——馒头的孔洞是 CO₂ 撑的。" },
+                { type: "text", html: "酵母菌：单细胞真菌。先认词——出芽生殖：母细胞长出小芽，芽长大后脱离成新个体。发酵：酵母菌把糖变成酒精（化学名乙醇）＋二氧化碳——馒头的孔洞是 CO₂ 撑的。" },
                 { type: "text", html: "霉菌：多细胞真菌，靠孢子生殖。先认词——孢子：真菌的繁殖体，随风飘散。馒头上长的\"白毛\"就是霉菌的菌丝；青霉能产青霉素。" },
                 { type: "text", html: "<div style=\"border:1px solid var(--bio-line);border-radius:10px;padding:12px;margin:6px 0;background:var(--bio-panel);text-align:center\">" +
                   "<svg viewBox=\"0 0 200 150\" width=\"100%\" role=\"img\" aria-label=\"酵母菌发酵演示\" style=\"max-width:220px;display:block;margin:0 auto\">" +

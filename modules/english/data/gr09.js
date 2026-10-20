@@ -335,7 +335,7 @@ window.ENG_CH["gr09"] = {
               id: "gr09.1.2-p3",
               kind: "explain",
               title: "不定式作状语：to do 表目的",
-              lead: "还记得吗？上一页 to catch the bus 回答“为什么”，too young to join 是“太小而不能”。",
+              lead: "to catch 答'为什么'，too young to join 是'不能'——同是 to do，意思为何不同？",
               blocks: [
                 {
                   type: "examples",
@@ -501,7 +501,7 @@ window.ENG_CH["gr09"] = {
               id: "gr09.1.3-p3",
               kind: "explain",
               title: "it 句型：it 顶班，to do 是真主语",
-              lead: "还记得吗？上一页 it 只是替身，for us 和 of you 站的是动作的“主人”。",
+              lead: "先看一眼上一页的结论：it 顶班，to do 是真主语。这一页把它用在选 for 还是 of 上。",
               blocks: [
                 {
                   type: "examples",
@@ -643,7 +643,7 @@ window.ENG_CH["gr09"] = {
               id: "gr09.1.4-p3",
               kind: "explain",
               title: "不定式作定语与表语：后置 + be to do",
-              lead: "还记得吗？上一页 to learn 站在 way 后面当定语——位置站对了。",
+              lead: "the way to learn 里 to learn 在名词后——定语为何后置？",
               blocks: [
                 {
                   type: "examples",
@@ -903,7 +903,7 @@ window.ENG_CH["gr09"] = {
               id: "gr09.2.2-p3",
               kind: "explain",
               title: "to do vs doing：朝前看 vs 朝后看",
-              lead: "还记得吗？上一页 to lock 是“没锁”，locking 是“锁了却忘了”。",
+              lead: "forgot to lock 是没锁，locking 是锁了——一词之差，意思为何全反？",
               blocks: [
                 {
                   type: "examples",

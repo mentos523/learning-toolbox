@@ -204,7 +204,7 @@ window.ENG_CH["gr13"] = {
               id: "gr13.1.1-p3",
               kind: "explain",
               title: "连接词三问：缺什么成分？",
-              lead: "上一页三个从句块进了三个槽，“ 开门词 ”各不相同。",
+              lead: "先看一眼上一页的结论：开门词各不相同。这一页把它用在选词三问上。",
               blocks: [
                 {
                   type: "examples",
@@ -220,7 +220,7 @@ window.ENG_CH["gr13"] = {
                   type: "bridge",
                   zh: "汉语说“ 我知道他病了 ”“ 我想知道是否下雨 ”——“ 是否 ”、“ 什么 ”直接嵌进去，不用“ 开门词 ”。",
                   en: "英语从句进主句要“ 办身份证 ”：陈述句的身份证是 that（口语可不带），“ 是否 ”必须带 if / whether，疑问词必须带 wh-——缺了就进不了宾语槽。",
-                  unbridge: "别拿汉语的“ 直接嵌 ”套英语——疑问词一个不能少，这是英语的规矩。"
+                  unbridge: "别拿汉语的“ 直接嵌 ”套英语——疑问词一个不能少——这条规矩不讲情面。"
                 },
                 {
                   type: "contrast",
@@ -351,7 +351,7 @@ window.ENG_CH["gr13"] = {
               id: "gr13.1.2-p3",
               kind: "explain",
               title: "从句语序复位 + 主过从过",
-              lead: "还记得吗？上一页 when 后面跟的是 he arrived，不是 did he arrive。",
+              lead: "when he arrived 不倒装，said 后 is 退 was——从句为何复位又呼应？",
               blocks: [
                 {
                   type: "examples",
@@ -636,7 +636,7 @@ window.ENG_CH["gr13"] = {
               id: "gr13.1.4-p3",
               kind: "explain",
               title: "三个动词，三种门禁",
-              lead: "还记得吗？上一页 doubt 后面跟 whether，suggest 后面跟 that——各有各的门禁。",
+              lead: "doubt 跟 whether，suggest 跟 that——动词为何各有门禁？",
               blocks: [
                 {
                   type: "examples",
@@ -768,7 +768,7 @@ window.ENG_CH["gr13"] = {
               id: "gr13.2.1-p3",
               kind: "explain",
               title: "it 顶班：形式主语",
-              lead: "还记得吗？上一页从句块进了主语槽，句子头重脚轻——it 来顶班了。",
+              lead: "先看一眼上一页的结论：it 顶班，真主语放句尾。这一页把它用在主语从句上。",
               blocks: [
                 {
                   type: "examples",
@@ -911,7 +911,7 @@ window.ENG_CH["gr13"] = {
               id: "gr13.2.2-p3",
               kind: "explain",
               title: "同位语：名词的“ 说明书 ”",
-              lead: "还记得吗？上一页 that he won 不缺成分（同位语），that he told us 缺宾语（定语）。",
+              lead: "that he won 不缺成分，that he told us 缺宾语——同是 that，怎么分同位语与定语？",
               blocks: [
                 {
                   type: "examples",

@@ -277,7 +277,7 @@ window.ENG_CH["gr05"] = {
                   type: "bridge",
                   zh: "汉语说“他跑”，“跑”字不用变——人称、时间都不用动词管。",
                   en: "英语不一样：动词要“报时”。主语是“他 / 她 / 它”，动词就穿上 -s 制服，向全世界宣告——这件事是“他”干的。",
-                  unbridge: "这是英语的规矩，不是汉语的翻译。"
+                  unbridge: "规矩就这一条，不是汉语的翻译。"
                 },
                 {
                   type: "spell",
@@ -422,7 +422,7 @@ window.ENG_CH["gr05"] = {
               id: "gr05.1.2-p3",
               kind: "explain",
               title: "频率副词的位置：实义动词前，be 动词后",
-              lead: "还记得吗？上一页 often 站 plays 前，always 却站 is 后。",
+              lead: "often 在 plays 前，always 在 is 后——频率副词为何两个座位？",
               blocks: [
                 {
                   type: "examples",
@@ -442,9 +442,9 @@ window.ENG_CH["gr05"] = {
                 },
                 {
                   type: "spell",
-                  title: "频率一条链 + every day：",
+                  title: "频率副词一条链 + every day：",
                   items: [
-                    "频率一条链：always（总是）> usually（通常）> often（经常）> sometimes（有时）> never（从不）",
+                    "频率副词一条链：always（总是）> usually（通常）> often（经常）> sometimes（有时）> never（从不）",
                     "never = 一次也不，句子不再加 not：He never smokes.",
                     "every day（每天，两词）vs everyday（日常的，形容词）"
                   ]
@@ -580,7 +580,7 @@ window.ENG_CH["gr05"] = {
               id: "gr05.1.3-p3",
               kind: "explain",
               title: "一般过去时：动词穿“过去装”",
-              lead: "还记得吗？went 是 go 的过去样子，Did 后 watch 变回了原形。",
+              lead: "先看一眼上一页的结论：Did 出场，动词还原原形。这一页把它用在分规则与不规则上。",
               blocks: [
                 {
                   type: "examples",
@@ -738,7 +738,7 @@ window.ENG_CH["gr05"] = {
               id: "gr05.1.4-p3",
               kind: "explain",
               title: "ago（…以前）与 used to do（过去常常）",
-              lead: "还记得吗？two years ago 往前数，used to 后跟动词原形。",
+              lead: "two years ago 是'以前'，used to 是'常常'——一个数时间，一个说习惯？",
               blocks: [
                 {
                   type: "examples",
@@ -1063,7 +1063,7 @@ window.ENG_CH["gr05"] = {
               id: "gr05.2.2-p3",
               kind: "explain",
               title: "will vs be going to：临时决定 vs 计划迹象",
-              lead: "还记得吗？电话一响，I will get it! 脱口而出；去北京却是提前计划好的。",
+              lead: "电话响，will 脱口而出；乌云来，be going to——同是'将要'，为何不能互换？",
               blocks: [
                 {
                   type: "examples",
@@ -1195,7 +1195,7 @@ window.ENG_CH["gr05"] = {
               id: "gr05.2.3-p3",
               kind: "explain",
               title: "过去将来：would = 过去的 will",
-              lead: "还记得吗？上一页你给 would 贴上了“情态动词”——would 后面跟的永远是动词原形。",
+              lead: "先看一眼上一页的结论：主句过去式，从句 will 退 would。这一页把它用在转述过去说的话上。",
               blocks: [
                 {
                   type: "examples",
@@ -1211,7 +1211,7 @@ window.ENG_CH["gr05"] = {
                   type: "bridge",
                   zh: "汉语说“他说他会来”，两个“会”长得一样，不管是现在转述还是过去转述。",
                   en: "英语转述过去的话，will 要“退一格”变成 would——站在过去的时间点上讲将来。",
-                  unbridge: "别在主句是过去式时还用 will——时态要“呼应”，这是英语的规矩。"
+                  unbridge: "别在主句是过去式时还用 will——时态要“呼应”，规矩就这一条。"
                 },
                 {
                   type: "contrast",
