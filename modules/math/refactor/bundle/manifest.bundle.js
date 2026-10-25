@@ -1,5 +1,5 @@
 window.MATH_MANIFEST = {
-  "generatedAt": "2026-10-25T02:52:28.937Z",
+  "generatedAt": "2026-10-25T04:14:00.155Z",
   "chapters": [
     {
       "id": "ch00",
@@ -62,6 +62,234 @@ window.MATH_MANIFEST = {
           ]
         }
       ]
+    },
+    {
+      "id": "ch01",
+      "title": "一元一次方程",
+      "units": [
+        {
+          "id": "ch01-u1",
+          "title": "方程的概念",
+          "lessons": [
+            {
+              "id": "ch01-u1-l1",
+              "title": "等式与方程",
+              "chapterId": "ch01",
+              "chapterTitle": "一元一次方程",
+              "unitId": "ch01-u1",
+              "unitTitle": "方程的概念",
+              "bundle": "ch01-u1-l1.bundle.js",
+              "freshness": "ch01-u1-l1.freshness.json",
+              "pages": [
+                {
+                  "id": "ch01-u1-l1-p1",
+                  "title": "2x + 1 = 11，x 是几？"
+                },
+                {
+                  "id": "ch01-u1-l1-p1b",
+                  "title": "2x+1=11：先减 1 再除以 2"
+                },
+                {
+                  "id": "ch01-u1-l1-p2",
+                  "title": "含有未知数的等式叫方程"
+                },
+                {
+                  "id": "ch01-u1-l1-p2b",
+                  "title": "方程和等式：一句话分清"
+                },
+                {
+                  "id": "ch01-u1-l1-p3",
+                  "title": "未知数和变量是一回事吗？"
+                },
+                {
+                  "id": "ch01-u1-l1-p3b",
+                  "title": "变量到处跑，未知数等人找"
+                }
+              ]
+            },
+            {
+              "id": "ch01-u1-l2",
+              "title": "等式的性质",
+              "chapterId": "ch01",
+              "chapterTitle": "一元一次方程",
+              "unitId": "ch01-u1",
+              "unitTitle": "方程的概念",
+              "bundle": "ch01-u1-l2.bundle.js",
+              "freshness": "ch01-u1-l2.freshness.json",
+              "pages": [
+                {
+                  "id": "ch01-u1-l2-p1",
+                  "title": "两边同时加减，天平还平吗？"
+                },
+                {
+                  "id": "ch01-u1-l2-p1b",
+                  "title": "性质 1：两边加减同一数"
+                },
+                {
+                  "id": "ch01-u1-l2-p2",
+                  "title": "两边同时乘除，天平还平吗？"
+                },
+                {
+                  "id": "ch01-u1-l2-p2b",
+                  "title": "性质 2：两边乘除同一数"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch01-u2",
+          "title": "一元一次方程的解法",
+          "lessons": [
+            {
+              "id": "ch01-u2-l1",
+              "title": "移项与合并",
+              "chapterId": "ch01",
+              "chapterTitle": "一元一次方程",
+              "unitId": "ch01-u2",
+              "unitTitle": "一元一次方程的解法",
+              "bundle": "ch01-u2-l1.bundle.js",
+              "freshness": "ch01-u2-l1.freshness.json",
+              "pages": [
+                {
+                  "id": "ch01-u2-l1-p1",
+                  "title": "x + 5 = 12：把 x 单独留下"
+                },
+                {
+                  "id": "ch01-u2-l1-p1b",
+                  "title": "移项：搬家过等号要变号"
+                },
+                {
+                  "id": "ch01-u2-l1-p2",
+                  "title": "2x + 3x：数盒子就行"
+                },
+                {
+                  "id": "ch01-u2-l1-p2b",
+                  "title": "同类项：长得一样才能并"
+                }
+              ]
+            },
+            {
+              "id": "ch01-u2-l2",
+              "title": "去括号与去分母",
+              "chapterId": "ch01",
+              "chapterTitle": "一元一次方程",
+              "unitId": "ch01-u2",
+              "unitTitle": "一元一次方程的解法",
+              "bundle": "ch01-u2-l2.bundle.js",
+              "freshness": "ch01-u2-l2.freshness.json",
+              "pages": [
+                {
+                  "id": "ch01-u2-l2-p1",
+                  "title": "2(x+3)：2 要乘给谁？"
+                },
+                {
+                  "id": "ch01-u2-l2-p1b",
+                  "title": "去括号：括号外乘进来"
+                },
+                {
+                  "id": "ch01-u2-l2-p2",
+                  "title": "分母 2 太碍事，乘掉它"
+                },
+                {
+                  "id": "ch01-u2-l2-p2b",
+                  "title": "去分母：两边同乘最小公倍数"
+                }
+              ]
+            },
+            {
+              "id": "ch01-u2-l3",
+              "title": "方程的应用（一）：列方程",
+              "chapterId": "ch01",
+              "chapterTitle": "一元一次方程",
+              "unitId": "ch01-u2",
+              "unitTitle": "一元一次方程的解法",
+              "bundle": "ch01-u2-l3.bundle.js",
+              "freshness": "ch01-u2-l3.freshness.json",
+              "pages": [
+                {
+                  "id": "ch01-u2-l3-p1",
+                  "title": "长方形：长比宽多 3"
+                },
+                {
+                  "id": "ch01-u2-l3-p1b",
+                  "title": "列方程：设、找、列三步走"
+                }
+              ]
+            },
+            {
+              "id": "ch01-u2-l4",
+              "title": "方程的应用（二）：拓展",
+              "chapterId": "ch01",
+              "chapterTitle": "一元一次方程",
+              "unitId": "ch01-u2",
+              "unitTitle": "一元一次方程的解法",
+              "bundle": "ch01-u2-l4.bundle.js",
+              "freshness": "ch01-u2-l4.freshness.json",
+              "pages": [
+                {
+                  "id": "ch01-u2-l4-p1",
+                  "title": "两车相向：几小时相遇？"
+                },
+                {
+                  "id": "ch01-u2-l4-p1b",
+                  "title": "追及问题：快的追慢的"
+                },
+                {
+                  "id": "ch01-u2-l4-p2",
+                  "title": "追及演示：哥哥追弟弟"
+                },
+                {
+                  "id": "ch01-u2-l4-p3",
+                  "title": "为什么追及用速度差？"
+                },
+                {
+                  "id": "ch01-u2-l4-p4",
+                  "title": "小练：你来列方程"
+                }
+              ]
+            },
+            {
+              "id": "ch01-u2-l5",
+              "title": "本章小结",
+              "chapterId": "ch01",
+              "chapterTitle": "一元一次方程",
+              "unitId": "ch01-u2",
+              "unitTitle": "一元一次方程的解法",
+              "bundle": "ch01-u2-l5.bundle.js",
+              "freshness": "ch01-u2-l5.freshness.json",
+              "pages": [
+                {
+                  "id": "ch01-u2-l5-p1",
+                  "title": "解方程三步走"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch01-ux",
+          "title": "本章习题",
+          "lessons": [
+            {
+              "id": "ch01-ux-l1",
+              "title": "第一章习题",
+              "chapterId": "ch01",
+              "chapterTitle": "一元一次方程",
+              "unitId": "ch01-ux",
+              "unitTitle": "本章习题",
+              "bundle": "ch01-ux-l1.bundle.js",
+              "freshness": "ch01-ux-l1.freshness.json",
+              "pages": [
+                {
+                  "id": "ch01-ux-l1-p1",
+                  "title": "第一章习题：一元一次方程"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "lessons": [
@@ -106,6 +334,210 @@ window.MATH_MANIFEST = {
         {
           "id": "ch00-ux-l1-p1",
           "title": "第零章习题：猜数字与天平"
+        }
+      ]
+    },
+    {
+      "id": "ch01-u1-l1",
+      "title": "等式与方程",
+      "chapterId": "ch01",
+      "chapterTitle": "一元一次方程",
+      "unitId": "ch01-u1",
+      "unitTitle": "方程的概念",
+      "bundle": "ch01-u1-l1.bundle.js",
+      "freshness": "ch01-u1-l1.freshness.json",
+      "pages": [
+        {
+          "id": "ch01-u1-l1-p1",
+          "title": "2x + 1 = 11，x 是几？"
+        },
+        {
+          "id": "ch01-u1-l1-p1b",
+          "title": "2x+1=11：先减 1 再除以 2"
+        },
+        {
+          "id": "ch01-u1-l1-p2",
+          "title": "含有未知数的等式叫方程"
+        },
+        {
+          "id": "ch01-u1-l1-p2b",
+          "title": "方程和等式：一句话分清"
+        },
+        {
+          "id": "ch01-u1-l1-p3",
+          "title": "未知数和变量是一回事吗？"
+        },
+        {
+          "id": "ch01-u1-l1-p3b",
+          "title": "变量到处跑，未知数等人找"
+        }
+      ]
+    },
+    {
+      "id": "ch01-u1-l2",
+      "title": "等式的性质",
+      "chapterId": "ch01",
+      "chapterTitle": "一元一次方程",
+      "unitId": "ch01-u1",
+      "unitTitle": "方程的概念",
+      "bundle": "ch01-u1-l2.bundle.js",
+      "freshness": "ch01-u1-l2.freshness.json",
+      "pages": [
+        {
+          "id": "ch01-u1-l2-p1",
+          "title": "两边同时加减，天平还平吗？"
+        },
+        {
+          "id": "ch01-u1-l2-p1b",
+          "title": "性质 1：两边加减同一数"
+        },
+        {
+          "id": "ch01-u1-l2-p2",
+          "title": "两边同时乘除，天平还平吗？"
+        },
+        {
+          "id": "ch01-u1-l2-p2b",
+          "title": "性质 2：两边乘除同一数"
+        }
+      ]
+    },
+    {
+      "id": "ch01-u2-l1",
+      "title": "移项与合并",
+      "chapterId": "ch01",
+      "chapterTitle": "一元一次方程",
+      "unitId": "ch01-u2",
+      "unitTitle": "一元一次方程的解法",
+      "bundle": "ch01-u2-l1.bundle.js",
+      "freshness": "ch01-u2-l1.freshness.json",
+      "pages": [
+        {
+          "id": "ch01-u2-l1-p1",
+          "title": "x + 5 = 12：把 x 单独留下"
+        },
+        {
+          "id": "ch01-u2-l1-p1b",
+          "title": "移项：搬家过等号要变号"
+        },
+        {
+          "id": "ch01-u2-l1-p2",
+          "title": "2x + 3x：数盒子就行"
+        },
+        {
+          "id": "ch01-u2-l1-p2b",
+          "title": "同类项：长得一样才能并"
+        }
+      ]
+    },
+    {
+      "id": "ch01-u2-l2",
+      "title": "去括号与去分母",
+      "chapterId": "ch01",
+      "chapterTitle": "一元一次方程",
+      "unitId": "ch01-u2",
+      "unitTitle": "一元一次方程的解法",
+      "bundle": "ch01-u2-l2.bundle.js",
+      "freshness": "ch01-u2-l2.freshness.json",
+      "pages": [
+        {
+          "id": "ch01-u2-l2-p1",
+          "title": "2(x+3)：2 要乘给谁？"
+        },
+        {
+          "id": "ch01-u2-l2-p1b",
+          "title": "去括号：括号外乘进来"
+        },
+        {
+          "id": "ch01-u2-l2-p2",
+          "title": "分母 2 太碍事，乘掉它"
+        },
+        {
+          "id": "ch01-u2-l2-p2b",
+          "title": "去分母：两边同乘最小公倍数"
+        }
+      ]
+    },
+    {
+      "id": "ch01-u2-l3",
+      "title": "方程的应用（一）：列方程",
+      "chapterId": "ch01",
+      "chapterTitle": "一元一次方程",
+      "unitId": "ch01-u2",
+      "unitTitle": "一元一次方程的解法",
+      "bundle": "ch01-u2-l3.bundle.js",
+      "freshness": "ch01-u2-l3.freshness.json",
+      "pages": [
+        {
+          "id": "ch01-u2-l3-p1",
+          "title": "长方形：长比宽多 3"
+        },
+        {
+          "id": "ch01-u2-l3-p1b",
+          "title": "列方程：设、找、列三步走"
+        }
+      ]
+    },
+    {
+      "id": "ch01-u2-l4",
+      "title": "方程的应用（二）：拓展",
+      "chapterId": "ch01",
+      "chapterTitle": "一元一次方程",
+      "unitId": "ch01-u2",
+      "unitTitle": "一元一次方程的解法",
+      "bundle": "ch01-u2-l4.bundle.js",
+      "freshness": "ch01-u2-l4.freshness.json",
+      "pages": [
+        {
+          "id": "ch01-u2-l4-p1",
+          "title": "两车相向：几小时相遇？"
+        },
+        {
+          "id": "ch01-u2-l4-p1b",
+          "title": "追及问题：快的追慢的"
+        },
+        {
+          "id": "ch01-u2-l4-p2",
+          "title": "追及演示：哥哥追弟弟"
+        },
+        {
+          "id": "ch01-u2-l4-p3",
+          "title": "为什么追及用速度差？"
+        },
+        {
+          "id": "ch01-u2-l4-p4",
+          "title": "小练：你来列方程"
+        }
+      ]
+    },
+    {
+      "id": "ch01-u2-l5",
+      "title": "本章小结",
+      "chapterId": "ch01",
+      "chapterTitle": "一元一次方程",
+      "unitId": "ch01-u2",
+      "unitTitle": "一元一次方程的解法",
+      "bundle": "ch01-u2-l5.bundle.js",
+      "freshness": "ch01-u2-l5.freshness.json",
+      "pages": [
+        {
+          "id": "ch01-u2-l5-p1",
+          "title": "解方程三步走"
+        }
+      ]
+    },
+    {
+      "id": "ch01-ux-l1",
+      "title": "第一章习题",
+      "chapterId": "ch01",
+      "chapterTitle": "一元一次方程",
+      "unitId": "ch01-ux",
+      "unitTitle": "本章习题",
+      "bundle": "ch01-ux-l1.bundle.js",
+      "freshness": "ch01-ux-l1.freshness.json",
+      "pages": [
+        {
+          "id": "ch01-ux-l1-p1",
+          "title": "第一章习题：一元一次方程"
         }
       ]
     }
