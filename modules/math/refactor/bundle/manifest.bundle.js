@@ -1,5 +1,5 @@
 window.MATH_MANIFEST = {
-  "generatedAt": "2026-10-25T11:12:06.700Z",
+  "generatedAt": "2026-10-25T11:43:07.477Z",
   "chapters": [
     {
       "id": "ch00",
@@ -3290,6 +3290,252 @@ window.MATH_MANIFEST = {
           ]
         }
       ]
+    },
+    {
+      "id": "g02",
+      "title": "相交线与平行线",
+      "units": [
+        {
+          "id": "g02-u1",
+          "title": "相交线",
+          "lessons": [
+            {
+              "id": "g02-u1-l1",
+              "title": "对顶角与邻补角",
+              "chapterId": "g02",
+              "chapterTitle": "相交线与平行线",
+              "unitId": "g02-u1",
+              "unitTitle": "相交线",
+              "bundle": "g02-u1-l1.bundle.js",
+              "freshness": "g02-u1-l1.freshness.json",
+              "pages": [
+                {
+                  "id": "g02-u1-l1-p1",
+                  "title": "转剪刀：四个角此消彼长"
+                },
+                {
+                  "id": "g02-u1-l1-p2",
+                  "title": "2 步看懂：对顶角为什么相等"
+                },
+                {
+                  "id": "g02-u1-l1-p3",
+                  "title": "对顶角与邻补角：一次讲透"
+                }
+              ]
+            },
+            {
+              "id": "g02-u1-l2",
+              "title": "垂线",
+              "chapterId": "g02",
+              "chapterTitle": "相交线与平行线",
+              "unitId": "g02-u1",
+              "unitTitle": "相交线",
+              "bundle": "g02-u1-l2.bundle.js",
+              "freshness": "g02-u1-l2.freshness.json",
+              "pages": [
+                {
+                  "id": "g02-u1-l2-p1",
+                  "title": "三角板推一推：画垂线"
+                },
+                {
+                  "id": "g02-u1-l2-p2",
+                  "title": "垂直：相交成了 90°"
+                }
+              ]
+            },
+            {
+              "id": "g02-u1-l3",
+              "title": "点到直线的距离",
+              "chapterId": "g02",
+              "chapterTitle": "相交线与平行线",
+              "unitId": "g02-u1",
+              "unitTitle": "相交线",
+              "bundle": "g02-u1-l3.bundle.js",
+              "freshness": "g02-u1-l3.freshness.json",
+              "pages": [
+                {
+                  "id": "g02-u1-l3-p1",
+                  "title": "点向直线跳：哪条路最短？"
+                },
+                {
+                  "id": "g02-u1-l3-p2",
+                  "title": "点到直线的距离"
+                }
+              ]
+            },
+            {
+              "id": "g02-u1-l4",
+              "title": "同位角、内错角、同旁内角",
+              "chapterId": "g02",
+              "chapterTitle": "相交线与平行线",
+              "unitId": "g02-u1",
+              "unitTitle": "相交线",
+              "bundle": "g02-u1-l4.bundle.js",
+              "freshness": "g02-u1-l4.freshness.json",
+              "pages": [
+                {
+                  "id": "g02-u1-l4-p1",
+                  "title": "第三条直线来了：八个角排排坐"
+                },
+                {
+                  "id": "g02-u1-l4-p2",
+                  "title": "同位角：位置一模一样的角"
+                },
+                {
+                  "id": "g02-u1-l4-p3",
+                  "title": "内错角：Z 字两头的角"
+                },
+                {
+                  "id": "g02-u1-l4-p4",
+                  "title": "同旁内角：U 字怀里的角"
+                },
+                {
+                  "id": "g02-u1-l4-p5",
+                  "title": "三线八角：一次讲透"
+                },
+                {
+                  "id": "g02-u1-l4-p6",
+                  "title": "同位角：F 形找同位"
+                },
+                {
+                  "id": "g02-u1-l4-p7",
+                  "title": "内错角：Z 字两头找"
+                },
+                {
+                  "id": "g02-u1-l4-p8",
+                  "title": "同旁内角：U 形抱一抱"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "g02-u2",
+          "title": "平行线",
+          "lessons": [
+            {
+              "id": "g02-u2-l1",
+              "title": "平行的定义与平行公理",
+              "chapterId": "g02",
+              "chapterTitle": "相交线与平行线",
+              "unitId": "g02-u2",
+              "unitTitle": "平行线",
+              "bundle": "g02-u2-l1.bundle.js",
+              "freshness": "g02-u2-l1.freshness.json",
+              "pages": [
+                {
+                  "id": "g02-u2-l1-p1",
+                  "title": "铁轨：永远不相交"
+                },
+                {
+                  "id": "g02-u2-l1-p2",
+                  "title": "平行公理：只能画一条"
+                }
+              ]
+            },
+            {
+              "id": "g02-u2-l2",
+              "title": "平行线的判定",
+              "chapterId": "g02",
+              "chapterTitle": "相交线与平行线",
+              "unitId": "g02-u2",
+              "unitTitle": "平行线",
+              "bundle": "g02-u2-l2.bundle.js",
+              "freshness": "g02-u2-l2.freshness.json",
+              "pages": [
+                {
+                  "id": "g02-u2-l2-p1",
+                  "title": "量角器验证：角对上了，线就平行了"
+                },
+                {
+                  "id": "g02-u2-l2-p2",
+                  "title": "判定 1：同位角相等 → 平行"
+                },
+                {
+                  "id": "g02-u2-l2-p3",
+                  "title": "判定 2：内错角相等 → 平行"
+                },
+                {
+                  "id": "g02-u2-l2-p4",
+                  "title": "判定 3：同旁内角互补 → 平行"
+                }
+              ]
+            },
+            {
+              "id": "g02-u2-l3",
+              "title": "平行线的性质",
+              "chapterId": "g02",
+              "chapterTitle": "相交线与平行线",
+              "unitId": "g02-u2",
+              "unitTitle": "平行线",
+              "bundle": "g02-u2-l3.bundle.js",
+              "freshness": "g02-u2-l3.freshness.json",
+              "pages": [
+                {
+                  "id": "g02-u2-l3-p1",
+                  "title": "平行线被截：三个角联动"
+                },
+                {
+                  "id": "g02-u2-l3-p2",
+                  "title": "性质 1：平行 → 同位角相等"
+                },
+                {
+                  "id": "g02-u2-l3-p3",
+                  "title": "性质 2：平行 → 内错角相等"
+                },
+                {
+                  "id": "g02-u2-l3-p4",
+                  "title": "性质 3：平行 → 同旁内角互补"
+                }
+              ]
+            },
+            {
+              "id": "g02-u2-l4",
+              "title": "平移：图形的第一次运动",
+              "chapterId": "g02",
+              "chapterTitle": "相交线与平行线",
+              "unitId": "g02-u2",
+              "unitTitle": "平行线",
+              "bundle": "g02-u2-l4.bundle.js",
+              "freshness": "g02-u2-l4.freshness.json",
+              "pages": [
+                {
+                  "id": "g02-u2-l4-p1",
+                  "title": "三角形滑走了：对应点连线"
+                },
+                {
+                  "id": "g02-u2-l4-p2",
+                  "title": "平移的性质：对应点连线平行且相等"
+                },
+                {
+                  "id": "g02-u2-l4-p3",
+                  "title": "预告：直线也能“滑”——y=x 往上滑"
+                }
+              ]
+            },
+            {
+              "id": "g02-u2-l5",
+              "title": "本章小结与习题",
+              "chapterId": "g02",
+              "chapterTitle": "相交线与平行线",
+              "unitId": "g02-u2",
+              "unitTitle": "平行线",
+              "bundle": "g02-u2-l5.bundle.js",
+              "freshness": "g02-u2-l5.freshness.json",
+              "pages": [
+                {
+                  "id": "g02-u2-l5-p1",
+                  "title": "判定 vs 性质：因为和所以换了位置"
+                },
+                {
+                  "id": "g02-u2-l5-p2",
+                  "title": "本章小测：6 道题"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "lessons": [
@@ -6178,6 +6424,234 @@ window.MATH_MANIFEST = {
         {
           "id": "g01-u2-l4-p2",
           "title": "本章小测：分类大挑战"
+        }
+      ]
+    },
+    {
+      "id": "g02-u1-l1",
+      "title": "对顶角与邻补角",
+      "chapterId": "g02",
+      "chapterTitle": "相交线与平行线",
+      "unitId": "g02-u1",
+      "unitTitle": "相交线",
+      "bundle": "g02-u1-l1.bundle.js",
+      "freshness": "g02-u1-l1.freshness.json",
+      "pages": [
+        {
+          "id": "g02-u1-l1-p1",
+          "title": "转剪刀：四个角此消彼长"
+        },
+        {
+          "id": "g02-u1-l1-p2",
+          "title": "2 步看懂：对顶角为什么相等"
+        },
+        {
+          "id": "g02-u1-l1-p3",
+          "title": "对顶角与邻补角：一次讲透"
+        }
+      ]
+    },
+    {
+      "id": "g02-u1-l2",
+      "title": "垂线",
+      "chapterId": "g02",
+      "chapterTitle": "相交线与平行线",
+      "unitId": "g02-u1",
+      "unitTitle": "相交线",
+      "bundle": "g02-u1-l2.bundle.js",
+      "freshness": "g02-u1-l2.freshness.json",
+      "pages": [
+        {
+          "id": "g02-u1-l2-p1",
+          "title": "三角板推一推：画垂线"
+        },
+        {
+          "id": "g02-u1-l2-p2",
+          "title": "垂直：相交成了 90°"
+        }
+      ]
+    },
+    {
+      "id": "g02-u1-l3",
+      "title": "点到直线的距离",
+      "chapterId": "g02",
+      "chapterTitle": "相交线与平行线",
+      "unitId": "g02-u1",
+      "unitTitle": "相交线",
+      "bundle": "g02-u1-l3.bundle.js",
+      "freshness": "g02-u1-l3.freshness.json",
+      "pages": [
+        {
+          "id": "g02-u1-l3-p1",
+          "title": "点向直线跳：哪条路最短？"
+        },
+        {
+          "id": "g02-u1-l3-p2",
+          "title": "点到直线的距离"
+        }
+      ]
+    },
+    {
+      "id": "g02-u1-l4",
+      "title": "同位角、内错角、同旁内角",
+      "chapterId": "g02",
+      "chapterTitle": "相交线与平行线",
+      "unitId": "g02-u1",
+      "unitTitle": "相交线",
+      "bundle": "g02-u1-l4.bundle.js",
+      "freshness": "g02-u1-l4.freshness.json",
+      "pages": [
+        {
+          "id": "g02-u1-l4-p1",
+          "title": "第三条直线来了：八个角排排坐"
+        },
+        {
+          "id": "g02-u1-l4-p2",
+          "title": "同位角：位置一模一样的角"
+        },
+        {
+          "id": "g02-u1-l4-p3",
+          "title": "内错角：Z 字两头的角"
+        },
+        {
+          "id": "g02-u1-l4-p4",
+          "title": "同旁内角：U 字怀里的角"
+        },
+        {
+          "id": "g02-u1-l4-p5",
+          "title": "三线八角：一次讲透"
+        },
+        {
+          "id": "g02-u1-l4-p6",
+          "title": "同位角：F 形找同位"
+        },
+        {
+          "id": "g02-u1-l4-p7",
+          "title": "内错角：Z 字两头找"
+        },
+        {
+          "id": "g02-u1-l4-p8",
+          "title": "同旁内角：U 形抱一抱"
+        }
+      ]
+    },
+    {
+      "id": "g02-u2-l1",
+      "title": "平行的定义与平行公理",
+      "chapterId": "g02",
+      "chapterTitle": "相交线与平行线",
+      "unitId": "g02-u2",
+      "unitTitle": "平行线",
+      "bundle": "g02-u2-l1.bundle.js",
+      "freshness": "g02-u2-l1.freshness.json",
+      "pages": [
+        {
+          "id": "g02-u2-l1-p1",
+          "title": "铁轨：永远不相交"
+        },
+        {
+          "id": "g02-u2-l1-p2",
+          "title": "平行公理：只能画一条"
+        }
+      ]
+    },
+    {
+      "id": "g02-u2-l2",
+      "title": "平行线的判定",
+      "chapterId": "g02",
+      "chapterTitle": "相交线与平行线",
+      "unitId": "g02-u2",
+      "unitTitle": "平行线",
+      "bundle": "g02-u2-l2.bundle.js",
+      "freshness": "g02-u2-l2.freshness.json",
+      "pages": [
+        {
+          "id": "g02-u2-l2-p1",
+          "title": "量角器验证：角对上了，线就平行了"
+        },
+        {
+          "id": "g02-u2-l2-p2",
+          "title": "判定 1：同位角相等 → 平行"
+        },
+        {
+          "id": "g02-u2-l2-p3",
+          "title": "判定 2：内错角相等 → 平行"
+        },
+        {
+          "id": "g02-u2-l2-p4",
+          "title": "判定 3：同旁内角互补 → 平行"
+        }
+      ]
+    },
+    {
+      "id": "g02-u2-l3",
+      "title": "平行线的性质",
+      "chapterId": "g02",
+      "chapterTitle": "相交线与平行线",
+      "unitId": "g02-u2",
+      "unitTitle": "平行线",
+      "bundle": "g02-u2-l3.bundle.js",
+      "freshness": "g02-u2-l3.freshness.json",
+      "pages": [
+        {
+          "id": "g02-u2-l3-p1",
+          "title": "平行线被截：三个角联动"
+        },
+        {
+          "id": "g02-u2-l3-p2",
+          "title": "性质 1：平行 → 同位角相等"
+        },
+        {
+          "id": "g02-u2-l3-p3",
+          "title": "性质 2：平行 → 内错角相等"
+        },
+        {
+          "id": "g02-u2-l3-p4",
+          "title": "性质 3：平行 → 同旁内角互补"
+        }
+      ]
+    },
+    {
+      "id": "g02-u2-l4",
+      "title": "平移：图形的第一次运动",
+      "chapterId": "g02",
+      "chapterTitle": "相交线与平行线",
+      "unitId": "g02-u2",
+      "unitTitle": "平行线",
+      "bundle": "g02-u2-l4.bundle.js",
+      "freshness": "g02-u2-l4.freshness.json",
+      "pages": [
+        {
+          "id": "g02-u2-l4-p1",
+          "title": "三角形滑走了：对应点连线"
+        },
+        {
+          "id": "g02-u2-l4-p2",
+          "title": "平移的性质：对应点连线平行且相等"
+        },
+        {
+          "id": "g02-u2-l4-p3",
+          "title": "预告：直线也能“滑”——y=x 往上滑"
+        }
+      ]
+    },
+    {
+      "id": "g02-u2-l5",
+      "title": "本章小结与习题",
+      "chapterId": "g02",
+      "chapterTitle": "相交线与平行线",
+      "unitId": "g02-u2",
+      "unitTitle": "平行线",
+      "bundle": "g02-u2-l5.bundle.js",
+      "freshness": "g02-u2-l5.freshness.json",
+      "pages": [
+        {
+          "id": "g02-u2-l5-p1",
+          "title": "判定 vs 性质：因为和所以换了位置"
+        },
+        {
+          "id": "g02-u2-l5-p2",
+          "title": "本章小测：6 道题"
         }
       ]
     }
