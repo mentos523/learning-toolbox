@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-25T17:19:08.310Z",
+  "generatedAt": "2026-10-25T17:52:10.126Z",
   "chapters": [
     {
       "id": "ch00",
@@ -5496,6 +5496,270 @@
           ]
         }
       ]
+    },
+    {
+      "id": "g13",
+      "title": "解析几何入门",
+      "units": [
+        {
+          "id": "g13-u1",
+          "title": "用代数研究几何",
+          "lessons": [
+            {
+              "id": "g13-u1-l0",
+              "title": "本章学习地图",
+              "chapterId": "g13",
+              "chapterTitle": "解析几何入门",
+              "unitId": "g13-u1",
+              "unitTitle": "用代数研究几何",
+              "bundle": "g13-u1-l0.bundle.js",
+              "freshness": "g13-u1-l0.freshness.json",
+              "pages": [
+                {
+                  "id": "g13-u1-l0-p1",
+                  "title": "本章学习地图：两条路"
+                }
+              ]
+            },
+            {
+              "id": "g13-u1-l1",
+              "title": "坐标系：几何视角",
+              "chapterId": "g13",
+              "chapterTitle": "解析几何入门",
+              "unitId": "g13-u1",
+              "unitTitle": "用代数研究几何",
+              "bundle": "g13-u1-l1.bundle.js",
+              "freshness": "g13-u1-l1.freshness.json",
+              "pages": [
+                {
+                  "id": "g13-u1-l1-p1",
+                  "title": "动点 P：坐标跟着走"
+                },
+                {
+                  "id": "g13-u1-l1-p2",
+                  "title": "点和坐标：一一对应"
+                },
+                {
+                  "id": "g13-u1-l1-p3",
+                  "title": "例题：读坐标，描点"
+                }
+              ]
+            },
+            {
+              "id": "g13-u1-l2",
+              "title": "距离与中点公式",
+              "chapterId": "g13",
+              "chapterTitle": "解析几何入门",
+              "unitId": "g13-u1",
+              "unitTitle": "用代数研究几何",
+              "bundle": "g13-u1-l2.bundle.js",
+              "freshness": "g13-u1-l2.freshness.json",
+              "pages": [
+                {
+                  "id": "g13-u1-l2-p1",
+                  "title": "两点之间：画个直角三角形"
+                },
+                {
+                  "id": "g13-u1-l2-p2",
+                  "title": "距离公式：勾股定理的坐标版"
+                },
+                {
+                  "id": "g13-u1-l2-p3",
+                  "title": "中点：正好走一半"
+                },
+                {
+                  "id": "g13-u1-l2-p4",
+                  "title": "中点公式：取个平均"
+                }
+              ]
+            },
+            {
+              "id": "g13-u1-l3",
+              "title": "直线的倾斜角与斜率",
+              "chapterId": "g13",
+              "chapterTitle": "解析几何入门",
+              "unitId": "g13-u1",
+              "unitTitle": "用代数研究几何",
+              "bundle": "g13-u1-l3.bundle.js",
+              "freshness": "g13-u1-l3.freshness.json",
+              "pages": [
+                {
+                  "id": "g13-u1-l3-p1",
+                  "title": "爬坡：直线越转越陡"
+                },
+                {
+                  "id": "g13-u1-l3-p2",
+                  "title": "斜率 k：纵向变化除以横向变化"
+                },
+                {
+                  "id": "g13-u1-l3-p3",
+                  "title": "k 的符号：上坡、下坡、平路"
+                },
+                {
+                  "id": "g13-u1-l3-p4",
+                  "title": "|k| 越大，越陡"
+                }
+              ]
+            },
+            {
+              "id": "g13-u1-l4",
+              "title": "直线方程",
+              "chapterId": "g13",
+              "chapterTitle": "解析几何入门",
+              "unitId": "g13-u1",
+              "unitTitle": "用代数研究几何",
+              "bundle": "g13-u1-l4.bundle.js",
+              "freshness": "g13-u1-l4.freshness.json",
+              "pages": [
+                {
+                  "id": "g13-u1-l4-p1",
+                  "title": "k、b 两个旋钮"
+                },
+                {
+                  "id": "g13-u1-l4-p2",
+                  "title": "斜截式：y=kx+b"
+                },
+                {
+                  "id": "g13-u1-l4-p3",
+                  "title": "点斜式：过一点、有斜率，直线被锁死"
+                },
+                {
+                  "id": "g13-u1-l4-p4",
+                  "title": "例题：两点定直线"
+                }
+              ]
+            },
+            {
+              "id": "g13-u1-l5",
+              "title": "两直线的位置关系",
+              "chapterId": "g13",
+              "chapterTitle": "解析几何入门",
+              "unitId": "g13-u1",
+              "unitTitle": "用代数研究几何",
+              "bundle": "g13-u1-l5.bundle.js",
+              "freshness": "g13-u1-l5.freshness.json",
+              "pages": [
+                {
+                  "id": "g13-u1-l5-p1",
+                  "title": "平行 vs 垂直：看 k"
+                },
+                {
+                  "id": "g13-u1-l5-p2",
+                  "title": "平行：k₁=k₂"
+                },
+                {
+                  "id": "g13-u1-l5-p3",
+                  "title": "慢放证明：k₁k₂=−1"
+                },
+                {
+                  "id": "g13-u1-l5-p4",
+                  "title": "垂直：k₁k₂=−1"
+                }
+              ]
+            },
+            {
+              "id": "g13-u1-l6",
+              "title": "抛物线的几何定义",
+              "chapterId": "g13",
+              "chapterTitle": "解析几何入门",
+              "unitId": "g13-u1",
+              "unitTitle": "用代数研究几何",
+              "bundle": "g13-u1-l6.bundle.js",
+              "freshness": "g13-u1-l6.freshness.json",
+              "pages": [
+                {
+                  "id": "g13-u1-l6-p1",
+                  "title": "焦点离准线越远，抛物线越“胖”"
+                },
+                {
+                  "id": "g13-u1-l6-p2",
+                  "title": "抛物线的出生证明"
+                },
+                {
+                  "id": "g13-u1-l6-p3",
+                  "title": "慢放推导：从等距到 y=ax²"
+                },
+                {
+                  "id": "g13-u1-l6-p4",
+                  "title": "y=ax² 的“出生”复盘"
+                },
+                {
+                  "id": "g13-u1-l6-p5",
+                  "title": "例题：已知焦点写方程"
+                }
+              ]
+            },
+            {
+              "id": "g13-u1-l7",
+              "title": "圆的方程",
+              "chapterId": "g13",
+              "chapterTitle": "解析几何入门",
+              "unitId": "g13-u1",
+              "unitTitle": "用代数研究几何",
+              "bundle": "g13-u1-l7.bundle.js",
+              "freshness": "g13-u1-l7.freshness.json",
+              "pages": [
+                {
+                  "id": "g13-u1-l7-p1",
+                  "title": "圆心拖到哪里，方程跟到哪里"
+                },
+                {
+                  "id": "g13-u1-l7-p2",
+                  "title": "圆的方程：平移推广"
+                },
+                {
+                  "id": "g13-u1-l7-p3",
+                  "title": "例题：写方程，判点位"
+                }
+              ]
+            },
+            {
+              "id": "g13-u1-l8",
+              "title": "切线斜率与导数",
+              "chapterId": "g13",
+              "chapterTitle": "解析几何入门",
+              "unitId": "g13-u1",
+              "unitTitle": "用代数研究几何",
+              "bundle": "g13-u1-l8.bundle.js",
+              "freshness": "g13-u1-l8.freshness.json",
+              "pages": [
+                {
+                  "id": "g13-u1-l8-p1",
+                  "title": "割线逼近切线"
+                },
+                {
+                  "id": "g13-u1-l8-p2",
+                  "title": "切线斜率：该点处的“变化率”"
+                },
+                {
+                  "id": "g13-u1-l8-p3",
+                  "title": "回声：y=x² 在 (1,1) 处"
+                }
+              ]
+            },
+            {
+              "id": "g13-u1-l9",
+              "title": "全书总结：数与形的统一",
+              "chapterId": "g13",
+              "chapterTitle": "解析几何入门",
+              "unitId": "g13-u1",
+              "unitTitle": "用代数研究几何",
+              "bundle": "g13-u1-l9.bundle.js",
+              "freshness": "g13-u1-l9.freshness.json",
+              "pages": [
+                {
+                  "id": "g13-u1-l9-p1",
+                  "title": "数与形：同一问题的两种说法"
+                },
+                {
+                  "id": "g13-u1-l9-p2",
+                  "title": "全书综合：6 道题"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "lessons": [
@@ -10452,6 +10716,258 @@
         {
           "id": "g12-u1-l5-p2",
           "title": "本章习题：6 道题"
+        }
+      ]
+    },
+    {
+      "id": "g13-u1-l0",
+      "title": "本章学习地图",
+      "chapterId": "g13",
+      "chapterTitle": "解析几何入门",
+      "unitId": "g13-u1",
+      "unitTitle": "用代数研究几何",
+      "bundle": "g13-u1-l0.bundle.js",
+      "freshness": "g13-u1-l0.freshness.json",
+      "pages": [
+        {
+          "id": "g13-u1-l0-p1",
+          "title": "本章学习地图：两条路"
+        }
+      ]
+    },
+    {
+      "id": "g13-u1-l1",
+      "title": "坐标系：几何视角",
+      "chapterId": "g13",
+      "chapterTitle": "解析几何入门",
+      "unitId": "g13-u1",
+      "unitTitle": "用代数研究几何",
+      "bundle": "g13-u1-l1.bundle.js",
+      "freshness": "g13-u1-l1.freshness.json",
+      "pages": [
+        {
+          "id": "g13-u1-l1-p1",
+          "title": "动点 P：坐标跟着走"
+        },
+        {
+          "id": "g13-u1-l1-p2",
+          "title": "点和坐标：一一对应"
+        },
+        {
+          "id": "g13-u1-l1-p3",
+          "title": "例题：读坐标，描点"
+        }
+      ]
+    },
+    {
+      "id": "g13-u1-l2",
+      "title": "距离与中点公式",
+      "chapterId": "g13",
+      "chapterTitle": "解析几何入门",
+      "unitId": "g13-u1",
+      "unitTitle": "用代数研究几何",
+      "bundle": "g13-u1-l2.bundle.js",
+      "freshness": "g13-u1-l2.freshness.json",
+      "pages": [
+        {
+          "id": "g13-u1-l2-p1",
+          "title": "两点之间：画个直角三角形"
+        },
+        {
+          "id": "g13-u1-l2-p2",
+          "title": "距离公式：勾股定理的坐标版"
+        },
+        {
+          "id": "g13-u1-l2-p3",
+          "title": "中点：正好走一半"
+        },
+        {
+          "id": "g13-u1-l2-p4",
+          "title": "中点公式：取个平均"
+        }
+      ]
+    },
+    {
+      "id": "g13-u1-l3",
+      "title": "直线的倾斜角与斜率",
+      "chapterId": "g13",
+      "chapterTitle": "解析几何入门",
+      "unitId": "g13-u1",
+      "unitTitle": "用代数研究几何",
+      "bundle": "g13-u1-l3.bundle.js",
+      "freshness": "g13-u1-l3.freshness.json",
+      "pages": [
+        {
+          "id": "g13-u1-l3-p1",
+          "title": "爬坡：直线越转越陡"
+        },
+        {
+          "id": "g13-u1-l3-p2",
+          "title": "斜率 k：纵向变化除以横向变化"
+        },
+        {
+          "id": "g13-u1-l3-p3",
+          "title": "k 的符号：上坡、下坡、平路"
+        },
+        {
+          "id": "g13-u1-l3-p4",
+          "title": "|k| 越大，越陡"
+        }
+      ]
+    },
+    {
+      "id": "g13-u1-l4",
+      "title": "直线方程",
+      "chapterId": "g13",
+      "chapterTitle": "解析几何入门",
+      "unitId": "g13-u1",
+      "unitTitle": "用代数研究几何",
+      "bundle": "g13-u1-l4.bundle.js",
+      "freshness": "g13-u1-l4.freshness.json",
+      "pages": [
+        {
+          "id": "g13-u1-l4-p1",
+          "title": "k、b 两个旋钮"
+        },
+        {
+          "id": "g13-u1-l4-p2",
+          "title": "斜截式：y=kx+b"
+        },
+        {
+          "id": "g13-u1-l4-p3",
+          "title": "点斜式：过一点、有斜率，直线被锁死"
+        },
+        {
+          "id": "g13-u1-l4-p4",
+          "title": "例题：两点定直线"
+        }
+      ]
+    },
+    {
+      "id": "g13-u1-l5",
+      "title": "两直线的位置关系",
+      "chapterId": "g13",
+      "chapterTitle": "解析几何入门",
+      "unitId": "g13-u1",
+      "unitTitle": "用代数研究几何",
+      "bundle": "g13-u1-l5.bundle.js",
+      "freshness": "g13-u1-l5.freshness.json",
+      "pages": [
+        {
+          "id": "g13-u1-l5-p1",
+          "title": "平行 vs 垂直：看 k"
+        },
+        {
+          "id": "g13-u1-l5-p2",
+          "title": "平行：k₁=k₂"
+        },
+        {
+          "id": "g13-u1-l5-p3",
+          "title": "慢放证明：k₁k₂=−1"
+        },
+        {
+          "id": "g13-u1-l5-p4",
+          "title": "垂直：k₁k₂=−1"
+        }
+      ]
+    },
+    {
+      "id": "g13-u1-l6",
+      "title": "抛物线的几何定义",
+      "chapterId": "g13",
+      "chapterTitle": "解析几何入门",
+      "unitId": "g13-u1",
+      "unitTitle": "用代数研究几何",
+      "bundle": "g13-u1-l6.bundle.js",
+      "freshness": "g13-u1-l6.freshness.json",
+      "pages": [
+        {
+          "id": "g13-u1-l6-p1",
+          "title": "焦点离准线越远，抛物线越“胖”"
+        },
+        {
+          "id": "g13-u1-l6-p2",
+          "title": "抛物线的出生证明"
+        },
+        {
+          "id": "g13-u1-l6-p3",
+          "title": "慢放推导：从等距到 y=ax²"
+        },
+        {
+          "id": "g13-u1-l6-p4",
+          "title": "y=ax² 的“出生”复盘"
+        },
+        {
+          "id": "g13-u1-l6-p5",
+          "title": "例题：已知焦点写方程"
+        }
+      ]
+    },
+    {
+      "id": "g13-u1-l7",
+      "title": "圆的方程",
+      "chapterId": "g13",
+      "chapterTitle": "解析几何入门",
+      "unitId": "g13-u1",
+      "unitTitle": "用代数研究几何",
+      "bundle": "g13-u1-l7.bundle.js",
+      "freshness": "g13-u1-l7.freshness.json",
+      "pages": [
+        {
+          "id": "g13-u1-l7-p1",
+          "title": "圆心拖到哪里，方程跟到哪里"
+        },
+        {
+          "id": "g13-u1-l7-p2",
+          "title": "圆的方程：平移推广"
+        },
+        {
+          "id": "g13-u1-l7-p3",
+          "title": "例题：写方程，判点位"
+        }
+      ]
+    },
+    {
+      "id": "g13-u1-l8",
+      "title": "切线斜率与导数",
+      "chapterId": "g13",
+      "chapterTitle": "解析几何入门",
+      "unitId": "g13-u1",
+      "unitTitle": "用代数研究几何",
+      "bundle": "g13-u1-l8.bundle.js",
+      "freshness": "g13-u1-l8.freshness.json",
+      "pages": [
+        {
+          "id": "g13-u1-l8-p1",
+          "title": "割线逼近切线"
+        },
+        {
+          "id": "g13-u1-l8-p2",
+          "title": "切线斜率：该点处的“变化率”"
+        },
+        {
+          "id": "g13-u1-l8-p3",
+          "title": "回声：y=x² 在 (1,1) 处"
+        }
+      ]
+    },
+    {
+      "id": "g13-u1-l9",
+      "title": "全书总结：数与形的统一",
+      "chapterId": "g13",
+      "chapterTitle": "解析几何入门",
+      "unitId": "g13-u1",
+      "unitTitle": "用代数研究几何",
+      "bundle": "g13-u1-l9.bundle.js",
+      "freshness": "g13-u1-l9.freshness.json",
+      "pages": [
+        {
+          "id": "g13-u1-l9-p1",
+          "title": "数与形：同一问题的两种说法"
+        },
+        {
+          "id": "g13-u1-l9-p2",
+          "title": "全书综合：6 道题"
         }
       ]
     }
