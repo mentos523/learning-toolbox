@@ -1,5 +1,5 @@
 window.MATH_MANIFEST = {
-  "generatedAt": "2026-10-25T06:14:58.207Z",
+  "generatedAt": "2026-10-25T06:42:45.437Z",
   "chapters": [
     {
       "id": "ch00",
@@ -1302,6 +1302,272 @@ window.MATH_MANIFEST = {
           ]
         }
       ]
+    },
+    {
+      "id": "ch06",
+      "title": "函数与一次函数",
+      "units": [
+        {
+          "id": "ch06-u0",
+          "title": "过渡：从方程到函数",
+          "lessons": [
+            {
+              "id": "ch06-u0-l1",
+              "title": "静与动：为什么需要函数",
+              "chapterId": "ch06",
+              "chapterTitle": "函数与一次函数",
+              "unitId": "ch06-u0",
+              "unitTitle": "过渡：从方程到函数",
+              "bundle": "ch06-u0-l1.bundle.js",
+              "freshness": "ch06-u0-l1.freshness.json",
+              "pages": [
+                {
+                  "id": "ch06-u0-l1-p1",
+                  "title": "方程求解，函数看关系"
+                },
+                {
+                  "id": "ch06-u0-l1-p1b",
+                  "title": "方程求数，函数看关系"
+                },
+                {
+                  "id": "ch06-u0-l1-p2",
+                  "title": "机器的工作记录连成线"
+                },
+                {
+                  "id": "ch06-u0-l1-p2b",
+                  "title": "图像：工作记录连成线"
+                }
+              ]
+            },
+            {
+              "id": "ch06-u0-l2",
+              "title": "平面直角坐标系",
+              "chapterId": "ch06",
+              "chapterTitle": "函数与一次函数",
+              "unitId": "ch06-u0",
+              "unitTitle": "过渡：从方程到函数",
+              "bundle": "ch06-u0-l2.bundle.js",
+              "freshness": "ch06-u0-l2.freshness.json",
+              "pages": [
+                {
+                  "id": "ch06-u0-l2-p1",
+                  "title": "两条数轴搭成十字"
+                },
+                {
+                  "id": "ch06-u0-l2-p2",
+                  "title": "有序数对：先横后纵"
+                },
+                {
+                  "id": "ch06-u0-l2-p2b",
+                  "title": "读坐标，描点：按图索骥"
+                },
+                {
+                  "id": "ch06-u0-l2-p3",
+                  "title": "四个象限：看正负"
+                },
+                {
+                  "id": "ch06-u0-l2-p3b",
+                  "title": "象限判读：三步走"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch06-u1",
+          "title": "函数的概念",
+          "lessons": [
+            {
+              "id": "ch06-u1-l1",
+              "title": "变量与常量",
+              "chapterId": "ch06",
+              "chapterTitle": "函数与一次函数",
+              "unitId": "ch06-u1",
+              "unitTitle": "函数的概念",
+              "bundle": "ch06-u1-l1.bundle.js",
+              "freshness": "ch06-u1-l1.freshness.json",
+              "pages": [
+                {
+                  "id": "ch06-u1-l1-p1",
+                  "title": "会动的数与不会动的数"
+                },
+                {
+                  "id": "ch06-u1-l1-p1b",
+                  "title": "变量常量：看语境"
+                }
+              ]
+            },
+            {
+              "id": "ch06-u1-l2",
+              "title": "函数的定义",
+              "chapterId": "ch06",
+              "chapterTitle": "函数与一次函数",
+              "unitId": "ch06-u1",
+              "unitTitle": "函数的概念",
+              "bundle": "ch06-u1-l2.bundle.js",
+              "freshness": "ch06-u1-l2.freshness.json",
+              "pages": [
+                {
+                  "id": "ch06-u1-l2-p1",
+                  "title": "每个 x 都有唯一的 y"
+                },
+                {
+                  "id": "ch06-u1-l2-p1b",
+                  "title": "函数：一个 x 一个 y"
+                }
+              ]
+            },
+            {
+              "id": "ch06-u1-l3",
+              "title": "函数的表示法",
+              "chapterId": "ch06",
+              "chapterTitle": "函数与一次函数",
+              "unitId": "ch06-u1",
+              "unitTitle": "函数的概念",
+              "bundle": "ch06-u1-l3.bundle.js",
+              "freshness": "ch06-u1-l3.freshness.json",
+              "pages": [
+                {
+                  "id": "ch06-u1-l3-p1",
+                  "title": "一种关系，三种写法"
+                },
+                {
+                  "id": "ch06-u1-l3-p1b",
+                  "title": "三种表示法：互相翻译"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch06-u2",
+          "title": "一次函数",
+          "lessons": [
+            {
+              "id": "ch06-u2-l1",
+              "title": "正比例函数",
+              "chapterId": "ch06",
+              "chapterTitle": "函数与一次函数",
+              "unitId": "ch06-u2",
+              "unitTitle": "一次函数",
+              "bundle": "ch06-u2-l1.bundle.js",
+              "freshness": "ch06-u2-l1.freshness.json",
+              "pages": [
+                {
+                  "id": "ch06-u2-l1-p1",
+                  "title": "正比例函数的图像：过原点的直线"
+                },
+                {
+                  "id": "ch06-u2-l1-p1b",
+                  "title": "正比例：比值恒定"
+                }
+              ]
+            },
+            {
+              "id": "ch06-u2-l2",
+              "title": "一次函数的图像",
+              "chapterId": "ch06",
+              "chapterTitle": "函数与一次函数",
+              "unitId": "ch06-u2",
+              "unitTitle": "一次函数",
+              "bundle": "ch06-u2-l2.bundle.js",
+              "freshness": "ch06-u2-l2.freshness.json",
+              "pages": [
+                {
+                  "id": "ch06-u2-l2-p1",
+                  "title": "b 让直线上下平移"
+                },
+                {
+                  "id": "ch06-u2-l2-p1b",
+                  "title": "截距 b：交 y 轴于 (0,b)"
+                },
+                {
+                  "id": "ch06-u2-l2-p1g",
+                  "title": "b 平移：直线上下搬家"
+                }
+              ]
+            },
+            {
+              "id": "ch06-u2-l3",
+              "title": "一次函数的性质",
+              "chapterId": "ch06",
+              "chapterTitle": "函数与一次函数",
+              "unitId": "ch06-u2",
+              "unitTitle": "一次函数",
+              "bundle": "ch06-u2-l3.bundle.js",
+              "freshness": "ch06-u2-l3.freshness.json",
+              "pages": [
+                {
+                  "id": "ch06-u2-l3-p1",
+                  "title": "k 定上坡还是下坡"
+                },
+                {
+                  "id": "ch06-u2-l3-p1b",
+                  "title": "增减性：k 说了算"
+                }
+              ]
+            },
+            {
+              "id": "ch06-u2-l4",
+              "title": "一次函数与方程、不等式",
+              "chapterId": "ch06",
+              "chapterTitle": "函数与一次函数",
+              "unitId": "ch06-u2",
+              "unitTitle": "一次函数",
+              "bundle": "ch06-u2-l4.bundle.js",
+              "freshness": "ch06-u2-l4.freshness.json",
+              "pages": [
+                {
+                  "id": "ch06-u2-l4-p1",
+                  "title": "方程不等式的大会师"
+                },
+                {
+                  "id": "ch06-u2-l4-p1b",
+                  "title": "大会师：交点即方程的解"
+                }
+              ]
+            },
+            {
+              "id": "ch06-u2-l5",
+              "title": "本章小结",
+              "chapterId": "ch06",
+              "chapterTitle": "函数与一次函数",
+              "unitId": "ch06-u2",
+              "unitTitle": "一次函数",
+              "bundle": "ch06-u2-l5.bundle.js",
+              "freshness": "ch06-u2-l5.freshness.json",
+              "pages": [
+                {
+                  "id": "ch06-u2-l5-p1",
+                  "title": "一图流：从机器到直线"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch06-ux",
+          "title": "本章习题",
+          "lessons": [
+            {
+              "id": "ch06-ux-l1",
+              "title": "第六章习题",
+              "chapterId": "ch06",
+              "chapterTitle": "函数与一次函数",
+              "unitId": "ch06-ux",
+              "unitTitle": "本章习题",
+              "bundle": "ch06-ux-l1.bundle.js",
+              "freshness": "ch06-ux-l1.freshness.json",
+              "pages": [
+                {
+                  "id": "ch06-ux-l1-p1",
+                  "title": "第六章习题：一次函数"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "lessons": [
@@ -2430,6 +2696,242 @@ window.MATH_MANIFEST = {
         {
           "id": "ch05x-u3-l2-p1",
           "title": "一图流：三条路，一座桥"
+        }
+      ]
+    },
+    {
+      "id": "ch06-u0-l1",
+      "title": "静与动：为什么需要函数",
+      "chapterId": "ch06",
+      "chapterTitle": "函数与一次函数",
+      "unitId": "ch06-u0",
+      "unitTitle": "过渡：从方程到函数",
+      "bundle": "ch06-u0-l1.bundle.js",
+      "freshness": "ch06-u0-l1.freshness.json",
+      "pages": [
+        {
+          "id": "ch06-u0-l1-p1",
+          "title": "方程求解，函数看关系"
+        },
+        {
+          "id": "ch06-u0-l1-p1b",
+          "title": "方程求数，函数看关系"
+        },
+        {
+          "id": "ch06-u0-l1-p2",
+          "title": "机器的工作记录连成线"
+        },
+        {
+          "id": "ch06-u0-l1-p2b",
+          "title": "图像：工作记录连成线"
+        }
+      ]
+    },
+    {
+      "id": "ch06-u0-l2",
+      "title": "平面直角坐标系",
+      "chapterId": "ch06",
+      "chapterTitle": "函数与一次函数",
+      "unitId": "ch06-u0",
+      "unitTitle": "过渡：从方程到函数",
+      "bundle": "ch06-u0-l2.bundle.js",
+      "freshness": "ch06-u0-l2.freshness.json",
+      "pages": [
+        {
+          "id": "ch06-u0-l2-p1",
+          "title": "两条数轴搭成十字"
+        },
+        {
+          "id": "ch06-u0-l2-p2",
+          "title": "有序数对：先横后纵"
+        },
+        {
+          "id": "ch06-u0-l2-p2b",
+          "title": "读坐标，描点：按图索骥"
+        },
+        {
+          "id": "ch06-u0-l2-p3",
+          "title": "四个象限：看正负"
+        },
+        {
+          "id": "ch06-u0-l2-p3b",
+          "title": "象限判读：三步走"
+        }
+      ]
+    },
+    {
+      "id": "ch06-u1-l1",
+      "title": "变量与常量",
+      "chapterId": "ch06",
+      "chapterTitle": "函数与一次函数",
+      "unitId": "ch06-u1",
+      "unitTitle": "函数的概念",
+      "bundle": "ch06-u1-l1.bundle.js",
+      "freshness": "ch06-u1-l1.freshness.json",
+      "pages": [
+        {
+          "id": "ch06-u1-l1-p1",
+          "title": "会动的数与不会动的数"
+        },
+        {
+          "id": "ch06-u1-l1-p1b",
+          "title": "变量常量：看语境"
+        }
+      ]
+    },
+    {
+      "id": "ch06-u1-l2",
+      "title": "函数的定义",
+      "chapterId": "ch06",
+      "chapterTitle": "函数与一次函数",
+      "unitId": "ch06-u1",
+      "unitTitle": "函数的概念",
+      "bundle": "ch06-u1-l2.bundle.js",
+      "freshness": "ch06-u1-l2.freshness.json",
+      "pages": [
+        {
+          "id": "ch06-u1-l2-p1",
+          "title": "每个 x 都有唯一的 y"
+        },
+        {
+          "id": "ch06-u1-l2-p1b",
+          "title": "函数：一个 x 一个 y"
+        }
+      ]
+    },
+    {
+      "id": "ch06-u1-l3",
+      "title": "函数的表示法",
+      "chapterId": "ch06",
+      "chapterTitle": "函数与一次函数",
+      "unitId": "ch06-u1",
+      "unitTitle": "函数的概念",
+      "bundle": "ch06-u1-l3.bundle.js",
+      "freshness": "ch06-u1-l3.freshness.json",
+      "pages": [
+        {
+          "id": "ch06-u1-l3-p1",
+          "title": "一种关系，三种写法"
+        },
+        {
+          "id": "ch06-u1-l3-p1b",
+          "title": "三种表示法：互相翻译"
+        }
+      ]
+    },
+    {
+      "id": "ch06-u2-l1",
+      "title": "正比例函数",
+      "chapterId": "ch06",
+      "chapterTitle": "函数与一次函数",
+      "unitId": "ch06-u2",
+      "unitTitle": "一次函数",
+      "bundle": "ch06-u2-l1.bundle.js",
+      "freshness": "ch06-u2-l1.freshness.json",
+      "pages": [
+        {
+          "id": "ch06-u2-l1-p1",
+          "title": "正比例函数的图像：过原点的直线"
+        },
+        {
+          "id": "ch06-u2-l1-p1b",
+          "title": "正比例：比值恒定"
+        }
+      ]
+    },
+    {
+      "id": "ch06-u2-l2",
+      "title": "一次函数的图像",
+      "chapterId": "ch06",
+      "chapterTitle": "函数与一次函数",
+      "unitId": "ch06-u2",
+      "unitTitle": "一次函数",
+      "bundle": "ch06-u2-l2.bundle.js",
+      "freshness": "ch06-u2-l2.freshness.json",
+      "pages": [
+        {
+          "id": "ch06-u2-l2-p1",
+          "title": "b 让直线上下平移"
+        },
+        {
+          "id": "ch06-u2-l2-p1b",
+          "title": "截距 b：交 y 轴于 (0,b)"
+        },
+        {
+          "id": "ch06-u2-l2-p1g",
+          "title": "b 平移：直线上下搬家"
+        }
+      ]
+    },
+    {
+      "id": "ch06-u2-l3",
+      "title": "一次函数的性质",
+      "chapterId": "ch06",
+      "chapterTitle": "函数与一次函数",
+      "unitId": "ch06-u2",
+      "unitTitle": "一次函数",
+      "bundle": "ch06-u2-l3.bundle.js",
+      "freshness": "ch06-u2-l3.freshness.json",
+      "pages": [
+        {
+          "id": "ch06-u2-l3-p1",
+          "title": "k 定上坡还是下坡"
+        },
+        {
+          "id": "ch06-u2-l3-p1b",
+          "title": "增减性：k 说了算"
+        }
+      ]
+    },
+    {
+      "id": "ch06-u2-l4",
+      "title": "一次函数与方程、不等式",
+      "chapterId": "ch06",
+      "chapterTitle": "函数与一次函数",
+      "unitId": "ch06-u2",
+      "unitTitle": "一次函数",
+      "bundle": "ch06-u2-l4.bundle.js",
+      "freshness": "ch06-u2-l4.freshness.json",
+      "pages": [
+        {
+          "id": "ch06-u2-l4-p1",
+          "title": "方程不等式的大会师"
+        },
+        {
+          "id": "ch06-u2-l4-p1b",
+          "title": "大会师：交点即方程的解"
+        }
+      ]
+    },
+    {
+      "id": "ch06-u2-l5",
+      "title": "本章小结",
+      "chapterId": "ch06",
+      "chapterTitle": "函数与一次函数",
+      "unitId": "ch06-u2",
+      "unitTitle": "一次函数",
+      "bundle": "ch06-u2-l5.bundle.js",
+      "freshness": "ch06-u2-l5.freshness.json",
+      "pages": [
+        {
+          "id": "ch06-u2-l5-p1",
+          "title": "一图流：从机器到直线"
+        }
+      ]
+    },
+    {
+      "id": "ch06-ux-l1",
+      "title": "第六章习题",
+      "chapterId": "ch06",
+      "chapterTitle": "函数与一次函数",
+      "unitId": "ch06-ux",
+      "unitTitle": "本章习题",
+      "bundle": "ch06-ux-l1.bundle.js",
+      "freshness": "ch06-ux-l1.freshness.json",
+      "pages": [
+        {
+          "id": "ch06-ux-l1-p1",
+          "title": "第六章习题：一次函数"
         }
       ]
     }

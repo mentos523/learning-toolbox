@@ -1,0 +1,65 @@
+window.MATH_BUNDLES = window.MATH_BUNDLES || {};
+window.MATH_BUNDLES["ch06-ux-l1"] = {
+  "lessonId": "ch06-ux-l1",
+  "lessonTitle": "第六章习题",
+  "chapterId": "ch06",
+  "pages": [
+    {
+      "id": "ch06-ux-l1-p1",
+      "title": "第六章习题：一次函数",
+      "concept": "本章习题",
+      "formulas": [
+        {
+          "id": "f1",
+          "latex": "2x - 6 = 0",
+          "translation": "第 6 题：x=3；直线 y=2x−6 交 x 轴于 (3,0)"
+        }
+      ],
+      "interaction": {
+        "params": {
+          "source": {
+            "initial": 3,
+            "label": "x",
+            "max": 6,
+            "min": 0,
+            "step": 0.5
+          },
+          "views": [
+            {
+              "expr": "2*x - 6",
+              "kind": "readout",
+              "label": "y"
+            },
+            {
+              "kind": "point",
+              "xExpr": "x",
+              "yExpr": "2*x - 6"
+            }
+          ]
+        },
+        "type": "linked-dashboard"
+      },
+      "auxInteraction": null,
+      "hints": [
+        "1．y=4x（x>0）中，变量是____，常量是____。",
+        "2．y=2x−5 的图像与 y 轴交于点____。",
+        "3．y=−3x+1 中，y 随 x 增大而____（增大/减小）。",
+        "4．y=3x+2：当 x=4 时 y=____。",
+        "5．直线 y=x+1 与 y=x−2 的位置关系是____（平行/相交）。",
+        "6．解方程 2x−6=0，并说出直线 y=2x−6 与 x 轴交点的横坐标。"
+      ],
+      "examples": [
+        {
+          "figure": "核对答案",
+          "text": "答案：1．x、y；4；2．(0,−5)；3．减小；4．14；5．平行；6．x=3，交点横坐标 3"
+        },
+        {
+          "figure": "错因解析",
+          "text": "1．变化的是变量 x、y；不变的是常量 4。2．与 y 轴交点：令 x=0，y=−5，得 (0,−5)。3．k=−3<0：k 为负，y 随 x 增大而减小。4．代入：y=3×4+2=14。5．k 都是 1：k 相同则平行。6．2x−6=0 得 x=3；方程的解就是直线与 x 轴交点的横坐标。"
+        }
+      ],
+      "prev": "ch06-u2-l5-p1",
+      "next": null
+    }
+  ]
+};
