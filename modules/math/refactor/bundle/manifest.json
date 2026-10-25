@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-25T07:51:35.284Z",
+  "generatedAt": "2026-10-25T08:24:33.393Z",
   "chapters": [
     {
       "id": "ch00",
@@ -2082,6 +2082,206 @@
           ]
         }
       ]
+    },
+    {
+      "id": "ch09",
+      "title": "数列",
+      "units": [
+        {
+          "id": "ch09-u1",
+          "title": "数列的概念",
+          "lessons": [
+            {
+              "id": "ch09-u1-l1",
+              "title": "数列的定义",
+              "chapterId": "ch09",
+              "chapterTitle": "数列",
+              "unitId": "ch09-u1",
+              "unitTitle": "数列的概念",
+              "bundle": "ch09-u1-l1.bundle.js",
+              "freshness": "ch09-u1-l1.freshness.json",
+              "pages": [
+                {
+                  "id": "ch09-u1-l1-p1",
+                  "title": "数列：一组排好顺序的数"
+                },
+                {
+                  "id": "ch09-u1-l1-p1b",
+                  "title": "数列：有序号的一串数"
+                }
+              ]
+            },
+            {
+              "id": "ch09-u1-l2",
+              "title": "数列的表示",
+              "chapterId": "ch09",
+              "chapterTitle": "数列",
+              "unitId": "ch09-u1",
+              "unitTitle": "数列的概念",
+              "bundle": "ch09-u1-l2.bundle.js",
+              "freshness": "ch09-u1-l2.freshness.json",
+              "pages": [
+                {
+                  "id": "ch09-u1-l2-p1",
+                  "title": "通项公式：用 n 写出第 n 项"
+                },
+                {
+                  "id": "ch09-u1-l2-p1b",
+                  "title": "通项公式：项的计算器"
+                },
+                {
+                  "id": "ch09-u1-l2-p2",
+                  "title": "递推公式：前一项推出后一项"
+                },
+                {
+                  "id": "ch09-u1-l2-p2b",
+                  "title": "递推：首项加规则"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch09-u2",
+          "title": "等差与等比数列",
+          "lessons": [
+            {
+              "id": "ch09-u2-l1",
+              "title": "等差数列",
+              "chapterId": "ch09",
+              "chapterTitle": "数列",
+              "unitId": "ch09-u2",
+              "unitTitle": "等差与等比数列",
+              "bundle": "ch09-u2-l1.bundle.js",
+              "freshness": "ch09-u2-l1.freshness.json",
+              "pages": [
+                {
+                  "id": "ch09-u2-l1-p1",
+                  "title": "等差数列：每次加同一个数"
+                },
+                {
+                  "id": "ch09-u2-l1-p1b",
+                  "title": "等差数列：公差是步伐"
+                },
+                {
+                  "id": "ch09-u2-l1-p2",
+                  "title": "公差的威力：拖 d 看第 10 项"
+                },
+                {
+                  "id": "ch09-u2-l1-p2b",
+                  "title": "公差 d：走了几步"
+                }
+              ]
+            },
+            {
+              "id": "ch09-u2-l2",
+              "title": "等差数列求和",
+              "chapterId": "ch09",
+              "chapterTitle": "数列",
+              "unitId": "ch09-u2",
+              "unitTitle": "等差与等比数列",
+              "bundle": "ch09-u2-l2.bundle.js",
+              "freshness": "ch09-u2-l2.freshness.json",
+              "pages": [
+                {
+                  "id": "ch09-u2-l2-p1",
+                  "title": "高斯配对：等差数列求和"
+                },
+                {
+                  "id": "ch09-u2-l2-p1b",
+                  "title": "高斯配对：首尾相加"
+                }
+              ]
+            },
+            {
+              "id": "ch09-u2-l3",
+              "title": "等比数列",
+              "chapterId": "ch09",
+              "chapterTitle": "数列",
+              "unitId": "ch09-u2",
+              "unitTitle": "等差与等比数列",
+              "bundle": "ch09-u2-l3.bundle.js",
+              "freshness": "ch09-u2-l3.freshness.json",
+              "pages": [
+                {
+                  "id": "ch09-u2-l3-p1",
+                  "title": "等比数列：每次乘同一个数"
+                },
+                {
+                  "id": "ch09-u2-l3-p1b",
+                  "title": "等比数列：公比是倍数"
+                }
+              ]
+            },
+            {
+              "id": "ch09-u2-l4",
+              "title": "等比数列求和",
+              "chapterId": "ch09",
+              "chapterTitle": "数列",
+              "unitId": "ch09-u2",
+              "unitTitle": "等差与等比数列",
+              "bundle": "ch09-u2-l4.bundle.js",
+              "freshness": "ch09-u2-l4.freshness.json",
+              "pages": [
+                {
+                  "id": "ch09-u2-l4-p1",
+                  "title": "错位相减：等比数列求和"
+                },
+                {
+                  "id": "ch09-u2-l4-p1b",
+                  "title": "错位相减：中间全消"
+                },
+                {
+                  "id": "ch09-u2-l4-p2",
+                  "title": "棋盘麦粒：指数爆炸的故事"
+                },
+                {
+                  "id": "ch09-u2-l4-p2b",
+                  "title": "指数爆炸：翻一番的威力"
+                }
+              ]
+            },
+            {
+              "id": "ch09-u2-l5",
+              "title": "本章小结",
+              "chapterId": "ch09",
+              "chapterTitle": "数列",
+              "unitId": "ch09-u2",
+              "unitTitle": "等差与等比数列",
+              "bundle": "ch09-u2-l5.bundle.js",
+              "freshness": "ch09-u2-l5.freshness.json",
+              "pages": [
+                {
+                  "id": "ch09-u2-l5-p1",
+                  "title": "本章小结：离散的函数"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch09-ux",
+          "title": "本章习题",
+          "lessons": [
+            {
+              "id": "ch09-ux-l1",
+              "title": "第九章习题",
+              "chapterId": "ch09",
+              "chapterTitle": "数列",
+              "unitId": "ch09-ux",
+              "unitTitle": "本章习题",
+              "bundle": "ch09-ux-l1.bundle.js",
+              "freshness": "ch09-ux-l1.freshness.json",
+              "pages": [
+                {
+                  "id": "ch09-ux-l1-p1",
+                  "title": "第九章习题：数列"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "lessons": [
@@ -3906,6 +4106,182 @@
         {
           "id": "ch08-ux-l1-p1",
           "title": "第八章习题：指数对数"
+        }
+      ]
+    },
+    {
+      "id": "ch09-u1-l1",
+      "title": "数列的定义",
+      "chapterId": "ch09",
+      "chapterTitle": "数列",
+      "unitId": "ch09-u1",
+      "unitTitle": "数列的概念",
+      "bundle": "ch09-u1-l1.bundle.js",
+      "freshness": "ch09-u1-l1.freshness.json",
+      "pages": [
+        {
+          "id": "ch09-u1-l1-p1",
+          "title": "数列：一组排好顺序的数"
+        },
+        {
+          "id": "ch09-u1-l1-p1b",
+          "title": "数列：有序号的一串数"
+        }
+      ]
+    },
+    {
+      "id": "ch09-u1-l2",
+      "title": "数列的表示",
+      "chapterId": "ch09",
+      "chapterTitle": "数列",
+      "unitId": "ch09-u1",
+      "unitTitle": "数列的概念",
+      "bundle": "ch09-u1-l2.bundle.js",
+      "freshness": "ch09-u1-l2.freshness.json",
+      "pages": [
+        {
+          "id": "ch09-u1-l2-p1",
+          "title": "通项公式：用 n 写出第 n 项"
+        },
+        {
+          "id": "ch09-u1-l2-p1b",
+          "title": "通项公式：项的计算器"
+        },
+        {
+          "id": "ch09-u1-l2-p2",
+          "title": "递推公式：前一项推出后一项"
+        },
+        {
+          "id": "ch09-u1-l2-p2b",
+          "title": "递推：首项加规则"
+        }
+      ]
+    },
+    {
+      "id": "ch09-u2-l1",
+      "title": "等差数列",
+      "chapterId": "ch09",
+      "chapterTitle": "数列",
+      "unitId": "ch09-u2",
+      "unitTitle": "等差与等比数列",
+      "bundle": "ch09-u2-l1.bundle.js",
+      "freshness": "ch09-u2-l1.freshness.json",
+      "pages": [
+        {
+          "id": "ch09-u2-l1-p1",
+          "title": "等差数列：每次加同一个数"
+        },
+        {
+          "id": "ch09-u2-l1-p1b",
+          "title": "等差数列：公差是步伐"
+        },
+        {
+          "id": "ch09-u2-l1-p2",
+          "title": "公差的威力：拖 d 看第 10 项"
+        },
+        {
+          "id": "ch09-u2-l1-p2b",
+          "title": "公差 d：走了几步"
+        }
+      ]
+    },
+    {
+      "id": "ch09-u2-l2",
+      "title": "等差数列求和",
+      "chapterId": "ch09",
+      "chapterTitle": "数列",
+      "unitId": "ch09-u2",
+      "unitTitle": "等差与等比数列",
+      "bundle": "ch09-u2-l2.bundle.js",
+      "freshness": "ch09-u2-l2.freshness.json",
+      "pages": [
+        {
+          "id": "ch09-u2-l2-p1",
+          "title": "高斯配对：等差数列求和"
+        },
+        {
+          "id": "ch09-u2-l2-p1b",
+          "title": "高斯配对：首尾相加"
+        }
+      ]
+    },
+    {
+      "id": "ch09-u2-l3",
+      "title": "等比数列",
+      "chapterId": "ch09",
+      "chapterTitle": "数列",
+      "unitId": "ch09-u2",
+      "unitTitle": "等差与等比数列",
+      "bundle": "ch09-u2-l3.bundle.js",
+      "freshness": "ch09-u2-l3.freshness.json",
+      "pages": [
+        {
+          "id": "ch09-u2-l3-p1",
+          "title": "等比数列：每次乘同一个数"
+        },
+        {
+          "id": "ch09-u2-l3-p1b",
+          "title": "等比数列：公比是倍数"
+        }
+      ]
+    },
+    {
+      "id": "ch09-u2-l4",
+      "title": "等比数列求和",
+      "chapterId": "ch09",
+      "chapterTitle": "数列",
+      "unitId": "ch09-u2",
+      "unitTitle": "等差与等比数列",
+      "bundle": "ch09-u2-l4.bundle.js",
+      "freshness": "ch09-u2-l4.freshness.json",
+      "pages": [
+        {
+          "id": "ch09-u2-l4-p1",
+          "title": "错位相减：等比数列求和"
+        },
+        {
+          "id": "ch09-u2-l4-p1b",
+          "title": "错位相减：中间全消"
+        },
+        {
+          "id": "ch09-u2-l4-p2",
+          "title": "棋盘麦粒：指数爆炸的故事"
+        },
+        {
+          "id": "ch09-u2-l4-p2b",
+          "title": "指数爆炸：翻一番的威力"
+        }
+      ]
+    },
+    {
+      "id": "ch09-u2-l5",
+      "title": "本章小结",
+      "chapterId": "ch09",
+      "chapterTitle": "数列",
+      "unitId": "ch09-u2",
+      "unitTitle": "等差与等比数列",
+      "bundle": "ch09-u2-l5.bundle.js",
+      "freshness": "ch09-u2-l5.freshness.json",
+      "pages": [
+        {
+          "id": "ch09-u2-l5-p1",
+          "title": "本章小结：离散的函数"
+        }
+      ]
+    },
+    {
+      "id": "ch09-ux-l1",
+      "title": "第九章习题",
+      "chapterId": "ch09",
+      "chapterTitle": "数列",
+      "unitId": "ch09-ux",
+      "unitTitle": "本章习题",
+      "bundle": "ch09-ux-l1.bundle.js",
+      "freshness": "ch09-ux-l1.freshness.json",
+      "pages": [
+        {
+          "id": "ch09-ux-l1-p1",
+          "title": "第九章习题：数列"
         }
       ]
     }
