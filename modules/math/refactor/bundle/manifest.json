@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-25T10:09:17.707Z",
+  "generatedAt": "2026-10-25T10:41:50.488Z",
   "chapters": [
     {
       "id": "ch00",
@@ -3004,6 +3004,106 @@
           ]
         }
       ]
+    },
+    {
+      "id": "g00",
+      "title": "导论——几何是什么",
+      "units": [
+        {
+          "id": "g00-u1",
+          "title": "几何的直觉",
+          "lessons": [
+            {
+              "id": "g00-u1-l1",
+              "title": "几何是什么：从丈量土地说起",
+              "chapterId": "g00",
+              "chapterTitle": "导论——几何是什么",
+              "unitId": "g00-u1",
+              "unitTitle": "几何的直觉",
+              "bundle": "g00-u1-l1.bundle.js",
+              "freshness": "g00-u1-l1.freshness.json",
+              "pages": [
+                {
+                  "id": "g00-u1-l1-p1",
+                  "title": "几何：从丈量土地开始"
+                },
+                {
+                  "id": "g00-u1-l1-p2",
+                  "title": "同一件几何衣，多件生活外衣"
+                }
+              ]
+            },
+            {
+              "id": "g00-u1-l2",
+              "title": "点、线、面、体：维度的直觉",
+              "chapterId": "g00",
+              "chapterTitle": "导论——几何是什么",
+              "unitId": "g00-u1",
+              "unitTitle": "几何的直觉",
+              "bundle": "g00-u1-l2.bundle.js",
+              "freshness": "g00-u1-l2.freshness.json",
+              "pages": [
+                {
+                  "id": "g00-u1-l2-p1",
+                  "title": "点动成线，线动成面，面动成体"
+                },
+                {
+                  "id": "g00-u1-l2-p2",
+                  "title": "拖一拖：变的是大小，不变的是“面”"
+                }
+              ]
+            },
+            {
+              "id": "g00-u1-l3",
+              "title": "图形会说话：直观证明",
+              "chapterId": "g00",
+              "chapterTitle": "导论——几何是什么",
+              "unitId": "g00-u1",
+              "unitTitle": "几何的直觉",
+              "bundle": "g00-u1-l3.bundle.js",
+              "freshness": "g00-u1-l3.freshness.json",
+              "pages": [
+                {
+                  "id": "g00-u1-l3-p1",
+                  "title": "三个角拼一拼，会发生什么？"
+                },
+                {
+                  "id": "g00-u1-l3-p2",
+                  "title": "亲手拼一次：撕角拼平角"
+                },
+                {
+                  "id": "g00-u1-l3-p3",
+                  "title": "拼图为什么算证明？"
+                }
+              ]
+            },
+            {
+              "id": "g00-u1-l4",
+              "title": "几何与代数的握手",
+              "chapterId": "g00",
+              "chapterTitle": "导论——几何是什么",
+              "unitId": "g00-u1",
+              "unitTitle": "几何的直觉",
+              "bundle": "g00-u1-l4.bundle.js",
+              "freshness": "g00-u1-l4.freshness.json",
+              "pages": [
+                {
+                  "id": "g00-u1-l4-p1",
+                  "title": "同一个 x²，两种样子"
+                },
+                {
+                  "id": "g00-u1-l4-p2",
+                  "title": "把未知数画成一条线段"
+                },
+                {
+                  "id": "g00-u1-l4-p3",
+                  "title": "导论小测：5 道题"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "lessons": [
@@ -5636,6 +5736,94 @@
         {
           "id": "ch12-ux-l1-p1",
           "title": "第十二章习题：定积分"
+        }
+      ]
+    },
+    {
+      "id": "g00-u1-l1",
+      "title": "几何是什么：从丈量土地说起",
+      "chapterId": "g00",
+      "chapterTitle": "导论——几何是什么",
+      "unitId": "g00-u1",
+      "unitTitle": "几何的直觉",
+      "bundle": "g00-u1-l1.bundle.js",
+      "freshness": "g00-u1-l1.freshness.json",
+      "pages": [
+        {
+          "id": "g00-u1-l1-p1",
+          "title": "几何：从丈量土地开始"
+        },
+        {
+          "id": "g00-u1-l1-p2",
+          "title": "同一件几何衣，多件生活外衣"
+        }
+      ]
+    },
+    {
+      "id": "g00-u1-l2",
+      "title": "点、线、面、体：维度的直觉",
+      "chapterId": "g00",
+      "chapterTitle": "导论——几何是什么",
+      "unitId": "g00-u1",
+      "unitTitle": "几何的直觉",
+      "bundle": "g00-u1-l2.bundle.js",
+      "freshness": "g00-u1-l2.freshness.json",
+      "pages": [
+        {
+          "id": "g00-u1-l2-p1",
+          "title": "点动成线，线动成面，面动成体"
+        },
+        {
+          "id": "g00-u1-l2-p2",
+          "title": "拖一拖：变的是大小，不变的是“面”"
+        }
+      ]
+    },
+    {
+      "id": "g00-u1-l3",
+      "title": "图形会说话：直观证明",
+      "chapterId": "g00",
+      "chapterTitle": "导论——几何是什么",
+      "unitId": "g00-u1",
+      "unitTitle": "几何的直觉",
+      "bundle": "g00-u1-l3.bundle.js",
+      "freshness": "g00-u1-l3.freshness.json",
+      "pages": [
+        {
+          "id": "g00-u1-l3-p1",
+          "title": "三个角拼一拼，会发生什么？"
+        },
+        {
+          "id": "g00-u1-l3-p2",
+          "title": "亲手拼一次：撕角拼平角"
+        },
+        {
+          "id": "g00-u1-l3-p3",
+          "title": "拼图为什么算证明？"
+        }
+      ]
+    },
+    {
+      "id": "g00-u1-l4",
+      "title": "几何与代数的握手",
+      "chapterId": "g00",
+      "chapterTitle": "导论——几何是什么",
+      "unitId": "g00-u1",
+      "unitTitle": "几何的直觉",
+      "bundle": "g00-u1-l4.bundle.js",
+      "freshness": "g00-u1-l4.freshness.json",
+      "pages": [
+        {
+          "id": "g00-u1-l4-p1",
+          "title": "同一个 x²，两种样子"
+        },
+        {
+          "id": "g00-u1-l4-p2",
+          "title": "把未知数画成一条线段"
+        },
+        {
+          "id": "g00-u1-l4-p3",
+          "title": "导论小测：5 道题"
         }
       ]
     }
