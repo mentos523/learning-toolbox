@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-25T15:55:41.489Z",
+  "generatedAt": "2026-10-25T16:25:00.734Z",
   "chapters": [
     {
       "id": "ch00",
@@ -5064,6 +5064,278 @@
           ]
         }
       ]
+    },
+    {
+      "id": "g11",
+      "title": "面积与体积",
+      "units": [
+        {
+          "id": "g11-u1",
+          "title": "面积与体积",
+          "lessons": [
+            {
+              "id": "g11-u1-l1",
+              "title": "矩形与正方形面积",
+              "chapterId": "g11",
+              "chapterTitle": "面积与体积",
+              "unitId": "g11-u1",
+              "unitTitle": "面积与体积",
+              "bundle": "g11-u1-l1.bundle.js",
+              "freshness": "g11-u1-l1.freshness.json",
+              "pages": [
+                {
+                  "id": "g11-u1-l1-p1",
+                  "title": "数格子：面积的单位"
+                },
+                {
+                  "id": "g11-u1-l1-p2",
+                  "title": "矩形面积：长乘宽"
+                },
+                {
+                  "id": "g11-u1-l1-p3",
+                  "title": "x² 是一个正方形"
+                },
+                {
+                  "id": "g11-u1-l1-p4",
+                  "title": "分配律的面积读法"
+                }
+              ]
+            },
+            {
+              "id": "g11-u1-l2",
+              "title": "平行四边形面积",
+              "chapterId": "g11",
+              "chapterTitle": "面积与体积",
+              "unitId": "g11-u1",
+              "unitTitle": "面积与体积",
+              "bundle": "g11-u1-l2.bundle.js",
+              "freshness": "g11-u1-l2.freshness.json",
+              "pages": [
+                {
+                  "id": "g11-u1-l2-p1",
+                  "title": "剪一刀，拼成矩形"
+                },
+                {
+                  "id": "g11-u1-l2-p2",
+                  "title": "平行四边形面积公式"
+                },
+                {
+                  "id": "g11-u1-l2-p3",
+                  "title": "伸缩门：高变了"
+                }
+              ]
+            },
+            {
+              "id": "g11-u1-l3",
+              "title": "三角形面积",
+              "chapterId": "g11",
+              "chapterTitle": "面积与体积",
+              "unitId": "g11-u1",
+              "unitTitle": "面积与体积",
+              "bundle": "g11-u1-l3.bundle.js",
+              "freshness": "g11-u1-l3.freshness.json",
+              "pages": [
+                {
+                  "id": "g11-u1-l3-p1",
+                  "title": "两个三角形拼一拼"
+                },
+                {
+                  "id": "g11-u1-l3-p2",
+                  "title": "三角形面积：底乘高除以 2"
+                },
+                {
+                  "id": "g11-u1-l3-p3",
+                  "title": "同底等高，面积相等"
+                },
+                {
+                  "id": "g11-u1-l3-p4",
+                  "title": "算一算三角形面积"
+                }
+              ]
+            },
+            {
+              "id": "g11-u1-l4",
+              "title": "梯形面积",
+              "chapterId": "g11",
+              "chapterTitle": "面积与体积",
+              "unitId": "g11-u1",
+              "unitTitle": "面积与体积",
+              "bundle": "g11-u1-l4.bundle.js",
+              "freshness": "g11-u1-l4.freshness.json",
+              "pages": [
+                {
+                  "id": "g11-u1-l4-p1",
+                  "title": "两个梯形拼一拼"
+                },
+                {
+                  "id": "g11-u1-l4-p2",
+                  "title": "梯形面积公式"
+                },
+                {
+                  "id": "g11-u1-l4-p3",
+                  "title": "算一算梯形面积"
+                }
+              ]
+            },
+            {
+              "id": "g11-u1-l5",
+              "title": "圆的面积：化圆为方",
+              "chapterId": "g11",
+              "chapterTitle": "面积与体积",
+              "unitId": "g11-u1",
+              "unitTitle": "面积与体积",
+              "bundle": "g11-u1-l5.bundle.js",
+              "freshness": "g11-u1-l5.freshness.json",
+              "pages": [
+                {
+                  "id": "g11-u1-l5-p1",
+                  "title": "把圆切成小扇形"
+                },
+                {
+                  "id": "g11-u1-l5-p2",
+                  "title": "圆面积公式的由来"
+                },
+                {
+                  "id": "g11-u1-l5-p3",
+                  "title": "极限：先看到，再算到"
+                },
+                {
+                  "id": "g11-u1-l5-p4",
+                  "title": "算一算圆的面积"
+                }
+              ]
+            },
+            {
+              "id": "g11-u1-l6",
+              "title": "弧长与扇形面积",
+              "chapterId": "g11",
+              "chapterTitle": "面积与体积",
+              "unitId": "g11-u1",
+              "unitTitle": "面积与体积",
+              "bundle": "g11-u1-l6.bundle.js",
+              "freshness": "g11-u1-l6.freshness.json",
+              "pages": [
+                {
+                  "id": "g11-u1-l6-p1",
+                  "title": "圆心角越大，扇形越大"
+                },
+                {
+                  "id": "g11-u1-l6-p2",
+                  "title": "弧长公式"
+                },
+                {
+                  "id": "g11-u1-l6-p3",
+                  "title": "扇形面积公式"
+                },
+                {
+                  "id": "g11-u1-l6-p4",
+                  "title": "算一算弧长和扇形"
+                }
+              ]
+            },
+            {
+              "id": "g11-u1-l7",
+              "title": "柱体的表面积与体积",
+              "chapterId": "g11",
+              "chapterTitle": "面积与体积",
+              "unitId": "g11-u1",
+              "unitTitle": "面积与体积",
+              "bundle": "g11-u1-l7.bundle.js",
+              "freshness": "g11-u1-l7.freshness.json",
+              "pages": [
+                {
+                  "id": "g11-u1-l7-p1",
+                  "title": "纸盒展开：表面积"
+                },
+                {
+                  "id": "g11-u1-l7-p2",
+                  "title": "棱柱的表面积"
+                },
+                {
+                  "id": "g11-u1-l7-p3",
+                  "title": "圆柱侧面展开"
+                },
+                {
+                  "id": "g11-u1-l7-p4",
+                  "title": "圆柱的表面积"
+                },
+                {
+                  "id": "g11-u1-l7-p5",
+                  "title": "柱体体积：底面积乘高"
+                }
+              ]
+            },
+            {
+              "id": "g11-u1-l8",
+              "title": "锥体体积",
+              "chapterId": "g11",
+              "chapterTitle": "面积与体积",
+              "unitId": "g11-u1",
+              "unitTitle": "面积与体积",
+              "bundle": "g11-u1-l8.bundle.js",
+              "freshness": "g11-u1-l8.freshness.json",
+              "pages": [
+                {
+                  "id": "g11-u1-l8-p1",
+                  "title": "沙漏实验：三杯沙"
+                },
+                {
+                  "id": "g11-u1-l8-p2",
+                  "title": "锥体体积公式"
+                },
+                {
+                  "id": "g11-u1-l8-p3",
+                  "title": "算一算锥体体积"
+                }
+              ]
+            },
+            {
+              "id": "g11-u1-l9",
+              "title": "球的表面积与体积",
+              "chapterId": "g11",
+              "chapterTitle": "面积与体积",
+              "unitId": "g11-u1",
+              "unitTitle": "面积与体积",
+              "bundle": "g11-u1-l9.bundle.js",
+              "freshness": "g11-u1-l9.freshness.json",
+              "pages": [
+                {
+                  "id": "g11-u1-l9-p1",
+                  "title": "橘子瓣拼球面"
+                },
+                {
+                  "id": "g11-u1-l9-p2",
+                  "title": "球的表面积和体积"
+                },
+                {
+                  "id": "g11-u1-l9-p3",
+                  "title": "算一算球的体积"
+                }
+              ]
+            },
+            {
+              "id": "g11-u1-l10",
+              "title": "本章小结与习题",
+              "chapterId": "g11",
+              "chapterTitle": "面积与体积",
+              "unitId": "g11-u1",
+              "unitTitle": "面积与体积",
+              "bundle": "g11-u1-l10.bundle.js",
+              "freshness": "g11-u1-l10.freshness.json",
+              "pages": [
+                {
+                  "id": "g11-u1-l10-p1",
+                  "title": "本章小结：面积公式链"
+                },
+                {
+                  "id": "g11-u1-l10-p2",
+                  "title": "本章习题：8 道题"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "lessons": [
@@ -9612,6 +9884,266 @@
         {
           "id": "g10-u1-l7-p2",
           "title": "本章习题：6 道题"
+        }
+      ]
+    },
+    {
+      "id": "g11-u1-l1",
+      "title": "矩形与正方形面积",
+      "chapterId": "g11",
+      "chapterTitle": "面积与体积",
+      "unitId": "g11-u1",
+      "unitTitle": "面积与体积",
+      "bundle": "g11-u1-l1.bundle.js",
+      "freshness": "g11-u1-l1.freshness.json",
+      "pages": [
+        {
+          "id": "g11-u1-l1-p1",
+          "title": "数格子：面积的单位"
+        },
+        {
+          "id": "g11-u1-l1-p2",
+          "title": "矩形面积：长乘宽"
+        },
+        {
+          "id": "g11-u1-l1-p3",
+          "title": "x² 是一个正方形"
+        },
+        {
+          "id": "g11-u1-l1-p4",
+          "title": "分配律的面积读法"
+        }
+      ]
+    },
+    {
+      "id": "g11-u1-l2",
+      "title": "平行四边形面积",
+      "chapterId": "g11",
+      "chapterTitle": "面积与体积",
+      "unitId": "g11-u1",
+      "unitTitle": "面积与体积",
+      "bundle": "g11-u1-l2.bundle.js",
+      "freshness": "g11-u1-l2.freshness.json",
+      "pages": [
+        {
+          "id": "g11-u1-l2-p1",
+          "title": "剪一刀，拼成矩形"
+        },
+        {
+          "id": "g11-u1-l2-p2",
+          "title": "平行四边形面积公式"
+        },
+        {
+          "id": "g11-u1-l2-p3",
+          "title": "伸缩门：高变了"
+        }
+      ]
+    },
+    {
+      "id": "g11-u1-l3",
+      "title": "三角形面积",
+      "chapterId": "g11",
+      "chapterTitle": "面积与体积",
+      "unitId": "g11-u1",
+      "unitTitle": "面积与体积",
+      "bundle": "g11-u1-l3.bundle.js",
+      "freshness": "g11-u1-l3.freshness.json",
+      "pages": [
+        {
+          "id": "g11-u1-l3-p1",
+          "title": "两个三角形拼一拼"
+        },
+        {
+          "id": "g11-u1-l3-p2",
+          "title": "三角形面积：底乘高除以 2"
+        },
+        {
+          "id": "g11-u1-l3-p3",
+          "title": "同底等高，面积相等"
+        },
+        {
+          "id": "g11-u1-l3-p4",
+          "title": "算一算三角形面积"
+        }
+      ]
+    },
+    {
+      "id": "g11-u1-l4",
+      "title": "梯形面积",
+      "chapterId": "g11",
+      "chapterTitle": "面积与体积",
+      "unitId": "g11-u1",
+      "unitTitle": "面积与体积",
+      "bundle": "g11-u1-l4.bundle.js",
+      "freshness": "g11-u1-l4.freshness.json",
+      "pages": [
+        {
+          "id": "g11-u1-l4-p1",
+          "title": "两个梯形拼一拼"
+        },
+        {
+          "id": "g11-u1-l4-p2",
+          "title": "梯形面积公式"
+        },
+        {
+          "id": "g11-u1-l4-p3",
+          "title": "算一算梯形面积"
+        }
+      ]
+    },
+    {
+      "id": "g11-u1-l5",
+      "title": "圆的面积：化圆为方",
+      "chapterId": "g11",
+      "chapterTitle": "面积与体积",
+      "unitId": "g11-u1",
+      "unitTitle": "面积与体积",
+      "bundle": "g11-u1-l5.bundle.js",
+      "freshness": "g11-u1-l5.freshness.json",
+      "pages": [
+        {
+          "id": "g11-u1-l5-p1",
+          "title": "把圆切成小扇形"
+        },
+        {
+          "id": "g11-u1-l5-p2",
+          "title": "圆面积公式的由来"
+        },
+        {
+          "id": "g11-u1-l5-p3",
+          "title": "极限：先看到，再算到"
+        },
+        {
+          "id": "g11-u1-l5-p4",
+          "title": "算一算圆的面积"
+        }
+      ]
+    },
+    {
+      "id": "g11-u1-l6",
+      "title": "弧长与扇形面积",
+      "chapterId": "g11",
+      "chapterTitle": "面积与体积",
+      "unitId": "g11-u1",
+      "unitTitle": "面积与体积",
+      "bundle": "g11-u1-l6.bundle.js",
+      "freshness": "g11-u1-l6.freshness.json",
+      "pages": [
+        {
+          "id": "g11-u1-l6-p1",
+          "title": "圆心角越大，扇形越大"
+        },
+        {
+          "id": "g11-u1-l6-p2",
+          "title": "弧长公式"
+        },
+        {
+          "id": "g11-u1-l6-p3",
+          "title": "扇形面积公式"
+        },
+        {
+          "id": "g11-u1-l6-p4",
+          "title": "算一算弧长和扇形"
+        }
+      ]
+    },
+    {
+      "id": "g11-u1-l7",
+      "title": "柱体的表面积与体积",
+      "chapterId": "g11",
+      "chapterTitle": "面积与体积",
+      "unitId": "g11-u1",
+      "unitTitle": "面积与体积",
+      "bundle": "g11-u1-l7.bundle.js",
+      "freshness": "g11-u1-l7.freshness.json",
+      "pages": [
+        {
+          "id": "g11-u1-l7-p1",
+          "title": "纸盒展开：表面积"
+        },
+        {
+          "id": "g11-u1-l7-p2",
+          "title": "棱柱的表面积"
+        },
+        {
+          "id": "g11-u1-l7-p3",
+          "title": "圆柱侧面展开"
+        },
+        {
+          "id": "g11-u1-l7-p4",
+          "title": "圆柱的表面积"
+        },
+        {
+          "id": "g11-u1-l7-p5",
+          "title": "柱体体积：底面积乘高"
+        }
+      ]
+    },
+    {
+      "id": "g11-u1-l8",
+      "title": "锥体体积",
+      "chapterId": "g11",
+      "chapterTitle": "面积与体积",
+      "unitId": "g11-u1",
+      "unitTitle": "面积与体积",
+      "bundle": "g11-u1-l8.bundle.js",
+      "freshness": "g11-u1-l8.freshness.json",
+      "pages": [
+        {
+          "id": "g11-u1-l8-p1",
+          "title": "沙漏实验：三杯沙"
+        },
+        {
+          "id": "g11-u1-l8-p2",
+          "title": "锥体体积公式"
+        },
+        {
+          "id": "g11-u1-l8-p3",
+          "title": "算一算锥体体积"
+        }
+      ]
+    },
+    {
+      "id": "g11-u1-l9",
+      "title": "球的表面积与体积",
+      "chapterId": "g11",
+      "chapterTitle": "面积与体积",
+      "unitId": "g11-u1",
+      "unitTitle": "面积与体积",
+      "bundle": "g11-u1-l9.bundle.js",
+      "freshness": "g11-u1-l9.freshness.json",
+      "pages": [
+        {
+          "id": "g11-u1-l9-p1",
+          "title": "橘子瓣拼球面"
+        },
+        {
+          "id": "g11-u1-l9-p2",
+          "title": "球的表面积和体积"
+        },
+        {
+          "id": "g11-u1-l9-p3",
+          "title": "算一算球的体积"
+        }
+      ]
+    },
+    {
+      "id": "g11-u1-l10",
+      "title": "本章小结与习题",
+      "chapterId": "g11",
+      "chapterTitle": "面积与体积",
+      "unitId": "g11-u1",
+      "unitTitle": "面积与体积",
+      "bundle": "g11-u1-l10.bundle.js",
+      "freshness": "g11-u1-l10.freshness.json",
+      "pages": [
+        {
+          "id": "g11-u1-l10-p1",
+          "title": "本章小结：面积公式链"
+        },
+        {
+          "id": "g11-u1-l10-p2",
+          "title": "本章习题：8 道题"
         }
       ]
     }
