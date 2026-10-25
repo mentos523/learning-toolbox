@@ -1,0 +1,72 @@
+window.MATH_BUNDLES = window.MATH_BUNDLES || {};
+window.MATH_BUNDLES["ch05-u2-l4"] = {
+  "lessonId": "ch05-u2-l4",
+  "lessonTitle": "本章小结",
+  "chapterId": "ch05",
+  "pages": [
+    {
+      "id": "ch05-u2-l4-p1",
+      "title": "一图流：先找分界点",
+      "concept": "本章知识串联",
+      "formulas": [
+        {
+          "id": "f1",
+          "latex": "ax + b > 0",
+          "translation": "一次不等式：解集是数轴上的一条射线"
+        },
+        {
+          "id": "f2",
+          "latex": "ax^2 + bx + c > 0",
+          "translation": "二次不等式：抛物线在横轴上方（>0）的 x 范围"
+        }
+      ],
+      "interaction": {
+        "type": "ineq-shade-lab",
+        "params": {
+          "source": {
+            "label": "x",
+            "min": -2,
+            "max": 5,
+            "step": 1
+          },
+          "mode": "single",
+          "sets": [
+            {
+              "expr": "x^2-3*x+2",
+              "ineq": ">",
+              "label": "x²−3x+2>0"
+            }
+          ],
+          "showProbe": true
+        },
+        "engine": {
+          "primitive": "IneqShadeLab",
+          "version": "2026.10.16.A",
+          "params": {
+            "mode": "single",
+            "sets": [
+              {
+                "expr": "x^2-3*x+2",
+                "ineq": ">",
+                "label": "x²−3x+2>0"
+              }
+            ]
+          }
+        }
+      },
+      "auxInteraction": null,
+      "hints": [
+        "路线：不等号意义 → 三条性质（乘负反向是易错点）→ 解集画数轴 → 二次看抛物线。",
+        "万能第一步：先解'等于'找分界点，再看不等号取哪一边。"
+      ],
+      "examples": [
+        {
+          "text": "x²−3x+2>0：分界点 x=1 和 2，取两边",
+          "figure": "滑块"
+        }
+      ],
+      "prev": "ch05-u2-l3-p1b",
+      "next": "ch05-ux-l1-p1"
+    }
+  ]
+};

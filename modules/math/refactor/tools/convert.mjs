@@ -94,6 +94,20 @@ export function parseMdFile(file) {
       continue;
     }
     if (inProse && t.type === 'paragraph') prose.push(t.text);
+    // 选项 A（Batch 5 协调者裁决）：prose 区单段 blockquote 还原为 prose 段。
+    // 内容模型中 hints 均为普通段落、无引用语义；marked 词法剥离行首 `>`，
+    // 故内层 paragraph 文本本身缺 `>`，还原时须补回 `>`（即 `>`＋段内文本），
+    // 否则仍与以 `>` 开头的 hint 逐字不等、断言仍 FAIL。递归取内层 paragraph，
+    // 按顺序计入；ch00–ch05 实测仅 2 处此类单段单行 blockquote。
+    if (inProse && t.type === 'blockquote') {
+      const collect = (toks) => {
+        for (const inner of toks || []) {
+          if (inner.type === 'paragraph') prose.push('>' + inner.text);
+          else if (inner.tokens) collect(inner.tokens);
+        }
+      };
+      collect(t.tokens);
+    }
   }
   for (const k of ['interaction', 'auxInteraction', 'formulas', 'data']) {
     if (!(k in fences)) errors.push(`缺失 \`\`\`${k} 围栏`);

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-25T05:24:40.872Z",
+  "generatedAt": "2026-10-25T05:51:19.540Z",
   "chapters": [
     {
       "id": "ch00",
@@ -974,6 +974,210 @@
           ]
         }
       ]
+    },
+    {
+      "id": "ch05",
+      "title": "不等式",
+      "units": [
+        {
+          "id": "ch05-u1",
+          "title": "一元一次不等式",
+          "lessons": [
+            {
+              "id": "ch05-u1-l1",
+              "title": "不等式的性质",
+              "chapterId": "ch05",
+              "chapterTitle": "不等式",
+              "unitId": "ch05-u1",
+              "unitTitle": "一元一次不等式",
+              "bundle": "ch05-u1-l1.bundle.js",
+              "freshness": "ch05-u1-l1.freshness.json",
+              "pages": [
+                {
+                  "id": "ch05-u1-l1-p1",
+                  "title": "天平不平：不等号的来历"
+                },
+                {
+                  "id": "ch05-u1-l1-p1b",
+                  "title": "不等号：开口朝大的一边"
+                },
+                {
+                  "id": "ch05-u1-l1-p2",
+                  "title": "两边加减，方向不变"
+                },
+                {
+                  "id": "ch05-u1-l1-p2b",
+                  "title": "性质一：加减方向不变"
+                },
+                {
+                  "id": "ch05-u1-l1-p3",
+                  "title": "乘除负数，不等号反向"
+                },
+                {
+                  "id": "ch05-u1-l1-p3b",
+                  "title": "乘负数：不等号要翻面"
+                }
+              ]
+            },
+            {
+              "id": "ch05-u1-l2",
+              "title": "一元一次不等式的解法",
+              "chapterId": "ch05",
+              "chapterTitle": "不等式",
+              "unitId": "ch05-u1",
+              "unitTitle": "一元一次不等式",
+              "bundle": "ch05-u1-l2.bundle.js",
+              "freshness": "ch05-u1-l2.freshness.json",
+              "pages": [
+                {
+                  "id": "ch05-u1-l2-p1",
+                  "title": "解集：满足条件的 x 全体"
+                },
+                {
+                  "id": "ch05-u1-l2-p1b",
+                  "title": "解集画数轴：空心实心"
+                },
+                {
+                  "id": "ch05-u1-l2-p1g",
+                  "title": "解集在数轴上长什么样"
+                }
+              ]
+            },
+            {
+              "id": "ch05-u1-l3",
+              "title": "一元一次不等式组",
+              "chapterId": "ch05",
+              "chapterTitle": "不等式",
+              "unitId": "ch05-u1",
+              "unitTitle": "一元一次不等式",
+              "bundle": "ch05-u1-l3.bundle.js",
+              "freshness": "ch05-u1-l3.freshness.json",
+              "pages": [
+                {
+                  "id": "ch05-u1-l3-p1",
+                  "title": "公共解集：两段射线重叠处"
+                },
+                {
+                  "id": "ch05-u1-l3-p1b",
+                  "title": "不等式组：分开解取公共"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch05-u2",
+          "title": "一元二次不等式",
+          "lessons": [
+            {
+              "id": "ch05-u2-l1",
+              "title": "二次不等式的图像解法",
+              "chapterId": "ch05",
+              "chapterTitle": "不等式",
+              "unitId": "ch05-u2",
+              "unitTitle": "一元二次不等式",
+              "bundle": "ch05-u2-l1.bundle.js",
+              "freshness": "ch05-u2-l1.freshness.json",
+              "pages": [
+                {
+                  "id": "ch05-u2-l1-p1",
+                  "title": "抛物线在横轴上方"
+                },
+                {
+                  "id": "ch05-u2-l1-p1b",
+                  "title": "二次不等式：三步看图像"
+                },
+                {
+                  "id": "ch05-u2-l1-p2",
+                  "title": "相切与恒成立"
+                },
+                {
+                  "id": "ch05-u2-l1-p2b",
+                  "title": "Δ=0 与 Δ<0：先看判别式"
+                }
+              ]
+            },
+            {
+              "id": "ch05-u2-l2",
+              "title": "含参数的二次不等式",
+              "chapterId": "ch05",
+              "chapterTitle": "不等式",
+              "unitId": "ch05-u2",
+              "unitTitle": "一元二次不等式",
+              "bundle": "ch05-u2-l2.bundle.js",
+              "freshness": "ch05-u2-l2.freshness.json",
+              "pages": [
+                {
+                  "id": "ch05-u2-l2-p1",
+                  "title": "参数 a：分类讨论"
+                },
+                {
+                  "id": "ch05-u2-l2-p1b",
+                  "title": "含参讨论：按大小分类"
+                }
+              ]
+            },
+            {
+              "id": "ch05-u2-l3",
+              "title": "不等式的应用",
+              "chapterId": "ch05",
+              "chapterTitle": "不等式",
+              "unitId": "ch05-u2",
+              "unitTitle": "一元二次不等式",
+              "bundle": "ch05-u2-l3.bundle.js",
+              "freshness": "ch05-u2-l3.freshness.json",
+              "pages": [
+                {
+                  "id": "ch05-u2-l3-p1",
+                  "title": "周长固定，面积最大"
+                },
+                {
+                  "id": "ch05-u2-l3-p1b",
+                  "title": "最值应用：和定积最大"
+                }
+              ]
+            },
+            {
+              "id": "ch05-u2-l4",
+              "title": "本章小结",
+              "chapterId": "ch05",
+              "chapterTitle": "不等式",
+              "unitId": "ch05-u2",
+              "unitTitle": "一元二次不等式",
+              "bundle": "ch05-u2-l4.bundle.js",
+              "freshness": "ch05-u2-l4.freshness.json",
+              "pages": [
+                {
+                  "id": "ch05-u2-l4-p1",
+                  "title": "一图流：先找分界点"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch05-ux",
+          "title": "本章习题",
+          "lessons": [
+            {
+              "id": "ch05-ux-l1",
+              "title": "第五章习题",
+              "chapterId": "ch05",
+              "chapterTitle": "不等式",
+              "unitId": "ch05-ux",
+              "unitTitle": "本章习题",
+              "bundle": "ch05-ux-l1.bundle.js",
+              "freshness": "ch05-ux-l1.freshness.json",
+              "pages": [
+                {
+                  "id": "ch05-ux-l1-p1",
+                  "title": "第五章习题：不等式"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "lessons": [
@@ -1822,6 +2026,186 @@
         {
           "id": "ch04-ux-l1-p1",
           "title": "第四章习题：一元二次方程"
+        }
+      ]
+    },
+    {
+      "id": "ch05-u1-l1",
+      "title": "不等式的性质",
+      "chapterId": "ch05",
+      "chapterTitle": "不等式",
+      "unitId": "ch05-u1",
+      "unitTitle": "一元一次不等式",
+      "bundle": "ch05-u1-l1.bundle.js",
+      "freshness": "ch05-u1-l1.freshness.json",
+      "pages": [
+        {
+          "id": "ch05-u1-l1-p1",
+          "title": "天平不平：不等号的来历"
+        },
+        {
+          "id": "ch05-u1-l1-p1b",
+          "title": "不等号：开口朝大的一边"
+        },
+        {
+          "id": "ch05-u1-l1-p2",
+          "title": "两边加减，方向不变"
+        },
+        {
+          "id": "ch05-u1-l1-p2b",
+          "title": "性质一：加减方向不变"
+        },
+        {
+          "id": "ch05-u1-l1-p3",
+          "title": "乘除负数，不等号反向"
+        },
+        {
+          "id": "ch05-u1-l1-p3b",
+          "title": "乘负数：不等号要翻面"
+        }
+      ]
+    },
+    {
+      "id": "ch05-u1-l2",
+      "title": "一元一次不等式的解法",
+      "chapterId": "ch05",
+      "chapterTitle": "不等式",
+      "unitId": "ch05-u1",
+      "unitTitle": "一元一次不等式",
+      "bundle": "ch05-u1-l2.bundle.js",
+      "freshness": "ch05-u1-l2.freshness.json",
+      "pages": [
+        {
+          "id": "ch05-u1-l2-p1",
+          "title": "解集：满足条件的 x 全体"
+        },
+        {
+          "id": "ch05-u1-l2-p1b",
+          "title": "解集画数轴：空心实心"
+        },
+        {
+          "id": "ch05-u1-l2-p1g",
+          "title": "解集在数轴上长什么样"
+        }
+      ]
+    },
+    {
+      "id": "ch05-u1-l3",
+      "title": "一元一次不等式组",
+      "chapterId": "ch05",
+      "chapterTitle": "不等式",
+      "unitId": "ch05-u1",
+      "unitTitle": "一元一次不等式",
+      "bundle": "ch05-u1-l3.bundle.js",
+      "freshness": "ch05-u1-l3.freshness.json",
+      "pages": [
+        {
+          "id": "ch05-u1-l3-p1",
+          "title": "公共解集：两段射线重叠处"
+        },
+        {
+          "id": "ch05-u1-l3-p1b",
+          "title": "不等式组：分开解取公共"
+        }
+      ]
+    },
+    {
+      "id": "ch05-u2-l1",
+      "title": "二次不等式的图像解法",
+      "chapterId": "ch05",
+      "chapterTitle": "不等式",
+      "unitId": "ch05-u2",
+      "unitTitle": "一元二次不等式",
+      "bundle": "ch05-u2-l1.bundle.js",
+      "freshness": "ch05-u2-l1.freshness.json",
+      "pages": [
+        {
+          "id": "ch05-u2-l1-p1",
+          "title": "抛物线在横轴上方"
+        },
+        {
+          "id": "ch05-u2-l1-p1b",
+          "title": "二次不等式：三步看图像"
+        },
+        {
+          "id": "ch05-u2-l1-p2",
+          "title": "相切与恒成立"
+        },
+        {
+          "id": "ch05-u2-l1-p2b",
+          "title": "Δ=0 与 Δ<0：先看判别式"
+        }
+      ]
+    },
+    {
+      "id": "ch05-u2-l2",
+      "title": "含参数的二次不等式",
+      "chapterId": "ch05",
+      "chapterTitle": "不等式",
+      "unitId": "ch05-u2",
+      "unitTitle": "一元二次不等式",
+      "bundle": "ch05-u2-l2.bundle.js",
+      "freshness": "ch05-u2-l2.freshness.json",
+      "pages": [
+        {
+          "id": "ch05-u2-l2-p1",
+          "title": "参数 a：分类讨论"
+        },
+        {
+          "id": "ch05-u2-l2-p1b",
+          "title": "含参讨论：按大小分类"
+        }
+      ]
+    },
+    {
+      "id": "ch05-u2-l3",
+      "title": "不等式的应用",
+      "chapterId": "ch05",
+      "chapterTitle": "不等式",
+      "unitId": "ch05-u2",
+      "unitTitle": "一元二次不等式",
+      "bundle": "ch05-u2-l3.bundle.js",
+      "freshness": "ch05-u2-l3.freshness.json",
+      "pages": [
+        {
+          "id": "ch05-u2-l3-p1",
+          "title": "周长固定，面积最大"
+        },
+        {
+          "id": "ch05-u2-l3-p1b",
+          "title": "最值应用：和定积最大"
+        }
+      ]
+    },
+    {
+      "id": "ch05-u2-l4",
+      "title": "本章小结",
+      "chapterId": "ch05",
+      "chapterTitle": "不等式",
+      "unitId": "ch05-u2",
+      "unitTitle": "一元二次不等式",
+      "bundle": "ch05-u2-l4.bundle.js",
+      "freshness": "ch05-u2-l4.freshness.json",
+      "pages": [
+        {
+          "id": "ch05-u2-l4-p1",
+          "title": "一图流：先找分界点"
+        }
+      ]
+    },
+    {
+      "id": "ch05-ux-l1",
+      "title": "第五章习题",
+      "chapterId": "ch05",
+      "chapterTitle": "不等式",
+      "unitId": "ch05-ux",
+      "unitTitle": "本章习题",
+      "bundle": "ch05-ux-l1.bundle.js",
+      "freshness": "ch05-ux-l1.freshness.json",
+      "pages": [
+        {
+          "id": "ch05-ux-l1-p1",
+          "title": "第五章习题：不等式"
         }
       ]
     }
