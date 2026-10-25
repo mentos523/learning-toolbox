@@ -1,0 +1,138 @@
+/* 学习工具箱 · 数学重构试点 · 壳与卡片样式
+ *
+ * 约束：不得破坏一屏约束与 V8 字号阶梯。
+ * 页内三块（标题/公式/交互/点拨/导航）直接复用分支 math.css 的
+ * .m-page/.m-title/.m-formulas/.m-interaction/.m-hints/.m-nav 类，
+ * 本文件只写壳 chrome（顶栏/总览/徽标/提示），不覆盖任何 .m-* 字号；
+ * 例外见文末白队 FAIL 修复：仅以试点壳作用域覆盖 .m-nav button 的
+ * min-height（不改字号/padding/布局），分支 math.css 本身不动。
+ * 深色变量沿用 math.css 的 --m-*，不另起色板。
+ */
+
+html, body { height: 100%; }
+body { margin: 0; }
+
+#pilot-app {
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  padding-top: 44px; /* 给顶部品牌条留位（与旧站 .m-app 顶栏同量级） */
+  /* 底部固定 footer（.tb-footer-fixed，padding 18px + 一行文字 ≈57px）：
+   * 旧站课页视图用 CSS :has 隐藏它；试点壳保留 footer 可见，
+   * 故此处预留 64px，翻页按钮不得被 footer 遮挡（自测曾抓到此拦截，见证据）。 */
+  padding-bottom: 64px;
+  box-sizing: border-box;
+  background: var(--m-bg);
+  color: var(--m-ink);
+}
+
+.pilot-shell {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  max-width: 960px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 12px;
+  box-sizing: border-box;
+}
+.pilot-shell > div { flex: 1; min-height: 0; display: flex; flex-direction: column; }
+
+.pilot-head {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+}
+.pilot-head h1 {
+  margin: 0;
+  font-size: 1.05rem;
+  flex: 1;
+  text-align: center;
+  letter-spacing: 1px;
+}
+.pilot-head-btn {
+  border: 1px solid var(--m-line);
+  background: var(--m-panel);
+  color: var(--m-ink);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  /* 白队 FAIL 修复：原高 35px → min-height 保证 ≥44px；字号/padding 不动，
+   * 多出的 9px 由 flex:1 的交互区吸收，不破一屏。 */
+  min-height: 44px;
+  box-sizing: border-box;
+}
+.pilot-badge {
+  font-size: 0.75rem;
+  font-weight: normal;
+  color: var(--m-accent-strong);
+  border: 1px solid var(--m-accent);
+  border-radius: 999px;
+  padding: 1px 8px;
+  white-space: nowrap;
+}
+
+/* 总览：页级卡列表（可点 ≥44px：行高 + 内边距保证） */
+.pilot-overview { flex: 1; min-height: 0; overflow-y: auto; }
+.pilot-overview h2 { text-align: center; font-size: 1.3rem; margin: 14px 0 4px; }
+.pilot-overview-sub { text-align: center; color: var(--m-ink-soft); font-size: 0.95rem; margin: 0 0 16px; }
+.pilot-card-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.pilot-card-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  padding: 10px 14px;
+  border: 1px solid var(--m-line);
+  border-radius: 14px;
+  background: var(--m-panel);
+  color: var(--m-ink);
+  text-decoration: none;
+  box-sizing: border-box;
+}
+.pilot-card-no {
+  flex: none;
+  width: 28px; height: 28px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  background: var(--m-accent-soft);
+  color: var(--m-accent-strong);
+  font-weight: bold;
+}
+.pilot-card-title { flex: 1; font-size: 1rem; }
+.pilot-card-concept { flex: none; font-size: 0.85rem; color: var(--m-ink-soft); }
+
+.pilot-note {
+  text-align: center;
+  color: var(--m-ink-soft);
+  font-size: 0.9rem;
+  margin: 12px 0 0;
+}
+.pilot-error, .pilot-noscript {
+  text-align: center;
+  color: #b3261e;
+  border: 1px dashed #b3261e;
+  border-radius: 8px;
+  padding: 12px;
+  margin: 24px 12px;
+}
+
+/* 卡片页：复用 .m-page 的 flex 纵向一屏结构；本文件只补触摸手势提示，
+ * 不改 .m-page/.m-interaction/.m-hints 的任何尺寸声明。 */
+.pilot-card { touch-action: pan-y; }
+
+/* 白队 FAIL 修复（仅试点壳作用域覆盖，分支 css/math.css 不动）：
+ * 翻页按钮原高 40px（math.css .m-nav button：padding 8px 22px、无
+ * min-height）。本选择器特异性高于 .m-nav button，且 app.css 在 math.css
+ * 之后加载，故只在试点壳内生效，不扩及分支全数学页。
+ * 仅加 min-height + box-sizing：字号/padding 不动，高度恰为 44px；
+ * 多出的 4px 由 flex:1 的交互区吸收，不破一屏、不改 .m-* 字号与尺寸。 */
+.pilot-shell .m-nav button {
+  min-height: 44px;
+  box-sizing: border-box;
+}
