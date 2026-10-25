@@ -1,5 +1,5 @@
 window.MATH_MANIFEST = {
-  "generatedAt": "2026-10-25T11:43:07.477Z",
+  "generatedAt": "2026-10-25T12:21:43.547Z",
   "chapters": [
     {
       "id": "ch00",
@@ -3536,6 +3536,170 @@ window.MATH_MANIFEST = {
           ]
         }
       ]
+    },
+    {
+      "id": "g03",
+      "title": "三角形（一）：认识三角形",
+      "units": [
+        {
+          "id": "g03-u1",
+          "title": "三角形的基础",
+          "lessons": [
+            {
+              "id": "g03-u1-l1",
+              "title": "三角形的定义与三边关系",
+              "chapterId": "g03",
+              "chapterTitle": "三角形（一）：认识三角形",
+              "unitId": "g03-u1",
+              "unitTitle": "三角形的基础",
+              "bundle": "g03-u1-l1.bundle.js",
+              "freshness": "g03-u1-l1.freshness.json",
+              "pages": [
+                {
+                  "id": "g03-u1-l1-p1",
+                  "title": "三根小棒：拼得成，拼不成"
+                },
+                {
+                  "id": "g03-u1-l1-p2",
+                  "title": "什么是三角形：三条线段首尾相连"
+                },
+                {
+                  "id": "g03-u1-l1-p3",
+                  "title": "三边关系：两边之和大于第三边"
+                }
+              ]
+            },
+            {
+              "id": "g03-u1-l2",
+              "title": "三角形的分类与三线",
+              "chapterId": "g03",
+              "chapterTitle": "三角形（一）：认识三角形",
+              "unitId": "g03-u1",
+              "unitTitle": "三角形的基础",
+              "bundle": "g03-u1-l2.bundle.js",
+              "freshness": "g03-u1-l2.freshness.json",
+              "pages": [
+                {
+                  "id": "g03-u1-l2-p1",
+                  "title": "分一分：按边分，还是按角分？"
+                },
+                {
+                  "id": "g03-u1-l2-p2",
+                  "title": "点一点：高、中线、角平分线"
+                },
+                {
+                  "id": "g03-u1-l2-p3",
+                  "title": "分类讲透：等边也是等腰"
+                },
+                {
+                  "id": "g03-u1-l2-p4",
+                  "title": "三线讲透：钝角三角形的高在形外"
+                }
+              ]
+            },
+            {
+              "id": "g03-u1-l3",
+              "title": "三角形内角和",
+              "chapterId": "g03",
+              "chapterTitle": "三角形（一）：认识三角形",
+              "unitId": "g03-u1",
+              "unitTitle": "三角形的基础",
+              "bundle": "g03-u1-l3.bundle.js",
+              "freshness": "g03-u1-l3.freshness.json",
+              "pages": [
+                {
+                  "id": "g03-u1-l3-p1",
+                  "title": "拖一拖：内角和永远是 180°"
+                },
+                {
+                  "id": "g03-u1-l3-p2",
+                  "title": "只量 3 个就敢说永远？"
+                },
+                {
+                  "id": "g03-u1-l3-p3",
+                  "title": "撕角拼角：拼成一条直线"
+                },
+                {
+                  "id": "g03-u1-l3-p4",
+                  "title": "证明：过顶点作平行线"
+                },
+                {
+                  "id": "g03-u1-l3-p5",
+                  "title": "内角和定理：永远 180°"
+                }
+              ]
+            },
+            {
+              "id": "g03-u1-l4",
+              "title": "三角形的外角",
+              "chapterId": "g03",
+              "chapterTitle": "三角形（一）：认识三角形",
+              "unitId": "g03-u1",
+              "unitTitle": "三角形的基础",
+              "bundle": "g03-u1-l4.bundle.js",
+              "freshness": "g03-u1-l4.freshness.json",
+              "pages": [
+                {
+                  "id": "g03-u1-l4-p1",
+                  "title": "把一条边延长：外角“长”出来了"
+                },
+                {
+                  "id": "g03-u1-l4-p2",
+                  "title": "外角 = 不相邻两内角之和"
+                },
+                {
+                  "id": "g03-u1-l4-p3",
+                  "title": "外角定理：一次讲透"
+                }
+              ]
+            },
+            {
+              "id": "g03-u1-l5",
+              "title": "多边形的内角和",
+              "chapterId": "g03",
+              "chapterTitle": "三角形（一）：认识三角形",
+              "unitId": "g03-u1",
+              "unitTitle": "三角形的基础",
+              "bundle": "g03-u1-l5.bundle.js",
+              "freshness": "g03-u1-l5.freshness.json",
+              "pages": [
+                {
+                  "id": "g03-u1-l5-p1",
+                  "title": "切一切：五边形变成 3 个三角形"
+                },
+                {
+                  "id": "g03-u1-l5-p2",
+                  "title": "加边游戏：你来发明公式"
+                },
+                {
+                  "id": "g03-u1-l5-p3",
+                  "title": "多边形内角和定理：(n−2)×180°"
+                }
+              ]
+            },
+            {
+              "id": "g03-u1-l6",
+              "title": "本章小结与习题",
+              "chapterId": "g03",
+              "chapterTitle": "三角形（一）：认识三角形",
+              "unitId": "g03-u1",
+              "unitTitle": "三角形的基础",
+              "bundle": "g03-u1-l6.bundle.js",
+              "freshness": "g03-u1-l6.freshness.json",
+              "pages": [
+                {
+                  "id": "g03-u1-l6-p1",
+                  "title": "这一章：三角形从拼到算"
+                },
+                {
+                  "id": "g03-u1-l6-p2",
+                  "title": "本章习题：5 道题"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "lessons": [
@@ -6652,6 +6816,158 @@ window.MATH_MANIFEST = {
         {
           "id": "g02-u2-l5-p2",
           "title": "本章小测：6 道题"
+        }
+      ]
+    },
+    {
+      "id": "g03-u1-l1",
+      "title": "三角形的定义与三边关系",
+      "chapterId": "g03",
+      "chapterTitle": "三角形（一）：认识三角形",
+      "unitId": "g03-u1",
+      "unitTitle": "三角形的基础",
+      "bundle": "g03-u1-l1.bundle.js",
+      "freshness": "g03-u1-l1.freshness.json",
+      "pages": [
+        {
+          "id": "g03-u1-l1-p1",
+          "title": "三根小棒：拼得成，拼不成"
+        },
+        {
+          "id": "g03-u1-l1-p2",
+          "title": "什么是三角形：三条线段首尾相连"
+        },
+        {
+          "id": "g03-u1-l1-p3",
+          "title": "三边关系：两边之和大于第三边"
+        }
+      ]
+    },
+    {
+      "id": "g03-u1-l2",
+      "title": "三角形的分类与三线",
+      "chapterId": "g03",
+      "chapterTitle": "三角形（一）：认识三角形",
+      "unitId": "g03-u1",
+      "unitTitle": "三角形的基础",
+      "bundle": "g03-u1-l2.bundle.js",
+      "freshness": "g03-u1-l2.freshness.json",
+      "pages": [
+        {
+          "id": "g03-u1-l2-p1",
+          "title": "分一分：按边分，还是按角分？"
+        },
+        {
+          "id": "g03-u1-l2-p2",
+          "title": "点一点：高、中线、角平分线"
+        },
+        {
+          "id": "g03-u1-l2-p3",
+          "title": "分类讲透：等边也是等腰"
+        },
+        {
+          "id": "g03-u1-l2-p4",
+          "title": "三线讲透：钝角三角形的高在形外"
+        }
+      ]
+    },
+    {
+      "id": "g03-u1-l3",
+      "title": "三角形内角和",
+      "chapterId": "g03",
+      "chapterTitle": "三角形（一）：认识三角形",
+      "unitId": "g03-u1",
+      "unitTitle": "三角形的基础",
+      "bundle": "g03-u1-l3.bundle.js",
+      "freshness": "g03-u1-l3.freshness.json",
+      "pages": [
+        {
+          "id": "g03-u1-l3-p1",
+          "title": "拖一拖：内角和永远是 180°"
+        },
+        {
+          "id": "g03-u1-l3-p2",
+          "title": "只量 3 个就敢说永远？"
+        },
+        {
+          "id": "g03-u1-l3-p3",
+          "title": "撕角拼角：拼成一条直线"
+        },
+        {
+          "id": "g03-u1-l3-p4",
+          "title": "证明：过顶点作平行线"
+        },
+        {
+          "id": "g03-u1-l3-p5",
+          "title": "内角和定理：永远 180°"
+        }
+      ]
+    },
+    {
+      "id": "g03-u1-l4",
+      "title": "三角形的外角",
+      "chapterId": "g03",
+      "chapterTitle": "三角形（一）：认识三角形",
+      "unitId": "g03-u1",
+      "unitTitle": "三角形的基础",
+      "bundle": "g03-u1-l4.bundle.js",
+      "freshness": "g03-u1-l4.freshness.json",
+      "pages": [
+        {
+          "id": "g03-u1-l4-p1",
+          "title": "把一条边延长：外角“长”出来了"
+        },
+        {
+          "id": "g03-u1-l4-p2",
+          "title": "外角 = 不相邻两内角之和"
+        },
+        {
+          "id": "g03-u1-l4-p3",
+          "title": "外角定理：一次讲透"
+        }
+      ]
+    },
+    {
+      "id": "g03-u1-l5",
+      "title": "多边形的内角和",
+      "chapterId": "g03",
+      "chapterTitle": "三角形（一）：认识三角形",
+      "unitId": "g03-u1",
+      "unitTitle": "三角形的基础",
+      "bundle": "g03-u1-l5.bundle.js",
+      "freshness": "g03-u1-l5.freshness.json",
+      "pages": [
+        {
+          "id": "g03-u1-l5-p1",
+          "title": "切一切：五边形变成 3 个三角形"
+        },
+        {
+          "id": "g03-u1-l5-p2",
+          "title": "加边游戏：你来发明公式"
+        },
+        {
+          "id": "g03-u1-l5-p3",
+          "title": "多边形内角和定理：(n−2)×180°"
+        }
+      ]
+    },
+    {
+      "id": "g03-u1-l6",
+      "title": "本章小结与习题",
+      "chapterId": "g03",
+      "chapterTitle": "三角形（一）：认识三角形",
+      "unitId": "g03-u1",
+      "unitTitle": "三角形的基础",
+      "bundle": "g03-u1-l6.bundle.js",
+      "freshness": "g03-u1-l6.freshness.json",
+      "pages": [
+        {
+          "id": "g03-u1-l6-p1",
+          "title": "这一章：三角形从拼到算"
+        },
+        {
+          "id": "g03-u1-l6-p2",
+          "title": "本章习题：5 道题"
         }
       ]
     }
