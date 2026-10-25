@@ -1,0 +1,67 @@
+window.MATH_BUNDLES = window.MATH_BUNDLES || {};
+window.MATH_BUNDLES["ch10-u2-l4"] = {
+  "lessonId": "ch10-u2-l4",
+  "lessonTitle": "本章小结",
+  "chapterId": "ch10",
+  "pages": [
+    {
+      "id": "ch10-u2-l4-p1",
+      "title": "本章小结：从逼近到连续",
+      "concept": "本章知识串联",
+      "formulas": [
+        {
+          "id": "f1",
+          "latex": "\\lim_{n \\to \\infty} a_n = A",
+          "translation": "数列的极限：离散点的趋近——ε-N 语言是它的严格说法"
+        },
+        {
+          "id": "f2",
+          "latex": "\\lim_{x \\to x_0} f(x) = f(x_0)",
+          "translation": "连续：极限值 = 函数值——下一站：导数（变化率的极限）"
+        }
+      ],
+      "interaction": {
+        "type": "side-compare",
+        "params": {
+          "left": {
+            "kind": "slider-lab",
+            "params": {
+              "min": 1,
+              "max": 20,
+              "step": 1,
+              "label": "n",
+              "expr": "1/n"
+            }
+          },
+          "right": {
+            "kind": "slider-lab",
+            "params": {
+              "min": -2,
+              "max": 2,
+              "step": 0.1,
+              "label": "x",
+              "expr": "x^2"
+            }
+          },
+          "labels": [
+            "数列极限：1/n → 0（离散）",
+            "连续：一笔画 y=x²"
+          ]
+        }
+      },
+      "auxInteraction": null,
+      "hints": [
+        "本章路线：逼近 → ε-N → 数列极限 → 函数极限 → 连续。",
+        "附录 B：8.1.3 欠的 2^√2 严格定义，下一页用极限来还。"
+      ],
+      "examples": [
+        {
+          "text": "一图流：左栏离散逼近，右栏连续不断——极限是同一思想",
+          "figure": "并排对比"
+        }
+      ],
+      "prev": "ch10-u2-l3-p1b",
+      "next": "ch10-ub-l1-p1"
+    }
+  ]
+};

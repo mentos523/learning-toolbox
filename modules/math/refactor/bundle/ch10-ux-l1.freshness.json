@@ -1,0 +1,13 @@
+{
+  "generatedAt": "2026-10-25T08:54:15.660Z",
+  "lessonId": "ch10-ux-l1",
+  "bundleFile": "ch10-ux-l1.bundle.js",
+  "bundleSha256": "2644dd542ff30f76466ad8950a0b495e85accb403b3b024c41ed787c2edcd08e",
+  "pages": [
+    {
+      "id": "ch10-ux-l1-p1",
+      "file": "content/ch10-ux-l1/ch10-ux-l1-p1.md",
+      "sha256": "7bd97b9ef7c665345ba027f8e763c66e76c0314712bffd99cc3154f0a3b06beb"
+    }
+  ]
+}

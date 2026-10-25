@@ -1,0 +1,13 @@
+{
+  "generatedAt": "2026-10-25T08:54:15.659Z",
+  "lessonId": "ch10-u2-l4",
+  "bundleFile": "ch10-u2-l4.bundle.js",
+  "bundleSha256": "a958ff28feeedf1f45bd4695c37c68b7d005a62553915db6bfaeee3b173453b9",
+  "pages": [
+    {
+      "id": "ch10-u2-l4-p1",
+      "file": "content/ch10-u2-l4/ch10-u2-l4-p1.md",
+      "sha256": "c92ebc0c210ec6758cd0ff36d684c8b59adf4f08b61814294a2ca03ab45b4557"
+    }
+  ]
+}

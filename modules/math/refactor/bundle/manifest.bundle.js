@@ -1,5 +1,5 @@
 window.MATH_MANIFEST = {
-  "generatedAt": "2026-10-25T08:24:33.393Z",
+  "generatedAt": "2026-10-25T08:54:15.679Z",
   "chapters": [
     {
       "id": "ch00",
@@ -2282,6 +2282,254 @@ window.MATH_MANIFEST = {
           ]
         }
       ]
+    },
+    {
+      "id": "ch10",
+      "title": "极限与连续",
+      "units": [
+        {
+          "id": "ch10-u0",
+          "title": "过渡：从离散到连续",
+          "lessons": [
+            {
+              "id": "ch10-u0-l1",
+              "title": "从散点到曲线",
+              "chapterId": "ch10",
+              "chapterTitle": "极限与连续",
+              "unitId": "ch10-u0",
+              "unitTitle": "过渡：从离散到连续",
+              "bundle": "ch10-u0-l1.bundle.js",
+              "freshness": "ch10-u0-l1.freshness.json",
+              "pages": [
+                {
+                  "id": "ch10-u0-l1-p1",
+                  "title": "散点加密：从离散到连续"
+                },
+                {
+                  "id": "ch10-u0-l1-p1b",
+                  "title": "离散 vs 连续：点密成线"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch10-u1",
+          "title": "数列的极限",
+          "lessons": [
+            {
+              "id": "ch10-u1-l1",
+              "title": "逼近思想",
+              "chapterId": "ch10",
+              "chapterTitle": "极限与连续",
+              "unitId": "ch10-u1",
+              "unitTitle": "数列的极限",
+              "bundle": "ch10-u1-l1.bundle.js",
+              "freshness": "ch10-u1-l1.freshness.json",
+              "pages": [
+                {
+                  "id": "ch10-u1-l1-p1",
+                  "title": "加一项：和在逼近 1"
+                },
+                {
+                  "id": "ch10-u1-l1-p1b",
+                  "title": "逼近：永远差一点"
+                }
+              ]
+            },
+            {
+              "id": "ch10-u1-l2",
+              "title": "ε-N 语言（直观版）",
+              "chapterId": "ch10",
+              "chapterTitle": "极限与连续",
+              "unitId": "ch10-u1",
+              "unitTitle": "数列的极限",
+              "bundle": "ch10-u1-l2.bundle.js",
+              "freshness": "ch10-u1-l2.freshness.json",
+              "pages": [
+                {
+                  "id": "ch10-u1-l2-p1",
+                  "title": "ε-N（直观版）：带子套点"
+                },
+                {
+                  "id": "ch10-u1-l2-p1b",
+                  "title": "ε-N：带子套点的游戏"
+                }
+              ]
+            },
+            {
+              "id": "ch10-u1-l3",
+              "title": "ε-N 语言（严格版）",
+              "chapterId": "ch10",
+              "chapterTitle": "极限与连续",
+              "unitId": "ch10-u1",
+              "unitTitle": "数列的极限",
+              "bundle": "ch10-u1-l3.bundle.js",
+              "freshness": "ch10-u1-l3.freshness.json",
+              "pages": [
+                {
+                  "id": "ch10-u1-l3-p1",
+                  "title": "ε-N（严格版）：任意 ε"
+                },
+                {
+                  "id": "ch10-u1-l3-p1b",
+                  "title": "严格定义：∀ε∃N"
+                }
+              ]
+            },
+            {
+              "id": "ch10-u1-l4",
+              "title": "常见数列的极限",
+              "chapterId": "ch10",
+              "chapterTitle": "极限与连续",
+              "unitId": "ch10-u1",
+              "unitTitle": "数列的极限",
+              "bundle": "ch10-u1-l4.bundle.js",
+              "freshness": "ch10-u1-l4.freshness.json",
+              "pages": [
+                {
+                  "id": "ch10-u1-l4-p1",
+                  "title": "1/n 与 qⁿ：都趋向 0"
+                },
+                {
+                  "id": "ch10-u1-l4-p1b",
+                  "title": "常见极限：记住三个"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch10-u2",
+          "title": "函数的极限与连续",
+          "lessons": [
+            {
+              "id": "ch10-u2-l1",
+              "title": "函数的极限",
+              "chapterId": "ch10",
+              "chapterTitle": "极限与连续",
+              "unitId": "ch10-u2",
+              "unitTitle": "函数的极限与连续",
+              "bundle": "ch10-u2-l1.bundle.js",
+              "freshness": "ch10-u2-l1.freshness.json",
+              "pages": [
+                {
+                  "id": "ch10-u2-l1-p1",
+                  "title": "函数极限：x→1 时 f(x)→2"
+                },
+                {
+                  "id": "ch10-u2-l1-p1b",
+                  "title": "函数极限：左右夹击"
+                }
+              ]
+            },
+            {
+              "id": "ch10-u2-l2",
+              "title": "极限的运算法则",
+              "chapterId": "ch10",
+              "chapterTitle": "极限与连续",
+              "unitId": "ch10-u2",
+              "unitTitle": "函数的极限与连续",
+              "bundle": "ch10-u2-l2.bundle.js",
+              "freshness": "ch10-u2-l2.freshness.json",
+              "pages": [
+                {
+                  "id": "ch10-u2-l2-p1",
+                  "title": "极限法则：和可拆开算"
+                },
+                {
+                  "id": "ch10-u2-l2-p1b",
+                  "title": "极限法则：拆开算"
+                }
+              ]
+            },
+            {
+              "id": "ch10-u2-l3",
+              "title": "函数的连续性",
+              "chapterId": "ch10",
+              "chapterTitle": "极限与连续",
+              "unitId": "ch10-u2",
+              "unitTitle": "函数的极限与连续",
+              "bundle": "ch10-u2-l3.bundle.js",
+              "freshness": "ch10-u2-l3.freshness.json",
+              "pages": [
+                {
+                  "id": "ch10-u2-l3-p1",
+                  "title": "连续：一笔画不断裂"
+                },
+                {
+                  "id": "ch10-u2-l3-p1b",
+                  "title": "连续：极限对上函数值"
+                }
+              ]
+            },
+            {
+              "id": "ch10-u2-l4",
+              "title": "本章小结",
+              "chapterId": "ch10",
+              "chapterTitle": "极限与连续",
+              "unitId": "ch10-u2",
+              "unitTitle": "函数的极限与连续",
+              "bundle": "ch10-u2-l4.bundle.js",
+              "freshness": "ch10-u2-l4.freshness.json",
+              "pages": [
+                {
+                  "id": "ch10-u2-l4-p1",
+                  "title": "本章小结：从逼近到连续"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch10-ub",
+          "title": "附录 B：回填 8.1.3",
+          "lessons": [
+            {
+              "id": "ch10-ub-l1",
+              "title": "实数指数幂的严格定义",
+              "chapterId": "ch10",
+              "chapterTitle": "极限与连续",
+              "unitId": "ch10-ub",
+              "unitTitle": "附录 B：回填 8.1.3",
+              "bundle": "ch10-ub-l1.bundle.js",
+              "freshness": "ch10-ub-l1.freshness.json",
+              "pages": [
+                {
+                  "id": "ch10-ub-l1-p1",
+                  "title": "回填：2^√2 的严格定义"
+                },
+                {
+                  "id": "ch10-ub-l1-p1b",
+                  "title": "回填：有理数逼近无理数"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch10-ux",
+          "title": "本章习题",
+          "lessons": [
+            {
+              "id": "ch10-ux-l1",
+              "title": "第十章习题",
+              "chapterId": "ch10",
+              "chapterTitle": "极限与连续",
+              "unitId": "ch10-ux",
+              "unitTitle": "本章习题",
+              "bundle": "ch10-ux-l1.bundle.js",
+              "freshness": "ch10-ux-l1.freshness.json",
+              "pages": [
+                {
+                  "id": "ch10-ux-l1-p1",
+                  "title": "第十章习题：极限连续"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "lessons": [
@@ -4282,6 +4530,218 @@ window.MATH_MANIFEST = {
         {
           "id": "ch09-ux-l1-p1",
           "title": "第九章习题：数列"
+        }
+      ]
+    },
+    {
+      "id": "ch10-u0-l1",
+      "title": "从散点到曲线",
+      "chapterId": "ch10",
+      "chapterTitle": "极限与连续",
+      "unitId": "ch10-u0",
+      "unitTitle": "过渡：从离散到连续",
+      "bundle": "ch10-u0-l1.bundle.js",
+      "freshness": "ch10-u0-l1.freshness.json",
+      "pages": [
+        {
+          "id": "ch10-u0-l1-p1",
+          "title": "散点加密：从离散到连续"
+        },
+        {
+          "id": "ch10-u0-l1-p1b",
+          "title": "离散 vs 连续：点密成线"
+        }
+      ]
+    },
+    {
+      "id": "ch10-u1-l1",
+      "title": "逼近思想",
+      "chapterId": "ch10",
+      "chapterTitle": "极限与连续",
+      "unitId": "ch10-u1",
+      "unitTitle": "数列的极限",
+      "bundle": "ch10-u1-l1.bundle.js",
+      "freshness": "ch10-u1-l1.freshness.json",
+      "pages": [
+        {
+          "id": "ch10-u1-l1-p1",
+          "title": "加一项：和在逼近 1"
+        },
+        {
+          "id": "ch10-u1-l1-p1b",
+          "title": "逼近：永远差一点"
+        }
+      ]
+    },
+    {
+      "id": "ch10-u1-l2",
+      "title": "ε-N 语言（直观版）",
+      "chapterId": "ch10",
+      "chapterTitle": "极限与连续",
+      "unitId": "ch10-u1",
+      "unitTitle": "数列的极限",
+      "bundle": "ch10-u1-l2.bundle.js",
+      "freshness": "ch10-u1-l2.freshness.json",
+      "pages": [
+        {
+          "id": "ch10-u1-l2-p1",
+          "title": "ε-N（直观版）：带子套点"
+        },
+        {
+          "id": "ch10-u1-l2-p1b",
+          "title": "ε-N：带子套点的游戏"
+        }
+      ]
+    },
+    {
+      "id": "ch10-u1-l3",
+      "title": "ε-N 语言（严格版）",
+      "chapterId": "ch10",
+      "chapterTitle": "极限与连续",
+      "unitId": "ch10-u1",
+      "unitTitle": "数列的极限",
+      "bundle": "ch10-u1-l3.bundle.js",
+      "freshness": "ch10-u1-l3.freshness.json",
+      "pages": [
+        {
+          "id": "ch10-u1-l3-p1",
+          "title": "ε-N（严格版）：任意 ε"
+        },
+        {
+          "id": "ch10-u1-l3-p1b",
+          "title": "严格定义：∀ε∃N"
+        }
+      ]
+    },
+    {
+      "id": "ch10-u1-l4",
+      "title": "常见数列的极限",
+      "chapterId": "ch10",
+      "chapterTitle": "极限与连续",
+      "unitId": "ch10-u1",
+      "unitTitle": "数列的极限",
+      "bundle": "ch10-u1-l4.bundle.js",
+      "freshness": "ch10-u1-l4.freshness.json",
+      "pages": [
+        {
+          "id": "ch10-u1-l4-p1",
+          "title": "1/n 与 qⁿ：都趋向 0"
+        },
+        {
+          "id": "ch10-u1-l4-p1b",
+          "title": "常见极限：记住三个"
+        }
+      ]
+    },
+    {
+      "id": "ch10-u2-l1",
+      "title": "函数的极限",
+      "chapterId": "ch10",
+      "chapterTitle": "极限与连续",
+      "unitId": "ch10-u2",
+      "unitTitle": "函数的极限与连续",
+      "bundle": "ch10-u2-l1.bundle.js",
+      "freshness": "ch10-u2-l1.freshness.json",
+      "pages": [
+        {
+          "id": "ch10-u2-l1-p1",
+          "title": "函数极限：x→1 时 f(x)→2"
+        },
+        {
+          "id": "ch10-u2-l1-p1b",
+          "title": "函数极限：左右夹击"
+        }
+      ]
+    },
+    {
+      "id": "ch10-u2-l2",
+      "title": "极限的运算法则",
+      "chapterId": "ch10",
+      "chapterTitle": "极限与连续",
+      "unitId": "ch10-u2",
+      "unitTitle": "函数的极限与连续",
+      "bundle": "ch10-u2-l2.bundle.js",
+      "freshness": "ch10-u2-l2.freshness.json",
+      "pages": [
+        {
+          "id": "ch10-u2-l2-p1",
+          "title": "极限法则：和可拆开算"
+        },
+        {
+          "id": "ch10-u2-l2-p1b",
+          "title": "极限法则：拆开算"
+        }
+      ]
+    },
+    {
+      "id": "ch10-u2-l3",
+      "title": "函数的连续性",
+      "chapterId": "ch10",
+      "chapterTitle": "极限与连续",
+      "unitId": "ch10-u2",
+      "unitTitle": "函数的极限与连续",
+      "bundle": "ch10-u2-l3.bundle.js",
+      "freshness": "ch10-u2-l3.freshness.json",
+      "pages": [
+        {
+          "id": "ch10-u2-l3-p1",
+          "title": "连续：一笔画不断裂"
+        },
+        {
+          "id": "ch10-u2-l3-p1b",
+          "title": "连续：极限对上函数值"
+        }
+      ]
+    },
+    {
+      "id": "ch10-u2-l4",
+      "title": "本章小结",
+      "chapterId": "ch10",
+      "chapterTitle": "极限与连续",
+      "unitId": "ch10-u2",
+      "unitTitle": "函数的极限与连续",
+      "bundle": "ch10-u2-l4.bundle.js",
+      "freshness": "ch10-u2-l4.freshness.json",
+      "pages": [
+        {
+          "id": "ch10-u2-l4-p1",
+          "title": "本章小结：从逼近到连续"
+        }
+      ]
+    },
+    {
+      "id": "ch10-ub-l1",
+      "title": "实数指数幂的严格定义",
+      "chapterId": "ch10",
+      "chapterTitle": "极限与连续",
+      "unitId": "ch10-ub",
+      "unitTitle": "附录 B：回填 8.1.3",
+      "bundle": "ch10-ub-l1.bundle.js",
+      "freshness": "ch10-ub-l1.freshness.json",
+      "pages": [
+        {
+          "id": "ch10-ub-l1-p1",
+          "title": "回填：2^√2 的严格定义"
+        },
+        {
+          "id": "ch10-ub-l1-p1b",
+          "title": "回填：有理数逼近无理数"
+        }
+      ]
+    },
+    {
+      "id": "ch10-ux-l1",
+      "title": "第十章习题",
+      "chapterId": "ch10",
+      "chapterTitle": "极限与连续",
+      "unitId": "ch10-ux",
+      "unitTitle": "本章习题",
+      "bundle": "ch10-ux-l1.bundle.js",
+      "freshness": "ch10-ux-l1.freshness.json",
+      "pages": [
+        {
+          "id": "ch10-ux-l1-p1",
+          "title": "第十章习题：极限连续"
         }
       ]
     }
