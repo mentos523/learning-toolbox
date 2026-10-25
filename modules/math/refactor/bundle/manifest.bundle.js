@@ -1,5 +1,5 @@
 window.MATH_MANIFEST = {
-  "generatedAt": "2026-10-25T15:06:32.203Z",
+  "generatedAt": "2026-10-25T15:29:35.418Z",
   "chapters": [
     {
       "id": "ch00",
@@ -4644,6 +4644,230 @@ window.MATH_MANIFEST = {
           ]
         }
       ]
+    },
+    {
+      "id": "g09",
+      "title": "图形的相似",
+      "units": [
+        {
+          "id": "g09-u1",
+          "title": "相似",
+          "lessons": [
+            {
+              "id": "g09-u1-l1",
+              "title": "比例线段",
+              "chapterId": "g09",
+              "chapterTitle": "图形的相似",
+              "unitId": "g09-u1",
+              "unitTitle": "相似",
+              "bundle": "g09-u1-l1.bundle.js",
+              "freshness": "g09-u1-l1.freshness.json",
+              "pages": [
+                {
+                  "id": "g09-u1-l1-p1",
+                  "title": "两条线段，同一个分法"
+                },
+                {
+                  "id": "g09-u1-l1-p2",
+                  "title": "a:b=c:d：比例线段"
+                },
+                {
+                  "id": "g09-u1-l1-p3",
+                  "title": "细心的你发现了吗：黄金分割"
+                }
+              ]
+            },
+            {
+              "id": "g09-u1-l2",
+              "title": "相似图形",
+              "chapterId": "g09",
+              "chapterTitle": "图形的相似",
+              "unitId": "g09-u1",
+              "unitTitle": "相似",
+              "bundle": "g09-u1-l2.bundle.js",
+              "freshness": "g09-u1-l2.freshness.json",
+              "pages": [
+                {
+                  "id": "g09-u1-l2-p1",
+                  "title": "全等能套上，相似套不上"
+                },
+                {
+                  "id": "g09-u1-l2-p2",
+                  "title": "照片放大：人脸不变形"
+                },
+                {
+                  "id": "g09-u1-l2-p3",
+                  "title": "只拉宽：还像吗？"
+                },
+                {
+                  "id": "g09-u1-l2-p4",
+                  "title": "相似：形状相同，大小成比例"
+                }
+              ]
+            },
+            {
+              "id": "g09-u1-l3",
+              "title": "AA 判定",
+              "chapterId": "g09",
+              "chapterTitle": "图形的相似",
+              "unitId": "g09-u1",
+              "unitTitle": "相似",
+              "bundle": "g09-u1-l3.bundle.js",
+              "freshness": "g09-u1-l3.freshness.json",
+              "pages": [
+                {
+                  "id": "g09-u1-l3-p1",
+                  "title": "两个角相等，形状就锁死"
+                },
+                {
+                  "id": "g09-u1-l3-p2",
+                  "title": "AA 判定：两角相等就相似"
+                },
+                {
+                  "id": "g09-u1-l3-p3",
+                  "title": "练一练：用 AA 判相似"
+                }
+              ]
+            },
+            {
+              "id": "g09-u1-l4",
+              "title": "SAS/SSS 判定",
+              "chapterId": "g09",
+              "chapterTitle": "图形的相似",
+              "unitId": "g09-u1",
+              "unitTitle": "相似",
+              "bundle": "g09-u1-l4.bundle.js",
+              "freshness": "g09-u1-l4.freshness.json",
+              "pages": [
+                {
+                  "id": "g09-u1-l4-p1",
+                  "title": "SAS：两边成比例，夹角相等"
+                },
+                {
+                  "id": "g09-u1-l4-p2",
+                  "title": "SAS 判定：成比例的两边夹着相等的角"
+                },
+                {
+                  "id": "g09-u1-l4-p3",
+                  "title": "SSS：三边成比例"
+                },
+                {
+                  "id": "g09-u1-l4-p4",
+                  "title": "SSS 判定：三边同比例"
+                },
+                {
+                  "id": "g09-u1-l4-p5",
+                  "title": "全等判定 vs 相似判定"
+                }
+              ]
+            },
+            {
+              "id": "g09-u1-l5",
+              "title": "相似三角形的性质",
+              "chapterId": "g09",
+              "chapterTitle": "图形的相似",
+              "unitId": "g09-u1",
+              "unitTitle": "相似",
+              "bundle": "g09-u1-l5.bundle.js",
+              "freshness": "g09-u1-l5.freshness.json",
+              "pages": [
+                {
+                  "id": "g09-u1-l5-p1",
+                  "title": "周长跟着边一起变"
+                },
+                {
+                  "id": "g09-u1-l5-p2",
+                  "title": "周长比 = 相似比"
+                },
+                {
+                  "id": "g09-u1-l5-p3",
+                  "title": "拖 k，看面积按 k² 跳"
+                },
+                {
+                  "id": "g09-u1-l5-p4",
+                  "title": "面积比 = 相似比的平方"
+                },
+                {
+                  "id": "g09-u1-l5-p5",
+                  "title": "H4：这就是 y=x² 在干的事"
+                }
+              ]
+            },
+            {
+              "id": "g09-u1-l6",
+              "title": "应用：测高与测距",
+              "chapterId": "g09",
+              "chapterTitle": "图形的相似",
+              "unitId": "g09-u1",
+              "unitTitle": "相似",
+              "bundle": "g09-u1-l6.bundle.js",
+              "freshness": "g09-u1-l6.freshness.json",
+              "pages": [
+                {
+                  "id": "g09-u1-l6-p1",
+                  "title": "影子测高"
+                },
+                {
+                  "id": "g09-u1-l6-p2",
+                  "title": "建模四步：生活→图形→列式→求解"
+                },
+                {
+                  "id": "g09-u1-l6-p3",
+                  "title": "例题：河对岸的树有多远"
+                }
+              ]
+            },
+            {
+              "id": "g09-u1-l7",
+              "title": "位似",
+              "chapterId": "g09",
+              "chapterTitle": "图形的相似",
+              "unitId": "g09-u1",
+              "unitTitle": "相似",
+              "bundle": "g09-u1-l7.bundle.js",
+              "freshness": "g09-u1-l7.freshness.json",
+              "pages": [
+                {
+                  "id": "g09-u1-l7-p1",
+                  "title": "以一点为中心放大"
+                },
+                {
+                  "id": "g09-u1-l7-p2",
+                  "title": "位似：有中心的相似"
+                },
+                {
+                  "id": "g09-u1-l7-p3",
+                  "title": "H18：位似的坐标写法"
+                },
+                {
+                  "id": "g09-u1-l7-p4",
+                  "title": "例题：画 k=2 的位似图形"
+                }
+              ]
+            },
+            {
+              "id": "g09-u1-l8",
+              "title": "本章小结与习题",
+              "chapterId": "g09",
+              "chapterTitle": "图形的相似",
+              "unitId": "g09-u1",
+              "unitTitle": "相似",
+              "bundle": "g09-u1-l8.bundle.js",
+              "freshness": "g09-u1-l8.freshness.json",
+              "pages": [
+                {
+                  "id": "g09-u1-l8-p1",
+                  "title": "本章小结：从“像”到“算”"
+                },
+                {
+                  "id": "g09-u1-l8-p2",
+                  "title": "本章习题"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "lessons": [
@@ -8796,6 +9020,218 @@ window.MATH_MANIFEST = {
         {
           "id": "g08-u1-l6-p2",
           "title": "本章习题：6 道题"
+        }
+      ]
+    },
+    {
+      "id": "g09-u1-l1",
+      "title": "比例线段",
+      "chapterId": "g09",
+      "chapterTitle": "图形的相似",
+      "unitId": "g09-u1",
+      "unitTitle": "相似",
+      "bundle": "g09-u1-l1.bundle.js",
+      "freshness": "g09-u1-l1.freshness.json",
+      "pages": [
+        {
+          "id": "g09-u1-l1-p1",
+          "title": "两条线段，同一个分法"
+        },
+        {
+          "id": "g09-u1-l1-p2",
+          "title": "a:b=c:d：比例线段"
+        },
+        {
+          "id": "g09-u1-l1-p3",
+          "title": "细心的你发现了吗：黄金分割"
+        }
+      ]
+    },
+    {
+      "id": "g09-u1-l2",
+      "title": "相似图形",
+      "chapterId": "g09",
+      "chapterTitle": "图形的相似",
+      "unitId": "g09-u1",
+      "unitTitle": "相似",
+      "bundle": "g09-u1-l2.bundle.js",
+      "freshness": "g09-u1-l2.freshness.json",
+      "pages": [
+        {
+          "id": "g09-u1-l2-p1",
+          "title": "全等能套上，相似套不上"
+        },
+        {
+          "id": "g09-u1-l2-p2",
+          "title": "照片放大：人脸不变形"
+        },
+        {
+          "id": "g09-u1-l2-p3",
+          "title": "只拉宽：还像吗？"
+        },
+        {
+          "id": "g09-u1-l2-p4",
+          "title": "相似：形状相同，大小成比例"
+        }
+      ]
+    },
+    {
+      "id": "g09-u1-l3",
+      "title": "AA 判定",
+      "chapterId": "g09",
+      "chapterTitle": "图形的相似",
+      "unitId": "g09-u1",
+      "unitTitle": "相似",
+      "bundle": "g09-u1-l3.bundle.js",
+      "freshness": "g09-u1-l3.freshness.json",
+      "pages": [
+        {
+          "id": "g09-u1-l3-p1",
+          "title": "两个角相等，形状就锁死"
+        },
+        {
+          "id": "g09-u1-l3-p2",
+          "title": "AA 判定：两角相等就相似"
+        },
+        {
+          "id": "g09-u1-l3-p3",
+          "title": "练一练：用 AA 判相似"
+        }
+      ]
+    },
+    {
+      "id": "g09-u1-l4",
+      "title": "SAS/SSS 判定",
+      "chapterId": "g09",
+      "chapterTitle": "图形的相似",
+      "unitId": "g09-u1",
+      "unitTitle": "相似",
+      "bundle": "g09-u1-l4.bundle.js",
+      "freshness": "g09-u1-l4.freshness.json",
+      "pages": [
+        {
+          "id": "g09-u1-l4-p1",
+          "title": "SAS：两边成比例，夹角相等"
+        },
+        {
+          "id": "g09-u1-l4-p2",
+          "title": "SAS 判定：成比例的两边夹着相等的角"
+        },
+        {
+          "id": "g09-u1-l4-p3",
+          "title": "SSS：三边成比例"
+        },
+        {
+          "id": "g09-u1-l4-p4",
+          "title": "SSS 判定：三边同比例"
+        },
+        {
+          "id": "g09-u1-l4-p5",
+          "title": "全等判定 vs 相似判定"
+        }
+      ]
+    },
+    {
+      "id": "g09-u1-l5",
+      "title": "相似三角形的性质",
+      "chapterId": "g09",
+      "chapterTitle": "图形的相似",
+      "unitId": "g09-u1",
+      "unitTitle": "相似",
+      "bundle": "g09-u1-l5.bundle.js",
+      "freshness": "g09-u1-l5.freshness.json",
+      "pages": [
+        {
+          "id": "g09-u1-l5-p1",
+          "title": "周长跟着边一起变"
+        },
+        {
+          "id": "g09-u1-l5-p2",
+          "title": "周长比 = 相似比"
+        },
+        {
+          "id": "g09-u1-l5-p3",
+          "title": "拖 k，看面积按 k² 跳"
+        },
+        {
+          "id": "g09-u1-l5-p4",
+          "title": "面积比 = 相似比的平方"
+        },
+        {
+          "id": "g09-u1-l5-p5",
+          "title": "H4：这就是 y=x² 在干的事"
+        }
+      ]
+    },
+    {
+      "id": "g09-u1-l6",
+      "title": "应用：测高与测距",
+      "chapterId": "g09",
+      "chapterTitle": "图形的相似",
+      "unitId": "g09-u1",
+      "unitTitle": "相似",
+      "bundle": "g09-u1-l6.bundle.js",
+      "freshness": "g09-u1-l6.freshness.json",
+      "pages": [
+        {
+          "id": "g09-u1-l6-p1",
+          "title": "影子测高"
+        },
+        {
+          "id": "g09-u1-l6-p2",
+          "title": "建模四步：生活→图形→列式→求解"
+        },
+        {
+          "id": "g09-u1-l6-p3",
+          "title": "例题：河对岸的树有多远"
+        }
+      ]
+    },
+    {
+      "id": "g09-u1-l7",
+      "title": "位似",
+      "chapterId": "g09",
+      "chapterTitle": "图形的相似",
+      "unitId": "g09-u1",
+      "unitTitle": "相似",
+      "bundle": "g09-u1-l7.bundle.js",
+      "freshness": "g09-u1-l7.freshness.json",
+      "pages": [
+        {
+          "id": "g09-u1-l7-p1",
+          "title": "以一点为中心放大"
+        },
+        {
+          "id": "g09-u1-l7-p2",
+          "title": "位似：有中心的相似"
+        },
+        {
+          "id": "g09-u1-l7-p3",
+          "title": "H18：位似的坐标写法"
+        },
+        {
+          "id": "g09-u1-l7-p4",
+          "title": "例题：画 k=2 的位似图形"
+        }
+      ]
+    },
+    {
+      "id": "g09-u1-l8",
+      "title": "本章小结与习题",
+      "chapterId": "g09",
+      "chapterTitle": "图形的相似",
+      "unitId": "g09-u1",
+      "unitTitle": "相似",
+      "bundle": "g09-u1-l8.bundle.js",
+      "freshness": "g09-u1-l8.freshness.json",
+      "pages": [
+        {
+          "id": "g09-u1-l8-p1",
+          "title": "本章小结：从“像”到“算”"
+        },
+        {
+          "id": "g09-u1-l8-p2",
+          "title": "本章习题"
         }
       ]
     }
