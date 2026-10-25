@@ -1,5 +1,5 @@
 window.MATH_MANIFEST = {
-  "generatedAt": "2026-10-25T04:14:00.155Z",
+  "generatedAt": "2026-10-25T04:41:05.293Z",
   "chapters": [
     {
       "id": "ch00",
@@ -290,6 +290,268 @@ window.MATH_MANIFEST = {
           ]
         }
       ]
+    },
+    {
+      "id": "ch02",
+      "title": "整式与因式分解",
+      "units": [
+        {
+          "id": "ch02-u1",
+          "title": "整式",
+          "lessons": [
+            {
+              "id": "ch02-u1-l1",
+              "title": "单项式与多项式",
+              "chapterId": "ch02",
+              "chapterTitle": "整式与因式分解",
+              "unitId": "ch02-u1",
+              "unitTitle": "整式",
+              "bundle": "ch02-u1-l1.bundle.js",
+              "freshness": "ch02-u1-l1.freshness.json",
+              "pages": [
+                {
+                  "id": "ch02-u1-l1-p1",
+                  "title": "单项式攒成多项式"
+                },
+                {
+                  "id": "ch02-u1-l1-p1b",
+                  "title": "系数次数：先认再算"
+                }
+              ]
+            },
+            {
+              "id": "ch02-u1-l2",
+              "title": "整式的加减",
+              "chapterId": "ch02",
+              "chapterTitle": "整式与因式分解",
+              "unitId": "ch02-u1",
+              "unitTitle": "整式",
+              "bundle": "ch02-u1-l2.bundle.js",
+              "freshness": "ch02-u1-l2.freshness.json",
+              "pages": [
+                {
+                  "id": "ch02-u1-l2-p1",
+                  "title": "2x + 3x：数盒子就行"
+                },
+                {
+                  "id": "ch02-u1-l2-p1b",
+                  "title": "合并三步：找、并、抄"
+                }
+              ]
+            },
+            {
+              "id": "ch02-u1-l3",
+              "title": "幂的运算",
+              "chapterId": "ch02",
+              "chapterTitle": "整式与因式分解",
+              "unitId": "ch02-u1",
+              "unitTitle": "整式",
+              "bundle": "ch02-u1-l3.bundle.js",
+              "freshness": "ch02-u1-l3.freshness.json",
+              "pages": [
+                {
+                  "id": "ch02-u1-l3-p1",
+                  "title": "同底数幂相乘：指数相加"
+                },
+                {
+                  "id": "ch02-u1-l3-p1b",
+                  "title": "同底数幂：指数相加"
+                },
+                {
+                  "id": "ch02-u1-l3-p2",
+                  "title": "乘方再乘方：指数相乘"
+                },
+                {
+                  "id": "ch02-u1-l3-p2b",
+                  "title": "乘方套乘方：指数相乘"
+                },
+                {
+                  "id": "ch02-u1-l3-p2g",
+                  "title": "x²：边长为 x 的正方形"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch02-u2",
+          "title": "乘法公式",
+          "lessons": [
+            {
+              "id": "ch02-u2-l1",
+              "title": "平方差公式",
+              "chapterId": "ch02",
+              "chapterTitle": "整式与因式分解",
+              "unitId": "ch02-u2",
+              "unitTitle": "乘法公式",
+              "bundle": "ch02-u2-l1.bundle.js",
+              "freshness": "ch02-u2-l1.freshness.json",
+              "pages": [
+                {
+                  "id": "ch02-u2-l1-p1",
+                  "title": "(a+b)(a−b)：中间项去哪了？"
+                },
+                {
+                  "id": "ch02-u2-l1-p1b",
+                  "title": "平方差：三特征全中才套"
+                },
+                {
+                  "id": "ch02-u2-l1-p1g",
+                  "title": "平方差：大正方形挖一角"
+                }
+              ]
+            },
+            {
+              "id": "ch02-u2-l2",
+              "title": "完全平方公式",
+              "chapterId": "ch02",
+              "chapterTitle": "整式与因式分解",
+              "unitId": "ch02-u2",
+              "unitTitle": "乘法公式",
+              "bundle": "ch02-u2-l2.bundle.js",
+              "freshness": "ch02-u2-l2.freshness.json",
+              "pages": [
+                {
+                  "id": "ch02-u2-l2-p1",
+                  "title": "(a+b)²：别忘了中间的 2ab"
+                },
+                {
+                  "id": "ch02-u2-l2-p1b",
+                  "title": "完全平方：别漏 2ab"
+                },
+                {
+                  "id": "ch02-u2-l2-p1g",
+                  "title": "完全平方：切成四块看"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch02-u3",
+          "title": "因式分解",
+          "lessons": [
+            {
+              "id": "ch02-u3-l1",
+              "title": "因式分解的概念",
+              "chapterId": "ch02",
+              "chapterTitle": "整式与因式分解",
+              "unitId": "ch02-u3",
+              "unitTitle": "因式分解",
+              "bundle": "ch02-u3-l1.bundle.js",
+              "freshness": "ch02-u3-l1.freshness.json",
+              "pages": [
+                {
+                  "id": "ch02-u3-l1-p1",
+                  "title": "乘法倒着走：和变回积"
+                },
+                {
+                  "id": "ch02-u3-l1-p1b",
+                  "title": "因式分解：和变回积"
+                }
+              ]
+            },
+            {
+              "id": "ch02-u3-l2",
+              "title": "提公因式法",
+              "chapterId": "ch02",
+              "chapterTitle": "整式与因式分解",
+              "unitId": "ch02-u3",
+              "unitTitle": "因式分解",
+              "bundle": "ch02-u3-l2.bundle.js",
+              "freshness": "ch02-u3-l2.freshness.json",
+              "pages": [
+                {
+                  "id": "ch02-u3-l2-p1",
+                  "title": "3x²+6x：先把 3x 提出来"
+                },
+                {
+                  "id": "ch02-u3-l2-p1b",
+                  "title": "提公因式：先找后提"
+                }
+              ]
+            },
+            {
+              "id": "ch02-u3-l3",
+              "title": "公式法",
+              "chapterId": "ch02",
+              "chapterTitle": "整式与因式分解",
+              "unitId": "ch02-u3",
+              "unitTitle": "因式分解",
+              "bundle": "ch02-u3-l3.bundle.js",
+              "freshness": "ch02-u3-l3.freshness.json",
+              "pages": [
+                {
+                  "id": "ch02-u3-l3-p1",
+                  "title": "x²−9：平方差倒着用"
+                },
+                {
+                  "id": "ch02-u3-l3-p1b",
+                  "title": "公式法：认出形状倒着用"
+                }
+              ]
+            },
+            {
+              "id": "ch02-u3-l4",
+              "title": "十字相乘法",
+              "chapterId": "ch02",
+              "chapterTitle": "整式与因式分解",
+              "unitId": "ch02-u3",
+              "unitTitle": "因式分解",
+              "bundle": "ch02-u3-l4.bundle.js",
+              "freshness": "ch02-u3-l4.freshness.json",
+              "pages": [
+                {
+                  "id": "ch02-u3-l4-p1",
+                  "title": "x²+5x+6：6 拆成 2×3"
+                },
+                {
+                  "id": "ch02-u3-l4-p1b",
+                  "title": "十字相乘：拆常数凑系数"
+                }
+              ]
+            },
+            {
+              "id": "ch02-u3-l5",
+              "title": "本章小结",
+              "chapterId": "ch02",
+              "chapterTitle": "整式与因式分解",
+              "unitId": "ch02-u3",
+              "unitTitle": "因式分解",
+              "bundle": "ch02-u3-l5.bundle.js",
+              "freshness": "ch02-u3-l5.freshness.json",
+              "pages": [
+                {
+                  "id": "ch02-u3-l5-p1",
+                  "title": "整式乘法 ↔ 因式分解"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch02-ux",
+          "title": "本章习题",
+          "lessons": [
+            {
+              "id": "ch02-ux-l1",
+              "title": "第二章习题",
+              "chapterId": "ch02",
+              "chapterTitle": "整式与因式分解",
+              "unitId": "ch02-ux",
+              "unitTitle": "本章习题",
+              "bundle": "ch02-ux-l1.bundle.js",
+              "freshness": "ch02-ux-l1.freshness.json",
+              "pages": [
+                {
+                  "id": "ch02-ux-l1-p1",
+                  "title": "第二章习题：整式与分解"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "lessons": [
@@ -538,6 +800,238 @@ window.MATH_MANIFEST = {
         {
           "id": "ch01-ux-l1-p1",
           "title": "第一章习题：一元一次方程"
+        }
+      ]
+    },
+    {
+      "id": "ch02-u1-l1",
+      "title": "单项式与多项式",
+      "chapterId": "ch02",
+      "chapterTitle": "整式与因式分解",
+      "unitId": "ch02-u1",
+      "unitTitle": "整式",
+      "bundle": "ch02-u1-l1.bundle.js",
+      "freshness": "ch02-u1-l1.freshness.json",
+      "pages": [
+        {
+          "id": "ch02-u1-l1-p1",
+          "title": "单项式攒成多项式"
+        },
+        {
+          "id": "ch02-u1-l1-p1b",
+          "title": "系数次数：先认再算"
+        }
+      ]
+    },
+    {
+      "id": "ch02-u1-l2",
+      "title": "整式的加减",
+      "chapterId": "ch02",
+      "chapterTitle": "整式与因式分解",
+      "unitId": "ch02-u1",
+      "unitTitle": "整式",
+      "bundle": "ch02-u1-l2.bundle.js",
+      "freshness": "ch02-u1-l2.freshness.json",
+      "pages": [
+        {
+          "id": "ch02-u1-l2-p1",
+          "title": "2x + 3x：数盒子就行"
+        },
+        {
+          "id": "ch02-u1-l2-p1b",
+          "title": "合并三步：找、并、抄"
+        }
+      ]
+    },
+    {
+      "id": "ch02-u1-l3",
+      "title": "幂的运算",
+      "chapterId": "ch02",
+      "chapterTitle": "整式与因式分解",
+      "unitId": "ch02-u1",
+      "unitTitle": "整式",
+      "bundle": "ch02-u1-l3.bundle.js",
+      "freshness": "ch02-u1-l3.freshness.json",
+      "pages": [
+        {
+          "id": "ch02-u1-l3-p1",
+          "title": "同底数幂相乘：指数相加"
+        },
+        {
+          "id": "ch02-u1-l3-p1b",
+          "title": "同底数幂：指数相加"
+        },
+        {
+          "id": "ch02-u1-l3-p2",
+          "title": "乘方再乘方：指数相乘"
+        },
+        {
+          "id": "ch02-u1-l3-p2b",
+          "title": "乘方套乘方：指数相乘"
+        },
+        {
+          "id": "ch02-u1-l3-p2g",
+          "title": "x²：边长为 x 的正方形"
+        }
+      ]
+    },
+    {
+      "id": "ch02-u2-l1",
+      "title": "平方差公式",
+      "chapterId": "ch02",
+      "chapterTitle": "整式与因式分解",
+      "unitId": "ch02-u2",
+      "unitTitle": "乘法公式",
+      "bundle": "ch02-u2-l1.bundle.js",
+      "freshness": "ch02-u2-l1.freshness.json",
+      "pages": [
+        {
+          "id": "ch02-u2-l1-p1",
+          "title": "(a+b)(a−b)：中间项去哪了？"
+        },
+        {
+          "id": "ch02-u2-l1-p1b",
+          "title": "平方差：三特征全中才套"
+        },
+        {
+          "id": "ch02-u2-l1-p1g",
+          "title": "平方差：大正方形挖一角"
+        }
+      ]
+    },
+    {
+      "id": "ch02-u2-l2",
+      "title": "完全平方公式",
+      "chapterId": "ch02",
+      "chapterTitle": "整式与因式分解",
+      "unitId": "ch02-u2",
+      "unitTitle": "乘法公式",
+      "bundle": "ch02-u2-l2.bundle.js",
+      "freshness": "ch02-u2-l2.freshness.json",
+      "pages": [
+        {
+          "id": "ch02-u2-l2-p1",
+          "title": "(a+b)²：别忘了中间的 2ab"
+        },
+        {
+          "id": "ch02-u2-l2-p1b",
+          "title": "完全平方：别漏 2ab"
+        },
+        {
+          "id": "ch02-u2-l2-p1g",
+          "title": "完全平方：切成四块看"
+        }
+      ]
+    },
+    {
+      "id": "ch02-u3-l1",
+      "title": "因式分解的概念",
+      "chapterId": "ch02",
+      "chapterTitle": "整式与因式分解",
+      "unitId": "ch02-u3",
+      "unitTitle": "因式分解",
+      "bundle": "ch02-u3-l1.bundle.js",
+      "freshness": "ch02-u3-l1.freshness.json",
+      "pages": [
+        {
+          "id": "ch02-u3-l1-p1",
+          "title": "乘法倒着走：和变回积"
+        },
+        {
+          "id": "ch02-u3-l1-p1b",
+          "title": "因式分解：和变回积"
+        }
+      ]
+    },
+    {
+      "id": "ch02-u3-l2",
+      "title": "提公因式法",
+      "chapterId": "ch02",
+      "chapterTitle": "整式与因式分解",
+      "unitId": "ch02-u3",
+      "unitTitle": "因式分解",
+      "bundle": "ch02-u3-l2.bundle.js",
+      "freshness": "ch02-u3-l2.freshness.json",
+      "pages": [
+        {
+          "id": "ch02-u3-l2-p1",
+          "title": "3x²+6x：先把 3x 提出来"
+        },
+        {
+          "id": "ch02-u3-l2-p1b",
+          "title": "提公因式：先找后提"
+        }
+      ]
+    },
+    {
+      "id": "ch02-u3-l3",
+      "title": "公式法",
+      "chapterId": "ch02",
+      "chapterTitle": "整式与因式分解",
+      "unitId": "ch02-u3",
+      "unitTitle": "因式分解",
+      "bundle": "ch02-u3-l3.bundle.js",
+      "freshness": "ch02-u3-l3.freshness.json",
+      "pages": [
+        {
+          "id": "ch02-u3-l3-p1",
+          "title": "x²−9：平方差倒着用"
+        },
+        {
+          "id": "ch02-u3-l3-p1b",
+          "title": "公式法：认出形状倒着用"
+        }
+      ]
+    },
+    {
+      "id": "ch02-u3-l4",
+      "title": "十字相乘法",
+      "chapterId": "ch02",
+      "chapterTitle": "整式与因式分解",
+      "unitId": "ch02-u3",
+      "unitTitle": "因式分解",
+      "bundle": "ch02-u3-l4.bundle.js",
+      "freshness": "ch02-u3-l4.freshness.json",
+      "pages": [
+        {
+          "id": "ch02-u3-l4-p1",
+          "title": "x²+5x+6：6 拆成 2×3"
+        },
+        {
+          "id": "ch02-u3-l4-p1b",
+          "title": "十字相乘：拆常数凑系数"
+        }
+      ]
+    },
+    {
+      "id": "ch02-u3-l5",
+      "title": "本章小结",
+      "chapterId": "ch02",
+      "chapterTitle": "整式与因式分解",
+      "unitId": "ch02-u3",
+      "unitTitle": "因式分解",
+      "bundle": "ch02-u3-l5.bundle.js",
+      "freshness": "ch02-u3-l5.freshness.json",
+      "pages": [
+        {
+          "id": "ch02-u3-l5-p1",
+          "title": "整式乘法 ↔ 因式分解"
+        }
+      ]
+    },
+    {
+      "id": "ch02-ux-l1",
+      "title": "第二章习题",
+      "chapterId": "ch02",
+      "chapterTitle": "整式与因式分解",
+      "unitId": "ch02-ux",
+      "unitTitle": "本章习题",
+      "bundle": "ch02-ux-l1.bundle.js",
+      "freshness": "ch02-ux-l1.freshness.json",
+      "pages": [
+        {
+          "id": "ch02-ux-l1-p1",
+          "title": "第二章习题：整式与分解"
         }
       ]
     }
