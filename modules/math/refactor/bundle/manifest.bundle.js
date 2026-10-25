@@ -1,5 +1,5 @@
 window.MATH_MANIFEST = {
-  "generatedAt": "2026-10-25T09:32:53.962Z",
+  "generatedAt": "2026-10-25T10:09:17.707Z",
   "chapters": [
     {
       "id": "ch00",
@@ -2780,6 +2780,230 @@ window.MATH_MANIFEST = {
           ]
         }
       ]
+    },
+    {
+      "id": "ch12",
+      "title": "定积分与微积分基本定理",
+      "units": [
+        {
+          "id": "ch12-u1",
+          "title": "定积分的概念",
+          "lessons": [
+            {
+              "id": "ch12-u1-l1",
+              "title": "曲边梯形的面积（一）：分割与近似",
+              "chapterId": "ch12",
+              "chapterTitle": "定积分与微积分基本定理",
+              "unitId": "ch12-u1",
+              "unitTitle": "定积分的概念",
+              "bundle": "ch12-u1-l1.bundle.js",
+              "freshness": "ch12-u1-l1.freshness.json",
+              "pages": [
+                {
+                  "id": "ch12-u1-l1-p1",
+                  "title": "已知速度求路程：先切碎"
+                },
+                {
+                  "id": "ch12-u1-l1-p1b",
+                  "title": "曲边面积：切碎再拼"
+                }
+              ]
+            },
+            {
+              "id": "ch12-u1-l2",
+              "title": "曲边梯形的面积（二）：求和与取极限",
+              "chapterId": "ch12",
+              "chapterTitle": "定积分与微积分基本定理",
+              "unitId": "ch12-u1",
+              "unitTitle": "定积分的概念",
+              "bundle": "ch12-u1-l2.bundle.js",
+              "freshness": "ch12-u1-l2.freshness.json",
+              "pages": [
+                {
+                  "id": "ch12-u1-l2-p1",
+                  "title": "n 越大，和越接近 1/3"
+                },
+                {
+                  "id": "ch12-u1-l2-p1b",
+                  "title": "黎曼和：n→∞ 取极限"
+                }
+              ]
+            },
+            {
+              "id": "ch12-u1-l3",
+              "title": "定积分的定义",
+              "chapterId": "ch12",
+              "chapterTitle": "定积分与微积分基本定理",
+              "unitId": "ch12-u1",
+              "unitTitle": "定积分的概念",
+              "bundle": "ch12-u1-l3.bundle.js",
+              "freshness": "ch12-u1-l3.freshness.json",
+              "pages": [
+                {
+                  "id": "ch12-u1-l3-p1",
+                  "title": "定积分：面积的精确名字"
+                },
+                {
+                  "id": "ch12-u1-l3-p1b",
+                  "title": "∫：把无穷多份加起来"
+                }
+              ]
+            },
+            {
+              "id": "ch12-u1-l4",
+              "title": "定积分的性质",
+              "chapterId": "ch12",
+              "chapterTitle": "定积分与微积分基本定理",
+              "unitId": "ch12-u1",
+              "unitTitle": "定积分的概念",
+              "bundle": "ch12-u1-l4.bundle.js",
+              "freshness": "ch12-u1-l4.freshness.json",
+              "pages": [
+                {
+                  "id": "ch12-u1-l4-p1",
+                  "title": "分开算再加，结果一样"
+                },
+                {
+                  "id": "ch12-u1-l4-p1b",
+                  "title": "线性性质：分开算"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch12-u2",
+          "title": "微积分基本定理",
+          "lessons": [
+            {
+              "id": "ch12-u2-l1",
+              "title": "面积函数：变上限积分",
+              "chapterId": "ch12",
+              "chapterTitle": "定积分与微积分基本定理",
+              "unitId": "ch12-u2",
+              "unitTitle": "微积分基本定理",
+              "bundle": "ch12-u2-l1.bundle.js",
+              "freshness": "ch12-u2-l1.freshness.json",
+              "pages": [
+                {
+                  "id": "ch12-u2-l1-p1",
+                  "title": "面积函数：右端点会动"
+                },
+                {
+                  "id": "ch12-u2-l1-p1b",
+                  "title": "面积函数：上限是变量"
+                }
+              ]
+            },
+            {
+              "id": "ch12-u2-l2",
+              "title": "原函数与不定积分",
+              "chapterId": "ch12",
+              "chapterTitle": "定积分与微积分基本定理",
+              "unitId": "ch12-u2",
+              "unitTitle": "微积分基本定理",
+              "bundle": "ch12-u2-l2.bundle.js",
+              "freshness": "ch12-u2-l2.freshness.json",
+              "pages": [
+                {
+                  "id": "ch12-u2-l2-p1",
+                  "title": "原函数：坡度的逆运算"
+                },
+                {
+                  "id": "ch12-u2-l2-p1b",
+                  "title": "原函数：倒着求导"
+                }
+              ]
+            },
+            {
+              "id": "ch12-u2-l3",
+              "title": "牛顿-莱布尼茨公式",
+              "chapterId": "ch12",
+              "chapterTitle": "定积分与微积分基本定理",
+              "unitId": "ch12-u2",
+              "unitTitle": "微积分基本定理",
+              "bundle": "ch12-u2-l3.bundle.js",
+              "freshness": "ch12-u2-l3.freshness.json",
+              "pages": [
+                {
+                  "id": "ch12-u2-l3-p1",
+                  "title": "牛顿-莱布尼茨：面积=原函数之差"
+                },
+                {
+                  "id": "ch12-u2-l3-p1b",
+                  "title": "牛顿-莱布尼茨：两步算面积"
+                },
+                {
+                  "id": "ch12-u2-l3-p2",
+                  "title": "常数 C 在相减中消失"
+                },
+                {
+                  "id": "ch12-u2-l3-p2b",
+                  "title": "C 抵消：随便选个原函数"
+                }
+              ]
+            },
+            {
+              "id": "ch12-u2-l4",
+              "title": "定积分的应用",
+              "chapterId": "ch12",
+              "chapterTitle": "定积分与微积分基本定理",
+              "unitId": "ch12-u2",
+              "unitTitle": "微积分基本定理",
+              "bundle": "ch12-u2-l4.bundle.js",
+              "freshness": "ch12-u2-l4.freshness.json",
+              "pages": [
+                {
+                  "id": "ch12-u2-l4-p1",
+                  "title": "水池注水：面积=总水量"
+                },
+                {
+                  "id": "ch12-u2-l4-p1b",
+                  "title": "积分=累积量"
+                }
+              ]
+            },
+            {
+              "id": "ch12-u2-l5",
+              "title": "全书总结：微积分的统一",
+              "chapterId": "ch12",
+              "chapterTitle": "定积分与微积分基本定理",
+              "unitId": "ch12-u2",
+              "unitTitle": "微积分基本定理",
+              "bundle": "ch12-u2-l5.bundle.js",
+              "freshness": "ch12-u2-l5.freshness.json",
+              "pages": [
+                {
+                  "id": "ch12-u2-l5-p1",
+                  "title": "全书总结：微分与积分互逆"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch12-ux",
+          "title": "本章习题",
+          "lessons": [
+            {
+              "id": "ch12-ux-l1",
+              "title": "第十二章习题",
+              "chapterId": "ch12",
+              "chapterTitle": "定积分与微积分基本定理",
+              "unitId": "ch12-ux",
+              "unitTitle": "本章习题",
+              "bundle": "ch12-ux-l1.bundle.js",
+              "freshness": "ch12-ux-l1.freshness.json",
+              "pages": [
+                {
+                  "id": "ch12-ux-l1-p1",
+                  "title": "第十二章习题：定积分"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "lessons": [
@@ -5212,6 +5436,206 @@ window.MATH_MANIFEST = {
         {
           "id": "ch11-ux-l1-p1",
           "title": "第十一章习题：导数"
+        }
+      ]
+    },
+    {
+      "id": "ch12-u1-l1",
+      "title": "曲边梯形的面积（一）：分割与近似",
+      "chapterId": "ch12",
+      "chapterTitle": "定积分与微积分基本定理",
+      "unitId": "ch12-u1",
+      "unitTitle": "定积分的概念",
+      "bundle": "ch12-u1-l1.bundle.js",
+      "freshness": "ch12-u1-l1.freshness.json",
+      "pages": [
+        {
+          "id": "ch12-u1-l1-p1",
+          "title": "已知速度求路程：先切碎"
+        },
+        {
+          "id": "ch12-u1-l1-p1b",
+          "title": "曲边面积：切碎再拼"
+        }
+      ]
+    },
+    {
+      "id": "ch12-u1-l2",
+      "title": "曲边梯形的面积（二）：求和与取极限",
+      "chapterId": "ch12",
+      "chapterTitle": "定积分与微积分基本定理",
+      "unitId": "ch12-u1",
+      "unitTitle": "定积分的概念",
+      "bundle": "ch12-u1-l2.bundle.js",
+      "freshness": "ch12-u1-l2.freshness.json",
+      "pages": [
+        {
+          "id": "ch12-u1-l2-p1",
+          "title": "n 越大，和越接近 1/3"
+        },
+        {
+          "id": "ch12-u1-l2-p1b",
+          "title": "黎曼和：n→∞ 取极限"
+        }
+      ]
+    },
+    {
+      "id": "ch12-u1-l3",
+      "title": "定积分的定义",
+      "chapterId": "ch12",
+      "chapterTitle": "定积分与微积分基本定理",
+      "unitId": "ch12-u1",
+      "unitTitle": "定积分的概念",
+      "bundle": "ch12-u1-l3.bundle.js",
+      "freshness": "ch12-u1-l3.freshness.json",
+      "pages": [
+        {
+          "id": "ch12-u1-l3-p1",
+          "title": "定积分：面积的精确名字"
+        },
+        {
+          "id": "ch12-u1-l3-p1b",
+          "title": "∫：把无穷多份加起来"
+        }
+      ]
+    },
+    {
+      "id": "ch12-u1-l4",
+      "title": "定积分的性质",
+      "chapterId": "ch12",
+      "chapterTitle": "定积分与微积分基本定理",
+      "unitId": "ch12-u1",
+      "unitTitle": "定积分的概念",
+      "bundle": "ch12-u1-l4.bundle.js",
+      "freshness": "ch12-u1-l4.freshness.json",
+      "pages": [
+        {
+          "id": "ch12-u1-l4-p1",
+          "title": "分开算再加，结果一样"
+        },
+        {
+          "id": "ch12-u1-l4-p1b",
+          "title": "线性性质：分开算"
+        }
+      ]
+    },
+    {
+      "id": "ch12-u2-l1",
+      "title": "面积函数：变上限积分",
+      "chapterId": "ch12",
+      "chapterTitle": "定积分与微积分基本定理",
+      "unitId": "ch12-u2",
+      "unitTitle": "微积分基本定理",
+      "bundle": "ch12-u2-l1.bundle.js",
+      "freshness": "ch12-u2-l1.freshness.json",
+      "pages": [
+        {
+          "id": "ch12-u2-l1-p1",
+          "title": "面积函数：右端点会动"
+        },
+        {
+          "id": "ch12-u2-l1-p1b",
+          "title": "面积函数：上限是变量"
+        }
+      ]
+    },
+    {
+      "id": "ch12-u2-l2",
+      "title": "原函数与不定积分",
+      "chapterId": "ch12",
+      "chapterTitle": "定积分与微积分基本定理",
+      "unitId": "ch12-u2",
+      "unitTitle": "微积分基本定理",
+      "bundle": "ch12-u2-l2.bundle.js",
+      "freshness": "ch12-u2-l2.freshness.json",
+      "pages": [
+        {
+          "id": "ch12-u2-l2-p1",
+          "title": "原函数：坡度的逆运算"
+        },
+        {
+          "id": "ch12-u2-l2-p1b",
+          "title": "原函数：倒着求导"
+        }
+      ]
+    },
+    {
+      "id": "ch12-u2-l3",
+      "title": "牛顿-莱布尼茨公式",
+      "chapterId": "ch12",
+      "chapterTitle": "定积分与微积分基本定理",
+      "unitId": "ch12-u2",
+      "unitTitle": "微积分基本定理",
+      "bundle": "ch12-u2-l3.bundle.js",
+      "freshness": "ch12-u2-l3.freshness.json",
+      "pages": [
+        {
+          "id": "ch12-u2-l3-p1",
+          "title": "牛顿-莱布尼茨：面积=原函数之差"
+        },
+        {
+          "id": "ch12-u2-l3-p1b",
+          "title": "牛顿-莱布尼茨：两步算面积"
+        },
+        {
+          "id": "ch12-u2-l3-p2",
+          "title": "常数 C 在相减中消失"
+        },
+        {
+          "id": "ch12-u2-l3-p2b",
+          "title": "C 抵消：随便选个原函数"
+        }
+      ]
+    },
+    {
+      "id": "ch12-u2-l4",
+      "title": "定积分的应用",
+      "chapterId": "ch12",
+      "chapterTitle": "定积分与微积分基本定理",
+      "unitId": "ch12-u2",
+      "unitTitle": "微积分基本定理",
+      "bundle": "ch12-u2-l4.bundle.js",
+      "freshness": "ch12-u2-l4.freshness.json",
+      "pages": [
+        {
+          "id": "ch12-u2-l4-p1",
+          "title": "水池注水：面积=总水量"
+        },
+        {
+          "id": "ch12-u2-l4-p1b",
+          "title": "积分=累积量"
+        }
+      ]
+    },
+    {
+      "id": "ch12-u2-l5",
+      "title": "全书总结：微积分的统一",
+      "chapterId": "ch12",
+      "chapterTitle": "定积分与微积分基本定理",
+      "unitId": "ch12-u2",
+      "unitTitle": "微积分基本定理",
+      "bundle": "ch12-u2-l5.bundle.js",
+      "freshness": "ch12-u2-l5.freshness.json",
+      "pages": [
+        {
+          "id": "ch12-u2-l5-p1",
+          "title": "全书总结：微分与积分互逆"
+        }
+      ]
+    },
+    {
+      "id": "ch12-ux-l1",
+      "title": "第十二章习题",
+      "chapterId": "ch12",
+      "chapterTitle": "定积分与微积分基本定理",
+      "unitId": "ch12-ux",
+      "unitTitle": "本章习题",
+      "bundle": "ch12-ux-l1.bundle.js",
+      "freshness": "ch12-ux-l1.freshness.json",
+      "pages": [
+        {
+          "id": "ch12-ux-l1-p1",
+          "title": "第十二章习题：定积分"
         }
       ]
     }
