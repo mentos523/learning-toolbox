@@ -1,5 +1,5 @@
 window.MATH_MANIFEST = {
-  "generatedAt": "2026-10-25T12:21:43.547Z",
+  "generatedAt": "2026-10-25T12:50:11.833Z",
   "chapters": [
     {
       "id": "ch00",
@@ -3700,6 +3700,218 @@ window.MATH_MANIFEST = {
           ]
         }
       ]
+    },
+    {
+      "id": "g04",
+      "title": "全等三角形",
+      "units": [
+        {
+          "id": "g04-u1",
+          "title": "全等与判定",
+          "lessons": [
+            {
+              "id": "g04-u1-l1",
+              "title": "全等的概念",
+              "chapterId": "g04",
+              "chapterTitle": "全等三角形",
+              "unitId": "g04-u1",
+              "unitTitle": "全等与判定",
+              "bundle": "g04-u1-l1.bundle.js",
+              "freshness": "g04-u1-l1.freshness.json",
+              "pages": [
+                {
+                  "id": "g04-u1-l1-p1",
+                  "title": "拼图：严丝合缝才算全等"
+                },
+                {
+                  "id": "g04-u1-l1-p2",
+                  "title": "全等：能完全重合"
+                }
+              ]
+            },
+            {
+              "id": "g04-u1-l2",
+              "title": "SSS 判定",
+              "chapterId": "g04",
+              "chapterTitle": "全等三角形",
+              "unitId": "g04-u1",
+              "unitTitle": "全等与判定",
+              "bundle": "g04-u1-l2.bundle.js",
+              "freshness": "g04-u1-l2.freshness.json",
+              "pages": [
+                {
+                  "id": "g04-u1-l2-p1",
+                  "title": "拉一拉：四边形晃，三角形不晃"
+                },
+                {
+                  "id": "g04-u1-l2-p2",
+                  "title": "SSS：三边定，形状定"
+                },
+                {
+                  "id": "g04-u1-l2-p3",
+                  "title": "跟做：已知三边，画三角形"
+                }
+              ]
+            },
+            {
+              "id": "g04-u1-l3",
+              "title": "SAS 判定",
+              "chapterId": "g04",
+              "chapterTitle": "全等三角形",
+              "unitId": "g04-u1",
+              "unitTitle": "全等与判定",
+              "bundle": "g04-u1-l3.bundle.js",
+              "freshness": "g04-u1-l3.freshness.json",
+              "pages": [
+                {
+                  "id": "g04-u1-l3-p1",
+                  "title": "夹角一固定，三角形被“锁死”"
+                },
+                {
+                  "id": "g04-u1-l3-p2",
+                  "title": "SAS：两边夹角，锁死形状"
+                }
+              ]
+            },
+            {
+              "id": "g04-u1-l4",
+              "title": "ASA 与 AAS 判定",
+              "chapterId": "g04",
+              "chapterTitle": "全等三角形",
+              "unitId": "g04-u1",
+              "unitTitle": "全等与判定",
+              "bundle": "g04-u1-l4.bundle.js",
+              "freshness": "g04-u1-l4.freshness.json",
+              "pages": [
+                {
+                  "id": "g04-u1-l4-p1",
+                  "title": "实验：两角一夹边，扫出唯一三角形"
+                },
+                {
+                  "id": "g04-u1-l4-p2",
+                  "title": "ASA：两角夹一边"
+                },
+                {
+                  "id": "g04-u1-l4-p3",
+                  "title": "慢放证明：AAS 为什么成立"
+                },
+                {
+                  "id": "g04-u1-l4-p4",
+                  "title": "AAS：两角一对边"
+                }
+              ]
+            },
+            {
+              "id": "g04-u1-l5",
+              "title": "等腰三角形的性质",
+              "chapterId": "g04",
+              "chapterTitle": "全等三角形",
+              "unitId": "g04-u1",
+              "unitTitle": "全等与判定",
+              "bundle": "g04-u1-l5.bundle.js",
+              "freshness": "g04-u1-l5.freshness.json",
+              "pages": [
+                {
+                  "id": "g04-u1-l5-p1",
+                  "title": "对折：两边严丝合缝"
+                },
+                {
+                  "id": "g04-u1-l5-p2",
+                  "title": "性质 1：等边对等角"
+                },
+                {
+                  "id": "g04-u1-l5-p3",
+                  "title": "慢放证明：等边对等角"
+                },
+                {
+                  "id": "g04-u1-l5-p4",
+                  "title": "慢放证明：三线合一"
+                },
+                {
+                  "id": "g04-u1-l5-p5",
+                  "title": "性质 2：三线合一"
+                }
+              ]
+            },
+            {
+              "id": "g04-u1-l6",
+              "title": "等腰三角形的判定与等边三角形",
+              "chapterId": "g04",
+              "chapterTitle": "全等三角形",
+              "unitId": "g04-u1",
+              "unitTitle": "全等与判定",
+              "bundle": "g04-u1-l6.bundle.js",
+              "freshness": "g04-u1-l6.freshness.json",
+              "pages": [
+                {
+                  "id": "g04-u1-l6-p1",
+                  "title": "慢放证明：等角对等边"
+                },
+                {
+                  "id": "g04-u1-l6-p2",
+                  "title": "判定：等角对等边"
+                },
+                {
+                  "id": "g04-u1-l6-p3",
+                  "title": "等边三角形：三边等，三角六十"
+                }
+              ]
+            },
+            {
+              "id": "g04-u1-l7",
+              "title": "尺规作图（一）",
+              "chapterId": "g04",
+              "chapterTitle": "全等三角形",
+              "unitId": "g04-u1",
+              "unitTitle": "全等与判定",
+              "bundle": "g04-u1-l7.bundle.js",
+              "freshness": "g04-u1-l7.freshness.json",
+              "pages": [
+                {
+                  "id": "g04-u1-l7-p1",
+                  "title": "作图 1：作一条线段等于已知线段"
+                },
+                {
+                  "id": "g04-u1-l7-p2",
+                  "title": "作图 2：作一个角等于已知角"
+                },
+                {
+                  "id": "g04-u1-l7-p3",
+                  "title": "作图 3：作角的平分线"
+                },
+                {
+                  "id": "g04-u1-l7-p4",
+                  "title": "作图 4：过一点作已知直线的垂线"
+                },
+                {
+                  "id": "g04-u1-l7-p5",
+                  "title": "作图即全等"
+                }
+              ]
+            },
+            {
+              "id": "g04-u1-l8",
+              "title": "本章小结与习题",
+              "chapterId": "g04",
+              "chapterTitle": "全等三角形",
+              "unitId": "g04-u1",
+              "unitTitle": "全等与判定",
+              "bundle": "g04-u1-l8.bundle.js",
+              "freshness": "g04-u1-l8.freshness.json",
+              "pages": [
+                {
+                  "id": "g04-u1-l8-p1",
+                  "title": "全等章：一张图总结"
+                },
+                {
+                  "id": "g04-u1-l8-p2",
+                  "title": "本章习题：6 道题"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "lessons": [
@@ -6968,6 +7180,206 @@ window.MATH_MANIFEST = {
         {
           "id": "g03-u1-l6-p2",
           "title": "本章习题：5 道题"
+        }
+      ]
+    },
+    {
+      "id": "g04-u1-l1",
+      "title": "全等的概念",
+      "chapterId": "g04",
+      "chapterTitle": "全等三角形",
+      "unitId": "g04-u1",
+      "unitTitle": "全等与判定",
+      "bundle": "g04-u1-l1.bundle.js",
+      "freshness": "g04-u1-l1.freshness.json",
+      "pages": [
+        {
+          "id": "g04-u1-l1-p1",
+          "title": "拼图：严丝合缝才算全等"
+        },
+        {
+          "id": "g04-u1-l1-p2",
+          "title": "全等：能完全重合"
+        }
+      ]
+    },
+    {
+      "id": "g04-u1-l2",
+      "title": "SSS 判定",
+      "chapterId": "g04",
+      "chapterTitle": "全等三角形",
+      "unitId": "g04-u1",
+      "unitTitle": "全等与判定",
+      "bundle": "g04-u1-l2.bundle.js",
+      "freshness": "g04-u1-l2.freshness.json",
+      "pages": [
+        {
+          "id": "g04-u1-l2-p1",
+          "title": "拉一拉：四边形晃，三角形不晃"
+        },
+        {
+          "id": "g04-u1-l2-p2",
+          "title": "SSS：三边定，形状定"
+        },
+        {
+          "id": "g04-u1-l2-p3",
+          "title": "跟做：已知三边，画三角形"
+        }
+      ]
+    },
+    {
+      "id": "g04-u1-l3",
+      "title": "SAS 判定",
+      "chapterId": "g04",
+      "chapterTitle": "全等三角形",
+      "unitId": "g04-u1",
+      "unitTitle": "全等与判定",
+      "bundle": "g04-u1-l3.bundle.js",
+      "freshness": "g04-u1-l3.freshness.json",
+      "pages": [
+        {
+          "id": "g04-u1-l3-p1",
+          "title": "夹角一固定，三角形被“锁死”"
+        },
+        {
+          "id": "g04-u1-l3-p2",
+          "title": "SAS：两边夹角，锁死形状"
+        }
+      ]
+    },
+    {
+      "id": "g04-u1-l4",
+      "title": "ASA 与 AAS 判定",
+      "chapterId": "g04",
+      "chapterTitle": "全等三角形",
+      "unitId": "g04-u1",
+      "unitTitle": "全等与判定",
+      "bundle": "g04-u1-l4.bundle.js",
+      "freshness": "g04-u1-l4.freshness.json",
+      "pages": [
+        {
+          "id": "g04-u1-l4-p1",
+          "title": "实验：两角一夹边，扫出唯一三角形"
+        },
+        {
+          "id": "g04-u1-l4-p2",
+          "title": "ASA：两角夹一边"
+        },
+        {
+          "id": "g04-u1-l4-p3",
+          "title": "慢放证明：AAS 为什么成立"
+        },
+        {
+          "id": "g04-u1-l4-p4",
+          "title": "AAS：两角一对边"
+        }
+      ]
+    },
+    {
+      "id": "g04-u1-l5",
+      "title": "等腰三角形的性质",
+      "chapterId": "g04",
+      "chapterTitle": "全等三角形",
+      "unitId": "g04-u1",
+      "unitTitle": "全等与判定",
+      "bundle": "g04-u1-l5.bundle.js",
+      "freshness": "g04-u1-l5.freshness.json",
+      "pages": [
+        {
+          "id": "g04-u1-l5-p1",
+          "title": "对折：两边严丝合缝"
+        },
+        {
+          "id": "g04-u1-l5-p2",
+          "title": "性质 1：等边对等角"
+        },
+        {
+          "id": "g04-u1-l5-p3",
+          "title": "慢放证明：等边对等角"
+        },
+        {
+          "id": "g04-u1-l5-p4",
+          "title": "慢放证明：三线合一"
+        },
+        {
+          "id": "g04-u1-l5-p5",
+          "title": "性质 2：三线合一"
+        }
+      ]
+    },
+    {
+      "id": "g04-u1-l6",
+      "title": "等腰三角形的判定与等边三角形",
+      "chapterId": "g04",
+      "chapterTitle": "全等三角形",
+      "unitId": "g04-u1",
+      "unitTitle": "全等与判定",
+      "bundle": "g04-u1-l6.bundle.js",
+      "freshness": "g04-u1-l6.freshness.json",
+      "pages": [
+        {
+          "id": "g04-u1-l6-p1",
+          "title": "慢放证明：等角对等边"
+        },
+        {
+          "id": "g04-u1-l6-p2",
+          "title": "判定：等角对等边"
+        },
+        {
+          "id": "g04-u1-l6-p3",
+          "title": "等边三角形：三边等，三角六十"
+        }
+      ]
+    },
+    {
+      "id": "g04-u1-l7",
+      "title": "尺规作图（一）",
+      "chapterId": "g04",
+      "chapterTitle": "全等三角形",
+      "unitId": "g04-u1",
+      "unitTitle": "全等与判定",
+      "bundle": "g04-u1-l7.bundle.js",
+      "freshness": "g04-u1-l7.freshness.json",
+      "pages": [
+        {
+          "id": "g04-u1-l7-p1",
+          "title": "作图 1：作一条线段等于已知线段"
+        },
+        {
+          "id": "g04-u1-l7-p2",
+          "title": "作图 2：作一个角等于已知角"
+        },
+        {
+          "id": "g04-u1-l7-p3",
+          "title": "作图 3：作角的平分线"
+        },
+        {
+          "id": "g04-u1-l7-p4",
+          "title": "作图 4：过一点作已知直线的垂线"
+        },
+        {
+          "id": "g04-u1-l7-p5",
+          "title": "作图即全等"
+        }
+      ]
+    },
+    {
+      "id": "g04-u1-l8",
+      "title": "本章小结与习题",
+      "chapterId": "g04",
+      "chapterTitle": "全等三角形",
+      "unitId": "g04-u1",
+      "unitTitle": "全等与判定",
+      "bundle": "g04-u1-l8.bundle.js",
+      "freshness": "g04-u1-l8.freshness.json",
+      "pages": [
+        {
+          "id": "g04-u1-l8-p1",
+          "title": "全等章：一张图总结"
+        },
+        {
+          "id": "g04-u1-l8-p2",
+          "title": "本章习题：6 道题"
         }
       ]
     }
