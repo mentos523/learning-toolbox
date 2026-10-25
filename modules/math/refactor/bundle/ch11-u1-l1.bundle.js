@@ -1,0 +1,92 @@
+window.MATH_BUNDLES = window.MATH_BUNDLES || {};
+window.MATH_BUNDLES["ch11-u1-l1"] = {
+  "lessonId": "ch11-u1-l1",
+  "lessonTitle": "平均变化率",
+  "chapterId": "ch11",
+  "pages": [
+    {
+      "id": "ch11-u1-l1-p1",
+      "title": "割线斜率：平均变化率",
+      "concept": "平均变化率",
+      "formulas": [
+        {
+          "id": "f1",
+          "latex": "\\frac{\\Delta y}{\\Delta x} = \\frac{f(x_2) - f(x_1)}{x_2 - x_1}",
+          "translation": "平均变化率：y 的增量除以 x 的增量——几何上就是割线的斜率"
+        },
+        {
+          "id": "f2",
+          "latex": "\\frac{2^2 - 1^2}{2 - 1} = 3",
+          "translation": "y=x² 从 x=1 到 x=2：平均变化率是 3——这段割线的斜率"
+        }
+      ],
+      "interaction": {
+        "type": "slider-lab",
+        "params": {
+          "min": 1.5,
+          "max": 4,
+          "step": 0.5,
+          "label": "x",
+          "expr": "(x^2-1)/(x-1)",
+          "target": 3,
+          "targetLabel": "找：斜率=3 时第二点在哪"
+        }
+      },
+      "auxInteraction": null,
+      "hints": [
+        "拖动第二点：区间越短，割线越贴近曲线，斜率越接近那一点的陡峭程度。",
+        "0–10 秒走 100 米：平均速度 10 m/s，这就是平均变化率。"
+      ],
+      "examples": [
+        {
+          "text": "爬坡：两点间的平均坡度就是割线斜率",
+          "figure": "滑块实验"
+        }
+      ],
+      "prev": "ch10-ub-l1-p1",
+      "next": "ch11-u1-l1-p1b"
+    },
+    {
+      "id": "ch11-u1-l1-p1b",
+      "title": "平均变化率：两点间坡度",
+      "concept": "讲解：平均变化率",
+      "formulas": [
+        {
+          "id": "f1",
+          "latex": "\\frac{100 - 0}{10 - 0} = 10",
+          "translation": "0–10 秒跑 100 米：平均速度 10 m/s"
+        },
+        {
+          "id": "f2",
+          "latex": "\\frac{3^2 - 1^2}{3 - 1} = 4",
+          "translation": "y=x² 从 x=1 到 3：平均变化率 4"
+        }
+      ],
+      "interaction": {
+        "params": {
+          "expr": "(x^2-1)/(x-1)",
+          "label": "x",
+          "max": 4,
+          "min": 1.5,
+          "step": 0.5,
+          "target": 3,
+          "targetLabel": "找：斜率=3 时第二点在哪"
+        },
+        "type": "slider-lab"
+      },
+      "auxInteraction": null,
+      "hints": [
+        "平均变化率=Δy/Δx：纵增量除以横增量。",
+        "它只管“平均”：中间忽快忽慢，它都看不见。"
+      ],
+      "examples": [
+        {
+          "figure": "生活实例",
+          "text": "股票：周一 10 元周五 15 元，平均每天涨 1 元。"
+        }
+      ],
+      "prev": "ch11-u1-l1-p1",
+      "next": "ch11-u1-l2-p1"
+    }
+  ]
+};

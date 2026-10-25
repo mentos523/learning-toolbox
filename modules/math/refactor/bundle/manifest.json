@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-25T08:54:15.679Z",
+  "generatedAt": "2026-10-25T09:32:53.962Z",
   "chapters": [
     {
       "id": "ch00",
@@ -2530,6 +2530,256 @@
           ]
         }
       ]
+    },
+    {
+      "id": "ch11",
+      "title": "导数",
+      "units": [
+        {
+          "id": "ch11-u1",
+          "title": "导数的概念",
+          "lessons": [
+            {
+              "id": "ch11-u1-l1",
+              "title": "平均变化率",
+              "chapterId": "ch11",
+              "chapterTitle": "导数",
+              "unitId": "ch11-u1",
+              "unitTitle": "导数的概念",
+              "bundle": "ch11-u1-l1.bundle.js",
+              "freshness": "ch11-u1-l1.freshness.json",
+              "pages": [
+                {
+                  "id": "ch11-u1-l1-p1",
+                  "title": "割线斜率：平均变化率"
+                },
+                {
+                  "id": "ch11-u1-l1-p1b",
+                  "title": "平均变化率：两点间坡度"
+                }
+              ]
+            },
+            {
+              "id": "ch11-u1-l2",
+              "title": "瞬时变化率与导数",
+              "chapterId": "ch11",
+              "chapterTitle": "导数",
+              "unitId": "ch11-u1",
+              "unitTitle": "导数的概念",
+              "bundle": "ch11-u1-l2.bundle.js",
+              "freshness": "ch11-u1-l2.freshness.json",
+              "pages": [
+                {
+                  "id": "ch11-u1-l2-p1",
+                  "title": "h→0：平均变化率趋向 2"
+                },
+                {
+                  "id": "ch11-u1-l2-p1b",
+                  "title": "h→0：区间缩成一点"
+                }
+              ]
+            },
+            {
+              "id": "ch11-u1-l3",
+              "title": "导数的几何意义",
+              "chapterId": "ch11",
+              "chapterTitle": "导数",
+              "unitId": "ch11-u1",
+              "unitTitle": "导数的概念",
+              "bundle": "ch11-u1-l3.bundle.js",
+              "freshness": "ch11-u1-l3.freshness.json",
+              "pages": [
+                {
+                  "id": "ch11-u1-l3-p1",
+                  "title": "切线斜率就是导数"
+                },
+                {
+                  "id": "ch11-u1-l3-p1b",
+                  "title": "切线：导数的几何脸"
+                },
+                {
+                  "id": "ch11-u1-l3-p1g",
+                  "title": "放大镜：曲线放大变直线"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch11-u2",
+          "title": "求导",
+          "lessons": [
+            {
+              "id": "ch11-u2-l1",
+              "title": "基本初等函数的导数",
+              "chapterId": "ch11",
+              "chapterTitle": "导数",
+              "unitId": "ch11-u2",
+              "unitTitle": "求导",
+              "bundle": "ch11-u2-l1.bundle.js",
+              "freshness": "ch11-u2-l1.freshness.json",
+              "pages": [
+                {
+                  "id": "ch11-u2-l1-p1",
+                  "title": "求导公式表：幂法则先行"
+                },
+                {
+                  "id": "ch11-u2-l1-p1b",
+                  "title": "求导公式：先背幂法则"
+                }
+              ]
+            },
+            {
+              "id": "ch11-u2-l2",
+              "title": "求导法则",
+              "chapterId": "ch11",
+              "chapterTitle": "导数",
+              "unitId": "ch11-u2",
+              "unitTitle": "求导",
+              "bundle": "ch11-u2-l2.bundle.js",
+              "freshness": "ch11-u2-l2.freshness.json",
+              "pages": [
+                {
+                  "id": "ch11-u2-l2-p1",
+                  "title": "积的导数≠导数的积"
+                },
+                {
+                  "id": "ch11-u2-l2-p1b",
+                  "title": "积法则商法则：口诀"
+                }
+              ]
+            },
+            {
+              "id": "ch11-u2-l3",
+              "title": "链式法则",
+              "chapterId": "ch11",
+              "chapterTitle": "导数",
+              "unitId": "ch11-u2",
+              "unitTitle": "求导",
+              "bundle": "ch11-u2-l3.bundle.js",
+              "freshness": "ch11-u2-l3.freshness.json",
+              "pages": [
+                {
+                  "id": "ch11-u2-l3-p1",
+                  "title": "链式法则：剥洋葱"
+                },
+                {
+                  "id": "ch11-u2-l3-p1b",
+                  "title": "链式法则：先分层"
+                },
+                {
+                  "id": "ch11-u2-l3-p1c",
+                  "title": "为什么能拆：变化率接力"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch11-u3",
+          "title": "导数的应用",
+          "lessons": [
+            {
+              "id": "ch11-u3-l1",
+              "title": "单调性",
+              "chapterId": "ch11",
+              "chapterTitle": "导数",
+              "unitId": "ch11-u3",
+              "unitTitle": "导数的应用",
+              "bundle": "ch11-u3-l1.bundle.js",
+              "freshness": "ch11-u3-l1.freshness.json",
+              "pages": [
+                {
+                  "id": "ch11-u3-l1-p1",
+                  "title": "f'>0 上坡，f'<0 下坡"
+                },
+                {
+                  "id": "ch11-u3-l1-p1b",
+                  "title": "单调性：导数是坡度计"
+                }
+              ]
+            },
+            {
+              "id": "ch11-u3-l2",
+              "title": "极值",
+              "chapterId": "ch11",
+              "chapterTitle": "导数",
+              "unitId": "ch11-u3",
+              "unitTitle": "导数的应用",
+              "bundle": "ch11-u3-l2.bundle.js",
+              "freshness": "ch11-u3-l2.freshness.json",
+              "pages": [
+                {
+                  "id": "ch11-u3-l2-p1",
+                  "title": "山峰山谷：导数为 0 处"
+                },
+                {
+                  "id": "ch11-u3-l2-p1b",
+                  "title": "极值：驻点再看换向"
+                }
+              ]
+            },
+            {
+              "id": "ch11-u3-l3",
+              "title": "最值",
+              "chapterId": "ch11",
+              "chapterTitle": "导数",
+              "unitId": "ch11-u3",
+              "unitTitle": "导数的应用",
+              "bundle": "ch11-u3-l3.bundle.js",
+              "freshness": "ch11-u3-l3.freshness.json",
+              "pages": [
+                {
+                  "id": "ch11-u3-l3-p1",
+                  "title": "闭区间最值：端点也参选"
+                },
+                {
+                  "id": "ch11-u3-l3-p1b",
+                  "title": "最值：闭区间三步"
+                }
+              ]
+            },
+            {
+              "id": "ch11-u3-l4",
+              "title": "本章小结",
+              "chapterId": "ch11",
+              "chapterTitle": "导数",
+              "unitId": "ch11-u3",
+              "unitTitle": "导数的应用",
+              "bundle": "ch11-u3-l4.bundle.js",
+              "freshness": "ch11-u3-l4.freshness.json",
+              "pages": [
+                {
+                  "id": "ch11-u3-l4-p1",
+                  "title": "本章小结：从变化率到最值"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch11-ux",
+          "title": "本章习题",
+          "lessons": [
+            {
+              "id": "ch11-ux-l1",
+              "title": "第十一章习题",
+              "chapterId": "ch11",
+              "chapterTitle": "导数",
+              "unitId": "ch11-ux",
+              "unitTitle": "本章习题",
+              "bundle": "ch11-ux-l1.bundle.js",
+              "freshness": "ch11-ux-l1.freshness.json",
+              "pages": [
+                {
+                  "id": "ch11-ux-l1-p1",
+                  "title": "第十一章习题：导数"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "lessons": [
@@ -4742,6 +4992,226 @@
         {
           "id": "ch10-ux-l1-p1",
           "title": "第十章习题：极限连续"
+        }
+      ]
+    },
+    {
+      "id": "ch11-u1-l1",
+      "title": "平均变化率",
+      "chapterId": "ch11",
+      "chapterTitle": "导数",
+      "unitId": "ch11-u1",
+      "unitTitle": "导数的概念",
+      "bundle": "ch11-u1-l1.bundle.js",
+      "freshness": "ch11-u1-l1.freshness.json",
+      "pages": [
+        {
+          "id": "ch11-u1-l1-p1",
+          "title": "割线斜率：平均变化率"
+        },
+        {
+          "id": "ch11-u1-l1-p1b",
+          "title": "平均变化率：两点间坡度"
+        }
+      ]
+    },
+    {
+      "id": "ch11-u1-l2",
+      "title": "瞬时变化率与导数",
+      "chapterId": "ch11",
+      "chapterTitle": "导数",
+      "unitId": "ch11-u1",
+      "unitTitle": "导数的概念",
+      "bundle": "ch11-u1-l2.bundle.js",
+      "freshness": "ch11-u1-l2.freshness.json",
+      "pages": [
+        {
+          "id": "ch11-u1-l2-p1",
+          "title": "h→0：平均变化率趋向 2"
+        },
+        {
+          "id": "ch11-u1-l2-p1b",
+          "title": "h→0：区间缩成一点"
+        }
+      ]
+    },
+    {
+      "id": "ch11-u1-l3",
+      "title": "导数的几何意义",
+      "chapterId": "ch11",
+      "chapterTitle": "导数",
+      "unitId": "ch11-u1",
+      "unitTitle": "导数的概念",
+      "bundle": "ch11-u1-l3.bundle.js",
+      "freshness": "ch11-u1-l3.freshness.json",
+      "pages": [
+        {
+          "id": "ch11-u1-l3-p1",
+          "title": "切线斜率就是导数"
+        },
+        {
+          "id": "ch11-u1-l3-p1b",
+          "title": "切线：导数的几何脸"
+        },
+        {
+          "id": "ch11-u1-l3-p1g",
+          "title": "放大镜：曲线放大变直线"
+        }
+      ]
+    },
+    {
+      "id": "ch11-u2-l1",
+      "title": "基本初等函数的导数",
+      "chapterId": "ch11",
+      "chapterTitle": "导数",
+      "unitId": "ch11-u2",
+      "unitTitle": "求导",
+      "bundle": "ch11-u2-l1.bundle.js",
+      "freshness": "ch11-u2-l1.freshness.json",
+      "pages": [
+        {
+          "id": "ch11-u2-l1-p1",
+          "title": "求导公式表：幂法则先行"
+        },
+        {
+          "id": "ch11-u2-l1-p1b",
+          "title": "求导公式：先背幂法则"
+        }
+      ]
+    },
+    {
+      "id": "ch11-u2-l2",
+      "title": "求导法则",
+      "chapterId": "ch11",
+      "chapterTitle": "导数",
+      "unitId": "ch11-u2",
+      "unitTitle": "求导",
+      "bundle": "ch11-u2-l2.bundle.js",
+      "freshness": "ch11-u2-l2.freshness.json",
+      "pages": [
+        {
+          "id": "ch11-u2-l2-p1",
+          "title": "积的导数≠导数的积"
+        },
+        {
+          "id": "ch11-u2-l2-p1b",
+          "title": "积法则商法则：口诀"
+        }
+      ]
+    },
+    {
+      "id": "ch11-u2-l3",
+      "title": "链式法则",
+      "chapterId": "ch11",
+      "chapterTitle": "导数",
+      "unitId": "ch11-u2",
+      "unitTitle": "求导",
+      "bundle": "ch11-u2-l3.bundle.js",
+      "freshness": "ch11-u2-l3.freshness.json",
+      "pages": [
+        {
+          "id": "ch11-u2-l3-p1",
+          "title": "链式法则：剥洋葱"
+        },
+        {
+          "id": "ch11-u2-l3-p1b",
+          "title": "链式法则：先分层"
+        },
+        {
+          "id": "ch11-u2-l3-p1c",
+          "title": "为什么能拆：变化率接力"
+        }
+      ]
+    },
+    {
+      "id": "ch11-u3-l1",
+      "title": "单调性",
+      "chapterId": "ch11",
+      "chapterTitle": "导数",
+      "unitId": "ch11-u3",
+      "unitTitle": "导数的应用",
+      "bundle": "ch11-u3-l1.bundle.js",
+      "freshness": "ch11-u3-l1.freshness.json",
+      "pages": [
+        {
+          "id": "ch11-u3-l1-p1",
+          "title": "f'>0 上坡，f'<0 下坡"
+        },
+        {
+          "id": "ch11-u3-l1-p1b",
+          "title": "单调性：导数是坡度计"
+        }
+      ]
+    },
+    {
+      "id": "ch11-u3-l2",
+      "title": "极值",
+      "chapterId": "ch11",
+      "chapterTitle": "导数",
+      "unitId": "ch11-u3",
+      "unitTitle": "导数的应用",
+      "bundle": "ch11-u3-l2.bundle.js",
+      "freshness": "ch11-u3-l2.freshness.json",
+      "pages": [
+        {
+          "id": "ch11-u3-l2-p1",
+          "title": "山峰山谷：导数为 0 处"
+        },
+        {
+          "id": "ch11-u3-l2-p1b",
+          "title": "极值：驻点再看换向"
+        }
+      ]
+    },
+    {
+      "id": "ch11-u3-l3",
+      "title": "最值",
+      "chapterId": "ch11",
+      "chapterTitle": "导数",
+      "unitId": "ch11-u3",
+      "unitTitle": "导数的应用",
+      "bundle": "ch11-u3-l3.bundle.js",
+      "freshness": "ch11-u3-l3.freshness.json",
+      "pages": [
+        {
+          "id": "ch11-u3-l3-p1",
+          "title": "闭区间最值：端点也参选"
+        },
+        {
+          "id": "ch11-u3-l3-p1b",
+          "title": "最值：闭区间三步"
+        }
+      ]
+    },
+    {
+      "id": "ch11-u3-l4",
+      "title": "本章小结",
+      "chapterId": "ch11",
+      "chapterTitle": "导数",
+      "unitId": "ch11-u3",
+      "unitTitle": "导数的应用",
+      "bundle": "ch11-u3-l4.bundle.js",
+      "freshness": "ch11-u3-l4.freshness.json",
+      "pages": [
+        {
+          "id": "ch11-u3-l4-p1",
+          "title": "本章小结：从变化率到最值"
+        }
+      ]
+    },
+    {
+      "id": "ch11-ux-l1",
+      "title": "第十一章习题",
+      "chapterId": "ch11",
+      "chapterTitle": "导数",
+      "unitId": "ch11-ux",
+      "unitTitle": "本章习题",
+      "bundle": "ch11-ux-l1.bundle.js",
+      "freshness": "ch11-ux-l1.freshness.json",
+      "pages": [
+        {
+          "id": "ch11-ux-l1-p1",
+          "title": "第十一章习题：导数"
         }
       ]
     }

@@ -1,0 +1,70 @@
+window.MATH_BUNDLES = window.MATH_BUNDLES || {};
+window.MATH_BUNDLES["ch11-u3-l4"] = {
+  "lessonId": "ch11-u3-l4",
+  "lessonTitle": "本章小结",
+  "chapterId": "ch11",
+  "pages": [
+    {
+      "id": "ch11-u3-l4-p1",
+      "title": "本章小结：从变化率到最值",
+      "concept": "本章知识串联",
+      "formulas": [
+        {
+          "id": "f1",
+          "latex": "f'(x_0) = \\lim_{\\Delta x \\to 0} \\frac{\\Delta y}{\\Delta x}",
+          "translation": "导数：变化率的极限——割线斜率取极限，变成切线斜率"
+        },
+        {
+          "id": "f2",
+          "latex": "(x^n)' = n x^{n-1}, (f \\cdot g)' = f' g + f g'",
+          "translation": "求导工具箱：幂法则、积法则——下一站：定积分（第十二章）"
+        }
+      ],
+      "interaction": {
+        "type": "side-compare",
+        "params": {
+          "left": {
+            "kind": "slider-lab",
+            "params": {
+              "min": -3,
+              "max": 3,
+              "step": 0.1,
+              "label": "x",
+              "expr": "x^3-3*x"
+            }
+          },
+          "right": {
+            "kind": "slider-lab",
+            "params": {
+              "min": -3,
+              "max": 3,
+              "step": 0.1,
+              "label": "x",
+              "expr": "3*x^2-3"
+            }
+          },
+          "sync": [
+            "x"
+          ],
+          "labels": [
+            "y=x³−3x：拖 x 看起伏",
+            "y'=3x²−3：导数是'坡度计'"
+          ]
+        }
+      },
+      "auxInteraction": null,
+      "hints": [
+        "本章路线：平均变化率→导数→求导法则→单调性→极值→最值。",
+        "下一站第十二章：导数反过来用——已知'坡度'求'路程'，就是积分。"
+      ],
+      "examples": [
+        {
+          "text": "一图流：左图是路，右图是坡度计——导数是函数的'坡度计'",
+          "figure": "并排对比"
+        }
+      ],
+      "prev": "ch11-u3-l3-p1b",
+      "next": "ch11-ux-l1-p1"
+    }
+  ]
+};
