@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-25T10:41:50.488Z",
+  "generatedAt": "2026-10-25T11:12:06.700Z",
   "chapters": [
     {
       "id": "ch00",
@@ -3104,6 +3104,192 @@
           ]
         }
       ]
+    },
+    {
+      "id": "g01",
+      "title": "点、线、面、角",
+      "units": [
+        {
+          "id": "g01-u1",
+          "title": "点与线",
+          "lessons": [
+            {
+              "id": "g01-u1-l1",
+              "title": "点、线、面的概念",
+              "chapterId": "g01",
+              "chapterTitle": "点、线、面、角",
+              "unitId": "g01-u1",
+              "unitTitle": "点与线",
+              "bundle": "g01-u1-l1.bundle.js",
+              "freshness": "g01-u1-l1.freshness.json",
+              "pages": [
+                {
+                  "id": "g01-u1-l1-p1",
+                  "title": "生活中的点、线、面"
+                },
+                {
+                  "id": "g01-u1-l1-p2",
+                  "title": "给点、线、面起名字"
+                },
+                {
+                  "id": "g01-u1-l1-p3",
+                  "title": "几何的“洁癖”：只留形状大小位置"
+                }
+              ]
+            },
+            {
+              "id": "g01-u1-l2",
+              "title": "直线、射线、线段",
+              "chapterId": "g01",
+              "chapterTitle": "点、线、面、角",
+              "unitId": "g01-u1",
+              "unitTitle": "点与线",
+              "bundle": "g01-u1-l2.bundle.js",
+              "freshness": "g01-u1-l2.freshness.json",
+              "pages": [
+                {
+                  "id": "g01-u1-l2-p1",
+                  "title": "两点确定一条直线"
+                },
+                {
+                  "id": "g01-u1-l2-p2",
+                  "title": "直线、射线、线段：三张身份证"
+                },
+                {
+                  "id": "g01-u1-l2-p3",
+                  "title": "表示法：名字怎么写"
+                }
+              ]
+            },
+            {
+              "id": "g01-u1-l3",
+              "title": "线段的比较与中点",
+              "chapterId": "g01",
+              "chapterTitle": "点、线、面、角",
+              "unitId": "g01-u1",
+              "unitTitle": "点与线",
+              "bundle": "g01-u1-l3.bundle.js",
+              "freshness": "g01-u1-l3.freshness.json",
+              "pages": [
+                {
+                  "id": "g01-u1-l3-p1",
+                  "title": "叠一叠，比长短"
+                },
+                {
+                  "id": "g01-u1-l3-p2",
+                  "title": "中点：线段的“一半处”"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "g01-u2",
+          "title": "角",
+          "lessons": [
+            {
+              "id": "g01-u2-l1",
+              "title": "角的概念、表示与度量",
+              "chapterId": "g01",
+              "chapterTitle": "点、线、面、角",
+              "unitId": "g01-u2",
+              "unitTitle": "角",
+              "bundle": "g01-u2-l1.bundle.js",
+              "freshness": "g01-u2-l1.freshness.json",
+              "pages": [
+                {
+                  "id": "g01-u2-l1-p1",
+                  "title": "射线转一转，角就出来了"
+                },
+                {
+                  "id": "g01-u2-l1-p2",
+                  "title": "角的 4 种写法"
+                },
+                {
+                  "id": "g01-u2-l1-p3",
+                  "title": "拿起量角器，自己量一量"
+                },
+                {
+                  "id": "g01-u2-l1-p4",
+                  "title": "度、分、秒：角度的时分秒"
+                }
+              ]
+            },
+            {
+              "id": "g01-u2-l2",
+              "title": "角的比较与角平分线",
+              "chapterId": "g01",
+              "chapterTitle": "点、线、面、角",
+              "unitId": "g01-u2",
+              "unitTitle": "角",
+              "bundle": "g01-u2-l2.bundle.js",
+              "freshness": "g01-u2-l2.freshness.json",
+              "pages": [
+                {
+                  "id": "g01-u2-l2-p1",
+                  "title": "叠角：比一比谁大"
+                },
+                {
+                  "id": "g01-u2-l2-p2",
+                  "title": "角的加减法"
+                },
+                {
+                  "id": "g01-u2-l2-p3",
+                  "title": "角平分线：从中间下刀"
+                }
+              ]
+            },
+            {
+              "id": "g01-u2-l3",
+              "title": "余角与补角",
+              "chapterId": "g01",
+              "chapterTitle": "点、线、面、角",
+              "unitId": "g01-u2",
+              "unitTitle": "角",
+              "bundle": "g01-u2-l3.bundle.js",
+              "freshness": "g01-u2-l3.freshness.json",
+              "pages": [
+                {
+                  "id": "g01-u2-l3-p1",
+                  "title": "拼一拼：两个角凑成 90°"
+                },
+                {
+                  "id": "g01-u2-l3-p2",
+                  "title": "余角：同角的余角相等"
+                },
+                {
+                  "id": "g01-u2-l3-p3",
+                  "title": "拼一拼：两个角凑成 180°"
+                },
+                {
+                  "id": "g01-u2-l3-p4",
+                  "title": "补角：同角的补角相等"
+                }
+              ]
+            },
+            {
+              "id": "g01-u2-l4",
+              "title": "本章小结与习题",
+              "chapterId": "g01",
+              "chapterTitle": "点、线、面、角",
+              "unitId": "g01-u2",
+              "unitTitle": "角",
+              "bundle": "g01-u2-l4.bundle.js",
+              "freshness": "g01-u2-l4.freshness.json",
+              "pages": [
+                {
+                  "id": "g01-u2-l4-p1",
+                  "title": "本章小结：三步走"
+                },
+                {
+                  "id": "g01-u2-l4-p2",
+                  "title": "本章小测：分类大挑战"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "lessons": [
@@ -5824,6 +6010,174 @@
         {
           "id": "g00-u1-l4-p3",
           "title": "导论小测：5 道题"
+        }
+      ]
+    },
+    {
+      "id": "g01-u1-l1",
+      "title": "点、线、面的概念",
+      "chapterId": "g01",
+      "chapterTitle": "点、线、面、角",
+      "unitId": "g01-u1",
+      "unitTitle": "点与线",
+      "bundle": "g01-u1-l1.bundle.js",
+      "freshness": "g01-u1-l1.freshness.json",
+      "pages": [
+        {
+          "id": "g01-u1-l1-p1",
+          "title": "生活中的点、线、面"
+        },
+        {
+          "id": "g01-u1-l1-p2",
+          "title": "给点、线、面起名字"
+        },
+        {
+          "id": "g01-u1-l1-p3",
+          "title": "几何的“洁癖”：只留形状大小位置"
+        }
+      ]
+    },
+    {
+      "id": "g01-u1-l2",
+      "title": "直线、射线、线段",
+      "chapterId": "g01",
+      "chapterTitle": "点、线、面、角",
+      "unitId": "g01-u1",
+      "unitTitle": "点与线",
+      "bundle": "g01-u1-l2.bundle.js",
+      "freshness": "g01-u1-l2.freshness.json",
+      "pages": [
+        {
+          "id": "g01-u1-l2-p1",
+          "title": "两点确定一条直线"
+        },
+        {
+          "id": "g01-u1-l2-p2",
+          "title": "直线、射线、线段：三张身份证"
+        },
+        {
+          "id": "g01-u1-l2-p3",
+          "title": "表示法：名字怎么写"
+        }
+      ]
+    },
+    {
+      "id": "g01-u1-l3",
+      "title": "线段的比较与中点",
+      "chapterId": "g01",
+      "chapterTitle": "点、线、面、角",
+      "unitId": "g01-u1",
+      "unitTitle": "点与线",
+      "bundle": "g01-u1-l3.bundle.js",
+      "freshness": "g01-u1-l3.freshness.json",
+      "pages": [
+        {
+          "id": "g01-u1-l3-p1",
+          "title": "叠一叠，比长短"
+        },
+        {
+          "id": "g01-u1-l3-p2",
+          "title": "中点：线段的“一半处”"
+        }
+      ]
+    },
+    {
+      "id": "g01-u2-l1",
+      "title": "角的概念、表示与度量",
+      "chapterId": "g01",
+      "chapterTitle": "点、线、面、角",
+      "unitId": "g01-u2",
+      "unitTitle": "角",
+      "bundle": "g01-u2-l1.bundle.js",
+      "freshness": "g01-u2-l1.freshness.json",
+      "pages": [
+        {
+          "id": "g01-u2-l1-p1",
+          "title": "射线转一转，角就出来了"
+        },
+        {
+          "id": "g01-u2-l1-p2",
+          "title": "角的 4 种写法"
+        },
+        {
+          "id": "g01-u2-l1-p3",
+          "title": "拿起量角器，自己量一量"
+        },
+        {
+          "id": "g01-u2-l1-p4",
+          "title": "度、分、秒：角度的时分秒"
+        }
+      ]
+    },
+    {
+      "id": "g01-u2-l2",
+      "title": "角的比较与角平分线",
+      "chapterId": "g01",
+      "chapterTitle": "点、线、面、角",
+      "unitId": "g01-u2",
+      "unitTitle": "角",
+      "bundle": "g01-u2-l2.bundle.js",
+      "freshness": "g01-u2-l2.freshness.json",
+      "pages": [
+        {
+          "id": "g01-u2-l2-p1",
+          "title": "叠角：比一比谁大"
+        },
+        {
+          "id": "g01-u2-l2-p2",
+          "title": "角的加减法"
+        },
+        {
+          "id": "g01-u2-l2-p3",
+          "title": "角平分线：从中间下刀"
+        }
+      ]
+    },
+    {
+      "id": "g01-u2-l3",
+      "title": "余角与补角",
+      "chapterId": "g01",
+      "chapterTitle": "点、线、面、角",
+      "unitId": "g01-u2",
+      "unitTitle": "角",
+      "bundle": "g01-u2-l3.bundle.js",
+      "freshness": "g01-u2-l3.freshness.json",
+      "pages": [
+        {
+          "id": "g01-u2-l3-p1",
+          "title": "拼一拼：两个角凑成 90°"
+        },
+        {
+          "id": "g01-u2-l3-p2",
+          "title": "余角：同角的余角相等"
+        },
+        {
+          "id": "g01-u2-l3-p3",
+          "title": "拼一拼：两个角凑成 180°"
+        },
+        {
+          "id": "g01-u2-l3-p4",
+          "title": "补角：同角的补角相等"
+        }
+      ]
+    },
+    {
+      "id": "g01-u2-l4",
+      "title": "本章小结与习题",
+      "chapterId": "g01",
+      "chapterTitle": "点、线、面、角",
+      "unitId": "g01-u2",
+      "unitTitle": "角",
+      "bundle": "g01-u2-l4.bundle.js",
+      "freshness": "g01-u2-l4.freshness.json",
+      "pages": [
+        {
+          "id": "g01-u2-l4-p1",
+          "title": "本章小结：三步走"
+        },
+        {
+          "id": "g01-u2-l4-p2",
+          "title": "本章小测：分类大挑战"
         }
       ]
     }
