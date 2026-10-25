@@ -1,5 +1,5 @@
 window.MATH_MANIFEST = {
-  "generatedAt": "2026-10-25T14:15:55.774Z",
+  "generatedAt": "2026-10-25T14:43:00.886Z",
   "chapters": [
     {
       "id": "ch00",
@@ -4316,6 +4316,158 @@ window.MATH_MANIFEST = {
           ]
         }
       ]
+    },
+    {
+      "id": "g07",
+      "title": "圆（一）——圆的基本性质",
+      "units": [
+        {
+          "id": "g07-u1",
+          "title": "圆的对称性与角",
+          "lessons": [
+            {
+              "id": "g07-u1-l1",
+              "title": "圆的基本概念",
+              "chapterId": "g07",
+              "chapterTitle": "圆（一）——圆的基本性质",
+              "unitId": "g07-u1",
+              "unitTitle": "圆的对称性与角",
+              "bundle": "g07-u1-l1.bundle.js",
+              "freshness": "g07-u1-l1.freshness.json",
+              "pages": [
+                {
+                  "id": "g07-u1-l1-p1",
+                  "title": "圆规画圆：轨迹就是圆"
+                },
+                {
+                  "id": "g07-u1-l1-p2",
+                  "title": "圆的“全家福”：六个名字"
+                },
+                {
+                  "id": "g07-u1-l1-p3",
+                  "title": "圆 vs 圆面：圈和饼"
+                }
+              ]
+            },
+            {
+              "id": "g07-u1-l2",
+              "title": "垂径定理",
+              "chapterId": "g07",
+              "chapterTitle": "圆（一）——圆的基本性质",
+              "unitId": "g07-u1",
+              "unitTitle": "圆的对称性与角",
+              "bundle": "g07-u1-l2.bundle.js",
+              "freshness": "g07-u1-l2.freshness.json",
+              "pages": [
+                {
+                  "id": "g07-u1-l2-p1",
+                  "title": "对折：直径是折痕"
+                },
+                {
+                  "id": "g07-u1-l2-p2",
+                  "title": "慢放证明：垂径定理"
+                },
+                {
+                  "id": "g07-u1-l2-p3",
+                  "title": "垂径定理：赵州桥"
+                }
+              ]
+            },
+            {
+              "id": "g07-u1-l3",
+              "title": "弧、弦、圆心角",
+              "chapterId": "g07",
+              "chapterTitle": "圆（一）——圆的基本性质",
+              "unitId": "g07-u1",
+              "unitTitle": "圆的对称性与角",
+              "bundle": "g07-u1-l3.bundle.js",
+              "freshness": "g07-u1-l3.freshness.json",
+              "pages": [
+                {
+                  "id": "g07-u1-l3-p1",
+                  "title": "转一转：弧弦跟着角走"
+                },
+                {
+                  "id": "g07-u1-l3-p2",
+                  "title": "等弧、等弦、等角：一荣俱荣"
+                }
+              ]
+            },
+            {
+              "id": "g07-u1-l4",
+              "title": "圆周角定理",
+              "chapterId": "g07",
+              "chapterTitle": "圆（一）——圆的基本性质",
+              "unitId": "g07-u1",
+              "unitTitle": "圆的对称性与角",
+              "bundle": "g07-u1-l4.bundle.js",
+              "freshness": "g07-u1-l4.freshness.json",
+              "pages": [
+                {
+                  "id": "g07-u1-l4-p1",
+                  "title": "先认清：什么才是圆周角"
+                },
+                {
+                  "id": "g07-u1-l4-p2",
+                  "title": "慢放证明：情形一"
+                },
+                {
+                  "id": "g07-u1-l4-p3",
+                  "title": "慢放证明：情形二"
+                },
+                {
+                  "id": "g07-u1-l4-p4",
+                  "title": "慢放证明：情形三"
+                },
+                {
+                  "id": "g07-u1-l4-p5",
+                  "title": "圆周角定理：总述"
+                }
+              ]
+            },
+            {
+              "id": "g07-u1-l5",
+              "title": "直径所对的圆周角",
+              "chapterId": "g07",
+              "chapterTitle": "圆（一）——圆的基本性质",
+              "unitId": "g07-u1",
+              "unitTitle": "圆的对称性与角",
+              "bundle": "g07-u1-l5.bundle.js",
+              "freshness": "g07-u1-l5.freshness.json",
+              "pages": [
+                {
+                  "id": "g07-u1-l5-p1",
+                  "title": "拖一拖：半圆上的角不变"
+                },
+                {
+                  "id": "g07-u1-l5-p2",
+                  "title": "推论与逆命题：一对互逆"
+                }
+              ]
+            },
+            {
+              "id": "g07-u1-l6",
+              "title": "本章小结与习题",
+              "chapterId": "g07",
+              "chapterTitle": "圆（一）——圆的基本性质",
+              "unitId": "g07-u1",
+              "unitTitle": "圆的对称性与角",
+              "bundle": "g07-u1-l6.bundle.js",
+              "freshness": "g07-u1-l6.freshness.json",
+              "pages": [
+                {
+                  "id": "g07-u1-l6-p1",
+                  "title": "圆（一）：一张图总结"
+                },
+                {
+                  "id": "g07-u1-l6-p2",
+                  "title": "本章习题：6 道题"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "lessons": [
@@ -8164,6 +8316,146 @@ window.MATH_MANIFEST = {
         {
           "id": "g06-u1-l7-p2",
           "title": "本章小测：6 道题"
+        }
+      ]
+    },
+    {
+      "id": "g07-u1-l1",
+      "title": "圆的基本概念",
+      "chapterId": "g07",
+      "chapterTitle": "圆（一）——圆的基本性质",
+      "unitId": "g07-u1",
+      "unitTitle": "圆的对称性与角",
+      "bundle": "g07-u1-l1.bundle.js",
+      "freshness": "g07-u1-l1.freshness.json",
+      "pages": [
+        {
+          "id": "g07-u1-l1-p1",
+          "title": "圆规画圆：轨迹就是圆"
+        },
+        {
+          "id": "g07-u1-l1-p2",
+          "title": "圆的“全家福”：六个名字"
+        },
+        {
+          "id": "g07-u1-l1-p3",
+          "title": "圆 vs 圆面：圈和饼"
+        }
+      ]
+    },
+    {
+      "id": "g07-u1-l2",
+      "title": "垂径定理",
+      "chapterId": "g07",
+      "chapterTitle": "圆（一）——圆的基本性质",
+      "unitId": "g07-u1",
+      "unitTitle": "圆的对称性与角",
+      "bundle": "g07-u1-l2.bundle.js",
+      "freshness": "g07-u1-l2.freshness.json",
+      "pages": [
+        {
+          "id": "g07-u1-l2-p1",
+          "title": "对折：直径是折痕"
+        },
+        {
+          "id": "g07-u1-l2-p2",
+          "title": "慢放证明：垂径定理"
+        },
+        {
+          "id": "g07-u1-l2-p3",
+          "title": "垂径定理：赵州桥"
+        }
+      ]
+    },
+    {
+      "id": "g07-u1-l3",
+      "title": "弧、弦、圆心角",
+      "chapterId": "g07",
+      "chapterTitle": "圆（一）——圆的基本性质",
+      "unitId": "g07-u1",
+      "unitTitle": "圆的对称性与角",
+      "bundle": "g07-u1-l3.bundle.js",
+      "freshness": "g07-u1-l3.freshness.json",
+      "pages": [
+        {
+          "id": "g07-u1-l3-p1",
+          "title": "转一转：弧弦跟着角走"
+        },
+        {
+          "id": "g07-u1-l3-p2",
+          "title": "等弧、等弦、等角：一荣俱荣"
+        }
+      ]
+    },
+    {
+      "id": "g07-u1-l4",
+      "title": "圆周角定理",
+      "chapterId": "g07",
+      "chapterTitle": "圆（一）——圆的基本性质",
+      "unitId": "g07-u1",
+      "unitTitle": "圆的对称性与角",
+      "bundle": "g07-u1-l4.bundle.js",
+      "freshness": "g07-u1-l4.freshness.json",
+      "pages": [
+        {
+          "id": "g07-u1-l4-p1",
+          "title": "先认清：什么才是圆周角"
+        },
+        {
+          "id": "g07-u1-l4-p2",
+          "title": "慢放证明：情形一"
+        },
+        {
+          "id": "g07-u1-l4-p3",
+          "title": "慢放证明：情形二"
+        },
+        {
+          "id": "g07-u1-l4-p4",
+          "title": "慢放证明：情形三"
+        },
+        {
+          "id": "g07-u1-l4-p5",
+          "title": "圆周角定理：总述"
+        }
+      ]
+    },
+    {
+      "id": "g07-u1-l5",
+      "title": "直径所对的圆周角",
+      "chapterId": "g07",
+      "chapterTitle": "圆（一）——圆的基本性质",
+      "unitId": "g07-u1",
+      "unitTitle": "圆的对称性与角",
+      "bundle": "g07-u1-l5.bundle.js",
+      "freshness": "g07-u1-l5.freshness.json",
+      "pages": [
+        {
+          "id": "g07-u1-l5-p1",
+          "title": "拖一拖：半圆上的角不变"
+        },
+        {
+          "id": "g07-u1-l5-p2",
+          "title": "推论与逆命题：一对互逆"
+        }
+      ]
+    },
+    {
+      "id": "g07-u1-l6",
+      "title": "本章小结与习题",
+      "chapterId": "g07",
+      "chapterTitle": "圆（一）——圆的基本性质",
+      "unitId": "g07-u1",
+      "unitTitle": "圆的对称性与角",
+      "bundle": "g07-u1-l6.bundle.js",
+      "freshness": "g07-u1-l6.freshness.json",
+      "pages": [
+        {
+          "id": "g07-u1-l6-p1",
+          "title": "圆（一）：一张图总结"
+        },
+        {
+          "id": "g07-u1-l6-p2",
+          "title": "本章习题：6 道题"
         }
       ]
     }
