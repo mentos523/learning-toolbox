@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-25T07:15:08.555Z",
+  "generatedAt": "2026-10-25T07:51:35.284Z",
   "chapters": [
     {
       "id": "ch00",
@@ -1796,6 +1796,292 @@
           ]
         }
       ]
+    },
+    {
+      "id": "ch08",
+      "title": "指数与对数",
+      "units": [
+        {
+          "id": "ch08-u1",
+          "title": "指数的推广",
+          "lessons": [
+            {
+              "id": "ch08-u1-l1",
+              "title": "整数指数幂",
+              "chapterId": "ch08",
+              "chapterTitle": "指数与对数",
+              "unitId": "ch08-u1",
+              "unitTitle": "指数的推广",
+              "bundle": "ch08-u1-l1.bundle.js",
+              "freshness": "ch08-u1-l1.freshness.json",
+              "pages": [
+                {
+                  "id": "ch08-u1-l1-p1",
+                  "title": "幂的倒退：2⁻³=1/8"
+                },
+                {
+                  "id": "ch08-u1-l1-p1b",
+                  "title": "负指数：倒着数"
+                }
+              ]
+            },
+            {
+              "id": "ch08-u1-l2",
+              "title": "分数指数幂",
+              "chapterId": "ch08",
+              "chapterTitle": "指数与对数",
+              "unitId": "ch08-u1",
+              "unitTitle": "指数的推广",
+              "bundle": "ch08-u1-l2.bundle.js",
+              "freshness": "ch08-u1-l2.freshness.json",
+              "pages": [
+                {
+                  "id": "ch08-u1-l2-p1",
+                  "title": "分数指数：8 的 1/3 次方是 2"
+                },
+                {
+                  "id": "ch08-u1-l2-p1b",
+                  "title": "分数指数：分母管开方"
+                }
+              ]
+            },
+            {
+              "id": "ch08-u1-l3",
+              "title": "实数指数幂（直观版）",
+              "chapterId": "ch08",
+              "chapterTitle": "指数与对数",
+              "unitId": "ch08-u1",
+              "unitTitle": "指数的推广",
+              "bundle": "ch08-u1-l3.bundle.js",
+              "freshness": "ch08-u1-l3.freshness.json",
+              "pages": [
+                {
+                  "id": "ch08-u1-l3-p1",
+                  "title": "描点：y=2ˣ 是一条不断裂的曲线"
+                },
+                {
+                  "id": "ch08-u1-l3-p1b",
+                  "title": "无理数指数：逼近"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch08-u2",
+          "title": "指数函数与对数函数",
+          "lessons": [
+            {
+              "id": "ch08-u2-l1",
+              "title": "指数函数",
+              "chapterId": "ch08",
+              "chapterTitle": "指数与对数",
+              "unitId": "ch08-u2",
+              "unitTitle": "指数函数与对数函数",
+              "bundle": "ch08-u2-l1.bundle.js",
+              "freshness": "ch08-u2-l1.freshness.json",
+              "pages": [
+                {
+                  "id": "ch08-u2-l1-p1",
+                  "title": "指数函数：y=aˣ（a>0 且 a≠1）"
+                },
+                {
+                  "id": "ch08-u2-l1-p1b",
+                  "title": "指数函数：底数定性格"
+                }
+              ]
+            },
+            {
+              "id": "ch08-u2-l2",
+              "title": "对数的概念",
+              "chapterId": "ch08",
+              "chapterTitle": "指数与对数",
+              "unitId": "ch08-u2",
+              "unitTitle": "指数函数与对数函数",
+              "bundle": "ch08-u2-l2.bundle.js",
+              "freshness": "ch08-u2-l2.freshness.json",
+              "pages": [
+                {
+                  "id": "ch08-u2-l2-p1",
+                  "title": "对数：2⁵=32 倒过来问"
+                },
+                {
+                  "id": "ch08-u2-l2-p1b",
+                  "title": "对数：把指数请下来"
+                }
+              ]
+            },
+            {
+              "id": "ch08-u2-l3",
+              "title": "对数函数",
+              "chapterId": "ch08",
+              "chapterTitle": "指数与对数",
+              "unitId": "ch08-u2",
+              "unitTitle": "指数函数与对数函数",
+              "bundle": "ch08-u2-l3.bundle.js",
+              "freshness": "ch08-u2-l3.freshness.json",
+              "pages": [
+                {
+                  "id": "ch08-u2-l3-p1",
+                  "title": "镜像：y=log₂x 与 y=2ˣ"
+                },
+                {
+                  "id": "ch08-u2-l3-p1b",
+                  "title": "互逆：去程与回程"
+                },
+                {
+                  "id": "ch08-u2-l3-p1g",
+                  "title": "镜像：关于 y=x 对称"
+                }
+              ]
+            },
+            {
+              "id": "ch08-u2-l4",
+              "title": "对数的运算",
+              "chapterId": "ch08",
+              "chapterTitle": "指数与对数",
+              "unitId": "ch08-u2",
+              "unitTitle": "指数函数与对数函数",
+              "bundle": "ch08-u2-l4.bundle.js",
+              "freshness": "ch08-u2-l4.freshness.json",
+              "pages": [
+                {
+                  "id": "ch08-u2-l4-p1",
+                  "title": "对数运算法则：真数相乘，对数相加"
+                },
+                {
+                  "id": "ch08-u2-l4-p1b",
+                  "title": "对数法则：乘变加"
+                }
+              ]
+            },
+            {
+              "id": "ch08-u2-l5",
+              "title": "指数对数方程",
+              "chapterId": "ch08",
+              "chapterTitle": "指数与对数",
+              "unitId": "ch08-u2",
+              "unitTitle": "指数函数与对数函数",
+              "bundle": "ch08-u2-l5.bundle.js",
+              "freshness": "ch08-u2-l5.freshness.json",
+              "pages": [
+                {
+                  "id": "ch08-u2-l5-p1",
+                  "title": "方程的解是交点的横坐标"
+                },
+                {
+                  "id": "ch08-u2-l5-p1b",
+                  "title": "图像解方程：找交点"
+                }
+              ]
+            },
+            {
+              "id": "ch08-u2-l6",
+              "title": "互逆小结",
+              "chapterId": "ch08",
+              "chapterTitle": "指数与对数",
+              "unitId": "ch08-u2",
+              "unitTitle": "指数函数与对数函数",
+              "bundle": "ch08-u2-l6.bundle.js",
+              "freshness": "ch08-u2-l6.freshness.json",
+              "pages": [
+                {
+                  "id": "ch08-u2-l6-p1",
+                  "title": "互逆小结：指数与对数"
+                },
+                {
+                  "id": "ch08-u2-l6-p1b",
+                  "title": "互逆小结：域值互换"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch08-u3",
+          "title": "三角函数初探（选学）",
+          "lessons": [
+            {
+              "id": "ch08-u3-l1",
+              "title": "弧度制（选学）",
+              "chapterId": "ch08",
+              "chapterTitle": "指数与对数",
+              "unitId": "ch08-u3",
+              "unitTitle": "三角函数初探（选学）",
+              "bundle": "ch08-u3-l1.bundle.js",
+              "freshness": "ch08-u3-l1.freshness.json",
+              "pages": [
+                {
+                  "id": "ch08-u3-l1-p1",
+                  "title": "弧度制：180 度 = π（弧度）"
+                },
+                {
+                  "id": "ch08-u3-l1-p1b",
+                  "title": "弧度：用弧长量角（选学）"
+                }
+              ]
+            },
+            {
+              "id": "ch08-u3-l2",
+              "title": "正弦与余弦（选学）",
+              "chapterId": "ch08",
+              "chapterTitle": "指数与对数",
+              "unitId": "ch08-u3",
+              "unitTitle": "三角函数初探（选学）",
+              "bundle": "ch08-u3-l2.bundle.js",
+              "freshness": "ch08-u3-l2.freshness.json",
+              "pages": [
+                {
+                  "id": "ch08-u3-l2-p1",
+                  "title": "正弦与余弦：单位圆上点的坐标"
+                },
+                {
+                  "id": "ch08-u3-l2-p1b",
+                  "title": "正弦余弦：横纵坐标（选学）"
+                }
+              ]
+            },
+            {
+              "id": "ch08-u3-l3",
+              "title": "本章小结",
+              "chapterId": "ch08",
+              "chapterTitle": "指数与对数",
+              "unitId": "ch08-u3",
+              "unitTitle": "三角函数初探（选学）",
+              "bundle": "ch08-u3-l3.bundle.js",
+              "freshness": "ch08-u3-l3.freshness.json",
+              "pages": [
+                {
+                  "id": "ch08-u3-l3-p1",
+                  "title": "一图流：指数、对数与正弦"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch08-ux",
+          "title": "本章习题",
+          "lessons": [
+            {
+              "id": "ch08-ux-l1",
+              "title": "第八章习题",
+              "chapterId": "ch08",
+              "chapterTitle": "指数与对数",
+              "unitId": "ch08-ux",
+              "unitTitle": "本章习题",
+              "bundle": "ch08-ux-l1.bundle.js",
+              "freshness": "ch08-ux-l1.freshness.json",
+              "pages": [
+                {
+                  "id": "ch08-ux-l1-p1",
+                  "title": "第八章习题：指数对数"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "lessons": [
@@ -3364,6 +3650,262 @@
         {
           "id": "ch07-ux-l1-p1",
           "title": "第七章习题：函数图像"
+        }
+      ]
+    },
+    {
+      "id": "ch08-u1-l1",
+      "title": "整数指数幂",
+      "chapterId": "ch08",
+      "chapterTitle": "指数与对数",
+      "unitId": "ch08-u1",
+      "unitTitle": "指数的推广",
+      "bundle": "ch08-u1-l1.bundle.js",
+      "freshness": "ch08-u1-l1.freshness.json",
+      "pages": [
+        {
+          "id": "ch08-u1-l1-p1",
+          "title": "幂的倒退：2⁻³=1/8"
+        },
+        {
+          "id": "ch08-u1-l1-p1b",
+          "title": "负指数：倒着数"
+        }
+      ]
+    },
+    {
+      "id": "ch08-u1-l2",
+      "title": "分数指数幂",
+      "chapterId": "ch08",
+      "chapterTitle": "指数与对数",
+      "unitId": "ch08-u1",
+      "unitTitle": "指数的推广",
+      "bundle": "ch08-u1-l2.bundle.js",
+      "freshness": "ch08-u1-l2.freshness.json",
+      "pages": [
+        {
+          "id": "ch08-u1-l2-p1",
+          "title": "分数指数：8 的 1/3 次方是 2"
+        },
+        {
+          "id": "ch08-u1-l2-p1b",
+          "title": "分数指数：分母管开方"
+        }
+      ]
+    },
+    {
+      "id": "ch08-u1-l3",
+      "title": "实数指数幂（直观版）",
+      "chapterId": "ch08",
+      "chapterTitle": "指数与对数",
+      "unitId": "ch08-u1",
+      "unitTitle": "指数的推广",
+      "bundle": "ch08-u1-l3.bundle.js",
+      "freshness": "ch08-u1-l3.freshness.json",
+      "pages": [
+        {
+          "id": "ch08-u1-l3-p1",
+          "title": "描点：y=2ˣ 是一条不断裂的曲线"
+        },
+        {
+          "id": "ch08-u1-l3-p1b",
+          "title": "无理数指数：逼近"
+        }
+      ]
+    },
+    {
+      "id": "ch08-u2-l1",
+      "title": "指数函数",
+      "chapterId": "ch08",
+      "chapterTitle": "指数与对数",
+      "unitId": "ch08-u2",
+      "unitTitle": "指数函数与对数函数",
+      "bundle": "ch08-u2-l1.bundle.js",
+      "freshness": "ch08-u2-l1.freshness.json",
+      "pages": [
+        {
+          "id": "ch08-u2-l1-p1",
+          "title": "指数函数：y=aˣ（a>0 且 a≠1）"
+        },
+        {
+          "id": "ch08-u2-l1-p1b",
+          "title": "指数函数：底数定性格"
+        }
+      ]
+    },
+    {
+      "id": "ch08-u2-l2",
+      "title": "对数的概念",
+      "chapterId": "ch08",
+      "chapterTitle": "指数与对数",
+      "unitId": "ch08-u2",
+      "unitTitle": "指数函数与对数函数",
+      "bundle": "ch08-u2-l2.bundle.js",
+      "freshness": "ch08-u2-l2.freshness.json",
+      "pages": [
+        {
+          "id": "ch08-u2-l2-p1",
+          "title": "对数：2⁵=32 倒过来问"
+        },
+        {
+          "id": "ch08-u2-l2-p1b",
+          "title": "对数：把指数请下来"
+        }
+      ]
+    },
+    {
+      "id": "ch08-u2-l3",
+      "title": "对数函数",
+      "chapterId": "ch08",
+      "chapterTitle": "指数与对数",
+      "unitId": "ch08-u2",
+      "unitTitle": "指数函数与对数函数",
+      "bundle": "ch08-u2-l3.bundle.js",
+      "freshness": "ch08-u2-l3.freshness.json",
+      "pages": [
+        {
+          "id": "ch08-u2-l3-p1",
+          "title": "镜像：y=log₂x 与 y=2ˣ"
+        },
+        {
+          "id": "ch08-u2-l3-p1b",
+          "title": "互逆：去程与回程"
+        },
+        {
+          "id": "ch08-u2-l3-p1g",
+          "title": "镜像：关于 y=x 对称"
+        }
+      ]
+    },
+    {
+      "id": "ch08-u2-l4",
+      "title": "对数的运算",
+      "chapterId": "ch08",
+      "chapterTitle": "指数与对数",
+      "unitId": "ch08-u2",
+      "unitTitle": "指数函数与对数函数",
+      "bundle": "ch08-u2-l4.bundle.js",
+      "freshness": "ch08-u2-l4.freshness.json",
+      "pages": [
+        {
+          "id": "ch08-u2-l4-p1",
+          "title": "对数运算法则：真数相乘，对数相加"
+        },
+        {
+          "id": "ch08-u2-l4-p1b",
+          "title": "对数法则：乘变加"
+        }
+      ]
+    },
+    {
+      "id": "ch08-u2-l5",
+      "title": "指数对数方程",
+      "chapterId": "ch08",
+      "chapterTitle": "指数与对数",
+      "unitId": "ch08-u2",
+      "unitTitle": "指数函数与对数函数",
+      "bundle": "ch08-u2-l5.bundle.js",
+      "freshness": "ch08-u2-l5.freshness.json",
+      "pages": [
+        {
+          "id": "ch08-u2-l5-p1",
+          "title": "方程的解是交点的横坐标"
+        },
+        {
+          "id": "ch08-u2-l5-p1b",
+          "title": "图像解方程：找交点"
+        }
+      ]
+    },
+    {
+      "id": "ch08-u2-l6",
+      "title": "互逆小结",
+      "chapterId": "ch08",
+      "chapterTitle": "指数与对数",
+      "unitId": "ch08-u2",
+      "unitTitle": "指数函数与对数函数",
+      "bundle": "ch08-u2-l6.bundle.js",
+      "freshness": "ch08-u2-l6.freshness.json",
+      "pages": [
+        {
+          "id": "ch08-u2-l6-p1",
+          "title": "互逆小结：指数与对数"
+        },
+        {
+          "id": "ch08-u2-l6-p1b",
+          "title": "互逆小结：域值互换"
+        }
+      ]
+    },
+    {
+      "id": "ch08-u3-l1",
+      "title": "弧度制（选学）",
+      "chapterId": "ch08",
+      "chapterTitle": "指数与对数",
+      "unitId": "ch08-u3",
+      "unitTitle": "三角函数初探（选学）",
+      "bundle": "ch08-u3-l1.bundle.js",
+      "freshness": "ch08-u3-l1.freshness.json",
+      "pages": [
+        {
+          "id": "ch08-u3-l1-p1",
+          "title": "弧度制：180 度 = π（弧度）"
+        },
+        {
+          "id": "ch08-u3-l1-p1b",
+          "title": "弧度：用弧长量角（选学）"
+        }
+      ]
+    },
+    {
+      "id": "ch08-u3-l2",
+      "title": "正弦与余弦（选学）",
+      "chapterId": "ch08",
+      "chapterTitle": "指数与对数",
+      "unitId": "ch08-u3",
+      "unitTitle": "三角函数初探（选学）",
+      "bundle": "ch08-u3-l2.bundle.js",
+      "freshness": "ch08-u3-l2.freshness.json",
+      "pages": [
+        {
+          "id": "ch08-u3-l2-p1",
+          "title": "正弦与余弦：单位圆上点的坐标"
+        },
+        {
+          "id": "ch08-u3-l2-p1b",
+          "title": "正弦余弦：横纵坐标（选学）"
+        }
+      ]
+    },
+    {
+      "id": "ch08-u3-l3",
+      "title": "本章小结",
+      "chapterId": "ch08",
+      "chapterTitle": "指数与对数",
+      "unitId": "ch08-u3",
+      "unitTitle": "三角函数初探（选学）",
+      "bundle": "ch08-u3-l3.bundle.js",
+      "freshness": "ch08-u3-l3.freshness.json",
+      "pages": [
+        {
+          "id": "ch08-u3-l3-p1",
+          "title": "一图流：指数、对数与正弦"
+        }
+      ]
+    },
+    {
+      "id": "ch08-ux-l1",
+      "title": "第八章习题",
+      "chapterId": "ch08",
+      "chapterTitle": "指数与对数",
+      "unitId": "ch08-ux",
+      "unitTitle": "本章习题",
+      "bundle": "ch08-ux-l1.bundle.js",
+      "freshness": "ch08-ux-l1.freshness.json",
+      "pages": [
+        {
+          "id": "ch08-ux-l1-p1",
+          "title": "第八章习题：指数对数"
         }
       ]
     }
