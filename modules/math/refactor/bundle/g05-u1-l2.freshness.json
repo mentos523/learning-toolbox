@@ -1,0 +1,38 @@
+{
+  "generatedAt": "2026-10-25T13:36:19.117Z",
+  "lessonId": "g05-u1-l2",
+  "bundleFile": "g05-u1-l2.bundle.js",
+  "bundleSha256": "f734bdf366126ef0ae4881630dbfafb16620d88002e0ef10453b9aeb7dda1e5a",
+  "pages": [
+    {
+      "id": "g05-u1-l2-p0",
+      "file": "content/g05-u1-l2/g05-u1-l2-p0.md",
+      "sha256": "3ef44a965f3a623fdc7af0dcb55227e9af324d308637ff99fa6d1706ea1123b3"
+    },
+    {
+      "id": "g05-u1-l2-p1",
+      "file": "content/g05-u1-l2/g05-u1-l2-p1.md",
+      "sha256": "1ca745990432dc8c73a1e66aaf55b580f966fa7a6cda9515a6e406889d812684"
+    },
+    {
+      "id": "g05-u1-l2-p2",
+      "file": "content/g05-u1-l2/g05-u1-l2-p2.md",
+      "sha256": "7b984f1a251f4ec2672bce7cf5bffc9afda87047ea6bdd56ad8ac984f4bdc0a4"
+    },
+    {
+      "id": "g05-u1-l2-p3",
+      "file": "content/g05-u1-l2/g05-u1-l2-p3.md",
+      "sha256": "e3f8aba810a1f736c8d7133b6a401daa2888cc721354294bbfcd96a7d68f41d0"
+    },
+    {
+      "id": "g05-u1-l2-p4",
+      "file": "content/g05-u1-l2/g05-u1-l2-p4.md",
+      "sha256": "6ef21d0fa7867d7000cc93a783aeb288010ffc693a9f8e30938e0abd1fe16c1c"
+    },
+    {
+      "id": "g05-u1-l2-p5",
+      "file": "content/g05-u1-l2/g05-u1-l2-p5.md",
+      "sha256": "bc539bce7fb637713a91d14794d6302980113f45cfa34a7df9c2db77d6db859d"
+    }
+  ]
+}

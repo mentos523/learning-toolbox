@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-25T12:50:11.833Z",
+  "generatedAt": "2026-10-25T13:36:19.177Z",
   "chapters": [
     {
       "id": "ch00",
@@ -3912,6 +3912,214 @@
           ]
         }
       ]
+    },
+    {
+      "id": "g05",
+      "title": "勾股定理",
+      "units": [
+        {
+          "id": "g05-u1",
+          "title": "勾股定理",
+          "lessons": [
+            {
+              "id": "g05-u1-l1",
+              "title": "发现：方格纸上的秘密",
+              "chapterId": "g05",
+              "chapterTitle": "勾股定理",
+              "unitId": "g05-u1",
+              "unitTitle": "勾股定理",
+              "bundle": "g05-u1-l1.bundle.js",
+              "freshness": "g05-u1-l1.freshness.json",
+              "pages": [
+                {
+                  "id": "g05-u1-l1-p1",
+                  "title": "方格纸上数格子"
+                },
+                {
+                  "id": "g05-u1-l1-p2",
+                  "title": "正方形在生长"
+                },
+                {
+                  "id": "g05-u1-l1-p3",
+                  "title": "猜想：a²+b²=c²"
+                }
+              ]
+            },
+            {
+              "id": "g05-u1-l2",
+              "title": "证明：弦图拼图",
+              "chapterId": "g05",
+              "chapterTitle": "勾股定理",
+              "unitId": "g05-u1",
+              "unitTitle": "勾股定理",
+              "bundle": "g05-u1-l2.bundle.js",
+              "freshness": "g05-u1-l2.freshness.json",
+              "pages": [
+                {
+                  "id": "g05-u1-l2-p0",
+                  "title": "前置检查：完全平方公式"
+                },
+                {
+                  "id": "g05-u1-l2-p1",
+                  "title": "四个三角形拼正方形"
+                },
+                {
+                  "id": "g05-u1-l2-p2",
+                  "title": "主证法：面积两种算法"
+                },
+                {
+                  "id": "g05-u1-l2-p3",
+                  "title": "总统证法：拼梯形"
+                },
+                {
+                  "id": "g05-u1-l2-p4",
+                  "title": "总统证法：化简得结论"
+                },
+                {
+                  "id": "g05-u1-l2-p5",
+                  "title": "这就是勾股定理"
+                }
+              ]
+            },
+            {
+              "id": "g05-u1-l3",
+              "title": "应用：已知两边求第三边",
+              "chapterId": "g05",
+              "chapterTitle": "勾股定理",
+              "unitId": "g05-u1",
+              "unitTitle": "勾股定理",
+              "bundle": "g05-u1-l3.bundle.js",
+              "freshness": "g05-u1-l3.freshness.json",
+              "pages": [
+                {
+                  "id": "g05-u1-l3-p1",
+                  "title": "梯子靠墙：滑块实验"
+                },
+                {
+                  "id": "g05-u1-l3-p2",
+                  "title": "例题：旗杆拉绳"
+                },
+                {
+                  "id": "g05-u1-l3-p3",
+                  "title": "反过来：已知斜边求直角边"
+                }
+              ]
+            },
+            {
+              "id": "g05-u1-l4",
+              "title": "逆定理：判定直角三角形",
+              "chapterId": "g05",
+              "chapterTitle": "勾股定理",
+              "unitId": "g05-u1",
+              "unitTitle": "勾股定理",
+              "bundle": "g05-u1-l4.bundle.js",
+              "freshness": "g05-u1-l4.freshness.json",
+              "pages": [
+                {
+                  "id": "g05-u1-l4-p1",
+                  "title": "绳圈拉直角"
+                },
+                {
+                  "id": "g05-u1-l4-p2",
+                  "title": "逆定理证明：SSS 构造"
+                },
+                {
+                  "id": "g05-u1-l4-p3",
+                  "title": "互逆：条件结论换位置"
+                }
+              ]
+            },
+            {
+              "id": "g05-u1-l5",
+              "title": "HL：直角三角形全等",
+              "chapterId": "g05",
+              "chapterTitle": "勾股定理",
+              "unitId": "g05-u1",
+              "unitTitle": "勾股定理",
+              "bundle": "g05-u1-l5.bundle.js",
+              "freshness": "g05-u1-l5.freshness.json",
+              "pages": [
+                {
+                  "id": "g05-u1-l5-p1",
+                  "title": "g04 缺的最后一块拼图"
+                },
+                {
+                  "id": "g05-u1-l5-p2",
+                  "title": "HL 证明：勾股+SSS"
+                },
+                {
+                  "id": "g05-u1-l5-p3",
+                  "title": "HL：直角三角形专用"
+                }
+              ]
+            },
+            {
+              "id": "g05-u1-l6",
+              "title": "两点间距离公式",
+              "chapterId": "g05",
+              "chapterTitle": "勾股定理",
+              "unitId": "g05-u1",
+              "unitTitle": "勾股定理",
+              "bundle": "g05-u1-l6.bundle.js",
+              "freshness": "g05-u1-l6.freshness.json",
+              "pages": [
+                {
+                  "id": "g05-u1-l6-p1",
+                  "title": "横平竖直造公式"
+                },
+                {
+                  "id": "g05-u1-l6-p2",
+                  "title": "两点间距离公式"
+                }
+              ]
+            },
+            {
+              "id": "g05-u1-l7",
+              "title": "勾股数",
+              "chapterId": "g05",
+              "chapterTitle": "勾股定理",
+              "unitId": "g05-u1",
+              "unitTitle": "勾股定理",
+              "bundle": "g05-u1-l7.bundle.js",
+              "freshness": "g05-u1-l7.freshness.json",
+              "pages": [
+                {
+                  "id": "g05-u1-l7-p1",
+                  "title": "整数边直角三角形家族"
+                },
+                {
+                  "id": "g05-u1-l7-p2",
+                  "title": "√2：画出来的数"
+                },
+                {
+                  "id": "g05-u1-l7-p3",
+                  "title": "勾股数：边边皆整数"
+                }
+              ]
+            },
+            {
+              "id": "g05-u1-l8",
+              "title": "本章小结与习题",
+              "chapterId": "g05",
+              "chapterTitle": "勾股定理",
+              "unitId": "g05-u1",
+              "unitTitle": "勾股定理",
+              "bundle": "g05-u1-l8.bundle.js",
+              "freshness": "g05-u1-l8.freshness.json",
+              "pages": [
+                {
+                  "id": "g05-u1-l8-p1",
+                  "title": "本章小结：承重墙"
+                },
+                {
+                  "id": "g05-u1-l8-p2",
+                  "title": "本章习题：6 道题"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "lessons": [
@@ -7379,6 +7587,202 @@
         },
         {
           "id": "g04-u1-l8-p2",
+          "title": "本章习题：6 道题"
+        }
+      ]
+    },
+    {
+      "id": "g05-u1-l1",
+      "title": "发现：方格纸上的秘密",
+      "chapterId": "g05",
+      "chapterTitle": "勾股定理",
+      "unitId": "g05-u1",
+      "unitTitle": "勾股定理",
+      "bundle": "g05-u1-l1.bundle.js",
+      "freshness": "g05-u1-l1.freshness.json",
+      "pages": [
+        {
+          "id": "g05-u1-l1-p1",
+          "title": "方格纸上数格子"
+        },
+        {
+          "id": "g05-u1-l1-p2",
+          "title": "正方形在生长"
+        },
+        {
+          "id": "g05-u1-l1-p3",
+          "title": "猜想：a²+b²=c²"
+        }
+      ]
+    },
+    {
+      "id": "g05-u1-l2",
+      "title": "证明：弦图拼图",
+      "chapterId": "g05",
+      "chapterTitle": "勾股定理",
+      "unitId": "g05-u1",
+      "unitTitle": "勾股定理",
+      "bundle": "g05-u1-l2.bundle.js",
+      "freshness": "g05-u1-l2.freshness.json",
+      "pages": [
+        {
+          "id": "g05-u1-l2-p0",
+          "title": "前置检查：完全平方公式"
+        },
+        {
+          "id": "g05-u1-l2-p1",
+          "title": "四个三角形拼正方形"
+        },
+        {
+          "id": "g05-u1-l2-p2",
+          "title": "主证法：面积两种算法"
+        },
+        {
+          "id": "g05-u1-l2-p3",
+          "title": "总统证法：拼梯形"
+        },
+        {
+          "id": "g05-u1-l2-p4",
+          "title": "总统证法：化简得结论"
+        },
+        {
+          "id": "g05-u1-l2-p5",
+          "title": "这就是勾股定理"
+        }
+      ]
+    },
+    {
+      "id": "g05-u1-l3",
+      "title": "应用：已知两边求第三边",
+      "chapterId": "g05",
+      "chapterTitle": "勾股定理",
+      "unitId": "g05-u1",
+      "unitTitle": "勾股定理",
+      "bundle": "g05-u1-l3.bundle.js",
+      "freshness": "g05-u1-l3.freshness.json",
+      "pages": [
+        {
+          "id": "g05-u1-l3-p1",
+          "title": "梯子靠墙：滑块实验"
+        },
+        {
+          "id": "g05-u1-l3-p2",
+          "title": "例题：旗杆拉绳"
+        },
+        {
+          "id": "g05-u1-l3-p3",
+          "title": "反过来：已知斜边求直角边"
+        }
+      ]
+    },
+    {
+      "id": "g05-u1-l4",
+      "title": "逆定理：判定直角三角形",
+      "chapterId": "g05",
+      "chapterTitle": "勾股定理",
+      "unitId": "g05-u1",
+      "unitTitle": "勾股定理",
+      "bundle": "g05-u1-l4.bundle.js",
+      "freshness": "g05-u1-l4.freshness.json",
+      "pages": [
+        {
+          "id": "g05-u1-l4-p1",
+          "title": "绳圈拉直角"
+        },
+        {
+          "id": "g05-u1-l4-p2",
+          "title": "逆定理证明：SSS 构造"
+        },
+        {
+          "id": "g05-u1-l4-p3",
+          "title": "互逆：条件结论换位置"
+        }
+      ]
+    },
+    {
+      "id": "g05-u1-l5",
+      "title": "HL：直角三角形全等",
+      "chapterId": "g05",
+      "chapterTitle": "勾股定理",
+      "unitId": "g05-u1",
+      "unitTitle": "勾股定理",
+      "bundle": "g05-u1-l5.bundle.js",
+      "freshness": "g05-u1-l5.freshness.json",
+      "pages": [
+        {
+          "id": "g05-u1-l5-p1",
+          "title": "g04 缺的最后一块拼图"
+        },
+        {
+          "id": "g05-u1-l5-p2",
+          "title": "HL 证明：勾股+SSS"
+        },
+        {
+          "id": "g05-u1-l5-p3",
+          "title": "HL：直角三角形专用"
+        }
+      ]
+    },
+    {
+      "id": "g05-u1-l6",
+      "title": "两点间距离公式",
+      "chapterId": "g05",
+      "chapterTitle": "勾股定理",
+      "unitId": "g05-u1",
+      "unitTitle": "勾股定理",
+      "bundle": "g05-u1-l6.bundle.js",
+      "freshness": "g05-u1-l6.freshness.json",
+      "pages": [
+        {
+          "id": "g05-u1-l6-p1",
+          "title": "横平竖直造公式"
+        },
+        {
+          "id": "g05-u1-l6-p2",
+          "title": "两点间距离公式"
+        }
+      ]
+    },
+    {
+      "id": "g05-u1-l7",
+      "title": "勾股数",
+      "chapterId": "g05",
+      "chapterTitle": "勾股定理",
+      "unitId": "g05-u1",
+      "unitTitle": "勾股定理",
+      "bundle": "g05-u1-l7.bundle.js",
+      "freshness": "g05-u1-l7.freshness.json",
+      "pages": [
+        {
+          "id": "g05-u1-l7-p1",
+          "title": "整数边直角三角形家族"
+        },
+        {
+          "id": "g05-u1-l7-p2",
+          "title": "√2：画出来的数"
+        },
+        {
+          "id": "g05-u1-l7-p3",
+          "title": "勾股数：边边皆整数"
+        }
+      ]
+    },
+    {
+      "id": "g05-u1-l8",
+      "title": "本章小结与习题",
+      "chapterId": "g05",
+      "chapterTitle": "勾股定理",
+      "unitId": "g05-u1",
+      "unitTitle": "勾股定理",
+      "bundle": "g05-u1-l8.bundle.js",
+      "freshness": "g05-u1-l8.freshness.json",
+      "pages": [
+        {
+          "id": "g05-u1-l8-p1",
+          "title": "本章小结：承重墙"
+        },
+        {
+          "id": "g05-u1-l8-p2",
           "title": "本章习题：6 道题"
         }
       ]
