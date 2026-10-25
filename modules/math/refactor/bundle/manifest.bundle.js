@@ -1,5 +1,5 @@
 window.MATH_MANIFEST = {
-  "generatedAt": "2026-10-25T16:25:00.734Z",
+  "generatedAt": "2026-10-25T17:19:08.310Z",
   "chapters": [
     {
       "id": "ch00",
@@ -5336,6 +5336,166 @@ window.MATH_MANIFEST = {
           ]
         }
       ]
+    },
+    {
+      "id": "g12",
+      "title": "立体几何初步",
+      "units": [
+        {
+          "id": "g12-u1",
+          "title": "走进立体图形",
+          "lessons": [
+            {
+              "id": "g12-u1-l1",
+              "title": "走进立体图形：认识与空间位置",
+              "chapterId": "g12",
+              "chapterTitle": "立体几何初步",
+              "unitId": "g12-u1",
+              "unitTitle": "走进立体图形",
+              "bundle": "g12-u1-l1.bundle.js",
+              "freshness": "g12-u1-l1.freshness.json",
+              "pages": [
+                {
+                  "id": "g12-u1-l1-p1",
+                  "title": "五种立体，转着看"
+                },
+                {
+                  "id": "g12-u1-l1-p2",
+                  "title": "给立体“点名”"
+                },
+                {
+                  "id": "g12-u1-l1-p3",
+                  "title": "数一数，有惊喜"
+                },
+                {
+                  "id": "g12-u1-l1-p4",
+                  "title": "欧拉公式：永远的 2"
+                },
+                {
+                  "id": "g12-u1-l1-p5",
+                  "title": "长方体里找平行找垂直"
+                },
+                {
+                  "id": "g12-u1-l1-p6",
+                  "title": "平行垂直，看得见"
+                }
+              ]
+            },
+            {
+              "id": "g12-u1-l2",
+              "title": "三视图",
+              "chapterId": "g12",
+              "chapterTitle": "立体几何初步",
+              "unitId": "g12-u1",
+              "unitTitle": "走进立体图形",
+              "bundle": "g12-u1-l2.bundle.js",
+              "freshness": "g12-u1-l2.freshness.json",
+              "pages": [
+                {
+                  "id": "g12-u1-l2-p1",
+                  "title": "三束光，三个影子"
+                },
+                {
+                  "id": "g12-u1-l2-p2",
+                  "title": "三个视图各看什么"
+                },
+                {
+                  "id": "g12-u1-l2-p3",
+                  "title": "口诀：长对正高平齐"
+                },
+                {
+                  "id": "g12-u1-l2-p4",
+                  "title": "你能认出三个视图吗"
+                }
+              ]
+            },
+            {
+              "id": "g12-u1-l3",
+              "title": "展开图",
+              "chapterId": "g12",
+              "chapterTitle": "立体几何初步",
+              "unitId": "g12-u1",
+              "unitTitle": "走进立体图形",
+              "bundle": "g12-u1-l3.bundle.js",
+              "freshness": "g12-u1-l3.freshness.json",
+              "pages": [
+                {
+                  "id": "g12-u1-l3-p1",
+                  "title": "剥开，再折回去"
+                },
+                {
+                  "id": "g12-u1-l3-p2",
+                  "title": "展开图：把立体剥开"
+                },
+                {
+                  "id": "g12-u1-l3-p3",
+                  "title": "“一四一”：6 种"
+                },
+                {
+                  "id": "g12-u1-l3-p4",
+                  "title": "剩下 5 种长这样"
+                },
+                {
+                  "id": "g12-u1-l3-p5",
+                  "title": "“田”字形，折不成"
+                },
+                {
+                  "id": "g12-u1-l3-p6",
+                  "title": "口诀：141、231、222、33"
+                }
+              ]
+            },
+            {
+              "id": "g12-u1-l4",
+              "title": "截面",
+              "chapterId": "g12",
+              "chapterTitle": "立体几何初步",
+              "unitId": "g12-u1",
+              "unitTitle": "走进立体图形",
+              "bundle": "g12-u1-l4.bundle.js",
+              "freshness": "g12-u1-l4.freshness.json",
+              "pages": [
+                {
+                  "id": "g12-u1-l4-p1",
+                  "title": "切一切，截面现形"
+                },
+                {
+                  "id": "g12-u1-l4-p2",
+                  "title": "三角、四边形怎么切"
+                },
+                {
+                  "id": "g12-u1-l4-p3",
+                  "title": "五边形、六边形登场"
+                },
+                {
+                  "id": "g12-u1-l4-p4",
+                  "title": "截面规律一句话"
+                }
+              ]
+            },
+            {
+              "id": "g12-u1-l5",
+              "title": "本章小结与习题",
+              "chapterId": "g12",
+              "chapterTitle": "立体几何初步",
+              "unitId": "g12-u1",
+              "unitTitle": "走进立体图形",
+              "bundle": "g12-u1-l5.bundle.js",
+              "freshness": "g12-u1-l5.freshness.json",
+              "pages": [
+                {
+                  "id": "g12-u1-l5-p1",
+                  "title": "本章小结：看穿立体"
+                },
+                {
+                  "id": "g12-u1-l5-p2",
+                  "title": "本章习题：6 道题"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "lessons": [
@@ -10144,6 +10304,154 @@ window.MATH_MANIFEST = {
         {
           "id": "g11-u1-l10-p2",
           "title": "本章习题：8 道题"
+        }
+      ]
+    },
+    {
+      "id": "g12-u1-l1",
+      "title": "走进立体图形：认识与空间位置",
+      "chapterId": "g12",
+      "chapterTitle": "立体几何初步",
+      "unitId": "g12-u1",
+      "unitTitle": "走进立体图形",
+      "bundle": "g12-u1-l1.bundle.js",
+      "freshness": "g12-u1-l1.freshness.json",
+      "pages": [
+        {
+          "id": "g12-u1-l1-p1",
+          "title": "五种立体，转着看"
+        },
+        {
+          "id": "g12-u1-l1-p2",
+          "title": "给立体“点名”"
+        },
+        {
+          "id": "g12-u1-l1-p3",
+          "title": "数一数，有惊喜"
+        },
+        {
+          "id": "g12-u1-l1-p4",
+          "title": "欧拉公式：永远的 2"
+        },
+        {
+          "id": "g12-u1-l1-p5",
+          "title": "长方体里找平行找垂直"
+        },
+        {
+          "id": "g12-u1-l1-p6",
+          "title": "平行垂直，看得见"
+        }
+      ]
+    },
+    {
+      "id": "g12-u1-l2",
+      "title": "三视图",
+      "chapterId": "g12",
+      "chapterTitle": "立体几何初步",
+      "unitId": "g12-u1",
+      "unitTitle": "走进立体图形",
+      "bundle": "g12-u1-l2.bundle.js",
+      "freshness": "g12-u1-l2.freshness.json",
+      "pages": [
+        {
+          "id": "g12-u1-l2-p1",
+          "title": "三束光，三个影子"
+        },
+        {
+          "id": "g12-u1-l2-p2",
+          "title": "三个视图各看什么"
+        },
+        {
+          "id": "g12-u1-l2-p3",
+          "title": "口诀：长对正高平齐"
+        },
+        {
+          "id": "g12-u1-l2-p4",
+          "title": "你能认出三个视图吗"
+        }
+      ]
+    },
+    {
+      "id": "g12-u1-l3",
+      "title": "展开图",
+      "chapterId": "g12",
+      "chapterTitle": "立体几何初步",
+      "unitId": "g12-u1",
+      "unitTitle": "走进立体图形",
+      "bundle": "g12-u1-l3.bundle.js",
+      "freshness": "g12-u1-l3.freshness.json",
+      "pages": [
+        {
+          "id": "g12-u1-l3-p1",
+          "title": "剥开，再折回去"
+        },
+        {
+          "id": "g12-u1-l3-p2",
+          "title": "展开图：把立体剥开"
+        },
+        {
+          "id": "g12-u1-l3-p3",
+          "title": "“一四一”：6 种"
+        },
+        {
+          "id": "g12-u1-l3-p4",
+          "title": "剩下 5 种长这样"
+        },
+        {
+          "id": "g12-u1-l3-p5",
+          "title": "“田”字形，折不成"
+        },
+        {
+          "id": "g12-u1-l3-p6",
+          "title": "口诀：141、231、222、33"
+        }
+      ]
+    },
+    {
+      "id": "g12-u1-l4",
+      "title": "截面",
+      "chapterId": "g12",
+      "chapterTitle": "立体几何初步",
+      "unitId": "g12-u1",
+      "unitTitle": "走进立体图形",
+      "bundle": "g12-u1-l4.bundle.js",
+      "freshness": "g12-u1-l4.freshness.json",
+      "pages": [
+        {
+          "id": "g12-u1-l4-p1",
+          "title": "切一切，截面现形"
+        },
+        {
+          "id": "g12-u1-l4-p2",
+          "title": "三角、四边形怎么切"
+        },
+        {
+          "id": "g12-u1-l4-p3",
+          "title": "五边形、六边形登场"
+        },
+        {
+          "id": "g12-u1-l4-p4",
+          "title": "截面规律一句话"
+        }
+      ]
+    },
+    {
+      "id": "g12-u1-l5",
+      "title": "本章小结与习题",
+      "chapterId": "g12",
+      "chapterTitle": "立体几何初步",
+      "unitId": "g12-u1",
+      "unitTitle": "走进立体图形",
+      "bundle": "g12-u1-l5.bundle.js",
+      "freshness": "g12-u1-l5.freshness.json",
+      "pages": [
+        {
+          "id": "g12-u1-l5-p1",
+          "title": "本章小结：看穿立体"
+        },
+        {
+          "id": "g12-u1-l5-p2",
+          "title": "本章习题：6 道题"
         }
       ]
     }
