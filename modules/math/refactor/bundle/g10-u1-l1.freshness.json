@@ -1,0 +1,28 @@
+{
+  "generatedAt": "2026-10-25T15:55:41.416Z",
+  "lessonId": "g10-u1-l1",
+  "bundleFile": "g10-u1-l1.bundle.js",
+  "bundleSha256": "0e98a9767112a1884066c2e71531d27a29bdcfb737955d46d4ec77b951d1c535",
+  "pages": [
+    {
+      "id": "g10-u1-l1-p1",
+      "file": "content/g10-u1-l1/g10-u1-l1-p1.md",
+      "sha256": "090fc3773422ec4f1ab30fe2dcd02a61f654243c4c09e7bea85f83fe55444e79"
+    },
+    {
+      "id": "g10-u1-l1-p2",
+      "file": "content/g10-u1-l1/g10-u1-l1-p2.md",
+      "sha256": "70a48d7065489fa3ebe0fe78759280b3de063a190d0233fd505e3da98c8d4a60"
+    },
+    {
+      "id": "g10-u1-l1-p3",
+      "file": "content/g10-u1-l1/g10-u1-l1-p3.md",
+      "sha256": "11ac255e9c1038c0438ae63fcd8ccf0a0e46365817a67d60557c159b169217f7"
+    },
+    {
+      "id": "g10-u1-l1-p4",
+      "file": "content/g10-u1-l1/g10-u1-l1-p4.md",
+      "sha256": "5b44e75c005e467c6b6a31a5c541734be141df179617018da63db3ff433e956e"
+    }
+  ]
+}

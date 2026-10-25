@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-25T15:29:35.418Z",
+  "generatedAt": "2026-10-25T15:55:41.489Z",
   "chapters": [
     {
       "id": "ch00",
@@ -4868,6 +4868,202 @@
           ]
         }
       ]
+    },
+    {
+      "id": "g10",
+      "title": "图形的变换——对称与旋转",
+      "units": [
+        {
+          "id": "g10-u1",
+          "title": "对称与旋转",
+          "lessons": [
+            {
+              "id": "g10-u1-l1",
+              "title": "轴对称的概念",
+              "chapterId": "g10",
+              "chapterTitle": "图形的变换——对称与旋转",
+              "unitId": "g10-u1",
+              "unitTitle": "对称与旋转",
+              "bundle": "g10-u1-l1.bundle.js",
+              "freshness": "g10-u1-l1.freshness.json",
+              "pages": [
+                {
+                  "id": "g10-u1-l1-p1",
+                  "title": "折纸剪洞：对称是“折”出来的"
+                },
+                {
+                  "id": "g10-u1-l1-p2",
+                  "title": "翻折慢动作：重合的瞬间"
+                },
+                {
+                  "id": "g10-u1-l1-p3",
+                  "title": "轴对称：对折能重合的图形"
+                },
+                {
+                  "id": "g10-u1-l1-p4",
+                  "title": "反例：平行四边形合不上"
+                }
+              ]
+            },
+            {
+              "id": "g10-u1-l2",
+              "title": "轴对称的性质",
+              "chapterId": "g10",
+              "chapterTitle": "图形的变换——对称与旋转",
+              "unitId": "g10-u1",
+              "unitTitle": "对称与旋转",
+              "bundle": "g10-u1-l2.bundle.js",
+              "freshness": "g10-u1-l2.freshness.json",
+              "pages": [
+                {
+                  "id": "g10-u1-l2-p1",
+                  "title": "对应点“飞”过去：连线被垂直平分"
+                },
+                {
+                  "id": "g10-u1-l2-p2",
+                  "title": "性质：对称轴垂直平分连线"
+                },
+                {
+                  "id": "g10-u1-l2-p3",
+                  "title": "压轴例子：抛物线的折痕"
+                },
+                {
+                  "id": "g10-u1-l2-p4",
+                  "title": "找一找：矩形的对称轴"
+                }
+              ]
+            },
+            {
+              "id": "g10-u1-l3",
+              "title": "作轴对称图形",
+              "chapterId": "g10",
+              "chapterTitle": "图形的变换——对称与旋转",
+              "unitId": "g10-u1",
+              "unitTitle": "对称与旋转",
+              "bundle": "g10-u1-l3.bundle.js",
+              "freshness": "g10-u1-l3.freshness.json",
+              "pages": [
+                {
+                  "id": "g10-u1-l3-p1",
+                  "title": "作图：点的对称点"
+                },
+                {
+                  "id": "g10-u1-l3-p2",
+                  "title": "作图：三角形的对称形"
+                },
+                {
+                  "id": "g10-u1-l3-p3",
+                  "title": "三步口诀：垂线·等长·连线"
+                }
+              ]
+            },
+            {
+              "id": "g10-u1-l4",
+              "title": "等腰三角形的对称性再探",
+              "chapterId": "g10",
+              "chapterTitle": "图形的变换——对称与旋转",
+              "unitId": "g10-u1",
+              "unitTitle": "对称与旋转",
+              "bundle": "g10-u1-l4.bundle.js",
+              "freshness": "g10-u1-l4.freshness.json",
+              "pages": [
+                {
+                  "id": "g10-u1-l4-p1",
+                  "title": "等腰三角形：沿对称轴翻折"
+                },
+                {
+                  "id": "g10-u1-l4-p2",
+                  "title": "三线合一就是对称轴"
+                },
+                {
+                  "id": "g10-u1-l4-p3",
+                  "title": "例题：用对称求角度"
+                }
+              ]
+            },
+            {
+              "id": "g10-u1-l5",
+              "title": "旋转与中心对称",
+              "chapterId": "g10",
+              "chapterTitle": "图形的变换——对称与旋转",
+              "unitId": "g10-u1",
+              "unitTitle": "对称与旋转",
+              "bundle": "g10-u1-l5.bundle.js",
+              "freshness": "g10-u1-l5.freshness.json",
+              "pages": [
+                {
+                  "id": "g10-u1-l5-p1",
+                  "title": "旋转步进器：几转回原样"
+                },
+                {
+                  "id": "g10-u1-l5-p2",
+                  "title": "旋转三要素：中心·方向·角度"
+                },
+                {
+                  "id": "g10-u1-l5-p3",
+                  "title": "转 180°：风车回到自己"
+                },
+                {
+                  "id": "g10-u1-l5-p4",
+                  "title": "中心对称：连线过中心被平分"
+                },
+                {
+                  "id": "g10-u1-l5-p5",
+                  "title": "彩蛋：平行四边形的正名"
+                },
+                {
+                  "id": "g10-u1-l5-p6",
+                  "title": "找一找：中心对称图形"
+                }
+              ]
+            },
+            {
+              "id": "g10-u1-l6",
+              "title": "旋转与全等：运动的眼光",
+              "chapterId": "g10",
+              "chapterTitle": "图形的变换——对称与旋转",
+              "unitId": "g10-u1",
+              "unitTitle": "对称与旋转",
+              "bundle": "g10-u1-l6.bundle.js",
+              "freshness": "g10-u1-l6.freshness.json",
+              "pages": [
+                {
+                  "id": "g10-u1-l6-p1",
+                  "title": "三种运动，一个结果：重合"
+                },
+                {
+                  "id": "g10-u1-l6-p2",
+                  "title": "全等即运动重合"
+                },
+                {
+                  "id": "g10-u1-l6-p3",
+                  "title": "运动找对应：转过去压住"
+                }
+              ]
+            },
+            {
+              "id": "g10-u1-l7",
+              "title": "本章小结与习题",
+              "chapterId": "g10",
+              "chapterTitle": "图形的变换——对称与旋转",
+              "unitId": "g10-u1",
+              "unitTitle": "对称与旋转",
+              "bundle": "g10-u1-l7.bundle.js",
+              "freshness": "g10-u1-l7.freshness.json",
+              "pages": [
+                {
+                  "id": "g10-u1-l7-p1",
+                  "title": "小结：三变换对照表"
+                },
+                {
+                  "id": "g10-u1-l7-p2",
+                  "title": "本章习题：6 道题"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "lessons": [
@@ -9232,6 +9428,190 @@
         {
           "id": "g09-u1-l8-p2",
           "title": "本章习题"
+        }
+      ]
+    },
+    {
+      "id": "g10-u1-l1",
+      "title": "轴对称的概念",
+      "chapterId": "g10",
+      "chapterTitle": "图形的变换——对称与旋转",
+      "unitId": "g10-u1",
+      "unitTitle": "对称与旋转",
+      "bundle": "g10-u1-l1.bundle.js",
+      "freshness": "g10-u1-l1.freshness.json",
+      "pages": [
+        {
+          "id": "g10-u1-l1-p1",
+          "title": "折纸剪洞：对称是“折”出来的"
+        },
+        {
+          "id": "g10-u1-l1-p2",
+          "title": "翻折慢动作：重合的瞬间"
+        },
+        {
+          "id": "g10-u1-l1-p3",
+          "title": "轴对称：对折能重合的图形"
+        },
+        {
+          "id": "g10-u1-l1-p4",
+          "title": "反例：平行四边形合不上"
+        }
+      ]
+    },
+    {
+      "id": "g10-u1-l2",
+      "title": "轴对称的性质",
+      "chapterId": "g10",
+      "chapterTitle": "图形的变换——对称与旋转",
+      "unitId": "g10-u1",
+      "unitTitle": "对称与旋转",
+      "bundle": "g10-u1-l2.bundle.js",
+      "freshness": "g10-u1-l2.freshness.json",
+      "pages": [
+        {
+          "id": "g10-u1-l2-p1",
+          "title": "对应点“飞”过去：连线被垂直平分"
+        },
+        {
+          "id": "g10-u1-l2-p2",
+          "title": "性质：对称轴垂直平分连线"
+        },
+        {
+          "id": "g10-u1-l2-p3",
+          "title": "压轴例子：抛物线的折痕"
+        },
+        {
+          "id": "g10-u1-l2-p4",
+          "title": "找一找：矩形的对称轴"
+        }
+      ]
+    },
+    {
+      "id": "g10-u1-l3",
+      "title": "作轴对称图形",
+      "chapterId": "g10",
+      "chapterTitle": "图形的变换——对称与旋转",
+      "unitId": "g10-u1",
+      "unitTitle": "对称与旋转",
+      "bundle": "g10-u1-l3.bundle.js",
+      "freshness": "g10-u1-l3.freshness.json",
+      "pages": [
+        {
+          "id": "g10-u1-l3-p1",
+          "title": "作图：点的对称点"
+        },
+        {
+          "id": "g10-u1-l3-p2",
+          "title": "作图：三角形的对称形"
+        },
+        {
+          "id": "g10-u1-l3-p3",
+          "title": "三步口诀：垂线·等长·连线"
+        }
+      ]
+    },
+    {
+      "id": "g10-u1-l4",
+      "title": "等腰三角形的对称性再探",
+      "chapterId": "g10",
+      "chapterTitle": "图形的变换——对称与旋转",
+      "unitId": "g10-u1",
+      "unitTitle": "对称与旋转",
+      "bundle": "g10-u1-l4.bundle.js",
+      "freshness": "g10-u1-l4.freshness.json",
+      "pages": [
+        {
+          "id": "g10-u1-l4-p1",
+          "title": "等腰三角形：沿对称轴翻折"
+        },
+        {
+          "id": "g10-u1-l4-p2",
+          "title": "三线合一就是对称轴"
+        },
+        {
+          "id": "g10-u1-l4-p3",
+          "title": "例题：用对称求角度"
+        }
+      ]
+    },
+    {
+      "id": "g10-u1-l5",
+      "title": "旋转与中心对称",
+      "chapterId": "g10",
+      "chapterTitle": "图形的变换——对称与旋转",
+      "unitId": "g10-u1",
+      "unitTitle": "对称与旋转",
+      "bundle": "g10-u1-l5.bundle.js",
+      "freshness": "g10-u1-l5.freshness.json",
+      "pages": [
+        {
+          "id": "g10-u1-l5-p1",
+          "title": "旋转步进器：几转回原样"
+        },
+        {
+          "id": "g10-u1-l5-p2",
+          "title": "旋转三要素：中心·方向·角度"
+        },
+        {
+          "id": "g10-u1-l5-p3",
+          "title": "转 180°：风车回到自己"
+        },
+        {
+          "id": "g10-u1-l5-p4",
+          "title": "中心对称：连线过中心被平分"
+        },
+        {
+          "id": "g10-u1-l5-p5",
+          "title": "彩蛋：平行四边形的正名"
+        },
+        {
+          "id": "g10-u1-l5-p6",
+          "title": "找一找：中心对称图形"
+        }
+      ]
+    },
+    {
+      "id": "g10-u1-l6",
+      "title": "旋转与全等：运动的眼光",
+      "chapterId": "g10",
+      "chapterTitle": "图形的变换——对称与旋转",
+      "unitId": "g10-u1",
+      "unitTitle": "对称与旋转",
+      "bundle": "g10-u1-l6.bundle.js",
+      "freshness": "g10-u1-l6.freshness.json",
+      "pages": [
+        {
+          "id": "g10-u1-l6-p1",
+          "title": "三种运动，一个结果：重合"
+        },
+        {
+          "id": "g10-u1-l6-p2",
+          "title": "全等即运动重合"
+        },
+        {
+          "id": "g10-u1-l6-p3",
+          "title": "运动找对应：转过去压住"
+        }
+      ]
+    },
+    {
+      "id": "g10-u1-l7",
+      "title": "本章小结与习题",
+      "chapterId": "g10",
+      "chapterTitle": "图形的变换——对称与旋转",
+      "unitId": "g10-u1",
+      "unitTitle": "对称与旋转",
+      "bundle": "g10-u1-l7.bundle.js",
+      "freshness": "g10-u1-l7.freshness.json",
+      "pages": [
+        {
+          "id": "g10-u1-l7-p1",
+          "title": "小结：三变换对照表"
+        },
+        {
+          "id": "g10-u1-l7-p2",
+          "title": "本章习题：6 道题"
         }
       ]
     }
