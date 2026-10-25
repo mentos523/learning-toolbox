@@ -1,5 +1,5 @@
 window.MATH_MANIFEST = {
-  "generatedAt": "2026-10-25T05:51:19.540Z",
+  "generatedAt": "2026-10-25T06:14:58.207Z",
   "chapters": [
     {
       "id": "ch00",
@@ -1178,6 +1178,130 @@ window.MATH_MANIFEST = {
           ]
         }
       ]
+    },
+    {
+      "id": "ch05x",
+      "title": "二元一次方程组",
+      "units": [
+        {
+          "id": "ch05x-u1",
+          "title": "二元一次方程组与代入消元法",
+          "lessons": [
+            {
+              "id": "ch05x-u1-l1",
+              "title": "方程组：两个方程定住两个未知数",
+              "chapterId": "ch05x",
+              "chapterTitle": "二元一次方程组",
+              "unitId": "ch05x-u1",
+              "unitTitle": "二元一次方程组与代入消元法",
+              "bundle": "ch05x-u1-l1.bundle.js",
+              "freshness": "ch05x-u1-l1.freshness.json",
+              "pages": [
+                {
+                  "id": "ch05x-u1-l1-p1",
+                  "title": "一个方程，两个未知数：解有无数个"
+                },
+                {
+                  "id": "ch05x-u1-l1-p2",
+                  "title": "两个方程，解就定了：方程组的解"
+                }
+              ]
+            },
+            {
+              "id": "ch05x-u1-l2",
+              "title": "代入消元法",
+              "chapterId": "ch05x",
+              "chapterTitle": "二元一次方程组",
+              "unitId": "ch05x-u1",
+              "unitTitle": "二元一次方程组与代入消元法",
+              "bundle": "ch05x-u1-l2.bundle.js",
+              "freshness": "ch05x-u1-l2.freshness.json",
+              "pages": [
+                {
+                  "id": "ch05x-u1-l2-p1",
+                  "title": "代入：把 x 的“化身”送进第二个方程"
+                },
+                {
+                  "id": "ch05x-u1-l2-p2",
+                  "title": "代入法三步：变形→代入→回代检验"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch05x-u2",
+          "title": "加减消元法",
+          "lessons": [
+            {
+              "id": "ch05x-u2-l1",
+              "title": "加减：让一个未知数直接消失",
+              "chapterId": "ch05x",
+              "chapterTitle": "二元一次方程组",
+              "unitId": "ch05x-u2",
+              "unitTitle": "加减消元法",
+              "bundle": "ch05x-u2-l1.bundle.js",
+              "freshness": "ch05x-u2-l1.freshness.json",
+              "pages": [
+                {
+                  "id": "ch05x-u2-l1-p1",
+                  "title": "加减：让一个未知数直接消失"
+                },
+                {
+                  "id": "ch05x-u2-l1-p2",
+                  "title": "先凑系数，再加减"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch05x-u3",
+          "title": "图像法与小结",
+          "lessons": [
+            {
+              "id": "ch05x-u3-l1",
+              "title": "方程组的解 = 两条直线的交点",
+              "chapterId": "ch05x",
+              "chapterTitle": "二元一次方程组",
+              "unitId": "ch05x-u3",
+              "unitTitle": "图像法与小结",
+              "bundle": "ch05x-u3-l1.bundle.js",
+              "freshness": "ch05x-u3-l1.freshness.json",
+              "pages": [
+                {
+                  "id": "ch05x-u3-l1-p1",
+                  "title": "每条方程都是一条直线"
+                },
+                {
+                  "id": "ch05x-u3-l1-p2",
+                  "title": "方程组的解 = 两条直线交点的坐标"
+                },
+                {
+                  "id": "ch05x-u3-l1-p3",
+                  "title": "三种位置，三种解：相交 / 平行 / 重合"
+                }
+              ]
+            },
+            {
+              "id": "ch05x-u3-l2",
+              "title": "本章小结",
+              "chapterId": "ch05x",
+              "chapterTitle": "二元一次方程组",
+              "unitId": "ch05x-u3",
+              "unitTitle": "图像法与小结",
+              "bundle": "ch05x-u3-l2.bundle.js",
+              "freshness": "ch05x-u3-l2.freshness.json",
+              "pages": [
+                {
+                  "id": "ch05x-u3-l2-p1",
+                  "title": "一图流：三条路，一座桥"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "lessons": [
@@ -2206,6 +2330,106 @@ window.MATH_MANIFEST = {
         {
           "id": "ch05-ux-l1-p1",
           "title": "第五章习题：不等式"
+        }
+      ]
+    },
+    {
+      "id": "ch05x-u1-l1",
+      "title": "方程组：两个方程定住两个未知数",
+      "chapterId": "ch05x",
+      "chapterTitle": "二元一次方程组",
+      "unitId": "ch05x-u1",
+      "unitTitle": "二元一次方程组与代入消元法",
+      "bundle": "ch05x-u1-l1.bundle.js",
+      "freshness": "ch05x-u1-l1.freshness.json",
+      "pages": [
+        {
+          "id": "ch05x-u1-l1-p1",
+          "title": "一个方程，两个未知数：解有无数个"
+        },
+        {
+          "id": "ch05x-u1-l1-p2",
+          "title": "两个方程，解就定了：方程组的解"
+        }
+      ]
+    },
+    {
+      "id": "ch05x-u1-l2",
+      "title": "代入消元法",
+      "chapterId": "ch05x",
+      "chapterTitle": "二元一次方程组",
+      "unitId": "ch05x-u1",
+      "unitTitle": "二元一次方程组与代入消元法",
+      "bundle": "ch05x-u1-l2.bundle.js",
+      "freshness": "ch05x-u1-l2.freshness.json",
+      "pages": [
+        {
+          "id": "ch05x-u1-l2-p1",
+          "title": "代入：把 x 的“化身”送进第二个方程"
+        },
+        {
+          "id": "ch05x-u1-l2-p2",
+          "title": "代入法三步：变形→代入→回代检验"
+        }
+      ]
+    },
+    {
+      "id": "ch05x-u2-l1",
+      "title": "加减：让一个未知数直接消失",
+      "chapterId": "ch05x",
+      "chapterTitle": "二元一次方程组",
+      "unitId": "ch05x-u2",
+      "unitTitle": "加减消元法",
+      "bundle": "ch05x-u2-l1.bundle.js",
+      "freshness": "ch05x-u2-l1.freshness.json",
+      "pages": [
+        {
+          "id": "ch05x-u2-l1-p1",
+          "title": "加减：让一个未知数直接消失"
+        },
+        {
+          "id": "ch05x-u2-l1-p2",
+          "title": "先凑系数，再加减"
+        }
+      ]
+    },
+    {
+      "id": "ch05x-u3-l1",
+      "title": "方程组的解 = 两条直线的交点",
+      "chapterId": "ch05x",
+      "chapterTitle": "二元一次方程组",
+      "unitId": "ch05x-u3",
+      "unitTitle": "图像法与小结",
+      "bundle": "ch05x-u3-l1.bundle.js",
+      "freshness": "ch05x-u3-l1.freshness.json",
+      "pages": [
+        {
+          "id": "ch05x-u3-l1-p1",
+          "title": "每条方程都是一条直线"
+        },
+        {
+          "id": "ch05x-u3-l1-p2",
+          "title": "方程组的解 = 两条直线交点的坐标"
+        },
+        {
+          "id": "ch05x-u3-l1-p3",
+          "title": "三种位置，三种解：相交 / 平行 / 重合"
+        }
+      ]
+    },
+    {
+      "id": "ch05x-u3-l2",
+      "title": "本章小结",
+      "chapterId": "ch05x",
+      "chapterTitle": "二元一次方程组",
+      "unitId": "ch05x-u3",
+      "unitTitle": "图像法与小结",
+      "bundle": "ch05x-u3-l2.bundle.js",
+      "freshness": "ch05x-u3-l2.freshness.json",
+      "pages": [
+        {
+          "id": "ch05x-u3-l2-p1",
+          "title": "一图流：三条路，一座桥"
         }
       ]
     }
