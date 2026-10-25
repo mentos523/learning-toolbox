@@ -1,5 +1,5 @@
 window.MATH_MANIFEST = {
-  "generatedAt": "2026-10-25T06:42:45.437Z",
+  "generatedAt": "2026-10-25T07:15:08.555Z",
   "chapters": [
     {
       "id": "ch00",
@@ -1568,6 +1568,234 @@ window.MATH_MANIFEST = {
           ]
         }
       ]
+    },
+    {
+      "id": "ch07",
+      "title": "二次函数与反比例函数",
+      "units": [
+        {
+          "id": "ch07-u1",
+          "title": "二次函数",
+          "lessons": [
+            {
+              "id": "ch07-u1-l1",
+              "title": "二次函数的图像",
+              "chapterId": "ch07",
+              "chapterTitle": "二次函数与反比例函数",
+              "unitId": "ch07-u1",
+              "unitTitle": "二次函数",
+              "bundle": "ch07-u1-l1.bundle.js",
+              "freshness": "ch07-u1-l1.freshness.json",
+              "pages": [
+                {
+                  "id": "ch07-u1-l1-p1",
+                  "title": "描点：把 y=x² 一个点一个点画出来"
+                },
+                {
+                  "id": "ch07-u1-l1-p1b",
+                  "title": "二次函数：最高两次方"
+                },
+                {
+                  "id": "ch07-u1-l1-p2",
+                  "title": "a 的符号定开口，大小定宽窄"
+                },
+                {
+                  "id": "ch07-u1-l1-p2b",
+                  "title": "a：符号定开口大小定宽窄"
+                }
+              ]
+            },
+            {
+              "id": "ch07-u1-l2",
+              "title": "顶点式",
+              "chapterId": "ch07",
+              "chapterTitle": "二次函数与反比例函数",
+              "unitId": "ch07-u1",
+              "unitTitle": "二次函数",
+              "bundle": "ch07-u1-l2.bundle.js",
+              "freshness": "ch07-u1-l2.freshness.json",
+              "pages": [
+                {
+                  "id": "ch07-u1-l2-p1",
+                  "title": "顶点式：顶点直接写在脸上"
+                },
+                {
+                  "id": "ch07-u1-l2-p1b",
+                  "title": "顶点式：顶点写在脸上"
+                },
+                {
+                  "id": "ch07-u1-l2-p1g",
+                  "title": "平移：顶点搬家整条走"
+                },
+                {
+                  "id": "ch07-u1-l2-p2",
+                  "title": "一般式变顶点式：配方是钥匙"
+                },
+                {
+                  "id": "ch07-u1-l2-p2b",
+                  "title": "配方：一般式变顶点式"
+                }
+              ]
+            },
+            {
+              "id": "ch07-u1-l3",
+              "title": "二次函数的性质",
+              "chapterId": "ch07",
+              "chapterTitle": "二次函数与反比例函数",
+              "unitId": "ch07-u1",
+              "unitTitle": "二次函数",
+              "bundle": "ch07-u1-l3.bundle.js",
+              "freshness": "ch07-u1-l3.freshness.json",
+              "pages": [
+                {
+                  "id": "ch07-u1-l3-p1",
+                  "title": "顶点：对称轴穿过的地方"
+                },
+                {
+                  "id": "ch07-u1-l3-p1b",
+                  "title": "对称轴：对折重合的线"
+                }
+              ]
+            },
+            {
+              "id": "ch07-u1-l4",
+              "title": "二次函数的最值应用",
+              "chapterId": "ch07",
+              "chapterTitle": "二次函数与反比例函数",
+              "unitId": "ch07-u1",
+              "unitTitle": "二次函数",
+              "bundle": "ch07-u1-l4.bundle.js",
+              "freshness": "ch07-u1-l4.freshness.json",
+              "pages": [
+                {
+                  "id": "ch07-u1-l4-p1",
+                  "title": "20 米篱笆，围出最大面积"
+                },
+                {
+                  "id": "ch07-u1-l4-p1b",
+                  "title": "最值应用：建模三步"
+                },
+                {
+                  "id": "ch07-u1-l4-p2",
+                  "title": "扔铅球：能飞多远？"
+                },
+                {
+                  "id": "ch07-u1-l4-p3",
+                  "title": "最高点：顶点就是最值"
+                },
+                {
+                  "id": "ch07-u1-l4-p4a",
+                  "title": "试试 30°：低平远射"
+                },
+                {
+                  "id": "ch07-u1-l4-p4b",
+                  "title": "试试 45°：不低不高"
+                },
+                {
+                  "id": "ch07-u1-l4-p4c",
+                  "title": "试试 60°：高吊"
+                },
+                {
+                  "id": "ch07-u1-l4-p4d",
+                  "title": "结论：45° 最远"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch07-u2",
+          "title": "反比例函数",
+          "lessons": [
+            {
+              "id": "ch07-u2-l1",
+              "title": "反比例函数的图像",
+              "chapterId": "ch07",
+              "chapterTitle": "二次函数与反比例函数",
+              "unitId": "ch07-u2",
+              "unitTitle": "反比例函数",
+              "bundle": "ch07-u2-l1.bundle.js",
+              "freshness": "ch07-u2-l1.freshness.json",
+              "pages": [
+                {
+                  "id": "ch07-u2-l1-p1",
+                  "title": "y=k/x：一个变大，另一个变小"
+                },
+                {
+                  "id": "ch07-u2-l1-p1b",
+                  "title": "反比例：xy=k 恒定"
+                },
+                {
+                  "id": "ch07-u2-l1-p2",
+                  "title": "双曲线：关于原点对称的两支"
+                },
+                {
+                  "id": "ch07-u2-l1-p2b",
+                  "title": "双曲线：k 定象限"
+                }
+              ]
+            },
+            {
+              "id": "ch07-u2-l2",
+              "title": "反比例函数的性质",
+              "chapterId": "ch07",
+              "chapterTitle": "二次函数与反比例函数",
+              "unitId": "ch07-u2",
+              "unitTitle": "反比例函数",
+              "bundle": "ch07-u2-l2.bundle.js",
+              "freshness": "ch07-u2-l2.freshness.json",
+              "pages": [
+                {
+                  "id": "ch07-u2-l2-p1",
+                  "title": "增减性：只能在每支内部比"
+                },
+                {
+                  "id": "ch07-u2-l2-p1b",
+                  "title": "增减性：别跨禁区比"
+                }
+              ]
+            },
+            {
+              "id": "ch07-u2-l3",
+              "title": "本章小结",
+              "chapterId": "ch07",
+              "chapterTitle": "二次函数与反比例函数",
+              "unitId": "ch07-u2",
+              "unitTitle": "反比例函数",
+              "bundle": "ch07-u2-l3.bundle.js",
+              "freshness": "ch07-u2-l3.freshness.json",
+              "pages": [
+                {
+                  "id": "ch07-u2-l3-p1",
+                  "title": "一图流：抛物线与双曲线"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch07-ux",
+          "title": "本章习题",
+          "lessons": [
+            {
+              "id": "ch07-ux-l1",
+              "title": "第七章习题",
+              "chapterId": "ch07",
+              "chapterTitle": "二次函数与反比例函数",
+              "unitId": "ch07-ux",
+              "unitTitle": "本章习题",
+              "bundle": "ch07-ux-l1.bundle.js",
+              "freshness": "ch07-ux-l1.freshness.json",
+              "pages": [
+                {
+                  "id": "ch07-ux-l1-p1",
+                  "title": "第七章习题：函数图像"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "lessons": [
@@ -2932,6 +3160,210 @@ window.MATH_MANIFEST = {
         {
           "id": "ch06-ux-l1-p1",
           "title": "第六章习题：一次函数"
+        }
+      ]
+    },
+    {
+      "id": "ch07-u1-l1",
+      "title": "二次函数的图像",
+      "chapterId": "ch07",
+      "chapterTitle": "二次函数与反比例函数",
+      "unitId": "ch07-u1",
+      "unitTitle": "二次函数",
+      "bundle": "ch07-u1-l1.bundle.js",
+      "freshness": "ch07-u1-l1.freshness.json",
+      "pages": [
+        {
+          "id": "ch07-u1-l1-p1",
+          "title": "描点：把 y=x² 一个点一个点画出来"
+        },
+        {
+          "id": "ch07-u1-l1-p1b",
+          "title": "二次函数：最高两次方"
+        },
+        {
+          "id": "ch07-u1-l1-p2",
+          "title": "a 的符号定开口，大小定宽窄"
+        },
+        {
+          "id": "ch07-u1-l1-p2b",
+          "title": "a：符号定开口大小定宽窄"
+        }
+      ]
+    },
+    {
+      "id": "ch07-u1-l2",
+      "title": "顶点式",
+      "chapterId": "ch07",
+      "chapterTitle": "二次函数与反比例函数",
+      "unitId": "ch07-u1",
+      "unitTitle": "二次函数",
+      "bundle": "ch07-u1-l2.bundle.js",
+      "freshness": "ch07-u1-l2.freshness.json",
+      "pages": [
+        {
+          "id": "ch07-u1-l2-p1",
+          "title": "顶点式：顶点直接写在脸上"
+        },
+        {
+          "id": "ch07-u1-l2-p1b",
+          "title": "顶点式：顶点写在脸上"
+        },
+        {
+          "id": "ch07-u1-l2-p1g",
+          "title": "平移：顶点搬家整条走"
+        },
+        {
+          "id": "ch07-u1-l2-p2",
+          "title": "一般式变顶点式：配方是钥匙"
+        },
+        {
+          "id": "ch07-u1-l2-p2b",
+          "title": "配方：一般式变顶点式"
+        }
+      ]
+    },
+    {
+      "id": "ch07-u1-l3",
+      "title": "二次函数的性质",
+      "chapterId": "ch07",
+      "chapterTitle": "二次函数与反比例函数",
+      "unitId": "ch07-u1",
+      "unitTitle": "二次函数",
+      "bundle": "ch07-u1-l3.bundle.js",
+      "freshness": "ch07-u1-l3.freshness.json",
+      "pages": [
+        {
+          "id": "ch07-u1-l3-p1",
+          "title": "顶点：对称轴穿过的地方"
+        },
+        {
+          "id": "ch07-u1-l3-p1b",
+          "title": "对称轴：对折重合的线"
+        }
+      ]
+    },
+    {
+      "id": "ch07-u1-l4",
+      "title": "二次函数的最值应用",
+      "chapterId": "ch07",
+      "chapterTitle": "二次函数与反比例函数",
+      "unitId": "ch07-u1",
+      "unitTitle": "二次函数",
+      "bundle": "ch07-u1-l4.bundle.js",
+      "freshness": "ch07-u1-l4.freshness.json",
+      "pages": [
+        {
+          "id": "ch07-u1-l4-p1",
+          "title": "20 米篱笆，围出最大面积"
+        },
+        {
+          "id": "ch07-u1-l4-p1b",
+          "title": "最值应用：建模三步"
+        },
+        {
+          "id": "ch07-u1-l4-p2",
+          "title": "扔铅球：能飞多远？"
+        },
+        {
+          "id": "ch07-u1-l4-p3",
+          "title": "最高点：顶点就是最值"
+        },
+        {
+          "id": "ch07-u1-l4-p4a",
+          "title": "试试 30°：低平远射"
+        },
+        {
+          "id": "ch07-u1-l4-p4b",
+          "title": "试试 45°：不低不高"
+        },
+        {
+          "id": "ch07-u1-l4-p4c",
+          "title": "试试 60°：高吊"
+        },
+        {
+          "id": "ch07-u1-l4-p4d",
+          "title": "结论：45° 最远"
+        }
+      ]
+    },
+    {
+      "id": "ch07-u2-l1",
+      "title": "反比例函数的图像",
+      "chapterId": "ch07",
+      "chapterTitle": "二次函数与反比例函数",
+      "unitId": "ch07-u2",
+      "unitTitle": "反比例函数",
+      "bundle": "ch07-u2-l1.bundle.js",
+      "freshness": "ch07-u2-l1.freshness.json",
+      "pages": [
+        {
+          "id": "ch07-u2-l1-p1",
+          "title": "y=k/x：一个变大，另一个变小"
+        },
+        {
+          "id": "ch07-u2-l1-p1b",
+          "title": "反比例：xy=k 恒定"
+        },
+        {
+          "id": "ch07-u2-l1-p2",
+          "title": "双曲线：关于原点对称的两支"
+        },
+        {
+          "id": "ch07-u2-l1-p2b",
+          "title": "双曲线：k 定象限"
+        }
+      ]
+    },
+    {
+      "id": "ch07-u2-l2",
+      "title": "反比例函数的性质",
+      "chapterId": "ch07",
+      "chapterTitle": "二次函数与反比例函数",
+      "unitId": "ch07-u2",
+      "unitTitle": "反比例函数",
+      "bundle": "ch07-u2-l2.bundle.js",
+      "freshness": "ch07-u2-l2.freshness.json",
+      "pages": [
+        {
+          "id": "ch07-u2-l2-p1",
+          "title": "增减性：只能在每支内部比"
+        },
+        {
+          "id": "ch07-u2-l2-p1b",
+          "title": "增减性：别跨禁区比"
+        }
+      ]
+    },
+    {
+      "id": "ch07-u2-l3",
+      "title": "本章小结",
+      "chapterId": "ch07",
+      "chapterTitle": "二次函数与反比例函数",
+      "unitId": "ch07-u2",
+      "unitTitle": "反比例函数",
+      "bundle": "ch07-u2-l3.bundle.js",
+      "freshness": "ch07-u2-l3.freshness.json",
+      "pages": [
+        {
+          "id": "ch07-u2-l3-p1",
+          "title": "一图流：抛物线与双曲线"
+        }
+      ]
+    },
+    {
+      "id": "ch07-ux-l1",
+      "title": "第七章习题",
+      "chapterId": "ch07",
+      "chapterTitle": "二次函数与反比例函数",
+      "unitId": "ch07-ux",
+      "unitTitle": "本章习题",
+      "bundle": "ch07-ux-l1.bundle.js",
+      "freshness": "ch07-ux-l1.freshness.json",
+      "pages": [
+        {
+          "id": "ch07-ux-l1-p1",
+          "title": "第七章习题：函数图像"
         }
       ]
     }

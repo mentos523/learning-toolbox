@@ -1,0 +1,53 @@
+window.MATH_BUNDLES = window.MATH_BUNDLES || {};
+window.MATH_BUNDLES["ch07-ux-l1"] = {
+  "lessonId": "ch07-ux-l1",
+  "lessonTitle": "第七章习题",
+  "chapterId": "ch07",
+  "pages": [
+    {
+      "id": "ch07-ux-l1-p1",
+      "title": "第七章习题：函数图像",
+      "concept": "本章习题",
+      "formulas": [
+        {
+          "id": "f1",
+          "latex": "y = x^2 - 4x + 3",
+          "translation": "第 3 题：(x−2)²−1，顶点 (2,−1)"
+        }
+      ],
+      "interaction": {
+        "params": {
+          "autoPlay": true,
+          "fn": "x^2 - 4*x + 3",
+          "speed": 800,
+          "step": 0.5,
+          "xMax": 5,
+          "xMin": -1
+        },
+        "type": "plot-points"
+      },
+      "auxInteraction": null,
+      "hints": [
+        "1．y=(k−2)x² 是二次函数，则 k≠____。",
+        "2．y=−3(x+2)²+1 的顶点是____，开口向____。",
+        "3．y=x²−4x+3 配方成顶点式：____。",
+        "4．y=2x² 的图像比 y=x²____（宽/窄）。",
+        "5．y=10/x 中，当 x=5 时 y=____。",
+        "6．y=−5/x 的图像在第____、____象限。",
+        "7．矩形周长 40 米，长 x 米，面积 S=____，x=____ 时面积最大。"
+      ],
+      "examples": [
+        {
+          "figure": "核对答案",
+          "text": "答案：1．2；2．(−2,1)，下；3．y=(x−2)²−1；4．窄；5．2；6．二、四；7．S=x(20−x)，x=10"
+        },
+        {
+          "figure": "错因解析",
+          "text": "1．二次函数要求 x² 系数≠0：k−2≠0，k≠2。2．y=a(x−h)²+k：顶点 (−h,k)=(−2,1)；a=−3<0 开口向下。3．x²−4x+3=(x−2)²−1：配方加 (4/2)²=4 再减 4。4．|a| 越大开口越窄：2>1，y=2x² 更窄。5．代入：y=10/5=2。6．k=−5<0：反比例 k<0 在二、四象限。7．宽=(40−2x)/2=20−x：S=x(20−x)；顶点 x=10 时面积最大。"
+        }
+      ],
+      "prev": "ch07-u2-l3-p1",
+      "next": null
+    }
+  ]
+};
