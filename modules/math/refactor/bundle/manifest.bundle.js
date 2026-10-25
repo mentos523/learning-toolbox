@@ -1,5 +1,5 @@
 window.MATH_MANIFEST = {
-  "generatedAt": "2026-10-25T13:36:19.177Z",
+  "generatedAt": "2026-10-25T14:15:55.774Z",
   "chapters": [
     {
       "id": "ch00",
@@ -4120,6 +4120,202 @@ window.MATH_MANIFEST = {
           ]
         }
       ]
+    },
+    {
+      "id": "g06",
+      "title": "四边形",
+      "units": [
+        {
+          "id": "g06-u1",
+          "title": "四边形家族",
+          "lessons": [
+            {
+              "id": "g06-u1-l1",
+              "title": "平行四边形的性质",
+              "chapterId": "g06",
+              "chapterTitle": "四边形",
+              "unitId": "g06-u1",
+              "unitTitle": "四边形家族",
+              "bundle": "g06-u1-l1.bundle.js",
+              "freshness": "g06-u1-l1.freshness.json",
+              "pages": [
+                {
+                  "id": "g06-u1-l1-p1",
+                  "title": "转半圈：严丝合缝"
+                },
+                {
+                  "id": "g06-u1-l1-p2",
+                  "title": "性质1：对边平行且相等"
+                },
+                {
+                  "id": "g06-u1-l1-p3",
+                  "title": "性质2：对角相等"
+                },
+                {
+                  "id": "g06-u1-l1-p4",
+                  "title": "性质3：对角线互相平分"
+                },
+                {
+                  "id": "g06-u1-l1-p5",
+                  "title": "证明：对角线互相平分"
+                }
+              ]
+            },
+            {
+              "id": "g06-u1-l2",
+              "title": "平行四边形的判定",
+              "chapterId": "g06",
+              "chapterTitle": "四边形",
+              "unitId": "g06-u1",
+              "unitTitle": "四边形家族",
+              "bundle": "g06-u1-l2.bundle.js",
+              "freshness": "g06-u1-l2.freshness.json",
+              "pages": [
+                {
+                  "id": "g06-u1-l2-p1",
+                  "title": "四个条件，都能拼出来"
+                },
+                {
+                  "id": "g06-u1-l2-p2",
+                  "title": "判定1：两组对边分别平行"
+                },
+                {
+                  "id": "g06-u1-l2-p3",
+                  "title": "判定2：两组对边分别相等"
+                },
+                {
+                  "id": "g06-u1-l2-p4",
+                  "title": "判定3：一组对边平行且相等"
+                },
+                {
+                  "id": "g06-u1-l2-p5",
+                  "title": "判定4：对角线互相平分"
+                }
+              ]
+            },
+            {
+              "id": "g06-u1-l3",
+              "title": "矩形",
+              "chapterId": "g06",
+              "chapterTitle": "四边形",
+              "unitId": "g06-u1",
+              "unitTitle": "四边形家族",
+              "bundle": "g06-u1-l3.bundle.js",
+              "freshness": "g06-u1-l3.freshness.json",
+              "pages": [
+                {
+                  "id": "g06-u1-l3-p1",
+                  "title": "拉直：角变成了直角"
+                },
+                {
+                  "id": "g06-u1-l3-p2",
+                  "title": "矩形：一个直角定身份"
+                },
+                {
+                  "id": "g06-u1-l3-p3",
+                  "title": "矩形：对角线相等"
+                },
+                {
+                  "id": "g06-u1-l3-p4",
+                  "title": "证明：矩形对角线相等"
+                }
+              ]
+            },
+            {
+              "id": "g06-u1-l4",
+              "title": "菱形",
+              "chapterId": "g06",
+              "chapterTitle": "四边形",
+              "unitId": "g06-u1",
+              "unitTitle": "四边形家族",
+              "bundle": "g06-u1-l4.bundle.js",
+              "freshness": "g06-u1-l4.freshness.json",
+              "pages": [
+                {
+                  "id": "g06-u1-l4-p1",
+                  "title": "压扁：四条边一样长"
+                },
+                {
+                  "id": "g06-u1-l4-p2",
+                  "title": "菱形：邻边相等定身份"
+                },
+                {
+                  "id": "g06-u1-l4-p3",
+                  "title": "菱形：对角线垂直平分"
+                },
+                {
+                  "id": "g06-u1-l4-p4",
+                  "title": "证明：菱形对角线垂直"
+                }
+              ]
+            },
+            {
+              "id": "g06-u1-l5",
+              "title": "正方形",
+              "chapterId": "g06",
+              "chapterTitle": "四边形",
+              "unitId": "g06-u1",
+              "unitTitle": "四边形家族",
+              "bundle": "g06-u1-l5.bundle.js",
+              "freshness": "g06-u1-l5.freshness.json",
+              "pages": [
+                {
+                  "id": "g06-u1-l5-p1",
+                  "title": "家族谱系：多了什么条件"
+                },
+                {
+                  "id": "g06-u1-l5-p2",
+                  "title": "正方形：两家本事全有"
+                }
+              ]
+            },
+            {
+              "id": "g06-u1-l6",
+              "title": "梯形与三角形中位线",
+              "chapterId": "g06",
+              "chapterTitle": "四边形",
+              "unitId": "g06-u1",
+              "unitTitle": "四边形家族",
+              "bundle": "g06-u1-l6.bundle.js",
+              "freshness": "g06-u1-l6.freshness.json",
+              "pages": [
+                {
+                  "id": "g06-u1-l6-p1",
+                  "title": "切一角：拼出平行四边形"
+                },
+                {
+                  "id": "g06-u1-l6-p2",
+                  "title": "证明：三角形中位线定理"
+                },
+                {
+                  "id": "g06-u1-l6-p3",
+                  "title": "梯形：“只有”是关键词"
+                }
+              ]
+            },
+            {
+              "id": "g06-u1-l7",
+              "title": "本章小结与习题",
+              "chapterId": "g06",
+              "chapterTitle": "四边形",
+              "unitId": "g06-u1",
+              "unitTitle": "四边形家族",
+              "bundle": "g06-u1-l7.bundle.js",
+              "freshness": "g06-u1-l7.freshness.json",
+              "pages": [
+                {
+                  "id": "g06-u1-l7-p1",
+                  "title": "小结：判定 vs 性质"
+                },
+                {
+                  "id": "g06-u1-l7-p2",
+                  "title": "本章小测：6 道题"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "lessons": [
@@ -7784,6 +7980,190 @@ window.MATH_MANIFEST = {
         {
           "id": "g05-u1-l8-p2",
           "title": "本章习题：6 道题"
+        }
+      ]
+    },
+    {
+      "id": "g06-u1-l1",
+      "title": "平行四边形的性质",
+      "chapterId": "g06",
+      "chapterTitle": "四边形",
+      "unitId": "g06-u1",
+      "unitTitle": "四边形家族",
+      "bundle": "g06-u1-l1.bundle.js",
+      "freshness": "g06-u1-l1.freshness.json",
+      "pages": [
+        {
+          "id": "g06-u1-l1-p1",
+          "title": "转半圈：严丝合缝"
+        },
+        {
+          "id": "g06-u1-l1-p2",
+          "title": "性质1：对边平行且相等"
+        },
+        {
+          "id": "g06-u1-l1-p3",
+          "title": "性质2：对角相等"
+        },
+        {
+          "id": "g06-u1-l1-p4",
+          "title": "性质3：对角线互相平分"
+        },
+        {
+          "id": "g06-u1-l1-p5",
+          "title": "证明：对角线互相平分"
+        }
+      ]
+    },
+    {
+      "id": "g06-u1-l2",
+      "title": "平行四边形的判定",
+      "chapterId": "g06",
+      "chapterTitle": "四边形",
+      "unitId": "g06-u1",
+      "unitTitle": "四边形家族",
+      "bundle": "g06-u1-l2.bundle.js",
+      "freshness": "g06-u1-l2.freshness.json",
+      "pages": [
+        {
+          "id": "g06-u1-l2-p1",
+          "title": "四个条件，都能拼出来"
+        },
+        {
+          "id": "g06-u1-l2-p2",
+          "title": "判定1：两组对边分别平行"
+        },
+        {
+          "id": "g06-u1-l2-p3",
+          "title": "判定2：两组对边分别相等"
+        },
+        {
+          "id": "g06-u1-l2-p4",
+          "title": "判定3：一组对边平行且相等"
+        },
+        {
+          "id": "g06-u1-l2-p5",
+          "title": "判定4：对角线互相平分"
+        }
+      ]
+    },
+    {
+      "id": "g06-u1-l3",
+      "title": "矩形",
+      "chapterId": "g06",
+      "chapterTitle": "四边形",
+      "unitId": "g06-u1",
+      "unitTitle": "四边形家族",
+      "bundle": "g06-u1-l3.bundle.js",
+      "freshness": "g06-u1-l3.freshness.json",
+      "pages": [
+        {
+          "id": "g06-u1-l3-p1",
+          "title": "拉直：角变成了直角"
+        },
+        {
+          "id": "g06-u1-l3-p2",
+          "title": "矩形：一个直角定身份"
+        },
+        {
+          "id": "g06-u1-l3-p3",
+          "title": "矩形：对角线相等"
+        },
+        {
+          "id": "g06-u1-l3-p4",
+          "title": "证明：矩形对角线相等"
+        }
+      ]
+    },
+    {
+      "id": "g06-u1-l4",
+      "title": "菱形",
+      "chapterId": "g06",
+      "chapterTitle": "四边形",
+      "unitId": "g06-u1",
+      "unitTitle": "四边形家族",
+      "bundle": "g06-u1-l4.bundle.js",
+      "freshness": "g06-u1-l4.freshness.json",
+      "pages": [
+        {
+          "id": "g06-u1-l4-p1",
+          "title": "压扁：四条边一样长"
+        },
+        {
+          "id": "g06-u1-l4-p2",
+          "title": "菱形：邻边相等定身份"
+        },
+        {
+          "id": "g06-u1-l4-p3",
+          "title": "菱形：对角线垂直平分"
+        },
+        {
+          "id": "g06-u1-l4-p4",
+          "title": "证明：菱形对角线垂直"
+        }
+      ]
+    },
+    {
+      "id": "g06-u1-l5",
+      "title": "正方形",
+      "chapterId": "g06",
+      "chapterTitle": "四边形",
+      "unitId": "g06-u1",
+      "unitTitle": "四边形家族",
+      "bundle": "g06-u1-l5.bundle.js",
+      "freshness": "g06-u1-l5.freshness.json",
+      "pages": [
+        {
+          "id": "g06-u1-l5-p1",
+          "title": "家族谱系：多了什么条件"
+        },
+        {
+          "id": "g06-u1-l5-p2",
+          "title": "正方形：两家本事全有"
+        }
+      ]
+    },
+    {
+      "id": "g06-u1-l6",
+      "title": "梯形与三角形中位线",
+      "chapterId": "g06",
+      "chapterTitle": "四边形",
+      "unitId": "g06-u1",
+      "unitTitle": "四边形家族",
+      "bundle": "g06-u1-l6.bundle.js",
+      "freshness": "g06-u1-l6.freshness.json",
+      "pages": [
+        {
+          "id": "g06-u1-l6-p1",
+          "title": "切一角：拼出平行四边形"
+        },
+        {
+          "id": "g06-u1-l6-p2",
+          "title": "证明：三角形中位线定理"
+        },
+        {
+          "id": "g06-u1-l6-p3",
+          "title": "梯形：“只有”是关键词"
+        }
+      ]
+    },
+    {
+      "id": "g06-u1-l7",
+      "title": "本章小结与习题",
+      "chapterId": "g06",
+      "chapterTitle": "四边形",
+      "unitId": "g06-u1",
+      "unitTitle": "四边形家族",
+      "bundle": "g06-u1-l7.bundle.js",
+      "freshness": "g06-u1-l7.freshness.json",
+      "pages": [
+        {
+          "id": "g06-u1-l7-p1",
+          "title": "小结：判定 vs 性质"
+        },
+        {
+          "id": "g06-u1-l7-p2",
+          "title": "本章小测：6 道题"
         }
       ]
     }
