@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-25T14:43:00.886Z",
+  "generatedAt": "2026-10-25T15:06:32.203Z",
   "chapters": [
     {
       "id": "ch00",
@@ -4468,6 +4468,182 @@
           ]
         }
       ]
+    },
+    {
+      "id": "g08",
+      "title": "圆（二）——切线与圆的方程",
+      "units": [
+        {
+          "id": "g08-u1",
+          "title": "位置关系与切线",
+          "lessons": [
+            {
+              "id": "g08-u1-l1",
+              "title": "点、线与圆的位置关系",
+              "chapterId": "g08",
+              "chapterTitle": "圆（二）——切线与圆的方程",
+              "unitId": "g08-u1",
+              "unitTitle": "位置关系与切线",
+              "bundle": "g08-u1-l1.bundle.js",
+              "freshness": "g08-u1-l1.freshness.json",
+              "pages": [
+                {
+                  "id": "g08-u1-l1-p1",
+                  "title": "日出：直线靠近圆"
+                },
+                {
+                  "id": "g08-u1-l1-p2",
+                  "title": "点和圆：三种位置"
+                },
+                {
+                  "id": "g08-u1-l1-p3",
+                  "title": "直线和圆：三种位置"
+                },
+                {
+                  "id": "g08-u1-l1-p4",
+                  "title": "例题：d 和 r 比大小"
+                }
+              ]
+            },
+            {
+              "id": "g08-u1-l2",
+              "title": "切线的判定与性质",
+              "chapterId": "g08",
+              "chapterTitle": "圆（二）——切线与圆的方程",
+              "unitId": "g08-u1",
+              "unitTitle": "位置关系与切线",
+              "bundle": "g08-u1-l2.bundle.js",
+              "freshness": "g08-u1-l2.freshness.json",
+              "pages": [
+                {
+                  "id": "g08-u1-l2-p1",
+                  "title": "交点二合一：切线诞生"
+                },
+                {
+                  "id": "g08-u1-l2-p2",
+                  "title": "切线的判定：查两证"
+                },
+                {
+                  "id": "g08-u1-l2-p3",
+                  "title": "切线的性质：必垂直"
+                },
+                {
+                  "id": "g08-u1-l2-p4",
+                  "title": "例题：证明它是切线"
+                }
+              ]
+            },
+            {
+              "id": "g08-u1-l3",
+              "title": "切线长定理",
+              "chapterId": "g08",
+              "chapterTitle": "圆（二）——切线与圆的方程",
+              "unitId": "g08-u1",
+              "unitTitle": "位置关系与切线",
+              "bundle": "g08-u1-l3.bundle.js",
+              "freshness": "g08-u1-l3.freshness.json",
+              "pages": [
+                {
+                  "id": "g08-u1-l3-p1",
+                  "title": "对折：两条切线一样长"
+                },
+                {
+                  "id": "g08-u1-l3-p2",
+                  "title": "切线长定理的证明"
+                },
+                {
+                  "id": "g08-u1-l3-p3",
+                  "title": "切线长定理"
+                },
+                {
+                  "id": "g08-u1-l3-p4",
+                  "title": "例题：切线长求值"
+                }
+              ]
+            },
+            {
+              "id": "g08-u1-l4",
+              "title": "三角形的外接圆与内切圆",
+              "chapterId": "g08",
+              "chapterTitle": "圆（二）——切线与圆的方程",
+              "unitId": "g08-u1",
+              "unitTitle": "位置关系与切线",
+              "bundle": "g08-u1-l4.bundle.js",
+              "freshness": "g08-u1-l4.freshness.json",
+              "pages": [
+                {
+                  "id": "g08-u1-l4-p1",
+                  "title": "三角形“套”进圆"
+                },
+                {
+                  "id": "g08-u1-l4-p2",
+                  "title": "外心与外接圆"
+                },
+                {
+                  "id": "g08-u1-l4-p3",
+                  "title": "圆“塞”进三角形"
+                },
+                {
+                  "id": "g08-u1-l4-p4",
+                  "title": "内心与内切圆"
+                },
+                {
+                  "id": "g08-u1-l4-p5",
+                  "title": "外心 vs 内心"
+                }
+              ]
+            },
+            {
+              "id": "g08-u1-l5",
+              "title": "圆的方程：x²+y²=r²",
+              "chapterId": "g08",
+              "chapterTitle": "圆（二）——切线与圆的方程",
+              "unitId": "g08-u1",
+              "unitTitle": "位置关系与切线",
+              "bundle": "g08-u1-l5.bundle.js",
+              "freshness": "g08-u1-l5.freshness.json",
+              "pages": [
+                {
+                  "id": "g08-u1-l5-p1",
+                  "title": "圆也能写成一个式子？"
+                },
+                {
+                  "id": "g08-u1-l5-p2",
+                  "title": "圆的方程怎么来的"
+                },
+                {
+                  "id": "g08-u1-l5-p3",
+                  "title": "例题：代入检验"
+                },
+                {
+                  "id": "g08-u1-l5-p4",
+                  "title": "方程和图形的第二次握手"
+                }
+              ]
+            },
+            {
+              "id": "g08-u1-l6",
+              "title": "本章小结与习题",
+              "chapterId": "g08",
+              "chapterTitle": "圆（二）——切线与圆的方程",
+              "unitId": "g08-u1",
+              "unitTitle": "位置关系与切线",
+              "bundle": "g08-u1-l6.bundle.js",
+              "freshness": "g08-u1-l6.freshness.json",
+              "pages": [
+                {
+                  "id": "g08-u1-l6-p1",
+                  "title": "圆（二）：一张图总结"
+                },
+                {
+                  "id": "g08-u1-l6-p2",
+                  "title": "本章习题：6 道题"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "lessons": [
@@ -8455,6 +8631,170 @@
         },
         {
           "id": "g07-u1-l6-p2",
+          "title": "本章习题：6 道题"
+        }
+      ]
+    },
+    {
+      "id": "g08-u1-l1",
+      "title": "点、线与圆的位置关系",
+      "chapterId": "g08",
+      "chapterTitle": "圆（二）——切线与圆的方程",
+      "unitId": "g08-u1",
+      "unitTitle": "位置关系与切线",
+      "bundle": "g08-u1-l1.bundle.js",
+      "freshness": "g08-u1-l1.freshness.json",
+      "pages": [
+        {
+          "id": "g08-u1-l1-p1",
+          "title": "日出：直线靠近圆"
+        },
+        {
+          "id": "g08-u1-l1-p2",
+          "title": "点和圆：三种位置"
+        },
+        {
+          "id": "g08-u1-l1-p3",
+          "title": "直线和圆：三种位置"
+        },
+        {
+          "id": "g08-u1-l1-p4",
+          "title": "例题：d 和 r 比大小"
+        }
+      ]
+    },
+    {
+      "id": "g08-u1-l2",
+      "title": "切线的判定与性质",
+      "chapterId": "g08",
+      "chapterTitle": "圆（二）——切线与圆的方程",
+      "unitId": "g08-u1",
+      "unitTitle": "位置关系与切线",
+      "bundle": "g08-u1-l2.bundle.js",
+      "freshness": "g08-u1-l2.freshness.json",
+      "pages": [
+        {
+          "id": "g08-u1-l2-p1",
+          "title": "交点二合一：切线诞生"
+        },
+        {
+          "id": "g08-u1-l2-p2",
+          "title": "切线的判定：查两证"
+        },
+        {
+          "id": "g08-u1-l2-p3",
+          "title": "切线的性质：必垂直"
+        },
+        {
+          "id": "g08-u1-l2-p4",
+          "title": "例题：证明它是切线"
+        }
+      ]
+    },
+    {
+      "id": "g08-u1-l3",
+      "title": "切线长定理",
+      "chapterId": "g08",
+      "chapterTitle": "圆（二）——切线与圆的方程",
+      "unitId": "g08-u1",
+      "unitTitle": "位置关系与切线",
+      "bundle": "g08-u1-l3.bundle.js",
+      "freshness": "g08-u1-l3.freshness.json",
+      "pages": [
+        {
+          "id": "g08-u1-l3-p1",
+          "title": "对折：两条切线一样长"
+        },
+        {
+          "id": "g08-u1-l3-p2",
+          "title": "切线长定理的证明"
+        },
+        {
+          "id": "g08-u1-l3-p3",
+          "title": "切线长定理"
+        },
+        {
+          "id": "g08-u1-l3-p4",
+          "title": "例题：切线长求值"
+        }
+      ]
+    },
+    {
+      "id": "g08-u1-l4",
+      "title": "三角形的外接圆与内切圆",
+      "chapterId": "g08",
+      "chapterTitle": "圆（二）——切线与圆的方程",
+      "unitId": "g08-u1",
+      "unitTitle": "位置关系与切线",
+      "bundle": "g08-u1-l4.bundle.js",
+      "freshness": "g08-u1-l4.freshness.json",
+      "pages": [
+        {
+          "id": "g08-u1-l4-p1",
+          "title": "三角形“套”进圆"
+        },
+        {
+          "id": "g08-u1-l4-p2",
+          "title": "外心与外接圆"
+        },
+        {
+          "id": "g08-u1-l4-p3",
+          "title": "圆“塞”进三角形"
+        },
+        {
+          "id": "g08-u1-l4-p4",
+          "title": "内心与内切圆"
+        },
+        {
+          "id": "g08-u1-l4-p5",
+          "title": "外心 vs 内心"
+        }
+      ]
+    },
+    {
+      "id": "g08-u1-l5",
+      "title": "圆的方程：x²+y²=r²",
+      "chapterId": "g08",
+      "chapterTitle": "圆（二）——切线与圆的方程",
+      "unitId": "g08-u1",
+      "unitTitle": "位置关系与切线",
+      "bundle": "g08-u1-l5.bundle.js",
+      "freshness": "g08-u1-l5.freshness.json",
+      "pages": [
+        {
+          "id": "g08-u1-l5-p1",
+          "title": "圆也能写成一个式子？"
+        },
+        {
+          "id": "g08-u1-l5-p2",
+          "title": "圆的方程怎么来的"
+        },
+        {
+          "id": "g08-u1-l5-p3",
+          "title": "例题：代入检验"
+        },
+        {
+          "id": "g08-u1-l5-p4",
+          "title": "方程和图形的第二次握手"
+        }
+      ]
+    },
+    {
+      "id": "g08-u1-l6",
+      "title": "本章小结与习题",
+      "chapterId": "g08",
+      "chapterTitle": "圆（二）——切线与圆的方程",
+      "unitId": "g08-u1",
+      "unitTitle": "位置关系与切线",
+      "bundle": "g08-u1-l6.bundle.js",
+      "freshness": "g08-u1-l6.freshness.json",
+      "pages": [
+        {
+          "id": "g08-u1-l6-p1",
+          "title": "圆（二）：一张图总结"
+        },
+        {
+          "id": "g08-u1-l6-p2",
           "title": "本章习题：6 道题"
         }
       ]
