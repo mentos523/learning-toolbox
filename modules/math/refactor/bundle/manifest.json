@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-25T04:41:05.293Z",
+  "generatedAt": "2026-10-25T05:03:11.515Z",
   "chapters": [
     {
       "id": "ch00",
@@ -552,6 +552,186 @@
           ]
         }
       ]
+    },
+    {
+      "id": "ch03",
+      "title": "分式",
+      "units": [
+        {
+          "id": "ch03-u1",
+          "title": "分式的概念与性质",
+          "lessons": [
+            {
+              "id": "ch03-u1-l1",
+              "title": "分式的定义",
+              "chapterId": "ch03",
+              "chapterTitle": "分式",
+              "unitId": "ch03-u1",
+              "unitTitle": "分式的概念与性质",
+              "bundle": "ch03-u1-l1.bundle.js",
+              "freshness": "ch03-u1-l1.freshness.json",
+              "pages": [
+                {
+                  "id": "ch03-u1-l1-p1",
+                  "title": "分母里住进了字母"
+                },
+                {
+                  "id": "ch03-u1-l1-p1b",
+                  "title": "分式：只看分母有没有字母"
+                },
+                {
+                  "id": "ch03-u1-l1-p2",
+                  "title": "分母不能为零"
+                },
+                {
+                  "id": "ch03-u1-l1-p2b",
+                  "title": "禁区：让分母等于零的 x"
+                }
+              ]
+            },
+            {
+              "id": "ch03-u1-l2",
+              "title": "分式的基本性质",
+              "chapterId": "ch03",
+              "chapterTitle": "分式",
+              "unitId": "ch03-u1",
+              "unitTitle": "分式的概念与性质",
+              "bundle": "ch03-u1-l2.bundle.js",
+              "freshness": "ch03-u1-l2.freshness.json",
+              "pages": [
+                {
+                  "id": "ch03-u1-l2-p1",
+                  "title": "分子分母同乘除，值不变"
+                },
+                {
+                  "id": "ch03-u1-l2-p1b",
+                  "title": "约分：分子分母同除"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch03-u2",
+          "title": "分式的运算与方程",
+          "lessons": [
+            {
+              "id": "ch03-u2-l1",
+              "title": "分式的乘除",
+              "chapterId": "ch03",
+              "chapterTitle": "分式",
+              "unitId": "ch03-u2",
+              "unitTitle": "分式的运算与方程",
+              "bundle": "ch03-u2-l1.bundle.js",
+              "freshness": "ch03-u2-l1.freshness.json",
+              "pages": [
+                {
+                  "id": "ch03-u2-l1-p1",
+                  "title": "先约分，再相乘"
+                },
+                {
+                  "id": "ch03-u2-l1-p1b",
+                  "title": "乘除：先约分再相乘"
+                }
+              ]
+            },
+            {
+              "id": "ch03-u2-l2",
+              "title": "分式的加减",
+              "chapterId": "ch03",
+              "chapterTitle": "分式",
+              "unitId": "ch03-u2",
+              "unitTitle": "分式的运算与方程",
+              "bundle": "ch03-u2-l2.bundle.js",
+              "freshness": "ch03-u2-l2.freshness.json",
+              "pages": [
+                {
+                  "id": "ch03-u2-l2-p1",
+                  "title": "异分母相加：先通分"
+                },
+                {
+                  "id": "ch03-u2-l2-p1b",
+                  "title": "通分：化成相同分母"
+                },
+                {
+                  "id": "ch03-u2-l2-p2",
+                  "title": "同分母：分子直接加减"
+                },
+                {
+                  "id": "ch03-u2-l2-p2b",
+                  "title": "加减：分母不动算分子"
+                }
+              ]
+            },
+            {
+              "id": "ch03-u2-l3",
+              "title": "分式方程",
+              "chapterId": "ch03",
+              "chapterTitle": "分式",
+              "unitId": "ch03-u2",
+              "unitTitle": "分式的运算与方程",
+              "bundle": "ch03-u2-l3.bundle.js",
+              "freshness": "ch03-u2-l3.freshness.json",
+              "pages": [
+                {
+                  "id": "ch03-u2-l3-p1",
+                  "title": "去分母：两边同乘"
+                },
+                {
+                  "id": "ch03-u2-l3-p1b",
+                  "title": "分式方程：去分母三步"
+                },
+                {
+                  "id": "ch03-u2-l3-p2",
+                  "title": "增根：闯入禁区的解"
+                },
+                {
+                  "id": "ch03-u2-l3-p2b",
+                  "title": "增根：解完必须检验"
+                }
+              ]
+            },
+            {
+              "id": "ch03-u2-l4",
+              "title": "本章小结",
+              "chapterId": "ch03",
+              "chapterTitle": "分式",
+              "unitId": "ch03-u2",
+              "unitTitle": "分式的运算与方程",
+              "bundle": "ch03-u2-l4.bundle.js",
+              "freshness": "ch03-u2-l4.freshness.json",
+              "pages": [
+                {
+                  "id": "ch03-u2-l4-p1",
+                  "title": "一图流：分式全家桶"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch03-ux",
+          "title": "本章习题",
+          "lessons": [
+            {
+              "id": "ch03-ux-l1",
+              "title": "第三章习题",
+              "chapterId": "ch03",
+              "chapterTitle": "分式",
+              "unitId": "ch03-ux",
+              "unitTitle": "本章习题",
+              "bundle": "ch03-ux-l1.bundle.js",
+              "freshness": "ch03-ux-l1.freshness.json",
+              "pages": [
+                {
+                  "id": "ch03-ux-l1-p1",
+                  "title": "第三章习题：分式"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "lessons": [
@@ -1032,6 +1212,162 @@
         {
           "id": "ch02-ux-l1-p1",
           "title": "第二章习题：整式与分解"
+        }
+      ]
+    },
+    {
+      "id": "ch03-u1-l1",
+      "title": "分式的定义",
+      "chapterId": "ch03",
+      "chapterTitle": "分式",
+      "unitId": "ch03-u1",
+      "unitTitle": "分式的概念与性质",
+      "bundle": "ch03-u1-l1.bundle.js",
+      "freshness": "ch03-u1-l1.freshness.json",
+      "pages": [
+        {
+          "id": "ch03-u1-l1-p1",
+          "title": "分母里住进了字母"
+        },
+        {
+          "id": "ch03-u1-l1-p1b",
+          "title": "分式：只看分母有没有字母"
+        },
+        {
+          "id": "ch03-u1-l1-p2",
+          "title": "分母不能为零"
+        },
+        {
+          "id": "ch03-u1-l1-p2b",
+          "title": "禁区：让分母等于零的 x"
+        }
+      ]
+    },
+    {
+      "id": "ch03-u1-l2",
+      "title": "分式的基本性质",
+      "chapterId": "ch03",
+      "chapterTitle": "分式",
+      "unitId": "ch03-u1",
+      "unitTitle": "分式的概念与性质",
+      "bundle": "ch03-u1-l2.bundle.js",
+      "freshness": "ch03-u1-l2.freshness.json",
+      "pages": [
+        {
+          "id": "ch03-u1-l2-p1",
+          "title": "分子分母同乘除，值不变"
+        },
+        {
+          "id": "ch03-u1-l2-p1b",
+          "title": "约分：分子分母同除"
+        }
+      ]
+    },
+    {
+      "id": "ch03-u2-l1",
+      "title": "分式的乘除",
+      "chapterId": "ch03",
+      "chapterTitle": "分式",
+      "unitId": "ch03-u2",
+      "unitTitle": "分式的运算与方程",
+      "bundle": "ch03-u2-l1.bundle.js",
+      "freshness": "ch03-u2-l1.freshness.json",
+      "pages": [
+        {
+          "id": "ch03-u2-l1-p1",
+          "title": "先约分，再相乘"
+        },
+        {
+          "id": "ch03-u2-l1-p1b",
+          "title": "乘除：先约分再相乘"
+        }
+      ]
+    },
+    {
+      "id": "ch03-u2-l2",
+      "title": "分式的加减",
+      "chapterId": "ch03",
+      "chapterTitle": "分式",
+      "unitId": "ch03-u2",
+      "unitTitle": "分式的运算与方程",
+      "bundle": "ch03-u2-l2.bundle.js",
+      "freshness": "ch03-u2-l2.freshness.json",
+      "pages": [
+        {
+          "id": "ch03-u2-l2-p1",
+          "title": "异分母相加：先通分"
+        },
+        {
+          "id": "ch03-u2-l2-p1b",
+          "title": "通分：化成相同分母"
+        },
+        {
+          "id": "ch03-u2-l2-p2",
+          "title": "同分母：分子直接加减"
+        },
+        {
+          "id": "ch03-u2-l2-p2b",
+          "title": "加减：分母不动算分子"
+        }
+      ]
+    },
+    {
+      "id": "ch03-u2-l3",
+      "title": "分式方程",
+      "chapterId": "ch03",
+      "chapterTitle": "分式",
+      "unitId": "ch03-u2",
+      "unitTitle": "分式的运算与方程",
+      "bundle": "ch03-u2-l3.bundle.js",
+      "freshness": "ch03-u2-l3.freshness.json",
+      "pages": [
+        {
+          "id": "ch03-u2-l3-p1",
+          "title": "去分母：两边同乘"
+        },
+        {
+          "id": "ch03-u2-l3-p1b",
+          "title": "分式方程：去分母三步"
+        },
+        {
+          "id": "ch03-u2-l3-p2",
+          "title": "增根：闯入禁区的解"
+        },
+        {
+          "id": "ch03-u2-l3-p2b",
+          "title": "增根：解完必须检验"
+        }
+      ]
+    },
+    {
+      "id": "ch03-u2-l4",
+      "title": "本章小结",
+      "chapterId": "ch03",
+      "chapterTitle": "分式",
+      "unitId": "ch03-u2",
+      "unitTitle": "分式的运算与方程",
+      "bundle": "ch03-u2-l4.bundle.js",
+      "freshness": "ch03-u2-l4.freshness.json",
+      "pages": [
+        {
+          "id": "ch03-u2-l4-p1",
+          "title": "一图流：分式全家桶"
+        }
+      ]
+    },
+    {
+      "id": "ch03-ux-l1",
+      "title": "第三章习题",
+      "chapterId": "ch03",
+      "chapterTitle": "分式",
+      "unitId": "ch03-ux",
+      "unitTitle": "本章习题",
+      "bundle": "ch03-ux-l1.bundle.js",
+      "freshness": "ch03-ux-l1.freshness.json",
+      "pages": [
+        {
+          "id": "ch03-ux-l1-p1",
+          "title": "第三章习题：分式"
         }
       ]
     }
