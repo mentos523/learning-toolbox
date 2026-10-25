@@ -125,6 +125,20 @@ body { margin: 0; }
 /* 卡片页：复用 .m-page 的 flex 纵向一屏结构；本文件只补触摸手势提示，
  * 不改 .m-page/.m-interaction/.m-hints 的任何尺寸声明。 */
 .pilot-card { touch-action: pan-y; }
+/* RV-FAIL-1 修复（2026-10-25，壳 chrome 侧唯一改动之一，见 fix-rv-fail1-report.md）：
+ * 实测几何：.m-page（共享）为 flex:1／min-height:0，框高仅 732px（1366×900），
+ * 但其内层内容包（标题＋公式＋交互＋点拨＋导航）按内容自然高 894px（p1b），
+ * 无 flex 约束、无 overflow，内容直接溢出框外、溢出视口；body／html 均为
+ * overflow:hidden 且此前无任何可滚动祖先，滚轮／触摸滑动均无作用（实测 wheel
+ * 后 scrollTop 恒 0），翻页按钮初始即在视口之下，用户主路径完全不可达；
+ * scrollIntoView 探针虽能把按钮拉到视口底边，却恰落入固定页脚（高 60px）命中区。
+ * 故只隐藏页脚不够（按钮仍在视口外、无滚动可达），根因在“卡片区不可滚动”。
+ * 本规则使卡片区自身成为滚动容器：溢出页可滚到底，按钮底边停在卡片框底
+ * （1366×900 为 836px、390×844 为 780px），恰在页脚顶边（840px／784px）之上，
+ * 指针可命中；未溢出页 scrollHeight＝clientHeight，无滚动条、无布局变化。
+ * overflow-x:hidden 仅防 overflow-y:auto 按规范把 overflow-x:visible 算成 auto
+ * 后出现横向滚动条（实测 scrollWidth 仍＝innerWidth）；不改任何 .m-* 字号尺寸。 */
+.pilot-card { overflow-y: auto; overflow-x: hidden; }
 
 /* 白队 FAIL 修复（仅试点壳作用域覆盖，分支 css/math.css 不动）：
  * 翻页按钮原高 40px（math.css .m-nav button：padding 8px 22px、无
@@ -136,3 +150,15 @@ body { margin: 0; }
   min-height: 44px;
   box-sizing: border-box;
 }
+
+/* Batch 0 多课壳新增：数学总览（章→单元→课）与习题页 examples 区。
+ * 沿用试点视觉与 V8 字号阶梯；总览/课总览的按钮与链接一律 ≥44px
+ *（.pilot-card-link 已有 min-height:44px；此处只补章/单元标题与
+ * examples 折叠区的可点高度，不覆盖任何 .m-* 字号与尺寸）。 */
+.pilot-chapter { margin-top: 18px; }
+.pilot-chapter-title { font-size: 1.15rem; margin: 0 0 8px; }
+.pilot-unit { margin: 0 0 12px; }
+.pilot-unit-title { font-size: 1rem; margin: 8px 0 8px; color: var(--m-ink-soft); }
+.pilot-lesson-link { min-height: 44px; }
+/* 习题页核对答案区：直接复用分支 math.css 的 .m-answers 样式（旧渲染器同款），
+ * 壳不另写尺寸覆盖；.m-answers 的 toggle 已由 app.js 的 toggle 监听接 fitInteraction。 */

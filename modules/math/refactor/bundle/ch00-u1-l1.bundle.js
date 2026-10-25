@@ -1,5 +1,8 @@
-window.PILOT_BUNDLE = {
+window.MATH_BUNDLES = window.MATH_BUNDLES || {};
+window.MATH_BUNDLES["ch00-u1-l1"] = {
   "lessonId": "ch00-u1-l1",
+  "lessonTitle": "从猜数字到天平",
+  "chapterId": "ch00",
   "pages": [
     {
       "id": "ch00-u1-l1-p1",

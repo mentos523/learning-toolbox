@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>数学 · 从猜数字到天平（重构试点）— 学习工具箱</title>
-<meta name="description" content="数学重构试点：代数第零章第一课《从猜数字到天平》4 页，页级卡片。">
+<title>数学 · 重构 — 学习工具箱</title>
+<meta name="description" content="数学重构：已迁移的章与课，页级卡片；多课壳，课 bundle 按需加载。">
 <!-- 相对路径全部以本文件在分支中的位置为准：modules/math/refactor/index.html。
-     本文件在 ~/workspace/math-refactor/pilot/ 里直接双击打不开（相对路径指向
-     分支布局）；本地自测请打开 mirror 布局里的同一文件，见 README §自测。 -->
+     本文件在工作区原位置直接双击打不开（相对路径指向分支布局）；
+     本地自测请打开 mirror 布局里的同一文件，见 README §自测。 -->
 <link rel="stylesheet" href="../../../assets/css/style.css">
 <link rel="stylesheet" href="../css/math.css">
 <link rel="stylesheet" href="app.css">
@@ -27,32 +27,34 @@
 <div class="tb-brand-head tb-brand-overlay">
   <span class="tb-brand-name">学习工具箱</span>
   <span class="tb-brand-sep" aria-hidden="true">·</span>
-  <span class="tb-brand-subject">数学 · 重构试点</span>
+  <span class="tb-brand-subject">数学 · 重构</span>
 </div>
 
 <main id="pilot-app">
   <!-- Vue 挂载点：模板在 app.js 内；无 JS 时此处为空，属预期（试点为应用壳）。 -->
-  <p class="pilot-noscript">正在载入试点卡片……（若长期停留，请确认已用 file:// 打开 mirror 布局入口，而非 pilot/ 原文件。）</p>
+  <p class="pilot-noscript">正在载入重构卡片……（若长期停留，请确认已用 file:// 打开 mirror 布局入口，而非工作区原文件。）</p>
 </main>
 
-<div class="tb-footer tb-footer-fixed">学习工具箱 · 数学重构试点 · 不改动旧站、不推送 main</div>
+<div class="tb-footer tb-footer-fixed">学习工具箱 · 数学重构 · 不改动旧站、不推送 main</div>
 
 <!-- 壳框架：Vue 3.4.38 全局构建（vendored，见 VENDOR.md） -->
 <script src="vendor/vue.global.prod.js"></script>
-<!-- 试点内容 bundle：转换器产物（构建期由 md 生成，运行时直接引入，file:// 安全） -->
-<script src="bundle/content.bundle.js"></script>
+<!-- 数学总览 manifest：转换器产物（构建期由 md + meta.json 生成，file:// 安全）。
+     课 bundle 不在此预载，改由 app.js 按需以 <script> 注入（见 README §多课壳）。 -->
+<script src="bundle/manifest.bundle.js"></script>
 <!-- 分支渲染器与样式（原样引用，不复制、不改写；路径指向分支 modules/math/ 下文件） -->
 <script src="../data/ch00.formulas.js"></script>
 <script src="../js/mathml-check.js"></script>
 <script src="../js/expr-mathml.js"></script>
 <script>
-// 接入缝 · 注册表捕获式薄包装（详见 README §接入缝）：
+// 接入缝 · 注册表捕获式薄包装（详见 README §接入缝，多课壳沿用试点原样）：
 // 分支交互文件只要求“存在 window.MATH_INTERACTIONS.register”即可注册，
 // 但旧站 math.js 的注册表没有 getter、且其页面流程（renderPageInner /
 // openLesson）是 IIFE 私有函数、无法从外部调用；同时 math.js 的 SPA
 // init 会接管 hash（showTracks 时 replaceState 清空 hash），与 Vue 路由冲突。
 // 因此试点不加载 math.js 的 SPA init，改为在此先立一个同接口的注册表：
-// 注册时既记入试点自己的 PILOT_IX 表（供 app.js 挂载时调用原函数），
+// 注册时既记入壳自己的 PILOT_IX 表（供 app.js 挂载时调用原函数；
+// 名称沿用试点，widget 覆盖验证即读此表），
 // 也转发给此前已存在的注册表（若未来某批先加载了 math.js，仍不丢注册）。
 // 这 10 行是试点唯一的“包装”代码；交互实现本身一律是分支原文件。
 window.PILOT_IX = window.PILOT_IX || {};
@@ -71,7 +73,7 @@ window.PILOT_IX = window.PILOT_IX || {};
 <script src="../js/eq-bind.js"></script>
 <script src="../js/geom-primitives.js"></script>
 <script src="../js/geom-process.js"></script>
-<!-- Vue 应用壳 -->
+<!-- Vue 应用壳（多课） -->
 <script src="app.js"></script>
 </body>
 </html>

@@ -1,7 +1,8 @@
 {
-  "generatedAt": "2026-10-25T02:01:37.055Z",
+  "generatedAt": "2026-10-25T02:52:28.935Z",
   "lessonId": "ch00-u1-l1",
-  "bundleSha256": "9227c405672f825d6c0ddbde634df17d6c7c4da48f66b07b5432b7b77f371c2d",
+  "bundleFile": "ch00-u1-l1.bundle.js",
+  "bundleSha256": "9e75f1351702e1a741947c60aec5ce59135fab61a28143be6ae08078592b3333",
   "pages": [
     {
       "id": "ch00-u1-l1-p1",
